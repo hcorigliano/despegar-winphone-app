@@ -2,6 +2,10 @@
 # This .gitignore file was automatically created by Microsoft(R) Visual Studio.
 ################################################################################
 
+# Ignore files
+/WPapp.v12.suo
+
+# Ignore directories
 /Despegar.Core.Business/obj/**
 /Despegar.Core.Connector/obj/**
 /Despegar.Core.Connector.Model/obj/**
