@@ -1,0 +1,28 @@
+﻿<Page
+    x:Class="Despegar.WP.UI.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Despegar.WP.UI"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto">
+            </RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition MaxWidth="100" >
+            </ColumnDefinition>
+            <ColumnDefinition >
+            </ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        
+        <TextBox Name="txtExample" Grid.Column="0" Grid.Row="0" PlaceholderText="hola ->" ></TextBox>
+        <Button Name="btnMainButton" Content="the button" Grid.Column="1" Grid.Row="2" Click="btnMainButton_Click" />
+    </Grid>
+</Page>
