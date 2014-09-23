@@ -2,7 +2,7 @@
 # This .gitignore file was automatically created by Microsoft(R) Visual Studio.
 ################################################################################
 
-/Despegar.Core.Business/obj
+/Despegar.Core.Business/obj/**
 /Despegar.Core.Connector/obj/**
 /Despegar.Core.Connector.Model/obj/**
 /Despegar.Core.Connector.Model/obj/**
