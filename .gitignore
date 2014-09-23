@@ -4,6 +4,7 @@
 
 # Ignore files
 /WPapp.v12.suo
+/Despegar.WP.UI/Despegar.WP.UI.csproj.user
 
 # Ignore directories
 /Despegar.Core.Business/obj/**
