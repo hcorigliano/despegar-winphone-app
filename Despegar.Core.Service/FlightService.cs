@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Despegar.Core.IService;
 using Despegar.Core.Connector;
+using Despegar.Core.Connector.Model;
 
 namespace Despegar.Core.Service
 {
@@ -17,16 +18,23 @@ namespace Despegar.Core.Service
             _connector = new MapiConnector();
         }
 
-        /// <summary>
-        /// Get the itineraries from connector
-        /// </summary>
-        /// <param name="airportCode"> this parameter must be change it.</param>
-        /// <returns>this parameter must be change it.</returns>
-        public string GetItineraries(string airportCode)
+        // TODO: Example method, remove
+        public async Task<string> GetItineraries(string airlineDescription)
         {
-            //TODO this line is an example please change the method invoked.
-            
-            return _connector.GetString();
+            string serviceUrl = BuildMapiURL("mapi-flights/airlines?description={0}", airlineDescription);
+            return await _connector.GetAsync<Airline>(serviceUrl).ToString();
+        }
+
+        /// <summary>
+        /// Arranges the Mapi Service URL replacing the params
+        /// </summary>
+        /// <param name="pattern">Service Relative URL pattern to format</param>
+        /// <param name="parameters">Parameters to include in the URL</param>
+        /// <returns></returns>
+        private string BuildMapiURL(string pattern, params string[] parameters)
+        {
+            string serviceUrl = String.Format(pattern, parameters);
+            return _connector.GetMapiBaseURL() + serviceUrl;
         }
     }
 }

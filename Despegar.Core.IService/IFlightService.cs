@@ -11,6 +11,6 @@ namespace Despegar.Core.IService
     /// </summary>
     public interface IFlightService
     {
-        string GetItineraries(string airportCode);
+        Task<string> GetItineraries(string airportCode);
     }
 }
