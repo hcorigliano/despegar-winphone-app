@@ -17,7 +17,7 @@ namespace Despegar.WP.UI.Model
         {
             get
             {
-                return flight.GetItineraries("lalala");
+                return flight.GetItineraries("jajajaoa");
             }
         }
     }
