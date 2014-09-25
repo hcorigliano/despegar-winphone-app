@@ -34,7 +34,7 @@ namespace Despegar.Core.Service
         private string BuildMapiURL(string pattern, params string[] parameters)
         {
             string serviceUrl = String.Format(pattern, parameters);
-            return _connector.GetMapiBaseURL() + serviceUrl;
+            return _connector.GetBaseURL() + serviceUrl;
         }
     }
 }

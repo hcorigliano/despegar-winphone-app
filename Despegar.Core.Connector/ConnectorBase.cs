@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using System;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Resources;
 
@@ -18,6 +19,36 @@ namespace Despegar.Core.Connector
         /// <param name="client">The X_CLIENT header</param>
         public ConnectorBase(string client) {
             this.x_client = client;            
+        }
+
+        /// <summary>
+        /// Performs an HTTP GET request to a JSON service
+        /// </summary>
+        /// <typeparam name="T">Expected result type</typeparam>
+        /// <param name="serviceUrl">Service Resource URL</param>
+        /// <returns></returns>
+        public async Task<T> GetAsync<T>(string serviceUrl) where T : class
+        {
+            HttpRequestMessage httpMessage = new HttpRequestMessage(HttpMethod.Get, serviceUrl);
+            SetCustomHeaders(httpMessage);
+
+            return await base.ProcessRequest<T>(httpMessage);
+        }
+      
+        /// <summary>
+        /// Performs an HTTP POST request to a JSON service
+        /// </summary>
+        /// <typeparam name="T">Expected result type</typeparam>
+        /// <param name="serviceUrl">Service Resource URL</param>
+        /// <returns></returns>
+        public async Task<T> PostAsync<T>(string serviceUrl, string data) where T : class
+        {
+            HttpRequestMessage httpMessage = new HttpRequestMessage(HttpMethod.Post, serviceUrl);
+            httpMessage.Content = new StringContent(data);
+            httpMessage.Content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+            SetCustomHeaders(httpMessage);
+
+            return await ProcessRequest<T>(httpMessage);
         }
 
         /// <summary>
@@ -70,11 +101,23 @@ namespace Despegar.Core.Connector
 
         }
 
+        /// <summary>
+        /// Gets the Base Service URL. Example: "https://mobile.despegar.com"
+        /// </summary>
+        /// <returns></returns>
+        public abstract string GetBaseUrl();
+
+        /// <summary>
+        /// Tempalte Method for adding custom HTTP Headers
+        /// </summary>
+        /// <param name="message"></param>
+        protected abstract void SetCustomHeaders(HttpRequestMessage message);
+
         private void SetCommonHeaders(HttpRequestMessage message)
         {
             message.Headers.Add("Accept-Encoding", "gzip, deflate");
             message.Headers.Add("Accept", "application/json");
             message.Headers.Add("X-Client", x_client);           
-        }
+        }        
     }
 }
