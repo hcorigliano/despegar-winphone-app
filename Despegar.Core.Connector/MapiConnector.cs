@@ -14,6 +14,7 @@ namespace Despegar.Core.Connector
         private readonly string DOMAIN = "mobile.despegar.com/v3";
         //TODO: Site and Language
 
+
         private string APIKey;
         private string XUoW;
 
