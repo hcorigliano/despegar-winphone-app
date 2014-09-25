@@ -10,7 +10,7 @@
 /Despegar.Core.Business/obj/**
 /Despegar.Core.Connector/obj/**
 /Despegar.Core.Connector.Model/obj/**
-/Despegar.Core.Connector.Model/obj/**
+/Despegar.Core.Exceptions/obj/**
 /Despegar.Core.IService/obj/**
 /Despegar.Core.Service/obj/**
 /Despegar.WP.UI/obj/**
@@ -19,6 +19,7 @@
 /Despegar.Core.Business/bin/**
 /Despegar.Core.Connector/bin/**
 /Despegar.Core.Connector.Model/bin/**
+/Despegar.Core.Exceptions/bin/**
 /Despegar.Core.IService/bin/**
 /Despegar.Core.Service/bin/**
 /Despegar.WP.UI/bin/**
