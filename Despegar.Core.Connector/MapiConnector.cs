@@ -11,9 +11,8 @@ namespace Despegar.Core.Connector
 {
     public class MapiConnector : ConnectorBase
     {
-        private readonly string DOMAIN = "mobile.despegar.com/v3";
+        private readonly string DOMAIN = "mobile.despegar.it/v3/";
         //TODO: Site and Language
-
 
         private string APIKey;
         private string XUoW;
@@ -26,15 +25,15 @@ namespace Despegar.Core.Connector
         {
             // MapiConfiguration
             //TODO: set ApiKeys
-        }
-
-    
+            this.XUoW = "W8";
+            this.APIKey = "W8fasssafasaffassaf3";
+        }    
 
         /// <summary>
         /// Gets the Base URL for calling a MAPI service
         /// </summary>        
         /// <returns>The MAPI Base URL</returns>
-        public override string GetBaseURL()
+        public override string GetBaseUrl()
         {
             return new StringBuilder()
               .Append("http://")
@@ -42,7 +41,7 @@ namespace Despegar.Core.Connector
               .ToString();
         }
 
-        private void SetMapiHeader(HttpRequestMessage httpMessage)
+        protected override void SetCustomHeaders(HttpRequestMessage httpMessage)
         {
             httpMessage.Headers.Add("X-ApiKey", this.APIKey);
             httpMessage.Headers.Add("X-UOW", this.XUoW);

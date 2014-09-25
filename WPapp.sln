@@ -10,13 +10,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Despegar.Core.IService", "Despegar.Core.IService\Despegar.Core.IService.csproj", "{3C3CDCA2-E9FC-4207-B71E-22A1C423D5F8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Despegar.Core.Service", "Despegar.Core.Service\Despegar.Core.Service.csproj", "{B4B6D17F-4416-4920-A500-4E9A88AD2D80}"
-	ProjectSection(ProjectDependencies) = postProject
-		{5492E373-6D3F-4163-8423-EC91B3E6A2D7} = {5492E373-6D3F-4163-8423-EC91B3E6A2D7}
-	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Despegar.Core.Connector", "Despegar.Core.Connector\Despegar.Core.Connector.csproj", "{54C368E1-6A4B-46BD-BA1F-F04B97C45E83}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Despegar.Core.Connector.Model", "Despegar.Core.Connector.Model\Despegar.Core.Connector.Model.csproj", "{5492E373-6D3F-4163-8423-EC91B3E6A2D7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Despegar.Core.Business", "Despegar.Core.Business\Despegar.Core.Business.csproj", "{C4B34083-7E2A-461B-B525-4C238314655A}"
 EndProject
@@ -82,14 +77,6 @@ Global
 		{54C368E1-6A4B-46BD-BA1F-F04B97C45E83}.Release|Any CPU.Build.0 = Release|Any CPU
 		{54C368E1-6A4B-46BD-BA1F-F04B97C45E83}.Release|ARM.ActiveCfg = Release|Any CPU
 		{54C368E1-6A4B-46BD-BA1F-F04B97C45E83}.Release|x86.ActiveCfg = Release|Any CPU
-		{5492E373-6D3F-4163-8423-EC91B3E6A2D7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5492E373-6D3F-4163-8423-EC91B3E6A2D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5492E373-6D3F-4163-8423-EC91B3E6A2D7}.Debug|ARM.ActiveCfg = Debug|Any CPU
-		{5492E373-6D3F-4163-8423-EC91B3E6A2D7}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{5492E373-6D3F-4163-8423-EC91B3E6A2D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5492E373-6D3F-4163-8423-EC91B3E6A2D7}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5492E373-6D3F-4163-8423-EC91B3E6A2D7}.Release|ARM.ActiveCfg = Release|Any CPU
-		{5492E373-6D3F-4163-8423-EC91B3E6A2D7}.Release|x86.ActiveCfg = Release|Any CPU
 		{C4B34083-7E2A-461B-B525-4C238314655A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C4B34083-7E2A-461B-B525-4C238314655A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C4B34083-7E2A-461B-B525-4C238314655A}.Debug|ARM.ActiveCfg = Debug|Any CPU

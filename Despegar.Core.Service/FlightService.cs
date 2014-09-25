@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Despegar.Core.IService;
+﻿using Despegar.Core.Business.Flight;
 using Despegar.Core.Connector;
-using Despegar.Core.Connector.Model;
+using Despegar.Core.IService;
+using System;
+using System.Threading.Tasks;
 
 namespace Despegar.Core.Service
 {
@@ -13,16 +10,20 @@ namespace Despegar.Core.Service
     {
         private MapiConnector _connector;
 
-        public FlightService()
+        public FlightService(string xClient)
         {
-            _connector = new MapiConnector();
+            _connector = new MapiConnector(xClient);
         }
-
-        // TODO: Example method, remove
-        public async Task<string> GetItineraries(string airlineDescription)
+        
+        /// <summary>
+        /// Retrieves an airline info
+        /// </summary>
+        /// <param name="airlineDescription">the airline description</param>
+        /// <returns></returns>
+        public async Task<Airline> GetAirline(string airlineDescription)
         {
             string serviceUrl = BuildMapiURL("mapi-flights/airlines?description={0}", airlineDescription);
-            return await _connector.GetAsync<Airline>(serviceUrl).ToString();
+            return await _connector.GetAsync<Airline>(serviceUrl);
         }
 
         /// <summary>
@@ -34,7 +35,8 @@ namespace Despegar.Core.Service
         private string BuildMapiURL(string pattern, params string[] parameters)
         {
             string serviceUrl = String.Format(pattern, parameters);
-            return _connector.GetBaseURL() + serviceUrl;
+            return _connector.GetBaseUrl() + serviceUrl;
         }
+        
     }
 }

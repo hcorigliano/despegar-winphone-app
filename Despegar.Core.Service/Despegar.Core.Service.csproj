@@ -35,9 +35,9 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .NET Framework is automatically included -->
-    <ProjectReference Include="..\Despegar.Core.Connector.Model\Despegar.Core.Connector.Model.csproj">
-      <Project>{5492e373-6d3f-4163-8423-ec91b3e6a2d7}</Project>
-      <Name>Despegar.Core.Connector.Model</Name>
+    <ProjectReference Include="..\Despegar.Core.Business\Despegar.Core.Business.csproj">
+      <Project>{c4b34083-7e2a-461b-b525-4c238314655a}</Project>
+      <Name>Despegar.Core.Business</Name>
     </ProjectReference>
     <ProjectReference Include="..\Despegar.Core.Connector\Despegar.Core.Connector.csproj">
       <Project>{54c368e1-6a4b-46bd-ba1f-f04b97c45e83}</Project>

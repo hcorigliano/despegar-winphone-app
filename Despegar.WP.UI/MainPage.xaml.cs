@@ -46,10 +46,10 @@ namespace Despegar.WP.UI
             // this event is handled for you.
         }
 
-        private void btnMainButton_Click(object sender, RoutedEventArgs e)
+        private async void btnMainButton_Click(object sender, RoutedEventArgs e)
         {
             HomeModel hm = new HomeModel();
-            this.txtExample.Text = hm.myfirsttext;
+            this.txtExample.Text = await hm.LoadAirlines();
         }
     }
 }
