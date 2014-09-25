@@ -60,7 +60,7 @@ namespace Despegar.Core.Connector
 
             HttpRequestMessage httpMessage = new HttpRequestMessage(HttpMethod.Post, serviceUrl);
             httpMessage.Content = new StringContent(data);
-            httpMessage.Content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+            httpMessage.Content.Headers.ContentType = new MediaTypeHeaderValue("application/json; charset=utf-8");
             SetCustomHeaders(httpMessage);
 
             return await ProcessRequest<T>(httpMessage);

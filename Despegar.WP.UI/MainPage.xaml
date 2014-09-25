@@ -23,6 +23,8 @@
         </Grid.ColumnDefinitions>
         
         <TextBox Name="txtExample" Grid.Column="0" Grid.Row="0" PlaceholderText="hola ->" ></TextBox>
-        <Button Name="btnMainButton" Content="the button" Grid.Column="1" Grid.Row="2" Click="btnMainButton_Click" />
+        <TextBox Name="txtExample2" Grid.Column="0" Grid.Row="1" PlaceholderText="hola ->" ></TextBox>
+        <Button Name="btnMainButton" Content="the button" Grid.Column="1" Grid.Row="2" Click="btnMainButton_Click" Width="300" />
+        <Button Name="btnMainButton2" Content="the 2   aaaaaaa" Grid.Column="1" Grid.Row="1" Click="btnMainButton2_Click" Width="300" />
     </Grid>
 </Page>
