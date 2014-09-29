@@ -1,8 +1,4 @@
-﻿using Despegar.Core.Business.Flight;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using Despegar.Core.Business.Flight.Airline;
 using System.Threading.Tasks;
 
 namespace Despegar.Core.IService
@@ -12,6 +8,6 @@ namespace Despegar.Core.IService
     /// </summary>
     public interface IFlightService
     {
-        Task<Airline> GetAirline(string airlineDescription);
+        Task<Airline> GetAirline(string searchString);
     }
 }

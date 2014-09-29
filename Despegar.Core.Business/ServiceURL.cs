@@ -1,6 +1,6 @@
-﻿
-using System.Collections.Generic;
-namespace Despegar.Core.IService
+﻿using System.Collections.Generic;
+
+namespace Despegar.Core.Business
 {
     public enum ServiceKey
     {

@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Despegar.Core.Business.Common
+namespace Despegar.Core.Business.Flight.Airline
 {
-    public class IDElement
+    public class Airline
     {
         public string Id { get; set; }
         public string Name { get; set; }

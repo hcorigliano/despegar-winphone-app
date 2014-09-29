@@ -18,8 +18,13 @@ namespace Despegar.Core.Connector
         /// Initializes a new instance of Connector
         /// </summary>
         /// <param name="client">The X_CLIENT header</param>
-        public ConnectorBase() {            
-            this.httpClient = new HttpClient();
+        public ConnectorBase() {
+            // Create Http Client            
+            HttpClientHandler handler = new HttpClientHandler();
+            if (handler.SupportsAutomaticDecompression)
+                handler.AutomaticDecompression = DecompressionMethods.Deflate | DecompressionMethods.GZip;
+
+            this.httpClient = new HttpClient(handler);
         }
 
         /// <summary>
@@ -28,7 +33,7 @@ namespace Despegar.Core.Connector
         /// <typeparam name="T">Expected result type</typeparam>
         /// <param name="relativeServiceUrl">Service Resource URL</param>
         /// <returns></returns>
-        public async Task<T> GetAsync<T>(string relativeServiceUrl) where T : class
+        public virtual async Task<T> GetAsync<T>(string relativeServiceUrl) where T : class
         {
             string url = GetBaseUrl() + relativeServiceUrl;
 
@@ -44,7 +49,7 @@ namespace Despegar.Core.Connector
         /// <typeparam name="T">Expected result type</typeparam>
         /// <param name="relativeServiceUrl">Service Resource URL</param>
         /// <returns></returns>
-        public async Task<T> PostAsync<T>(string relativeServiceUrl, object postData) where T : class
+        public virtual async Task<T> PostAsync<T>(string relativeServiceUrl, object postData) where T : class
         {
             string data = String.Empty;
             string url = GetBaseUrl() + relativeServiceUrl;
@@ -76,11 +81,6 @@ namespace Despegar.Core.Connector
             SetCommonHeaders(httpMessage);
             string response = String.Empty;
 
-            // Create Http Client            
-            HttpClientHandler handler = new HttpClientHandler();
-            if (handler.SupportsAutomaticDecompression)
-                handler.AutomaticDecompression = DecompressionMethods.Deflate | DecompressionMethods.GZip;
-
             try
             {
                 // Call Service
@@ -88,7 +88,7 @@ namespace Despegar.Core.Connector
                 response = await httpResponse.Content.ReadAsStringAsync();
 
                 // Check HTTP Error Codes
-                if (httpResponse.StatusCode != HttpStatusCode.OK)
+                if (!httpResponse.IsSuccessStatusCode)
                 {
                     // TODO: Log exception
                     throw new HTTPStatusErrorException(String.Format("[Connector]: HTTP Error code {0} Message: {1}" , httpResponse.StatusCode.ToString(), response));
@@ -137,7 +137,8 @@ namespace Despegar.Core.Connector
         private void SetCommonHeaders(HttpRequestMessage message)
         {
             message.Headers.Add("Accept-Encoding", "gzip, deflate");
-            message.Headers.Add("Accept", "application/json");            
-        }       
+            message.Headers.Add("Accept", "application/json");
+            message.Headers.Add("Accept-Charset", "ISO-8859-1,utf-8");
+        }
     }
 }

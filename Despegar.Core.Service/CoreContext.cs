@@ -1,20 +1,46 @@
-﻿using Despegar.Core.Connector;
+﻿using Despegar.Core.Business;
+using Despegar.Core.Business.Culture;
+using Despegar.Core.Connector;
 using Despegar.Core.IService;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Windows.ApplicationModel.Resources;
 
 namespace Despegar.Core.Service
 {
+    /// <summary>
+    /// Core class for the Despegar.Core
+    /// It is the main object that the "library" exposes to user code.
+    /// There should only exists one CoreContext object in memory for a given application.
+    /// </summary>
     public class CoreContext : ICoreContext
     {
+#if DECOLAR
+        public static bool IsDECOLAR = true;
+#else
+        public static bool IsDECOLAR = false;
+#endif
+
         /// <summary>
         /// Contains the list of services to mock when they are called
         /// </summary>
-        private Dictionary<ServiceKey, MockKey> enabledMocks = new Dictionary<ServiceKey,MockKey>();
+        private Dictionary<ServiceKey, MockKey> appliedMocks = new Dictionary<ServiceKey, MockKey>();
+        private string site;
+        private string x_client;
+        private string uow;
+
+        // Connectors
+        private MapiConnector mapiConnector;
+
+        #region ** Public Interface **
+
+        public string GetSite()
+        {
+            return site;
+        }
+
+        public string GetLanguage() 
+        { 
+            return IsDECOLAR ? "ES" : "PT"; 
+        }
 
         /// <summary>
         /// Enables a specified Mock for a given Service
@@ -23,13 +49,13 @@ namespace Despegar.Core.Service
         /// <param name="mockKey">The Mock Key</param>
         public void AddMock(ServiceKey serviceKey, MockKey mockKey)
         {
-            if (!enabledMocks.ContainsKey(serviceKey))
+            if (!appliedMocks.ContainsKey(serviceKey))
             {
-                enabledMocks.Add(serviceKey, mockKey);
+                appliedMocks.Add(serviceKey, mockKey);
             }
             else
             {
-                enabledMocks[serviceKey] = mockKey;
+                appliedMocks[serviceKey] = mockKey;
             }
         }
 
@@ -39,10 +65,10 @@ namespace Despegar.Core.Service
         /// <param name="serviceKey">The Service Key</param>
         public void RemoveMock(ServiceKey serviceKey)
         {
-            if (!enabledMocks.ContainsKey(serviceKey))            
+            if (!appliedMocks.ContainsKey(serviceKey))            
                 return;
 
-            enabledMocks.Remove(serviceKey);
+            appliedMocks.Remove(serviceKey);
         }
 
         /// <summary>
@@ -50,11 +76,24 @@ namespace Despegar.Core.Service
         /// </summary>
         /// <param name="x_client"></param>
         /// <param name="uow"></param>
-        /// <param name="site"></param>
-        /// <param name="language"></param>
-        public void Configure(string x_client, string uow, string site, string language) 
+        public void Configure(string x_client, string uow) 
         {
-            MapiConnector.Configure(x_client, uow, site, language);
+            this.x_client = x_client;
+            this.uow = uow;
+
+            // Init Connectors
+            if (mapiConnector == null)
+                mapiConnector = new MapiConnector();
+        }
+
+        /// <summary>
+        /// Reconfigures the Core for the new Site
+        /// </summary>
+        /// <param name="site">Example: AR,CO,MX etc.</param>
+        public void SetSite(string siteCode)
+        {
+            this.site = siteCode;         
+            mapiConnector.Configure(x_client, uow, site, GetLanguage());
         }
 
         public IFlightService GetFlightService() 
@@ -62,16 +101,23 @@ namespace Despegar.Core.Service
             return new FlightService(this);
         }
 
-        internal IConnector GetServiceConnector(ServiceKey key) 
+        #endregion
+
+        #region ** Core private **
+
+        internal IConnector GetServiceConnector(ServiceKey key)
         {
-            if (enabledMocks.ContainsKey(key))
+            if (appliedMocks.ContainsKey(key))
             {
-                string mockedReponse =  Mocks.GetMock(this.enabledMocks[key]);
+                string mockedReponse =  Mocks.GetMock(this.appliedMocks[key]);
                 return new MockConnector(mockedReponse);
             }
 
             // Return the real connector
-            return MapiConnector.GetInstance();
+            return mapiConnector;
         }
+
+        #endregion
+    
     }
 }

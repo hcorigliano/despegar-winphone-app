@@ -1,11 +1,10 @@
-﻿using Despegar.Core.Business.Flight;
+﻿
+using Despegar.Core.Business;
+using Despegar.Core.Business.Flight.Airline;
 using Despegar.Core.Connector;
 using Despegar.Core.IService;
 using System;
-using System.Reflection;
-using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
-using System.Diagnostics;
 
 namespace Despegar.Core.Service
 {
@@ -25,8 +24,8 @@ namespace Despegar.Core.Service
         /// <returns></returns>
         public async Task<Airline> GetAirline(string searchString)
         {
-            string serviceUrl = String.Format(ServiceURL.GetServiceURL(ServiceKey.FlightCitiesAutocomplete), searchString);
-            IConnector connector = context.GetServiceConnector(ServiceKey.FlightCitiesAutocomplete);
+            string serviceUrl = String.Format(ServiceURL.GetServiceURL(ServiceKey.FlightsAirlines), searchString);
+            IConnector connector = context.GetServiceConnector(ServiceKey.FlightsAirlines);
 
             return await connector.GetAsync<Airline>(serviceUrl);
         }

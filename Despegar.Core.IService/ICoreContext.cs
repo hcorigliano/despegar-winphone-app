@@ -1,13 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Despegar.Core.Business;
+using Despegar.Core.Business.Culture;
 
 namespace Despegar.Core.IService
 {
+    /// <summary>
+    /// CoreContext contract.
+    /// This interface is the main contract exposed by the Core library.
+    /// </summary>
     public interface ICoreContext
-    {       
+    {
+        string GetSite();
+
+        string GetLanguage();
+
         /// <summary>
         /// Enables a specified Mock for a given Service
         /// </summary>
@@ -28,11 +33,17 @@ namespace Despegar.Core.IService
         /// <param name="uow"></param>
         /// <param name="site"></param>
         /// <param name="language"></param>
-        void Configure(string x_client, string uow, string site, string language);
+        void Configure(string x_client, string uow);
 
         /// <summary>
         /// Returns the Flight service object
         /// </summary> 
         IFlightService GetFlightService();
+
+        /// <summary>
+        /// Re-configures the Core for the new Site
+        /// </summary>
+        /// <param name="Site">Example: AR,CO,MX etc. </param>
+        void SetSite(string siteCode);
     }
 }

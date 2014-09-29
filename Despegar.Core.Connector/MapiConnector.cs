@@ -10,55 +10,45 @@ using Windows.ApplicationModel.Resources;
 namespace Despegar.Core.Connector
 {
     public class MapiConnector : ConnectorBase
-    {
-        private static MapiConnector instance;
-        private static readonly string DOMAIN = "mobile.despegar.it/v3/";
+    {        
+        private static readonly string DOMAIN = "mobile.despegar.com/v3/";
         private static readonly string APIKEY_WINDOWS_PHONE = "24b56c96e09146298eca3093f6f990c9";
-        private static string XUoW;
-        private static string x_client;   // Example: "WindowsPhone8App";
-        private static string site;
-        private static string language;
+        private string XUoW;
+        private string x_client;   // Example: "WindowsPhone8App";
+        private string site;
+        private string language;
 
-        private MapiConnector() : base() { }
+        public MapiConnector() : base() { }
 
-        public static MapiConnector GetInstance() 
+        public void Configure(string x_client, string uow, string site, string language)
         {
-            if (instance == null) {
-                instance = new MapiConnector();
-            }
-
-            return instance;
+            this.x_client = x_client;
+            this.XUoW = uow;
+            this.site = site;
+            this.language = language;
         }
 
-        public static void Configure(string x_client, string uow, string site, string language)
+        /// <summary>
+        /// Overrides Base method to include Site and Language parameters for MAPI
+        /// </summary>
+        /// <typeparam name="T">Expected result type</typeparam>
+        /// <param name="relativeServiceUrl">Service Resource URL</param>
+        /// <returns></returns>
+        public override async Task<T> GetAsync<T>(string relativeServiceUrl)
         {
-            MapiConnector.x_client = x_client;
-            MapiConnector.XUoW = uow;
-            MapiConnector.site = site;
-            MapiConnector.language = language;
+            return await base.GetAsync<T>(IncludeSiteAndLanguage(relativeServiceUrl));
         }
 
-        ///// <summary>
-        ///// Overrides Base method to include Site and Language parameters for MAPI
-        ///// </summary>
-        ///// <typeparam name="T">Expected result type</typeparam>
-        ///// <param name="relativeServiceUrl">Service Resource URL</param>
-        ///// <returns></returns>
-        //public async Task<T> GetAsync<T>(string relativeServiceUrl) where T:class
-        //{            
-        //    return base.GetAsync<T>(IncludeSiteAndLanguage(relativeServiceUrl));
-        //}
-
-        ///// <summary>
-        ///// Overrides Base method to include Site and Language parameters for MAPI
-        ///// </summary>
-        ///// <typeparam name="T">Expected result type</typeparam>
-        ///// <param name="relativeServiceUrl">Service Resource URL</param>
-        ///// <returns></returns>
-        //public async Task<T> PostAsync<T>(string relativeServiceUrl, object postData)
-        //{
-            
-        //}
+        /// <summary>
+        /// Overrides Base method to include Site and Language parameters for MAPI
+        /// </summary>
+        /// <typeparam name="T">Expected result type</typeparam>
+        /// <param name="relativeServiceUrl">Service Resource URL</param>
+        /// <returns></returns>
+        public override async Task<T> PostAsync<T>(string relativeServiceUrl, object postData)
+        {
+            return await base.PostAsync<T>(IncludeSiteAndLanguage(relativeServiceUrl), postData);
+        }
 
         /// <summary>
         /// Gets the Base URL for calling a MAPI service
@@ -67,7 +57,7 @@ namespace Despegar.Core.Connector
         protected override string GetBaseUrl()
         {
             return new StringBuilder()
-              .Append("http://")
+              .Append("https://")
               .Append(DOMAIN)                           
               .ToString();
         }
@@ -81,7 +71,7 @@ namespace Despegar.Core.Connector
     
         private string IncludeSiteAndLanguage(string relativeServiceUrl)
         {
- 	        return String.Format(relativeServiceUrl + "&site={0}&langauge={1}", site, language);
+ 	        return String.Format(relativeServiceUrl + "&site={0}&language={1}", site, language);
         }
     }
 }

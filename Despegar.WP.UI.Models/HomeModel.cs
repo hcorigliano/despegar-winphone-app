@@ -1,4 +1,5 @@
-﻿using Despegar.Core.IService;
+﻿using Despegar.Core.Business;
+using Despegar.Core.IService;
 using Despegar.Core.Service;
 using System.Threading.Tasks;
 
@@ -10,13 +11,8 @@ namespace Despegar.WP.UI.Model
         private IFlightService flightService;
 
         public HomeModel() 
-        {
-            // TODO: CoreContext should be a Singleton for the APP
-            var context = new CoreContext();
-            context.Configure("WindowsPhoneApp8", "deviceID", "AR", "ES");
-            context.AddMock(ServiceKey.FlightCitiesAutocomplete, MockKey.FlightCitiesAutocompleteBue);
-
-            flightService = context.GetFlightService();
+        {                      
+            flightService = GlobalConfiguration.CoreContext.GetFlightService();
         }
 
         public async Task<string> LoadAirlines()

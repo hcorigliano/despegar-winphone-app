@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Despegar.Core.IService;
+using Despegar.Core.Service;
+using Despegar.WP.UI.Model;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -35,6 +38,9 @@ namespace Despegar.WP.UI
         {
             this.InitializeComponent();
             this.Suspending += this.OnSuspending;
+
+            // Initialize Core
+            GlobalConfiguration.InitCore();
         }
 
         /// <summary>

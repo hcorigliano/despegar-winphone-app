@@ -41,9 +41,11 @@
     <TargetPlatform Include="Windows, Version=8.1" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Common\IDElement.cs" />
-    <Compile Include="Flight\Airline.cs" />
+    <Compile Include="Flight\Airline\Airline.cs" />
+    <Compile Include="Culture\Site.cs" />
+    <Compile Include="Mocks.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ServiceURL.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
