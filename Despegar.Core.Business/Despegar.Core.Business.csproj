@@ -43,6 +43,10 @@
   <ItemGroup>
     <Compile Include="Common\IDElement.cs" />
     <Compile Include="Flight\Airline.cs" />
+    <Compile Include="Flight\CitiesAutocomplete\CitiesAutocomplete.cs" />
+    <Compile Include="Flight\CitiesAutocomplete\City.cs" />
+    <Compile Include="Flight\CitiesAutocomplete\CityAutocomplete.cs" />
+    <Compile Include="Flight\CitiesAutocomplete\GeoLocation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />

@@ -1,4 +1,5 @@
-﻿using Despegar.Core.IService;
+﻿using Despegar.Core.Business.Flight.CitiesAutocomplete;
+using Despegar.Core.IService;
 using Despegar.Core.Service;
 using System.Threading.Tasks;
 
@@ -14,14 +15,23 @@ namespace Despegar.WP.UI.Model
             // TODO: CoreContext should be a Singleton for the APP
             var context = new CoreContext();
             context.Configure("WindowsPhoneApp8", "deviceID", "AR", "ES");
-            context.AddMock(ServiceKey.FlightCitiesAutocomplete, MockKey.FlightCitiesAutocompleteBue);
+            
+            //context.AddMock(ServiceKey.FlightCitiesAutocomplete, MockKey.FlightCitiesAutocompleteBue);
 
             flightService = context.GetFlightService();
+            GetCities("bue");
+            
         }
 
         public async Task<string> LoadAirlines()
         {
             return (await flightService.GetAirline("tam-lineas-aereas")).Id;
+        }
+
+        public async Task<CitiesAutocomplete> GetCities(string cityString)
+        {
+            cityString = "bue";
+            return (await flightService.GetCitiesAutocomplete(cityString));
         }
     }
 }

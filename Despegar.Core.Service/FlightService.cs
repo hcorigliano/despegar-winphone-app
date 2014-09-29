@@ -6,6 +6,7 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Diagnostics;
+using Despegar.Core.Business.Flight.CitiesAutocomplete;
 
 namespace Despegar.Core.Service
 {
@@ -29,6 +30,19 @@ namespace Despegar.Core.Service
             IConnector connector = context.GetServiceConnector(ServiceKey.FlightCitiesAutocomplete);
 
             return await connector.GetAsync<Airline>(serviceUrl);
+        }
+
+        /// <summary>
+        /// Retrieves an list of Cities
+        /// </summary>
+        /// <param name="cityString"></param>
+        /// <returns></returns>
+        public async Task<CitiesAutocomplete> GetCitiesAutocomplete(string cityString)
+        {
+            string serviceUrl = String.Format(ServiceURL.GetServiceURL(ServiceKey.FlightCitiesAutocomplete), cityString);
+            IConnector connector = context.GetServiceConnector(ServiceKey.FlightCitiesAutocomplete);
+
+            return await connector.GetAsync<CitiesAutocomplete>(serviceUrl);
         }
     }
 }
