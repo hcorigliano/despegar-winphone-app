@@ -2,41 +2,33 @@
 using Despegar.Core.Connector;
 using Despegar.Core.IService;
 using System;
+using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
+using System.Diagnostics;
 
 namespace Despegar.Core.Service
 {
     public class FlightService : IFlightService
     {
-        private MapiConnector _connector;
+        private CoreContext context;
 
-        public FlightService(string xClient)
+        public FlightService(CoreContext context)
         {
-            _connector = new MapiConnector(xClient);
+            this.context = context;
         }
-        
+
         /// <summary>
         /// Retrieves an airline info
         /// </summary>
         /// <param name="airlineDescription">the airline description</param>
         /// <returns></returns>
-        public async Task<Airline> GetAirline(string airlineDescription)
+        public async Task<Airline> GetAirline(string searchString)
         {
-            string serviceUrl = BuildMapiURL("mapi-flights/airlines?description={0}", airlineDescription);
-            return await _connector.GetAsync<Airline>(serviceUrl);
-        }
+            string serviceUrl = String.Format(ServiceURL.GetServiceURL(ServiceKey.FlightCitiesAutocomplete), searchString);
+            IConnector connector = context.GetServiceConnector(ServiceKey.FlightCitiesAutocomplete);
 
-        /// <summary>
-        /// Arranges the Mapi Service URL replacing the params
-        /// </summary>
-        /// <param name="pattern">Service Relative URL pattern to format</param>
-        /// <param name="parameters">Parameters to include in the URL</param>
-        /// <returns></returns>
-        private string BuildMapiURL(string pattern, params string[] parameters)
-        {
-            string serviceUrl = String.Format(pattern, parameters);
-            return _connector.GetBaseUrl() + serviceUrl;
+            return await connector.GetAsync<Airline>(serviceUrl);
         }
-        
     }
 }

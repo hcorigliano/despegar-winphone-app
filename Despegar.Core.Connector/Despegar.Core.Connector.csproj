@@ -39,7 +39,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConnectorBase.cs" />
+    <Compile Include="IConnector.cs" />
     <Compile Include="MapiConnector.cs" />
+    <Compile Include="MockConnector.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

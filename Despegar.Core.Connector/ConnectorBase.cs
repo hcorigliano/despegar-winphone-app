@@ -9,18 +9,16 @@ using Windows.ApplicationModel.Resources;
 
 namespace Despegar.Core.Connector
 {
-    public abstract class ConnectorBase
+    public abstract class ConnectorBase : IConnector
     {
-        public object syncLock = new Object();
-        private string x_client;   // Example: "WindowsPhone8App";        
+        public object syncLock = new Object();        
         private HttpClient httpClient;
 
         /// <summary>
         /// Initializes a new instance of Connector
         /// </summary>
         /// <param name="client">The X_CLIENT header</param>
-        public ConnectorBase(string client) {
-            this.x_client = client;
+        public ConnectorBase() {            
             this.httpClient = new HttpClient();
         }
 
@@ -28,11 +26,13 @@ namespace Despegar.Core.Connector
         /// Performs an HTTP GET request to a JSON service
         /// </summary>
         /// <typeparam name="T">Expected result type</typeparam>
-        /// <param name="serviceUrl">Service Resource URL</param>
+        /// <param name="relativeServiceUrl">Service Resource URL</param>
         /// <returns></returns>
-        public async Task<T> GetAsync<T>(string serviceUrl) where T : class
+        public async Task<T> GetAsync<T>(string relativeServiceUrl) where T : class
         {
-            HttpRequestMessage httpMessage = new HttpRequestMessage(HttpMethod.Get, serviceUrl);
+            string url = GetBaseUrl() + relativeServiceUrl;
+
+            HttpRequestMessage httpMessage = new HttpRequestMessage(HttpMethod.Get, url);
             SetCustomHeaders(httpMessage);
 
             return await ProcessRequest<T>(httpMessage);
@@ -42,11 +42,12 @@ namespace Despegar.Core.Connector
         /// Performs an HTTP POST request to a JSON service
         /// </summary>
         /// <typeparam name="T">Expected result type</typeparam>
-        /// <param name="serviceUrl">Service Resource URL</param>
+        /// <param name="relativeServiceUrl">Service Resource URL</param>
         /// <returns></returns>
-        public async Task<T> PostAsync<T>(string serviceUrl, object postData) where T : class
+        public async Task<T> PostAsync<T>(string relativeServiceUrl, object postData) where T : class
         {
             string data = String.Empty;
+            string url = GetBaseUrl() + relativeServiceUrl;
 
             try 
             {
@@ -54,11 +55,11 @@ namespace Despegar.Core.Connector
             }
             catch(JsonSerializationException ex)
             {
-                throw new JsonDeserializationException(String.Format("[Connector]:Could not serialize object of type {0} to call Service: {1}", typeof(T).FullName, serviceUrl), ex);
+                throw new JsonDeserializationException(String.Format("[Connector]:Could not serialize object of type {0} to call Service: {1}", typeof(T).FullName, url), ex);
                 //TODO: Logger.Error(ex.ToString())
             }
 
-            HttpRequestMessage httpMessage = new HttpRequestMessage(HttpMethod.Post, serviceUrl);
+            HttpRequestMessage httpMessage = new HttpRequestMessage(HttpMethod.Post, url);
             httpMessage.Content = new StringContent(data);
             httpMessage.Content.Headers.ContentType = new MediaTypeHeaderValue("application/json; charset=utf-8");
             SetCustomHeaders(httpMessage);
@@ -125,7 +126,7 @@ namespace Despegar.Core.Connector
         /// Gets the Base Service URL. Example: "https://mobile.despegar.com"
         /// </summary>
         /// <returns></returns>
-        public abstract string GetBaseUrl();
+        protected abstract string GetBaseUrl();        
 
         /// <summary>
         /// Template Method for adding custom HTTP Headers
@@ -136,8 +137,7 @@ namespace Despegar.Core.Connector
         private void SetCommonHeaders(HttpRequestMessage message)
         {
             message.Headers.Add("Accept-Encoding", "gzip, deflate");
-            message.Headers.Add("Accept", "application/json");
-            message.Headers.Add("X-Client", x_client);           
+            message.Headers.Add("Accept", "application/json");            
         }       
     }
 }

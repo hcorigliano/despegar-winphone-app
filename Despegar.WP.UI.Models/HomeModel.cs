@@ -1,25 +1,27 @@
-﻿using Despegar.Core.Business.Flight;
+﻿using Despegar.Core.IService;
 using Despegar.Core.Service;
-using System.Collections.Generic;
 using System.Threading.Tasks;
-using System.Linq;
 
 namespace Despegar.WP.UI.Model
 {
     public class HomeModel
     {
         //TODO all this code must be changed it is just for first time only.
-        private FlightService flight = new FlightService("WindowsPhone8App");
+        private IFlightService flightService;
 
-        public string myfirsttext
+        public HomeModel() 
         {
-            get;
-            set;
+            // TODO: CoreContext should be a Singleton for the APP
+            var context = new CoreContext();
+            context.Configure("WindowsPhoneApp8", "deviceID", "AR", "ES");
+            context.AddMock(ServiceKey.FlightCitiesAutocomplete, MockKey.FlightCitiesAutocompleteBue);
+
+            flightService = context.GetFlightService();
         }
 
         public async Task<string> LoadAirlines()
         {
-            return (await flight.GetAirline("tam-lineas-aereas")).Id;
+            return (await flightService.GetAirline("tam-lineas-aereas")).Id;
         }
     }
 }
