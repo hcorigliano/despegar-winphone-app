@@ -52,10 +52,13 @@
     <Compile Include="Flight\Itineraries\Currency.cs" />
     <Compile Include="Flight\Itineraries\Facet.cs" />
     <Compile Include="Flight\Itineraries\FlightsItineraries.cs" />
+    <Compile Include="Flight\Itineraries\Inbound.cs" />
     <Compile Include="Flight\Itineraries\Item.cs" />
-    <Compile Include="Flight\Itineraries\Bound.cs" />
+    <Compile Include="Flight\Itineraries\OperatedBy.cs" />
+    <Compile Include="Flight\Itineraries\Outbound.cs" />
     <Compile Include="Flight\Itineraries\Paging.cs" />
     <Compile Include="Flight\Itineraries\Segment.cs" />
+    <Compile Include="Flight\Itineraries\Segment2.cs" />
     <Compile Include="Flight\Itineraries\Sorting.cs" />
     <Compile Include="Flight\Itineraries\Value.cs" />
     <Compile Include="Flight\Itineraries\Value2.cs" />
