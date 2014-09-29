@@ -7,6 +7,7 @@ using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Diagnostics;
 using Despegar.Core.Business.Flight.CitiesAutocomplete;
+using Despegar.Core.Business.Flight.Itineraries;
 
 namespace Despegar.Core.Service
 {
@@ -18,19 +19,31 @@ namespace Despegar.Core.Service
         {
             this.context = context;
         }
-
         /// <summary>
-        /// Retrieves an airline info
+        /// Retrieves an itinerarie for a flight
         /// </summary>
-        /// <param name="airlineDescription">the airline description</param>
+        /// <param name="from"></param>
+        /// <param name="to"></param>
+        /// <param name="departure_date"></param>
+        /// <param name="adults"></param>
+        /// <param name="return_date"></param>
+        /// <param name="children"></param>
+        /// <param name="infants"></param>
+        /// <param name="offset"></param>
+        /// <param name="limit"></param>
+        /// <param name="order_by"></param>
+        /// <param name="order_type"></param>
+        /// <param name="currency_code"></param>
+        /// <param name="filter"></param>
         /// <returns></returns>
-        public async Task<Airline> GetAirline(string searchString)
+        public async Task<FlightsItineraries> GetItinerariesFlights(string from, string to, string departure_date, int adults, string return_date, int children, int infants, int offset, int limit, string order_by, string order_type, string currency_code, string filter)
         {
-            string serviceUrl = String.Format(ServiceURL.GetServiceURL(ServiceKey.FlightCitiesAutocomplete), searchString);
-            IConnector connector = context.GetServiceConnector(ServiceKey.FlightCitiesAutocomplete);
+            string serviceUrl = String.Format(ServiceURL.GetServiceURL(ServiceKey.FlightItineraries),from,to,departure_date,adults,return_date,children,infants,offset,limit,order_by,order_type,currency_code,filter);
+            IConnector connector = context.GetServiceConnector(ServiceKey.FlightItineraries);
 
-            return await connector.GetAsync<Airline>(serviceUrl);
+            return await connector.GetAsync<FlightsItineraries>(serviceUrl);
         }
+       
 
         /// <summary>
         /// Retrieves an list of Cities

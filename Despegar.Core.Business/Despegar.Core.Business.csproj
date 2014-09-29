@@ -35,18 +35,31 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .NET Framework is automatically included -->
+    <Folder Include="Common\" />
   </ItemGroup>
   <ItemGroup>
     <TargetPlatform Include="WindowsPhoneApp, Version=8.1" />
     <TargetPlatform Include="Windows, Version=8.1" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Common\IDElement.cs" />
-    <Compile Include="Flight\Airline.cs" />
     <Compile Include="Flight\CitiesAutocomplete\CitiesAutocomplete.cs" />
     <Compile Include="Flight\CitiesAutocomplete\City.cs" />
     <Compile Include="Flight\CitiesAutocomplete\CityAutocomplete.cs" />
     <Compile Include="Flight\CitiesAutocomplete\GeoLocation.cs" />
+    <Compile Include="Flight\Itineraries\Airline.cs" />
+    <Compile Include="Flight\Itineraries\Airport.cs" />
+    <Compile Include="Flight\Itineraries\Currencies.cs" />
+    <Compile Include="Flight\Itineraries\Currency.cs" />
+    <Compile Include="Flight\Itineraries\Facet.cs" />
+    <Compile Include="Flight\Itineraries\FlightsItineraries.cs" />
+    <Compile Include="Flight\Itineraries\Item.cs" />
+    <Compile Include="Flight\Itineraries\Bound.cs" />
+    <Compile Include="Flight\Itineraries\Paging.cs" />
+    <Compile Include="Flight\Itineraries\Segment.cs" />
+    <Compile Include="Flight\Itineraries\Sorting.cs" />
+    <Compile Include="Flight\Itineraries\Value.cs" />
+    <Compile Include="Flight\Itineraries\Value2.cs" />
+    <Compile Include="Flight\Itineraries\Value3.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />

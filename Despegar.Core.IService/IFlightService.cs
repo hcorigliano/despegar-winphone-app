@@ -1,5 +1,6 @@
 ﻿using Despegar.Core.Business.Flight;
 using Despegar.Core.Business.Flight.CitiesAutocomplete;
+using Despegar.Core.Business.Flight.Itineraries;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +14,8 @@ namespace Despegar.Core.IService
     /// </summary>
     public interface IFlightService
     {
-        Task<Airline> GetAirline(string airlineDescription);
         Task<CitiesAutocomplete> GetCitiesAutocomplete(string cityString);
+        Task<FlightsItineraries> GetItinerariesFlights(string from, string to, string departure_date, int adults, string return_date, int children, int infants, int offset, int limit, string order_by, string order_type, string currency_code, string filter);
+
     }
 }
