@@ -1,4 +1,3 @@
-
 using Despegar.Core.Business;
 ﻿using Despegar.Core.Business.Flight.BookingFields;
 using Despegar.Core.Business.Flight.CitiesAutocomplete;

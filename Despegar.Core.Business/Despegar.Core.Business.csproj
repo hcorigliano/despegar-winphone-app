@@ -43,7 +43,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Culture\Site.cs" />
-    <Compile Include="Flight\Itineraries\Airline.cs" />
     <Compile Include="Mocks.cs" />
     <Compile Include="Flight\BookingFields\Address.cs" />
     <Compile Include="Flight\BookingFields\Birthdate.cs" />
@@ -82,6 +81,7 @@
     <Compile Include="Flight\CitiesAutocomplete\City.cs" />
     <Compile Include="Flight\CitiesAutocomplete\CityAutocomplete.cs" />
     <Compile Include="Flight\CitiesAutocomplete\GeoLocation.cs" />
+    <Compile Include="Flight\Itineraries\Airline.cs" />
     <Compile Include="Flight\Itineraries\Airport.cs" />
     <Compile Include="Flight\Itineraries\Currencies.cs" />
     <Compile Include="Flight\Itineraries\Currency.cs" />
