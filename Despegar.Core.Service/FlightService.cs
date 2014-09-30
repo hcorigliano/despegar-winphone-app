@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Diagnostics;
 using Despegar.Core.Business.Flight.CitiesAutocomplete;
 using Despegar.Core.Business.Flight.Itineraries;
+using Despegar.Core.Business.Flight.BookingFields;
 
 namespace Despegar.Core.Service
 {
@@ -19,6 +20,7 @@ namespace Despegar.Core.Service
         {
             this.context = context;
         }
+
         /// <summary>
         /// Retrieves an itinerarie for a flight
         /// </summary>
@@ -56,6 +58,19 @@ namespace Despegar.Core.Service
             IConnector connector = context.GetServiceConnector(ServiceKey.FlightCitiesAutocomplete);
 
             return await connector.GetAsync<CitiesAutocomplete>(serviceUrl);
+        }
+
+        /// <summary>
+        /// Retrieves the booking fields
+        /// </summary>
+        /// <param name="bookingFieldPost"></param>
+        /// <returns></returns>
+        public async Task<BookingFields> GetBookingFields(BookingFieldPost bookingFieldPost)
+        {
+            string serviceUrl = ServiceURL.GetServiceURL(ServiceKey.FlightsBookingFields);
+            IConnector connector = context.GetServiceConnector(ServiceKey.FlightsBookingFields);
+
+            return await connector.PostAsync<BookingFields>(serviceUrl, bookingFieldPost);
         }
     }
 }

@@ -42,6 +42,39 @@
     <TargetPlatform Include="Windows, Version=8.1" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Flight\BookingFields\Address.cs" />
+    <Compile Include="Flight\BookingFields\Birthdate.cs" />
+    <Compile Include="Flight\BookingFields\BookingFieldPost.cs" />
+    <Compile Include="Flight\BookingFields\BookingFields.cs" />
+    <Compile Include="Flight\BookingFields\Card.cs" />
+    <Compile Include="Flight\BookingFields\Card2.cs" />
+    <Compile Include="Flight\BookingFields\Comment.cs" />
+    <Compile Include="Flight\BookingFields\Contact.cs" />
+    <Compile Include="Flight\BookingFields\Currency.cs" />
+    <Compile Include="Flight\BookingFields\Document.cs" />
+    <Compile Include="Flight\BookingFields\Expiration.cs" />
+    <Compile Include="Flight\BookingFields\FieldDataTypeOpt.cs" />
+    <Compile Include="Flight\BookingFields\FieldDataType.cs" />
+    <Compile Include="Flight\BookingFields\FieldDataTypeVal.cs" />
+    <Compile Include="Flight\BookingFields\FieldDataTypeValue.cs" />
+    <Compile Include="Flight\BookingFields\FieldDataTypeValValue.cs" />
+    <Compile Include="Flight\BookingFields\Form.cs" />
+    <Compile Include="Flight\BookingFields\Installment.cs" />
+    <Compile Include="Flight\BookingFields\Installments.cs" />
+    <Compile Include="Flight\BookingFields\Invoice.cs" />
+    <Compile Include="Flight\BookingFields\Option.cs" />
+    <Compile Include="Flight\BookingFields\OwnerDocument.cs" />
+    <Compile Include="Flight\BookingFields\FieldDataTypeOptValue.cs" />
+    <Compile Include="Flight\BookingFields\Passenger.cs" />
+    <Compile Include="Flight\BookingFields\Payment.cs" />
+    <Compile Include="Flight\BookingFields\Payments.cs" />
+    <Compile Include="Flight\BookingFields\Phone.cs" />
+    <Compile Include="Flight\BookingFields\Price.cs" />
+    <Compile Include="Flight\BookingFields\Quantity.cs" />
+    <Compile Include="Flight\BookingFields\Validation.cs" />
+    <Compile Include="Flight\BookingFields\Voucher.cs" />
+    <Compile Include="Flight\BookingFields\WithInterest.cs" />
+    <Compile Include="Flight\BookingFields\WithoutInterest.cs" />
     <Compile Include="Flight\CitiesAutocomplete\CitiesAutocomplete.cs" />
     <Compile Include="Flight\CitiesAutocomplete\City.cs" />
     <Compile Include="Flight\CitiesAutocomplete\CityAutocomplete.cs" />
