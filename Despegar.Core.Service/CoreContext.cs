@@ -39,7 +39,7 @@ namespace Despegar.Core.Service
 
         public string GetLanguage() 
         { 
-            return IsDECOLAR ? "ES" : "PT"; 
+            return IsDECOLAR ? "PT" : "ES"; 
         }
 
         /// <summary>
