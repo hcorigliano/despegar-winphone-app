@@ -50,12 +50,10 @@ namespace Despegar.WP.UI
 
         private async void btnMainButton_Click(object sender, RoutedEventArgs e)
         {           
-            this.txtExample.Text = await hm.LoadAirlines();
         }
 
         private async void btnMainButton2_Click(object sender, RoutedEventArgs e)
         {            
-            this.txtExample2.Text = await hm.LoadAirlines();
         }
     }
 }

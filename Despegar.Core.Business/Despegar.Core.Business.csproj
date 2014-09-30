@@ -35,15 +35,69 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .NET Framework is automatically included -->
+    <Folder Include="Common\" />
   </ItemGroup>
   <ItemGroup>
     <TargetPlatform Include="WindowsPhoneApp, Version=8.1" />
     <TargetPlatform Include="Windows, Version=8.1" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Flight\Airline\Airline.cs" />
     <Compile Include="Culture\Site.cs" />
+    <Compile Include="Flight\Itineraries\Airline.cs" />
     <Compile Include="Mocks.cs" />
+    <Compile Include="Flight\BookingFields\Address.cs" />
+    <Compile Include="Flight\BookingFields\Birthdate.cs" />
+    <Compile Include="Flight\BookingFields\BookingFieldPost.cs" />
+    <Compile Include="Flight\BookingFields\BookingFields.cs" />
+    <Compile Include="Flight\BookingFields\Card.cs" />
+    <Compile Include="Flight\BookingFields\Card2.cs" />
+    <Compile Include="Flight\BookingFields\Comment.cs" />
+    <Compile Include="Flight\BookingFields\Contact.cs" />
+    <Compile Include="Flight\BookingFields\Currency.cs" />
+    <Compile Include="Flight\BookingFields\Document.cs" />
+    <Compile Include="Flight\BookingFields\Expiration.cs" />
+    <Compile Include="Flight\BookingFields\FieldDataTypeOpt.cs" />
+    <Compile Include="Flight\BookingFields\FieldDataType.cs" />
+    <Compile Include="Flight\BookingFields\FieldDataTypeVal.cs" />
+    <Compile Include="Flight\BookingFields\FieldDataTypeValue.cs" />
+    <Compile Include="Flight\BookingFields\FieldDataTypeValValue.cs" />
+    <Compile Include="Flight\BookingFields\Form.cs" />
+    <Compile Include="Flight\BookingFields\Installment.cs" />
+    <Compile Include="Flight\BookingFields\Installments.cs" />
+    <Compile Include="Flight\BookingFields\Invoice.cs" />
+    <Compile Include="Flight\BookingFields\Option.cs" />
+    <Compile Include="Flight\BookingFields\OwnerDocument.cs" />
+    <Compile Include="Flight\BookingFields\FieldDataTypeOptValue.cs" />
+    <Compile Include="Flight\BookingFields\Passenger.cs" />
+    <Compile Include="Flight\BookingFields\Payment.cs" />
+    <Compile Include="Flight\BookingFields\Payments.cs" />
+    <Compile Include="Flight\BookingFields\Phone.cs" />
+    <Compile Include="Flight\BookingFields\Price.cs" />
+    <Compile Include="Flight\BookingFields\Quantity.cs" />
+    <Compile Include="Flight\BookingFields\Validation.cs" />
+    <Compile Include="Flight\BookingFields\Voucher.cs" />
+    <Compile Include="Flight\BookingFields\WithInterest.cs" />
+    <Compile Include="Flight\BookingFields\WithoutInterest.cs" />
+    <Compile Include="Flight\CitiesAutocomplete\CitiesAutocomplete.cs" />
+    <Compile Include="Flight\CitiesAutocomplete\City.cs" />
+    <Compile Include="Flight\CitiesAutocomplete\CityAutocomplete.cs" />
+    <Compile Include="Flight\CitiesAutocomplete\GeoLocation.cs" />
+    <Compile Include="Flight\Itineraries\Airport.cs" />
+    <Compile Include="Flight\Itineraries\Currencies.cs" />
+    <Compile Include="Flight\Itineraries\Currency.cs" />
+    <Compile Include="Flight\Itineraries\Facet.cs" />
+    <Compile Include="Flight\Itineraries\FlightsItineraries.cs" />
+    <Compile Include="Flight\Itineraries\Inbound.cs" />
+    <Compile Include="Flight\Itineraries\Item.cs" />
+    <Compile Include="Flight\Itineraries\OperatedBy.cs" />
+    <Compile Include="Flight\Itineraries\Outbound.cs" />
+    <Compile Include="Flight\Itineraries\Paging.cs" />
+    <Compile Include="Flight\Itineraries\Segment.cs" />
+    <Compile Include="Flight\Itineraries\Segment2.cs" />
+    <Compile Include="Flight\Itineraries\Sorting.cs" />
+    <Compile Include="Flight\Itineraries\Value.cs" />
+    <Compile Include="Flight\Itineraries\Value2.cs" />
+    <Compile Include="Flight\Itineraries\Value3.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServiceURL.cs" />
   </ItemGroup>
