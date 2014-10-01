@@ -12,6 +12,9 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Despegar.WP.UI.Classes;
+using Windows.ApplicationModel.Resources.Core;
+using System.Collections.ObjectModel;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
 
@@ -22,8 +25,31 @@ namespace Despegar.WP.UI
     /// </summary>
     public sealed partial class CountrySelection : Page
     {
+        private string nextPage;
+
+        ObservableCollection<CountryItem> item;
+
+        public ObservableCollection<CountryItem> Items
+        {
+            get { return item; }
+            set { item = value; }
+        }
+
         public CountrySelection()
         {
+
+            var resourceLoader = new Windows.ApplicationModel.Resources.ResourceLoader();
+            //var element = resourceLoader.GetString("Country_Code_Argentina");
+
+            this.Items = new ObservableCollection<CountryItem>
+            {
+                new CountryItem{ Code= resourceLoader.GetString("Country_Code_Argentina"), CountryName = resourceLoader.GetString("Country_Name_Argentina") },
+                new CountryItem{ Code= resourceLoader.GetString("Country_Code_Brazil"), CountryName = resourceLoader.GetString("Country_Name_Brazil") },
+                new CountryItem{ Code= resourceLoader.GetString("Country_Code_Mexico"), CountryName = resourceLoader.GetString("Country_Name_Mexico") },
+            };
+
+
+            this.DataContext = this;
             this.InitializeComponent();
         }
 
@@ -34,6 +60,24 @@ namespace Despegar.WP.UI
         /// This parameter is typically used to configure the page.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            base.OnNavigatedTo(e);
+
         }
+
+        private void ListView_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            CountryItem countrySelected = e.ClickedItem as CountryItem;
+
+            //NavigationService.Navigate(new Uri("/Home.xaml", UriKind.Relative));
+
+            Frame rootFrame = Window.Current.Content as Frame;
+
+            if (rootFrame != null)
+            {
+                rootFrame.Navigate(typeof(Home), e);
+            }
+        }
+
+        
     }
 }
