@@ -45,6 +45,7 @@
     <TargetPlatform Include="Windows, Version=8.1" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IConfigurationService.cs" />
     <Compile Include="ICoreContext.cs" />
     <Compile Include="IFlightService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

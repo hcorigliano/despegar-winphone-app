@@ -101,6 +101,11 @@ namespace Despegar.Core.Service
             return new FlightService(this);
         }
 
+        public IConfigurationService GetConfigurationService()
+        {
+            return new ConfigurationService(this);
+        }
+
         #endregion
 
         #region ** Core private **

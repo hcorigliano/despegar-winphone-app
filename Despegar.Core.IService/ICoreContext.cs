@@ -41,6 +41,12 @@ namespace Despegar.Core.IService
         IFlightService GetFlightService();
 
         /// <summary>
+        /// returns the ConfigurationService Object
+        /// </summary>
+        /// <returns></returns>
+        IConfigurationService GetConfigurationService();
+
+        /// <summary>
         /// Re-configures the Core for the new Site
         /// </summary>
         /// <param name="Site">Example: AR,CO,MX etc. </param>

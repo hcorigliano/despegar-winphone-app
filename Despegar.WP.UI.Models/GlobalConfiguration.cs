@@ -32,7 +32,11 @@ namespace Despegar.WP.UI.Model
             CoreContext.SetSite(SiteCode.Argentina);
 
             // Add Service Mocks
-           // CoreContext.AddMock(ServiceKey.FlightsAirlines, MockKey.AirlineTest);
+            GlobalConfiguration.CoreContext.AddMock(ServiceKey.Configurations, MockKey.ConfigurationsDefault);
+            // CoreContext.AddMock(ServiceKey.FlightsAirlines, MockKey.AirlineTest);
+            //GlobalConfiguration.CoreContext.AddMock(ServiceKey.FlightCitiesAutocomplete, MockKey.FlightCitiesAutocompleteBue);
+            //GlobalConfiguration.CoreContext.AddMock(ServiceKey.FlightItineraries, MockKey.ItinerarieBueToLax);
+            GlobalConfiguration.CoreContext.AddMock(ServiceKey.FlightsBookingFields, MockKey.BookingFieldBuetoMia);
         }
 
         /// <summary>

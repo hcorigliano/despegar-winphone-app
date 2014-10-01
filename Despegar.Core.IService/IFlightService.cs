@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace Despegar.Core.IService
 {
+
     /// <summary>
     /// Contract for accessing flight data service.
     /// </summary>

@@ -1,5 +1,6 @@
 using Despegar.Core.Business;
-﻿using Despegar.Core.Business.Flight.BookingFields;
+using Despegar.Core.Business.Configuration;
+using Despegar.Core.Business.Flight.BookingFields;
 using Despegar.Core.Business.Flight.CitiesAutocomplete;
 using Despegar.Core.Business.Flight.Itineraries;
 using Despegar.Core.IService;
@@ -12,25 +13,13 @@ namespace Despegar.WP.UI.Model
     {
         //TODO all this code must be changed it is just for first time only.
         private IFlightService flightService;
+        private IConfigurationService configurationService;
 
         public HomeModel()             
         {
-		    flightService = GlobalConfiguration.CoreContext.GetFlightService();		            
+		    flightService = GlobalConfiguration.CoreContext.GetFlightService();
+            configurationService = GlobalConfiguration.CoreContext.GetConfigurationService();
             
-            //TODO: Sacar Mocked
-            //GlobalConfiguration.CoreContext.AddMock(ServiceKey.FlightCitiesAutocomplete, MockKey.FlightCitiesAutocompleteBue);
-            //GlobalConfiguration.CoreContext.AddMock(ServiceKey.FlightItineraries, MockKey.ItinerarieBueToLax);
-            GlobalConfiguration.CoreContext.AddMock(ServiceKey.FlightsBookingFields, MockKey.BookingFieldBuetoMia);
-            
-            GetCities("bue");
-            GetItineraries("BUE","LAX","2014-10-10", 1, "2014-10-12",0,0,0,10,"","","ARS","");
-
-            BookingFieldPost bookingFieldPost = new BookingFieldPost();
-            bookingFieldPost.inbound_choice = 1;
-            bookingFieldPost.outbound_choice = 1;
-            bookingFieldPost.itinerary_id = "prism_AR_0_FLIGHTS_A-1_C-0_I-0_RT-BUEMIA20141010-MIABUE20141013_xorigin-api!0!C_1550550186!1,1";
-
-            GetBooking(bookingFieldPost);
         }
 
         public async Task<CitiesAutocomplete> GetCities(string cityString)
@@ -47,6 +36,11 @@ namespace Despegar.WP.UI.Model
         public async Task<BookingFields> GetBooking(BookingFieldPost bookingFieldPost)
         {
             return (await flightService.GetBookingFields(bookingFieldPost));
+        }
+
+        public async Task<Configurations> GetConfigurations()
+        {
+            return (await configurationService.GetConfigurations());
         }
 
     }
