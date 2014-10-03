@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Despegar.Core.Business.Flight.BookingCompletePost
 {
-    public class BookingCompletePost
+    public class Document
     {
-        public Form form { get; set; }
+        public string type { get; set; }
+        public string number { get; set; }
     }
 }

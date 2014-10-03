@@ -8,7 +8,8 @@ namespace Despegar.Core.Business
         FlightCitiesAutocomplete,
         FlightItineraries,
         FlightsBookingFields,
-        Configurations
+        Configurations,
+        BookingCompletePost
     }
 
     /// <summary>
@@ -22,7 +23,8 @@ namespace Despegar.Core.Business
             {ServiceKey.FlightCitiesAutocomplete, "mapi-cross/autocomplete/flights?search={0}" },
             {ServiceKey.FlightItineraries,"mapi-flights/itineraries?from={0}&to={1}&departure_date={2}&adults={3}&return_date={4}&children={5}&infants={6}&offset={7}&limit={8}&order_by={9}&order_type={10}&currency_code={11}&filter={12}"},
             {ServiceKey.FlightsBookingFields,"mapi-flights/bookings?"},
-            {ServiceKey.Configurations,"FALTA_DEFINIR"}
+            {ServiceKey.Configurations,"FALTA_DEFINIR"},
+            {ServiceKey.BookingCompletePost,"mapi-flights/bookings/{0}"}
         };
 
         public static string GetServiceURL(ServiceKey key)

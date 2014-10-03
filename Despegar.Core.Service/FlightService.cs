@@ -8,6 +8,8 @@ using System.Diagnostics;
 using Despegar.Core.Business.Flight.CitiesAutocomplete;
 using Despegar.Core.Business.Flight.Itineraries;
 using Despegar.Core.Business.Flight.BookingFields;
+using Despegar.Core.Business.Flight.BookingCompletePostResponse;
+using Despegar.Core.Business.Flight.BookingCompletePost;
 
 namespace Despegar.Core.Service
 {
@@ -74,6 +76,15 @@ namespace Despegar.Core.Service
 
 
             return await connector.PostAsync<BookingFields>(serviceUrl, bookingFieldPost);
+        }
+
+
+        public async Task<BookingCompletePostResponse> CompleteBooking(BookingCompletePost bookingCompletePost,string id)
+        {
+            string serviceUrl = String.Format(ServiceURL.GetServiceURL(ServiceKey.BookingCompletePost),id);
+            IConnector connector = context.GetServiceConnector(ServiceKey.BookingCompletePost);
+
+            return await connector.PostAsync<BookingCompletePostResponse>(serviceUrl, bookingCompletePost);
         }
     }
 }

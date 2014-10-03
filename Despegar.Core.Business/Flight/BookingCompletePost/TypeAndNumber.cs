@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace Despegar.Core.Business.Flight.BookingCompletePost
 {
-    public class BookingCompletePost
+    public class TypeAndNumber
     {
-        public Form form { get; set; }
+        public string type { get; set; }
+        public string number { get; set; }
     }
 }
