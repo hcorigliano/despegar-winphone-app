@@ -12,10 +12,10 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
-using Despegar.WP.UI.Classes;
 using Windows.ApplicationModel.Resources.Core;
 using System.Collections.ObjectModel;
-
+using Despegar.WP.UI.Model.Classes;
+using Despegar.WP.UI.Classes;
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
 
 namespace Despegar.WP.UI
@@ -25,8 +25,6 @@ namespace Despegar.WP.UI
     /// </summary>
     public sealed partial class CountrySelection : Page
     {
-        private string nextPage;
-
         ObservableCollection<CountryItem> item;
 
         public ObservableCollection<CountryItem> Items
@@ -67,17 +65,7 @@ namespace Despegar.WP.UI
         private void ListView_ItemClick(object sender, ItemClickEventArgs e)
         {
             CountryItem countrySelected = e.ClickedItem as CountryItem;
-
-            //NavigationService.Navigate(new Uri("/Home.xaml", UriKind.Relative));
-
-            Frame rootFrame = Window.Current.Content as Frame;
-
-            if (rootFrame != null)
-            {
-                rootFrame.Navigate(typeof(Home), e);
-            }
-        }
-
-        
+            PagesManager.GoTo(typeof(Home), e);
+        }   
     }
 }

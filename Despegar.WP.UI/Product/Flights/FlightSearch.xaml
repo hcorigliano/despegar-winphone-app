@@ -29,7 +29,29 @@
 
         <!--TODO: Content should be placed within the following grid-->
         <Grid Grid.Row="1" x:Name="ContentRoot" Margin="19,9.5,19,0">
-
+            <StackPanel  VerticalAlignment="Top" HorizontalAlignment="Stretch">
+                <TextBlock>Origen</TextBlock>
+                <TextBox Text="Miami, Florida, Estados Unidos"></TextBox>
+                <TextBlock>Destino</TextBlock>
+                <TextBox Text="Buenos Aires, Argentina"></TextBox>
+                <StackPanel
+                    Orientation="Horizontal"
+                    >
+                    <StackPanel> 
+                        <TextBlock>Partida</TextBlock>
+                        <DatePicker></DatePicker>
+                    </StackPanel>
+                    <StackPanel>
+                        <TextBlock>Regreso</TextBlock>
+                        <DatePicker></DatePicker>
+                    </StackPanel>
+                </StackPanel>
+                
+                <TextBlock Text="Adultos (+12)     - 1 +"></TextBlock>
+                <TextBlock Text="0 - 11     - 0 +" ></TextBlock>
+            </StackPanel>
+            
+            <Button Click="Button_Click" Margin="109,443,0,1">Buscar vuelos</Button>
         </Grid>
     </Grid>
 </Page>

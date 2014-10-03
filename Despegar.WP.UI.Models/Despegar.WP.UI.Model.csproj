@@ -49,7 +49,14 @@
     <TargetPlatform Include="Windows, Version=8.1" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AppModelBase.cs" />
+    <Compile Include="Classes\AdvanceSearchModel.cs" />
+    <Compile Include="Classes\CountryItem.cs" />
+    <Compile Include="FlightResultsModel.cs" />
+    <Compile Include="FlightSearchModel.cs" />
     <Compile Include="HomeModel.cs" />
+    <Compile Include="Interfaces\IInitializeModelInterface.cs" />
+    <Compile Include="Interfaces\IValidateInterface.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />

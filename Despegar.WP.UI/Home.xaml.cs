@@ -1,4 +1,5 @@
-﻿using Despegar.WP.UI.Common;
+﻿using Despegar.WP.UI.Classes;
+using Despegar.WP.UI.Common;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -111,8 +112,13 @@ namespace Despegar.WP.UI
         private void ListView_ItemClick(object sender, ItemClickEventArgs e)
         {
             //TODO cast element for calling the correct instances of object
+            string text = e.ClickedItem as string;
+            PagesManager.GoTo(typeof(Product.Flights.FlightSearch),e);
 
-            
+
+            //delete the following lines
+            //AppEmbbed.PivotPage pp = new PivotPage();
+            //PagesManager.GoTo(typeof(), e);
         }
     }
 }

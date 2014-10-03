@@ -1,4 +1,5 @@
-﻿using Despegar.WP.UI.Common;
+﻿using Despegar.WP.UI.Classes;
+using Despegar.WP.UI.Common;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -107,5 +108,10 @@ namespace Despegar.WP.UI.Product.Flights
         }
 
         #endregion
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            PagesManager.GoTo(typeof(FlightResults),null);
+        }
     }
 }
