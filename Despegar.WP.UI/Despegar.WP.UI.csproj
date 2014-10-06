@@ -80,6 +80,18 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
+    <ProjectReference Include="..\Despegar.Core.Business\Despegar.Core.Business.csproj">
+      <Project>{c4b34083-7e2a-461b-b525-4c238314655a}</Project>
+      <Name>Despegar.Core.Business</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Despegar.Core.IService\Despegar.Core.IService.csproj">
+      <Project>{3c3cdca2-e9fc-4207-b71e-22a1c423d5f8}</Project>
+      <Name>Despegar.Core.IService</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Despegar.Core.Service\Despegar.Core.Service.csproj">
+      <Project>{b4b6d17f-4416-4920-a500-4e9a88ad2d80}</Project>
+      <Name>Despegar.Core.Service</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Despegar.WP.UI.Models\Despegar.WP.UI.Model.csproj">
       <Project>{4bd277e3-3251-4cf8-8ee5-9ef410362d4f}</Project>
       <Name>Despegar.WP.UI.Model</Name>
