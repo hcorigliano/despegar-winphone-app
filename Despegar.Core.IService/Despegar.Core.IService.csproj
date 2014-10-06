@@ -35,12 +35,17 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .NET Framework is automatically included -->
+    <ProjectReference Include="..\Despegar.Core.Business\Despegar.Core.Business.csproj">
+      <Project>{c4b34083-7e2a-461b-b525-4c238314655a}</Project>
+      <Name>Despegar.Core.Business</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <TargetPlatform Include="WindowsPhoneApp, Version=8.1" />
     <TargetPlatform Include="Windows, Version=8.1" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ICoreContext.cs" />
     <Compile Include="IFlightService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

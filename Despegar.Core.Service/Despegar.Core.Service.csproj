@@ -35,6 +35,10 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .NET Framework is automatically included -->
+    <ProjectReference Include="..\Despegar.Core.Business\Despegar.Core.Business.csproj">
+      <Project>{c4b34083-7e2a-461b-b525-4c238314655a}</Project>
+      <Name>Despegar.Core.Business</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Despegar.Core.Connector\Despegar.Core.Connector.csproj">
       <Project>{54c368e1-6a4b-46bd-ba1f-f04b97c45e83}</Project>
       <Name>Despegar.Core.Connector</Name>
@@ -51,7 +55,9 @@
   <ItemGroup>
     <Compile Include="FlightService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="CoreContext.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
