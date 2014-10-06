@@ -32,7 +32,7 @@ namespace Despegar.WP.UI.Model
             CoreContext.SetSite(SiteCode.Argentina);
 
             // Add Service Mocks
-            GlobalConfiguration.CoreContext.AddMock(ServiceKey.Configurations, MockKey.ConfigurationsDefault);
+            GlobalConfiguration.CoreContext.AddMock(ServiceKey.Configurations, MockKey.ConfigurationsDefault); //keep on! No URL yet.
             // CoreContext.AddMock(ServiceKey.FlightsAirlines, MockKey.AirlineTest);
             //GlobalConfiguration.CoreContext.AddMock(ServiceKey.FlightCitiesAutocomplete, MockKey.FlightCitiesAutocompleteBue);
             //GlobalConfiguration.CoreContext.AddMock(ServiceKey.FlightItineraries, MockKey.ItinerarieBueToLax);

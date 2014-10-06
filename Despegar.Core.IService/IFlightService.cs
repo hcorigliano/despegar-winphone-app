@@ -21,6 +21,6 @@ namespace Despegar.Core.IService
         Task<CitiesAutocomplete> GetCitiesAutocomplete(string cityString);
         Task<FlightsItineraries> GetItinerariesFlights(string from, string to, string departure_date, int adults, string return_date, int children, int infants, int offset, int limit, string order_by, string order_type, string currency_code, string filter);
         Task<BookingFields> GetBookingFields(BookingFieldPost bookingFieldPost);
-        Task<BookingCompletePostResponse> CompleteBooking(BookingCompletePost bookingCompletePost,string id);
+        Task<BookingCompletePostResponse> CompleteBooking(object bookingCompletePost,string id);
     }
 }

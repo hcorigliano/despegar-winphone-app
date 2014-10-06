@@ -63,6 +63,7 @@
     <Compile Include="Configuration\Prices.cs" />
     <Compile Include="Configuration\schedules.cs" />
     <Compile Include="Culture\Site.cs" />
+    <Compile Include="Dynamics\DynamicFlightBookingFieldsToPost.cs" />
     <Compile Include="Flight\BookingCompletePostResponse\Answers.cs" />
     <Compile Include="Flight\BookingCompletePostResponse\BookingCompletePostResponse.cs" />
     <Compile Include="Flight\BookingCompletePostResponse\FreeTextDescription.cs" />
