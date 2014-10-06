@@ -7,6 +7,9 @@
 /Despegar.WP.UI/Despegar.WP.UI.csproj.user
 
 # Ignore directories
+/packages/**
+
+/Despegar.LegacyCore/obj/**
 /Despegar.Core.Business/obj/**
 /Despegar.Core.Connector/obj/**
 /Despegar.Core.Connector.Model/obj/**
@@ -16,6 +19,7 @@
 /Despegar.WP.UI/obj/**
 /Despegar.WP.UI.Models/obj/**
 
+/Despegar.LegacyCore/bin/**
 /Despegar.Core.Business/bin/**
 /Despegar.Core.Connector/bin/**
 /Despegar.Core.Connector.Model/bin/**
