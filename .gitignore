@@ -24,3 +24,5 @@
 /Despegar.Core.Service/bin/**
 /Despegar.WP.UI/bin/**
 /Despegar.WP.UI.Models/bin/**
+*.USER
+*.suo
