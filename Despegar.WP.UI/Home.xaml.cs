@@ -1,10 +1,17 @@
-﻿using Despegar.WP.UI.Classes;
+﻿using Despegar.LegacyCore;
+using Despegar.LegacyCore.Resource;
+using Despegar.LegacyCore.ViewModel;
+using Despegar.WP.UI.Classes;
 using Despegar.WP.UI.Common;
+using Despegar.WP.UI.Product.Legacy;
+using Despegar.WP.UI.Resource;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Resources;
 using System.Runtime.InteropServices.WindowsRuntime;
+using Windows.ApplicationModel.Resources;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Graphics.Display;
@@ -25,13 +32,16 @@ namespace Despegar.WP.UI
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
     public sealed partial class Home : Page
-    {
+    {        
         private NavigationHelper navigationHelper;
         private ObservableDictionary defaultViewModel = new ObservableDictionary();
+        private HomeViewModel legacyHomeViewModel;
 
         public Home()
         {
             this.InitializeComponent();
+
+            this.legacyHomeViewModel = new HomeViewModel(); // TODO: LEGACY
 
             this.navigationHelper = new NavigationHelper(this);
             this.navigationHelper.LoadState += this.NavigationHelper_LoadState;
@@ -112,13 +122,29 @@ namespace Despegar.WP.UI
         private void ListView_ItemClick(object sender, ItemClickEventArgs e)
         {
             //TODO cast element for calling the correct instances of object
-            string text = e.ClickedItem as string;
-            PagesManager.GoTo(typeof(Product.Flights.FlightSearch),e);
+            TextBlock text = e.ClickedItem as TextBlock;
 
+            switch (text.Name) 
+            {
+                case "FlightsOption": 
+                    PagesManager.GoTo(typeof(Product.Flights.FlightSearch),e);
+                    break;
+                case "HotelsOption":
+                    LoadBrowser(AppResources.GetLegacyString("HomeProductHotelsUrl"), e);
+                    break;
+                default:
+                    throw new InvalidOperationException();
+            }
 
             //delete the following lines
             //AppEmbbed.PivotPage pp = new PivotPage();
             //PagesManager.GoTo(typeof(), e);
+        }
+
+        private void LoadBrowser(string relativePath, ItemClickEventArgs e)
+        {
+            ApplicationConfig.Instance.ResetBrowsingPages(new Uri(this.legacyHomeViewModel.Domain + relativePath));
+            PagesManager.GoTo(typeof(Browser), e);
         }
     }
 }

@@ -21,22 +21,14 @@ namespace Despegar.LegacyCore.ViewModel
 
         public bool Geolocation { get; set; }
         public string Domain { get; set; }
-        public bool HasFlights { get; set; }
-
 
         public HomeViewModel()
         {
-            Logger.Info("[vm:home] Home ViewModel initialized");
-
-            Configuration = new ConfigurationModel();
-            
-            Domain = Configuration.GetCurrentDomain();
-            Geolocation = ApplicationConfig.Instance.Location;
-            HasFlights = Configuration.GetCurrent().products.Contains("flights");
+            //Configuration = new ConfigurationModel();            
+            Domain = "http://m.despegar.com.ar/";
+            Geolocation = ApplicationConfig.Instance.Location; // TODO: Is it Necesary?
 
             NotifyPropertyChanged("Geolocation");
-            NotifyPropertyChanged("HasFlights");
-
         }
 
 

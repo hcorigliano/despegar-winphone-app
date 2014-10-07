@@ -1,0 +1,1271 @@
+﻿<Page
+    x:Class="Despegar.View.HotelsCheckout"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    xmlns:toolkitpr="clr-namespace:Microsoft.Phone.Controls.Primitives;assembly=Microsoft.Phone.Controls.Toolkit"
+    xmlns:conv="clr-namespace:Despegar.Converter"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="#000000"
+    mc:Ignorable="d">
+
+    <Page.Resources>
+        
+        <Style x:Key="RowStyle" TargetType="StackPanel">
+            <Setter Property="Margin" Value="0,0,0,12" />
+        </Style>
+        
+        <Style x:Key="RowTitleStyle" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="#023d8b" />
+            <Setter Property="Margin" Value="12,0" />
+            <Setter Property="FontSize" Value="28" />
+        </Style>
+
+        <Style x:Key="RowSubTitleStyle" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="#686868" />
+            <Setter Property="Margin" Value="12,6,10,0" />
+            <Setter Property="FontSize" Value="24" />
+        </Style>
+        
+        <Style x:Key="RowErrorStyle" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="#e73741" />
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="Margin" Value="12,-2,12,4" />
+            <Setter Property="Visibility" Value="Collapsed" />
+        </Style>
+
+        <Style x:Key="RowInputStyle" TargetType="Control">
+            <Setter Property="Background" Value="#fafafa" />
+            <Setter Property="BorderBrush" Value="#aaa" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="FontSize" Value="22" />
+            <Setter Property="Foreground" Value="#333" />
+            <Setter Property="Padding" Value="6" />
+        </Style>
+
+        <Style x:Key="RowErrorInputStyle" TargetType="Control">
+            <Setter Property="Background" Value="#FFCCCC" />
+            <Setter Property="BorderBrush" Value="#FF0000" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="FontSize" Value="22" />
+            <Setter Property="Foreground" Value="#333" />
+            <Setter Property="Padding" Value="6" />
+        </Style>
+
+        <Style x:Key="RowDetailsDetailStyle" TargetType="StackPanel">
+            <Setter Property="Background" Value="#FFFFFF" />
+            <Setter Property="Margin" Value="12,0" />
+        </Style>
+        
+        <Style x:Key="RowDetailsDetailTextStyle" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="#7b7b7b" />
+            <Setter Property="FontSize" Value="18" />
+            <Setter Property="Margin" Value="10,8,10,0" />
+        </Style>
+
+        <Style x:Key="TaxAtDestinationTextStyle" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="#ff0000" />
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="Margin" Value="10,8,10,5" />
+        </Style>
+
+        <Style x:Key="RowDetailsDetailRightTextStyle" TargetType="TextBlock" BasedOn="{StaticResource RowDetailsDetailTextStyle}">
+            <Setter Property="HorizontalAlignment" Value="Right" />
+        </Style>
+
+        <Style x:Key="RowDetailsDetailTotalStyle" TargetType="StackPanel" BasedOn="{StaticResource RowDetailsDetailStyle}">
+            <Setter Property="Background" Value="#FFFF33" />
+        </Style>
+
+        <Style x:Key="RowDetailsDetailTotalGridStyle" TargetType="Grid">
+            <Setter Property="Background" Value="#FFFF33" />
+            <Setter Property="Margin" Value="8,0" />
+        </Style>
+        
+        <Style x:Key="RowDetailsDetailTotalWordRightStyle" TargetType="TextBlock" BasedOn="{StaticResource RowDetailsDetailTextStyle}">
+            <Setter Property="HorizontalAlignment" Value="Right" />
+            <Setter Property="VerticalAlignment" Value="Bottom" />
+            <Setter Property="Foreground" Value="#444" />
+            <Setter Property="FontSize" Value="22" />
+            <Setter Property="Margin" Value="0,0,2,-4" />
+        </Style>
+        
+        <Style x:Key="RowDetailsDetailTotalRightStyle" TargetType="TextBlock" BasedOn="{StaticResource RowDetailsDetailTextStyle}">
+            <Setter Property="HorizontalAlignment" Value="Right" />
+            <Setter Property="VerticalAlignment" Value="Bottom" />
+            <Setter Property="Foreground" Value="#444" />
+            <Setter Property="FontSize" Value="30" />
+            <Setter Property="Margin" Value="0" />
+        </Style>
+        
+        <Style x:Key="RowDetailsDetailTextCenterStyle" TargetType="TextBlock" BasedOn="{StaticResource RowDetailsDetailTextStyle}">
+            <Setter Property="HorizontalAlignment" Value="Center" />
+        </Style>
+
+        <Storyboard x:Name="ShowSubPaymentMethods">
+            <DoubleAnimation
+                    Storyboard.TargetName="SubPaymentMethodTransform"
+                    Storyboard.TargetProperty="Y"
+                    From="-50" To="0" Duration="0:0:0.6">
+                <DoubleAnimation.EasingFunction>
+                    <ExponentialEase EasingMode="EaseOut"></ExponentialEase>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+            <DoubleAnimation
+                    Storyboard.TargetName="SubPaymentMethod"
+                    Storyboard.TargetProperty="Opacity"
+                    From="0" To="1" Duration="0:0:0.5">
+            </DoubleAnimation>
+        </Storyboard>
+        
+        <conv:StyleConverter x:Name="StyleConverter" TrueValue="{StaticResource RowErrorInputStyle}" FalseValue="{StaticResource RowInputStyle}" />
+        <conv:VisibilityConverter x:Name="VisibilityConverter" TrueValue="Visible" FalseValue="Collapsed" />
+        <conv:VisibilityConverter x:Name="VisibilityConverterInverted" TrueValue="Collapsed" FalseValue="Visible"  />
+        <conv:DisplayBlockConverter x:Name="DisplayBlockConverter" TrueValue="Visible" FalseValue="Collapsed" />
+        <conv:HotelCheckoutErrorConverter x:Name="ErrorCodeToPropertyConverter" />
+        
+    </Page.Resources>
+
+    <Grid x:Name="HotelsCheckoutView" Background="#EEEEEE">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="82"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- TITLE BAR -->
+        <Grid Grid.Row="0">
+            <Image x:Name="MainLogo" Source="/Assets/Image/despegar-logo.png" Height="60" Margin="21,0,0,5" HorizontalAlignment="Left" VerticalAlignment="Bottom" />
+            <TextBlock Text="{Binding Path=AppProperties.HotelCheckoutBuyHotel, Source={StaticResource LocalizedProperties}}" FontSize="20" Foreground="#023d8b" TextAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,10,10" />
+        </Grid>
+        
+        <Grid Visibility="{Binding Loading}" Grid.Row="1" Height="690" VerticalAlignment="Bottom" Background="#EEE" Canvas.ZIndex="1" Margin="0,65,0,0">
+            <ProgressBar IsIndeterminate="true" Foreground="#023d8b" Grid.Row="1" VerticalAlignment="Center" Margin="0,-30,0,0" />
+            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#333">loading</TextBlock>
+            <TextBlock x:Name="Model" DataContext="{Binding AvailabilityModel}" Visibility="Collapsed"></TextBlock>
+        </Grid>
+        
+        <!-- MAIN PIVOT -->
+        <Pivot x:Name="CheckoutForm" Grid.Row="1" Margin="0,-15,0,0" Padding="0">
+            <phone:Pivot.HeaderTemplate>
+                <DataTemplate>
+                    <Grid Margin="-3,0,0,0" Height="80">
+                        <TextBlock Text="{Binding}" FontSize="50" Foreground="#369edd" />
+                    </Grid>
+                </DataTemplate>
+            </phone:Pivot.HeaderTemplate>
+
+            <!-- PASSENGER DEFINITIONS -->
+            <phone:PivotItem Header="{Binding Path=AppProperties.HotelCheckoutPassengersTitle, Source={StaticResource LocalizedProperties}}" Margin="0" Padding="8,0">
+                <ScrollViewer>
+                    <ItemsControl ItemsSource="{Binding PassengerDefinitions}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Style="{StaticResource RowStyle}">
+                                    
+                                    <TextBlock Style="{StaticResource RowTitleStyle}">
+                                        <Run Text="{Binding Path=AppProperties.HotelCheckoutRoomTitle, Source={StaticResource LocalizedProperties}}" />
+                                        <Run Text="{Binding Index}" />
+                                    </TextBlock>
+
+                                    <StackPanel DataContext="{Binding firstName}">
+                                        
+                                        <TextBlock 
+                                            Style="{StaticResource RowSubTitleStyle}"
+                                             Text="{Binding Path=AppProperties.CheckoutLabel_Title_Name, 
+                                                          Source={StaticResource LocalizedProperties}}" />
+                                        
+                                        <toolkit:PhoneTextBox
+                                            LostFocus="Input_Blur"
+                                            GotFocus="Input_Focus"
+                                            InputScope="PersonalFullName"
+                                            Text="{Binding Value, Mode=TwoWay}"
+                                            Style="{Binding Error, Converter={StaticResource StyleConverter}}"
+                                            Hint="{Binding Path=AppProperties.CheckoutLabel_Placeholder_AsIsInDocument,
+                                                         Source={StaticResource LocalizedProperties}}" />
+
+                                        <ItemsControl ItemsSource="{Binding regexValidations}">
+                                            <ItemsControl.ItemTemplate>
+                                                <DataTemplate>
+                                                    <TextBlock
+                                                        Style="{StaticResource RowErrorStyle}"
+                                                        Visibility="{Binding Error, Converter={StaticResource VisibilityConverter}}"
+                                                        Text="{Binding errorCode, Converter={StaticResource ErrorCodeToPropertyConverter}, ConverterParameter=firstName}" />
+                                                </DataTemplate>
+                                            </ItemsControl.ItemTemplate>
+                                        </ItemsControl>
+                                    </StackPanel>
+
+                                    <StackPanel DataContext="{Binding lastName}">
+                                        
+                                        <TextBlock
+                                            Style="{StaticResource RowSubTitleStyle}"
+                                            Text="{Binding Path=AppProperties.CheckoutLabel_Title_Last, 
+                                                         Source={StaticResource LocalizedProperties}}" />
+
+                                        <toolkit:PhoneTextBox
+                                            LostFocus="Input_Blur"
+                                            GotFocus="Input_Focus"
+                                            InputScope="PersonalFullName"
+                                            Text="{Binding Value, Mode=TwoWay}"
+                                            Style="{Binding Error, Converter={StaticResource StyleConverter}}"
+                                            Hint="{Binding Path=AppProperties.CheckoutLabel_Placeholder_AsIsInDocument,
+                                                         Source={StaticResource LocalizedProperties}}" />
+
+                                        <ItemsControl ItemsSource="{Binding regexValidations}">
+                                            <ItemsControl.ItemTemplate>
+                                                <DataTemplate>
+                                                    <TextBlock
+                                                        Style="{StaticResource RowErrorStyle}"
+                                                        Visibility="{Binding Error, Converter={StaticResource VisibilityConverter}}"
+                                                        Text="{Binding errorCode, Converter={StaticResource ErrorCodeToPropertyConverter}, ConverterParameter=lastName}" />
+                                                </DataTemplate>
+                                            </ItemsControl.ItemTemplate>
+                                        </ItemsControl>
+                                    </StackPanel>
+
+                                    <!-- CUSTOM VALIDATIONS
+                                    <ItemsControl ItemsSource="{Binding Validations}">
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <TextBlock
+                                                        Style="{StaticResource RowErrorStyle}"
+                                                        Visibility="{Binding Error, Converter={StaticResource VisibilityConverter}}"
+                                                        Text="PEPE PATEATRASEROS" />
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+                                    -->
+
+                                </StackPanel>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </ScrollViewer>
+            </phone:PivotItem>
+
+            <!-- CONTACT DEFINITION -->
+            <phone:PivotItem Header="{Binding Path=AppProperties.HotelCheckoutContactTitle, Source={StaticResource LocalizedProperties}}" Margin="0" Padding="8,0">
+                <ScrollViewer>
+                    
+                    <StackPanel Style="{StaticResource RowStyle}" DataContext="{Binding ContactDefinition}">
+
+                        <!-- EMAIL DEFINITION -->
+                        <StackPanel DataContext="{Binding email}">                            
+                            
+                            
+                            <TextBlock 
+                                Style="{StaticResource RowSubTitleStyle}"
+                                Text="{Binding Path=AppProperties.CheckoutLabel_Title_Email, 
+                                             Source={StaticResource LocalizedProperties}}" />
+                            
+                            <toolkit:PhoneTextBox
+                                x:Name="EmailTextBox"
+                                LostFocus="Input_Blur"
+                                GotFocus="Input_Focus"
+                                InputScope="EmailUserName"
+                                Text="{Binding Value, Mode=TwoWay}"
+                                Style="{Binding Error, Converter={StaticResource StyleConverter}}"
+                                Hint="{Binding Path=AppProperties.CheckoutLabel_Placeholder_FillEmail, 
+                                             Source={StaticResource LocalizedProperties}}" />
+                            
+                            <ItemsControl ItemsSource="{Binding regexValidations}">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock
+                                            Style="{StaticResource RowErrorStyle}"
+                                            Visibility="{Binding Error, Converter={StaticResource VisibilityConverter}}"
+                                            Text="{Binding errorCode, Converter={StaticResource ErrorCodeToPropertyConverter}, ConverterParameter=email}" />
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+
+                            <TextBlock
+                                Style="{StaticResource RowSubTitleStyle}"
+                                Text="{Binding Path=AppProperties.CheckoutLabel_Title_RepeatEmail,
+                                             Source={StaticResource LocalizedProperties}}" />
+                            
+                            <toolkit:PhoneTextBox
+                                LostFocus="InputRepeat_Blur"
+                                InputScope="EmailUserName"
+                                x:Name="EmailConfirmTextBox"
+                                Text="{Binding Repeat, Mode=TwoWay}"
+                                Style="{Binding Error, Converter={StaticResource StyleConverter}}"
+                                Hint="{Binding Path=AppProperties.CheckoutLabel_Placeholder_FillEmail,
+                                             Source={StaticResource LocalizedProperties}}" />
+
+                            <TextBlock
+                                TextWrapping="Wrap"
+                                Style="{StaticResource RowErrorStyle}"
+                                Visibility="{Binding Error, Converter={StaticResource VisibilityConverter}}"
+                                Text="{Binding Path=AppProperties.CheckoutLabel_Error_NotEqualEmails,
+                                                Source={StaticResource LocalizedProperties}}" />
+                        </StackPanel>
+                        
+                        <!-- PHONE DEFINITION -->
+                        <StackPanel DataContext="{Binding PhoneDefinition}">
+                            <StackPanel DataContext="{Binding type}">
+
+                                <TextBlock
+                                    Style="{StaticResource RowSubTitleStyle}"
+                                    Text="{Binding Path=AppProperties.CheckoutLabel_Title_Phone,
+                                                 Source={StaticResource LocalizedProperties}}" />
+
+                                <toolkit:ListPicker
+                                    ItemsSource="{Binding options}"
+                                    SelectedItem="{Binding Selected, Mode=TwoWay}"
+                                    Style="{StaticResource RowInputStyle}">
+
+                                    <toolkit:ListPicker.ItemTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding description}"></TextBlock>
+                                        </DataTemplate>
+                                    </toolkit:ListPicker.ItemTemplate>
+                                </toolkit:ListPicker>
+                            </StackPanel>
+
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="2.2*" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="auto" />
+                                    <RowDefinition Height="auto" />
+                                    <RowDefinition Height="auto" />
+                                </Grid.RowDefinitions>
+
+                                <TextBlock 
+                                    Grid.Row="0" 
+                                    Grid.Column="0"
+                                    Style="{StaticResource RowSubTitleStyle}"
+                                    Text="{Binding Path=AppProperties.CheckoutLabel_Title_CountryCode,
+                                                 Source={StaticResource LocalizedProperties}}" />
+
+                                <StackPanel 
+                                    Grid.Row="1"
+                                    Grid.Column="0"
+                                    DataContext="{Binding countryCode}">
+                                    
+                                    <toolkit:PhoneTextBox
+                                        LostFocus="Input_Blur"
+                                        GotFocus="Input_Focus"
+                                        InputScope="TelephoneCountryCode"
+                                        Text="{Binding Value, Mode=TwoWay}"
+                                        Style="{Binding Error, Converter={StaticResource StyleConverter}}" />
+                                </StackPanel>
+
+                                <TextBlock
+                                    Grid.Row="0"
+                                    Grid.Column="1"
+                                    Style="{StaticResource RowSubTitleStyle}"
+                                    Text="{Binding Path=AppProperties.CheckoutLabel_Title_AreaCode,
+                                                 Source={StaticResource LocalizedProperties}}" />
+
+                                <StackPanel 
+                                    Grid.Row="1"
+                                    Grid.Column="1"
+                                    DataContext="{Binding areaCode}">
+                                    
+                                    <toolkit:PhoneTextBox
+                                        LostFocus="Input_Blur"
+                                        GotFocus="Input_Focus"
+                                        InputScope="TelephoneAreaCode"
+                                        Text="{Binding Value, Mode=TwoWay}"
+                                        Style="{Binding Error, Converter={StaticResource StyleConverter}}" />
+                                </StackPanel>
+
+                                <TextBlock
+                                    Grid.Row="0"
+                                    Grid.Column="2"
+                                    Style="{StaticResource RowSubTitleStyle}"
+                                    Text="{Binding Path=AppProperties.CheckoutLabel_Title_Number,
+                                                 Source={StaticResource LocalizedProperties}}" />
+
+                                <StackPanel 
+                                    Grid.Row="1" 
+                                    Grid.Column="2"
+                                    DataContext="{Binding number}">
+                                    
+                                    <toolkit:PhoneTextBox
+                                        x:Name="TelephoneNumberTextBox"
+                                        LostFocus="Input_Blur"
+                                        GotFocus="Input_Focus"
+                                        InputScope="TelephoneNumber"
+                                        Text="{Binding Value, Mode=TwoWay}"
+                                        Style="{Binding Error, Converter={StaticResource StyleConverter}}"
+                                        Hint="{Binding Path=AppProperties.CheckoutLabel_Placeholder_PhoneNumber,
+                                                     Source={StaticResource LocalizedProperties}}" />
+                                </StackPanel>
+
+                                <StackPanel Grid.Row="2" Grid.ColumnSpan="3">
+                                    <StackPanel DataContext="{Binding countryCode}">
+                                        <ItemsControl ItemsSource="{Binding regexValidations}">
+                                            <ItemsControl.ItemTemplate>
+                                                <DataTemplate>
+                                                    <TextBlock
+                                                        Style="{StaticResource RowErrorStyle}"
+                                                        Visibility="{Binding Error, Converter={StaticResource VisibilityConverter}}"
+                                                        Text="{Binding errorCode, Converter={StaticResource ErrorCodeToPropertyConverter}, ConverterParameter=countryCode}" />
+                                                </DataTemplate>
+                                            </ItemsControl.ItemTemplate>
+                                        </ItemsControl>
+                                    </StackPanel>
+
+                                    <StackPanel DataContext="{Binding areaCode}">
+                                        <ItemsControl ItemsSource="{Binding regexValidations}">
+                                            <ItemsControl.ItemTemplate>
+                                                <DataTemplate>
+                                                    <TextBlock
+                                                        Style="{StaticResource RowErrorStyle}"
+                                                        Visibility="{Binding Error, Converter={StaticResource VisibilityConverter}}"
+                                                        Text="{Binding errorCode, Converter={StaticResource ErrorCodeToPropertyConverter}, ConverterParameter=areaCode}" />
+                                                </DataTemplate>
+                                            </ItemsControl.ItemTemplate>
+                                        </ItemsControl>
+                                    </StackPanel>
+
+                                    <StackPanel DataContext="{Binding number}">
+                                        <ItemsControl ItemsSource="{Binding regexValidations}">
+                                            <ItemsControl.ItemTemplate>
+                                                <DataTemplate>
+                                                    <TextBlock
+                                                        Style="{StaticResource RowErrorStyle}"
+                                                        Visibility="{Binding Error, Converter={StaticResource VisibilityConverter}}"
+                                                        Text="{Binding errorCode, Converter={StaticResource ErrorCodeToPropertyConverter}, ConverterParameter=phoneNumber}" />
+                                                </DataTemplate>
+                                            </ItemsControl.ItemTemplate>
+                                        </ItemsControl>
+                                    </StackPanel>
+                                </StackPanel>
+                            </Grid>
+                        </StackPanel>
+                        
+                    </StackPanel>
+                </ScrollViewer>
+            </phone:PivotItem>
+
+            <!-- PAYMENT TYPE -->
+            <phone:PivotItem Header="{Binding Path=AppProperties.HotelCheckoutPaymentTitle, Source={StaticResource LocalizedProperties}}" Margin="0" Padding="8,0">
+                <ScrollViewer>
+                    <StackPanel DataContext="{Binding AvailabilityInfo}">
+
+                        <ItemsControl ItemsSource="{Binding PayAtDestination}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Style="{StaticResource RowStyle}">
+                                        <StackPanel Orientation="Horizontal" Margin="0,-8">
+                                            <RadioButton BorderBrush="#555" GroupName="PaymentType" IsChecked="{Binding Selected}" Checked="PaymentMethod_Click" Unchecked="PaymentMethod_Unchecked" />
+                                            <TextBlock Text="{Binding Path=AppProperties.HotelCheckout_PayAtDestination, Source={StaticResource LocalizedProperties}}" Style="{StaticResource RowSubTitleStyle}" Margin="-10,18,0,0" />
+                                        </StackPanel>
+                                            
+                                        <StackPanel Orientation="Horizontal">
+                                            <Image Source="/Assets/Image/CreditCard/EFECTIVO.png" Width="76" Margin="45,-5,0,8" />
+                                            <ListBox ItemsSource="{Binding creditCards}" Margin="0,0,0,7" ScrollViewer.VerticalScrollBarVisibility="Disabled">
+                                                <ListBox.ItemsPanel>
+                                                    <ItemsPanelTemplate>
+                                                        <toolkit:WrapPanel />
+                                                    </ItemsPanelTemplate>
+                                                </ListBox.ItemsPanel>
+                                                <ListBox.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <StackPanel Orientation="Horizontal">
+                                                            <Image Source="{Binding cardCode, StringFormat='/Assets/Image/CreditCard/{0}.png'}" Width="76" Margin="5,0,0,7" ImageFailed="Image_Load_Failed" />
+                                                        </StackPanel>
+                                                    </DataTemplate>
+                                                </ListBox.ItemTemplate>
+                                            </ListBox>
+                                        </StackPanel>
+
+                                        <TextBlock Style="{StaticResource RowSubTitleStyle}" FontSize="18" Margin="45,0,0,0" Text="{Binding Path=AppProperties.HotelCheckout_CardWillBeUsedAsWarranty, Source={StaticResource LocalizedProperties}}" />
+                                        <Rectangle Fill="#aaa" Width="Auto" Height="1" Margin="50,10,10,0" />
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+
+                        <ItemsControl ItemsSource="{Binding PayInOnePayment}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Style="{StaticResource RowStyle}">
+                                        <StackPanel Orientation="Horizontal" Margin="0,-8">
+                                            <RadioButton BorderBrush="#555" GroupName="PaymentType" IsChecked="{Binding Selected}" Checked="PaymentMethod_Click" Unchecked="PaymentMethod_Unchecked" />
+                                            <TextBlock Text="{Binding Path=AppProperties.HotelCheckout_PayInOnePayment, Source={StaticResource LocalizedProperties}}" Style="{StaticResource RowSubTitleStyle}" Margin="-10,18,0,0" />
+                                        </StackPanel>
+                                        <ListBox ItemsSource="{Binding creditCards}" Margin="45,0,0,0" ScrollViewer.VerticalScrollBarVisibility="Disabled">
+                                            <ListBox.ItemsPanel>
+                                                <ItemsPanelTemplate>
+                                                    <toolkit:WrapPanel />
+                                                </ItemsPanelTemplate>
+                                            </ListBox.ItemsPanel>
+                                            <ListBox.ItemTemplate>
+                                                <DataTemplate>
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <Image Source="{Binding cardCode, StringFormat='/Assets/Image/CreditCard/{0}.png'}" Width="76" Margin="5,0,0,7" ImageFailed="Image_Load_Failed" />
+                                                    </StackPanel>
+                                                </DataTemplate>
+                                            </ListBox.ItemTemplate>
+                                        </ListBox>
+                                        <TextBlock Style="{StaticResource RowSubTitleStyle}" FontSize="21" Margin="50,3,0,0" Visibility="{Binding Selected, Converter={StaticResource VisibilityConverter}}">
+                                            <Run Text="1" />
+                                            <Run Text="{Binding Path=AppProperties.HotelCheckout_PaymentOf, Source={StaticResource LocalizedProperties}}" />
+                                            <Run Text="{Binding Path=DataContext.Currency, ElementName=Model}" />
+                                            <Run Text="{Binding Path=rooms[0].installments.first, StringFormat='{}{0:0,0}'}" FontFamily="Portable User Interface" />
+                                        </TextBlock>
+                                        <Rectangle Fill="#aaa" Width="Auto" Height="1" Margin="50,10,10,0" />
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+
+                        <ItemsControl ItemsSource="{Binding PayWithoutInterest}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Style="{StaticResource RowStyle}">
+                                        <StackPanel Orientation="Horizontal" Margin="0,-8">
+                                            <RadioButton BorderBrush="#555" GroupName="PaymentType" IsChecked="{Binding Selected}"  Checked="PaymentMethod_Click" Unchecked="PaymentMethod_Unchecked" />
+                                            <TextBlock Style="{StaticResource RowSubTitleStyle}" Margin="-10,18,0,0">
+                                                <Run Text="{Binding installmentQuantity}" />
+                                                <Run Text="{Binding Path=AppProperties.HotelCheckout_PayWithoutInterest, Source={StaticResource LocalizedProperties}}" />
+                                            </TextBlock>
+                                        </StackPanel>
+                                        <ListBox ItemsSource="{Binding creditCards}" Margin="45,0,0,0" ScrollViewer.VerticalScrollBarVisibility="Disabled">
+                                            <ListBox.ItemsPanel>
+                                                <ItemsPanelTemplate>
+                                                    <toolkit:WrapPanel />
+                                                </ItemsPanelTemplate>
+                                            </ListBox.ItemsPanel>
+                                            <ListBox.ItemTemplate>
+                                                <DataTemplate>
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <Image Source="{Binding cardCode, StringFormat='/Assets/Image/CreditCard/{0}.png'}" Width="76" Margin="5,0,0,7" ImageFailed="Image_Load_Failed" />
+                                                    </StackPanel>
+                                                </DataTemplate>
+                                            </ListBox.ItemTemplate>
+                                        </ListBox>
+                                        <TextBlock Style="{StaticResource RowSubTitleStyle}" FontSize="21" Margin="50,3,0,0" Visibility="{Binding Selected, Converter={StaticResource VisibilityConverter}}">
+                                            <Run Text="{Binding installmentQuantity}" />
+                                            <Run Text="{Binding Path=AppProperties.HotelCheckout_PaymentsOf, Source={StaticResource LocalizedProperties}}" />
+                                            <Run Text="{Binding Path=DataContext.Currency, ElementName=Model}" />
+                                            <Run Text="{Binding Path=rooms[0].installments.first, StringFormat='{}{0:0,0}'}" />
+                                        </TextBlock>
+                                        <Rectangle Fill="#aaa" Width="Auto" Height="1" Margin="50,10,10,0" />
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+
+                        <StackPanel Style="{StaticResource RowStyle}" Tap="Show_SubPaymentMethods_Click" DataContext="{Binding PayWithInterestProps}" Visibility="{Binding Visible}">
+                            <StackPanel Orientation="Horizontal" Margin="0,-8">
+                                <RadioButton BorderBrush="#555" x:Name="PayWithInterestRadio" GroupName="PaymentType" Unchecked="Hide_SubPaymentMethods_Click" />
+                                <TextBlock Style="{StaticResource RowSubTitleStyle}" Margin="-10,18,0,0">
+                                    <Run Text="{Binding Installments}" />
+                                    <Run Text="{Binding Path=AppProperties.HotelCheckout_PayWithInterest, Source={StaticResource LocalizedProperties}}" />
+                                </TextBlock>
+                            </StackPanel>
+                            <ListBox ItemsSource="{Binding creditCards}" Margin="45,0,0,0" ScrollViewer.VerticalScrollBarVisibility="Disabled">
+                                <ListBox.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <toolkit:WrapPanel />
+                                    </ItemsPanelTemplate>
+                                </ListBox.ItemsPanel>
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal">
+                                            <Image Source="{Binding cardCode, StringFormat='/Assets/Image/CreditCard/{0}.png'}" Width="76" Margin="5,0,0,7" ImageFailed="Image_Load_Failed" />
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
+                            <Rectangle Fill="#aaa" Width="Auto" Height="1" Margin="50,10,10,0" />
+                        </StackPanel>
+
+                        <ItemsControl ItemsSource="{Binding PayWithInterest}" Margin="40,0,0,0" x:Name="SubPaymentMethod" Visibility="Collapsed" Opacity="0">
+                            <ItemsControl.RenderTransform>
+                                <TranslateTransform x:Name="SubPaymentMethodTransform" Y="-50"></TranslateTransform>
+                            </ItemsControl.RenderTransform>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Style="{StaticResource RowStyle}">
+                                        <StackPanel Orientation="Horizontal" Margin="0,-8">
+                                            <RadioButton BorderBrush="#555" GroupName="PaymentTypeSubGroup" IsChecked="{Binding Selected}" Checked="PaymentMethod_Click" Unchecked="PaymentMethod_Unchecked" />
+                                            <TextBlock Style="{StaticResource RowSubTitleStyle}" Margin="-10,18,0,0">
+                                                    <Run Text="{Binding installmentQuantity}" />
+                                                    <Run Text="{Binding Path=AppProperties.HotelCheckout_PayWithInterest, Source={StaticResource LocalizedProperties}}" />
+                                            </TextBlock>
+                                        </StackPanel>
+                                        <ListBox ItemsSource="{Binding creditCards}" Margin="45,0,0,0" ScrollViewer.VerticalScrollBarVisibility="Disabled">
+                                            <ListBox.ItemsPanel>
+                                                <ItemsPanelTemplate>
+                                                    <toolkit:WrapPanel />
+                                                </ItemsPanelTemplate>
+                                            </ListBox.ItemsPanel>
+                                            <ListBox.ItemTemplate>
+                                                <DataTemplate>
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <Image Source="{Binding cardCode, StringFormat='/Assets/Image/CreditCard/{0}.png'}" Width="76" Margin="5,0,0,7" ImageFailed="Image_Load_Failed" />
+                                                    </StackPanel>
+                                                </DataTemplate>
+                                            </ListBox.ItemTemplate>
+                                        </ListBox>
+                                        <TextBlock Style="{StaticResource RowSubTitleStyle}" FontSize="21" Margin="50,3,0,0"  Visibility="{Binding Selected, Converter={StaticResource VisibilityConverter}}">
+                                                <Run Text="{Binding installmentQuantity}" />
+                                                <Run Text="{Binding Path=AppProperties.HotelCheckout_PaymentsOf, Source={StaticResource LocalizedProperties}}" />
+                                                <Run Text="{Binding Path=DataContext.Currency, ElementName=Model}" />
+                                                <Run Text="{Binding Path=rooms[0].installments.first, StringFormat='{}{0:0,0}'}" />
+                                        </TextBlock>
+                                        <Rectangle Fill="#aaa" Width="Auto" Height="1" Margin="50,14,10,0" />
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+
+                    </StackPanel>
+                </ScrollViewer>
+            </phone:PivotItem>
+
+            <!-- PAYMENT DEFINITION -->
+            <phone:PivotItem Header="{Binding Path=AppProperties.HotelCheckoutCardDataTitle, Source={StaticResource LocalizedProperties}}" Margin="0" Padding="8,0">
+                <ScrollViewer>
+                    <StackPanel>
+                        <!-- CARD DEFINITIONS -->
+                        <StackPanel DataContext="{Binding CardDefinition}">
+
+                            <StackPanel Visibility="{Binding number, Converter={StaticResource DisplayBlockConverter}}">
+                                <TextBlock
+                                        Style="{StaticResource RowSubTitleStyle}"
+                                        Text="{Binding Path=AppProperties.CheckoutLabel_Title_CardType,
+                                                     Source={StaticResource LocalizedProperties}}" />
+
+                                <toolkit:ListPicker
+                                        x:Name="CardSelector"
+                                        ExpansionMode="ExpansionAllowed"
+                                        ItemsSource="{Binding Cards}"
+                                        SelectedItem="{Binding Selected, Mode=TwoWay}"
+                                        Style="{StaticResource RowInputStyle}">
+
+                                    <toolkit:ListPicker.ItemTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding cardDescription}"></TextBlock>
+                                        </DataTemplate>
+                                    </toolkit:ListPicker.ItemTemplate>
+                                </toolkit:ListPicker>
+                            </StackPanel>
+
+                            <StackPanel DataContext="{Binding number}" Visibility="{Binding DataContext, RelativeSource={RelativeSource Self}, Converter={StaticResource DisplayBlockConverter}}">
+                                <TextBlock
+                                        Style="{StaticResource RowSubTitleStyle}"
+                                        Text="{Binding Path=AppProperties.CheckoutLabel_Title_CardNumber,
+                                                     Source={StaticResource LocalizedProperties}}" />
+
+                                <toolkit:PhoneTextBox
+                                        x:Name="CardCreditNumberTextBox"
+                                        InputScope="Number"
+                                        LostFocus="CardNumber_Validation"
+                                        Text="{Binding Value, Mode=TwoWay}"
+                                        Style="{Binding Error, Converter={StaticResource StyleConverter}}"
+                                        Hint="{Binding Path=AppProperties.CheckoutLabel_Placeholder_CardNumber,
+                                                     Source={StaticResource LocalizedProperties}}" />
+
+                                <ItemsControl ItemsSource="{Binding regexValidations}">
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <TextBlock
+                                                    Style="{StaticResource RowErrorStyle}"
+                                                    Visibility="{Binding Error, Converter={StaticResource VisibilityConverter}}"
+                                                    Text="{Binding errorCode, Converter={StaticResource ErrorCodeToPropertyConverter}, ConverterParameter=cardNumber}" />
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+
+                                <TextBlock
+                                        Text=""
+                                        TextWrapping="Wrap"
+                                        Visibility="Collapsed"
+                                        x:Name="InvalidCardNumberLabel"
+                                        Style="{StaticResource RowErrorStyle}" />
+
+                            </StackPanel>
+
+                            <StackPanel DataContext="{Binding expiration}" Visibility="{Binding DataContext, RelativeSource={RelativeSource Self}, Converter={StaticResource DisplayBlockConverter}}">
+
+                                <TextBlock
+                                        Style="{StaticResource RowSubTitleStyle}"                                    
+                                        Text="{Binding Path=AppProperties.CheckoutLabel_Title_ExpirationDate,
+                                                     Source={StaticResource LocalizedProperties}}" />
+
+                                <StackPanel Orientation="Horizontal">
+
+                                    <toolkit:ListPicker
+                                            Width="200"
+                                            x:Name="MonthPicker"
+                                            ExpansionMode="ExpansionAllowed"
+                                            ItemsSource="{Binding Months}"
+                                            SelectedItem="{Binding ValueMonth, Mode=TwoWay}"
+                                            Style="{Binding Error, Converter={StaticResource StyleConverter}}">
+                                        <toolkit:ListPicker.ItemTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding}"></TextBlock>
+                                            </DataTemplate>
+                                        </toolkit:ListPicker.ItemTemplate>
+                                    </toolkit:ListPicker>
+
+                                    <TextBlock Foreground="#777" FontSize="36" Margin="0,18,0,0">/</TextBlock>
+
+                                    <toolkit:ListPicker
+                                            Width="200"
+                                            x:Name="YearPicker"
+                                            ExpansionMode="ExpansionAllowed"
+                                            ItemsSource="{Binding Years}"
+                                            SelectedItem="{Binding ValueYear, Mode=TwoWay}"
+                                            Style="{Binding Error, Converter={StaticResource StyleConverter}}">
+                                        <toolkit:ListPicker.ItemTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding}"></TextBlock>
+                                            </DataTemplate>
+                                        </toolkit:ListPicker.ItemTemplate>
+                                    </toolkit:ListPicker>
+                                </StackPanel>
+
+                                <TextBlock
+                                        Style="{StaticResource RowErrorStyle}"
+                                        Visibility="{Binding Error, Converter={StaticResource VisibilityConverter}}"
+                                        Text="{Binding Path=AppProperties.CheckoutLabel_Error_YearMonthInvalid,
+                                                     Source={StaticResource LocalizedProperties}}" />
+                            </StackPanel>
+
+                            <StackPanel DataContext="{Binding securityCode}" Visibility="{Binding DataContext, RelativeSource={RelativeSource Self}, Converter={StaticResource DisplayBlockConverter}}">
+
+                                <TextBlock
+                                        Style="{StaticResource RowSubTitleStyle}"
+                                        Text="{Binding Path=AppProperties.CheckoutLabel_Title_SecurityCode,
+                                                     Source={StaticResource LocalizedProperties}}" />
+
+                                <toolkit:PhoneTextBox
+                                        x:Name="CreditCardSecurityCodeTextBox"
+                                        InputScope="Number"
+                                        LostFocus="SecurityCode_Validation"
+                                        Text="{Binding Value, Mode=TwoWay}"
+                                        Style="{Binding Error, Converter={StaticResource StyleConverter}}"
+                                        Hint="{Binding Path=AppProperties.CheckoutLabel_Placeholder_SecurityCode,
+                                                     Source={StaticResource LocalizedProperties}}" />
+
+                                <TextBlock
+                                        Text=""
+                                        Visibility="Collapsed"
+                                        x:Name="InvalidSecurityCodeLabel"
+                                        Style="{StaticResource RowErrorStyle}" />
+
+                            </StackPanel>
+
+                            <StackPanel DataContext="{Binding ownerName}" Visibility="{Binding DataContext, RelativeSource={RelativeSource Self}, Converter={StaticResource DisplayBlockConverter}}">
+
+                                <TextBlock
+                                        Style="{StaticResource RowSubTitleStyle}"
+                                        Text="{Binding Path=AppProperties.CheckoutLabel_Title_OwnerName,
+                                                     Source={StaticResource LocalizedProperties}}" />
+
+                                <toolkit:PhoneTextBox
+                                        x:Name="CreditCardFullNameTextBox"
+                                        LostFocus="Input_Blur"
+                                        GotFocus="Input_Focus"
+                                        InputScope="PersonalFullName"
+                                        Text="{Binding Value, Mode=TwoWay}"
+                                        Style="{Binding Error, Converter={StaticResource StyleConverter}}"
+                                        Hint="{Binding Path=AppProperties.CheckoutLabel_Placeholder_AsIsInDocument,
+                                                     Source={StaticResource LocalizedProperties}}" />
+
+                                <ItemsControl ItemsSource="{Binding regexValidations}">
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <TextBlock
+                                                    TextWrapping="Wrap"
+                                                    Style="{StaticResource RowErrorStyle}"
+                                                    Visibility="{Binding Error, Converter={StaticResource VisibilityConverter}}"
+                                                    Text="{Binding errorCode, Converter={StaticResource ErrorCodeToPropertyConverter}, ConverterParameter=ownerName}" />
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+
+                            </StackPanel>
+
+                            <StackPanel DataContext="{Binding ownerDocumentDefinition}" Visibility="{Binding DataContext, RelativeSource={RelativeSource Self}, Converter={StaticResource DisplayBlockConverter}}">
+                                <StackPanel DataContext="{Binding number}">
+
+                                    <TextBlock
+                                            Style="{StaticResource RowSubTitleStyle}"
+                                            Text="{Binding Path=AppProperties.CheckoutLabel_Title_DocumentNumber,
+                                                         Source={StaticResource LocalizedProperties}}" />
+
+                                    <toolkit:PhoneTextBox
+                                            x:Name="CreditCardDNITextBox"
+                                            LostFocus="Input_Blur"
+                                            GotFocus="Input_Focus"
+                                            InputScope="NameOrPhoneNumber"
+                                            Text="{Binding Value, Mode=TwoWay}"
+                                            Style="{Binding Error, Converter={StaticResource StyleConverter}}"
+                                            Hint="{Binding Path=AppProperties.CheckoutLabel_Placeholder_DocumentNumber,
+                                                         Source={StaticResource LocalizedProperties}}" />
+
+                                    <ItemsControl ItemsSource="{Binding regexValidations}">
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <TextBlock
+                                                        TextWrapping="Wrap"
+                                                        Style="{StaticResource RowErrorStyle}"
+                                                        Visibility="{Binding Error, Converter={StaticResource VisibilityConverter}}"
+                                                        Text="{Binding errorCode, Converter={StaticResource ErrorCodeToPropertyConverter}, ConverterParameter=ownerDocument}" />
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+
+                                </StackPanel>
+                            </StackPanel>
+
+                            <StackPanel DataContext="{Binding ownerGender}" Visibility="{Binding DataContext, RelativeSource={RelativeSource Self}, Converter={StaticResource DisplayBlockConverter}}">
+
+                                <TextBlock
+                                        Style="{StaticResource RowSubTitleStyle}"
+                                        Text="{Binding Path=AppProperties.CheckoutLabel_Title_OwnerGender,
+                                                     Source={StaticResource LocalizedProperties}}" />
+
+                                <toolkit:ListPicker
+                                        ItemsSource="{Binding options}"
+                                        SelectedItem="{Binding Selected, Mode=TwoWay}"
+                                        Style="{StaticResource RowInputStyle}">
+
+                                    <toolkit:ListPicker.ItemTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding description}"></TextBlock>
+                                        </DataTemplate>
+                                    </toolkit:ListPicker.ItemTemplate>
+                                </toolkit:ListPicker>
+
+                            </StackPanel>
+
+                        </StackPanel>
+
+                        <!-- VOUCHER DEFINITION -->
+                        <ItemsControl ItemsSource="{Binding VoucherDefinitions}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Style="{StaticResource RowStyle}">
+                                        <TextBlock
+                                                    Style="{StaticResource RowTitleStyle}"
+                                                    Text="{Binding Path=AppProperties.HotelCheckoutAditionalsTitle,
+                                                                    Source={StaticResource LocalizedProperties}}" />
+
+                                        <StackPanel Orientation="Horizontal">
+                                            <CheckBox BorderBrush="#555"
+                                                                Margin="0,-12,-20,-10"
+                                                                IsChecked="{Binding Active, Mode=TwoWay}" />
+
+                                            <TextBlock
+                                                        Style="{StaticResource RowSubTitleStyle}"
+                                                        Text="{Binding Path=AppProperties.CheckoutLabel_Title_ReferenceCode,
+                                                                        Source={StaticResource LocalizedProperties}}" />
+                                        </StackPanel>
+
+                                        <StackPanel Visibility="{Binding Active, Converter={StaticResource VisibilityConverter}}">
+
+                                            <toolkit:PhoneTextBox 
+                                                    LostFocus="Input_Blur"
+                                                    GotFocus="Input_Focus"
+                                                    InputScope="NameOrPhoneNumber"
+                                                    Text="{Binding Value, Mode=TwoWay}"
+                                                    Style="{Binding Error, Converter={StaticResource StyleConverter}}"
+                                                    Hint="{Binding Path=AppProperties.CheckoutLabel_Placeholder_ReferenceCode,
+                                                                  Source={StaticResource LocalizedProperties}}" />
+
+                                            <ItemsControl ItemsSource="{Binding regexValidations}">
+                                                <ItemsControl.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <TextBlock
+                                                                Style="{StaticResource RowErrorStyle}"
+                                                                Visibility="{Binding Error, Converter={StaticResource VisibilityConverter}}"
+                                                                Text="{Binding errorCode, Converter={StaticResource ErrorCodeToPropertyConverter}, ConverterParameter=voucher}" />
+                                                    </DataTemplate>
+                                                </ItemsControl.ItemTemplate>
+                                            </ItemsControl>
+
+                                            <!-- CUSTOM VALIDATION
+                                                <TextBlock
+                                                    Style="{StaticResource RowErrorStyle}"
+                                                    Visibility="{Binding Error, Converter={StaticResource VisibilityConverter}}"
+                                                    Text="{Binding errorCode, Converter={StaticResource ErrorCodeToPropertyConverter}, ConverterParameter=voucher}" />
+                                                -->
+                                        </StackPanel>
+                                        <Rectangle Fill="#aaa" Width="Auto" Height="1" Margin="0,30,0,0" />
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </StackPanel>
+                </ScrollViewer>
+            </phone:PivotItem>
+
+            <!--FISCAL DATA ONLY ARG-->
+            <phone:PivotItem Header="Datos Fiscales" x:Name="InvoiceDefinitionPivotItem">
+                <ScrollViewer>
+                    <StackPanel DataContext="{Binding InvoiceDefinition}">
+                        <!--TODO: BOTON DE TEST--> 
+                        <!--<Button FontSize="23" BorderBrush="Transparent" Padding="-17,6,0,0" Margin="0,0,0,0" Click="FillDataForTest" Background="Transparent"/>-->
+                        <!--TAX STATUS-->
+                        <StackPanel DataContext="{Binding taxStatus}">
+                            <TextBlock
+                                        Style="{StaticResource RowSubTitleStyle}"
+                                        Text="Situacion Fiscal" />
+
+                            <toolkit:ListPicker
+                                        Name="FiscatStatusPicker"
+                                        
+                                        ItemsSource="{Binding options}"
+                                        SelectedItem="{Binding Selected, Mode=TwoWay}"
+                                SelectionChanged="FiscalStatus_Changed"
+                                        Style="{StaticResource RowInputStyle}">
+
+                                <toolkit:ListPicker.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding description}"></TextBlock>
+                                    </DataTemplate>
+                                </toolkit:ListPicker.ItemTemplate>
+                            </toolkit:ListPicker>
+                        </StackPanel>
+                        <!--CUIL/CUIT-->
+                        <StackPanel DataContext="{Binding fiscalDocument}">
+                            <TextBlock Style="{StaticResource RowSubTitleStyle}" Text="CUIL/CUIT" />
+
+                            <toolkit:PhoneTextBox
+                                    LostFocus="Input_Blur"
+                                    GotFocus="Input_Focus"
+                                    InputScope="TelephoneNumber"
+                                    Text="{Binding Value, Mode=TwoWay}"
+                                    Style="{Binding Error, Converter={StaticResource StyleConverter}}"
+                                    Hint="CUIL/CUIT" />
+
+                            <ItemsControl ItemsSource="{Binding regexValidations}">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock
+                                            Style="{StaticResource RowErrorStyle}"
+                                            Visibility="{Binding Error, Converter={StaticResource VisibilityConverter}}"
+                                            Text="{Binding errorCode, Converter={StaticResource ErrorCodeToPropertyConverter}, ConverterParameter=fiscalDocument}" />
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+
+
+
+
+                        </StackPanel>
+                        <!--RAZON SOCIAL-->
+                        <StackPanel DataContext="{Binding invoiceName}" x:Name="razonSocial">
+                            <TextBlock Style="{StaticResource RowSubTitleStyle}" Text="Nombre o razon social" />
+
+                            <toolkit:PhoneTextBox
+                                    LostFocus="Input_Blur"
+                                    GotFocus="Input_Focus"
+                                    InputScope="PersonalFullName"
+                                    Text="{Binding Value, Mode=TwoWay}"
+                                    Style="{Binding Error, Converter={StaticResource StyleConverter}}"
+                                    Hint="Razon Social" />
+
+                            <ItemsControl ItemsSource="{Binding regexValidations}">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock
+                                            Style="{StaticResource RowErrorStyle}"
+                                            Visibility="{Binding Error, Converter={StaticResource VisibilityConverter}}"
+                                            Text="{Binding errorCode, Converter={StaticResource ErrorCodeToPropertyConverter}, ConverterParameter=invoiceName}" />
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </StackPanel>
+                        <!--ADRRESS-->
+                        <StackPanel DataContext="{Binding billingAddress}" x:Name="InvoiceAdressFields" >
+
+                            <!--STREET-->
+                            <StackPanel DataContext="{Binding street}">
+
+                                <TextBlock Style="{StaticResource RowSubTitleStyle}"  x:Name="streetTextBlock" Text="Calle" />
+
+                                <toolkit:PhoneTextBox
+                                    LostFocus="Input_Blur"
+                                    GotFocus="Input_Focus"
+                                    Text="{Binding Value, Mode=TwoWay}"
+                                    Style="{Binding Error, Converter={StaticResource StyleConverter}}"
+                                    Hint="" />
+
+                                <ItemsControl ItemsSource="{Binding regexValidations}">
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <TextBlock
+                                            Style="{StaticResource RowErrorStyle}"
+                                            Visibility="{Binding Error, Converter={StaticResource VisibilityConverter}}"
+                                            Text="{Binding errorCode, Converter={StaticResource ErrorCodeToPropertyConverter}, ConverterParameter=street}" />
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+
+                            </StackPanel>
+                            
+                            <!--NUMBER-->
+                            <StackPanel Orientation="Horizontal" >
+                            <StackPanel DataContext="{Binding number}" x:Name="number" Visibility="Visible">
+
+                                <TextBlock Style="{StaticResource RowSubTitleStyle}" Text="Numero" />
+
+                                <toolkit:PhoneTextBox                              
+                                    LostFocus="Input_Blur"
+                                    GotFocus="Input_Focus"
+                                    InputScope="TelephoneNumber"
+                                    Text="{Binding Value, Mode=TwoWay}"
+                                    Style="{Binding Error, Converter={StaticResource StyleConverter}}"
+                                    Hint="" />
+
+                                <ItemsControl ItemsSource="{Binding regexValidations}">
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <TextBlock
+                                            Style="{StaticResource RowErrorStyle}"
+                                            Visibility="{Binding Error, Converter={StaticResource VisibilityConverter}}"
+                                            Text="{Binding errorCode, Converter={StaticResource ErrorCodeToPropertyConverter}, ConverterParameter=number}" />
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+
+                            </StackPanel>
+                            <!--FLOOR-->
+                            <StackPanel DataContext="{Binding floor}" x:Name="floor" Visibility="Visible">
+
+                                <TextBlock Style="{StaticResource RowSubTitleStyle}" Text="Piso" />
+
+                                <toolkit:PhoneTextBox
+                                    LostFocus="Input_Blur"
+                                    GotFocus="Input_Focus"
+                                    InputScope="TelephoneNumber"
+                                    Text="{Binding Value, Mode=TwoWay}"
+                                    Style="{Binding Error, Converter={StaticResource StyleConverter}}"
+                                    Hint="" />
+
+                            </StackPanel>
+                            <!--DTO-->
+                            <StackPanel DataContext="{Binding department}" x:Name="dto" Visibility="Visible">
+
+                                <TextBlock Style="{StaticResource RowSubTitleStyle}" Text="Dpto" />
+
+                                <toolkit:PhoneTextBox
+                                    LostFocus="Input_Blur"
+                                    GotFocus="Input_Focus"
+                                    Text="{Binding Value, Mode=TwoWay}"
+                                    Style="{Binding Error, Converter={StaticResource StyleConverter}}"
+                                    Hint="" />
+
+                            </StackPanel>
+                            </StackPanel>
+
+                            <!--POSTAL CODE (ZIP CODE)-->
+                            <StackPanel DataContext="{Binding postalCode}" x:Name="postalCode" Visibility="Visible">
+
+                                <TextBlock Style="{StaticResource RowSubTitleStyle}" Text="CP" />
+
+                                <toolkit:PhoneTextBox
+                                    LostFocus="Input_Blur"
+                                    GotFocus="Input_Focus"
+                                    InputScope="TelephoneNumber"
+                                    Text="{Binding Value, Mode=TwoWay}"
+                                    Style="{Binding Error, Converter={StaticResource StyleConverter}}"
+                                    Hint="" />
+
+                                <ItemsControl ItemsSource="{Binding regexValidations}">
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <TextBlock
+                                            Style="{StaticResource RowErrorStyle}"
+                                            Visibility="{Binding Error, Converter={StaticResource VisibilityConverter}}"
+                                            Text="{Binding errorCode, Converter={StaticResource ErrorCodeToPropertyConverter}, ConverterParameter=postalCode}" />
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+
+                            </StackPanel>
+
+                            <!--LISTPICKER STATES-->
+                            <StackPanel DataContext="{Binding statesId}" x:Name="states" Visibility="Visible">
+                                <TextBlock
+                                        Style="{StaticResource RowSubTitleStyle}"
+                                        Text="Provincia" />
+
+                                <toolkit:ListPicker
+                                        Name="StatesListPicker"                            
+                                        SelectionChanged="States_Changed"
+                                        Style="{StaticResource RowInputStyle}">
+
+                                    <toolkit:ListPicker.ItemTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding name}"></TextBlock>
+                                        </DataTemplate>
+                                    </toolkit:ListPicker.ItemTemplate>
+
+                                    <toolkit:ListPicker.FullModeItemTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding name}" FontSize="30"></TextBlock>
+                                        </DataTemplate>
+                                    </toolkit:ListPicker.FullModeItemTemplate>
+
+                                </toolkit:ListPicker>
+                            </StackPanel>
+                            <!-- AUTOCOMPLETE CITIES -->
+                            <StackPanel DataContext="{Binding cityID}" x:Name="cities" Visibility="Visible">
+                                <TextBlock Style="{StaticResource RowSubTitleStyle}" Text="Ciudad" />
+                                <toolkit:AutoCompleteBox                                        
+                                    x:Name="citiesAutoComplete"
+                                        SelectionChanged="SelectedCityChanged"
+                                    KeyUp="Cities_Changed"
+                                    LostFocus="City_Focus_Lost"
+                                    IsTextCompletionEnabled="false"
+                                    ValueMemberPath="full_name"
+                                    Style="{Binding Error, Converter={StaticResource StyleConverter}}"                                        
+                                    />
+                            </StackPanel>
+                        </StackPanel>
+
+                    </StackPanel>
+                </ScrollViewer>
+
+            </phone:PivotItem>
+
+            <!-- DETAILS -->
+            <phone:PivotItem Header="{Binding Path=AppProperties.HotelCheckoutDetailsTitle, Source={StaticResource LocalizedProperties}}" Margin="0" Padding="8,0">
+                <Grid DataContext="{Binding Path=AvailabilityInfo}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="82" />
+                        <RowDefinition Height="100" />
+                    </Grid.RowDefinitions>
+                    
+                    <ScrollViewer Grid.Row="0">
+                        <StackPanel Style="{StaticResource RowStyle}">
+
+                            <TextBlock Text="{Binding Path=Hotel.Name}" Style="{StaticResource RowTitleStyle}" TextWrapping="Wrap" />
+                            <TextBlock Text="{Binding Path=Room.Description}" Style="{StaticResource RowSubTitleStyle}" Margin="12,-2,12,0" TextWrapping="Wrap" />
+                            <Image HorizontalAlignment="Left" Source="{Binding Path=Hotel.Stars, StringFormat='/Assets/Image/details-{0}-stars-hotel.png'}" Height="20" Margin="14,5,0,15" />
+
+                            <StackPanel Style="{StaticResource RowDetailsDetailStyle}">
+                                <TextBlock Text="{Binding Path=Room.Penalty.Cancelation}" Style="{StaticResource RowDetailsDetailTextStyle}" TextWrapping="Wrap" />
+                                <TextBlock Text="{Binding Path=Room.MealPlan}" Style="{StaticResource RowDetailsDetailTextStyle}" Padding="0,0,0,20" TextWrapping="Wrap"  />
+                            </StackPanel>
+                            
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="2*" />
+                                    <ColumnDefinition Width="1*" />
+                                </Grid.ColumnDefinitions>
+
+                                <StackPanel Grid.Column="0" Style="{StaticResource RowDetailsDetailStyle}" Margin="12,0,0,0">
+                                    <!--<TextBlock Text="{Binding Path=AppProperties.HotelCheckout_PerNightRoom, Source={StaticResource LocalizedProperties}}" Style="{StaticResource RowDetailsDetailTextStyle}" />-->
+                                    <TextBlock Visibility="{Binding Path=Room.Prices.pricesWithoutTaxes, Converter={StaticResource VisibilityConverterInverted}}" Text="{Binding Path=AppProperties.HotelCheckout_PerNightRoom, Source={StaticResource LocalizedProperties}}" Style="{StaticResource RowDetailsDetailTextStyle}" />
+                                    <TextBlock Visibility="{Binding Path=Room.Prices.pricesWithoutTaxes, Converter={StaticResource VisibilityConverter}}" Text="{Binding Path=AppProperties.HotelCheckout_PerNightRoomCo, Source={StaticResource LocalizedProperties}}" Style="{StaticResource RowDetailsDetailTextStyle}" />
+
+                                    <TextBlock Style="{StaticResource RowDetailsDetailTextStyle}">
+                                        <Run Text="{Binding Path=DataContext.Nights, ElementName=Model}" />
+                                        <Run Text="{Binding Path=AppProperties.CheckoutLabel_Details_Nights, Source={StaticResource LocalizedProperties}}" />
+                                        <Run Text="-" />
+                                        <Run Text="{Binding Path=DataContext.Rooms, ElementName=Model}" />
+                                        <Run Text="{Binding Path=AppProperties.CheckoutLabel_Details_Rooms, Source={StaticResource LocalizedProperties}}" />
+                                    </TextBlock>
+                                    <TextBlock Text="{Binding Path=AppProperties.HotelCheckoutDetailsTaxes, Source={StaticResource LocalizedProperties}}" Style="{StaticResource RowDetailsDetailTextStyle}" />
+                                    <TextBlock Visibility="{Binding Path=Room.Prices.TaxFee, Converter={StaticResource VisibilityConverter}}" Text="{Binding Path=AppProperties.HotelCheckoutDetailsAFIPRes, Source={StaticResource LocalizedProperties}}" Style="{StaticResource RowDetailsDetailTextStyle}" />
+                                    <TextBlock Height="6" Style="{StaticResource RowDetailsDetailTextStyle}" />
+                                </StackPanel>
+
+                                <StackPanel Grid.Column="1" Style="{StaticResource RowDetailsDetailStyle}" Margin="0,0,12,0">
+                                    <TextBlock Style="{StaticResource RowDetailsDetailRightTextStyle}">    
+                                        <Run Text="{Binding Currency}" />
+                                        <Run Text="{Binding Path=Room.Prices.PricePerNight, StringFormat='{}{0:0,0}'}" />
+                                    </TextBlock>
+                                    <TextBlock Style="{StaticResource RowDetailsDetailRightTextStyle}">
+                                        <Run Text="{Binding Currency}" />
+                                        <Run Text="{Binding Path=Room.Prices.PriceCalculated, StringFormat='{}{0:0,0}'}" />
+                                    </TextBlock>
+                                    <TextBlock Style="{StaticResource RowDetailsDetailRightTextStyle}">
+                                        <Run Text="{Binding Currency}" />
+                                        <Run Text="{Binding Path=Room.Prices.Taxes, StringFormat='{}{0:0,0}'}" />
+                                    </TextBlock>
+                                    <TextBlock Visibility="{Binding Path=Room.Prices.TaxFee, Converter={StaticResource VisibilityConverter}}" Style="{StaticResource RowDetailsDetailRightTextStyle}">
+                                        <Run Text="{Binding Currency}" />
+                                        <Run Text="{Binding Path=Room.Prices.TaxFee, StringFormat='{}{0:0,0}'}" />
+                                    </TextBlock>
+                                    <TextBlock Height="6" Style="{StaticResource RowDetailsDetailTextStyle}" />
+                                </StackPanel>
+                            </Grid>
+
+                            <Grid Style="{StaticResource RowDetailsDetailTotalGridStyle}">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />                                    
+                                </Grid.ColumnDefinitions>
+                                
+                                <Grid.RowDefinitions>
+                                    <RowDefinition  Height="*" />
+                                    <RowDefinition  Height="*" />
+                                </Grid.RowDefinitions>
+                                
+                                <StackPanel Grid.Column="0" Grid.Row="0" Margin="8,50,0,0">
+                                    <StackPanel Orientation="Horizontal" DataContext="{Binding Path=DataContext.AvailabilityModel, ElementName=HotelsCheckoutView}">
+                                        <TextBlock Style="{StaticResource RowDetailsDetailTextStyle}" Margin="10,0,15,0" Text="{Binding TheCheckin}" />
+                                        <Image Source="/Assets/Image/details-nights-icon.png" />
+                                        <TextBlock Text="{Binding Nights}" Margin="6,0,12,0" Style="{StaticResource RowDetailsDetailTextCenterStyle}"/>
+                                        <Image Source="/Assets/Image/details-rooms-icon.png" />
+                                        <TextBlock Text="{Binding Rooms}" Margin="6,0,12,0" Style="{StaticResource RowDetailsDetailTextCenterStyle}" />
+                                        <Image Source="/Assets/Image/details-guests-icon.png" />
+                                        <TextBlock Text="{Binding Hostages}" Margin="6,0,0,0" Style="{StaticResource RowDetailsDetailTextCenterStyle}" />
+                                    </StackPanel>
+                                </StackPanel>
+
+                                <StackPanel Grid.Column="1" Grid.Row="0" Margin="0,15,15,14" >
+                                    <StackPanel DataContext="{Binding Path=Room.Prices}">
+                                        <TextBlock Style="{StaticResource RowDetailsDetailTotalWordRightStyle}">Total</TextBlock>
+                                        <TextBlock Style="{StaticResource RowDetailsDetailTotalRightStyle}">
+                                        <Run Text="{Binding Currency}" />
+                                        <Run Text="{Binding Total, StringFormat='{}{0:0,0}'}" />
+                                        </TextBlock>                                        
+                                    </StackPanel>
+                                </StackPanel>
+                                
+                                <StackPanel Grid.Row="1" Grid.ColumnSpan="2">
+                                    <TextBlock TextWrapping="Wrap" Visibility="{Binding Path=Room.Prices.taxAtDestination, Converter={StaticResource VisibilityConverter}}" Text="{Binding Room.Prices.taxAtDestination , StringFormat= 'Residentes colombianos: $ {0:0,0} por concepto de IVA a pagar en el hotel'}"  Style="{StaticResource TaxAtDestinationTextStyle}" />
+                                </StackPanel>
+                            </Grid>
+                            
+                        </StackPanel>
+                                                
+                    </ScrollViewer>
+
+                    <StackPanel Grid.Row="1">
+                        <StackPanel Orientation="Horizontal">
+                            <CheckBox x:Name="AcceptConditionsCheckBox"  Checked="AcceptConditions_Checked" Unchecked="AcceptConditions_Unchecked" BorderBrush="#555" Margin="0,0,-28,0" FontFamily="Portable User Interface"></CheckBox>
+                            <TextBlock Style="{StaticResource RowSubTitleStyle}" FontSize="23" Padding="0,18,0,0"  Text="{Binding Path=AppProperties.CheckoutLabel_Title_AcceptConditions, Source={StaticResource LocalizedProperties}}" />
+                            <Button FontSize="23" BorderBrush="Transparent" Padding="-17,6,0,0" Margin="0,0,0,0" Click="AcceptConditions_Click" Background="Transparent">
+                                <TextBlock Foreground="Blue" FontWeight="Light" Text="{Binding Path=AppProperties.CheckoutLabel_Title_AcceptConditionsLink, Source={StaticResource LocalizedProperties}}"></TextBlock>
+                            </Button>
+                        </StackPanel>
+                        <TextBlock TextWrapping="Wrap" Style="{StaticResource RowErrorStyle}" x:Name="AcceptConditionsError" Margin="12,-10,0,0" Text="{Binding Path=AppProperties.CheckoutLabel_Error_YouHaveToReadAndAcceptTermsAndConditions, Source={StaticResource LocalizedProperties}}" />
+                    </StackPanel>
+
+                    <Button Grid.Row="2" x:Name="ValidateAndBuy" Click="ValidateAndBuy_Click" Background="Red" BorderThickness="0" Margin="8">
+                        <TextBlock Text="Comprar" FontSize="26"></TextBlock>
+                    </Button>
+                </Grid>
+            </phone:PivotItem>
+            
+            
+            
+        </Pivot>
+    </Grid>
+
+</Page>

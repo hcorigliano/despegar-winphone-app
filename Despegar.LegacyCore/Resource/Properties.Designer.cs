@@ -37,7 +37,7 @@ namespace Despegar.LegacyCore.Resource {
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        public static global::System.Resources.ResourceManager ResourceManager {
+        internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Despegar.LegacyCore.Resource.Properties", typeof(Properties).GetTypeInfo().Assembly);
@@ -52,7 +52,7 @@ namespace Despegar.LegacyCore.Resource {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        public static global::System.Globalization.CultureInfo Culture {
+        internal static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -64,7 +64,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to Prôximo.
         /// </summary>
-        public static string AppBarNextField {
+        internal static string AppBarNextField {
             get {
                 return ResourceManager.GetString("AppBarNextField", resourceCulture);
             }
@@ -73,7 +73,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to Anterior.
         /// </summary>
-        public static string AppBarPreviousField {
+        internal static string AppBarPreviousField {
             get {
                 return ResourceManager.GetString("AppBarPreviousField", resourceCulture);
             }
@@ -82,7 +82,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to Conexão com espera de.
         /// </summary>
-        public static string CheckoutLabel_Details_ConectionWith {
+        internal static string CheckoutLabel_Details_ConectionWith {
             get {
                 return ResourceManager.GetString("CheckoutLabel_Details_ConectionWith", resourceCulture);
             }
@@ -91,7 +91,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to Vôo.
         /// </summary>
-        public static string CheckoutLabel_Details_Flight {
+        internal static string CheckoutLabel_Details_Flight {
             get {
                 return ResourceManager.GetString("CheckoutLabel_Details_Flight", resourceCulture);
             }
@@ -100,7 +100,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to Desde.
         /// </summary>
-        public static string CheckoutLabel_Details_From {
+        internal static string CheckoutLabel_Details_From {
             get {
                 return ResourceManager.GetString("CheckoutLabel_Details_From", resourceCulture);
             }
@@ -109,7 +109,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to IDA.
         /// </summary>
-        public static string CheckoutLabel_Details_IDA {
+        internal static string CheckoutLabel_Details_IDA {
             get {
                 return ResourceManager.GetString("CheckoutLabel_Details_IDA", resourceCulture);
             }
@@ -118,7 +118,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to  noite(s).
         /// </summary>
-        public static string CheckoutLabel_Details_Nights {
+        internal static string CheckoutLabel_Details_Nights {
             get {
                 return ResourceManager.GetString("CheckoutLabel_Details_Nights", resourceCulture);
             }
@@ -127,7 +127,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to Quarto(s).
         /// </summary>
-        public static string CheckoutLabel_Details_Rooms {
+        internal static string CheckoutLabel_Details_Rooms {
             get {
                 return ResourceManager.GetString("CheckoutLabel_Details_Rooms", resourceCulture);
             }
@@ -136,7 +136,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to Trecho.
         /// </summary>
-        public static string CheckoutLabel_Details_Segment {
+        internal static string CheckoutLabel_Details_Segment {
             get {
                 return ResourceManager.GetString("CheckoutLabel_Details_Segment", resourceCulture);
             }
@@ -145,7 +145,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to para.
         /// </summary>
-        public static string CheckoutLabel_Details_To {
+        internal static string CheckoutLabel_Details_To {
             get {
                 return ResourceManager.GetString("CheckoutLabel_Details_To", resourceCulture);
             }
@@ -154,7 +154,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to Duração total de vôo:.
         /// </summary>
-        public static string CheckoutLabel_Details_TotalTime {
+        internal static string CheckoutLabel_Details_TotalTime {
             get {
                 return ResourceManager.GetString("CheckoutLabel_Details_TotalTime", resourceCulture);
             }
@@ -163,7 +163,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to VOLTA.
         /// </summary>
-        public static string CheckoutLabel_Details_VUELTA {
+        internal static string CheckoutLabel_Details_VUELTA {
             get {
                 return ResourceManager.GetString("CheckoutLabel_Details_VUELTA", resourceCulture);
             }
@@ -172,7 +172,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to Por favor, ingrese el código de área del teléfono..
         /// </summary>
-        public static string CheckoutLabel_Error_areaCode_INVALID_LENGTH {
+        internal static string CheckoutLabel_Error_areaCode_INVALID_LENGTH {
             get {
                 return ResourceManager.GetString("CheckoutLabel_Error_areaCode_INVALID_LENGTH", resourceCulture);
             }
@@ -181,7 +181,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to Por favor, verifique que el código de área sólo contenga números..
         /// </summary>
-        public static string CheckoutLabel_Error_areaCode_INVALID_PHONE_AREA_CODE {
+        internal static string CheckoutLabel_Error_areaCode_INVALID_PHONE_AREA_CODE {
             get {
                 return ResourceManager.GetString("CheckoutLabel_Error_areaCode_INVALID_PHONE_AREA_CODE", resourceCulture);
             }
@@ -190,7 +190,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to Por favor, preencha o número de cartão..
         /// </summary>
-        public static string CheckoutLabel_Error_cardNumber_INVALID_LENGTH {
+        internal static string CheckoutLabel_Error_cardNumber_INVALID_LENGTH {
             get {
                 return ResourceManager.GetString("CheckoutLabel_Error_cardNumber_INVALID_LENGTH", resourceCulture);
             }
@@ -199,7 +199,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to Por favor, preencha o código do país do telefone..
         /// </summary>
-        public static string CheckoutLabel_Error_countryCode_INVALID_LENGTH {
+        internal static string CheckoutLabel_Error_countryCode_INVALID_LENGTH {
             get {
                 return ResourceManager.GetString("CheckoutLabel_Error_countryCode_INVALID_LENGTH", resourceCulture);
             }
@@ -208,7 +208,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to Por favor, verifique o código do país só seja números..
         /// </summary>
-        public static string CheckoutLabel_Error_countryCode_NOT_NUMERIC {
+        internal static string CheckoutLabel_Error_countryCode_NOT_NUMERIC {
             get {
                 return ResourceManager.GetString("CheckoutLabel_Error_countryCode_NOT_NUMERIC", resourceCulture);
             }
@@ -217,7 +217,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to Por favor, verifique o e-mail onde vá recever o voucher..
         /// </summary>
-        public static string CheckoutLabel_Error_email_INVALID_EMAIL {
+        internal static string CheckoutLabel_Error_email_INVALID_EMAIL {
             get {
                 return ResourceManager.GetString("CheckoutLabel_Error_email_INVALID_EMAIL", resourceCulture);
             }
@@ -226,7 +226,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to Por favor, verifique o e-mail onde vá recever o voucher..
         /// </summary>
-        public static string CheckoutLabel_Error_email_INVALID_LENGTH {
+        internal static string CheckoutLabel_Error_email_INVALID_LENGTH {
             get {
                 return ResourceManager.GetString("CheckoutLabel_Error_email_INVALID_LENGTH", resourceCulture);
             }
@@ -235,7 +235,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to Por favor, preenche o nome do cliente..
         /// </summary>
-        public static string CheckoutLabel_Error_firstName_INVALID_NAME {
+        internal static string CheckoutLabel_Error_firstName_INVALID_NAME {
             get {
                 return ResourceManager.GetString("CheckoutLabel_Error_firstName_INVALID_NAME", resourceCulture);
             }
@@ -244,7 +244,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to Por favor, verifique data de nacimiento..
         /// </summary>
-        public static string CheckoutLabel_Error_INVALID_BIRTHDAY {
+        internal static string CheckoutLabel_Error_INVALID_BIRTHDAY {
             get {
                 return ResourceManager.GetString("CheckoutLabel_Error_INVALID_BIRTHDAY", resourceCulture);
             }
@@ -253,7 +253,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to O número preenchado na corresponde á {0}.
         /// </summary>
-        public static string CheckoutLabel_Error_InvalidCardNumber {
+        internal static string CheckoutLabel_Error_InvalidCardNumber {
             get {
                 return ResourceManager.GetString("CheckoutLabel_Error_InvalidCardNumber", resourceCulture);
             }
@@ -262,7 +262,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to Por favor, verifique quantidade de dígitos..
         /// </summary>
-        public static string CheckoutLabel_Error_InvalidSecurityCode {
+        internal static string CheckoutLabel_Error_InvalidSecurityCode {
             get {
                 return ResourceManager.GetString("CheckoutLabel_Error_InvalidSecurityCode", resourceCulture);
             }
@@ -271,7 +271,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to Por favor, preenche el sobrenome do cliente..
         /// </summary>
-        public static string CheckoutLabel_Error_lastName_INVALID_NAME {
+        internal static string CheckoutLabel_Error_lastName_INVALID_NAME {
             get {
                 return ResourceManager.GetString("CheckoutLabel_Error_lastName_INVALID_NAME", resourceCulture);
             }
@@ -280,7 +280,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to O endereços dos e-mails devem ser iguais..
         /// </summary>
-        public static string CheckoutLabel_Error_NotEqualEmails {
+        internal static string CheckoutLabel_Error_NotEqualEmails {
             get {
                 return ResourceManager.GetString("CheckoutLabel_Error_NotEqualEmails", resourceCulture);
             }
@@ -289,7 +289,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to Por favor, verifique que número de identificação seja válido..
         /// </summary>
-        public static string CheckoutLabel_Error_ownerDocument_INVALID_DOCUMENT_NUMBER {
+        internal static string CheckoutLabel_Error_ownerDocument_INVALID_DOCUMENT_NUMBER {
             get {
                 return ResourceManager.GetString("CheckoutLabel_Error_ownerDocument_INVALID_DOCUMENT_NUMBER", resourceCulture);
             }
@@ -298,7 +298,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to Por favor, verifique o número de identificação seja igual que do cartão de crédito. .
         /// </summary>
-        public static string CheckoutLabel_Error_ownerDocument_INVALID_LENGTH {
+        internal static string CheckoutLabel_Error_ownerDocument_INVALID_LENGTH {
             get {
                 return ResourceManager.GetString("CheckoutLabel_Error_ownerDocument_INVALID_LENGTH", resourceCulture);
             }
@@ -307,7 +307,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to Por favor, verifique o nome do titular do cartão de crédito este preenchado. (um nome e sobrenome).
         /// </summary>
-        public static string CheckoutLabel_Error_ownerName_INVALID_CARD_OWNER_NAME {
+        internal static string CheckoutLabel_Error_ownerName_INVALID_CARD_OWNER_NAME {
             get {
                 return ResourceManager.GetString("CheckoutLabel_Error_ownerName_INVALID_CARD_OWNER_NAME", resourceCulture);
             }
@@ -316,7 +316,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to Por favor, preenche o nome e sobrenome do dono do cartão de crédito..
         /// </summary>
-        public static string CheckoutLabel_Error_ownerName_INVALID_LENGTH {
+        internal static string CheckoutLabel_Error_ownerName_INVALID_LENGTH {
             get {
                 return ResourceManager.GetString("CheckoutLabel_Error_ownerName_INVALID_LENGTH", resourceCulture);
             }
@@ -325,7 +325,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to Adulto.
         /// </summary>
-        public static string CheckoutLabel_Error_PASSENGER_TYPE_ADULT {
+        internal static string CheckoutLabel_Error_PASSENGER_TYPE_ADULT {
             get {
                 return ResourceManager.GetString("CheckoutLabel_Error_PASSENGER_TYPE_ADULT", resourceCulture);
             }
@@ -334,7 +334,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to Crianças.
         /// </summary>
-        public static string CheckoutLabel_Error_PASSENGER_TYPE_CHILD {
+        internal static string CheckoutLabel_Error_PASSENGER_TYPE_CHILD {
             get {
                 return ResourceManager.GetString("CheckoutLabel_Error_PASSENGER_TYPE_CHILD", resourceCulture);
             }
@@ -343,7 +343,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to Bebês.
         /// </summary>
-        public static string CheckoutLabel_Error_PASSENGER_TYPE_INFANT {
+        internal static string CheckoutLabel_Error_PASSENGER_TYPE_INFANT {
             get {
                 return ResourceManager.GetString("CheckoutLabel_Error_PASSENGER_TYPE_INFANT", resourceCulture);
             }
@@ -352,7 +352,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to Por favor, preenche sobrenome do passageiro..
         /// </summary>
-        public static string CheckoutLabel_Error_passengerLast_INVALID_NAME {
+        internal static string CheckoutLabel_Error_passengerLast_INVALID_NAME {
             get {
                 return ResourceManager.GetString("CheckoutLabel_Error_passengerLast_INVALID_NAME", resourceCulture);
             }
@@ -361,7 +361,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to Por favor, preenche nome do passageiro..
         /// </summary>
-        public static string CheckoutLabel_Error_passengerName_INVALID_NAME {
+        internal static string CheckoutLabel_Error_passengerName_INVALID_NAME {
             get {
                 return ResourceManager.GetString("CheckoutLabel_Error_passengerName_INVALID_NAME", resourceCulture);
             }
@@ -370,7 +370,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to Por favor, verifique seu número de telefone..
         /// </summary>
-        public static string CheckoutLabel_Error_phoneNumber_INVALID_LENGTH {
+        internal static string CheckoutLabel_Error_phoneNumber_INVALID_LENGTH {
             get {
                 return ResourceManager.GetString("CheckoutLabel_Error_phoneNumber_INVALID_LENGTH", resourceCulture);
             }
@@ -379,7 +379,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to O número de telefone tem que ser números..
         /// </summary>
-        public static string CheckoutLabel_Error_phoneNumber_INVALID_PHONE_NUMBER {
+        internal static string CheckoutLabel_Error_phoneNumber_INVALID_PHONE_NUMBER {
             get {
                 return ResourceManager.GetString("CheckoutLabel_Error_phoneNumber_INVALID_PHONE_NUMBER", resourceCulture);
             }
@@ -388,7 +388,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to Por favor, verifique o número do codigo de referencia..
         /// </summary>
-        public static string CheckoutLabel_Error_voucher_INVALID_LENGTH {
+        internal static string CheckoutLabel_Error_voucher_INVALID_LENGTH {
             get {
                 return ResourceManager.GetString("CheckoutLabel_Error_voucher_INVALID_LENGTH", resourceCulture);
             }
@@ -397,7 +397,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to O codigo ingressado não existe..
         /// </summary>
-        public static string CheckoutLabel_Error_voucherDoesNotExists {
+        internal static string CheckoutLabel_Error_voucherDoesNotExists {
             get {
                 return ResourceManager.GetString("CheckoutLabel_Error_voucherDoesNotExists", resourceCulture);
             }
@@ -406,7 +406,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to Por favor, verifique o mes e ano de caducidade do cartao..
         /// </summary>
-        public static string CheckoutLabel_Error_YearMonthInvalid {
+        internal static string CheckoutLabel_Error_YearMonthInvalid {
             get {
                 return ResourceManager.GetString("CheckoutLabel_Error_YearMonthInvalid", resourceCulture);
             }
@@ -415,7 +415,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to Por favor, leia e aceite os termos e condições..
         /// </summary>
-        public static string CheckoutLabel_Error_YouHaveToReadAndAcceptTermsAndConditions {
+        internal static string CheckoutLabel_Error_YouHaveToReadAndAcceptTermsAndConditions {
             get {
                 return ResourceManager.GetString("CheckoutLabel_Error_YouHaveToReadAndAcceptTermsAndConditions", resourceCulture);
             }
@@ -424,7 +424,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to Por Segurança preencher a siguente informaçao:.
         /// </summary>
-        public static string CheckoutLabel_Message_AdditionalDataNeeded {
+        internal static string CheckoutLabel_Message_AdditionalDataNeeded {
             get {
                 return ResourceManager.GetString("CheckoutLabel_Message_AdditionalDataNeeded", resourceCulture);
             }
@@ -433,7 +433,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to e intente novamente..
         /// </summary>
-        public static string CheckoutLabel_Message_BeCorrect {
+        internal static string CheckoutLabel_Message_BeCorrect {
             get {
                 return ResourceManager.GetString("CheckoutLabel_Message_BeCorrect", resourceCulture);
             }
@@ -442,7 +442,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to Por favor verifique que o cartão de crédito tenha disponibilidade ou use outro médio de pagamento..
         /// </summary>
-        public static string CheckoutLabel_Message_ChangeCreditCard {
+        internal static string CheckoutLabel_Message_ChangeCreditCard {
             get {
                 return ResourceManager.GetString("CheckoutLabel_Message_ChangeCreditCard", resourceCulture);
             }
@@ -451,7 +451,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to dados de pagamento, .
         /// </summary>
-        public static string CheckoutLabel_Message_CheckCardData {
+        internal static string CheckoutLabel_Message_CheckCardData {
             get {
                 return ResourceManager.GetString("CheckoutLabel_Message_CheckCardData", resourceCulture);
             }
@@ -460,7 +460,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to dados de contato, .
         /// </summary>
-        public static string CheckoutLabel_Message_CheckContact {
+        internal static string CheckoutLabel_Message_CheckContact {
             get {
                 return ResourceManager.GetString("CheckoutLabel_Message_CheckContact", resourceCulture);
             }
@@ -469,7 +469,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to Por favor verifique que os dados do cartão de crédito sejam correto..
         /// </summary>
-        public static string CheckoutLabel_Message_CheckCreditCardData {
+        internal static string CheckoutLabel_Message_CheckCreditCardData {
             get {
                 return ResourceManager.GetString("CheckoutLabel_Message_CheckCreditCardData", resourceCulture);
             }
@@ -478,7 +478,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to dados dos hóspedes, .
         /// </summary>
-        public static string CheckoutLabel_Message_CheckGuests {
+        internal static string CheckoutLabel_Message_CheckGuests {
             get {
                 return ResourceManager.GetString("CheckoutLabel_Message_CheckGuests", resourceCulture);
             }
@@ -487,7 +487,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to Por favor verifique a informação dada em .
         /// </summary>
-        public static string CheckoutLabel_Message_CheckItPlease {
+        internal static string CheckoutLabel_Message_CheckItPlease {
             get {
                 return ResourceManager.GetString("CheckoutLabel_Message_CheckItPlease", resourceCulture);
             }
@@ -496,7 +496,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to dados dos pasageiros, .
         /// </summary>
-        public static string CheckoutLabel_Message_CheckPassengers {
+        internal static string CheckoutLabel_Message_CheckPassengers {
             get {
                 return ResourceManager.GetString("CheckoutLabel_Message_CheckPassengers", resourceCulture);
             }
@@ -505,7 +505,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to Verifique os dados preenchados.
         /// </summary>
-        public static string CheckoutLabel_Message_CheckTheInformation {
+        internal static string CheckoutLabel_Message_CheckTheInformation {
             get {
                 return ResourceManager.GetString("CheckoutLabel_Message_CheckTheInformation", resourceCulture);
             }
@@ -514,7 +514,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to Ocorreu erro ao usar seu cupom de desconto, por favor tente de novo máis tarde..
         /// </summary>
-        public static string CheckoutLabel_Message_CouponNoRecoverable {
+        internal static string CheckoutLabel_Message_CouponNoRecoverable {
             get {
                 return ResourceManager.GetString("CheckoutLabel_Message_CouponNoRecoverable", resourceCulture);
             }
@@ -523,7 +523,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to Ocorreu erro processando sua solicitação, por favor tente de novo máis tarde..
         /// </summary>
-        public static string CheckoutLabel_Message_NoRecoverableError {
+        internal static string CheckoutLabel_Message_NoRecoverableError {
             get {
                 return ResourceManager.GetString("CheckoutLabel_Message_NoRecoverableError", resourceCulture);
             }
@@ -532,7 +532,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to Como indicado no documento.
         /// </summary>
-        public static string CheckoutLabel_Placeholder_AsIsInDocument {
+        internal static string CheckoutLabel_Placeholder_AsIsInDocument {
             get {
                 return ResourceManager.GetString("CheckoutLabel_Placeholder_AsIsInDocument", resourceCulture);
             }
@@ -541,7 +541,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to Nome do Banco.
         /// </summary>
-        public static string CheckoutLabel_Placeholder_Bank {
+        internal static string CheckoutLabel_Placeholder_Bank {
             get {
                 return ResourceManager.GetString("CheckoutLabel_Placeholder_Bank", resourceCulture);
             }
@@ -550,7 +550,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to Ej: 6598789654984650.
         /// </summary>
-        public static string CheckoutLabel_Placeholder_CardNumber {
+        internal static string CheckoutLabel_Placeholder_CardNumber {
             get {
                 return ResourceManager.GetString("CheckoutLabel_Placeholder_CardNumber", resourceCulture);
             }
@@ -559,7 +559,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to Ej: 316549879.
         /// </summary>
-        public static string CheckoutLabel_Placeholder_DocumentNumber {
+        internal static string CheckoutLabel_Placeholder_DocumentNumber {
             get {
                 return ResourceManager.GetString("CheckoutLabel_Placeholder_DocumentNumber", resourceCulture);
             }
@@ -568,7 +568,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to Mes (Ej: 04).
         /// </summary>
-        public static string CheckoutLabel_Placeholder_ExpirationMonth {
+        internal static string CheckoutLabel_Placeholder_ExpirationMonth {
             get {
                 return ResourceManager.GetString("CheckoutLabel_Placeholder_ExpirationMonth", resourceCulture);
             }
@@ -577,7 +577,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to Ano (Ej: 2014).
         /// </summary>
-        public static string CheckoutLabel_Placeholder_ExpirationYear {
+        internal static string CheckoutLabel_Placeholder_ExpirationYear {
             get {
                 return ResourceManager.GetString("CheckoutLabel_Placeholder_ExpirationYear", resourceCulture);
             }
@@ -586,7 +586,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to Preenche e-mail do titular.
         /// </summary>
-        public static string CheckoutLabel_Placeholder_FillEmail {
+        internal static string CheckoutLabel_Placeholder_FillEmail {
             get {
                 return ResourceManager.GetString("CheckoutLabel_Placeholder_FillEmail", resourceCulture);
             }
@@ -595,7 +595,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to - Seleccione -.
         /// </summary>
-        public static string CheckoutLabel_Placeholder_GenericSelect {
+        internal static string CheckoutLabel_Placeholder_GenericSelect {
             get {
                 return ResourceManager.GetString("CheckoutLabel_Placeholder_GenericSelect", resourceCulture);
             }
@@ -604,7 +604,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to Ej: 54156423.
         /// </summary>
-        public static string CheckoutLabel_Placeholder_PhoneNumber {
+        internal static string CheckoutLabel_Placeholder_PhoneNumber {
             get {
                 return ResourceManager.GetString("CheckoutLabel_Placeholder_PhoneNumber", resourceCulture);
             }
@@ -613,7 +613,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to Preenche o codigo.
         /// </summary>
-        public static string CheckoutLabel_Placeholder_ReferenceCode {
+        internal static string CheckoutLabel_Placeholder_ReferenceCode {
             get {
                 return ResourceManager.GetString("CheckoutLabel_Placeholder_ReferenceCode", resourceCulture);
             }
@@ -622,7 +622,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to Ej: 543.
         /// </summary>
-        public static string CheckoutLabel_Placeholder_SecurityCode {
+        internal static string CheckoutLabel_Placeholder_SecurityCode {
             get {
                 return ResourceManager.GetString("CheckoutLabel_Placeholder_SecurityCode", resourceCulture);
             }
@@ -631,7 +631,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to Li e aceito as.
         /// </summary>
-        public static string CheckoutLabel_Title_AcceptConditions {
+        internal static string CheckoutLabel_Title_AcceptConditions {
             get {
                 return ResourceManager.GetString("CheckoutLabel_Title_AcceptConditions", resourceCulture);
             }
@@ -640,7 +640,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to Condições de compra.
         /// </summary>
-        public static string CheckoutLabel_Title_AcceptConditionsLink {
+        internal static string CheckoutLabel_Title_AcceptConditionsLink {
             get {
                 return ResourceManager.GetString("CheckoutLabel_Title_AcceptConditionsLink", resourceCulture);
             }
@@ -649,7 +649,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to Area.
         /// </summary>
-        public static string CheckoutLabel_Title_AreaCode {
+        internal static string CheckoutLabel_Title_AreaCode {
             get {
                 return ResourceManager.GetString("CheckoutLabel_Title_AreaCode", resourceCulture);
             }
@@ -658,7 +658,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to Entidade bancaria.
         /// </summary>
-        public static string CheckoutLabel_Title_Bank {
+        internal static string CheckoutLabel_Title_Bank {
             get {
                 return ResourceManager.GetString("CheckoutLabel_Title_Bank", resourceCulture);
             }
@@ -667,7 +667,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to Endereço de entrega do cartão de crédito.
         /// </summary>
-        public static string CheckoutLabel_Title_Billing {
+        internal static string CheckoutLabel_Title_Billing {
             get {
                 return ResourceManager.GetString("CheckoutLabel_Title_Billing", resourceCulture);
             }
@@ -676,7 +676,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to Data de nascimento.
         /// </summary>
-        public static string CheckoutLabel_Title_Birthday {
+        internal static string CheckoutLabel_Title_Birthday {
             get {
                 return ResourceManager.GetString("CheckoutLabel_Title_Birthday", resourceCulture);
             }
@@ -685,7 +685,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to Número de cartão de crédito.
         /// </summary>
-        public static string CheckoutLabel_Title_CardNumber {
+        internal static string CheckoutLabel_Title_CardNumber {
             get {
                 return ResourceManager.GetString("CheckoutLabel_Title_CardNumber", resourceCulture);
             }
@@ -694,7 +694,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to Cartão.
         /// </summary>
-        public static string CheckoutLabel_Title_CardType {
+        internal static string CheckoutLabel_Title_CardType {
             get {
                 return ResourceManager.GetString("CheckoutLabel_Title_CardType", resourceCulture);
             }
@@ -703,7 +703,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to País.
         /// </summary>
-        public static string CheckoutLabel_Title_CountryCode {
+        internal static string CheckoutLabel_Title_CountryCode {
             get {
                 return ResourceManager.GetString("CheckoutLabel_Title_CountryCode", resourceCulture);
             }
@@ -712,7 +712,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to Colonia.
         /// </summary>
-        public static string CheckoutLabel_Title_County {
+        internal static string CheckoutLabel_Title_County {
             get {
                 return ResourceManager.GetString("CheckoutLabel_Title_County", resourceCulture);
             }
@@ -721,7 +721,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to Departamento.
         /// </summary>
-        public static string CheckoutLabel_Title_Department {
+        internal static string CheckoutLabel_Title_Department {
             get {
                 return ResourceManager.GetString("CheckoutLabel_Title_Department", resourceCulture);
             }
@@ -730,7 +730,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to Informação da compra.
         /// </summary>
-        public static string CheckoutLabel_Title_Details {
+        internal static string CheckoutLabel_Title_Details {
             get {
                 return ResourceManager.GetString("CheckoutLabel_Title_Details", resourceCulture);
             }
@@ -739,7 +739,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to Número de identidade.
         /// </summary>
-        public static string CheckoutLabel_Title_DocumentNumber {
+        internal static string CheckoutLabel_Title_DocumentNumber {
             get {
                 return ResourceManager.GetString("CheckoutLabel_Title_DocumentNumber", resourceCulture);
             }
@@ -748,7 +748,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to Tipo de documento.
         /// </summary>
-        public static string CheckoutLabel_Title_DocumentType {
+        internal static string CheckoutLabel_Title_DocumentType {
             get {
                 return ResourceManager.GetString("CheckoutLabel_Title_DocumentType", resourceCulture);
             }
@@ -757,7 +757,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to E-mail (onde vai receber seu voucher).
         /// </summary>
-        public static string CheckoutLabel_Title_Email {
+        internal static string CheckoutLabel_Title_Email {
             get {
                 return ResourceManager.GetString("CheckoutLabel_Title_Email", resourceCulture);
             }
@@ -766,7 +766,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to Vencimiento.
         /// </summary>
-        public static string CheckoutLabel_Title_ExpirationDate {
+        internal static string CheckoutLabel_Title_ExpirationDate {
             get {
                 return ResourceManager.GetString("CheckoutLabel_Title_ExpirationDate", resourceCulture);
             }
@@ -775,7 +775,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to Interior.
         /// </summary>
-        public static string CheckoutLabel_Title_Intern {
+        internal static string CheckoutLabel_Title_Intern {
             get {
                 return ResourceManager.GetString("CheckoutLabel_Title_Intern", resourceCulture);
             }
@@ -784,7 +784,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to Sobrenome.
         /// </summary>
-        public static string CheckoutLabel_Title_Last {
+        internal static string CheckoutLabel_Title_Last {
             get {
                 return ResourceManager.GetString("CheckoutLabel_Title_Last", resourceCulture);
             }
@@ -793,7 +793,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to Nome.
         /// </summary>
-        public static string CheckoutLabel_Title_Name {
+        internal static string CheckoutLabel_Title_Name {
             get {
                 return ResourceManager.GetString("CheckoutLabel_Title_Name", resourceCulture);
             }
@@ -802,7 +802,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to Nacionalidade.
         /// </summary>
-        public static string CheckoutLabel_Title_Nationality {
+        internal static string CheckoutLabel_Title_Nationality {
             get {
                 return ResourceManager.GetString("CheckoutLabel_Title_Nationality", resourceCulture);
             }
@@ -811,7 +811,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to Número.
         /// </summary>
-        public static string CheckoutLabel_Title_Number {
+        internal static string CheckoutLabel_Title_Number {
             get {
                 return ResourceManager.GetString("CheckoutLabel_Title_Number", resourceCulture);
             }
@@ -820,7 +820,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to Exterior.
         /// </summary>
-        public static string CheckoutLabel_Title_Outer {
+        internal static string CheckoutLabel_Title_Outer {
             get {
                 return ResourceManager.GetString("CheckoutLabel_Title_Outer", resourceCulture);
             }
@@ -829,7 +829,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to Sexo do titular do cartão de crédito.
         /// </summary>
-        public static string CheckoutLabel_Title_OwnerGender {
+        internal static string CheckoutLabel_Title_OwnerGender {
             get {
                 return ResourceManager.GetString("CheckoutLabel_Title_OwnerGender", resourceCulture);
             }
@@ -838,7 +838,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to Nome e Sobrenome do titular do cartão de crédito.
         /// </summary>
-        public static string CheckoutLabel_Title_OwnerName {
+        internal static string CheckoutLabel_Title_OwnerName {
             get {
                 return ResourceManager.GetString("CheckoutLabel_Title_OwnerName", resourceCulture);
             }
@@ -847,7 +847,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to Número de identidade.
         /// </summary>
-        public static string CheckoutLabel_Title_PassDocumentNumber {
+        internal static string CheckoutLabel_Title_PassDocumentNumber {
             get {
                 return ResourceManager.GetString("CheckoutLabel_Title_PassDocumentNumber", resourceCulture);
             }
@@ -856,7 +856,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to Sexo.
         /// </summary>
-        public static string CheckoutLabel_Title_PassengerGender {
+        internal static string CheckoutLabel_Title_PassengerGender {
             get {
                 return ResourceManager.GetString("CheckoutLabel_Title_PassengerGender", resourceCulture);
             }
@@ -865,7 +865,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to Telefone.
         /// </summary>
-        public static string CheckoutLabel_Title_Phone {
+        internal static string CheckoutLabel_Title_Phone {
             get {
                 return ResourceManager.GetString("CheckoutLabel_Title_Phone", resourceCulture);
             }
@@ -874,7 +874,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to Código Postal.
         /// </summary>
-        public static string CheckoutLabel_Title_PostalCode {
+        internal static string CheckoutLabel_Title_PostalCode {
             get {
                 return ResourceManager.GetString("CheckoutLabel_Title_PostalCode", resourceCulture);
             }
@@ -883,7 +883,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to Código de referencia.
         /// </summary>
-        public static string CheckoutLabel_Title_ReferenceCode {
+        internal static string CheckoutLabel_Title_ReferenceCode {
             get {
                 return ResourceManager.GetString("CheckoutLabel_Title_ReferenceCode", resourceCulture);
             }
@@ -892,7 +892,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to Confirme seu e-mail.
         /// </summary>
-        public static string CheckoutLabel_Title_RepeatEmail {
+        internal static string CheckoutLabel_Title_RepeatEmail {
             get {
                 return ResourceManager.GetString("CheckoutLabel_Title_RepeatEmail", resourceCulture);
             }
@@ -901,7 +901,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to Código de segurança.
         /// </summary>
-        public static string CheckoutLabel_Title_SecurityCode {
+        internal static string CheckoutLabel_Title_SecurityCode {
             get {
                 return ResourceManager.GetString("CheckoutLabel_Title_SecurityCode", resourceCulture);
             }
@@ -910,7 +910,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to Estado.
         /// </summary>
-        public static string CheckoutLabel_Title_State {
+        internal static string CheckoutLabel_Title_State {
             get {
                 return ResourceManager.GetString("CheckoutLabel_Title_State", resourceCulture);
             }
@@ -919,7 +919,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to Calle.
         /// </summary>
-        public static string CheckoutLabel_Title_Street {
+        internal static string CheckoutLabel_Title_Street {
             get {
                 return ResourceManager.GetString("CheckoutLabel_Title_Street", resourceCulture);
             }
@@ -928,7 +928,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to Decolar.com.
         /// </summary>
-        public static string CommonBrandName {
+        internal static string CommonBrandName {
             get {
                 return ResourceManager.GetString("CommonBrandName", resourceCulture);
             }
@@ -937,7 +937,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to Erro de conexão.
         /// </summary>
-        public static string ConnectionErrorMessage {
+        internal static string ConnectionErrorMessage {
             get {
                 return ResourceManager.GetString("ConnectionErrorMessage", resourceCulture);
             }
@@ -946,7 +946,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to adulto(s).
         /// </summary>
-        public static string FlightCheckoutDetailsAdults {
+        internal static string FlightCheckoutDetailsAdults {
             get {
                 return ResourceManager.GetString("FlightCheckoutDetailsAdults", resourceCulture);
             }
@@ -955,7 +955,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to Res. 3550 AFIP.
         /// </summary>
-        public static string FlightCheckoutDetailsAFIPRes {
+        internal static string FlightCheckoutDetailsAFIPRes {
             get {
                 return ResourceManager.GetString("FlightCheckoutDetailsAFIPRes", resourceCulture);
             }
@@ -964,7 +964,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to Cargos.
         /// </summary>
-        public static string FlightCheckoutDetailsCharges {
+        internal static string FlightCheckoutDetailsCharges {
             get {
                 return ResourceManager.GetString("FlightCheckoutDetailsCharges", resourceCulture);
             }
@@ -973,7 +973,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to criança(s).
         /// </summary>
-        public static string FlightCheckoutDetailsChildren {
+        internal static string FlightCheckoutDetailsChildren {
             get {
                 return ResourceManager.GetString("FlightCheckoutDetailsChildren", resourceCulture);
             }
@@ -982,7 +982,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to bebê(s).
         /// </summary>
-        public static string FlightCheckoutDetailsInfants {
+        internal static string FlightCheckoutDetailsInfants {
             get {
                 return ResourceManager.GetString("FlightCheckoutDetailsInfants", resourceCulture);
             }
@@ -991,7 +991,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to Tarifa por adulto.
         /// </summary>
-        public static string FlightCheckoutDetailsPricePerAdult {
+        internal static string FlightCheckoutDetailsPricePerAdult {
             get {
                 return ResourceManager.GetString("FlightCheckoutDetailsPricePerAdult", resourceCulture);
             }
@@ -1000,7 +1000,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to Tarifa por criança.
         /// </summary>
-        public static string FlightCheckoutDetailsPricePerChild {
+        internal static string FlightCheckoutDetailsPricePerChild {
             get {
                 return ResourceManager.GetString("FlightCheckoutDetailsPricePerChild", resourceCulture);
             }
@@ -1009,7 +1009,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to Tarifa por bebê.
         /// </summary>
-        public static string FlightCheckoutDetailsPricePerInfant {
+        internal static string FlightCheckoutDetailsPricePerInfant {
             get {
                 return ResourceManager.GetString("FlightCheckoutDetailsPricePerInfant", resourceCulture);
             }
@@ -1018,7 +1018,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to Impostos e taxas.
         /// </summary>
-        public static string FlightCheckoutDetailsTaxes {
+        internal static string FlightCheckoutDetailsTaxes {
             get {
                 return ResourceManager.GetString("FlightCheckoutDetailsTaxes", resourceCulture);
             }
@@ -1027,7 +1027,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to Comprar vôo.
         /// </summary>
-        public static string FlightsCheckoutBuyFlight {
+        internal static string FlightsCheckoutBuyFlight {
             get {
                 return ResourceManager.GetString("FlightsCheckoutBuyFlight", resourceCulture);
             }
@@ -1036,7 +1036,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to passageiros.
         /// </summary>
-        public static string FlightsCheckoutPassengersTitle {
+        internal static string FlightsCheckoutPassengersTitle {
             get {
                 return ResourceManager.GetString("FlightsCheckoutPassengersTitle", resourceCulture);
             }
@@ -1045,7 +1045,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to Carros.
         /// </summary>
-        public static string HomeProductCars {
+        internal static string HomeProductCars {
             get {
                 return ResourceManager.GetString("HomeProductCars", resourceCulture);
             }
@@ -1054,7 +1054,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to Escolha carro para sua viagem..
         /// </summary>
-        public static string HomeProductCarsDescription {
+        internal static string HomeProductCarsDescription {
             get {
                 return ResourceManager.GetString("HomeProductCarsDescription", resourceCulture);
             }
@@ -1063,7 +1063,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to carros/.
         /// </summary>
-        public static string HomeProductCarsUrl {
+        internal static string HomeProductCarsUrl {
             get {
                 return ResourceManager.GetString("HomeProductCarsUrl", resourceCulture);
             }
@@ -1072,7 +1072,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to Passagens.
         /// </summary>
-        public static string HomeProductFlights {
+        internal static string HomeProductFlights {
             get {
                 return ResourceManager.GetString("HomeProductFlights", resourceCulture);
             }
@@ -1081,7 +1081,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to Encontre o melhor vôo.
         /// </summary>
-        public static string HomeProductFlightsDescription {
+        internal static string HomeProductFlightsDescription {
             get {
                 return ResourceManager.GetString("HomeProductFlightsDescription", resourceCulture);
             }
@@ -1090,7 +1090,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to passagens-aereas/.
         /// </summary>
-        public static string HomeProductFlightsUrl {
+        internal static string HomeProductFlightsUrl {
             get {
                 return ResourceManager.GetString("HomeProductFlightsUrl", resourceCulture);
             }
@@ -1099,7 +1099,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to Estado do vôo.
         /// </summary>
-        public static string HomeProductFlightTracker {
+        internal static string HomeProductFlightTracker {
             get {
                 return ResourceManager.GetString("HomeProductFlightTracker", resourceCulture);
             }
@@ -1108,7 +1108,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to Acompanhe o estado de seu vôo.
         /// </summary>
-        public static string HomeProductFlightTrackerDescription {
+        internal static string HomeProductFlightTrackerDescription {
             get {
                 return ResourceManager.GetString("HomeProductFlightTrackerDescription", resourceCulture);
             }
@@ -1117,7 +1117,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to tools/flights/tracker/search/.
         /// </summary>
-        public static string HomeProductFlightTrackerUrl {
+        internal static string HomeProductFlightTrackerUrl {
             get {
                 return ResourceManager.GetString("HomeProductFlightTrackerUrl", resourceCulture);
             }
@@ -1126,7 +1126,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to Hotel para hoje.
         /// </summary>
-        public static string HomeProductHotelForToday {
+        internal static string HomeProductHotelForToday {
             get {
                 return ResourceManager.GetString("HomeProductHotelForToday", resourceCulture);
             }
@@ -1135,7 +1135,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to Hotel perto para esta noite.
         /// </summary>
-        public static string HomeProductHotelForTodayDescription {
+        internal static string HomeProductHotelForTodayDescription {
             get {
                 return ResourceManager.GetString("HomeProductHotelForTodayDescription", resourceCulture);
             }
@@ -1144,7 +1144,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to hoteis/search/location/{0},{1}/{2}/{3}/2/i1.
         /// </summary>
-        public static string HomeProductHotelForTodayUrl {
+        internal static string HomeProductHotelForTodayUrl {
             get {
                 return ResourceManager.GetString("HomeProductHotelForTodayUrl", resourceCulture);
             }
@@ -1153,7 +1153,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to Hoteis.
         /// </summary>
-        public static string HomeProductHotels {
+        internal static string HomeProductHotels {
             get {
                 return ResourceManager.GetString("HomeProductHotels", resourceCulture);
             }
@@ -1162,7 +1162,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to Reserve o quarto ideal.
         /// </summary>
-        public static string HomeProductHotelsDescription {
+        internal static string HomeProductHotelsDescription {
             get {
                 return ResourceManager.GetString("HomeProductHotelsDescription", resourceCulture);
             }
@@ -1171,7 +1171,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to hoteis/.
         /// </summary>
-        public static string HomeProductHotelsUrl {
+        internal static string HomeProductHotelsUrl {
             get {
                 return ResourceManager.GetString("HomeProductHotelsUrl", resourceCulture);
             }
@@ -1180,7 +1180,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to Meu decolar.
         /// </summary>
-        public static string HomeProductSelfservice {
+        internal static string HomeProductSelfservice {
             get {
                 return ResourceManager.GetString("HomeProductSelfservice", resourceCulture);
             }
@@ -1189,7 +1189,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to Veja estado de sua reservação.
         /// </summary>
-        public static string HomeProductSelfserviceDescription {
+        internal static string HomeProductSelfserviceDescription {
             get {
                 return ResourceManager.GetString("HomeProductSelfserviceDescription", resourceCulture);
             }
@@ -1198,7 +1198,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to meudecolar/.
         /// </summary>
-        public static string HomeProductSelfserviceUrl {
+        internal static string HomeProductSelfserviceUrl {
             get {
                 return ResourceManager.GetString("HomeProductSelfserviceUrl", resourceCulture);
             }
@@ -1207,7 +1207,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to O cartão vai ser usado só como garantia de reservação..
         /// </summary>
-        public static string HotelCheckout_CardWillBeUsedAsWarranty {
+        internal static string HotelCheckout_CardWillBeUsedAsWarranty {
             get {
                 return ResourceManager.GetString("HotelCheckout_CardWillBeUsedAsWarranty", resourceCulture);
             }
@@ -1216,7 +1216,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to Pagamento no destino.
         /// </summary>
-        public static string HotelCheckout_PayAtDestination {
+        internal static string HotelCheckout_PayAtDestination {
             get {
                 return ResourceManager.GetString("HotelCheckout_PayAtDestination", resourceCulture);
             }
@@ -1225,7 +1225,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to 1 pagamento com.
         /// </summary>
-        public static string HotelCheckout_PayInOnePayment {
+        internal static string HotelCheckout_PayInOnePayment {
             get {
                 return ResourceManager.GetString("HotelCheckout_PayInOnePayment", resourceCulture);
             }
@@ -1234,7 +1234,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to pagamento de.
         /// </summary>
-        public static string HotelCheckout_PaymentOf {
+        internal static string HotelCheckout_PaymentOf {
             get {
                 return ResourceManager.GetString("HotelCheckout_PaymentOf", resourceCulture);
             }
@@ -1243,7 +1243,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to pagamentos de.
         /// </summary>
-        public static string HotelCheckout_PaymentsOf {
+        internal static string HotelCheckout_PaymentsOf {
             get {
                 return ResourceManager.GetString("HotelCheckout_PaymentsOf", resourceCulture);
             }
@@ -1252,7 +1252,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to pagamentos com.
         /// </summary>
-        public static string HotelCheckout_PayWithInterest {
+        internal static string HotelCheckout_PayWithInterest {
             get {
                 return ResourceManager.GetString("HotelCheckout_PayWithInterest", resourceCulture);
             }
@@ -1261,7 +1261,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to pagamentos sem juros com.
         /// </summary>
-        public static string HotelCheckout_PayWithoutInterest {
+        internal static string HotelCheckout_PayWithoutInterest {
             get {
                 return ResourceManager.GetString("HotelCheckout_PayWithoutInterest", resourceCulture);
             }
@@ -1270,7 +1270,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to Quarto por noite.
         /// </summary>
-        public static string HotelCheckout_PerNightRoom {
+        internal static string HotelCheckout_PerNightRoom {
             get {
                 return ResourceManager.GetString("HotelCheckout_PerNightRoom", resourceCulture);
             }
@@ -1279,7 +1279,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to Opções adicionais.
         /// </summary>
-        public static string HotelCheckoutAditionalsTitle {
+        internal static string HotelCheckoutAditionalsTitle {
             get {
                 return ResourceManager.GetString("HotelCheckoutAditionalsTitle", resourceCulture);
             }
@@ -1288,7 +1288,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to Comprar Hotel.
         /// </summary>
-        public static string HotelCheckoutBuyHotel {
+        internal static string HotelCheckoutBuyHotel {
             get {
                 return ResourceManager.GetString("HotelCheckoutBuyHotel", resourceCulture);
             }
@@ -1297,7 +1297,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to dados do cartão de crédito.
         /// </summary>
-        public static string HotelCheckoutCardDataTitle {
+        internal static string HotelCheckoutCardDataTitle {
             get {
                 return ResourceManager.GetString("HotelCheckoutCardDataTitle", resourceCulture);
             }
@@ -1306,7 +1306,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to forma de pagamento.
         /// </summary>
-        public static string HotelCheckoutCardTitle {
+        internal static string HotelCheckoutCardTitle {
             get {
                 return ResourceManager.GetString("HotelCheckoutCardTitle", resourceCulture);
             }
@@ -1315,7 +1315,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to dados do contato.
         /// </summary>
-        public static string HotelCheckoutContactTitle {
+        internal static string HotelCheckoutContactTitle {
             get {
                 return ResourceManager.GetString("HotelCheckoutContactTitle", resourceCulture);
             }
@@ -1324,7 +1324,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to Res. 3550 AFIP.
         /// </summary>
-        public static string HotelCheckoutDetailsAFIPRes {
+        internal static string HotelCheckoutDetailsAFIPRes {
             get {
                 return ResourceManager.GetString("HotelCheckoutDetailsAFIPRes", resourceCulture);
             }
@@ -1333,7 +1333,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to Impostos e taxas.
         /// </summary>
-        public static string HotelCheckoutDetailsTaxes {
+        internal static string HotelCheckoutDetailsTaxes {
             get {
                 return ResourceManager.GetString("HotelCheckoutDetailsTaxes", resourceCulture);
             }
@@ -1342,7 +1342,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to finalizar compra.
         /// </summary>
-        public static string HotelCheckoutDetailsTitle {
+        internal static string HotelCheckoutDetailsTitle {
             get {
                 return ResourceManager.GetString("HotelCheckoutDetailsTitle", resourceCulture);
             }
@@ -1351,7 +1351,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to Passageiros.
         /// </summary>
-        public static string HotelCheckoutPassengersTitle {
+        internal static string HotelCheckoutPassengersTitle {
             get {
                 return ResourceManager.GetString("HotelCheckoutPassengersTitle", resourceCulture);
             }
@@ -1360,7 +1360,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to forma de pagamento.
         /// </summary>
-        public static string HotelCheckoutPaymentTitle {
+        internal static string HotelCheckoutPaymentTitle {
             get {
                 return ResourceManager.GetString("HotelCheckoutPaymentTitle", resourceCulture);
             }
@@ -1369,7 +1369,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to Titular do quarto.
         /// </summary>
-        public static string HotelCheckoutRoomTitle {
+        internal static string HotelCheckoutRoomTitle {
             get {
                 return ResourceManager.GetString("HotelCheckoutRoomTitle", resourceCulture);
             }
@@ -1378,7 +1378,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to é.
         /// </summary>
-        public static string ResourceLanguage {
+        internal static string ResourceLanguage {
             get {
                 return ResourceManager.GetString("ResourceLanguage", resourceCulture);
             }
@@ -1387,7 +1387,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to Configuração.
         /// </summary>
-        public static string SettingsButtonConfiguration {
+        internal static string SettingsButtonConfiguration {
             get {
                 return ResourceManager.GetString("SettingsButtonConfiguration", resourceCulture);
             }
@@ -1396,7 +1396,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to Localização.
         /// </summary>
-        public static string SettingsPage_LocationLabel {
+        internal static string SettingsPage_LocationLabel {
             get {
                 return ResourceManager.GetString("SettingsPage_LocationLabel", resourceCulture);
             }
@@ -1407,7 +1407,7 @@ namespace Despegar.LegacyCore.Resource {
         ///Decolar.com usa seus dados de localizacao para ofrecer-le hoteis perto sua locacao.
         ///Decolar.com nao comparte seus dados de localizacao..
         /// </summary>
-        public static string SettingsPage_LocationText {
+        internal static string SettingsPage_LocationText {
             get {
                 return ResourceManager.GetString("SettingsPage_LocationText", resourceCulture);
             }
@@ -1416,7 +1416,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to Configuração.
         /// </summary>
-        public static string SettingsPage_SettingsLabel {
+        internal static string SettingsPage_SettingsLabel {
             get {
                 return ResourceManager.GetString("SettingsPage_SettingsLabel", resourceCulture);
             }
@@ -1425,7 +1425,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to Ir para home screen.
         /// </summary>
-        public static string ThanksLabel_GoToHomePage {
+        internal static string ThanksLabel_GoToHomePage {
             get {
                 return ResourceManager.GetString("ThanksLabel_GoToHomePage", resourceCulture);
             }
@@ -1434,7 +1434,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to Como continuar a compra.
         /// </summary>
-        public static string ThanksLabel_HowTheProcessContinues {
+        internal static string ThanksLabel_HowTheProcessContinues {
             get {
                 return ResourceManager.GetString("ThanksLabel_HowTheProcessContinues", resourceCulture);
             }
@@ -1443,7 +1443,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to Seu pagamento esta sendo processado. Quando o pagamento seja concretado vôce vai ser contatado pelo e-mail..
         /// </summary>
-        public static string ThanksLabel_ProcessDescription {
+        internal static string ThanksLabel_ProcessDescription {
             get {
                 return ResourceManager.GetString("ThanksLabel_ProcessDescription", resourceCulture);
             }
@@ -1452,7 +1452,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to Informação da reservação.
         /// </summary>
-        public static string ThanksLabel_ReservationDetail {
+        internal static string ThanksLabel_ReservationDetail {
             get {
                 return ResourceManager.GetString("ThanksLabel_ReservationDetail", resourceCulture);
             }
@@ -1461,7 +1461,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to Muito obrigado pela solicitação de compra!.
         /// </summary>
-        public static string ThanksLabel_ThanksForBuying {
+        internal static string ThanksLabel_ThanksForBuying {
             get {
                 return ResourceManager.GetString("ThanksLabel_ThanksForBuying", resourceCulture);
             }
@@ -1470,7 +1470,7 @@ namespace Despegar.LegacyCore.Resource {
         /// <summary>
         ///   Looks up a localized string similar to Seu número de solicitação de compra é.
         /// </summary>
-        public static string ThanksLabel_YourCroIdNumber {
+        internal static string ThanksLabel_YourCroIdNumber {
             get {
                 return ResourceManager.GetString("ThanksLabel_YourCroIdNumber", resourceCulture);
             }
