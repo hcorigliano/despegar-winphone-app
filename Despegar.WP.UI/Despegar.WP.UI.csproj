@@ -115,6 +115,9 @@
     <Compile Include="Loading.xaml.cs">
       <DependentUpon>Loading.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Product\Flights\borrar.xaml.cs">
+      <DependentUpon>borrar.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Product\Flights\FlightResults.xaml.cs">
       <DependentUpon>FlightResults.xaml</DependentUpon>
     </Compile>
@@ -139,6 +142,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\ApplicationIcon.png" />
+    <Content Include="Assets\Icon\add.png" />
     <Content Include="Assets\Logo.scale-240.png" />
     <Content Include="Assets\SmallLogo.scale-240.png" />
     <Content Include="Assets\SplashScreen.scale-100.png" />
@@ -162,6 +166,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Loading.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Product\Flights\borrar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -10,7 +10,7 @@ namespace Despegar.WP.UI.Classes
 {
     static public class PagesManager
     {
-        static public void GoTo(Type page, ItemClickEventArgs e)
+        static public void GoTo(Type page, object e)
         {
             Frame rootFrame = Window.Current.Content as Frame;
 

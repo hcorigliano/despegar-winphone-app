@@ -16,5 +16,11 @@ namespace Despegar.Core.Business.Flight.CitiesAutocomplete
         public string country_code { get; set; }
         public bool has_airport { get; set; }
         public City city { get; set; }
+
+
+        public override string ToString()
+        {
+            return this.name;
+        }
     }
 }
