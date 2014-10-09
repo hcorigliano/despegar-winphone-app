@@ -56,8 +56,8 @@
 
 		<StackPanel Grid.Row="0" Margin="19,0,0,0">
 			<TextBlock x:Uid="AppTitle" Style="{ThemeResource TitleTextBlockStyle}" Margin="0,12,0,0"/>
-			<TextBlock x:Uid="Page_FlightResults" Margin="0,-6.5,0,26.5" Style="{ThemeResource HeaderTextBlockStyle}" CharacterSpacing="{ThemeResource PivotHeaderItemCharacterSpacing}"/>
-
+            <TextBlock x:Uid="Page_FlightResults" Margin="0,-6.5,0,26.5" Style="{ThemeResource HeaderTextBlockStyle}" CharacterSpacing="{ThemeResource PivotHeaderItemCharacterSpacing}"/>
+            
             <UI:SearchMiniBoxControl Height="Auto"/>    
         </StackPanel>
 
@@ -70,5 +70,6 @@
             </ListBox>
 
 		</Grid>
+        <Button Grid.Row="2" Click="Button_Click">Detalles</Button>
 	</Grid>
 </Page>
