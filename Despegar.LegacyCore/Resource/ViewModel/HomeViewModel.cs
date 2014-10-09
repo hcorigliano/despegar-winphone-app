@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 using Despegar.LegacyCore.Util;
 using Despegar.LegacyCore.Model;
-using Despegar.LegacyCore.Resource;
 using System.Resources;
 using System.ComponentModel;
 using Despegar.LegacyCore.Connector.Domain.API;

@@ -177,7 +177,7 @@
   <data name="HomeProductSelfserviceUrl" xml:space="preserve">
     <value>midespegar/</value>
   </data>
-  <data name="ConnectionErrorMessage" xml:space="preserve">
+  <data name="ConnectionErrorMessage.Text" xml:space="preserve">
     <value>Error de conexión.</value>
   </data>
   <data name="HotelCheckoutBuyHotel" xml:space="preserve">
@@ -186,22 +186,22 @@
   <data name="SettingsButtonConfiguration" xml:space="preserve">
     <value>configuración</value>
   </data>
-  <data name="HotelCheckoutRoomTitle" xml:space="preserve">
+  <data name="HotelCheckoutRoomTitle.Text" xml:space="preserve">
     <value>Titular de la habitación</value>
   </data>
   <data name="HotelCheckoutCardTitle" xml:space="preserve">
     <value>forma de pago</value>
   </data>
-  <data name="HotelCheckoutContactTitle" xml:space="preserve">
+  <data name="HotelCheckoutContactTitle.Header" xml:space="preserve">
     <value>datos de contacto</value>
   </data>
-  <data name="HotelCheckoutPassengersTitle" xml:space="preserve">
+  <data name="HotelCheckoutPassengersTitle.Header" xml:space="preserve">
     <value>huéspedes</value>
   </data>
-  <data name="HotelCheckoutPaymentTitle" xml:space="preserve">
+  <data name="HotelCheckoutPaymentTitle.Header" xml:space="preserve">
     <value>forma de pago</value>
   </data>
-  <data name="HotelCheckoutDetailsTitle" xml:space="preserve">
+  <data name="HotelCheckoutDetailsTitle.Header" xml:space="preserve">
     <value>finalizar compra</value>
   </data>
   <data name="CheckoutLabel_Error_areaCode_INVALID_LENGTH" xml:space="preserve">
@@ -222,7 +222,7 @@
   <data name="CheckoutLabel_Error_phoneNumber_INVALID_LENGTH" xml:space="preserve">
     <value>Por favor, verifique su número de teléfono.</value>
   </data>
-  <data name="CheckoutLabel_Error_NotEqualEmails" xml:space="preserve">
+  <data name="CheckoutLabel_Error_NotEqualEmails.Text" xml:space="preserve">
     <value>Las direcciones de e-mail ingresadas en ambos campos deben ser iguales.</value>
   </data>
   <data name="CheckoutLabel_Placeholder_AsIsInDocument" xml:space="preserve">
@@ -234,28 +234,28 @@
   <data name="CheckoutLabel_Placeholder_PhoneNumber" xml:space="preserve">
     <value>Ej: 54156423</value>
   </data>
-  <data name="CheckoutLabel_Title_AreaCode" xml:space="preserve">
+  <data name="CheckoutLabel_Title_AreaCode.Text" xml:space="preserve">
     <value>Area</value>
   </data>
-  <data name="CheckoutLabel_Title_CountryCode" xml:space="preserve">
+  <data name="CheckoutLabel_Title_CountryCode.Text" xml:space="preserve">
     <value>País</value>
   </data>
-  <data name="CheckoutLabel_Title_Email" xml:space="preserve">
+  <data name="CheckoutLabel_Title_Email.Text" xml:space="preserve">
     <value>E-mail (donde recibirá su voucher)</value>
   </data>
-  <data name="CheckoutLabel_Title_Last" xml:space="preserve">
+  <data name="CheckoutLabel_Title_Last.Text" xml:space="preserve">
     <value>Apellido</value>
   </data>
-  <data name="CheckoutLabel_Title_Name" xml:space="preserve">
+  <data name="CheckoutLabel_Title_Name.Text" xml:space="preserve">
     <value>Nombre</value>
   </data>
-  <data name="CheckoutLabel_Title_Number" xml:space="preserve">
+  <data name="CheckoutLabel_Title_Number.Text" xml:space="preserve">
     <value>Número</value>
   </data>
-  <data name="CheckoutLabel_Title_Phone" xml:space="preserve">
+  <data name="CheckoutLabel_Title_Phone.Text" xml:space="preserve">
     <value>Teléfono</value>
   </data>
-  <data name="CheckoutLabel_Title_RepeatEmail" xml:space="preserve">
+  <data name="CheckoutLabel_Title_RepeatEmail.Text" xml:space="preserve">
     <value>Confirme su e-mail</value>
   </data>
   <data name="AppBarNextField" xml:space="preserve">
@@ -264,37 +264,37 @@
   <data name="AppBarPreviousField" xml:space="preserve">
     <value>Anterior</value>
   </data>
-  <data name="CheckoutLabel_Title_CardNumber" xml:space="preserve">
+  <data name="CheckoutLabel_Title_CardNumber.Text" xml:space="preserve">
     <value>Número de la tarjeta</value>
   </data>
-  <data name="CheckoutLabel_Title_CardType" xml:space="preserve">
+  <data name="CheckoutLabel_Title_CardType.Text" xml:space="preserve">
     <value>Tarjeta</value>
   </data>
-  <data name="CheckoutLabel_Title_DocumentNumber" xml:space="preserve">
+  <data name="CheckoutLabel_Title_DocumentNumber.Text" xml:space="preserve">
     <value>D.N.I del titular de la tarjeta</value>
   </data>
-  <data name="CheckoutLabel_Title_ExpirationDate" xml:space="preserve">
+  <data name="CheckoutLabel_Title_ExpirationDate.Text" xml:space="preserve">
     <value>Vencimiento</value>
   </data>
-  <data name="CheckoutLabel_Title_OwnerGender" xml:space="preserve">
+  <data name="CheckoutLabel_Title_OwnerGender.Text" xml:space="preserve">
     <value>Sexo del titular de la tarjeta</value>
   </data>
-  <data name="CheckoutLabel_Title_OwnerName" xml:space="preserve">
+  <data name="CheckoutLabel_Title_OwnerName.Text" xml:space="preserve">
     <value>Nombre y apellido del titular de la tarjeta</value>
   </data>
-  <data name="CheckoutLabel_Title_ReferenceCode" xml:space="preserve">
+  <data name="CheckoutLabel_Title_ReferenceCode.Text" xml:space="preserve">
     <value>Código de referencia</value>
   </data>
-  <data name="CheckoutLabel_Title_SecurityCode" xml:space="preserve">
+  <data name="CheckoutLabel_Title_SecurityCode.Text" xml:space="preserve">
     <value>Código de seguridad</value>
   </data>
-  <data name="HotelCheckoutAditionalsTitle" xml:space="preserve">
+  <data name="HotelCheckoutAditionalsTitle.Text" xml:space="preserve">
     <value>Opciones adicionales</value>
   </data>
-  <data name="HotelCheckoutCardDataTitle" xml:space="preserve">
+  <data name="HotelCheckoutCardDataTitle.Header" xml:space="preserve">
     <value>datos de tarjeta</value>
   </data>
-  <data name="CheckoutLabel_Error_YearMonthInvalid" xml:space="preserve">
+  <data name="CheckoutLabel_Error_YearMonthInvalid.Text" xml:space="preserve">
     <value>Por favor, verifique el mes y año de vencimiento de la tarjeta.</value>
   </data>
   <data name="CheckoutLabel_Error_cardNumber_INVALID_LENGTH" xml:space="preserve">
@@ -375,31 +375,31 @@
   <data name="CheckoutLabel_Error_voucher_INVALID_LENGTH" xml:space="preserve">
     <value>Por favor, verifique el número del código de referencia.</value>
   </data>
-  <data name="CheckoutLabel_Error_YouHaveToReadAndAcceptTermsAndConditions" xml:space="preserve">
+  <data name="CheckoutLabel_Error_YouHaveToReadAndAcceptTermsAndConditions.Text" xml:space="preserve">
     <value>Para comprar debe Leer y aceptar las condiciones de compra.</value>
   </data>
-  <data name="CheckoutLabel_Title_AcceptConditions" xml:space="preserve">
+  <data name="CheckoutLabel_Title_AcceptConditions.Text" xml:space="preserve">
     <value>Leí y acepto las</value>
   </data>
-  <data name="CheckoutLabel_Title_AcceptConditionsLink" xml:space="preserve">
+  <data name="CheckoutLabel_Title_AcceptConditionsLink.Text" xml:space="preserve">
     <value>condiciones de compra.</value>
   </data>
-  <data name="HotelCheckout_CardWillBeUsedAsWarranty" xml:space="preserve">
+  <data name="HotelCheckout_CardWillBeUsedAsWarranty.Text" xml:space="preserve">
     <value>La tarjeta será utilizada como garantía de reserva.</value>
   </data>
-  <data name="HotelCheckout_PayAtDestination" xml:space="preserve">
+  <data name="HotelCheckout_PayAtDestination.Text" xml:space="preserve">
     <value>Pago en destino</value>
   </data>
-  <data name="HotelCheckout_PayInOnePayment" xml:space="preserve">
+  <data name="HotelCheckout_PayInOnePayment.Text" xml:space="preserve">
     <value>1 pago con</value>
   </data>
-  <data name="HotelCheckout_PaymentsOf" xml:space="preserve">
+  <data name="HotelCheckout_PaymentsOf.Text" xml:space="preserve">
     <value>pagos de</value>
   </data>
-  <data name="HotelCheckout_PayWithInterest" xml:space="preserve">
+  <data name="HotelCheckout_PayWithInterest.Text" xml:space="preserve">
     <value>pagos con</value>
   </data>
-  <data name="HotelCheckout_PayWithoutInterest" xml:space="preserve">
+  <data name="HotelCheckout_PayWithoutInterest.Text" xml:space="preserve">
     <value>pagos sin interés con</value>
   </data>
   <data name="CheckoutLabel_Message_BeCorrect" xml:space="preserve">
@@ -527,22 +527,22 @@ Despegar.com no comparte sus datos de localización.</value>
   <data name="FlightCheckoutDetailsPricePerInfant" xml:space="preserve">
     <value>Tarifa por bebe</value>
   </data>
-  <data name="HotelCheckout_PaymentOf" xml:space="preserve">
+  <data name="HotelCheckout_PaymentOf.Text" xml:space="preserve">
     <value>pago de</value>
   </data>
-  <data name="CheckoutLabel_Details_Nights" xml:space="preserve">
+  <data name="CheckoutLabel_Details_Nights.Text" xml:space="preserve">
     <value>noche(s)</value>
   </data>
-  <data name="CheckoutLabel_Details_Rooms" xml:space="preserve">
+  <data name="CheckoutLabel_Details_Rooms.Text" xml:space="preserve">
     <value>habitación(es)</value>
   </data>
-  <data name="HotelCheckoutDetailsAFIPRes" xml:space="preserve">
+  <data name="HotelCheckoutDetailsAFIPRes.Text" xml:space="preserve">
     <value>Res. 3550 AFIP</value>
   </data>
   <data name="HotelCheckoutDetailsTaxes" xml:space="preserve">
     <value>Impuestos y tasas</value>
   </data>
-  <data name="HotelCheckout_PerNightRoom" xml:space="preserve">
+  <data name="HotelCheckout_PerNightRoom.Text" xml:space="preserve">
     <value>Habitación por noche</value>
   </data>
   <data name="CheckoutLabel_Title_Billing" xml:space="preserve">
@@ -554,7 +554,7 @@ Despegar.com no comparte sus datos de localización.</value>
   <data name="CheckoutLabel_Title_Department" xml:space="preserve">
     <value>Departamento</value>
   </data>
-  <data name="CheckoutLabel_Title_Intern" xml:space="preserve">
+  <data name="CheckoutLabel_Title_Intern.Text" xml:space="preserve">
     <value>Interior</value>
   </data>
   <data name="CheckoutLabel_Title_Outer" xml:space="preserve">
@@ -589,5 +589,8 @@ Despegar.com no comparte sus datos de localización.</value>
   </data>
   <data name="CheckoutLabel_Message_NoRecoverableError" xml:space="preserve">
     <value>Ha ocurrido un error al procesar su solicitud, por favor vuelva al listado e intentelo nuevamente.</value>
+  </data>
+  <data name="HotelCheckout_PerNightRoomCo.Text" xml:space="preserve">
+    <value>Habitacion por noche</value>
   </data>
 </root>

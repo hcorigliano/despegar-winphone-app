@@ -29,8 +29,6 @@
 				<Setter Property="FontSize" Value="18.667"/>
 				<Setter Property="Margin" Value="5"/>
 			</Style>
-            <!-- LEGACY CODE to REMOVE -->
-            <prop:LocalizedProperties x:Key="LocalizedProperties"  />
     	</ResourceDictionary>
     </Application.Resources>
     

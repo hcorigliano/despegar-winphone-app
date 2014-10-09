@@ -10,8 +10,8 @@ using Despegar.LegacyCore.Connector.Domain.API;
 using Despegar.LegacyCore.Util;
 using Despegar.LegacyCore.Model;
 using Despegar.LegacyCore;
-using Despegar.LegacyCore.Resource;
 using System.Text.RegularExpressions;
+using Windows.ApplicationModel.Resources;
 
 
 namespace Despegar.LegacyCore.ViewModel
@@ -38,6 +38,9 @@ namespace Despegar.LegacyCore.ViewModel
         public void NotifyPropertyChanged(string propertyName) { PropertyChanged(this, new PropertyChangedEventArgs(propertyName)); }
         public event PropertyChangedEventHandler PropertyChanged;
         public event EventHandler FieldsLoaded;
+
+        private static ResourceLoader legacyManager = new ResourceLoader("LegacyStrings");
+
 
         public HotelsCheckoutViewModel()
         {
@@ -180,11 +183,11 @@ namespace Despegar.LegacyCore.ViewModel
 
             // other errors
             bool err = passErr || contErr || cardErr || fiscalDataErr;
-            errMsg += Properties.CheckoutLabel_Message_CheckItPlease;
-            errMsg += passErr ? Properties.CheckoutLabel_Message_CheckGuests : "";
-            errMsg += contErr ? Properties.CheckoutLabel_Message_CheckContact : "";
-            errMsg += cardErr ? Properties.CheckoutLabel_Message_CheckCardData : "";
-            errMsg += Properties.CheckoutLabel_Message_BeCorrect;
+            errMsg += legacyManager.GetString("CheckoutLabel_Message_CheckItPlease");
+            errMsg += passErr ? legacyManager.GetString("CheckoutLabel_Message_CheckGuests") : "";
+            errMsg += contErr ? legacyManager.GetString("CheckoutLabel_Message_CheckContact") : "";
+            errMsg += cardErr ? legacyManager.GetString("CheckoutLabel_Message_CheckCardData") : "";
+            errMsg += legacyManager.GetString("CheckoutLabel_Message_BeCorrect");
             
             if (!err)
             {
@@ -200,11 +203,11 @@ namespace Despegar.LegacyCore.ViewModel
                         case BookingResponse.SUCCESS : errMsg = null; break;
 
                         case BookingResponse.RECOVERABLE_FIX_CREDIT_CARD : 
-                            errMsg = Properties.CheckoutLabel_Message_CheckCreditCardData; break;
+                            errMsg = legacyManager.GetString("CheckoutLabel_Message_CheckCreditCardData"); break;
 
                         case BookingResponse.RECOVERABLE_NEW_CREDIT_CARD :
                         case BookingResponse.RECOVERABLE_NEW_CREDIT_CARD_LOW_FOUNDS :
-                            errMsg = Properties.CheckoutLabel_Message_ChangeCreditCard; break;
+                            errMsg = legacyManager.GetString("CheckoutLabel_Message_ChangeCreditCard"); break;
 
                         case BookingResponse.NO_RECOVERABLE_NEW_BOOKING :
                         case BookingResponse.NO_RECOVERABLE_NEW_BOOKING_EXPIRED :
@@ -213,13 +216,13 @@ namespace Despegar.LegacyCore.ViewModel
                         case BookingResponse.NO_RECOVERABLE_CREDIT_CARD_CANCEL_ERROR :
                         case BookingResponse.NO_RECOVERABLE_RISK_REJECTED :
                         case BookingResponse.NO_RECOVERABLE_BANK_SLIP_ERROR :
-                            errMsg = Properties.CheckoutLabel_Message_NoRecoverableError; break;
+                            errMsg = legacyManager.GetString("CheckoutLabel_Message_NoRecoverableError"); break;
                     
                         case BookingResponse.C_NO_RECOVERABLE_CONSUME_COUPON_ERROR :
-                            errMsg = Properties.CheckoutLabel_Message_CouponNoRecoverable; break;
+                            errMsg = legacyManager.GetString("CheckoutLabel_Message_CouponNoRecoverable"); break;
 
                         case BookingResponse.RISK_QUESTIONS :
-                            errMsg = Properties.CheckoutLabel_Message_AdditionalDataNeeded; break;
+                            errMsg = legacyManager.GetString("CheckoutLabel_Message_AdditionalDataNeeded"); break;
 
                         default: errMsg = "Unknown error"; break;
                     }

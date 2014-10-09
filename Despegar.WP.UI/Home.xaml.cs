@@ -1,10 +1,9 @@
 ﻿using Despegar.LegacyCore;
-using Despegar.LegacyCore.Resource;
 using Despegar.LegacyCore.ViewModel;
 using Despegar.WP.UI.Classes;
 using Despegar.WP.UI.Common;
 using Despegar.WP.UI.Product.Legacy;
-using Despegar.WP.UI.Resource;
+using Despegar.WP.UI.Strings;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -143,7 +142,8 @@ namespace Despegar.WP.UI
 
         private void LoadBrowser(string relativePath, ItemClickEventArgs e)
         {
-            ApplicationConfig.Instance.ResetBrowsingPages(new Uri(this.legacyHomeViewModel.Domain + relativePath));
+            //ApplicationConfig.Instance.ResetBrowsingPages(new Uri(this.legacyHomeViewModel.Domain + relativePath));
+            ApplicationConfig.Instance.ResetBrowsingPages(new Uri("http://m.despegar.com.ar/hoteles/detail/297146/2014-10-31/2014-11-01/2/ARS"));
             PagesManager.GoTo(typeof(Browser), e);
         }
     }

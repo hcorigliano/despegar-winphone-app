@@ -1,4 +1,5 @@
 ﻿using Despegar.LegacyCore;
+using Despegar.View;
 using Despegar.WP.UI.Classes;
 using System;
 using System.Net.NetworkInformation;
@@ -70,9 +71,12 @@ namespace Despegar.WP.UI.Product.Legacy
                 if (e.Uri.ToString().Contains("book/hotels") && !e.Uri.ToString().Contains("conditions"))
                 {          
                     ApplicationConfig.Instance.BrowsingPages.Push(e.Uri);
-                    //PagesManager.GoTo(typeof(HotelsCheckout));  // TODO: uncomment
-                    //return;// TODO: uncomment
-                }                
+                    PagesManager.GoTo(typeof(HotelsCheckout), null);
+
+                    // remove checkout entry
+                    ApplicationConfig.Instance.BrowsingPages.Pop();
+                    return;
+                }
 
                 ApplicationConfig.Instance.BrowsingPages.Push(e.Uri);
                 _currentPage = ApplicationConfig.Instance.BrowsingPages.Peek();

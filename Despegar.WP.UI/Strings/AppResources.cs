@@ -1,6 +1,6 @@
 ﻿using Windows.ApplicationModel.Resources;
 
-namespace Despegar.WP.UI.Resource
+namespace Despegar.WP.UI.Strings
 {
     public static class AppResources
     {
