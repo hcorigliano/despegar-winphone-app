@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Despegar.Core.Business.Culture;
 using Despegar.Core.Business;
+using Despegar.Core.Log;
 
 namespace Despegar.WP.UI.Model
 {
@@ -30,6 +31,12 @@ namespace Despegar.WP.UI.Model
             CoreContext.Configure("WindowsPhone8App", "wp8-uow");
 
             CoreContext.SetSite(SiteCode.Argentina);
+
+
+            // Enable Verbose logging
+            #if DEBUG
+             Logger.Configure(true, true);
+            #endif
 
             // Add Service Mocks
            // CoreContext.AddMock(ServiceKey.FlightsAirlines, MockKey.AirlineTest);

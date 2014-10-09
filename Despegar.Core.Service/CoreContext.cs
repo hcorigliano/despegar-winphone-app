@@ -2,6 +2,8 @@
 using Despegar.Core.Business.Culture;
 using Despegar.Core.Connector;
 using Despegar.Core.IService;
+using Despegar.Core.Log;
+using System;
 using System.Collections.Generic;
 
 namespace Despegar.Core.Service
@@ -57,6 +59,8 @@ namespace Despegar.Core.Service
             {
                 appliedMocks[serviceKey] = mockKey;
             }
+
+            Logger.LogCore(String.Format("Enabled mock '{0}' for service '{1}'", mockKey.ToString(), serviceKey.ToString()));
         }
 
         /// <summary>
@@ -69,6 +73,7 @@ namespace Despegar.Core.Service
                 return;
 
             appliedMocks.Remove(serviceKey);
+            Logger.LogCore(String.Format("Disabled mock for '{0}' service ", serviceKey.ToString()));
         }
 
         /// <summary>
@@ -78,12 +83,16 @@ namespace Despegar.Core.Service
         /// <param name="uow"></param>
         public void Configure(string x_client, string uow) 
         {
+            Logger.LogCore("Initializing Core...");
+
             this.x_client = x_client;
             this.uow = uow;
 
             // Init Connectors
             if (mapiConnector == null)
                 mapiConnector = new MapiConnector();
+
+            Logger.LogCore("Core Initialized.");
         }
 
         /// <summary>
@@ -92,8 +101,12 @@ namespace Despegar.Core.Service
         /// <param name="site">Example: AR,CO,MX etc.</param>
         public void SetSite(string siteCode)
         {
+            Logger.LogCore("Changing Site...");
+
             this.site = siteCode;         
             mapiConnector.Configure(x_client, uow, site, GetLanguage());
+
+            Logger.LogCore("Site Changed.");
         }
 
         public IFlightService GetFlightService() 
@@ -109,6 +122,8 @@ namespace Despegar.Core.Service
         {
             if (appliedMocks.ContainsKey(key))
             {
+                Logger.LogCore(String.Format("Returning Mock Connector for service '{0}'", key.ToString()));
+
                 string mockedReponse =  Mocks.GetMock(this.appliedMocks[key]);
                 return new MockConnector(mockedReponse);
             }

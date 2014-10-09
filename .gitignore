@@ -16,8 +16,10 @@
 /Despegar.Core.Exceptions/obj/**
 /Despegar.Core.IService/obj/**
 /Despegar.Core.Service/obj/**
+/Despegar.Core.Log/obj/**
 /Despegar.WP.UI/obj/**
 /Despegar.WP.UI.Models/obj/**
+
 
 /Despegar.LegacyCore/bin/**
 /Despegar.Core.Business/bin/**
@@ -26,6 +28,7 @@
 /Despegar.Core.Exceptions/bin/**
 /Despegar.Core.IService/bin/**
 /Despegar.Core.Service/bin/**
+/Despegar.Core.Log/bin/**
 /Despegar.WP.UI/bin/**
 /Despegar.WP.UI.Models/bin/**
 *.USER

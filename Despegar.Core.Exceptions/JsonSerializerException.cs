@@ -5,18 +5,18 @@ namespace Despegar.Core.Exceptions
     /// <summary>
     /// Represents an error when a JSON string could not be deserialized to a specific Type
     /// </summary>
-    public class JsonDeserializationException : Exception
+    public class JsonSerializerException : Exception
     {
-        public JsonDeserializationException()
+        public JsonSerializerException()
         {
         }
 
-        public JsonDeserializationException(string message)
+        public JsonSerializerException(string message)
             : base(message)
         {
         }
 
-        public JsonDeserializationException(string message, Exception inner)
+        public JsonSerializerException(string message, Exception inner)
             : base(message, inner)
         {
         }

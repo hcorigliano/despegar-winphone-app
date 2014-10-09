@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Despegar.Core.Log;
+using System;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,7 +15,9 @@ namespace Despegar.Core.Connector
         private string site;
         private string language;
 
-        public MapiConnector() : base() { }
+        public MapiConnector() : base() {
+            Logger.LogCore("MAPI Connector created.");
+        }
 
         public void Configure(string x_client, string uow, string site, string language)
         {

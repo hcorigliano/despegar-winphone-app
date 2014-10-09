@@ -5,11 +5,11 @@
     <MinimumVisualStudioVersion>12.0</MinimumVisualStudioVersion>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{54C368E1-6A4B-46BD-BA1F-F04B97C45E83}</ProjectGuid>
+    <ProjectGuid>{0C50151E-91DE-45C5-BB01-B03EC44D7735}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Despegar.Core.Connector</RootNamespace>
-    <AssemblyName>Despegar.Core.Connector</AssemblyName>
+    <RootNamespace>Despegar.Core.Log</RootNamespace>
+    <AssemblyName>Despegar.Core.Log</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -34,33 +34,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <!-- A reference to the entire .NET Framework is automatically included -->
+  </ItemGroup>
+  <ItemGroup>
     <TargetPlatform Include="WindowsPhoneApp, Version=8.1" />
     <TargetPlatform Include="Windows, Version=8.1" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ConnectorBase.cs" />
-    <Compile Include="IConnector.cs" />
-    <Compile Include="MapiConnector.cs" />
-    <Compile Include="MockConnector.cs" />
+    <Compile Include="Logger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.6.0.5\lib\portable-net45+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Despegar.Core.Exceptions\Despegar.Core.Exceptions.csproj">
-      <Project>{9359897f-8df6-4787-80db-b68ed851088e}</Project>
-      <Name>Despegar.Core.Exceptions</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Despegar.Core.Log\Despegar.Core.Log.csproj">
-      <Project>{0c50151e-91de-45c5-bb01-b03ec44d7735}</Project>
-      <Name>Despegar.Core.Log</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
