@@ -30,7 +30,7 @@ namespace Despegar.WP.UI.Model
             CoreContext.Configure("WindowsPhone8App", "wp8-uow");
 
             //TODO : (1)
-            CoreContext.SetSite(SiteCode.Argentina);
+            //CoreContext.SetSite(SiteCode.Argentina);
 
             // Add Service Mocks
             GlobalConfiguration.CoreContext.AddMock(ServiceKey.Configurations, MockKey.ConfigurationsDefault); //keep on! No URL yet.
@@ -43,9 +43,9 @@ namespace Despegar.WP.UI.Model
         /// <summary>
         /// Changes the Site configuration for the Context
         /// </summary>
-        public static void ChangeSite(string site) 
+        public static void ChangeSite(string siteCode) 
         {
-            CoreContext.SetSite(site);
+            CoreContext.SetSite(siteCode);
         }
     }
 }

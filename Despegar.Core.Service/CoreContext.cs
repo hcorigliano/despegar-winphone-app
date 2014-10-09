@@ -3,6 +3,7 @@ using Despegar.Core.Business.Culture;
 using Despegar.Core.Connector;
 using Despegar.Core.IService;
 using System.Collections.Generic;
+using Windows.Storage;
 
 namespace Despegar.Core.Service
 {
@@ -33,7 +34,7 @@ namespace Despegar.Core.Service
         #region ** Public Interface **
 
         public string GetSite()
-        {
+        {                       
             return site;
         }
 
@@ -89,7 +90,9 @@ namespace Despegar.Core.Service
         /// <summary>
         /// Reconfigures the Core for the new Site
         /// </summary>
-        /// <param name="site">Example: AR,CO,MX etc.</param>
+        /// <param name="code">Example: AR,CO,MX etc.</param>
+        /// <param name="name">Name of country. Example: Argentina , Mexico , Colombia , etc.</param>
+        /// 
         public void SetSite(string siteCode)
         {
             this.site = siteCode;         

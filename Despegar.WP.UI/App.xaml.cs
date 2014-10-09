@@ -10,6 +10,7 @@ using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Storage;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -94,13 +95,26 @@ namespace Despegar.WP.UI
                 rootFrame.ContentTransitions = null;
                 rootFrame.Navigated += this.RootFrame_FirstNavigated;
 
-                // When the navigation stack isn't restored navigate to the first page,
-                // configuring the new page by passing required information as a navigation
-                // parameter
-                if (!rootFrame.Navigate(typeof(CountrySelection), e.Arguments))
-                {
-                    throw new Exception("Failed to create initial page");
-                }
+                // Check persist information
+                 var roamingSettings = ApplicationData.Current.RoamingSettings;
+                 if (roamingSettings.Values["countryCode"] == null)
+                 {
+                     // When the navigation stack isn't restored navigate to the first page,
+                     // configuring the new page by passing required information as a navigation
+                     // parameter
+                     if (!rootFrame.Navigate(typeof(CountrySelection), e.Arguments))
+                     {
+                         throw new Exception("Failed to create initial page");
+                     }
+                 }
+                 else
+                 {
+                     if (!rootFrame.Navigate(typeof(Home), e.Arguments))
+                     {
+                         throw new Exception("Failed to create Home page");
+                     }
+
+                 }
             }
 
             // Ensure the current window is active
