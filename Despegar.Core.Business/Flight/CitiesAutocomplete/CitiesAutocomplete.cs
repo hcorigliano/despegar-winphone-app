@@ -8,5 +8,6 @@ namespace Despegar.Core.Business.Flight.CitiesAutocomplete
 {
     public class CitiesAutocomplete : List<CityAutocomplete>
     {
+        
     }
 }

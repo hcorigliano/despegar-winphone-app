@@ -16,6 +16,8 @@ using Windows.ApplicationModel.Resources.Core;
 using System.Collections.ObjectModel;
 using Despegar.WP.UI.Model.Classes;
 using Despegar.WP.UI.Classes;
+using Windows.Storage;
+using Despegar.WP.UI.Model;
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
 
 namespace Despegar.WP.UI
@@ -36,8 +38,7 @@ namespace Despegar.WP.UI
         public CountrySelection()
         {
 
-            var resourceLoader = new Windows.ApplicationModel.Resources.ResourceLoader();
-            //var element = resourceLoader.GetString("Country_Code_Argentina");
+            var resourceLoader = new Windows.ApplicationModel.Resources.ResourceLoader();            
 
             this.Items = new ObservableCollection<CountryItem>
             {
@@ -46,7 +47,7 @@ namespace Despegar.WP.UI
                 new CountryItem{ Code= resourceLoader.GetString("Country_Code_Mexico"), CountryName = resourceLoader.GetString("Country_Name_Mexico") },
             };
 
-
+            
             this.DataContext = this;
             this.InitializeComponent();
         }
@@ -64,7 +65,16 @@ namespace Despegar.WP.UI
 
         private void ListView_ItemClick(object sender, ItemClickEventArgs e)
         {
-            CountryItem countrySelected = e.ClickedItem as CountryItem;
+            //persist data in phone
+            CountryItem ci = e.ClickedItem as CountryItem;
+            var roamingSettings = ApplicationData.Current.RoamingSettings;
+            roamingSettings.Values["countryCode"] = ci.Code;
+            roamingSettings.Values["countryName"] = ci.CountryName;
+
+
+            GlobalConfiguration.CoreContext.SetSite(ci.Code); 
+
+            CountryItem countrySelected = ci;
             PagesManager.GoTo(typeof(Home), e);
         }   
     }

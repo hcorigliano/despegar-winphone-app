@@ -1,21 +1,16 @@
-﻿using Despegar.WP.UI.Classes;
+﻿using Despegar.Core.Business.Flight.CitiesAutocomplete;
+using Despegar.Core.Business.Flight.Itineraries;
+using Despegar.WP.UI.Classes;
 using Despegar.WP.UI.Common;
+using Despegar.WP.UI.Model;
+using Despegar.WP.UI.Model.Classes.Flights;
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
-using Windows.Graphics.Display;
-using Windows.UI.ViewManagement;
+using System.Collections;
+using System.Threading.Tasks;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+
 
 // The Basic Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
 
@@ -28,6 +23,10 @@ namespace Despegar.WP.UI.Product.Flights
     {
         private NavigationHelper navigationHelper;
         private ObservableDictionary defaultViewModel = new ObservableDictionary();
+        private FlightsSearchBoxModel flightSearchBoxModel = new FlightsSearchBoxModel();
+
+        PassagersQuantity passagers = new PassagersQuantity();
+
        
 
         public FlightSearch()
@@ -37,6 +36,12 @@ namespace Despegar.WP.UI.Product.Flights
             this.navigationHelper = new NavigationHelper(this);
             this.navigationHelper.LoadState += this.NavigationHelper_LoadState;
             this.navigationHelper.SaveState += this.NavigationHelper_SaveState;
+
+            passagers.ChildPassagerQuantity = 0;
+            passagers.AdultPassagerQuantity = 1;
+            this.txbQuantityAdults.DataContext = passagers;
+            this.txbQuantityChild.DataContext = passagers;
+            
         }
 
         /// <summary>
@@ -110,9 +115,67 @@ namespace Despegar.WP.UI.Product.Flights
 
         #endregion
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private async void FlightsTextBlock_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
         {
-            PagesManager.GoTo(typeof(FlightResults),null);
+            if (sender.Text != "" && sender.Text.Length >= 3)
+            {
+
+                sender.ItemsSource = (IEnumerable)(await flightSearchBoxModel.GetCities(sender.Text));
+            }
         }
+
+        private void OriginFlightsTextBlock_SuggestionChosen(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
+        {
+            if (args.Reason == AutoSuggestionBoxTextChangeReason.UserInput)
+            {
+                // TODO: 
+                              
+            }
+        }        
+
+        private async void Button_Click(object sender, RoutedEventArgs e)
+        {
+            CityAutocomplete origin = originFlightsTextBlock.Items[0] as CityAutocomplete;
+            CityAutocomplete destiny = destinyFlightsTextBlock.Items[0] as CityAutocomplete;
+            //TODO: validate the origin and destiny for any problem.
+            //if(origin == null || destiny == null)
+            //{
+            //    // autocomplete not charge properly
+            //    throw new NotImplementedException();
+            //}
+            
+            
+            //FlightsItineraries intinerarie =   await flightSearchBoxModel.GetItineraries(origin.code, destiny.code, departureDate.Date.ToString("yyyy-MM-dd"), passagers.AdultPassagerQuantity, returnDate.Date.ToString("yyyy-MM-dd"), 0, 0, 0, 10, "", "", "", "");
+            FlightsItineraries intinerarie = await flightSearchBoxModel.GetItineraries("BUE", "LAX", "2014-11-11", 1, "2014-11-13", 0, 0, 0, 10, "", "", "", "");
+
+
+            PagesManager.GoTo(typeof(FlightResults), intinerarie);
+        }
+
+        //Bottons for passagers Quantity
+        #region
+        private void btnAdultAdd_Click(object sender, RoutedEventArgs e)
+        {
+            passagers.AddAdult();
+        }
+
+        private void btnChildAdd_Click(object sender, RoutedEventArgs e)
+        {
+            passagers.AddChild();
+        }
+
+        private void btnAdultSub_Click(object sender, RoutedEventArgs e)
+        {
+            passagers.SubAdult();
+        }
+
+        private void btnChildSub_Click(object sender, RoutedEventArgs e)
+        {
+            passagers.subChild();
+        }
+
+        #endregion
+
     }
 }
+                                    

@@ -29,18 +29,23 @@ namespace Despegar.WP.UI.Model
             CoreContext = new CoreContext();
             CoreContext.Configure("WindowsPhone8App", "wp8-uow");
 
-            CoreContext.SetSite(SiteCode.Argentina);
+            //TODO : (1)
+            //CoreContext.SetSite(SiteCode.Argentina);
 
             // Add Service Mocks
-           // CoreContext.AddMock(ServiceKey.FlightsAirlines, MockKey.AirlineTest);
+            GlobalConfiguration.CoreContext.AddMock(ServiceKey.Configurations, MockKey.ConfigurationsDefault); //keep on! No URL yet.
+            //CoreContext.AddMock(ServiceKey.FlightsAirlines, MockKey.AirlineTest);
+            //GlobalConfiguration.CoreContext.AddMock(ServiceKey.FlightCitiesAutocomplete, MockKey.FlightCitiesAutocompleteBue);
+            GlobalConfiguration.CoreContext.AddMock(ServiceKey.FlightItineraries, MockKey.ItinerarieBueToLax);
+            GlobalConfiguration.CoreContext.AddMock(ServiceKey.FlightsBookingFields, MockKey.BookingFieldBuetoMia);
         }
 
         /// <summary>
         /// Changes the Site configuration for the Context
         /// </summary>
-        public static void ChangeSite(string site) 
+        public static void ChangeSite(string siteCode) 
         {
-            CoreContext.SetSite(site);
+            CoreContext.SetSite(siteCode);
         }
     }
 }

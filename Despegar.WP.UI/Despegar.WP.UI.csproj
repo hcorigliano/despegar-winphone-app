@@ -220,6 +220,7 @@
   <ItemGroup>
     <Folder Include="Assets\en\" />
     <Folder Include="Assets\es\" />
+    <Folder Include="Assets\Icon\" />
     <Folder Include="Assets\pt\" />
     <Folder Include="Strings\en\" />
     <Folder Include="Strings\pt\" />

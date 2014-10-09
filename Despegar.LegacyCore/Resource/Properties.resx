@@ -1,0 +1,593 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="CommonBrandName" xml:space="preserve">
+    <value>Decolar.com</value>
+  </data>
+  <data name="HomeProductFlights" xml:space="preserve">
+    <value>Passagens</value>
+  </data>
+  <data name="HomeProductFlightsDescription" xml:space="preserve">
+    <value>Encontre o melhor vôo</value>
+  </data>
+  <data name="HomeProductFlightTracker" xml:space="preserve">
+    <value>Estado do vôo</value>
+  </data>
+  <data name="HomeProductFlightTrackerDescription" xml:space="preserve">
+    <value>Acompanhe o estado de seu vôo</value>
+  </data>
+  <data name="HomeProductHotelForToday" xml:space="preserve">
+    <value>Hotel para hoje</value>
+  </data>
+  <data name="HomeProductHotelForTodayDescription" xml:space="preserve">
+    <value>Hotel perto para esta noite</value>
+  </data>
+  <data name="HomeProductHotels" xml:space="preserve">
+    <value>Hoteis</value>
+  </data>
+  <data name="HomeProductHotelsDescription" xml:space="preserve">
+    <value>Reserve o quarto ideal</value>
+  </data>
+  <data name="HomeProductSelfservice" xml:space="preserve">
+    <value>Meu decolar</value>
+  </data>
+  <data name="HomeProductSelfserviceDescription" xml:space="preserve">
+    <value>Veja estado de sua reservação</value>
+  </data>
+  <data name="ResourceLanguage" xml:space="preserve">
+    <value>é</value>
+  </data>
+  <data name="HomeProductCars" xml:space="preserve">
+    <value>Carros</value>
+  </data>
+  <data name="HomeProductCarsDescription" xml:space="preserve">
+    <value>Escolha carro para sua viagem.</value>
+  </data>
+  <data name="HomeProductCarsUrl" xml:space="preserve">
+    <value>carros/</value>
+  </data>
+  <data name="HomeProductFlightsUrl" xml:space="preserve">
+    <value>passagens-aereas/</value>
+  </data>
+  <data name="HomeProductFlightTrackerUrl" xml:space="preserve">
+    <value>tools/flights/tracker/search/</value>
+  </data>
+  <data name="HomeProductHotelForTodayUrl" xml:space="preserve">
+    <value>hoteis/search/location/{0},{1}/{2}/{3}/2/i1</value>
+  </data>
+  <data name="HomeProductHotelsUrl" xml:space="preserve">
+    <value>hoteis/</value>
+  </data>
+  <data name="HomeProductSelfserviceUrl" xml:space="preserve">
+    <value>meudecolar/</value>
+  </data>
+  <data name="ConnectionErrorMessage" xml:space="preserve">
+    <value>Erro de conexão</value>
+  </data>
+  <data name="HotelCheckoutBuyHotel" xml:space="preserve">
+    <value>Comprar Hotel</value>
+  </data>
+  <data name="SettingsButtonConfiguration" xml:space="preserve">
+    <value>Configuração</value>
+  </data>
+  <data name="HotelCheckoutRoomTitle" xml:space="preserve">
+    <value>Titular do quarto</value>
+  </data>
+  <data name="HotelCheckoutCardTitle" xml:space="preserve">
+    <value>forma de pagamento</value>
+  </data>
+  <data name="HotelCheckoutContactTitle" xml:space="preserve">
+    <value>dados do contato</value>
+  </data>
+  <data name="HotelCheckoutPassengersTitle" xml:space="preserve">
+    <value>Passageiros</value>
+  </data>
+  <data name="HotelCheckoutPaymentTitle" xml:space="preserve">
+    <value>forma de pagamento</value>
+  </data>
+  <data name="HotelCheckoutDetailsTitle" xml:space="preserve">
+    <value>finalizar compra</value>
+  </data>
+  <data name="CheckoutLabel_Error_areaCode_INVALID_LENGTH" xml:space="preserve">
+    <value>Por favor, ingrese el código de área del teléfono.</value>
+  </data>
+  <data name="CheckoutLabel_Error_countryCode_INVALID_LENGTH" xml:space="preserve">
+    <value>Por favor, preencha o código do país do telefone.</value>
+  </data>
+  <data name="CheckoutLabel_Error_email_INVALID_LENGTH" xml:space="preserve">
+    <value>Por favor, verifique o e-mail onde vá recever o voucher.</value>
+  </data>
+  <data name="CheckoutLabel_Error_lastName_INVALID_NAME" xml:space="preserve">
+    <value>Por favor, preenche el sobrenome do cliente.</value>
+  </data>
+  <data name="CheckoutLabel_Error_firstName_INVALID_NAME" xml:space="preserve">
+    <value>Por favor, preenche o nome do cliente.</value>
+  </data>
+  <data name="CheckoutLabel_Error_phoneNumber_INVALID_LENGTH" xml:space="preserve">
+    <value>Por favor, verifique seu número de telefone.</value>
+  </data>
+  <data name="CheckoutLabel_Error_NotEqualEmails" xml:space="preserve">
+    <value>O endereços dos e-mails devem ser iguais.</value>
+  </data>
+  <data name="CheckoutLabel_Placeholder_AsIsInDocument" xml:space="preserve">
+    <value>Como indicado no documento</value>
+  </data>
+  <data name="CheckoutLabel_Placeholder_FillEmail" xml:space="preserve">
+    <value>Preenche e-mail do titular</value>
+  </data>
+  <data name="CheckoutLabel_Placeholder_PhoneNumber" xml:space="preserve">
+    <value>Ej: 54156423</value>
+  </data>
+  <data name="CheckoutLabel_Title_AreaCode" xml:space="preserve">
+    <value>Area</value>
+  </data>
+  <data name="CheckoutLabel_Title_CountryCode" xml:space="preserve">
+    <value>País</value>
+  </data>
+  <data name="CheckoutLabel_Title_Email" xml:space="preserve">
+    <value>E-mail (onde vai receber seu voucher)</value>
+  </data>
+  <data name="CheckoutLabel_Title_Last" xml:space="preserve">
+    <value>Sobrenome</value>
+  </data>
+  <data name="CheckoutLabel_Title_Name" xml:space="preserve">
+    <value>Nome</value>
+  </data>
+  <data name="CheckoutLabel_Title_Number" xml:space="preserve">
+    <value>Número</value>
+  </data>
+  <data name="CheckoutLabel_Title_Phone" xml:space="preserve">
+    <value>Telefone</value>
+  </data>
+  <data name="CheckoutLabel_Title_RepeatEmail" xml:space="preserve">
+    <value>Confirme seu e-mail</value>
+  </data>
+  <data name="AppBarNextField" xml:space="preserve">
+    <value>Prôximo</value>
+  </data>
+  <data name="AppBarPreviousField" xml:space="preserve">
+    <value>Anterior</value>
+  </data>
+  <data name="CheckoutLabel_Title_CardNumber" xml:space="preserve">
+    <value>Número de cartão de crédito</value>
+  </data>
+  <data name="CheckoutLabel_Title_CardType" xml:space="preserve">
+    <value>Cartão</value>
+  </data>
+  <data name="CheckoutLabel_Title_DocumentNumber" xml:space="preserve">
+    <value>Número de identidade</value>
+  </data>
+  <data name="CheckoutLabel_Title_ExpirationDate" xml:space="preserve">
+    <value>Vencimiento</value>
+  </data>
+  <data name="CheckoutLabel_Title_OwnerGender" xml:space="preserve">
+    <value>Sexo do titular do cartão de crédito</value>
+  </data>
+  <data name="CheckoutLabel_Title_OwnerName" xml:space="preserve">
+    <value>Nome e Sobrenome do titular do cartão de crédito</value>
+  </data>
+  <data name="CheckoutLabel_Title_ReferenceCode" xml:space="preserve">
+    <value>Código de referencia</value>
+  </data>
+  <data name="CheckoutLabel_Title_SecurityCode" xml:space="preserve">
+    <value>Código de segurança</value>
+  </data>
+  <data name="HotelCheckoutAditionalsTitle" xml:space="preserve">
+    <value>Opções adicionais</value>
+  </data>
+  <data name="HotelCheckoutCardDataTitle" xml:space="preserve">
+    <value>dados do cartão de crédito</value>
+  </data>
+  <data name="CheckoutLabel_Error_YearMonthInvalid" xml:space="preserve">
+    <value>Por favor, verifique o mes e ano de caducidade do cartao.</value>
+  </data>
+  <data name="CheckoutLabel_Error_cardNumber_INVALID_LENGTH" xml:space="preserve">
+    <value>Por favor, preencha o número de cartão.</value>
+  </data>
+  <data name="CheckoutLabel_Error_ownerDocument_INVALID_LENGTH" xml:space="preserve">
+    <value>Por favor, verifique o número de identificação seja igual que do cartão de crédito. </value>
+  </data>
+  <data name="CheckoutLabel_Error_ownerName_INVALID_LENGTH" xml:space="preserve">
+    <value>Por favor, preenche o nome e sobrenome do dono do cartão de crédito.</value>
+  </data>
+  <data name="CheckoutLabel_Error_voucherDoesNotExists" xml:space="preserve">
+    <value>O codigo ingressado não existe.</value>
+  </data>
+  <data name="CheckoutLabel_Placeholder_CardNumber" xml:space="preserve">
+    <value>Ej: 6598789654984650</value>
+  </data>
+  <data name="CheckoutLabel_Placeholder_DocumentNumber" xml:space="preserve">
+    <value>Ej: 316549879</value>
+  </data>
+  <data name="CheckoutLabel_Placeholder_ExpirationMonth" xml:space="preserve">
+    <value>Mes (Ej: 04)</value>
+  </data>
+  <data name="CheckoutLabel_Placeholder_ExpirationYear" xml:space="preserve">
+    <value>Ano (Ej: 2014)</value>
+  </data>
+  <data name="CheckoutLabel_Placeholder_GenericSelect" xml:space="preserve">
+    <value>- Seleccione -</value>
+  </data>
+  <data name="CheckoutLabel_Placeholder_ReferenceCode" xml:space="preserve">
+    <value>Preenche o codigo</value>
+  </data>
+  <data name="CheckoutLabel_Placeholder_SecurityCode" xml:space="preserve">
+    <value>Ej: 543</value>
+  </data>
+  <data name="CheckoutLabel_Error_InvalidCardNumber" xml:space="preserve">
+    <value>O número preenchado na corresponde á {0}</value>
+  </data>
+  <data name="CheckoutLabel_Error_InvalidSecurityCode" xml:space="preserve">
+    <value>Por favor, verifique quantidade de dígitos.</value>
+  </data>
+  <data name="ThanksLabel_GoToHomePage" xml:space="preserve">
+    <value>Ir para home screen</value>
+  </data>
+  <data name="ThanksLabel_HowTheProcessContinues" xml:space="preserve">
+    <value>Como continuar a compra</value>
+  </data>
+  <data name="ThanksLabel_ProcessDescription" xml:space="preserve">
+    <value>Seu pagamento esta sendo processado. Quando o pagamento seja concretado vôce vai ser contatado pelo e-mail.</value>
+  </data>
+  <data name="ThanksLabel_ReservationDetail" xml:space="preserve">
+    <value>Informação da reservação</value>
+  </data>
+  <data name="ThanksLabel_ThanksForBuying" xml:space="preserve">
+    <value>Muito obrigado pela solicitação de compra!</value>
+  </data>
+  <data name="ThanksLabel_YourCroIdNumber" xml:space="preserve">
+    <value>Seu número de solicitação de compra é</value>
+  </data>
+  <data name="CheckoutLabel_Error_email_INVALID_EMAIL" xml:space="preserve">
+    <value>Por favor, verifique o e-mail onde vá recever o voucher.</value>
+  </data>
+  <data name="CheckoutLabel_Error_areaCode_INVALID_PHONE_AREA_CODE" xml:space="preserve">
+    <value>Por favor, verifique que el código de área sólo contenga números.</value>
+  </data>
+  <data name="CheckoutLabel_Error_countryCode_NOT_NUMERIC" xml:space="preserve">
+    <value>Por favor, verifique o código do país só seja números.</value>
+  </data>
+  <data name="CheckoutLabel_Error_ownerDocument_INVALID_DOCUMENT_NUMBER" xml:space="preserve">
+    <value>Por favor, verifique que número de identificação seja válido.</value>
+  </data>
+  <data name="CheckoutLabel_Error_ownerName_INVALID_CARD_OWNER_NAME" xml:space="preserve">
+    <value>Por favor, verifique o nome do titular do cartão de crédito este preenchado. (um nome e sobrenome)</value>
+  </data>
+  <data name="CheckoutLabel_Error_phoneNumber_INVALID_PHONE_NUMBER" xml:space="preserve">
+    <value>O número de telefone tem que ser números.</value>
+  </data>
+  <data name="CheckoutLabel_Error_voucher_INVALID_LENGTH" xml:space="preserve">
+    <value>Por favor, verifique o número do codigo de referencia.</value>
+  </data>
+  <data name="CheckoutLabel_Error_YouHaveToReadAndAcceptTermsAndConditions" xml:space="preserve">
+    <value>Por favor, leia e aceite os termos e condições.</value>
+  </data>
+  <data name="CheckoutLabel_Title_AcceptConditions" xml:space="preserve">
+    <value>Li e aceito as</value>
+  </data>
+  <data name="CheckoutLabel_Title_AcceptConditionsLink" xml:space="preserve">
+    <value>Condições de compra</value>
+  </data>
+  <data name="HotelCheckout_CardWillBeUsedAsWarranty" xml:space="preserve">
+    <value>O cartão vai ser usado só como garantia de reservação.</value>
+  </data>
+  <data name="HotelCheckout_PayAtDestination" xml:space="preserve">
+    <value>Pagamento no destino</value>
+  </data>
+  <data name="HotelCheckout_PayInOnePayment" xml:space="preserve">
+    <value>1 pagamento com</value>
+  </data>
+  <data name="HotelCheckout_PaymentsOf" xml:space="preserve">
+    <value>pagamentos de</value>
+  </data>
+  <data name="HotelCheckout_PayWithInterest" xml:space="preserve">
+    <value>pagamentos com</value>
+  </data>
+  <data name="HotelCheckout_PayWithoutInterest" xml:space="preserve">
+    <value>pagamentos sem juros com</value>
+  </data>
+  <data name="CheckoutLabel_Message_BeCorrect" xml:space="preserve">
+    <value>e intente novamente.</value>
+  </data>
+  <data name="CheckoutLabel_Message_CheckCardData" xml:space="preserve">
+    <value>dados de pagamento, </value>
+  </data>
+  <data name="CheckoutLabel_Message_CheckContact" xml:space="preserve">
+    <value>dados de contato, </value>
+  </data>
+  <data name="CheckoutLabel_Message_CheckGuests" xml:space="preserve">
+    <value>dados dos hóspedes, </value>
+  </data>
+  <data name="CheckoutLabel_Message_CheckItPlease" xml:space="preserve">
+    <value>Por favor verifique a informação dada em </value>
+  </data>
+  <data name="CheckoutLabel_Message_CheckPassengers" xml:space="preserve">
+    <value>dados dos pasageiros, </value>
+  </data>
+  <data name="CheckoutLabel_Message_CheckTheInformation" xml:space="preserve">
+    <value>Verifique os dados preenchados</value>
+  </data>
+  <data name="CheckoutLabel_Error_PASSENGER_TYPE_ADULT" xml:space="preserve">
+    <value>Adulto</value>
+  </data>
+  <data name="CheckoutLabel_Error_PASSENGER_TYPE_CHILD" xml:space="preserve">
+    <value>Crianças</value>
+  </data>
+  <data name="CheckoutLabel_Error_PASSENGER_TYPE_INFANT" xml:space="preserve">
+    <value>Bebês</value>
+  </data>
+  <data name="FlightsCheckoutBuyFlight" xml:space="preserve">
+    <value>Comprar vôo</value>
+  </data>
+  <data name="FlightsCheckoutPassengersTitle" xml:space="preserve">
+    <value>passageiros</value>
+  </data>
+  <data name="CheckoutLabel_Title_Birthday" xml:space="preserve">
+    <value>Data de nascimento</value>
+  </data>
+  <data name="CheckoutLabel_Title_DocumentType" xml:space="preserve">
+    <value>Tipo de documento</value>
+  </data>
+  <data name="CheckoutLabel_Title_Nationality" xml:space="preserve">
+    <value>Nacionalidade</value>
+  </data>
+  <data name="CheckoutLabel_Title_PassDocumentNumber" xml:space="preserve">
+    <value>Número de identidade</value>
+  </data>
+  <data name="CheckoutLabel_Error_passengerLast_INVALID_NAME" xml:space="preserve">
+    <value>Por favor, preenche sobrenome do passageiro.</value>
+  </data>
+  <data name="CheckoutLabel_Error_passengerName_INVALID_NAME" xml:space="preserve">
+    <value>Por favor, preenche nome do passageiro.</value>
+  </data>
+  <data name="CheckoutLabel_Title_PassengerGender" xml:space="preserve">
+    <value>Sexo</value>
+  </data>
+  <data name="CheckoutLabel_Error_INVALID_BIRTHDAY" xml:space="preserve">
+    <value>Por favor, verifique data de nacimiento.</value>
+  </data>
+  <data name="SettingsPage_LocationLabel" xml:space="preserve">
+    <value>Localização</value>
+  </data>
+  <data name="SettingsPage_LocationText" xml:space="preserve">
+    <value>Permitir a Decolar.com usar o servico de localizacao.
+Decolar.com usa seus dados de localizacao para ofrecer-le hoteis perto sua locacao.
+Decolar.com nao comparte seus dados de localizacao.</value>
+  </data>
+  <data name="SettingsPage_SettingsLabel" xml:space="preserve">
+    <value>Configuração</value>
+  </data>
+  <data name="CheckoutLabel_Details_ConectionWith" xml:space="preserve">
+    <value>Conexão com espera de</value>
+  </data>
+  <data name="CheckoutLabel_Details_Flight" xml:space="preserve">
+    <value>Vôo</value>
+  </data>
+  <data name="CheckoutLabel_Details_From" xml:space="preserve">
+    <value>Desde</value>
+  </data>
+  <data name="CheckoutLabel_Details_IDA" xml:space="preserve">
+    <value>IDA</value>
+  </data>
+  <data name="CheckoutLabel_Details_Segment" xml:space="preserve">
+    <value>Trecho</value>
+  </data>
+  <data name="CheckoutLabel_Details_TotalTime" xml:space="preserve">
+    <value>Duração total de vôo:</value>
+  </data>
+  <data name="CheckoutLabel_Details_VUELTA" xml:space="preserve">
+    <value>VOLTA</value>
+  </data>
+  <data name="CheckoutLabel_Title_Details" xml:space="preserve">
+    <value>Informação da compra</value>
+  </data>
+  <data name="CheckoutLabel_Details_To" xml:space="preserve">
+    <value>para</value>
+  </data>
+  <data name="FlightCheckoutDetailsAdults" xml:space="preserve">
+    <value>adulto(s)</value>
+  </data>
+  <data name="FlightCheckoutDetailsAFIPRes" xml:space="preserve">
+    <value>Res. 3550 AFIP</value>
+  </data>
+  <data name="FlightCheckoutDetailsCharges" xml:space="preserve">
+    <value>Cargos</value>
+  </data>
+  <data name="FlightCheckoutDetailsInfants" xml:space="preserve">
+    <value>bebê(s)</value>
+  </data>
+  <data name="FlightCheckoutDetailsChildren" xml:space="preserve">
+    <value>criança(s)</value>
+  </data>
+  <data name="FlightCheckoutDetailsPricePerAdult" xml:space="preserve">
+    <value>Tarifa por adulto</value>
+  </data>
+  <data name="FlightCheckoutDetailsTaxes" xml:space="preserve">
+    <value>Impostos e taxas</value>
+  </data>
+  <data name="FlightCheckoutDetailsPricePerChild" xml:space="preserve">
+    <value>Tarifa por criança</value>
+  </data>
+  <data name="FlightCheckoutDetailsPricePerInfant" xml:space="preserve">
+    <value>Tarifa por bebê</value>
+  </data>
+  <data name="HotelCheckout_PaymentOf" xml:space="preserve">
+    <value>pagamento de</value>
+  </data>
+  <data name="CheckoutLabel_Details_Nights" xml:space="preserve">
+    <value> noite(s)</value>
+  </data>
+  <data name="CheckoutLabel_Details_Rooms" xml:space="preserve">
+    <value>Quarto(s)</value>
+  </data>
+  <data name="HotelCheckoutDetailsAFIPRes" xml:space="preserve">
+    <value>Res. 3550 AFIP</value>
+  </data>
+  <data name="HotelCheckoutDetailsTaxes" xml:space="preserve">
+    <value>Impostos e taxas</value>
+  </data>
+  <data name="HotelCheckout_PerNightRoom" xml:space="preserve">
+    <value>Quarto por noite</value>
+  </data>
+  <data name="CheckoutLabel_Title_Billing" xml:space="preserve">
+    <value>Endereço de entrega do cartão de crédito</value>
+  </data>
+  <data name="CheckoutLabel_Title_County" xml:space="preserve">
+    <value>Colonia</value>
+  </data>
+  <data name="CheckoutLabel_Title_Department" xml:space="preserve">
+    <value>Departamento</value>
+  </data>
+  <data name="CheckoutLabel_Title_Intern" xml:space="preserve">
+    <value>Interior</value>
+  </data>
+  <data name="CheckoutLabel_Title_Outer" xml:space="preserve">
+    <value>Exterior</value>
+  </data>
+  <data name="CheckoutLabel_Title_PostalCode" xml:space="preserve">
+    <value>Código Postal</value>
+  </data>
+  <data name="CheckoutLabel_Title_State" xml:space="preserve">
+    <value>Estado</value>
+  </data>
+  <data name="CheckoutLabel_Title_Street" xml:space="preserve">
+    <value>Calle</value>
+  </data>
+  <data name="CheckoutLabel_Placeholder_Bank" xml:space="preserve">
+    <value>Nome do Banco</value>
+  </data>
+  <data name="CheckoutLabel_Title_Bank" xml:space="preserve">
+    <value>Entidade bancaria</value>
+  </data>
+  <data name="CheckoutLabel_Message_AdditionalDataNeeded" xml:space="preserve">
+    <value>Por Segurança preencher a siguente informaçao:</value>
+  </data>
+  <data name="CheckoutLabel_Message_ChangeCreditCard" xml:space="preserve">
+    <value>Por favor verifique que o cartão de crédito tenha disponibilidade ou use outro médio de pagamento.</value>
+  </data>
+  <data name="CheckoutLabel_Message_CheckCreditCardData" xml:space="preserve">
+    <value>Por favor verifique que os dados do cartão de crédito sejam correto.</value>
+  </data>
+  <data name="CheckoutLabel_Message_CouponNoRecoverable" xml:space="preserve">
+    <value>Ocorreu erro ao usar seu cupom de desconto, por favor tente de novo máis tarde.</value>
+  </data>
+  <data name="CheckoutLabel_Message_NoRecoverableError" xml:space="preserve">
+    <value>Ocorreu erro processando sua solicitação, por favor tente de novo máis tarde.</value>
+  </data>
+</root>
