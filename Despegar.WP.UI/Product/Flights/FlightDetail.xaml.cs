@@ -1,4 +1,5 @@
 ﻿using Despegar.WP.UI.Common;
+using Despegar.WP.UI.Classes;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -15,6 +16,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+
 
 // The Basic Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
 
@@ -107,5 +109,10 @@ namespace Despegar.WP.UI.Product.Flights
         }
 
         #endregion
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            PagesManager.GoTo(typeof(FlightCheckout),null);
+        }
     }
 }

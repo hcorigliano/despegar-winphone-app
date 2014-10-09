@@ -106,6 +106,16 @@
     <Compile Include="Common\ObservableDictionary.cs" />
     <Compile Include="Common\RelayCommand.cs" />
     <Compile Include="Common\SuspensionManager.cs" />
+    <Compile Include="Controls\DateDisplayMiniBoxSearch.xaml.cs">
+      <DependentUpon>DateDisplayMiniBoxSearch.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\GoReturnPanelMiniBoxSearch.xaml.cs">
+      <DependentUpon>GoReturnPanelMiniBoxSearch.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\PaxCounterMiniBoxSearch.xaml.cs">
+      <DependentUpon>PaxCounterMiniBoxSearch.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\SearchMiniBoxControl.cs" />
     <Compile Include="CountrySelection.xaml.cs">
       <DependentUpon>CountrySelection.xaml</DependentUpon>
     </Compile>
@@ -153,6 +163,18 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Controls\DateDisplayMiniBoxSearch.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\GoReturnPanelMiniBoxSearch.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\PaxCounterMiniBoxSearch.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="CountrySelection.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -199,7 +221,6 @@
     <Folder Include="Assets\en\" />
     <Folder Include="Assets\es\" />
     <Folder Include="Assets\pt\" />
-    <Folder Include="Controls\" />
     <Folder Include="Strings\en\" />
     <Folder Include="Strings\pt\" />
   </ItemGroup>
