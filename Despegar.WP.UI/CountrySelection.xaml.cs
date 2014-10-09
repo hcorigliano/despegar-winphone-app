@@ -18,6 +18,8 @@ using Despegar.WP.UI.Model.Classes;
 using Despegar.WP.UI.Classes;
 using Windows.Storage;
 using Despegar.WP.UI.Model;
+using Despegar.Core.IService;
+using Despegar.Core.Business.Configuration;
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
 
 namespace Despegar.WP.UI
@@ -37,30 +39,33 @@ namespace Despegar.WP.UI
 
         public CountrySelection()
         {
-
-            var resourceLoader = new Windows.ApplicationModel.Resources.ResourceLoader();            
-
-            this.Items = new ObservableCollection<CountryItem>
-            {
-                new CountryItem{ Code= resourceLoader.GetString("Country_Code_Argentina"), CountryName = resourceLoader.GetString("Country_Name_Argentina") },
-                new CountryItem{ Code= resourceLoader.GetString("Country_Code_Brazil"), CountryName = resourceLoader.GetString("Country_Name_Brazil") },
-                new CountryItem{ Code= resourceLoader.GetString("Country_Code_Mexico"), CountryName = resourceLoader.GetString("Country_Name_Mexico") },
-            };
-
-            
+            var resourceLoader = new Windows.ApplicationModel.Resources.ResourceLoader();
+                  
             this.DataContext = this;
             this.InitializeComponent();
         }
+
 
         /// <summary>
         /// Invoked when this page is about to be displayed in a Frame.
         /// </summary>
         /// <param name="e">Event data that describes how this page was reached.
         /// This parameter is typically used to configure the page.</param>
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
+            IConfigurationService configurationService = GlobalConfiguration.CoreContext.GetConfigurationService();            
+            Configurations configuration = await configurationService.GetConfigurations();
 
+            this.Items = new ObservableCollection<CountryItem>(configuration.configuration.Select(p => GetCountries(p)).ToList());
+        }
+
+        private CountryItem GetCountries(Configuration p)
+        {
+            CountryItem ci = new CountryItem();
+            ci.Code = p.id;
+            ci.CountryName = p.description;
+            return ci;
         }
 
         private void ListView_ItemClick(object sender, ItemClickEventArgs e)
