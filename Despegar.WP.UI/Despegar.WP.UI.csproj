@@ -106,6 +106,15 @@
     <Compile Include="Common\ObservableDictionary.cs" />
     <Compile Include="Common\RelayCommand.cs" />
     <Compile Include="Common\SuspensionManager.cs" />
+    <Compile Include="Controls\Flights\DateControl.xaml.cs">
+      <DependentUpon>DateControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Flights\QuantityPassagersControl.xaml.cs">
+      <DependentUpon>QuantityPassagersControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Flights\SearchAirport.xaml.cs">
+      <DependentUpon>SearchAirport.xaml</DependentUpon>
+    </Compile>
     <Compile Include="CountrySelection.xaml.cs">
       <DependentUpon>CountrySelection.xaml</DependentUpon>
     </Compile>
@@ -153,6 +162,18 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Controls\Flights\DateControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Flights\QuantityPassagersControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Flights\SearchAirport.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="CountrySelection.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -200,7 +221,6 @@
     <Folder Include="Assets\es\" />
     <Folder Include="Assets\Icon\" />
     <Folder Include="Assets\pt\" />
-    <Folder Include="Controls\" />
     <Folder Include="Strings\en\" />
     <Folder Include="Strings\pt\" />
   </ItemGroup>

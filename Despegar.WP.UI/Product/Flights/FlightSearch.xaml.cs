@@ -25,7 +25,7 @@ namespace Despegar.WP.UI.Product.Flights
         private ObservableDictionary defaultViewModel = new ObservableDictionary();
         private FlightsSearchBoxModel flightSearchBoxModel = new FlightsSearchBoxModel();
 
-        PassagersQuantity passagers = new PassagersQuantity();
+        
 
 
         public FlightSearch()
@@ -34,12 +34,7 @@ namespace Despegar.WP.UI.Product.Flights
 
             this.navigationHelper = new NavigationHelper(this);
             this.navigationHelper.LoadState += this.NavigationHelper_LoadState;
-            this.navigationHelper.SaveState += this.NavigationHelper_SaveState;
-
-            passagers.ChildPassagerQuantity = 0;
-            passagers.AdultPassagerQuantity = 1;
-            this.txbQuantityAdults.DataContext = passagers;
-            this.txbQuantityChild.DataContext = passagers;
+            this.navigationHelper.SaveState += this.NavigationHelper_SaveState;           
             
         }
 
@@ -113,67 +108,31 @@ namespace Despegar.WP.UI.Product.Flights
         }
 
         #endregion
-
-        private async void FlightsTextBlock_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
-        {
-            if (sender.Text != "" && sender.Text.Length >= 3)
-            {
-
-                sender.ItemsSource = (IEnumerable)(await flightSearchBoxModel.GetCities(sender.Text));
-            }
-        }
-
-        private void OriginFlightsTextBlock_SuggestionChosen(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
-        {
-            if (args.Reason == AutoSuggestionBoxTextChangeReason.UserInput)
-            {
-                // TODO: 
-                              
-            }
-        }        
+      
 
         private async void Button_Click(object sender, RoutedEventArgs e)
         {
-            CityAutocomplete origin = originFlightsTextBlock.Items[0] as CityAutocomplete;
-            CityAutocomplete destiny = destinyFlightsTextBlock.Items[0] as CityAutocomplete;
+
+            CityAutocomplete origin = airportsContainer.OriginAirportControl.Items[0] as CityAutocomplete;
+            CityAutocomplete destiny = airportsContainer.DestinyAirportControl.Items[0] as CityAutocomplete;
             //TODO: validate the origin and destiny for any problem.
             //if(origin == null || destiny == null)
             //{
             //    // autocomplete not charge properly
             //    throw new NotImplementedException();
             //}
+
+
             
+            //FlightsItineraries intinerarie = await flightSearchBoxModel.GetItineraries(origin.code, destiny.code, dateControlContainer.DepartureDateControl.Date.ToString("yyyy-MM-dd"), quantityPassagersContainer.Passagers.AdultPassagerQuantity, dateControlContainer.ReturnDateControl.Date.ToString("yyyy-MM-dd"), 0, 0, 0, 10, "", "", "", "");
             
-            //FlightsItineraries intinerarie =   await flightSearchBoxModel.GetItineraries(origin.code, destiny.code, departureDate.Date.ToString("yyyy-MM-dd"), passagers.AdultPassagerQuantity, returnDate.Date.ToString("yyyy-MM-dd"), 0, 0, 0, 10, "", "", "", "");
             FlightsItineraries intinerarie = await flightSearchBoxModel.GetItineraries("BUE", "LAX", "2014-11-11", 1, "2014-11-13", 0, 0, 0, 10, "", "", "", "");
 
 
             PagesManager.GoTo(typeof(FlightResults), intinerarie);
         }
 
-        //Bottons for passagers Quantity
-        #region
-        private void btnAdultAdd_Click(object sender, RoutedEventArgs e)
-        {
-            passagers.AddAdult();
-        }
-
-        private void btnChildAdd_Click(object sender, RoutedEventArgs e)
-        {
-            passagers.AddChild();
-        }
-
-        private void btnAdultSub_Click(object sender, RoutedEventArgs e)
-        {
-            passagers.SubAdult();
-        }
-
-        private void btnChildSub_Click(object sender, RoutedEventArgs e)
-        {
-            passagers.subChild();
-        }
-
-        #endregion
+        
 
     }
 }
