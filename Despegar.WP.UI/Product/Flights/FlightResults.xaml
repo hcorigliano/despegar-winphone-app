@@ -8,22 +8,7 @@
     x:Class="Despegar.WP.UI.Product.Flights.FlightResults"
     mc:Ignorable="d"
     Background="{ThemeResource AppBarBorderThemeBrush}">
-	<Page.Resources>
-        <!--<DataTemplate x:Key="FlightItemDateTemplate">
-            <Grid>
-				<Grid.ColumnDefinitions>
-					<ColumnDefinition Width="50"/>
-					<ColumnDefinition Width="*"/>
-					<ColumnDefinition Width="100"/>
-				</Grid.ColumnDefinitions>
-                <Image Grid.Column="0" HorizontalAlignment="Left" Height="Auto"  VerticalAlignment="Top" Width="Auto"/>
-                <StackPanel Grid.Column="1"  HorizontalAlignment="Left" Height="Auto"  VerticalAlignment="Top" Width="Auto">
-					<TextBlock TextWrapping="Wrap" Text="Multiples Aerolineas"/>
-					<TextBlock TextWrapping="Wrap" Text="1 vuelo disponible"/>
-				</StackPanel>
-				<TextBlock Grid.Column="2"  HorizontalAlignment="Left" TextWrapping="Wrap" Text="Precio" VerticalAlignment="Top"/>
-			</Grid>
-		</DataTemplate>-->
+    <Page.Resources>
         <DataTemplate x:Key="FlightItemDateTemplate">
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -39,16 +24,16 @@
                 <TextBlock Grid.Column="2"  HorizontalAlignment="Left" TextWrapping="Wrap" Text="Precio" VerticalAlignment="Top"/>
             </Grid>
         </DataTemplate>
-	</Page.Resources>
+    </Page.Resources>
 
-	<Grid x:Name="LayoutRoot">
+    <Grid x:Name="LayoutRoot">
 
-        <Grid.ChildrenTransitions>
-            <TransitionCollection>
-                <EntranceThemeTransition/>
-            </TransitionCollection>
-        </Grid.ChildrenTransitions>
-        <Grid.RowDefinitions>
+		<Grid.ChildrenTransitions>
+			<TransitionCollection>
+				<EntranceThemeTransition/>
+			</TransitionCollection>
+		</Grid.ChildrenTransitions>
+		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto"/>
 			<RowDefinition Height="20"/>
 			<RowDefinition Height="Auto"/>
@@ -56,20 +41,19 @@
 
 		<StackPanel Grid.Row="0" Margin="19,0,0,0">
 			<TextBlock x:Uid="AppTitle" Style="{ThemeResource TitleTextBlockStyle}" Margin="0,12,0,0"/>
-            <TextBlock x:Uid="Page_FlightResults" Margin="0,-6.5,0,26.5" Style="{ThemeResource HeaderTextBlockStyle}" CharacterSpacing="{ThemeResource PivotHeaderItemCharacterSpacing}"/>
+			<TextBlock x:Uid="Page_FlightResults" Margin="0,-6.5,0,26.5" Style="{ThemeResource HeaderTextBlockStyle}" CharacterSpacing="{ThemeResource PivotHeaderItemCharacterSpacing}"/>
             
-            <UI:SearchMiniBoxControl Height="Auto"/>    
-        </StackPanel>
+			<UI:SearchMiniBoxControl Height="Auto"/>    
+		</StackPanel>
 
 		<Grid Grid.Row="1">
-			<TextBlock></TextBlock>
+			<TextBlock/>
 		</Grid>
         <!--<ListViewItem Template="{StaticResource FlightItemControlTemplate}"/>-->
         <Grid Grid.Row="2" x:Name="ContentRoot" Width="Auto" >
-            <ListBox Background="White" ItemTemplate="{StaticResource FlightItemDateTemplate}">
-            </ListBox>
+			<ListBox Background="White"  ItemTemplate="{StaticResource FlightItemDateTemplate}"/>
 
 		</Grid>
-        <Button Grid.Row="2" Click="Button_Click">Detalles</Button>
+        
 	</Grid>
 </Page>
