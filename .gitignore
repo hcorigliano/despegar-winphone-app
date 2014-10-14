@@ -30,3 +30,5 @@
 /Despegar.WP.UI.Models/bin/**
 *.USER
 *.suo
+/Despegar.WP.UI/AppPackages/Despegar.WP.UI_1.0.0.0_AnyCPU_Debug_Test
+*.appxupload

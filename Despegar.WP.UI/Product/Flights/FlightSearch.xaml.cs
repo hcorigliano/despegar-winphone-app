@@ -27,6 +27,7 @@ namespace Despegar.WP.UI.Product.Flights
 
         
 
+       
 
         public FlightSearch()
         {
@@ -68,6 +69,22 @@ namespace Despegar.WP.UI.Product.Flights
         /// session.  The state will be null the first time a page is visited.</param>
         private void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
         {
+            // Restore values stored in session state.
+            if (e.PageState != null)
+            {
+                if (e.PageState.ContainsKey("originFlight"))
+                {
+                    airportsContainer.OriginAirportControl.Text = e.PageState["originFlight"].ToString();
+                }
+
+                if (e.PageState.ContainsKey("destinyFlight"))
+                {
+                    airportsContainer.DestinyAirportControl.Text = e.PageState["destinyFlight"].ToString();
+                }
+
+            }
+
+
         }
 
         /// <summary>
@@ -80,6 +97,9 @@ namespace Despegar.WP.UI.Product.Flights
         /// serializable state.</param>
         private void NavigationHelper_SaveState(object sender, SaveStateEventArgs e)
         {
+            e.PageState["originFlight"] = airportsContainer.OriginAirportControl.Text;
+            e.PageState["destinyFlight"] = airportsContainer.DestinyAirportControl.Text;
+
         }
 
         #region NavigationHelper registration

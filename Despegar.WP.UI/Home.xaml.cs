@@ -115,10 +115,6 @@ namespace Despegar.WP.UI
             string text = e.ClickedItem as string;
             PagesManager.GoTo(typeof(Product.Flights.FlightSearch),e);
 
-
-            //delete the following lines
-            //AppEmbbed.PivotPage pp = new PivotPage();
-            //PagesManager.GoTo(typeof(), e);
         }
     }
 }

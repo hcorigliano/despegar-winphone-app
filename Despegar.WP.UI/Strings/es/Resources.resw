@@ -144,7 +144,7 @@
   <data name="Page_FlightCheckout.Text" xml:space="preserve">
     <value>Pago</value>
   </data>
-  <data name="Page_FlightDetails.Text" xml:space="preserve">
+  <data name="Page_FlightDetail.Text" xml:space="preserve">
     <value>Detalles</value>
   </data>
   <data name="Page_FlightResults.Text" xml:space="preserve">
