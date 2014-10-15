@@ -5,28 +5,35 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:UI="using:Despegar.WP.UI"
+    xmlns:Model="using:Despegar.WP.UI.Model"
     x:Class="Despegar.WP.UI.Product.Flights.FlightResults"
     mc:Ignorable="d"
-    Background="{ThemeResource AppBarBorderThemeBrush}">
+    Background="{ThemeResource AppBarBorderThemeBrush}" Margin="1,0,-1,0"
+    
+    >
     <Page.Resources>
         <DataTemplate x:Key="FlightItemDateTemplate">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="50"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="100"/>
-                </Grid.ColumnDefinitions>
-                <Image Grid.Column="0" HorizontalAlignment="Left" Height="Auto"  VerticalAlignment="Top" Width="Auto"/>
-                <StackPanel Grid.Column="1"  HorizontalAlignment="Left" Height="Auto"  VerticalAlignment="Top" Width="Auto">
-                    <TextBlock TextWrapping="Wrap" Text="Multiples Aerolineas"/>
-                    <TextBlock TextWrapping="Wrap" Text="1 vuelo disponible"/>
-                </StackPanel>
-                <TextBlock Grid.Column="2"  HorizontalAlignment="Left" TextWrapping="Wrap" Text="Precio" VerticalAlignment="Top"/>
-            </Grid>
+        	<Grid>
+        		<Grid.ColumnDefinitions>
+        			<ColumnDefinition Width="50"/>
+        			<ColumnDefinition Width="*"/>
+        			<ColumnDefinition Width="100"/>
+        		</Grid.ColumnDefinitions>
+        		<Image Grid.Column="0" HorizontalAlignment="Left" Height="Auto"  VerticalAlignment="Top" Width="Auto"/>
+        		<StackPanel Grid.Column="1"  HorizontalAlignment="Left" Height="Auto"  VerticalAlignment="Top" Width="Auto">
+        			<TextBlock TextWrapping="Wrap" Text="{Binding Items[0].airline.name}" />
+        			<TextBlock TextWrapping="Wrap" Text="asdfsad"/>
+        		</StackPanel>
+        		<TextBlock Grid.Column="2"  HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding price}" VerticalAlignment="Top"/>
+        	</Grid>
         </DataTemplate>
     </Page.Resources>
 
-    <Grid x:Name="LayoutRoot">
+	<Page.DataContext>
+		<Model:FlightResultsModel/>
+	</Page.DataContext>
+
+	<Grid x:Name="LayoutRoot">
 
 		<Grid.ChildrenTransitions>
 			<TransitionCollection>
@@ -47,12 +54,10 @@
 		</StackPanel>
 
 		<Grid Grid.Row="1">
-			<TextBlock/>
-		</Grid>
-        <!--<ListViewItem Template="{StaticResource FlightItemControlTemplate}"/>-->
-        <Grid Grid.Row="2" x:Name="ContentRoot" Width="Auto" >
-			<ListBox Background="White"  ItemTemplate="{StaticResource FlightItemDateTemplate}"/>
-
+			<TextBlock Text="{Binding paging.limit}" />
+		</Grid> 
+		<Grid Grid.Row="2" x:Name="ContentRoot" Width="Auto" >
+			<ListBox Background="White" ItemTemplate="{StaticResource FlightItemDateTemplate}" ItemsSource="{Binding Items}" />
 		</Grid>
         
 	</Grid>
