@@ -6,6 +6,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:Classes="using:Despegar.WP.UI.Model.Classes"
     x:Class="Despegar.WP.UI.Product.Flights.FlightSearch"
+    
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
@@ -31,84 +32,16 @@
 		</StackPanel>
 
         <!--TODO: Content should be placed within the following grid-->
-		<Grid Grid.Row="1" x:Name="ContentRoot" Margin="19,9.5,19,0">
+        <Grid Grid.Row="1" x:Name="ContentRoot" Margin="19,9.5,19,0" xmlns:src="using:Despegar.WP.UI.Controls.Flights" >
+            
+            
 			<StackPanel  VerticalAlignment="Top" HorizontalAlignment="Stretch">
-				<TextBlock>
-					<Run Text="Origen"/>
-				</TextBlock>
-				<AutoSuggestBox x:Name="originFlightsTextBlock" Text="" ItemsSource="{Binding}" TextChanged="FlightsTextBlock_TextChanged"  TextMemberPath="name"  />
 
-				<TextBlock>
-					<Run Text="Destino"/>
-				</TextBlock>
-				<AutoSuggestBox x:Name="destinyFlightsTextBlock" Text="" ItemsSource="{Binding}" TextChanged="FlightsTextBlock_TextChanged"  TextMemberPath="name"  />
+                <src:SearchAirport x:Name="airportsContainer"> </src:SearchAirport>
 
-				<StackPanel
-					Orientation="Horizontal"
-                    >
-					<StackPanel>
-						<TextBlock>
-							<Run Text="Partida"/>
-						</TextBlock>
-                        <DatePicker x:Name="departureDate"/>
-                    </StackPanel>
-					<StackPanel>
-						<TextBlock>
-							<Run Text="Regreso"/>
-						</TextBlock>
-						<DatePicker x:Name="returnDate"/>
-					</StackPanel>
-				</StackPanel>
-
+                <src:DateControl x:Name="dateControlContainer"></src:DateControl>
                 
-				<!--Grid for passagers-->
-				<Grid Margin="12,0,12,0">
-					<Grid.RowDefinitions>
-						<RowDefinition Height="auto" />
-						<RowDefinition />
-						<RowDefinition Height="auto" />
-					</Grid.RowDefinitions>
-
-					<Grid.ColumnDefinitions>
-						<ColumnDefinition Width="auto"  />
-						<ColumnDefinition Width="*" />
-						<ColumnDefinition Width="*" />
-						<ColumnDefinition Width="*" />
-						<ColumnDefinition Width="*" />
-					</Grid.ColumnDefinitions>
-                    
-					<!--Adults Row-->
-					<TextBlock Text="Adultos (+12)" FontSize="14" Grid.Column="0" Grid.Row="0" VerticalAlignment="Center"/>
-					<Button x:Name="btnAdultSub" HorizontalAlignment="Center"  Grid.Column="2" Grid.Row="0" IsDoubleTapEnabled="False" IsHoldingEnabled="False" RenderTransformOrigin="0.5,0.5" Content="-" FontSize="30" Click="btnAdultSub_Click"   >
-						<Button.RenderTransform>
-							<CompositeTransform ScaleX="0.3" ScaleY="0.5"/>
-						</Button.RenderTransform>
-					</Button>
-                    <TextBlock   x:Name="txbQuantityAdults" Text="{Binding Path=AdultPassagerQuantity, Mode=OneWay}"  FontSize="14" Grid.Column="3" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>				
-					<Button x:Name="btnAdultAdd" HorizontalAlignment="Center"  Grid.Column="4" Grid.Row="0" IsDoubleTapEnabled="False" IsHoldingEnabled="False" RenderTransformOrigin="0.5,0.5" Content="+" FontSize="30" Click="btnAdultAdd_Click"  >
-						<Button.RenderTransform>
-							<CompositeTransform ScaleX="0.3" ScaleY="0.5"/>
-						</Button.RenderTransform>
-					</Button>
-
-					<!--Children Row-->
-					<TextBlock Text="Menores (0 - 11)" FontSize="14" Grid.Column="0" Grid.Row="1" VerticalAlignment="Center"/>
-					<Button x:Name="btnChildSub" HorizontalAlignment="Center"  Grid.Column="2" Grid.Row="1" IsDoubleTapEnabled="False" IsHoldingEnabled="False" RenderTransformOrigin="0.5,0.5" Content="-" FontSize="30" Click="btnChildSub_Click"  >
-						<Button.RenderTransform>
-							<CompositeTransform ScaleX="0.3" ScaleY="0.5"/>
-						</Button.RenderTransform>
-					</Button>
-					<TextBlock x:Name="txbQuantityChild" Text="{Binding Path=ChildPassagerQuantity, Mode=OneWay}" FontSize="14" Grid.Column="3" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-					<Button x:Name="btnChildAdd" HorizontalAlignment="Center"  Grid.Column="4" Grid.Row="1" IsDoubleTapEnabled="False" IsHoldingEnabled="False" RenderTransformOrigin="0.5,0.5" Content="+" FontSize="30" Click="btnChildAdd_Click"   >
-						<Button.RenderTransform>
-							<CompositeTransform ScaleX="0.3" ScaleY="0.5"/>
-						</Button.RenderTransform>
-					</Button>
-				</Grid>
-
-
-				<!--<TextBlock Text="Adultos (+12)     - 1 +"></TextBlock>
-                <TextBlock Text="0 - 11     - 0 +" ></TextBlock>-->
+                <src:QuantityPassagersControl x:Name="quantityPassagersContainer"></src:QuantityPassagersControl>
 			</StackPanel>
 
 			<Button Click="Button_Click" Margin="109,443,0,1" Content="Buscar vuelos"/>
