@@ -17,6 +17,7 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using Despegar.Core.Business.Flight.Itineraries;
 using Despegar.WP.UI.Classes;
+using Despegar.WP.UI.Model;
 
 // The Basic Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
 
@@ -29,6 +30,7 @@ namespace Despegar.WP.UI.Product.Flights
     {
         private NavigationHelper navigationHelper;
         private ObservableDictionary defaultViewModel = new ObservableDictionary();
+        private FlightResultsModel flightResultModel = new FlightResultsModel();
 
         public FlightResults()
         {
@@ -37,6 +39,7 @@ namespace Despegar.WP.UI.Product.Flights
             this.navigationHelper = new NavigationHelper(this);
             this.navigationHelper.LoadState += this.NavigationHelper_LoadState;
             this.navigationHelper.SaveState += this.NavigationHelper_SaveState;
+            this.DataContext = flightResultModel;
         }
 
         /// <summary>
@@ -69,8 +72,8 @@ namespace Despegar.WP.UI.Product.Flights
         /// session.  The state will be null the first time a page is visited.</param>
         private void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
         {
-            FlightsItineraries itineraries = e.NavigationParameter as FlightsItineraries;
-            int test = 1;
+            flightResultModel.Itineraries = e.NavigationParameter as FlightsItineraries;
+
         }
 
         /// <summary>
@@ -83,6 +86,7 @@ namespace Despegar.WP.UI.Product.Flights
         /// serializable state.</param>
         private void NavigationHelper_SaveState(object sender, SaveStateEventArgs e)
         {
+
         }
 
         #region NavigationHelper registration
@@ -112,9 +116,6 @@ namespace Despegar.WP.UI.Product.Flights
 
         #endregion
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            PagesManager.GoTo(typeof(FlightDetail),null);
-        }
+        
     }
 }
