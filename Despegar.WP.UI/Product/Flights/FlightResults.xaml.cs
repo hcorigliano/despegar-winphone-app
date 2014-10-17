@@ -116,6 +116,11 @@ namespace Despegar.WP.UI.Product.Flights
 
         #endregion
 
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            PagesManager.GoTo(typeof(FlightDetail), null);
+        }
+
         
     }
 }

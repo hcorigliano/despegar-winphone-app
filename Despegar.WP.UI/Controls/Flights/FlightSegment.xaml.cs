@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Despegar.Core.Business.Flight.Itineraries;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -23,16 +24,11 @@ namespace Despegar.WP.UI.Controls.Flights
     /// </summary>
     public sealed partial class FlightSegment : Page
     {
+        //public StackPanel SegmentControl { get; set; }
 
-        public FlightSegmentTrip Origin { get; set; }
-        public FlightSegmentTrip Destiny { get; set; }
         public FlightSegment()
         {
             this.InitializeComponent();
-            Origin = origin;
-            Destiny = destiny;
-            
-
         }
 
         /// <summary>

@@ -19,6 +19,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
         <!-- Title Panel -->
@@ -26,14 +27,41 @@
             <TextBlock x:Uid="AppTitle" Style="{ThemeResource TitleTextBlockStyle}" Margin="0,12,0,0"/>
             <TextBlock x:Uid="Page_FlightDetail" Margin="0,-6.5,0,26.5" Style="{ThemeResource HeaderTextBlockStyle}" CharacterSpacing="{ThemeResource PivotHeaderItemCharacterSpacing}"/>
         </StackPanel>
-
         <!--TODO: Content should be placed within the following grid-->
-        <!--Margin="19,9.833,19,10"-->
-        <Grid Grid.Row="1" x:Name="ContentRoot" xmlns:src="using:Despegar.WP.UI.Controls.Flights">
-            <src:FlightSegment x:Name="flightSegment"  ></src:FlightSegment>
-        	
-        	<Button Content="Comprar" HorizontalAlignment="Left" Margin="130,433,0,0" VerticalAlignment="Top" Click="Button_Click"/>
-            
-        </Grid>
+
+        <StackPanel Grid.Row="1"  x:Name="ContentRoot" xmlns:src="using:Despegar.WP.UI.Controls.Flights">
+
+            <ScrollViewer  VerticalScrollBarVisibility="Auto" Height="400">
+                
+                <StackPanel>
+                    <TextBlock Text=" IDA" ></TextBlock>
+                    <ItemsControl x:Name="SegmentControlInbound" ItemsSource="{Binding Segments}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <src:FlightSegment x:Name="flightSegmentInbound"></src:FlightSegment>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+
+                    <TextBlock Text=" VUELTA" ></TextBlock>
+                    <ItemsControl x:Name="SegmentControlOutbound" ItemsSource="{Binding Segments}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <src:FlightSegment x:Name="flightSegmentOutbound"></src:FlightSegment>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </StackPanel>
+
+            </ScrollViewer>
+
+        </StackPanel>
+        <!--Margin="130,433,0,0"-->
+        <StackPanel Grid.Row="2">
+            <Button Content="Comprar" HorizontalAlignment="Center"  VerticalAlignment="Top" Click="Button_Click"/>
+        </StackPanel>
+
+
     </Grid>
+
 </Page>

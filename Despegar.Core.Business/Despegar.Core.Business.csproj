@@ -134,7 +134,6 @@
     <Compile Include="Flight\Itineraries\Outbound.cs" />
     <Compile Include="Flight\Itineraries\Paging.cs" />
     <Compile Include="Flight\Itineraries\Segment.cs" />
-    <Compile Include="Flight\Itineraries\Segment2.cs" />
     <Compile Include="Flight\Itineraries\Sorting.cs" />
     <Compile Include="Flight\Itineraries\Value.cs" />
     <Compile Include="Flight\Itineraries\Value2.cs" />

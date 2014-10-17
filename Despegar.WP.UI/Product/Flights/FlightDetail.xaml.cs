@@ -32,24 +32,31 @@ namespace Despegar.WP.UI.Product.Flights
         private NavigationHelper navigationHelper;
         private ObservableDictionary defaultViewModel = new ObservableDictionary();
         private FlightsSearchBoxModel flightSearchBoxModel = new FlightsSearchBoxModel();
+        private FlightDetailsModel flightDetailModelInbound = new FlightDetailsModel();
+        private FlightDetailsModel flightDetailModelOutbound = new FlightDetailsModel();
         private FlightsItineraries intinerarie;
 
         public FlightDetail()
         {
-            this.InitializeComponent();
+            this.InitializeComponent();            
 
             this.navigationHelper = new NavigationHelper(this);
             this.navigationHelper.LoadState += this.NavigationHelper_LoadState;
             this.navigationHelper.SaveState += this.NavigationHelper_SaveState;
 
-            TestInit();
+            FillDataMocked();
         }
 
-        private async void TestInit()
+        private async void FillDataMocked()
         {
             intinerarie = await flightSearchBoxModel.GetItineraries("BUE", "LAX", "2014-11-11", 1, "2014-11-13", 0, 0, 0, 10, "", "", "", "");
-            flightSegment.Origin.Airport.DataContext = intinerarie.items[0].outbound[0].segments[0].from;
-            flightSegment.Destiny.Airport.DataContext = intinerarie.items[0].inbound[0].segments[0].from;
+
+            flightDetailModelInbound.inbound = intinerarie.items[0].inbound[0];
+            flightDetailModelOutbound.outbound = intinerarie.items[0].outbound[0];
+
+            SegmentControlInbound.DataContext = flightDetailModelInbound;
+            SegmentControlOutbound.DataContext = flightDetailModelOutbound;
+
         }
 
         /// <summary>

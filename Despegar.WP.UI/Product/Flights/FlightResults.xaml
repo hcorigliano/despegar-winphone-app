@@ -13,7 +13,7 @@
     >
     <Page.Resources>
         <DataTemplate x:Key="FlightItemDateTemplate">
-        	<Grid>
+        	<Grid DataContext="{Binding Items[0]}">
         		<Grid.ColumnDefinitions>
         			<ColumnDefinition Width="50"/>
         			<ColumnDefinition Width="*"/>
@@ -21,7 +21,7 @@
         		</Grid.ColumnDefinitions>
         		<Image Grid.Column="0" HorizontalAlignment="Left" Height="Auto"  VerticalAlignment="Top" Width="Auto"/>
         		<StackPanel Grid.Column="1"  HorizontalAlignment="Left" Height="Auto"  VerticalAlignment="Top" Width="Auto">
-        			<TextBlock TextWrapping="Wrap" Text="{Binding Items[0].airline.name}" />
+        			<TextBlock TextWrapping="Wrap" Text="{Binding airline.name}" />
         			<TextBlock TextWrapping="Wrap" Text="asdfsad"/>
         		</StackPanel>
         		<TextBlock Grid.Column="2"  HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding price}" VerticalAlignment="Top"/>
@@ -59,6 +59,6 @@
 		<Grid Grid.Row="2" x:Name="ContentRoot" Width="Auto" >
 			<ListBox Background="White" ItemTemplate="{StaticResource FlightItemDateTemplate}" ItemsSource="{Binding Items}" />
 		</Grid>
-        
+        <Button Click="Button_Click"> clickme  </Button>
 	</Grid>
 </Page>
