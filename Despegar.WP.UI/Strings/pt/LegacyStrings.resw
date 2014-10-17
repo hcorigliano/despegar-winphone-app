@@ -180,7 +180,7 @@
   <data name="ConnectionErrorMessage.Text" xml:space="preserve">
     <value>Erro de conexão</value>
   </data>
-  <data name="HotelCheckoutBuyHotel" xml:space="preserve">
+  <data name="HotelCheckoutBuyHotel.Text" xml:space="preserve">
     <value>Comprar Hotel</value>
   </data>
   <data name="SettingsButtonConfiguration" xml:space="preserve">
@@ -336,22 +336,22 @@
   <data name="CheckoutLabel_Error_InvalidSecurityCode" xml:space="preserve">
     <value>Por favor, verifique quantidade de dígitos.</value>
   </data>
-  <data name="ThanksLabel_GoToHomePage" xml:space="preserve">
+  <data name="ThanksLabel_GoToHomePage.Text" xml:space="preserve">
     <value>Ir para home screen</value>
   </data>
-  <data name="ThanksLabel_HowTheProcessContinues" xml:space="preserve">
+  <data name="ThanksLabel_HowTheProcessContinues.Text" xml:space="preserve">
     <value>Como continuar a compra</value>
   </data>
-  <data name="ThanksLabel_ProcessDescription" xml:space="preserve">
+  <data name="ThanksLabel_ProcessDescription.Text" xml:space="preserve">
     <value>Seu pagamento esta sendo processado. Quando o pagamento seja concretado vôce vai ser contatado pelo e-mail.</value>
   </data>
-  <data name="ThanksLabel_ReservationDetail" xml:space="preserve">
+  <data name="ThanksLabel_ReservationDetail.Text" xml:space="preserve">
     <value>Informação da reservação</value>
   </data>
-  <data name="ThanksLabel_ThanksForBuying" xml:space="preserve">
+  <data name="ThanksLabel_ThanksForBuying.Text" xml:space="preserve">
     <value>Muito obrigado pela solicitação de compra!</value>
   </data>
-  <data name="ThanksLabel_YourCroIdNumber" xml:space="preserve">
+  <data name="ThanksLabel_YourCroIdNumber.Text" xml:space="preserve">
     <value>Seu número de solicitação de compra é</value>
   </data>
   <data name="CheckoutLabel_Error_email_INVALID_EMAIL" xml:space="preserve">
@@ -539,7 +539,7 @@ Decolar.com nao comparte seus dados de localizacao.</value>
   <data name="HotelCheckoutDetailsAFIPRes.Text" xml:space="preserve">
     <value>Res. 3550 AFIP</value>
   </data>
-  <data name="HotelCheckoutDetailsTaxes" xml:space="preserve">
+  <data name="HotelCheckoutDetailsTaxes.Text" xml:space="preserve">
     <value>Impostos e taxas</value>
   </data>
   <data name="HotelCheckout_PerNightRoom.Text" xml:space="preserve">
@@ -592,5 +592,32 @@ Decolar.com nao comparte seus dados de localizacao.</value>
   </data>
   <data name="HotelCheckout_PerNightRoomCo.Text" xml:space="preserve">
     <value>Quarto por noite</value>
+  </data>
+  <data name="CheckoutLabel_Error_billingAddress_LENGTH" xml:space="preserve">
+    <value>Por favor, ingrese el nombre de la calle.</value>
+  </data>
+  <data name="CheckoutLabel_Error_billingAddress_NOT_NUMERIC" xml:space="preserve">
+    <value>Por favor, no ingrese valores numericos.</value>
+  </data>
+  <data name="CheckoutLabel_Error_cardholderName_INVALID_LENGTH" xml:space="preserve">
+    <value>Por favor, ingrese el nombre o razón social de la factura fiscal.</value>
+  </data>
+  <data name="CheckoutLabel_Error_fiscalDocument_INVALID_CUIT" xml:space="preserve">
+    <value>Escriba el numero de CUIL o CUIT sin espacios ni guiones.</value>
+  </data>
+  <data name="CheckoutLabel_Error_fiscalId_INVALID_CUIT" xml:space="preserve">
+    <value>Por favor verifique el número de CUIL/CUIT ingresado.</value>
+  </data>
+  <data name="CheckoutLabel_Error_invoiceName_INVALID_LENGTH" xml:space="preserve">
+    <value>Por favor, ingrese el nombre o razón social.</value>
+  </data>
+  <data name="CheckoutLabel_Error_number_INVALID_LENGTH" xml:space="preserve">
+    <value>Por favor, ingrese numero de la dirección.</value>
+  </data>
+  <data name="CheckoutLabel_Error_postalCode_INVALID_LENGTH" xml:space="preserve">
+    <value>Por favor, ingrese el codigo postal.</value>
+  </data>
+  <data name="CheckoutLabel_Error_street_INVALID_LENGTH" xml:space="preserve">
+    <value>Por favor, ingrese el nombre de la calle.</value>
   </data>
 </root>

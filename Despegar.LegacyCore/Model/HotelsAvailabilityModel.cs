@@ -35,7 +35,7 @@ namespace Despegar.LegacyCore.Model
             if (uri.Query.Contains("room="))
                 Room = uri.Query.Substring(uri.Query.IndexOf("room=") + 5);
 
-            ApplicationConfig.Instance.BrowsingPages.Pop();
+            //ApplicationConfig.Instance.BrowsingPages.Pop();
         }
 
         public async Task<HotelAvailability> GetAvailability()

@@ -3,18 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Navigation;
-using Microsoft.Phone.Controls;
-using Microsoft.Phone.Shell;
-using Despegar.Core.ViewModel;
-using Despegar.Core.Util;
 //using Despegar.Analytics;
-using System.Windows.Media.Imaging;
+//using System.Windows.Media.Imaging;
+using Windows.UI.Xaml.Controls;
+using Despegar.LegacyCore.ViewModel;
+using Despegar.WP.UI.Classes;
+using Windows.UI.Xaml;
+using Despegar.WP.UI;
+using Windows.Phone.UI.Input;
+using Windows.UI.Xaml.Navigation;
+using Windows.UI.Xaml.Media.Imaging;
 
-namespace Despegar.View
+namespace Despegar.WP.UI.Product.Legacy
 {
-    public partial class HotelsThanks : PhoneApplicationPage
+    public partial class HotelsThanks : Page
     {
         public HotelsThanksViewModel ThanksViewModel { get; set; }
 
@@ -24,26 +26,33 @@ namespace Despegar.View
 
             #if DECOLAR
             MainLogo.Source = new BitmapImage(new Uri("/Assets/Image/decolar-logo.png", UriKind.RelativeOrAbsolute));
-            #endif
-
+            #endif            
+            
             ThanksViewModel = new HotelsThanksViewModel();
             HotelsThanksView.DataContext = ThanksViewModel;
         }
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        
+        protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
         {
-            Logger.Info(String.Format("[view:hotel:thanks] Hotel Thanks page navigated for", this.ThanksViewModel.ToString()));
-            //Track.View("HotelsThanksPage");
+            HardwareButtons.BackPressed -= HardwareButtons_BackPressed;
         }
 
-        protected override void OnBackKeyPress(System.ComponentModel.CancelEventArgs e)
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {        
+            HardwareButtons.BackPressed += HardwareButtons_BackPressed;
+        }
+
+        private void HardwareButtons_BackPressed(object sender, BackPressedEventArgs e)
         {
-            e.Cancel = true;
+            e.Handled = true;
             // do nothing
         }
 
         private void BackToFlow_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new Uri("/View/Home.xaml", UriKind.RelativeOrAbsolute));
+            PagesManager.ClearStack();
+            PagesManager.GoTo(typeof(Home), null);
         }
+       
     }
 }

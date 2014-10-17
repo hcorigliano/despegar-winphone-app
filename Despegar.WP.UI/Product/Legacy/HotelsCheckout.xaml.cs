@@ -1,6 +1,5 @@
 ﻿using Despegar.LegacyCore;
 using Despegar.LegacyCore.Connector.Domain.API;
-using Despegar.LegacyCore.Model;
 //using System.Windows.Data;
 //using System.Windows.Media.Imaging;
 using Despegar.LegacyCore.Util;
@@ -10,11 +9,15 @@ using Despegar.WP.UI.Product.Legacy;
 using Despegar.WP.UI.Strings;
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Net.NetworkInformation;
 using Windows.Phone.UI.Input;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Navigation;
 
 
@@ -43,7 +46,7 @@ namespace Despegar.View
             CheckoutViewModel =  new  HotelsCheckoutViewModel();
             CheckoutViewModel.FieldsLoaded += ViewModel_FieldsLoaded;
             HotelsCheckoutView.DataContext = CheckoutViewModel;
-            FillStatesListPicker();            
+            FillStatesListPicker();                   
         }
 
         protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
@@ -66,23 +69,25 @@ namespace Despegar.View
 
         private void HardwareButtons_BackPressed(object sender, BackPressedEventArgs e)
         {
+            e.Handled = true;
+
             if (!NetworkInterface.GetIsNetworkAvailable())
             {
                 Application.Current.Exit();
             }
             else
             {
-                e.Handled = true;
-                Frame frame = Window.Current.Content as Frame;
-                frame.GoBack();
+                ApplicationConfig.Instance.BrowsingPages.Pop();
+                PagesManager.GoBack();
+                PagesManager.ClearPageCache();
             }
         }
 
         private void ViewModel_FieldsLoaded(object sender, EventArgs e)
         {
             Logger.Info("[view:HotelsCheckout]: Booking fields loaded");
-            //if (!CheckoutViewModel.InvoiceDefinitionIsRequired)
-                //CheckoutForm.Items.Remove(InvoiceDefinitionPivotItem);  TODO: uncomment
+            if (!CheckoutViewModel.InvoiceDefinitionIsRequired)
+                CheckoutForm.Items.Remove(InvoiceDefinitionPivotItem);
         }
 
         private void Input_Focus(object sender, RoutedEventArgs e)
@@ -213,7 +218,6 @@ namespace Despegar.View
         private async void FillStatesListPicker()
         {
             StatesListPicker.ItemsSource =  (IEnumerable)(await CheckoutViewModel.GetAllStatesAsync());
-            
         }
        
         private void AcceptConditions_Checked(object sender, RoutedEventArgs e)
@@ -229,8 +233,14 @@ namespace Despegar.View
 
         private void AcceptConditions_Click(object sender, RoutedEventArgs e)
         {
-            ConfigurationModel Configuration = new ConfigurationModel();
-            ApplicationConfig.Instance.ResetBrowsingPages(new Uri(Configuration.GetCurrentSecureDomain() + "book/hotels/checkout/conditions/wp"));
+            //ConfigurationModel Configuration = new ConfigurationModel();
+            string domain = "https://secure.despegar.com.ar/book/hotels/checkout/conditions/wp";
+
+            #if DECOLAR
+                domain = "https://secure.decolar.com/book/hotels/checkout/conditions/wp";
+            #endif
+
+            ApplicationConfig.Instance.BrowsingPages.Push(new Uri(domain));
             PagesManager.GoTo(typeof(Browser),  null);
         }
 
@@ -261,14 +271,19 @@ namespace Despegar.View
                 err = !string.IsNullOrEmpty(errMessage);
             }
 
-            //if (!err)
-               //PagesManager.GoTo(typeof(HotelsThanks), null);
+            if (!err)
+               PagesManager.GoTo(typeof(HotelsThanks), null);
 
-            //else if (errMessage == Properties.CheckoutLabel_Message_AdditionalDataNeeded)
+            //else if (errMessage == AppResources.GetLegacyString("CheckoutLabel_Message_AdditionalDataNeeded"))
             //    NavigationService.Navigate(new Uri("/View/HotelsRiskQuestions.xaml", UriKind.RelativeOrAbsolute));
 
-            //else
-            //    MessageBox.Show(errMessage, AppResources.GetLegacyString("CheckoutLabel_Message_CheckTheInformation, MessageBoxButton.OK"));
+            else {
+                var messageDialog = new MessageDialog(errMessage, AppResources.GetLegacyString("CheckoutLabel_Message_CheckTheInformation"));
+                messageDialog.Commands.Add(new UICommand("OK"));
+                messageDialog.DefaultCommandIndex = 0;
+
+                await messageDialog.ShowAsync();
+            }
         }
 
         private void FiscalStatus_Changed(object sender, SelectionChangedEventArgs e)
@@ -284,7 +299,7 @@ namespace Despegar.View
             }
 
 
-            if (selected == "FINAL_CONSUMER") //TODO: use enum constant class
+            if (selected == "FINAL_CONSUMER")
             {
                 this.razonSocial.Visibility = Visibility.Collapsed;
             }
@@ -296,52 +311,49 @@ namespace Despegar.View
 
         private void States_Changed(object sender, SelectionChangedEventArgs e)
         {
-            //citiesAutoComplete.Text = "";
+            citiesAutoComplete.Text = "";
 
-            ////Saves ID State in InvoiceDefinition
-            //if (CheckoutViewModel.InvoiceDefinition != null)
-            //{
-            //    State selected = (State)StatesListPicker.SelectedItem;
-            //    CheckoutViewModel.InvoiceDefinition.billingAddress.stateId.value = selected.oid.ToString();
-            //}
+            // Saves ID State in InvoiceDefinition
+            if (CheckoutViewModel.InvoiceDefinition != null)
+            {
+                State selected = (State)StatesListPicker.SelectedItem;
+                CheckoutViewModel.InvoiceDefinition.billingAddress.stateId.value = selected.oid.ToString();
+            }
         }
 
-        //private async void Cities_Changed(object sender, EventArgs e)
-        //{
-        //    //States_Changed
-        //    State selected = (State)StatesListPicker.SelectedItem;            
-        //    if (citiesAutoComplete.Text.ToString() != "")
-        //    {
-        //        citiesAutoComplete.ItemsSource = (IEnumerable)(await CheckoutViewModel.GetStringCityAsync(citiesAutoComplete.Text.ToString(), (int)selected.oid));
-        //    }
-        //}
+        private async void Cities_Changed(object sender, KeyRoutedEventArgs e)
+        {
+            // States_Changed
+            State selected = (State)StatesListPicker.SelectedItem;
+            if (!String.IsNullOrEmpty(citiesAutoComplete.Text))            
+                citiesAutoComplete.ItemsSource = (IEnumerable)(await CheckoutViewModel.GetStringCityAsync(citiesAutoComplete.Text.ToString(), (int)selected.oid));            
+        }
 
-        //private void City_Focus_Lost(object sender, EventArgs e)
-        //{
-        //    //Force complete city when focus lost
-        //    if (citiesAutoComplete.Text.Length >= 3 && citiesAutoComplete.ItemsSource != null)
-        //    {
-
-        //        List<City> cities = (List<City>)citiesAutoComplete.ItemsSource;
-        //        City city = cities.FirstOrDefault();
-        //        if (city != null)
-        //        {
-        //            citiesAutoComplete.Text = city.full_name;
-        //            CheckoutViewModel.InvoiceDefinition.billingAddress.cityId.value = city.id.ToString();
-        //        }
-        //        else
-        //        {
-        //            citiesAutoComplete.Text = "";
-        //            CheckoutViewModel.InvoiceDefinition.billingAddress.cityId.value = "";
-        //        }
-        //    }
-        //    else
-        //    {
-        //        citiesAutoComplete.Text = "";
-        //        CheckoutViewModel.InvoiceDefinition.billingAddress.cityId.value = "";
-        //    }
-        //}
-
+        private void City_Focus_Lost(object sender, RoutedEventArgs e)
+        {
+            // Force complete city when focus lost
+            if (citiesAutoComplete.Text.Length > 2 && citiesAutoComplete.ItemsSource != null)
+            {
+                List<City> cities = (List<City>)citiesAutoComplete.ItemsSource;
+                City city = cities.FirstOrDefault();
+                if (city != null)
+                {
+                    citiesAutoComplete.Text = city.full_name;
+                    CheckoutViewModel.InvoiceDefinition.billingAddress.cityId.value = city.id.ToString();
+                }
+                else
+                {
+                    citiesAutoComplete.Text = "";
+                    CheckoutViewModel.InvoiceDefinition.billingAddress.cityId.value = "";
+                }
+            }
+            else
+            {
+                citiesAutoComplete.Text = "";
+                CheckoutViewModel.InvoiceDefinition.billingAddress.cityId.value = "";
+            }
+        }
+       
        
     }
 }

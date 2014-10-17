@@ -114,14 +114,14 @@
     <Compile Include="Repository\CountriesRep.cs" />
     <Compile Include="Repository\CurrenciesRep.cs" />
     <Compile Include="Repository\ValidationCreditcardsRep.cs" />
-    <Compile Include="Resource\ViewModel\AppDelegate.cs" />
-    <Compile Include="Resource\ViewModel\HomeViewModel.cs" />
-    <Compile Include="Resource\ViewModel\HotelsCheckoutViewModel.cs" />
-    <Compile Include="Resource\ViewModel\HotelsRiskQuestionsViewModel.cs" />
-    <Compile Include="Resource\ViewModel\HotelsThanksViewModel.cs" />
-    <Compile Include="Resource\ViewModel\MainViewModel.cs" />
-    <Compile Include="Resource\ViewModel\SettingsViewModel.cs" />
-    <Compile Include="Resource\ViewModel\SplashViewModel.cs" />
+    <Compile Include="ViewModel\AppDelegate.cs" />
+    <Compile Include="ViewModel\HomeViewModel.cs" />
+    <Compile Include="ViewModel\HotelsCheckoutViewModel.cs" />
+    <Compile Include="ViewModel\HotelsRiskQuestionsViewModel.cs" />
+    <Compile Include="ViewModel\HotelsThanksViewModel.cs" />
+    <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\SettingsViewModel.cs" />
+    <Compile Include="ViewModel\SplashViewModel.cs" />
     <Compile Include="Util\BrowsingStack.cs" />
     <Compile Include="Util\GeoLocation.cs" />
     <Compile Include="Util\Logger.cs" />
@@ -144,6 +144,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Resource\" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">
     <VisualStudioVersion>12.0</VisualStudioVersion>

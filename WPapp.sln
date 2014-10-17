@@ -225,6 +225,7 @@ Global
 		{9359897F-8DF6-4787-80DB-B68ED851088E}.Decolar_Debug|ARM.ActiveCfg = Debug|Any CPU
 		{9359897F-8DF6-4787-80DB-B68ED851088E}.Decolar_Debug|x86.ActiveCfg = Debug|Any CPU
 		{9359897F-8DF6-4787-80DB-B68ED851088E}.Decolar_Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9359897F-8DF6-4787-80DB-B68ED851088E}.Decolar_Release|Any CPU.Build.0 = Release|Any CPU
 		{9359897F-8DF6-4787-80DB-B68ED851088E}.Decolar_Release|ARM.ActiveCfg = Release|Any CPU
 		{9359897F-8DF6-4787-80DB-B68ED851088E}.Decolar_Release|x86.ActiveCfg = Release|Any CPU
 		{9359897F-8DF6-4787-80DB-B68ED851088E}.Despegar_Debug|Any CPU.ActiveCfg = Debug|Any CPU

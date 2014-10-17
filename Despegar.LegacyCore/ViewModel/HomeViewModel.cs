@@ -15,16 +15,11 @@ namespace Despegar.LegacyCore.ViewModel
 {
     public class HomeViewModel : INotifyPropertyChanged
     {
-
-        public ConfigurationModel Configuration { get; set; }
-
         public bool Geolocation { get; set; }
-        public string Domain { get; set; }
+        public static string Domain { get { return "http://m.despegar.com.ar/"; } }
 
         public HomeViewModel()
         {
-            //Configuration = new ConfigurationModel();            
-            Domain = "http://m.despegar.com.ar/";
             Geolocation = ApplicationConfig.Instance.Location; // TODO: Is it Necesary?
 
             NotifyPropertyChanged("Geolocation");

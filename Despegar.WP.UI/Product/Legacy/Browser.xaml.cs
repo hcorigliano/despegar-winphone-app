@@ -3,14 +3,15 @@ using Despegar.View;
 using Despegar.WP.UI.Classes;
 using System;
 using System.Net.NetworkInformation;
-//using System.Windows.Media.Imaging;
 using System.Text.RegularExpressions;
 using Windows.ApplicationModel.Core;
 using Windows.Phone.UI.Input;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
+using Windows.Web.Http;
 
 namespace Despegar.WP.UI.Product.Legacy
 {
@@ -18,6 +19,7 @@ namespace Despegar.WP.UI.Product.Legacy
     {
         private Uri _currentPage;
         private bool _firstPage;
+        private static string XVERSION = "windowsphone";
 
         public Browser()
         {
@@ -26,7 +28,7 @@ namespace Despegar.WP.UI.Product.Legacy
             #if DECOLAR            
               // TODO: will not compile!
               MainLogo.Source = new BitmapImage(new Uri("/Assets/Image/decolar-logo.png", UriKind.RelativeOrAbsolute));
-            #endif
+            #endif            
         }
 
         protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
@@ -47,11 +49,15 @@ namespace Despegar.WP.UI.Product.Legacy
             if (ApplicationConfig.Instance.BrowsingPages.Any())
             {
                 _firstPage = true;
+                // Headers configuration
+                HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, ApplicationConfig.Instance.BrowsingPages.Peek());
+                request.Headers.Append("X-Version", XVERSION);
+
                 var task = CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(
                           CoreDispatcherPriority.Normal,
                           () =>
                           {
-                              EmbbededBrowser.Navigate(ApplicationConfig.Instance.BrowsingPages.Peek());
+                              EmbbededBrowser.NavigateWithHttpRequestMessage(request);
                           }
                 );
             }
@@ -69,12 +75,9 @@ namespace Despegar.WP.UI.Product.Legacy
                     return;
 
                 if (e.Uri.ToString().Contains("book/hotels") && !e.Uri.ToString().Contains("conditions"))
-                {          
+                {
                     ApplicationConfig.Instance.BrowsingPages.Push(e.Uri);
                     PagesManager.GoTo(typeof(HotelsCheckout), null);
-
-                    // remove checkout entry
-                    ApplicationConfig.Instance.BrowsingPages.Pop();
                     return;
                 }
 
@@ -91,8 +94,10 @@ namespace Despegar.WP.UI.Product.Legacy
                );
             }
 
-            if (_firstPage && !e.Uri.Equals(_currentPage))
-                ApplicationConfig.Instance.BrowsingPages.Push(e.Uri);
+            if (_firstPage && !e.Uri.Equals(_currentPage)) 
+            { 
+                ApplicationConfig.Instance.BrowsingPages.Push(e.Uri);         
+            }
 
             _firstPage = false;
             EmbbededBrowserHide.Begin();
@@ -138,6 +143,8 @@ namespace Despegar.WP.UI.Product.Legacy
 
         private void HardwareButtons_BackPressed(object sender, BackPressedEventArgs e)
         {
+            e.Handled = true;            
+
             if (!NetworkInterface.GetIsNetworkAvailable())
             {
                 Application.Current.Exit();
@@ -148,7 +155,6 @@ namespace Despegar.WP.UI.Product.Legacy
 
                 if (ApplicationConfig.Instance.BrowsingPages.Any())
                 {
-                    e.Handled = true;
                     var task = CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(
                                 CoreDispatcherPriority.Normal,
                                     () =>
@@ -158,9 +164,7 @@ namespace Despegar.WP.UI.Product.Legacy
                     );
                 }  else {
                     // No more URLs,  Navigate to home
-                    e.Handled = true;
-                    Frame frame = Window.Current.Content as Frame;
-                    frame.GoBack();
+                    PagesManager.GoBack();
                 }      
             }
             

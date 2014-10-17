@@ -17,6 +17,7 @@ using System.Collections.ObjectModel;
 using Despegar.WP.UI.Model.Classes;
 using Despegar.WP.UI.Classes;
 using Despegar.LegacyCore.Connector;
+using Despegar.LegacyCore;
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
 
 namespace Despegar.WP.UI
@@ -67,7 +68,7 @@ namespace Despegar.WP.UI
         {
             CountryItem countrySelected = e.ClickedItem as CountryItem;
             APIConnector.Instance.Channel = countrySelected.Code;  // TODO: Legacy code
-
+            ApplicationConfig.Instance.Country = countrySelected.Code; // TODO: Legacy code
             PagesManager.GoTo(typeof(Home), e);
         }   
     }

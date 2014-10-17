@@ -58,9 +58,9 @@ namespace Despegar.Core.Connector
             {
               data = JsonConvert.SerializeObject(postData);
             }
-            catch(JsonSerializationException e)
+            catch(JsonSerializationException ex)
             {
-                throw new JsonDeserializationException(String.Format("[Connector]:Could not serialize object of type {0} to call Service: {1}", typeof(T).FullName, url), ex);
+                var e = new JsonSerializerException(String.Format("[Connector]:Could not serialize object of type {0} to call Service: {1}", typeof(T).FullName, url), ex);
                 Logger.LogCoreException(e);
                 throw e;
             }

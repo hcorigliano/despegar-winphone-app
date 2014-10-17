@@ -34,13 +34,10 @@ namespace Despegar.WP.UI
     {        
         private NavigationHelper navigationHelper;
         private ObservableDictionary defaultViewModel = new ObservableDictionary();
-        private HomeViewModel legacyHomeViewModel;
 
         public Home()
         {
             this.InitializeComponent();
-
-            this.legacyHomeViewModel = new HomeViewModel(); // TODO: LEGACY
 
             this.navigationHelper = new NavigationHelper(this);
             this.navigationHelper.LoadState += this.NavigationHelper_LoadState;
@@ -142,8 +139,8 @@ namespace Despegar.WP.UI
 
         private void LoadBrowser(string relativePath, ItemClickEventArgs e)
         {
-            //ApplicationConfig.Instance.ResetBrowsingPages(new Uri(this.legacyHomeViewModel.Domain + relativePath));
-            ApplicationConfig.Instance.ResetBrowsingPages(new Uri("http://m.despegar.com.ar/hoteles/detail/297146/2014-10-31/2014-11-01/2/ARS"));
+            ApplicationConfig.Instance.ResetBrowsingPages(new Uri(HomeViewModel.Domain + relativePath));
+            //ApplicationConfig.Instance.ResetBrowsingPages(new Uri("http://m.despegar.com.ar/hoteles/detail/297146/2014-10-31/2014-11-01/2/ARS"));
             PagesManager.GoTo(typeof(Browser), e);
         }
     }
