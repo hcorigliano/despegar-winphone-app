@@ -30,10 +30,11 @@
                     <TextBlock TextWrapping="Wrap" Text="{Binding outbound.Count}"/>
                 </StackPanel>
                 <TextBlock Grid.Column="2"  HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding price}" VerticalAlignment="Top"/>
-                <ItemsControl Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" ItemsSource="{Binding Routes}" DataContext="{Binding}">
+                <ItemsControl x:Name="RoutesItemControl"  Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" ItemsSource="{Binding Routes}" DataContext="{Binding}">
+                	
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <Grid>
+                            <Grid Tapped="Grid_Tapped">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="20"/>
                                     <RowDefinition Height="20"/>
