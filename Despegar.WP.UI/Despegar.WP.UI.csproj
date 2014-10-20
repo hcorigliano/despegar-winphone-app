@@ -113,6 +113,9 @@
     <Compile Include="Controls\DateDisplayMiniBoxSearch.xaml.cs">
       <DependentUpon>DateDisplayMiniBoxSearch.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Flights\FlightSegment.xaml.cs">
+      <DependentUpon>FlightSegment.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Flights\QuantityPassagersControl.xaml.cs">
       <DependentUpon>QuantityPassagersControl.xaml</DependentUpon>
     </Compile>
@@ -178,6 +181,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\DateDisplayMiniBoxSearch.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Flights\FlightSegment.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

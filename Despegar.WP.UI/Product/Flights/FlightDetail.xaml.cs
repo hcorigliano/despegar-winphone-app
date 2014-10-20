@@ -16,6 +16,8 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Despegar.Core.Business.Flight.Itineraries;
+using Despegar.WP.UI.Model;
 
 
 // The Basic Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
@@ -29,14 +31,32 @@ namespace Despegar.WP.UI.Product.Flights
     {
         private NavigationHelper navigationHelper;
         private ObservableDictionary defaultViewModel = new ObservableDictionary();
+        private FlightsSearchBoxModel flightSearchBoxModel = new FlightsSearchBoxModel();
+        private FlightDetailsModel flightDetailModelInbound = new FlightDetailsModel();
+        private FlightDetailsModel flightDetailModelOutbound = new FlightDetailsModel();
+        private FlightsItineraries intinerarie;
 
         public FlightDetail()
         {
-            this.InitializeComponent();
+            this.InitializeComponent();            
 
             this.navigationHelper = new NavigationHelper(this);
             this.navigationHelper.LoadState += this.NavigationHelper_LoadState;
             this.navigationHelper.SaveState += this.NavigationHelper_SaveState;
+
+            FillDataMocked();
+        }
+
+        private async void FillDataMocked()
+        {
+            intinerarie = await flightSearchBoxModel.GetItineraries("BUE", "LAX", "2014-11-11", 1, "2014-11-13", 0, 0, 0, 10, "", "", "", "");
+
+            flightDetailModelInbound.inbound = intinerarie.items[0].inbound[0];
+            flightDetailModelOutbound.outbound = intinerarie.items[0].outbound[0];
+
+            SegmentControlInbound.DataContext = flightDetailModelInbound;
+            SegmentControlOutbound.DataContext = flightDetailModelOutbound;
+
         }
 
         /// <summary>

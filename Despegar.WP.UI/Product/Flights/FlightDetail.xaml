@@ -18,7 +18,8 @@
 
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
         <!-- Title Panel -->
@@ -26,34 +27,41 @@
             <TextBlock x:Uid="AppTitle" Style="{ThemeResource TitleTextBlockStyle}" Margin="0,12,0,0"/>
             <TextBlock x:Uid="Page_FlightDetail" Margin="0,-6.5,0,26.5" Style="{ThemeResource HeaderTextBlockStyle}" CharacterSpacing="{ThemeResource PivotHeaderItemCharacterSpacing}"/>
         </StackPanel>
-
         <!--TODO: Content should be placed within the following grid-->
-        <Grid Grid.Row="1" x:Name="ContentRoot" Margin="19,9.833,19,10">
-        	
-        	<Grid HorizontalAlignment="Left" Height="49" Margin="10,10,0,0" VerticalAlignment="Top" Width="342">
-				<TextBlock HorizontalAlignment="Left" Margin="0,0,0,0" TextWrapping="Wrap" Text="EZE - GRU" VerticalAlignment="Top"/>
-				<TextBlock HorizontalAlignment="Left" Margin="0,20,0,0" TextWrapping="Wrap" Text="Vuelo LA6465 - Económica" VerticalAlignment="Top"/>
-				<Image HorizontalAlignment="Left" Height="49" Margin="217,10,0,0" VerticalAlignment="Top" Width="50"/>
-				<TextBlock HorizontalAlignment="Left" Margin="300,10,0,0" TextWrapping="Wrap" Text="Lan" VerticalAlignment="Top"/>
-				<Image HorizontalAlignment="Left" Height="49" Margin="217,10,0,0" VerticalAlignment="Top" Width="50"/>
-			</Grid>
-        	<Grid HorizontalAlignment="Left" Height="100" Margin="10,59,0,0" VerticalAlignment="Top" Width="352">
-        		<StackPanel HorizontalAlignment="Left" Height="80" Margin="10,10,0,0" VerticalAlignment="Top" Width="332">
-        			<TextBlock TextWrapping="Wrap" Text="Operado por Tam"/>
-        			<Grid Height="56" Margin="0,0,-0.333,0">
-        				<TextBlock HorizontalAlignment="Left" Margin="25,10,0,0" TextWrapping="Wrap" Text="14 OCT 2014" VerticalAlignment="Top"/>
-        				<TextBlock HorizontalAlignment="Left" Margin="25,28,0,0" TextWrapping="Wrap" Text="17:55" VerticalAlignment="Top"/>
-        				<Image HorizontalAlignment="Left" Height="31" Margin="89,10,0,0" VerticalAlignment="Top" Width="69"/>
-        				<TextBlock HorizontalAlignment="Left" Margin="192,10,0,0" TextWrapping="Wrap" Text="Sale de Buenos Aires" VerticalAlignment="Top"/>
-        				<TextBlock HorizontalAlignment="Left" Margin="192,28,0,0" TextWrapping="Wrap" Text="Aeropuerto Buenos Aires Ministro Pistarini Ezeiza" VerticalAlignment="Top"/>
-        			</Grid>
-					<!--TODO add control for outbound //-->
-					<TextBlock Text="Conexión con espera de 2 hs 45m"></TextBlock>
-        		</StackPanel>
-				
-			</Grid>
-        	<Button Content="Comprar" HorizontalAlignment="Left" Margin="130,433,0,0" VerticalAlignment="Top" Click="Button_Click"/>
-            
-        </Grid>
+
+        <StackPanel Grid.Row="1"  x:Name="ContentRoot" xmlns:src="using:Despegar.WP.UI.Controls.Flights">
+
+            <ScrollViewer  VerticalScrollBarVisibility="Auto" Height="400">
+                
+                <StackPanel>
+                    <TextBlock Text=" IDA" ></TextBlock>
+                    <ItemsControl x:Name="SegmentControlInbound" ItemsSource="{Binding Segments}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <src:FlightSegment x:Name="flightSegmentInbound"></src:FlightSegment>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+
+                    <TextBlock Text=" VUELTA" ></TextBlock>
+                    <ItemsControl x:Name="SegmentControlOutbound" ItemsSource="{Binding Segments}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <src:FlightSegment x:Name="flightSegmentOutbound"></src:FlightSegment>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </StackPanel>
+
+            </ScrollViewer>
+
+        </StackPanel>
+        <!--Margin="130,433,0,0"-->
+        <StackPanel Grid.Row="2">
+            <Button Content="Comprar" HorizontalAlignment="Center"  VerticalAlignment="Top" Click="Button_Click"/>
+        </StackPanel>
+
+
     </Grid>
+
 </Page>

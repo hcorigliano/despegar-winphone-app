@@ -19,7 +19,7 @@ namespace Despegar.WP.UI.Model
             set
             {
                 //TODO initialize all variables needed for this page.
-                    
+                
                 //this.cheapest_price = value.cheapest_price;
                 this.Currencies = value.currencies;
                 

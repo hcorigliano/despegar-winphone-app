@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Despegar.Core.Business.Flight.Itineraries
 {
@@ -19,5 +18,6 @@ namespace Despegar.Core.Business.Flight.Itineraries
         public string arrival_time { get; set; }
         public string cabin_type { get; set; }
         public List<object> stopovers { get; set; }
+        public OperatedBy operated_by { get; set; }
     }
 }

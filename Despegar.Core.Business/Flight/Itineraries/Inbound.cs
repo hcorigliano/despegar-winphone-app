@@ -14,6 +14,6 @@ namespace Despegar.Core.Business.Flight.Itineraries
         public string departure { get; set; }
         public string arrival { get; set; }
         public int layovers { get; set; }
-        public List<Segment2> segments { get; set; }
+        public List<Segment> segments { get; set; }
     }
 }
