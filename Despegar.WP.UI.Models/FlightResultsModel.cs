@@ -1,4 +1,5 @@
 ﻿using Despegar.Core.Business.Flight.Itineraries;
+using Despegar.WP.UI.Model.Classes.Flights;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -18,19 +19,19 @@ namespace Despegar.WP.UI.Model
             set
             {
                 //TODO initialize all variables needed for this page.
-
+                    
                 //this.cheapest_price = value.cheapest_price;
                 this.Currencies = value.currencies;
                 
-                this.Items = value.items;
+                FillItems(value.items);
+
                 this.Facets = value.facets;
                 
                 this.Sorting = value.sorting;
                 this.Paging = value.paging;
-             
             }
         }
-
+        
         //TODO: create the correct class for cheapest_price
         //public IObservable<object> cheapest_price { get; set; }
 
@@ -44,8 +45,8 @@ namespace Despegar.WP.UI.Model
         }
         
         //This items represents flights inbounds and outbounds
-        private List<Item> _items;
-        public List<Item> Items {
+        private List<BindableItem> _items;
+        public List<BindableItem> Items {
             get { return _items; }
             set {
                 _items = value;
@@ -100,5 +101,22 @@ namespace Despegar.WP.UI.Model
             //Validate each variable for this model
         }
 
+        private void FillItems(List<Item> itemList)
+        {
+            if (Items == null)
+            {
+                Items = new List<BindableItem>();
+            }
+            Items.AddRange( (itemList.Select(il=> new BindableItem(il))).ToList() );
+        }
+
+        public void FillRoutedTemplate(Item item)
+        {
+            var _item = Items.FirstOrDefault(i=> item.id.Equals(i.id));
+            if (_item != null)
+            {
+                _item.LinkFlightRoutes();
+            }
+        }
     }
 }

@@ -116,6 +116,20 @@ namespace Despegar.WP.UI.Product.Flights
 
         #endregion
 
+        private void ListBox_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            ListBox listbox = sender as ListBox;
+            
+            if (listbox!=null)
+            {
+                Item item = listbox.SelectedItem as Item;
+                if (item != null)
+                {
+                    flightResultModel.FillRoutedTemplate(item);
+                }
+            }
+        }
+
         
     }
 }

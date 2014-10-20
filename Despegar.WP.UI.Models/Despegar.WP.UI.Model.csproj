@@ -55,7 +55,9 @@
   <ItemGroup>
     <Compile Include="AppModelBase.cs" />
     <Compile Include="Classes\BindableBase.cs" />
+    <Compile Include="Classes\Flights\BindableItem.cs" />
     <Compile Include="Classes\Flights\PassagersQuantity.cs" />
+    <Compile Include="Classes\Flights\RoutesItems.cs" />
     <Compile Include="FlightsSearchBoxModel.cs" />
     <Compile Include="GlobalConfiguration.cs" />
     <Compile Include="Classes\AdvanceSearchModel.cs" />
