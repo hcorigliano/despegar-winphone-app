@@ -30,7 +30,7 @@
                     <TextBlock TextWrapping="Wrap" Text="{Binding outbound.Count}"/>
                 </StackPanel>
                 <TextBlock Grid.Column="2"  HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding price}" VerticalAlignment="Top"/>
-                <ItemsControl x:Name="RoutesItemControl"  Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" ItemsSource="{Binding Routes}" DataContext="{Binding}">
+                <ItemsControl x:Name="RoutesItemControl"  Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" ItemsSource="{Binding Routes}" DataContext="{Binding}" Visibility="Collapsed">
                 	
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
@@ -105,7 +105,7 @@
             <TextBlock />
         </Grid>
         <Grid Grid.Row="2" x:Name="ContentRoot" Width="Auto" >
-            <ListBox Background="White" ItemTemplate="{StaticResource FlightItemDateTemplate}" ItemsSource="{Binding Items}" Tapped="ListBox_Tapped" />
+            <ListBox Name="lbFlights" Background="White" ItemTemplate="{StaticResource FlightItemDateTemplate}" ItemsSource="{Binding Items}"  Tapped="ListBox_Tapped"  />
         </Grid>
 
     </Grid>
