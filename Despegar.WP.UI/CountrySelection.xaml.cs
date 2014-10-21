@@ -74,10 +74,7 @@ namespace Despegar.WP.UI
         {
             //persist data in phone
             CountryItem countrySelected = e.ClickedItem as CountryItem;
-            var roamingSettings = ApplicationData.Current.RoamingSettings;
-
-            APIConnector.Instance.Channel = countrySelected.Code;  // TODO: Legacy code
-            ApplicationConfig.Instance.Country = countrySelected.Code; // TODO: Legacy code
+            var roamingSettings = ApplicationData.Current.RoamingSettings;          
 
             roamingSettings.Values["countryCode"] = countrySelected.Code;
             roamingSettings.Values["countryName"] = countrySelected.CountryName;

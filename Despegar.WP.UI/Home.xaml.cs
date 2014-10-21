@@ -1,7 +1,9 @@
 ﻿using Despegar.LegacyCore;
+using Despegar.LegacyCore.Connector;
 using Despegar.LegacyCore.ViewModel;
 using Despegar.WP.UI.Classes;
 using Despegar.WP.UI.Common;
+using Despegar.WP.UI.Model;
 using Despegar.WP.UI.Product.Legacy;
 using Despegar.WP.UI.Strings;
 using System;
@@ -120,8 +122,9 @@ namespace Despegar.WP.UI
 
         private void LoadBrowser(string relativePath, ItemClickEventArgs e)
         {
+            APIConnector.Instance.Channel = ApplicationConfig.Instance.Country = GlobalConfiguration.Site;  // TODO: Legacy code
             ApplicationConfig.Instance.ResetBrowsingPages(new Uri(HomeViewModel.Domain + relativePath));
-            //ApplicationConfig.Instance.ResetBrowsingPages(new Uri("http://m.despegar.com.ar/hoteles/detail/297146/2014-10-31/2014-11-01/2/ARS"));
+
             PagesManager.GoTo(typeof(Browser), e);
         }
     }
