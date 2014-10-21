@@ -138,6 +138,36 @@
   <data name="Country_Name_Mexico" xml:space="preserve">
     <value>México</value>
   </data>
+  <data name="Flights_Arrives_In" xml:space="preserve">
+    <value>LLega de </value>
+  </data>
+  <data name="Flights_Connect_with_pending" xml:space="preserve">
+    <value>Conexión con espera de </value>
+  </data>
+  <data name="Flights_Duration" xml:space="preserve">
+    <value>Duración total del vuelo </value>
+  </data>
+  <data name="Flights_Flight" xml:space="preserve">
+    <value>Vuelo </value>
+  </data>
+  <data name="Flights_Leaves" xml:space="preserve">
+    <value>Sale de </value>
+  </data>
+  <data name="Flights_Operated_By" xml:space="preserve">
+    <value>Operado por </value>
+  </data>
+  <data name="Flights_Passager_Baby_In_Arms" xml:space="preserve">
+    <value>0 a 24 meses (En brazos)</value>
+  </data>
+  <data name="Flights_Passager_Baby_In_Seat" xml:space="preserve">
+    <value>0 a 24 meses (En asiento)</value>
+  </data>
+  <data name="Flights_Passager_Over_11_Years" xml:space="preserve">
+    <value>12 años o mas</value>
+  </data>
+  <data name="Flights_Passager_Up_To_11_Years" xml:space="preserve">
+    <value>2 a 11 años</value>
+  </data>
   <data name="Page_CountrySelection.Text" xml:space="preserve">
     <value>Seleccione país</value>
   </data>

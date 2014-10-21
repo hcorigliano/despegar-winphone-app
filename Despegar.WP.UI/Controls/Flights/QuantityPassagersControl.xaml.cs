@@ -1,4 +1,5 @@
-﻿using Despegar.WP.UI.Model.Classes.Flights;
+﻿using Despegar.WP.UI.Model;
+using Despegar.WP.UI.Model.Classes.Flights;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -23,22 +24,24 @@ namespace Despegar.WP.UI.Controls.Flights
     /// </summary>
     public sealed partial class QuantityPassagersControl : Page
     {
-        public TextBlock QuantityAdultsControl { get; set; }
-        public TextBlock QuantityChildControl { get; set; }
         public PassagersQuantity Passagers = new PassagersQuantity();
+        public StackPanel ChildPassagers { get; set; }
+
 
         public QuantityPassagersControl()
         {
+            
             this.InitializeComponent();
 
-            QuantityAdultsControl = txbAdults;
-            QuantityChildControl = txbChild;
 
             Passagers.ChildPassagerQuantity = 0;
             Passagers.AdultPassagerQuantity = 1;
 
             this.txbAdults.DataContext = Passagers;
             this.txbChild.DataContext = Passagers;
+
+            ChildPassagers = ChildAgeStackPanel;
+
         }
 
         /// <summary>
@@ -59,16 +62,26 @@ namespace Despegar.WP.UI.Controls.Flights
 
         private void btnChildAdd_Click(object sender, RoutedEventArgs e)
         {
+            if (Passagers.ChildPassagerQuantity + Passagers.AdultPassagerQuantity < 8 )
+            {
+            ChildAgeStackPanel.Children.Add(new ChildControl(Passagers.ChildPassagerQuantity));
+            }
             Passagers.AddChild();
         }
 
         private void btnAdultSub_Click(object sender, RoutedEventArgs e)
         {
+            
             Passagers.SubAdult();
+
         }
 
         private void btnChildSub_Click(object sender, RoutedEventArgs e)
         {
+            if(Passagers.ChildPassagerQuantity  > 0)
+            {
+            ChildAgeStackPanel.Children.RemoveAt(Passagers.ChildPassagerQuantity - 1);
+            }
             Passagers.subChild();
         }
 

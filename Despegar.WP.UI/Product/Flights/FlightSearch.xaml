@@ -12,39 +12,63 @@
 
 
 
-	<Grid x:Name="LayoutRoot">
+    <Grid x:Name="LayoutRoot">
 
-		<Grid.ChildrenTransitions>
-			<TransitionCollection>
-				<EntranceThemeTransition/>
-			</TransitionCollection>
-		</Grid.ChildrenTransitions>
+        <Grid.ChildrenTransitions>
+            <TransitionCollection>
+                <EntranceThemeTransition/>
+            </TransitionCollection>
+        </Grid.ChildrenTransitions>
 
-		<Grid.RowDefinitions>
-			<RowDefinition Height="Auto"/>
-			<RowDefinition Height="*"/>
-		</Grid.RowDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
 
-		<!-- Title Panel -->
-		<StackPanel Grid.Row="0" Margin="19,0,0,0">
-			<TextBlock x:Uid="AppTitle" Style="{ThemeResource TitleTextBlockStyle}" Margin="0,12,0,0"/>
-			<TextBlock x:Uid="Page_FlightSearch" Margin="0,-6.5,0,26.5" Style="{ThemeResource HeaderTextBlockStyle}" CharacterSpacing="{ThemeResource PivotHeaderItemCharacterSpacing}"/>
-		</StackPanel>
+        <!-- Title Panel -->
+        <StackPanel Grid.Row="0" Margin="19,0,0,0">
+            <TextBlock x:Uid="AppTitle" Style="{ThemeResource TitleTextBlockStyle}" Margin="0,12,0,0"/>
+            <TextBlock x:Uid="Page_FlightSearch" Margin="0,-6.5,0,26.5" Style="{ThemeResource HeaderTextBlockStyle}" CharacterSpacing="{ThemeResource PivotHeaderItemCharacterSpacing}"/>
+        </StackPanel>
+
 
         <!--TODO: Content should be placed within the following grid-->
+
         <Grid Grid.Row="1" x:Name="ContentRoot" Margin="19,9.5,19,0" xmlns:src="using:Despegar.WP.UI.Controls.Flights" >
-            
-            
-			<StackPanel  VerticalAlignment="Top" HorizontalAlignment="Stretch">
+            <Pivot>
+                <PivotItem>
+                    <ScrollViewer>
+                        <StackPanel>
+                            <TextBlock Text="IDA Y VUELTA"></TextBlock>
+                            <StackPanel  VerticalAlignment="Top" HorizontalAlignment="Stretch">
 
-                <src:SearchAirport x:Name="airportsContainer"> </src:SearchAirport>
+                                <src:SearchAirport x:Name="airportsContainer"></src:SearchAirport>
 
-                <src:DateControl x:Name="dateControlContainer"></src:DateControl>
-                
-                <src:QuantityPassagersControl x:Name="quantityPassagersContainer"></src:QuantityPassagersControl>
-			</StackPanel>
+                                <src:DateControl x:Name="dateControlContainer"></src:DateControl>
 
-			<Button Click="Button_Click" Margin="109,443,0,1" Content="Buscar vuelos"/>
-		</Grid>
-	</Grid>
+                                <src:QuantityPassagersControl x:Name="quantityPassagersContainer"></src:QuantityPassagersControl>
+
+                            </StackPanel>
+
+                            <Button Click="ButtonReturn_Click" HorizontalAlignment="Center" Content="Buscar vuelos"/>
+                        </StackPanel>
+                    </ScrollViewer>
+                </PivotItem>
+
+                <PivotItem>
+                    <StackPanel>
+                        <TextBlock Text="IDA"></TextBlock>
+                    </StackPanel>
+                </PivotItem>
+
+                <PivotItem>
+                    <StackPanel>
+                        <TextBlock Text="MULTIPLES"></TextBlock>
+                    </StackPanel>
+                </PivotItem>
+
+            </Pivot>
+        </Grid>
+
+    </Grid>
 </Page>

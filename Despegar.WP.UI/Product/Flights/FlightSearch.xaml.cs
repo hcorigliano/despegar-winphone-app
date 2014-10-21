@@ -1,7 +1,9 @@
-﻿using Despegar.Core.Business.Flight.CitiesAutocomplete;
+﻿using Despegar.Core.Business.Enums;
+using Despegar.Core.Business.Flight.CitiesAutocomplete;
 using Despegar.Core.Business.Flight.Itineraries;
 using Despegar.WP.UI.Classes;
 using Despegar.WP.UI.Common;
+using Despegar.WP.UI.Controls.Flights;
 using Despegar.WP.UI.Model;
 using Despegar.WP.UI.Model.Classes.Flights;
 using System;
@@ -23,9 +25,7 @@ namespace Despegar.WP.UI.Product.Flights
     {
         private NavigationHelper navigationHelper;
         private ObservableDictionary defaultViewModel = new ObservableDictionary();
-        private FlightsSearchBoxModel flightSearchBoxModel = new FlightsSearchBoxModel();
-
-        
+        private FlightsSearchBoxModel flightSearchBoxModel = new FlightsSearchBoxModel();      
 
        
 
@@ -35,7 +35,7 @@ namespace Despegar.WP.UI.Product.Flights
 
             this.navigationHelper = new NavigationHelper(this);
             this.navigationHelper.LoadState += this.NavigationHelper_LoadState;
-            this.navigationHelper.SaveState += this.NavigationHelper_SaveState;           
+            this.navigationHelper.SaveState += this.NavigationHelper_SaveState;          
             
         }
 
@@ -81,10 +81,7 @@ namespace Despegar.WP.UI.Product.Flights
                 {
                     airportsContainer.DestinyAirportControl.Text = e.PageState["destinyFlight"].ToString();
                 }
-
             }
-
-
         }
 
         /// <summary>
@@ -128,13 +125,15 @@ namespace Despegar.WP.UI.Product.Flights
         }
 
         #endregion
-      
 
-        private async void Button_Click(object sender, RoutedEventArgs e)
+
+        private async void ButtonReturn_Click(object sender, RoutedEventArgs e)
         {
-
+            int adults = quantityPassagersContainer.Passagers.AdultPassagerQuantity;
+            int infants = 0, childs = 0;
             CityAutocomplete origin = airportsContainer.OriginAirportControl.Items[0] as CityAutocomplete;
             CityAutocomplete destiny = airportsContainer.DestinyAirportControl.Items[0] as CityAutocomplete;
+
             //TODO: validate the origin and destiny for any problem.
             //if(origin == null || destiny == null)
             //{
@@ -143,11 +142,25 @@ namespace Despegar.WP.UI.Product.Flights
             //}
 
 
+            foreach (ChildControl a in quantityPassagersContainer.ChildPassagers.Children)
+            {
+                switch (a.SelectedItemTag)
+                {
+                    case FlightSearchChildEnum.Child:
+                        childs += 1;
+                        break;
+                    case FlightSearchChildEnum.Infant:
+                        infants += 1;
+                        break;
+                    case FlightSearchChildEnum.Adult:
+                        adults += 1;
+                        break;
+                }
+            }
             
-            //FlightsItineraries intinerarie = await flightSearchBoxModel.GetItineraries(origin.code, destiny.code, dateControlContainer.DepartureDateControl.Date.ToString("yyyy-MM-dd"), quantityPassagersContainer.Passagers.AdultPassagerQuantity, dateControlContainer.ReturnDateControl.Date.ToString("yyyy-MM-dd"), 0, 0, 0, 10, "", "", "", "");
+            //FlightsItineraries intinerarie = await flightSearchBoxModel.GetItineraries(origin.code, destiny.code, dateControlContainer.DepartureDateControl.Date.ToString("yyyy-MM-dd"), adult, dateControlContainer.ReturnDateControl.Date.ToString("yyyy-MM-dd"), children, infants, 0, 10, "", "", "", "");
             
             FlightsItineraries intinerarie = await flightSearchBoxModel.GetItineraries("BUE", "LAX", "2014-11-11", 1, "2014-11-13", 0, 0, 0, 10, "", "", "", "");
-
 
             PagesManager.GoTo(typeof(FlightResults), intinerarie);
         }

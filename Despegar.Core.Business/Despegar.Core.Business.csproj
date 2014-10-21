@@ -64,6 +64,7 @@
     <Compile Include="Configuration\schedules.cs" />
     <Compile Include="Culture\Site.cs" />
     <Compile Include="Dynamics\DynamicFlightBookingFieldsToPost.cs" />
+    <Compile Include="Enums\FlightSearchChildEnum.cs" />
     <Compile Include="Flight\BookingCompletePostResponse\Answers.cs" />
     <Compile Include="Flight\BookingCompletePostResponse\BookingCompletePostResponse.cs" />
     <Compile Include="Flight\BookingCompletePostResponse\FreeTextDescription.cs" />

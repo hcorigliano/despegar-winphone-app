@@ -35,19 +35,19 @@
                 
                 <StackPanel>
                     <TextBlock Text=" IDA" ></TextBlock>
-                    <ItemsControl x:Name="SegmentControlInbound" ItemsSource="{Binding Segments}">
+                    <ItemsControl x:Name="SegmentControlOutbound" ItemsSource="{Binding Segments}">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
-                                <src:FlightSegment x:Name="flightSegmentInbound"></src:FlightSegment>
+                                <src:FlightSegment x:Name="flightSegmentOutbound"></src:FlightSegment>
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
 
                     <TextBlock Text=" VUELTA" ></TextBlock>
-                    <ItemsControl x:Name="SegmentControlOutbound" ItemsSource="{Binding Segments}">
+                    <ItemsControl x:Name="SegmentControlInbound" ItemsSource="{Binding Segments}">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
-                                <src:FlightSegment x:Name="flightSegmentOutbound"></src:FlightSegment>
+                                <src:FlightSegment x:Name="flightSegmentInbound"></src:FlightSegment>
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>

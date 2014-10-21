@@ -49,6 +49,8 @@ namespace Despegar.WP.UI.Product.Flights
 
         private async void FillDataMocked()
         {
+
+            //BORRAR ESTO
             intinerarie = await flightSearchBoxModel.GetItineraries("BUE", "LAX", "2014-11-11", 1, "2014-11-13", 0, 0, 0, 10, "", "", "", "");
 
             flightDetailModelInbound.inbound = intinerarie.items[0].inbound[0];
@@ -89,6 +91,12 @@ namespace Despegar.WP.UI.Product.Flights
         /// session.  The state will be null the first time a page is visited.</param>
         private void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
         {
+            //DESCOMENTAR ESTO
+            //flightDetailModelInbound.inbound = e.inbound;
+            //flightDetailModelOutbound.outbound =e.outbound;
+
+            //SegmentControlInbound.DataContext = flightDetailModelInbound;
+            //SegmentControlOutbound.DataContext = flightDetailModelOutbound;
         }
 
         /// <summary>

@@ -10,6 +10,7 @@ namespace Despegar.WP.UI.Model
 {
     public class FlightDetailsModel : AppModelBase, Interfaces.IInitializeModelInterface, Interfaces.IValidateInterface
     {
+        private Windows.ApplicationModel.Resources.ResourceLoader loader = new Windows.ApplicationModel.Resources.ResourceLoader();
 
         public Outbound outbound
         {
@@ -59,13 +60,13 @@ namespace Despegar.WP.UI.Model
                 bindable.arrival_time = listSegment[i].arrival_time;
                 bindable.cabin_type = listSegment[i].cabin_type;
                 bindable.AirportCodeFromto = listSegment[i].from.code + " - " + listSegment[i].to.code;
-                bindable.flightIdAndCabinType = "Vuelo " + listSegment[i].flight_id + " - " + listSegment[i].cabin_type;
-                bindable.toInformation = "Llega a " + bindable.to.city;
-                bindable.fromInformation = "Sale de " + bindable.from.city;
+                bindable.flightIdAndCabinType = loader.GetString("Flights_Flight") + listSegment[i].flight_id + " - " + listSegment[i].cabin_type;
+                bindable.toInformation = loader.GetString("Flights_Arrives_In") + bindable.to.city;
+                bindable.fromInformation = loader.GetString("Flights_Leaves") + bindable.from.city;
 
                 if (listSegment[i].operated_by != null)
                 {
-                    bindable.operateBy = "Operado por " + listSegment[i].operated_by.name;
+                    bindable.operateBy = loader.GetString("Flights_Operated_By") + listSegment[i].operated_by.name;
                 }
                 if (i < listSegment.Count() - 1)
                 {
@@ -75,7 +76,7 @@ namespace Despegar.WP.UI.Model
                 else
                 {
                     string[] durationTime = duration.Split(new Char[] { ':' });
-                    bindable.timeInformation = "Duración total del vuelo " + durationTime[0] + "hs " + durationTime[1] + "m";
+                    bindable.timeInformation = loader.GetString("Flights_Duration") + durationTime[0] + "hs " + durationTime[1] + "m";
                 }
 
                 listBindable.Add(bindable);
@@ -92,7 +93,7 @@ namespace Despegar.WP.UI.Model
             DateTime arrival = new DateTime(Convert.ToInt32(arrivalSplitDate[0]), Convert.ToInt32(arrivalSplitDate[1]), Convert.ToInt32(arrivalSplitDate[2]), Convert.ToInt32(arrivalSplitTime[0]), Convert.ToInt32(arrivalSplitTime[1]), 0);
             DateTime departure = new DateTime(Convert.ToInt32(departureSplitDate[0]), Convert.ToInt32(departureSplitDate[1]), Convert.ToInt32(departureSplitDate[2]), Convert.ToInt32(departureSplitTime[0]), Convert.ToInt32(departureSplitTime[1]), 0);
             TimeSpan diference = departure.Subtract(arrival);
-            return "Conexión con espera de " + diference.Hours + "hs " + diference.Minutes + "m";
+            return loader.GetString("Flights_Connect_with_pending") + diference.Hours + "hs " + diference.Minutes + "m";
         }
 
 

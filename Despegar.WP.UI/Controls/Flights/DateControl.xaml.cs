@@ -39,5 +39,11 @@ namespace Despegar.WP.UI.Controls.Flights
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
         }
+
+        
+        private void departure_DateChanged(object sender, DatePickerValueChangedEventArgs e)
+        {
+            returnn.Date = departure.Date;
+        }
     }
 }
