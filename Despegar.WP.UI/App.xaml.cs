@@ -1,15 +1,8 @@
-﻿using Despegar.Core.IService;
-using Despegar.Core.Service;
+﻿using Despegar.LegacyCore;
 using Despegar.WP.UI.Model;
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.Storage;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -117,6 +110,10 @@ namespace Despegar.WP.UI
 
                  }
             }
+
+            // TODO: Legacy code
+            if (!ApplicationConfig.Instance.Initialized)
+                ApplicationConfig.Instance.Init();
 
             // Ensure the current window is active
             Window.Current.Activate();

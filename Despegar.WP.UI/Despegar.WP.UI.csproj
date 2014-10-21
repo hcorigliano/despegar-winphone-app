@@ -14,7 +14,9 @@
     <MinimumVisualStudioVersion>12</MinimumVisualStudioVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{76F1466A-8B6D-4E39-A767-685A06062A39};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
     <ExpressionBlendVersion>12.0.50716.0</ExpressionBlendVersion>
+    <AppxBundlePlatforms>neutral</AppxBundlePlatforms>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -89,9 +91,17 @@
       <Project>{3c3cdca2-e9fc-4207-b71e-22a1c423d5f8}</Project>
       <Name>Despegar.Core.IService</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Despegar.Core.Log\Despegar.Core.Log.csproj">
+      <Project>{0c50151e-91de-45c5-bb01-b03ec44d7735}</Project>
+      <Name>Despegar.Core.Log</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Despegar.Core.Service\Despegar.Core.Service.csproj">
       <Project>{b4b6d17f-4416-4920-a500-4e9a88ad2d80}</Project>
       <Name>Despegar.Core.Service</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Despegar.LegacyCore\Despegar.LegacyCore.csproj">
+      <Project>{8447a9fc-a65c-4fed-9de3-ca9eea1470df}</Project>
+      <Name>Despegar.LegacyCore</Name>
     </ProjectReference>
     <ProjectReference Include="..\Despegar.WP.UI.Models\Despegar.WP.UI.Model.csproj">
       <Project>{4bd277e3-3251-4cf8-8ee5-9ef410362d4f}</Project>
@@ -103,6 +113,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Classes\PagesManager.cs" />
+    <Compile Include="Common\Converter\StringConverter.cs" />
     <Compile Include="Common\NavigationHelper.cs" />
     <Compile Include="Common\ObservableDictionary.cs" />
     <Compile Include="Common\RelayCommand.cs" />
@@ -153,7 +164,28 @@
     <Compile Include="Product\Flights\FlightThanks.xaml.cs">
       <DependentUpon>FlightThanks.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Product\Legacy\Browser.xaml.cs">
+      <DependentUpon>Browser.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Product\Legacy\ConnectionError.xaml.cs">
+      <DependentUpon>ConnectionError.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Product\Legacy\Converter\CommonConverters.cs" />
+    <Compile Include="Product\Legacy\HotelsCheckout.xaml.cs">
+      <DependentUpon>HotelsCheckout.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Product\Legacy\HotelsThanks.xaml.cs">
+      <DependentUpon>HotelsThanks.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Strings\AppResources.cs" />
+    <Page Include="Product\Legacy\HotelsThanks.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Styles\Legacy.xaml">
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -170,6 +202,231 @@
     <Content Include="Assets\Square71x71Logo.scale-240.png" />
     <Content Include="Assets\StoreLogo.scale-240.png" />
     <Content Include="Assets\WideLogo.scale-240.png" />
+    <Content Include="Product\Legacy\Assets\Image\ApplicationIcon.png" />
+    <Content Include="Product\Legacy\Assets\Image\ApplicationNormalIcon.png" />
+    <Content Include="Product\Legacy\Assets\Image\ApplicationWideIcon.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\AX.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\AX_BRA.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\AX_CDC.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\AX_COM.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\AX_FRN.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\AX_GLC.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\AX_GUA.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\AX_HIP.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\AX_HSB.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\AX_ICBC.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\AX_ITAU.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\AX_MAC.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\AX_NAC.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\AX_NAR.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\AX_PAT.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\AX_PLA.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\AX_PRO.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\AX_RIO.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\AX_SAN.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\CA.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\CA_AFIRM.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\CA_AUS.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\CA_BAN.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\CA_BANJE.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\CA_BANOR.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\CA_BBVA.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\CA_BC.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\CA_BCI.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\CA_BERSA.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\CA_BOL.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\CA_BRA.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\CA_CDC.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\CA_CEN.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\CA_CIT.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\CA_CIU.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\CA_CMR.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\CA_COM.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\CA_COR.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\CA_CS.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\CA_DAV.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\CA_FAMSA.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\CA_FRN.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\CA_GLC.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\CA_HIP.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\CA_HSB.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\CA_HSBC.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\CA_ICBC.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\CA_INT.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\CA_INVEX.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\CA_ITAU.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\CA_IXE.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\CA_LIV.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\CA_MAC.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\CA_NAC.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\CA_NAT.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\CA_NBSF.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\CA_PAC.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\CA_PAT.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\CA_PRO.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\CA_SAN.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\CA_SB.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\CA_SCB.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\CA_SCR.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\CA_SJU.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\CA_TBANC.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\CD_DAV.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\CS.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\CS_CEN.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\DC.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\DC_CIT.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\DC_PIC.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\DS_PIC.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\EFECTIVO.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\IX_IXE.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\MC_BBVAB.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\MC_GUA.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\MC_NAR.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\MC_PIC.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\MC_PRB.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\MD.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\MD_GUA.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\VD.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\VD_INB.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\VD_PIC.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\VD_PRB.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\VI.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\VI_AFIRM.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\VI_AMA.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\VI_AUS.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\VI_AZU.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\VI_BAJIO.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\VI_BAN.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\VI_BANJE.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\VI_BANOR.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\VI_BANRE.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\VI_BBVAB.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\VI_BBVAC.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\VI_BC.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\VI_BCI.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\VI_BERSA.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\VI_BLP.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\VI_BOL.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\VI_BSE.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\VI_BVA.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\VI_CDC.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\VI_CHA.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\VI_CIT.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\VI_CIU.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\VI_COM.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\VI_CORD.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\VI_CRE.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\VI_DAV.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\VI_FAMSA.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\VI_FOR.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\VI_FRN.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\VI_GUA.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\VI_HIP.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\VI_HSB.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\VI_HSBC.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\VI_ICBC.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\VI_INBUR.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\VI_INT.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\VI_INVEX.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\VI_ITAU.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\VI_IXE.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\VI_LIV.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\VI_MAC.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\VI_MIFEL.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\VI_NAC.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\VI_NAT.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\VI_NBLR.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\VI_NBSF.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\VI_NEU.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\VI_PAC.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\VI_PAT.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\VI_PIC.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\VI_PRB.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\VI_PRM.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\VI_PRO.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\VI_RI2.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\VI_RIO.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\VI_ROS.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\VI_RUM.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\VI_SAENZ.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\VI_SAN.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\VI_SB.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\VI_SCB.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\VI_SCR.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\VI_SJU.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\VI_SUP.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\VI_TBANC.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\VI_TER.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\VI_UNI.png" />
+    <Content Include="Product\Legacy\Assets\Image\CreditCard\V_BCO.png" />
+    <Content Include="Product\Legacy\Assets\Image\decolar-logo.png" />
+    <Content Include="Product\Legacy\Assets\Image\despegar-logo-dark.png" />
+    <Content Include="Product\Legacy\Assets\Image\despegar-logo.png" />
+    <Content Include="Product\Legacy\Assets\Image\details-1-stars-hotel.png" />
+    <Content Include="Product\Legacy\Assets\Image\details-2-stars-hotel.png" />
+    <Content Include="Product\Legacy\Assets\Image\details-3-stars-hotel.png" />
+    <Content Include="Product\Legacy\Assets\Image\details-4-stars-hotel.png" />
+    <Content Include="Product\Legacy\Assets\Image\details-5-stars-hotel.png" />
+    <Content Include="Product\Legacy\Assets\Image\details-guests-icon.png" />
+    <Content Include="Product\Legacy\Assets\Image\details-nights-icon.png" />
+    <Content Include="Product\Legacy\Assets\Image\details-rooms-icon.png" />
+    <Content Include="Product\Legacy\Assets\Image\home-flight-tracker-row.png" />
+    <Content Include="Product\Legacy\Assets\Image\home-flights-row.png" />
+    <Content Include="Product\Legacy\Assets\Image\home-geo-row.png" />
+    <Content Include="Product\Legacy\Assets\Image\home-hotels-row.png" />
+    <Content Include="Product\Legacy\Assets\Image\home-selfservice-row.png" />
+    <Content Include="Product\Legacy\Assets\Image\Icon\add.png" />
+    <Content Include="Product\Legacy\Assets\Image\Icon\back.png" />
+    <Content Include="Product\Legacy\Assets\Image\Icon\basecircle.png" />
+    <Content Include="Product\Legacy\Assets\Image\Icon\cancel.png" />
+    <Content Include="Product\Legacy\Assets\Image\Icon\check.png" />
+    <Content Include="Product\Legacy\Assets\Image\Icon\close.png" />
+    <Content Include="Product\Legacy\Assets\Image\Icon\delete.png" />
+    <Content Include="Product\Legacy\Assets\Image\Icon\download.png" />
+    <Content Include="Product\Legacy\Assets\Image\Icon\edit.png" />
+    <Content Include="Product\Legacy\Assets\Image\Icon\favs.addto.png" />
+    <Content Include="Product\Legacy\Assets\Image\Icon\favs.png" />
+    <Content Include="Product\Legacy\Assets\Image\Icon\feature.alarm.png" />
+    <Content Include="Product\Legacy\Assets\Image\Icon\feature.calendar.png" />
+    <Content Include="Product\Legacy\Assets\Image\Icon\feature.camera.png" />
+    <Content Include="Product\Legacy\Assets\Image\Icon\feature.email.png" />
+    <Content Include="Product\Legacy\Assets\Image\Icon\feature.phone.png" />
+    <Content Include="Product\Legacy\Assets\Image\Icon\feature.search.png" />
+    <Content Include="Product\Legacy\Assets\Image\Icon\feature.settings.png" />
+    <Content Include="Product\Legacy\Assets\Image\Icon\feature.video.png" />
+    <Content Include="Product\Legacy\Assets\Image\Icon\folder.png" />
+    <Content Include="Product\Legacy\Assets\Image\Icon\like.png" />
+    <Content Include="Product\Legacy\Assets\Image\Icon\microphone.png" />
+    <Content Include="Product\Legacy\Assets\Image\Icon\minus.png" />
+    <Content Include="Product\Legacy\Assets\Image\Icon\new.png" />
+    <Content Include="Product\Legacy\Assets\Image\Icon\next.png" />
+    <Content Include="Product\Legacy\Assets\Image\Icon\overflowdots.png" />
+    <Content Include="Product\Legacy\Assets\Image\Icon\questionmark.png" />
+    <Content Include="Product\Legacy\Assets\Image\Icon\refresh.png" />
+    <Content Include="Product\Legacy\Assets\Image\Icon\save.png" />
+    <Content Include="Product\Legacy\Assets\Image\Icon\share.png" />
+    <Content Include="Product\Legacy\Assets\Image\Icon\stop.png" />
+    <Content Include="Product\Legacy\Assets\Image\Icon\sync.png" />
+    <Content Include="Product\Legacy\Assets\Image\Icon\transport.ff.png" />
+    <Content Include="Product\Legacy\Assets\Image\Icon\transport.pause.png" />
+    <Content Include="Product\Legacy\Assets\Image\Icon\transport.play.png" />
+    <Content Include="Product\Legacy\Assets\Image\Icon\transport.rew.png" />
+    <Content Include="Product\Legacy\Assets\Image\Icon\upload.png" />
+    <Content Include="Product\Legacy\Assets\Tiles\FlipCycleTileLarge.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Product\Legacy\Assets\Tiles\FlipCycleTileMedium.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Product\Legacy\Assets\Tiles\FlipCycleTileSmall.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Product\Legacy\Assets\Tiles\IconicTileMediumLarge.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Product\Legacy\Assets\Tiles\IconicTileSmall.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -236,6 +493,18 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Product\Legacy\Browser.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Product\Legacy\ConnectionError.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Product\Legacy\HotelsCheckout.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Styles\StyleShared.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -252,13 +521,34 @@
     <Folder Include="Assets\Icon\" />
     <Folder Include="Assets\pt\" />
     <Folder Include="Strings\en\" />
-    <Folder Include="Strings\pt\" />
   </ItemGroup>
   <ItemGroup>
     <PRIResource Include="Strings\es\Resources.resw" />
   </ItemGroup>
+<ItemGroup>
+  <SDKReference Include="BehaviorsXamlSDKManaged, Version=12.0" />
+</ItemGroup>
+  <ItemGroup>    
+    <PRIResource Include="Strings\es\LegacyStrings.resw">
+      <SubType>Designer</SubType>
+    </PRIResource>
+  </ItemGroup>
   <ItemGroup>
-    <SDKReference Include="BehaviorsXamlSDKManaged, Version=12.0" />
+    <PRIResource Include="Strings\pt\LegacyStrings.resw" />
+  </ItemGroup>
+  <ItemGroup>
+    <PRIResource Include="Strings\es\LegacyConnectorStrings.resw" />
+  </ItemGroup>
+  <ItemGroup>
+    <PRIResource Include="Strings\es\LegacyAPIKeys.resw" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="WinRTXamlToolkit">
+      <HintPath>..\packages\WinRTXamlToolkit.WindowsPhone.1.7.4.0\lib\wpa\WinRTXamlToolkit.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">
     <VisualStudioVersion>12.0</VisualStudioVersion>

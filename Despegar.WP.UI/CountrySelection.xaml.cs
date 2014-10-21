@@ -18,6 +18,8 @@ using Despegar.WP.UI.Model.Classes;
 using Despegar.WP.UI.Classes;
 using Windows.Storage;
 using Despegar.WP.UI.Model;
+using Despegar.LegacyCore.Connector;
+using Despegar.LegacyCore;
 using Despegar.Core.IService;
 using Despegar.Core.Business.Configuration;
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
@@ -73,6 +75,8 @@ namespace Despegar.WP.UI
             //persist data in phone
             CountryItem ci = e.ClickedItem as CountryItem;
             var roamingSettings = ApplicationData.Current.RoamingSettings;
+            APIConnector.Instance.Channel = countrySelected.Code;  // TODO: Legacy code
+            ApplicationConfig.Instance.Country = countrySelected.Code; // TODO: Legacy code
             roamingSettings.Values["countryCode"] = ci.Code;
             roamingSettings.Values["countryName"] = ci.CountryName;
 

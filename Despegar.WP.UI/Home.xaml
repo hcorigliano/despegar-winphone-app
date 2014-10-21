@@ -31,7 +31,10 @@
         <Grid Grid.Row="1" x:Name="ContentRoot" Margin="19,9.5,19,0">
             <ListView IsItemClickEnabled="True" ItemClick="ListView_ItemClick">
                 <ListViewItem>
-                    <TextBlock>Vuelos</TextBlock>
+                    <TextBlock Name="FlightsOption">Vuelos</TextBlock>
+                </ListViewItem>
+                <ListViewItem>
+                    <TextBlock Name="HotelsOption">Hoteles Test</TextBlock>
                 </ListViewItem>
             </ListView>
         </Grid>

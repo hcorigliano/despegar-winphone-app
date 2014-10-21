@@ -81,25 +81,12 @@
   <ItemGroup>
     <Compile Include="ApplicationConfig.cs" />
     <Compile Include="Connector\APIConnector.cs" />
-    <Compile Include="Connector\APIConnector.keys.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>APIConnector.keys.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Connector\Connector.url.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Connector.url.resx</DependentUpon>
-    </Compile>
     <Compile Include="Connector\Domain\API\BaseResponse.cs" />
     <Compile Include="Connector\Domain\API\CitiesFields.cs" />
     <Compile Include="Connector\Domain\API\CommonDefinitions.cs" />
     <Compile Include="Connector\Domain\API\Configuration.cs" />
     <Compile Include="Connector\Domain\API\DespegarPushNotification.cs" />
     <Compile Include="Connector\Domain\API\Discounts.cs" />
-    <Compile Include="Connector\Domain\API\FlightAvailability.cs" />
-    <Compile Include="Connector\Domain\API\FlightBookingBook.cs" />
-    <Compile Include="Connector\Domain\API\FlightBookingFields.cs" />
     <Compile Include="Connector\Domain\API\GeoCountries.cs" />
     <Compile Include="Connector\Domain\API\HotelAvailability.cs" />
     <Compile Include="Connector\Domain\API\HotelBookingBook.cs" />
@@ -115,12 +102,9 @@
     <Compile Include="Model\CountriesModel.cs" />
     <Compile Include="Model\CurrenciesModel.cs" />
     <Compile Include="Model\DPNSModel.cs" />
-    <Compile Include="Model\FlightsAvailabilityModel.cs" />
-    <Compile Include="Model\FlightsBookingModel.cs" />
     <Compile Include="Model\HotelsAvailabilityModel.cs" />
     <Compile Include="Model\HotelsBookingModel.cs" />
     <Compile Include="Model\HotelsDistributionModel.cs" />
-    <Compile Include="Model\LastFlightBookDataModel.cs" />
     <Compile Include="Model\LastHotelBookDataModel.cs" />
     <Compile Include="Model\ProductModel.cs" />
     <Compile Include="Model\StatesModel.cs" />
@@ -130,38 +114,21 @@
     <Compile Include="Repository\CountriesRep.cs" />
     <Compile Include="Repository\CurrenciesRep.cs" />
     <Compile Include="Repository\ValidationCreditcardsRep.cs" />
-    <Compile Include="Resource\LocalizedProperties.cs" />
-    <Compile Include="Resource\Properties-PT.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Properties-PT.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Resource\Properties.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Properties.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Resource\ViewModel\AppDelegate.cs" />
-    <Compile Include="Resource\ViewModel\BrowserViewModel.cs" />
-    <Compile Include="Resource\ViewModel\FlightsCheckoutViewModel.cs" />
-    <Compile Include="Resource\ViewModel\FlightsRiskQuestionsViewModel.cs" />
-    <Compile Include="Resource\ViewModel\FlightsThanksViewModel.cs" />
-    <Compile Include="Resource\ViewModel\HomeViewModel.cs" />
-    <Compile Include="Resource\ViewModel\HotelsCheckoutViewModel.cs" />
-    <Compile Include="Resource\ViewModel\HotelsRiskQuestionsViewModel.cs" />
-    <Compile Include="Resource\ViewModel\HotelsThanksViewModel.cs" />
-    <Compile Include="Resource\ViewModel\MainViewModel.cs" />
-    <Compile Include="Resource\ViewModel\SettingsViewModel.cs" />
-    <Compile Include="Resource\ViewModel\SplashViewModel.cs" />
+    <Compile Include="ViewModel\AppDelegate.cs" />
+    <Compile Include="ViewModel\HomeViewModel.cs" />
+    <Compile Include="ViewModel\HotelsCheckoutViewModel.cs" />
+    <Compile Include="ViewModel\HotelsRiskQuestionsViewModel.cs" />
+    <Compile Include="ViewModel\HotelsThanksViewModel.cs" />
+    <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\SettingsViewModel.cs" />
+    <Compile Include="ViewModel\SplashViewModel.cs" />
     <Compile Include="Util\BrowsingStack.cs" />
     <Compile Include="Util\GeoLocation.cs" />
-    <Compile Include="Util\LocalSettings.cs" />
     <Compile Include="Util\Logger.cs" />
     <Compile Include="Util\Service\APICitiesService.cs" />
     <Compile Include="Util\Service\APIConfigurationService.cs" />
     <Compile Include="Util\Service\APICountriesService.cs" />
     <Compile Include="Util\Service\APICurrenciesService.cs" />
-    <Compile Include="Util\Service\APIFlightsService.cs" />
     <Compile Include="Util\Service\APIHotelsService.cs" />
     <Compile Include="Util\Service\APIStatesService.cs" />
     <Compile Include="Util\Service\APIValidationCreditcards.cs" />
@@ -179,22 +146,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Connector\APIConnector.keys.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>APIConnector.keys.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Connector\Connector.url.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Connector.url.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resource\Properties-PT.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Properties-PT.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resource\Properties.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Properties.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
+    <Folder Include="Resource\" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">
     <VisualStudioVersion>12.0</VisualStudioVersion>

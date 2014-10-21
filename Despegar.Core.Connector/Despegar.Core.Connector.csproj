@@ -57,6 +57,10 @@
       <Project>{9359897f-8df6-4787-80db-b68ed851088e}</Project>
       <Name>Despegar.Core.Exceptions</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Despegar.Core.Log\Despegar.Core.Log.csproj">
+      <Project>{0c50151e-91de-45c5-bb01-b03ec44d7735}</Project>
+      <Name>Despegar.Core.Log</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
