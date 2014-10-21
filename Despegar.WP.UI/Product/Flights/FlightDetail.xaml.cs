@@ -18,6 +18,7 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using Despegar.Core.Business.Flight.Itineraries;
 using Despegar.WP.UI.Model;
+using Despegar.WP.UI.Model.Classes.Flights;
 
 
 // The Basic Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
@@ -44,7 +45,7 @@ namespace Despegar.WP.UI.Product.Flights
             this.navigationHelper.LoadState += this.NavigationHelper_LoadState;
             this.navigationHelper.SaveState += this.NavigationHelper_SaveState;
 
-            FillDataMocked();
+            //FillDataMocked();
         }
 
         private async void FillDataMocked()
@@ -89,6 +90,17 @@ namespace Despegar.WP.UI.Product.Flights
         /// session.  The state will be null the first time a page is visited.</param>
         private void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
         {
+
+            RoutesItems routes = e.NavigationParameter as RoutesItems;
+            if (routes != null)
+            {
+                flightDetailModelInbound.inbound = routes.inbound;
+                flightDetailModelOutbound.outbound = routes.outbound;
+
+                SegmentControlInbound.DataContext = flightDetailModelInbound;
+                SegmentControlOutbound.DataContext = flightDetailModelOutbound;
+            }
+
         }
 
         /// <summary>

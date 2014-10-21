@@ -144,9 +144,9 @@ namespace Despegar.WP.UI.Product.Flights
 
 
             
-            //FlightsItineraries intinerarie = await flightSearchBoxModel.GetItineraries(origin.code, destiny.code, dateControlContainer.DepartureDateControl.Date.ToString("yyyy-MM-dd"), quantityPassagersContainer.Passagers.AdultPassagerQuantity, dateControlContainer.ReturnDateControl.Date.ToString("yyyy-MM-dd"), 0, 0, 0, 10, "", "", "", "");
+            FlightsItineraries intinerarie = await flightSearchBoxModel.GetItineraries(origin.code, destiny.code, dateControlContainer.DepartureDateControl.Date.ToString("yyyy-MM-dd"), quantityPassagersContainer.Passagers.AdultPassagerQuantity, dateControlContainer.ReturnDateControl.Date.ToString("yyyy-MM-dd"), 0, 0, 0, 10, "", "", "", "");
             
-            FlightsItineraries intinerarie = await flightSearchBoxModel.GetItineraries("BUE", "LAX", "2014-11-11", 1, "2014-11-13", 0, 0, 0, 10, "", "", "", "");
+            //FlightsItineraries intinerarie = await flightSearchBoxModel.GetItineraries("BUE", "LAX", "2014-11-11", 1, "2014-11-13", 0, 0, 0, 10, "", "", "", "");
 
 
             PagesManager.GoTo(typeof(FlightResults), intinerarie);
