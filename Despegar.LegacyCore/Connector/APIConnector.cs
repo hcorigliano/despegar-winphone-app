@@ -119,7 +119,7 @@ namespace Despegar.LegacyCore.Connector
         {
             StringBuilder url = new StringBuilder()
                .Append(legacyManager.GetString("_http"))
-               .Append(legacyManager.GetString("._base_mapi"))
+               .Append(legacyManager.GetString("_base_mapi"))
                .Append(legacyManager.GetString("_version_v3"))
                .Append(legacyManager.GetString("mapi_" + service));
 

@@ -244,16 +244,6 @@ namespace Despegar.View
             PagesManager.GoTo(typeof(Browser),  null);
         }
 
-        //private void SelectedCityChanged(object sender, EventArgs e)
-        //{
-        //    //Saves ID city in InvoiceDefinition
-        //    City selected = (City)citiesAutoComplete.SelectedItem;
-        //    if (selected != null)
-        //    {
-        //        CheckoutViewModel.InvoiceDefinition.billingAddress.cityId.value = selected.id.ToString();
-        //    }
-        //}
-
         private async void ValidateAndBuy_Click(object sender, RoutedEventArgs e)
         {
             bool err = false;
@@ -319,14 +309,26 @@ namespace Despegar.View
                 State selected = (State)StatesListPicker.SelectedItem;
                 CheckoutViewModel.InvoiceDefinition.billingAddress.stateId.value = selected.oid.ToString();
             }
+        }       
+
+        private async void Cities_Changed(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
+        {
+            var selected = (State)StatesListPicker.SelectedItem;
+
+            if (selected != null && !String.IsNullOrEmpty(sender.Text) && sender.Text.Length >= 3)
+            {
+                sender.ItemsSource = (IEnumerable)(await CheckoutViewModel.GetStringCityAsync(sender.Text, (int)selected.oid));
+            }
         }
 
-        private async void Cities_Changed(object sender, KeyRoutedEventArgs e)
+        private void Cities_Chosen(AutoSuggestBox sender, AutoSuggestBoxSuggestionChosenEventArgs args)
         {
-            // States_Changed
-            State selected = (State)StatesListPicker.SelectedItem;
-            if (!String.IsNullOrEmpty(citiesAutoComplete.Text))            
-                citiesAutoComplete.ItemsSource = (IEnumerable)(await CheckoutViewModel.GetStringCityAsync(citiesAutoComplete.Text.ToString(), (int)selected.oid));            
+            //  Saves ID city in InvoiceDefinition
+            var selected = (City)args.SelectedItem;
+            if (selected != null)
+            {
+                CheckoutViewModel.InvoiceDefinition.billingAddress.cityId.value = selected.id.ToString();
+            }
         }
 
         private void City_Focus_Lost(object sender, RoutedEventArgs e)
@@ -352,8 +354,7 @@ namespace Despegar.View
                 citiesAutoComplete.Text = "";
                 CheckoutViewModel.InvoiceDefinition.billingAddress.cityId.value = "";
             }
-        }
-       
+        }     
        
     }
 }

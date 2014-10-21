@@ -5,22 +5,7 @@ using Despegar.WP.UI.Common;
 using Despegar.WP.UI.Product.Legacy;
 using Despegar.WP.UI.Strings;
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Resources;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.ApplicationModel.Resources;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
-using Windows.Graphics.Display;
-using Windows.UI.ViewManagement;
-using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
 // The Basic Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
@@ -33,7 +18,7 @@ namespace Despegar.WP.UI
     public sealed partial class Home : Page
     {        
         private NavigationHelper navigationHelper;
-        private ObservableDictionary defaultViewModel = new ObservableDictionary();
+        private ObservableDictionary defaultViewModel = new ObservableDictionary();                
 
         public Home()
         {
@@ -41,7 +26,7 @@ namespace Despegar.WP.UI
 
             this.navigationHelper = new NavigationHelper(this);
             this.navigationHelper.LoadState += this.NavigationHelper_LoadState;
-            this.navigationHelper.SaveState += this.NavigationHelper_SaveState;
+            this.navigationHelper.SaveState += this.NavigationHelper_SaveState;            
         }
 
         /// <summary>

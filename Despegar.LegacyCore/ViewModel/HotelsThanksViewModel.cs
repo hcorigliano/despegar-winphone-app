@@ -37,18 +37,18 @@ namespace Despegar.LegacyCore.ViewModel
             NotifyPropertyChanged("CardDefinition");
             NotifyPropertyChanged("VoucherDefinitions");
 
-            registerBookingToDPNS(LastBookResponse.data.checkoutId);
+            //registerBookingToDPNS(LastBookResponse.data.checkoutId);
 
             Loading = "Collapsed";
             NotifyPropertyChanged("Loading");
         }
 
 
-        public async void registerBookingToDPNS(string checkoutId)
-        {
-            DPNSModel PushNotifications = new DPNSModel();
-            await PushNotifications.RegisterBooking("HOTEL", checkoutId);
-        }
+        //public async void registerBookingToDPNS(string checkoutId)
+        //{
+        //    DPNSModel PushNotifications = new DPNSModel();
+        //    await PushNotifications.RegisterBooking("HOTEL", checkoutId);
+        //}
 
         public string Loading { get; set; }
 

@@ -1096,15 +1096,26 @@
                             <!-- AUTOCOMPLETE CITIES -->
 							<StackPanel DataContext="{Binding cityID}" x:Name="cities" Visibility="Visible">
 								<TextBlock Style="{StaticResource RowSubTitleStyle}" Text="Ciudad" />
-                                								
-                                  <AutoSuggestBox
+
+                                <AutoSuggestBox
                                     x:Name="citiesAutoComplete"
-                                    KeyUp="Cities_Changed"
-                                    LostFocus="City_Focus_Lost"                                    
-                                    Style="{Binding Error, Converter={StaticResource StyleConverter}}"                                        
-                                    />
-                                
-							</StackPanel>
+                                    TextChanged="Cities_Changed"
+                                    LostFocus="City_Focus_Lost"      
+                                    SuggestionChosen="Cities_Chosen"
+                                    Style="{Binding Error, Converter={StaticResource StyleConverter}}"
+                                    TextMemberPath="full_name"
+                                    Background="Aqua"
+                                    Foreground="Red"
+                                    >
+                                    <AutoSuggestBox.TextBoxStyle>
+                                        <Style TargetType="TextBox">
+                                            <Setter Property="Foreground" Value="Red"></Setter>
+                                            <Setter Property="Background" Value="Blue"></Setter>
+                                        </Style>
+                                    </AutoSuggestBox.TextBoxStyle>
+                                </AutoSuggestBox>
+
+                            </StackPanel>
 						</StackPanel>
 
 					</StackPanel>
