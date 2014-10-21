@@ -73,17 +73,17 @@ namespace Despegar.WP.UI
         private void ListView_ItemClick(object sender, ItemClickEventArgs e)
         {
             //persist data in phone
-            CountryItem ci = e.ClickedItem as CountryItem;
+            CountryItem countrySelected = e.ClickedItem as CountryItem;
             var roamingSettings = ApplicationData.Current.RoamingSettings;
+
             APIConnector.Instance.Channel = countrySelected.Code;  // TODO: Legacy code
             ApplicationConfig.Instance.Country = countrySelected.Code; // TODO: Legacy code
-            roamingSettings.Values["countryCode"] = ci.Code;
-            roamingSettings.Values["countryName"] = ci.CountryName;
 
+            roamingSettings.Values["countryCode"] = countrySelected.Code;
+            roamingSettings.Values["countryName"] = countrySelected.CountryName;
 
-            GlobalConfiguration.CoreContext.SetSite(ci.Code); 
+            GlobalConfiguration.CoreContext.SetSite(countrySelected.Code); 
 
-            CountryItem countrySelected = ci;
             PagesManager.GoTo(typeof(Home), e);
         }   
     }
