@@ -26,8 +26,8 @@ namespace Despegar.WP.UI.Product.Flights
     {
         private NavigationHelper navigationHelper;
         private ObservableDictionary defaultViewModel = new ObservableDictionary();
-        private FlightsSearchBoxModel flightSearchBoxModel = new FlightsSearchBoxModel();      
-
+        private FlightsSearchBoxModel flightSearchBoxModel = new FlightsSearchBoxModel();
+        private FlightSearchModel flightSearchModel = new FlightSearchModel();
        
 
         public FlightSearch()
