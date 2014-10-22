@@ -169,81 +169,81 @@ namespace Despegar.LegacyCore.ViewModel
 
         public async Task<string> ValidateAndBuy()
         {
-            //TODO:sacar mocked
             string errMsg = "";
 
-            foreach (var item in PassengerDefinitions)
-                item.Validate();           
+                foreach (var item in PassengerDefinitions)
+                    item.Validate();
 
-            bool passErr = PassengerDefinitions.Any(it => { return it.Validate(); });
-            bool contErr = ContactDefinition.Validate();
-            bool cardErr = CardDefinition.Validate();
-            bool fiscalDataErr = InvoiceDefinitionIsRequired ? InvoiceDefinition.Validate() : false;
-            
-
-            // other errors
-            bool err = passErr || contErr || cardErr || fiscalDataErr;
-            errMsg += legacyManager.GetString("CheckoutLabel_Message_CheckItPlease");
-            errMsg += passErr ? legacyManager.GetString("CheckoutLabel_Message_CheckGuests") : "";
-            errMsg += contErr ? legacyManager.GetString("CheckoutLabel_Message_CheckContact") : "";
-            errMsg += cardErr ? legacyManager.GetString("CheckoutLabel_Message_CheckCardData") : "";
-            errMsg += legacyManager.GetString("CheckoutLabel_Message_BeCorrect");
-            
-            if (!err)
-            {
-                Loading = "Visible";
-                NotifyPropertyChanged("Loading");
-                LastHotelBookData.LastBookResponse = await BookingModel.Buy(AvailabilityInfo.SelectedRoom, PaymentId, BookingFields);
+                bool passErr = PassengerDefinitions.Any(it => { return it.Validate(); });
+                bool contErr = ContactDefinition.Validate();
+                bool cardErr = CardDefinition.Validate();
+                bool fiscalDataErr = InvoiceDefinitionIsRequired ? InvoiceDefinition.Validate() : false;
 
 
-                if (LastHotelBookData.LastBookResponse.data != null)
+                // other errors
+                bool err = passErr || contErr || cardErr || fiscalDataErr;
+                errMsg += legacyManager.GetString("CheckoutLabel_Message_CheckItPlease");
+                errMsg += passErr ? legacyManager.GetString("CheckoutLabel_Message_CheckGuests") : "";
+                errMsg += contErr ? legacyManager.GetString("CheckoutLabel_Message_CheckContact") : "";
+                errMsg += cardErr ? legacyManager.GetString("CheckoutLabel_Message_CheckCardData") : "";
+                errMsg += legacyManager.GetString("CheckoutLabel_Message_BeCorrect");
+
+                if (!err)
                 {
-                    switch (LastHotelBookData.LastBookResponse.data.checkOutStatus)
+                    Loading = "Visible";
+                    NotifyPropertyChanged("Loading");
+                    LastHotelBookData.LastBookResponse = await BookingModel.Buy(AvailabilityInfo.SelectedRoom, PaymentId, BookingFields);
+
+
+                    if (LastHotelBookData.LastBookResponse.data != null)
                     {
-                        case BookingResponse.SUCCESS : errMsg = null; break;
+                        switch (LastHotelBookData.LastBookResponse.data.checkOutStatus)
+                        {
+                            case BookingResponse.SUCCESS: errMsg = null; break;
 
-                        case BookingResponse.RECOVERABLE_FIX_CREDIT_CARD : 
-                            errMsg = legacyManager.GetString("CheckoutLabel_Message_CheckCreditCardData"); break;
+                            case BookingResponse.RECOVERABLE_FIX_CREDIT_CARD:
+                                errMsg = legacyManager.GetString("CheckoutLabel_Message_CheckCreditCardData"); break;
 
-                        case BookingResponse.RECOVERABLE_NEW_CREDIT_CARD :
-                        case BookingResponse.RECOVERABLE_NEW_CREDIT_CARD_LOW_FOUNDS :
-                            errMsg = legacyManager.GetString("CheckoutLabel_Message_ChangeCreditCard"); break;
+                            case BookingResponse.RECOVERABLE_NEW_CREDIT_CARD:
+                            case BookingResponse.RECOVERABLE_NEW_CREDIT_CARD_LOW_FOUNDS:
+                                errMsg = legacyManager.GetString("CheckoutLabel_Message_ChangeCreditCard"); break;
 
-                        case BookingResponse.NO_RECOVERABLE_NEW_BOOKING :
-                        case BookingResponse.NO_RECOVERABLE_NEW_BOOKING_EXPIRED :
-                        case BookingResponse.NO_RECOVERABLE_NEW_BOOKING_NEW_PROVIDER :
-                        case BookingResponse.NO_RECOVERABLE_CREDIT_CARD_ERROR :
-                        case BookingResponse.NO_RECOVERABLE_CREDIT_CARD_CANCEL_ERROR :
-                        case BookingResponse.NO_RECOVERABLE_RISK_REJECTED :
-                        case BookingResponse.NO_RECOVERABLE_BANK_SLIP_ERROR :
-                            errMsg = legacyManager.GetString("CheckoutLabel_Message_NoRecoverableError"); break;
-                    
-                        case BookingResponse.C_NO_RECOVERABLE_CONSUME_COUPON_ERROR :
-                            errMsg = legacyManager.GetString("CheckoutLabel_Message_CouponNoRecoverable"); break;
+                            case BookingResponse.NO_RECOVERABLE_NEW_BOOKING:
+                            case BookingResponse.NO_RECOVERABLE_NEW_BOOKING_EXPIRED:
+                            case BookingResponse.NO_RECOVERABLE_NEW_BOOKING_NEW_PROVIDER:
+                            case BookingResponse.NO_RECOVERABLE_CREDIT_CARD_ERROR:
+                            case BookingResponse.NO_RECOVERABLE_CREDIT_CARD_CANCEL_ERROR:
+                            case BookingResponse.NO_RECOVERABLE_RISK_REJECTED:
+                            case BookingResponse.NO_RECOVERABLE_BANK_SLIP_ERROR:
+                                errMsg = legacyManager.GetString("CheckoutLabel_Message_NoRecoverableError"); break;
 
-                        case BookingResponse.RISK_QUESTIONS :
-                            errMsg = legacyManager.GetString("CheckoutLabel_Message_AdditionalDataNeeded"); break;
+                            case BookingResponse.C_NO_RECOVERABLE_CONSUME_COUPON_ERROR:
+                                errMsg = legacyManager.GetString("CheckoutLabel_Message_CouponNoRecoverable"); break;
 
-                        default: errMsg = "Unknown error"; break;
+                            case BookingResponse.RISK_QUESTIONS:
+                                errMsg = legacyManager.GetString("CheckoutLabel_Message_AdditionalDataNeeded"); break;
+
+                            default: errMsg = "Unknown error"; break;
+                        }
+                    }
+
+                    else errMsg = "Unknown error";
+
+                    if (string.IsNullOrEmpty(errMsg))
+                    {
+                        LastHotelBookData.AvailabilityModel = AvailabilityModel;
+                        LastHotelBookData.AvailabilityInfo = AvailabilityInfo;
+                        LastHotelBookData.PassengerDefinitions = PassengerDefinitions;
+                        LastHotelBookData.VoucherDefinitions = VoucherDefinitions;
+                        LastHotelBookData.CardDefinition = CardDefinition;
+                        Logger.Info("[vm:hotel:checkout] Booking completed");
                     }
                 }
 
-                else errMsg = "Unknown error";
-
-                if (string.IsNullOrEmpty(errMsg))
-                {
-                    LastHotelBookData.AvailabilityModel = AvailabilityModel;
-                    LastHotelBookData.AvailabilityInfo = AvailabilityInfo;
-                    LastHotelBookData.PassengerDefinitions = PassengerDefinitions;
-                    LastHotelBookData.VoucherDefinitions = VoucherDefinitions;
-                    LastHotelBookData.CardDefinition = CardDefinition;
-                    Logger.Info("[vm:hotel:checkout] Booking completed");
-                }
-            }
-
-            Loading = "Collapsed";
-            NotifyPropertyChanged("Loading");
-            return errMsg;
+                Loading = "Collapsed";
+                NotifyPropertyChanged("Loading");
+                return errMsg;
+            
         }
 
 

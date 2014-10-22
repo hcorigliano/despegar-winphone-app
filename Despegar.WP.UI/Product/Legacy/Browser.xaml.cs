@@ -120,7 +120,6 @@ namespace Despegar.WP.UI.Product.Legacy
         private void EmbbededBrowser_NavigationFailed(object sender, WebViewNavigationFailedEventArgs e)
         {
             PagesManager.GoTo(typeof(ConnectionError), null);
-            //PagesManager.RemoveBackEntry();  TODO: uncomment?
         }
 
         private string getIataFromUri(string absoluteUri)
