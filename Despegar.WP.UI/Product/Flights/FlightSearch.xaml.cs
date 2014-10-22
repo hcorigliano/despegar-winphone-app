@@ -132,13 +132,11 @@ namespace Despegar.WP.UI.Product.Flights
         {
             int adults = quantityPassagersContainer.Passagers.AdultPassagerQuantity;
             int infants = 0, childs = 0;
-            CityAutocomplete origin = airportsContainer.OriginAirportControl.Items[0] as CityAutocomplete;
-            CityAutocomplete destiny = airportsContainer.DestinyAirportControl.Items[0] as CityAutocomplete;
             bool error = false;
 
 #if !DEBUG
             //TODO: validate the origin and destiny for any problem.
-            if(origin == null || destiny == null)
+            if (String.IsNullOrEmpty(airportsContainer.AirportOrigin) || String.IsNullOrEmpty(airportsContainer.AirportDestiny))
             {
                 // autocomplete not charge properly
                 error = true;
@@ -167,7 +165,7 @@ namespace Despegar.WP.UI.Product.Flights
 #else
             if (!error)
             {
-                FlightsItineraries intinerarie = await flightSearchBoxModel.GetItineraries(origin.code, destiny.code, dateControlContainer.DepartureDateControl.Date.ToString("yyyy-MM-dd"), adults, dateControlContainer.ReturnDateControl.Date.ToString("yyyy-MM-dd"), childs, infants, 0, 10, "", "", "", "");
+                FlightsItineraries intinerarie = await flightSearchBoxModel.GetItineraries(airportsContainer.AirportOrigin, airportsContainer.AirportDestiny, dateControlContainer.DepartureDateControl.Date.ToString("yyyy-MM-dd"), adults, dateControlContainer.ReturnDateControl.Date.ToString("yyyy-MM-dd"), childs, infants, 0, 10, "", "", "", "");
                 PagesManager.GoTo(typeof(FlightResults), intinerarie);
             }
             else
@@ -175,8 +173,8 @@ namespace Despegar.WP.UI.Product.Flights
                 var messageDialog = new MessageDialog("No se completo correctamente las ciudades");
                 await messageDialog.ShowAsync();
             }
-#endif        
-                        
+#endif
+
         }
                 
     }

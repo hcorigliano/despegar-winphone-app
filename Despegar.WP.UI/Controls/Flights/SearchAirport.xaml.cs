@@ -94,11 +94,11 @@ namespace Despegar.WP.UI.Controls.Flights
                     _sender.Text = city.name;
                     if (_sender.Name == "origin")
                     {
-                        AirportDestiny = city.id.ToString();
+                        AirportDestiny = city.code;
                     }
                     else if (_sender.Name == "destiny")
                     {
-                        AirportOrigin = city.id.ToString();
+                        AirportOrigin = city.code;
                     }
                 }
                 else
