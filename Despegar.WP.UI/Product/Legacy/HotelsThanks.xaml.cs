@@ -30,6 +30,7 @@ namespace Despegar.WP.UI.Product.Legacy
             
             ThanksViewModel = new HotelsThanksViewModel();
             HotelsThanksView.DataContext = ThanksViewModel;
+            StackPepe.DataContext = ThanksViewModel.AvailabilityModel;
         }
         
         protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
