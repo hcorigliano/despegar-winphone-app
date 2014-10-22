@@ -63,11 +63,11 @@ namespace Despegar.WP.UI.Controls.Flights
             var selected = (CityAutocomplete)args.SelectedItem;
             if (selected != null)
             {
-                if(sender.Name == "origin")
+                if(sender.Name == "destiny")
                 {
                     AirportDestiny = selected.code;
                 }
-                else if (sender.Name == "destiny")
+                else if (sender.Name == "origin")
                 {
                     AirportOrigin = selected.code;
                 }
@@ -92,11 +92,11 @@ namespace Despegar.WP.UI.Controls.Flights
                 if (city != null)
                 {
                     _sender.Text = city.name;
-                    if (_sender.Name == "origin")
+                    if (_sender.Name == "destiny")
                     {
                         AirportDestiny = city.code;
                     }
-                    else if (_sender.Name == "destiny")
+                    else if (_sender.Name == "origin")
                     {
                         AirportOrigin = city.code;
                     }
@@ -104,11 +104,11 @@ namespace Despegar.WP.UI.Controls.Flights
                 else
                 {
                     _sender.Text = "";
-                    if (_sender.Name == "origin")
+                    if (_sender.Name == "destiny")
                     {
                         AirportDestiny = "";
                     }
-                    else if (_sender.Name == "destiny")
+                    else if (_sender.Name == "origin")
                     {
                         AirportOrigin = "";
                     }
@@ -117,11 +117,11 @@ namespace Despegar.WP.UI.Controls.Flights
             else
             {
                 _sender.Text = "";
-                if (_sender.Name == "origin")
+                if (_sender.Name == "destiny")
                 {
                     AirportDestiny = "";
                 }
-                else if (_sender.Name == "destiny")
+                else if (_sender.Name == "origin")
                 {
                     AirportOrigin = "";
                 }
