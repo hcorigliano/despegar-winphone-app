@@ -9,6 +9,7 @@ using Despegar.WP.UI.Model.Classes.Flights;
 using System;
 using System.Collections;
 using System.Threading.Tasks;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
@@ -133,13 +134,16 @@ namespace Despegar.WP.UI.Product.Flights
             int infants = 0, childs = 0;
             CityAutocomplete origin = airportsContainer.OriginAirportControl.Items[0] as CityAutocomplete;
             CityAutocomplete destiny = airportsContainer.DestinyAirportControl.Items[0] as CityAutocomplete;
+            bool error = false;
 
+#if !DEBUG
             //TODO: validate the origin and destiny for any problem.
-            //if(origin == null || destiny == null)
-            //{
-            //    // autocomplete not charge properly
-            //    throw new NotImplementedException();
-            //}
+            if(origin == null || destiny == null)
+            {
+                // autocomplete not charge properly
+                error = true;
+            }
+#endif
 
 
             foreach (ChildControl a in quantityPassagersContainer.ChildPassagers.Children)
@@ -157,16 +161,24 @@ namespace Despegar.WP.UI.Product.Flights
                         break;
                 }
             }
-            
-            //FlightsItineraries intinerarie = await flightSearchBoxModel.GetItineraries(origin.code, destiny.code, dateControlContainer.DepartureDateControl.Date.ToString("yyyy-MM-dd"), adult, dateControlContainer.ReturnDateControl.Date.ToString("yyyy-MM-dd"), children, infants, 0, 10, "", "", "", "");
-            
-            //FlightsItineraries intinerarie = await flightSearchBoxModel.GetItineraries("BUE", "LAX", "2014-11-11", 1, "2014-11-13", 0, 0, 0, 10, "", "", "", "");
-
+#if DEBUG
+            FlightsItineraries intinerarie = await flightSearchBoxModel.GetItineraries("BUE", "LAX", "2014-12-11", 1, "2014-12-13", 0, 0, 0, 10, "", "", "", "");
             PagesManager.GoTo(typeof(FlightResults), intinerarie);
+#else
+            if (!error)
+            {
+                FlightsItineraries intinerarie = await flightSearchBoxModel.GetItineraries(origin.code, destiny.code, dateControlContainer.DepartureDateControl.Date.ToString("yyyy-MM-dd"), adults, dateControlContainer.ReturnDateControl.Date.ToString("yyyy-MM-dd"), childs, infants, 0, 10, "", "", "", "");
+                PagesManager.GoTo(typeof(FlightResults), intinerarie);
+            }
+            else
+            {
+                var messageDialog = new MessageDialog("No se completo correctamente las ciudades");
+                await messageDialog.ShowAsync();
+            }
+#endif        
+                        
         }
-
-        
-
+                
     }
 }
                                     
