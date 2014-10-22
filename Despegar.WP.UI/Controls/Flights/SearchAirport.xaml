@@ -9,16 +9,16 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-        <StackPanel >
+        <StackPanel>
         <TextBlock>
 					<Run Text="Origen"/>
         </TextBlock>
-        <AutoSuggestBox x:Name="origin" Text="" ItemsSource="{Binding}" TextChanged="FlightsTextBlock_TextChanged"  TextMemberPath="name"  />
+            <AutoSuggestBox x:Name="origin" Text="" ItemsSource="{Binding}" TextChanged="FlightsTextBlock_TextChanged" LostFocus="Focus_Lost" SuggestionChosen="SuggestionChosen"  TextMemberPath="name"  />
 
         <TextBlock>
 					<Run Text="Destino"/>
         </TextBlock>
-        <AutoSuggestBox x:Name="destiny" Text="" ItemsSource="{Binding}" TextChanged="FlightsTextBlock_TextChanged"  TextMemberPath="name"  />
+            <AutoSuggestBox x:Name="destiny" Text="" ItemsSource="{Binding}" TextChanged="FlightsTextBlock_TextChanged"  LostFocus="Focus_Lost" SuggestionChosen="SuggestionChosen" TextMemberPath="name"   />
         </StackPanel>
     </Grid>
 </Page>

@@ -1,4 +1,5 @@
-﻿using Despegar.WP.UI.Model;
+﻿using Despegar.Core.Business.Flight.CitiesAutocomplete;
+using Despegar.WP.UI.Model;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -27,6 +28,8 @@ namespace Despegar.WP.UI.Controls.Flights
         private FlightsSearchBoxModel FlightSearchBoxModel = new FlightsSearchBoxModel();
         public AutoSuggestBox OriginAirportControl{set;get;}
         public AutoSuggestBox DestinyAirportControl { set; get; }
+        public string AirportOrigin { get; set; }
+        public string AirportDestiny { get; set; }
 
         public SearchAirport()
         {
@@ -46,21 +49,83 @@ namespace Despegar.WP.UI.Controls.Flights
 
 
         private async void FlightsTextBlock_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
-        {
-            if (sender.Text != "" && sender.Text.Length >= 3)
+        {           
+            if (args.Reason == AutoSuggestionBoxTextChangeReason.UserInput && sender.Text != "" && sender.Text.Length >= 3)
             {
 
                 sender.ItemsSource = (IEnumerable)(await FlightSearchBoxModel.GetCities(sender.Text));
             }
         }
 
-        private void OriginFlightsTextBlock_SuggestionChosen(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
+        private void SuggestionChosen(AutoSuggestBox sender, AutoSuggestBoxSuggestionChosenEventArgs args)
         {
-            if (args.Reason == AutoSuggestionBoxTextChangeReason.UserInput)
+            //  Saves ID city in InvoiceDefinition
+            var selected = (CityAutocomplete)args.SelectedItem;
+            if (selected != null)
             {
-                // TODO: 
+                if(sender.Name == "origin")
+                {
+                    AirportDestiny = selected.code;
+                }
+                else if (sender.Name == "destiny")
+                {
+                    AirportOrigin = selected.code;
+                }
 
+                //For Fix Focus_Lost
+                sender.ItemsSource = null;
+                List<CityAutocomplete> source = new List<CityAutocomplete>();
+                source.Add(selected);
+                sender.ItemsSource = source;
             }
-        }  
+        }
+
+        private void Focus_Lost(object sender, RoutedEventArgs e)
+        {
+            AutoSuggestBox _sender = (AutoSuggestBox)sender;
+
+            // Force complete city when focus lost
+            if (_sender.Text.Length > 2 && _sender.ItemsSource != null)
+            {
+                List<CityAutocomplete> cities = (List<CityAutocomplete>)_sender.ItemsSource;
+                CityAutocomplete city = cities.FirstOrDefault();
+                if (city != null)
+                {
+                    _sender.Text = city.name;
+                    if (_sender.Name == "origin")
+                    {
+                        AirportDestiny = city.id.ToString();
+                    }
+                    else if (_sender.Name == "destiny")
+                    {
+                        AirportOrigin = city.id.ToString();
+                    }
+                }
+                else
+                {
+                    _sender.Text = "";
+                    if (_sender.Name == "origin")
+                    {
+                        AirportDestiny = "";
+                    }
+                    else if (_sender.Name == "destiny")
+                    {
+                        AirportOrigin = "";
+                    }
+                }
+            }
+            else
+            {
+                _sender.Text = "";
+                if (_sender.Name == "origin")
+                {
+                    AirportDestiny = "";
+                }
+                else if (_sender.Name == "destiny")
+                {
+                    AirportOrigin = "";
+                }
+            }
+        }
     }
 }
