@@ -43,6 +43,10 @@
       <Project>{3c3cdca2-e9fc-4207-b71e-22a1c423d5f8}</Project>
       <Name>Despegar.Core.IService</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Despegar.Core.Log\Despegar.Core.Log.csproj">
+      <Project>{0c50151e-91de-45c5-bb01-b03ec44d7735}</Project>
+      <Name>Despegar.Core.Log</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Despegar.Core.Service\Despegar.Core.Service.csproj">
       <Project>{b4b6d17f-4416-4920-a500-4e9a88ad2d80}</Project>
       <Name>Despegar.Core.Service</Name>

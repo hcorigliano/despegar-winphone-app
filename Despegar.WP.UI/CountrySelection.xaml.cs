@@ -18,6 +18,8 @@ using Despegar.WP.UI.Model.Classes;
 using Despegar.WP.UI.Classes;
 using Windows.Storage;
 using Despegar.WP.UI.Model;
+using Despegar.LegacyCore.Connector;
+using Despegar.LegacyCore;
 using Despegar.Core.IService;
 using Despegar.Core.Business.Configuration;
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
@@ -71,15 +73,14 @@ namespace Despegar.WP.UI
         private void ListView_ItemClick(object sender, ItemClickEventArgs e)
         {
             //persist data in phone
-            CountryItem ci = e.ClickedItem as CountryItem;
-            var roamingSettings = ApplicationData.Current.RoamingSettings;
-            roamingSettings.Values["countryCode"] = ci.Code;
-            roamingSettings.Values["countryName"] = ci.CountryName;
+            CountryItem countrySelected = e.ClickedItem as CountryItem;
+            var roamingSettings = ApplicationData.Current.RoamingSettings;          
 
+            roamingSettings.Values["countryCode"] = countrySelected.Code;
+            roamingSettings.Values["countryName"] = countrySelected.CountryName;
 
-            GlobalConfiguration.CoreContext.SetSite(ci.Code); 
+            GlobalConfiguration.CoreContext.SetSite(countrySelected.Code); 
 
-            CountryItem countrySelected = ci;
             PagesManager.GoTo(typeof(Home), e);
         }   
     }

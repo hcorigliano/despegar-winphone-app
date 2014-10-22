@@ -1,11 +1,11 @@
 ﻿using Despegar.Core.Exceptions;
 using Newtonsoft.Json;
+using Despegar.Core.Log;
 using System;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
-using Windows.ApplicationModel.Resources;
 
 namespace Despegar.Core.Connector
 {
@@ -60,8 +60,9 @@ namespace Despegar.Core.Connector
             }
             catch(JsonSerializationException ex)
             {
-                throw new JsonDeserializationException(String.Format("[Connector]:Could not serialize object of type {0} to call Service: {1}", typeof(T).FullName, url), ex);
-                //TODO: Logger.Error(ex.ToString())
+                var e = new JsonSerializerException(String.Format("[Connector]:Could not serialize object of type {0} to call Service: {1}", typeof(T).FullName, url), ex);
+                Logger.LogCoreException(e);
+                throw e;
             }
 
             HttpRequestMessage httpMessage = new HttpRequestMessage(HttpMethod.Post, url);
@@ -97,8 +98,9 @@ namespace Despegar.Core.Connector
                 // Check Empty Response
                 if (String.IsNullOrEmpty(response))
                 {
-                    // TODO: Log exception
-                    throw new EmptyWebResponseException(String.Format("[Connector]: Requested Service URL '{0}' returned an empty response.", httpMessage.RequestUri));
+                    var e = new HTTPStatusErrorException(String.Format("[Connector]: HTTP Error code {0} Message: {1}", httpResponse.StatusCode.ToString(), response));
+                    Logger.LogCoreException(e);
+                    throw e;
                 }
 
                 // Deserialize JSON data to .NET object
@@ -107,18 +109,21 @@ namespace Despegar.Core.Connector
             catch (HttpRequestException ex)
             {
                 // HTTP Client error
-                throw new WebConnectivityException(String.Format("[Connector]: Could not connect to Service URL ", httpMessage.RequestUri), ex);
-                //TODO: Logger.Error(ex.ToString());
+                var e = new WebConnectivityException(String.Format("[Connector]: Could not connect to Service URL ", httpMessage.RequestUri), ex);
+                Logger.LogCoreException(e);
+                throw e;
             }
             catch (JsonSerializationException ex)
             {
                 // Deserializer JSON.NET Error
-                throw new JsonDeserializationException(String.Format("[Connector]: Service call: {0}. Could not deserialize type '{1}' from service response data: {2}", httpMessage.RequestUri, typeof(T).FullName, response), ex);
-                //TODO: Logger.Error(ex.ToString())
+                var e = new JsonSerializerException(String.Format("[Connector]: Service call: {0}. Could not deserialize type '{1}' from service response data: {2}", httpMessage.RequestUri, typeof(T).FullName, response), ex);
+                Logger.LogCoreException(e);
+                throw e;
             }
             catch (Exception ex) {
-                //TODO: Logger.Error(ex.ToString())
-                throw new Exception(String.Format("[Connector]: Unknown Connector Error when calling Service URL {0}", httpMessage.RequestUri), ex);
+                var e = new Exception(String.Format("[Connector]: Unknown Connector Error when calling Service URL {0}", httpMessage.RequestUri), ex);
+                Logger.LogCoreException(e);
+                throw e;
             }
         }
 
