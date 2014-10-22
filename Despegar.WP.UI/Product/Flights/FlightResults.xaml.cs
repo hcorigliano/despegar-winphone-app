@@ -18,6 +18,8 @@ using Windows.UI.Xaml.Navigation;
 using Despegar.Core.Business.Flight.Itineraries;
 using Despegar.WP.UI.Classes;
 using Despegar.WP.UI.Model;
+using Windows.UI.Popups;
+using System.Threading.Tasks;
 
 // The Basic Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
 
@@ -116,11 +118,126 @@ namespace Despegar.WP.UI.Product.Flights
 
         #endregion
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        public T FindDescendant<T>(DependencyObject obj) where T : DependencyObject
         {
-            PagesManager.GoTo(typeof(FlightDetail), null);
+            // Check if this object is the specified type
+            if (obj is T)
+                return obj as T;
+
+            // Check for children
+            int childrenCount = VisualTreeHelper.GetChildrenCount(obj);
+            if (childrenCount < 1)
+                return null;
+
+            // First check all the children
+            for (int i = 0; i < childrenCount; i++)
+            {
+                DependencyObject child = VisualTreeHelper.GetChild(obj, i);
+                if (child is T)
+                    return child as T;
+            }
+
+            // Then check the childrens children
+            for (int i = 0; i < childrenCount; i++)
+            {
+                DependencyObject child = FindDescendant<T>(VisualTreeHelper.GetChild(obj, i));
+                if (child != null && child is T)
+                    return child as T;
+            }
+
+            return null;
         }
 
-        
+        private DependencyObject FindChildControl<T>(DependencyObject control, string ctrlName)
+        {
+            int childNumber = VisualTreeHelper.GetChildrenCount(control);
+            for (int i = 0; i < childNumber; i++)
+            {
+                DependencyObject child = VisualTreeHelper.GetChild(control, i);
+                FrameworkElement fe = child as FrameworkElement;
+                // Not a framework element or is null
+                if (fe == null) return null;
+
+                if (child is T && fe.Name == ctrlName)
+                {
+                    // Found the control so return
+                    return child;
+                }
+                else
+                {
+                    // Not found it - search children
+                    DependencyObject nextLevel = FindChildControl<T>(child, ctrlName);
+                    if (nextLevel != null)
+                        return nextLevel;
+                }
+            }
+            return null;
+        }
+
+        private void Grid_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            Grid grid = sender as Grid;
+            if (grid!=null)
+            {
+                PagesManager.GoTo(typeof(FlightDetail), grid.DataContext);
+            }
+        }
+
+        private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ListBoxItem currentSelectedListBoxItem;
+            if (lbFlights.SelectedIndex == -1)
+                return;
+
+            //currentSelectedListBoxItem = this.lbFlights.ItemContainerGenerator.ContainerFromIndex(lbFlights.SelectedIndex) as ListBoxItem;
+
+            currentSelectedListBoxItem = this.lbFlights.ContainerFromIndex(lbFlights.SelectedIndex) as ListBoxItem;
+
+            if (currentSelectedListBoxItem == null)
+                return;
+
+            // Iterate whole listbox tree and search for this items
+            ItemsControl itemsControl = FindDescendant<ItemsControl>(currentSelectedListBoxItem);
+
+            if (itemsControl == null) 
+                return;
+            itemsControl.Visibility = SetVisualEffect(itemsControl.Visibility);
+
+        }
+
+        private void ListBox_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            ListBox listbox = sender as ListBox;
+            ListBoxItem listboxitem;
+            int index = 0;
+
+            if (listbox == null)
+                return;
+            
+            index = listbox.SelectedIndex;
+
+            listboxitem = listbox.ContainerFromIndex(index) as ListBoxItem;
+            if (listboxitem == null) 
+                return;
+
+            //ItemsControl itemsControl = FindDescendant<ItemsControl>(listboxitem);
+            ItemsControl itemsControl = FindChildControl<ItemsControl>(listboxitem, "RoutesItemControl") as ItemsControl;
+
+            if (itemsControl == null) 
+                return;
+
+            itemsControl.Visibility = SetVisualEffect(itemsControl.Visibility);
+        }
+
+        private Visibility SetVisualEffect(Visibility visibility)
+        {
+            switch (visibility){
+                case  Visibility.Collapsed:
+                    return Visibility.Visible;
+                case Visibility.Visible:
+                    return Visibility.Collapsed;
+            }
+            return visibility;
+        }
     }
 }

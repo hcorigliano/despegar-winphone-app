@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Despegar.Core.Business.Culture;
 using Despegar.Core.Business;
+using Despegar.Core.Log;
 
 namespace Despegar.WP.UI.Model
 {
@@ -32,11 +33,17 @@ namespace Despegar.WP.UI.Model
             //TODO : (1)
             //CoreContext.SetSite(SiteCode.Argentina);
 
+
+            // Enable Verbose logging
+            #if DEBUG
+             Logger.Configure(true, true);
+            #endif
+
             // Add Service Mocks
             GlobalConfiguration.CoreContext.AddMock(ServiceKey.Configurations, MockKey.ConfigurationsDefault); //keep on! No URL yet.
             //CoreContext.AddMock(ServiceKey.FlightsAirlines, MockKey.AirlineTest);
-            GlobalConfiguration.CoreContext.AddMock(ServiceKey.FlightCitiesAutocomplete, MockKey.FlightCitiesAutocompleteBue);
-            GlobalConfiguration.CoreContext.AddMock(ServiceKey.FlightItineraries, MockKey.ItinerarieBueToLax);
+           // GlobalConfiguration.CoreContext.AddMock(ServiceKey.FlightCitiesAutocomplete, MockKey.FlightCitiesAutocompleteBue);
+            //GlobalConfiguration.CoreContext.AddMock(ServiceKey.FlightItineraries, MockKey.ItinerarieBueToLax);
             GlobalConfiguration.CoreContext.AddMock(ServiceKey.FlightsBookingFields, MockKey.BookingFieldBuetoMia);
         }
 

@@ -3,32 +3,34 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:Despegar.WP.UI"
+    xmlns:prop="using:Despegar.LegacyCore.Resource"
     RequestedTheme="Light"
     >
 
     <Application.Resources>
-    	<ResourceDictionary>
-    		<ResourceDictionary.MergedDictionaries>
-    			<ResourceDictionary Source="Styles/StyleShared.xaml"/>
-    		</ResourceDictionary.MergedDictionaries>
-    		<Style TargetType="Grid" x:Key="Grid.background">
-    			<Setter Property="Background" Value="White"/>
-    		</Style>
-    		<Style TargetType="TextBlock" x:Key="TextBlock.Heading1">
-    			<Setter Property="FontSize" Value="36"/>
-    		</Style>
-    		<Style TargetType="TextBlock" x:Key="TextBlock.CommonText">
-    			<Setter Property="FontSize" Value="20"/>
-    			<Setter Property="HorizontalAlignment" Value="Stretch"/>
-    			<Setter Property="VerticalAlignment" Value="Center"/>
-    			<Setter Property="Margin" Value="5"/>
-    		</Style>
-			<Style TargetType="TextBlock" x:Key="TextBlock.Error">
-				<Setter Property="Foreground" Value="#FFF30A35"/>
-				<Setter Property="FontSize" Value="18.667"/>
-				<Setter Property="Margin" Value="5"/>
-			</Style>
-    	</ResourceDictionary>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Styles/StyleShared.xaml"/>
+                <!--<ResourceDictionary Source="Styles/Legacy.xaml" />-->
+            </ResourceDictionary.MergedDictionaries>
+            <Style TargetType="Grid" x:Key="Grid.background">
+                <Setter Property="Background" Value="White"/>
+            </Style>
+            <Style TargetType="TextBlock" x:Key="TextBlock.Heading1">
+                <Setter Property="FontSize" Value="36"/>
+            </Style>
+            <Style TargetType="TextBlock" x:Key="TextBlock.CommonText">
+                <Setter Property="FontSize" Value="20"/>
+                <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="Margin" Value="5"/>
+            </Style>
+            <Style TargetType="TextBlock" x:Key="TextBlock.Error">
+                <Setter Property="Foreground" Value="#FFF30A35"/>
+                <Setter Property="FontSize" Value="18.667"/>
+                <Setter Property="Margin" Value="5"/>
+            </Style>
+        </ResourceDictionary>
     </Application.Resources>
     
 </Application>
