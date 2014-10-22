@@ -144,8 +144,8 @@
 
         <!-- TITLE BAR -->
         <Grid Grid.Row="0">
-            <Image x:Name="MainLogo" Source="/Assets/Image/despegar-logo.png" Height="60" Margin="18,0,0,5" HorizontalAlignment="Left" VerticalAlignment="Bottom" />
-            <TextBlock x:Uid="/LegacyStrings/HotelCheckoutBuyHotel"  FontSize="20" Foreground="#023d8b" TextAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,10,10" />
+            <Image x:Name="MainLogo" Source="/Product/Legacy/Assets/Image/despegar-logo.png" Height="44" Margin="17,0,0,12" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="231"  />
+            <TextBlock x:Uid="/LegacyStrings/HotelCheckoutBuyHotel"  FontSize="20" Foreground="#023d8b" TextAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,10,13" />
             <TextBlock x:Name="Model" DataContext="{Binding AvailabilityModel}" Visibility="Collapsed"></TextBlock>
         </Grid>
         
@@ -167,7 +167,7 @@
 
                     <TextBlock Text="{Binding Path=Hotel.Name}" Style="{StaticResource RowTitleStyle}" TextWrapping="Wrap" />
                     <TextBlock Text="{Binding Path=Room.Description}" Style="{StaticResource RowSubTitleStyle}" Margin="12,-2,12,0" TextWrapping="Wrap" />
-                    <Image HorizontalAlignment="Left" Source="{Binding Path=Hotel.Stars, Converter={StaticResource StringFormatConverter}, ConverterParameter='/Assets/Image/details-{0}-stars-hotel.png'}" Height="20" Margin="14,5,0,15" />
+                    <Image HorizontalAlignment="Left" Source="{Binding Path=Hotel.Stars, Converter={StaticResource StringFormatConverter}, ConverterParameter='/Product/Legacy/Assets/Image/details-{0}-stars-hotel.png'}" Height="20" Margin="14,5,0,15" />
 
                     <StackPanel Style="{StaticResource RowDetailsDetailStyle}">
                         <TextBlock Text="{Binding Path=Room.Penalty.Cancelation}" Style="{StaticResource RowDetailsDetailTextStyle}" TextWrapping="Wrap" />
@@ -228,14 +228,14 @@
                             <RowDefinition Height="*" />
                         </Grid.RowDefinitions>
 
-                        <StackPanel Grid.Row="0"  Grid.Column="0" Margin="8,50,0,0">
-                            <StackPanel Orientation="Horizontal" DataContext="{Binding Path=DataContext.AvailabilityModel, ElementName=HotelsCheckoutView}">
+                        <StackPanel Grid.Row="0"  Grid.Column="0" Margin="8,50,0,0" >                                                        
+                            <StackPanel Orientation="Horizontal" x:Name="StackPepe">
                                 <TextBlock Style="{StaticResource RowDetailsDetailTextStyle}" Margin="10,0,15,0" Text="{Binding TheCheckin}" />
-                                <Image Source="/Assets/Image/details-nights-icon.png" />
+                                <Image Source="/Product/Legacy/Assets/Image/details-nights-icon.png" />
                                 <TextBlock Text="{Binding Nights}" Margin="6,0,12,0" Style="{StaticResource RowDetailsDetailTextCenterStyle}"/>
-                                <Image Source="/Assets/Image/details-rooms-icon.png" />
+                                <Image Source="/Product/Legacy/Assets/Image/details-rooms-icon.png" />
                                 <TextBlock Text="{Binding Rooms}" Margin="6,0,12,0" Style="{StaticResource RowDetailsDetailTextCenterStyle}" />
-                                <Image Source="/Assets/Image/details-guests-icon.png" />
+                                <Image Source="/Product/Legacy/Assets/Image/details-guests-icon.png" />
                                 <TextBlock Text="{Binding Hostages}" Margin="6,0,0,0" Style="{StaticResource RowDetailsDetailTextCenterStyle}" />
                             </StackPanel>
                         </StackPanel>
@@ -258,7 +258,7 @@
                 </StackPanel>
 
                 <Rectangle Fill="#aaa" Width="Auto" Height="1" Margin="10,10,10,0" />
-                <Button Grid.Row="1" x:Name="BackToFlow" Click="BackToFlow_Click" Background="#002d7b" BorderThickness="0" Margin="8">
+                <Button Grid.Row="1" x:Name="BackToFlow" Click="BackToFlow_Click" Background="#002d7b" BorderThickness="0" HorizontalAlignment="Stretch" Width="Auto" Height="65" Foreground="White" Margin="10,0">
                     <TextBlock x:Uid="/LegacyStrings/ThanksLabel_GoToHomePage" FontSize="24"></TextBlock>
                 </Button>
             </StackPanel>
