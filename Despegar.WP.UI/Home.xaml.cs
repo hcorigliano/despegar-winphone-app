@@ -28,7 +28,8 @@ namespace Despegar.WP.UI
 
             this.navigationHelper = new NavigationHelper(this);
             this.navigationHelper.LoadState += this.NavigationHelper_LoadState;
-            this.navigationHelper.SaveState += this.NavigationHelper_SaveState;            
+            this.navigationHelper.SaveState += this.NavigationHelper_SaveState;          
+
         }
 
         /// <summary>
@@ -126,6 +127,11 @@ namespace Despegar.WP.UI
             ApplicationConfig.Instance.ResetBrowsingPages(new Uri(HomeViewModel.Domain + relativePath));
 
             PagesManager.GoTo(typeof(Browser), e);
+        }
+
+        private void AppBarButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            PagesManager.GoTo(typeof(CountrySelection), e);
         }
     }
 }

@@ -52,7 +52,7 @@ namespace Despegar.WP.UI.Controls.Flights
         {           
             if (args.Reason == AutoSuggestionBoxTextChangeReason.UserInput && sender.Text != "" && sender.Text.Length >= 3)
             {
-
+                //TODO : TRY CATCH
                 sender.ItemsSource = (IEnumerable)(await FlightSearchBoxModel.GetCities(sender.Text));
             }
         }

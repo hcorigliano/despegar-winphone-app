@@ -71,41 +71,38 @@ namespace Despegar.WP.UI.Product.Flights
         private void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
         {
             // Restore values stored in session state.
-            if (e.PageState != null)
-            {
-                if (e.PageState.ContainsKey("originFlight"))
-                {
-                    airportsContainer.OriginAirportControl.Text = e.PageState["originFlight"].ToString();
-                }
+            //if (e.PageState != null)
+            //{
+            //    if (e.PageState.ContainsKey("originFlight"))
+            //    {
+            //        airportsContainer.OriginAirportControl.Text = e.PageState["originFlight"].ToString();
+            //    }
 
-                if (e.PageState.ContainsKey("destinyFlight"))
-                {
-                    airportsContainer.DestinyAirportControl.Text = e.PageState["destinyFlight"].ToString();
-                }
+            //    if (e.PageState.ContainsKey("destinyFlight"))
+            //    {
+            //        airportsContainer.DestinyAirportControl.Text = e.PageState["destinyFlight"].ToString();
+            //    }
 
-                if (e.PageState.ContainsKey("originFlight"))
-                {
-                    airportsContainer.AirportOrigin = e.PageState["originFlightCode"].ToString();
-                }
+            //    if (e.PageState.ContainsKey("originFlight"))
+            //    {
+            //        airportsContainer.AirportOrigin = e.PageState["originFlightCode"].ToString();
+            //    }
 
-                if (e.PageState.ContainsKey("destinyFlight"))
-                {
-                    airportsContainer.AirportDestiny = e.PageState["destinyFlightCode"].ToString();
-                }
+            //    if (e.PageState.ContainsKey("destinyFlight"))
+            //    {
+            //        airportsContainer.AirportDestiny = e.PageState["destinyFlightCode"].ToString();
+            //    }
 
-                var testo = e.PageState["FlightDateDeparture"].ToString();
-                var test1 = e.PageState["FlightDateReturn"].ToString();
+            //    if (e.PageState.ContainsKey("FlightDateDeparture"))
+            //    {
+            //        dateControlContainer.DepartureDateControl.Date = DateTime.Parse(e.PageState["FlightDateDeparture"].ToString());
+            //    }
 
-                if (e.PageState.ContainsKey("FlightDateDeparture"))
-                {
-                    dateControlContainer.DepartureDateControl.Date = DateTime.Parse(e.PageState["FlightDateDeparture"].ToString());
-                }
-
-                if (e.PageState.ContainsKey("FlightDateReturn"))
-                {
-                    dateControlContainer.ReturnDateControl.Date = DateTime.Parse(e.PageState["FlightDateReturn"].ToString());
-                }
-            }
+            //    if (e.PageState.ContainsKey("FlightDateReturn"))
+            //    {
+            //        dateControlContainer.ReturnDateControl.Date = DateTime.Parse(e.PageState["FlightDateReturn"].ToString());
+            //    }
+            //}
         }
 
         /// <summary>
@@ -118,13 +115,13 @@ namespace Despegar.WP.UI.Product.Flights
         /// serializable state.</param>
         private void NavigationHelper_SaveState(object sender, SaveStateEventArgs e)
         {
-            e.PageState["originFlight"] = airportsContainer.OriginAirportControl.Text;
-            e.PageState["destinyFlight"] = airportsContainer.DestinyAirportControl.Text;
-            e.PageState["originFlightCode"] = airportsContainer.AirportOrigin;
-            e.PageState["destinyFlightCode"] = airportsContainer.AirportDestiny;
+            //e.PageState["originFlight"] = airportsContainer.OriginAirportControl.Text;
+            //e.PageState["destinyFlight"] = airportsContainer.DestinyAirportControl.Text;
+            //e.PageState["originFlightCode"] = airportsContainer.AirportOrigin;
+            //e.PageState["destinyFlightCode"] = airportsContainer.AirportDestiny;
 
-            e.PageState["FlightDateDeparture"] = dateControlContainer.DepartureDateControl.Date;
-            e.PageState["FlightDateReturn"] = dateControlContainer.ReturnDateControl.Date;
+            //e.PageState["FlightDateDeparture"] = dateControlContainer.DepartureDateControl.Date;
+            //e.PageState["FlightDateReturn"] = dateControlContainer.ReturnDateControl.Date;
 
         }
 
@@ -193,6 +190,7 @@ namespace Despegar.WP.UI.Product.Flights
 #else
             if (!error)
             {
+
                 FlightsItineraries intinerarie = await flightSearchBoxModel.GetItineraries(airportsContainer.AirportOrigin, airportsContainer.AirportDestiny, dateControlContainer.DepartureDateControl.Date.ToString("yyyy-MM-dd"), adults, dateControlContainer.ReturnDateControl.Date.ToString("yyyy-MM-dd"), childs, infants, 0, 10, "", "", "", "");
                 PagesManager.GoTo(typeof(FlightResults), intinerarie);
             }
