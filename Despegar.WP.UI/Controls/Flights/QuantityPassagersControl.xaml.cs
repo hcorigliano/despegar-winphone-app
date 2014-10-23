@@ -27,6 +27,24 @@ namespace Despegar.WP.UI.Controls.Flights
         public PassagersQuantity Passagers = new PassagersQuantity();
         public StackPanel ChildPassagers { get; set; }
 
+        public int ChildrenInFlights
+        { 
+            get {
+                return ChildPassagers.Children.Where(x => (x as ChildControl).SelectedItemTag.Equals(Core.Business.Enums.FlightSearchChildEnum.Child)).Count() ;
+                }
+        }
+        public int AdultsInFlights {
+            get
+            {
+                return ChildPassagers.Children.Where(x => (x as ChildControl).SelectedItemTag.Equals(Core.Business.Enums.FlightSearchChildEnum.Adult) ).Count() + Passagers.AdultPassagerQuantity;
+            }
+        }
+        public int InfantsInFlights {
+            get 
+            {
+                return ChildPassagers.Children.Where(x => (x as ChildControl).SelectedItemTag.Equals(Core.Business.Enums.FlightSearchChildEnum.Infant)).Count();
+            }
+        }
 
         public QuantityPassagersControl()
         {
@@ -54,7 +72,7 @@ namespace Despegar.WP.UI.Controls.Flights
         }
 
         //Bottons for passagers Quantity
-        #region
+        #region Control Behaviors
         private void btnAdultAdd_Click(object sender, RoutedEventArgs e)
         {
             Passagers.AddAdult();
@@ -86,5 +104,6 @@ namespace Despegar.WP.UI.Controls.Flights
         }
 
         #endregion
+
     }
 }

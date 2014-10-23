@@ -5,70 +5,70 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:Classes="using:Despegar.WP.UI.Model.Classes"
+    xmlns:Model="using:Despegar.WP.UI.Model"
     x:Class="Despegar.WP.UI.Product.Flights.FlightSearch"
     
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
 
+	<Grid x:Name="LayoutRoot">
 
-    <Grid x:Name="LayoutRoot">
+		<Grid.ChildrenTransitions>
+			<TransitionCollection>
+				<EntranceThemeTransition/>
+			</TransitionCollection>
+		</Grid.ChildrenTransitions>
 
-        <Grid.ChildrenTransitions>
-            <TransitionCollection>
-                <EntranceThemeTransition/>
-            </TransitionCollection>
-        </Grid.ChildrenTransitions>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="*"/>
+		</Grid.RowDefinitions>
 
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-
-        <!-- Title Panel -->
-        <StackPanel Grid.Row="0" Margin="19,0,0,0">
-            <TextBlock x:Uid="AppTitle" Style="{ThemeResource TitleTextBlockStyle}" Margin="0,12,0,0"/>
-            <TextBlock x:Uid="Page_FlightSearch" Margin="0,-6.5,0,26.5" Style="{ThemeResource HeaderTextBlockStyle}" CharacterSpacing="{ThemeResource PivotHeaderItemCharacterSpacing}"/>
-        </StackPanel>
+		<!-- Title Panel -->
+		<StackPanel Grid.Row="0" Margin="19,0,0,0">
+			<TextBlock x:Uid="AppTitle" Style="{ThemeResource TitleTextBlockStyle}" Margin="0,12,0,0"/>
+			<TextBlock x:Uid="Page_FlightSearch" Margin="0,-6.5,0,26.5" Style="{ThemeResource HeaderTextBlockStyle}" CharacterSpacing="{ThemeResource PivotHeaderItemCharacterSpacing}"/>
+		</StackPanel>
 
 
         <!--TODO: Content should be placed within the following grid-->
 
-        <Grid Grid.Row="1" x:Name="ContentRoot" Margin="19,9.5,19,0" xmlns:src="using:Despegar.WP.UI.Controls.Flights" >
-            <Pivot>
-                <PivotItem>
-                    <ScrollViewer>
-                        <StackPanel>
-                            <TextBlock Text="IDA Y VUELTA"></TextBlock>
-                            <StackPanel  VerticalAlignment="Top" HorizontalAlignment="Stretch">
+		<Grid xmlns:src="using:Despegar.WP.UI.Controls.Flights" Grid.Row="1" x:Name="ContentRoot" Margin="19,9.5,19,0" >
+			<Pivot>
+				<PivotItem>
+					<ScrollViewer>
+						<StackPanel>
+							<TextBlock Text="IDA Y VUELTA"/>
+							<StackPanel  VerticalAlignment="Top" HorizontalAlignment="Stretch">
 
-                                <src:SearchAirport x:Name="airportsContainer"></src:SearchAirport>
+								<src:SearchAirport x:Name="airportsContainer"/>
 
-                                <src:DateControl x:Name="dateControlContainer"></src:DateControl>
+								<src:DateControl x:Name="dateControlContainer"/>
 
-                                <src:QuantityPassagersControl x:Name="quantityPassagersContainer"></src:QuantityPassagersControl>
+								<src:QuantityPassagersControl x:Name="quantityPassagersContainer"/>
 
-                            </StackPanel>
+							</StackPanel>
 
-                            <Button Click="ButtonReturn_Click" HorizontalAlignment="Center" Content="Buscar vuelos"/>
-                        </StackPanel>
-                    </ScrollViewer>
-                </PivotItem>
+							<Button Click="ButtonSearch_Click" HorizontalAlignment="Center" Content="Buscar vuelos"/>
+						</StackPanel>
+					</ScrollViewer>
+				</PivotItem>
 
-                <PivotItem>
-                    <StackPanel>
-                        <TextBlock Text="IDA"></TextBlock>
-                    </StackPanel>
-                </PivotItem>
+				<PivotItem>
+					<StackPanel>
+						<TextBlock Text="IDA"/>
+					</StackPanel>
+				</PivotItem>
 
-                <PivotItem>
-                    <StackPanel>
-                        <TextBlock Text="MULTIPLES"></TextBlock>
-                    </StackPanel>
-                </PivotItem>
+				<PivotItem>
+					<StackPanel>
+						<TextBlock Text="MULTIPLES"/>
+					</StackPanel>
+				</PivotItem>
 
-            </Pivot>
-        </Grid>
+			</Pivot>
+		</Grid>
 
-    </Grid>
+	</Grid>
 </Page>

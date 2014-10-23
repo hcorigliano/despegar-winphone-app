@@ -36,8 +36,10 @@ namespace Despegar.WP.UI.Product.Flights
 
             this.navigationHelper = new NavigationHelper(this);
             this.navigationHelper.LoadState += this.NavigationHelper_LoadState;
-            this.navigationHelper.SaveState += this.NavigationHelper_SaveState;          
+            this.navigationHelper.SaveState += this.NavigationHelper_SaveState;
             
+            // Datacontext is link with the interface
+            //this.DataContext = flightSearchModel;
         }
 
         /// <summary>
@@ -175,10 +177,35 @@ namespace Despegar.WP.UI.Product.Flights
                 var messageDialog = new MessageDialog("No se completo correctamente las ciudades");
                 await messageDialog.ShowAsync();
             }
-#endif        
-                        
+#endif    
         }
-                
+
+
+        private void ButtonSearch_Click(object sender, RoutedEventArgs e)
+        {
+            //  TODO 
+            //  Validate model
+            // if anyerror
+            //  display errors 
+            //else
+            //  continue if everything is ok.
+
+            flightSearchModel.AdultsInFlights = quantityPassagersContainer.AdultsInFlights;
+            flightSearchModel.ChildrenInFlights = quantityPassagersContainer.ChildrenInFlights;
+            flightSearchModel.InfantsInFlights = quantityPassagersContainer.InfantsInFlights;
+            
+            flightSearchModel.DepartureDate = dateControlContainer.DepartureDateControl.Date;
+            flightSearchModel.DestinationDate = dateControlContainer.ReturnDateControl.Date;
+
+            flightSearchModel.OriginFlight = airportsContainer.OriginAirportCode;
+            flightSearchModel.DestinationFlight = airportsContainer.DestinyAirportCode;
+            flightSearchModel.LimitResult = 10;
+
+            //string from, string to, string departure_date, int adults, string return_date, int children, int infants, int offset, int limit, string order_by, string order_type, string currency_code, string filter)
+
+            //FlightsItineraries intinerarie = await flightSearchBoxModel.GetItineraries("BUE", "LAX", "2014-12-11", 1, "2014-12-13", 0, 0, 0, 10, "", "", "", "");
+            //PagesManager.GoTo(typeof(FlightResults), intinerarie);
+        }        
     }
 }
                                     
