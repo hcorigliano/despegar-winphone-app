@@ -46,14 +46,14 @@ namespace Despegar.WP.UI
             //CitiesAutocomplete a = await hm.GetCities("bue");
             //FlightsItineraries b = await hm.GetItineraries("BUE", "LAX", "2014-10-10", 1, "2014-10-12", 0, 0, 0, 10, "", "", "ARS", "");
 
-            BookingFieldPost bookingFieldPost = new BookingFieldPost();
-            bookingFieldPost.inbound_choice = 1;
-            bookingFieldPost.outbound_choice = 1;
-            bookingFieldPost.itinerary_id = "prism_AR_0_FLIGHTS_A-1_C-0_I-0_RT-BUEMIA20141010-MIABUE20141013_xorigin-api!1!C_626893920!1,1";
+            //BookingFieldPost bookingFieldPost = new BookingFieldPost();
+            //bookingFieldPost.inbound_choice = 1;
+            //bookingFieldPost.outbound_choice = 1;
+            //bookingFieldPost.itinerary_id = "prism_AR_0_FLIGHTS_A-1_C-0_I-0_RT-BUEMIA20141010-MIABUE20141013_xorigin-api!1!C_626893920!1,1";
             //BookingFields c = await hm.GetBooking(bookingFieldPost);
             
             //Configurations d = await hm.GetConfigurations();
-            int test = 1;
+            //int test = 1;
 
             //string id =  "prism_AR_0_FLIGHTS_A-1_C-0_I-0_RT-BUEMIA20141010-MIABUE20141013_xorigin-api!0!C_1385824347!1,1";
             //BookingCompletePost booking = new BookingCompletePost();

@@ -171,6 +171,9 @@
   <data name="Layovers.Text" xml:space="preserve">
     <value>Escalas</value>
   </data>
+  <data name="Home_Settings.Label" xml:space="preserve">
+    <value>Configuración</value>
+  </data>
   <data name="Page_CountrySelection.Text" xml:space="preserve">
     <value>Seleccione país</value>
   </data>
