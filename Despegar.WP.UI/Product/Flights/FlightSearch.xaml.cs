@@ -214,16 +214,20 @@ namespace Despegar.WP.UI.Product.Flights
             //else
             //  continue if everything is ok.
 
+
             flightSearchModel.AdultsInFlights = quantityPassagersContainer.AdultsInFlights;
             flightSearchModel.ChildrenInFlights = quantityPassagersContainer.ChildrenInFlights;
             flightSearchModel.InfantsInFlights = quantityPassagersContainer.InfantsInFlights;
-            
+
             flightSearchModel.DepartureDate = dateControlContainer.DepartureDateControl.Date;
             flightSearchModel.DestinationDate = dateControlContainer.ReturnDateControl.Date;
 
             flightSearchModel.OriginFlight = airportsContainer.AirportOrigin;
             flightSearchModel.DestinationFlight = airportsContainer.AirportDestiny;
             flightSearchModel.LimitResult = 10;
+
+
+            //flightSearchModel.Send
 
             //string from, string to, string departure_date, int adults, string return_date, int children, int infants, int offset, int limit, string order_by, string order_type, string currency_code, string filter)
 
