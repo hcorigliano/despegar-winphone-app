@@ -127,8 +127,14 @@
     <Compile Include="Controls\DateDisplayMiniBoxSearch.xaml.cs">
       <DependentUpon>DateDisplayMiniBoxSearch.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Flights\DateControlSimple.xaml.cs">
+      <DependentUpon>DateControlSimple.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Flights\FlightSegment.xaml.cs">
       <DependentUpon>FlightSegment.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Flights\FlightsSection.xaml.cs">
+      <DependentUpon>FlightsSection.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\Flights\QuantityPassagersControl.xaml.cs">
       <DependentUpon>QuantityPassagersControl.xaml</DependentUpon>
@@ -182,6 +188,14 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Strings\AppResources.cs" />
+    <Page Include="Controls\Flights\DateControlSimple.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Flights\FlightsSection.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Product\Legacy\HotelsThanks.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -532,10 +546,10 @@
   <ItemGroup>
     <PRIResource Include="Strings\es\Resources.resw" />
   </ItemGroup>
-<ItemGroup>
-  <SDKReference Include="BehaviorsXamlSDKManaged, Version=12.0" />
-</ItemGroup>
-  <ItemGroup>    
+  <ItemGroup>
+    <SDKReference Include="BehaviorsXamlSDKManaged, Version=12.0" />
+  </ItemGroup>
+  <ItemGroup>
     <PRIResource Include="Strings\es\LegacyStrings.resw">
       <SubType>Designer</SubType>
     </PRIResource>

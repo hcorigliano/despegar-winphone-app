@@ -13,6 +13,8 @@ using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
+using System.Collections.Generic;
+using System.Linq;
 
 
 // The Basic Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
@@ -26,7 +28,8 @@ namespace Despegar.WP.UI.Product.Flights
     {
         private NavigationHelper navigationHelper;
         private ObservableDictionary defaultViewModel = new ObservableDictionary();
-        private FlightsSearchBoxModel flightSearchBoxModel = new FlightsSearchBoxModel();      
+        private FlightsSearchBoxModel flightSearchBoxModel = new FlightsSearchBoxModel();
+        private int numberOfSegments = 0;
 
        
 
@@ -36,7 +39,10 @@ namespace Despegar.WP.UI.Product.Flights
 
             this.navigationHelper = new NavigationHelper(this);
             this.navigationHelper.LoadState += this.NavigationHelper_LoadState;
-            this.navigationHelper.SaveState += this.NavigationHelper_SaveState;          
+            this.navigationHelper.SaveState += this.NavigationHelper_SaveState;
+
+            AddSegmentMultiple();
+            AddSegmentMultiple();
             
         }
 
@@ -55,6 +61,34 @@ namespace Despegar.WP.UI.Product.Flights
         public ObservableDictionary DefaultViewModel
         {
             get { return this.defaultViewModel; }
+        }
+
+        private void addSectionButton_Click(object sender, RoutedEventArgs e)
+        {
+                      
+            AddSegmentMultiple();
+            sectionSubGrid.Visibility = Visibility.Visible;
+        }
+
+        private void subSectionButton_Click(object sender, RoutedEventArgs e)
+        {
+            segmentMultipleStackPanel.Children.RemoveAt(numberOfSegments - 1);
+            numberOfSegments -= 1;
+            if (numberOfSegments <= 2)
+            {
+                sectionSubGrid.Visibility = Visibility.Collapsed;
+            }            
+            sectionAddGrid.Visibility = Visibility.Visible;
+        }
+
+        private void AddSegmentMultiple()
+        {
+            segmentMultipleStackPanel.Children.Add(new FlightsSection(numberOfSegments));
+            numberOfSegments += 1;
+            if (numberOfSegments >= 6)
+            {
+                sectionAddGrid.Visibility = Visibility.Collapsed;
+            }
         }
 
         /// <summary>
@@ -155,13 +189,42 @@ namespace Despegar.WP.UI.Product.Flights
 
         private async void ButtonReturn_Click(object sender, RoutedEventArgs e)
         {
-            int adults = quantityPassagersContainer.Passagers.AdultPassagerQuantity;
+            string originAirport = "",destinyAirport = "", departureDate = "", returnDate = "";
+
+            int adults = quantityPassagersContainerRoundTrip.Passagers.AdultPassagerQuantity;
             int infants = 0, childs = 0;
             bool error = false;
+            
 
+            switch (((Button)sender).Name)
+            {
+                case "RoundTripButton":
+                    originAirport = airportsContainerRoundTrip.AirportOrigin;
+                    destinyAirport = airportsContainerRoundTrip.AirportDestiny;
+                    departureDate = dateControlContainerRoundTrip.DepartureDateControl.Date.ToString("yyyy-MM-dd");
+                    returnDate = dateControlContainerRoundTrip.ReturnDateControl.Date.ToString("yyyy-MM-dd");
+                    break;
+
+                case "OneWayButton":
+                    originAirport = airportsContainerOneWay.AirportOrigin;
+                    destinyAirport = airportsContainerOneWay.AirportDestiny;
+                    departureDate = dateControlContainerOneWay.DateDeparture.Date.ToString("yyyy-MM-dd");
+                    returnDate = "";
+                    break;
+
+                case "MultipleButton":
+                    originAirport = String.Join(",", segmentMultipleStackPanel.Children.Select(x => ((FlightsSection)x).AirportsContainerMultipleSection.AirportOrigin).ToList());
+                    destinyAirport = String.Join(",", segmentMultipleStackPanel.Children.Select(x => ((FlightsSection)x).AirportsContainerMultipleSection.AirportDestiny).ToList());
+                    departureDate = String.Join(",", segmentMultipleStackPanel.Children.Select(x => ((FlightsSection)x).DateControlContainerMultipleSection.DateDeparture.Date.ToString("yyyy-MM-dd")).ToList());
+                    returnDate = "";
+                    break;
+            }
+
+            //FlightsItineraries intinerarie = await flightSearchBoxModel.GetItineraries(originAirport,destinyAirport,departureDate, adults,returnDate, childs, infants, 0, 10, "", "", "", "");
+            //PagesManager.GoTo(typeof(FlightResults), intinerarie);
 #if !DEBUG
             //TODO: validate the origin and destiny for any problem.
-            if (String.IsNullOrEmpty(airportsContainer.AirportOrigin) || String.IsNullOrEmpty(airportsContainer.AirportDestiny))
+            if (String.IsNullOrEmpty(airportsContainerRoundTrip.AirportOrigin) || String.IsNullOrEmpty(airportsContainerRoundTrip.AirportDestiny))
             {
                 // autocomplete not charge properly
                 error = true;
@@ -169,7 +232,7 @@ namespace Despegar.WP.UI.Product.Flights
 #endif
 
 
-            foreach (ChildControl a in quantityPassagersContainer.ChildPassagers.Children)
+            foreach (ChildControl a in quantityPassagersContainerRoundTrip.ChildPassagers.Children)
             {
                 switch (a.SelectedItemTag)
                 {
@@ -191,7 +254,7 @@ namespace Despegar.WP.UI.Product.Flights
             if (!error)
             {
 
-                FlightsItineraries intinerarie = await flightSearchBoxModel.GetItineraries(airportsContainer.AirportOrigin, airportsContainer.AirportDestiny, dateControlContainer.DepartureDateControl.Date.ToString("yyyy-MM-dd"), adults, dateControlContainer.ReturnDateControl.Date.ToString("yyyy-MM-dd"), childs, infants, 0, 10, "", "", "", "");
+                FlightsItineraries intinerarie = await flightSearchBoxModel.GetItineraries(airportsContainerRoundTrip.AirportOrigin, airportsContainerRoundTrip.AirportDestiny, dateControlContainerRoundTrip.DepartureDateControl.Date.ToString("yyyy-MM-dd"), adults, dateControlContainerRoundTrip.ReturnDateControl.Date.ToString("yyyy-MM-dd"), childs, infants, 0, 10, "", "", "", "");
                 PagesManager.GoTo(typeof(FlightResults), intinerarie);
             }
             else
@@ -202,6 +265,8 @@ namespace Despegar.WP.UI.Product.Flights
 #endif
 
         }
+
+        
                 
     }
 }

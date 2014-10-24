@@ -37,35 +37,91 @@
 
         <Grid Grid.Row="1" x:Name="ContentRoot" Margin="19,9.5,19,0" xmlns:src="using:Despegar.WP.UI.Controls.Flights" >
             <Pivot>
+                
+                <!--ReoundTrip Flights-->
                 <PivotItem>
+                    <PivotItem.Header>
+                        <TextBlock Text="IDA Y VUELTA" FontSize="36"></TextBlock>
+                    </PivotItem.Header>
                     <ScrollViewer>
                         <StackPanel>
-                            <TextBlock Text="IDA Y VUELTA"></TextBlock>
+                            
                             <StackPanel  VerticalAlignment="Top" HorizontalAlignment="Stretch">
 
-                                <src:SearchAirport x:Name="airportsContainer"></src:SearchAirport>
+                                <src:SearchAirport x:Name="airportsContainerRoundTrip"></src:SearchAirport>
 
-                                <src:DateControl x:Name="dateControlContainer"></src:DateControl>
+                                <src:DateControl x:Name="dateControlContainerRoundTrip"></src:DateControl>
 
-                                <src:QuantityPassagersControl x:Name="quantityPassagersContainer"></src:QuantityPassagersControl>
+                                <src:QuantityPassagersControl x:Name="quantityPassagersContainerRoundTrip"></src:QuantityPassagersControl>
 
                             </StackPanel>
 
-                            <Button Click="ButtonReturn_Click" HorizontalAlignment="Center" Content="Buscar vuelos"/>
+                            <Button Click="ButtonReturn_Click" x:Name="RoundTripButton" HorizontalAlignment="Center" Content="Buscar vuelos"/>
                         </StackPanel>
                     </ScrollViewer>
                 </PivotItem>
 
+                
+                <!--OneWay Flights-->
                 <PivotItem>
-                    <StackPanel>
-                        <TextBlock Text="IDA"></TextBlock>
-                    </StackPanel>
+                    <PivotItem.Header>
+                        <TextBlock Text="IDA" FontSize="36" ></TextBlock>
+                    </PivotItem.Header>
+                    <ScrollViewer>
+                        <StackPanel>
+
+                            <StackPanel  VerticalAlignment="Top" HorizontalAlignment="Stretch">
+
+                                <src:SearchAirport x:Name="airportsContainerOneWay"></src:SearchAirport>
+
+                                <src:DateControlSimple x:Name="dateControlContainerOneWay"></src:DateControlSimple>
+
+                                <src:QuantityPassagersControl x:Name="quantityPassagersContainerOneWay"></src:QuantityPassagersControl>
+
+                            </StackPanel>
+
+                            <Button Click="ButtonReturn_Click" x:Name="OneWayButton" HorizontalAlignment="Center" Content="Buscar vuelos"/>
+                        </StackPanel>
+                    </ScrollViewer>
                 </PivotItem>
 
+                <!--Multiple flights-->
                 <PivotItem>
-                    <StackPanel>
-                        <TextBlock Text="MULTIPLES"></TextBlock>
-                    </StackPanel>
+                    <PivotItem.Header>
+                        <TextBlock Text="MULTIPLES" FontSize="36"></TextBlock>
+                    </PivotItem.Header>
+                    <ScrollViewer>
+                        <StackPanel>
+
+                            <StackPanel  VerticalAlignment="Top" HorizontalAlignment="Stretch">
+
+                                <StackPanel x:Name="segmentMultipleStackPanel">  </StackPanel>
+
+                                <Grid x:Name="sectionSubGrid" Visibility="Collapsed">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="auto"></ColumnDefinition>
+                                        <ColumnDefinition Width="auto"></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock x:Uid="Flight_Search_Sub_Section" Grid.Column="0"></TextBlock>
+                                    <Button x:Name="subSectionButton" Grid.Column="1" Click="subSectionButton_Click"></Button>
+                                </Grid>
+
+                                <Grid x:Name="sectionAddGrid">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="auto"></ColumnDefinition>
+                                        <ColumnDefinition Width="auto"></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>                                   
+                                    <TextBlock x:Uid="Flight_Search_Add_Section" Grid.Column="0"> </TextBlock>
+                                    <Button x:Name="addSectionButton" Grid.Column="1" Click="addSectionButton_Click"></Button>
+                                </Grid>
+                                                                
+                                <src:QuantityPassagersControl x:Name="quantityPassagersContainerMultiple"></src:QuantityPassagersControl>
+
+                            </StackPanel>
+
+                            <Button Click="ButtonReturn_Click" x:Name="MultipleButton" HorizontalAlignment="Center" Content="Buscar vuelos"/>
+                        </StackPanel>
+                    </ScrollViewer>
                 </PivotItem>
 
             </Pivot>

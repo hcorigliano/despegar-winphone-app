@@ -20,15 +20,14 @@ namespace Despegar.WP.UI.Controls.Flights
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class DateControl : Page
+    public sealed partial class DateControlSimple : Page
     {
-        public DatePicker DepartureDateControl { get; set; }
-        public DatePicker ReturnDateControl { get; set; }
-        public DateControl()
+        public DatePicker DateDeparture { get; set; }
+
+        public DateControlSimple()
         {
             this.InitializeComponent();
-            DepartureDateControl = departure;
-            ReturnDateControl = returnn;
+            DateDeparture = departure;
         }
 
         /// <summary>
@@ -38,13 +37,6 @@ namespace Despegar.WP.UI.Controls.Flights
         /// This parameter is typically used to configure the page.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-        }
-
-        
-        private void departure_DateChanged(object sender, DatePickerValueChangedEventArgs e)
-        {
-            returnn.Date = departure.Date;
-            //returnn.
         }
     }
 }
