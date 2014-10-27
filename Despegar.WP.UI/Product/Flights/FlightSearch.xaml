@@ -41,7 +41,7 @@
                 <!--ReoundTrip Flights-->
                 <PivotItem>
                     <PivotItem.Header>
-                        <TextBlock Text="IDA Y VUELTA" FontSize="36"></TextBlock>
+                        <TextBlock x:Uid="Flight_Search_Round_Trip"  FontSize="36"></TextBlock>
                     </PivotItem.Header>
                     <ScrollViewer>
                         <StackPanel>
@@ -65,7 +65,7 @@
                 <!--OneWay Flights-->
                 <PivotItem>
                     <PivotItem.Header>
-                        <TextBlock Text="IDA" FontSize="36" ></TextBlock>
+                        <TextBlock x:Uid="Flight_Search_One_Way"  FontSize="36" ></TextBlock>
                     </PivotItem.Header>
                     <ScrollViewer>
                         <StackPanel>
@@ -88,7 +88,7 @@
                 <!--Multiple flights-->
                 <PivotItem>
                     <PivotItem.Header>
-                        <TextBlock Text="MULTIPLES" FontSize="36"></TextBlock>
+                        <TextBlock x:Uid="Flight_Search_Multple"  FontSize="36"></TextBlock>
                     </PivotItem.Header>
                     <ScrollViewer>
                         <StackPanel>
