@@ -4,10 +4,13 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"    
-    xmlns:controls="using:Despegar.WP.UI.Developer"
+    xmlns:controls="using:Despegar.WP.UI.Developer.Controls"
     mc:Ignorable="d">
-
-    <Canvas x:Name="Overlay" Width="{Binding Viewport.Width}" Height="{Binding Viewport.Height}">
+    <UserControl.Resources>
+        <CollectionViewSource x:Name="mocksCvs" IsSourceGrouped="True" Source="{Binding MockGroups}" />
+    </UserControl.Resources>
+    
+    <Canvas Width="{Binding Viewport.Width}" Height="{Binding Viewport.Height}">
         <Canvas.Background>
             <SolidColorBrush Color="Black" Opacity="0.4"/>
         </Canvas.Background>
@@ -33,13 +36,31 @@
                     </Pivot.HeaderTemplate>
 
                     <PivotItem Header="Service Mocks">
-                        <ItemsControl x:Name="MockList">
-                            <ItemsControl.ItemTemplate>
+                        <ListView ItemsSource="{Binding Source={StaticResource mocksCvs}}" MaxHeight="300">
+                            <ListView.GroupStyle>
+                                <GroupStyle HidesIfEmpty="True">
+                                    <GroupStyle.HeaderTemplate>
+                                        <!-- HEADERS -->
+                                        <DataTemplate>
+                                            <StackPanel>
+                                                <TextBlock Text='{Binding Key}' FontSize="20"/>
+                                                <Rectangle Width="380" Fill="#BBB" Height="1" Margin="10,10,10,0" />
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </GroupStyle.HeaderTemplate>
+                                </GroupStyle>
+                            </ListView.GroupStyle>
+                            
+                            <ListView.ItemTemplate>
                                 <DataTemplate>
-                                    <CheckBox Content="{Binding Name}" IsChecked="{Binding IsSelected}" />
+                                    <StackPanel Margin="20,0,0,0">
+                                        <!-- Mock Enabled / Disabled-->
+                                        <RadioButton  GroupName="{Binding ServiceKey}" Foreground="#333"  Content="{Binding Name}" IsChecked="{Binding Enabled, Mode=TwoWay}" />
+                                    </StackPanel>
                                 </DataTemplate>
-                            </ItemsControl.ItemTemplate>
-                        </ItemsControl>
+                            </ListView.ItemTemplate>
+                          
+                        </ListView>
                     </PivotItem>
 
                     <PivotItem Header="Form Automation">

@@ -40,11 +40,11 @@ namespace Despegar.WP.UI.Model
             #endif
 
             // Add Service Mocks
-            GlobalConfiguration.CoreContext.AddMock(ServiceKey.Configurations, MockKey.ConfigurationsDefault); //keep on! No URL yet.
-            //CoreContext.AddMock(ServiceKey.FlightsAirlines, MockKey.AirlineTest);
-           // GlobalConfiguration.CoreContext.AddMock(ServiceKey.FlightCitiesAutocomplete, MockKey.FlightCitiesAutocompleteBue);
-            //GlobalConfiguration.CoreContext.AddMock(ServiceKey.FlightItineraries, MockKey.ItinerarieBueToLax);
-            GlobalConfiguration.CoreContext.AddMock(ServiceKey.FlightsBookingFields, MockKey.BookingFieldBuetoMia);
+            CoreContext.EnableMock(MockKey.ConfigurationsDefault); //keep on! No URL yet.
+            //CoreContext.AddMock(MockKey.AirlineTest);
+            // GlobalConfiguration.CoreContext.AddMock(MockKey.FlightCitiesAutocompleteBue);
+            //GlobalConfiguration.CoreContext.AddMock(MockKey.ItinerarieBueToLax);
+            CoreContext.EnableMock( MockKey.BookingFieldBuetoMia);
         }
 
         /// <summary>
