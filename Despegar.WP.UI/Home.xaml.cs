@@ -9,7 +9,7 @@ using Despegar.WP.UI.Strings;
 using System;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
-
+using Despegar.WP.UI.Developer;
 // The Basic Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
 
 namespace Despegar.WP.UI
@@ -18,7 +18,7 @@ namespace Despegar.WP.UI
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
     public sealed partial class Home : Page
-    {        
+    {
         private NavigationHelper navigationHelper;
         private ObservableDictionary defaultViewModel = new ObservableDictionary();                
 
@@ -28,8 +28,10 @@ namespace Despegar.WP.UI
 
             this.navigationHelper = new NavigationHelper(this);
             this.navigationHelper.LoadState += this.NavigationHelper_LoadState;
-            this.navigationHelper.SaveState += this.NavigationHelper_SaveState;          
-
+            this.navigationHelper.SaveState += this.NavigationHelper_SaveState;
+            
+            // Developer Tools
+            this.CheckDeveloperTools();
         }
 
         /// <summary>

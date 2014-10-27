@@ -6,10 +6,6 @@ using Windows.ApplicationModel.Activation;
 using Windows.Storage;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
 
@@ -48,7 +44,7 @@ namespace Despegar.WP.UI
 #if DEBUG
             if (System.Diagnostics.Debugger.IsAttached)
             {
-                this.DebugSettings.EnableFrameRateCounter = true;
+                this.DebugSettings.EnableFrameRateCounter = true;                
             }
 #endif
 
@@ -114,7 +110,7 @@ namespace Despegar.WP.UI
             // TODO: Legacy code
             if (!ApplicationConfig.Instance.Initialized)
                 ApplicationConfig.Instance.Init();
-
+            
             // Ensure the current window is active
             Window.Current.Activate();
         }

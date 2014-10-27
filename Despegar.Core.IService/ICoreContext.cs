@@ -14,17 +14,23 @@ namespace Despegar.Core.IService
         string GetLanguage();
 
         /// <summary>
-        /// Enables a specified Mock for a given Service
+        /// Enables a specified Mock
         /// </summary>
-        /// <param name="serviceKey">The Service Key</param>
         /// <param name="mockKey">The Mock Key</param>
-        void AddMock(ServiceKey serviceKey, MockKey mockKey);
+        void EnableMock(MockKey mockKey);
 
         /// <summary>
-        /// Disables a specified Mock for a given Service
+        /// Disables a specified Mock
         /// </summary>
-        /// <param name="serviceKey">The Service Key</param>
-        void RemoveMock(ServiceKey serviceKey);
+        /// <param name="mockKey">The Mock Key</param>
+        void DisableMock(MockKey mockKey);
+
+        /// <summary>
+        /// Indicates whether a Mock is Enabled or not
+        /// </summary>
+        /// <param name="mockKey">The Mock Key</param>
+        /// <returns>A boolean indicating the Mock status</returns>
+        bool IsMockEnabled(MockKey mockKey);
 
         /// <summary>
         /// Configures the Connection parameters for MAPI
@@ -50,6 +56,6 @@ namespace Despegar.Core.IService
         /// Re-configures the Core for the new Site
         /// </summary>
         /// <param name="Site">Example: AR,CO,MX etc. </param>
-        void SetSite(string siteCode);
+        void SetSite(string siteCode);        
     }
 }
