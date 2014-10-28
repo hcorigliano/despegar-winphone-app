@@ -63,6 +63,7 @@
     <Compile Include="Classes\Flights\PassagersQuantity.cs" />
     <Compile Include="Classes\Flights\RoutesItems.cs" />
     <Compile Include="Classes\Flights\BindableSegment.cs" />
+    <Compile Include="Enums\FlightSearchPagesEnum.cs" />
     <Compile Include="FlightDetailsModel.cs" />
     <Compile Include="FlightsSearchBoxModel.cs" />
     <Compile Include="GlobalConfiguration.cs" />

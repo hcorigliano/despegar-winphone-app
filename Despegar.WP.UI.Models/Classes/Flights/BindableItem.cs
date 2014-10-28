@@ -33,6 +33,15 @@ namespace Despegar.WP.UI.Model.Classes.Flights
         {
             if (Routes.Count == 0)
             {
+                if (inbound == null)
+                {
+                    inbound = new List<Inbound>();
+                    foreach (Outbound outboundItem in outbound)
+                    {
+                        Routes.Add(new RoutesItems(null, outboundItem));
+                    }
+                }
+
                 foreach (Inbound inboundItem in inbound)
                 {
                     foreach (Outbound outboundItem in outbound)
@@ -40,6 +49,7 @@ namespace Despegar.WP.UI.Model.Classes.Flights
                         Routes.Add(new RoutesItems(inboundItem, outboundItem));
                     }
                 }
+
             }
         }
     }

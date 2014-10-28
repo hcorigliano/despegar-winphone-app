@@ -13,6 +13,8 @@ using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
+using System.Collections.Generic;
+using System.Linq;
 
 
 // The Basic Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
@@ -26,8 +28,8 @@ namespace Despegar.WP.UI.Product.Flights
     {
         private NavigationHelper navigationHelper;
         private ObservableDictionary defaultViewModel = new ObservableDictionary();
-        private FlightsSearchBoxModel flightSearchBoxModel = new FlightsSearchBoxModel();
         private FlightSearchModel flightSearchModel = new FlightSearchModel();
+        private int numberOfSegments = 0;
        
 
         public FlightSearch()
@@ -37,9 +39,12 @@ namespace Despegar.WP.UI.Product.Flights
             this.navigationHelper = new NavigationHelper(this);
             this.navigationHelper.LoadState += this.NavigationHelper_LoadState;
             this.navigationHelper.SaveState += this.NavigationHelper_SaveState;
-            
+
             // Datacontext is link with the interface
             //this.DataContext = flightSearchModel;
+            AddSegmentMultiple();
+            AddSegmentMultiple();
+            
         }
 
         /// <summary>
@@ -57,6 +62,34 @@ namespace Despegar.WP.UI.Product.Flights
         public ObservableDictionary DefaultViewModel
         {
             get { return this.defaultViewModel; }
+        }
+
+        private void addSectionButton_Click(object sender, RoutedEventArgs e)
+        {
+                      
+            AddSegmentMultiple();
+            sectionSubGrid.Visibility = Visibility.Visible;
+        }
+
+        private void subSectionButton_Click(object sender, RoutedEventArgs e)
+        {
+            segmentMultipleStackPanel.Children.RemoveAt(numberOfSegments - 1);
+            numberOfSegments -= 1;
+            if (numberOfSegments <= 2)
+            {
+                sectionSubGrid.Visibility = Visibility.Collapsed;
+            }            
+            sectionAddGrid.Visibility = Visibility.Visible;
+        }
+
+        private void AddSegmentMultiple()
+        {
+            segmentMultipleStackPanel.Children.Add(new FlightsSection(numberOfSegments));
+            numberOfSegments += 1;
+            if (numberOfSegments >= 6)
+            {
+                sectionAddGrid.Visibility = Visibility.Collapsed;
+            }
         }
 
         /// <summary>
@@ -157,82 +190,112 @@ namespace Despegar.WP.UI.Product.Flights
 
         private async void ButtonReturn_Click(object sender, RoutedEventArgs e)
         {
-            int adults = quantityPassagersContainer.Passagers.AdultPassagerQuantity;
-            int infants = 0, childs = 0;
-            bool error = false;
-
-#if !DEBUG
-            //TODO: validate the origin and destiny for any problem.
-            if (String.IsNullOrEmpty(airportsContainer.AirportOrigin) || String.IsNullOrEmpty(airportsContainer.AirportDestiny))
+            
+            switch (((Button)sender).Name)
             {
-                // autocomplete not charge properly
-                error = true;
+                case "RoundTripButton":
+
+                    flightSearchModel.PageMode = Model.Enums.FlightSearchPages.RoundTrip;
+                    flightSearchModel.AdultsInFlights = quantityPassagersContainerRoundTrip.AdultsInFlights;
+                    flightSearchModel.ChildrenInFlights = quantityPassagersContainerRoundTrip.ChildrenInFlights;
+                    flightSearchModel.InfantsInFlights = quantityPassagersContainerRoundTrip.InfantsInFlights;
+
+                    flightSearchModel.DepartureDate = dateControlContainerRoundTrip.DepartureDateControl.Date;
+                    flightSearchModel.DestinationDate = dateControlContainerRoundTrip.ReturnDateControl.Date;
+
+                    flightSearchModel.OriginFlight = airportsContainerRoundTrip.AirportOrigin;
+                    flightSearchModel.DestinationFlight = airportsContainerRoundTrip.AirportDestiny;
+
+                    break;
+
+                case "OneWayButton":
+                    //originAirport = airportsContainerOneWay.AirportOrigin;
+                    //destinyAirport = airportsContainerOneWay.AirportDestiny;
+                    //departureDate = dateControlContainerOneWay.DateDeparture.Date.ToString("yyyy-MM-dd");
+                    //returnDate = "";
+                    flightSearchModel.PageMode = Model.Enums.FlightSearchPages.OneWay;
+
+                    flightSearchModel.AdultsInFlights = quantityPassagersContainerOneWay.AdultsInFlights;
+                    flightSearchModel.ChildrenInFlights = quantityPassagersContainerOneWay.ChildrenInFlights;
+                    flightSearchModel.InfantsInFlights = quantityPassagersContainerOneWay.InfantsInFlights;
+
+                    flightSearchModel.DepartureDate = dateControlContainerOneWay.DateDeparture.Date;
+                    flightSearchModel.DestinationDate = DateTimeOffset.MinValue;
+
+                    flightSearchModel.OriginFlight = airportsContainerOneWay.AirportOrigin;
+                    flightSearchModel.DestinationFlight = airportsContainerOneWay.AirportDestiny;
+
+                    break;
+
+                case "MultipleButton":
+                    flightSearchModel.PageMode = Model.Enums.FlightSearchPages.Multiple;
+
+                    //originAirport = String.Join(",", segmentMultipleStackPanel.Children.Select(x => ((FlightsSection)x).AirportsContainerMultipleSection.AirportOrigin).ToList());
+                    //destinyAirport = String.Join(",", segmentMultipleStackPanel.Children.Select(x => ((FlightsSection)x).AirportsContainerMultipleSection.AirportDestiny).ToList());
+                    //departureDate = String.Join(",", segmentMultipleStackPanel.Children.Select(x => ((FlightsSection)x).DateControlContainerMultipleSection.DateDeparture.Date.ToString("yyyy-MM-dd")).ToList());
+                    //returnDate = "";
+
+                    flightSearchModel.AdultsInFlights = quantityPassagersContainerMultiple.AdultsInFlights;
+                    flightSearchModel.ChildrenInFlights = quantityPassagersContainerMultiple.ChildrenInFlights;
+                    flightSearchModel.InfantsInFlights = quantityPassagersContainerMultiple.InfantsInFlights;
+
+                    flightSearchModel.DepartureDate = DateTimeOffset.MaxValue;
+                    flightSearchModel.DestinationDate = DateTimeOffset.MinValue;
+
+                    flightSearchModel.MultipleDates = String.Join(",", segmentMultipleStackPanel.Children.Select(x => ((FlightsSection)x).DateControlContainerMultipleSection.DateDeparture.Date.ToString("yyyy-MM-dd")).ToList());
+
+                    flightSearchModel.OriginFlight = String.Join(",", segmentMultipleStackPanel.Children.Select(x => ((FlightsSection)x).AirportsContainerMultipleSection.AirportOrigin).ToList());
+                    flightSearchModel.DestinationFlight = String.Join(",", segmentMultipleStackPanel.Children.Select(x => ((FlightsSection)x).AirportsContainerMultipleSection.AirportDestiny).ToList());
+
+                    break;
+
+                default:
+                        //TODO handle error.
+                        var messageDialog = new MessageDialog("Hubo un problema por favor revisar los datos de búsqueda.");
+                        await messageDialog.ShowAsync();
+                    break;
             }
-#endif
 
-
-            foreach (ChildControl a in quantityPassagersContainer.ChildPassagers.Children)
-            {
-                switch (a.SelectedItemTag)
-                {
-                    case FlightSearchChildEnum.Child:
-                        childs += 1;
-                        break;
-                    case FlightSearchChildEnum.Infant:
-                        infants += 1;
-                        break;
-                    case FlightSearchChildEnum.Adult:
-                        adults += 1;
-                        break;
-                }
-            }
-#if DEBUG
-            FlightsItineraries intinerarie = await flightSearchBoxModel.GetItineraries("BUE", "LAX", "2014-12-11", 1, "2014-12-13", 0, 0, 0, 10, "", "", "", "");
-            PagesManager.GoTo(typeof(FlightResults), intinerarie);
-#else
-            if (!error)
+            if(flightSearchModel.isValid())
             {
 
-                FlightsItineraries intinerarie = await flightSearchBoxModel.GetItineraries(airportsContainer.AirportOrigin, airportsContainer.AirportDestiny, dateControlContainer.DepartureDateControl.Date.ToString("yyyy-MM-dd"), adults, dateControlContainer.ReturnDateControl.Date.ToString("yyyy-MM-dd"), childs, infants, 0, 10, "", "", "", "");
+                FlightsItineraries intinerarie = await flightSearchModel.Search();
+
+                //TODO handle error with exceptions.
                 PagesManager.GoTo(typeof(FlightResults), intinerarie);
             }
             else
             {
-                var messageDialog = new MessageDialog("No se completo correctamente las ciudades");
+                //TODO send signal to controls so each one of them can valite it self.
+                var messageDialog = new MessageDialog("No se completo correctamente las ciudades.");
                 await messageDialog.ShowAsync();
             }
-#endif    
         }
 
+        
 
-        private void ButtonSearch_Click(object sender, RoutedEventArgs e)
+
+        private async void ButtonSearch_Click(object sender, RoutedEventArgs e)
         {
-            //  TODO 
-            //  Validate model
-            // if anyerror
-            //  display errors 
-            //else
-            //  continue if everything is ok.
+           
 
+            flightSearchModel.AdultsInFlights = quantityPassagersContainerRoundTrip.AdultsInFlights;
+            flightSearchModel.ChildrenInFlights = quantityPassagersContainerRoundTrip.ChildrenInFlights;
+            flightSearchModel.InfantsInFlights = quantityPassagersContainerRoundTrip.InfantsInFlights;
 
-            flightSearchModel.AdultsInFlights = quantityPassagersContainer.AdultsInFlights;
-            flightSearchModel.ChildrenInFlights = quantityPassagersContainer.ChildrenInFlights;
-            flightSearchModel.InfantsInFlights = quantityPassagersContainer.InfantsInFlights;
+            flightSearchModel.DepartureDate = dateControlContainerRoundTrip.DepartureDateControl.Date;
+            flightSearchModel.DestinationDate = dateControlContainerRoundTrip.ReturnDateControl.Date;
 
-            flightSearchModel.DepartureDate = dateControlContainer.DepartureDateControl.Date;
-            flightSearchModel.DestinationDate = dateControlContainer.ReturnDateControl.Date;
+            flightSearchModel.OriginFlight = airportsContainerRoundTrip.AirportOrigin;
+            flightSearchModel.DestinationFlight = airportsContainerRoundTrip.AirportDestiny;
+            
 
-            flightSearchModel.OriginFlight = airportsContainer.AirportOrigin;
-            flightSearchModel.DestinationFlight = airportsContainer.AirportDestiny;
-            flightSearchModel.LimitResult = 10;
+            if (flightSearchModel.isValid())
+            {
+                FlightsItineraries intinerarie = await flightSearchModel.Search();
+                PagesManager.GoTo(typeof(FlightResults), intinerarie);
+            }
 
-
-            //flightSearchModel.Send
-
-            //string from, string to, string departure_date, int adults, string return_date, int children, int infants, int offset, int limit, string order_by, string order_type, string currency_code, string filter)
-
-            //FlightsItineraries intinerarie = await flightSearchBoxModel.GetItineraries("BUE", "LAX", "2014-12-11", 1, "2014-12-13", 0, 0, 0, 10, "", "", "", "");
-            //PagesManager.GoTo(typeof(FlightResults), intinerarie);
         }        
     }
 }

@@ -171,6 +171,9 @@
   <data name="Layovers.Text" xml:space="preserve">
     <value>Escalas</value>
   </data>
+  <data name="Flight_Departure.Text" xml:space="preserve">
+    <value>Partida</value>
+  </data>
   <data name="Home_Settings.Label" xml:space="preserve">
     <value>Configuración</value>
   </data>
@@ -194,5 +197,14 @@
   </data>
   <data name="Page_Home.Text" xml:space="preserve">
     <value>Início</value>
+  </data>
+  <data name="Flight_Search_Add_Section.Text" xml:space="preserve">
+    <value>Agregar otro tramo</value>
+  </data>
+  <data name="Flight_Search_Sub_Section.Text" xml:space="preserve">
+    <value>Borrar tramo</value>
+  </data>
+  <data name="Flight_Section_Section.Text" xml:space="preserve">
+    <value>Tramo </value>
   </data>
 </root>

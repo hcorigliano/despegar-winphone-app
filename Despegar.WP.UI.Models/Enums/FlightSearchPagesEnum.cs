@@ -4,11 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Despegar.WP.UI.Model.Interfaces
+namespace Despegar.WP.UI.Model.Enums
 {
-    interface IValidateInterface
+    public enum FlightSearchPages
     {
-        void Validate();
-        bool isValid();
+        RoundTrip, OneWay, Multiple
     }
 }

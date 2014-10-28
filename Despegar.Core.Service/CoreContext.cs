@@ -3,6 +3,7 @@ using Despegar.Core.Business.Culture;
 using Despegar.Core.Connector;
 using Despegar.Core.IService;
 using Despegar.Core.Log;
+using System.Linq;
 using System;
 using System.Collections.Generic;
 using Windows.Storage;
@@ -25,7 +26,7 @@ namespace Despegar.Core.Service
         /// <summary>
         /// Contains the list of services to mock when they are called
         /// </summary>
-        private Dictionary<ServiceKey, MockKey> appliedMocks = new Dictionary<ServiceKey, MockKey>();
+        private List<Mock> appliedMocks = new List<Mock>();
         private string site;
         private string x_client;
         private string uow;
@@ -46,35 +47,39 @@ namespace Despegar.Core.Service
         }
 
         /// <summary>
-        /// Enables a specified Mock for a given Service
-        /// </summary>
-        /// <param name="serviceKey">The Service Key</param>
+        /// Enables a specified Mock
+        /// </summary>        
         /// <param name="mockKey">The Mock Key</param>
-        public void AddMock(ServiceKey serviceKey, MockKey mockKey)
+        public void EnableMock(MockKey mockKey)
         {
-            if (!appliedMocks.ContainsKey(serviceKey))
+            if (!appliedMocks.Any(x => x.MockID == mockKey))
             {
-                appliedMocks.Add(serviceKey, mockKey);
-            }
-            else
-            {
-                appliedMocks[serviceKey] = mockKey;
+                appliedMocks.Add(Mock.GetMock(mockKey));
             }
 
-            Logger.LogCore(String.Format("Enabled mock '{0}' for service '{1}'", mockKey.ToString(), serviceKey.ToString()));
+            Logger.LogCore(String.Format("Enabled mock '{0}'", mockKey.ToString()));
         }
 
         /// <summary>
-        /// Disables a specified Mock for a given Service
-        /// </summary>
-        /// <param name="serviceKey">The Service Key</param>
-        public void RemoveMock(ServiceKey serviceKey)
+       /// Disables a specific Mock
+       /// </summary>
+        /// <param name="mockKey"></param>
+        public void DisableMock(MockKey mockKey)
         {
-            if (!appliedMocks.ContainsKey(serviceKey))            
+            if (!appliedMocks.Any( x => x.MockID == mockKey))
                 return;
 
-            appliedMocks.Remove(serviceKey);
-            Logger.LogCore(String.Format("Disabled mock for '{0}' service ", serviceKey.ToString()));
+            appliedMocks.Remove(Mock.GetMock(mockKey));
+            Logger.LogCore(String.Format("Disabled mock '{0}' ", mockKey.ToString()));
+        }
+
+        /// <summary>
+        /// Indicates whether a Mock is Enabled or not
+        /// </summary>
+        /// <param name="mockKey">The Mock Key</param>
+        /// <returns>A boolean indicating the Mock status</returns>
+        public bool IsMockEnabled(MockKey mockKey) {
+            return appliedMocks.Any(x => x.MockID == mockKey);
         }
 
         /// <summary>
@@ -128,12 +133,11 @@ namespace Despegar.Core.Service
 
         internal IConnector GetServiceConnector(ServiceKey key)
         {
-            if (appliedMocks.ContainsKey(key))
+            var mock = appliedMocks.FirstOrDefault(x=> x.ServiceID == key);
+            if (mock != null)
             {
                 Logger.LogCore(String.Format("Returning Mock Connector for service '{0}'", key.ToString()));
-
-                string mockedReponse =  Mocks.GetMock(this.appliedMocks[key]);
-                return new MockConnector(mockedReponse);
+                return new MockConnector(mock.Content);
             }
 
             // Return the real connector
