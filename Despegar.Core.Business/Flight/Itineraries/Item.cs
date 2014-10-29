@@ -12,8 +12,9 @@ namespace Despegar.Core.Business.Flight.Itineraries
         public Currency currency { get; set; }
         public Airline airline { get; set; }
         public int price { get; set; }
-        public List<Outbound> outbound { get; set; }
-        public List<Inbound> inbound { get; set; }
+        public List<Route> outbound { get; set; }
+        public List<Route> inbound { get; set; }
+        public List<Route> routes { get; set; } //Using in Multiple Flights
         public bool final_price { get; set; }
         public string destination_type { get; set; }
         public string destination_country_code { get; set; }
