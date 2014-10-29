@@ -86,7 +86,7 @@
     <Compile Include="Flight\BookingCompletePost\RiskQuestion.cs" />
     <Compile Include="Flight\BookingCompletePost\TypeAndNumber.cs" />
     <Compile Include="Flight\Itineraries\Route.cs" />
-    <Compile Include="Mocks.cs" />
+    <Compile Include="Mock.cs" />
     <Compile Include="Flight\BookingFields\Address.cs" />
     <Compile Include="Flight\BookingFields\Birthdate.cs" />
     <Compile Include="Flight\BookingFields\BookingFieldPost.cs" />
