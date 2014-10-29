@@ -140,6 +140,9 @@
     <Compile Include="Controls\Flights\QuantityPassagersControl.xaml.cs">
       <DependentUpon>QuantityPassagersControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Flights\RouteItemControl.xaml.cs">
+      <DependentUpon>RouteItemControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\GoReturnPanelMiniBoxSearch.xaml.cs">
       <DependentUpon>GoReturnPanelMiniBoxSearch.xaml</DependentUpon>
     </Compile>
@@ -212,6 +215,10 @@
     <Page Include="Controls\Flights\FlightsSection.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Flights\RouteItemControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Product\Flights\Checkout\Passagers\Passagers.xaml">
       <SubType>Designer</SubType>
