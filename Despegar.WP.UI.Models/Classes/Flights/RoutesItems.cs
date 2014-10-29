@@ -9,10 +9,10 @@ namespace Despegar.WP.UI.Model.Classes.Flights
 {
     public class RoutesItems
     {
-        public Outbound outbound { get; set; }
-        public Inbound inbound { get; set; }
+        public Route outbound { get; set; }
+        public Route inbound { get; set; }
 
-        public RoutesItems( Inbound inboundItem, Outbound outboundItem )
+        public RoutesItems( Route inboundItem, Route outboundItem )
         {
             inbound = inboundItem;
             outbound = outboundItem;

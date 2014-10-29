@@ -207,4 +207,13 @@
   <data name="Flight_Section_Section.Text" xml:space="preserve">
     <value>Tramo </value>
   </data>
+  <data name="Flight_Search_Multple.Text" xml:space="preserve">
+    <value>MULTIPLES</value>
+  </data>
+  <data name="Flight_Search_One_Way.Text" xml:space="preserve">
+    <value>IDA</value>
+  </data>
+  <data name="Flight_Search_Round_Trip.Text" xml:space="preserve">
+    <value>IDA Y VUELTA</value>
+  </data>
 </root>

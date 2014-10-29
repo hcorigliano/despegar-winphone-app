@@ -12,7 +12,7 @@ namespace Despegar.WP.UI.Model
     {
         private Windows.ApplicationModel.Resources.ResourceLoader loader = new Windows.ApplicationModel.Resources.ResourceLoader();
 
-        public Outbound outbound
+        public Route outbound
         {
             set
             {
@@ -27,7 +27,7 @@ namespace Despegar.WP.UI.Model
             }
         }
 
-        public Inbound inbound
+        public Route inbound
         { 
             set
             {

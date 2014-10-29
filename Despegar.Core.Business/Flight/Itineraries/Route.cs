@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Despegar.Core.Business.Flight.Itineraries
 {
-    public class Outbound
+    public class Route
     {
         public int choice { get; set; }
         public string duration { get; set; }
