@@ -32,7 +32,7 @@
                     <TextBlock TextWrapping="Wrap" Text="{Binding outbound.Count}"/>
                 </StackPanel>
                 <TextBlock Grid.Column="2"  HorizontalAlignment="Right" TextWrapping="Wrap" Text="{Binding price}" VerticalAlignment="Top"/>
-                <ItemsControl x:Name="RoutesItemControl"  Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" ItemsSource="{Binding Routes}" DataContext="{Binding}" Visibility="Collapsed">
+                <ItemsControl x:Name="RoutesItemControl"  Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" ItemsSource="{Binding RoutesCustom}" DataContext="{Binding}" Visibility="Collapsed">
                 	
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>

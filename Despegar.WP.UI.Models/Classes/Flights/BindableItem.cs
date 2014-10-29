@@ -9,7 +9,7 @@ namespace Despegar.WP.UI.Model.Classes.Flights
 {
     public class BindableItem : Despegar.Core.Business.Flight.Itineraries.Item
     {
-        public List<RoutesItems> Routes { get; set; }
+        public List<RoutesItems> RoutesCustom { get; set; }
 
         public BindableItem(Item item)
         {
@@ -19,11 +19,11 @@ namespace Despegar.WP.UI.Model.Classes.Flights
             base.destination_country_code = item.destination_country_code;
             base.destination_type = item.destination_type;
             base.final_price = item.final_price;
-            base.inbound = item.inbound;
-            base.outbound = item.outbound;
+            base.inbound =  (item.inbound == null) ? new List<Inbound>() : item.inbound ;
+            base.outbound = (item.outbound == null) ? new List<Outbound>() : item.outbound;
             base.price = item.price;
             base.validating_carrier = item.validating_carrier;
-            Routes = new List<RoutesItems>();
+            RoutesCustom = new List<RoutesItems>();
 
             LinkFlightRoutes();
         }
@@ -31,14 +31,13 @@ namespace Despegar.WP.UI.Model.Classes.Flights
 
         public void LinkFlightRoutes()
         {
-            if (Routes.Count == 0)
+            if (RoutesCustom.Count == 0)
             {
-                if (inbound == null)
+                if (inbound.Count == 0 && outbound.Count>0)
                 {
-                    inbound = new List<Inbound>();
                     foreach (Outbound outboundItem in outbound)
                     {
-                        Routes.Add(new RoutesItems(null, outboundItem));
+                        RoutesCustom.Add(new RoutesItems(null, outboundItem));
                     }
                 }
 
@@ -46,7 +45,7 @@ namespace Despegar.WP.UI.Model.Classes.Flights
                 {
                     foreach (Outbound outboundItem in outbound)
                     {
-                        Routes.Add(new RoutesItems(inboundItem, outboundItem));
+                        RoutesCustom.Add(new RoutesItems(inboundItem, outboundItem));
                     }
                 }
 
