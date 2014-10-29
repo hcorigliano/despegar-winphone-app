@@ -213,10 +213,12 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+<<<<<<< HEAD
     <Page Include="Product\Flights\Checkout\Passagers\Passagers.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+=======
     <Page Include="Developer\Controls\ColorPicker.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -225,6 +227,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+>>>>>>> develop
     <Page Include="Product\Legacy\HotelsThanks.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

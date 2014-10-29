@@ -1,0 +1,25 @@
+﻿<UserControl x:Class="Despegar.WP.UI.Developer.Controls.ColorPicker"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:sys="clr-namespace:System;assembly=mscorlib" 
+		     Height="40" Width="200" 
+             Name="ColorControl"
+             mc:Ignorable="d">
+    <Grid>
+        <ComboBox
+            ItemsSource="{Binding ColorList, ElementName=ColorControl}" 
+	        SelectedValuePath="Name" 
+            SelectedItem="{Binding DropdownChosenColor, Mode=TwoWay, ElementName=ColorControl}">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <Rectangle Width="20" Height="20" Margin="5" Fill="{Binding Brush}"/>
+                            <TextBlock  Text="{Binding Name}"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+        </ComboBox>
+    </Grid>
+</UserControl>
