@@ -6,6 +6,8 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:UI="using:Despegar.WP.UI"
     xmlns:Model="using:Despegar.WP.UI.Model"
+    xmlns:Interactivity="using:Microsoft.Xaml.Interactivity" xmlns:Core="using:Microsoft.Xaml.Interactions.Core" 
+    x:Name="page"
     x:Class="Despegar.WP.UI.Product.Flights.FlightResults"
     mc:Ignorable="d"
     Background="{ThemeResource AppBarBorderThemeBrush}" 
@@ -21,9 +23,7 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="50"/>
                     <ColumnDefinition Width="300"/>
-                    <ColumnDefinition Width="*">
-                        
-                    </ColumnDefinition>
+                    <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
                 <Image Grid.Column="0" HorizontalAlignment="Left" Height="Auto"  VerticalAlignment="Top" Width="Auto"/>
@@ -33,16 +33,26 @@
                 </StackPanel>
                 <TextBlock Grid.Column="2"  HorizontalAlignment="Right" TextWrapping="Wrap" Text="{Binding price}" VerticalAlignment="Top"/>
                 <ItemsControl x:Name="RoutesItemControl"  Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" ItemsSource="{Binding RoutesCustom}" DataContext="{Binding}" Visibility="Collapsed">
-                	
+
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                             <Grid Tapped="Grid_Tapped">
-                            	<Grid.RowDefinitions>
-                            		<RowDefinition Height="30"/>
-                            		<RowDefinition Height="30"/>
-                            	</Grid.RowDefinitions>
-                                <UI:RouteItemControl DataContext="{Binding outbound}"/>
-                                <UI:RouteItemControl Grid.Row="1" DataContext="{Binding inbound}" />
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="30"/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                <UI:RouteItemControl DataContext="{Binding outbound}" d:IsHidden="True"/>
+                                <UI:RouteItemControl Height="30" x:Name="routeItemControl" Grid.Row="1" DataContext="{Binding inbound}" d:IsHidden="True" >
+                                    <Interactivity:Interaction.Behaviors>
+                                        <Core:DataTriggerBehavior Value="-1" Binding="{Binding choice}" >
+                                            <Core:ChangePropertyAction PropertyName="Visibility">
+                                                <Core:ChangePropertyAction.Value>
+                                                    <Visibility>Collapsed</Visibility>
+                                                </Core:ChangePropertyAction.Value>
+                                            </Core:ChangePropertyAction>
+                                        </Core:DataTriggerBehavior>
+                                    </Interactivity:Interaction.Behaviors>
+                                </UI:RouteItemControl>
                             </Grid>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
@@ -80,7 +90,7 @@
             <TextBlock />
         </Grid>
         <Grid Grid.Row="2" x:Name="ContentRoot" Width="Auto" >
-            <ListBox Height="450" Name="lbFlights" Background="White" ItemTemplate="{StaticResource FlightItemDateTemplate}" ItemsSource="{Binding Items}"  Tapped="ListBox_Tapped" HorizontalContentAlignment="Stretch" ScrollViewer.VerticalScrollBarVisibility="Visible"  />
+            <ListBox Height="450" x:Name="lbFlights" Background="White" ItemTemplate="{StaticResource FlightItemDateTemplate}" ItemsSource="{Binding Items}"  Tapped="ListBox_Tapped" HorizontalContentAlignment="Stretch" ScrollViewer.VerticalScrollBarVisibility="Visible"  />
         </Grid>
 
     </Grid>

@@ -45,7 +45,8 @@ namespace Despegar.WP.UI.Model.Classes.Flights
                 {
                     foreach (Route outboundItem in outbound)
                     {
-                        RoutesCustom.Add(new RoutesItems(null, outboundItem));
+                        //route inbound is created with choice -1 for UI animation
+                        RoutesCustom.Add(new RoutesItems(new Route { choice = -1 }, outboundItem));
                     }
                 }
 
