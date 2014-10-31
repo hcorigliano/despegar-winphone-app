@@ -25,6 +25,11 @@ namespace Despegar.WP.UI.Model.Classes
             throw new NotImplementedException();
         }
 
+        public bool isValid()
+        {
+            throw new NotImplementedException();
+        }
+
         public void Validate()
         {
             throw new NotImplementedException();

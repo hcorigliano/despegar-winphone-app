@@ -216,6 +216,8 @@ namespace Despegar.WP.UI.Product.Flights
             
             index = listbox.SelectedIndex;
 
+            if (index == -1) return;
+
             listboxitem = listbox.ContainerFromIndex(index) as ListBoxItem;
             if (listboxitem == null) 
                 return;

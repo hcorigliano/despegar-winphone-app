@@ -182,6 +182,10 @@ namespace Despegar.WP.UI.Model
             //Validate each variable for this model
         }
 
+        public bool isValid()
+        {
+            throw new NotImplementedException();
+        }
 
     }
 }

@@ -168,6 +168,9 @@
   <data name="Flights_Passager_Up_To_11_Years" xml:space="preserve">
     <value>2 a 11 años</value>
   </data>
+  <data name="Layovers.Text" xml:space="preserve">
+    <value>Escalas</value>
+  </data>
   <data name="Flight_Departure.Text" xml:space="preserve">
     <value>Partida</value>
   </data>

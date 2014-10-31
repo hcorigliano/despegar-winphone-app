@@ -6,6 +6,8 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:UI="using:Despegar.WP.UI"
     xmlns:Model="using:Despegar.WP.UI.Model"
+    xmlns:Interactivity="using:Microsoft.Xaml.Interactivity" xmlns:Core="using:Microsoft.Xaml.Interactions.Core" 
+    x:Name="page"
     x:Class="Despegar.WP.UI.Product.Flights.FlightResults"
     mc:Ignorable="d"
     Background="{ThemeResource AppBarBorderThemeBrush}" 
@@ -21,9 +23,7 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="50"/>
                     <ColumnDefinition Width="300"/>
-                    <ColumnDefinition Width="*">
-                        
-                    </ColumnDefinition>
+                    <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
                 <Image Grid.Column="0" HorizontalAlignment="Left" Height="Auto"  VerticalAlignment="Top" Width="Auto"/>
@@ -32,44 +32,27 @@
                     <TextBlock TextWrapping="Wrap" Text="{Binding outbound.Count}"/>
                 </StackPanel>
                 <TextBlock Grid.Column="2"  HorizontalAlignment="Right" TextWrapping="Wrap" Text="{Binding price}" VerticalAlignment="Top"/>
-                <ItemsControl x:Name="RoutesItemControl"  Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" ItemsSource="{Binding Routes}" DataContext="{Binding}" Visibility="Collapsed">
-                	
+                <ItemsControl x:Name="RoutesItemControl"  Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" ItemsSource="{Binding RoutesCustom}" DataContext="{Binding}" Visibility="Collapsed">
+
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                             <Grid Tapped="Grid_Tapped">
                                 <Grid.RowDefinitions>
-                                    <RowDefinition Height="20"/>
-                                    <RowDefinition Height="20"/>
+                                    <RowDefinition Height="30"/>
+                                    <RowDefinition/>
                                 </Grid.RowDefinitions>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="25"/>
-                                    <ColumnDefinition Width="30"/>
-                                    <ColumnDefinition Width="30"/>
-                                    <ColumnDefinition Width="30"/>
-                                    <ColumnDefinition Width="30"/>
-                                    <ColumnDefinition Width="30"/>
-                                    <ColumnDefinition Width="50"/>
-                                    <ColumnDefinition Width="50"/>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition />
-                                </Grid.ColumnDefinitions>
-                                <Image Grid.Column="0" HorizontalAlignment="Left" Height="50" Margin="10,60,0,0" Grid.Row="0" VerticalAlignment="Top" />
-                                <TextBlock Grid.Column="1" HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding outbound.from.code}" VerticalAlignment="Top"/>
-                                <TextBlock Grid.Column="2" HorizontalAlignment="Left" Margin="0,0,0,0" TextWrapping="Wrap" Text="{Binding outbound.departure}" VerticalAlignment="Top"/>
-                                <Image Grid.Column="3" HorizontalAlignment="Left" Height="50" Margin="0,0,0,0" VerticalAlignment="Top" />
-                                <TextBlock Grid.Column="4" HorizontalAlignment="Left" Margin="0,0,0,0" TextWrapping="Wrap" Text="{Binding outbound.to.code}" VerticalAlignment="Top"/>
-                                <TextBlock Grid.Column="5" HorizontalAlignment="Left" Margin="0,0,0,0" TextWrapping="Wrap" Text="{Binding outbound.arrival}" VerticalAlignment="Top"/>
-                                <TextBlock Grid.Column="6" HorizontalAlignment="Left" Margin="0,0,0,0" TextWrapping="Wrap" Text="{Binding outbound.duration}" VerticalAlignment="Top"/>
-                                <TextBlock Grid.Column="7" HorizontalAlignment="Left" Margin="0,0,0,0" TextWrapping="Wrap" Text="{Binding outbound.layovers}" VerticalAlignment="Top"/>
-
-                                <Image Grid.Column="0" HorizontalAlignment="Left" Height="50" Margin="10,60,0,0" VerticalAlignment="Top" Grid.Row="1" />
-                                <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="0,0,0,0" TextWrapping="Wrap" Text="{Binding inbound.from.code}" VerticalAlignment="Top" Grid.Row="1"/>
-                                <TextBlock Grid.Column="2" HorizontalAlignment="Left" Margin="0,0,0,0" TextWrapping="Wrap" Text="{Binding inbound.departure}" VerticalAlignment="Top" Grid.Row="1"/>
-                                <Image Grid.Column="3" HorizontalAlignment="Left" Height="50" Margin="0,0,0,0" VerticalAlignment="Top"  Grid.Row="1"/>
-                                <TextBlock Grid.Column="4" HorizontalAlignment="Left" Margin="0,0,0,0" TextWrapping="Wrap" Text="{Binding inbound.to.code}" VerticalAlignment="Top" Grid.Row="1"/>
-                                <TextBlock Grid.Column="5" HorizontalAlignment="Left" Margin="0,0,0,0" TextWrapping="Wrap" Text="{Binding inbound.arrival}" VerticalAlignment="Top" Grid.Row="1"/>
-                                <TextBlock Grid.Column="6" HorizontalAlignment="Left" Margin="0,0,0,0" TextWrapping="Wrap" Text="{Binding inbound.duration}" VerticalAlignment="Top" Grid.Row="1"/>
-                                <TextBlock Grid.Column="7" HorizontalAlignment="Left" Margin="0,0,0,0" TextWrapping="Wrap" Text="{Binding inbound.layovers}" VerticalAlignment="Top" Grid.Row="1"/>
+                                <UI:RouteItemControl DataContext="{Binding outbound}" d:IsHidden="True"/>
+                                <UI:RouteItemControl Height="30" x:Name="routeItemControl" Grid.Row="1" DataContext="{Binding inbound}" d:IsHidden="True" >
+                                    <Interactivity:Interaction.Behaviors>
+                                        <Core:DataTriggerBehavior Value="-1" Binding="{Binding choice}" >
+                                            <Core:ChangePropertyAction PropertyName="Visibility">
+                                                <Core:ChangePropertyAction.Value>
+                                                    <Visibility>Collapsed</Visibility>
+                                                </Core:ChangePropertyAction.Value>
+                                            </Core:ChangePropertyAction>
+                                        </Core:DataTriggerBehavior>
+                                    </Interactivity:Interaction.Behaviors>
+                                </UI:RouteItemControl>
                             </Grid>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
@@ -107,7 +90,7 @@
             <TextBlock />
         </Grid>
         <Grid Grid.Row="2" x:Name="ContentRoot" Width="Auto" >
-            <ListBox Name="lbFlights" Background="White" ItemTemplate="{StaticResource FlightItemDateTemplate}" ItemsSource="{Binding Items}"  Tapped="ListBox_Tapped" HorizontalContentAlignment="Stretch" ScrollViewer.VerticalScrollBarVisibility="Visible"  />
+            <ListBox Height="450" x:Name="lbFlights" Background="White" ItemTemplate="{StaticResource FlightItemDateTemplate}" ItemsSource="{Binding Items}"  Tapped="ListBox_Tapped" HorizontalContentAlignment="Stretch" ScrollViewer.VerticalScrollBarVisibility="Visible"  />
         </Grid>
 
     </Grid>
