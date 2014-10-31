@@ -10,6 +10,7 @@ using System;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 using Despegar.WP.UI.Developer;
+using Windows.UI.Xaml;
 // The Basic Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
 
 namespace Despegar.WP.UI
@@ -20,7 +21,7 @@ namespace Despegar.WP.UI
     public sealed partial class Home : Page
     {
         private NavigationHelper navigationHelper;
-        private ObservableDictionary defaultViewModel = new ObservableDictionary();                
+        public HomeViewModel ViewModel;                // TODO: create Viewmodel
 
         public Home()
         {
@@ -30,6 +31,10 @@ namespace Despegar.WP.UI
             this.navigationHelper.LoadState += this.NavigationHelper_LoadState;
             this.navigationHelper.SaveState += this.NavigationHelper_SaveState;
             
+
+            //this.ViewModel = new HomeViewModel();
+            //this.DataContext = ViewModel;
+
             // Developer Tools
             this.CheckDeveloperTools();
         }
@@ -40,15 +45,6 @@ namespace Despegar.WP.UI
         public NavigationHelper NavigationHelper
         {
             get { return this.navigationHelper; }
-        }
-
-        /// <summary>
-        /// Gets the view model for this <see cref="Page"/>.
-        /// This can be changed to a strongly typed view model.
-        /// </summary>
-        public ObservableDictionary DefaultViewModel
-        {
-            get { return this.defaultViewModel; }
         }
 
         /// <summary>
@@ -107,17 +103,16 @@ namespace Despegar.WP.UI
 
         private void ListView_ItemClick(object sender, ItemClickEventArgs e)
         {
-            //TODO cast element for calling the correct instances of object
-            TextBlock text = e.ClickedItem as TextBlock;
+            string selectedButton = (string)((e.ClickedItem as Grid).DataContext);
 
-            switch (text.Name) 
+            switch (selectedButton)
             {
-                case "FlightsOption": 
-                    PagesManager.GoTo(typeof(Product.Flights.FlightSearch),e);
-                    break;
-                case "HotelsOption":
+                case "Hotels":
                     LoadBrowser(AppResources.GetLegacyString("HomeProductHotelsUrl"), e);
                     break;
+                case "Flights":
+                    PagesManager.GoTo(typeof(Product.Flights.FlightSearch), e);
+                    break;                
                 default:
                     throw new InvalidOperationException();
             }
@@ -126,7 +121,7 @@ namespace Despegar.WP.UI
         private void LoadBrowser(string relativePath, ItemClickEventArgs e)
         {
             APIConnector.Instance.Channel = ApplicationConfig.Instance.Country = GlobalConfiguration.Site;  // TODO: Legacy code
-            ApplicationConfig.Instance.ResetBrowsingPages(new Uri(HomeViewModel.Domain + relativePath));
+            ApplicationConfig.Instance.ResetBrowsingPages(new Uri(Despegar.LegacyCore.ViewModel.HomeViewModel.Domain + relativePath));
 
             PagesManager.GoTo(typeof(Browser), e);
         }

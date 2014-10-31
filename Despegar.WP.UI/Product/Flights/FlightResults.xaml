@@ -8,7 +8,7 @@
     xmlns:Model="using:Despegar.WP.UI.Model"
     x:Class="Despegar.WP.UI.Product.Flights.FlightResults"
     mc:Ignorable="d"
-    Background="{ThemeResource AppBarBorderThemeBrush}" 
+    Style="{StaticResource BasePage}" 
     
     >
     <Page.Resources>

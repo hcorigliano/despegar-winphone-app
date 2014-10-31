@@ -179,14 +179,14 @@ namespace System.Windows
             double height = frame.ActualHeight;
             double max = Math.Max(width, height);
 
-            for (int x = 24; x < /*width*/ max; x += 37)
+            for (double x = 20; x < /*width*/ max; x += 20.9d + 9.9d)
             {
-                for (int y = 24; y < /*height*/ max; y += 37)
+                for (double y = 20 + 26.75d; y < /*height*/ max; y += 20.9d + 9.9d)
                 {
                     var rect = new Rectangle
                     {
-                        Width = 25,
-                        Height = 25,
+                        Width = 20.9,
+                        Height = 20.9,
                         VerticalAlignment = VerticalAlignment.Top,
                         HorizontalAlignment = HorizontalAlignment.Left,
                         Margin = new Thickness(x, y, 0, 0),
