@@ -15,6 +15,7 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 using System.Collections.Generic;
 using System.Linq;
+using Despegar.WP.UI.Model.Classes;
 
 
 // The Basic Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
@@ -262,7 +263,10 @@ namespace Despegar.WP.UI.Product.Flights
                 FlightsItineraries intinerarie = await flightSearchModel.Search();
 
                 //TODO handle error with exceptions.
-                PagesManager.GoTo(typeof(FlightResults), intinerarie);
+                PageParameters pageParameters = new PageParameters();
+                pageParameters.Itineraries = intinerarie;
+                pageParameters.SearchModel = flightSearchModel;
+                PagesManager.GoTo(typeof(FlightResults), pageParameters);
             }
             else
             {
@@ -275,28 +279,28 @@ namespace Despegar.WP.UI.Product.Flights
         
 
 
-        private async void ButtonSearch_Click(object sender, RoutedEventArgs e)
-        {
+        //private async void ButtonSearch_Click(object sender, RoutedEventArgs e)
+        //{
            
 
-            flightSearchModel.AdultsInFlights = quantityPassagersContainerRoundTrip.AdultsInFlights;
-            flightSearchModel.ChildrenInFlights = quantityPassagersContainerRoundTrip.ChildrenInFlights;
-            flightSearchModel.InfantsInFlights = quantityPassagersContainerRoundTrip.InfantsInFlights;
+        //    flightSearchModel.AdultsInFlights = quantityPassagersContainerRoundTrip.AdultsInFlights;
+        //    flightSearchModel.ChildrenInFlights = quantityPassagersContainerRoundTrip.ChildrenInFlights;
+        //    flightSearchModel.InfantsInFlights = quantityPassagersContainerRoundTrip.InfantsInFlights;
 
-            flightSearchModel.DepartureDate = dateControlContainerRoundTrip.DepartureDateControl.Date;
-            flightSearchModel.DestinationDate = dateControlContainerRoundTrip.ReturnDateControl.Date;
+        //    flightSearchModel.DepartureDate = dateControlContainerRoundTrip.DepartureDateControl.Date;
+        //    flightSearchModel.DestinationDate = dateControlContainerRoundTrip.ReturnDateControl.Date;
 
-            flightSearchModel.OriginFlight = airportsContainerRoundTrip.AirportOrigin;
-            flightSearchModel.DestinationFlight = airportsContainerRoundTrip.AirportDestiny;
+        //    flightSearchModel.OriginFlight = airportsContainerRoundTrip.AirportOrigin;
+        //    flightSearchModel.DestinationFlight = airportsContainerRoundTrip.AirportDestiny;
             
 
-            if (flightSearchModel.isValid())
-            {
-                FlightsItineraries intinerarie = await flightSearchModel.Search();
-                PagesManager.GoTo(typeof(FlightResults), intinerarie);
-            }
+        //    if (flightSearchModel.isValid())
+        //    {
+        //        FlightsItineraries intinerarie = await flightSearchModel.Search();
+        //        PagesManager.GoTo(typeof(FlightResults), intinerarie);
+        //    }
 
-        }        
+        //}        
     }
 }
                                     

@@ -23,12 +23,12 @@
         </Grid.Resources>
         
     	<StackPanel HorizontalAlignment="Left" Height="Auto" VerticalAlignment="Top" Width="Auto">
-            <TextBlock TextWrapping="Wrap" Text="1"/>
-            <TextBlock TextWrapping="Wrap" Text="Adulto"/>
+            <TextBlock TextWrapping="Wrap" Text="{Binding TotalAdults}"/>
+            <TextBlock TextWrapping="Wrap" x:Uid="Page_FlightResult_Adult"/>
         </StackPanel>
         <StackPanel Grid.Column="1" HorizontalAlignment="Left" Height="Auto" VerticalAlignment="Top" Width="Auto">
-            <TextBlock TextWrapping="Wrap" Text="0"/>
-            <TextBlock TextWrapping="Wrap" Text="Niños"/>
+            <TextBlock TextWrapping="Wrap" Text="{Binding TotalChildren}"/>
+            <TextBlock TextWrapping="Wrap" x:Uid="Page_FlightResult_Child"/>
         </StackPanel>
     </Grid>
 

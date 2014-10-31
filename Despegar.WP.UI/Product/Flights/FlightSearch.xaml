@@ -56,7 +56,7 @@
 
 							</StackPanel>
 
-							<Button Click="ButtonSearch_Click" HorizontalAlignment="Center" Content="Buscar vuelos"/>
+                            <Button Click="ButtonReturn_Click" x:Name="RoundTripButton" HorizontalAlignment="Center" Content="Buscar vuelos"/>
 						</StackPanel>
 					</ScrollViewer>
 				</PivotItem>

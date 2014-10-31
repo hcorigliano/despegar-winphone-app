@@ -10,7 +10,7 @@
     d:DesignWidth="400" Height="Auto" Width="Auto">
 
 
-    <Grid Style="{StaticResource Grid.background}" Width="Auto" Height="Auto" >
+    <Grid Width="Auto" Height="Auto" >
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition />
 			<ColumnDefinition />
@@ -18,9 +18,8 @@
 
     	<StackPanel Grid.Column="0" HorizontalAlignment="Left" Height="Auto" VerticalAlignment="Top" Width="Auto">
     		<TextBlock  TextWrapping="Wrap" Text="mie" />
-			<TextBlock Text="Oct"></TextBlock>
-			<TextBlock Text="Ida"></TextBlock>
-		</StackPanel>
+            <TextBlock Text="Oct"></TextBlock>
+        </StackPanel>
 		<StackPanel Grid.Column="1">
 			<TextBlock>
 				5

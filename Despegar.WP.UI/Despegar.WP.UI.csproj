@@ -153,7 +153,9 @@
     <Compile Include="Controls\PaxCounterMiniBoxSearch.xaml.cs">
       <DependentUpon>PaxCounterMiniBoxSearch.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\SearchMiniBoxControl.cs" />
+    <Compile Include="Controls\SearchMiniBoxControl.xaml.cs">
+      <DependentUpon>SearchMiniBoxControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="CountrySelection.xaml.cs">
       <DependentUpon>CountrySelection.xaml</DependentUpon>
     </Compile>
@@ -219,6 +221,10 @@
     <Page Include="Controls\Flights\RouteItemControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\SearchMiniBoxControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Product\Flights\Checkout\Passagers\Passagers.xaml">
       <SubType>Designer</SubType>

@@ -216,4 +216,13 @@
   <data name="Flight_Search_Round_Trip.Text" xml:space="preserve">
     <value>IDA Y VUELTA</value>
   </data>
+  <data name="Page_FlightResult_Adult.Text" xml:space="preserve">
+    <value>Adulto</value>
+  </data>
+  <data name="Page_FlightResult_Child.Text" xml:space="preserve">
+    <value>Niños</value>
+  </data>
+  <data name="Page_FlightResult_Flight.Text" xml:space="preserve">
+    <value>Vuelos</value>
+  </data>
 </root>
