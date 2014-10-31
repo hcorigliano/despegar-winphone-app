@@ -113,6 +113,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Classes\PagesManager.cs" />
+    <Compile Include="Common\Converter\CommonConverters.cs" />
     <Compile Include="Common\Converter\StringConverter.cs" />
     <Compile Include="Common\NavigationHelper.cs" />
     <Compile Include="Common\ObservableDictionary.cs" />
@@ -172,8 +173,11 @@
     <Compile Include="Loading.xaml.cs">
       <DependentUpon>Loading.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Product\Flights\Checkout\Passagers\Passagers.xaml.cs">
-      <DependentUpon>Passagers.xaml</DependentUpon>
+    <Compile Include="Product\Flights\Checkout\Contact\Contact.xaml.cs">
+      <DependentUpon>Contact.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Product\Flights\Checkout\Passegers\Passengers.xaml.cs">
+      <DependentUpon>Passengers.xaml</DependentUpon>
     </Compile>
     <Compile Include="Product\Flights\FlightResults.xaml.cs">
       <DependentUpon>FlightResults.xaml</DependentUpon>
@@ -213,7 +217,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Product\Flights\Checkout\Passagers\Passagers.xaml">
+    <Page Include="Product\Flights\Checkout\Contact\Contact.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Product\Flights\Checkout\Passegers\Passengers.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

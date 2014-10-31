@@ -64,6 +64,7 @@
     <Compile Include="Classes\Flights\RoutesItems.cs" />
     <Compile Include="Classes\Flights\BindableSegment.cs" />
     <Compile Include="FlightDetailsModel.cs" />
+    <Compile Include="FlightsCheckoutModel.cs" />
     <Compile Include="FlightsSearchBoxModel.cs" />
     <Compile Include="GlobalConfiguration.cs" />
     <Compile Include="Classes\AdvanceSearchModel.cs" />

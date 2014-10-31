@@ -15,14 +15,14 @@ using Windows.UI.Xaml.Navigation;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
 
-namespace Despegar.WP.UI.Product.Flights.Checkout.Passagers
+namespace Despegar.WP.UI.Product.Flights.Checkout.Passegers
 {
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class Passagers : Page
+    public sealed partial class Passengers : Page
     {
-        public Passagers()
+        public Passengers()
         {
             this.InitializeComponent();
         }

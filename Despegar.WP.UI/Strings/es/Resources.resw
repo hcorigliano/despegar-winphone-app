@@ -213,4 +213,58 @@
   <data name="Flight_Search_Round_Trip.Text" xml:space="preserve">
     <value>IDA Y VUELTA</value>
   </data>
+  <data name="Flight_Checkout_Passagers.Text" xml:space="preserve">
+    <value>Pasajeros</value>
+  </data>
+  <data name="Generic_Adult" xml:space="preserve">
+    <value>Adulto</value>
+  </data>
+  <data name="Passager_First_Name.Text" xml:space="preserve">
+    <value>Nombre</value>
+  </data>
+  <data name="Passager_Last_Name.Text" xml:space="preserve">
+    <value>Apellido</value>
+  </data>
+  <data name="Generic_Child" xml:space="preserve">
+    <value>Menor</value>
+  </data>
+  <data name="Generic_Infant" xml:space="preserve">
+    <value>Bebé</value>
+  </data>
+  <data name="Passager_Birthdate.Text" xml:space="preserve">
+    <value>Fecha de nacimiento</value>
+  </data>
+  <data name="Passager_Document_Number.Text" xml:space="preserve">
+    <value>Numero de documento</value>
+  </data>
+  <data name="Passager_Document_Type.Text" xml:space="preserve">
+    <value>Tipo de documento</value>
+  </data>
+  <data name="Passager_gender.Text" xml:space="preserve">
+    <value>Sexo</value>
+  </data>
+  <data name="Passager_Nationality.Text" xml:space="preserve">
+    <value>Nacionalidad</value>
+  </data>
+  <data name="Contact_email.Text" xml:space="preserve">
+    <value>E-mail</value>
+  </data>
+  <data name="Contact_email_Confirmation.Text" xml:space="preserve">
+    <value>Confirme su e-mail</value>
+  </data>
+  <data name="Flight_Checkout_Contact.Text" xml:space="preserve">
+    <value>Información de contacto</value>
+  </data>
+  <data name="Contact_Area_Code.Text" xml:space="preserve">
+    <value>Area</value>
+  </data>
+  <data name="Contact_Country_Code.Text" xml:space="preserve">
+    <value>País</value>
+  </data>
+  <data name="Contact_Number.Text" xml:space="preserve">
+    <value>Número</value>
+  </data>
+  <data name="Contact_Phone.Text" xml:space="preserve">
+    <value>Teléfono</value>
+  </data>
 </root>

@@ -42,26 +42,11 @@
     <TargetPlatform Include="Windows, Version=8.1" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Configuration\Checkout.cs" />
     <Compile Include="Configuration\Configuration.cs" />
-    <Compile Include="Configuration\Configurations.cs" />
     <Compile Include="Configuration\Contact.cs" />
-    <Compile Include="Configuration\Currencies.cs" />
-    <Compile Include="Configuration\CurrenciesDetails.cs" />
-    <Compile Include="Configuration\CurrencyMasks.cs" />
-    <Compile Include="Configuration\DaysAndLastAvailableHour.cs" />
-    <Compile Include="Configuration\Defaults.cs" />
-    <Compile Include="Configuration\Domains.cs" />
-    <Compile Include="Configuration\Domestic.cs" />
-    <Compile Include="Configuration\EmissionAnticipationDays.cs" />
-    <Compile Include="Configuration\Hours.cs" />
-    <Compile Include="Configuration\International.cs" />
-    <Compile Include="Configuration\LanguageAndCurrency.cs" />
-    <Compile Include="Configuration\Meta.cs" />
-    <Compile Include="Configuration\Mobile.cs" />
-    <Compile Include="Configuration\Permitted.cs" />
-    <Compile Include="Configuration\Prices.cs" />
-    <Compile Include="Configuration\schedules.cs" />
+    <Compile Include="Configuration\Domain.cs" />
+    <Compile Include="Configuration\Product.cs" />
+    <Compile Include="Configuration\Site.cs" />
     <Compile Include="Culture\Site.cs" />
     <Compile Include="Dynamics\DynamicFlightBookingFieldsToPost.cs" />
     <Compile Include="Enums\FlightSearchChildEnum.cs" />
@@ -101,15 +86,12 @@
     <Compile Include="Flight\BookingFields\FieldDataTypeOpt.cs" />
     <Compile Include="Flight\BookingFields\FieldDataType.cs" />
     <Compile Include="Flight\BookingFields\FieldDataTypeVal.cs" />
-    <Compile Include="Flight\BookingFields\FieldDataTypeValue.cs" />
-    <Compile Include="Flight\BookingFields\FieldDataTypeValValue.cs" />
     <Compile Include="Flight\BookingFields\Form.cs" />
     <Compile Include="Flight\BookingFields\Installment.cs" />
     <Compile Include="Flight\BookingFields\Installments.cs" />
     <Compile Include="Flight\BookingFields\Invoice.cs" />
     <Compile Include="Flight\BookingFields\Option.cs" />
     <Compile Include="Flight\BookingFields\OwnerDocument.cs" />
-    <Compile Include="Flight\BookingFields\FieldDataTypeOptValue.cs" />
     <Compile Include="Flight\BookingFields\Passenger.cs" />
     <Compile Include="Flight\BookingFields\Payment.cs" />
     <Compile Include="Flight\BookingFields\Payments.cs" />
