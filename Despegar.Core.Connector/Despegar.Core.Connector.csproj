@@ -38,6 +38,7 @@
     <TargetPlatform Include="Windows, Version=8.1" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Apiv1Connector.cs" />
     <Compile Include="ConnectorBase.cs" />
     <Compile Include="IConnector.cs" />
     <Compile Include="MapiConnector.cs" />
