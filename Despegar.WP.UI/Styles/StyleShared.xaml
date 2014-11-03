@@ -39,18 +39,21 @@
     <Color x:Key="Blue140">#BAE8FF</Color>
     <Color x:Key="Green20">#008C23</Color>
     <Color x:Key="Green40">#1ECB3F</Color>
-    
-    <!-- ===================== Generic Brushes ===================== -->
-    <SolidColorBrush x:Key="Yelow40Brush" Color="{StaticResource Yellow40}" />
 
-    <!-- Generic Styles -->
+    <!-- ===================== Measure Constants ===================== -->
+    <GridLength x:Key="PageHeaderHeight">88.8</GridLength>
+    <GridLength x:Key="HomeButtonColumnWidth">79.2</GridLength>
+    <!-- ===================== Generic Brushes ======================= -->
+    <SolidColorBrush x:Key="Blue60Brush" Color="{StaticResource Blue60}" />
+
+    <!-- ===================== Generic Styles ======================== -->
     <Style x:Key="ImageBase" TargetType="Image">
         <Setter Property="Stretch" Value="None" />
         <Setter Property="HorizontalAlignment" Value="Left" />
         <Setter Property="VerticalAlignment" Value="Top" />        
     </Style>
-
-    <!-- Fonts -->
+        
+    <!-- Text & Fonts -->
     <Style x:Key="PageHeader" TargetType="TextBlock" BasedOn="{StaticResource HeaderTextBlockStyle}">
         <Setter Property="FontFamily" Value="Segoe UI" />
         <Setter Property="FontSize" Value="42" />
@@ -62,33 +65,46 @@
         <Setter Property="FontSize" Value="36" />
         <Setter Property="FontWeight" Value="Thin" />
     </Style>
+    <Style x:Key="PivotHeader" TargetType="TextBlock" BasedOn="{StaticResource PageHeader}">
+        <Setter Property="FontSize" Value="36" />
+        <Setter Property="FontWeight" Value="Medium" />
+    </Style>
+    <Style x:Key="PivotItem" TargetType="PivotItem">
+        <Setter Property="Margin" Value="0,0,19,0" />
+    </Style>
     <!-- Input Styles -->
+    <Style x:Key="ButtonBase" TargetType="Button">
+        <Setter Property="BorderBrush" Value="{StaticResource Blue60Brush}" />
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+    </Style>
 
-    <!-- ===================== Page Styles ===================== -->
     <Style x:Key="BasePage" TargetType="Page">        
         <Setter Property="Background">
             <Setter.Value>
-                <!--<ImageBrush ImageSource="/Assets/test.png" Stretch="Uniform"  AlignmentX="Left" AlignmentY="Top" />-->
+                <!--<ImageBrush ImageSource="/Assets/Helpers/matrix_green.png" Stretch="Uniform"  AlignmentX="Left" AlignmentY="Top" />-->
+                <!--<ImageBrush ImageSource="/Assets/Helpers/matrix_green_strong.png" Stretch="Uniform"  AlignmentX="Left" AlignmentY="Top" />-->
+                <!--<ImageBrush ImageSource="/Assets/Helpers/matrix_red.png" Stretch="Uniform"  AlignmentX="Left" AlignmentY="Top" />-->
+                <!--<ImageBrush ImageSource="/Assets/Helpers/matrix_red_strong.png" Stretch="Uniform"  AlignmentX="Left" AlignmentY="Top" />-->
                 <ImageBrush ImageSource="/Assets/WindowsPhone_Background_480x800.png" Stretch="UniformToFill"  AlignmentX="Left" AlignmentY="Top" />
             </Setter.Value>
         </Setter>
     </Style>
     
     <Style x:Key="MainContainerGrid" TargetType="Grid">
-        <Setter Property="Margin" Value="20,20,0,0" />
+        <Setter Property="Margin" Value="24,12,0,0" />
     </Style>
 
     <Style x:Key="TopLogo" TargetType="Image" BasedOn="{StaticResource ImageBase}">
         <Setter Property="Source" Value="/Assets/topLogo.png" />
         <Setter Property="Stretch" Value="Fill"/>
         <Setter Property="Width" Value="100" />
-        <Setter Property="Height" Value="21" />
+        <Setter Property="Height" Value="20" />
     </Style>
     
     <!-- Home Page -->
     <Style x:Key="BaseHomeButton" TargetType="Image" BasedOn="{StaticResource ImageBase}">               
-        <Setter Property="Width" Value="82" />
-        <Setter Property="Height" Value="82" />
+        <Setter Property="Width" Value="79.2" />
+        <Setter Property="Height" Value="79.2" />        
     </Style>
     <Style x:Key="HomeHotelsButton" TargetType="Image" BasedOn="{StaticResource BaseHomeButton}">
         <Setter Property="Source" Value="/Assets/HomeButton_Hotels.png" />
@@ -105,15 +121,15 @@
     <Style x:Key="HomeButtonTitle" TargetType="TextBlock" BasedOn="{StaticResource BaseText}">
         <Setter Property="VerticalAlignment" Value="Top" />
         <Setter Property="FontSize" Value="36" />        
-        <Setter Property="Margin" Value="12,0,0,0" />
+        <Setter Property="Margin" Value="9.6,0,0,0" />
     </Style>
     <Style x:Key="HomeButtonSub" TargetType="TextBlock" BasedOn="{StaticResource BaseText}">
         <Setter Property="FontSize" Value="16" />
-        <Setter Property="Margin" Value="12,4,0,0" />
+        <Setter Property="Margin" Value="9.6,0,0,0" />
     </Style>
     <Style x:Key="HomeButtonItemContainer" TargetType="ListViewItem">
-      <Setter Property="Margin" Value="0,0,0,11" />
-    </Style>  
+      <Setter Property="Padding" Value="0,0,0,9.3" />
+    </Style>
     <Style x:Key="HomeButtonTextContainer" TargetType="StackPanel">
         <Setter Property="Margin" Value="0,-13,0,0"></Setter>
     </Style>
