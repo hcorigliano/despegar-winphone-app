@@ -6,7 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"  
-    Style="{StaticResource BasePage}"
+    Style="{StaticResource BasePage}" HorizontalContentAlignment="Left" VerticalContentAlignment="Top"    
     >
     <Page.BottomAppBar>
         <CommandBar ClosedDisplayMode="Minimal">
@@ -14,13 +14,20 @@
         </CommandBar>
     </Page.BottomAppBar>
 
-    <!--<Canvas>
-        <Rectangle Canvas.Left="20" Canvas.Top="20" Width="20.9" Height="20.9" Opacity="0.2" Fill="{StaticResource Yelow40Brush}" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto">
-            <Rectangle.RenderTransform>
-                <CompositeTransform SkewY="-0.259" TranslateY="-0.048"/>
-            </Rectangle.RenderTransform>
-        </Rectangle>
-    </Canvas>-->
+    <!--<Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Rectangle Margin="0,0,0,0" HorizontalAlignment="Left" Width="20" Height="800" Opacity="0.3" Fill="Green"   VerticalAlignment="Top"/>
+        <Rectangle Margin="0,0,0,0" HorizontalAlignment="Right" Width="20" Height="800" Opacity="0.3" Fill="Green"   VerticalAlignment="Top"/>
+        
+        --><!--<Rectangle HorizontalAlignment="Left" Width="25" Height="800" Opacity="0.3" Fill="red"   VerticalAlignment="Top"/>
+        <Rectangle Margin="25,0,0,0" HorizontalAlignment="Left" Width="12" Height="800" Opacity="0.3" Fill="Green"   VerticalAlignment="Top"/>
+        <Rectangle Margin="37,0,0,0" HorizontalAlignment="Left" Width="25" Height="800" Opacity="0.3" Fill="red"   VerticalAlignment="Top"/>
+        <Rectangle Margin="62,0,0,0" HorizontalAlignment="Left" Width="12" Height="800" Opacity="0.3" Fill="Green"   VerticalAlignment="Top"/>
+        <Rectangle Margin="74,0,0,0" HorizontalAlignment="Left" Width="25" Height="800" Opacity="0.3" Fill="red"   VerticalAlignment="Top"/>--><!--       
+    </Grid>-->
 
     <Grid x:Name="LayoutRoot" Style="{StaticResource MainContainerGrid}">
         <Grid.ChildrenTransitions>
@@ -33,7 +40,9 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <!-- Title Panel -->
+        
+     <!--Title Panel--> 
+    
         <StackPanel Grid.Row="0">
             <Image Style="{StaticResource TopLogo}" />
             <StackPanel>
