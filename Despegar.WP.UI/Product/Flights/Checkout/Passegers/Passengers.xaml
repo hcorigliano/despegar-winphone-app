@@ -1,0 +1,63 @@
+﻿<Page
+    x:Class="Despegar.WP.UI.Product.Flights.Checkout.Passegers.Passengers"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Despegar.WP.UI.Product.Flights.Checkout.Passegers"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:conv="using:Despegar.WP.UI.Common.Converter"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Page.Resources>
+        <conv:VisibilityConverter x:Name="VisibilityConverter"/>
+        <conv:TypeToTextConverter x:Name="TypeToTextConverter"/>
+        <conv:DateToStringConverter x:Name="DateToStringConverter"/>
+    </Page.Resources>
+
+    <Grid>
+        <ScrollViewer VerticalScrollBarVisibility="Auto" Height="400">
+            <StackPanel>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <!--x:Uid="Generic_Adult"-->
+                    <TextBlock  Text="{Binding type , Converter={StaticResource TypeToTextConverter}}"></TextBlock>
+                </Grid>
+
+                <StackPanel Visibility="{Binding first_name.required,Converter={StaticResource VisibilityConverter}}" >
+                    <TextBlock x:Uid="Passager_First_Name"></TextBlock>
+                    <TextBox x:Name="first_name" ></TextBox>
+                </StackPanel>
+
+                <StackPanel Visibility="{Binding last_name.required,Converter={StaticResource VisibilityConverter}}">
+                    <TextBlock x:Uid="Passager_Last_Name"></TextBlock>
+                    <TextBox x:Name="last_name"></TextBox>
+                </StackPanel>
+
+                <StackPanel Visibility="{Binding nationality.required,Converter={StaticResource VisibilityConverter}}">
+                    <TextBlock x:Uid="Passager_Nationality"></TextBlock>
+                    <ComboBox x:Name="nationality"></ComboBox>
+                </StackPanel>
+
+                <StackPanel Visibility="{Binding document.required,Converter={StaticResource VisibilityConverter}}">
+                    <TextBlock x:Uid="Passager_Document_Type"></TextBlock>
+                    <ComboBox x:Name="document" ItemsSource="{Binding document.type.options}" DisplayMemberPath="description"></ComboBox>
+                </StackPanel>
+
+                <StackPanel Visibility="{Binding birthdate.required,Converter={StaticResource VisibilityConverter}}">
+                    <TextBlock x:Uid="Passager_Birthdate"></TextBlock>
+                    <DatePicker x:Name="birthdate" Height="auto" Date="{Binding birthdate.coreValue , Mode=TwoWay , Converter={StaticResource DateToStringConverter}}"></DatePicker>
+                </StackPanel>
+
+                <StackPanel Visibility="{Binding gender.required,Converter={StaticResource VisibilityConverter}}">
+                    <TextBlock x:Uid="Passager_gender"></TextBlock>
+                    <ComboBox x:Name="gender" ItemsSource="{Binding gender.options}" DisplayMemberPath="description"></ComboBox>
+                </StackPanel>
+
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Page>

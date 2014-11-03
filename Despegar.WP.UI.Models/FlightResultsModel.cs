@@ -118,5 +118,10 @@ namespace Despegar.WP.UI.Model
                 _item.LinkFlightRoutes();
             }
         }
+
+        public bool isValid()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

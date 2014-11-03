@@ -6,7 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    Style="{StaticResource BasePage}">
 
     <Grid x:Name="LayoutRoot">
 
@@ -27,9 +27,67 @@
             <TextBlock x:Uid="Page_FlightCheckout" Margin="0,-6.5,0,26.5" Style="{ThemeResource HeaderTextBlockStyle}" CharacterSpacing="{ThemeResource PivotHeaderItemCharacterSpacing}"/>
         </StackPanel>
 
-        <!--TODO: Content should be placed within the following grid-->
-        <Grid Grid.Row="1" x:Name="ContentRoot" Margin="19,9.5,19,0">
+        
+        <!--Passenger Pivot-->
+        <!--xmlns:src="using:Despegar.WP.UI.Product.Flights.Checkout.Passagers"-->
+        <Pivot Grid.Row="1" x:Name="ContentRoot" Margin="19,9.5,19,0">
+            <PivotItem >
+                <PivotItem.Header>
+                    <TextBlock x:Uid="Flight_Checkout_Passagers" FontSize="36"></TextBlock>
+                </PivotItem.Header>
 
-        </Grid>
+                <StackPanel xmlns:src="using:Despegar.WP.UI.Product.Flights.Checkout.Passegers">
+
+                    <!--ItemsSource="{Binding passengers}"-->
+                    <ItemsControl x:Name="PassengerControl" ItemsSource="{Binding passengers}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <src:Passengers></src:Passengers>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </StackPanel>
+            </PivotItem>
+
+
+            
+            
+            
+            <PivotItem>
+                <PivotItem.Header>
+                    <TextBlock x:Uid="Flight_Checkout_Contact" FontSize="36"></TextBlock>
+                </PivotItem.Header>
+                <StackPanel xmlns:src="using:Despegar.WP.UI.Product.Flights.Checkout.Contact">
+
+                    <src:ContactData x:Name="ContactControl"></src:ContactData>
+                    <Button Click="testo"></Button>
+                </StackPanel>
+            </PivotItem>
+
+
+
+
+
+                    <!--Contact Data-->
+            <!--xmlns:src="using:Despegar.WP.UI.Product.Flights.Checkout.Contact"--><!--
+            <PivotItem>
+                <PivotItem.Header>
+                    <TextBlock x:Uid="Flight_Checkout_Contact" FontSize="36"></TextBlock>
+                </PivotItem.Header>
+
+                <StackPanel xmlns:src="using:Despegar.WP.UI.Product.Flights.Checkout.Contact">
+
+                    --><!--ItemsSource="{Binding passengers}"--><!--
+                    <ItemsControl x:Name="ContactControl" ItemsSource="{Binding passengers}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <src:ContactData></src:ContactData>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </StackPanel>
+            </PivotItem>-->
+        </Pivot>
+
     </Grid>
 </Page>

@@ -23,12 +23,12 @@ namespace Despegar.Core.Service
         /// Retrives Configuration for all Countries.
         /// </summary>
         /// <returns></returns>
-        public async Task<Configurations> GetConfigurations()
+        public async Task<Configuration> GetConfigurations()
         {
-            string serviceUrl = ServiceURL.GetServiceURL(ServiceKey.Configurations);
-            IConnector connector = context.GetServiceConnector(ServiceKey.Configurations);
+            string serviceUrl = ServiceURL.GetServiceURL(ServiceKey.Configuration);
+            IConnector connector = context.GetServiceConnector(ServiceKey.Configuration);
 
-            return await connector.GetAsync<Configurations>(serviceUrl);
+            return await connector.GetAsync<Configuration>(serviceUrl);
         }
     }
 }

@@ -1,0 +1,55 @@
+﻿<Page
+    x:Class="Despegar.WP.UI.Product.Flights.Checkout.Contact.ContactData"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Despegar.WP.UI.Product.Flights.Checkout.Contact"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:conv="using:Despegar.WP.UI.Common.Converter"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Page.Resources>
+        <conv:VisibilityConverter x:Name="VisibilityConverter"/>
+    </Page.Resources>
+
+    <Grid>
+        <ScrollViewer VerticalScrollBarVisibility="Auto" Height="400">
+            <StackPanel x:Name="contact"><!--Contact-->                
+                
+                <StackPanel Visibility="{Binding email.required,Converter={StaticResource VisibilityConverter}}" >
+                    <TextBlock x:Uid="Contact_email"></TextBlock>
+                    <TextBox x:Name="email" Text="{Binding email.coreValue , Mode=TwoWay}"> </TextBox>
+                </StackPanel>
+
+                <StackPanel Visibility="{Binding email.required,Converter={StaticResource VisibilityConverter}}">
+                    <TextBlock x:Uid="Contact_email_Confirmation"></TextBlock>
+                    <TextBox x:Name="emailConfirmation" ></TextBox>                    
+                </StackPanel>
+
+                <StackPanel Visibility="{Binding phones.type.required,Converter={StaticResource VisibilityConverter}}">
+                    <TextBlock x:Uid="Contact_Phone"></TextBlock>
+                    <ComboBox x:Name="phone_Type" ItemsSource="{Binding phones[0].type.options}" DisplayMemberPath="description" SelectedValue="{Binding phones[0].type.coreValue, Mode=TwoWay}" SelectedValuePath="value"   ></ComboBox>
+                </StackPanel>
+
+                <StackPanel Visibility="{Binding phones.country_code.required,Converter={StaticResource VisibilityConverter}}">
+                    <TextBlock x:Uid="Contact_Country_Code"></TextBlock>
+                    <TextBox x:Name="country_code"></TextBox>
+                </StackPanel>
+
+                <StackPanel Visibility="{Binding phones.area_code.required,Converter={StaticResource VisibilityConverter}}">
+                    <TextBlock x:Uid="Contact_Area_Code"></TextBlock>
+                    <TextBox x:Name="area_code"></TextBox>
+                </StackPanel>
+
+                <StackPanel Visibility="{Binding phones.number.required,Converter={StaticResource VisibilityConverter}}">
+                    <TextBlock x:Uid="Contact_Number"></TextBlock>
+                    <TextBox x:Name="number"></TextBox>
+                </StackPanel>
+                
+                <Button Click="Button_Click_Test" x:Name="btn_Test"></Button>
+               
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Page>

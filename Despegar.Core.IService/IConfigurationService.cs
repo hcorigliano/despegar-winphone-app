@@ -9,6 +9,6 @@ namespace Despegar.Core.IService
 {
     public interface IConfigurationService
     {
-        Task<Configurations> GetConfigurations();               
+        Task<Configuration> GetConfigurations();               
     }
 }

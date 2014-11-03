@@ -9,5 +9,6 @@ namespace Despegar.WP.UI.Model.Interfaces
     interface IValidateInterface
     {
         void Validate();
+        bool isValid();
     }
 }
