@@ -5,17 +5,37 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"    
     xmlns:controls="using:Despegar.WP.UI.Developer.Controls"
-    mc:Ignorable="d">
+    mc:Ignorable="d"
+    RequestedTheme="Light" 
+	d:DataContext="{d:DesignData /SampleData/DeveloperViewModelSampleData.xaml}"
+    >
     <UserControl.Resources>
         <CollectionViewSource x:Name="mocksCvs" IsSourceGrouped="True" Source="{Binding MockGroups}" />
+        <Storyboard x:Name="ShowDialogAnimation">
+            <DoubleAnimation Duration="0:0:.5" To="1" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="mainCanvas" d:IsOptimized="True">
+                <DoubleAnimation.EasingFunction>
+                    <QuadraticEase EasingMode="EaseIn" />
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+        </Storyboard>
+        <Storyboard x:Name="HideDialogAnimation">
+            <DoubleAnimation Duration="0:0:.5" To="0" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="mainCanvas" d:IsOptimized="True">
+                <DoubleAnimation.EasingFunction>
+                    <QuadraticEase EasingMode="EaseOut" />
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+        </Storyboard>                
     </UserControl.Resources>
     
-    <Canvas Width="{Binding Viewport.Width}" Height="{Binding Viewport.Height}">
-        <Canvas.Background>
+    <Grid Width="{Binding Viewport.Width}" Height="{Binding Viewport.Height}" Opacity="0" x:Name="mainCanvas">
+    	<Grid.RowDefinitions>
+    		<RowDefinition/>
+    	</Grid.RowDefinitions>
+        <Grid.Background>
             <SolidColorBrush Color="Black" Opacity="0.4"/>
-        </Canvas.Background>
+        </Grid.Background>
 
-        <Grid Height="500" Width="350" Background="Gainsboro" Canvas.Left="28" Canvas.Top="91">
+        <Grid Height="500" Width="350" Background="Gainsboro" HorizontalAlignment="Center" VerticalAlignment="Center" >            
             <Grid.RowDefinitions>
                 <RowDefinition Height="50"/>
                 <RowDefinition Height="390"/>
@@ -28,13 +48,40 @@
 
             <StackPanel Grid.Row="1">
                 <!-- Content -->
-                <Pivot>
+                <Pivot>                   
                     <Pivot.HeaderTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding}" FontSize="28" />
                         </DataTemplate>
                     </Pivot.HeaderTemplate>
+                    
+                    <PivotItem Header="Other tools">
+                        <ScrollViewer>
+                            <StackPanel>
+                                <TextBlock FontSize="28">Design Grid</TextBlock>
+                                <CheckBox Content="Enabled" IsChecked="{Binding DesignGridEnabled, Mode=TwoWay}" />
 
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition />
+                                        <RowDefinition />
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="1*" />
+                                        <ColumnDefinition Width="2*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <TextBlock Grid.Row="0" Grid.Column="0" Margin="0,8,15,0" FontSize="18" VerticalAlignment="Center" >Opacity</TextBlock>
+                                    <ComboBox x:Name="OpacityPicker"  Grid.Row="0" Grid.Column="1" HorizontalContentAlignment="Right" VerticalAlignment="Top" ItemsSource="{Binding OpacityOptions}" SelectedItem="{Binding Opacity, Mode=TwoWay}"  HorizontalAlignment="Right" Width="180" Margin="0,0,9.667,0" />
+
+                                    <TextBlock Grid.Row="1" Grid.Column="0" Margin="0,8,15,0" FontSize="18" VerticalAlignment="Center">Color</TextBlock>
+                                    <controls:ColorPicker x:Name="ColourPicker" Grid.Row="1" Grid.Column="1" VerticalAlignment="Top"  HorizontalAlignment="Right" SelectedColor="{Binding DesignGridColor, Mode=TwoWay}" Height="55"  Width="180" Margin="0,0,10,0"  />
+                                </Grid>
+
+                            </StackPanel>
+                        </ScrollViewer>
+                    </PivotItem>
+                    
                     <PivotItem Header="Service Mocks">
                         <ListView ItemsSource="{Binding Source={StaticResource mocksCvs}}" MaxHeight="300">
                             <ListView.GroupStyle>
@@ -72,32 +119,6 @@
                         </ScrollViewer>
                     </PivotItem>
 
-                    <PivotItem Header="Other tools">
-                        <ScrollViewer>
-                            <StackPanel>
-                                <TextBlock FontSize="28">Design Grid</TextBlock>
-                                <CheckBox Content="Enabled" IsChecked="{Binding DesignGridEnabled, Mode=TwoWay}" />
-
-                                <Grid>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition />
-                                        <RowDefinition />
-                                    </Grid.RowDefinitions>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="1*" />
-                                        <ColumnDefinition Width="2*"/>
-                                    </Grid.ColumnDefinitions>
-
-                                    <TextBlock Grid.Row="0" Grid.Column="0" Margin="0,8,15,0" FontSize="18" VerticalAlignment="Center" >Opacity</TextBlock>
-                                    <ComboBox x:Name="OpacityPicker"  Grid.Row="0" Grid.Column="1" HorizontalContentAlignment="Right" VerticalAlignment="Top" ItemsSource="{Binding OpacityOptions}" SelectedItem="{Binding Opacity, Mode=TwoWay}"  HorizontalAlignment="Right" Width="180" Margin="0,0,9.667,0" />
-
-                                    <TextBlock Grid.Row="1" Grid.Column="0" Margin="0,8,15,0" FontSize="18" VerticalAlignment="Center">Color</TextBlock>
-                                    <controls:ColorPicker x:Name="ColourPicker" Grid.Row="1" Grid.Column="1" VerticalAlignment="Top"  HorizontalAlignment="Right" SelectedColor="{Binding DesignGridColor, Mode=TwoWay}" Height="55"  Width="180" Margin="0,0,10,0"  />
-                                </Grid>
-
-                            </StackPanel>
-                        </ScrollViewer>
-                    </PivotItem>
                 </Pivot>
             </StackPanel>
 
@@ -108,6 +129,6 @@
             </StackPanel>
 
         </Grid>
-    </Canvas>
+    </Grid>
 
 </UserControl>

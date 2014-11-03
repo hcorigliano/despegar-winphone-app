@@ -270,4 +270,25 @@
   <data name="Contact_Phone.Text" xml:space="preserve">
     <value>Teléfono</value>
   </data>
+  <data name="Page_Home_MyDespegarButton.Text" xml:space="preserve">
+    <value>Mi Despegar</value>
+  </data>
+  <data name="Page_Home_FlightsButton.Text" xml:space="preserve">
+    <value>Vuelos</value>
+  </data>
+  <data name="Page_Home_FlightsButtonSub.Text" xml:space="preserve">
+    <value>Las mejores ofertas</value>
+  </data>
+  <data name="Page_Home_FlightStatusButton.Text" xml:space="preserve">
+    <value>Estados de Vuelos</value>
+  </data>
+  <data name="Page_Home_FlightStatusButtonSub.Text" xml:space="preserve">
+    <value>Las mejores ofertas</value>
+  </data>
+  <data name="Page_Home_HotelsButton.Text" xml:space="preserve">
+    <value>Hoteles</value>
+  </data>
+  <data name="Page_Home_HotelsButtonSub.Text" xml:space="preserve">
+    <value>Las mejores ofertas</value>
+  </data>
 </root>
