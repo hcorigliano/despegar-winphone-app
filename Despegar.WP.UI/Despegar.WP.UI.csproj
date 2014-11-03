@@ -113,6 +113,8 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Classes\PagesManager.cs" />
+    <Compile Include="Common\Converter\DayofWeekShortName.cs" />
+    <Compile Include="Common\Converter\GetMonthName.cs" />
     <Compile Include="Common\Converter\StringConverter.cs" />
     <Compile Include="Common\NavigationHelper.cs" />
     <Compile Include="Common\ObservableDictionary.cs" />

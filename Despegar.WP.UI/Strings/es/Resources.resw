@@ -225,4 +225,7 @@
   <data name="Page_FlightResult_Flight.Text" xml:space="preserve">
     <value>Vuelos</value>
   </data>
+  <data name="Page_FlightResult_Passangers.Text" xml:space="preserve">
+    <value>Pasajeros</value>
+  </data>
 </root>

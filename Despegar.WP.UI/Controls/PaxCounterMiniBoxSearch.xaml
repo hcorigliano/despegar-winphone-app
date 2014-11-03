@@ -22,13 +22,10 @@
             
         </Grid.Resources>
         
-    	<StackPanel HorizontalAlignment="Left" Height="Auto" VerticalAlignment="Top" Width="Auto">
-            <TextBlock TextWrapping="Wrap" Text="{Binding TotalAdults}"/>
-            <TextBlock TextWrapping="Wrap" x:Uid="Page_FlightResult_Adult"/>
-        </StackPanel>
+        <Image Grid.Column="0"></Image>
         <StackPanel Grid.Column="1" HorizontalAlignment="Left" Height="Auto" VerticalAlignment="Top" Width="Auto">
-            <TextBlock TextWrapping="Wrap" Text="{Binding TotalChildren}"/>
-            <TextBlock TextWrapping="Wrap" x:Uid="Page_FlightResult_Child"/>
+            <TextBlock TextWrapping="Wrap" Text="{Binding TotalPassangers}"/>
+            <TextBlock TextWrapping="Wrap" x:Uid="Page_FlightResult_Passangers"/>
         </StackPanel>
     </Grid>
 

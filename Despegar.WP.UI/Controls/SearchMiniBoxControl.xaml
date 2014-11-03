@@ -53,8 +53,8 @@
         </Grid.ColumnDefinitions>
 
         <src:GoReturnPanelMiniBoxSearch x:Name="SearchedFlight" Grid.Column="0" DataContext="{Binding}" ></src:GoReturnPanelMiniBoxSearch>
-        <src:DateDisplayMiniBoxSearch x:Name="SearchedGoDate" Grid.Column="1" DataContext="{Binding}"></src:DateDisplayMiniBoxSearch>
-        <src:DateDisplayMiniBoxSearch x:Name="SearchedReturnDate" Grid.Column="2" DataContext="{Binding}"></src:DateDisplayMiniBoxSearch>
+        <src:DateDisplayMiniBoxSearch x:Name="SearchedGoDate" Grid.Column="1" DataContext="{Binding DepartureDate}"></src:DateDisplayMiniBoxSearch>
+        <src:DateDisplayMiniBoxSearch x:Name="SearchedReturnDate" Grid.Column="2" DataContext="{Binding DestinationDate}"></src:DateDisplayMiniBoxSearch>
         <src:PaxCounterMiniBoxSearch x:Name="SearchedPax" Grid.Column="3" DataContext="{Binding}"></src:PaxCounterMiniBoxSearch>
     </Grid>
 </UserControl>
