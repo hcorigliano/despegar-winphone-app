@@ -6,33 +6,5 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
     mc:Ignorable="d">
 
-	<Style TargetType="local:SearchMiniBoxControl">
-		<Setter Property="Template">
-			<Setter.Value>
-				<ControlTemplate TargetType="local:SearchMiniBoxControl">
-                    <Grid
-						Background="{TemplateBinding Background}" 
-                        xmlns:src="using:Despegar.WP.UI.Controls" >
-                        
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition></ColumnDefinition>
-                            <ColumnDefinition></ColumnDefinition>
-                            <ColumnDefinition></ColumnDefinition>
-                            <ColumnDefinition></ColumnDefinition>
-                        </Grid.ColumnDefinitions>
-                        
-                        <src:GoReturnPanelMiniBoxSearch Grid.Column="0"></src:GoReturnPanelMiniBoxSearch>
-                        <src:DateDisplayMiniBoxSearch Grid.Column="1"></src:DateDisplayMiniBoxSearch>
-                        <src:DateDisplayMiniBoxSearch Grid.Column="2"></src:DateDisplayMiniBoxSearch>
-                        <src:PaxCounterMiniBoxSearch Grid.Column="3"></src:PaxCounterMiniBoxSearch>
-                    </Grid>
-                </ControlTemplate>
-                
-			</Setter.Value>
-
-		</Setter>
-	</Style>
-
-
     
 </ResourceDictionary>

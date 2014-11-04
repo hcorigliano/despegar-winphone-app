@@ -20,6 +20,7 @@ using Despegar.WP.UI.Classes;
 using Despegar.WP.UI.Model;
 using Windows.UI.Popups;
 using System.Threading.Tasks;
+using Despegar.WP.UI.Model.Classes;
 
 // The Basic Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
 
@@ -33,6 +34,7 @@ namespace Despegar.WP.UI.Product.Flights
         private NavigationHelper navigationHelper;
         private ObservableDictionary defaultViewModel = new ObservableDictionary();
         private FlightResultsModel flightResultModel = new FlightResultsModel();
+        private FlightSearchModel flightSearchModel = new FlightSearchModel();
 
         public FlightResults()
         {
@@ -41,7 +43,9 @@ namespace Despegar.WP.UI.Product.Flights
             this.navigationHelper = new NavigationHelper(this);
             this.navigationHelper.LoadState += this.NavigationHelper_LoadState;
             this.navigationHelper.SaveState += this.NavigationHelper_SaveState;
+
             this.DataContext = flightResultModel;
+            this.miniboxSearch.DataContext = flightSearchModel;
         }
 
         /// <summary>
@@ -74,7 +78,13 @@ namespace Despegar.WP.UI.Product.Flights
         /// session.  The state will be null the first time a page is visited.</param>
         private void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
         {
-            flightResultModel.Itineraries = e.NavigationParameter as FlightsItineraries;
+            PageParameters pageParameters = e.NavigationParameter as PageParameters;
+
+            flightResultModel.Itineraries = pageParameters.Itineraries as FlightsItineraries;
+
+            flightSearchModel = pageParameters.SearchModel as FlightSearchModel;
+
+            this.miniboxSearch.DataContext = flightSearchModel;
 
         }
 

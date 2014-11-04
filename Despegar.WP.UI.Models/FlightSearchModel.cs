@@ -23,6 +23,13 @@ namespace Despegar.WP.UI.Model
         public int LimitResult { get; set; }
         public int Offset { get; set; }
 
+        public int TotalPassangers {
+                get {
+                    
+                    return AdultsInFlights+ChildrenInFlights+InfantsInFlights;
+                }
+            }
+        public int TotalFlights { get; set; }
 
         //auxiliar
         public string MultipleDates { get; set; }

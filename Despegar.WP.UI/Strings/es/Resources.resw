@@ -216,14 +216,26 @@
   <data name="Flight_Search_Round_Trip.Text" xml:space="preserve">
     <value>IDA Y VUELTA</value>
   </data>
+  <data name="Page_FlightResult_Adult.Text" xml:space="preserve">
+    <value>Adulto</value>
+    </data>
   <data name="Flight_Checkout_Passagers.Text" xml:space="preserve">
     <value>Pasajeros</value>
+  </data>
+  <data name="Page_FlightResult_Child.Text" xml:space="preserve">
+    <value>Niños</value>
   </data>
   <data name="Generic_Adult" xml:space="preserve">
     <value>Adulto</value>
   </data>
+  <data name="Page_FlightResult_Flight.Text" xml:space="preserve">
+    <value>Vuelos</value>
+  </data>
   <data name="Passager_First_Name.Text" xml:space="preserve">
     <value>Nombre</value>
+  </data>
+  <data name="Page_FlightResult_Passangers.Text" xml:space="preserve">
+    <value>Pasajeros</value>
   </data>
   <data name="Passager_Last_Name.Text" xml:space="preserve">
     <value>Apellido</value>

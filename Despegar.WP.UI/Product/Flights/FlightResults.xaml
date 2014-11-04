@@ -1,4 +1,4 @@
-﻿<Page xmlns:Flights="using:Despegar.WP.UI.Controls.Flights" 
+﻿<Page xmlns:Controls="using:Despegar.WP.UI.Controls"  xmlns:Flights="using:Despegar.WP.UI.Controls.Flights" 
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:Despegar.WP.UI.Product.Flights"
@@ -33,7 +33,6 @@
                 </StackPanel>
                 <TextBlock Grid.Column="2"  HorizontalAlignment="Right" TextWrapping="Wrap" Text="{Binding price}" VerticalAlignment="Top"/>
                 <ItemsControl x:Name="RoutesItemControl"  Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" ItemsSource="{Binding RoutesCustom}" DataContext="{Binding}" Visibility="Collapsed">
-
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                             <Grid Tapped="Grid_Tapped">
@@ -82,15 +81,21 @@
         <StackPanel Grid.Row="0" Margin="19,0,0,0">
             <TextBlock x:Uid="AppTitle" Style="{ThemeResource TitleTextBlockStyle}" Margin="0,12,0,0"/>
             <TextBlock x:Uid="Page_FlightResults" Margin="0,-6.5,0,26.5" Style="{ThemeResource HeaderTextBlockStyle}" CharacterSpacing="{ThemeResource PivotHeaderItemCharacterSpacing}"/>
-
-            <UI:SearchMiniBoxControl Height="Auto"/>
+            
+            <Controls:SearchMiniBoxControl x:Name="miniboxSearch" Height="Auto"/>
         </StackPanel>
 
         <Grid Grid.Row="1">
             <TextBlock />
         </Grid>
         <Grid Grid.Row="2" x:Name="ContentRoot" Width="Auto" >
-            <ListBox Height="450" x:Name="lbFlights" Background="White" ItemTemplate="{StaticResource FlightItemDateTemplate}" ItemsSource="{Binding Items}"  Tapped="ListBox_Tapped" HorizontalContentAlignment="Stretch" ScrollViewer.VerticalScrollBarVisibility="Visible"  />
+            <ListBox Height="450" x:Name="lbFlights" Background="White" ItemTemplate="{StaticResource FlightItemDateTemplate}" ItemsSource="{Binding Items}"  Tapped="ListBox_Tapped" HorizontalContentAlignment="Stretch" ScrollViewer.VerticalScrollBarVisibility="Visible"  >
+            	<ListBox.ItemContainerTransitions>
+            		<TransitionCollection>
+            			<EntranceThemeTransition FromVerticalOffset="100" FromHorizontalOffset="0"/>
+            		</TransitionCollection>
+            	</ListBox.ItemContainerTransitions>
+            </ListBox>
         </Grid>
 
     </Grid>
