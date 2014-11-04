@@ -8,8 +8,8 @@ namespace Despegar.Core.Business.Flight.BookingFields
     public class Address
     {
         public bool required { get; set; }
-        public FieldDataTypeValValue country { get; set; }
-        public FieldDataTypeValValue state { get; set; }
+        public FieldDataTypeVal country { get; set; }
+        public FieldDataTypeVal state { get; set; }
         public FieldDataTypeVal street { get; set; }
         public FieldDataTypeVal number { get; set; }
         public FieldDataTypeVal floor { get; set; }

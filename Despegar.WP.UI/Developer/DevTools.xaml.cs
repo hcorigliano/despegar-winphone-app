@@ -35,15 +35,23 @@ namespace Despegar.WP.UI.Developer
             // Default Picker Values
             this.OpacityPicker.SelectedValue = MetroGridHelper.Opacity;
             this.ColourPicker.SelectedColor = MetroGridHelper.Color;
+
+            ShowDialogAnimation.Begin();
         }
 
         private void ClosePopup(object sender, RoutedEventArgs e)
         {
+            HideDialogAnimation.Begin();
+            HideDialogAnimation.Completed += DoClosePopup;                 
+        }
+
+        private void DoClosePopup(object sender, object e)
+        {
             // in this example we assume the parent of the UserControl is a Popup 
             Popup p = this.Parent as Popup;
-            
+
             // close the Popup
-            if (p != null) { p.IsOpen = false; }            
+            if (p != null) { p.IsOpen = false; }     
         }        
     }
 }

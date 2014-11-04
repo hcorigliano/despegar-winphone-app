@@ -8,9 +8,8 @@
     xmlns:Classes="using:Despegar.WP.UI.Model.Classes"
     xmlns:Model="using:Despegar.WP.UI.Model"
     x:Class="Despegar.WP.UI.Product.Flights.FlightSearch"
-    
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    Style="{StaticResource BasePage}">
 
     
 	<Grid x:Name="LayoutRoot">

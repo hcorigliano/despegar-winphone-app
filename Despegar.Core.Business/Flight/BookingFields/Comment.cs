@@ -8,6 +8,6 @@ namespace Despegar.Core.Business.Flight.BookingFields
     public class Comment : FieldDataType
     {
         public FieldDataType reference_code { get; set; }
-        public FieldDataTypeValue follow_reservation { get; set; }
+        public FieldDataType follow_reservation { get; set; }
     }
 }

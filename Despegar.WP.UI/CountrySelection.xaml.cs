@@ -31,14 +31,7 @@ namespace Despegar.WP.UI
     /// </summary>
     public sealed partial class CountrySelection : Page
     {
-        ObservableCollection<CountryItem> item;
-
-        public ObservableCollection<CountryItem> Items
-        {
-            get { return item; }
-            set { item = value; }
-        }
-
+        
         public CountrySelection()
         {
             var resourceLoader = new Windows.ApplicationModel.Resources.ResourceLoader();
@@ -57,29 +50,30 @@ namespace Despegar.WP.UI
         {
             base.OnNavigatedTo(e);
             IConfigurationService configurationService = GlobalConfiguration.CoreContext.GetConfigurationService();            
-            Configurations configuration = await configurationService.GetConfigurations();
+            Configuration configuration = await configurationService.GetConfigurations();
 
-            this.Items = new ObservableCollection<CountryItem>(configuration.configuration.Select(p => GetCountries(p)).ToList());
+
+            sitesListView.DataContext = configuration;
         }
 
-        private CountryItem GetCountries(Configuration p)
-        {
-            CountryItem ci = new CountryItem();
-            ci.Code = p.id;
-            ci.CountryName = p.description;
-            return ci;
-        }
+        //private CountryItem GetCountries(Configuration p)
+        //{
+        //    //CountryItem ci = new CountryItem();
+        //    //ci.Code = p.id;
+        //    //ci.CountryName = p.description;
+        //    //return ci;
+        //}
 
         private void ListView_ItemClick(object sender, ItemClickEventArgs e)
         {
             //persist data in phone
-            CountryItem countrySelected = e.ClickedItem as CountryItem;
-            var roamingSettings = ApplicationData.Current.RoamingSettings;          
+            Site countrySelected = e.ClickedItem as Site;
+            var roamingSettings = ApplicationData.Current.RoamingSettings;
 
-            roamingSettings.Values["countryCode"] = countrySelected.Code;
-            roamingSettings.Values["countryName"] = countrySelected.CountryName;
+            roamingSettings.Values["countryCode"] = countrySelected.code;
+            roamingSettings.Values["countryName"] = countrySelected.name;
 
-            GlobalConfiguration.CoreContext.SetSite(countrySelected.Code); 
+            GlobalConfiguration.CoreContext.SetSite(countrySelected.code); 
 
             PagesManager.GoTo(typeof(Home), e);
         }   

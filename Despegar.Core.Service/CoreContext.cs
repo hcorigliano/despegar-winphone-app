@@ -33,6 +33,7 @@ namespace Despegar.Core.Service
 
         // Connectors
         private MapiConnector mapiConnector;
+        private Apiv1Connector apiv1Connector;
 
         #region ** Public Interface **
 
@@ -98,6 +99,9 @@ namespace Despegar.Core.Service
             if (mapiConnector == null)
                 mapiConnector = new MapiConnector();
 
+            if (apiv1Connector == null)
+                apiv1Connector = new Apiv1Connector();
+            
             Logger.LogCore("Core Initialized.");
         }
 
@@ -113,6 +117,9 @@ namespace Despegar.Core.Service
 
             this.site = siteCode;         
             mapiConnector.Configure(x_client, uow, site, GetLanguage());
+            apiv1Connector.Configure(x_client, uow, site);
+
+            
 
             Logger.LogCore("Site Changed.");
         }

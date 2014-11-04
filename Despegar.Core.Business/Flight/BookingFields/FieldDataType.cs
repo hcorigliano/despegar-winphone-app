@@ -12,5 +12,6 @@ namespace Despegar.Core.Business.Flight.BookingFields
         public string data_type { get; set; }
         public string coreValue { get; set; }
         public bool corePostEnable { get; set; }
+        public string value { get; set; }
     }
 }

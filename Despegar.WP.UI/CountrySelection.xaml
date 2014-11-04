@@ -30,11 +30,11 @@
 
         <!--TODO: Content should be placed within the following grid-->
         <Grid Grid.Row="1" x:Name="ContentRoot" Margin="19,9.5,19,0">
-            <ListView IsItemClickEnabled="True" ItemClick="ListView_ItemClick" ItemsSource="{Binding Path=Items}" HorizontalAlignment="Center"  VerticalAlignment="Center">
+            <ListView x:Name="sitesListView" IsItemClickEnabled="True" ItemClick="ListView_ItemClick" ItemsSource="{Binding Path=sites}" HorizontalAlignment="Center"  VerticalAlignment="Center">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="{Binding Path=CountryName}" />
+                            <TextBlock Text="{Binding Path=name}" />
                         </StackPanel>
                     </DataTemplate>
                 </ListView.ItemTemplate>

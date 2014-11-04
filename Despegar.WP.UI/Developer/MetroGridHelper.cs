@@ -157,20 +157,12 @@ namespace System.Windows
                 return;
             }
         }
-
-        /// <summary>
-        /// Does the actual work of preparing the grid once the parent frame is
-        /// in the visual tree and we have a Grid instance to work with for
-        /// placing the chilren.
-        /// </summary>
-        /// <param name="frame">The phone application frame.</param>
-        /// <param name="parent">The parent grid to insert the sub-grid into.</param>
+ 
         private static void PrepareGrid(Frame frame, Grid parent)
         {
             var brush = new SolidColorBrush(_color);
 
-            _grid = new Grid();
-            _grid.IsHitTestVisible = false;
+            _grid = new Grid { IsHitTestVisible = false };
 
             // To support both orientations, unfortunately more visuals need to
             // be used. An alternate implementation would be to react to the
@@ -179,14 +171,102 @@ namespace System.Windows
             double height = frame.ActualHeight;
             double max = Math.Max(width, height);
 
-            for (int x = 24; x < /*width*/ max; x += 37)
+            #if WINDOWS_APP
+ 
+                const double strokeWidth = 2.0;
+ 
+                var horizontalLine = new Line
+                {
+                    IsHitTestVisible = false,
+                    Stroke = brush,
+                    X1 = 0,
+                    X2 = max,
+                    Y1 = 100 + (strokeWidth / 2),
+                    Y2 = 100 + (strokeWidth / 2),
+                    StrokeThickness = strokeWidth,
+                };
+                _grid.Children.Add(horizontalLine);
+                _squares.Add(horizontalLine);
+                var horizontalLine2 = new Line
+                {
+                    IsHitTestVisible = false,
+                    Stroke = brush,
+                    X1 = 0,
+                    X2 = max,
+                    Y1 = 140 + (strokeWidth / 2),
+                    Y2 = 140 + (strokeWidth / 2),
+                    StrokeThickness = strokeWidth,
+                };
+                _grid.Children.Add(horizontalLine2);
+                _squares.Add(horizontalLine2);
+ 
+                var verticalLine = new Line
+                {
+                    IsHitTestVisible = false,
+                    Stroke = brush,
+                    X1 = 120 - (strokeWidth / 2),
+                    X2 = 120 - (strokeWidth / 2),
+                    Y1 = 0,
+                    Y2 = max,
+                    StrokeThickness = strokeWidth,
+                };
+                _grid.Children.Add(verticalLine);
+                _squares.Add(verticalLine);
+ 
+                var horizontalBottomLine = new Line
+                {
+                    IsHitTestVisible = false,
+                    Stroke = brush,
+                    X1 = 0,
+                    X2 = max,
+                    Y1 = height - 130 + (strokeWidth / 2),
+                    Y2 = height - 130 + (strokeWidth / 2),
+                    StrokeThickness = strokeWidth,
+                };
+                _grid.Children.Add(horizontalBottomLine);
+                _squares.Add(horizontalBottomLine);
+                var horizontalBottomLine2 = new Line
+                {
+                    IsHitTestVisible = false,
+                    Stroke = brush,
+                    X1 = 0,
+                    X2 = max,
+                    Y1 = height - 50 + (strokeWidth / 2),
+                    Y2 = height - 50 + (strokeWidth / 2),
+                    StrokeThickness = strokeWidth,
+                };
+                _grid.Children.Add(horizontalBottomLine2);
+                _squares.Add(horizontalBottomLine2);
+ 
+            #endif
+
+            double tileWidth = 20;
+            double tileHeight = 20;
+
+#if WINDOWS_PHONE_APP
+            double x = 19.2;
+            double y = 38.4;
+            double block = 29.6;
+#else
+    double x = 120;
+    double y = 140;
+    double block = 40;
+#endif
+
+            for (; x < /*width*/ max; x += block)
             {
-                for (int y = 24; y < /*height*/ max; y += 37)
+#if WINDOWS_PHONE_APP
+                y = 38.4;
+#else
+        y = 140;
+#endif
+
+                for (; y < /*height*/ max; y += block)
                 {
                     var rect = new Rectangle
                     {
-                        Width = 25,
-                        Height = 25,
+                        Width = tileWidth,
+                        Height = tileHeight,
                         VerticalAlignment = VerticalAlignment.Top,
                         HorizontalAlignment = HorizontalAlignment.Left,
                         Margin = new Thickness(x, y, 0, 0),
@@ -208,6 +288,6 @@ namespace System.Windows
             // Places the grid into the visual tree. It is never removed once
             // being added.
             parent.Children.Add(_grid);
-        }
+}
     }
 }

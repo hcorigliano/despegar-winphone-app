@@ -11,7 +11,7 @@ namespace Despegar.Core.Business.Flight.BookingFields
         public string type { get; set; }
         public Document document { get; set; }
         public FieldDataTypeOpt gender { get; set; }
-        public FieldDataTypeValValue nationality { get; set; }
+        public FieldDataTypeVal nationality { get; set; }
         public Birthdate birthdate { get; set; }
         public string data_type { get; set; }
         public FieldDataTypeVal first_name { get; set; }

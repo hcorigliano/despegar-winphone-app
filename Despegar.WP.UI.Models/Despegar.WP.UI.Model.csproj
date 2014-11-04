@@ -66,6 +66,7 @@
     <Compile Include="Classes\PageParameters.cs" />
     <Compile Include="Enums\FlightSearchPagesEnum.cs" />
     <Compile Include="FlightDetailsModel.cs" />
+    <Compile Include="FlightsCheckoutModel.cs" />
     <Compile Include="FlightsSearchBoxModel.cs" />
     <Compile Include="GlobalConfiguration.cs" />
     <Compile Include="Classes\AdvanceSearchModel.cs" />

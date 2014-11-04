@@ -46,7 +46,7 @@ namespace Despegar.WP.UI.Model
         }
 
 
-        public async Task<Configurations> GetConfigurations()
+        public async Task<Configuration> GetConfigurations()
         {
             return (await configurationService.GetConfigurations());
         }

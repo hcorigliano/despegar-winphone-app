@@ -5,8 +5,9 @@ using System.Text;
 
 namespace Despegar.Core.Business.Configuration
 {
-    public class Prices
+    public class Domain
     {
-        public bool? showsBreakDown { get; set; }
+        public string @base { get; set; }
+        public string media_content { get; set; }
     }
 }
