@@ -3,6 +3,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:System="using:System"
     xmlns:local="using:Despegar.WP.UI.Styles"
+    xmlns:controls="using:Windows.UI.Xaml.Controls" 
     >
     <!-- ===================================================================================== -->
     <!-- ===================== Main Stylesheet for Despegar/Decolar Apps ===================== -->
@@ -43,16 +44,39 @@
     <!-- ===================== Measure Constants ===================== -->
     <GridLength x:Key="PageHeaderHeight">88.8</GridLength>
     <GridLength x:Key="HomeButtonColumnWidth">79.2</GridLength>
+    <GridLength x:Key="TwoColumnMiddleSpacing">22</GridLength>    
     <!-- ===================== Generic Brushes ======================= -->
     <SolidColorBrush x:Key="Blue60Brush" Color="{StaticResource Blue60}" />
-
+    <SolidColorBrush x:Key="WhiteBrush" Color="{StaticResource White}" />
     <!-- ===================== Generic Styles ======================== -->
+    <Style x:Key="BasePage" TargetType="Page">
+        <Setter Property="Background">
+            <Setter.Value>
+                <!--<ImageBrush ImageSource="/Assets/Helpers/matrix_green_strong.png" Stretch="Uniform"  AlignmentX="Left" AlignmentY="Top" />-->
+                <!--<ImageBrush ImageSource="/Assets/Helpers/matrix_red.png" Stretch="Uniform"  AlignmentX="Left" AlignmentY="Top" />-->
+                <!--<ImageBrush ImageSource="/Assets/Helpers/matrix_red_strong.png" Stretch="Uniform"  AlignmentX="Left" AlignmentY="Top" />-->
+                <!--<ImageBrush ImageSource="/Assets/Helpers/matrix_magenta.png" Stretch="Uniform"  AlignmentX="Left" AlignmentY="Top" />-->
+                <ImageBrush ImageSource="/Assets/WindowsPhone_Background_480x800.png" Stretch="UniformToFill"  AlignmentX="Left" AlignmentY="Top" />
+            </Setter.Value>
+        </Setter>
+    </Style>
     <Style x:Key="ImageBase" TargetType="Image">
         <Setter Property="Stretch" Value="None" />
         <Setter Property="HorizontalAlignment" Value="Left" />
         <Setter Property="VerticalAlignment" Value="Top" />        
     </Style>
-        
+    <Style x:Key="MainContainerGrid" TargetType="Grid">
+        <Setter Property="Margin" Value="19.2,12,0,0" />
+    </Style>
+    <Style x:Key="TopLogo" TargetType="Image" BasedOn="{StaticResource ImageBase}">
+        <Setter Property="Source" Value="/Assets/topLogo.png" />
+        <Setter Property="Stretch" Value="Fill"/>
+        <Setter Property="Width" Value="100" />
+        <Setter Property="Height" Value="20" />
+    </Style>
+    <Style x:Key="TwoColumnLayoutContainer" TargetType="StackPanel">
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+    </Style>
     <!-- Text & Fonts -->
     <Style x:Key="PageHeader" TargetType="TextBlock" BasedOn="{StaticResource HeaderTextBlockStyle}">
         <Setter Property="FontFamily" Value="Segoe UI" />
@@ -62,7 +86,12 @@
     <Style x:Key="BaseText" TargetType="TextBlock" BasedOn="{StaticResource BaseTextBlockStyle}">
         <Setter Property="CharacterSpacing" Value="-20" />
         <Setter Property="FontFamily" Value="Segoe UI" />
+        <Setter Property="Foreground" Value="{StaticResource WhiteBrush}" />
         <Setter Property="FontSize" Value="36" />
+        <Setter Property="FontWeight" Value="Thin" />
+    </Style>
+    <Style x:Key="BaseTextLabel" TargetType="TextBlock" BasedOn="{StaticResource BaseText}">
+        <Setter Property="FontSize" Value="12" />
         <Setter Property="FontWeight" Value="Thin" />
     </Style>
     <Style x:Key="PivotHeader" TargetType="TextBlock" BasedOn="{StaticResource PageHeader}">
@@ -72,35 +101,90 @@
     <Style x:Key="PivotItem" TargetType="PivotItem">
         <Setter Property="Margin" Value="0,0,19,0" />
     </Style>
-    <!-- Input Styles -->
+
+    <!-- Input/Controls Styles -->
+    <Style TargetType="DatePicker" x:Key="DatePickerBase">
+        <Setter Property="BorderBrush" Value="{StaticResource Blue60Brush}" />
+        <Setter Property="Template">            
+            <Setter.Value>
+                <ControlTemplate TargetType="DatePicker">
+                    <StackPanel Margin="{TemplateBinding Padding}" x:Name="LayoutRoot">
+                        <ContentPresenter x:Name="HeaderContentPresenter" Style="{StaticResource HeaderContentPresenterStyle}" Margin="0,0,0,-3"
+                    Content="{TemplateBinding Header}" ContentTemplate="{TemplateBinding HeaderTemplate}" />
+                   <Button x:Name="FlyoutButton"
+                    Foreground="{TemplateBinding Foreground}"
+                    Background="{TemplateBinding Background}"
+                    BorderBrush="{TemplateBinding BorderBrush}"
+                    BorderThickness="2.5"
+                    Padding="6.5,0,0,3"
+                    IsEnabled="{TemplateBinding IsEnabled}"
+                    HorizontalAlignment="Stretch"
+                    HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" />
+                    </StackPanel>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="InputBase" TargetType="TextBox">
+        <Setter Property="Foreground" Value="{StaticResource WhiteBrush}" />
+        <Setter Property="BorderBrush" Value="{StaticResource Blue60Brush}" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="IsSpellCheckEnabled" Value="false"></Setter>
+    </Style>
     <Style x:Key="ButtonBase" TargetType="Button">
         <Setter Property="BorderBrush" Value="{StaticResource Blue60Brush}" />
         <Setter Property="HorizontalAlignment" Value="Stretch" />
     </Style>
-
-    <Style x:Key="BasePage" TargetType="Page">        
-        <Setter Property="Background">
+    <Style x:Key="AutosuggestBoxBase" TargetType="AutoSuggestBox">
+        <Setter Property="Template">
             <Setter.Value>
-                <!--<ImageBrush ImageSource="/Assets/Helpers/matrix_green.png" Stretch="Uniform"  AlignmentX="Left" AlignmentY="Top" />-->
-                <!--<ImageBrush ImageSource="/Assets/Helpers/matrix_green_strong.png" Stretch="Uniform"  AlignmentX="Left" AlignmentY="Top" />-->
-                <!--<ImageBrush ImageSource="/Assets/Helpers/matrix_red.png" Stretch="Uniform"  AlignmentX="Left" AlignmentY="Top" />-->
-                <!--<ImageBrush ImageSource="/Assets/Helpers/matrix_red_strong.png" Stretch="Uniform"  AlignmentX="Left" AlignmentY="Top" />-->
-                <ImageBrush ImageSource="/Assets/WindowsPhone_Background_480x800.png" Stretch="UniformToFill"  AlignmentX="Left" AlignmentY="Top" />
+                <ControlTemplate TargetType="controls:AutoSuggestBox">
+                    <Grid>
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="Orientation">
+                                <VisualState x:Name="Landscape"/>
+                                <VisualState x:Name="Portrait"/>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                        <TextBox x:Name="TextBox"
+                                 PlaceholderText="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=PlaceholderText}"
+                                 Header="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Header}"
+                                 Width="{TemplateBinding Width}"
+                                 ScrollViewer.BringIntoViewOnFocusChange="False"
+                                 Canvas.ZIndex="0"
+                                 Margin="0" 
+                                 Style="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TextBoxStyle}"
+                                 />
+                        <Popup x:Name="SuggestionsPopup">
+                            <Border x:Name="SuggestionsContainer"
+                      Background="{ThemeResource AutoSuggestBackgroundThemeBrush}"
+                      BorderBrush="{ThemeResource PhoneAccentBrush}"
+                      BorderThickness="{ThemeResource TextControlBorderThemeThickness}">
+                                <Border.RenderTransform>
+                                    <TranslateTransform x:Name="UpwardTransform"/>
+                                </Border.RenderTransform>
+                                <ListView x:Name="SuggestionsList"
+                          ItemsSource="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ItemsSource}"
+                          ItemTemplate="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ItemTemplate}"
+                          ItemTemplateSelector="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ItemTemplateSelector}"
+                          ItemContainerStyle="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ItemContainerStyle}"
+                          RenderTransformOrigin=".5,.5">
+                                    <ListView.RenderTransform>
+                                        <ScaleTransform x:Name="ListItemOrderTransform"/>
+                                    </ListView.RenderTransform>
+                                </ListView>
+                            </Border>
+                        </Popup>
+                    </Grid>
+                </ControlTemplate>
             </Setter.Value>
         </Setter>
     </Style>
-    
-    <Style x:Key="MainContainerGrid" TargetType="Grid">
-        <Setter Property="Margin" Value="24,12,0,0" />
+    <Style x:Key="ComboBoxBase" TargetType="ComboBox">
+        <Setter Property="Foreground" Value="{StaticResource WhiteBrush}" />
+        <Setter Property="BorderBrush" Value="{StaticResource Blue60Brush}" />
+        <Setter Property="Background" Value="Transparent" />
     </Style>
-
-    <Style x:Key="TopLogo" TargetType="Image" BasedOn="{StaticResource ImageBase}">
-        <Setter Property="Source" Value="/Assets/topLogo.png" />
-        <Setter Property="Stretch" Value="Fill"/>
-        <Setter Property="Width" Value="100" />
-        <Setter Property="Height" Value="20" />
-    </Style>
-    
     <!-- Home Page -->
     <Style x:Key="BaseHomeButton" TargetType="Image" BasedOn="{StaticResource ImageBase}">               
         <Setter Property="Width" Value="79.2" />
@@ -128,7 +212,7 @@
         <Setter Property="Margin" Value="9.6,0,0,0" />
     </Style>
     <Style x:Key="HomeButtonItemContainer" TargetType="ListViewItem">
-      <Setter Property="Padding" Value="0,0,0,9.3" />
+      <Setter Property="Padding" Value="0,0,0,9.6" />
     </Style>
     <Style x:Key="HomeButtonTextContainer" TargetType="StackPanel">
         <Setter Property="Margin" Value="0,-13,0,0"></Setter>

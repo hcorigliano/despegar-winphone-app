@@ -256,8 +256,7 @@ namespace System.Windows
             for (; x < /*width*/ max; x += block)
             {
 #if WINDOWS_PHONE_APP
-                //y = 38.4;
-                y = 19.2 + 12;  // custom code (Status bar height + Page Margin)
+                y = 38.4;
 #else           
         y = 140;
 #endif

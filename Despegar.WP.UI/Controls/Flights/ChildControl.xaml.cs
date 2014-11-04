@@ -22,7 +22,7 @@ namespace Despegar.WP.UI.Controls.Flights
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class ChildControl : Page
+    public sealed partial class ChildControl : UserControl
     {
         public int Quantity { get; set; }
         public FlightSearchChildEnum SelectedItemTag { get { return (FlightSearchChildEnum)((ComboBoxItem)ComboBoxOptions.SelectedItem).Tag; } }
@@ -32,30 +32,19 @@ namespace Despegar.WP.UI.Controls.Flights
             Quantity = quantity + 1;
             this.InitializeComponent();
             
-            //TODO: Resource
-            var loader = new Windows.ApplicationModel.Resources.ResourceLoader();            
+            var resources =  App.Current.Resources;
 
-            var i = new ComboBoxItem() { Content = loader.GetString("Flights_Passager_Baby_In_Arms"), Tag = FlightSearchChildEnum.Infant };
+            var i = new ComboBoxItem() { Content = resources["Flights_Passager_Baby_In_Arms"], Tag = FlightSearchChildEnum.Infant };
             ComboBoxOptions.Items.Add(i);
-            i = new ComboBoxItem() { Content = loader.GetString("Flights_Passager_Baby_In_Seat"), Tag = FlightSearchChildEnum.Child };
+            i = new ComboBoxItem() { Content = resources["Flights_Passager_Baby_In_Seat"], Tag = FlightSearchChildEnum.Child };
             ComboBoxOptions.Items.Add(i);
-            i = new ComboBoxItem() { Content = loader.GetString("Flights_Passager_Up_To_11_Years"), Tag = FlightSearchChildEnum.Child };
+            i = new ComboBoxItem() { Content = resources["Flights_Passager_Up_To_11_Years"], Tag = FlightSearchChildEnum.Child };
             ComboBoxOptions.Items.Add(i);
-            i = new ComboBoxItem() { Content = loader.GetString("Flights_Passager_Over_11_Years"), Tag = FlightSearchChildEnum.Adult };
+            i = new ComboBoxItem() { Content = resources["Flights_Passager_Over_11_Years"], Tag = FlightSearchChildEnum.Adult };
             ComboBoxOptions.Items.Add(i);
             ComboBoxOptions.SelectedIndex = 0;
 
             this.IdChild.DataContext = this;
         }
-                
-        /// <summary>
-        /// Invoked when this page is about to be displayed in a Frame.
-        /// </summary>
-        /// <param name="e">Event data that describes how this page was reached.
-        /// This parameter is typically used to configure the page.</param>
-        protected override void OnNavigatedTo(NavigationEventArgs e)
-        {
-        }
-
     }
 }

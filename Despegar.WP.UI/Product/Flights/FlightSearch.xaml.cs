@@ -44,6 +44,8 @@ namespace Despegar.WP.UI.Product.Flights
             //this.DataContext = flightSearchModel;
             AddSegmentMultiple();
             AddSegmentMultiple();
+
+            this.CheckDeveloperTools();
             
         }
 
@@ -277,8 +279,6 @@ namespace Despegar.WP.UI.Product.Flights
 
         private async void ButtonSearch_Click(object sender, RoutedEventArgs e)
         {
-           
-
             flightSearchModel.AdultsInFlights = quantityPassagersContainerRoundTrip.AdultsInFlights;
             flightSearchModel.ChildrenInFlights = quantityPassagersContainerRoundTrip.ChildrenInFlights;
             flightSearchModel.InfantsInFlights = quantityPassagersContainerRoundTrip.InfantsInFlights;

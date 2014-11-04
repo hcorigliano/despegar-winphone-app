@@ -36,7 +36,6 @@
             </StackPanel>
         </StackPanel>
 
-
         <Pivot xmlns:src="using:Despegar.WP.UI.Controls.Flights" Grid.Row="1" x:Name="ContentRoot">
             <Pivot.HeaderTemplate>
                 <DataTemplate>

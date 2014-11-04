@@ -1,4 +1,4 @@
-﻿<Page
+﻿<UserControl
     x:Class="Despegar.WP.UI.Controls.Flights.SearchAirport"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -6,19 +6,14 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    >
 
     <Grid>
         <StackPanel>
-        <TextBlock>
-					<Run Text="Origen"/>
-        </TextBlock>
-            <AutoSuggestBox x:Name="origin" Text="" ItemsSource="{Binding}" TextChanged="FlightsTextBlock_TextChanged" LostFocus="Focus_Lost" SuggestionChosen="SuggestionChosen"  TextMemberPath="name"  />
-
-        <TextBlock>
-					<Run Text="Destino"/>
-        </TextBlock>
-            <AutoSuggestBox x:Name="destiny" Text="" ItemsSource="{Binding}" TextChanged="FlightsTextBlock_TextChanged"  LostFocus="Focus_Lost" SuggestionChosen="SuggestionChosen" TextMemberPath="name"   />
+            <TextBlock x:Uid="Flights_Search_Origin"  Style="{StaticResource BaseTextLabel}" Text="Origen" />
+            <AutoSuggestBox TextBoxStyle="{StaticResource InputBase}" Style="{StaticResource AutosuggestBoxBase}"  x:Name="origin" Text="" ItemsSource="{Binding}" TextChanged="FlightsTextBlock_TextChanged" LostFocus="Focus_Lost" SuggestionChosen="SuggestionChosen"  TextMemberPath="name" />            
+            <TextBlock x:Uid="Flights_Search_Destination" Style="{StaticResource BaseTextLabel}" Text="Destino" />
+            <AutoSuggestBox  TextBoxStyle="{StaticResource InputBase}" Style="{StaticResource AutosuggestBoxBase}" x:Name="destiny" Text="" ItemsSource="{Binding}" TextChanged="FlightsTextBlock_TextChanged"  LostFocus="Focus_Lost" SuggestionChosen="SuggestionChosen" TextMemberPath="name"   />
         </StackPanel>
     </Grid>
-</Page>
+</UserControl>

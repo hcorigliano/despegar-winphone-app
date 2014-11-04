@@ -15,14 +15,14 @@
         </CommandBar>
     </Page.BottomAppBar>
 
-    <Grid x:Name="LayoutRoot" Style="{StaticResource MainContainerGrid}" Margin="20,12,0,0">
+    <Grid x:Name="LayoutRoot" Style="{StaticResource MainContainerGrid}">
         <Grid.ChildrenTransitions>
             <TransitionCollection>
                 <EntranceThemeTransition/>
             </TransitionCollection>
         </Grid.ChildrenTransitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="86.22"/>
+            <RowDefinition Height="{StaticResource PageHeaderHeight}"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
@@ -97,7 +97,6 @@
                         </StackPanel>
                     </Grid>
                 </ListViewItem>
-
             </ListView>
         </StackPanel>
 

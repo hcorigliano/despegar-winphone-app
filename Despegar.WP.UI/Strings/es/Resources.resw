@@ -294,4 +294,25 @@
   <data name="Flights_Search_SearchButton.Content" xml:space="preserve">
     <value>Buscar vuelos</value>
   </data>
+  <data name="Flights_Search_Departure" xml:space="preserve">
+    <value>Partida</value>
+  </data>
+  <data name="Flights_Search_Destination" xml:space="preserve">
+    <value>Destino</value>
+  </data>
+  <data name="Flights_Search_Origin" xml:space="preserve">
+    <value>Origen</value>
+  </data>
+  <data name="Flights_Search_Return" xml:space="preserve">
+    <value>Regreso</value>
+  </data>
+  <data name="Flights_Search_Adults" xml:space="preserve">
+    <value>Adultos</value>
+  </data>
+  <data name="Flights_Search_Children" xml:space="preserve">
+    <value>Menores</value>
+  </data>
+  <data name="Flights_Search_ChildrenAge" xml:space="preserve">
+    <value>Edad del menor</value>
+  </data>
 </root>
