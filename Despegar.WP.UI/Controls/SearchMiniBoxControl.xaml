@@ -36,7 +36,7 @@
         </Setter>
     </Style>-->
 
-    <Grid Background="White" xmlns:src="using:Despegar.WP.UI.Controls" >
+    <Grid xmlns:src="using:Despegar.WP.UI.Controls" >
         <Grid.ChildrenTransitions>
             <TransitionCollection>
                 <EntranceThemeTransition FromHorizontalOffset="150"/>

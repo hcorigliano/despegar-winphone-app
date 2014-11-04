@@ -19,6 +19,7 @@ namespace Despegar.WP.UI.Controls
 {
     public sealed partial class DateDisplayMiniBoxSearch : UserControl
     {
+        
         public DateDisplayMiniBoxSearch()
         {
             this.InitializeComponent();

@@ -259,14 +259,13 @@ namespace Despegar.WP.UI.Product.Flights
 
             if(flightSearchModel.isValid())
             {
+                    FlightsItineraries intinerarie = await flightSearchModel.Search();
 
-                FlightsItineraries intinerarie = await flightSearchModel.Search();
-
-                //TODO handle error with exceptions.
-                PageParameters pageParameters = new PageParameters();
-                pageParameters.Itineraries = intinerarie;
-                pageParameters.SearchModel = flightSearchModel;
-                PagesManager.GoTo(typeof(FlightResults), pageParameters);
+                    //TODO handle error with exceptions.
+                    PageParameters pageParameters = new PageParameters();
+                    pageParameters.Itineraries = intinerarie;
+                    pageParameters.SearchModel = flightSearchModel;
+                    PagesManager.GoTo(typeof(FlightResults), pageParameters);
             }
             else
             {
