@@ -30,5 +30,32 @@ namespace Despegar.Core.Service
 
             return await connector.GetAsync<Configuration>(serviceUrl);
         }
+
+        /// <summary>
+        /// Checks if the app needs to be updated
+        /// </summary>
+        /// <returns></returns>
+        public async Task<UpdateFields> CheckUpdate()     
+        {
+            string serviceUrl = ServiceURL.GetServiceURL(ServiceKey.Update);
+            IConnector connector = context.GetServiceConnector(ServiceKey.Update);
+
+            return await connector.GetAsync<UpdateFields>(serviceUrl);
+        }
+
+        /// <summary>
+        /// Auto completes cities
+        /// </summary>
+        /// <returns></returns>
+        public async Task<CitiesFields> AutoCompleteCities(string CountryCode, string Search, string CityResult)
+        {
+            string serviceUrl = ServiceURL.GetServiceURL(ServiceKey.CitiesAutocomplete);
+            String.Format(serviceUrl, CountryCode, Search, CityResult);
+            IConnector connector = context.GetServiceConnector(ServiceKey.CitiesAutocomplete);
+
+            return await connector.GetAsync<CitiesFields>(serviceUrl);
+
+        }
+
     }
 }
