@@ -116,7 +116,9 @@
     <Compile Include="Common\Converter\DayofWeekShortName.cs" />
     <Compile Include="Common\Converter\CommonConverters.cs" />
     <Compile Include="Common\Converter\GetMonthName.cs" />
+    <Compile Include="Common\Converter\MiniboxVisibilityConverter.cs" />
     <Compile Include="Common\Converter\StringConverter.cs" />
+    <Compile Include="Common\Converter\TextGoReturnConverter.cs" />
     <Compile Include="Common\NavigationHelper.cs" />
     <Compile Include="Common\ObservableDictionary.cs" />
     <Compile Include="Common\PageExtensions.cs" />
@@ -128,7 +130,7 @@
     <Compile Include="Controls\Flights\DateControl.xaml.cs">
       <DependentUpon>DateControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\DateDisplayMiniBoxSearch.xaml.cs">
+    <Compile Include="Controls\Flights\Results\DateDisplayMiniBoxSearch.xaml.cs">
       <DependentUpon>DateDisplayMiniBoxSearch.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\Flights\DateControlSimple.xaml.cs">
@@ -143,20 +145,23 @@
     <Compile Include="Controls\Flights\QuantityPassagersControl.xaml.cs">
       <DependentUpon>QuantityPassagersControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Flights\Results\MiniBoxFlightRoutes.xaml.cs">
+      <DependentUpon>MiniBoxFlightRoutes.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Flights\RouteItemControl.xaml.cs">
       <DependentUpon>RouteItemControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\GoReturnPanelMiniBoxSearch.xaml.cs">
+    <Compile Include="Controls\Flights\Results\GoReturnPanelMiniBoxSearch.xaml.cs">
       <DependentUpon>GoReturnPanelMiniBoxSearch.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\Flights\SearchAirport.xaml.cs">
       <DependentUpon>SearchAirport.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\ModalPopup.cs" />
-    <Compile Include="Controls\PaxCounterMiniBoxSearch.xaml.cs">
+    <Compile Include="Controls\Flights\Results\PaxCounterMiniBoxSearch.xaml.cs">
       <DependentUpon>PaxCounterMiniBoxSearch.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\SearchMiniBoxControl.xaml.cs">
+    <Compile Include="Controls\Flights\Results\SearchMiniBoxControl.xaml.cs">
       <DependentUpon>SearchMiniBoxControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="CountrySelection.xaml.cs">
@@ -224,11 +229,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controls\Flights\Results\MiniBoxFlightRoutes.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\Flights\RouteItemControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Controls\SearchMiniBoxControl.xaml">
+    <Page Include="Controls\Flights\Results\SearchMiniBoxControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -511,7 +520,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\DateDisplayMiniBoxSearch.xaml">
+    <Page Include="Controls\Flights\Results\DateDisplayMiniBoxSearch.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -523,7 +532,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\GoReturnPanelMiniBoxSearch.xaml">
+    <Page Include="Controls\Flights\Results\GoReturnPanelMiniBoxSearch.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -531,7 +540,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\PaxCounterMiniBoxSearch.xaml">
+    <Page Include="Controls\Flights\Results\PaxCounterMiniBoxSearch.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

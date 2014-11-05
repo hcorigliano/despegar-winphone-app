@@ -31,13 +31,16 @@ namespace Despegar.WP.UI.Model
         { 
             set
             {
-                this.Duration = value.duration;
-                this.From = value.from;
-                this.To = value.to;
-                this.Departure = value.departure;
-                this.Arrival = value.arrival;
-                this.Layovers = value.layovers;
-                this.Segments = ToBindableSegmentList(value.segments, value.duration);
+                if (value.choice != -1)
+                {
+                    this.Duration = value.duration;
+                    this.From = value.from;
+                    this.To = value.to;
+                    this.Departure = value.departure;
+                    this.Arrival = value.arrival;
+                    this.Layovers = value.layovers;
+                    this.Segments = ToBindableSegmentList(value.segments, value.duration);
+                }
             }
         }
 

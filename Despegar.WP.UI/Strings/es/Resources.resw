@@ -218,7 +218,7 @@
   </data>
   <data name="Page_FlightResult_Adult.Text" xml:space="preserve">
     <value>Adulto</value>
-    </data>
+  </data>
   <data name="Flight_Checkout_Passagers.Text" xml:space="preserve">
     <value>Pasajeros</value>
   </data>
@@ -302,5 +302,14 @@
   </data>
   <data name="Page_Home_HotelsButtonSub.Text" xml:space="preserve">
     <value>Las mejores ofertas</value>
+  </data>
+  <data name="Generic_Go" xml:space="preserve">
+    <value>Ida</value>
+  </data>
+  <data name="Generic_Multiple" xml:space="preserve">
+    <value>Multiple</value>
+  </data>
+  <data name="Generic_Return" xml:space="preserve">
+    <value>Vuelta</value>
   </data>
 </root>

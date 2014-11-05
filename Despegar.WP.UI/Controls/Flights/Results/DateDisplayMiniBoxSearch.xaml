@@ -6,7 +6,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:Converter="using:Despegar.WP.UI.Common.Converter"
     xmlns:System="using:System"
-    x:Class="Despegar.WP.UI.Controls.DateDisplayMiniBoxSearch"
+    x:Class="Despegar.WP.UI.Controls.Flights.Results.DateDisplayMiniBoxSearch"
     mc:Ignorable="d"
     d:DesignHeight="300"
     d:DesignWidth="400" Height="Auto" Width="Auto">

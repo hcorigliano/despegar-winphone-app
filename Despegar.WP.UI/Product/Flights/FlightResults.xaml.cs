@@ -251,5 +251,19 @@ namespace Despegar.WP.UI.Product.Flights
             }
             return visibility;
         }
+
+
+        public void GoBack() 
+        {
+            if (navigationHelper.CanGoBack())
+            {
+                navigationHelper.GoBack();
+            }
+        }
+
+        private void miniboxSearch_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            GoBack();
+        }
     }
 }
