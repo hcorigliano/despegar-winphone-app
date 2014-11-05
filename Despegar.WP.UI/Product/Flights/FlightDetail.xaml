@@ -1,67 +1,79 @@
 ﻿<Page
-    x:Class="Despegar.WP.UI.Product.Flights.FlightDetail"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:Despegar.WP.UI.Product.Flights"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:Interactivity="using:Microsoft.Xaml.Interactivity" xmlns:Core="using:Microsoft.Xaml.Interactions.Core"
+    x:Class="Despegar.WP.UI.Product.Flights.FlightDetail"
     mc:Ignorable="d"
     Style="{StaticResource BasePage}">
 
-    <Grid x:Name="LayoutRoot">
+	<Grid x:Name="LayoutRoot">
 
-        <Grid.ChildrenTransitions>
-            <TransitionCollection>
-                <EntranceThemeTransition/>
-            </TransitionCollection>
-        </Grid.ChildrenTransitions>
+		<Grid.ChildrenTransitions>
+			<TransitionCollection>
+				<EntranceThemeTransition/>
+			</TransitionCollection>
+		</Grid.ChildrenTransitions>
 
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="Auto"/>
+		</Grid.RowDefinitions>
 
-        <!-- Title Panel -->
-        <StackPanel Grid.Row="0" Margin="19,0,0,0">
-            <TextBlock x:Uid="AppTitle" Style="{ThemeResource TitleTextBlockStyle}" Margin="0,12,0,0"/>
-            <TextBlock x:Uid="Page_FlightDetail" Margin="0,-6.5,0,26.5" Style="{ThemeResource HeaderTextBlockStyle}" CharacterSpacing="{ThemeResource PivotHeaderItemCharacterSpacing}"/>
-        </StackPanel>
+		<!-- Title Panel -->
+		<StackPanel Grid.Row="0" Margin="19,0,0,0">
+			<TextBlock x:Uid="AppTitle" Style="{ThemeResource TitleTextBlockStyle}" Margin="0,12,0,0"/>
+			<TextBlock x:Uid="Page_FlightDetail" Margin="0,-6.5,0,26.5" Style="{ThemeResource HeaderTextBlockStyle}" CharacterSpacing="{ThemeResource PivotHeaderItemCharacterSpacing}"/>
+		</StackPanel>
         <!--TODO: Content should be placed within the following grid-->
 
-        <StackPanel Grid.Row="1"  x:Name="ContentRoot" xmlns:src="using:Despegar.WP.UI.Controls.Flights">
+		<StackPanel xmlns:src="using:Despegar.WP.UI.Controls.Flights" Grid.Row="1"  x:Name="ContentRoot">
 
-            <ScrollViewer  VerticalScrollBarVisibility="Auto" Height="400">
+			<ScrollViewer  VerticalScrollBarVisibility="Auto" Height="400">
                 
-                <StackPanel>
-                    <TextBlock Text=" IDA" ></TextBlock>
-                    <ItemsControl x:Name="SegmentControlOutbound" ItemsSource="{Binding Segments}">
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <src:FlightSegment x:Name="flightSegmentOutbound"></src:FlightSegment>
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                    </ItemsControl>
+				<StackPanel>
+                    <TextBlock x:Uid="Flight_Search_One_Way" />
+					<ItemsControl x:Name="SegmentControlOutbound" ItemsSource="{Binding Segments}">
+						<ItemsControl.ItemTemplate>
+							<DataTemplate>
+								<src:FlightSegment x:Name="flightSegmentOutbound"/>
+							</DataTemplate>
+						</ItemsControl.ItemTemplate>
+					</ItemsControl>
 
-                    <TextBlock Text=" VUELTA" ></TextBlock>
-                    <ItemsControl x:Name="SegmentControlInbound" ItemsSource="{Binding Segments}">
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <src:FlightSegment x:Name="flightSegmentInbound"></src:FlightSegment>
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                    </ItemsControl>
-                </StackPanel>
+                    <TextBlock x:Name="textBlock" x:Uid="Page_Flight_Details_Return">
+                    	<Interactivity:Interaction.Behaviors>
+                    		<Core:DataTriggerBehavior Binding="{Binding HasSegments}" Value="false">
+                    			<Core:ChangePropertyAction PropertyName="Visibility">
+                    				<Core:ChangePropertyAction.Value>
+                    					<Visibility>Collapsed</Visibility>
+                    				</Core:ChangePropertyAction.Value>
+                    			</Core:ChangePropertyAction>
+                    		</Core:DataTriggerBehavior>
+                    	</Interactivity:Interaction.Behaviors>
+                    	
+                    </TextBlock>
+					<ItemsControl x:Name="SegmentControlInbound" ItemsSource="{Binding Segments}">
+						<ItemsControl.ItemTemplate>
+							<DataTemplate>
+								<src:FlightSegment x:Name="flightSegmentInbound"/>
+							</DataTemplate>
+						</ItemsControl.ItemTemplate>
+					</ItemsControl>
+				</StackPanel>
 
-            </ScrollViewer>
+			</ScrollViewer>
 
-        </StackPanel>
-        <!--Margin="130,433,0,0"-->
-        <StackPanel Grid.Row="2">
-            <Button Content="Comprar" HorizontalAlignment="Center"  VerticalAlignment="Top" Click="Button_Click"/>
-        </StackPanel>
+		</StackPanel>
+		<!--Margin="130,433,0,0"-->
+		<StackPanel Grid.Row="2">
+			<Button Content="Comprar" HorizontalAlignment="Center"  VerticalAlignment="Top" Click="Button_Click"/>
+		</StackPanel>
 
 
-    </Grid>
+	</Grid>
 
 </Page>

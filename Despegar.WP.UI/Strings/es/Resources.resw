@@ -312,4 +312,7 @@
   <data name="Generic_Return" xml:space="preserve">
     <value>Vuelta</value>
   </data>
+  <data name="Page_Flight_Details_Return.Text" xml:space="preserve">
+    <value>Vuelta</value>
+  </data>
 </root>
