@@ -12,7 +12,7 @@
     Style="{StaticResource BasePage}">
     
     <Page.BottomAppBar>
-        <CommandBar ClosedDisplayMode="Compact">
+        <CommandBar ClosedDisplayMode="Minimal">
             <!--<AppBarButton Icon="Setting" x:Uid="Home_Settings" FontSize="14" Click="AppBarButton_Click" />-->
         </CommandBar>
     </Page.BottomAppBar>
@@ -31,39 +31,33 @@
         <!-- Title Panel -->
         <StackPanel Grid.Row="0">
             <Image Style="{StaticResource TopLogo}" />
-            <StackPanel>
-                <TextBlock x:Uid="Page_FlightSearch" Style="{StaticResource PageHeader}" Text="Búsqueda" />
-            </StackPanel>
+            <TextBlock x:Uid="Page_FlightSearch" Style="{StaticResource PageHeaderSmall}" Text="BUSQUEDA" />
         </StackPanel>
 
-        <Pivot xmlns:src="using:Despegar.WP.UI.Controls.Flights" Grid.Row="1" x:Name="ContentRoot">
+        <Pivot xmlns:src="using:Despegar.WP.UI.Controls.Flights" Grid.Row="1" x:Name="ContentRoot" Style="{StaticResource PivotBaseSmall}">
             <Pivot.HeaderTemplate>
                 <DataTemplate>
-                    <TextBlock Text="{Binding}"  Style="{StaticResource PivotHeader}"  />
+                    <TextBlock Text="{Binding}"  Style="{StaticResource PivotHeader}" />
                 </DataTemplate>
             </Pivot.HeaderTemplate>
 
             <!--ReoundTrip Flights-->
-            <PivotItem x:Uid="Flight_Search_Round_Trip" Style="{StaticResource PivotItem}"  Header="Ida y Vuelta" >
+            <PivotItem x:Uid="Flight_Search_Round_Trip" Header="ida y vuelta" >
                 <ScrollViewer>
                     <StackPanel>
-                        <StackPanel VerticalAlignment="Top" HorizontalAlignment="Stretch">
+                        <src:SearchAirport x:Name="airportsContainerRoundTrip" />
 
-                            <src:SearchAirport x:Name="airportsContainerRoundTrip"/>
+                        <src:DateControl x:Name="dateControlContainerRoundTrip"/>
 
-                            <src:DateControl x:Name="dateControlContainerRoundTrip"/>
-
-                            <src:QuantityPassagersControl x:Name="quantityPassagersContainerRoundTrip"/>
-
-                        </StackPanel>
-
-                        <Button x:Uid="Flights_Search_SearchButton" Click="ButtonSearch_Click" Style="{StaticResource ButtonBase}" Content="Buscar vuelos"/>
+                        <src:QuantityPassagersControl x:Name="quantityPassagersContainerRoundTrip"/>
+                        
+                        <Button x:Uid="Flights_Search_SearchButton" Click="ButtonSearch_Click" Style="{StaticResource ButtonBase}" Content="Buscar vuelos" VerticalAlignment="Bottom"/>
                     </StackPanel>
                 </ScrollViewer>
             </PivotItem>
 
             <!--OneWay Flights-->
-            <PivotItem  x:Uid="Flight_Search_One_Way" Header="Ida">
+            <PivotItem  x:Uid="Flight_Search_One_Way" Header="ida">
                 <ScrollViewer>
                     <StackPanel>
                         <TextBlock Text="IDA"/>
@@ -83,7 +77,7 @@
             </PivotItem>
 
             <!--Multiple flights-->
-            <PivotItem x:Uid="Flight_Search_Multple"  Header="Multiples">
+            <PivotItem x:Uid="Flight_Search_Multple"  Header="multiples">
                 <ScrollViewer>
                     <StackPanel>
                         <StackPanel  VerticalAlignment="Top" HorizontalAlignment="Stretch">

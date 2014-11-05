@@ -190,7 +190,7 @@
     <value>Resultados</value>
   </data>
   <data name="Page_FlightSearch.Text" xml:space="preserve">
-    <value>Búsqueda</value>
+    <value>BUSQUEDA</value>
   </data>
   <data name="Page_FlightThanks.Text" xml:space="preserve">
     <value>Gracias</value>

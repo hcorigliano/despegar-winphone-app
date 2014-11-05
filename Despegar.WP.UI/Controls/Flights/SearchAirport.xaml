@@ -5,15 +5,28 @@
     xmlns:local="using:Despegar.WP.UI.Controls.Flights"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d"
+    xmlns:dev="using:Despegar.WP.UI.Developer.Controls"
+    mc:Ignorable="d"        
     >
-
+       
     <Grid>
-        <StackPanel>
-            <TextBlock x:Uid="Flights_Search_Origin"  Style="{StaticResource BaseTextLabel}" Text="Origen" />
-            <AutoSuggestBox TextBoxStyle="{StaticResource InputBase}" Style="{StaticResource AutosuggestBoxBase}"  x:Name="origin" Text="" ItemsSource="{Binding}" TextChanged="FlightsTextBlock_TextChanged" LostFocus="Focus_Lost" SuggestionChosen="SuggestionChosen"  TextMemberPath="name" />            
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        
+        <!--<dev:UserControlDesignGridOdd />-->
+        
+        <StackPanel Grid.Row="0">
+         <TextBlock x:Uid="Flights_Search_Origin"  Style="{StaticResource BaseTextLabel}" Text="Origen" />
+         <AutoSuggestBox TextBoxStyle="{StaticResource InputBase}" Style="{StaticResource AutosuggestBoxBase}"  x:Name="OriginInput" Text="" ItemsSource="{Binding}" TextChanged="FlightsTextBlock_TextChanged" LostFocus="Focus_Lost" SuggestionChosen="SuggestionChosen"  TextMemberPath="name"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="2">
             <TextBlock x:Uid="Flights_Search_Destination" Style="{StaticResource BaseTextLabel}" Text="Destino" />
-            <AutoSuggestBox  TextBoxStyle="{StaticResource InputBase}" Style="{StaticResource AutosuggestBoxBase}" x:Name="destiny" Text="" ItemsSource="{Binding}" TextChanged="FlightsTextBlock_TextChanged"  LostFocus="Focus_Lost" SuggestionChosen="SuggestionChosen" TextMemberPath="name"   />
+            <AutoSuggestBox   TextBoxStyle="{StaticResource InputBase}" Style="{StaticResource AutosuggestBoxBase}" x:Name="DestinyInput" Text="" ItemsSource="{Binding}" TextChanged="FlightsTextBlock_TextChanged"  LostFocus="Focus_Lost" SuggestionChosen="SuggestionChosen" TextMemberPath="name" />
         </StackPanel>
     </Grid>
+
 </UserControl>

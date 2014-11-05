@@ -25,17 +25,13 @@ namespace Despegar.WP.UI.Controls.Flights
     /// </summary>
     public sealed partial class SearchAirport : UserControl
     {
-        private FlightsSearchBoxModel FlightSearchBoxModel = new FlightsSearchBoxModel();
-        public AutoSuggestBox OriginAirportControl{set;get;}
-        public AutoSuggestBox DestinyAirportControl { set; get; }
+        private FlightsSearchBoxModel FlightSearchBoxModel = new FlightsSearchBoxModel();  
         public string AirportOrigin { get; set; }
         public string AirportDestiny { get; set; }
 
         public SearchAirport()
         {
-            this.InitializeComponent();
-            OriginAirportControl = origin;
-            DestinyAirportControl = destiny;
+            this.InitializeComponent();            
         }
 
 
@@ -54,11 +50,11 @@ namespace Despegar.WP.UI.Controls.Flights
             var selected = (CityAutocomplete)args.SelectedItem;
             if (selected != null)
             {
-                if(sender.Name == "destiny")
+                if (sender.Name == "DestinyInput")
                 {
                     AirportDestiny = selected.code;
                 }
-                else if (sender.Name == "origin")
+                else if (sender.Name == "OriginInput")
                 {
                     AirportOrigin = selected.code;
                 }
@@ -83,11 +79,11 @@ namespace Despegar.WP.UI.Controls.Flights
                 if (city != null)
                 {
                     _sender.Text = city.name;
-                    if (_sender.Name == "destiny")
+                    if (_sender.Name == "DestinyInput")
                     {
                         AirportDestiny = city.code;
                     }
-                    else if (_sender.Name == "origin")
+                    else if (_sender.Name == "OriginInput")
                     {
                         AirportOrigin = city.code;
                     }
@@ -95,11 +91,11 @@ namespace Despegar.WP.UI.Controls.Flights
                 else
                 {
                     _sender.Text = "";
-                    if (_sender.Name == "destiny")
+                    if (_sender.Name == "DestinyInput")
                     {
                         AirportDestiny = "";
                     }
-                    else if (_sender.Name == "origin")
+                    else if (_sender.Name == "OriginInput")
                     {
                         AirportOrigin = "";
                     }
@@ -108,11 +104,11 @@ namespace Despegar.WP.UI.Controls.Flights
             else
             {
                 _sender.Text = "";
-                if (_sender.Name == "destiny")
+                if (_sender.Name == "DestinyInput")
                 {
                     AirportDestiny = "";
                 }
-                else if (_sender.Name == "origin")
+                else if (_sender.Name == "OriginInput")
                 {
                     AirportOrigin = "";
                 }

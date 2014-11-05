@@ -120,9 +120,6 @@
     <Compile Include="Common\PageExtensions.cs" />
     <Compile Include="Common\RelayCommand.cs" />
     <Compile Include="Common\SuspensionManager.cs" />
-    <Compile Include="Controls\Flights\ChildControl.xaml.cs">
-      <DependentUpon>ChildControl.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Controls\Flights\DateControl.xaml.cs">
       <DependentUpon>DateControl.xaml</DependentUpon>
     </Compile>
@@ -161,6 +158,12 @@
     <Compile Include="Developer\Controls\ColorOption.cs" />
     <Compile Include="Developer\Controls\ColorPicker.xaml.cs">
       <DependentUpon>ColorPicker.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Developer\Controls\UserControlDesignGrid.xaml.cs">
+      <DependentUpon>UserControlDesignGrid.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Developer\Controls\UserControlDesignGridOdd.xaml.cs">
+      <DependentUpon>UserControlDesignGridOdd.xaml</DependentUpon>
     </Compile>
     <Compile Include="Developer\DeveloperViewModel.cs" />
     <Compile Include="Developer\DevTools.xaml.cs">
@@ -224,6 +227,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Developer\Controls\UserControlDesignGrid.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Developer\Controls\UserControlDesignGridOdd.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Product\Flights\Checkout\Contact\Contact.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -252,6 +263,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\ApplicationIcon.png" />
+    <Content Include="Assets\Helpers\a.png" />
     <Content Include="Assets\Helpers\matrix_green.png" />
     <Content Include="Assets\Helpers\matrix_magenta.png" />
     <Content Include="Assets\HomeButton_Flights.png" />
@@ -500,10 +512,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="Controls\Flights\ChildControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Controls\Flights\DateControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
