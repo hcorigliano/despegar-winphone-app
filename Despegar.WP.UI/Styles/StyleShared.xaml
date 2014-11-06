@@ -42,18 +42,28 @@
     <Color x:Key="Green40">#1ECB3F</Color>
 
     <!-- ===================== Measure Constants ===================== -->
-    <!--<GridLength x:Key="Square">20</GridLength>
-    <GridLength x:Key="Offset">9.6</GridLength> 
-    <GridLength x:Key="Block">29.6</GridLength>   --><!--  Square + offset --><!--     
-    <GridLength x:Key="Block2">49.6</GridLength>  --><!-- (Square + offset) x2--><!--
+    <!-- Base Grid Measures-->
+    <GridLength x:Key="Square">20</GridLength>
+    <x:Double x:Key="dSquare">20</x:Double>
+    <GridLength x:Key="Offset">9.6</GridLength>
+    <x:Double x:Key="dOffset">9.6</x:Double>
+    <!-- Block Grid Measures-->
+    <GridLength x:Key="Block1p">29.6</GridLength>   <!--  Square + offset -->  
+    <GridLength x:Key="Block2">49.6</GridLength>  <!-- (Square + offset) x2-->
+    <x:Double x:Key="dBlock2">49.6</x:Double> 
+    <GridLength x:Key="Block2p">59.2</GridLength>
     <GridLength x:Key="Block3">79.2</GridLength>
-
-    <x:Double x:Key="pBlockp">39.2</x:Double>  --><!-- offset + Square + offset-->
+    <GridLength x:Key="Block3p">88.8</GridLength>
+    <x:Double x:Key="dBlock3">79.2</x:Double>
+    <GridLength x:Key="Block6">168</GridLength>
+    <GridLength x:Key="Block6p">177.6</GridLength>
+    <GridLength x:Key="Block1p_And_Half">39.6</GridLength>
+    <!-- Margins -->
+    <Thickness x:Key="Left_Offset">9.6,0,0,0</Thickness>
+    <Thickness x:Key="Bottom_Offset">0,0,0,9.6</Thickness>
+    <Thickness x:Key="Top_Offset">0,9.6,0,0</Thickness>
     
-    
-    <GridLength x:Key="PageHeaderHeight">88.8</GridLength>
-    <GridLength x:Key="HomeButtonColumnWidth">79.2</GridLength>
-    <GridLength x:Key="TwoColumnMiddleSpacing">22</GridLength>    
+    <GridLength x:Key="TwoColumnMiddleSpacing">19.2</GridLength>    
     <!-- ===================== Generic Brushes ======================= -->
     <SolidColorBrush x:Key="Blue60Brush" Color="{StaticResource Blue60}" />
     <SolidColorBrush x:Key="WhiteBrush" Color="{StaticResource White}" />
@@ -76,7 +86,7 @@
         <Setter Property="VerticalAlignment" Value="Top" />        
     </Style>
     <Style x:Key="MainContainerGrid" TargetType="Grid">
-        <Setter Property="Margin" Value="19.2,12,0,0" />
+        <Setter Property="Margin" Value="19.2,12,19.2,0" />
     </Style>
     <Style x:Key="TopLogo" TargetType="Image" BasedOn="{StaticResource ImageBase}">
         <Setter Property="Source" Value="/Assets/topLogo.png" />
@@ -84,20 +94,19 @@
         <Setter Property="Width" Value="100" />
         <Setter Property="Height" Value="20" />
     </Style>
-    <Style x:Key="TwoColumnLayoutContainer" TargetType="StackPanel">
-        <Setter Property="HorizontalAlignment" Value="Stretch" />
-    </Style>
+
     <!-- Text & Fonts -->
     <Style x:Key="PageHeader" TargetType="TextBlock" BasedOn="{StaticResource HeaderTextBlockStyle}">
         <Setter Property="FontFamily" Value="Segoe UI" />
         <Setter Property="FontSize" Value="42" />
         <Setter Property="FontWeight" Value="Thin" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <!--<Setter Property="Margin" Value="0,0,0,0"/>-->
     </Style>
     <Style x:Key="PageHeaderSmall" TargetType="TextBlock" BasedOn="{StaticResource PageHeader}">
         <Setter Property="FontFamily" Value="Segoe UI" />
         <Setter Property="FontSize" Value="13.6" />
         <Setter Property="FontWeight" Value="SemiBold" />
-        <Setter Property="Margin" Value="0,20,0,0" />
         <Setter Property="CharacterSpacing" Value="40" />
     </Style>
     <Style x:Key="BaseText" TargetType="TextBlock" BasedOn="{StaticResource BaseTextBlockStyle}">
@@ -108,9 +117,9 @@
         <Setter Property="FontWeight" Value="Thin" />
     </Style>
     <Style x:Key="BaseTextLabel" TargetType="TextBlock" BasedOn="{StaticResource BaseText}">
-        <Setter Property="FontSize" Value="12" />
+        <Setter Property="FontSize" Value="16" />
         <Setter Property="FontWeight" Value="Thin" />
-        <Setter Property="Margin" Value="0,7,0,0" />
+        <Setter Property="Margin" Value="0,0,0,0" />
     </Style>
     <!--  ================= Input/Controls Styles  ================== -->
     <!-- DatePicker -->
@@ -142,6 +151,8 @@
         <Setter Property="BorderBrush" Value="{StaticResource Blue60Brush}" />
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="IsSpellCheckEnabled" Value="false"></Setter>
+        <Setter Property="IsTextPredictionEnabled" Value="false"></Setter>
+        <Setter Property="Margin" Value="0,6,0,0" />
     </Style>
     <Style x:Key="AutosuggestBoxBase" TargetType="AutoSuggestBox">
         <Setter Property="Height" Value="39.2" />
@@ -195,6 +206,11 @@
         <Setter Property="BorderBrush" Value="{StaticResource Blue60Brush}" />
         <Setter Property="HorizontalAlignment" Value="Stretch" />
     </Style>
+    <Style x:Key="ButtonBottom" TargetType="Button" BasedOn="{StaticResource ButtonBase}">
+        <Setter Property="VerticalAlignment" Value="Bottom" />
+        <Setter Property="Height" Value="{StaticResource Block1p_And_Half}" />
+    </Style>
+   
     <!-- ComboBox -->
     <Style x:Key="ComboBoxBase" TargetType="ComboBox">
         <Setter Property="Foreground" Value="{StaticResource WhiteBrush}" />
@@ -496,8 +512,8 @@
             </Setter.Value>
         </Setter>
     </Style>
-    <Style x:Key="PivotBaseSmall" TargetType="Pivot" BasedOn="{StaticResource PivotBase}">
-        <Setter Property="Margin" Value="0,-35,0,0" />
+    <Style x:Key="PivotBaseMain" TargetType="Pivot" BasedOn="{StaticResource PivotBase}">
+        <Setter Property="Margin" Value="0,-5,0,0" />
     </Style>
     <Style x:Key="PivotHeader" TargetType="TextBlock" BasedOn="{StaticResource PageHeader}">
         <Setter Property="FontSize" Value="43.2" />
@@ -506,14 +522,16 @@
         <Setter Property="FontWeight" Value="Normal" />
         <Setter Property="CharacterSpacing" Value="10" />
     </Style>
-    <!--  ================= User Controls Styles  ================== -->
-    <x:Double x:Key="QuantityPassengerHeight">148</x:Double>
+    <Style x:Key="PivotItemBase" TargetType="PivotItem">
+        <Setter Property="Margin" Value="0,3,0,0" />
+    </Style>
+    <!--  ================= User Controls Styles  ================== -->    
 
     <!--  ================= Page Specific Styles  ================== -->
     <!-- Home Page -->
     <Style x:Key="BaseHomeButton" TargetType="Image" BasedOn="{StaticResource ImageBase}">               
-        <Setter Property="Width" Value="79.2" />
-        <Setter Property="Height" Value="79.2" />        
+        <Setter Property="Width" Value="{StaticResource dBlock3}" />
+        <Setter Property="Height" Value="{StaticResource dBlock3}" />        
     </Style>
     <Style x:Key="HomeHotelsButton" TargetType="Image" BasedOn="{StaticResource BaseHomeButton}">
         <Setter Property="Source" Value="/Assets/HomeButton_Hotels.png" />
@@ -529,17 +547,30 @@
     </Style>
     <Style x:Key="HomeButtonTitle" TargetType="TextBlock" BasedOn="{StaticResource BaseText}">
         <Setter Property="VerticalAlignment" Value="Top" />
-        <Setter Property="FontSize" Value="36" />        
-        <Setter Property="Margin" Value="9.6,0,0,0" />
+        <Setter Property="FontSize" Value="30" />        
+        <Setter Property="Margin" Value="0,-13,0,0" />
     </Style>
     <Style x:Key="HomeButtonSub" TargetType="TextBlock" BasedOn="{StaticResource BaseText}">
         <Setter Property="FontSize" Value="16" />
-        <Setter Property="Margin" Value="9.6,0,0,0" />
+        <Setter Property="Margin" Value="0,-2,0,0" />
     </Style>
     <Style x:Key="HomeButtonItemContainer" TargetType="ListViewItem">
-      <Setter Property="Padding" Value="0,0,0,9.6" />
+        <Setter Property="Padding" Value="{StaticResource Bottom_Offset}" />
     </Style>
-    <Style x:Key="HomeButtonTextContainer" TargetType="StackPanel">
-        <Setter Property="Margin" Value="0,-13,0,0"></Setter>
+    <Style x:Key="HomeButtonTextContainer" TargetType="StackPanel">       
+        <Setter Property="Margin" Value="{StaticResource Left_Offset}" />
+    </Style>   
+    <!-- Country Selection -->
+    <Style x:Key="CountrySelectionButton" TargetType="Image">
+        <Setter Property="Width"  Value="{StaticResource dBlock2}" />
+        <Setter Property="Height" Value="{StaticResource dBlock2}" />
+    </Style>
+    <Style x:Key="CountryText" TargetType="TextBlock" BasedOn="{StaticResource BaseText}">
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="FontSize" Value="24" />
+        <Setter Property="Margin" Value="{StaticResource Left_Offset}" />
+    </Style>
+    <Style x:Key="CountryButtonItemContainer" TargetType="ListViewItem">
+        <Setter Property="Padding" Value="{StaticResource Bottom_Offset}" />
     </Style>
 </ResourceDictionary>

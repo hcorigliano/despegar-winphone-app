@@ -24,17 +24,17 @@
             </TransitionCollection>
         </Grid.ChildrenTransitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="{StaticResource PageHeaderHeight}"/>
+            <RowDefinition Height="{StaticResource Block1p}"/>
+            <RowDefinition Height="{StaticResource Square}"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <!-- Title Panel -->
-        <StackPanel Grid.Row="0">
-            <Image Style="{StaticResource TopLogo}" />
-            <TextBlock x:Uid="Page_FlightSearch" Style="{StaticResource PageHeaderSmall}" Text="BUSQUEDA" />
-        </StackPanel>
+        <!-- Title Panel -->       
+        <Image Grid.Row="0" Style="{StaticResource TopLogo}" />
+        <TextBlock Grid.Row="1" x:Uid="Page_FlightSearch" Style="{StaticResource PageHeaderSmall}" Text="BUSQUEDA" />
+        
 
-        <Pivot xmlns:src="using:Despegar.WP.UI.Controls.Flights" Grid.Row="1" x:Name="ContentRoot" Style="{StaticResource PivotBaseSmall}">
+        <Pivot xmlns:src="using:Despegar.WP.UI.Controls.Flights" Grid.Row="2" x:Name="ContentRoot" Style="{StaticResource PivotBaseMain}" Margin="0,-5,0,0">
             <Pivot.HeaderTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding}"  Style="{StaticResource PivotHeader}" />
@@ -42,72 +42,79 @@
             </Pivot.HeaderTemplate>
 
             <!--ReoundTrip Flights-->
-            <PivotItem x:Uid="Flight_Search_Round_Trip" Header="ida y vuelta" >
+            <PivotItem x:Uid="Flight_Search_Round_Trip" Header="ida y vuelta" Style="{StaticResource PivotItemBase}">
                 <ScrollViewer>
-                    <StackPanel>
-                        <src:SearchAirport x:Name="airportsContainerRoundTrip" />
-
-                        <src:DateControl x:Name="dateControlContainerRoundTrip"/>
-
-                        <src:QuantityPassagersControl x:Name="quantityPassagersContainerRoundTrip"/>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="{StaticResource Block6p}" />
+                            <RowDefinition Height="{StaticResource Block3p}" />
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>                        
                         
-                        <Button x:Uid="Flights_Search_SearchButton" Click="ButtonSearch_Click" Style="{StaticResource ButtonBase}" Content="Buscar vuelos" VerticalAlignment="Bottom"/>
-                    </StackPanel>
+                        <src:SearchAirport Grid.Row="0" x:Name="airportsContainerRoundTrip" />
+                        <src:DateControl Grid.Row="1" x:Name="dateControlContainerRoundTrip"/>
+                        <src:QuantityPassagersControl  Grid.Row="2" x:Name="quantityPassagersContainerRoundTrip"/>
+
+                        <Button Grid.Row="3" x:Uid="Flights_Search_SearchButton" Click="ButtonSearch_Click" Style="{StaticResource ButtonBottom}" Content="Buscar vuelos"  />
+                    </Grid>
                 </ScrollViewer>
             </PivotItem>
 
             <!--OneWay Flights-->
-            <PivotItem  x:Uid="Flight_Search_One_Way" Header="ida">
+            <PivotItem  x:Uid="Flight_Search_One_Way" Header="ida" Style="{StaticResource PivotItemBase}">
                 <ScrollViewer>
-                    <StackPanel>
-                        <TextBlock Text="IDA"/>
-                        <StackPanel  VerticalAlignment="Top" HorizontalAlignment="Stretch">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="{StaticResource Block3p}" />
+                            <RowDefinition Height="{StaticResource Block3p}" />
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
 
-                            <src:SearchAirport x:Name="airportsContainerOneWay"></src:SearchAirport>
+                        <src:SearchAirport  Grid.Row="0" x:Name="airportsContainerOneWay"></src:SearchAirport>
+                        <src:DateControlSimple Grid.Row="1" x:Name="dateControlContainerOneWay"></src:DateControlSimple>
+                        <src:QuantityPassagersControl Grid.Row="2" x:Name="quantityPassagersContainerOneWay"></src:QuantityPassagersControl>
 
-                            <src:DateControlSimple x:Name="dateControlContainerOneWay"></src:DateControlSimple>
-
-                            <src:QuantityPassagersControl x:Name="quantityPassagersContainerOneWay"></src:QuantityPassagersControl>
-
-                        </StackPanel>
-
-                        <Button Click="ButtonReturn_Click" x:Name="OneWayButton" HorizontalAlignment="Center" Content="Buscar vuelos"/>
-                    </StackPanel>
+                        <Button Click="ButtonReturn_Click" Grid.Row="4" x:Name="OneWayButton" Style="{StaticResource ButtonBottom}" Content="Buscar vuelos"/>
+                    </Grid>
                 </ScrollViewer>
             </PivotItem>
 
             <!--Multiple flights-->
-            <PivotItem x:Uid="Flight_Search_Multple"  Header="multiples">
+            <PivotItem x:Uid="Flight_Search_Multple"  Header="multiples" Style="{StaticResource PivotItemBase}">
                 <ScrollViewer>
-                    <StackPanel>
-                        <StackPanel  VerticalAlignment="Top" HorizontalAlignment="Stretch">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        
+                        <StackPanel Grid.Row="0" x:Name="segmentMultipleStackPanel"></StackPanel>
 
-                            <StackPanel x:Name="segmentMultipleStackPanel"></StackPanel>
-
+                        <StackPanel Grid.Row="1">
                             <Grid x:Name="sectionSubGrid" Visibility="Collapsed">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="auto"></ColumnDefinition>
-                                    <ColumnDefinition Width="auto"></ColumnDefinition>
                                 </Grid.ColumnDefinitions>
-                                <TextBlock x:Uid="Flight_Search_Sub_Section" Grid.Column="0"></TextBlock>
-                                <Button x:Name="subSectionButton" Grid.Column="1" Click="subSectionButton_Click"></Button>
+
+                                <Button  Style="{StaticResource ButtonBase}" x:Uid="Flight_Search_Sub_Section" x:Name="subSectionButton" Grid.Column="1" Click="subSectionButton_Click" Content="Borrar tramo"></Button>
                             </Grid>
 
                             <Grid x:Name="sectionAddGrid">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="auto"></ColumnDefinition>
-                                    <ColumnDefinition Width="auto"></ColumnDefinition>
                                 </Grid.ColumnDefinitions>
-                                <TextBlock x:Uid="Flight_Search_Add_Section" Grid.Column="0"></TextBlock>
-                                <Button x:Name="addSectionButton" Grid.Column="1" Click="addSectionButton_Click"></Button>
+
+                                <Button Style="{StaticResource ButtonBase}" x:Uid="Flight_Search_Add_Section" x:Name="addSectionButton" Grid.Column="1"  Click="AddSectionButton_Click"  Content="Agregar" />
                             </Grid>
-
-                            <src:QuantityPassagersControl x:Name="quantityPassagersContainerMultiple"></src:QuantityPassagersControl>
-
                         </StackPanel>
 
-                        <Button Click="ButtonReturn_Click" x:Name="MultipleButton" HorizontalAlignment="Center" Content="Buscar vuelos"/>
-                    </StackPanel>
+                        <src:QuantityPassagersControl Grid.Row="2" x:Name="quantityPassagersContainerMultiple"></src:QuantityPassagersControl>
+                        
+                        <Button Click="ButtonReturn_Click" x:Name="MultipleButton" Style="{StaticResource ButtonBottom}" Content="Buscar vuelos"/>
+                    </Grid>
                 </ScrollViewer>
             </PivotItem>
 

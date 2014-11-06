@@ -11,21 +11,21 @@
        
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="20"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="{StaticResource Block3}" />
+            <RowDefinition Height="{StaticResource Offset}"/>
+            <RowDefinition Height="{StaticResource Block3}"/>
         </Grid.RowDefinitions>
         
-        <!--<dev:UserControlDesignGridOdd />-->
+        <!--<dev:UserControlDesignGrid />-->
         
         <StackPanel Grid.Row="0">
-         <TextBlock x:Uid="Flights_Search_Origin"  Style="{StaticResource BaseTextLabel}" Text="Origen" />
-         <AutoSuggestBox TextBoxStyle="{StaticResource InputBase}" Style="{StaticResource AutosuggestBoxBase}"  x:Name="OriginInput" Text="" ItemsSource="{Binding}" TextChanged="FlightsTextBlock_TextChanged" LostFocus="Focus_Lost" SuggestionChosen="SuggestionChosen"  TextMemberPath="name"/>
+            <TextBlock x:Uid="Flights_Search_Origin"  Style="{StaticResource BaseTextLabel}" Text="Origen" />
+            <AutoSuggestBox  TextBoxStyle="{StaticResource InputBase}" Style="{StaticResource AutosuggestBoxBase}"  x:Name="OriginInput" Text="" ItemsSource="{Binding}" TextChanged="FlightsTextBlock_TextChanged" LostFocus="Focus_Lost" SuggestionChosen="SuggestionChosen"  TextMemberPath="name" />
         </StackPanel>
 
         <StackPanel Grid.Row="2">
             <TextBlock x:Uid="Flights_Search_Destination" Style="{StaticResource BaseTextLabel}" Text="Destino" />
-            <AutoSuggestBox   TextBoxStyle="{StaticResource InputBase}" Style="{StaticResource AutosuggestBoxBase}" x:Name="DestinyInput" Text="" ItemsSource="{Binding}" TextChanged="FlightsTextBlock_TextChanged"  LostFocus="Focus_Lost" SuggestionChosen="SuggestionChosen" TextMemberPath="name" />
+            <AutoSuggestBox  TextBoxStyle="{StaticResource InputBase}" Style="{StaticResource AutosuggestBoxBase}" x:Name="DestinyInput" Text="" ItemsSource="{Binding}"  TextChanged="FlightsTextBlock_TextChanged" LostFocus="Focus_Lost" SuggestionChosen="SuggestionChosen" TextMemberPath="name" />
         </StackPanel>
     </Grid>
 

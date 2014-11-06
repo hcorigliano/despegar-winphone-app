@@ -10,10 +10,8 @@
 
     <Grid>
         <StackPanel>
-            <TextBlock >
-			    <Run x:Uid="Flight_Departure"/>
-            </TextBlock>
-            <DatePicker Width="120" x:Name="departure" />
+            <TextBlock x:Uid="Flight_Departure" Style="{StaticResource BaseTextLabel}" />
+            <DatePicker x:Name="departure"  Style="{StaticResource DatePickerBase}" />
         </StackPanel>
     </Grid>
 </Page>

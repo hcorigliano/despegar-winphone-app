@@ -177,7 +177,7 @@
   <data name="Home_Settings.Label" xml:space="preserve">
     <value>Configuración</value>
   </data>
-  <data name="Page_CountrySelection.Text" xml:space="preserve">
+  <data name="Page_CountrySelection_selection.Text" xml:space="preserve">
     <value>Seleccione país</value>
   </data>
   <data name="Page_FlightCheckout.Text" xml:space="preserve">
@@ -198,23 +198,23 @@
   <data name="Page_Home.Text" xml:space="preserve">
     <value>Início</value>
   </data>
-  <data name="Flight_Search_Add_Section.Text" xml:space="preserve">
+  <data name="Flight_Search_Add_Section.Content" xml:space="preserve">
     <value>Agregar otro tramo</value>
   </data>
-  <data name="Flight_Search_Sub_Section.Text" xml:space="preserve">
+  <data name="Flight_Search_Sub_Section.Content" xml:space="preserve">
     <value>Borrar tramo</value>
   </data>
   <data name="Flight_Section_Section.Text" xml:space="preserve">
     <value>Tramo </value>
   </data>
   <data name="Flight_Search_Multple.Header" xml:space="preserve">
-    <value>Múltiples</value>
+    <value>múltiples</value>
   </data>
   <data name="Flight_Search_One_Way.Header" xml:space="preserve">
-    <value>Ida</value>
+    <value>ida</value>
   </data>
   <data name="Flight_Search_Round_Trip.Header" xml:space="preserve">
-    <value>Ida y Vuelta</value>
+    <value>ida y vuelta</value>
   </data>
   <data name="Flight_Checkout_Passagers.Text" xml:space="preserve">
     <value>Pasajeros</value>
@@ -314,5 +314,8 @@
   </data>
   <data name="Flights_Search_ChildrenAge" xml:space="preserve">
     <value>Edad del menor</value>
+  </data>
+  <data name="Page_CountrySelection_configuration.Text" xml:space="preserve">
+    <value>CONFIGURACION</value>
   </data>
 </root>

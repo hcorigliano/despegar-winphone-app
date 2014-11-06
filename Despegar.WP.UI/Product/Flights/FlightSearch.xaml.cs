@@ -66,7 +66,7 @@ namespace Despegar.WP.UI.Product.Flights
             get { return this.defaultViewModel; }
         }
 
-        private void addSectionButton_Click(object sender, RoutedEventArgs e)
+        private void AddSectionButton_Click(object sender, RoutedEventArgs e)
         {
                       
             AddSegmentMultiple();

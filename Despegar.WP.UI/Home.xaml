@@ -22,22 +22,21 @@
             </TransitionCollection>
         </Grid.ChildrenTransitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="{StaticResource PageHeaderHeight}"/>
+            <RowDefinition Height="{StaticResource Block1p}"/>
+            <RowDefinition Height="{StaticResource Block2}"/>
+            <RowDefinition Height="{StaticResource Offset}"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <!--Title Panel-->
-        <StackPanel Grid.Row="0">
-            <Image Style="{StaticResource TopLogo}" />
-            <TextBlock x:Uid="Page_Home" Style="{StaticResource PageHeader}" Text="Inicio"  />
-        </StackPanel>
-
-        <StackPanel Grid.Row="1">
-            <ListView IsItemClickEnabled="True" ItemClick="ListView_ItemClick" ItemsSource="{Binding HomeOptions}" ItemContainerStyle="{StaticResource HomeButtonItemContainer}">
+        <!--Title Section-->
+        <Image Grid.Row="0" Style="{StaticResource TopLogo}" />
+        <TextBlock  Grid.Row="1" x:Uid="Page_Home" Style="{StaticResource PageHeader}" Text="inicio" />
+        
+        <ListView Grid.Row="3"  IsItemClickEnabled="True" ItemClick="ListView_ItemClick" ItemsSource="{Binding HomeOptions}" ItemContainerStyle="{StaticResource HomeButtonItemContainer}">
                 <ListViewItem>
                     <Grid DataContext="Hotels">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="{StaticResource HomeButtonColumnWidth}"/>
+                            <ColumnDefinition Width="{StaticResource Block3}"/>
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
 
@@ -53,7 +52,7 @@
                 <ListViewItem>
                     <Grid DataContext="Flights">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="{StaticResource HomeButtonColumnWidth}"/>
+                        <ColumnDefinition Width="{StaticResource Block3}"/>
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
 
@@ -69,7 +68,7 @@
                 <ListViewItem>
                     <Grid DataContext="FlightStatus">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="{StaticResource HomeButtonColumnWidth}"/>
+                        <ColumnDefinition Width="{StaticResource Block3}"/>
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
 
@@ -85,7 +84,7 @@
                 <ListViewItem>
                     <Grid DataContext="MyDespegar">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="{StaticResource HomeButtonColumnWidth}"/>
+                        <ColumnDefinition Width="{StaticResource Block3}"/>
                             <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
 
@@ -98,7 +97,6 @@
                     </Grid>
                 </ListViewItem>
             </ListView>
-        </StackPanel>
 
     </Grid>
 </Page>

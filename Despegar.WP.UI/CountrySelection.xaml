@@ -5,40 +5,49 @@
     xmlns:local="using:Despegar.WP.UI"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:sample="using:Despegar.WP.UI.SampleData"
+    xmlns:conv="using:Despegar.WP.UI.Common.Converter"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
-
-    <Grid x:Name="LayoutRoot">
-
+    Style="{StaticResource BasePage}">
+    <Page.Resources>
+        <conv:StringConverter x:Key="StringConverter"></conv:StringConverter>
+    </Page.Resources>
+    <Grid x:Name="LayoutRoot" Style="{StaticResource MainContainerGrid}">
         <Grid.ChildrenTransitions>
             <TransitionCollection>
                 <EntranceThemeTransition/>
             </TransitionCollection>
         </Grid.ChildrenTransitions>
-
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="{StaticResource Block1p}"/>
+            <RowDefinition Height="{StaticResource Block1p}"/>
+            <RowDefinition Height="{StaticResource Block2p}"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
         <!-- Title Panel -->
-        <StackPanel Grid.Row="0" Margin="19,0,0,0">
-            <TextBlock x:Uid="AppTitle" Style="{ThemeResource TitleTextBlockStyle}" Margin="0,12,0,0"/>
-            <TextBlock x:Uid="Page_CountrySelection" Margin="0,-6.5,0,26.5" Style="{ThemeResource HeaderTextBlockStyle}" CharacterSpacing="{ThemeResource PivotHeaderItemCharacterSpacing}"/>
-        </StackPanel>
+        <Image Grid.Row="0" Style="{StaticResource TopLogo}" />
+        <TextBlock Grid.Row="1" x:Uid="Page_CountrySelection_configuration" Style="{StaticResource PageHeaderSmall}" Text="CONFIGURACION" />
 
-        <!--TODO: Content should be placed within the following grid-->
-        <Grid Grid.Row="1" x:Name="ContentRoot" Margin="19,9.5,19,0">
-            <ListView x:Name="sitesListView" IsItemClickEnabled="True" ItemClick="ListView_ItemClick" ItemsSource="{Binding Path=sites}" HorizontalAlignment="Center"  VerticalAlignment="Center">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="{Binding Path=name}" />
-                        </StackPanel>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-        </Grid>
+        <TextBlock Grid.Row="2" x:Uid="Page_CountrySelection_selection" Style="{StaticResource PageHeader}" Text="seleccion de pais" />
+
+        <ListView Grid.Row="3"  x:Name="sitesListView" IsItemClickEnabled="True" ItemClick="ListView_ItemClick" ItemsSource="{Binding Path=sites}" ItemContainerStyle="{StaticResource CountryButtonItemContainer}">
+            <d:DesignProperties.DataContext>
+                <sample:CountrySelectionSample />
+            </d:DesignProperties.DataContext>            
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="{StaticResource Block2}"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Image Grid.Column="0" Style="{StaticResource CountrySelectionButton}" Source="{Binding name, Converter={StaticResource StringConverter}, ConverterParameter='/Assets/country/{0}.png' }" />                        
+                        <TextBlock Grid.Column="1" Text="{Binding Path=name}" Style="{StaticResource CountryText}" />
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
     </Grid>
 </Page>
