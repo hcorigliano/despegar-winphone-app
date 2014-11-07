@@ -1,0 +1,33 @@
+﻿<UserControl
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Despegar.WP.UI.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:Model="using:Despegar.WP.UI.Model"
+    x:Class="Despegar.WP.UI.Controls.GoReturnPanelMiniBoxSearch"
+    mc:Ignorable="d"
+    d:DesignHeight="100"
+    d:DesignWidth="100"
+    >
+
+    <Grid >
+        <StackPanel Orientation="Vertical">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="{Binding OriginFlight}"/>
+                <Image Width="30"/>
+                <TextBlock Text="{Binding DestinationFlight}"/>
+            </StackPanel>
+			<Grid>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition/>
+					<ColumnDefinition/>
+				</Grid.ColumnDefinitions>
+				<TextBlock Text="{Binding TotalFlights}" Grid.ColumnSpan="2" Margin="40,0,23,0"/>
+                <TextBlock x:Uid="Page_FlightResult_Flight" Grid.Column="1"/>
+			</Grid>
+            <Image Width="20" Height="20" Source="ms-appx:///Product/Legacy/Assets/Image/Icon/new.png"/>
+            
+        </StackPanel>
+    </Grid>
+</UserControl>

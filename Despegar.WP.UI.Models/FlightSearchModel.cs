@@ -23,14 +23,6 @@ namespace Despegar.WP.UI.Model
         public int LimitResult { get; set; }
         public int Offset { get; set; }
 
-        public string Language
-        {
-            get
-            {
-                return "es";
-            }
-        }
-
         public int TotalPassangers {
                 get {
                     
