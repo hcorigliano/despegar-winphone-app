@@ -16,6 +16,7 @@ namespace Despegar.WP.UI.Model
         {
             set
             {
+                this.Choice = value.choice;
                 this.Duration   = value.duration;
                 this.From   = value.from ;
                 this.To   = value.to ;
@@ -31,13 +32,18 @@ namespace Despegar.WP.UI.Model
         { 
             set
             {
-                this.Duration = value.duration;
-                this.From = value.from;
-                this.To = value.to;
-                this.Departure = value.departure;
-                this.Arrival = value.arrival;
-                this.Layovers = value.layovers;
-                this.Segments = ToBindableSegmentList(value.segments, value.duration);
+                this.Choice = value.choice;
+                if (value.choice != -1)
+                {
+                    this.Choice = value.choice;
+                    this.Duration = value.duration;
+                    this.From = value.from;
+                    this.To = value.to;
+                    this.Departure = value.departure;
+                    this.Arrival = value.arrival;
+                    this.Layovers = value.layovers;
+                    this.Segments = ToBindableSegmentList(value.segments, value.duration);
+                }
             }
         }
 
@@ -167,6 +173,23 @@ namespace Despegar.WP.UI.Model
                 _segments = value;
                 base.NotifyPropertyChanged("Segments");
             }
+        }
+
+        private int _choice;
+        public int Choice 
+        {
+            get { return _choice; }
+            set {
+                _choice = value;
+                base.NotifyPropertyChanged("Choice");
+            }
+        }
+
+        public bool HasSegments
+        {
+            get {
+                    return (Segments != null);
+                }
         }
 
         public new void InitializeModel()
