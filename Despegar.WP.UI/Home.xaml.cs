@@ -1,4 +1,6 @@
-﻿using Despegar.LegacyCore;
+﻿using Despegar.Core.Business.Configuration;
+using Despegar.Core.IService;
+using Despegar.LegacyCore;
 using Despegar.LegacyCore.Connector;
 using Despegar.LegacyCore.ViewModel;
 using Despegar.WP.UI.Classes;
@@ -7,10 +9,13 @@ using Despegar.WP.UI.Model;
 using Despegar.WP.UI.Product.Legacy;
 using Despegar.WP.UI.Strings;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
-using Despegar.WP.UI.Developer;
-using Windows.UI.Xaml;
+
+
+
 // The Basic Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
 
 namespace Despegar.WP.UI
@@ -22,6 +27,8 @@ namespace Despegar.WP.UI
     {
         private NavigationHelper navigationHelper;
         public HomeViewModel ViewModel;                // TODO: create Viewmodel
+        public List<Despegar.Core.Business.Configuration.Product> products;
+
 
         public Home()
         {
@@ -37,6 +44,8 @@ namespace Despegar.WP.UI
 
             // Developer Tools
             this.CheckDeveloperTools();
+            SetupMenuItems(GlobalConfiguration.Site);
+
         }
 
         /// <summary>
@@ -45,6 +54,14 @@ namespace Despegar.WP.UI
         public NavigationHelper NavigationHelper
         {
             get { return this.navigationHelper; }
+        }
+
+        private async void SetupMenuItems(string country)
+        {
+            IConfigurationService configurationService = GlobalConfiguration.CoreContext.GetConfigurationService();
+            Configuration configuration = await configurationService.GetConfigurations();
+            var Site = configuration.sites.FirstOrDefault(s => s.code == country);
+            products = Site.products;
         }
 
         /// <summary>
@@ -60,6 +77,7 @@ namespace Despegar.WP.UI
         /// session.  The state will be null the first time a page is visited.</param>
         private void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
         {
+
         }
 
         /// <summary>

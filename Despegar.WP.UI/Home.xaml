@@ -68,7 +68,7 @@
                     </Grid>
                 </ListViewItem>
 
-                <ListViewItem>
+                <ListViewItem> 
                     <Grid DataContext="Flights">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="82"/>
