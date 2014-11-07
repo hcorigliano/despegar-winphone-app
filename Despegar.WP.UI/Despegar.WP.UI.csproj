@@ -112,6 +112,8 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Common\Converter\MiniboxVisibilityConverter.cs" />
+    <Compile Include="Common\Converter\TextGoReturnConverter.cs" />
     <Compile Include="SampleData\CountrySelectionSample.cs" />
     <Compile Include="Styles\CustomThickness.cs" />
     <Compile Include="Classes\PagesManager.cs" />
@@ -235,7 +237,7 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Controls\SearchMiniBoxControl.xaml">
-    <SubType>Designer</SubType>
+      <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Developer\Controls\UserControlDesignGrid.xaml">
