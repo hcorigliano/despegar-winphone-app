@@ -113,6 +113,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Classes\PagesManager.cs" />
+    <Compile Include="Common\Converter\CheckoutConverters.cs" />
     <Compile Include="Common\Converter\CommonConverters.cs" />
     <Compile Include="Common\Converter\StringConverter.cs" />
     <Compile Include="Common\NavigationHelper.cs" />
@@ -176,11 +177,29 @@
     <Compile Include="Loading.xaml.cs">
       <DependentUpon>Loading.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Product\Flights\Checkout\Buy\Buy.xaml.cs">
+      <DependentUpon>Buy.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Product\Flights\Checkout\CardData\CardData.xaml.cs">
+      <DependentUpon>CardData.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Product\Flights\Checkout\Contact\Contact.xaml.cs">
       <DependentUpon>Contact.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Product\Flights\Checkout\Invoice\InvoiceArg.xaml.cs">
+      <DependentUpon>InvoiceArg.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Product\Flights\Checkout\Passegers\Passengers.xaml.cs">
       <DependentUpon>Passengers.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Product\Flights\Checkout\Payment\Controls\Cards.xaml.cs">
+      <DependentUpon>Cards.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Product\Flights\Checkout\Payment\Controls\PaymentWithInterest.xaml.cs">
+      <DependentUpon>PaymentWithInterest.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Product\Flights\Checkout\Payment\Payments.xaml.cs">
+      <DependentUpon>Payments.xaml</DependentUpon>
     </Compile>
     <Compile Include="Product\Flights\FlightResults.xaml.cs">
       <DependentUpon>FlightResults.xaml</DependentUpon>
@@ -224,7 +243,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Product\Flights\Checkout\Buy\Buy.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Product\Flights\Checkout\CardData\CardData.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Product\Flights\Checkout\Contact\Contact.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Product\Flights\Checkout\Invoice\InvoiceArg.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -239,6 +270,18 @@
     <Page Include="Developer\DevTools.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Product\Flights\Checkout\Payment\Controls\Cards.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Product\Flights\Checkout\Payment\Controls\PaymentWithInterest.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Product\Flights\Checkout\Payment\Payments.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Product\Legacy\HotelsThanks.xaml">
       <SubType>Designer</SubType>
@@ -255,6 +298,161 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\ApplicationIcon.png" />
+    <Content Include="Assets\Icon\CreditCard\AX.png" />
+    <Content Include="Assets\Icon\CreditCard\AX_BRA.png" />
+    <Content Include="Assets\Icon\CreditCard\AX_CDC.png" />
+    <Content Include="Assets\Icon\CreditCard\AX_COM.png" />
+    <Content Include="Assets\Icon\CreditCard\AX_FRN.png" />
+    <Content Include="Assets\Icon\CreditCard\AX_GLC.png" />
+    <Content Include="Assets\Icon\CreditCard\AX_GUA.png" />
+    <Content Include="Assets\Icon\CreditCard\AX_HIP.png" />
+    <Content Include="Assets\Icon\CreditCard\AX_HSB.png" />
+    <Content Include="Assets\Icon\CreditCard\AX_ICBC.png" />
+    <Content Include="Assets\Icon\CreditCard\AX_ITAU.png" />
+    <Content Include="Assets\Icon\CreditCard\AX_MAC.png" />
+    <Content Include="Assets\Icon\CreditCard\AX_NAC.png" />
+    <Content Include="Assets\Icon\CreditCard\AX_NAR.png" />
+    <Content Include="Assets\Icon\CreditCard\AX_PAT.png" />
+    <Content Include="Assets\Icon\CreditCard\AX_PLA.png" />
+    <Content Include="Assets\Icon\CreditCard\AX_PRO.png" />
+    <Content Include="Assets\Icon\CreditCard\AX_RIO.png" />
+    <Content Include="Assets\Icon\CreditCard\AX_SAN.png" />
+    <Content Include="Assets\Icon\CreditCard\CA.png" />
+    <Content Include="Assets\Icon\CreditCard\CA_AFIRM.png" />
+    <Content Include="Assets\Icon\CreditCard\CA_AUS.png" />
+    <Content Include="Assets\Icon\CreditCard\CA_BAN.png" />
+    <Content Include="Assets\Icon\CreditCard\CA_BANJE.png" />
+    <Content Include="Assets\Icon\CreditCard\CA_BANOR.png" />
+    <Content Include="Assets\Icon\CreditCard\CA_BBVA.png" />
+    <Content Include="Assets\Icon\CreditCard\CA_BC.png" />
+    <Content Include="Assets\Icon\CreditCard\CA_BCI.png" />
+    <Content Include="Assets\Icon\CreditCard\CA_BERSA.png" />
+    <Content Include="Assets\Icon\CreditCard\CA_BOL.png" />
+    <Content Include="Assets\Icon\CreditCard\CA_BRA.png" />
+    <Content Include="Assets\Icon\CreditCard\CA_CDC.png" />
+    <Content Include="Assets\Icon\CreditCard\CA_CEN.png" />
+    <Content Include="Assets\Icon\CreditCard\CA_CIT.png" />
+    <Content Include="Assets\Icon\CreditCard\CA_CIU.png" />
+    <Content Include="Assets\Icon\CreditCard\CA_CMR.png" />
+    <Content Include="Assets\Icon\CreditCard\CA_COM.png" />
+    <Content Include="Assets\Icon\CreditCard\CA_COR.png" />
+    <Content Include="Assets\Icon\CreditCard\CA_CS.png" />
+    <Content Include="Assets\Icon\CreditCard\CA_DAV.png" />
+    <Content Include="Assets\Icon\CreditCard\CA_FAMSA.png" />
+    <Content Include="Assets\Icon\CreditCard\CA_FRN.png" />
+    <Content Include="Assets\Icon\CreditCard\CA_GLC.png" />
+    <Content Include="Assets\Icon\CreditCard\CA_HIP.png" />
+    <Content Include="Assets\Icon\CreditCard\CA_HSB.png" />
+    <Content Include="Assets\Icon\CreditCard\CA_HSBC.png" />
+    <Content Include="Assets\Icon\CreditCard\CA_ICBC.png" />
+    <Content Include="Assets\Icon\CreditCard\CA_INT.png" />
+    <Content Include="Assets\Icon\CreditCard\CA_INVEX.png" />
+    <Content Include="Assets\Icon\CreditCard\CA_ITAU.png" />
+    <Content Include="Assets\Icon\CreditCard\CA_IXE.png" />
+    <Content Include="Assets\Icon\CreditCard\CA_LIV.png" />
+    <Content Include="Assets\Icon\CreditCard\CA_MAC.png" />
+    <Content Include="Assets\Icon\CreditCard\CA_NAC.png" />
+    <Content Include="Assets\Icon\CreditCard\CA_NAT.png" />
+    <Content Include="Assets\Icon\CreditCard\CA_NBSF.png" />
+    <Content Include="Assets\Icon\CreditCard\CA_PAC.png" />
+    <Content Include="Assets\Icon\CreditCard\CA_PAT.png" />
+    <Content Include="Assets\Icon\CreditCard\CA_PRO.png" />
+    <Content Include="Assets\Icon\CreditCard\CA_SAN.png" />
+    <Content Include="Assets\Icon\CreditCard\CA_SB.png" />
+    <Content Include="Assets\Icon\CreditCard\CA_SCB.png" />
+    <Content Include="Assets\Icon\CreditCard\CA_SCR.png" />
+    <Content Include="Assets\Icon\CreditCard\CA_SJU.png" />
+    <Content Include="Assets\Icon\CreditCard\CA_TBANC.png" />
+    <Content Include="Assets\Icon\CreditCard\CD_DAV.png" />
+    <Content Include="Assets\Icon\CreditCard\CS.png" />
+    <Content Include="Assets\Icon\CreditCard\CS_CEN.png" />
+    <Content Include="Assets\Icon\CreditCard\DC.png" />
+    <Content Include="Assets\Icon\CreditCard\DC_CIT.png" />
+    <Content Include="Assets\Icon\CreditCard\DC_PIC.png" />
+    <Content Include="Assets\Icon\CreditCard\DS_PIC.png" />
+    <Content Include="Assets\Icon\CreditCard\EFECTIVO.png" />
+    <Content Include="Assets\Icon\CreditCard\IX_IXE.png" />
+    <Content Include="Assets\Icon\CreditCard\MC_BBVAB.png" />
+    <Content Include="Assets\Icon\CreditCard\MC_GUA.png" />
+    <Content Include="Assets\Icon\CreditCard\MC_NAR.png" />
+    <Content Include="Assets\Icon\CreditCard\MC_PIC.png" />
+    <Content Include="Assets\Icon\CreditCard\MC_PRB.png" />
+    <Content Include="Assets\Icon\CreditCard\MD.png" />
+    <Content Include="Assets\Icon\CreditCard\MD_GUA.png" />
+    <Content Include="Assets\Icon\CreditCard\VD.png" />
+    <Content Include="Assets\Icon\CreditCard\VD_INB.png" />
+    <Content Include="Assets\Icon\CreditCard\VD_PIC.png" />
+    <Content Include="Assets\Icon\CreditCard\VD_PRB.png" />
+    <Content Include="Assets\Icon\CreditCard\VI-SCR.png" />
+    <Content Include="Assets\Icon\CreditCard\VI.png" />
+    <Content Include="Assets\Icon\CreditCard\VI_AFIRM.png" />
+    <Content Include="Assets\Icon\CreditCard\VI_AMA.png" />
+    <Content Include="Assets\Icon\CreditCard\VI_AUS.png" />
+    <Content Include="Assets\Icon\CreditCard\VI_AZU.png" />
+    <Content Include="Assets\Icon\CreditCard\VI_BAJIO.png" />
+    <Content Include="Assets\Icon\CreditCard\VI_BAN.png" />
+    <Content Include="Assets\Icon\CreditCard\VI_BANJE.png" />
+    <Content Include="Assets\Icon\CreditCard\VI_BANOR.png" />
+    <Content Include="Assets\Icon\CreditCard\VI_BANRE.png" />
+    <Content Include="Assets\Icon\CreditCard\VI_BBVAB.png" />
+    <Content Include="Assets\Icon\CreditCard\VI_BBVAC.png" />
+    <Content Include="Assets\Icon\CreditCard\VI_BC.png" />
+    <Content Include="Assets\Icon\CreditCard\VI_BCI.png" />
+    <Content Include="Assets\Icon\CreditCard\VI_BERSA.png" />
+    <Content Include="Assets\Icon\CreditCard\VI_BLP.png" />
+    <Content Include="Assets\Icon\CreditCard\VI_BOL.png" />
+    <Content Include="Assets\Icon\CreditCard\VI_BSE.png" />
+    <Content Include="Assets\Icon\CreditCard\VI_BVA.png" />
+    <Content Include="Assets\Icon\CreditCard\VI_CDC.png" />
+    <Content Include="Assets\Icon\CreditCard\VI_CHA.png" />
+    <Content Include="Assets\Icon\CreditCard\VI_CIT.png" />
+    <Content Include="Assets\Icon\CreditCard\VI_CIU.png" />
+    <Content Include="Assets\Icon\CreditCard\VI_COM.png" />
+    <Content Include="Assets\Icon\CreditCard\VI_CORD.png" />
+    <Content Include="Assets\Icon\CreditCard\VI_CRE.png" />
+    <Content Include="Assets\Icon\CreditCard\VI_DAV.png" />
+    <Content Include="Assets\Icon\CreditCard\VI_FAMSA.png" />
+    <Content Include="Assets\Icon\CreditCard\VI_FOR.png" />
+    <Content Include="Assets\Icon\CreditCard\VI_FRN.png" />
+    <Content Include="Assets\Icon\CreditCard\VI_GUA.png" />
+    <Content Include="Assets\Icon\CreditCard\VI_HIP.png" />
+    <Content Include="Assets\Icon\CreditCard\VI_HSB.png" />
+    <Content Include="Assets\Icon\CreditCard\VI_HSBC.png" />
+    <Content Include="Assets\Icon\CreditCard\VI_ICBC.png" />
+    <Content Include="Assets\Icon\CreditCard\VI_INBUR.png" />
+    <Content Include="Assets\Icon\CreditCard\VI_INT.png" />
+    <Content Include="Assets\Icon\CreditCard\VI_INVEX.png" />
+    <Content Include="Assets\Icon\CreditCard\VI_ITAU.png" />
+    <Content Include="Assets\Icon\CreditCard\VI_IXE.png" />
+    <Content Include="Assets\Icon\CreditCard\VI_LIV.png" />
+    <Content Include="Assets\Icon\CreditCard\VI_MAC.png" />
+    <Content Include="Assets\Icon\CreditCard\VI_MIFEL.png" />
+    <Content Include="Assets\Icon\CreditCard\VI_NAC.png" />
+    <Content Include="Assets\Icon\CreditCard\VI_NAT.png" />
+    <Content Include="Assets\Icon\CreditCard\VI_NBLR.png" />
+    <Content Include="Assets\Icon\CreditCard\VI_NBSF.png" />
+    <Content Include="Assets\Icon\CreditCard\VI_NEU.png" />
+    <Content Include="Assets\Icon\CreditCard\VI_PAC.png" />
+    <Content Include="Assets\Icon\CreditCard\VI_PAT.png" />
+    <Content Include="Assets\Icon\CreditCard\VI_PIC.png" />
+    <Content Include="Assets\Icon\CreditCard\VI_PRB.png" />
+    <Content Include="Assets\Icon\CreditCard\VI_PRM.png" />
+    <Content Include="Assets\Icon\CreditCard\VI_PRO.png" />
+    <Content Include="Assets\Icon\CreditCard\VI_RI2.png" />
+    <Content Include="Assets\Icon\CreditCard\VI_RIO.png" />
+    <Content Include="Assets\Icon\CreditCard\VI_ROS.png" />
+    <Content Include="Assets\Icon\CreditCard\VI_RUM.png" />
+    <Content Include="Assets\Icon\CreditCard\VI_SAENZ.png" />
+    <Content Include="Assets\Icon\CreditCard\VI_SAN.png" />
+    <Content Include="Assets\Icon\CreditCard\VI_SB.png" />
+    <Content Include="Assets\Icon\CreditCard\VI_SCB.png" />
+    <Content Include="Assets\Icon\CreditCard\VI_SCR.png" />
+    <Content Include="Assets\Icon\CreditCard\VI_SJU.png" />
+    <Content Include="Assets\Icon\CreditCard\VI_SUP.png" />
+    <Content Include="Assets\Icon\CreditCard\VI_TBANC.png" />
+    <Content Include="Assets\Icon\CreditCard\VI_TER.png" />
+    <Content Include="Assets\Icon\CreditCard\VI_UNI.png" />
+    <Content Include="Assets\Icon\CreditCard\V_BCO.png" />
     <Content Include="Assets\Logo.scale-240.png" />
     <Content Include="Assets\SmallLogo.scale-240.png" />
     <Content Include="Assets\SplashScreen.scale-100.png" />
@@ -583,7 +781,6 @@
   <ItemGroup>
     <Folder Include="Assets\en\" />
     <Folder Include="Assets\es\" />
-    <Folder Include="Assets\Icon\" />
     <Folder Include="Assets\pt\" />
     <Folder Include="Strings\en\" />
   </ItemGroup>

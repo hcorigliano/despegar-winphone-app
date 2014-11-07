@@ -27,14 +27,15 @@
                     <TextBlock  Text="{Binding type , Converter={StaticResource TypeToTextConverter}}"></TextBlock>
                 </Grid>
 
+
                 <StackPanel Visibility="{Binding first_name.required,Converter={StaticResource VisibilityConverter}}" >
                     <TextBlock x:Uid="Passager_First_Name"></TextBlock>
-                    <TextBox x:Name="first_name" ></TextBox>
+                    <TextBox x:Name="first_name" Text="{Binding first_name.coreValue,Mode=TwoWay}"></TextBox>
                 </StackPanel>
 
                 <StackPanel Visibility="{Binding last_name.required,Converter={StaticResource VisibilityConverter}}">
                     <TextBlock x:Uid="Passager_Last_Name"></TextBlock>
-                    <TextBox x:Name="last_name"></TextBox>
+                    <TextBox x:Name="last_name" Text="{Binding last_name.coreValue,Mode=TwoWay}"></TextBox>
                 </StackPanel>
 
                 <StackPanel Visibility="{Binding nationality.required,Converter={StaticResource VisibilityConverter}}">
@@ -44,7 +45,7 @@
 
                 <StackPanel Visibility="{Binding document.required,Converter={StaticResource VisibilityConverter}}">
                     <TextBlock x:Uid="Passager_Document_Type"></TextBlock>
-                    <ComboBox x:Name="document" ItemsSource="{Binding document.type.options}" DisplayMemberPath="description"></ComboBox>
+                    <ComboBox x:Name="document" ItemsSource="{Binding document.type.options}" DisplayMemberPath="description" SelectedValue="{Binding document.type.coreValue, Mode=TwoWay}" SelectedValuePath="value"></ComboBox>
                 </StackPanel>
 
                 <StackPanel Visibility="{Binding birthdate.required,Converter={StaticResource VisibilityConverter}}">
@@ -54,7 +55,7 @@
 
                 <StackPanel Visibility="{Binding gender.required,Converter={StaticResource VisibilityConverter}}">
                     <TextBlock x:Uid="Passager_gender"></TextBlock>
-                    <ComboBox x:Name="gender" ItemsSource="{Binding gender.options}" DisplayMemberPath="description"></ComboBox>
+                    <ComboBox x:Name="gender" ItemsSource="{Binding gender.options}" DisplayMemberPath="description"  SelectedValue="{Binding gender.coreValue, Mode=TwoWay}" SelectedValuePath="value" ></ComboBox>
                 </StackPanel>
 
             </StackPanel>

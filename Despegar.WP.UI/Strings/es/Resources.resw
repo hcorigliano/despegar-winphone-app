@@ -270,4 +270,67 @@
   <data name="Contact_Phone.Text" xml:space="preserve">
     <value>Teléfono</value>
   </data>
+  <data name="Card_Data_Card.Text" xml:space="preserve">
+    <value>Tarjeta</value>
+  </data>
+  <data name="Card_Data_Document.Text" xml:space="preserve">
+    <value>Tipo de documento</value>
+  </data>
+  <data name="Card_Data_Number_Document.Text" xml:space="preserve">
+    <value>Número de documento</value>
+  </data>
+  <data name="Card_Data_Number_Of_Card.Text" xml:space="preserve">
+    <value>Número de tarjeta</value>
+  </data>
+  <data name="Card_Data_Owner_Gender.Text" xml:space="preserve">
+    <value>Sexo</value>
+  </data>
+  <data name="Card_Data_owner_name.Text" xml:space="preserve">
+    <value>Titular de la tarjeta</value>
+  </data>
+  <data name="Card_Data_Security_Code.Text" xml:space="preserve">
+    <value>Código de seguridad</value>
+  </data>
+  <data name="Flight_Checkout_Card_Data.Text" xml:space="preserve">
+    <value>Datos de la tarjeta</value>
+  </data>
+  <data name="address_floor.Text" xml:space="preserve">
+    <value>Piso</value>
+  </data>
+  <data name="Flight_Checkout_Invoice_Arg.Text" xml:space="preserve">
+    <value>Factura Fiscal</value>
+  </data>
+  <data name="Invoice_Arg_City.Text" xml:space="preserve">
+    <value>Ciudad</value>
+  </data>
+  <data name="Invoice_Arg_Department.Text" xml:space="preserve">
+    <value>Dpto</value>
+  </data>
+  <data name="Invoice_Arg_fiscal_id.Text" xml:space="preserve">
+    <value>Cuit/Cuil</value>
+  </data>
+  <data name="Invoice_Arg_fiscal_name.Text" xml:space="preserve">
+    <value>Nombre ó razón social</value>
+  </data>
+  <data name="Invoice_Arg_Fiscal_Status.Text" xml:space="preserve">
+    <value>Situación Fiscal</value>
+  </data>
+  <data name="Invoice_Arg_Floor.Text" xml:space="preserve">
+    <value>Piso</value>
+  </data>
+  <data name="Invoice_Arg_Number.Text" xml:space="preserve">
+    <value>Número</value>
+  </data>
+  <data name="Invoice_Arg_Postal_Code.Text" xml:space="preserve">
+    <value>Código Postal</value>
+  </data>
+  <data name="Invoice_Arg_State.Text" xml:space="preserve">
+    <value>Provincia</value>
+  </data>
+  <data name="Invoice_Arg_Street.Text" xml:space="preserve">
+    <value>Calle</value>
+  </data>
+  <data name="Flight_Checkout_Payments.Text" xml:space="preserve">
+    <value>Forma de pago</value>
+  </data>
 </root>

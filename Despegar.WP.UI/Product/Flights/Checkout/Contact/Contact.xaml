@@ -27,24 +27,24 @@
                     <TextBox x:Name="emailConfirmation" ></TextBox>                    
                 </StackPanel>
 
-                <StackPanel Visibility="{Binding phones.type.required,Converter={StaticResource VisibilityConverter}}">
+                <StackPanel Visibility="{Binding phones[0].type.required,Converter={StaticResource VisibilityConverter}}">
                     <TextBlock x:Uid="Contact_Phone"></TextBlock>
                     <ComboBox x:Name="phone_Type" ItemsSource="{Binding phones[0].type.options}" DisplayMemberPath="description" SelectedValue="{Binding phones[0].type.coreValue, Mode=TwoWay}" SelectedValuePath="value"   ></ComboBox>
                 </StackPanel>
 
-                <StackPanel Visibility="{Binding phones.country_code.required,Converter={StaticResource VisibilityConverter}}">
+                <StackPanel Visibility="{Binding phones[0].country_code.required,Converter={StaticResource VisibilityConverter}}">
                     <TextBlock x:Uid="Contact_Country_Code"></TextBlock>
-                    <TextBox x:Name="country_code"></TextBox>
+                    <TextBox x:Name="country_code" Text="{Binding phones[0].country_code.coreValue,Mode=TwoWay}"></TextBox>
                 </StackPanel>
 
-                <StackPanel Visibility="{Binding phones.area_code.required,Converter={StaticResource VisibilityConverter}}">
+                <StackPanel Visibility="{Binding phones[0].area_code.required,Converter={StaticResource VisibilityConverter}}">
                     <TextBlock x:Uid="Contact_Area_Code"></TextBlock>
-                    <TextBox x:Name="area_code"></TextBox>
+                    <TextBox x:Name="area_code" Text="{Binding phones[0].area_code.coreValue,Mode=TwoWay}"></TextBox>
                 </StackPanel>
 
-                <StackPanel Visibility="{Binding phones.number.required,Converter={StaticResource VisibilityConverter}}">
+                <StackPanel Visibility="{Binding phones[0].number.required,Converter={StaticResource VisibilityConverter}}">
                     <TextBlock x:Uid="Contact_Number"></TextBlock>
-                    <TextBox x:Name="number"></TextBox>
+                    <TextBox x:Name="number" Text="{Binding phones[0].number.coreValue,Mode=TwoWay}"></TextBox>
                 </StackPanel>
                 
                 <Button Click="Button_Click_Test" x:Name="btn_Test"></Button>

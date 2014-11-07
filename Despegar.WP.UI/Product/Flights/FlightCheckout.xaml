@@ -48,11 +48,9 @@
                     </ItemsControl>
                 </StackPanel>
             </PivotItem>
-
-
+        
             
-            
-            
+            <!--Contact Pivot-->            
             <PivotItem>
                 <PivotItem.Header>
                     <TextBlock x:Uid="Flight_Checkout_Contact" FontSize="36"></TextBlock>
@@ -64,29 +62,42 @@
                 </StackPanel>
             </PivotItem>
 
-
-
-
-
-                    <!--Contact Data-->
-            <!--xmlns:src="using:Despegar.WP.UI.Product.Flights.Checkout.Contact"--><!--
+            <!--Payments Pivot-->
             <PivotItem>
                 <PivotItem.Header>
-                    <TextBlock x:Uid="Flight_Checkout_Contact" FontSize="36"></TextBlock>
+                    <TextBlock x:Uid="Flight_Checkout_Payments" FontSize="36"></TextBlock>
                 </PivotItem.Header>
+                <StackPanel xmlns:src="using:Despegar.WP.UI.Product.Flights.Checkout.Payment">
 
-                <StackPanel xmlns:src="using:Despegar.WP.UI.Product.Flights.Checkout.Contact">
-
-                    --><!--ItemsSource="{Binding passengers}"--><!--
-                    <ItemsControl x:Name="ContactControl" ItemsSource="{Binding passengers}">
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <src:ContactData></src:ContactData>
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                    </ItemsControl>
+                    <src:Payments x:Name="PaymentControl"></src:Payments>
+                    
                 </StackPanel>
-            </PivotItem>-->
+            </PivotItem>
+
+            <!--Card Data Pivot-->
+            <PivotItem>
+                <PivotItem.Header>
+                    <TextBlock x:Uid="Flight_Checkout_Card_Data" FontSize="36"></TextBlock>
+                </PivotItem.Header>
+                <StackPanel xmlns:src="using:Despegar.WP.UI.Product.Flights.Checkout.CardData">
+
+                    <src:CardData x:Name="CardDataControl"></src:CardData>
+                    <Button Click="testo"></Button>
+                </StackPanel>
+            </PivotItem>
+            
+            <PivotItem>
+                <PivotItem.Header>
+                    <TextBlock x:Uid="Flight_Checkout_Invoice_Arg" FontSize="36"></TextBlock>
+                </PivotItem.Header>
+                <StackPanel xmlns:src="using:Despegar.WP.UI.Product.Flights.Checkout.Invoice">
+
+                    <src:InvoiceArg x:Name="InvoiceArgControl"></src:InvoiceArg>
+                    <Button Click="testo"></Button>
+                </StackPanel>                
+                
+            </PivotItem>
+
         </Pivot>
 
     </Grid>

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Despegar.Core.Business.Flight.BookingFields
 {
-    public class WithInterest
+    public class PaymentDetail
     {
         public string id { get; set; }
         public Card card { get; set; }

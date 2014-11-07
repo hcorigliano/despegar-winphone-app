@@ -35,13 +35,13 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .NET Framework is automatically included -->
-    <Folder Include="Common\" />
   </ItemGroup>
   <ItemGroup>
     <TargetPlatform Include="WindowsPhoneApp, Version=8.1" />
     <TargetPlatform Include="Windows, Version=8.1" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\State\State.cs" />
     <Compile Include="Configuration\Configuration.cs" />
     <Compile Include="Configuration\Contact.cs" />
     <Compile Include="Configuration\Domain.cs" />
@@ -100,8 +100,7 @@
     <Compile Include="Flight\BookingFields\Quantity.cs" />
     <Compile Include="Flight\BookingFields\Validation.cs" />
     <Compile Include="Flight\BookingFields\Voucher.cs" />
-    <Compile Include="Flight\BookingFields\WithInterest.cs" />
-    <Compile Include="Flight\BookingFields\WithoutInterest.cs" />
+    <Compile Include="Flight\BookingFields\PaymentDetail.cs" />
     <Compile Include="Flight\CitiesAutocomplete\CitiesAutocomplete.cs" />
     <Compile Include="Flight\CitiesAutocomplete\City.cs" />
     <Compile Include="Flight\CitiesAutocomplete\CityAutocomplete.cs" />

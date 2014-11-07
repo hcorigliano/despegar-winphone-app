@@ -1,5 +1,6 @@
 ﻿using Despegar.LegacyCore;
 using Despegar.WP.UI.Model;
+using Despegar.WP.UI.Product.Flights;
 using System;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
@@ -98,11 +99,17 @@ namespace Despegar.WP.UI
                  }
                  else
                  {
-                     GlobalConfiguration.CoreContext.SetSite(roamingSettings.Values["countryCode"].ToString()); 
-                     if (!rootFrame.Navigate(typeof(Home), e.Arguments))
+                     GlobalConfiguration.CoreContext.SetSite(roamingSettings.Values["countryCode"].ToString());
+                     if (!rootFrame.Navigate(typeof(FlightCheckout), e.Arguments))
                      {
                          throw new Exception("Failed to create Home page");
-                     }
+                     } 
+                     
+                     //GlobalConfiguration.CoreContext.SetSite(roamingSettings.Values["countryCode"].ToString());
+                     //if (!rootFrame.Navigate(typeof(Home), e.Arguments))
+                     //{
+                     //    throw new Exception("Failed to create Home page");
+                     //}
 
                  }
             }

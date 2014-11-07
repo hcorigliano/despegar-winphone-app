@@ -10,7 +10,7 @@ namespace Despegar.Core.Business.Dynamics
 {
     public class DynamicFlightBookingFieldsToPost
     {
-        private dynamic BuildPassenger(Passenger passenger) {
+        private static dynamic BuildPassenger(Passenger passenger) {
             dynamic result = new ExpandoObject();
             result.type = passenger.type;
             result.first_name = passenger.first_name.coreValue;
@@ -24,7 +24,7 @@ namespace Despegar.Core.Business.Dynamics
             return result;
         }
 
-        public dynamic BuildPhones(Phone phone)
+        public static dynamic BuildPhones(Phone phone)
         {
             dynamic result = new ExpandoObject();
             result.type = phone.type.coreValue;
@@ -35,11 +35,12 @@ namespace Despegar.Core.Business.Dynamics
             return result;
         }
 
-        public object ToDynamic(BookingFields bookingFields)
+        public static object ToDynamic(BookingFields bookingFields)
         {
             //TODO: Estos son los datos minimos para hacer una compra de un vuelo en Arg.
             dynamic result = new ExpandoObject();
             result.form = new ExpandoObject();
+            
             result.form.passangers = bookingFields.form.passengers.Select(p => BuildPassenger(p)).ToList();
             
             result.form.contact = new ExpandoObject();
@@ -79,6 +80,8 @@ namespace Despegar.Core.Business.Dynamics
             }
 
             return result;
+
         }
+      
     }
 }

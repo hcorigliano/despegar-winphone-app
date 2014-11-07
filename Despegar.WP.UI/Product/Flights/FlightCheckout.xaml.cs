@@ -1,7 +1,9 @@
-﻿using Despegar.Core.Business.Flight.BookingFields;
+﻿using Despegar.Core.Business.Dynamics;
+using Despegar.Core.Business.Flight.BookingFields;
 using Despegar.Core.Service;
 using Despegar.WP.UI.Common;
 using Despegar.WP.UI.Model;
+using Despegar.WP.UI.Model.Classes.Flights.Checkout;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -55,6 +57,14 @@ namespace Despegar.WP.UI.Product.Flights
             bookingfields = await flightService.GetBookingFields(book);
             PassengerControl.DataContext = bookingfields.form;
             ContactControl.DataContext = bookingfields.form.contact;
+            CardDataControl.DataContext = bookingfields.form.payment.card;
+            InvoiceArgControl.DataContext = bookingfields.form.payment.invoice;
+
+
+            PaymentsFormated test = new PaymentsFormated();            
+            test = FlightsCheckoutModel.FormatPayments(bookingfields.payments);
+            PaymentControl.DataContext = test;
+            int i = 1;
             //PassengersControl.DataContext = test.form.passengers;
         }
 
@@ -131,7 +141,12 @@ namespace Despegar.WP.UI.Product.Flights
 
         private void testo(object sender, RoutedEventArgs e)
         {
+            FlightsCheckoutModel flightCheckoutModel = new FlightsCheckoutModel(); 
+            var toConert = DynamicFlightBookingFieldsToPost.ToDynamic(bookingfields);
+            flightCheckoutModel.CompleteCheckOut(toConert); 
+            
             int i = 1;
         }
+
     }
 }

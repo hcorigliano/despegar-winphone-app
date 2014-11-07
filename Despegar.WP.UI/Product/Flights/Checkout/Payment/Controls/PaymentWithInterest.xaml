@@ -1,0 +1,83 @@
+﻿<Page
+    x:Class="Despegar.WP.UI.Product.Flights.Checkout.Payment.Controls.PaymentWithInterest"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Despegar.WP.UI.Product.Flights.Checkout.Payment.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:conv="using:Despegar.WP.UI.Common.Converter"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Page.Resources>
+        <conv:ListToVisibilityConverter x:Name="ListToVisibilityConverter"/>
+        <conv:VisibilityConverter x:Name="VisibilityConverter"/>
+        <conv:StringFormatConverter x:Name="StringFormatConverter"/>
+        <conv:PaymentDetailsToLabelConverter x:Name="PaymentDetailsToLabelConverter"/>
+        <conv:PaymentDetailsToPaysConverter x:Name="PaymentDetailsToPaysConverter"/>
+    </Page.Resources>
+
+    <Grid>
+        <StackPanel xmlns:src="using:Despegar.WP.UI.Product.Flights.Checkout.Payment.Controls">
+    
+            <ItemsControl DataContext="{Binding}" x:Name="PaymentControlOnePay" ItemsSource="{Binding OnePay}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel>
+                            
+                            <RadioButton GroupName="WithInteres" Click="RadioButtonClick" Visibility="{Binding LabelText,Converter={StaticResource ListToVisibilityConverter}}" x:Name="radioButton" Content="{Binding LabelText}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                            <Image Source="{Binding PaymentsDetails.card.code, Converter={StaticResource StringFormatConverter}, ConverterParameter='/Assets/Icon/CreditCard/{0}.png'}" Width="76" Margin="5,0,0,7"  ImageFailed="Image_Load_Failed" />
+                            <TextBlock Text="{Binding PaysText}" Visibility="{Binding IsChecked, ElementName=radioButton , Converter={StaticResource VisibilityConverter} }"></TextBlock>
+                      
+                        </StackPanel>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+
+            <ItemsControl DataContext="{Binding}" x:Name="PaymentControlSixPays" ItemsSource="{Binding SixPays}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel>
+
+                            <RadioButton GroupName="WithInteres" Click="RadioButtonClick" Visibility="{Binding LabelText,Converter={StaticResource ListToVisibilityConverter}}" x:Name="radioButton" Content="{Binding PaymentsDetails, Converter={StaticResource PaymentDetailsToLabelConverter}}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                            <Image Source="{Binding PaymentsDetails.card.code, Converter={StaticResource StringFormatConverter}, ConverterParameter='/Assets/Icon/CreditCard/{0}.png'}" Width="76" Margin="5,0,0,7"  ImageFailed="Image_Load_Failed" />
+                            <TextBlock Text="{Binding PaysText}" Visibility="{Binding IsChecked, ElementName=radioButton , Converter={StaticResource VisibilityConverter} }"></TextBlock>
+
+                        </StackPanel>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+
+            <ItemsControl DataContext="{Binding}" x:Name="PaymentControlTwelvePays" ItemsSource="{Binding TwelvePays}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel>
+
+                            <RadioButton GroupName="WithInteres" Click="RadioButtonClick" Visibility="{Binding LabelText,Converter={StaticResource ListToVisibilityConverter}}" x:Name="radioButton" Content="{Binding LabelText}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                            <Image Source="{Binding PaymentsDetails.card.code, Converter={StaticResource StringFormatConverter}, ConverterParameter='/Assets/Icon/CreditCard/{0}.png'}" Width="76" Margin="5,0,0,7"  ImageFailed="Image_Load_Failed" />
+                            <TextBlock Text="{Binding PaysText}" Visibility="{Binding IsChecked, ElementName=radioButton , Converter={StaticResource VisibilityConverter} }"></TextBlock>
+
+                        </StackPanel>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+
+            <ItemsControl DataContext="{Binding}" x:Name="PaymentControlTwentyFourPays" ItemsSource="{Binding TwentyFourPays}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel>
+
+                            <RadioButton GroupName="WithInteres" Click="RadioButtonClick" Visibility="{Binding LabelText,Converter={StaticResource ListToVisibilityConverter}}" x:Name="radioButton" Content="{Binding LabelText}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                            <Image Source="{Binding PaymentsDetails.card.code, Converter={StaticResource StringFormatConverter}, ConverterParameter='/Assets/Icon/CreditCard/{0}.png'}" Width="76" Margin="5,0,0,7"  ImageFailed="Image_Load_Failed" />
+                            <TextBlock Text="{Binding PaysText}" Visibility="{Binding IsChecked, ElementName=radioButton , Converter={StaticResource VisibilityConverter} }"></TextBlock>
+
+                        </StackPanel>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+
+
+
+        </StackPanel>
+    </Grid>
+</Page>
