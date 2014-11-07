@@ -21,7 +21,7 @@ namespace Despegar.WP.UI
     public sealed partial class Home : Page
     {
         private NavigationHelper navigationHelper;
-        public HomeViewModel ViewModel;                // TODO: create Viewmodel
+        public HomeViewModel ViewModel; 
 
         public Home()
         {

@@ -257,7 +257,7 @@ namespace System.Windows
             {
 #if WINDOWS_PHONE_APP
                 y = 38.4;
-#else
+#else           
         y = 140;
 #endif
 

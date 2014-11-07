@@ -6,28 +6,14 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"  
-    Style="{StaticResource BasePage}" HorizontalContentAlignment="Left" VerticalContentAlignment="Top"    
+    Style="{StaticResource BasePage}"
+    NavigationCacheMode="Required"
     >
     <Page.BottomAppBar>
         <CommandBar ClosedDisplayMode="Minimal">
             <AppBarButton Icon="Setting" x:Uid="Home_Settings" FontSize="14" Click="AppBarButton_Click" />
         </CommandBar>
     </Page.BottomAppBar>
-
-    <!--<Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="1*"></RowDefinition>
-        </Grid.RowDefinitions>
-
-        <Rectangle Margin="0,0,0,0" HorizontalAlignment="Left" Width="20" Height="800" Opacity="0.3" Fill="Green"   VerticalAlignment="Top"/>
-        <Rectangle Margin="0,0,0,0" HorizontalAlignment="Right" Width="20" Height="800" Opacity="0.3" Fill="Green"   VerticalAlignment="Top"/>
-        
-        --><!--<Rectangle HorizontalAlignment="Left" Width="25" Height="800" Opacity="0.3" Fill="red"   VerticalAlignment="Top"/>
-        <Rectangle Margin="25,0,0,0" HorizontalAlignment="Left" Width="12" Height="800" Opacity="0.3" Fill="Green"   VerticalAlignment="Top"/>
-        <Rectangle Margin="37,0,0,0" HorizontalAlignment="Left" Width="25" Height="800" Opacity="0.3" Fill="red"   VerticalAlignment="Top"/>
-        <Rectangle Margin="62,0,0,0" HorizontalAlignment="Left" Width="12" Height="800" Opacity="0.3" Fill="Green"   VerticalAlignment="Top"/>
-        <Rectangle Margin="74,0,0,0" HorizontalAlignment="Left" Width="25" Height="800" Opacity="0.3" Fill="red"   VerticalAlignment="Top"/>--><!--       
-    </Grid>-->
 
     <Grid x:Name="LayoutRoot" Style="{StaticResource MainContainerGrid}">
         <Grid.ChildrenTransitions>
@@ -36,26 +22,21 @@
             </TransitionCollection>
         </Grid.ChildrenTransitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="93"/>
+            <RowDefinition Height="{StaticResource Block1p}"/>
+            <RowDefinition Height="{StaticResource Block2}"/>
+            <RowDefinition Height="{StaticResource Offset}"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
+        <!--Title Section-->
+        <Image Grid.Row="0" Style="{StaticResource TopLogo}" />
+        <TextBlock  Grid.Row="1" x:Uid="Page_Home" Style="{StaticResource PageHeader}" Text="inicio" />
         
-     <!--Title Panel--> 
-    
-        <StackPanel Grid.Row="0">
-            <Image Style="{StaticResource TopLogo}" />
-            <StackPanel>
-                <TextBlock x:Uid="Page_Home" Style="{StaticResource PageHeader}" Text="Inicio" />
-            </StackPanel>
-        </StackPanel>
-
-        <StackPanel Grid.Row="1">
-            <ListView IsItemClickEnabled="True" ItemClick="ListView_ItemClick" ItemsSource="{Binding HomeOptions}" ItemContainerStyle="{StaticResource HomeButtonItemContainer}">                
+        <ListView Grid.Row="3"  IsItemClickEnabled="True" ItemClick="ListView_ItemClick" ItemsSource="{Binding HomeOptions}" ItemContainerStyle="{StaticResource HomeButtonItemContainer}">
                 <ListViewItem>
                     <Grid DataContext="Hotels">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="82"/>
+                            <ColumnDefinition Width="{StaticResource Block3}"/>
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
 
@@ -71,7 +52,7 @@
                 <ListViewItem>
                     <Grid DataContext="Flights">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="82"/>
+                        <ColumnDefinition Width="{StaticResource Block3}"/>
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
 
@@ -87,7 +68,7 @@
                 <ListViewItem>
                     <Grid DataContext="FlightStatus">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="82"/>
+                        <ColumnDefinition Width="{StaticResource Block3}"/>
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
 
@@ -103,7 +84,7 @@
                 <ListViewItem>
                     <Grid DataContext="MyDespegar">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="82"/>
+                        <ColumnDefinition Width="{StaticResource Block3}"/>
                             <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
 
@@ -115,9 +96,7 @@
                         </StackPanel>
                     </Grid>
                 </ListViewItem>
-
             </ListView>
-        </StackPanel>
 
     </Grid>
 </Page>
