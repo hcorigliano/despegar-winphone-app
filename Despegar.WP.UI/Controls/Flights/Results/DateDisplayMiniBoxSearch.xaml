@@ -6,7 +6,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:Converter="using:Despegar.WP.UI.Common.Converter"
     xmlns:System="using:System"
-    x:Class="Despegar.WP.UI.Controls.DateDisplayMiniBoxSearch"
+    x:Class="Despegar.WP.UI.Controls.Flights.Results.DateDisplayMiniBoxSearch"
     mc:Ignorable="d"
     d:DesignHeight="300"
     d:DesignWidth="400" Height="Auto" Width="Auto">
@@ -25,8 +25,8 @@
         </Grid.ColumnDefinitions>
 
         <StackPanel Grid.Column="0" HorizontalAlignment="Left" Height="Auto" VerticalAlignment="Top" Width="Auto">
-            <TextBlock  TextWrapping="Wrap" Text="{Binding LocalDateTime.DayOfWeek, Converter={StaticResource DayofWeekShortName}}" />
-            <TextBlock Text="{Binding LocalDateTime.Month, Converter={StaticResource GetMonthName}}"/>
+            <TextBlock  TextWrapping="Wrap" Text="{Binding LocalDateTime.DayOfWeek, Converter={StaticResource DayofWeekShortName},ConverterLanguage=es}" />
+            <TextBlock Text="{Binding LocalDateTime.Month, Converter={StaticResource GetMonthName},ConverterLanguage=es}"/>
         </StackPanel>
         <StackPanel Grid.Column="1">
             <TextBlock Text="{Binding LocalDateTime.Day, Mode=OneWay}"  />

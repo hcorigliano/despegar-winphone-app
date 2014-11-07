@@ -96,11 +96,14 @@ namespace Despegar.WP.UI.Product.Flights
             RoutesItems routes = e.NavigationParameter as RoutesItems;
             if (routes != null)
             {
+                //TODO the following 5 lines works but could be better.
                 flightDetailModelInbound.inbound = routes.inbound;
                 flightDetailModelOutbound.outbound = routes.outbound;
 
                 SegmentControlInbound.DataContext = flightDetailModelInbound;
                 SegmentControlOutbound.DataContext = flightDetailModelOutbound;
+
+                textBlock.DataContext = flightDetailModelInbound;
             }
 
         }

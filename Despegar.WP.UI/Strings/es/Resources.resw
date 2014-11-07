@@ -218,7 +218,7 @@
   </data>
   <data name="Page_FlightResult_Adult.Text" xml:space="preserve">
     <value>Adulto</value>
-    </data>
+  </data>
   <data name="Flight_Checkout_Passagers.Text" xml:space="preserve">
     <value>Pasajeros</value>
   </data>
@@ -303,21 +303,39 @@
   <data name="Page_Home_HotelsButtonSub.Text" xml:space="preserve">
     <value>Las mejores ofertas</value>
   </data>
+  <data name="Generic_Go" xml:space="preserve">
+    <value>Ida</value>
+    </data>
   <data name="Flights_Search_SearchButton.Content" xml:space="preserve">
     <value>Buscar vuelos</value>
   </data>
+  <data name="Generic_Multiple" xml:space="preserve">
+    <value>Multiple</value>
+    </data>
   <data name="Flights_Search_Departure" xml:space="preserve">
     <value>Partida</value>
   </data>
+  <data name="Generic_Return" xml:space="preserve">
+    <value>Vuelta</value>
+    </data>
   <data name="Flights_Search_Destination" xml:space="preserve">
     <value>Destino</value>
   </data>
+  <data name="Page_Flight_Details_Return.Text" xml:space="preserve">
+    <value>Vuelta</value>
+    </data>
   <data name="Flights_Search_Origin" xml:space="preserve">
     <value>Origen</value>
   </data>
+  <data name="AppBarButton_Filters.Label" xml:space="preserve">
+    <value>Filtros</value>
+    </data>
   <data name="Flights_Search_Return" xml:space="preserve">
     <value>Regreso</value>
   </data>
+  <data name="AppBarButton_OrderBy.Label" xml:space="preserve">
+    <value>Ordenar</value>
+    </data>
   <data name="Flights_Search_Adults" xml:space="preserve">
     <value>Adultos</value>
   </data>

@@ -113,7 +113,6 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Common\Converter\MiniboxVisibilityConverter.cs" />
-    <Compile Include="Common\Converter\TextGoReturnConverter.cs" />
     <Compile Include="SampleData\CountrySelectionSample.cs" />
     <Compile Include="Styles\CustomThickness.cs" />
     <Compile Include="Classes\PagesManager.cs" />
@@ -121,6 +120,7 @@
     <Compile Include="Common\Converter\CommonConverters.cs" />
     <Compile Include="Common\Converter\GetMonthName.cs" />
     <Compile Include="Common\Converter\StringConverter.cs" />
+    <Compile Include="Common\Converter\TextGoReturnConverter.cs" />
     <Compile Include="Common\NavigationHelper.cs" />
     <Compile Include="Common\ObservableDictionary.cs" />
     <Compile Include="Common\PageExtensions.cs" />
@@ -129,7 +129,7 @@
     <Compile Include="Controls\Flights\DateControl.xaml.cs">
       <DependentUpon>DateControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\DateDisplayMiniBoxSearch.xaml.cs">
+    <Compile Include="Controls\Flights\Results\DateDisplayMiniBoxSearch.xaml.cs">
       <DependentUpon>DateDisplayMiniBoxSearch.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\Flights\DateControlSimple.xaml.cs">
@@ -144,20 +144,23 @@
     <Compile Include="Controls\Flights\QuantityPassagersControl.xaml.cs">
       <DependentUpon>QuantityPassagersControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Flights\Results\MiniBoxFlightRoutes.xaml.cs">
+      <DependentUpon>MiniBoxFlightRoutes.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Flights\RouteItemControl.xaml.cs">
       <DependentUpon>RouteItemControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\GoReturnPanelMiniBoxSearch.xaml.cs">
+    <Compile Include="Controls\Flights\Results\GoReturnPanelMiniBoxSearch.xaml.cs">
       <DependentUpon>GoReturnPanelMiniBoxSearch.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\Flights\SearchAirport.xaml.cs">
       <DependentUpon>SearchAirport.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\ModalPopup.cs" />
-    <Compile Include="Controls\PaxCounterMiniBoxSearch.xaml.cs">
+    <Compile Include="Controls\Flights\Results\PaxCounterMiniBoxSearch.xaml.cs">
       <DependentUpon>PaxCounterMiniBoxSearch.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\SearchMiniBoxControl.xaml.cs">
+    <Compile Include="Controls\Flights\Results\SearchMiniBoxControl.xaml.cs">
       <DependentUpon>SearchMiniBoxControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="CountrySelection.xaml.cs">
@@ -193,6 +196,9 @@
     <Compile Include="Product\Flights\Checkout\Passegers\Passengers.xaml.cs">
       <DependentUpon>Passengers.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Product\Flights\FlightFilters.xaml.cs">
+      <DependentUpon>FlightFilters.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Product\Flights\FlightResults.xaml.cs">
       <DependentUpon>FlightResults.xaml</DependentUpon>
     </Compile>
@@ -204,6 +210,9 @@
     </Compile>
     <Compile Include="Product\Flights\FlightSearch.xaml.cs">
       <DependentUpon>FlightSearch.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Product\Flights\FlightSortBy.xaml.cs">
+      <DependentUpon>FlightSortBy.xaml</DependentUpon>
     </Compile>
     <Compile Include="Product\Flights\FlightThanks.xaml.cs">
       <DependentUpon>FlightThanks.xaml</DependentUpon>
@@ -232,11 +241,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controls\Flights\Results\MiniBoxFlightRoutes.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\Flights\RouteItemControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Controls\SearchMiniBoxControl.xaml">
+    <Page Include="Controls\Flights\Results\SearchMiniBoxControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -263,6 +276,14 @@
     <Page Include="Developer\DevTools.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Product\Flights\FlightFilters.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Product\Flights\FlightSortBy.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Product\Legacy\HotelsThanks.xaml">
       <SubType>Designer</SubType>
@@ -551,7 +572,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\DateDisplayMiniBoxSearch.xaml">
+    <Page Include="Controls\Flights\Results\DateDisplayMiniBoxSearch.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -563,7 +584,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\GoReturnPanelMiniBoxSearch.xaml">
+    <Page Include="Controls\Flights\Results\GoReturnPanelMiniBoxSearch.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -571,7 +592,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\PaxCounterMiniBoxSearch.xaml">
+    <Page Include="Controls\Flights\Results\PaxCounterMiniBoxSearch.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Despegar.WP.UI.Model;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -12,19 +13,19 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
-using Despegar.WP.UI.Model.Enums;
-using System.ComponentModel;
 
 // The User Control item template is documented at http://go.microsoft.com/fwlink/?LinkId=234236
 
-namespace Despegar.WP.UI.Controls
+namespace Despegar.WP.UI.Controls.Flights.Results
 {
-    public sealed partial class GoReturnPanelMiniBoxSearch : UserControl
+    public sealed partial class SearchMiniBoxControl : UserControl
     {
-        public GoReturnPanelMiniBoxSearch()
+        public FlightSearchModel searchMiniboxModel { get; set; }
+
+        public SearchMiniBoxControl()
         {
             this.InitializeComponent();
+            this.DataContext = searchMiniboxModel;
         }
     }
 }
-

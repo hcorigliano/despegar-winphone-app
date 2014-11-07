@@ -62,6 +62,7 @@ namespace Despegar.WP.UI
 
             roamingSettings.Values["countryCode"] = countrySelected.code;
             roamingSettings.Values["countryName"] = countrySelected.name;
+            roamingSettings.Values["countryLanguage"] = countrySelected.language;
 
             GlobalConfiguration.CoreContext.SetSite(countrySelected.code); 
 
