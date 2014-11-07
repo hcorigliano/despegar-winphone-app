@@ -191,6 +191,9 @@
     <Compile Include="Product\Flights\Checkout\Passegers\Passengers.xaml.cs">
       <DependentUpon>Passengers.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Product\Flights\FlightFilters.xaml.cs">
+      <DependentUpon>FlightFilters.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Product\Flights\FlightResults.xaml.cs">
       <DependentUpon>FlightResults.xaml</DependentUpon>
     </Compile>
@@ -202,6 +205,9 @@
     </Compile>
     <Compile Include="Product\Flights\FlightSearch.xaml.cs">
       <DependentUpon>FlightSearch.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Product\Flights\FlightSortBy.xaml.cs">
+      <DependentUpon>FlightSortBy.xaml</DependentUpon>
     </Compile>
     <Compile Include="Product\Flights\FlightThanks.xaml.cs">
       <DependentUpon>FlightThanks.xaml</DependentUpon>
@@ -256,6 +262,14 @@
     <Page Include="Developer\DevTools.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Product\Flights\FlightFilters.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Product\Flights\FlightSortBy.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Product\Legacy\HotelsThanks.xaml">
       <SubType>Designer</SubType>

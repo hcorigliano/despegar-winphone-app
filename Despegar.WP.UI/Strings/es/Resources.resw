@@ -315,4 +315,10 @@
   <data name="Page_Flight_Details_Return.Text" xml:space="preserve">
     <value>Vuelta</value>
   </data>
+  <data name="AppBarButton_Filters.Label" xml:space="preserve">
+    <value>Filtros</value>
+  </data>
+  <data name="AppBarButton_OrderBy.Label" xml:space="preserve">
+    <value>Ordenar</value>
+  </data>
 </root>

@@ -265,5 +265,11 @@ namespace Despegar.WP.UI.Product.Flights
         {
             GoBack();
         }
+
+        private void appBarFilter_Click(object sender, RoutedEventArgs e)
+        {
+            PagesManager.GoTo(typeof(FlightFilters), null);
+        }
+       
     }
 }

@@ -63,12 +63,29 @@
 
         </DataTemplate>
     </Page.Resources>
+    <Page.BottomAppBar>
+        <CommandBar ClosedDisplayMode="Minimal">
+            <AppBarButton x:Name="appBarFilter" Icon="Filter" x:Uid="AppBarButton_Filters" >
+            </AppBarButton>
+            <AppBarButton x:Name="appBarSortBy" Icon="Sort" x:Uid="AppBarButton_OrderBy" >
+            </AppBarButton>
+        </CommandBar>
+    </Page.BottomAppBar>
 
     <Page.DataContext>
         <Model:FlightResultsModel/>
     </Page.DataContext>
 
     <Grid x:Name="LayoutRoot" >
+        <Interactivity:Interaction.Behaviors>
+            <Core:EventTriggerBehavior SourceObject="{Binding ElementName=appBarFilter}" EventName="Click">
+                <Core:NavigateToPageAction TargetPage="Despegar.WP.UI.Product.Flights.FlightFilters" Parameter="{Binding Facets}"/>
+            </Core:EventTriggerBehavior>
+            <Core:EventTriggerBehavior SourceObject="{Binding ElementName=appBarSortBy}" EventName="Click">
+                <Core:NavigateToPageAction Parameter="{Binding Sorting, Mode=TwoWay}" TargetPage="Despegar.WP.UI.Product.Flights.FlightSortBy"/>
+            </Core:EventTriggerBehavior>
+        </Interactivity:Interaction.Behaviors>
+
 
         <Grid.ChildrenTransitions>
             <TransitionCollection>
@@ -84,21 +101,21 @@
         <StackPanel Grid.Row="0" Margin="19,0,0,0">
             <TextBlock x:Uid="AppTitle" Style="{ThemeResource TitleTextBlockStyle}" Margin="0,12,0,0"/>
             <TextBlock x:Uid="Page_FlightResults" Margin="0,-6.5,0,26.5" Style="{ThemeResource HeaderTextBlockStyle}" CharacterSpacing="{ThemeResource PivotHeaderItemCharacterSpacing}"/>
-            
+
             <Controls:SearchMiniBoxControl Tapped="miniboxSearch_Tapped" x:Name="miniboxSearch" Height="Auto"/>
-            	
+
         </StackPanel>
 
         <Grid Grid.Row="1">
             <TextBlock />
         </Grid>
         <Grid Grid.Row="2" x:Name="ContentRoot" Width="Auto" >
-            <ListBox Height="450" x:Name="lbFlights" Background="White" ItemTemplate="{StaticResource FlightItemDateTemplate}" ItemsSource="{Binding Items}"  Tapped="ListBox_Tapped" HorizontalContentAlignment="Stretch" ScrollViewer.VerticalScrollBarVisibility="Visible"  >
-            	<ListBox.ItemContainerTransitions>
-            		<TransitionCollection>
-            			<EntranceThemeTransition FromVerticalOffset="100" FromHorizontalOffset="0"/>
-            		</TransitionCollection>
-            	</ListBox.ItemContainerTransitions>
+            <ListBox Height="385" x:Name="lbFlights" ItemTemplate="{StaticResource FlightItemDateTemplate}" ItemsSource="{Binding Items}"  Tapped="ListBox_Tapped" HorizontalContentAlignment="Stretch" ScrollViewer.VerticalScrollBarVisibility="Visible" Background="WhiteSmoke" >
+                <ListBox.ItemContainerTransitions>
+                    <TransitionCollection>
+                        <EntranceThemeTransition FromVerticalOffset="100" FromHorizontalOffset="0"/>
+                    </TransitionCollection>
+                </ListBox.ItemContainerTransitions>
             </ListBox>
         </Grid>
 

@@ -32,7 +32,7 @@
 
 		<StackPanel xmlns:src="using:Despegar.WP.UI.Controls.Flights" Grid.Row="1"  x:Name="ContentRoot">
 
-			<ScrollViewer  VerticalScrollBarVisibility="Auto" Height="400">
+			<ScrollViewer  VerticalScrollBarVisibility="Auto" Height="430" Margin="10,0">
                 
 				<StackPanel>
                     <TextBlock x:Uid="Flight_Search_One_Way" />
@@ -54,7 +54,6 @@
                     			</Core:ChangePropertyAction>
                     		</Core:DataTriggerBehavior>
                     	</Interactivity:Interaction.Behaviors>
-                    	
                     </TextBlock>
 					<ItemsControl x:Name="SegmentControlInbound" ItemsSource="{Binding Segments}">
 						<ItemsControl.ItemTemplate>
