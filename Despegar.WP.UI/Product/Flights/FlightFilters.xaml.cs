@@ -34,6 +34,7 @@ namespace Despegar.WP.UI.Product.Flights
         /// This parameter is typically used to configure the page.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            this.DataContext = e.Parameter;
         }
     }
 }

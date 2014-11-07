@@ -7,16 +7,29 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-	<Page.BottomAppBar>
-		<CommandBar>
-			<AppBarButton Icon="Accept" Label="Aceptar"/>
-			<AppBarButton Icon="Cancel" Label="Cancelar"/>
-		</CommandBar>
-	</Page.BottomAppBar>
+    <Page.Resources>
+        <DataTemplate x:Key="FlightFilterTemplate">
+            <Grid>
+                <!--<RadioButton GroupName="FlightSortByGroup" Content="{Binding label}" HorizontalAlignment="Left" VerticalAlignment="Top" IsChecked="{Binding selected ,Mode=TwoWay}"/>-->
+                <TextBlock Text="{Binding label}"></TextBlock>
+                <ItemsControl ItemsSource="{Binding values}" DataContext="{Binding}" >
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <CheckBox Content="{Binding label}" IsChecked="{Binding selected,Mode=TwoWay}" />
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </Grid>
+        </DataTemplate>
+    </Page.Resources>
+    <Page.BottomAppBar>
+        <CommandBar>
+            <AppBarButton Icon="Accept" Label="Aceptar" />
+            <AppBarButton Icon="Cancel" Label="Cancelar" Name="AppBarCancelButton" />
+        </CommandBar>
+    </Page.BottomAppBar>
 
-    <ListView Header="Filtros">
-    	<ListViewItem Content="Hola"/>
-		<ListViewItem Content="Chau"/>
-		<ListViewItem Content="Welcome"/>
+    <ListView Header="Filtros" DataContext="{Binding Mode=TwoWay}" ItemTemplate="{StaticResource FlightFilterTemplate}" ItemsSource="{Binding}" IsItemClickEnabled="True">
+    	
     </ListView>
 </Page>
