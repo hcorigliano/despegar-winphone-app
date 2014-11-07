@@ -5,6 +5,7 @@
     xmlns:local="using:Despegar.WP.UI.Product.Flights"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:src="using:Despegar.WP.UI.Controls.Flights"
     mc:Ignorable="d"
     Style="{StaticResource BasePage}">
 
@@ -17,7 +18,8 @@
 
         <Grid.RowDefinitions>
             <RowDefinition Height="{StaticResource Block1p}"/>
-            <RowDefinition Height="{StaticResource Block1p}"/>            
+            <RowDefinition Height="{StaticResource Block1p}"/>
+            <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
@@ -25,37 +27,42 @@
         <Image Grid.Row="0" Style="{StaticResource TopLogo}" />
         <TextBlock Grid.Row="1" x:Uid="Page_Detail_TitleDetail" Style="{StaticResource PageHeaderSmall}" Text="DETALLE" />
 
-        <TextBlock x:Uid="Page_FlightDetail" Style="{ThemeResource HeaderTextBlockStyle}" CharacterSpacing="{ThemeResource PivotHeaderItemCharacterSpacing}"/>
-        
-        <StackPanel Grid.Row="2"  x:Name="ContentRoot" xmlns:src="using:Despegar.WP.UI.Controls.Flights">
-
-            <ScrollViewer  VerticalScrollBarVisibility="Auto" Height="400">
-                
-                <StackPanel>
-                    <TextBlock Text=" IDA" ></TextBlock>
+        <!-- Content -->
+        <Pivot Grid.Row="2" Style="{StaticResource PivotBaseMain}">
+            <PivotItem x:Uid="Page_Flight_Detail_Go" Header="ida" Style="{StaticResource PivotItemBase}">
+                <ScrollViewer>
                     <ItemsControl x:Name="SegmentControlOutbound" ItemsSource="{Binding Segments}">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
-                                <src:FlightSegment x:Name="flightSegmentOutbound"></src:FlightSegment>
+                                <src:FlightSegment />
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
+                </ScrollViewer>
+            </PivotItem>
 
-                    <TextBlock Text=" VUELTA" ></TextBlock>
+            <PivotItem x:Name="ReturnPivot" x:Uid="Page_Flight_Detail_Return" Header="vuelta" Style="{StaticResource PivotItemBase}">
+                <ScrollViewer>
                     <ItemsControl x:Name="SegmentControlInbound" ItemsSource="{Binding Segments}">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
-                                <src:FlightSegment x:Name="flightSegmentInbound"></src:FlightSegment>
+                                <src:FlightSegment />
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
-                </StackPanel>
+                </ScrollViewer>
+            </PivotItem>
+        </Pivot>
 
-            </ScrollViewer>
+        <Grid Grid.Row="3" Style="{StaticResource BottomGrid}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="{StaticResource TwoColumnMiddleSpacing}" />
+                <ColumnDefinition Width="1*" />
+            </Grid.ColumnDefinitions>
 
-        </StackPanel>
-        <StackPanel Grid.Row="2">
-            <Button Content="Comprar" HorizontalAlignment="Center"  VerticalAlignment="Top" Click="Button_Click"/>
-        </StackPanel>
+            <Button Grid.Column="0" x:Uid="Page_Flight_Detail_Buy.Text" Content="Comprar" Style="{StaticResource ButtonBase}" Click="Buy_Click"/>
+            <Button Grid.Column="2" x:Uid="Page_Flight_Detail_Cancel.Text" Content="Cancelar" Style="{StaticResource ButtonBase}" Click="Cancel_Click"/>
+        </Grid>
     </Grid>
 </Page>

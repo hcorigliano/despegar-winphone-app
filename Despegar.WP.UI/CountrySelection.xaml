@@ -34,7 +34,8 @@
         <Image Grid.Row="0" Style="{StaticResource TopLogo}" />
         <TextBlock Grid.Row="1" x:Uid="Page_CountrySelection_configuration" Style="{StaticResource PageHeaderSmall}" Text="CONFIGURACION" />
         <TextBlock Grid.Row="2" x:Uid="Page_CountrySelection_selection" Style="{StaticResource PageHeader}" Text="seleccion de pais" />
-
+        
+        <!-- Content -->
         <ListView Grid.Row="3"  x:Name="sitesListView" IsItemClickEnabled="True" ItemClick="ListView_ItemClick" ItemsSource="{Binding Path=sites}" ItemContainerStyle="{StaticResource CountryButtonItemContainer}">
             <d:DesignProperties.DataContext>
                 <sample:CountrySelectionSample />

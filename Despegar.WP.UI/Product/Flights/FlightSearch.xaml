@@ -35,11 +35,6 @@
         
 
         <Pivot xmlns:src="using:Despegar.WP.UI.Controls.Flights" Grid.Row="2" x:Name="ContentRoot" Style="{StaticResource PivotBaseMain}" Margin="0,-5,0,0">
-            <Pivot.HeaderTemplate>
-                <DataTemplate>
-                    <TextBlock Text="{Binding}"  Style="{StaticResource PivotHeader}" />
-                </DataTemplate>
-            </Pivot.HeaderTemplate>
 
             <!--ReoundTrip Flights-->
             <PivotItem x:Uid="Flight_Search_Round_Trip" Header="ida y vuelta" Style="{StaticResource PivotItemBase}">

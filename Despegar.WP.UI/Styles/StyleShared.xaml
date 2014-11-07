@@ -94,7 +94,9 @@
         <Setter Property="Width" Value="100" />
         <Setter Property="Height" Value="20" />
     </Style>
-
+    <Style x:Key="BottomGrid" TargetType="Grid">
+        <Setter  Property="VerticalAlignment" Value="Bottom" />
+    </Style>
     <!-- Text & Fonts -->
     <Style x:Key="PageHeader" TargetType="TextBlock" BasedOn="{StaticResource HeaderTextBlockStyle}">
         <Setter Property="FontFamily" Value="Segoe UI" />
@@ -514,6 +516,13 @@
     </Style>
     <Style x:Key="PivotBaseMain" TargetType="Pivot" BasedOn="{StaticResource PivotBase}">
         <Setter Property="Margin" Value="0,-5,0,0" />
+        <Setter Property="HeaderTemplate">
+            <Setter.Value>
+                <DataTemplate>
+                    <TextBlock Text="{Binding}"  Style="{StaticResource PivotHeader}" />
+                </DataTemplate>
+            </Setter.Value>
+        </Setter>
     </Style>
     <Style x:Key="PivotHeader" TargetType="TextBlock" BasedOn="{StaticResource PageHeader}">
         <Setter Property="FontSize" Value="43.2" />

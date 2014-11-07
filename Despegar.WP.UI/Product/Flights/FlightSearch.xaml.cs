@@ -272,9 +272,7 @@ namespace Despegar.WP.UI.Product.Flights
                 var messageDialog = new MessageDialog("No se completo correctamente las ciudades.");
                 await messageDialog.ShowAsync();
             }
-        }
-
-        
+        }        
 
 
         private async void ButtonSearch_Click(object sender, RoutedEventArgs e)

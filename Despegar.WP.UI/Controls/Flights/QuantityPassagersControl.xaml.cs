@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Windows.ApplicationModel.Resources;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml;
 
 namespace Despegar.WP.UI.Controls.Flights
 {
@@ -36,7 +37,7 @@ namespace Despegar.WP.UI.Controls.Flights
         {
             get
             {
-                return  ChildrenControls.Where(x => (x.SelectedItem as ChildrenAgeOption).Value == FlightSearchChildEnum.Child).Count();
+                return ChildrenControls.Where(x => (x.SelectedItem as ChildrenAgeOption).Value == FlightSearchChildEnum.Child && ((FrameworkElement)x.Parent).Visibility == Visibility.Visible).Count();
             }
         }
 
@@ -44,7 +45,7 @@ namespace Despegar.WP.UI.Controls.Flights
         {
             get
             {
-                return ChildrenControls.Where(x => (x.SelectedItem as ChildrenAgeOption).Value == FlightSearchChildEnum.Child).Count() + Passagers.AdultPassagerQuantity;
+                return ChildrenControls.Where(x => (x.SelectedItem as ChildrenAgeOption).Value == FlightSearchChildEnum.Child && ((FrameworkElement)x.Parent).Visibility == Visibility.Visible).Count() + Passagers.AdultPassagerQuantity;
             }
         }
 
@@ -52,7 +53,7 @@ namespace Despegar.WP.UI.Controls.Flights
         {
             get
             {
-                return ChildrenControls.Where(x => (x.SelectedItem as ChildrenAgeOption).Value == FlightSearchChildEnum.Infant).Count();
+                return ChildrenControls.Where(x => (x.SelectedItem as ChildrenAgeOption).Value == FlightSearchChildEnum.Infant && ((FrameworkElement)x.Parent).Visibility == Visibility.Visible).Count();
             }
         }
 

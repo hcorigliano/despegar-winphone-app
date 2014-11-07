@@ -50,7 +50,6 @@ namespace Despegar.WP.UI.Product.Flights
 
         private async void FillDataMocked()
         {
-
             //BORRAR ESTO
             intinerarie = await flightSearchBoxModel.GetItineraries("BUE", "LAX", "2014-11-11", 1, "2014-11-13", 0, 0, 0, 10, "", "", "", "");
 
@@ -59,24 +58,6 @@ namespace Despegar.WP.UI.Product.Flights
 
             SegmentControlInbound.DataContext = flightDetailModelInbound;
             SegmentControlOutbound.DataContext = flightDetailModelOutbound;
-
-        }
-
-        /// <summary>
-        /// Gets the <see cref="NavigationHelper"/> associated with this <see cref="Page"/>.
-        /// </summary>
-        public NavigationHelper NavigationHelper
-        {
-            get { return this.navigationHelper; }
-        }
-
-        /// <summary>
-        /// Gets the view model for this <see cref="Page"/>.
-        /// This can be changed to a strongly typed view model.
-        /// </summary>
-        public ObservableDictionary DefaultViewModel
-        {
-            get { return this.defaultViewModel; }
         }
 
         /// <summary>
@@ -92,7 +73,6 @@ namespace Despegar.WP.UI.Product.Flights
         /// session.  The state will be null the first time a page is visited.</param>
         private void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
         {
-
             RoutesItems routes = e.NavigationParameter as RoutesItems;
             if (routes != null)
             {
@@ -102,7 +82,6 @@ namespace Despegar.WP.UI.Product.Flights
                 SegmentControlInbound.DataContext = flightDetailModelInbound;
                 SegmentControlOutbound.DataContext = flightDetailModelOutbound;
             }
-
         }
 
         /// <summary>
@@ -144,9 +123,14 @@ namespace Despegar.WP.UI.Product.Flights
 
         #endregion
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Buy_Click(object sender, RoutedEventArgs e)
         {
             PagesManager.GoTo(typeof(FlightCheckout),null);
+        }
+
+        private void Cancel_Click(object sender, RoutedEventArgs e)
+        {
+            PagesManager.GoBack();
         }
     }
 }

@@ -183,9 +183,6 @@
   <data name="Page_FlightCheckout.Text" xml:space="preserve">
     <value>Pago</value>
   </data>
-  <data name="Page_FlightDetail.Text" xml:space="preserve">
-    <value>Detalles</value>
-  </data>
   <data name="Page_FlightResults.Text" xml:space="preserve">
     <value>Resultados</value>
   </data>
@@ -318,7 +315,19 @@
   <data name="Page_CountrySelection_configuration.Text" xml:space="preserve">
     <value>CONFIGURACION</value>
   </data>
-  <data name="Page_Detail_TitleDetail" xml:space="preserve">
+  <data name="Page_Detail_TitleDetail.Text" xml:space="preserve">
     <value>DETALLE</value>
+  </data>
+  <data name="Page_Flight_Detail_Go.Header" xml:space="preserve">
+    <value>ida</value>
+  </data>
+  <data name="Page_Flight_Detail_Return.Header" xml:space="preserve">
+    <value>vuelta</value>
+  </data>
+  <data name="Page_Flight_Detail_Buy.Text" xml:space="preserve">
+    <value>Comprar</value>
+  </data>
+  <data name="Page_Flight_Detail_Cancel.Text" xml:space="preserve">
+    <value>Cancelar</value>
   </data>
 </root>
