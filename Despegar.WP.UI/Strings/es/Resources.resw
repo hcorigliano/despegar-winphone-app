@@ -177,7 +177,7 @@
   <data name="Home_Settings.Label" xml:space="preserve">
     <value>Configuración</value>
   </data>
-  <data name="Page_CountrySelection.Text" xml:space="preserve">
+  <data name="Page_CountrySelection_selection.Text" xml:space="preserve">
     <value>Seleccione país</value>
   </data>
   <data name="Page_FlightCheckout.Text" xml:space="preserve">
@@ -190,7 +190,7 @@
     <value>Resultados</value>
   </data>
   <data name="Page_FlightSearch.Text" xml:space="preserve">
-    <value>Búsqueda</value>
+    <value>BUSQUEDA</value>
   </data>
   <data name="Page_FlightThanks.Text" xml:space="preserve">
     <value>Gracias</value>
@@ -198,23 +198,23 @@
   <data name="Page_Home.Text" xml:space="preserve">
     <value>Início</value>
   </data>
-  <data name="Flight_Search_Add_Section.Text" xml:space="preserve">
+  <data name="Flight_Search_Add_Section.Content" xml:space="preserve">
     <value>Agregar otro tramo</value>
   </data>
-  <data name="Flight_Search_Sub_Section.Text" xml:space="preserve">
+  <data name="Flight_Search_Sub_Section.Content" xml:space="preserve">
     <value>Borrar tramo</value>
   </data>
   <data name="Flight_Section_Section.Text" xml:space="preserve">
     <value>Tramo </value>
   </data>
-  <data name="Flight_Search_Multple.Text" xml:space="preserve">
-    <value>MULTIPLES</value>
+  <data name="Flight_Search_Multple.Header" xml:space="preserve">
+    <value>múltiples</value>
   </data>
-  <data name="Flight_Search_One_Way.Text" xml:space="preserve">
-    <value>IDA</value>
+  <data name="Flight_Search_One_Way.Header" xml:space="preserve">
+    <value>ida</value>
   </data>
-  <data name="Flight_Search_Round_Trip.Text" xml:space="preserve">
-    <value>IDA Y VUELTA</value>
+  <data name="Flight_Search_Round_Trip.Header" xml:space="preserve">
+    <value>ida y vuelta</value>
   </data>
   <data name="Page_FlightResult_Adult.Text" xml:space="preserve">
     <value>Adulto</value>
@@ -305,20 +305,50 @@
   </data>
   <data name="Generic_Go" xml:space="preserve">
     <value>Ida</value>
+    </data>
+  <data name="Flights_Search_SearchButton.Content" xml:space="preserve">
+    <value>Buscar vuelos</value>
   </data>
   <data name="Generic_Multiple" xml:space="preserve">
     <value>Multiple</value>
+    </data>
+  <data name="Flights_Search_Departure" xml:space="preserve">
+    <value>Partida</value>
   </data>
   <data name="Generic_Return" xml:space="preserve">
     <value>Vuelta</value>
+    </data>
+  <data name="Flights_Search_Destination" xml:space="preserve">
+    <value>Destino</value>
   </data>
   <data name="Page_Flight_Details_Return.Text" xml:space="preserve">
     <value>Vuelta</value>
+    </data>
+  <data name="Flights_Search_Origin" xml:space="preserve">
+    <value>Origen</value>
   </data>
   <data name="AppBarButton_Filters.Label" xml:space="preserve">
     <value>Filtros</value>
+    </data>
+  <data name="Flights_Search_Return" xml:space="preserve">
+    <value>Regreso</value>
   </data>
   <data name="AppBarButton_OrderBy.Label" xml:space="preserve">
     <value>Ordenar</value>
+    </data>
+  <data name="Flights_Search_Adults" xml:space="preserve">
+    <value>Adultos</value>
+  </data>
+  <data name="Flights_Search_Children" xml:space="preserve">
+    <value>Menores</value>
+  </data>
+  <data name="Flights_Search_ChildrenAge" xml:space="preserve">
+    <value>Edad del menor</value>
+  </data>
+  <data name="Page_CountrySelection_configuration.Text" xml:space="preserve">
+    <value>CONFIGURACION</value>
+  </data>
+  <data name="Page_Detail_TitleDetail" xml:space="preserve">
+    <value>DETALLE</value>
   </data>
 </root>

@@ -34,9 +34,6 @@ namespace Despegar.WP.UI
         
         public CountrySelection()
         {
-            var resourceLoader = new Windows.ApplicationModel.Resources.ResourceLoader();
-                  
-            this.DataContext = this;
             this.InitializeComponent();
         }
 
@@ -50,20 +47,13 @@ namespace Despegar.WP.UI
         {
             base.OnNavigatedTo(e);
             IConfigurationService configurationService = GlobalConfiguration.CoreContext.GetConfigurationService();            
-            Configuration configuration = await configurationService.GetConfigurations();
+            Configuration configurations = await configurationService.GetConfigurations();
 
 
-            sitesListView.DataContext = configuration;
+            sitesListView.DataContext = configurations;
         }
 
-        //private CountryItem GetCountries(Configuration p)
-        //{
-        //    //CountryItem ci = new CountryItem();
-        //    //ci.Code = p.id;
-        //    //ci.CountryName = p.description;
-        //    //return ci;
-        //}
-
+        
         private void ListView_ItemClick(object sender, ItemClickEventArgs e)
         {
             //persist data in phone

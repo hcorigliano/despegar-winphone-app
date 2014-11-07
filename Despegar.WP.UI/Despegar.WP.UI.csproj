@@ -112,6 +112,8 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="SampleData\CountrySelectionSample.cs" />
+    <Compile Include="Styles\CustomThickness.cs" />
     <Compile Include="Classes\PagesManager.cs" />
     <Compile Include="Common\Converter\DayofWeekShortName.cs" />
     <Compile Include="Common\Converter\CommonConverters.cs" />
@@ -124,9 +126,6 @@
     <Compile Include="Common\PageExtensions.cs" />
     <Compile Include="Common\RelayCommand.cs" />
     <Compile Include="Common\SuspensionManager.cs" />
-    <Compile Include="Controls\Flights\ChildControl.xaml.cs">
-      <DependentUpon>ChildControl.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Controls\Flights\DateControl.xaml.cs">
       <DependentUpon>DateControl.xaml</DependentUpon>
     </Compile>
@@ -170,6 +169,12 @@
     <Compile Include="Developer\Controls\ColorOption.cs" />
     <Compile Include="Developer\Controls\ColorPicker.xaml.cs">
       <DependentUpon>ColorPicker.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Developer\Controls\UserControlDesignGrid.xaml.cs">
+      <DependentUpon>UserControlDesignGrid.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Developer\Controls\UserControlDesignGridOdd.xaml.cs">
+      <DependentUpon>UserControlDesignGridOdd.xaml</DependentUpon>
     </Compile>
     <Compile Include="Developer\DeveloperViewModel.cs" />
     <Compile Include="Developer\DevTools.xaml.cs">
@@ -227,6 +232,7 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Strings\AppResources.cs" />
+    <Compile Include="Styles\CustomThicknessValueConverter.cs" />
     <Page Include="Controls\Flights\DateControlSimple.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -244,6 +250,14 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Controls\Flights\Results\SearchMiniBoxControl.xaml">
+    <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Developer\Controls\UserControlDesignGrid.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Developer\Controls\UserControlDesignGridOdd.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -283,11 +297,39 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\ApplicationIcon.png" />
+    <Content Include="Assets\country\Argentina.png" />
+    <Content Include="Assets\country\Australia.png" />
+    <Content Include="Assets\country\Bolivia.png" />
+    <Content Include="Assets\country\Brasil.png" />
+    <Content Include="Assets\country\Chile.png" />
+    <Content Include="Assets\country\Colombia.png" />
+    <Content Include="Assets\country\Costa Rica.png" />
+    <Content Include="Assets\country\Ecuador.png" />
+    <Content Include="Assets\country\El Salvador.png" />
+    <Content Include="Assets\country\España.png" />
+    <Content Include="Assets\country\Estados Unidos.png" />
+    <Content Include="Assets\country\Guatemala.png" />
+    <Content Include="Assets\country\Honduras.png" />
+    <Content Include="Assets\country\México.png" />
+    <Content Include="Assets\country\Nicaragua.png" />
+    <Content Include="Assets\country\Panamá.png" />
+    <Content Include="Assets\country\Paraguay.png" />
+    <Content Include="Assets\country\Peru.png" />
+    <Content Include="Assets\country\Puerto Rico.png" />
+    <Content Include="Assets\country\República Dominicana.png" />
+    <Content Include="Assets\country\Uruguay.png" />
+    <Content Include="Assets\country\Venezuela.png" />
+    <Content Include="Assets\Helpers\a.png" />
+    <Content Include="Assets\Helpers\matrix_green.png" />
+    <Content Include="Assets\Helpers\matrix_magenta.png" />
     <Content Include="Assets\HomeButton_Flights.png" />
     <Content Include="Assets\HomeButton_FlightStatus.png" />
     <Content Include="Assets\HomeButton_Hotels.png" />
     <Content Include="Assets\HomeButton_MyDespegar.png" />
     <Content Include="Assets\Logo.scale-240.png" />
+    <Content Include="Assets\Helpers\matrix_green_strong.png" />
+    <Content Include="Assets\Helpers\matrix_red.png" />
+    <Content Include="Assets\Helpers\matrix_red_strong.png" />
     <Content Include="Assets\SmallLogo.scale-240.png" />
     <Content Include="Assets\SplashScreenImage.png" />
     <Content Include="Assets\Square71x71Logo.scale-240.png" />
@@ -526,10 +568,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="Controls\Flights\ChildControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Controls\Flights\DateControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -646,9 +684,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <DesignData Include="SampleData\DeveloperViewModelSampleData.xaml" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">
     <VisualStudioVersion>12.0</VisualStudioVersion>

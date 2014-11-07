@@ -1,20 +1,10 @@
 ﻿using Despegar.Core.Business.Flight.CitiesAutocomplete;
 using Despegar.WP.UI.Model;
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
 
@@ -23,28 +13,15 @@ namespace Despegar.WP.UI.Controls.Flights
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class SearchAirport : Page
+    public sealed partial class SearchAirport : UserControl
     {
-        private FlightsSearchBoxModel FlightSearchBoxModel = new FlightsSearchBoxModel();
-        public AutoSuggestBox OriginAirportControl{set;get;}
-        public AutoSuggestBox DestinyAirportControl { set; get; }
+        private FlightsSearchBoxModel FlightSearchBoxModel = new FlightsSearchBoxModel();  
         public string AirportOrigin { get; set; }
         public string AirportDestiny { get; set; }
 
         public SearchAirport()
         {
-            this.InitializeComponent();
-            OriginAirportControl = origin;
-            DestinyAirportControl = destiny;
-        }
-
-        /// <summary>
-        /// Invoked when this page is about to be displayed in a Frame.
-        /// </summary>
-        /// <param name="e">Event data that describes how this page was reached.
-        /// This parameter is typically used to configure the page.</param>
-        protected override void OnNavigatedTo(NavigationEventArgs e)
-        {
+            this.InitializeComponent();            
         }
 
 
@@ -63,11 +40,11 @@ namespace Despegar.WP.UI.Controls.Flights
             var selected = (CityAutocomplete)args.SelectedItem;
             if (selected != null)
             {
-                if(sender.Name == "destiny")
+                if (sender.Name == "DestinyInput")
                 {
                     AirportDestiny = selected.code;
                 }
-                else if (sender.Name == "origin")
+                else if (sender.Name == "OriginInput")
                 {
                     AirportOrigin = selected.code;
                 }
@@ -92,11 +69,11 @@ namespace Despegar.WP.UI.Controls.Flights
                 if (city != null)
                 {
                     _sender.Text = city.name;
-                    if (_sender.Name == "destiny")
+                    if (_sender.Name == "DestinyInput")
                     {
                         AirportDestiny = city.code;
                     }
-                    else if (_sender.Name == "origin")
+                    else if (_sender.Name == "OriginInput")
                     {
                         AirportOrigin = city.code;
                     }
@@ -104,11 +81,11 @@ namespace Despegar.WP.UI.Controls.Flights
                 else
                 {
                     _sender.Text = "";
-                    if (_sender.Name == "destiny")
+                    if (_sender.Name == "DestinyInput")
                     {
                         AirportDestiny = "";
                     }
-                    else if (_sender.Name == "origin")
+                    else if (_sender.Name == "OriginInput")
                     {
                         AirportOrigin = "";
                     }
@@ -117,11 +94,11 @@ namespace Despegar.WP.UI.Controls.Flights
             else
             {
                 _sender.Text = "";
-                if (_sender.Name == "destiny")
+                if (_sender.Name == "DestinyInput")
                 {
                     AirportDestiny = "";
                 }
-                else if (_sender.Name == "origin")
+                else if (_sender.Name == "OriginInput")
                 {
                     AirportOrigin = "";
                 }

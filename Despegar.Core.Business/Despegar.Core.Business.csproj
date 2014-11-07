@@ -42,11 +42,13 @@
     <TargetPlatform Include="Windows, Version=8.1" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Configuration\CitiesFields.cs" />
     <Compile Include="Configuration\Configuration.cs" />
     <Compile Include="Configuration\Contact.cs" />
     <Compile Include="Configuration\Domain.cs" />
     <Compile Include="Configuration\Product.cs" />
     <Compile Include="Configuration\Site.cs" />
+    <Compile Include="Configuration\UpdateFields.cs" />
     <Compile Include="Culture\Site.cs" />
     <Compile Include="Dynamics\DynamicFlightBookingFieldsToPost.cs" />
     <Compile Include="Enums\FlightSearchChildEnum.cs" />

@@ -9,6 +9,8 @@ namespace Despegar.Core.IService
 {
     public interface IConfigurationService
     {
-        Task<Configuration> GetConfigurations();               
+        Task<Configuration> GetConfigurations();
+        Task<UpdateFields> CheckUpdate();
+        Task<CitiesFields> AutoCompleteCities(string CountryCode, string Search, string CityResult);       
     }
 }
