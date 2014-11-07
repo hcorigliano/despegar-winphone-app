@@ -318,4 +318,7 @@
   <data name="Page_CountrySelection_configuration.Text" xml:space="preserve">
     <value>CONFIGURACION</value>
   </data>
+  <data name="Page_Detail_TitleDetail" xml:space="preserve">
+    <value>DETALLE</value>
+  </data>
 </root>

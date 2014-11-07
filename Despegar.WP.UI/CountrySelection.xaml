@@ -12,6 +12,11 @@
     <Page.Resources>
         <conv:StringConverter x:Key="StringConverter"></conv:StringConverter>
     </Page.Resources>
+    <Page.BottomAppBar>
+        <CommandBar ClosedDisplayMode="Minimal">
+            <!--<AppBarButton Icon="Setting" x:Uid="Home_Settings" FontSize="14" Click="AppBarButton_Click" />-->
+        </CommandBar>
+    </Page.BottomAppBar>
     <Grid x:Name="LayoutRoot" Style="{StaticResource MainContainerGrid}">
         <Grid.ChildrenTransitions>
             <TransitionCollection>
@@ -28,7 +33,6 @@
         <!-- Title Panel -->
         <Image Grid.Row="0" Style="{StaticResource TopLogo}" />
         <TextBlock Grid.Row="1" x:Uid="Page_CountrySelection_configuration" Style="{StaticResource PageHeaderSmall}" Text="CONFIGURACION" />
-
         <TextBlock Grid.Row="2" x:Uid="Page_CountrySelection_selection" Style="{StaticResource PageHeader}" Text="seleccion de pais" />
 
         <ListView Grid.Row="3"  x:Name="sitesListView" IsItemClickEnabled="True" ItemClick="ListView_ItemClick" ItemsSource="{Binding Path=sites}" ItemContainerStyle="{StaticResource CountryButtonItemContainer}">
