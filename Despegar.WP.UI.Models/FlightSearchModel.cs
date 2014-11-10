@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Despegar.WP.UI.Model.Classes;
 using Despegar.WP.UI.Model.Enums;
+using Despegar.Core.Business.Flight.Itineraries;
 
 namespace Despegar.WP.UI.Model
 {
@@ -23,14 +24,6 @@ namespace Despegar.WP.UI.Model
         public int LimitResult { get; set; }
         public int Offset { get; set; }
 
-        public string Language
-        {
-            get
-            {
-                return "es";
-            }
-        }
-
         public int TotalPassangers {
                 get {
                     
@@ -38,6 +31,10 @@ namespace Despegar.WP.UI.Model
                 }
             }
         public int TotalFlights { get; set; }
+
+        public List<Facet> FacetsSearch { get; set; }
+        public List<Value> SortingValuesSearch { get; set; }
+        public string SortingCriteriaSearch { get; set; }
 
         //auxiliar
         public string MultipleDates { get; set; }

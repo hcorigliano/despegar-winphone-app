@@ -79,7 +79,7 @@
     <Grid x:Name="LayoutRoot" >
         <Interactivity:Interaction.Behaviors>
             <Core:EventTriggerBehavior SourceObject="{Binding ElementName=appBarFilter}" EventName="Click">
-                <Core:NavigateToPageAction TargetPage="Despegar.WP.UI.Product.Flights.FlightFilters" Parameter="{Binding Facets}"/>
+                <Core:NavigateToPageAction TargetPage="Despegar.WP.UI.Product.Flights.FlightFilters" Parameter="{Binding Facets ,Mode=TwoWay}"/>
             </Core:EventTriggerBehavior>
             <Core:EventTriggerBehavior SourceObject="{Binding ElementName=appBarSortBy}" EventName="Click">
                 <Core:NavigateToPageAction Parameter="{Binding Sorting, Mode=TwoWay}" TargetPage="Despegar.WP.UI.Product.Flights.FlightSortBy"/>
