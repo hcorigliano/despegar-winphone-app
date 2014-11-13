@@ -57,8 +57,6 @@ namespace Despegar.WP.UI.Product.Flights
             {
                 // Multiples are inserted as an Outbound collection of Routes
                 ViewModel = new FlightDetailsViewModel(routes.outbound, routes.inbound);
-
-                textBlock.DataContext = flightDetailModelInbound;
             }
 
             DataContext = ViewModel;

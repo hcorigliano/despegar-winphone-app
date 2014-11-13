@@ -131,10 +131,8 @@ namespace Despegar.WP.UI.Product.Flights
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
             this.navigationHelper.OnNavigatedFrom(e);
-        }
 
-                    pageParameters.Itineraries = intinerarie;
-                    pageParameters.SearchModel = flightSearchModel;
-                    PagesManager.GoTo(typeof(FlightResults), pageParameters);
+        }       
+                    
     }
 }

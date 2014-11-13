@@ -145,60 +145,49 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
             return await flightService.GetCitiesAutocomplete(cityString);
         }
 
-        private async void SearchTwoWay()
+        private void SearchTwoWay()
         {
             coreSearchModel.PageMode = FlightSearchPages.RoundTrip;
             UpdatePassengers();
 
-            if (coreSearchModel.IsValid())
-            {
-                FlightsItineraries intineraries = await flightService.GetItineraries(coreSearchModel);
-                //TODO handle error with exceptions.
-                Navigator.GoTo(ViewModelPages.FlightsResults, intineraries);
-            } else { 
-                // Error messages
-            }
+            DoSearch();            
         }
 
-        private async void SearchOneWay()
+        private void SearchOneWay()
         { 
             coreSearchModel.PageMode = FlightSearchPages.OneWay;
             UpdatePassengers();
             coreSearchModel.DestinationDate = DateTimeOffset.MinValue; // TODO HACER EN EL SET PageMode del COREMODEL
 
-            if (coreSearchModel.IsValid())
-            {
-                FlightsItineraries intineraries = await flightService.GetItineraries(coreSearchModel);
-
-                //TODO handle error with exceptions.
-                Navigator.GoTo(ViewModelPages.FlightsResults, intineraries);
-            }
-            else
-            {
-                // TODO send signal to controls so each one of them can valite it self.
-                //var messageDialog = new MessageDialog("No se completo correctamente las ciudades.");
-                //await messageDialog.ShowAsync();
-            }
+            DoSearch();
         }
 
-        private async void SearchMultiples()
+        private void SearchMultiples()
         {            
             coreSearchModel.PageMode = FlightSearchPages.Multiple;
             UpdatePassengers();
             coreSearchModel.DepartureDate = DateTimeOffset.MaxValue; // TODO HACER EN EL SET PageMode del COREMODEL
             coreSearchModel.DestinationDate = DateTimeOffset.MinValue; // TODO HACER EN EL SET PageMode del COREMODEL
-             
+
+            DoSearch();
+        }
+
+        private async void DoSearch()
+        {
             if (coreSearchModel.IsValid())
             {
                 FlightsItineraries intineraries = await flightService.GetItineraries(coreSearchModel);
-                // TODO handle error with exceptions.
+                //TODO handle error with exceptions.
+
+
+                //pageParameters.Itineraries = intinerarie;
+                //pageParameters.SearchModel = coreSearchModel;
+
                 Navigator.GoTo(ViewModelPages.FlightsResults, intineraries);
             }
             else
             {
-                //TODO send signal to controls so each one of them can valite it self.
-                //var messageDialog = new MessageDialog("No se completo correctamente las ciudades.");
-                //await messageDialog.ShowAsync();
+                // Error messages
             }
         }
 
