@@ -3,6 +3,7 @@ using Despegar.Core.Business.Flight;
 using Despegar.Core.Business.Flight.CitiesAutocomplete;
 using Despegar.Core.Business.Flight.Itineraries;
 using Despegar.Core.IService;
+using Despegar.WP.UI.Model.Classes;
 using Despegar.WP.UI.Model.Interfaces;
 using Despegar.WP.UI.Models.Classes;
 using System;
@@ -179,11 +180,11 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
                 FlightsItineraries intineraries = await flightService.GetItineraries(coreSearchModel);
                 //TODO handle error with exceptions.
 
+                var pageParameters = new PageParameters();
+                pageParameters.Itineraries = intineraries;
+                pageParameters.SearchModel = coreSearchModel;
 
-                //pageParameters.Itineraries = intinerarie;
-                //pageParameters.SearchModel = coreSearchModel;
-
-                Navigator.GoTo(ViewModelPages.FlightsResults, intineraries);
+                Navigator.GoTo(ViewModelPages.FlightsResults, pageParameters);
             }
             else
             {
