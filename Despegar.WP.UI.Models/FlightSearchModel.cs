@@ -33,8 +33,24 @@ namespace Despegar.WP.UI.Model
         public int TotalFlights { get; set; }
 
         public List<Facet> FacetsSearch { get; set; }
-        public List<Value> SortingValuesSearch { get; set; }
+        private Value3 OldValue { get; set; }
+        public Value3 SortingValuesSearch { 
+            get
+            {
+                if (OldValue == null) return new Value3 { label=String.Empty , type = String.Empty , value = String.Empty };
+                return OldValue;
+            } 
+            set
+            {
+                HasNewSortingSearch = !(value.label == SortingValuesSearch.label);
+                OldValue = value;
+            } 
+        }
+        public bool HasNewSortingSearch { get; set;}
+
         public string SortingCriteriaSearch { get; set; }
+
+        public SearchStates SearchStatus { get; set; }
 
         //auxiliar
         public string MultipleDates { get; set; }
@@ -71,7 +87,7 @@ namespace Despegar.WP.UI.Model
             FlightsSearchBoxModel flightSearchBoxModel = new FlightsSearchBoxModel();
             //flightSearchBoxModel.GetItineraries("BUE", "LAX", "2014-12-11", 1, "2014-12-13", 0, 0, 0, 10, "", "", "", "");
 
-            return flightSearchBoxModel.GetItineraries(this.OriginFlight, this.DestinationFlight, DateConverterDeparture(this.DepartureDate), this.AdultsInFlights, DateConverterDestination(this.DestinationDate), this.ChildrenInFlights, this.InfantsInFlights, this.Offset, this.LimitResult, "", "", "", "");
+            return flightSearchBoxModel.GetItineraries(this.OriginFlight, this.DestinationFlight, DateConverterDeparture(this.DepartureDate), this.AdultsInFlights, DateConverterDestination(this.DestinationDate), this.ChildrenInFlights, this.InfantsInFlights, this.Offset, this.LimitResult, SortingValuesSearch.value, SortingValuesSearch.type, "", this.FacetsCodes);
         }
 
 
@@ -130,6 +146,53 @@ namespace Despegar.WP.UI.Model
             }
 
             return true;
+        }
+
+        public bool HasFacetsSelected
+        {
+            get
+            {
+                if (FacetsSearch != null)
+                {
+                    return FacetsSearch.Count > 0;
+                }
+                return false;
+            }
+        }
+
+        public string FacetsCodes
+        {
+            get
+            {
+                // TODO create array separatated "," for webservice call
+
+                // var element = from x in FacetsSearch
+                // var codes = from s in  FacetsSearch 
+                //            select  new stri}
+
+                // for each facet check the list of value on true
+                // get the string array then create a array of separeted by comma
+
+                List<String> facetListNames = new List<string>();
+                if (FacetsSearch == null) return String.Empty;
+
+                foreach (Facet facet in FacetsSearch)
+                {
+                    var elements = facet.values.Where(x=>x.selected==true);
+
+                    var response = (from value in elements
+                                     select value.value);
+
+                    if (response != null)
+                    {
+                        facetListNames.AddRange(response.ToList());
+                    }
+                }
+
+                if (facetListNames.Count == 0) return String.Empty;
+
+                return String.Join(",",facetListNames);
+            }
         }
     }
 }

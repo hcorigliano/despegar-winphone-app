@@ -65,6 +65,13 @@ namespace Despegar.WP.UI.Product.Flights
             get { return this.defaultViewModel; }
         }
 
+        protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
+        {
+            base.OnNavigatingFrom(e);
+
+            flightSearchModel.SearchStatus = Model.Enums.SearchStates.SearchAgain;
+        }
+
         /// <summary>
         /// Populates the page with content passed during navigation.  Any saved state is also
         /// provided when recreating a page from a prior session.
@@ -76,16 +83,31 @@ namespace Despegar.WP.UI.Product.Flights
         /// <see cref="Frame.Navigate(Type, Object)"/> when this page was initially requested and
         /// a dictionary of state preserved by this page during an earlier
         /// session.  The state will be null the first time a page is visited.</param>
-        private void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
+        private async void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
         {
+
             PageParameters pageParameters = e.NavigationParameter as PageParameters;
 
-            flightResultModel.Itineraries = pageParameters.Itineraries as FlightsItineraries;
+            FlightsItineraries Itineraries = new FlightsItineraries();
 
+            
+            flightResultModel.Itineraries = pageParameters.Itineraries as FlightsItineraries;
+            Itineraries = pageParameters.Itineraries as FlightsItineraries;
             flightSearchModel = pageParameters.SearchModel as FlightSearchModel;
+           
+            flightSearchModel.FacetsSearch = flightResultModel.SelectedFacets;
+            flightSearchModel.SortingValuesSearch = flightResultModel.SelectedSorting;
+            flightSearchModel.SortingCriteriaSearch = flightResultModel.Sorting.criteria;
+
+            if (flightSearchModel.SearchStatus == Model.Enums.SearchStates.SearchAgain)
+            {
+                Itineraries = await flightSearchModel.Search();
+                flightResultModel.Clear();
+                flightResultModel.Itineraries = Itineraries;
+                flightSearchModel.SearchStatus = Model.Enums.SearchStates.FirstSearch;
+            }
 
             this.miniboxSearch.DataContext = flightSearchModel;
-
         }
 
         /// <summary>
