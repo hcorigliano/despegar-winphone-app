@@ -1,12 +1,15 @@
 ﻿using Despegar.WP.UI.Controls;
 using Despegar.WP.UI.Developer;
+using System.Collections.Generic;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Media;
 
 namespace Despegar.WP.UI.Common
 {
     public static class PageExtensions
     {
+        #region ** DEV TOOLS EXTENSIONS **
         public static void CheckDeveloperTools(this Page page)
         {
            #if DEBUG
@@ -26,6 +29,27 @@ namespace Despegar.WP.UI.Common
             ModalPopup popup = new ModalPopup(new DevTools());
             popup.Show();
         }
+        #endregion
 
+        // Dependecy Object Extension
+        public static IEnumerable<T> FindVisualChildren<T>(this DependencyObject depObj) where T : DependencyObject
+        {
+            if (depObj != null)
+            {
+                for (int i = 0; i < VisualTreeHelper.GetChildrenCount(depObj); i++)
+                {
+                    DependencyObject child = VisualTreeHelper.GetChild(depObj, i);
+                    if (child != null && child is T)
+                    {
+                        yield return (T)child;
+                    }
+
+                    foreach (T childOfChild in FindVisualChildren<T>(child))
+                    {
+                        yield return childOfChild;
+                    }
+                }
+            }
+        }
     }
 }

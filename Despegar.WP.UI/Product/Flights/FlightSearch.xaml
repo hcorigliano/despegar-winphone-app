@@ -13,7 +13,9 @@
     
     <Page.BottomAppBar>
         <CommandBar ClosedDisplayMode="Minimal">
-            <!--<AppBarButton Icon="Setting" x:Uid="Home_Settings" FontSize="14" Click="AppBarButton_Click" />-->
+            <!--<AppBarButton Icon="Setting" x:Uid="Home_Settings" FontSize="12" Click="AppBarButton_Click" />-->
+            <AppBarButton Icon="Add" x:Uid="Page_Flights_Search_AddSegment" FontSize="12" Command="{Binding AddSegmentMultipleCommand}"/>
+            <AppBarButton Icon="Remove" x:Uid="Page_Flights_Search_RemoveSegment" FontSize="12" Command="{Binding RemoveSegmentMultipleCommand}" />
         </CommandBar>
     </Page.BottomAppBar>
 
@@ -35,12 +37,6 @@
         
 
         <Pivot xmlns:src="using:Despegar.WP.UI.Controls.Flights" Grid.Row="2" x:Name="ContentRoot" Style="{StaticResource PivotBaseMain}" Margin="0,-5,0,0">
-            <Pivot.HeaderTemplate>
-                <DataTemplate>
-                    <TextBlock Text="{Binding}"  Style="{StaticResource PivotHeader}" />
-                </DataTemplate>
-            </Pivot.HeaderTemplate>
-
             <!--ReoundTrip Flights-->
             <PivotItem x:Uid="Flight_Search_Round_Trip" Header="ida y vuelta" Style="{StaticResource PivotItemBase}">
                 <ScrollViewer>
@@ -50,13 +46,13 @@
                             <RowDefinition Height="{StaticResource Block3p}" />
                             <RowDefinition />
                             <RowDefinition />
-                        </Grid.RowDefinitions>                        
-                        
-                        <src:SearchAirport Grid.Row="0" x:Name="airportsContainerRoundTrip" />
-                        <src:DateControl Grid.Row="1" x:Name="dateControlContainerRoundTrip"/>
-                        <src:QuantityPassagersControl  Grid.Row="2" x:Name="quantityPassagersContainerRoundTrip"/>
+                        </Grid.RowDefinitions>
 
-                        <Button Grid.Row="3" x:Uid="Flights_Search_SearchButton" Click="ButtonReturn_Click" Style="{StaticResource ButtonBottom}"  x:Name="RoundTripButton" Content="Buscar vuelos"  />
+                        <src:SearchAirport Grid.Row="0"   SelectedOrigin="{Binding Origin, Mode=TwoWay}" SelectedDestination="{Binding Destination, Mode=TwoWay}"/>
+                        <src:DateControl Grid.Row="1"  FromDate="{Binding FromDate, Mode=TwoWay}" ToDate="{Binding ToDate, Mode=TwoWay}" />
+                        <src:QuantityPassagersControl  Grid.Row="2" DataContext="{Binding PassengersViewModel}"   Adults="{Binding Adults, Mode=TwoWay}" Children="{Binding Children, Mode=TwoWay}"  Infants="{Binding Infants, Mode=TwoWay}"   />
+
+                        <Button Grid.Row="3" x:Uid="Flights_Search_SearchButton" Command="{Binding SearchTwoWayCommand}" Style="{StaticResource ButtonBottom}" Content="Buscar vuelos"  />
                     </Grid>
                 </ScrollViewer>
             </PivotItem>
@@ -72,16 +68,16 @@
                             <RowDefinition />
                         </Grid.RowDefinitions>
 
-                        <src:SearchAirport  Grid.Row="0" x:Name="airportsContainerOneWay"></src:SearchAirport>
-                        <src:DateControlSimple Grid.Row="1" x:Name="dateControlContainerOneWay"></src:DateControlSimple>
-                        <src:QuantityPassagersControl Grid.Row="2" x:Name="quantityPassagersContainerOneWay"></src:QuantityPassagersControl>
+                        <src:SearchAirport  Grid.Row="0" SelectedOrigin="{Binding Origin, Mode=TwoWay}" SelectedDestination="{Binding Destination, Mode=TwoWay}" />
+                        <src:DateControlSimple Grid.Row="1" SelectedDate="{Binding FromDate, Mode=TwoWay}" />
+                        <src:QuantityPassagersControl Grid.Row="2"  Adults="{Binding Adults, Mode=TwoWay}" Children="{Binding Children, Mode=TwoWay}"  Infants="{Binding Infants, Mode=TwoWay}"  />
 
-                        <Button Click="ButtonReturn_Click" Grid.Row="4" x:Name="OneWayButton" Style="{StaticResource ButtonBottom}" Content="Buscar vuelos"/>
+                        <Button Command="{Binding SearchOneWayCommand}" Grid.Row="4"  Style="{StaticResource ButtonBottom}" Content="Buscar vuelos"/>
                     </Grid>
                 </ScrollViewer>
             </PivotItem>
 
-            <!--Multiple flights-->
+            <!-- Multiple flights -->
             <PivotItem x:Uid="Flight_Search_Multple"  Header="multiples" Style="{StaticResource PivotItemBase}">
                 <ScrollViewer>
                     <Grid>
@@ -99,7 +95,7 @@
                                     <ColumnDefinition Width="auto"></ColumnDefinition>
                                 </Grid.ColumnDefinitions>
 
-                                <Button  Style="{StaticResource ButtonBase}" x:Uid="Flight_Search_Sub_Section" x:Name="subSectionButton" Grid.Column="1" Click="subSectionButton_Click" Content="Borrar tramo"></Button>
+                                <Button  Style="{StaticResource ButtonBase}" x:Uid="Flight_Search_Sub_Section" x:Name="subSectionButton" Grid.Column="1" Content="Borrar tramo"></Button>
                             </Grid>
 
                             <Grid x:Name="sectionAddGrid">
@@ -107,13 +103,13 @@
                                     <ColumnDefinition Width="auto"></ColumnDefinition>
                                 </Grid.ColumnDefinitions>
 
-                                <Button Style="{StaticResource ButtonBase}" x:Uid="Flight_Search_Add_Section" x:Name="addSectionButton" Grid.Column="1"  Click="AddSectionButton_Click"  Content="Agregar" />
+                                <Button Style="{StaticResource ButtonBase}" x:Uid="Flight_Search_Add_Section" x:Name="addSectionButton" Grid.Column="1"   Content="Agregar" />
                             </Grid>
                         </StackPanel>
 
-                        <src:QuantityPassagersControl Grid.Row="2" x:Name="quantityPassagersContainerMultiple"></src:QuantityPassagersControl>
-                        
-                        <Button Click="ButtonReturn_Click" x:Name="MultipleButton" Style="{StaticResource ButtonBottom}" Content="Buscar vuelos"/>
+                        <src:QuantityPassagersControl Grid.Row="2"  Adults="{Binding Adults, Mode=TwoWay}" Children="{Binding Children, Mode=TwoWay}"  Infants="{Binding Infants, Mode=TwoWay}"  />
+
+                        <Button Command="{Binding SearchMultiplesCommand}"  Style="{StaticResource ButtonBottom}" Content="Buscar vuelos"/>
                     </Grid>
                 </ScrollViewer>
             </PivotItem>

@@ -113,9 +113,10 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Common\Converter\MiniboxVisibilityConverter.cs" />
+    <Compile Include="Common\Navigator.cs" />
+    <Compile Include="Common\OldPagesManager.cs" />
+    <Compile Include="Controls\Classes\Minor.cs" />
     <Compile Include="SampleData\CountrySelectionSample.cs" />
-    <Compile Include="Styles\CustomThickness.cs" />
-    <Compile Include="Classes\PagesManager.cs" />
     <Compile Include="Common\Converter\DayofWeekShortName.cs" />
     <Compile Include="Common\Converter\CommonConverters.cs" />
     <Compile Include="Common\Converter\GetMonthName.cs" />
@@ -124,7 +125,6 @@
     <Compile Include="Common\NavigationHelper.cs" />
     <Compile Include="Common\ObservableDictionary.cs" />
     <Compile Include="Common\PageExtensions.cs" />
-    <Compile Include="Common\RelayCommand.cs" />
     <Compile Include="Common\SuspensionManager.cs" />
     <Compile Include="Controls\Flights\DateControl.xaml.cs">
       <DependentUpon>DateControl.xaml</DependentUpon>
@@ -232,7 +232,6 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Strings\AppResources.cs" />
-    <Compile Include="Styles\CustomThicknessValueConverter.cs" />
     <Page Include="Controls\Flights\DateControlSimple.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -297,6 +296,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\ApplicationIcon.png" />
+    <Content Include="Assets\clock.jpg" />
     <Content Include="Assets\country\Argentina.png" />
     <Content Include="Assets\country\Australia.png" />
     <Content Include="Assets\country\Bolivia.png" />
@@ -684,6 +684,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <DesignData Include="SampleData\SegmentSampleData.xaml" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">
     <VisualStudioVersion>12.0</VisualStudioVersion>

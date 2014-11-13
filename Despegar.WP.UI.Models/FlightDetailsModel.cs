@@ -1,5 +1,6 @@
 ﻿using Despegar.Core.Business.Flight.Itineraries;
 using Despegar.WP.UI.Model.Classes.Flights;
+using Despegar.WP.UI.Model.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Despegar.WP.UI.Model
 {
-    public class FlightDetailsModel : AppModelBase, Interfaces.IInitializeModelInterface, Interfaces.IValidateInterface
+    public class FlightDetails : AppModelBase, IInitializeModelInterface, IValidateInterface
     {
         private Windows.ApplicationModel.Resources.ResourceLoader loader = new Windows.ApplicationModel.Resources.ResourceLoader();
 

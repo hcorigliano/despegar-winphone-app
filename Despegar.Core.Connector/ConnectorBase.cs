@@ -81,6 +81,7 @@ namespace Despegar.Core.Connector
         {
             SetCommonHeaders(httpMessage);
             string response = String.Empty;
+            bool customExceptionThrown = false;
 
             try
             {
@@ -91,14 +92,17 @@ namespace Despegar.Core.Connector
                 // Check HTTP Error Codes
                 if (!httpResponse.IsSuccessStatusCode)
                 {
-                    // TODO: Log exception
-                    throw new HTTPStatusErrorException(String.Format("[Connector]: HTTP Error code {0} Message: {1}" , httpResponse.StatusCode.ToString(), response));
+                    customExceptionThrown = true;
+                    var e =  new HTTPStatusErrorException(String.Format("[Connector]: HTTP Error code {0} Message: {1}" , httpResponse.StatusCode.ToString(), response));
+                    Logger.LogCoreException(e);                    
+                    throw e;
                 }
 
                 // Check Empty Response
                 if (String.IsNullOrEmpty(response))
                 {
                     var e = new HTTPStatusErrorException(String.Format("[Connector]: HTTP Error code {0} Message: {1}", httpResponse.StatusCode.ToString(), response));
+                    customExceptionThrown = true;
                     Logger.LogCoreException(e);
                     throw e;
                 }
@@ -110,6 +114,7 @@ namespace Despegar.Core.Connector
             {
                 // HTTP Client error
                 var e = new WebConnectivityException(String.Format("[Connector]: Could not connect to Service URL ", httpMessage.RequestUri), ex);
+                customExceptionThrown = true;
                 Logger.LogCoreException(e);
                 throw e;
             }
@@ -117,15 +122,20 @@ namespace Despegar.Core.Connector
             {
                 // Deserializer JSON.NET Error
                 var e = new JsonSerializerException(String.Format("[Connector]: Service call: {0}. Could not deserialize type '{1}' from service response data: {2}", httpMessage.RequestUri, typeof(T).FullName, response), ex);
+                customExceptionThrown = true;
                 Logger.LogCoreException(e);
                 throw e;
             }
-            catch (Exception ex) {
-                var e = new Exception(String.Format("[Connector]: Unknown Connector Error when calling Service URL {0}", httpMessage.RequestUri), ex);
-                Logger.LogCoreException(e);
-                throw e;
-            }
-        }
+            catch (Exception ex) 
+            {
+                if (customExceptionThrown)                 
+                    throw ex;
+                
+                  var e = new Exception(String.Format("[Connector]: Unknown Connector Error when calling Service URL {0}", httpMessage.RequestUri, ex.ToString()));
+                  Logger.LogCoreException(e);
+                  throw e;
+                }
+          }        
 
         /// <summary>
         /// Gets the Base Service URL. Example: "https://mobile.despegar.com"

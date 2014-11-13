@@ -183,9 +183,6 @@
   <data name="Page_FlightCheckout.Text" xml:space="preserve">
     <value>Pago</value>
   </data>
-  <data name="Page_FlightDetail.Text" xml:space="preserve">
-    <value>Detalles</value>
-  </data>
   <data name="Page_FlightResults.Text" xml:space="preserve">
     <value>Resultados</value>
   </data>
@@ -348,7 +345,40 @@
   <data name="Page_CountrySelection_configuration.Text" xml:space="preserve">
     <value>CONFIGURACION</value>
   </data>
-  <data name="Page_Detail_TitleDetail" xml:space="preserve">
+  <data name="Page_Detail_TitleDetail.Text" xml:space="preserve">
     <value>DETALLE</value>
+  </data>
+  <data name="Page_Flight_Detail_Go.Header" xml:space="preserve">
+    <value>ida</value>
+  </data>
+  <data name="Page_Flight_Detail_Return.Header" xml:space="preserve">
+    <value>vuelta</value>
+  </data>
+  <data name="Page_Flight_Detail_Buy.Text" xml:space="preserve">
+    <value>Comprar</value>
+  </data>
+  <data name="Page_Flight_Detail_Cancel.Text" xml:space="preserve">
+    <value>Cancelar</value>
+  </data>
+  <data name="Page_Flight_Detail_TimeWait.Text" xml:space="preserve">
+    <value>Conexion con espera de</value>
+  </data>
+  <data name="Page_Flight_InBound.Text" xml:space="preserve">
+    <value>Llega</value>
+  </data>
+  <data name="Page_Flight_Outbound.Text" xml:space="preserve">
+    <value>Sale</value>
+  </data>
+  <data name="Page_Flight_Detail_Flight" xml:space="preserve">
+    <value>Vuelo</value>
+  </data>
+  <data name="Page_Flight_Detail_OperatedBy" xml:space="preserve">
+    <value>Operado por</value>
+  </data>
+  <data name="Page_Flights_Search_AddSegment" xml:space="preserve">
+    <value>Agregar</value>
+  </data>
+  <data name="Page_Flights_Search_RemoveSegment" xml:space="preserve">
+    <value>Quitar</value>
   </data>
 </root>

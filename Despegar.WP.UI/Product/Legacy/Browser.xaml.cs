@@ -1,6 +1,6 @@
 ﻿using Despegar.LegacyCore;
 using Despegar.View;
-using Despegar.WP.UI.Classes;
+using Despegar.WP.UI.Common;
 using System;
 using System.Net.NetworkInformation;
 using System.Text.RegularExpressions;
@@ -42,7 +42,7 @@ namespace Despegar.WP.UI.Product.Legacy
 
             if (!NetworkInterface.GetIsNetworkAvailable())
             {
-                PagesManager.GoTo(typeof(ConnectionError), null);
+                OldPagesManager.GoTo(typeof(ConnectionError), null);
                 return;
             }
 
@@ -77,7 +77,7 @@ namespace Despegar.WP.UI.Product.Legacy
                 if (e.Uri.ToString().Contains("book/hotels") && !e.Uri.ToString().Contains("conditions"))
                 {
                     ApplicationConfig.Instance.BrowsingPages.Push(e.Uri);
-                    PagesManager.GoTo(typeof(HotelsCheckout), null);
+                    OldPagesManager.GoTo(typeof(HotelsCheckout), null);
                     return;
                 }
 
@@ -119,7 +119,7 @@ namespace Despegar.WP.UI.Product.Legacy
 
         private void EmbbededBrowser_NavigationFailed(object sender, WebViewNavigationFailedEventArgs e)
         {
-            PagesManager.GoTo(typeof(ConnectionError), null);
+            OldPagesManager.GoTo(typeof(ConnectionError), null);
         }
 
         private string getIataFromUri(string absoluteUri)
@@ -163,7 +163,7 @@ namespace Despegar.WP.UI.Product.Legacy
                     );
                 }  else {
                     // No more URLs,  Navigate to home
-                    PagesManager.GoBack();
+                    OldPagesManager.GoBack();
                 }      
             }
             

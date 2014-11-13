@@ -4,11 +4,12 @@
     xmlns:System="using:System"
     xmlns:local="using:Despegar.WP.UI.Styles"
     xmlns:controls="using:Windows.UI.Xaml.Controls" 
+    xmlns:primitives="using:Windows.UI.Xaml.Controls.Primitives"
     >
     <!-- ===================================================================================== -->
     <!-- ===================== Main Stylesheet for Despegar/Decolar Apps ===================== -->
-    <!-- ===================================================================================== -->
-
+    <!-- ===================================================================================== -->   
+    
     <!-- ===================== Color Palette ===================== -->
     <!-- Grayscale -->
     <Color x:Key="Gray20">#222</Color>
@@ -55,9 +56,12 @@
     <GridLength x:Key="Block3">79.2</GridLength>
     <GridLength x:Key="Block3p">88.8</GridLength>
     <x:Double x:Key="dBlock3">79.2</x:Double>
+    <GridLength x:Key="Block4">118.4</GridLength>
+    <GridLength x:Key="Block4p">108.8</GridLength>
     <GridLength x:Key="Block6">168</GridLength>
     <GridLength x:Key="Block6p">177.6</GridLength>
     <GridLength x:Key="Block1p_And_Half">39.6</GridLength>
+    <x:Double x:Key="dBlock1p_And_Half">39.6</x:Double>
     <!-- Margins -->
     <Thickness x:Key="Left_Offset">9.6,0,0,0</Thickness>
     <Thickness x:Key="Bottom_Offset">0,0,0,9.6</Thickness>
@@ -67,6 +71,10 @@
     <!-- ===================== Generic Brushes ======================= -->
     <SolidColorBrush x:Key="Blue60Brush" Color="{StaticResource Blue60}" />
     <SolidColorBrush x:Key="WhiteBrush" Color="{StaticResource White}" />
+    <SolidColorBrush x:Key="WhiteBrush60" Color="{StaticResource White}" Opacity="0.6" />
+    <SolidColorBrush x:Key="Black60Brush" Color="{StaticResource Black}" Opacity="0.6" />
+    <SolidColorBrush x:Key="BlackBrush" Color="{StaticResource Black }" />
+    <SolidColorBrush x:Key="Green40Brush" Color="{StaticResource Green40 }" />    
     <!-- ===================== Generic Styles ======================== -->
     <Style x:Key="BasePage" TargetType="Page">
         <Setter Property="Background">
@@ -94,7 +102,9 @@
         <Setter Property="Width" Value="100" />
         <Setter Property="Height" Value="20" />
     </Style>
-
+    <Style x:Key="BottomGrid" TargetType="Grid">
+        <Setter  Property="VerticalAlignment" Value="Bottom" />
+    </Style>
     <!-- Text & Fonts -->
     <Style x:Key="PageHeader" TargetType="TextBlock" BasedOn="{StaticResource HeaderTextBlockStyle}">
         <Setter Property="FontFamily" Value="Segoe UI" />
@@ -146,7 +156,95 @@
         </Setter>
     </Style>
     <!-- TextBox -->
-    <Style x:Key="InputBase" TargetType="TextBox">
+    <Style x:Key="TextBoxBase" TargetType="TextBox">
+        <Setter Property="MinWidth" Value="{ThemeResource TextControlThemeMinWidth}" />
+        <Setter Property="MinHeight" Value="{ThemeResource TextControlThemeMinHeight}" />
+        <Setter Property="Foreground" Value="{ThemeResource TextBoxForegroundThemeBrush}" />
+        <Setter Property="SelectionHighlightColor" Value="{ThemeResource TextSelectionHighlightColorThemeBrush}" />
+        <Setter Property="Background" Value="{ThemeResource TextBoxBackgroundThemeBrush}" />
+        <Setter Property="BorderBrush" Value="{ThemeResource TextBoxBorderThemeBrush}" />
+        <Setter Property="BorderThickness" Value="{ThemeResource TextControlBorderThemeThickness}" />
+        <Setter Property="FontFamily" Value="{ThemeResource PhoneFontFamilyNormal}" />
+        <Setter Property="FontSize" Value="{ThemeResource ContentControlFontSize}" />
+        <Setter Property="TextWrapping" Value="NoWrap" />
+        <Setter Property="ScrollViewer.HorizontalScrollMode" Value="Auto" />
+        <Setter Property="ScrollViewer.VerticalScrollMode" Value="Auto" />
+        <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Hidden" />
+        <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Hidden" />
+        <Setter Property="ScrollViewer.IsDeferredScrollingEnabled" Value="False" />
+        <Setter Property="Padding" Value="{ThemeResource TextControlThemePadding}" />
+        <Setter Property="Margin" Value="{ThemeResource TextControlMarginThemeThickness}" />
+        <Setter Property="VerticalAlignment" Value="Top" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="TextBox">
+                    <Grid>
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualState x:Name="Disabled">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="BackgroundElement" Storyboard.TargetProperty="Background">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource TextBoxDisabledBackgroundThemeBrush}" />
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="BorderElement" Storyboard.TargetProperty="BorderBrush">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource TextBoxDisabledBorderThemeBrush}" />
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentElement" Storyboard.TargetProperty="Foreground">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource TextBoxDisabledForegroundThemeBrush}" />
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PlaceholderTextContentPresenter" Storyboard.TargetProperty="Foreground">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource TextBoxDisabledForegroundThemeBrush}" />
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Normal">
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetName="BackgroundElement" Storyboard.TargetProperty="Opacity" Duration="0"
+                                     To="{ThemeResource TextControlBackgroundThemeOpacity}" />
+                                        <DoubleAnimation Storyboard.TargetName="BorderElement" Storyboard.TargetProperty="Opacity" Duration="0"
+                                     To="{ThemeResource TextControlBorderThemeOpacity}" />
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Focused">
+                                    <Storyboard>
+                                        <!--<ObjectAnimationUsingKeyFrames Storyboard.TargetName="BorderElement" Storyboard.TargetProperty="BorderBrush">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource TextSelectionHighlightColorThemeBrush}" />
+                                        </ObjectAnimationUsingKeyFrames>-->
+                                        <DoubleAnimation Storyboard.TargetName="PlaceholderTextContentPresenter" Storyboard.TargetProperty="Opacity" Duration="0" To="0" />
+                                        <!--<ObjectAnimationUsingKeyFrames Storyboard.TargetName="BackgroundElement" Storyboard.TargetProperty="Background">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource TextBoxFocusedBackgroundThemeBrush}" />
+                                        </ObjectAnimationUsingKeyFrames>-->
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Border x:Name="BackgroundElement" Grid.Row="1" Background="{TemplateBinding Background}" Margin="{TemplateBinding BorderThickness}" />
+                        <Border x:Name="BorderElement" Grid.Row="1" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" />
+                        <ContentPresenter x:Name="HeaderContentPresenter" Grid.Row="0" Style="{StaticResource HeaderContentPresenterStyle}" Margin="{ThemeResource TextControlHeaderMarginThemeThickness}"
+                              Content="{TemplateBinding Header}" ContentTemplate="{TemplateBinding HeaderTemplate}" />
+                        <ScrollViewer x:Name="ContentElement" Grid.Row="1" MinHeight="{ThemeResource TextControlThemeMinHeight}"
+                          HorizontalScrollMode="{TemplateBinding ScrollViewer.HorizontalScrollMode}"
+                          HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
+                          VerticalScrollMode="{TemplateBinding ScrollViewer.VerticalScrollMode}"
+                          VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}"
+                          IsHorizontalRailEnabled="{TemplateBinding ScrollViewer.IsHorizontalRailEnabled}"
+                          IsVerticalRailEnabled="{TemplateBinding ScrollViewer.IsVerticalRailEnabled}"
+                          IsDeferredScrollingEnabled="{TemplateBinding ScrollViewer.IsDeferredScrollingEnabled}" Margin="{TemplateBinding BorderThickness}"
+                          Padding="{TemplateBinding Padding}" IsTabStop="False" ZoomMode="Disabled"
+                          AutomationProperties.AccessibilityView="Raw"/>
+                        <ContentControl x:Name="PlaceholderTextContentPresenter" Grid.Row="1" Foreground="{ThemeResource TextBoxPlaceholderTextThemeBrush}"
+                            FontSize="{ThemeResource ContentControlFontSize}" Margin="{TemplateBinding BorderThickness}" Padding="{TemplateBinding Padding}"
+                            IsTabStop="False" Content="{TemplateBinding PlaceholderText}" />
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="InputBase" TargetType="TextBox" BasedOn="{StaticResource TextBoxBase}">
         <Setter Property="Foreground" Value="{StaticResource WhiteBrush}" />
         <Setter Property="BorderBrush" Value="{StaticResource Blue60Brush}" />
         <Setter Property="Background" Value="Transparent" />
@@ -154,6 +252,7 @@
         <Setter Property="IsTextPredictionEnabled" Value="false"></Setter>
         <Setter Property="Margin" Value="0,6,0,0" />
     </Style>
+    <!-- AutoSuggestBox -->
     <Style x:Key="AutosuggestBoxBase" TargetType="AutoSuggestBox">
         <Setter Property="Height" Value="39.2" />
         <Setter Property="Margin" Value="0,5.4,0,0" />
@@ -176,9 +275,9 @@
                                  Margin="0" 
                                  Style="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TextBoxStyle}"
                                  />
-                        <Popup x:Name="SuggestionsPopup">
+                        <Popup x:Name="SuggestionsPopup" >
                             <Border x:Name="SuggestionsContainer"
-                      Background="{ThemeResource AutoSuggestBackgroundThemeBrush}"
+                      Background="{StaticResource BlackBrush}"
                       BorderBrush="{ThemeResource PhoneAccentBrush}"
                       BorderThickness="{ThemeResource TextControlBorderThemeThickness}">
                                 <Border.RenderTransform>
@@ -200,6 +299,13 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+        <Setter Property="ItemTemplate">
+            <Setter.Value>
+                <DataTemplate>
+                    <TextBlock Text="{Binding}" Foreground="{StaticResource WhiteBrush}"></TextBlock>
+                </DataTemplate>
+            </Setter.Value>
+        </Setter>
     </Style>
     <!-- Buttons -->
     <Style x:Key="ButtonBase" TargetType="Button">
@@ -208,14 +314,21 @@
     </Style>
     <Style x:Key="ButtonBottom" TargetType="Button" BasedOn="{StaticResource ButtonBase}">
         <Setter Property="VerticalAlignment" Value="Bottom" />
-        <Setter Property="Height" Value="{StaticResource Block1p_And_Half}" />
+        <Setter Property="Height" Value="{StaticResource dBlock1p_And_Half}" />
     </Style>
-   
-    <!-- ComboBox -->
+    <!-- ComboBox -->    
     <Style x:Key="ComboBoxBase" TargetType="ComboBox">
         <Setter Property="Foreground" Value="{StaticResource WhiteBrush}" />
         <Setter Property="BorderBrush" Value="{StaticResource Blue60Brush}" />
         <Setter Property="Background" Value="Transparent" />
+        <Setter Property="ItemContainerStyle">
+            <Setter.Value>
+                <Style TargetType="ComboBoxItem">
+                    <Setter Property="Background" Value="Transparent" />
+                    <Setter Property="Foreground" Value="{StaticResource WhiteBrush}" />
+                </Style>
+            </Setter.Value>
+        </Setter>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="ComboBox">
@@ -328,7 +441,7 @@
                                             <DiscreteObjectKeyFrame KeyTime="0" Value="True" />
                                         </ObjectAnimationUsingKeyFrames>
                                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Background" Storyboard.TargetProperty="Background">
-                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ComboBoxHighlightedBackgroundThemeBrush}" />
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding Backgroundm, RelativeSource={RelativeSource TemplatedParent}}" />
                                         </ObjectAnimationUsingKeyFrames>
                                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="UserControl" Storyboard.TargetProperty="Foreground">
                                             <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ComboBoxHighlightedForegroundThemeBrush}" />
@@ -422,10 +535,10 @@
                              IsHitTestVisible="False"
                              Foreground="{TemplateBinding Foreground}"
                              FlowDirection="{TemplateBinding FlowDirection}">
-                                    <Canvas x:Name="ItemsPresenterHost"
+                                    <Canvas x:Name="ItemsPresenterHost"                                            
                           MinHeight="{ThemeResource ComboBoxItemMinHeightThemeSize}"
                           HorizontalAlignment="Left">
-                                        <ContentPresenter x:Name="PlaceholderTextContentPresenter"
+                                        <ContentPresenter x:Name="PlaceholderTextContentPresenter"                                                         
                                       Style="{StaticResource PlaceholderContentPresenterStyle}"
                                       Margin="{ThemeResource ComboBoxPlaceholderTextThemeMargin}"
                                       Content="{TemplateBinding PlaceholderText}"
@@ -443,7 +556,7 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-    </Style>
+    </Style>     
     <Style x:Key="ComboBoxWrappable"  TargetType="ComboBox" BasedOn="{StaticResource ComboBoxBase}">
         <Setter Property="ItemTemplate">
             <Setter.Value>
@@ -514,8 +627,15 @@
     </Style>
     <Style x:Key="PivotBaseMain" TargetType="Pivot" BasedOn="{StaticResource PivotBase}">
         <Setter Property="Margin" Value="0,-5,0,0" />
+        <Setter Property="HeaderTemplate">
+            <Setter.Value>
+                <DataTemplate>
+                    <TextBlock Text="{Binding}"  Style="{StaticResource PivotHeader}" />                    
+                </DataTemplate>
+            </Setter.Value>
+        </Setter>
     </Style>
-    <Style x:Key="PivotHeader" TargetType="TextBlock" BasedOn="{StaticResource PageHeader}">
+    <Style x:Key="PivotHeader" TargetType="TextBlock">
         <Setter Property="FontSize" Value="43.2" />
         <Setter Property="Margin" Value="-15,0,0,0" />
         <Setter Property="Padding" Value="0,0,24,0" />
@@ -573,4 +693,53 @@
     <Style x:Key="CountryButtonItemContainer" TargetType="ListViewItem">
         <Setter Property="Padding" Value="{StaticResource Bottom_Offset}" />
     </Style>
+    <!-- Flights Details-->
+    <Style x:Key="FlightDetailAirlineImage" TargetType="Image" BasedOn="{StaticResource ImageBase}">
+        <Setter Property="Width" Value="{StaticResource dBlock2}" />
+        <Setter Property="Height" Value="{StaticResource dBlock2}" />
+    </Style>
+    <Style x:Key="FlightSegmentTitle" TargetType="TextBlock" BasedOn="{StaticResource BaseText}">
+        <Setter Property="FontSize" Value="18" />
+    </Style>
+    <Style x:Key="FlightSegmentSmallText" TargetType="TextBlock" BasedOn="{StaticResource BaseText}">
+        <Setter Property="FontSize" Value="12" />
+        <Setter Property="Opacity" Value="0.6" />
+    </Style>
+    <Style x:Key="FlightDetailAirlineTitle" TargetType="TextBlock" BasedOn="{StaticResource BaseText}">
+        <Setter Property="FontSize" Value="16" />
+        <Setter Property="FontWeight" Value="Normal" />
+        <Setter Property="TextWrapping" Value="Wrap" />
+    </Style>
+    <Style x:Key="FlightDurationImage" TargetType="Image" BasedOn="{StaticResource ImageBase}">
+        <Setter Property="Width" Value="13" />
+        <Setter Property="Height" Value="13" />
+        <Setter Property="Margin" Value="0,0,16.6,0" />
+        <Setter Property="Source" Value="/Assets/clock.jpg" />
+        <Setter Property="VerticalAlignment" Value="Bottom" />
+        <Setter Property="Stretch" Value="Fill" />
+    </Style>
+    <Style x:Key="FlightDurationText" TargetType="TextBlock" BasedOn="{StaticResource BaseText}">
+      <Setter Property="FontSize" Value="12" />
+      <Setter Property="FontWeight" Value="Normal" />
+      <Setter Property="VerticalAlignment" Value="Bottom" />
+    </Style>
+    <Style x:Key="FlightDetailAccent" TargetType="TextBlock" BasedOn="{StaticResource BaseText}">
+        <Setter Property="FontSize" Value="18" />
+        <Setter Property="FontWeight" Value="Normal" />
+        <Setter Property="Foreground" Value="{StaticResource Green40Brush}" />
+    </Style>
+    <!-- ================== ThemeResources Overrides ================= -->
+    <ResourceDictionary.ThemeDictionaries>
+        <ResourceDictionary x:Key="Default">
+            <SolidColorBrush
+            x:Key="PivotHeaderForegroundSelectedBrush"
+            Color="{StaticResource White}"/>
+            <SolidColorBrush
+            x:Key="PivotHeaderForegroundUnselectedBrush"
+            Color="{StaticResource White}"
+            Opacity="0.6"
+           />
+        </ResourceDictionary>
+    </ResourceDictionary.ThemeDictionaries>
+
 </ResourceDictionary>

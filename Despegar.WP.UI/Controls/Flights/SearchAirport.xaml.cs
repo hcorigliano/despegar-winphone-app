@@ -1,36 +1,52 @@
 ﻿using Despegar.Core.Business.Flight.CitiesAutocomplete;
-using Despegar.WP.UI.Model;
+using Despegar.WP.UI.Model.ViewModel.Flights;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
-// The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
-
 namespace Despegar.WP.UI.Controls.Flights
-{
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
+{    
     public sealed partial class SearchAirport : UserControl
     {
-        private FlightsSearchBoxModel FlightSearchBoxModel = new FlightsSearchBoxModel();  
-        public string AirportOrigin { get; set; }
-        public string AirportDestiny { get; set; }
+        public static readonly DependencyProperty SelectedOriginProperty = DependencyProperty.Register("SelectedOrigin", typeof(string), typeof(SearchAirport), null);
+        public static readonly DependencyProperty SelectedDestinationProperty = DependencyProperty.Register("SelectedDestination", typeof(string), typeof(SearchAirport), null);
 
-        public SearchAirport()
+        // Bindable Property from XAML
+        public string SelectedOrigin
         {
-            this.InitializeComponent();            
+            get { return (string)GetValue(SelectedOriginProperty); }
+            set
+            {
+                SetValue(SelectedOriginProperty, value);
+            }
         }
 
+        // Bindable Property from XAML
+        public string SelectedDestination
+        {
+            get { return (string)GetValue(SelectedDestinationProperty); }
+            set
+            {
+                SetValue(SelectedDestinationProperty, value);
+            }
+        }
 
+        // DataContext is the FlightSearchViewModel
+        public SearchAirport()
+        {
+            this.InitializeComponent();                   
+        }
+
+       
         private async void FlightsTextBlock_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
         {           
             if (args.Reason == AutoSuggestionBoxTextChangeReason.UserInput && sender.Text != "" && sender.Text.Length >= 3)
             {
                 //TODO : TRY CATCH
-                sender.ItemsSource = (IEnumerable)(await FlightSearchBoxModel.GetCities(sender.Text));
+                var viewModel = DataContext as FlightSearchViewModel;
+                sender.ItemsSource = (IEnumerable)(await viewModel.GetCitiesAutocomplete(sender.Text));
             }
         }
 
@@ -42,11 +58,11 @@ namespace Despegar.WP.UI.Controls.Flights
             {
                 if (sender.Name == "DestinyInput")
                 {
-                    AirportDestiny = selected.code;
+                    SelectedDestination = selected.code;
                 }
                 else if (sender.Name == "OriginInput")
                 {
-                    AirportOrigin = selected.code;
+                    SelectedOrigin = selected.code;
                 }
 
                 //For Fix Focus_Lost
@@ -59,50 +75,54 @@ namespace Despegar.WP.UI.Controls.Flights
 
         private void Focus_Lost(object sender, RoutedEventArgs e)
         {
-            AutoSuggestBox _sender = (AutoSuggestBox)sender;
-
+            UpdateTextbox((AutoSuggestBox)sender);
+        }
+        
+        public void UpdateTextbox(AutoSuggestBox control)
+        {         
             // Force complete city when focus lost
-            if (_sender.Text.Length > 2 && _sender.ItemsSource != null)
+            if (control.Text.Length > 2 && control.ItemsSource != null)
             {
-                List<CityAutocomplete> cities = (List<CityAutocomplete>)_sender.ItemsSource;
+                List<CityAutocomplete> cities = (List<CityAutocomplete>)control.ItemsSource;
                 CityAutocomplete city = cities.FirstOrDefault();
                 if (city != null)
                 {
-                    _sender.Text = city.name;
-                    if (_sender.Name == "DestinyInput")
+                    control.Text = city.name;
+                    if (control.Name == "DestinyInput")
                     {
-                        AirportDestiny = city.code;
+                        SelectedDestination = city.code;
                     }
-                    else if (_sender.Name == "OriginInput")
+                    else if (control.Name == "OriginInput")
                     {
-                        AirportOrigin = city.code;
+                        SelectedOrigin = city.code;
                     }
                 }
                 else
                 {
-                    _sender.Text = "";
-                    if (_sender.Name == "DestinyInput")
+                    control.Text = "";
+                    if (control.Name == "DestinyInput")
                     {
-                        AirportDestiny = "";
+                        SelectedDestination = "";
                     }
-                    else if (_sender.Name == "OriginInput")
+                    else if (control.Name == "OriginInput")
                     {
-                        AirportOrigin = "";
+                        SelectedOrigin = "";
                     }
                 }
             }
             else
             {
-                _sender.Text = "";
-                if (_sender.Name == "DestinyInput")
+                control.Text = "";
+                if (control.Name == "DestinyInput")
                 {
-                    AirportDestiny = "";
+                    SelectedDestination = "";
                 }
-                else if (_sender.Name == "OriginInput")
+                else if (control.Name == "OriginInput")
                 {
-                    AirportOrigin = "";
+                    SelectedOrigin = "";
                 }
             }
         }
+        
     }
 }

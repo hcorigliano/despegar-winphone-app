@@ -55,6 +55,22 @@
                         </DataTemplate>
                     </Pivot.HeaderTemplate>
                     
+                    <PivotItem Header="Form Automation">
+                        <ScrollViewer>
+                            <StackPanel>
+                                <TextBlock Text="Flights" />
+                                <Button Content="Fill SeardhBox Ida" HorizontalAlignment="Center" />
+                                <Button Content="Fill SeardhBox Ida y Vuelta" HorizontalAlignment="Center" Click="Button_FillIdaYVuelta" />
+                                <Button Content="Fill SeardhBox Multiples" HorizontalAlignment="Center" />
+                                
+                                <TextBlock Text="Checkout" />
+                                <Button Content="Fill Checkout Hotel" HorizontalAlignment="Center" />
+                                <Button Content="Fill Checkout Flights" HorizontalAlignment="Center" />
+                            </StackPanel>
+                        </ScrollViewer>
+                    </PivotItem>
+                    
+                    
                     <PivotItem Header="Other tools">
                         <ScrollViewer>
                             <StackPanel>
@@ -108,15 +124,6 @@
                             </ListView.ItemTemplate>
                           
                         </ListView>
-                    </PivotItem>
-
-                    <PivotItem Header="Form Automation">
-                        <ScrollViewer>
-                            <StackPanel>
-                                <Button Content="Fill Checkout Hotel" HorizontalAlignment="Center" />
-                                <Button Content="Fill Checkout Flights" HorizontalAlignment="Center" />
-                            </StackPanel>
-                        </ScrollViewer>
                     </PivotItem>
 
                 </Pivot>

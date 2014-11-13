@@ -1,4 +1,4 @@
-﻿using Despegar.WP.UI.Classes;
+﻿using Despegar.WP.UI.Common;
 using System.Net.NetworkInformation;
 using Windows.Phone.UI.Input;
 using Windows.UI.Xaml;
@@ -32,8 +32,8 @@ namespace Despegar.WP.UI.Product.Legacy
         private void HardwareButtons_BackPressed(object sender, BackPressedEventArgs e)
         {
                 e.Handled = true;
-                PagesManager.ClearStack();
-                PagesManager.GoTo(typeof(Home), null);
+                OldPagesManager.ClearStack();
+                OldPagesManager.GoTo(typeof(Home), null);
                 //NavigationHelper.RemoveBackEntry();  // TODO!!!            
         }
     }
