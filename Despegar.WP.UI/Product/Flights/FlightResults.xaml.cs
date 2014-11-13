@@ -16,12 +16,10 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using Despegar.Core.Business.Flight.Itineraries;
-using Despegar.WP.UI.Classes;
 using Despegar.WP.UI.Model;
 using Windows.UI.Popups;
 using System.Threading.Tasks;
 
-// The Basic Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
 
 namespace Despegar.WP.UI.Product.Flights
 {
@@ -179,7 +177,7 @@ namespace Despegar.WP.UI.Product.Flights
             Grid grid = sender as Grid;
             if (grid!=null)
             {
-                PagesManager.GoTo(typeof(FlightDetail), grid.DataContext);
+                OldPagesManager.GoTo(typeof(FlightDetail), grid.DataContext);
             }
         }
 

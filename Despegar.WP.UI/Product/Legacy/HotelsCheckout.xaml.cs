@@ -4,7 +4,7 @@ using Despegar.LegacyCore.Connector.Domain.API;
 //using System.Windows.Media.Imaging;
 using Despegar.LegacyCore.Util;
 using Despegar.LegacyCore.ViewModel;
-using Despegar.WP.UI.Classes;
+using Despegar.WP.UI.Common;
 using Despegar.WP.UI.Product.Legacy;
 using Despegar.WP.UI.Strings;
 using System;
@@ -60,7 +60,7 @@ namespace Despegar.View
 
             if (!NetworkInterface.GetIsNetworkAvailable())
             {
-                PagesManager.GoTo(typeof(ConnectionError), null);
+                OldPagesManager.GoTo(typeof(ConnectionError), null);
                 return;
             }
 
@@ -78,8 +78,8 @@ namespace Despegar.View
             else
             {
                 ApplicationConfig.Instance.BrowsingPages.Pop();
-                PagesManager.GoBack();
-                PagesManager.ClearPageCache();
+                OldPagesManager.GoBack();
+                OldPagesManager.ClearPageCache();
             }
         }
 
@@ -241,7 +241,7 @@ namespace Despegar.View
             #endif
 
             ApplicationConfig.Instance.BrowsingPages.Push(new Uri(domain));
-            PagesManager.GoTo(typeof(Browser),  null);
+            OldPagesManager.GoTo(typeof(Browser), null);
         }
 
         private async void ValidateAndBuy_Click(object sender, RoutedEventArgs e)
@@ -262,7 +262,7 @@ namespace Despegar.View
             }
 
             if (!err)
-               PagesManager.GoTo(typeof(HotelsThanks), null);
+                OldPagesManager.GoTo(typeof(HotelsThanks), null);
 
             //else if (errMessage == AppResources.GetLegacyString("CheckoutLabel_Message_AdditionalDataNeeded"))
             //    NavigationService.Navigate(new Uri("/View/HotelsRiskQuestions.xaml", UriKind.RelativeOrAbsolute));

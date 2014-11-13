@@ -11,7 +11,7 @@
     >
     <Page.BottomAppBar>
         <CommandBar ClosedDisplayMode="Minimal">
-            <AppBarButton Icon="Setting" x:Uid="Home_Settings" FontSize="14" Click="AppBarButton_Click" />
+            <AppBarButton Icon="Setting" x:Uid="Home_Settings" FontSize="14" Command="{Binding NavigateToCountrySelection}" />
         </CommandBar>
     </Page.BottomAppBar>
 
@@ -32,7 +32,7 @@
         <Image Grid.Row="0" Style="{StaticResource TopLogo}" />
         <TextBlock  Grid.Row="1" x:Uid="Page_Home" Style="{StaticResource PageHeader}" Text="inicio" />
         
-        <ListView Grid.Row="3"  IsItemClickEnabled="True" ItemClick="ListView_ItemClick" ItemsSource="{Binding HomeOptions}" ItemContainerStyle="{StaticResource HomeButtonItemContainer}">
+         <ListView Grid.Row="3"  IsItemClickEnabled="True" ItemClick="ListView_ItemClick" ItemsSource="{Binding HomeOptions}" ItemContainerStyle="{StaticResource HomeButtonItemContainer}">
                 <ListViewItem>
                     <Grid DataContext="Hotels">
                         <Grid.ColumnDefinitions>
@@ -96,7 +96,7 @@
                         </StackPanel>
                     </Grid>
                 </ListViewItem>
-            </ListView>
+         </ListView>
 
     </Grid>
 </Page>

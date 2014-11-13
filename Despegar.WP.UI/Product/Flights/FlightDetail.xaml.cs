@@ -1,5 +1,4 @@
 ﻿using Despegar.WP.UI.Common;
-using Despegar.WP.UI.Classes;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -20,9 +19,6 @@ using Despegar.Core.Business.Flight.Itineraries;
 using Despegar.WP.UI.Model;
 using Despegar.WP.UI.Model.Classes.Flights;
 
-
-// The Basic Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
-
 namespace Despegar.WP.UI.Product.Flights
 {
     /// <summary>
@@ -31,11 +27,7 @@ namespace Despegar.WP.UI.Product.Flights
     public sealed partial class FlightDetail : Page
     {
         private NavigationHelper navigationHelper;
-        private ObservableDictionary defaultViewModel = new ObservableDictionary();
-        private FlightsSearchBoxModel flightSearchBoxModel = new FlightsSearchBoxModel();
-        private FlightDetailsModel flightDetailModelInbound = new FlightDetailsModel();
-        private FlightDetailsModel flightDetailModelOutbound = new FlightDetailsModel();
-        private FlightsItineraries intinerarie;
+        public FlightDetailsViewModel ViewModel { get; set; }
 
         public FlightDetail()
         {
@@ -44,20 +36,7 @@ namespace Despegar.WP.UI.Product.Flights
             this.navigationHelper = new NavigationHelper(this);
             this.navigationHelper.LoadState += this.NavigationHelper_LoadState;
             this.navigationHelper.SaveState += this.NavigationHelper_SaveState;
-
-            //FillDataMocked();
-        }
-
-        private async void FillDataMocked()
-        {
-            //BORRAR ESTO
-            intinerarie = await flightSearchBoxModel.GetItineraries("BUE", "LAX", "2014-11-11", 1, "2014-11-13", 0, 0, 0, 10, "", "", "", "");
-
-            flightDetailModelInbound.inbound = intinerarie.items[0].inbound[0];
-            flightDetailModelOutbound.outbound = intinerarie.items[0].outbound[0];
-
-            SegmentControlInbound.DataContext = flightDetailModelInbound;
-            SegmentControlOutbound.DataContext = flightDetailModelOutbound;
+            this.CheckDeveloperTools();
         }
 
         /// <summary>
@@ -73,15 +52,15 @@ namespace Despegar.WP.UI.Product.Flights
         /// session.  The state will be null the first time a page is visited.</param>
         private void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
         {
+          
             RoutesItems routes = e.NavigationParameter as RoutesItems;
             if (routes != null)
             {
-                flightDetailModelInbound.inbound = routes.inbound;
-                flightDetailModelOutbound.outbound = routes.outbound;
-
-                SegmentControlInbound.DataContext = flightDetailModelInbound;
-                SegmentControlOutbound.DataContext = flightDetailModelOutbound;
+                // Multiples are inserted as an Outbound collection of Routes
+                ViewModel = new FlightDetailsViewModel(routes.outbound, routes.inbound);
             }
+
+            DataContext = ViewModel;
         }
 
         /// <summary>
@@ -125,12 +104,12 @@ namespace Despegar.WP.UI.Product.Flights
 
         private void Buy_Click(object sender, RoutedEventArgs e)
         {
-            PagesManager.GoTo(typeof(FlightCheckout),null);
+            OldPagesManager.GoTo(typeof(FlightCheckout), null);
         }
 
         private void Cancel_Click(object sender, RoutedEventArgs e)
         {
-            PagesManager.GoBack();
+            OldPagesManager.GoBack();
         }
     }
 }

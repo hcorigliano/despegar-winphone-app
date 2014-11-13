@@ -51,6 +51,10 @@
       <Project>{b4b6d17f-4416-4920-a500-4e9a88ad2d80}</Project>
       <Name>Despegar.Core.Service</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Despegar.LegacyCore\Despegar.LegacyCore.csproj">
+      <Project>{8447a9fc-a65c-4fed-9de3-ca9eea1470df}</Project>
+      <Name>Despegar.LegacyCore</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <TargetPlatform Include="WindowsPhoneApp, Version=8.1" />
@@ -61,23 +65,26 @@
     <Compile Include="Classes\BindableBase.cs" />
     <Compile Include="Classes\Flights\BindableItem.cs" />
     <Compile Include="Classes\Flights\ChildrenAgeOption.cs" />
-    <Compile Include="Classes\Flights\QuantityPassagersControViewModel.cs" />
-    <Compile Include="Classes\Flights\PassagersQuantity.cs" />
+    <Compile Include="Classes\Minor.cs" />
+    <Compile Include="Interfaces\INavigator.cs" />
+    <Compile Include="ViewModel\CountrySelectionViewModel.cs" />
+    <Compile Include="ViewModel\Flights\PassengersViewModel.cs" />
     <Compile Include="Classes\Flights\RoutesItems.cs" />
     <Compile Include="Classes\Flights\BindableSegment.cs" />
-    <Compile Include="Enums\FlightSearchPagesEnum.cs" />
+    <Compile Include="Classes\RelayCommand.cs" />
     <Compile Include="FlightDetailsModel.cs" />
+    <Compile Include="FlightDetailsViewModel.cs" />
     <Compile Include="FlightsCheckoutModel.cs" />
-    <Compile Include="FlightsSearchBoxModel.cs" />
+    <Compile Include="ViewModel\Flights\FlightSearchViewModel.cs" />
     <Compile Include="GlobalConfiguration.cs" />
     <Compile Include="Classes\AdvanceSearchModel.cs" />
     <Compile Include="Classes\CountryItem.cs" />
     <Compile Include="FlightResultsModel.cs" />
-    <Compile Include="FlightSearchModel.cs" />
-    <Compile Include="HomeModel.cs" />
+    <Compile Include="ViewModel\HomeModel.cs" />
     <Compile Include="Interfaces\IInitializeModelInterface.cs" />
     <Compile Include="Interfaces\IValidateInterface.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModelBase.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

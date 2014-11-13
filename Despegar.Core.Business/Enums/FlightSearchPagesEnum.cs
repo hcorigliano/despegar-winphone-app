@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Despegar.WP.UI.Model.Enums
+namespace Despegar.Core.Business.Enums
 {
     public enum FlightSearchPages
     {

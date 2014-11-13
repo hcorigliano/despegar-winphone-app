@@ -6,6 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
+    x:Name="FlightsPassengerControl"
     >
 
     <Grid>
@@ -15,73 +16,43 @@
             <ColumnDefinition Width="1*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="{StaticResource Block3p}"  />
-            <RowDefinition />
-            <RowDefinition />
-            <RowDefinition />
-            <RowDefinition />
-            <RowDefinition />
-            <RowDefinition />
-            <RowDefinition />
+            <RowDefinition Height="Auto"  />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        
+
         <StackPanel Grid.Row="0" Grid.Column="0"  >
             <TextBlock Style="{StaticResource BaseTextLabel}" x:Uid="Flights_Search_Adults" Text="Adultos" />
-            <ComboBox  Style="{StaticResource ComboBoxBase}" ItemsSource="{Binding Passengers.AdultOptions, Mode=TwoWay}" SelectedItem="{Binding Passengers.AdultPassagerQuantity, Mode=TwoWay}" x:Name="DeparturePicker"  />
+            <ComboBox  Style="{StaticResource ComboBoxBase}" ItemsSource="{Binding AdultOptions, Mode=TwoWay}" SelectedItem="{Binding GeneralAdults, Mode=TwoWay}"   />
         </StackPanel>
 
         <StackPanel Grid.Row="0" Grid.Column="2" >
             <TextBlock Style="{StaticResource BaseTextLabel}" x:Uid="Flights_Search_Children" Text="Menores" />
-            <ComboBox  Style="{StaticResource ComboBoxBase}" ItemsSource="{Binding Passengers.ChildrenOptions, Mode=TwoWay}" SelectedItem="{Binding Passengers.ChildPassagerQuantity, Mode=TwoWay}" x:Name="ReturnPicker" SelectionChanged="ReturnPicker_SelectionChanged"/>
+            <ComboBox  Style="{StaticResource ComboBoxBase}" ItemsSource="{Binding ChildrenOptions, Mode=TwoWay}" SelectedItem="{Binding GeneralMinors, Mode=TwoWay}"  />
         </StackPanel>
 
         <!-- Children Controls -->
-        <StackPanel  x:Name="ChildrenAgePicker_0" Grid.Row="1"  Grid.ColumnSpan="3" >
-            <TextBlock Style="{StaticResource BaseTextLabel}" x:Uid="Flights_Search_ChildrenAge" Text="Edad del menor" />
-            <ComboBox  x:Name="ChildrenAgePickerComboBox_0"  Style="{StaticResource ComboBoxWrappable}" ItemsSource="{Binding ChildrenAgeOptions}"  />
-        </StackPanel>
-        <StackPanel  x:Name="ChildrenAgePicker_1"  Grid.Row="2"  Grid.ColumnSpan="3">
-            <TextBlock Style="{StaticResource BaseTextLabel}"  Text="Edad del menor" >
-                <Run x:Uid="Flights_Search_ChildrenAge"></Run>
-                <Run Text=" 2"></Run>
-            </TextBlock>
-            <ComboBox   x:Name="ChildrenAgePickerComboBox_1" Style="{StaticResource ComboBoxWrappable}" ItemsSource="{Binding ChildrenAgeOptions}"   />
-        </StackPanel>
-        <StackPanel  x:Name="ChildrenAgePicker_2" Grid.Row="3"  Grid.ColumnSpan="3">
-           <TextBlock Style="{StaticResource BaseTextLabel}"  Text="Edad del menor" >
-             <Run x:Uid="Flights_Search_ChildrenAge"></Run>
-             <Run Text=" 3"></Run>
-            </TextBlock>
-            <ComboBox  x:Name="ChildrenAgePickerComboBox_2"  Style="{StaticResource ComboBoxWrappable}" ItemsSource="{Binding ChildrenAgeOptions}"    />
-        </StackPanel>
-        <StackPanel  x:Name="ChildrenAgePicker_3"  Grid.Row="4"  Grid.ColumnSpan="3">
-            <TextBlock Style="{StaticResource BaseTextLabel}"  Text="Edad del menor" >
-            <Run x:Uid="Flights_Search_ChildrenAge"></Run>
-            <Run Text=" 4"></Run>
-            </TextBlock>
-            <ComboBox  x:Name="ChildrenAgePickerComboBox_3" Style="{StaticResource ComboBoxWrappable}" ItemsSource="{Binding ChildrenAgeOptions}"   />
-        </StackPanel>
-        <StackPanel  x:Name="ChildrenAgePicker_4" Grid.Row="5" Grid.ColumnSpan="3" >
-            <TextBlock Style="{StaticResource BaseTextLabel}"  Text="Edad del menor" >
-            <Run x:Uid="Flights_Search_ChildrenAge"></Run>
-            <Run Text=" 5"></Run>
-            </TextBlock>
-            <ComboBox   x:Name="ChildrenAgePickerComboBox_4" Style="{StaticResource ComboBoxWrappable}" ItemsSource="{Binding ChildrenAgeOptions}"  />
-        </StackPanel>
-        <StackPanel  x:Name="ChildrenAgePicker_5"  Grid.Row="6" Grid.ColumnSpan="3" >
-            <TextBlock Style="{StaticResource BaseTextLabel}"  Text="Edad del menor" >
-            <Run x:Uid="Flights_Search_ChildrenAge"></Run>
-            <Run Text=" 6"></Run>
-            </TextBlock>
-            <ComboBox  x:Name="ChildrenAgePickerComboBox_5" Style="{StaticResource ComboBoxWrappable}" ItemsSource="{Binding ChildrenAgeOptions}"   />
-        </StackPanel>
-        <StackPanel  x:Name="ChildrenAgePicker_6" Grid.Row="7"  Grid.ColumnSpan="3">
-            <TextBlock Style="{StaticResource BaseTextLabel}"  Text="Edad del menor" >
-            <Run x:Uid="Flights_Search_ChildrenAge"></Run>
-            <Run Text=" 7"></Run>
-            </TextBlock>
-            <ComboBox   x:Name="ChildrenAgePickerComboBox_6" Style="{StaticResource ComboBoxWrappable}" ItemsSource="{Binding ChildrenAgeOptions}"  />
-        </StackPanel>
+        <ItemsControl Grid.Row="1"  Grid.ColumnSpan="3" ItemsSource="{Binding MinorsList}">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <!-- Max 7 child controls -->
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                   
+                     <StackPanel  Grid.Row="{Binding IndexZeroBased}"  >
+                        <TextBlock Style="{StaticResource BaseTextLabel}" x:Uid="Flights_Search_ChildrenAge" Text="Edad del menor" />
+                            <ComboBox  Style="{StaticResource ComboBoxWrappable}" ItemsSource="{Binding OptionsItems}" SelectedItem="{Binding SelectedAge, Mode=TwoWay}"   />
+                      </StackPanel>
+                    </Grid >
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>        
     </Grid>
-
 </UserControl>

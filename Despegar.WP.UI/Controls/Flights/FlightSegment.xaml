@@ -6,44 +6,88 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	xmlns:src="using:Despegar.WP.UI.Controls.Flights"
-    mc:Ignorable="d">
+    xmlns:dev="using:Despegar.WP.UI.Developer.Controls"
+    mc:Ignorable="d"
+	d:DataContext="{d:DesignData /SampleData/SegmentSampleData.xaml}">
 
     <Grid>
-        <Grid>
-            <TextBlock Text="{Binding AirportCodeFromto}" />
-            <TextBlock Text="{Binding flightIdAndCabinType}" />
-            <Image Width="50"/>
-            <TextBlock Text="{Binding Path=airline.name}" />
-            <Image Width="50"/>
-        </Grid>
+    	<Grid.RowDefinitions>
+    		<RowDefinition Height="{StaticResource Block1p}" />
+            <RowDefinition Height="{StaticResource Block1p}"/>
+            <RowDefinition Height="{StaticResource Block3p}"/>            
+            <RowDefinition Height="{StaticResource Block3p}"/>
+            <RowDefinition Height="{StaticResource Block3p}"/>
+            <RowDefinition Height="{StaticResource Square}" />            
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="{StaticResource TwoColumnMiddleSpacing}"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
         
-        <Grid>
-            <StackPanel x:Name="segementControl">
-                <TextBlock TextWrapping="Wrap" Text="{Binding operateBy}"  />
+        <!--<dev:UserControlDesignGrid />-->
 
-                <StackPanel>
-                    
-                        <TextBlock x:Name="fromDate"  Text="{Binding Path=departure_date}"/>
-                        <TextBlock x:Name="fromTime"  Text="{Binding Path=departure_time}"/>
-                        <Image x:Name="fromImagen" Height="31" Width="69"/>				
-                        <TextBlock x:Name="fromSite"  Text="{Binding Path=fromInformation}" />
-                        <TextBlock x:Name="fromAirport"  Text="{Binding Path=from.label}" />
-                    
-                </StackPanel>
+        <TextBlock Grid.Row="0" Style="{StaticResource FlightSegmentTitle}" Text="Primer tramo" />
 
-                <StackPanel>
-                   
-                        <TextBlock x:Name="toDate" Text="{Binding Path=arrival_date}" />
-                        <TextBlock x:Name="toTime" Text="{Binding Path=arrival_time}" />
-                        <Image x:Name="toImagen"  Width="69" />
-                        <TextBlock x:Name="toSite"  Text="{Binding Path=toInformation}" />
-                        <TextBlock x:Name="toAirport" Text="{Binding Path=to.label}" />
-                    
-                </StackPanel>
-                    
-                <!--TODO add control for outbound //-->
-                <TextBlock x:Name="delay" Text="{Binding timeInformation}"></TextBlock>
-            </StackPanel>
+        <TextBlock Grid.Row="1" Grid.Column="0" Style="{StaticResource FlightSegmentSmallText}" >
+            <Run  x:Uid="Page_Flight_Detail_Flight" Text="Vuelo" />
+            <Run  Text=" " />
+            <Run  Text="{Binding flight_id}" />
+            <Run  Text=" - " />
+            <Run  Text="{Binding cabin_type}" />
+        </TextBlock>
+        <TextBlock Grid.Row="1" Grid.Column="2" Style="{StaticResource FlightSegmentSmallText}" x:Uid="Page_Flight_Detail_OperatedBy" Text="Operado por" />
+
+        <Grid Grid.Row="2" Grid.Column="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="{StaticResource Block2p}"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            
+            <Image Grid.Column="0" Source="/Assets/Helpers/a.png" Style="{StaticResource FlightDetailAirlineImage}"  />
+            <TextBlock Grid.Column="1" Style="{Binding FlightDetailAirlineTitle}" Text="Aerolineas Argentinas" />
         </Grid>
+
+        <Grid Grid.Row="2" Grid.Column="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="{StaticResource Block2p}"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Image Grid.Column="0" Source="/Assets/Helpers/a.png" Style="{StaticResource FlightDetailAirlineImage}"  />
+            <TextBlock Grid.Column="1" Text="American Airlines"  />
+        </Grid>
+
+        <StackPanel  Grid.Row="3"  Grid.Column="0">
+            <TextBlock Text="{Binding Path=departure_date}" Style="{StaticResource FlightDetailAccent}"  />
+            <TextBlock Text="{Binding Path=departure_time}" />
+        </StackPanel>
+ 
+        <StackPanel  Grid.Row="3"  Grid.Column="2">
+            <TextBlock x:Uid="Page_Flight_Outbound" Text="Sale" Style="{StaticResource FlightDetailAccent}" />
+            <TextBlock Text="{Binding Path=from.city}" />
+            <TextBlock Style="{StaticResource FlightSegmentSmallText}" Text="{Binding Path=from.label}" />
+         </StackPanel>
+
+        <StackPanel  Grid.Row="4"  Grid.Column="0">
+            <TextBlock Text="{Binding Path=arrival_date}" Style="{StaticResource FlightDetailAccent}"  />
+            <TextBlock Text="{Binding Path=arrival_time}" />
+        </StackPanel>
+
+        <StackPanel  Grid.Row="4"  Grid.Column="2">
+            <TextBlock x:Uid="Page_Flight_Outbound" Text="Llega" Style="{StaticResource FlightDetailAccent}" />
+            <TextBlock Text="{Binding Path=to.city}" />
+            <TextBlock Style="{StaticResource FlightSegmentSmallText}" Text="{Binding Path=to.label}" />
+        </StackPanel>
+
+        <StackPanel Grid.Row="5" Grid.ColumnSpan="3" Orientation="Horizontal">
+            <Image Style="{StaticResource FlightDurationImage}" />
+            <TextBlock Style="{StaticResource FlightDurationText}">
+                <Run x:Uid="Page_Flight_Detail_TimeWait" Text="Conexion con espera de " />
+                <Run Text=" " />
+                <Run Text="{Binding duration}" />
+            </TextBlock>
+        </StackPanel>
+       
     </Grid>
 </UserControl>

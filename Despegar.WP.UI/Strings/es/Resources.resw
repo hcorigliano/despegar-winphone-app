@@ -330,4 +330,25 @@
   <data name="Page_Flight_Detail_Cancel.Text" xml:space="preserve">
     <value>Cancelar</value>
   </data>
+  <data name="Page_Flight_Detail_TimeWait.Text" xml:space="preserve">
+    <value>Conexion con espera de</value>
+  </data>
+  <data name="Page_Flight_InBound.Text" xml:space="preserve">
+    <value>Llega</value>
+  </data>
+  <data name="Page_Flight_Outbound.Text" xml:space="preserve">
+    <value>Sale</value>
+  </data>
+  <data name="Page_Flight_Detail_Flight" xml:space="preserve">
+    <value>Vuelo</value>
+  </data>
+  <data name="Page_Flight_Detail_OperatedBy" xml:space="preserve">
+    <value>Operado por</value>
+  </data>
+  <data name="Page_Flights_Search_AddSegment" xml:space="preserve">
+    <value>Agregar</value>
+  </data>
+  <data name="Page_Flights_Search_RemoveSegment" xml:space="preserve">
+    <value>Quitar</value>
+  </data>
 </root>

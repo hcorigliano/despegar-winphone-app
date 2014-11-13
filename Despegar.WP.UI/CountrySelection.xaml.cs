@@ -15,57 +15,51 @@ using Windows.UI.Xaml.Navigation;
 using Windows.ApplicationModel.Resources.Core;
 using System.Collections.ObjectModel;
 using Despegar.WP.UI.Model.Classes;
-using Despegar.WP.UI.Classes;
 using Windows.Storage;
 using Despegar.WP.UI.Model;
 using Despegar.LegacyCore.Connector;
 using Despegar.LegacyCore;
 using Despegar.Core.IService;
 using Despegar.Core.Business.Configuration;
-// The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
+using Despegar.WP.UI.Common;
+using Despegar.WP.UI.Model.ViewModel;
 
 namespace Despegar.WP.UI
-{
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
+{    
     public sealed partial class CountrySelection : Page
     {
-        
+        public CountrySelectionViewModel ViewModel { get; set; }
+
         public CountrySelection()
         {
             this.InitializeComponent();
+            ViewModel = new CountrySelectionViewModel(Navigator.Instance, GlobalConfiguration.CoreContext.GetConfigurationService());
+            DataContext = ViewModel;
         }
-
 
         /// <summary>
         /// Invoked when this page is about to be displayed in a Frame.
         /// </summary>
         /// <param name="e">Event data that describes how this page was reached.
         /// This parameter is typically used to configure the page.</param>
-        protected override async void OnNavigatedTo(NavigationEventArgs e)
+        protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
-            IConfigurationService configurationService = GlobalConfiguration.CoreContext.GetConfigurationService();            
-            Configuration configurations = await configurationService.GetConfigurations();
-
-
-            sitesListView.DataContext = configurations;
+            ViewModel.LoadConfigurations();
         }
-
         
         private void ListView_ItemClick(object sender, ItemClickEventArgs e)
         {
             //persist data in phone
             Site countrySelected = e.ClickedItem as Site;
-            var roamingSettings = ApplicationData.Current.RoamingSettings;
 
+            // Persist selection
+            var roamingSettings = ApplicationData.Current.RoamingSettings;
             roamingSettings.Values["countryCode"] = countrySelected.code;
             roamingSettings.Values["countryName"] = countrySelected.name;
-
-            GlobalConfiguration.CoreContext.SetSite(countrySelected.code); 
-
-            PagesManager.GoTo(typeof(Home), e);
-        }   
+                    
+            ViewModel.ChangeCountry(countrySelected);
+            ViewModel.NavigateToHome.Execute(null);
+        }
     }
 }

@@ -7,7 +7,7 @@ using Despegar.Core.Business.Flight.Itineraries;
 
 namespace Despegar.WP.UI.Model.Classes.Flights
 {
-    public class BindableItem : Despegar.Core.Business.Flight.Itineraries.Item
+    public class BindableItem : Item
     {
         public List<RoutesItems> RoutesCustom { get; set; }
 

@@ -42,6 +42,7 @@
     <TargetPlatform Include="Windows, Version=8.1" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BusinessModelBase.cs" />
     <Compile Include="Configuration\Configuration.cs" />
     <Compile Include="Configuration\Contact.cs" />
     <Compile Include="Configuration\Domain.cs" />
@@ -50,6 +51,8 @@
     <Compile Include="Culture\Site.cs" />
     <Compile Include="Dynamics\DynamicFlightBookingFieldsToPost.cs" />
     <Compile Include="Enums\FlightSearchChildEnum.cs" />
+    <Compile Include="Enums\FlightSearchPagesEnum.cs" />
+    <Compile Include="Flight\FlightSearchModel.cs" />
     <Compile Include="Flight\BookingCompletePostResponse\Answers.cs" />
     <Compile Include="Flight\BookingCompletePostResponse\BookingCompletePostResponse.cs" />
     <Compile Include="Flight\BookingCompletePostResponse\FreeTextDescription.cs" />

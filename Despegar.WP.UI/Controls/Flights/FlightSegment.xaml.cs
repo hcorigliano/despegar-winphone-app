@@ -18,8 +18,6 @@ using Windows.UI.Xaml.Navigation;
 
 namespace Despegar.WP.UI.Controls.Flights
 {
-    //public FlightSegmentTrip origin {get;set;}
-
     public sealed partial class FlightSegment : UserControl
     {
         //public StackPanel SegmentControl { get; set; }
