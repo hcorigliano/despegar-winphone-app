@@ -62,24 +62,24 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppModelBase.cs" />
-    <Compile Include="Classes\BindableBase.cs" />
-    <Compile Include="Classes\Flights\BindableItem.cs" />
-    <Compile Include="Classes\Flights\ChildrenAgeOption.cs" />
-    <Compile Include="Classes\Minor.cs" />
+    <Compile Include="ViewModel\Classes\BindableBase.cs" />
+    <Compile Include="ViewModel\Classes\Flights\BindableItem.cs" />
+    <Compile Include="ViewModel\Classes\Flights\ChildrenAgeOption.cs" />
+    <Compile Include="ViewModel\Classes\Minor.cs" />
     <Compile Include="Interfaces\INavigator.cs" />
     <Compile Include="ViewModel\CountrySelectionViewModel.cs" />
     <Compile Include="ViewModel\Flights\PassengersViewModel.cs" />
-    <Compile Include="Classes\Flights\RoutesItems.cs" />
-    <Compile Include="Classes\Flights\BindableSegment.cs" />
-    <Compile Include="Classes\RelayCommand.cs" />
-    <Compile Include="Classes\PageParameters.cs" />
+    <Compile Include="ViewModel\Classes\Flights\RoutesItems.cs" />
+    <Compile Include="ViewModel\Classes\Flights\BindableSegment.cs" />
+    <Compile Include="ViewModel\Classes\RelayCommand.cs" />
+    <Compile Include="ViewModel\Classes\PageParameters.cs" />
     <Compile Include="FlightDetailsModel.cs" />
     <Compile Include="FlightDetailsViewModel.cs" />
     <Compile Include="FlightsCheckoutModel.cs" />
     <Compile Include="ViewModel\Flights\FlightSearchViewModel.cs" />
     <Compile Include="GlobalConfiguration.cs" />
-    <Compile Include="Classes\AdvanceSearchModel.cs" />
-    <Compile Include="Classes\CountryItem.cs" />
+    <Compile Include="ViewModel\Classes\AdvanceSearchModel.cs" />
+    <Compile Include="ViewModel\Classes\CountryItem.cs" />
     <Compile Include="FlightResultsModel.cs" />
     <Compile Include="ViewModel\HomeModel.cs" />
     <Compile Include="Interfaces\IInitializeModelInterface.cs" />
