@@ -1,5 +1,5 @@
 ﻿<UserControl
-    x:Class="Despegar.WP.UI.Controls.PaxCounterMiniBoxSearch"
+    x:Class="Despegar.WP.UI.Controls.Flights.Results.PaxCounterMiniBoxSearch"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:Despegar.WP.UI.Controls"

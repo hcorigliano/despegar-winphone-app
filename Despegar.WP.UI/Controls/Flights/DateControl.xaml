@@ -18,12 +18,12 @@
 
         <StackPanel Grid.Column="0" >
             <TextBlock  Style="{StaticResource BaseTextLabel}" x:Uid="Flights_Search_Departure" Text="Partida" />
-            <DatePicker Style="{StaticResource DatePickerBase}" x:Name="departure" DateChanged="departure_DateChanged"/>
+            <DatePicker Style="{StaticResource DatePickerBase}" x:Name="departure" Date="{Binding FromDate, Mode=TwoWay}"/>
         </StackPanel>
 
         <StackPanel Grid.Column="2">
             <TextBlock Style="{StaticResource BaseTextLabel}"   x:Uid="Flights_Search_Return"  Text="Regreso" />
-            <DatePicker Style="{StaticResource DatePickerBase}" x:Name="returnn"/>
+            <DatePicker Style="{StaticResource DatePickerBase}" x:Name="ToDateControl" Date="{Binding ToDate, Mode=TwoWay}" />
         </StackPanel>
     </Grid>
 

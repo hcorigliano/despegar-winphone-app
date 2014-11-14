@@ -3,7 +3,6 @@ using Despegar.Core.IService;
 using Despegar.LegacyCore;
 using Despegar.LegacyCore.Connector;
 using Despegar.LegacyCore.ViewModel;
-using Despegar.WP.UI.Classes;
 using Despegar.WP.UI.Common;
 using Despegar.WP.UI.Model;
 using Despegar.WP.UI.Product.Legacy;
@@ -15,21 +14,16 @@ using System.Linq;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
-
-
-
-// The Basic Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
+using Despegar.WP.UI.Developer;
+using Windows.UI.Xaml;
 
 namespace Despegar.WP.UI
-{
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
+{    
     public sealed partial class Home : Page
     {
         private NavigationHelper navigationHelper;
-        public HomeModel ViewModel = new HomeModel();              
         public List<Despegar.Core.Business.Configuration.Product> products;
+        public Despegar.WP.UI.Model.HomeViewModel ViewModel { get; set; }
 
         public Home()
         {
@@ -38,19 +32,14 @@ namespace Despegar.WP.UI
             this.navigationHelper = new NavigationHelper(this);
             this.navigationHelper.LoadState += this.NavigationHelper_LoadState;
             this.navigationHelper.SaveState += this.NavigationHelper_SaveState;
-            
 
-            //this.ViewModel = new HomeViewModel();
-            //this.DataContext = ViewModel;
+            ViewModel = new Despegar.WP.UI.Model.HomeViewModel(Navigator.Instance);
+            DataContext = ViewModel;
 
             // Developer Tools
             this.CheckDeveloperTools();
             SetupMenuItems(GlobalConfiguration.Site);
             test();
-            
-           
-
-
         }
 
         /// <summary>
@@ -65,10 +54,8 @@ namespace Despegar.WP.UI
         {
             IConfigurationService configurationService = GlobalConfiguration.CoreContext.GetConfigurationService();
             Countries con = await configurationService.GetCountries();
-
-
-
         }
+
         private async void SetupMenuItems(string country)
         {
             products = await ViewModel.GetProducts(country);
@@ -149,27 +136,15 @@ namespace Despegar.WP.UI
             switch (selectedButton)
             {
                 case "Hotels":
-                    LoadBrowser(AppResources.GetLegacyString("HomeProductHotelsUrl"), e);
+                    ViewModel.NavigateToHotelsLegacy.Execute(AppResources.GetLegacyString("HomeProductHotelsUrl"));
                     break;
                 case "Flights":
-                    PagesManager.GoTo(typeof(Product.Flights.FlightSearch), e);
+                    ViewModel.NavigateToFlights.Execute(null);
                     break;                
                 default:
                     throw new InvalidOperationException();
             }
         }
-
-        private void LoadBrowser(string relativePath, ItemClickEventArgs e)
-        {
-            APIConnector.Instance.Channel = ApplicationConfig.Instance.Country = GlobalConfiguration.Site;  // TODO: Legacy code
-            ApplicationConfig.Instance.ResetBrowsingPages(new Uri(Despegar.LegacyCore.ViewModel.HomeViewModel.Domain + relativePath));
-
-            PagesManager.GoTo(typeof(Browser), e);
-        }
-
-        private void AppBarButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
-        {
-            PagesManager.GoTo(typeof(CountrySelection), e);
-        }
+        
     }
 }

@@ -10,16 +10,16 @@
     d:DesignWidth="450">
 
     <Canvas VerticalAlignment="Top" HorizontalAlignment="Left">
-        <Grid Canvas.Top="0" Canvas.Left="0">
-            <Grid.Resources>
+        <Grid Canvas.Top="0" Canvas.Left="0" x:Name="TheGrid">
+            <!--<Grid.Resources>
                 <Style x:Name="GridFill" TargetType="Rectangle">
                     <Setter Property="Fill" Value="Red" />
                     <Setter Property="Width" Value="20" />
                     <Setter Property="Height" Value="20" />
                     <Setter Property="Opacity" Value="0.3" />
                 </Style>
-            </Grid.Resources>
-            <Grid.RowDefinitions>
+            </Grid.Resources>-->
+            <!--<Grid.RowDefinitions>
                 <RowDefinition Height="20" />
                 <RowDefinition Height="9.6" />
                 <RowDefinition Height="20" />
@@ -152,7 +152,7 @@
             <Rectangle Grid.Row="10" Grid.Column="20" Style="{StaticResource GridFill}" />
             <Rectangle Grid.Row="10" Grid.Column="22" Style="{StaticResource GridFill}" />
             <Rectangle Grid.Row="10" Grid.Column="24" Style="{StaticResource GridFill}" />
-            <Rectangle Grid.Row="10" Grid.Column="26" Style="{StaticResource GridFill}" />
+            <Rectangle Grid.Row="10" Grid.Column="26" Style="{StaticResource GridFill}" />-->
         </Grid>
     </Canvas>
 </UserControl>

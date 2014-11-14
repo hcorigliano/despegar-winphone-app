@@ -20,23 +20,24 @@ namespace Despegar.WP.UI.Controls.Flights
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class DateControlSimple : Page
+    public sealed partial class DateControlSimple : UserControl
     {
-        public DatePicker DateDeparture { get; set; }
+        public static readonly DependencyProperty SelectedDateProperty = DependencyProperty.Register("SelectedDate", typeof(DateTimeOffset), typeof(DateControlSimple), new PropertyMetadata(null));
+
+        // Bindable Property from XAML
+        public DateTimeOffset SelectedDate
+        {
+            get { return (DateTimeOffset)GetValue(SelectedDateProperty); }
+            set
+            {
+                SetValue(SelectedDateProperty, value);
+            }
+        }
 
         public DateControlSimple()
         {
             this.InitializeComponent();
-            DateDeparture = departure;
         }
-
-        /// <summary>
-        /// Invoked when this page is about to be displayed in a Frame.
-        /// </summary>
-        /// <param name="e">Event data that describes how this page was reached.
-        /// This parameter is typically used to configure the page.</param>
-        protected override void OnNavigatedTo(NavigationEventArgs e)
-        {
-        }
+       
     }
 }

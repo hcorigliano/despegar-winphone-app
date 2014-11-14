@@ -4,94 +4,50 @@ using System.Collections.Generic;
 using System.Linq;
 using Windows.ApplicationModel.Resources;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml;
+using Despegar.WP.UI.Model.ViewModel.Flights;
+using Windows.UI.Xaml.Data;
 
 namespace Despegar.WP.UI.Controls.Flights
 {
     public sealed partial class QuantityPassagersControl : UserControl
     {
-        public PassagersQuantity Passagers = new PassagersQuantity();
-        public List<ComboBox> ChildrenControls { get; set; }
+        public static readonly DependencyProperty AdultsProperty = DependencyProperty.Register("Adults", typeof(int), typeof(QuantityPassagersControl), new PropertyMetadata(null));
+        public static readonly DependencyProperty ChildrenProperty = DependencyProperty.Register("Children", typeof(int), typeof(QuantityPassagersControl), new PropertyMetadata(null));
+        public static readonly DependencyProperty InfantsProperty = DependencyProperty.Register("Infants", typeof(int), typeof(QuantityPassagersControl), new PropertyMetadata(null));
 
-        private List<ChildrenAgeOption> _childAgeOptions;
-        public List<ChildrenAgeOption> ChildAgeOptions
+        // Bindable Property from XAML
+        public int Adults
         {
-            get
+            get { return (int)GetValue(AdultsProperty); }
+            set
             {
-                if (_childAgeOptions == null)
-                {
-                    _childAgeOptions = new List<ChildrenAgeOption>();
-                    var resources = ResourceLoader.GetForCurrentView("Resources");
-
-                    _childAgeOptions.Add(new ChildrenAgeOption() { DisplayText = resources.GetString("Flights_Passager_Baby_In_Arms"), Value = FlightSearchChildEnum.Infant });
-                    _childAgeOptions.Add(new ChildrenAgeOption() { DisplayText = resources.GetString("Flights_Passager_Baby_In_Seat") as string, Value = FlightSearchChildEnum.Child });
-                    _childAgeOptions.Add(new ChildrenAgeOption() { DisplayText = resources.GetString("Flights_Passager_Up_To_11_Years") as string, Value = FlightSearchChildEnum.Child });
-                    _childAgeOptions.Add(new ChildrenAgeOption() { DisplayText = resources.GetString("Flights_Passager_Over_11_Years") as string, Value = FlightSearchChildEnum.Adult });
-                }
-
-                return _childAgeOptions;
+                SetValue(AdultsProperty, value);
+            }
+        }
+        // Bindable Property from XAML
+        public int Children
+        {
+            get { return (int)GetValue(ChildrenProperty); }
+            set
+            {
+                SetValue(ChildrenProperty, value);
+            }
+        }
+        // Bindable Property from XAML
+        public int Infants
+        {
+            get { return (int)GetValue(InfantsProperty); }
+            set
+            {
+                SetValue(InfantsProperty, value);
             }
         }
 
-        public int ChildrenInFlights
-        {
-            get
-            {
-                return  ChildrenControls.Where(x => (x.SelectedItem as ChildrenAgeOption).Value == FlightSearchChildEnum.Child).Count();
-            }
-        }
-
-        public int AdultsInFlights
-        {
-            get
-            {
-                return ChildrenControls.Where(x => (x.SelectedItem as ChildrenAgeOption).Value == FlightSearchChildEnum.Child).Count() + Passagers.AdultPassagerQuantity;
-            }
-        }
-
-        public int InfantsInFlights
-        {
-            get
-            {
-                return ChildrenControls.Where(x => (x.SelectedItem as ChildrenAgeOption).Value == FlightSearchChildEnum.Infant).Count();
-            }
-        }
 
         public QuantityPassagersControl()
         {
             this.InitializeComponent();
-            Passagers.AdultPassagerQuantity = 1;
-            Passagers.ChildPassagerQuantity = 0;
-
-            this.DataContext = new QuantityPassagersControViewModel() { Passengers = Passagers, ChildrenAgeOptions = ChildAgeOptions };
-
-            ChildrenControls = new List<ComboBox>();
-            ChildrenControls.Add(ChildrenAgePickerComboBox_0);
-            ChildrenControls.Add(ChildrenAgePickerComboBox_1);
-            ChildrenControls.Add(ChildrenAgePickerComboBox_2);
-            ChildrenControls.Add(ChildrenAgePickerComboBox_3);
-            ChildrenControls.Add(ChildrenAgePickerComboBox_4);
-            ChildrenControls.Add(ChildrenAgePickerComboBox_5);
-            ChildrenControls.Add(ChildrenAgePickerComboBox_6);
-
-            ChildrenAgePickerComboBox_0.SelectedIndex = 0;
-            ChildrenAgePickerComboBox_1.SelectedIndex = 0;
-            ChildrenAgePickerComboBox_2.SelectedIndex = 0;
-            ChildrenAgePickerComboBox_3.SelectedIndex = 0;
-            ChildrenAgePickerComboBox_4.SelectedIndex = 0;
-            ChildrenAgePickerComboBox_5.SelectedIndex = 0;
-            ChildrenAgePickerComboBox_6.SelectedIndex = 0;
         }
-
-        private void ReturnPicker_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            // Hide All
-            for (int i = 0; i < 7; i++)
-                ((StackPanel)this.FindName("ChildrenAgePicker_" + i)).Visibility = Windows.UI.Xaml.Visibility.Collapsed;
-
-            // Show controls
-            for (int i = 0; i < Passagers.ChildPassagerQuantity; i++)
-                ((StackPanel)this.FindName("ChildrenAgePicker_" + i)).Visibility = Windows.UI.Xaml.Visibility.Visible;                    
-        }
-
     }
 }

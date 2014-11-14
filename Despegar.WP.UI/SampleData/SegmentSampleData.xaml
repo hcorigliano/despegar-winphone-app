@@ -1,0 +1,14 @@
+﻿<Itineraries:Segment xmlns:Itineraries="using:Despegar.Core.Business.Flight.Itineraries" arrival_time="02:30 hs" arrival_date="2014-02-2012" cabin_type="Economico" departure_date="2015-11-31" departure_time="12:30 hs" duration="30hs 5min" flight_id="LS1304">
+	<Itineraries:Segment.airline>
+		<Itineraries:Airline code="AIR" name="American Airlines2"/>
+	</Itineraries:Segment.airline>
+	<Itineraries:Segment.from>
+		<Itineraries:Airport city="Las Bahamas" code="BA" label="Bahamas"/>
+	</Itineraries:Segment.from>
+	<Itineraries:Segment.operated_by>
+		<Itineraries:OperatedBy code="EZE" name="American Airlines"/>
+	</Itineraries:Segment.operated_by>
+	<Itineraries:Segment.to>
+		<Itineraries:Airport city="San carlo de Barilo" code="Aliq" label="San carlos de barilo"/>
+	</Itineraries:Segment.to>
+</Itineraries:Segment>

@@ -12,19 +12,16 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
-using Despegar.WP.UI.Model.Enums;
-using System.ComponentModel;
 
 // The User Control item template is documented at http://go.microsoft.com/fwlink/?LinkId=234236
 
-namespace Despegar.WP.UI.Controls
+namespace Despegar.WP.UI.Controls.Flights.Results
 {
-    public sealed partial class GoReturnPanelMiniBoxSearch : UserControl
+    public sealed partial class MiniBoxFlightRoutes : UserControl
     {
-        public GoReturnPanelMiniBoxSearch()
+        public MiniBoxFlightRoutes()
         {
             this.InitializeComponent();
         }
     }
 }
-

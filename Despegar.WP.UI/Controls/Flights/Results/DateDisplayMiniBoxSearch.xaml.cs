@@ -15,11 +15,12 @@ using Windows.UI.Xaml.Navigation;
 
 // The User Control item template is documented at http://go.microsoft.com/fwlink/?LinkId=234236
 
-namespace Despegar.WP.UI.Controls
+namespace Despegar.WP.UI.Controls.Flights.Results
 {
-    public sealed partial class PaxCounterMiniBoxSearch : UserControl
+    public sealed partial class DateDisplayMiniBoxSearch : UserControl
     {
-        public PaxCounterMiniBoxSearch()
+        
+        public DateDisplayMiniBoxSearch()
         {
             this.InitializeComponent();
         }
