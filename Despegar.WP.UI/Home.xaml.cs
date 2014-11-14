@@ -27,7 +27,7 @@ namespace Despegar.WP.UI
             this.navigationHelper.LoadState += this.NavigationHelper_LoadState;
             this.navigationHelper.SaveState += this.NavigationHelper_SaveState;
 
-            ViewModel = new Despegar.WP.UI.Model.HomeViewModel(Navigator.Instance);
+            ViewModel = new Despegar.WP.UI.Model.HomeViewModel(Navigator.Instance, GlobalConfiguration.CoreContext.GetConfigurationService());
             DataContext = ViewModel;
 
             // Developer Tools

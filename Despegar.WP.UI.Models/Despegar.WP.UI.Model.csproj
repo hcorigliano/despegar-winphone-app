@@ -85,7 +85,7 @@
     <Compile Include="Interfaces\IInitializeModelInterface.cs" />
     <Compile Include="Interfaces\IValidateInterface.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ViewModelBase.cs" />
+    <Compile Include="ViewModel\ViewModelBase.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

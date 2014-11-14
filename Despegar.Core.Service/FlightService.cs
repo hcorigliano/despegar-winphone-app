@@ -1,11 +1,10 @@
 ﻿
 using Despegar.Core.Business;
-using Despegar.Core.Business.Enums;
-using Despegar.Core.Business.Flight;
 using Despegar.Core.Business.Flight.BookingCompletePostResponse;
 using Despegar.Core.Business.Flight.BookingFields;
 using Despegar.Core.Business.Flight.CitiesAutocomplete;
 using Despegar.Core.Business.Flight.Itineraries;
+using Despegar.Core.Business.Flight.SearchBox;
 using Despegar.Core.Connector;
 using Despegar.Core.IService;
 using System;

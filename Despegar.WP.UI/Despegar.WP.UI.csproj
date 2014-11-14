@@ -115,7 +115,6 @@
     <Compile Include="Common\Converter\MiniboxVisibilityConverter.cs" />
     <Compile Include="Common\Navigator.cs" />
     <Compile Include="Common\OldPagesManager.cs" />
-    <Compile Include="Controls\Classes\Minor.cs" />
     <Compile Include="SampleData\CountrySelectionSample.cs" />
     <Compile Include="Common\Converter\DayofWeekShortName.cs" />
     <Compile Include="Common\Converter\CommonConverters.cs" />
@@ -326,6 +325,8 @@
     <Content Include="Assets\HomeButton_FlightStatus.png" />
     <Content Include="Assets\HomeButton_Hotels.png" />
     <Content Include="Assets\HomeButton_MyDespegar.png" />
+    <Content Include="Assets\Icon\App\xxx1.jpg" />
+    <Content Include="Assets\Icon\App\xxx2.jpg" />
     <Content Include="Assets\Logo.scale-240.png" />
     <Content Include="Assets\Helpers\matrix_green_strong.png" />
     <Content Include="Assets\Helpers\matrix_red.png" />
@@ -649,7 +650,6 @@
   <ItemGroup>
     <Folder Include="Assets\en\" />
     <Folder Include="Assets\es\" />
-    <Folder Include="Assets\Icon\" />
     <Folder Include="Assets\pt\" />
     <Folder Include="Strings\en\" />
   </ItemGroup>

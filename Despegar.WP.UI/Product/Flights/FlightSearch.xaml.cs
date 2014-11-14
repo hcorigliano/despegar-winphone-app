@@ -1,19 +1,16 @@
-﻿using Despegar.Core.IService;
-using Despegar.WP.UI.Common;
+﻿using Despegar.WP.UI.Common;
 using Despegar.WP.UI.Model;
 using Despegar.WP.UI.Model.ViewModel.Flights;
 using System;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
-using Despegar.WP.UI.Model.Classes;
-
+using Windows.UI.Xaml;
 
 namespace Despegar.WP.UI.Product.Flights
 {
     public sealed partial class FlightSearch : Page
     {
         private NavigationHelper navigationHelper;
-        private IFlightService flightService;
         public FlightSearchViewModel ViewModel { get; set; }
        
         public FlightSearch()
@@ -24,14 +21,9 @@ namespace Despegar.WP.UI.Product.Flights
             this.navigationHelper.LoadState += this.NavigationHelper_LoadState;
             this.navigationHelper.SaveState += this.NavigationHelper_SaveState;
 
-            this.flightService = GlobalConfiguration.CoreContext.GetFlightService();
-            ViewModel = new FlightSearchViewModel(Navigator.Instance, flightService);
+            ViewModel = new FlightSearchViewModel(Navigator.Instance, GlobalConfiguration.CoreContext.GetFlightService());
             this.DataContext = ViewModel;
-            this.CheckDeveloperTools();
-
-            // TODO: default it in ViewModel
-            ViewModel.AddSegmentMultipleCommand.Execute(null);
-            ViewModel.AddSegmentMultipleCommand.Execute(null);            
+            this.CheckDeveloperTools();     
         }
 
         /// <summary>
@@ -132,7 +124,11 @@ namespace Despegar.WP.UI.Product.Flights
         {
             this.navigationHelper.OnNavigatedFrom(e);
 
-        }       
-                    
+        }
+
+        private void Pivot_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            this.BottomAppBar.Visibility = !((((Pivot)sender).SelectedIndex) == 2) ? Visibility.Visible : Visibility.Collapsed;           
+        }                                
     }
 }

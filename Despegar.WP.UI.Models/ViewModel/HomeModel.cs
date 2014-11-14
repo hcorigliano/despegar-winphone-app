@@ -3,6 +3,7 @@ using Despegar.Core.IService;
 using Despegar.LegacyCore;
 using Despegar.LegacyCore.Connector;
 using Despegar.WP.UI.Model.Interfaces;
+using Despegar.WP.UI.Model.ViewModel;
 using Despegar.WP.UI.Models.Classes;
 using System;
 using System.Collections.Generic;
@@ -17,10 +18,10 @@ namespace Despegar.WP.UI.Model
         private IConfigurationService configurationService;
         private INavigator Navigator;
 
-        public HomeViewModel(INavigator navigator)             
+        public HomeViewModel(INavigator navigator, IConfigurationService configuracion)             
         {
             this.Navigator = navigator;
-            configurationService = GlobalConfiguration.CoreContext.GetConfigurationService();
+            this.configurationService = configuracion;
         }
 
         public List<Configuration> Configurations { get; set; }
