@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Despegar.Core.Business.Flight.BookingFields;
+using Despegar.WP.UI.Model.Classes.Flights.Checkout;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -22,6 +24,9 @@ namespace Despegar.WP.UI.Product.Flights.Checkout.Payment.Controls
     /// </summary>
     public sealed partial class PaymentWithInterest : Page
     {
+        public delegate void EventHandler(object sender, RoutedEventArgs e);
+        public event EventHandler OnUserControlButtonClicked;
+
         public PaymentWithInterest()
         {
             this.InitializeComponent();
@@ -44,6 +49,15 @@ namespace Despegar.WP.UI.Product.Flights.Checkout.Payment.Controls
         private void Image_Load_Failed(object sender, ExceptionRoutedEventArgs e)
         {
 
+        }
+
+        private void OnButtonClicked(object sender, RoutedEventArgs e)
+        {
+            //PaymentDetail bla = (PaymentDetail)(((CheckBox)e.OriginalSource).DataContext);
+            //var ble = ((RadioButton)e.OriginalSource).DataContext;
+            //((RadioButton)e.OriginalSource).DataContext = PaymentsFormated.CardToArray((PaymentDetail)(((RadioButton)e.OriginalSource).DataContext)); 
+            if (OnUserControlButtonClicked != null)
+                OnUserControlButtonClicked(this, e);
         }
 
     }

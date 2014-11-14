@@ -36,7 +36,9 @@
                     <TextBlock x:Uid="Flight_Checkout_Passagers" FontSize="36"></TextBlock>
                 </PivotItem.Header>
 
-                <StackPanel xmlns:src="using:Despegar.WP.UI.Product.Flights.Checkout.Passegers">
+                <ScrollViewer VerticalScrollBarVisibility="Auto" Height="400">
+
+                    <StackPanel xmlns:src="using:Despegar.WP.UI.Product.Flights.Checkout.Passegers">
 
                     <!--ItemsSource="{Binding passengers}"-->
                     <ItemsControl x:Name="PassengerControl" ItemsSource="{Binding passengers}">
@@ -47,6 +49,7 @@
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
                 </StackPanel>
+                </ScrollViewer>
             </PivotItem>
         
             
@@ -58,7 +61,6 @@
                 <StackPanel xmlns:src="using:Despegar.WP.UI.Product.Flights.Checkout.Contact">
 
                     <src:ContactData x:Name="ContactControl"></src:ContactData>
-                    <Button Click="testo"></Button>
                 </StackPanel>
             </PivotItem>
 
@@ -82,10 +84,10 @@
                 <StackPanel xmlns:src="using:Despegar.WP.UI.Product.Flights.Checkout.CardData">
 
                     <src:CardData x:Name="CardDataControl"></src:CardData>
-                    <Button Click="testo"></Button>
                 </StackPanel>
             </PivotItem>
             
+            <!--Invoice Arg-->
             <PivotItem>
                 <PivotItem.Header>
                     <TextBlock x:Uid="Flight_Checkout_Invoice_Arg" FontSize="36"></TextBlock>
@@ -93,9 +95,20 @@
                 <StackPanel xmlns:src="using:Despegar.WP.UI.Product.Flights.Checkout.Invoice">
 
                     <src:InvoiceArg x:Name="InvoiceArgControl"></src:InvoiceArg>
-                    <Button Click="testo"></Button>
                 </StackPanel>                
                 
+            </PivotItem>
+
+            <!--Buy-->
+            <PivotItem>
+                <PivotItem.Header>
+                    <TextBlock x:Uid="Flight_Checkout_Buy" FontSize="36"></TextBlock>
+                </PivotItem.Header>
+                <StackPanel xmlns:src="using:Despegar.WP.UI.Product.Flights.Checkout.Buy">
+
+                    <src:Buy x:Name="Buycontrol"></src:Buy>
+                </StackPanel>
+
             </PivotItem>
 
         </Pivot>

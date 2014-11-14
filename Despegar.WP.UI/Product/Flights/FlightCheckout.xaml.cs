@@ -36,6 +36,7 @@ namespace Despegar.WP.UI.Product.Flights
 
         private BookingFields bookingfields = new BookingFields();
 
+
         public FlightCheckout()
         {
             this.InitializeComponent();
@@ -53,21 +54,28 @@ namespace Despegar.WP.UI.Product.Flights
             book.inbound_choice = 1;
             book.outbound_choice = 1;
             book.itinerary_id = "prism_AR_0_FLIGHTS_A-1_C-0_I-0_RT-BUEMIA20141110-MIABUE20141111_xorigin-api!0!C_1212636001_843603426_-2008006059_1555498055_-278056197_804297563!1,6_1,4_1,5_1,2_1,3_1,1";
-            //BookingFields test = await flightService.GetBookingFields(book);
+
             bookingfields = await flightService.GetBookingFields(book);
             PassengerControl.DataContext = bookingfields.form;
             ContactControl.DataContext = bookingfields.form.contact;
             CardDataControl.DataContext = bookingfields.form.payment.card;
+            CardDataControl.DataContext = bookingfields.form.payment;
             InvoiceArgControl.DataContext = bookingfields.form.payment.invoice;
-
-
-            PaymentsFormated test = new PaymentsFormated();            
-            test = FlightsCheckoutModel.FormatPayments(bookingfields.payments);
-            PaymentControl.DataContext = test;
+           // Buycontrol.DataContext = bookingfields.price;PriceFormated
+            Buycontrol.DataContext = new PriceFormated(bookingfields);
+            //PaymentsFormated test = new PaymentsFormated();            
+            //test = FlightsCheckoutModel.FormatPayments(bookingfields.payments);
+            PaymentControl.DataContext = FlightsCheckoutModel.FormatPayments(bookingfields.payments);
             int i = 1;
-            //PassengersControl.DataContext = test.form.passengers;
-        }
 
+
+            //Notify to CardData 
+            PaymentControl.OnUserControlButtonClicked += CardDataControl.OnUCButtonClicked;
+            Buycontrol.OnUserControlButtonClicked += this.ValidateAndBuy;
+
+
+        }
+       
         /// <summary>
         /// Gets the <see cref="NavigationHelper"/> associated with this <see cref="Page"/>.
         /// </summary>
@@ -139,14 +147,17 @@ namespace Despegar.WP.UI.Product.Flights
 
         #endregion
 
-        private void testo(object sender, RoutedEventArgs e)
+        private void ValidateAndBuy(object sender, RoutedEventArgs e)
         {
-            FlightsCheckoutModel flightCheckoutModel = new FlightsCheckoutModel(); 
+            FlightsCheckoutModel flightCheckoutModel = new FlightsCheckoutModel();
             var toConert = DynamicFlightBookingFieldsToPost.ToDynamic(bookingfields);
-            flightCheckoutModel.CompleteCheckOut(toConert); 
-            
+            flightCheckoutModel.CompleteCheckOut(toConert);
+
             int i = 1;
         }
+
+
+
 
     }
 }

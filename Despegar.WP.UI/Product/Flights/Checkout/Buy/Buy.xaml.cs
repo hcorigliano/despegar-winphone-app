@@ -22,6 +22,9 @@ namespace Despegar.WP.UI.Product.Flights.Checkout.Buy
     /// </summary>
     public sealed partial class Buy : Page
     {
+        public delegate void EventHandler(object sender, RoutedEventArgs e);
+        public event EventHandler OnUserControlButtonClicked;
+
         public Buy()
         {
             this.InitializeComponent();
@@ -34,6 +37,12 @@ namespace Despegar.WP.UI.Product.Flights.Checkout.Buy
         /// This parameter is typically used to configure the page.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+        }
+
+        private void OnButtonClicked(object sender, RoutedEventArgs e)
+        {
+            if (OnUserControlButtonClicked != null)
+                OnUserControlButtonClicked(this, e);
         }
     }
 }

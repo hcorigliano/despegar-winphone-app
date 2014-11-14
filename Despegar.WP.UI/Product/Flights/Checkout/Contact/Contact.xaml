@@ -46,9 +46,7 @@
                     <TextBlock x:Uid="Contact_Number"></TextBlock>
                     <TextBox x:Name="number" Text="{Binding phones[0].number.coreValue,Mode=TwoWay}"></TextBox>
                 </StackPanel>
-                
-                <Button Click="Button_Click_Test" x:Name="btn_Test"></Button>
-               
+                               
             </StackPanel>
         </ScrollViewer>
     </Grid>

@@ -180,6 +180,9 @@
     <Compile Include="Product\Flights\Checkout\Buy\Buy.xaml.cs">
       <DependentUpon>Buy.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Product\Flights\Checkout\Buy\Controls\BuyDetailsControl.xaml.cs">
+      <DependentUpon>BuyDetailsControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Product\Flights\Checkout\CardData\CardData.xaml.cs">
       <DependentUpon>CardData.xaml</DependentUpon>
     </Compile>
@@ -244,6 +247,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Product\Flights\Checkout\Buy\Buy.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Product\Flights\Checkout\Buy\Controls\BuyDetailsControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

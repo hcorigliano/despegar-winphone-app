@@ -22,47 +22,48 @@
                 <!--Card-->
                 
                 <!--TARJETA-->
-                <!--<StackPanel>
+                <StackPanel>
                     <TextBlock x:Uid="Card_Data_Card"></TextBlock>
-                    <ComboBox x:Name="card" ItemsSource="{Binding phones[0].type.options}" DisplayMemberPath="description" SelectedValue="{Binding phones[0].type.coreValue, Mode=TwoWay}" SelectedValuePath="value"   ></ComboBox>
-                </StackPanel>-->
+                    <!--ItemsSource="{Binding phones[0].type.options}"--> <!--bookingFields.form.payment.installment.quantity.coreValue-->
+                    <ComboBox x:Name="card"  DisplayMemberPath="card.description" SelectedValue="{Binding card.phones[0].type.coreValue, Mode=TwoWay}" SelectedValuePath="card.code"  SelectionChanged="FillCardData"  ></ComboBox>
+                </StackPanel>
 
-                <StackPanel Visibility="{Binding number.required,Converter={StaticResource VisibilityConverter}}" >
+                <StackPanel Visibility="{Binding card.number.required,Converter={StaticResource VisibilityConverter}}" >
                     <TextBlock x:Uid="Card_Data_Number_Of_Card"></TextBlock>
-                    <TextBox x:Name="number" Text="{Binding number.coreValue , Mode=TwoWay}"></TextBox>
+                    <TextBox x:Name="number" Text="{Binding card.number.coreValue , Mode=TwoWay}"></TextBox>
                 </StackPanel>
 
 
                 <StackPanel>
                     <TextBlock Text="Testo"></TextBlock>
                     <!--DayVisible="False"-->
-                    <DatePicker DayFormat="{}{day.integer(1)}" Date="{Binding expiration.coreValue , Mode=TwoWay , Converter={StaticResource DateToExpirationStringConverter}}" ></DatePicker>  <!--BINDEAR MIN YEAR-->
+                    <DatePicker DayFormat="{}{day.integer(1)}" Date="{Binding card.expiration.coreValue , Mode=TwoWay , Converter={StaticResource DateToExpirationStringConverter}}" ></DatePicker>  <!--BINDEAR MIN YEAR-->
                 </StackPanel>
-                
-                <StackPanel Visibility="{Binding security_code.required,Converter={StaticResource VisibilityConverter}}" >
+
+                <StackPanel Visibility="{Binding card.security_code.required,Converter={StaticResource VisibilityConverter}}" >
                     <TextBlock x:Uid="Card_Data_Security_Code"></TextBlock>
-                        <TextBox x:Name="security_code" Text="{Binding security_code.coreValue , Mode=TwoWay}"></TextBox>
+                    <TextBox x:Name="security_code" Text="{Binding card.security_code.coreValue , Mode=TwoWay}"></TextBox>
                 </StackPanel>
 
-                <StackPanel Visibility="{Binding owner_name.required,Converter={StaticResource VisibilityConverter}}" >
+                <StackPanel Visibility="{Binding card.owner_name.required,Converter={StaticResource VisibilityConverter}}" >
                     <TextBlock x:Uid="Card_Data_owner_name"></TextBlock>
-                    <TextBox x:Name="owner_name" Text="{Binding owner_name.coreValue , Mode=TwoWay}"></TextBox>
+                    <TextBox x:Name="owner_name" Text="{Binding card.owner_name.coreValue , Mode=TwoWay}"></TextBox>
                 </StackPanel>
 
-                <!--<StackPanel Visibility="{Binding owner_document.type.required,Converter={StaticResource VisibilityConverter}}">
+                <!--<StackPanel Visibility="{Binding card.owner_document.type.required,Converter={StaticResource VisibilityConverter}}">
                     <TextBlock x:Uid="Card_Data_Document"></TextBlock>
-                    <ComboBox x:Name="owner_document_type" ItemsSource="{Binding owner_document.type.options}" DisplayMemberPath="description" SelectedValue="{Binding owner_document.type.coreValue, Mode=TwoWay}" SelectedValuePath="value"   ></ComboBox>
+                    <ComboBox x:Name="owner_document_type" ItemsSource="{Binding card.owner_document.type.options}" DisplayMemberPath="description" SelectedValue="{Binding card.owner_document.type.coreValue, Mode=TwoWay}" SelectedValuePath="value"   ></ComboBox>
                 </StackPanel>-->
 
-                <StackPanel Visibility="{Binding owner_document.number.required,Converter={StaticResource VisibilityConverter}}" >
+                <StackPanel Visibility="{Binding card.owner_document.number.required,Converter={StaticResource VisibilityConverter}}" >
                     <TextBlock x:Uid="Card_Data_Number_Document"></TextBlock>
-                    <TextBox x:Name="owner_document_number" Text="{Binding owner_document.number.coreValue , Mode=TwoWay}"></TextBox>
+                    <TextBox x:Name="owner_document_number" Text="{Binding card.owner_document.number.coreValue , Mode=TwoWay}"></TextBox>
                 </StackPanel>
 
 
-                <StackPanel Visibility="{Binding email.required,Converter={StaticResource VisibilityConverter}}">
+                <StackPanel Visibility="{Binding card.email.required,Converter={StaticResource VisibilityConverter}}">
                     <TextBlock x:Uid="Card_Data_Owner_Gender"></TextBlock>
-                    <ComboBox x:Name="owner_gender" ItemsSource="{Binding owner_gender.options}" DisplayMemberPath="description" SelectedValue="{Binding owner_gender.coreValue, Mode=TwoWay}" SelectedValuePath="value"   ></ComboBox>
+                    <ComboBox x:Name="owner_gender" ItemsSource="{Binding card.owner_gender.options}" DisplayMemberPath="description" SelectedValue="{Binding card.owner_gender.coreValue, Mode=TwoWay}" SelectedValuePath="value"   ></ComboBox>
                 </StackPanel>
 
 

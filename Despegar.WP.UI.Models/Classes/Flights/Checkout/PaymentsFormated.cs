@@ -7,75 +7,61 @@ using System.Threading.Tasks;
 
 namespace Despegar.WP.UI.Model.Classes.Flights.Checkout
 {
-    public class PaymentWithoutInterest
-    {
-        public List<PaymentDetail> PaymentsDetails {get;set;}
-        public string LabelText {get; set;}
-        public string PaysText { get; set;}
-
-        public PaymentWithoutInterest()
-        {
-            PaymentsDetails = new List<PaymentDetail>();
-            //LabelText = "";
-            //PaysText = "";
-        }
-
-    }
-
 
     public class PaymentsWithoutInterest
     {
-        public PaymentWithoutInterest OnePay { get; set; }
-        public PaymentWithoutInterest SixPays { get; set; }
-        public PaymentWithoutInterest TwelvePays { get; set; }
-        public PaymentWithoutInterest TwentyFourPays { get; set; }
+        public List<PaymentDetail> OnePay { get; set; }
+        public List<PaymentDetail> SixPays { get; set; }
+        public List<PaymentDetail> TwelvePays { get; set; }
+        public List<PaymentDetail> TwentyFourPays { get; set; }
 
 
         public PaymentsWithoutInterest()
         {
-            OnePay = new PaymentWithoutInterest();
-            SixPays = new PaymentWithoutInterest();
-            TwelvePays = new PaymentWithoutInterest();
-            TwentyFourPays = new PaymentWithoutInterest();
+            OnePay = new List<PaymentDetail>();
+            SixPays = new List<PaymentDetail>();
+            TwelvePays = new List<PaymentDetail>();
+            TwentyFourPays = new List<PaymentDetail>();
         }
     }
 
     //---------------------------------------------------------------------------//
 
-    public class PaymentWithInterest
-    {
-        public PaymentDetail PaymentsDetails { get; set; }
-        public string LabelText { get; set; }
-        public string PaysText { get; set; }
-
-        public PaymentWithInterest()
-        {
-            PaymentsDetails = new PaymentDetail();
-            //LabelText = "";
-            //PaysText = "";
-        }
-
-    }
 
 
     public class PaymentsWithInterest
     {
-        public List<PaymentWithInterest> OnePay { get; set; }
-        public List<PaymentWithInterest> SixPays { get; set; }
-        public List<PaymentWithInterest> TwelvePays { get; set; }
-        public List<PaymentWithInterest> TwentyFourPays { get; set; }
+        public List<ListPays> OnePay { get; set; }
+        public List<ListPays> SixPays { get; set; }
+        public List<ListPays> TwelvePays { get; set; }
+        public List<ListPays> TwentyFourPays { get; set; }
         public string GrupLabelText { get; set; }
 
         public PaymentsWithInterest()
         {
-            OnePay = new List<PaymentWithInterest>();
-            SixPays = new List<PaymentWithInterest>();
-            TwelvePays = new List<PaymentWithInterest>();
-            TwentyFourPays = new List<PaymentWithInterest>();
-            //TODO : RESOURCE
-            GrupLabelText = "6 , 12 o 24 pagos con";
+            OnePay = new List<ListPays>();
+            SixPays = new List<ListPays>();
+            TwelvePays = new List<ListPays>();
+            TwentyFourPays = new List<ListPays>();
+            //TODO : RESOURCE          
+               
+
+            GrupLabelText = "";
+        }
+
+
+    }
+
+    public class ListPays
+    {
+        public List<PaymentDetail> Cards { get; set; }
+
+        public ListPays()
+        {
+            Cards = new List<PaymentDetail>();
         }
     }
+
     //---------------------------------------------------------------------------//
 
     public class PaymentsFormated
@@ -89,6 +75,14 @@ namespace Despegar.WP.UI.Model.Classes.Flights.Checkout
             pay_at_destination = new PaymentsWithoutInterest();
             with_interest = new PaymentsWithInterest();
             without_interest = new PaymentsWithoutInterest();
+        }
+
+        static public List<PaymentDetail> CardToArray(PaymentDetail card)
+        {
+            List<PaymentDetail> array = new List<PaymentDetail>();
+            array.Add(card);
+            return array;
+
         }
     }
 }

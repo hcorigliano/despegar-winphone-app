@@ -61,6 +61,7 @@
     <Compile Include="Classes\BindableBase.cs" />
     <Compile Include="Classes\Flights\BindableItem.cs" />
     <Compile Include="Classes\Flights\Checkout\PaymentsFormated.cs" />
+    <Compile Include="Classes\Flights\Checkout\PriceFormated.cs" />
     <Compile Include="Classes\Flights\PassagersQuantity.cs" />
     <Compile Include="Classes\Flights\RoutesItems.cs" />
     <Compile Include="Classes\Flights\BindableSegment.cs" />

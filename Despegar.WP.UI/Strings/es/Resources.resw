@@ -333,4 +333,55 @@
   <data name="Flight_Checkout_Payments.Text" xml:space="preserve">
     <value>Forma de pago</value>
   </data>
+  <data name="Common_Pays_With" xml:space="preserve">
+    <value>Pagos con </value>
+  </data>
+  <data name="Common_Pays_Without_Interest" xml:space="preserve">
+    <value>Pagos sin interés con </value>
+  </data>
+  <data name="Common_Pay_With" xml:space="preserve">
+    <value>Pago con</value>
+  </data>
+  <data name="Common_Pays_Of" xml:space="preserve">
+    <value>Pagos de </value>
+  </data>
+  <data name="Common_Pay_Of" xml:space="preserve">
+    <value>Pago de </value>
+  </data>
+  <data name="Buy_Button.Content" xml:space="preserve">
+    <value>Comprar</value>
+  </data>
+  <data name="Flight_Checkout_Buy.Text" xml:space="preserve">
+    <value>Finalizar compra</value>
+  </data>
+  <data name="Buy_Details_Afip.Text" xml:space="preserve">
+    <value>Res. 3550 AFIP</value>
+  </data>
+  <data name="Buy_Details_Charges.Text" xml:space="preserve">
+    <value>Cargos</value>
+  </data>
+  <data name="Buy_Details_Fare_Adult.Text" xml:space="preserve">
+    <value> adulto(s)</value>
+  </data>
+  <data name="Buy_Details_Fare_Children.Text" xml:space="preserve">
+    <value> menor(es)</value>
+  </data>
+  <data name="Buy_Details_Fare_Infant.Text" xml:space="preserve">
+    <value> bebe(s)</value>
+  </data>
+  <data name="Buy_Details_Fare_Per_Adult.Text" xml:space="preserve">
+    <value>Tarifa por adulto</value>
+  </data>
+  <data name="Buy_Details_Fare_Per_Children.Text" xml:space="preserve">
+    <value>Tarifa por menor</value>
+  </data>
+  <data name="Buy_Details_Fare_Per_Infant.Text" xml:space="preserve">
+    <value>Tarifa por bebe</value>
+  </data>
+  <data name="Buy_Details_Taxes.Text" xml:space="preserve">
+    <value>Impuestos y tasas</value>
+  </data>
+  <data name="Buy_Details_Total.Text" xml:space="preserve">
+    <value>Total</value>
+  </data>
 </root>

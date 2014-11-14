@@ -1,5 +1,6 @@
 ﻿using Despegar.Core.Business.Flight.BookingFields;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -26,11 +27,25 @@ namespace Despegar.WP.UI.Common.Converter
         }
     }
 
+    public class NullToVisibilityConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, string language)
+        {
+            if (value == null) { return Visibility.Collapsed; }
+            return  Visibility.Visible; 
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, string language)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
     public class ListToVisibilityConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, string language)
         {
-            return value != null ? Visibility.Visible : Visibility.Collapsed;
+            return  ((IList)value).Count != 0 ? Visibility.Visible : Visibility.Collapsed;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)

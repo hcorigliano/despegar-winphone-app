@@ -22,9 +22,16 @@ namespace Despegar.WP.UI.Product.Flights.Checkout.Payment
     /// </summary>
     public sealed partial class Payments : Page
     {
+        public delegate void EventHandler(object sender, RoutedEventArgs e);
+        public event EventHandler OnUserControlButtonClicked;
+
         public Payments()
         {
             this.InitializeComponent();
+
+            PaymentWithInterest.OnUserControlButtonClicked += this.OnButtonClicked;
+        
+           //radioButtonOnePayWith.Checked += new EventHandler(OnButtonClicked);
         }
 
         /// <summary>
@@ -34,6 +41,27 @@ namespace Despegar.WP.UI.Product.Flights.Checkout.Payment
         /// This parameter is typically used to configure the page.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+        }
+
+        public void PayMethodChanged(object sender, RoutedEventArgs e)
+        {
+            
+        }
+
+        //private void OnButtonClicked(object sender, EventArgs e)
+        //{
+        //    // Delegate the event to the caller
+        //    if (OnUserControlButtonClicked != null)
+        //        OnUserControlButtonClicked(this, e);
+        //}
+
+        private void OnButtonClicked(object sender, RoutedEventArgs e)
+        {
+            var a = this.DataContext;
+            var b = ((RadioButton)e.OriginalSource).DataContext;
+
+            if (OnUserControlButtonClicked != null)
+                OnUserControlButtonClicked(this, e);
         }
     }
 }

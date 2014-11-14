@@ -13,6 +13,9 @@ namespace Despegar.Core.Business.Dynamics
         private static dynamic BuildPassenger(Passenger passenger) {
             dynamic result = new ExpandoObject();
             result.type = passenger.type;
+            result.document = new ExpandoObject();
+            result.document.type = passenger.document.type.coreValue;
+            result.document.number = passenger.document.number.coreValue;
             result.first_name = passenger.first_name.coreValue;
             result.last_name = passenger.last_name.coreValue;
             result.nationality = passenger.nationality.coreValue;

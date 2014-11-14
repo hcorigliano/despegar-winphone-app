@@ -8,40 +8,26 @@
     xmlns:conv="using:Despegar.WP.UI.Common.Converter"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-    
+
     <Page.Resources>
         <conv:StringFormatConverter x:Name="StringFormatConverter"/>
     </Page.Resources>
 
     <Grid >
-        <!--cardCode-->
+        <!--List<PaymentDetails>-->
         <StackPanel Orientation="Horizontal">
-            <ItemsControl DataContext="{Binding}" ItemsSource="{Binding PaymentsDetails}">
-            <ItemsControl.ItemTemplate>
-            <DataTemplate>
-                
+            <ItemsControl DataContext="{Binding}" ItemsSource="{Binding}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+
 
                         <Image Source="{Binding card.code, Converter={StaticResource StringFormatConverter}, ConverterParameter='/Assets/Icon/CreditCard/{0}.png'}" Width="76" Margin="5,0,0,7"  ImageFailed="Image_Load_Failed" />
 
-                    
-            </DataTemplate>
-        </ItemsControl.ItemTemplate>
-        </ItemsControl>
+
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
         </StackPanel>
-
-        <!--<ItemsControl DataContext="{Binding}" x:Name="PaymentControlSixPays" ItemsSource="{Binding SixPays}">
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel>
-
-                        <RadioButton GroupName="WithInteres" Click="RadioButtonClick" Visibility="{Binding LabelText,Converter={StaticResource ListToVisibilityConverter}}" x:Name="radioButton" Content="{Binding LabelText}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
-                        <StackPanel ></StackPanel>
-                        <TextBlock Text="{Binding PaysText}" Visibility="{Binding IsChecked, ElementName=radioButton , Converter={StaticResource VisibilityConverter} }"></TextBlock>
-
-                    </StackPanel>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl>-->
 
     </Grid>
 </Page>

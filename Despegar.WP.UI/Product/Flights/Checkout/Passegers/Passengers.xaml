@@ -16,7 +16,7 @@
     </Page.Resources>
 
     <Grid>
-        <ScrollViewer VerticalScrollBarVisibility="Auto" Height="400">
+       
             <StackPanel>
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -59,6 +59,6 @@
                 </StackPanel>
 
             </StackPanel>
-        </ScrollViewer>
+
     </Grid>
 </Page>
