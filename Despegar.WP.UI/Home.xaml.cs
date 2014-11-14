@@ -9,8 +9,10 @@ using Despegar.WP.UI.Model;
 using Despegar.WP.UI.Product.Legacy;
 using Despegar.WP.UI.Strings;
 using System;
+using System.Windows;
 using System.Collections.Generic;
 using System.Linq;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 
@@ -26,9 +28,8 @@ namespace Despegar.WP.UI
     public sealed partial class Home : Page
     {
         private NavigationHelper navigationHelper;
-        public HomeViewModel ViewModel;              
+        public HomeModel ViewModel = new HomeModel();              
         public List<Despegar.Core.Business.Configuration.Product> products;
-
 
         public Home()
         {
@@ -45,6 +46,10 @@ namespace Despegar.WP.UI
             // Developer Tools
             this.CheckDeveloperTools();
             SetupMenuItems(GlobalConfiguration.Site);
+            test();
+            
+           
+
 
         }
 
@@ -56,12 +61,30 @@ namespace Despegar.WP.UI
             get { return this.navigationHelper; }
         }
 
-        private async void SetupMenuItems(string country)
+        private async void test()
         {
             IConfigurationService configurationService = GlobalConfiguration.CoreContext.GetConfigurationService();
-            Configuration configuration = await configurationService.GetConfigurations();
-            var Site = configuration.sites.FirstOrDefault(s => s.code == country);
-            products = Site.products;
+            Countries con = await configurationService.GetCountries();
+
+
+
+        }
+        private async void SetupMenuItems(string country)
+        {
+            products = await ViewModel.GetProducts(country);
+
+            foreach (var product in products)
+            {
+                switch(product.name)
+                {
+                    case "hotels":
+                        Hotels.Visibility = (product.status == "ENABLED") ? Visibility.Visible : Visibility.Collapsed;
+                        break;
+                    case "flights":
+                        Flights.Visibility = (product.status == "ENABLED") ? Visibility.Visible : Visibility.Collapsed;
+                        break;
+                }
+            }
         }
 
         /// <summary>

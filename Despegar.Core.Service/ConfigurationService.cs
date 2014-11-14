@@ -43,6 +43,15 @@ namespace Despegar.Core.Service
             return await connector.GetAsync<UpdateFields>(serviceUrl);
         }
 
+        public async Task<Countries> GetCountries()
+        {
+            string serviceUrl = ServiceURL.GetServiceURL(ServiceKey.Countries);
+            IConnector connector = context.GetServiceConnector(ServiceKey.Countries);
+
+            return await connector.GetAsync<Countries>(serviceUrl);  
+
+        }
+
         /// <summary>
         /// Auto completes cities
         /// </summary>

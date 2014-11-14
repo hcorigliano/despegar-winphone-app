@@ -45,6 +45,8 @@
     <Compile Include="Configuration\CitiesFields.cs" />
     <Compile Include="Configuration\Configuration.cs" />
     <Compile Include="Configuration\Contact.cs" />
+    <Compile Include="Configuration\Countries.cs" />
+    <Compile Include="Configuration\CountryFields.cs" />
     <Compile Include="Configuration\Domain.cs" />
     <Compile Include="Configuration\Product.cs" />
     <Compile Include="Configuration\Site.cs" />
