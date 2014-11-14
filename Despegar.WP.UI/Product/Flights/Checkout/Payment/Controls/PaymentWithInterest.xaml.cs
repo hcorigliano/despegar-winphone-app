@@ -13,6 +13,7 @@ using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
@@ -47,8 +48,9 @@ namespace Despegar.WP.UI.Product.Flights.Checkout.Payment.Controls
         }
 
         private void Image_Load_Failed(object sender, ExceptionRoutedEventArgs e)
-        {
-
+        {                         
+            //((Image)sender).Source = new BitmapImage(new Uri("/Assets/Icon/CreditCard/GRL.png", UriKind.Relative));
+            //int i = 1;
         }
 
         private void OnButtonClicked(object sender, RoutedEventArgs e)

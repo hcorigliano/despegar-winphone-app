@@ -21,7 +21,7 @@
                     <DataTemplate>
 
 
-                        <Image Source="{Binding card.code, Converter={StaticResource StringFormatConverter}, ConverterParameter='/Assets/Icon/CreditCard/{0}.png'}" Width="76" Margin="5,0,0,7"  ImageFailed="Image_Load_Failed" />
+                        <Image Source="{Binding card.code, Converter={StaticResource StringFormatConverter}, ConverterParameter='/Assets/Icon/CreditCard/{0}.png' , TargetNullValue='/Assets/Icon/CreditCard/GRL.png'}" Width="76" Margin="5,0,0,7"   />
 
 
                     </DataTemplate>

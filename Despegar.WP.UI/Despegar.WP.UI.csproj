@@ -378,6 +378,7 @@
     <Content Include="Assets\Icon\CreditCard\DC_PIC.png" />
     <Content Include="Assets\Icon\CreditCard\DS_PIC.png" />
     <Content Include="Assets\Icon\CreditCard\EFECTIVO.png" />
+    <Content Include="Assets\Icon\CreditCard\GRL.png" />
     <Content Include="Assets\Icon\CreditCard\IX_IXE.png" />
     <Content Include="Assets\Icon\CreditCard\MC_BBVAB.png" />
     <Content Include="Assets\Icon\CreditCard\MC_GUA.png" />

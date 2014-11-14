@@ -15,6 +15,8 @@
         <conv:StringFormatConverter x:Name="StringFormatConverter"/>
         <conv:PaymentDetailsToLabelConverter x:Name="PaymentDetailsToLabelConverter"/>
         <conv:PaymentDetailsToPaysConverter x:Name="PaymentDetailsToPaysConverter"/>
+
+        <BitmapImage x:Key="DefaultImage" UriSource="/Assets/Icon/CreditCard/GRL.png" />
     </Page.Resources>
 
     <Grid>
@@ -24,9 +26,9 @@
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <StackPanel DataContext="{Binding Cards}">
-
+                            
                             <RadioButton DataContext="{Binding}" Checked="OnButtonClicked" GroupName="WithInteres" Click="RadioButtonClick" Visibility="{Binding Converter={StaticResource ListToVisibilityConverter}}" x:Name="radioButton" Content="{Binding [0], Converter={StaticResource PaymentDetailsToLabelConverter}}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
-                            <Image Source="{Binding [0].card.code, Converter={StaticResource StringFormatConverter}, ConverterParameter='/Assets/Icon/CreditCard/{0}.png'}" Width="76" Margin="5,0,0,7"  ImageFailed="Image_Load_Failed" />
+                            <Image Source="{Binding [0].card.code, Converter={StaticResource StringFormatConverter}, ConverterParameter='/Assets/Icon/CreditCard/{0}.png'}" Width="76" Margin="5,0,0,7" />
                             <TextBlock Text="{Binding [0],  Converter={StaticResource PaymentDetailsToPaysConverter}}" Visibility="{Binding IsChecked, ElementName=radioButton , Converter={StaticResource VisibilityConverter} }"></TextBlock>
                       
                         </StackPanel>
@@ -37,9 +39,9 @@
             <ItemsControl DataContext="{Binding}" x:Name="PaymentControlSixPays" ItemsSource="{Binding SixPays}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <StackPanel DataContext="{Binding Cards}">
+                        <StackPanel DataContext="{Binding Cards}"><!--ms-appx:///Assets/Icon/CreditCard/{0}.png-->
                             <RadioButton Checked="OnButtonClicked" GroupName="WithInteres" Click="RadioButtonClick" Visibility="{Binding Converter={StaticResource ListToVisibilityConverter}}"  x:Name="radioButton" Content="{Binding [0], Converter={StaticResource PaymentDetailsToLabelConverter}}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
-                            <Image Source="{Binding [0].card.code, Converter={StaticResource StringFormatConverter}, ConverterParameter='/Assets/Icon/CreditCard/{0}.png'}" Width="76" Margin="5,0,0,7"  ImageFailed="Image_Load_Failed" />
+                            <Image Source="{Binding [0].card.code, Converter={StaticResource StringFormatConverter}, ConverterParameter='/Assets/Icon/CreditCard/{0}.png'}"  ImageFailed="Image_Load_Failed" Width="76" Margin="5,0,0,7"   />
                             <TextBlock Text="{Binding [0], Converter={StaticResource PaymentDetailsToPaysConverter}}" Visibility="{Binding IsChecked, ElementName=radioButton , Converter={StaticResource VisibilityConverter} }"></TextBlock>
 
                         </StackPanel>
@@ -53,7 +55,7 @@
                         <StackPanel DataContext="{Binding Cards}">
 
                             <RadioButton  Checked="OnButtonClicked" GroupName="WithInteres" Click="RadioButtonClick" Visibility="{Binding LabelText,Converter={StaticResource ListToVisibilityConverter}}" x:Name="radioButton" Content="{Binding [0], Converter={StaticResource PaymentDetailsToLabelConverter}}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
-                            <Image Source="{Binding [0].card.code, Converter={StaticResource StringFormatConverter}, ConverterParameter='/Assets/Icon/CreditCard/{0}.png'}" Width="76" Margin="5,0,0,7"  ImageFailed="Image_Load_Failed" />
+                            <Image Source="{  Binding [0].card.code, Converter={StaticResource StringFormatConverter}, ConverterParameter='/Assets/Icon/CreditCard/{0}.png'}" Width="76" Margin="5,0,0,7"  />
                             <TextBlock Text="{Binding [0], Converter={StaticResource PaymentDetailsToPaysConverter}}" Visibility="{Binding IsChecked, ElementName=radioButton , Converter={StaticResource VisibilityConverter} }"></TextBlock>
 
                         </StackPanel>
@@ -67,7 +69,7 @@
                         <StackPanel DataContext="{Binding Cards}">
 
                             <RadioButton Checked="OnButtonClicked" GroupName="WithInteres" Click="RadioButtonClick" Visibility="{Binding LabelText,Converter={StaticResource ListToVisibilityConverter}}" x:Name="radioButton" Content="{Binding [0], Converter={StaticResource PaymentDetailsToLabelConverter}}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
-                            <Image Source="{Binding [0].card.code, Converter={StaticResource StringFormatConverter}, ConverterParameter='/Assets/Icon/CreditCard/{0}.png'}" Width="76" Margin="5,0,0,7"  ImageFailed="Image_Load_Failed" />
+                            <Image Source="{Binding [0].card.code, Converter={StaticResource StringFormatConverter}, ConverterParameter='/Assets/Icon/CreditCard/{0}.png'}" Width="76" Margin="5,0,0,7" />
                             <TextBlock Text="{Binding  [0], Converter={StaticResource PaymentDetailsToPaysConverter}}" Visibility="{Binding IsChecked, ElementName=radioButton , Converter={StaticResource VisibilityConverter} }"></TextBlock>
 
                         </StackPanel>

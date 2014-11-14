@@ -16,11 +16,43 @@ namespace Despegar.WP.UI.Model
         private IFlightService flightService;
         private ICommonServices CommonServices;
 
+        public BookingFields bookingfields = new BookingFields();
+
         public FlightsCheckoutModel()
         {
             flightService = GlobalConfiguration.CoreContext.GetFlightService();
             CommonServices = GlobalConfiguration.CoreContext.GetCommonService();
         }
+
+        private async void test()
+        {
+            BookingFieldPost book = new BookingFieldPost();
+            book.inbound_choice = 1;
+            book.outbound_choice = 1;
+            book.itinerary_id = "prism_AR_0_FLIGHTS_A-1_C-0_I-0_RT-BUEMIA20141110-MIABUE20141111_xorigin-api!0!C_1212636001_843603426_-2008006059_1555498055_-278056197_804297563!1,6_1,4_1,5_1,2_1,3_1,1";
+
+            bookingfields = await flightService.GetBookingFields(book);
+
+
+            //PassengerControl.DataContext = bookingfields.form;
+            //ContactControl.DataContext = bookingfields.form.contact;
+            //CardDataControl.DataContext = bookingfields.form.payment.card;
+            //CardDataControl.DataContext = bookingfields.form.payment;
+            //InvoiceArgControl.DataContext = bookingfields.form.payment.invoice;
+
+            //Buycontrol.DataContext = new PriceFormated(bookingfields);
+
+            //PaymentControl.DataContext = FlightsCheckoutModel.FormatPayments(bookingfields.payments);
+
+
+
+            //Notify to CardData 
+            //PaymentControl.OnUserControlButtonClicked += CardDataControl.OnUCButtonClicked;
+            //Buycontrol.OnUserControlButtonClicked += this.ValidateAndBuy;
+
+
+        }
+
 
         public async Task<BookingFields> GetBookingFields(BookingFieldPost bookingFieldPost)
         {           
@@ -38,8 +70,6 @@ namespace Despegar.WP.UI.Model
             return (await CommonServices.GetStates(country));
         }
 
-
-
         public static PaymentsFormated FormatPayments(Payments payments)
         {
             PaymentsFormated formated = new PaymentsFormated();
@@ -49,8 +79,6 @@ namespace Despegar.WP.UI.Model
             //TODO : FILL PAY AT DESTINATION
             return formated;
         }
-
-
 
         private static void FillFormatedWithoutInterest(List<PaymentDetail> list, PaymentsWithoutInterest paymentsFilter)
         {
