@@ -15,9 +15,8 @@ namespace Despegar.WP.UI.Model.Interfaces
     public interface INavigator
     {
        void GoTo(ViewModelPages page, object data);
-
        void ClearStack();
-    
+       void RemoveBackEntry();
        void GoBack();        
     }
 }

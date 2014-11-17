@@ -1,11 +1,13 @@
 ﻿using Despegar.Core.Business.Flight.CitiesAutocomplete;
 using Despegar.WP.UI.Common;
+using Despegar.WP.UI.Model;
 using Despegar.WP.UI.Model.ViewModel.Flights;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
@@ -47,9 +49,10 @@ namespace Despegar.WP.UI.Controls.Flights
         }
 
         // DataContext is the FlightSearchViewModel
-        public SearchAirport() : base()
+        public SearchAirport()
         {
             this.InitializeComponent();
+            (this.Content as FrameworkElement).DataContext = this;
         }
        
         private async void FlightsTextBlock_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
@@ -57,9 +60,19 @@ namespace Despegar.WP.UI.Controls.Flights
             if (args.Reason == AutoSuggestionBoxTextChangeReason.UserInput && sender.Text != "" && sender.Text.Length >= 3)
             {
                 //TODO : TRY CATCH
-                var viewModel = DataContext as FlightSearchViewModel;
-                sender.ItemsSource = (IEnumerable)(await viewModel.GetCitiesAutocomplete(sender.Text));
+                sender.ItemsSource = (IEnumerable)(await GetCitiesAutocomplete(sender.Text));
             }
+        }
+
+        /// <summary>
+        /// This method is included in this user control to facilitate the Code Reuse of it
+        /// </summary>
+        /// <param name="cityString"></param>
+        /// <returns></returns>
+        private async Task<CitiesAutocomplete> GetCitiesAutocomplete(string cityString)
+        {
+            var flightService = GlobalConfiguration.CoreContext.GetFlightService();  // There is no need to test this control with Unit Tests, so we inject this dependency directly
+            return await flightService.GetCitiesAutocomplete(cityString);
         }
 
         private void SuggestionChosen(AutoSuggestBox sender, AutoSuggestBoxSuggestionChosenEventArgs args)

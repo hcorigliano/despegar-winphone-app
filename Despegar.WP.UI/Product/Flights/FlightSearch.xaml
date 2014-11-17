@@ -37,9 +37,9 @@
         <!-- Title Panel -->       
         <Image Grid.Row="0" Style="{StaticResource TopLogo}" />
         <TextBlock Grid.Row="1" x:Uid="Page_FlightSearch" Style="{StaticResource PageHeaderSmall}" Text="BUSQUEDA" />
-        
 
-        <Pivot Grid.Row="2"  Style="{StaticResource PivotBaseMain}" SelectionChanged="Pivot_SelectionChanged">
+
+        <Pivot x:Name="MainPivotControl" Grid.Row="2"  Style="{StaticResource PivotBaseMain}" SelectionChanged="Pivot_SelectionChanged">
             <!--ReoundTrip Flights-->
             <PivotItem x:Uid="Flight_Search_Round_Trip" Header="ida y vuelta" Style="{StaticResource PivotItemBase}">
                 <ScrollViewer>
@@ -55,7 +55,7 @@
                         <src:DateControl Grid.Row="1"   FromDate="{Binding FromDate, Mode=TwoWay}" ToDate="{Binding ToDate, Mode=TwoWay}" />
                         <src:QuantityPassagersControl  Grid.Row="2" DataContext="{Binding PassengersViewModel}"   Adults="{Binding Adults, Mode=TwoWay}" Children="{Binding Children, Mode=TwoWay}"  Infants="{Binding Infants, Mode=TwoWay}"   />
 
-                        <Button Grid.Row="3" x:Uid="Flights_Search_SearchButton" Command="{Binding SearchTwoWayCommand}" Style="{StaticResource ButtonBottom}" Content="Buscar vuelos"  />
+                        <Button Grid.Row="3" x:Uid="Flights_Search_SearchButton" Command="{Binding SearchCommand}" Style="{StaticResource ButtonBottom}" Content="Buscar vuelos"  />
                     </Grid>
                 </ScrollViewer>
             </PivotItem>
@@ -73,9 +73,9 @@
 
                         <src:SearchAirport  Grid.Row="0"  SelectedOrigin="{Binding Origin, Mode=TwoWay}" SelectedDestination="{Binding Destination, Mode=TwoWay}" />
                         <src:DateControlSimple  Grid.Row="1" SelectedDate="{Binding FromDate, Mode=TwoWay}" />
-                        <src:QuantityPassagersControl    Grid.Row="2" DataContext="{Binding PassengersViewModel}"   Adults="{Binding Adults2, Mode=TwoWay}" Children="{Binding Children2, Mode=TwoWay}"  Infants="{Binding Infants2, Mode=TwoWay}"   />
-                        
-                        <Button Command="{Binding SearchOneWayCommand}" Grid.Row="4"  Style="{StaticResource ButtonBottom}" Content="Buscar vuelos"/>
+                        <src:QuantityPassagersControl  Grid.Row="2" DataContext="{Binding PassengersViewModel}"   Adults="{Binding Adults, Mode=TwoWay}" Children="{Binding Children, Mode=TwoWay}"  Infants="{Binding Infants, Mode=TwoWay}"   />
+
+                        <Button Command="{Binding SearchCommand}" Grid.Row="4"  Style="{StaticResource ButtonBottom}" Content="Buscar vuelos"/>
                     </Grid>
                 </ScrollViewer>
             </PivotItem>
@@ -137,7 +137,7 @@
 
                         <src:QuantityPassagersControl  Grid.Row="1" DataContext="{Binding PassengersViewModel}"   Adults="{Binding Adults, Mode=TwoWay}" Children="{Binding Children, Mode=TwoWay}"  Infants="{Binding Infants, Mode=TwoWay}"   />
 
-                        <Button Grid.Row="2" Command="{Binding SearchMultiplesCommand}"  Style="{StaticResource ButtonBottom}" Content="Buscar vuelos"/>
+                        <Button Grid.Row="2" Command="{Binding SearchCommand}"  Style="{StaticResource ButtonBottom}" Content="Buscar vuelos"/>
                     </Grid>
                 </ScrollViewer>
             </PivotItem>

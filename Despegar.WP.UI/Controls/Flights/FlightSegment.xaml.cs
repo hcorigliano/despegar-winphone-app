@@ -20,9 +20,10 @@ namespace Despegar.WP.UI.Controls.Flights
         }
         #endregion
 
-        public FlightSegment() : base()
+        public FlightSegment() 
         {
-            this.InitializeComponent();            
+            this.InitializeComponent();
+            (this.Content as FrameworkElement).DataContext = this;
         }
     }
 }

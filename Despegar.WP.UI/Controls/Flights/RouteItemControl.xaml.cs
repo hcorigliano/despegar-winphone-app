@@ -20,9 +20,10 @@ namespace Despegar.WP.UI
         }
 
         #endregion
-        public RouteItemControl() : base()
+        public RouteItemControl()
         {
             this.InitializeComponent();
+            (this.Content as FrameworkElement).DataContext = this;
         }
     }
 }
