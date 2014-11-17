@@ -689,7 +689,7 @@
     <Style x:Key="CalendarIcon" TargetType="Image" BasedOn="{StaticResource ImageBase}">
         <Setter Property="Width" Value="27" />
         <Setter Property="Height" Value="27" />
-        <Setter Property="Source" Value="/Assets/Icon/App/xxx2.png" />
+        <Setter Property="Source" Value="/Assets/Icon/App/calendar-small-white.png" />
     </Style>
     <!-- Country Selection -->
     <Style x:Key="CountrySelectionButton" TargetType="Image">
@@ -725,7 +725,7 @@
         <Setter Property="Width" Value="13" />
         <Setter Property="Height" Value="13" />
         <Setter Property="Margin" Value="0,0,16.6,0" />
-        <Setter Property="Source" Value="/Assets/clock.jpg" />
+        <Setter Property="Source" Value="/Assets/Icon/App/clock-xsmall-white.pngt" />
         <Setter Property="VerticalAlignment" Value="Bottom" />
         <Setter Property="Stretch" Value="Fill" />
     </Style>

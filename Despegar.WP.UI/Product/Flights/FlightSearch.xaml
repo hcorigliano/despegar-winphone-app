@@ -22,7 +22,7 @@
         </CommandBar>
     </Page.BottomAppBar>
 
-    <Grid x:Name="LayoutRoot" Style="{StaticResource MainContainerGrid}">
+    <Grid Style="{StaticResource MainContainerGrid}">
         <Grid.ChildrenTransitions>
             <TransitionCollection>
                 <EntranceThemeTransition/>

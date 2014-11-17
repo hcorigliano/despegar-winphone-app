@@ -381,4 +381,10 @@
   <data name="Page_Flights_Search_RemoveSegment.Label" xml:space="preserve">
     <value>Quitar</value>
   </data>
+  <data name="Flights_Search_Multiple_Apply.Content" xml:space="preserve">
+    <value>Aplicar</value>
+  </data>
+  <data name="Flights_Search_Multiple_Cancel.Content" xml:space="preserve">
+    <value>Cancelar</value>
+  </data>
 </root>

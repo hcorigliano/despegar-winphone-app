@@ -44,6 +44,9 @@ namespace Despegar.WP.UI.Common
                 case ViewModelPages.FlightsSearch:
                     view = typeof(FlightSearch);
                     break;
+                case ViewModelPages.FlightsMultiplEdit:
+                    view = typeof(FlightMultipleEdit);
+                    break;
                 case ViewModelPages.FlightsResults:
                     view = typeof(FlightResults);
                     break;

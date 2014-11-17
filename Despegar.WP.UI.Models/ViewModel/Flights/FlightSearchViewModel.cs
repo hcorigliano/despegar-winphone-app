@@ -5,6 +5,7 @@ using Despegar.Core.Business.Flight.Itineraries;
 using Despegar.Core.Business.Flight.SearchBox;
 using Despegar.Core.IService;
 using Despegar.WP.UI.Model.Classes;
+using Despegar.WP.UI.Model.Classes.Flights;
 using Despegar.WP.UI.Model.Interfaces;
 using Despegar.WP.UI.Models.Classes;
 using System;
@@ -125,8 +126,8 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
             {
                 // TODO navigate to 
                 return new RelayCommand<ItemClickEventArgs>((x) => 
-                {   int segmentIndex = (x.ClickedItem as FlightMultipleSegment).Index;
-                    new MessageDialog(segmentIndex.ToString()).ShowAsync();
+                  {   int segmentIndex = (x.ClickedItem as FlightMultipleSegment).Index;
+                  Navigator.GoTo(ViewModelPages.FlightsMultiplEdit, new EditMultiplesNavigationData (){ SelectedSegmentIndex = segmentIndex, SearchModel = coreSearchModel });
                 });
             }
         }
