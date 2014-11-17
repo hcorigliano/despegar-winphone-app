@@ -46,11 +46,15 @@
                             <RowDefinition />
                         </Grid.RowDefinitions>
                    
-                     <StackPanel  Grid.Row="{Binding IndexZeroBased}"  >
-                        <TextBlock Style="{StaticResource BaseTextLabel}" x:Uid="Flights_Search_ChildrenAge" Text="Edad del menor" />
+                     <StackPanel Grid.Row="{Binding IndexZeroBased}" >
+                            <TextBlock Style="{StaticResource BaseTextLabel}" >
+                                <Run  x:Uid="Flights_Search_ChildrenAge" Text="Edad del menor" />
+                                <Run  Text="{Binding Index}"/>
+                            </TextBlock>
                             <ComboBox  Style="{StaticResource ComboBoxWrappable}" ItemsSource="{Binding OptionsItems}" SelectedItem="{Binding SelectedAge, Mode=TwoWay}"   />
                       </StackPanel>
-                    </Grid >
+                    </Grid>
+                    
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>        

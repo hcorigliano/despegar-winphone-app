@@ -51,44 +51,6 @@ namespace Despegar.WP.UI.Developer
             if (p != null) { p.IsOpen = false; }     
         }
 
-        private void Button_FillIdaYVuelta(object sender, RoutedEventArgs e)
-        {
-            var page = (Window.Current.Content as Frame).Content as FlightSearch;
-            if (page == null) 
-            {
-                Logger.Log("[Developer Tools]: Can't use this functionality in this page. Go to the correct page.");
-                ShowInvalidMessage();
-                return;
-            }
-
-            // Fill From EZE to MIA
-            FlightSearchViewModel viewModel = page.DataContext as FlightSearchViewModel;
-            //viewModel.Origin = "Aeropuerto Buenos Aires Ministro ¨Pistarini Ezeiza, Buenos Aires, Argentina";
-            //viewModel.Destination = "Miami, Florida, Estados Unidos";
-            viewModel.PassengersViewModel.GeneralAdults = 2;
-            viewModel.PassengersViewModel.GeneralMinors = 1;
-            viewModel.FromDate = new System.DateTimeOffset(2015, 2, 10, 0, 0, 0, TimeSpan.FromDays(0));
-            viewModel.ToDate = new System.DateTimeOffset(2015, 3, 20, 0, 0, 0, TimeSpan.FromDays(0));
-
-            // Update UI
-            var userControl = page.FindVisualChildren<SearchAirport>().First();                        
-            var originBox = userControl.FindName("OriginInput") as AutoSuggestBox;
-            var destinationBox =userControl.FindName("DestinyInput") as AutoSuggestBox;
-
-            originBox.ItemsSource = new List<CityAutocomplete>() { new CityAutocomplete() { code = "EZE", name = "Aeropuerto Buenos Aires Ministro ¨Pistarini Ezeiza, Buenos Aires, Argentina" } };
-            destinationBox.ItemsSource = new List<CityAutocomplete>() { new CityAutocomplete() { code = "MIA", name = "Miami, Florida, Estados Unidos" } };
-
-            originBox.Text = (originBox.ItemsSource as IEnumerable<CityAutocomplete>).First().name as string;
-            destinationBox.Text = (destinationBox.ItemsSource as IEnumerable<CityAutocomplete>).First().name as string;
-
-            userControl.UpdateTextbox(originBox);
-            userControl.UpdateTextbox(destinationBox);
-        }
-
-        private void ShowInvalidMessage()
-        {
-            var msg = new MessageDialog("Not available for current View.");
-            msg.ShowAsync();
-        } 
+               
     }
 }

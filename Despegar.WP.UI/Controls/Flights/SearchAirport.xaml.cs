@@ -1,8 +1,11 @@
 ﻿using Despegar.Core.Business.Flight.CitiesAutocomplete;
+using Despegar.WP.UI.Common;
 using Despegar.WP.UI.Model.ViewModel.Flights;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
@@ -13,13 +16,23 @@ namespace Despegar.WP.UI.Controls.Flights
         public static readonly DependencyProperty SelectedOriginProperty = DependencyProperty.Register("SelectedOrigin", typeof(string), typeof(SearchAirport), null);
         public static readonly DependencyProperty SelectedDestinationProperty = DependencyProperty.Register("SelectedDestination", typeof(string), typeof(SearchAirport), null);
 
+        #region ** BoilerPlate Code **
+        public event PropertyChangedEventHandler PropertyChanged;
+        private void SetValueAndNotify(DependencyProperty property, object value, [CallerMemberName] string p = null)
+        {
+            SetValue(property, value);
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(p));
+        }
+        #endregion
+
         // Bindable Property from XAML
         public string SelectedOrigin
         {
             get { return (string)GetValue(SelectedOriginProperty); }
             set
             {
-                SetValue(SelectedOriginProperty, value);
+                SetValueAndNotify(SelectedOriginProperty, value);
             }
         }
 
@@ -29,16 +42,15 @@ namespace Despegar.WP.UI.Controls.Flights
             get { return (string)GetValue(SelectedDestinationProperty); }
             set
             {
-                SetValue(SelectedDestinationProperty, value);
+                SetValueAndNotify(SelectedDestinationProperty, value);
             }
         }
 
         // DataContext is the FlightSearchViewModel
-        public SearchAirport()
+        public SearchAirport() : base()
         {
-            this.InitializeComponent();                   
+            this.InitializeComponent();
         }
-
        
         private async void FlightsTextBlock_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
         {           

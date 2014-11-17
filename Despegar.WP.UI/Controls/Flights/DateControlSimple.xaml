@@ -11,7 +11,7 @@
     <Grid>
         <StackPanel>
             <TextBlock x:Uid="Flight_Departure" Style="{StaticResource BaseTextLabel}" />
-            <DatePicker x:Name="DatePickerControl"  Style="{StaticResource DatePickerBase}" Date="{Binding SelectedDate, Mode=TwoWay}" />
+            <DatePicker x:Name="DatePickerControl"  Style="{StaticResource DatePickerBase}" Date="{Binding SelectedDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
         </StackPanel>
     </Grid>
 </UserControl>

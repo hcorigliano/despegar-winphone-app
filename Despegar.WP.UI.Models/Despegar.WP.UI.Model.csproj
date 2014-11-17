@@ -65,9 +65,11 @@
     <Compile Include="ViewModel\Classes\BindableBase.cs" />
     <Compile Include="ViewModel\Classes\Flights\BindableItem.cs" />
     <Compile Include="ViewModel\Classes\Flights\ChildrenAgeOption.cs" />
+    <Compile Include="Classes\Flights\EditMultiplesNavigationData.cs" />
     <Compile Include="ViewModel\Classes\Minor.cs" />
     <Compile Include="Interfaces\INavigator.cs" />
     <Compile Include="ViewModel\CountrySelectionViewModel.cs" />
+    <Compile Include="ViewModel\Flights\MultipleEditionViewModel.cs" />
     <Compile Include="ViewModel\Flights\PassengersViewModel.cs" />
     <Compile Include="ViewModel\Classes\Flights\RoutesItems.cs" />
     <Compile Include="ViewModel\Classes\Flights\BindableSegment.cs" />
@@ -85,7 +87,7 @@
     <Compile Include="Interfaces\IInitializeModelInterface.cs" />
     <Compile Include="Interfaces\IValidateInterface.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ViewModelBase.cs" />
+    <Compile Include="ViewModel\ViewModelBase.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

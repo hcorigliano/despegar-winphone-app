@@ -8,6 +8,7 @@ using Windows.UI.Xaml.Controls;
 
 namespace Despegar.WP.UI.Common
 {
+    // TODO: REMOVE
     public static class OldPagesManager
     {
         public static void GoTo(Type page, object e)

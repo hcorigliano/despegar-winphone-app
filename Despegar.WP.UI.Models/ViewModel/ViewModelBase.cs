@@ -6,7 +6,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Despegar.WP.UI.Model
+namespace Despegar.WP.UI.Model.ViewModel
 {
     /// <summary>
     /// Provides the Base ViewModel for the Application

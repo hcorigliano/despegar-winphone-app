@@ -9,13 +9,8 @@ namespace Despegar.WP.UI.Model
 {
     public abstract class BusinessModelBase : INotifyPropertyChanged 
     {
-        public BusinessModelBase()
-        {
-            InitializeModel();
-        }
-
-        public virtual void Validate() { }
-        public virtual void InitializeModel() { }                           
+        public abstract bool IsValid { get; }
+        public abstract bool Validate();
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -26,6 +21,5 @@ namespace Despegar.WP.UI.Model
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
         }
-
     }
 }

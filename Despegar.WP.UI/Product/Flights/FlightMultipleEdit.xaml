@@ -1,0 +1,61 @@
+﻿<Page
+    x:Class="Despegar.WP.UI.Product.Flights.FlightMultipleEdit"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Despegar.WP.UI.Product.Flights"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:dev="using:Despegar.WP.UI.Developer.Controls"
+    xmlns:controls="using:Despegar.WP.UI.Controls.Flights"
+    mc:Ignorable="d"    
+    Style="{StaticResource BasePage}">
+
+    <!--<Page.Resources>
+        <DataTemplate x:Key="segmentTemplate">
+            <ScrollViewer>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="{StaticResource Block6p}" />
+                        <RowDefinition Height="{StaticResource Block3p}" />
+                    </Grid.RowDefinitions>
+
+                    <controls:SearchAirport Grid.Row="0"  SelectedOrigin="{Binding }" SelectedDestination="{Binding }" />
+                    <controls:DateControlSimple Grid.Row="1" SelectedDate="{Binding }"  />
+                </Grid>
+            </ScrollViewer>
+        </DataTemplate>
+    </Page.Resources>-->
+    
+    <Grid Style="{StaticResource MainContainerGrid}">
+        <Grid.ChildrenTransitions>
+            <TransitionCollection>
+                <EntranceThemeTransition/>
+            </TransitionCollection>
+        </Grid.ChildrenTransitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition Width="{StaticResource TwoColumnMiddleSpacing}" />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="{StaticResource Block1p}"/>
+            <RowDefinition Height="{StaticResource Square}"/>
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <dev:UserControlDesignGrid />
+        
+        <!-- Title Panel -->
+        <Image Grid.Row="0" Grid.ColumnSpan="3" Style="{StaticResource TopLogo}" />
+        <TextBlock Grid.Row="1" Grid.ColumnSpan="3" x:Uid="Page_FlightSearch" Style="{StaticResource PageHeaderSmall}" Text="BUSQUEDA" />
+
+        <Pivot Grid.Row="2" Grid.ColumnSpan="3" Style="{StaticResource PivotBaseMain}" x:Name="MainPivotControl" ItemsSource="{Binding Segments}">
+            <!--<PivotItem Header="tramo 1" Style="{StaticResource PivotItemBase}">               
+            </PivotItem>-->
+        </Pivot>
+
+        <Button Grid.Row="3"  Grid.Column="0" Command="{Binding ApplyCommand}" x:Uid="Flights_Search_Multiple_Apply" Style="{StaticResource ButtonBottom}" Content="Aplicar"  />
+        <Button Grid.Row="3"  Grid.Column="2" Command="{Binding CancelCommand}"  x:Uid="Flights_Search_Multiple_Cancel" Style="{StaticResource ButtonBottom}" Content="Cancelar"   />
+    </Grid>
+</Page>
