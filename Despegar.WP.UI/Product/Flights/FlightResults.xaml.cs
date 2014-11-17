@@ -96,8 +96,7 @@ namespace Despegar.WP.UI.Product.Flights
 
             if (flightSearchModel.SearchStatus == SearchStates.SearchAgain)
             {
-                Itineraries = await this.flightResultModel.flightService.GetItineraries(flightSearchModel);
-
+                Itineraries = await flightResultModel.flightService.GetItineraries(flightSearchModel);
                 flightResultModel.Clear();
                 flightResultModel.Itineraries = Itineraries;
                 flightSearchModel.SearchStatus = SearchStates.FirstSearch;

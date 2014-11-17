@@ -72,6 +72,7 @@
     <Compile Include="ViewModel\Flights\MultipleEditionViewModel.cs" />
     <Compile Include="ViewModel\Flights\PassengersViewModel.cs" />
     <Compile Include="ViewModel\Classes\Flights\RoutesItems.cs" />
+    <Compile Include="Enums\SearchStates.cs" />
     <Compile Include="ViewModel\Classes\Flights\BindableSegment.cs" />
     <Compile Include="ViewModel\Classes\RelayCommand.cs" />
     <Compile Include="ViewModel\Classes\PageParameters.cs" />
