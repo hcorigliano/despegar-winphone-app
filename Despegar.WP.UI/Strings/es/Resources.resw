@@ -375,10 +375,10 @@
   <data name="Page_Flight_Detail_OperatedBy" xml:space="preserve">
     <value>Operado por</value>
   </data>
-  <data name="Page_Flights_Search_AddSegment" xml:space="preserve">
+  <data name="Page_Flights_Search_AddSegment.Label" xml:space="preserve">
     <value>Agregar</value>
   </data>
-  <data name="Page_Flights_Search_RemoveSegment" xml:space="preserve">
+  <data name="Page_Flights_Search_RemoveSegment.Label" xml:space="preserve">
     <value>Quitar</value>
   </data>
 </root>

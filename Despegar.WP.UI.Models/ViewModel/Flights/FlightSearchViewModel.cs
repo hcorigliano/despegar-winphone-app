@@ -9,6 +9,7 @@ using Despegar.WP.UI.Model.Interfaces;
 using Despegar.WP.UI.Models.Classes;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -28,9 +29,9 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
 
         #region ** Exposed Properties **
 
-        public List<FlightMultipleSegment> MultipleSegments
+        public ObservableCollection<FlightMultipleSegment> MultipleSegments
         {
-            get { return coreSearchModel.MultipleSegments; }            
+            get { return new ObservableCollection<FlightMultipleSegment>(coreSearchModel.MultipleSegments); }            
         }
 
         public string Origin 
@@ -125,7 +126,7 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
                 // TODO navigate to 
                 return new RelayCommand<ItemClickEventArgs>((x) => 
                 {   int segmentIndex = (x.ClickedItem as FlightMultipleSegment).Index;
-                    new MessageDialog(segmentIndex.ToString()).ShowAsync(); 
+                    new MessageDialog(segmentIndex.ToString()).ShowAsync();
                 });
             }
         }

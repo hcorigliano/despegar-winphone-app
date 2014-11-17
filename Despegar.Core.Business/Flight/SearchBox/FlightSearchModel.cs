@@ -12,6 +12,7 @@ namespace Despegar.Core.Business.Flight.SearchBox
     public class FlightSearchModel : BusinessModelBase
     {
         public const int MAX_MULTIPLE_SEGMENTS = 6;
+        public const int MIN_MULTIPLE_SEGMENTS = 2;
         public FlightSearchPages PageMode { get; set; }
         public DateTimeOffset DepartureDate { get; set; }
         public DateTimeOffset DestinationDate { get; set; }
@@ -55,7 +56,7 @@ namespace Despegar.Core.Business.Flight.SearchBox
 
         public void RemoveMultipleSegment()
         {
-            if (this.MultipleSegments.Count> 0)
+            if (this.MultipleSegments.Count > MIN_MULTIPLE_SEGMENTS)
                 this.MultipleSegments.Remove(MultipleSegments.Last());
         }
 

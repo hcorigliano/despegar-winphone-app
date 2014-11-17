@@ -15,10 +15,10 @@
     Style="{StaticResource BasePage}">
     
     <Page.BottomAppBar>
-        <CommandBar ClosedDisplayMode="Minimal">
+        <CommandBar IsSticky="True">
             <!--<AppBarButton Icon="Setting" x:Uid="Home_Settings" FontSize="12" Click="AppBarButton_Click" />-->
-            <AppBarButton Icon="Add" x:Uid="Page_Flights_Search_AddSegment" FontSize="12" Command="{Binding AddSegmentMultipleCommand}"/>
-            <AppBarButton Icon="Remove" x:Uid="Page_Flights_Search_RemoveSegment" FontSize="12" Command="{Binding RemoveSegmentMultipleCommand}" />
+            <AppBarButton Icon="Add" x:Uid="Page_Flights_Search_AddSegment"  Label="Agregar"  FontSize="12" Command="{Binding AddSegmentMultipleCommand}"/>
+            <AppBarButton Icon="Remove" x:Uid="Page_Flights_Search_RemoveSegment" Label="Quitar" Command="{Binding RemoveSegmentMultipleCommand}" />
         </CommandBar>
     </Page.BottomAppBar>
 
@@ -90,7 +90,7 @@
                             <RowDefinition Height="Auto"></RowDefinition>
                         </Grid.RowDefinitions>
 
-                        <ListView x:Name="SegmentList" Grid.Row="0" ItemsSource="{Binding MultipleSegments}" IsItemClickEnabled="True">
+                        <ListView x:Name="SegmentList" Grid.Row="0" ItemsSource="{Binding MultipleSegments, Mode=TwoWay}" IsItemClickEnabled="True">
                             <Interactivity:Interaction.Behaviors>
                                 <Core:EventTriggerBehavior EventName="ItemClick" >
                                     <Core:InvokeCommandAction Command="{Binding EditMultipleSegment}" />

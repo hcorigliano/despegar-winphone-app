@@ -128,7 +128,17 @@ namespace Despegar.WP.UI.Product.Flights
 
         private void Pivot_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            this.BottomAppBar.Visibility = !((((Pivot)sender).SelectedIndex) == 2) ? Visibility.Visible : Visibility.Collapsed;           
+            if((((Pivot)sender).SelectedIndex) == 2)
+            {
+                this.BottomAppBar.Visibility = Visibility.Visible;
+                //this.BottomAppBar.IsOpen = false;
+                //this.BottomAppBar.IsSticky = false;
+            } else {
+                this.BottomAppBar.Visibility = Visibility.Collapsed;
+                //this.BottomAppBar.IsOpen = false;
+                //this.BottomAppBar.IsSticky = false;
+            }
+            
         }                                
     }
 }
