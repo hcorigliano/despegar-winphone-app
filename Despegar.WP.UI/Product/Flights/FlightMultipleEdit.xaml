@@ -10,7 +10,7 @@
     mc:Ignorable="d"    
     Style="{StaticResource BasePage}">
 
-    <Page.Resources>
+    <!--<Page.Resources>
         <DataTemplate x:Key="segmentTemplate">
             <ScrollViewer>
                 <Grid>
@@ -24,7 +24,7 @@
                 </Grid>
             </ScrollViewer>
         </DataTemplate>
-    </Page.Resources>
+    </Page.Resources>-->
     
     <Grid Style="{StaticResource MainContainerGrid}">
         <Grid.ChildrenTransitions>
@@ -56,6 +56,6 @@
         </Pivot>
 
         <Button Grid.Row="3"  Grid.Column="0" Command="{Binding ApplyCommand}" x:Uid="Flights_Search_Multiple_Apply" Style="{StaticResource ButtonBottom}" Content="Aplicar"  />
-        <Button Grid.Row="3"  Grid.Column="2" Command="{Binding CancelCommand}"  x:Uid="Flights_Search_Multiple_Cancel" Style="{StaticResource ButtonBottom}" Content="Cancelar" Click="Button_Click"  />
+        <Button Grid.Row="3"  Grid.Column="2" Command="{Binding CancelCommand}"  x:Uid="Flights_Search_Multiple_Cancel" Style="{StaticResource ButtonBottom}" Content="Cancelar"   />
     </Grid>
 </Page>

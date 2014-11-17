@@ -28,7 +28,7 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
         {
             get
             {
-                return new RelayCommand(() => { navigator.GoBack() });
+                return new RelayCommand(() => { navigator.GoBack(); });
             }
         }
 

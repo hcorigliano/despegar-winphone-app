@@ -65,9 +65,11 @@
     <Compile Include="Classes\BindableBase.cs" />
     <Compile Include="Classes\Flights\BindableItem.cs" />
     <Compile Include="Classes\Flights\ChildrenAgeOption.cs" />
+    <Compile Include="Classes\Flights\EditMultiplesNavigationData.cs" />
     <Compile Include="Classes\Minor.cs" />
     <Compile Include="Interfaces\INavigator.cs" />
     <Compile Include="ViewModel\CountrySelectionViewModel.cs" />
+    <Compile Include="ViewModel\Flights\MultipleEditionViewModel.cs" />
     <Compile Include="ViewModel\Flights\PassengersViewModel.cs" />
     <Compile Include="Classes\Flights\RoutesItems.cs" />
     <Compile Include="Classes\Flights\BindableSegment.cs" />
