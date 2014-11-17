@@ -1,28 +1,19 @@
-﻿using Despegar.WP.UI.Common;
+﻿using Despegar.Core.Business.Flight;
+using Despegar.Core.Business.Flight.Itineraries;
+using Despegar.Core.Business.Flight.SearchBox;
+using Despegar.WP.UI.Common;
+using Despegar.WP.UI.Model;
+using Despegar.WP.UI.Model.Classes;
+using Despegar.WP.UI.Model.ViewModel.Flights;
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
-using Windows.Graphics.Display;
-using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
-using Despegar.Core.Business.Flight.Itineraries;
-using Despegar.WP.UI.Classes;
-using Despegar.WP.UI.Model;
-using Windows.UI.Popups;
-using System.Threading.Tasks;
-using Despegar.WP.UI.Model.Classes;
-
-// The Basic Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
+using Despegar.Core.Business.Enums;
+using Despegar.Core.Business;
+using Despegar.Core.IService;
 
 namespace Despegar.WP.UI.Product.Flights
 {
@@ -44,7 +35,11 @@ namespace Despegar.WP.UI.Product.Flights
             this.navigationHelper.LoadState += this.NavigationHelper_LoadState;
             this.navigationHelper.SaveState += this.NavigationHelper_SaveState;
 
+            flightResultModel = new FlightResultsModel(Navigator.Instance, GlobalConfiguration.CoreContext.GetFlightService());
             this.DataContext = flightResultModel;
+            this.CheckDeveloperTools();
+
+            //this.DataContext = flightResultModel;
             this.miniboxSearch.DataContext = flightSearchModel;
         }
 
@@ -69,7 +64,7 @@ namespace Despegar.WP.UI.Product.Flights
         {
             base.OnNavigatingFrom(e);
 
-            flightSearchModel.SearchStatus = Model.Enums.SearchStates.SearchAgain;
+            flightSearchModel.SearchStatus = SearchStates.SearchAgain;
         }
 
         /// <summary>
@@ -99,12 +94,13 @@ namespace Despegar.WP.UI.Product.Flights
             flightSearchModel.SortingValuesSearch = flightResultModel.SelectedSorting;
             flightSearchModel.SortingCriteriaSearch = flightResultModel.Sorting.criteria;
 
-            if (flightSearchModel.SearchStatus == Model.Enums.SearchStates.SearchAgain)
+            if (flightSearchModel.SearchStatus == SearchStates.SearchAgain)
             {
-                Itineraries = await flightSearchModel.Search();
+                Itineraries = await this.flightResultModel.flightService.GetItineraries(flightSearchModel);
+
                 flightResultModel.Clear();
                 flightResultModel.Itineraries = Itineraries;
-                flightSearchModel.SearchStatus = Model.Enums.SearchStates.FirstSearch;
+                flightSearchModel.SearchStatus = SearchStates.FirstSearch;
             }
 
             this.miniboxSearch.DataContext = flightSearchModel;
@@ -211,7 +207,7 @@ namespace Despegar.WP.UI.Product.Flights
             Grid grid = sender as Grid;
             if (grid!=null)
             {
-                PagesManager.GoTo(typeof(FlightDetail), grid.DataContext);
+                OldPagesManager.GoTo(typeof(FlightDetail), grid.DataContext);
             }
         }
 
@@ -290,7 +286,7 @@ namespace Despegar.WP.UI.Product.Flights
 
         private void appBarFilter_Click(object sender, RoutedEventArgs e)
         {
-            PagesManager.GoTo(typeof(FlightFilters), null);
+            OldPagesManager.GoTo(typeof(FlightFilters), null);
         }
        
     }

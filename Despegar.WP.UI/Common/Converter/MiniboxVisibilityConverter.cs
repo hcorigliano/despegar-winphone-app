@@ -1,4 +1,4 @@
-﻿using Despegar.WP.UI.Model.Enums;
+﻿using Despegar.Core.Business.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -1,15 +1,14 @@
 ﻿
 using Despegar.Core.Business;
+using Despegar.Core.Business.Flight.BookingCompletePostResponse;
+using Despegar.Core.Business.Flight.BookingFields;
+using Despegar.Core.Business.Flight.CitiesAutocomplete;
+using Despegar.Core.Business.Flight.Itineraries;
+using Despegar.Core.Business.Flight.SearchBox;
 using Despegar.Core.Connector;
 using Despegar.Core.IService;
 using System;
 using System.Threading.Tasks;
-using System.Diagnostics;
-using Despegar.Core.Business.Flight.CitiesAutocomplete;
-using Despegar.Core.Business.Flight.Itineraries;
-using Despegar.Core.Business.Flight.BookingFields;
-using Despegar.Core.Business.Flight.BookingCompletePostResponse;
-using Despegar.Core.Business.Flight.BookingCompletePost;
 
 namespace Despegar.Core.Service
 {
@@ -23,33 +22,18 @@ namespace Despegar.Core.Service
         }
 
         /// <summary>
-        /// Retrieves an itinerarie for a flight
+        /// Retrieves Flights Search result
         /// </summary>
-        /// <param name="from"></param>
-        /// <param name="to"></param>
-        /// <param name="departure_date"></param>
-        /// <param name="adults"></param>
-        /// <param name="return_date"></param>
-        /// <param name="children"></param>
-        /// <param name="infants"></param>
-        /// <param name="offset"></param>
-        /// <param name="limit"></param>
-        /// <param name="order_by"></param>
-        /// <param name="order_type"></param>
-        /// <param name="currency_code"></param>
-        /// <param name="filter"></param>
+        /// <param name="searchModel"></param>
         /// <returns></returns>
-        public async Task<FlightsItineraries> GetItinerariesFlights(string from, string to, string departure_date, int adults, string return_date, int children, int infants, int offset, int limit, string order_by, string order_type, string currency_code, string filter)
-        {
-            string serviceUrl = String.Format(ServiceURL.GetServiceURL(ServiceKey.FlightItineraries),from,to,departure_date,adults,return_date,children,infants,offset,limit,order_by,order_type,currency_code,filter);
+        public async Task<FlightsItineraries> GetItineraries(FlightSearchModel searchModel)
+        {           
             IConnector connector = context.GetServiceConnector(ServiceKey.FlightItineraries);
-
-            return await connector.GetAsync<FlightsItineraries>(serviceUrl);
+            return await connector.GetAsync<FlightsItineraries>(searchModel.GetQueryUrl());
         }
-       
-
+        
         /// <summary>
-        /// Retrieves an list of Cities
+        /// retrieves Autocompletes city list
         /// </summary>
         /// <param name="cityString"></param>
         /// <returns></returns>
@@ -78,7 +62,12 @@ namespace Despegar.Core.Service
             return await connector.PostAsync<BookingFields>(serviceUrl, bookingFieldPost);
         }
 
-
+        /// <summary>
+        /// Completes the Booking process
+        /// </summary>
+        /// <param name="bookingCompletePost"></param>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<BookingCompletePostResponse> CompleteBooking(object bookingCompletePost,string id)
         {
             string serviceUrl = String.Format(ServiceURL.GetServiceURL(ServiceKey.BookingCompletePost),id);
@@ -86,5 +75,6 @@ namespace Despegar.Core.Service
 
             return await connector.PostAsync<BookingCompletePostResponse>(serviceUrl, bookingCompletePost);
         }
+        
     }
 }

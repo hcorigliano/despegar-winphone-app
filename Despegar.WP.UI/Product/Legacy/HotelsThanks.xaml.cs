@@ -3,16 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Windows;
-//using Despegar.Analytics;
-//using System.Windows.Media.Imaging;
 using Windows.UI.Xaml.Controls;
 using Despegar.LegacyCore.ViewModel;
-using Despegar.WP.UI.Classes;
 using Windows.UI.Xaml;
 using Despegar.WP.UI;
 using Windows.Phone.UI.Input;
 using Windows.UI.Xaml.Navigation;
 using Windows.UI.Xaml.Media.Imaging;
+using Despegar.WP.UI.Common;
 
 namespace Despegar.WP.UI.Product.Legacy
 {
@@ -51,8 +49,8 @@ namespace Despegar.WP.UI.Product.Legacy
 
         private void BackToFlow_Click(object sender, RoutedEventArgs e)
         {
-            PagesManager.ClearStack();
-            PagesManager.GoTo(typeof(Home), null);
+            OldPagesManager.ClearStack();
+            OldPagesManager.GoTo(typeof(Home), null);
         }
        
     }

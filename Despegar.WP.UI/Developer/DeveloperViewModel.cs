@@ -9,6 +9,16 @@ using System.Windows;
 using Windows.Foundation;
 using Windows.UI;
 using Windows.UI.Xaml;
+using System.Windows.Input;
+using Despegar.WP.UI.Models.Classes;
+using Windows.UI.Xaml.Controls;
+using Despegar.WP.UI.Product.Flights;
+using Despegar.WP.UI.Model.ViewModel.Flights;
+using Despegar.WP.UI.Controls.Flights;
+using Despegar.Core.Business.Flight.CitiesAutocomplete;
+using Windows.UI.Popups;
+using Despegar.WP.UI.Common;
+using Despegar.Core.Log;
 
 namespace Despegar.WP.UI.Developer
 {
@@ -74,5 +84,78 @@ namespace Despegar.WP.UI.Developer
                 .OrderBy(g => g.Key)
                 .ToList();                        
         }
+
+        private void ShowInvalidMessage()
+        {
+            Logger.Log("[Developer Tools]: Can't use this functionality in this page. Go to the correct page.");
+            var msg = new MessageDialog("Not available for current View.");
+            msg.ShowAsync();
+        }
+
+        public ICommand FillFlightsOneWaySearchBox_MIAMI
+        {
+            get
+            {
+                return new RelayCommand(() =>
+                {
+                    var page = (Window.Current.Content as Frame).Content as FlightSearch;
+                    if (page == null)
+                    {
+                        ShowInvalidMessage();
+                        return;
+                    }
+
+                    // Fill From EZE to MIA
+                    FlightSearchViewModel viewModel = page.DataContext as FlightSearchViewModel;            
+                    viewModel.PassengersViewModel.GeneralAdults = 1;
+                    viewModel.PassengersViewModel.GeneralMinors = 1;
+                    viewModel.FromDate = new System.DateTimeOffset(2015, 2, 10, 0, 0, 0, TimeSpan.FromDays(0));
+
+                    // Update UI
+                    var userControl = page.FindVisualChildren<SearchAirport>().First();   // TODO this will always change the current View, it should update the correct Control on the correct page
+                    var originBox = userControl.FindName("OriginInput") as AutoSuggestBox;
+                    var destinationBox = userControl.FindName("DestinyInput") as AutoSuggestBox;
+                    originBox.ItemsSource = new List<CityAutocomplete>() { new CityAutocomplete() { code = "EZE", name = "Aeropuerto Buenos Aires Ministro ¨Pistarini Ezeiza, Buenos Aires, Argentina" } };
+                    destinationBox.ItemsSource = new List<CityAutocomplete>() { new CityAutocomplete() { code = "MIA", name = "Miami, Florida, Estados Unidos" } };
+                    originBox.Text = (originBox.ItemsSource as IEnumerable<CityAutocomplete>).First().name as string;
+                    destinationBox.Text = (destinationBox.ItemsSource as IEnumerable<CityAutocomplete>).First().name as string;
+                    userControl.UpdateTextbox(originBox);
+                    userControl.UpdateTextbox(destinationBox);
+                });
+            }
+        }
+
+        public ICommand FillFlightsTwoWaySearchBox_MIAMI {
+            get { return new RelayCommand(() => {
+                var page = (Window.Current.Content as Frame).Content as FlightSearch;
+                if (page == null)
+                {
+                    ShowInvalidMessage();
+                    return;
+                }
+
+                // Fill From EZE to MIA
+                FlightSearchViewModel viewModel = page.DataContext as FlightSearchViewModel;
+                //viewModel.Origin = "Aeropuerto Buenos Aires Ministro ¨Pistarini Ezeiza, Buenos Aires, Argentina";
+                //viewModel.Destination = "Miami, Florida, Estados Unidos";
+                viewModel.PassengersViewModel.GeneralAdults = 2;
+                viewModel.PassengersViewModel.GeneralMinors = 1;
+                viewModel.FromDate = new System.DateTimeOffset(2015, 2, 10, 0, 0, 0, TimeSpan.FromDays(0));
+                viewModel.ToDate = new System.DateTimeOffset(2015, 3, 20, 0, 0, 0, TimeSpan.FromDays(0));
+
+                // Update UI
+                var userControl = page.FindVisualChildren<SearchAirport>().First();    // TODO this will always change the current View, it should update the correct Control on the correct page
+                var originBox = userControl.FindName("OriginInput") as AutoSuggestBox;
+                var destinationBox = userControl.FindName("DestinyInput") as AutoSuggestBox;
+                originBox.ItemsSource = new List<CityAutocomplete>() { new CityAutocomplete() { code = "EZE", name = "Aeropuerto Buenos Aires Ministro ¨Pistarini Ezeiza, Buenos Aires, Argentina" } };
+                destinationBox.ItemsSource = new List<CityAutocomplete>() { new CityAutocomplete() { code = "MIA", name = "Miami, Florida, Estados Unidos" } };
+                originBox.Text = (originBox.ItemsSource as IEnumerable<CityAutocomplete>).First().name as string;
+                destinationBox.Text = (destinationBox.ItemsSource as IEnumerable<CityAutocomplete>).First().name as string;
+                userControl.UpdateTextbox(originBox);
+                userControl.UpdateTextbox(destinationBox);
+            }); }
+        }
+
+
     }
 }

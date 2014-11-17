@@ -11,7 +11,8 @@ namespace Despegar.Core.Business
         Configuration,
         BookingCompletePost,
         Update,
-        CitiesAutocomplete
+        CitiesAutocomplete,
+        Countries
     }
 
     /// <summary>
@@ -28,7 +29,8 @@ namespace Despegar.Core.Business
             {ServiceKey.Configuration,"mapi-cross/configuration"},
             {ServiceKey.BookingCompletePost,"mapi-flights/bookings/{0}"},
             {ServiceKey.Update,"mapi-cross/apps/update/{0}/?os_version={1}&installation_source={2}&device_description={3}"},
-            {ServiceKey.CitiesAutocomplete,"mapi-cross/apps/autocomplete/{0}/{1}/?city_result={2}"}
+            {ServiceKey.CitiesAutocomplete,"mapi-cross/apps/autocomplete/{0}/{1}/?city_result={2}"}, 
+            {ServiceKey.Countries,"mapi-cross/apps/"}, 
 
         };
 

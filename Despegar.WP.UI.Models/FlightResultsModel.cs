@@ -1,5 +1,7 @@
 ﻿using Despegar.Core.Business.Flight.Itineraries;
+using Despegar.Core.IService;
 using Despegar.WP.UI.Model.Classes.Flights;
+using Despegar.WP.UI.Model.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -76,6 +78,9 @@ namespace Despegar.WP.UI.Model
         }
 
         private Paging _paging;
+        
+        public Core.IService.IFlightService flightService;
+
         public Paging Paging{
             get { return _paging; }
             set {   _paging = value;
@@ -87,6 +92,15 @@ namespace Despegar.WP.UI.Model
         public FlightResultsModel()
         {
             this.InitializeModel();
+        }
+
+        public FlightResultsModel(INavigator navigator, IFlightService flightService)
+        {
+            // TODO: Complete member initialization
+
+            this.Navigator = navigator;
+            this.flightService = flightService;
+           
         }
 
         public new void InitializeModel()
@@ -164,5 +178,7 @@ namespace Despegar.WP.UI.Model
             this.Sorting = null;
             this.Paging = null;
         }
+
+        public INavigator Navigator { get; set; }
     }
 }

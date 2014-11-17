@@ -11,6 +11,7 @@ namespace Despegar.Core.IService
     {
         Task<Configuration> GetConfigurations();
         Task<UpdateFields> CheckUpdate();
-        Task<CitiesFields> AutoCompleteCities(string CountryCode, string Search, string CityResult);       
+        Task<CitiesFields> AutoCompleteCities(string CountryCode, string Search, string CityResult);
+        Task<Countries> GetCountries();
     }
 }

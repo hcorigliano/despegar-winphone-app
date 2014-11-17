@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
-namespace Despegar.WP.UI.Classes
+namespace Despegar.WP.UI.Common
 {
-    public static class PagesManager
+    // TODO: REMOVE
+    public static class OldPagesManager
     {
         public static void GoTo(Type page, object e)
         {

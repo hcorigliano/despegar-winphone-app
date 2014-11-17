@@ -1,21 +1,18 @@
-﻿using Despegar.Core.Business;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
+﻿using Despegar.Core.Log;
+using Despegar.WP.UI.Controls.Flights;
+using Despegar.WP.UI.Model.ViewModel.Flights;
+using Despegar.WP.UI.Product.Flights;
 using System.Windows;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
-
-// The User Control item template is documented at http://go.microsoft.com/fwlink/?LinkId=234236
+using Despegar.WP.UI.Common;
+using System.Linq;
+using System.Collections.Generic;
+using System.Collections;
+using Despegar.Core.Business.Flight.CitiesAutocomplete;
+using Windows.UI.Popups;
+using System;
 
 namespace Despegar.WP.UI.Developer
 {
@@ -52,6 +49,8 @@ namespace Despegar.WP.UI.Developer
 
             // close the Popup
             if (p != null) { p.IsOpen = false; }     
-        }        
+        }
+
+               
     }
 }

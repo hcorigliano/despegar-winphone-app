@@ -43,8 +43,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Configuration\CitiesFields.cs" />
+    <Compile Include="BusinessModelBase.cs" />
     <Compile Include="Configuration\Configuration.cs" />
     <Compile Include="Configuration\Contact.cs" />
+    <Compile Include="Configuration\Countries.cs" />
+    <Compile Include="Configuration\CountryFields.cs" />
     <Compile Include="Configuration\Domain.cs" />
     <Compile Include="Configuration\Product.cs" />
     <Compile Include="Configuration\Site.cs" />
@@ -52,6 +55,9 @@
     <Compile Include="Culture\Site.cs" />
     <Compile Include="Dynamics\DynamicFlightBookingFieldsToPost.cs" />
     <Compile Include="Enums\FlightSearchChildEnum.cs" />
+    <Compile Include="Enums\FlightSearchPagesEnum.cs" />
+    <Compile Include="Enums\SearchStates.cs" />
+    <Compile Include="Flight\SearchBox\FlightSearchModel.cs" />
     <Compile Include="Flight\BookingCompletePostResponse\Answers.cs" />
     <Compile Include="Flight\BookingCompletePostResponse\BookingCompletePostResponse.cs" />
     <Compile Include="Flight\BookingCompletePostResponse\FreeTextDescription.cs" />
@@ -73,6 +79,7 @@
     <Compile Include="Flight\BookingCompletePost\RiskQuestion.cs" />
     <Compile Include="Flight\BookingCompletePost\TypeAndNumber.cs" />
     <Compile Include="Flight\Itineraries\Route.cs" />
+    <Compile Include="Flight\SearchBox\FlightMultipleSegment.cs" />
     <Compile Include="Mock.cs" />
     <Compile Include="Flight\BookingFields\Address.cs" />
     <Compile Include="Flight\BookingFields\Birthdate.cs" />
