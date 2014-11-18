@@ -57,9 +57,6 @@ namespace Despegar.WP.UI.Product.Flights.Checkout.Payment
 
         private void OnButtonClicked(object sender, RoutedEventArgs e)
         {
-            var a = this.DataContext;
-            var b = ((RadioButton)e.OriginalSource).DataContext;
-
             if (OnUserControlButtonClicked != null)
                 OnUserControlButtonClicked(this, e);
         }

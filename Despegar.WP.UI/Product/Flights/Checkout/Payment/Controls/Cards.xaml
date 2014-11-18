@@ -14,20 +14,16 @@
     </Page.Resources>
 
     <Grid >
-        <!--List<PaymentDetails>-->
         <StackPanel Orientation="Horizontal">
             <ItemsControl DataContext="{Binding}" ItemsSource="{Binding}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
 
-
                         <Image Source="{Binding card.code, Converter={StaticResource StringFormatConverter}, ConverterParameter='/Assets/Icon/CreditCard/{0}.png' , TargetNullValue='/Assets/Icon/CreditCard/GRL.png'}" Width="76" Margin="5,0,0,7"   />
-
 
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
         </StackPanel>
-
     </Grid>
 </Page>

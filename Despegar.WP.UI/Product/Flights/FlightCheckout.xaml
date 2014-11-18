@@ -6,7 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    Style="{StaticResource BasePage}">
 
     <Grid x:Name="LayoutRoot">
 
@@ -41,7 +41,7 @@
                     <StackPanel xmlns:src="using:Despegar.WP.UI.Product.Flights.Checkout.Passegers">
 
                     <!--ItemsSource="{Binding passengers}"-->
-                    <ItemsControl x:Name="PassengerControl" ItemsSource="{Binding passengers}">
+                    <ItemsControl x:Name="PassengerControl" DataContext="{Binding bookingfields.form}" ItemsSource="{Binding passengers}">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
                                 <src:Passengers></src:Passengers>
@@ -60,7 +60,7 @@
                 </PivotItem.Header>
                 <StackPanel xmlns:src="using:Despegar.WP.UI.Product.Flights.Checkout.Contact">
 
-                    <src:ContactData x:Name="ContactControl"></src:ContactData>
+                    <src:ContactData x:Name="ContactControl" DataContext="{Binding bookingfields.form.contact}"></src:ContactData>
                 </StackPanel>
             </PivotItem>
 
@@ -71,7 +71,7 @@
                 </PivotItem.Header>
                 <StackPanel xmlns:src="using:Despegar.WP.UI.Product.Flights.Checkout.Payment">
 
-                    <src:Payments x:Name="PaymentControl"></src:Payments>
+                    <src:Payments x:Name="PaymentControl" DataContext="{Binding PaymentFormated}"></src:Payments>
                     
                 </StackPanel>
             </PivotItem>
@@ -83,7 +83,7 @@
                 </PivotItem.Header>
                 <StackPanel xmlns:src="using:Despegar.WP.UI.Product.Flights.Checkout.CardData">
 
-                    <src:CardData x:Name="CardDataControl"></src:CardData>
+                    <src:CardData x:Name="CardDataControl" DataContext="{Binding bookingfields.form.payment}"></src:CardData>
                 </StackPanel>
             </PivotItem>
             
@@ -94,7 +94,7 @@
                 </PivotItem.Header>
                 <StackPanel xmlns:src="using:Despegar.WP.UI.Product.Flights.Checkout.Invoice">
 
-                    <src:InvoiceArg x:Name="InvoiceArgControl"></src:InvoiceArg>
+                    <src:InvoiceArg x:Name="InvoiceArgControl" DataContext="{Binding bookingfields.form.payment.invoice}"></src:InvoiceArg>
                 </StackPanel>                
                 
             </PivotItem>
@@ -106,7 +106,7 @@
                 </PivotItem.Header>
                 <StackPanel xmlns:src="using:Despegar.WP.UI.Product.Flights.Checkout.Buy">
 
-                    <src:Buy x:Name="Buycontrol"></src:Buy>
+                    <src:Buy x:Name="Buycontrol" DataContext="{Binding PriceFormated}"></src:Buy>
                 </StackPanel>
 
             </PivotItem>

@@ -38,10 +38,6 @@
         
         <StackPanel Grid.Column="0">
 
-            <!--<TextBlock Text="{Binding adult_quantity}"  >                
-                <Run  x:Uid="Buy_Details_Fare_Adult" />
-            </TextBlock>-->
-            <!--x:Uid="Buy_Details_Fare_Per_Adult"--><!-- ,ConverterParameter={RelativeSource  Buy_Details_Fare_Adult.Text}-->
             <TextBlock Grid.Row="0" x:Uid="Buy_Details_Fare_Per_Adult"></TextBlock>
             <TextBlock Grid.Row="1" x:Uid="Buy_Details_Fare_Per_Children"  Visibility="{Binding children_base, Converter={StaticResource NullToVisibilityConverter}}" ></TextBlock>
             <TextBlock Grid.Row="2" x:Uid="Buy_Details_Fare_Per_Infant"  Visibility="{Binding infant_base, Converter={StaticResource NullToVisibilityConverter}}"></TextBlock>

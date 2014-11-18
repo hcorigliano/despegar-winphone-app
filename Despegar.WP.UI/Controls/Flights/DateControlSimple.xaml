@@ -1,4 +1,4 @@
-﻿<Page
+﻿<UserControl
     x:Class="Despegar.WP.UI.Controls.Flights.DateControlSimple"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -10,10 +10,8 @@
 
     <Grid>
         <StackPanel>
-            <TextBlock >
-			    <Run x:Uid="Flight_Departure"/>
-            </TextBlock>
-            <DatePicker Width="120" x:Name="departure" />
+            <TextBlock x:Uid="Flight_Departure" Style="{StaticResource BaseTextLabel}" />
+            <DatePicker x:Name="DatePickerControl"  Style="{StaticResource DatePickerBase}" Date="{Binding SelectedDate, Mode=TwoWay}" />
         </StackPanel>
     </Grid>
-</Page>
+</UserControl>

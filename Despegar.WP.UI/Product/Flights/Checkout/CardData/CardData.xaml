@@ -24,7 +24,6 @@
                 <!--TARJETA-->
                 <StackPanel>
                     <TextBlock x:Uid="Card_Data_Card"></TextBlock>
-                    <!--ItemsSource="{Binding phones[0].type.options}"--> <!--bookingFields.form.payment.installment.quantity.coreValue-->
                     <ComboBox x:Name="card"  DisplayMemberPath="card.description" SelectedValue="{Binding card.phones[0].type.coreValue, Mode=TwoWay}" SelectedValuePath="card.code"  SelectionChanged="FillCardData"  ></ComboBox>
                 </StackPanel>
 
@@ -33,10 +32,8 @@
                     <TextBox x:Name="number" Text="{Binding card.number.coreValue , Mode=TwoWay}"></TextBox>
                 </StackPanel>
 
-
                 <StackPanel>
-                    <TextBlock Text="Testo"></TextBlock>
-                    <!--DayVisible="False"-->
+                    <TextBlock x:Uid="Card_Data_Expiration"></TextBlock>
                     <DatePicker DayFormat="{}{day.integer(1)}" Date="{Binding card.expiration.coreValue , Mode=TwoWay , Converter={StaticResource DateToExpirationStringConverter}}" ></DatePicker>  <!--BINDEAR MIN YEAR-->
                 </StackPanel>
 
@@ -60,13 +57,10 @@
                     <TextBox x:Name="owner_document_number" Text="{Binding card.owner_document.number.coreValue , Mode=TwoWay}"></TextBox>
                 </StackPanel>
 
-
                 <StackPanel Visibility="{Binding card.email.required,Converter={StaticResource VisibilityConverter}}">
                     <TextBlock x:Uid="Card_Data_Owner_Gender"></TextBlock>
                     <ComboBox x:Name="owner_gender" ItemsSource="{Binding card.owner_gender.options}" DisplayMemberPath="description" SelectedValue="{Binding card.owner_gender.coreValue, Mode=TwoWay}" SelectedValuePath="value"   ></ComboBox>
                 </StackPanel>
-
-
 
             </StackPanel>
         </ScrollViewer>

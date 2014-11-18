@@ -7,6 +7,8 @@ using Despegar.Core.Business.Flight.CitiesAutocomplete;
 using Despegar.Core.Business.Flight.Itineraries;
 using Despegar.Core.IService;
 using Despegar.Core.Service;
+using System.Linq;
+using System.Collections.Generic;
 using System.Dynamic;
 using System.Threading.Tasks;
 
@@ -26,7 +28,15 @@ namespace Despegar.WP.UI.Model
             
         }
 
-       
+        public async Task<List<Product>> GetProducts(string country)
+        {
+            IConfigurationService configurationService = GlobalConfiguration.CoreContext.GetConfigurationService();
+            Configuration configuration = await configurationService.GetConfigurations();
+            var Site = configuration.sites.FirstOrDefault(s => s.code == country);
+            return Site.products;
+
+        }
+
         public async Task<CitiesAutocomplete> GetCities(string cityString)
         {
             cityString = "bue";

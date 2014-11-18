@@ -23,10 +23,8 @@
                         <ColumnDefinition></ColumnDefinition>
                         <ColumnDefinition></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <!--x:Uid="Generic_Adult"-->
                     <TextBlock  Text="{Binding type , Converter={StaticResource TypeToTextConverter}}"></TextBlock>
                 </Grid>
-
 
                 <StackPanel Visibility="{Binding first_name.required,Converter={StaticResource VisibilityConverter}}" >
                     <TextBlock x:Uid="Passager_First_Name"></TextBlock>
@@ -40,7 +38,7 @@
 
                 <StackPanel Visibility="{Binding nationality.required,Converter={StaticResource VisibilityConverter}}">
                     <TextBlock x:Uid="Passager_Nationality"></TextBlock>
-                    <ComboBox x:Name="nationality"></ComboBox>
+                    <AutoSuggestBox x:Name="nationality" TextChanged="Autosuggest_TextChanged" SuggestionChosen="SuggestionChosen"></AutoSuggestBox>
                 </StackPanel>
 
                 <StackPanel Visibility="{Binding document.required,Converter={StaticResource VisibilityConverter}}">

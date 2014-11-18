@@ -62,15 +62,13 @@
 
                 <StackPanel Visibility="{Binding address.state.required,Converter={StaticResource VisibilityConverter}}" >
                     <TextBlock x:Uid="Invoice_Arg_State"></TextBlock>
-                    <ComboBox x:Name="address_state"  DisplayMemberPath="name" SelectedValue="{Binding address.state.coreValue, Mode=TwoWay}" SelectedValuePath="code"  SelectionChanged="FiscalStatus_Changed" ></ComboBox>
-
-                    <!--<TextBox x:Name="address_state" Text="{Binding Address.state.coreValue , Mode=TwoWay}"></TextBox>-->
+                    <ComboBox x:Name="address_state"  DisplayMemberPath="name" SelectedValue="{Binding address.state.coreValue, Mode=TwoWay}" SelectedValuePath="code"  SelectionChanged="FiscalStatus_Changed" ></ComboBox>                 
                 </StackPanel>
 
 
                 <StackPanel Visibility="{Binding Address.city_id.required,Converter={StaticResource VisibilityConverter}}" >
                     <TextBlock x:Uid="Invoice_Arg_City"></TextBlock>
-                    <TextBox x:Name="address_city_id" Text="{Binding Address.city_id.coreValue , Mode=TwoWay}"></TextBox>
+                    <AutoSuggestBox DataContext="{Binding}" TextBoxStyle="{StaticResource InputBase}" Style="{StaticResource AutosuggestBoxBase}"  x:Name="address_city" TextChanged="FlightsTextBlock_TextChanged" LostFocus="Focus_Lost" SuggestionChosen="SuggestionChosen" TextMemberPath="full_name" ></AutoSuggestBox>
                 </StackPanel>
 
 

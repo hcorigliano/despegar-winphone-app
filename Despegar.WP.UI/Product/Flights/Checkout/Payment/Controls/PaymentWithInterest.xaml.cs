@@ -42,22 +42,13 @@ namespace Despegar.WP.UI.Product.Flights.Checkout.Payment.Controls
         {
         }
 
-        private void RadioButtonClick(object sender, RoutedEventArgs e)
-        {
-
-        }
-
         private void Image_Load_Failed(object sender, ExceptionRoutedEventArgs e)
         {                         
             //((Image)sender).Source = new BitmapImage(new Uri("/Assets/Icon/CreditCard/GRL.png", UriKind.Relative));
-            //int i = 1;
         }
 
         private void OnButtonClicked(object sender, RoutedEventArgs e)
         {
-            //PaymentDetail bla = (PaymentDetail)(((CheckBox)e.OriginalSource).DataContext);
-            //var ble = ((RadioButton)e.OriginalSource).DataContext;
-            //((RadioButton)e.OriginalSource).DataContext = PaymentsFormated.CardToArray((PaymentDetail)(((RadioButton)e.OriginalSource).DataContext)); 
             if (OnUserControlButtonClicked != null)
                 OnUserControlButtonClicked(this, e);
         }

@@ -42,14 +42,21 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common\State\State.cs" />
+    <Compile Include="Configuration\CitiesFields.cs" />
+    <Compile Include="BusinessModelBase.cs" />
     <Compile Include="Configuration\Configuration.cs" />
     <Compile Include="Configuration\Contact.cs" />
+    <Compile Include="Configuration\Countries.cs" />
+    <Compile Include="Configuration\CountryFields.cs" />
     <Compile Include="Configuration\Domain.cs" />
     <Compile Include="Configuration\Product.cs" />
     <Compile Include="Configuration\Site.cs" />
+    <Compile Include="Configuration\UpdateFields.cs" />
     <Compile Include="Culture\Site.cs" />
     <Compile Include="Dynamics\DynamicFlightBookingFieldsToPost.cs" />
     <Compile Include="Enums\FlightSearchChildEnum.cs" />
+    <Compile Include="Enums\FlightSearchPagesEnum.cs" />
+    <Compile Include="Flight\FlightSearchModel.cs" />
     <Compile Include="Flight\BookingCompletePostResponse\Answers.cs" />
     <Compile Include="Flight\BookingCompletePostResponse\BookingCompletePostResponse.cs" />
     <Compile Include="Flight\BookingCompletePostResponse\FreeTextDescription.cs" />

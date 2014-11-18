@@ -23,7 +23,6 @@ namespace Despegar.Core.Business.Dynamics
             result.gender = passenger.gender.coreValue;
 
             //Agregar todos los que falten
-
             return result;
         }
 
@@ -69,13 +68,13 @@ namespace Despegar.Core.Business.Dynamics
             if (bookingFields.form.payment.invoice != null)
             {
                 result.form.payment.invoice = new ExpandoObject();
-                result.form.payment.invoice.fiscal_id = bookingFields.form.payment.invoice.fiscal_id;
+                result.form.payment.invoice.fiscal_id = bookingFields.form.payment.invoice.fiscal_id.coreValue;
                 result.form.payment.invoice.address = new ExpandoObject();
                 result.form.payment.invoice.address.number = bookingFields.form.payment.invoice.address.number.coreValue;
                 result.form.payment.invoice.address.floor = bookingFields.form.payment.invoice.address.floor.coreValue;
                 result.form.payment.invoice.address.city_id = bookingFields.form.payment.invoice.address.city_id.coreValue;
                 result.form.payment.invoice.address.state = bookingFields.form.payment.invoice.address.state.coreValue;
-                result.form.payment.invoice.address.country = bookingFields.form.payment.invoice.address.country.coreValue;
+                result.form.payment.invoice.address.country = bookingFields.form.payment.invoice.address.country.value;
                 result.form.payment.invoice.address.postal_code = bookingFields.form.payment.invoice.address.postal_code.coreValue;
                 result.form.payment.invoice.address.department = bookingFields.form.payment.invoice.address.department.coreValue;
                 result.form.payment.invoice.address.street = bookingFields.form.payment.invoice.address.street.coreValue;
@@ -85,6 +84,5 @@ namespace Despegar.Core.Business.Dynamics
             return result;
 
         }
-      
     }
 }

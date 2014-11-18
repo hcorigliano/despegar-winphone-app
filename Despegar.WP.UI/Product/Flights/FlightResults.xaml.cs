@@ -1,27 +1,15 @@
-﻿using Despegar.WP.UI.Common;
+﻿using Despegar.Core.Business.Flight;
+using Despegar.Core.Business.Flight.Itineraries;
+using Despegar.WP.UI.Common;
+using Despegar.WP.UI.Model;
+using Despegar.WP.UI.Model.Classes;
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
-using Windows.Graphics.Display;
-using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
-using Despegar.Core.Business.Flight.Itineraries;
-using Despegar.WP.UI.Classes;
-using Despegar.WP.UI.Model;
-using Windows.UI.Popups;
-using System.Threading.Tasks;
 
-// The Basic Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
 
 namespace Despegar.WP.UI.Product.Flights
 {
@@ -33,6 +21,7 @@ namespace Despegar.WP.UI.Product.Flights
         private NavigationHelper navigationHelper;
         private ObservableDictionary defaultViewModel = new ObservableDictionary();
         private FlightResultsModel flightResultModel = new FlightResultsModel();
+        private FlightSearchModel flightSearchModel = new FlightSearchModel();
 
         public FlightResults()
         {
@@ -41,7 +30,9 @@ namespace Despegar.WP.UI.Product.Flights
             this.navigationHelper = new NavigationHelper(this);
             this.navigationHelper.LoadState += this.NavigationHelper_LoadState;
             this.navigationHelper.SaveState += this.NavigationHelper_SaveState;
+
             this.DataContext = flightResultModel;
+            this.miniboxSearch.DataContext = flightSearchModel;
         }
 
         /// <summary>
@@ -74,7 +65,13 @@ namespace Despegar.WP.UI.Product.Flights
         /// session.  The state will be null the first time a page is visited.</param>
         private void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
         {
-            flightResultModel.Itineraries = e.NavigationParameter as FlightsItineraries;
+            PageParameters pageParameters = e.NavigationParameter as PageParameters;
+
+            flightResultModel.Itineraries = pageParameters.Itineraries as FlightsItineraries;
+
+            flightSearchModel = pageParameters.SearchModel as FlightSearchModel;
+
+            this.miniboxSearch.DataContext = flightSearchModel;
 
         }
 
@@ -179,7 +176,7 @@ namespace Despegar.WP.UI.Product.Flights
             Grid grid = sender as Grid;
             if (grid!=null)
             {
-                PagesManager.GoTo(typeof(FlightDetail), grid.DataContext);
+                OldPagesManager.GoTo(typeof(FlightDetail), grid.DataContext);
             }
         }
 
@@ -241,5 +238,25 @@ namespace Despegar.WP.UI.Product.Flights
             }
             return visibility;
         }
+
+
+        public void GoBack() 
+        {
+            if (navigationHelper.CanGoBack())
+            {
+                navigationHelper.GoBack();
+            }
+        }
+
+        private void miniboxSearch_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            GoBack();
+        }
+
+        private void appBarFilter_Click(object sender, RoutedEventArgs e)
+        {
+            OldPagesManager.GoTo(typeof(FlightFilters), null);
+        }
+       
     }
 }

@@ -1,26 +1,29 @@
-﻿using Despegar.LegacyCore;
+﻿using Despegar.Core.Business.Configuration;
+using Despegar.Core.IService;
+using Despegar.LegacyCore;
 using Despegar.LegacyCore.Connector;
 using Despegar.LegacyCore.ViewModel;
-using Despegar.WP.UI.Classes;
 using Despegar.WP.UI.Common;
 using Despegar.WP.UI.Model;
 using Despegar.WP.UI.Product.Legacy;
 using Despegar.WP.UI.Strings;
 using System;
+using System.Windows;
+using System.Collections.Generic;
+using System.Linq;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 using Despegar.WP.UI.Developer;
-// The Basic Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
+using Windows.UI.Xaml;
 
 namespace Despegar.WP.UI
-{
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
+{    
     public sealed partial class Home : Page
     {
         private NavigationHelper navigationHelper;
-        private ObservableDictionary defaultViewModel = new ObservableDictionary();                
+        public List<Despegar.Core.Business.Configuration.Product> products;
+        public Despegar.WP.UI.Model.HomeViewModel ViewModel { get; set; }
 
         public Home()
         {
@@ -29,9 +32,14 @@ namespace Despegar.WP.UI
             this.navigationHelper = new NavigationHelper(this);
             this.navigationHelper.LoadState += this.NavigationHelper_LoadState;
             this.navigationHelper.SaveState += this.NavigationHelper_SaveState;
-            
+
+            ViewModel = new Despegar.WP.UI.Model.HomeViewModel(Navigator.Instance);
+            DataContext = ViewModel;
+
             // Developer Tools
             this.CheckDeveloperTools();
+            SetupMenuItems(GlobalConfiguration.Site);
+            test();
         }
 
         /// <summary>
@@ -42,13 +50,28 @@ namespace Despegar.WP.UI
             get { return this.navigationHelper; }
         }
 
-        /// <summary>
-        /// Gets the view model for this <see cref="Page"/>.
-        /// This can be changed to a strongly typed view model.
-        /// </summary>
-        public ObservableDictionary DefaultViewModel
+        private async void test()
         {
-            get { return this.defaultViewModel; }
+            IConfigurationService configurationService = GlobalConfiguration.CoreContext.GetConfigurationService();
+            Countries con = await configurationService.GetCountries();
+        }
+
+        private async void SetupMenuItems(string country)
+        {
+            products = await ViewModel.GetProducts(country);
+
+            foreach (var product in products)
+            {
+                switch(product.name)
+                {
+                    case "hotels":
+                        Hotels.Visibility = (product.status == "ENABLED") ? Visibility.Visible : Visibility.Collapsed;
+                        break;
+                    case "flights":
+                        Flights.Visibility = (product.status == "ENABLED") ? Visibility.Visible : Visibility.Collapsed;
+                        break;
+                }
+            }
         }
 
         /// <summary>
@@ -64,6 +87,7 @@ namespace Despegar.WP.UI
         /// session.  The state will be null the first time a page is visited.</param>
         private void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
         {
+
         }
 
         /// <summary>
@@ -107,33 +131,20 @@ namespace Despegar.WP.UI
 
         private void ListView_ItemClick(object sender, ItemClickEventArgs e)
         {
-            //TODO cast element for calling the correct instances of object
-            TextBlock text = e.ClickedItem as TextBlock;
+            string selectedButton = (string)((e.ClickedItem as Grid).DataContext);
 
-            switch (text.Name) 
+            switch (selectedButton)
             {
-                case "FlightsOption": 
-                    PagesManager.GoTo(typeof(Product.Flights.FlightSearch),e);
+                case "Hotels":
+                    ViewModel.NavigateToHotelsLegacy.Execute(AppResources.GetLegacyString("HomeProductHotelsUrl"));
                     break;
-                case "HotelsOption":
-                    LoadBrowser(AppResources.GetLegacyString("HomeProductHotelsUrl"), e);
-                    break;
+                case "Flights":
+                    ViewModel.NavigateToFlights.Execute(null);
+                    break;                
                 default:
                     throw new InvalidOperationException();
             }
         }
-
-        private void LoadBrowser(string relativePath, ItemClickEventArgs e)
-        {
-            APIConnector.Instance.Channel = ApplicationConfig.Instance.Country = GlobalConfiguration.Site;  // TODO: Legacy code
-            ApplicationConfig.Instance.ResetBrowsingPages(new Uri(HomeViewModel.Domain + relativePath));
-
-            PagesManager.GoTo(typeof(Browser), e);
-        }
-
-        private void AppBarButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
-        {
-            PagesManager.GoTo(typeof(CountrySelection), e);
-        }
+        
     }
 }

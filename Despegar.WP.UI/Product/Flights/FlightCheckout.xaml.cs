@@ -34,9 +34,6 @@ namespace Despegar.WP.UI.Product.Flights
         private ObservableDictionary defaultViewModel = new ObservableDictionary();
         private FlightsCheckoutModel flightService = new FlightsCheckoutModel();
 
-        private BookingFields bookingfields = new BookingFields();
-
-
         public FlightCheckout()
         {
             this.InitializeComponent();
@@ -45,35 +42,16 @@ namespace Despegar.WP.UI.Product.Flights
             this.navigationHelper.LoadState += this.NavigationHelper_LoadState;
             this.navigationHelper.SaveState += this.NavigationHelper_SaveState;
 
-            test();
+            InitilizePage();
         }
 
-        private async void test()
+        private void InitilizePage()
         {
-            BookingFieldPost book = new BookingFieldPost();
-            book.inbound_choice = 1;
-            book.outbound_choice = 1;
-            book.itinerary_id = "prism_AR_0_FLIGHTS_A-1_C-0_I-0_RT-BUEMIA20141110-MIABUE20141111_xorigin-api!0!C_1212636001_843603426_-2008006059_1555498055_-278056197_804297563!1,6_1,4_1,5_1,2_1,3_1,1";
-
-            bookingfields = await flightService.GetBookingFields(book);
-            PassengerControl.DataContext = bookingfields.form;
-            ContactControl.DataContext = bookingfields.form.contact;
-            CardDataControl.DataContext = bookingfields.form.payment.card;
-            CardDataControl.DataContext = bookingfields.form.payment;
-            InvoiceArgControl.DataContext = bookingfields.form.payment.invoice;
-           // Buycontrol.DataContext = bookingfields.price;PriceFormated
-            Buycontrol.DataContext = new PriceFormated(bookingfields);
-            //PaymentsFormated test = new PaymentsFormated();            
-            //test = FlightsCheckoutModel.FormatPayments(bookingfields.payments);
-            PaymentControl.DataContext = FlightsCheckoutModel.FormatPayments(bookingfields.payments);
-            int i = 1;
-
-
+            LayoutRoot.DataContext = flightService;
+            
             //Notify to CardData 
             PaymentControl.OnUserControlButtonClicked += CardDataControl.OnUCButtonClicked;
             Buycontrol.OnUserControlButtonClicked += this.ValidateAndBuy;
-
-
         }
        
         /// <summary>
@@ -149,11 +127,9 @@ namespace Despegar.WP.UI.Product.Flights
 
         private void ValidateAndBuy(object sender, RoutedEventArgs e)
         {
-            FlightsCheckoutModel flightCheckoutModel = new FlightsCheckoutModel();
-            var toConert = DynamicFlightBookingFieldsToPost.ToDynamic(bookingfields);
-            flightCheckoutModel.CompleteCheckOut(toConert);
+            var toConvert = DynamicFlightBookingFieldsToPost.ToDynamic(flightService.bookingfields);
+            flightService.CompleteCheckOut(toConvert);
 
-            int i = 1;
         }
 
 

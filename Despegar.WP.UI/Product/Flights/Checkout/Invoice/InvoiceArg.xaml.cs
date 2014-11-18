@@ -1,6 +1,9 @@
 ﻿using Despegar.Core.Business.Common.State;
+using Despegar.Core.Business.Configuration;
+using Despegar.Core.Business.Flight.BookingFields;
 using Despegar.WP.UI.Model;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -29,9 +32,6 @@ namespace Despegar.WP.UI.Product.Flights.Checkout.Invoice
         {
             this.InitializeComponent();
             FillStates("AR");
-            //address_state.ItemsSource =  ((States)FillStates("AR")).StatesList;
-
-            
         }
 
         private async void FillStates(string country)
@@ -42,6 +42,16 @@ namespace Despegar.WP.UI.Product.Flights.Checkout.Invoice
                 address_state.ItemsSource = await flightCheckoutModel.GetStates("AR");
             }
             catch { }
+        }
+
+        private async void FlightsTextBlock_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
+        {
+            if (args.Reason == AutoSuggestionBoxTextChangeReason.UserInput && sender.Text != "" && sender.Text.Length >= 3)
+            {
+                //TODO : TRY CATCH
+                State state = (State)address_state.SelectedItem;
+                sender.ItemsSource = (IEnumerable)(await FlightsCheckoutModel.GetCities("AR", sender.Text, state.id));
+            }
         }
 
         /// <summary>
@@ -63,6 +73,18 @@ namespace Despegar.WP.UI.Product.Flights.Checkout.Invoice
             {
                 fiscal_name_StackPanel.Visibility = Visibility.Visible;
             }
+        }
+
+        private void Focus_Lost(object sender, RoutedEventArgs e)
+        {
+            //TODO: Agarrar el primero o si no hay nada , dejarlo en blanco.
+        }
+
+        private void SuggestionChosen(AutoSuggestBox sender, AutoSuggestBoxSuggestionChosenEventArgs args)
+        {
+
+            Despegar.Core.Business.Flight.BookingFields.Invoice context = (Despegar.Core.Business.Flight.BookingFields.Invoice)this.DataContext;
+            context.address.city_id.coreValue = ((CitiesFields)args.SelectedItem).id;
         }
     }
 }
