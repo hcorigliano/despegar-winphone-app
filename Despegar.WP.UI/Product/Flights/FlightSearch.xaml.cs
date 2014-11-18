@@ -77,11 +77,11 @@ namespace Despegar.WP.UI.Product.Flights
                 }
 
                 // If it is coming from Multiples edit, remove the "Multiples edit" View from the stack
-                if (parameters.NavigatedFromMultiples)
+                if (parameters.NavigatedFromMultiples && e.NavigationMode == NavigationMode.New)
                     ViewModel.Navigator.RemoveBackEntry();
 
                 this.DataContext = ViewModel;
-            }                        
+            }
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)

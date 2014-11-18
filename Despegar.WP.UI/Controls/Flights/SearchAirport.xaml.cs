@@ -15,8 +15,15 @@ namespace Despegar.WP.UI.Controls.Flights
 {    
     public sealed partial class SearchAirport : UserControl
     {
-        public static readonly DependencyProperty SelectedOriginProperty = DependencyProperty.Register("SelectedOrigin", typeof(string), typeof(SearchAirport), null);
-        public static readonly DependencyProperty SelectedDestinationProperty = DependencyProperty.Register("SelectedDestination", typeof(string), typeof(SearchAirport), null);
+        public static readonly DependencyProperty SelectedOriginCodeProperty = DependencyProperty.Register("SelectedOriginCode", typeof(string), typeof(SearchAirport), null);
+        public static readonly DependencyProperty SelectedDestinationCodeProperty = DependencyProperty.Register("SelectedDestinationCode", typeof(string), typeof(SearchAirport), null);
+
+        public static readonly DependencyProperty SelectedOriginTextProperty = DependencyProperty.Register("SelectedOriginText", typeof(string), typeof(SearchAirport), null);
+        public static readonly DependencyProperty SelectedDestinationTextProperty = DependencyProperty.Register("SelectedDestinationText", typeof(string), typeof(SearchAirport), null);
+
+        // Aux properties for setting Initial Autosuggestbox values
+        public static readonly DependencyProperty InitialOriginTextProperty = DependencyProperty.Register("InitialOriginText", typeof(string), typeof(SearchAirport), null);
+        public static readonly DependencyProperty InitialDestinationTextProperty = DependencyProperty.Register("InitialDestinationText", typeof(string), typeof(SearchAirport), null);
 
         #region ** BoilerPlate Code **
         public event PropertyChangedEventHandler PropertyChanged;
@@ -29,22 +36,62 @@ namespace Despegar.WP.UI.Controls.Flights
         #endregion
 
         // Bindable Property from XAML
-        public string SelectedOrigin
+        public string SelectedOriginCode
         {
-            get { return (string)GetValue(SelectedOriginProperty); }
+            get { return (string)GetValue(SelectedOriginCodeProperty); }
             set
             {
-                SetValueAndNotify(SelectedOriginProperty, value);
+                SetValueAndNotify(SelectedOriginCodeProperty, value);
             }
         }
 
         // Bindable Property from XAML
-        public string SelectedDestination
+        public string SelectedDestinationCode
         {
-            get { return (string)GetValue(SelectedDestinationProperty); }
+            get { return (string)GetValue(SelectedDestinationCodeProperty); }
             set
             {
-                SetValueAndNotify(SelectedDestinationProperty, value);
+                SetValueAndNotify(SelectedDestinationCodeProperty, value);
+            }
+        }
+
+        // Bindable Property from XAML
+        public string SelectedOriginText
+        {
+            get { return (string)GetValue(SelectedOriginTextProperty); }
+            set
+            {
+                SetValueAndNotify(SelectedOriginTextProperty, value);
+            }
+        }
+
+        // Bindable Property from XAML
+        public string SelectedDestinationText
+        {
+            get { return (string)GetValue(SelectedDestinationTextProperty); }
+            set
+            {
+                SetValueAndNotify(SelectedDestinationTextProperty, value);
+            }
+        }
+
+        // Bindable Property from XAML (This property is OneTime binding only. It is used to set the Autosuggest Text from XAML the first time the control is loaded.)
+        public string InitialOriginText
+        {
+            get { return (string)GetValue(InitialOriginTextProperty); }
+            set
+            {
+                SetValueAndNotify(InitialOriginTextProperty, value);
+            }
+        }
+
+        // Bindable Property from XAML (This property is OneTime binding only. It is used to set the Autosuggest Text from XAML the first time the control is loaded.)
+        public string InitialDestinationText
+        {
+            get { return (string)GetValue(InitialDestinationTextProperty); }
+            set
+            {
+                SetValueAndNotify(InitialDestinationTextProperty, value);
             }
         }
 
@@ -83,11 +130,13 @@ namespace Despegar.WP.UI.Controls.Flights
             {
                 if (sender.Name == "DestinyInput")
                 {
-                    SelectedDestination = selected.code;
+                    SelectedDestinationCode = selected.code;
+                    SelectedDestinationText = selected.name;
                 }
                 else if (sender.Name == "OriginInput")
                 {
-                    SelectedOrigin = selected.code;
+                    SelectedOriginCode = selected.code;
+                    SelectedOriginText = selected.name;
                 }
 
                 //For Fix Focus_Lost
@@ -103,7 +152,7 @@ namespace Despegar.WP.UI.Controls.Flights
             UpdateTextbox((AutoSuggestBox)sender);
         }
         
-        public void UpdateTextbox(AutoSuggestBox control)
+        private void UpdateTextbox(AutoSuggestBox control)
         {         
             // Force complete city when focus lost
             if (control.Text.Length > 2 && control.ItemsSource != null)
@@ -115,11 +164,13 @@ namespace Despegar.WP.UI.Controls.Flights
                     control.Text = city.name;
                     if (control.Name == "DestinyInput")
                     {
-                        SelectedDestination = city.code;
+                        SelectedDestinationCode = city.code;
+                        SelectedDestinationText = city.name;
                     }
                     else if (control.Name == "OriginInput")
                     {
-                        SelectedOrigin = city.code;
+                        SelectedOriginCode = city.code;
+                        SelectedOriginText = city.name;
                     }
                 }
                 else
@@ -127,11 +178,13 @@ namespace Despegar.WP.UI.Controls.Flights
                     control.Text = "";
                     if (control.Name == "DestinyInput")
                     {
-                        SelectedDestination = "";
+                        SelectedDestinationCode = "";
+                        SelectedDestinationText = "";
                     }
                     else if (control.Name == "OriginInput")
                     {
-                        SelectedOrigin = "";
+                        SelectedOriginCode = "";
+                        SelectedOriginText = "";
                     }
                 }
             }
@@ -140,14 +193,30 @@ namespace Despegar.WP.UI.Controls.Flights
                 control.Text = "";
                 if (control.Name == "DestinyInput")
                 {
-                    SelectedDestination = "";
+                    SelectedDestinationCode = "";
+                    SelectedDestinationText = "";
                 }
                 else if (control.Name == "OriginInput")
                 {
-                    SelectedOrigin = "";
+                    SelectedOriginCode = "";
+                    SelectedOriginText = "";
                 }
             }
         }
-        
+
+        /// <summary>
+        /// Initially sets the Ui values of the Autosuggest boxes, Used for DEV TOOLS
+        /// </summary>        
+        public void UpdateAirportBoxes(string originCode, string originText, string destinationCode, string destinationText)
+        {
+            OriginInput.ItemsSource = new List<CityAutocomplete>() { new CityAutocomplete() { code = originCode, name = originText } };
+            DestinyInput.ItemsSource = new List<CityAutocomplete>() { new CityAutocomplete() { code = destinationCode, name = destinationText } };
+
+            OriginInput.Text = originText;
+            DestinyInput.Text = destinationText;
+
+            UpdateTextbox(OriginInput);
+            UpdateTextbox(DestinyInput);
+        }
     }
 }

@@ -25,7 +25,13 @@
                         <RowDefinition Height="{StaticResource Block3p}" />
                     </Grid.RowDefinitions>
 
-                    <controls:SearchAirport Grid.Row="0"  SelectedOrigin="{Binding AirportOrigin, Mode=TwoWay}" SelectedDestination="{Binding AirportDestination, Mode=TwoWay}" />
+                    <controls:SearchAirport Grid.Row="0"  SelectedOriginCode="{Binding AirportOrigin, Mode=TwoWay}" 
+                                            SelectedDestinationCode="{Binding AirportDestination, Mode=TwoWay}" 
+                                            SelectedOriginText="{Binding AirportOriginText, Mode=TwoWay}" 
+                                            SelectedDestinationText="{Binding AirportDestinationText, Mode=TwoWay}" 
+                                            InitialOriginText="{Binding AirportOriginText}"
+                                            InitialDestinationText="{Binding AirportDestinationText}"/>
+                    
                     <controls:DateControlSimple Grid.Row="1" SelectedDate="{Binding DepartureDate, Mode=TwoWay }"  />
                 </Grid>
             </ScrollViewer>

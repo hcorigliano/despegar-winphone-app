@@ -33,7 +33,13 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
             this.passengerModel = navigationData.PassengerModel;
 
             // Make a copy in order to not modify the oringinal data, so the user can Cancel the changes.
-            var copiedSegments = coreSearchModel.MultipleSegments.Select(x => new FlightMultipleSegment() { Index = x.Index, AirportDestination = x.AirportDestination, AirportOrigin = x.AirportOrigin, DepartureDate = x.DepartureDate});            
+            var copiedSegments = coreSearchModel.MultipleSegments.Select(
+                x => new FlightMultipleSegment() { 
+                Index = x.Index, AirportDestination = x.AirportDestination, 
+                AirportOrigin = x.AirportOrigin, DepartureDate = x.DepartureDate, 
+                AirportOriginText = x.AirportOriginText, AirportDestinationText = x.AirportDestinationText
+            });         
+   
             this.Segments = new ObservableCollection<FlightMultipleSegment>(copiedSegments);
         }
 
@@ -47,7 +53,7 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
                     coreSearchModel.MultipleSegments.Clear();
                     coreSearchModel.MultipleSegments.AddRange(Segments);
 
-                    navigator.RemoveBackEntry();
+                    navigator.RemoveBackEntry(); // Remove the SearchBox page, go to new instance
                     navigator.GoTo(ViewModelPages.FlightsSearch, new FlightSearchNavigationData() {NavigatedFromMultiples = true,  SearchModel = coreSearchModel, PassengerModel = passengerModel});
                 });
             }

@@ -51,7 +51,12 @@
                             <RowDefinition />
                         </Grid.RowDefinitions>
 
-                        <src:SearchAirport Grid.Row="0"   SelectedOrigin="{Binding Origin, Mode=TwoWay}" SelectedDestination="{Binding Destination, Mode=TwoWay}"/>
+                        <src:SearchAirport Grid.Row="0"   
+                                           SelectedOriginCode="{Binding Origin, Mode=TwoWay}" 
+                                           SelectedDestinationCode="{Binding Destination, Mode=TwoWay}"  
+                                           SelectedOriginText="{Binding OriginText, Mode=TwoWay}"  
+                                           SelectedDestinationText="{Binding DestinationText, Mode=TwoWay}" />
+                        
                         <src:DateControl Grid.Row="1"   FromDate="{Binding FromDate, Mode=TwoWay}" ToDate="{Binding ToDate, Mode=TwoWay}" />
                         <src:QuantityPassagersControl  Grid.Row="2" DataContext="{Binding PassengersViewModel}"   Adults="{Binding Adults, Mode=TwoWay}" Children="{Binding Children, Mode=TwoWay}"  Infants="{Binding Infants, Mode=TwoWay}"   />
 
@@ -71,7 +76,12 @@
                             <RowDefinition />
                         </Grid.RowDefinitions>
 
-                        <src:SearchAirport  Grid.Row="0"  SelectedOrigin="{Binding Origin, Mode=TwoWay}" SelectedDestination="{Binding Destination, Mode=TwoWay}" />
+                        <src:SearchAirport  Grid.Row="0"  
+                                            SelectedOriginCode="{Binding Origin, Mode=TwoWay}" 
+                                            SelectedDestinationCode="{Binding Destination, Mode=TwoWay}" 
+                                            SelectedOriginText="{Binding OriginText, Mode=TwoWay}"  
+                                            SelectedDestinationText="{Binding DestinationText, Mode=TwoWay}" />
+                        
                         <src:DateControlSimple  Grid.Row="1" SelectedDate="{Binding FromDate, Mode=TwoWay}" />
                         <src:QuantityPassagersControl  Grid.Row="2" DataContext="{Binding PassengersViewModel}"   Adults="{Binding Adults, Mode=TwoWay}" Children="{Binding Children, Mode=TwoWay}"  Infants="{Binding Infants, Mode=TwoWay}"   />
 

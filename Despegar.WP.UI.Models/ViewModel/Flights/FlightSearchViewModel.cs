@@ -55,6 +55,29 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
             } 
         }
 
+        public string OriginText
+        {
+            get
+            {
+                return coreSearchModel.OriginFlightText;
+            }
+            set
+            {
+                coreSearchModel.OriginFlightText = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string DestinationText
+        {
+            get { return coreSearchModel.DestinationFlightText; }
+            set
+            {
+                coreSearchModel.DestinationFlightText = value;
+                OnPropertyChanged();
+            }
+        }
+
         public DateTimeOffset FromDate
         {
             get { return coreSearchModel.DepartureDate; }

@@ -13,6 +13,8 @@ namespace Despegar.Core.Business.Flight.SearchBox
         public int Index { get; set; }
         public DateTimeOffset DepartureDate { get; set; }
         public string AirportOrigin { get; set; }
-        public string AirportDestination { get; set; }        
+        public string AirportDestination { get; set; }
+        public string AirportOriginText { get; set; }
+        public string AirportDestinationText { get; set; }
     }
 }

@@ -1,9 +1,11 @@
 ﻿using Despegar.WP.UI.Common;
+using Despegar.WP.UI.Controls.Flights;
 using Despegar.WP.UI.Model.Classes.Flights;
 using Despegar.WP.UI.Model.ViewModel.Flights;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
-
+using System.Linq;
+using Windows.UI.Xaml;
 
 namespace Despegar.WP.UI.Product.Flights
 {
@@ -52,5 +54,25 @@ namespace Despegar.WP.UI.Product.Flights
         {
             //this.navigationHelper.OnNavigatedFrom(e);
         }
+
+        //private void MainPivotControl_LayoutUpdated(object sender, object e)
+        //{
+        //    // Set AutosuggestBox Text properties  TODO: SET THIS TO BE THE INITIAL PROPERTY BINDING OF THE TEXT in AUTOSUGGESTBOX, in SEARCHAIROT,  Public property, not Dependency
+        //    //int index = 0;
+        //    //foreach (PivotItem pivotItem in this.FindVisualChildren<PivotItem>(this))
+        //    //{
+        //    //    SearchAirport userControl = this.FindVisualChildren<SearchAirport>(pivotItem).First();
+        //    //    var segment = ViewModel.Segments[index];
+
+        //    //    userControl.UpdateAirportBoxes(
+        //    //        segment.AirportOrigin,
+        //    //        segment.AirportOriginText,
+        //    //        segment.AirportDestination,
+        //    //        segment.AirportDestinationText);
+
+        //    //    index++;
+        //    //}
+        //}
+      
     }
 }

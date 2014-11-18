@@ -112,15 +112,10 @@ namespace Despegar.WP.UI.Developer
                     viewModel.FromDate = new System.DateTimeOffset(2015, 2, 10, 0, 0, 0, TimeSpan.FromDays(0));
 
                     // Update UI
-                    var userControl = page.FindVisualChildren<SearchAirport>().First();   // TODO this will always change the current View, it should update the correct Control on the correct page
-                    var originBox = userControl.FindName("OriginInput") as AutoSuggestBox;
-                    var destinationBox = userControl.FindName("DestinyInput") as AutoSuggestBox;
-                    originBox.ItemsSource = new List<CityAutocomplete>() { new CityAutocomplete() { code = "EZE", name = "Aeropuerto Buenos Aires Ministro ¨Pistarini Ezeiza, Buenos Aires, Argentina" } };
-                    destinationBox.ItemsSource = new List<CityAutocomplete>() { new CityAutocomplete() { code = "MIA", name = "Miami, Florida, Estados Unidos" } };
-                    originBox.Text = (originBox.ItemsSource as IEnumerable<CityAutocomplete>).First().name as string;
-                    destinationBox.Text = (destinationBox.ItemsSource as IEnumerable<CityAutocomplete>).First().name as string;
-                    userControl.UpdateTextbox(originBox);
-                    userControl.UpdateTextbox(destinationBox);
+                    var pivotItem = page.FindVisualChildren<PivotItem>(page).Skip(1).First();
+                    var userControl = page.FindVisualChildren<SearchAirport>(pivotItem).First();
+                    userControl.UpdateAirportBoxes("EZE", "Aeropuerto Buenos Aires Ministro ¨Pistarini Ezeiza, Buenos Aires, Argentina", "MIA", "Miami, Florida, Estados Unidos");
+                
                 });
             }
         }
@@ -135,24 +130,17 @@ namespace Despegar.WP.UI.Developer
                 }
 
                 // Fill From EZE to MIA
-                FlightSearchViewModel viewModel = page.DataContext as FlightSearchViewModel;
-                //viewModel.Origin = "Aeropuerto Buenos Aires Ministro ¨Pistarini Ezeiza, Buenos Aires, Argentina";
-                //viewModel.Destination = "Miami, Florida, Estados Unidos";
+                FlightSearchViewModel viewModel = page.DataContext as FlightSearchViewModel;               
                 viewModel.PassengersViewModel.GeneralAdults = 2;
                 viewModel.PassengersViewModel.GeneralMinors = 1;
                 viewModel.FromDate = new System.DateTimeOffset(2015, 2, 10, 0, 0, 0, TimeSpan.FromDays(0));
                 viewModel.ToDate = new System.DateTimeOffset(2015, 3, 20, 0, 0, 0, TimeSpan.FromDays(0));
 
                 // Update UI
-                var userControl = page.FindVisualChildren<SearchAirport>().First();    // TODO this will always change the current View, it should update the correct Control on the correct page
-                var originBox = userControl.FindName("OriginInput") as AutoSuggestBox;
-                var destinationBox = userControl.FindName("DestinyInput") as AutoSuggestBox;
-                originBox.ItemsSource = new List<CityAutocomplete>() { new CityAutocomplete() { code = "EZE", name = "Aeropuerto Buenos Aires Ministro ¨Pistarini Ezeiza, Buenos Aires, Argentina" } };
-                destinationBox.ItemsSource = new List<CityAutocomplete>() { new CityAutocomplete() { code = "MIA", name = "Miami, Florida, Estados Unidos" } };
-                originBox.Text = (originBox.ItemsSource as IEnumerable<CityAutocomplete>).First().name as string;
-                destinationBox.Text = (destinationBox.ItemsSource as IEnumerable<CityAutocomplete>).First().name as string;
-                userControl.UpdateTextbox(originBox);
-                userControl.UpdateTextbox(destinationBox);
+                var pivotItem = page.FindVisualChildren<PivotItem>(page).First();
+                var userControl = page.FindVisualChildren<SearchAirport>(pivotItem).First();
+                userControl.UpdateAirportBoxes("EZE", "Aeropuerto Buenos Aires Ministro ¨Pistarini Ezeiza, Buenos Aires, Argentina","MIA" ,"Miami, Florida, Estados Unidos");
+
             }); }
         }
 
