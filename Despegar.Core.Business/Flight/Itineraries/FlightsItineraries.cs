@@ -8,7 +8,8 @@ namespace Despegar.Core.Business.Flight.Itineraries
 {
     public class FlightsItineraries
     {
-        public object cheapest_price { get; set; }
+        public int total { get; set; }
+        public CheapestPrice cheapest_price { get; set; }
         public Currencies currencies { get; set; }
         public List<Item> items { get; set; }
         public List<Facet> facets { get; set; }

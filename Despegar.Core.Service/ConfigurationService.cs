@@ -56,13 +56,13 @@ namespace Despegar.Core.Service
         /// Auto completes cities
         /// </summary>
         /// <returns></returns>
-        public async Task<CitiesFields> AutoCompleteCities(string CountryCode, string Search, string CityResult)
+        public async Task<List<CitiesFields>> AutoCompleteCities(string CountryCode, string Search, string CityResult)
         {
-            string serviceUrl = ServiceURL.GetServiceURL(ServiceKey.CitiesAutocomplete);
-            String.Format(serviceUrl, CountryCode, Search, CityResult);
+            string serviceUrl = String.Format(ServiceURL.GetServiceURL(ServiceKey.CitiesAutocomplete),  CountryCode, Search, CityResult);
             IConnector connector = context.GetServiceConnector(ServiceKey.CitiesAutocomplete);
 
-            return await connector.GetAsync<CitiesFields>(serviceUrl);
+            return await connector.GetAsync<List<CitiesFields>>(serviceUrl);
+        
 
         }
 

@@ -10,9 +10,12 @@ namespace Despegar.Core.Business.Dynamics
 {
     public class DynamicFlightBookingFieldsToPost
     {
-        private dynamic BuildPassenger(Passenger passenger) {
+        private static dynamic BuildPassenger(Passenger passenger) {
             dynamic result = new ExpandoObject();
             result.type = passenger.type;
+            result.document = new ExpandoObject();
+            result.document.type = passenger.document.type.coreValue;
+            result.document.number = passenger.document.number.coreValue;
             result.first_name = passenger.first_name.coreValue;
             result.last_name = passenger.last_name.coreValue;
             result.nationality = passenger.nationality.coreValue;
@@ -20,11 +23,10 @@ namespace Despegar.Core.Business.Dynamics
             result.gender = passenger.gender.coreValue;
 
             //Agregar todos los que falten
-
             return result;
         }
 
-        public dynamic BuildPhones(Phone phone)
+        public static dynamic BuildPhones(Phone phone)
         {
             dynamic result = new ExpandoObject();
             result.type = phone.type.coreValue;
@@ -35,11 +37,12 @@ namespace Despegar.Core.Business.Dynamics
             return result;
         }
 
-        public object ToDynamic(BookingFields bookingFields)
+        public static object ToDynamic(BookingFields bookingFields)
         {
             //TODO: Estos son los datos minimos para hacer una compra de un vuelo en Arg.
             dynamic result = new ExpandoObject();
             result.form = new ExpandoObject();
+            
             result.form.passangers = bookingFields.form.passengers.Select(p => BuildPassenger(p)).ToList();
             
             result.form.contact = new ExpandoObject();
@@ -65,13 +68,13 @@ namespace Despegar.Core.Business.Dynamics
             if (bookingFields.form.payment.invoice != null)
             {
                 result.form.payment.invoice = new ExpandoObject();
-                result.form.payment.invoice.fiscal_id = bookingFields.form.payment.invoice.fiscal_id;
+                result.form.payment.invoice.fiscal_id = bookingFields.form.payment.invoice.fiscal_id.coreValue;
                 result.form.payment.invoice.address = new ExpandoObject();
                 result.form.payment.invoice.address.number = bookingFields.form.payment.invoice.address.number.coreValue;
                 result.form.payment.invoice.address.floor = bookingFields.form.payment.invoice.address.floor.coreValue;
                 result.form.payment.invoice.address.city_id = bookingFields.form.payment.invoice.address.city_id.coreValue;
                 result.form.payment.invoice.address.state = bookingFields.form.payment.invoice.address.state.coreValue;
-                result.form.payment.invoice.address.country = bookingFields.form.payment.invoice.address.country.coreValue;
+                result.form.payment.invoice.address.country = bookingFields.form.payment.invoice.address.country.value;
                 result.form.payment.invoice.address.postal_code = bookingFields.form.payment.invoice.address.postal_code.coreValue;
                 result.form.payment.invoice.address.department = bookingFields.form.payment.invoice.address.department.coreValue;
                 result.form.payment.invoice.address.street = bookingFields.form.payment.invoice.address.street.coreValue;
@@ -79,6 +82,7 @@ namespace Despegar.Core.Business.Dynamics
             }
 
             return result;
+
         }
     }
 }

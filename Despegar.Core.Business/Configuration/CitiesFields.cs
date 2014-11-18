@@ -8,8 +8,14 @@ namespace Despegar.Core.Business.Configuration
 {
     public class CitiesFields
     {
-        public string fullName { get; set; }
+        public string full_name { get; set; }
         public string id { get; set; }
         public string code { get; set; }
+
+        public override string ToString()
+        {
+            return this.full_name;
+        }
     }
+
 }

@@ -19,6 +19,8 @@ namespace Despegar.Core.Business.Flight.SearchBox
         public DateTimeOffset DestinationDate { get; set; }
         public string OriginFlight { get; set; }
         public string DestinationFlight { get; set; }
+        public string OriginFlightText { get; set; }
+        public string DestinationFlightText { get; set; }
         public int AdultsInFlights { get; set; }
         public int ChildrenInFlights { get; set; }
         public int InfantsInFlights { get; set; }
@@ -43,6 +45,8 @@ namespace Despegar.Core.Business.Flight.SearchBox
 
             this.OriginFlight = string.Empty;
             this.DestinationFlight = string.Empty;
+            this.OriginFlightText = string.Empty;
+            this.DestinationFlightText = string.Empty;
 
             this.DepartureDate = DateTime.Today.AddDays(2);
             this.DestinationDate = DateTime.Today.AddDays(2);
@@ -59,7 +63,7 @@ namespace Despegar.Core.Business.Flight.SearchBox
         public void AddMultipleSegment()
         {
             if (this.MultipleSegments.Count < MAX_MULTIPLE_SEGMENTS)
-                this.MultipleSegments.Add(new FlightMultipleSegment() { Index = this.MultipleSegments.Count + 1, DepartureDate = DateTime.Today, AirportOrigin = "", AirportDestination = "" });            
+                this.MultipleSegments.Add(new FlightMultipleSegment() { Index = this.MultipleSegments.Count + 1, DepartureDate = DateTime.Today, AirportDestination=String.Empty, AirportOrigin=String.Empty, AirportOriginText = String.Empty, AirportDestinationText = String.Empty});            
         }
 
         public void RemoveMultipleSegment()

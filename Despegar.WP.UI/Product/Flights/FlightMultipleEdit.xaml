@@ -8,9 +8,15 @@
     xmlns:dev="using:Despegar.WP.UI.Developer.Controls"
     xmlns:controls="using:Despegar.WP.UI.Controls.Flights"
     mc:Ignorable="d"    
-    Style="{StaticResource BasePage}">
-
-    <!--<Page.Resources>
+    Style="{StaticResource BasePage}"
+    NavigationCacheMode="Disabled" 
+   >
+    
+    <Page.BottomAppBar>
+        <CommandBar />
+    </Page.BottomAppBar>
+    
+    <Page.Resources>
         <DataTemplate x:Key="segmentTemplate">
             <ScrollViewer>
                 <Grid>
@@ -19,12 +25,26 @@
                         <RowDefinition Height="{StaticResource Block3p}" />
                     </Grid.RowDefinitions>
 
-                    <controls:SearchAirport Grid.Row="0"  SelectedOrigin="{Binding }" SelectedDestination="{Binding }" />
-                    <controls:DateControlSimple Grid.Row="1" SelectedDate="{Binding }"  />
+                    <controls:SearchAirport Grid.Row="0"  SelectedOriginCode="{Binding AirportOrigin, Mode=TwoWay}" 
+                                            SelectedDestinationCode="{Binding AirportDestination, Mode=TwoWay}" 
+                                            SelectedOriginText="{Binding AirportOriginText, Mode=TwoWay}" 
+                                            SelectedDestinationText="{Binding AirportDestinationText, Mode=TwoWay}" 
+                                            InitialOriginText="{Binding AirportOriginText}"
+                                            InitialDestinationText="{Binding AirportDestinationText}"/>
+                    
+                    <controls:DateControlSimple Grid.Row="1" SelectedDate="{Binding DepartureDate, Mode=TwoWay }"  />
                 </Grid>
             </ScrollViewer>
         </DataTemplate>
-    </Page.Resources>-->
+
+        <DataTemplate x:Key="headerPivotTemplate">
+                <TextBlock  Style="{StaticResource PivotHeader}" >
+                    <Run x:Uid="Page_Flight_Search_Section" />
+                    <Run Text="{Binding Index}" />
+                </TextBlock>
+        </DataTemplate>
+        
+    </Page.Resources>
     
     <Grid Style="{StaticResource MainContainerGrid}">
         <Grid.ChildrenTransitions>
@@ -41,18 +61,16 @@
             <RowDefinition Height="{StaticResource Block1p}"/>
             <RowDefinition Height="{StaticResource Square}"/>
             <RowDefinition />
-            <RowDefinition />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <dev:UserControlDesignGrid />
+        <!--<dev:UserControlDesignGrid />-->
         
         <!-- Title Panel -->
         <Image Grid.Row="0" Grid.ColumnSpan="3" Style="{StaticResource TopLogo}" />
         <TextBlock Grid.Row="1" Grid.ColumnSpan="3" x:Uid="Page_FlightSearch" Style="{StaticResource PageHeaderSmall}" Text="BUSQUEDA" />
 
-        <Pivot Grid.Row="2" Grid.ColumnSpan="3" Style="{StaticResource PivotBaseMain}" x:Name="MainPivotControl" ItemsSource="{Binding Segments}">
-            <!--<PivotItem Header="tramo 1" Style="{StaticResource PivotItemBase}">               
-            </PivotItem>-->
+        <Pivot Grid.Row="2" Grid.ColumnSpan="3" Style="{StaticResource PivotBaseMain}" x:Name="MainPivotControl" ItemsSource="{Binding Segments}" ItemTemplate="{StaticResource segmentTemplate}" HeaderTemplate="{StaticResource headerPivotTemplate}">
         </Pivot>
 
         <Button Grid.Row="3"  Grid.Column="0" Command="{Binding ApplyCommand}" x:Uid="Flights_Search_Multiple_Apply" Style="{StaticResource ButtonBottom}" Content="Aplicar"  />

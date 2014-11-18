@@ -381,10 +381,127 @@
   <data name="Page_Flights_Search_RemoveSegment.Label" xml:space="preserve">
     <value>Quitar</value>
   </data>
+  <data name="Card_Data_Card.Text" xml:space="preserve">
+    <value>Tarjeta</value>
+  </data>
   <data name="Flights_Search_Multiple_Apply.Content" xml:space="preserve">
     <value>Aplicar</value>
   </data>
+  <data name="Card_Data_Document.Text" xml:space="preserve">
+    <value>Tipo de documento</value>
+  </data>
   <data name="Flights_Search_Multiple_Cancel.Content" xml:space="preserve">
     <value>Cancelar</value>
+  </data>
+  <data name="Card_Data_Number_Document.Text" xml:space="preserve">
+    <value>Número de documento</value>
+  </data>
+  <data name="Card_Data_Number_Of_Card.Text" xml:space="preserve">
+    <value>Número de tarjeta</value>
+  </data>
+  <data name="Card_Data_Owner_Gender.Text" xml:space="preserve">
+    <value>Sexo</value>
+  </data>
+  <data name="Card_Data_owner_name.Text" xml:space="preserve">
+    <value>Titular de la tarjeta</value>
+  </data>
+  <data name="Card_Data_Security_Code.Text" xml:space="preserve">
+    <value>Código de seguridad</value>
+  </data>
+  <data name="Flight_Checkout_Card_Data.Text" xml:space="preserve">
+    <value>Datos de la tarjeta</value>
+  </data>
+  <data name="address_floor.Text" xml:space="preserve">
+    <value>Piso</value>
+  </data>
+  <data name="Flight_Checkout_Invoice_Arg.Text" xml:space="preserve">
+    <value>Factura Fiscal</value>
+  </data>
+  <data name="Invoice_Arg_City.Text" xml:space="preserve">
+    <value>Ciudad</value>
+  </data>
+  <data name="Invoice_Arg_Department.Text" xml:space="preserve">
+    <value>Dpto</value>
+  </data>
+  <data name="Invoice_Arg_fiscal_id.Text" xml:space="preserve">
+    <value>Cuit/Cuil</value>
+  </data>
+  <data name="Invoice_Arg_fiscal_name.Text" xml:space="preserve">
+    <value>Nombre ó razón social</value>
+  </data>
+  <data name="Invoice_Arg_Fiscal_Status.Text" xml:space="preserve">
+    <value>Situación Fiscal</value>
+  </data>
+  <data name="Invoice_Arg_Floor.Text" xml:space="preserve">
+    <value>Piso</value>
+  </data>
+  <data name="Invoice_Arg_Number.Text" xml:space="preserve">
+    <value>Número</value>
+  </data>
+  <data name="Invoice_Arg_Postal_Code.Text" xml:space="preserve">
+    <value>Código Postal</value>
+  </data>
+  <data name="Invoice_Arg_State.Text" xml:space="preserve">
+    <value>Provincia</value>
+  </data>
+  <data name="Invoice_Arg_Street.Text" xml:space="preserve">
+    <value>Calle</value>
+  </data>
+  <data name="Flight_Checkout_Payments.Text" xml:space="preserve">
+    <value>Forma de pago</value>
+  </data>
+  <data name="Common_Pays_With" xml:space="preserve">
+    <value>Pagos con </value>
+  </data>
+  <data name="Common_Pays_Without_Interest" xml:space="preserve">
+    <value>Pagos sin interés con </value>
+  </data>
+  <data name="Common_Pay_With" xml:space="preserve">
+    <value>Pago con</value>
+  </data>
+  <data name="Common_Pays_Of" xml:space="preserve">
+    <value>Pagos de </value>
+  </data>
+  <data name="Common_Pay_Of" xml:space="preserve">
+    <value>Pago de </value>
+  </data>
+  <data name="Buy_Button.Content" xml:space="preserve">
+    <value>Comprar</value>
+  </data>
+  <data name="Flight_Checkout_Buy.Text" xml:space="preserve">
+    <value>Finalizar compra</value>
+  </data>
+  <data name="Buy_Details_Afip.Text" xml:space="preserve">
+    <value>Res. 3550 AFIP</value>
+  </data>
+  <data name="Buy_Details_Charges.Text" xml:space="preserve">
+    <value>Cargos</value>
+  </data>
+  <data name="Buy_Details_Fare_Adult.Text" xml:space="preserve">
+    <value> adulto(s)</value>
+  </data>
+  <data name="Buy_Details_Fare_Children.Text" xml:space="preserve">
+    <value> menor(es)</value>
+  </data>
+  <data name="Buy_Details_Fare_Infant.Text" xml:space="preserve">
+    <value> bebe(s)</value>
+  </data>
+  <data name="Buy_Details_Fare_Per_Adult.Text" xml:space="preserve">
+    <value>Tarifa por adulto</value>
+  </data>
+  <data name="Buy_Details_Fare_Per_Children.Text" xml:space="preserve">
+    <value>Tarifa por menor</value>
+  </data>
+  <data name="Buy_Details_Fare_Per_Infant.Text" xml:space="preserve">
+    <value>Tarifa por bebe</value>
+  </data>
+  <data name="Buy_Details_Taxes.Text" xml:space="preserve">
+    <value>Impuestos y tasas</value>
+  </data>
+  <data name="Buy_Details_Total.Text" xml:space="preserve">
+    <value>Total</value>
+  </data>
+  <data name="Card_Data_Expiration.Text" xml:space="preserve">
+    <value>Vencimiento</value>
   </data>
 </root>

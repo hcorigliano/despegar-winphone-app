@@ -134,6 +134,10 @@ namespace Despegar.Core.Service
             return new ConfigurationService(this);
         }
 
+        public ICommonServices GetCommonService()
+        {
+            return new CommonServices(this);
+        }
         #endregion
 
         #region ** Core private **

@@ -53,6 +53,12 @@ namespace Despegar.Core.IService
         IConfigurationService GetConfigurationService();
 
         /// <summary>
+        /// returns the CommonService Object
+        /// </summary>
+        /// <returns></returns>
+        ICommonServices GetCommonService();
+
+        /// <summary>
         /// Re-configures the Core for the new Site
         /// </summary>
         /// <param name="Site">Example: AR,CO,MX etc. </param>

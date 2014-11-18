@@ -62,10 +62,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppModelBase.cs" />
-    <Compile Include="ViewModel\Classes\BindableBase.cs" />
+    <Compile Include="ViewModel\Classes\Flights\FlightSearchNavigationData.cs" />
+    <Compile Include="BindableBase.cs" />
     <Compile Include="ViewModel\Classes\Flights\BindableItem.cs" />
+    <Compile Include="Classes\Flights\Checkout\PaymentsFormated.cs" />
+    <Compile Include="Classes\Flights\Checkout\PriceFormated.cs" />
     <Compile Include="ViewModel\Classes\Flights\ChildrenAgeOption.cs" />
-    <Compile Include="Classes\Flights\EditMultiplesNavigationData.cs" />
+    <Compile Include="ViewModel\Classes\Flights\EditMultiplesNavigationData.cs" />
     <Compile Include="ViewModel\Classes\Minor.cs" />
     <Compile Include="Interfaces\INavigator.cs" />
     <Compile Include="ViewModel\CountrySelectionViewModel.cs" />
@@ -92,6 +95,14 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Enums\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.6\lib\portable-net40+sl5+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

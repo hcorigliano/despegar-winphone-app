@@ -10,6 +10,7 @@ namespace Despegar.Core.Business
         FlightsBookingFields,
         Configuration,
         BookingCompletePost,
+        States,
         Update,
         CitiesAutocomplete,
         Countries
@@ -28,8 +29,9 @@ namespace Despegar.Core.Business
             {ServiceKey.FlightsBookingFields,"mapi-flights/bookings?"},
             {ServiceKey.Configuration,"mapi-cross/configuration"},
             {ServiceKey.BookingCompletePost,"mapi-flights/bookings/{0}"},
+            {ServiceKey.States,"mapi-cross/administrative-divisions/by-country-id/{0}?"},
             {ServiceKey.Update,"mapi-cross/apps/update/{0}/?os_version={1}&installation_source={2}&device_description={3}"},
-            {ServiceKey.CitiesAutocomplete,"mapi-cross/apps/autocomplete/{0}/{1}/?city_result={2}"}, 
+            {ServiceKey.CitiesAutocomplete,"mapi-cross/autocomplete/{0}/{1}?administrative_division_id={2}&city_result=5"}, 
             {ServiceKey.Countries,"mapi-cross/apps/"}, 
 
         };

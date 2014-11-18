@@ -1,0 +1,61 @@
+﻿<Page
+    x:Class="Despegar.WP.UI.Product.Flights.Checkout.Payment.Payments"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Despegar.WP.UI.Product.Flights.Checkout.Payment"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:conv="using:Despegar.WP.UI.Common.Converter"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Page.Resources>
+        <conv:ListToVisibilityConverter x:Name="ListToVisibilityConverter"/>
+        <conv:VisibilityConverter x:Name="VisibilityConverter"/>
+        <conv:PaymentDetailsToLabelConverter x:Name="PaymentDetailsToLabelConverter"/>
+        <conv:PaymentDetailsToPaysConverter x:Name="PaymentDetailsToPaysConverter"/>
+    </Page.Resources>
+
+    <Grid>
+        <!--PaymentsFormated-->
+        <ScrollViewer VerticalScrollBarVisibility="Auto" Height="400">
+            <StackPanel x:Name="payments" DataContext="{Binding}">
+
+                <RadioButton DataContext="{Binding without_interest.OnePay}"  Checked="OnButtonClicked" Visibility="{Binding Converter={StaticResource ListToVisibilityConverter}}" x:Name="radioButtonOnePayWith" Content="{Binding [0], Converter={StaticResource PaymentDetailsToLabelConverter}}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <StackPanel xmlns:src="using:Despegar.WP.UI.Product.Flights.Checkout.Payment.Controls" >
+                    <src:Cards DataContext="{Binding without_interest.OnePay}"></src:Cards>
+                </StackPanel>
+                <TextBlock Text="{Binding without_interest.OnePay[0], Converter={StaticResource PaymentDetailsToPaysConverter}}" Visibility="{Binding IsChecked, ElementName=radioButtonOnePayWith , Converter={StaticResource VisibilityConverter} }"></TextBlock>
+
+
+                <RadioButton DataContext="{Binding without_interest.SixPays}"  Checked="OnButtonClicked" Visibility="{Binding Converter={StaticResource ListToVisibilityConverter}}" x:Name="radioButtonSixPaysWith" Content="{Binding [0], Converter={StaticResource PaymentDetailsToLabelConverter}}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>            
+                <StackPanel xmlns:src="using:Despegar.WP.UI.Product.Flights.Checkout.Payment.Controls" >
+                    <src:Cards DataContext="{Binding without_interest.SixPays}"></src:Cards>
+                </StackPanel>
+                <TextBlock Text="{Binding without_interest.SixPays[0], Converter={StaticResource PaymentDetailsToPaysConverter}}" Visibility="{Binding IsChecked, ElementName=radioButtonSixPaysWith , Converter={StaticResource VisibilityConverter} }"></TextBlock>
+
+
+                <RadioButton  DataContext="{Binding without_interest.TwelvePays}" Checked="OnButtonClicked" Visibility="{Binding Converter={StaticResource ListToVisibilityConverter}}" x:Name="radioButtonTwlvePays" Content="{Binding [0], Converter={StaticResource PaymentDetailsToLabelConverter}}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <StackPanel xmlns:src="using:Despegar.WP.UI.Product.Flights.Checkout.Payment.Controls" >
+                    <src:Cards DataContext="{Binding without_interest.TwelvePays}"></src:Cards>
+                </StackPanel>
+                <TextBlock Text="{Binding without_interest.TwelvePays[0], Converter={StaticResource PaymentDetailsToPaysConverter}}" Visibility="{Binding IsChecked, ElementName=radioButtonTwlvePays , Converter={StaticResource VisibilityConverter} }"></TextBlock>
+
+
+                <RadioButton  DataContext="{Binding without_interest.TwentyFourPays}" Checked="OnButtonClicked" Visibility="{Binding Converter={StaticResource ListToVisibilityConverter}}" x:Name="radioButtonTwentyFourPays" Content="{Binding [0], Converter={StaticResource PaymentDetailsToLabelConverter}}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <StackPanel xmlns:src="using:Despegar.WP.UI.Product.Flights.Checkout.Payment.Controls" >
+                    <src:Cards DataContext="{Binding without_interest.TwentyFourPays}"></src:Cards>
+                </StackPanel>
+                <TextBlock Text="{Binding without_interest.TwentyFourPays[0], Converter={StaticResource PaymentDetailsToPaysConverter}}" Visibility="{Binding IsChecked, ElementName=radioButtonTwentyFourPays , Converter={StaticResource VisibilityConverter} }"></TextBlock>
+
+                <!--TODO : Cambiar visibility-->
+                <RadioButton Visibility="{Binding with_interest.SixPays,Converter={StaticResource ListToVisibilityConverter}}" x:Name="radioButtonWithInterest" Content="{Binding with_interest.GrupLabelText}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <StackPanel ></StackPanel>
+                <StackPanel  xmlns:src="using:Despegar.WP.UI.Product.Flights.Checkout.Payment.Controls" Visibility="{Binding IsChecked, ElementName=radioButtonWithInterest , Converter={StaticResource VisibilityConverter} }">
+                    <src:PaymentWithInterest x:Name="PaymentWithInterest" DataContext="{Binding with_interest}"></src:PaymentWithInterest>
+                </StackPanel>
+
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Page>
