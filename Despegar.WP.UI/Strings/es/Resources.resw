@@ -201,7 +201,7 @@
   <data name="Flight_Search_Sub_Section.Content" xml:space="preserve">
     <value>Borrar tramo</value>
   </data>
-  <data name="Flight_Section_Section.Text" xml:space="preserve">
+  <data name="Page_Flight_Search_Section.Text" xml:space="preserve">
     <value>Tramo </value>
   </data>
   <data name="Flight_Search_Multple.Header" xml:space="preserve">
@@ -375,17 +375,23 @@
   <data name="Page_Flight_Detail_OperatedBy" xml:space="preserve">
     <value>Operado por</value>
   </data>
-  <data name="Page_Flights_Search_AddSegment" xml:space="preserve">
+  <data name="Page_Flights_Search_AddSegment.Label" xml:space="preserve">
     <value>Agregar</value>
   </data>
-  <data name="Page_Flights_Search_RemoveSegment" xml:space="preserve">
+  <data name="Page_Flights_Search_RemoveSegment.Label" xml:space="preserve">
     <value>Quitar</value>
   </data>
   <data name="Card_Data_Card.Text" xml:space="preserve">
     <value>Tarjeta</value>
   </data>
+  <data name="Flights_Search_Multiple_Apply.Content" xml:space="preserve">
+    <value>Aplicar</value>
+  </data>
   <data name="Card_Data_Document.Text" xml:space="preserve">
     <value>Tipo de documento</value>
+  </data>
+  <data name="Flights_Search_Multiple_Cancel.Content" xml:space="preserve">
+    <value>Cancelar</value>
   </data>
   <data name="Card_Data_Number_Document.Text" xml:space="preserve">
     <value>Número de documento</value>

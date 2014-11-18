@@ -6,8 +6,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"    
     xmlns:controls="using:Despegar.WP.UI.Developer.Controls"
     mc:Ignorable="d"
-    RequestedTheme="Light" 
-	d:DataContext="{d:DesignData /SampleData/DeveloperViewModelSampleData.xaml}"
+    RequestedTheme="Dark" 
     >
     <UserControl.Resources>
         <CollectionViewSource x:Name="mocksCvs" IsSourceGrouped="True" Source="{Binding MockGroups}" />
@@ -24,53 +23,87 @@
                     <QuadraticEase EasingMode="EaseOut" />
                 </DoubleAnimation.EasingFunction>
             </DoubleAnimation>
-        </Storyboard>                
+        </Storyboard>
     </UserControl.Resources>
-    
-    <Grid Width="{Binding Viewport.Width}" Height="{Binding Viewport.Height}" Opacity="0" x:Name="mainCanvas">
-    	<Grid.RowDefinitions>
-    		<RowDefinition/>
-    	</Grid.RowDefinitions>
+
+    <Grid Width="{Binding Viewport.Width}" Height="{Binding Viewport.Height}" Opacity="1" x:Name="mainCanvas">
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
         <Grid.Background>
             <SolidColorBrush Color="Black" Opacity="0.4"/>
         </Grid.Background>
 
-        <Grid Height="500" Width="350" Background="Gainsboro" HorizontalAlignment="Center" VerticalAlignment="Center" >            
+        <Grid Height="500" Width="350" Background="#FF091423" HorizontalAlignment="Center" VerticalAlignment="Center" >
             <Grid.RowDefinitions>
                 <RowDefinition Height="50"/>
                 <RowDefinition Height="390"/>
                 <RowDefinition Height="60" />
             </Grid.RowDefinitions>
 
-            <StackPanel Grid.Row="0" Background="#FF303030">
-                <TextBlock  Text="Developer Tools" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="22" Padding="0,15" />
+            <StackPanel Grid.Row="0">
+                <StackPanel.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF3C6EA0"/>
+                        <GradientStop Color="#FF112649" Offset="1"/>
+                    </LinearGradientBrush>
+                </StackPanel.Background>
+                <TextBlock  Text="Developer Tools" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="22" Padding="0,15" FontFamily="Segoe UI Semilight" />
             </StackPanel>
 
             <StackPanel Grid.Row="1">
                 <!-- Content -->
-                <Pivot>                   
+                <Pivot>
+                    <Pivot.Resources>                                                 
+                        <Style TargetType="TextBlock">
+                            <Setter Property="Foreground" Value="#FF27CEFF" />
+                            <Setter Property="FontSize" Value="16" />
+                            <Setter Property="Margin" Value="0,0,0,0" />
+                        </Style>
+                        <Style TargetType="Rectangle">
+                            <Setter Property="Fill" Value="White" />
+                            <Setter Property="Height" Value="1" />
+                            <Setter Property="Width" Value="310" />
+                            <Setter Property="Margin" Value="0,0,0,10" />
+                        </Style>
+                        <Style TargetType="Button" x:Name="btnStlye">
+                            <Setter Property="Foreground" Value="#FF27CEFF" />
+                            <Setter Property="HorizontalAlignment" Value="Stretch" />
+                            <Setter Property="BorderBrush" Value="#FF6998A6" />
+                        </Style>
+                    </Pivot.Resources>
                     <Pivot.HeaderTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding}" FontSize="28" />
                         </DataTemplate>
                     </Pivot.HeaderTemplate>
-                    
+
                     <PivotItem Header="Form Automation">
-                        <ScrollViewer>
+                        <PivotItem.Resources>
+                          
+                        </PivotItem.Resources>
+                        <ScrollViewer Height="283" >
                             <StackPanel>
-                                <TextBlock Text="Flights" />
-                                <Button Content="Fill SeardhBox Ida" HorizontalAlignment="Center" />
-                                <Button Content="Fill SeardhBox Ida y Vuelta" HorizontalAlignment="Center" Click="Button_FillIdaYVuelta" />
-                                <Button Content="Fill SeardhBox Multiples" HorizontalAlignment="Center" />
+                                <StackPanel>
+                                    <TextBlock Text="Flights"/>
+                                    <Rectangle />
+                                    <Button Content="SearchBox Ida y Vuelta - MIA"  Command="{Binding FillFlightsTwoWaySearchBox_MIAMI}" Style="{StaticResource btnStlye}"   />
+                                    <Button Content="SearchBox Ida - MIA" Command="{Binding FillFlightsOneWaySearchBox_MIAMI}" Style="{StaticResource btnStlye}"  />
+
+                                    <Button Content="SearchBox Multiples - 3 Tramos"  Style="{StaticResource btnStlye}"   />
+                                </StackPanel>
                                 
-                                <TextBlock Text="Checkout" />
-                                <Button Content="Fill Checkout Hotel" HorizontalAlignment="Center" />
-                                <Button Content="Fill Checkout Flights" HorizontalAlignment="Center" />
+                                <StackPanel Margin="0,10,0,0">
+                                    <TextBlock Text="Hotels" />
+                                    <Rectangle />
+                                    <Button Content="Fill Checkout Hotel" Style="{StaticResource btnStlye}"  />
+                                    <Button Content="Fill Checkout Flights" Style="{StaticResource btnStlye}"   />
+                                </StackPanel>                                
                             </StackPanel>
                         </ScrollViewer>
                     </PivotItem>
-                    
-                    
+
+
                     <PivotItem Header="Other tools">
                         <ScrollViewer>
                             <StackPanel>
@@ -88,7 +121,7 @@
                                     </Grid.ColumnDefinitions>
 
                                     <TextBlock Grid.Row="0" Grid.Column="0" Margin="0,8,15,0" FontSize="18" VerticalAlignment="Center" >Opacity</TextBlock>
-                                    <ComboBox x:Name="OpacityPicker"  Grid.Row="0" Grid.Column="1" HorizontalContentAlignment="Right" VerticalAlignment="Top" ItemsSource="{Binding OpacityOptions}" SelectedItem="{Binding Opacity, Mode=TwoWay}"  HorizontalAlignment="Right" Width="180" Margin="0,0,9.667,0" />
+                                    <ComboBox x:Name="OpacityPicker"  Grid.Row="0" Grid.Column="1" HorizontalContentAlignment="Right" VerticalAlignment="Top" ItemsSource="{Binding OpacityOptions}" SelectedItem="{Binding Opacity, Mode=TwoWay}"  HorizontalAlignment="Right" Width="180" Margin="0,0,9.667,0" Foreground="White" />
 
                                     <TextBlock Grid.Row="1" Grid.Column="0" Margin="0,8,15,0" FontSize="18" VerticalAlignment="Center">Color</TextBlock>
                                     <controls:ColorPicker x:Name="ColourPicker" Grid.Row="1" Grid.Column="1" VerticalAlignment="Top"  HorizontalAlignment="Right" SelectedColor="{Binding DesignGridColor, Mode=TwoWay}" Height="55"  Width="180" Margin="0,0,10,0"  />
@@ -97,7 +130,7 @@
                             </StackPanel>
                         </ScrollViewer>
                     </PivotItem>
-                    
+
                     <PivotItem Header="Service Mocks">
                         <ListView ItemsSource="{Binding Source={StaticResource mocksCvs}}" MaxHeight="300">
                             <ListView.GroupStyle>
@@ -106,23 +139,23 @@
                                         <!-- HEADERS -->
                                         <DataTemplate>
                                             <StackPanel>
-                                                <TextBlock Text='{Binding Key}' FontSize="20"/>
+                                                <TextBlock Text='{Binding Key}' FontSize="20" Foreground="White"/>
                                                 <Rectangle Width="380" Fill="#BBB" Height="1" Margin="10,10,10,0" />
                                             </StackPanel>
                                         </DataTemplate>
                                     </GroupStyle.HeaderTemplate>
                                 </GroupStyle>
                             </ListView.GroupStyle>
-                            
+
                             <ListView.ItemTemplate>
                                 <DataTemplate>
                                     <StackPanel Margin="20,0,0,0">
                                         <!-- Mock Enabled / Disabled-->
-                                        <RadioButton  GroupName="{Binding ServiceKey}" Foreground="#333"  Content="{Binding Name}" IsChecked="{Binding Enabled, Mode=TwoWay}" />
+                                        <RadioButton Foreground="White"  GroupName="{Binding ServiceKey}"   Content="{Binding Name}" IsChecked="{Binding Enabled, Mode=TwoWay}" />
                                     </StackPanel>
                                 </DataTemplate>
                             </ListView.ItemTemplate>
-                          
+
                         </ListView>
                     </PivotItem>
 
@@ -131,7 +164,7 @@
 
             <!-- Close Dialog Button -->
             <StackPanel Grid.Row="2">
-                <Button Content="Close" HorizontalAlignment="Stretch" Margin="20,0" Click="ClosePopup">
+                <Button Content="Close" HorizontalAlignment="Stretch" Margin="7,0" Click="ClosePopup" Background="#FF0D2042" BorderBrush="#FF9AEABB">
                 </Button>
             </StackPanel>
 

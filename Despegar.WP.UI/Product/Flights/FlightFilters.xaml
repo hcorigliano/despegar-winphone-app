@@ -12,7 +12,7 @@
             <Grid>
                 <!--<RadioButton GroupName="FlightSortByGroup" Content="{Binding label}" HorizontalAlignment="Left" VerticalAlignment="Top" IsChecked="{Binding selected ,Mode=TwoWay}"/>-->
                 <TextBlock Text="{Binding label}"></TextBlock>
-                <ItemsControl ItemsSource="{Binding values}" DataContext="{Binding}" >
+                <ItemsControl ItemsSource="{Binding values ,Mode=TwoWay}" DataContext="{Binding}" >
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                             <CheckBox Content="{Binding label}" IsChecked="{Binding selected,Mode=TwoWay}" />

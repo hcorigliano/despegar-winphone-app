@@ -9,6 +9,16 @@ using System.Windows;
 using Windows.Foundation;
 using Windows.UI;
 using Windows.UI.Xaml;
+using System.Windows.Input;
+using Despegar.WP.UI.Models.Classes;
+using Windows.UI.Xaml.Controls;
+using Despegar.WP.UI.Product.Flights;
+using Despegar.WP.UI.Model.ViewModel.Flights;
+using Despegar.WP.UI.Controls.Flights;
+using Despegar.Core.Business.Flight.CitiesAutocomplete;
+using Windows.UI.Popups;
+using Despegar.WP.UI.Common;
+using Despegar.Core.Log;
 
 namespace Despegar.WP.UI.Developer
 {
@@ -74,5 +84,66 @@ namespace Despegar.WP.UI.Developer
                 .OrderBy(g => g.Key)
                 .ToList();                        
         }
+
+        private void ShowInvalidMessage()
+        {
+            Logger.Log("[Developer Tools]: Can't use this functionality in this page. Go to the correct page.");
+            var msg = new MessageDialog("Not available for current View.");
+            msg.ShowAsync();
+        }
+
+        public ICommand FillFlightsOneWaySearchBox_MIAMI
+        {
+            get
+            {
+                return new RelayCommand(() =>
+                {
+                    var page = (Window.Current.Content as Frame).Content as FlightSearch;
+                    if (page == null)
+                    {
+                        ShowInvalidMessage();
+                        return;
+                    }
+
+                    // Fill From EZE to MIA
+                    FlightSearchViewModel viewModel = page.DataContext as FlightSearchViewModel;            
+                    viewModel.PassengersViewModel.GeneralAdults = 1;
+                    viewModel.PassengersViewModel.GeneralMinors = 1;
+                    viewModel.FromDate = new System.DateTimeOffset(2015, 2, 10, 0, 0, 0, TimeSpan.FromDays(0));
+
+                    // Update UI
+                    var pivotItem = page.FindVisualChildren<PivotItem>(page).Skip(1).First();
+                    var userControl = page.FindVisualChildren<SearchAirport>(pivotItem).First();
+                    userControl.UpdateAirportBoxes("EZE", "Aeropuerto Buenos Aires Ministro ¨Pistarini Ezeiza, Buenos Aires, Argentina", "MIA", "Miami, Florida, Estados Unidos");
+                
+                });
+            }
+        }
+
+        public ICommand FillFlightsTwoWaySearchBox_MIAMI {
+            get { return new RelayCommand(() => {
+                var page = (Window.Current.Content as Frame).Content as FlightSearch;
+                if (page == null)
+                {
+                    ShowInvalidMessage();
+                    return;
+                }
+
+                // Fill From EZE to MIA
+                FlightSearchViewModel viewModel = page.DataContext as FlightSearchViewModel;               
+                viewModel.PassengersViewModel.GeneralAdults = 2;
+                viewModel.PassengersViewModel.GeneralMinors = 1;
+                viewModel.FromDate = new System.DateTimeOffset(2015, 2, 10, 0, 0, 0, TimeSpan.FromDays(0));
+                viewModel.ToDate = new System.DateTimeOffset(2015, 3, 20, 0, 0, 0, TimeSpan.FromDays(0));
+
+                // Update UI
+                var pivotItem = page.FindVisualChildren<PivotItem>(page).First();
+                var userControl = page.FindVisualChildren<SearchAirport>(pivotItem).First();
+                userControl.UpdateAirportBoxes("EZE", "Aeropuerto Buenos Aires Ministro ¨Pistarini Ezeiza, Buenos Aires, Argentina","MIA" ,"Miami, Florida, Estados Unidos");
+
+            }); }
+        }
+
+
     }
 }

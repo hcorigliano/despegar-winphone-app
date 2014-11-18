@@ -8,6 +8,10 @@ using Windows.UI.Xaml.Controls;
 
 namespace Despegar.WP.UI.Common
 {
+    /// <summary>
+    /// Specific Implementation of the Navigator
+    /// It maps the different ViewModels with their respective Views
+    /// </summary>
     public class Navigator : INavigator
     {
         private static Navigator _instance;
@@ -40,6 +44,9 @@ namespace Despegar.WP.UI.Common
                 case ViewModelPages.FlightsSearch:
                     view = typeof(FlightSearch);
                     break;
+                case ViewModelPages.FlightsMultiplEdit:
+                    view = typeof(FlightMultipleEdit);
+                    break;
                 case ViewModelPages.FlightsResults:
                     view = typeof(FlightResults);
                     break;
@@ -68,6 +75,12 @@ namespace Despegar.WP.UI.Common
         public void ClearStack()
         {
             ((Frame)Window.Current.Content).BackStack.Clear();
+        }
+
+        public void RemoveBackEntry()
+        {
+            var backStack = ((Frame)Window.Current.Content).BackStack;
+            backStack.RemoveAt(backStack.Count-1);
         }
 
         public void GoBack()

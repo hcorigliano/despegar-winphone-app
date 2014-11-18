@@ -1,15 +1,19 @@
 ﻿using Despegar.Core.Business.Flight;
 using Despegar.Core.Business.Flight.Itineraries;
+using Despegar.Core.Business.Flight.SearchBox;
 using Despegar.WP.UI.Common;
 using Despegar.WP.UI.Model;
 using Despegar.WP.UI.Model.Classes;
+using Despegar.WP.UI.Model.ViewModel.Flights;
 using System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
-
+using Despegar.Core.Business.Enums;
+using Despegar.Core.Business;
+using Despegar.Core.IService;
 
 namespace Despegar.WP.UI.Product.Flights
 {
@@ -31,7 +35,11 @@ namespace Despegar.WP.UI.Product.Flights
             this.navigationHelper.LoadState += this.NavigationHelper_LoadState;
             this.navigationHelper.SaveState += this.NavigationHelper_SaveState;
 
+            flightResultModel = new FlightResultsModel(Navigator.Instance, GlobalConfiguration.CoreContext.GetFlightService());
             this.DataContext = flightResultModel;
+            this.CheckDeveloperTools();
+
+            //this.DataContext = flightResultModel;
             this.miniboxSearch.DataContext = flightSearchModel;
         }
 
@@ -52,6 +60,13 @@ namespace Despegar.WP.UI.Product.Flights
             get { return this.defaultViewModel; }
         }
 
+        protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
+        {
+            base.OnNavigatingFrom(e);
+
+            flightSearchModel.SearchStatus = SearchStates.SearchAgain;
+        }
+
         /// <summary>
         /// Populates the page with content passed during navigation.  Any saved state is also
         /// provided when recreating a page from a prior session.
@@ -63,16 +78,31 @@ namespace Despegar.WP.UI.Product.Flights
         /// <see cref="Frame.Navigate(Type, Object)"/> when this page was initially requested and
         /// a dictionary of state preserved by this page during an earlier
         /// session.  The state will be null the first time a page is visited.</param>
-        private void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
+        private async void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
         {
+
             PageParameters pageParameters = e.NavigationParameter as PageParameters;
 
-            flightResultModel.Itineraries = pageParameters.Itineraries as FlightsItineraries;
+            FlightsItineraries Itineraries = new FlightsItineraries();
 
+            
+            flightResultModel.Itineraries = pageParameters.Itineraries as FlightsItineraries;
+            Itineraries = pageParameters.Itineraries as FlightsItineraries;
             flightSearchModel = pageParameters.SearchModel as FlightSearchModel;
+           
+            flightSearchModel.FacetsSearch = flightResultModel.SelectedFacets;
+            flightSearchModel.SortingValuesSearch = flightResultModel.SelectedSorting;
+            flightSearchModel.SortingCriteriaSearch = flightResultModel.Sorting.criteria;
+
+            if (flightSearchModel.SearchStatus == SearchStates.SearchAgain)
+            {
+                Itineraries = await flightResultModel.flightService.GetItineraries(flightSearchModel);
+                flightResultModel.Clear();
+                flightResultModel.Itineraries = Itineraries;
+                flightSearchModel.SearchStatus = SearchStates.FirstSearch;
+            }
 
             this.miniboxSearch.DataContext = flightSearchModel;
-
         }
 
         /// <summary>

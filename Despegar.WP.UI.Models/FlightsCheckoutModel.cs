@@ -3,6 +3,7 @@ using Despegar.Core.Business.Configuration;
 using Despegar.Core.Business.Flight.BookingFields;
 using Despegar.Core.IService;
 using Despegar.WP.UI.Model.Classes.Flights.Checkout;
+using Despegar.WP.UI.Model.ViewModel;
 using Despegar.WP.UI.Models.Classes;
 using Newtonsoft.Json;
 using System;
