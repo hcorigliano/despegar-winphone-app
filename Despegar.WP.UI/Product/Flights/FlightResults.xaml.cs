@@ -101,9 +101,9 @@ namespace Despegar.WP.UI.Product.Flights
                 flightResultModel.Itineraries = Itineraries;
                 flightSearchModel.SearchStatus = SearchStates.FirstSearch;
                 this.DataContext = flightResultModel;
-
             }
 
+            flightSearchModel.TotalFlights = Itineraries.total;
             this.miniboxSearch.DataContext = flightSearchModel;
         }
 

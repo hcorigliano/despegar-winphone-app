@@ -33,7 +33,14 @@ namespace Despegar.Core.Business.Flight.SearchBox
         public bool HasNewSortingSearch { get; set; }
         public string SortingCriteriaSearch { get; set; }
         public SearchStates SearchStatus { get; set; }
-
+        public int TotalFlights { get; set; }
+        public int TotalPassangers 
+        {
+            get
+            {
+                return AdultsInFlights + ChildrenInFlights + InfantsInFlights;
+            }
+        }
 
         public FlightSearchModel()
         {
