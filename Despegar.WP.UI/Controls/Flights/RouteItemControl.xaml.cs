@@ -23,7 +23,6 @@ namespace Despegar.WP.UI
         public RouteItemControl()
         {
             this.InitializeComponent();
-            (this.Content as FrameworkElement).DataContext = this;
         }
     }
 }
