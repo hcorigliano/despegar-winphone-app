@@ -84,17 +84,17 @@ namespace Despegar.Core.Business.Flight.SearchBox
             switch (this.PageMode)
             {
                 case FlightSearchPages.RoundTrip:
-                    serviceUrl = String.Format(ServiceURL.GetServiceURL(ServiceKey.FlightItineraries), this.OriginFlight, this.DestinationFlight, this.DepartureDate.ToString("yyyy-MM-dd"), this.AdultsInFlights, this.DestinationDate.ToString("yyyy-MM-dd"), this.ChildrenInFlights, this.InfantsInFlights, this.Offset, this.LimitResult, "", "", "", "");
+                    serviceUrl = String.Format(ServiceURL.GetServiceURL(ServiceKey.FlightItineraries), this.OriginFlight, this.DestinationFlight, this.DepartureDate.ToString("yyyy-MM-dd"), this.AdultsInFlights, this.DestinationDate.ToString("yyyy-MM-dd"), this.ChildrenInFlights, this.InfantsInFlights, this.Offset, this.LimitResult, this.SortingValuesSearch.value, this.SortingValuesSearch.type, "" , String.Empty,this.FacetsCodes);
                     break;
                 case FlightSearchPages.OneWay:
-                    serviceUrl = String.Format(ServiceURL.GetServiceURL(ServiceKey.FlightItineraries), this.OriginFlight, this.DestinationFlight, this.DepartureDate.ToString("yyyy-MM-dd"), this.AdultsInFlights, "", this.ChildrenInFlights, this.InfantsInFlights, this.Offset, this.LimitResult, "", "", "", "");
+                    serviceUrl = String.Format(ServiceURL.GetServiceURL(ServiceKey.FlightItineraries), this.OriginFlight, this.DestinationFlight, this.DepartureDate.ToString("yyyy-MM-dd"), this.AdultsInFlights, "", this.ChildrenInFlights, this.InfantsInFlights, this.Offset, this.LimitResult, this.SortingValuesSearch.value, this.SortingValuesSearch.type, "", String.Empty,this.FacetsCodes);
                     break;
                 case FlightSearchPages.Multiple:
                     string vectorizedDates =   String.Join(",", MultipleSegments.Select(x => x.DepartureDate.Date.ToString("yyyy-MM-dd") ));
                     string vectorizedOrigins = String.Join(",", MultipleSegments.Select(x => x.AirportOrigin));
-                    string vectorizedDestinations = String.Join(",", MultipleSegments.Select(x => x.AirportDestination)); 
+                    string vectorizedDestinations = String.Join(",", MultipleSegments.Select(x => x.AirportDestination));
 
-                    serviceUrl = String.Format(ServiceURL.GetServiceURL(ServiceKey.FlightItineraries), vectorizedOrigins, vectorizedDestinations,vectorizedDates, this.AdultsInFlights, "", this.ChildrenInFlights, this.InfantsInFlights, this.Offset, this.LimitResult, "", "", "", "");
+                    serviceUrl = String.Format(ServiceURL.GetServiceURL(ServiceKey.FlightItineraries), vectorizedOrigins, vectorizedDestinations, vectorizedDates, this.AdultsInFlights, "", this.ChildrenInFlights, this.InfantsInFlights, this.Offset, this.LimitResult, this.SortingValuesSearch.value, this.SortingValuesSearch.type, "", String.Empty ,this.FacetsCodes);
                     break;
             }
 
@@ -187,13 +187,14 @@ namespace Despegar.Core.Business.Flight.SearchBox
 
                     if (response != null)
                     {
-                        facetListNames.AddRange(response.ToList());
+                        String parameters = String.Join(",", response.ToList());
+                        facetListNames.Add(facet.criteria + "=" + parameters);
                     }
                 }
 
                 if (facetListNames.Count == 0) return String.Empty;
 
-                return String.Join(",", facetListNames);
+                return String.Join("&", facetListNames);
             }
         }
 

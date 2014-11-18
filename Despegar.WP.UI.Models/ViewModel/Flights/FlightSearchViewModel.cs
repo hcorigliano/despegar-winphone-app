@@ -153,6 +153,7 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
         private void SearchTwoWay()
         {
             coreSearchModel.PageMode = FlightSearchPages.RoundTrip;
+            coreSearchModel.SearchStatus = Core.Business.SearchStates.FirstSearch;
             UpdatePassengers();
 
             DoSearch();            
@@ -161,6 +162,7 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
         private void SearchOneWay()
         { 
             coreSearchModel.PageMode = FlightSearchPages.OneWay;
+            coreSearchModel.SearchStatus = Core.Business.SearchStates.FirstSearch;
             UpdatePassengers();
             FromDate = DateTimeOffset.MinValue;
 
@@ -170,6 +172,7 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
         private void SearchMultiples()
         {
             coreSearchModel.PageMode = FlightSearchPages.Multiple;
+            coreSearchModel.SearchStatus = Core.Business.SearchStates.FirstSearch;
             UpdatePassengers();
             FromDate = DateTimeOffset.MaxValue; 
             ToDate = DateTimeOffset.MinValue;
