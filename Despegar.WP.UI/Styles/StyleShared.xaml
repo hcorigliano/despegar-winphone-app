@@ -62,6 +62,9 @@
     <GridLength x:Key="Block6p">177.6</GridLength>
     <GridLength x:Key="Block1p_And_Half">39.6</GridLength>
     <x:Double x:Key="dBlock1p_And_Half">39.6</x:Double>
+
+    <GridLength x:Key="IconSize">26.4</GridLength>
+    <x:Double x:Key="dIconSize">26.4</x:Double>
     <!-- Margins -->
     <Thickness x:Key="Left_Offset">9.6,0,0,0</Thickness>
     <Thickness x:Key="Bottom_Offset">0,0,0,9.6</Thickness>
@@ -69,12 +72,40 @@
     
     <GridLength x:Key="TwoColumnMiddleSpacing">19.2</GridLength>    
     <!-- ===================== Generic Brushes ======================= -->
+    <SolidColorBrush x:Key="Blue20Brush" Color="{StaticResource Blue20}" />
     <SolidColorBrush x:Key="Blue60Brush" Color="{StaticResource Blue60}" />
     <SolidColorBrush x:Key="WhiteBrush" Color="{StaticResource White}" />
     <SolidColorBrush x:Key="WhiteBrush60" Color="{StaticResource White}" Opacity="0.6" />
     <SolidColorBrush x:Key="Black60Brush" Color="{StaticResource Black}" Opacity="0.6" />
     <SolidColorBrush x:Key="BlackBrush" Color="{StaticResource Black }" />
-    <SolidColorBrush x:Key="Green40Brush" Color="{StaticResource Green40 }" />    
+    <SolidColorBrush x:Key="Green20Brush" Color="{StaticResource Green20 }" />
+    <SolidColorBrush x:Key="Green40Brush" Color="{StaticResource Green40 }" />
+    <!-- ===================== Generic Fonts ======================== -->
+    <Style x:Key="BaseText" TargetType="TextBlock" BasedOn="{StaticResource BaseTextBlockStyle}">
+        <Setter Property="FontFamily" Value="Segoe UI" />
+        <Setter Property="CharacterSpacing" Value="-20" />
+        <Setter Property="Foreground" Value="{StaticResource WhiteBrush}" />
+    </Style>
+    <Style x:Key="SegoeSemilight54" TargetType="TextBlock" BasedOn="{StaticResource BaseText}">
+        <Setter Property="FontFamily" Value="Segoe UI Semilight" />
+        <Setter Property="FontSize" Value="43.2" />
+        <Setter Property="FontWeight" Value="SemiLight" />
+    </Style>
+    <Style x:Key="SegoeSemibold17" TargetType="TextBlock" BasedOn="{StaticResource BaseText}">
+        <Setter Property="FontFamily" Value="Segoe UI Semibold" />
+        <Setter Property="FontSize" Value="13.6" />
+        <Setter Property="CharacterSpacing" Value="40" />
+        <Setter Property="FontWeight" Value="SemiBold" />
+    </Style>
+    <Style x:Key="SegoeLight28" TargetType="TextBlock" BasedOn="{StaticResource BaseText}">
+        <Setter Property="FontFamily" Value="Segoe UI Light" />
+        <Setter Property="FontSize" Value="22.4" />
+    </Style>
+    <Style x:Key="SegoeRegular15" TargetType="TextBlock" BasedOn="{StaticResource BaseText}">
+        <Setter Property="FontSize" Value="12" />
+        <Setter Property="FontWeight" Value="Normal" />
+        <Setter Property="Opacity" Value="0.6" />
+    </Style>
     <!-- ===================== Generic Styles ======================== -->
     <Style x:Key="BasePage" TargetType="Page">
         <Setter Property="Background">
@@ -105,36 +136,38 @@
     <Style x:Key="BottomGrid" TargetType="Grid">
         <Setter  Property="VerticalAlignment" Value="Bottom" />
     </Style>
-    <!-- Text & Fonts -->
-    <Style x:Key="PageHeader" TargetType="TextBlock" BasedOn="{StaticResource HeaderTextBlockStyle}">
-        <Setter Property="FontFamily" Value="Segoe UI" />
-        <Setter Property="FontSize" Value="42" />
-        <Setter Property="FontWeight" Value="Thin" />
+    <Style x:Key="IconImageBase" TargetType="Image">
+        <Setter Property="Width" Value="26.4" />
+        <Setter Property="Height" Value="26.4" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
         <Setter Property="VerticalAlignment" Value="Center" />
-        <!--<Setter Property="Margin" Value="0,0,0,0"/>-->
+        <Setter Property="Stretch" Value="None" />
     </Style>
-    <Style x:Key="PageHeaderSmall" TargetType="TextBlock" BasedOn="{StaticResource PageHeader}">
-        <Setter Property="FontFamily" Value="Segoe UI" />
-        <Setter Property="FontSize" Value="13.6" />
-        <Setter Property="FontWeight" Value="SemiBold" />
-        <Setter Property="CharacterSpacing" Value="40" />
+    <Style x:Key="IconBase" TargetType="Grid">
+        <Setter Property="Width"  Value="26.4" />
+        <Setter Property="Height" Value="26.4" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
+        <Setter Property="VerticalAlignment" Value="Top" />
     </Style>
-    <Style x:Key="BaseText" TargetType="TextBlock" BasedOn="{StaticResource BaseTextBlockStyle}">
-        <Setter Property="CharacterSpacing" Value="-20" />
-        <Setter Property="FontFamily" Value="Segoe UI" />
-        <Setter Property="Foreground" Value="{StaticResource WhiteBrush}" />
-        <Setter Property="FontSize" Value="36" />
-        <Setter Property="FontWeight" Value="Thin" />
+    <Style x:Key="IconGreen" TargetType="Grid" BasedOn="{StaticResource IconBase}">
+        <Setter Property="Background"  Value="{StaticResource Green20Brush}" />
     </Style>
-    <Style x:Key="BaseTextLabel" TargetType="TextBlock" BasedOn="{StaticResource BaseText}">
-        <Setter Property="FontSize" Value="16" />
-        <Setter Property="FontWeight" Value="Thin" />
+    <Style x:Key="IconBlue" TargetType="Grid" BasedOn="{StaticResource IconBase}">
+        <Setter Property="Background"  Value="{StaticResource Blue20Brush}" />
+    </Style>
+    <!-- Base Fonts -->
+    <Style x:Key="PageHeader" TargetType="TextBlock" BasedOn="{StaticResource SegoeSemilight54}">        
+    </Style>
+    <Style x:Key="PageHeaderSmall" TargetType="TextBlock" BasedOn="{StaticResource SegoeSemibold17}">                
+    </Style>
+    <Style x:Key="BaseTextLabel" TargetType="TextBlock" BasedOn="{StaticResource SegoeRegular15}">
         <Setter Property="Margin" Value="0,0,0,0" />
     </Style>
     <!--  ================= Input/Controls Styles  ================== -->
     <!-- DatePicker -->
     <Style TargetType="DatePicker" x:Key="DatePickerBase">
-        <Setter Property="BorderBrush" Value="{StaticResource Blue60Brush}" />
+        <Setter Property="Margin" Value="0,-7,0,0" />
+        <Setter Property="BorderBrush" Value="{StaticResource Blue20Brush}" />
         <Setter Property="Template">            
             <Setter.Value>
                 <ControlTemplate TargetType="DatePicker">
@@ -246,16 +279,16 @@
     </Style>
     <Style x:Key="InputBase" TargetType="TextBox" BasedOn="{StaticResource TextBoxBase}">
         <Setter Property="Foreground" Value="{StaticResource WhiteBrush}" />
-        <Setter Property="BorderBrush" Value="{StaticResource Blue60Brush}" />
+        <Setter Property="BorderBrush" Value="{StaticResource Blue20Brush}" />
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="IsSpellCheckEnabled" Value="false"></Setter>
         <Setter Property="IsTextPredictionEnabled" Value="false"></Setter>
-        <Setter Property="Margin" Value="0,6,0,0" />
+        <Setter Property="Margin" Value="0,-7,0,0" />
     </Style>
     <!-- AutoSuggestBox -->
     <Style x:Key="AutosuggestBoxBase" TargetType="AutoSuggestBox">
         <Setter Property="Height" Value="39.2" />
-        <Setter Property="Margin" Value="0,5.4,0,0" />
+        <Setter Property="Margin" Value="0,2,0,0" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="controls:AutoSuggestBox">
@@ -309,7 +342,7 @@
     </Style>
     <!-- Buttons -->
     <Style x:Key="ButtonBase" TargetType="Button">
-        <Setter Property="BorderBrush" Value="{StaticResource Blue60Brush}" />
+        <Setter Property="BorderBrush" Value="{StaticResource Blue20Brush}" />
         <Setter Property="HorizontalAlignment" Value="Stretch" />
     </Style>
     <Style x:Key="ButtonBottom" TargetType="Button" BasedOn="{StaticResource ButtonBase}">
@@ -318,8 +351,9 @@
     </Style>
     <!-- ComboBox -->    
     <Style x:Key="ComboBoxBase" TargetType="ComboBox">
+        <Setter Property="Margin" Value="0,-7,0,0" />
         <Setter Property="Foreground" Value="{StaticResource WhiteBrush}" />
-        <Setter Property="BorderBrush" Value="{StaticResource Blue60Brush}" />
+        <Setter Property="BorderBrush" Value="{StaticResource Blue20Brush}" />
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="ItemContainerStyle">
             <Setter.Value>
@@ -649,30 +683,34 @@
 
     <!--  ================= Page Specific Styles  ================== -->
     <!-- Home Page -->
-    <Style x:Key="BaseHomeButton" TargetType="Image" BasedOn="{StaticResource ImageBase}">               
-        <Setter Property="Width" Value="{StaticResource dBlock3}" />
-        <Setter Property="Height" Value="{StaticResource dBlock3}" />        
+    <Style x:Key="BaseHomeButtonBackground" TargetType="Grid" BasedOn="{StaticResource IconBlue}">
+        <Setter Property="Width"  Value="{StaticResource dBlock3}" />
+        <Setter Property="Height" Value="{StaticResource dBlock3}" />
     </Style>
-    <Style x:Key="HomeHotelsButton" TargetType="Image" BasedOn="{StaticResource BaseHomeButton}">
-        <Setter Property="Source" Value="/Assets/HomeButton_Hotels.png" />
+    <Style x:Key="BaseHomeButtonImage" TargetType="Image" BasedOn="{StaticResource IconImageBase}">
+        <Setter Property="Width"  Value="45" />
+        <Setter Property="Height" Value="45" />        
     </Style>
-    <Style x:Key="HomeFlightsButton" TargetType="Image" BasedOn="{StaticResource BaseHomeButton}">
-        <Setter Property="Source" Value="/Assets/HomeButton_Flights.png" />           
+    <Style x:Key="HomeHotelsButton" TargetType="Image" BasedOn="{StaticResource BaseHomeButtonImage}">
+        <Setter Property="Source" Value="/Assets/Icon/App/hotel-large-white.png" />
     </Style>
-    <Style x:Key="HomeFlightStatusButton" TargetType="Image" BasedOn="{StaticResource BaseHomeButton}">
-        <Setter Property="Source" Value="/Assets/HomeButton_FlightStatus.png" />
+    <Style x:Key="HomeFlightsButton" TargetType="Image" BasedOn="{StaticResource BaseHomeButtonImage}">
+        <Setter Property="Source" Value="/Assets/Icon/App/flight-large-white.png" />           
     </Style>
-    <Style x:Key="HomeMyDespegarButton" TargetType="Image" BasedOn="{StaticResource BaseHomeButton}">
-        <Setter Property="Source" Value="/Assets/HomeButton_MyDespegar.png" />
+    <Style x:Key="HomeFlightStatusButton" TargetType="Image" BasedOn="{StaticResource BaseHomeButtonImage}">
+        <Setter Property="Source" Value="/Assets/Icon/App/flightstatus-large-white.png" />
     </Style>
-    <Style x:Key="HomeButtonTitle" TargetType="TextBlock" BasedOn="{StaticResource BaseText}">
-        <Setter Property="VerticalAlignment" Value="Top" />
-        <Setter Property="FontSize" Value="30" />        
-        <Setter Property="Margin" Value="0,-13,0,0" />
+    <Style x:Key="HomeMyDespegarButton" TargetType="Image" BasedOn="{StaticResource BaseHomeButtonImage}">
+        <Setter Property="Source" Value="/Assets/Icon/App/midespegar-large-white.png" />
+    </Style>
+    <Style x:Key="HomeButtonTitle" TargetType="TextBlock" BasedOn="{StaticResource BaseText}">        
+        <Setter Property="FontSize" Value="33.6" />        
+        <Setter Property="FontFamily" Value="Segoe UI Light" />
+        <Setter Property="Margin" Value="0,-7,0,0" />
     </Style>
     <Style x:Key="HomeButtonSub" TargetType="TextBlock" BasedOn="{StaticResource BaseText}">
         <Setter Property="FontSize" Value="16" />
-        <Setter Property="Margin" Value="0,-2,0,0" />
+        <Setter Property="FontFamily" Value="Segoe UI Light" />        
     </Style>
     <Style x:Key="HomeButtonItemContainer" TargetType="ListViewItem">
         <Setter Property="Padding" Value="{StaticResource Bottom_Offset}" />
@@ -681,24 +719,19 @@
         <Setter Property="Margin" Value="{StaticResource Left_Offset}" />
     </Style>   
     <!-- Flights SearchBox -->
-    <Style x:Key="FlightAirportIcon" TargetType="Image" BasedOn="{StaticResource ImageBase}">
-        <Setter Property="Width" Value="27" />
-        <Setter Property="Height" Value="27" />
-        <Setter Property="Source" Value="/Assets/Icon/App/xxx1.png" />
+    <Style x:Key="FlightAirportIcon" TargetType="Image" BasedOn="{StaticResource IconImageBase}">       
+        <Setter Property="Source" Value="/Assets/Icon/App/flight-right-small-white.png" />        
     </Style>
-    <Style x:Key="CalendarIcon" TargetType="Image" BasedOn="{StaticResource ImageBase}">
-        <Setter Property="Width" Value="27" />
-        <Setter Property="Height" Value="27" />
+    <Style x:Key="CalendarIcon" TargetType="Image" BasedOn="{StaticResource IconImageBase}">
         <Setter Property="Source" Value="/Assets/Icon/App/calendar-small-white.png" />
     </Style>
     <!-- Country Selection -->
     <Style x:Key="CountrySelectionButton" TargetType="Image">
-        <Setter Property="Width"  Value="{StaticResource dBlock2}" />
-        <Setter Property="Height" Value="{StaticResource dBlock2}" />
+        <Setter Property="Width"  Value="40.4" />
+        <Setter Property="Height" Value="36" />
     </Style>
-    <Style x:Key="CountryText" TargetType="TextBlock" BasedOn="{StaticResource BaseText}">
+    <Style x:Key="CountryText" TargetType="TextBlock" BasedOn="{StaticResource SegoeLight28}">
         <Setter Property="VerticalAlignment" Value="Center" />
-        <Setter Property="FontSize" Value="24" />
         <Setter Property="Margin" Value="{StaticResource Left_Offset}" />
     </Style>
     <Style x:Key="CountryButtonItemContainer" TargetType="ListViewItem">
@@ -709,8 +742,11 @@
         <Setter Property="Width" Value="{StaticResource dBlock2}" />
         <Setter Property="Height" Value="{StaticResource dBlock2}" />
     </Style>
-    <Style x:Key="FlightSegmentTitle" TargetType="TextBlock" BasedOn="{StaticResource BaseText}">
-        <Setter Property="FontSize" Value="18" />
+    <Style x:Key="FlightSegmentTitle" TargetType="TextBlock" BasedOn="{StaticResource SegoeLight28}">
+        <Setter Property="Foreground" Value="{StaticResource Green20Brush}" />
+    </Style>
+    <Style x:Key="FlightSegmentAirports" TargetType="TextBlock" BasedOn="{StaticResource SegoeLight28}">
+        <Setter Property="Margin" Value="5,0,0,0" />
     </Style>
     <Style x:Key="FlightSegmentSmallText" TargetType="TextBlock" BasedOn="{StaticResource BaseText}">
         <Setter Property="FontSize" Value="12" />
@@ -725,7 +761,7 @@
         <Setter Property="Width" Value="13" />
         <Setter Property="Height" Value="13" />
         <Setter Property="Margin" Value="0,0,16.6,0" />
-        <Setter Property="Source" Value="/Assets/Icon/App/clock-xsmall-white.pngt" />
+        <Setter Property="Source" Value="/Assets/Icon/App/clock-xsmall-white.png" />
         <Setter Property="VerticalAlignment" Value="Bottom" />
         <Setter Property="Stretch" Value="Fill" />
     </Style>
