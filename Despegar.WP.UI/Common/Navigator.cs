@@ -77,6 +77,12 @@ namespace Despegar.WP.UI.Common
             ((Frame)Window.Current.Content).BackStack.Clear();
         }
 
+        public void RemoveBackEntry()
+        {
+            var backStack = ((Frame)Window.Current.Content).BackStack;
+            backStack.RemoveAt(backStack.Count-1);
+        }
+
         public void GoBack()
         {
             Frame rootFrame = Window.Current.Content as Frame;

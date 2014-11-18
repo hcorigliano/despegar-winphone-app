@@ -32,7 +32,7 @@ namespace Despegar.WP.UI.Common
         #endregion
 
         // Dependecy Object Extension
-        public static IEnumerable<T> FindVisualChildren<T>(this DependencyObject depObj) where T : DependencyObject
+        public static IEnumerable<T> FindVisualChildren<T>(this Page page, DependencyObject depObj) where T : DependencyObject
         {
             if (depObj != null)
             {
@@ -44,7 +44,7 @@ namespace Despegar.WP.UI.Common
                         yield return (T)child;
                     }
 
-                    foreach (T childOfChild in FindVisualChildren<T>(child))
+                    foreach (T childOfChild in FindVisualChildren<T>(page, child))
                     {
                         yield return childOfChild;
                     }

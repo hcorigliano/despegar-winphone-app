@@ -33,9 +33,10 @@ namespace Despegar.WP.UI.Controls.Flights
             }
         }
 
-        public DateControlSimple() : base()
+        public DateControlSimple() 
         {
             this.InitializeComponent();
+            (this.Content as FrameworkElement).DataContext = this;
         }
 
     }

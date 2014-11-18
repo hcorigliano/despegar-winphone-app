@@ -58,9 +58,10 @@ namespace Despegar.WP.UI.Controls.Flights
         }
 
 
-        public QuantityPassagersControl() : base()
+        public QuantityPassagersControl()
         {
             this.InitializeComponent();
+            //(this.Content as FrameworkElement).DataContext = this; // DataContext is set from Outside            
         }
     }
 }

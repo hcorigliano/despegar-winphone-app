@@ -22,11 +22,10 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
 {
     public class FlightSearchViewModel : ViewModelBase
     {
-        
-        private INavigator Navigator { get; set; }
+        public INavigator Navigator { get; set; }
+        public PassengersViewModel PassengersViewModel { get; set; }
         private IFlightService flightService { get; set; }
         private FlightSearchModel coreSearchModel;
-        public PassengersViewModel PassengersViewModel { get; set; }
 
 
         #region ** Exposed Properties **
@@ -55,6 +54,29 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
                 coreSearchModel.DestinationFlight = value;
                 OnPropertyChanged();
             } 
+        }
+
+        public string OriginText
+        {
+            get
+            {
+                return coreSearchModel.OriginFlightText;
+            }
+            set
+            {
+                coreSearchModel.OriginFlightText = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string DestinationText
+        {
+            get { return coreSearchModel.DestinationFlightText; }
+            set
+            {
+                coreSearchModel.DestinationFlightText = value;
+                OnPropertyChanged();
+            }
         }
 
         public DateTimeOffset FromDate
@@ -97,29 +119,13 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
             }
         }
 
-        public ICommand SearchTwoWayCommand
+        public ICommand SearchCommand
         {
             get
             {
-                return new RelayCommand(() => SearchTwoWay());
+                return new RelayCommand(() => Search());
             }
-        }
-
-        public ICommand SearchOneWayCommand
-        {
-            get
-            {
-                return new RelayCommand(() => SearchOneWay());
-            }
-        }
-
-        public ICommand SearchMultiplesCommand
-        {
-            get
-            {
-                return new RelayCommand(() => SearchMultiples());
-            }
-        }
+        }       
 
         public ICommand EditMultipleSegment
         {
@@ -127,8 +133,8 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
             {
                 // TODO navigate to 
                 return new RelayCommand<ItemClickEventArgs>((x) => 
-                  {   int segmentIndex = (x.ClickedItem as FlightMultipleSegment).Index;
-                  Navigator.GoTo(ViewModelPages.FlightsMultiplEdit, new EditMultiplesNavigationData (){ SelectedSegmentIndex = segmentIndex, SearchModel = coreSearchModel });
+                  { int segmentIndex = (x.ClickedItem as FlightMultipleSegment).Index;
+                    Navigator.GoTo(ViewModelPages.FlightsMultiplEdit, new EditMultiplesNavigationData (){ SelectedSegmentIndex = segmentIndex, SearchModel = coreSearchModel, PassengerModel = PassengersViewModel });
                 });
             }
         }
@@ -141,44 +147,12 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
             this.flightService = flightService;
             this.coreSearchModel = new FlightSearchModel();
             this.PassengersViewModel = new PassengersViewModel();
-        }
-
-        public async Task<CitiesAutocomplete> GetCitiesAutocomplete(string cityString) 
-        {
-            return await flightService.GetCitiesAutocomplete(cityString);
-        }
+        }        
+      
+        private async void Search()
+        {           
 
        
-
-        private void SearchTwoWay()
-        {
-            coreSearchModel.PageMode = FlightSearchPages.RoundTrip;
-            UpdatePassengers();
-
-            DoSearch();            
-        }
-
-        private void SearchOneWay()
-        { 
-            coreSearchModel.PageMode = FlightSearchPages.OneWay;
-            UpdatePassengers();
-            FromDate = DateTimeOffset.MinValue;
-
-            DoSearch();
-        }
-
-        private void SearchMultiples()
-        {
-            coreSearchModel.PageMode = FlightSearchPages.Multiple;
-            UpdatePassengers();
-            FromDate = DateTimeOffset.MaxValue; 
-            ToDate = DateTimeOffset.MinValue;
-
-            DoSearch();
-        }
-
-        private async void DoSearch()
-        {
             if (coreSearchModel.IsValid)
             {
                 FlightsItineraries intineraries = await flightService.GetItineraries(coreSearchModel);
@@ -201,6 +175,29 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
             coreSearchModel.AdultsInFlights = PassengersViewModel.Adults;
             coreSearchModel.ChildrenInFlights = PassengersViewModel.Children;
             coreSearchModel.InfantsInFlights = PassengersViewModel.Infants;
+        }
+
+        /// <summary>
+        /// Used to Load a search model in the ViewModel
+        /// </summary>
+        /// <param name="model"></param>
+        /// <param name="passengerModel"></param>
+        public void InitializeWith(FlightSearchModel model, PassengersViewModel passengerModel)
+        {
+            coreSearchModel = model;
+            PassengersViewModel = passengerModel;
+
+            // Notify Changes
+            OnPropertyChanged("MultipleSegments");
+            OnPropertyChanged("FromDate");
+            OnPropertyChanged("To"); 
+            OnPropertyChanged("Origin");
+            OnPropertyChanged("Destination");
+        }
+
+        public void SetSearchMode(FlightSearchPages mode)
+        {
+            coreSearchModel.PageMode = mode;
         }
     }
 }
