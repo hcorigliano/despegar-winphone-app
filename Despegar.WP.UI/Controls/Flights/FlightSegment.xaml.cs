@@ -9,6 +9,9 @@ namespace Despegar.WP.UI.Controls.Flights
 {
     public sealed partial class FlightSegment : UserControl
     {
+        public static readonly DependencyProperty ToDateProperty = DependencyProperty.Register("IsReturn", typeof(bool), typeof(FlightSegment), new PropertyMetadata(null));
+
+        public bool IsReturn {get; set;}
 
         #region ** BoilerPlate Code **
         public event PropertyChangedEventHandler PropertyChanged;

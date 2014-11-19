@@ -19,6 +19,9 @@ namespace Despegar.WP.UI.Common.Converter
         /// <returns>The formatted value.</returns>
         public object Convert(object value, Type targetType, object parameter, string language)
         {
+            if (value == null)
+                return null;
+
             return string.Format(parameter as string, value);
         }
 

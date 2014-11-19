@@ -30,30 +30,36 @@
 
         <!-- Content -->
         <Pivot Grid.Row="2" Style="{StaticResource PivotBaseMain}" x:Name="MainPivot">
+            
             <PivotItem x:Uid="Page_Flight_Detail_Go" Header="ida" Style="{StaticResource PivotItemBase}" DataContext="{Binding OutModel}">
                 <ScrollViewer>
-                    <Grid>
+                    <Grid>                                                
                         <Grid.RowDefinitions>
                             <RowDefinition Height="{StaticResource Block2p}"/>
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
+
+                        <!-- DEV -->
+                        <!--<dev:UserControlDesignGrid />-->
                         
                         <!-- Route Header -->
                         <Grid Grid.Row="0">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="{StaticResource Block2p}"/>
-                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="{StaticResource Block2p}" />
+                                <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
-                            
-                            <Image Grid.Column="0" Source="/Assets/clock.jpg" Style="{StaticResource FlightDetailAirlineImage}" />
+
+                            <Grid Grid.Column="0" Style="{StaticResource IconGreenBig}">
+                                <Image Style="{StaticResource FlightDetailAirlineImage}" />
+                            </Grid>
 
                             <Grid Grid.Column="1">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="{StaticResource Block1p}" />
                                     <RowDefinition Height="{StaticResource Square}" />
                                 </Grid.RowDefinitions>
-                                
-                                <TextBlock Grid.Row="0" Text="{Binding Path=from.city}" Style="{StaticResource FlightDetailAccent}" />
+
+                                <TextBlock Grid.Row="0" Text="{Binding Path=from.city}" Style="{StaticResource FlightDetailTitle}" />
                                 <TextBlock Grid.Row="1" Text="{Binding Path=to.city}" Style="{StaticResource FlightSegmentSmallText}"  />
                             </Grid>
                         </Grid>
@@ -62,7 +68,7 @@
                         <ItemsControl Grid.Row="1"  x:Name="SegmentControlOutbound" ItemsSource="{Binding segments}">
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
-                                    <src:FlightSegment />
+                                    <src:FlightSegment IsReturn="false" />
                                 </DataTemplate>
                             </ItemsControl.ItemTemplate>
                         </ItemsControl>
@@ -85,16 +91,18 @@
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
 
-                        <Image Grid.Column="0" Source="/Assets/clock.jpg" Style="{StaticResource FlightDetailAirlineImage}" />
-
-                        <Grid Grid.Column="1">
-                            <Grid.RowDefinitions>
+                            <Grid Grid.Column="0" Style="{StaticResource IconBlueBig}">
+                                <Image Style="{StaticResource FlightDetailAirlineReturnImage}" />
+                            </Grid>
+                            
+                            <Grid Grid.Column="1">
+                             <Grid.RowDefinitions>
                                 <RowDefinition Height="{StaticResource Block1p}" />
                                 <RowDefinition Height="{StaticResource Square}" />
-                            </Grid.RowDefinitions>
+                             </Grid.RowDefinitions>
 
-                            <TextBlock Grid.Row="0" Text="{Binding from.city}" Style="{StaticResource FlightDetailAccent}" />
-                            <TextBlock Grid.Row="1" Text="{Binding to.city}" Style="{StaticResource FlightSegmentSmallText}"  />
+                                <TextBlock Grid.Row="0" Text="{Binding from.city}" Style="{StaticResource FlightReturnSegmentTitle}" />
+                                <TextBlock Grid.Row="1" Text="{Binding to.city}" Style="{StaticResource FlightSegmentSmallText}"  />
                         </Grid>
                     </Grid>
                         
@@ -102,7 +110,7 @@
                         <ItemsControl Grid.Row="1" x:Name="SegmentControlInbound" ItemsSource="{Binding segments}">
 						<ItemsControl.ItemTemplate>
 							<DataTemplate>
-                                <src:FlightSegment />
+                                  <src:FlightSegment IsReturn="true" />
 							</DataTemplate>
 						</ItemsControl.ItemTemplate>
 					</ItemsControl>
