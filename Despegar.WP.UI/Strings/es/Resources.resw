@@ -504,4 +504,7 @@
   <data name="Card_Data_Expiration.Text" xml:space="preserve">
     <value>Vencimiento</value>
   </data>
+  <data name="Page_Flight_Search_SelectSegment" xml:space="preserve">
+    <value>Seleccion su ruta</value>
+  </data>
 </root>

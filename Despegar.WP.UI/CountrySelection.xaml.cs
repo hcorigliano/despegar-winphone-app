@@ -35,6 +35,7 @@ namespace Despegar.WP.UI
             this.InitializeComponent();
             ViewModel = new CountrySelectionViewModel(Navigator.Instance, GlobalConfiguration.CoreContext.GetConfigurationService());
             DataContext = ViewModel;
+            this.CheckDeveloperTools();
         }
 
         /// <summary>
