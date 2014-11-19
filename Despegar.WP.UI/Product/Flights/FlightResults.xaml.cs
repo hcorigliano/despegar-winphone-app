@@ -37,7 +37,7 @@ namespace Despegar.WP.UI.Product.Flights
 
             flightResultModel = new FlightResultsModel(Navigator.Instance, GlobalConfiguration.CoreContext.GetFlightService());
             this.DataContext = flightResultModel;
-            this.CheckDeveloperTools();
+            //this.CheckDeveloperTools();
 
             //this.DataContext = flightResultModel;
             this.miniboxSearch.DataContext = flightSearchModel;
