@@ -775,6 +775,17 @@
         <Setter Property="FontWeight" Value="Normal" />
         <Setter Property="Foreground" Value="{StaticResource Green40Brush}" />
     </Style>
+
+    <!-- Flights Result -->
+    <Style x:Key="CalendarIconResult" TargetType="Image" BasedOn="{StaticResource IconImageBase}">
+        <Setter Property="Source" Value="/Assets/Icon/App/calendar-small-white.png" />
+    </Style>
+    <Style x:Key="FamilyIconResult" TargetType="Image" BasedOn="{StaticResource IconImageBase}">
+        <Setter Property="Source" Value="/Assets/Icon/App/family-right-small-white.png" />
+    </Style>
+    <Style x:Key="FlightIconResult" TargetType="Image" BasedOn="{StaticResource IconImageBase}">
+        <Setter Property="Source" Value="/Assets/Icon/App/flight-right-small-white.png" />
+    </Style>
     <!-- ================== ThemeResources Overrides ================= -->
     <ResourceDictionary.ThemeDictionaries>
         <ResourceDictionary x:Key="Default">

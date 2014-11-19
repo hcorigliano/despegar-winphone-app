@@ -48,7 +48,7 @@
 			</Core:DataTriggerBehavior>
 		</Interactivity:Interaction.Behaviors>
 
-		<src:GoReturnPanelMiniBoxSearch x:Name="SearchedFlight" Grid.Column="0" DataContext="{Binding}" Grid.RowSpan="2" />
+		<src:GoReturnPanelMiniBoxSearch x:Name="SearchedFlight" Grid.Column="0" DataContext="{Binding}"  />
 		<src:DateDisplayMiniBoxSearch x:Name="SearchedGoDate" Grid.Column="1" DataContext="{Binding DepartureDate}"/>
 		<src:DateDisplayMiniBoxSearch x:Name="SearchedReturnDate" Grid.Column="1" Grid.Row="2" DataContext="{Binding DestinationDate}"/>
 		<src:PaxCounterMiniBoxSearch x:Name="SearchedPax" Grid.Column="0" Grid.Row="2" DataContext="{Binding}" />
