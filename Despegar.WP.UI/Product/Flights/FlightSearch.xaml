@@ -12,6 +12,7 @@
     xmlns:dev="using:Despegar.WP.UI.Developer.Controls"
     xmlns:Interactivity="using:Microsoft.Xaml.Interactivity" 
     xmlns:Core="using:Microsoft.Xaml.Interactions.Core"
+    xmlns:conv="using:Despegar.WP.UI.Common.Converter"
     mc:Ignorable="d"
     Style="{StaticResource BasePage}">
 
@@ -22,7 +23,10 @@
             <AppBarButton Icon="Remove" x:Uid="Page_Flights_Search_RemoveSegment" Label="Quitar" Command="{Binding RemoveSegmentMultipleCommand}" />
         </CommandBar>
     </Page.BottomAppBar>
-
+    <Page.Resources>
+        <conv:DateToLongString x:Key="dateConverter" />
+        <conv:BooleanToVisibilityConverter x:Key="visibilityConverter" />
+    </Page.Resources>
     <Grid Style="{StaticResource MainContainerGrid}">
         <Grid.ChildrenTransitions>
             <TransitionCollection>
@@ -127,16 +131,15 @@
                                            <Run Text="{Binding Index}" />
                                         </TextBlock>
 
-
-
-                                        <Grid Grid.Row="1" Grid.Column="0">
+                                         <!--Airports-->
+                                        <Grid Grid.Row="1" Grid.Column="0" Visibility="{Binding IsNew, Converter={StaticResource visibilityConverter}, ConverterParameter=Inverted}">
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="{StaticResource Block1p}" />
                                                 <ColumnDefinition Width="*" />
                                             </Grid.ColumnDefinitions>                                                                                 
 
                                             <Grid Grid.Column="0" Style="{StaticResource IconGreen}">
-                                                <Image Stretch="None" Style="{StaticResource FlightAirportIcon}"/>
+                                                <Image Style="{StaticResource FlightAirportIcon}"/>
                                             </Grid>
 
                                             <TextBlock Grid.Column="1" Style="{StaticResource FlightSegmentAirports}">
@@ -145,20 +148,22 @@
                                                  <Run Text="{Binding AirportDestination}" />
                                             </TextBlock>
                                         </Grid>
-
-                                        <Grid Grid.Row="1" Grid.Column="2">
+                                         <!--Date-->
+                                        <Grid Grid.Row="1" Grid.Column="2" Visibility="{Binding IsNew, Converter={StaticResource visibilityConverter}, ConverterParameter=Inverted}">
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="{StaticResource Block1p}" />
                                                 <ColumnDefinition Width="*" />
                                             </Grid.ColumnDefinitions>
 
                                             <Grid Grid.Column="0" Style="{StaticResource IconGreen}">
-                                                <Image Stretch="None" Style="{StaticResource CalendarIcon}"/>
+                                                <Image Style="{StaticResource CalendarIcon}"/>
                                             </Grid>
 
-                                            <TextBlock Grid.Column="1"  Text="{Binding DepartureDate}" Style="{StaticResource FlightSegmentAirports}" />
+                                            <TextBlock Grid.Column="1"  Text="{Binding DepartureDate, Converter={StaticResource dateConverter}}" Style="{StaticResource FlightSegmentAirports}" />
                                         </Grid>
-                    
+
+                                        <TextBlock Visibility="{Binding IsNew, Converter={StaticResource visibilityConverter}, ConverterParameter=Normal}" Grid.Row="1" Grid.ColumnSpan="3" x:Uid="Page_Flight_Search_SelectSegment" Text="Seleccione su ruta"  Style="{StaticResource BaseTextLabel}"/>
+
                                     </Grid>
                                 </DataTemplate>
                             </ListView.ItemTemplate>
@@ -185,14 +190,14 @@
                                            <Run Text=" 1" />
                                     </TextBlock>
 
-                                    <Grid Grid.Row="1" Grid.Column="0">
+                                    <Grid Grid.Row="1" Grid.Column="0" Visibility="Collapsed">
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="{StaticResource Block1p}" />
                                             <ColumnDefinition Width="*" />
                                         </Grid.ColumnDefinitions>
                                         
                                         <Grid Grid.Column="0" Style="{StaticResource IconGreen}">
-                                            <Image Stretch="None" Style="{StaticResource FlightAirportIcon}"/>
+                                            <Image  Style="{StaticResource FlightAirportIcon}"/>
                                         </Grid>
 
                                         <TextBlock Grid.Column="1" Style="{StaticResource FlightSegmentAirports}">
@@ -202,25 +207,24 @@
                                         </TextBlock>
                                     </Grid>
 
-                                    <Grid Grid.Row="1" Grid.Column="2">
+                                    <Grid Grid.Row="1" Grid.Column="2" Visibility="Collapsed">
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="{StaticResource Block1p}" />
                                             <ColumnDefinition Width="*" />
                                         </Grid.ColumnDefinitions>
 
                                         <Grid Grid.Column="0" Style="{StaticResource IconGreen}">
-                                            <Image Stretch="None" Style="{StaticResource CalendarIcon}"/>
+                                            <Image  Style="{StaticResource CalendarIcon}"/>
                                         </Grid>
 
                                         <TextBlock Grid.Column="1" Text="16 NOV 2014"  Style="{StaticResource FlightSegmentAirports}"/>
                                     </Grid>
 
+                                    
                                 </Grid>
                             </ListViewItem>-->
                             
                         </ListView>
-
-                        
 
                         <src:QuantityPassagersControl  Grid.Row="1" DataContext="{Binding PassengersViewModel}"   Adults="{Binding Adults, Mode=TwoWay}" Children="{Binding Children, Mode=TwoWay}"  Infants="{Binding Infants, Mode=TwoWay}"   />
 

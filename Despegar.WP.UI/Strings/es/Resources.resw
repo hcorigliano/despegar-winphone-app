@@ -387,4 +387,7 @@
   <data name="Flights_Search_Multiple_Cancel.Content" xml:space="preserve">
     <value>Cancelar</value>
   </data>
+  <data name="Page_Flight_Search_SelectSegment" xml:space="preserve">
+    <value>Seleccion su ruta</value>
+  </data>
 </root>

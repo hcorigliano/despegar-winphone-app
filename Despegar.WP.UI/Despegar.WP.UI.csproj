@@ -112,6 +112,8 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Common\Converter\BooleanToVisibilityConverter.cs" />
+    <Compile Include="Common\Converter\DateToLongString.cs" />
     <Compile Include="Common\Converter\MiniboxVisibilityConverter.cs" />
     <Compile Include="Common\Navigator.cs" />
     <Compile Include="Common\OldPagesManager.cs" />
