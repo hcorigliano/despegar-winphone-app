@@ -15,7 +15,7 @@
         <StackPanel Orientation="Vertical">
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="{Binding OriginFlight}"/>
-                <Image Width="30"/>
+                <TextBlock Text="-"/>
                 <TextBlock Text="{Binding DestinationFlight}"/>
             </StackPanel>
 			<Grid>
@@ -26,8 +26,6 @@
                 <TextBlock Text="{Binding TotalFlights}" Grid.ColumnSpan="2" Margin="20,0,45,0"/>
                 <TextBlock x:Uid="Page_FlightResult_Flight" Grid.Column="1"/>
 			</Grid>
-            <Image Width="20" Height="20" Source="ms-appx:///Product/Legacy/Assets/Image/Icon/new.png"/>
-            
         </StackPanel>
     </Grid>
 </UserControl>
