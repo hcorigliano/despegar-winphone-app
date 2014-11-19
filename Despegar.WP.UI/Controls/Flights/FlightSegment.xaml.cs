@@ -23,7 +23,7 @@ namespace Despegar.WP.UI.Controls.Flights
         public FlightSegment() 
         {
             this.InitializeComponent();
-            (this.Content as FrameworkElement).DataContext = this;
+            //(this.Content as FrameworkElement).DataContext = this;
         }
     }
 }

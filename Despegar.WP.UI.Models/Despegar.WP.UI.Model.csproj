@@ -63,7 +63,6 @@
   <ItemGroup>
     <Compile Include="AppModelBase.cs" />
     <Compile Include="ViewModel\Classes\Flights\FlightSearchNavigationData.cs" />
-    <Compile Include="BindableBase.cs" />
     <Compile Include="ViewModel\Classes\Flights\BindableItem.cs" />
     <Compile Include="Classes\Flights\Checkout\PaymentsFormated.cs" />
     <Compile Include="Classes\Flights\Checkout\PriceFormated.cs" />
@@ -93,9 +92,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Enums\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.6.0.6\lib\portable-net40+sl5+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>

@@ -29,7 +29,7 @@
         <TextBlock Grid.Row="1" x:Uid="Page_Detail_TitleDetail" Style="{StaticResource PageHeaderSmall}" Text="DETALLE" />
 
         <!-- Content -->
-        <Pivot Grid.Row="2" Style="{StaticResource PivotBaseMain}">
+        <Pivot Grid.Row="2" Style="{StaticResource PivotBaseMain}" x:Name="MainPivot">
             <PivotItem x:Uid="Page_Flight_Detail_Go" Header="ida" Style="{StaticResource PivotItemBase}" DataContext="{Binding OutModel}">
                 <ScrollViewer>
                     <Grid>
@@ -121,8 +121,8 @@
                 <ColumnDefinition Width="1*" />
             </Grid.ColumnDefinitions>
 
-            <Button Grid.Column="0" x:Uid="Page_Flight_Detail_Buy.Text" Content="Comprar" Style="{StaticResource ButtonBase}" Click="Buy_Click"/>
-            <Button Grid.Column="2" x:Uid="Page_Flight_Detail_Cancel.Text" Content="Cancelar" Style="{StaticResource ButtonBase}" Click="Cancel_Click"/>
+            <Button Grid.Column="0" x:Uid="Page_Flight_Detail_Buy.Text" Content="Comprar" Style="{StaticResource ButtonBase}" Command="{Binding BuyCommand}"/>
+            <Button Grid.Column="2" x:Uid="Page_Flight_Detail_Cancel.Text" Content="Cancelar" Style="{StaticResource ButtonBase}" Command="{Binding CancelCommand}"/>
         </Grid>
 	</Grid>
 </Page>

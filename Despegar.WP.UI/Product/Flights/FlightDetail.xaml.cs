@@ -51,12 +51,19 @@ namespace Despegar.WP.UI.Product.Flights
         /// a dictionary of state preserved by this page during an earlier
         /// session.  The state will be null the first time a page is visited.</param>
         private void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
-        {          
+        {
             RoutesItems routes = e.NavigationParameter as RoutesItems;
             if (routes != null)
             {
                 // Multiples are inserted as an Outbound collection of Routes
-                ViewModel = new FlightDetailsViewModel(routes.outbound, routes.inbound);
+                ViewModel = new FlightDetailsViewModel(Navigator.Instance, routes.outbound, routes.inbound);
+            }
+
+            // Check Search type
+            if (!ViewModel.IsTwoWaySearch) 
+            {
+                // Remove "Return" pivot item
+                MainPivot.Items.RemoveAt(1);
             }
 
             DataContext = ViewModel;
@@ -100,15 +107,6 @@ namespace Despegar.WP.UI.Product.Flights
         }
 
         #endregion
-
-        private void Buy_Click(object sender, RoutedEventArgs e)
-        {
-            OldPagesManager.GoTo(typeof(FlightCheckout), null);
-        }
-
-        private void Cancel_Click(object sender, RoutedEventArgs e)
-        {
-            OldPagesManager.GoBack();
-        }
+             
     }
 }

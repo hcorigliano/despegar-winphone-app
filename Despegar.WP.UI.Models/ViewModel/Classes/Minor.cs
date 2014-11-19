@@ -1,10 +1,11 @@
-﻿using Despegar.WP.UI.Model.Classes;
+﻿using Despegar.Core.Business;
+using Despegar.WP.UI.Model.Classes;
 using Despegar.WP.UI.Model.Classes.Flights;
 using System.Collections.Generic;
 
 namespace Despegar.WP.UI.Models.Controls.Classes
 {
-    public class Minor : BindableBase
+    public class Minor : Bindable
     {
         public List<ChildrenAgeOption> OptionsItems { get; set; }
         private ChildrenAgeOption selectedAge;

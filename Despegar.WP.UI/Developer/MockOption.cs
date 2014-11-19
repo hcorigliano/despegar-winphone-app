@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Despegar.WP.UI.Developer
 {
-    public class MockOption : BindableBase
+    public class MockOption : Bindable
     {
         public ServiceKey ServiceKey { get; set; }
         public MockKey MockKey { get; set; }
