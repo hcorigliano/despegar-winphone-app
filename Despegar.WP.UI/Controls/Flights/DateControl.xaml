@@ -14,10 +14,13 @@
             <ColumnDefinition Width="{StaticResource TwoColumnMiddleSpacing}" />
             <ColumnDefinition Width="1*" />
         </Grid.ColumnDefinitions>
-
+        
+        <!-- DEV -->
+        <!--<dev:UserControlDesignGrid />-->
+        
         <StackPanel Grid.Column="0" >
             <TextBlock  Style="{StaticResource BaseTextLabel}" x:Uid="Flights_Search_Departure" Text="Partida" />
-            <DatePicker Style="{StaticResource DatePickerBase}" x:Name="departure" Date="{Binding FromDate, Mode=TwoWay}"/>
+            <DatePicker Style="{StaticResource DatePickerBase}" x:Name="departure" Date="{Binding FromDate, Mode=TwoWay}" />
         </StackPanel>
 
         <StackPanel Grid.Column="2">

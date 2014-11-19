@@ -5,6 +5,7 @@
     xmlns:local="using:Despegar.WP.UI.Controls.Flights"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:dev="using:Despegar.WP.UI.Developer.Controls"
     mc:Ignorable="d"
     x:Name="FlightsPassengerControl"
     >
@@ -16,10 +17,13 @@
             <ColumnDefinition Width="1*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"  />
+            <RowDefinition Height="{StaticResource Block3p}"  />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-
+        
+        <!-- DEV -->
+        <!--<dev:UserControlDesignGrid />-->
+        
         <StackPanel Grid.Row="0" Grid.Column="0"  >
             <TextBlock Style="{StaticResource BaseTextLabel}" x:Uid="Flights_Search_Adults" Text="Adultos" />
             <ComboBox  Style="{StaticResource ComboBoxBase}" ItemsSource="{Binding AdultOptions, Mode=TwoWay}" SelectedItem="{Binding GeneralAdults, Mode=TwoWay}"   />
@@ -34,18 +38,11 @@
         <ItemsControl Grid.Row="1"  Grid.ColumnSpan="3" ItemsSource="{Binding MinorsList}">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <Grid>
+                    <Grid>     
                         <Grid.RowDefinitions>
-                            <!-- Max 7 child controls -->
-                            <RowDefinition />
-                            <RowDefinition />
-                            <RowDefinition />
-                            <RowDefinition />
-                            <RowDefinition />
-                            <RowDefinition />
-                            <RowDefinition />
+                            <RowDefinition Height="{StaticResource Block3p}"/>
                         </Grid.RowDefinitions>
-                   
+                        
                      <StackPanel Grid.Row="{Binding IndexZeroBased}" >
                             <TextBlock Style="{StaticResource BaseTextLabel}" >
                                 <Run  x:Uid="Flights_Search_ChildrenAge" Text="Edad del menor" />
@@ -53,8 +50,7 @@
                             </TextBlock>
                             <ComboBox  Style="{StaticResource ComboBoxWrappable}" ItemsSource="{Binding OptionsItems}" SelectedItem="{Binding SelectedAge, Mode=TwoWay}"   />
                       </StackPanel>
-                    </Grid>
-                    
+                    </Grid>                    
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>        

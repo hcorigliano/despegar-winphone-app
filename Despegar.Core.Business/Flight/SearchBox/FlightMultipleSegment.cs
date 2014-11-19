@@ -16,5 +16,9 @@ namespace Despegar.Core.Business.Flight.SearchBox
         public string AirportDestination { get; set; }
         public string AirportOriginText { get; set; }
         public string AirportDestinationText { get; set; }
+        /// <summary>
+        /// Indicates whether the Segment has just been created with empty values
+        /// </summary>
+        public bool IsNew { get { return String.IsNullOrWhiteSpace(AirportOrigin) && String.IsNullOrWhiteSpace(AirportDestination); } }
     }
 }
