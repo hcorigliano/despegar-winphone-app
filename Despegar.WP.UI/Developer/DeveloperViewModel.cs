@@ -1,28 +1,26 @@
 ﻿using Despegar.Core.Business;
+using Despegar.Core.Log;
+using Despegar.WP.UI.Common;
+using Despegar.WP.UI.Controls.Flights;
 using Despegar.WP.UI.Model;
-using Despegar.WP.UI.Model.Classes;
+using Despegar.WP.UI.Model.ViewModel;
+using Despegar.WP.UI.Model.ViewModel.Flights;
+using Despegar.WP.UI.Models.Classes;
+using Despegar.WP.UI.Product.Flights;
 using System;
-using System.Linq;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
+using System.Linq;
 using System.Windows;
+using System.Windows.Input;
 using Windows.Foundation;
 using Windows.UI;
-using Windows.UI.Xaml;
-using System.Windows.Input;
-using Despegar.WP.UI.Models.Classes;
-using Windows.UI.Xaml.Controls;
-using Despegar.WP.UI.Product.Flights;
-using Despegar.WP.UI.Model.ViewModel.Flights;
-using Despegar.WP.UI.Controls.Flights;
-using Despegar.Core.Business.Flight.CitiesAutocomplete;
 using Windows.UI.Popups;
-using Despegar.WP.UI.Common;
-using Despegar.Core.Log;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
 
 namespace Despegar.WP.UI.Developer
 {
-    public class DeveloperViewModel : BindableBase
+    public class DeveloperViewModel : ViewModelBase
     {
         public Rect Viewport { get { return Window.Current.Bounds; } }
 
