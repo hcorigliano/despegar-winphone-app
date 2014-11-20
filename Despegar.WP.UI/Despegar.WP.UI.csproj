@@ -118,6 +118,9 @@
     <Compile Include="Common\Converter\VisibilityProConverter.cs" />
     <Compile Include="Common\Navigator.cs" />
     <Compile Include="Common\OldPagesManager.cs" />
+    <Compile Include="Loading.xaml.cs">
+      <DependentUpon>Loading.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Product\Flights\FlightMultipleEdit.xaml.cs">
       <DependentUpon>FlightMultipleEdit.xaml</DependentUpon>
     </Compile>
@@ -187,9 +190,6 @@
     <Compile Include="Developer\MockOption.cs" />
     <Compile Include="Home.xaml.cs">
       <DependentUpon>Home.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Loading.xaml.cs">
-      <DependentUpon>Loading.xaml</DependentUpon>
     </Compile>
     <Compile Include="Product\Flights\Checkout\Buy\Buy.xaml.cs">
       <DependentUpon>Buy.xaml</DependentUpon>
@@ -287,6 +287,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Developer\Controls\UserControlDesignGridOdd.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Loading.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -1302,10 +1306,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Home.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Loading.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
