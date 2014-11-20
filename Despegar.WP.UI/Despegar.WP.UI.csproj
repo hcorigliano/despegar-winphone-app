@@ -118,7 +118,7 @@
     <Compile Include="Common\Converter\VisibilityProConverter.cs" />
     <Compile Include="Common\Navigator.cs" />
     <Compile Include="Common\OldPagesManager.cs" />
-    <Compile Include="Loading.xaml.cs">
+    <Compile Include="Controls\Loading.xaml.cs">
       <DependentUpon>Loading.xaml</DependentUpon>
     </Compile>
     <Compile Include="Product\Flights\FlightMultipleEdit.xaml.cs">
@@ -290,7 +290,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Loading.xaml">
+    <Page Include="Controls\Loading.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -349,6 +349,79 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\Animations\loading\loading0.png" />
+    <Content Include="Assets\Animations\loading\loading1.png" />
+    <Content Include="Assets\Animations\loading\loading10.png" />
+    <Content Include="Assets\Animations\loading\loading11.png" />
+    <Content Include="Assets\Animations\loading\loading12.png" />
+    <Content Include="Assets\Animations\loading\loading13.png" />
+    <Content Include="Assets\Animations\loading\loading14.png" />
+    <Content Include="Assets\Animations\loading\loading15.png" />
+    <Content Include="Assets\Animations\loading\loading16.png" />
+    <Content Include="Assets\Animations\loading\loading17.png" />
+    <Content Include="Assets\Animations\loading\loading18.png" />
+    <Content Include="Assets\Animations\loading\loading19.png" />
+    <Content Include="Assets\Animations\loading\loading2.png" />
+    <Content Include="Assets\Animations\loading\loading20.png" />
+    <Content Include="Assets\Animations\loading\loading21.png" />
+    <Content Include="Assets\Animations\loading\loading22.png" />
+    <Content Include="Assets\Animations\loading\loading23.png" />
+    <Content Include="Assets\Animations\loading\loading24.png" />
+    <Content Include="Assets\Animations\loading\loading25.png" />
+    <Content Include="Assets\Animations\loading\loading26.png" />
+    <Content Include="Assets\Animations\loading\loading27.png" />
+    <Content Include="Assets\Animations\loading\loading28.png" />
+    <Content Include="Assets\Animations\loading\loading29.png" />
+    <Content Include="Assets\Animations\loading\loading3.png" />
+    <Content Include="Assets\Animations\loading\loading30.png" />
+    <Content Include="Assets\Animations\loading\loading31.png" />
+    <Content Include="Assets\Animations\loading\loading32.png" />
+    <Content Include="Assets\Animations\loading\loading33.png" />
+    <Content Include="Assets\Animations\loading\loading34.png" />
+    <Content Include="Assets\Animations\loading\loading35.png" />
+    <Content Include="Assets\Animations\loading\loading36.png" />
+    <Content Include="Assets\Animations\loading\loading37.png" />
+    <Content Include="Assets\Animations\loading\loading38.png" />
+    <Content Include="Assets\Animations\loading\loading39.png" />
+    <Content Include="Assets\Animations\loading\loading4.png" />
+    <Content Include="Assets\Animations\loading\loading40.png" />
+    <Content Include="Assets\Animations\loading\loading41.png" />
+    <Content Include="Assets\Animations\loading\loading42.png" />
+    <Content Include="Assets\Animations\loading\loading43.png" />
+    <Content Include="Assets\Animations\loading\loading44.png" />
+    <Content Include="Assets\Animations\loading\loading45.png" />
+    <Content Include="Assets\Animations\loading\loading46.png" />
+    <Content Include="Assets\Animations\loading\loading47.png" />
+    <Content Include="Assets\Animations\loading\loading48.png" />
+    <Content Include="Assets\Animations\loading\loading49.png" />
+    <Content Include="Assets\Animations\loading\loading5.png" />
+    <Content Include="Assets\Animations\loading\loading50.png" />
+    <Content Include="Assets\Animations\loading\loading51.png" />
+    <Content Include="Assets\Animations\loading\loading52.png" />
+    <Content Include="Assets\Animations\loading\loading53.png" />
+    <Content Include="Assets\Animations\loading\loading54.png" />
+    <Content Include="Assets\Animations\loading\loading55.png" />
+    <Content Include="Assets\Animations\loading\loading56.png" />
+    <Content Include="Assets\Animations\loading\loading57.png" />
+    <Content Include="Assets\Animations\loading\loading58.png" />
+    <Content Include="Assets\Animations\loading\loading59.png" />
+    <Content Include="Assets\Animations\loading\loading6.png" />
+    <Content Include="Assets\Animations\loading\loading60.png" />
+    <Content Include="Assets\Animations\loading\loading61.png" />
+    <Content Include="Assets\Animations\loading\loading62.png" />
+    <Content Include="Assets\Animations\loading\loading63.png" />
+    <Content Include="Assets\Animations\loading\loading64.png" />
+    <Content Include="Assets\Animations\loading\loading65.png" />
+    <Content Include="Assets\Animations\loading\loading66.png" />
+    <Content Include="Assets\Animations\loading\loading67.png" />
+    <Content Include="Assets\Animations\loading\loading68.png" />
+    <Content Include="Assets\Animations\loading\loading69.png" />
+    <Content Include="Assets\Animations\loading\loading7.png" />
+    <Content Include="Assets\Animations\loading\loading70.png" />
+    <Content Include="Assets\Animations\loading\loading71.png" />
+    <Content Include="Assets\Animations\loading\loading72.png" />
+    <Content Include="Assets\Animations\loading\loading8.png" />
+    <Content Include="Assets\Animations\loading\loading9.png" />
     <Content Include="Assets\ApplicationIcon.png" />
     <Content Include="Assets\country\AD.png" />
     <Content Include="Assets\country\AE.png" />

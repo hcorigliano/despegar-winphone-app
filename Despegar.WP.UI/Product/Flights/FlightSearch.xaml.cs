@@ -8,14 +8,18 @@ using Windows.UI.Xaml;
 using Despegar.Core.Business.Flight.SearchBox;
 using Despegar.WP.UI.Model.Classes.Flights;
 using Despegar.Core.Business.Enums;
+using Despegar.WP.UI.Controls;
+using Windows.UI.Xaml.Data;
+using System.ComponentModel;
 
 namespace Despegar.WP.UI.Product.Flights
 {
     public sealed partial class FlightSearch : Page
     {
         private NavigationHelper navigationHelper;
-        public FlightSearchViewModel ViewModel { get; set; }
-       
+        private ModalPopup loadingPopup = new ModalPopup(new Loading());
+        public FlightSearchViewModel ViewModel { get; set; }        
+
         public FlightSearch()
         {
             this.InitializeComponent();
@@ -28,8 +32,24 @@ namespace Despegar.WP.UI.Product.Flights
 
             ViewModel = new FlightSearchViewModel(Navigator.Instance, GlobalConfiguration.CoreContext.GetFlightService());
             this.DataContext = ViewModel;
+
+            //Binding loadingBinding = new Binding() { Path = new PropertyPath("IsLoading"), Source = ViewModel, Mode = BindingMode.OneWay};
+            ViewModel.PropertyChanged += Checkloading;            
         }
 
+        private void Checkloading(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "IsLoading") 
+            {
+                if ((sender as FlightSearchViewModel).IsLoading)
+                    loadingPopup.Show();
+                else
+                    loadingPopup.Hide();
+
+            }
+        }
+
+       
         public NavigationHelper NavigationHelper
         {
             get { return this.navigationHelper; }

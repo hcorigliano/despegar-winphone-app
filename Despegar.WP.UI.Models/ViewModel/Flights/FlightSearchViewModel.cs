@@ -25,8 +25,7 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
         public INavigator Navigator { get; set; }
         public PassengersViewModel PassengersViewModel { get; set; }
         private IFlightService flightService { get; set; }
-        private FlightSearchModel coreSearchModel;
-        public bool IsLoading { get; set; }
+        private FlightSearchModel coreSearchModel;        
 
         #region ** Exposed Properties **
 
@@ -34,6 +33,9 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
         {
             get { return new ObservableCollection<FlightMultipleSegment>(coreSearchModel.MultipleSegments); }            
         }
+
+        private bool isLoading;
+        public bool IsLoading { get { return isLoading; } set { isLoading = value; OnPropertyChanged(); } }
 
         public string Origin 
         { 
