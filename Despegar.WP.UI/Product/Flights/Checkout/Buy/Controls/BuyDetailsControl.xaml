@@ -7,6 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:conv="using:Despegar.WP.UI.Common.Converter"
     xmlns:dic="using:Despegar.WP.UI.Strings"
+    xmlns:dev="using:Despegar.WP.UI.Developer.Controls"
     mc:Ignorable="d"
     d:DesignHeight="300"
     d:DesignWidth="400">
@@ -14,66 +15,87 @@
     <UserControl.Resources>
         <conv:NullToVisibilityConverter x:Name="NullToVisibilityConverter" ></conv:NullToVisibilityConverter>
     </UserControl.Resources>
-    
 
-    
+
+
     <Grid>
+        <!-- Dev -->
+        <!--<dev:UserControlDesignGrid Loaded="UserControlDesignGrid_Loaded" />-->
+
         <Grid.RowDefinitions >
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="{StaticResource Block1p}"></RowDefinition>
+            <RowDefinition  Height="auto"></RowDefinition>
+            <RowDefinition Height="{StaticResource Block1p}"></RowDefinition>
+            <RowDefinition  Height="auto"></RowDefinition>
         </Grid.RowDefinitions>
-        
+
         <Grid.ColumnDefinitions>
-            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition Width="{StaticResource Block6p}"></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
+
+
+        <!--PER PASSAGER-->
+        <StackPanel>
+        <StackPanel Height="{StaticResource dBlock1p_And_Half}" Grid.Column="0"  Grid.Row="0" >
+        <TextBlock  Style="{StaticResource BaseTextLabel}" x:Uid="Buy_Details_Fare_Per_Adult" Text="Tarifa por adulto"></TextBlock>
+        </StackPanel>
+        <StackPanel Height="{StaticResource dBlock1p_And_Half}" Grid.Column="0" Grid.Row="0" >
+        <TextBlock x:Uid="Buy_Details_Fare_Per_Children"  Visibility="{Binding children_base, Converter={StaticResource NullToVisibilityConverter}}" Text="Tarifa por menor"></TextBlock>
+        </StackPanel>
+        <StackPanel Height="{StaticResource dBlock1p_And_Half}" Grid.Column="0" Grid.Row="0" >
+        <TextBlock  x:Uid="Buy_Details_Fare_Per_Infant"  Visibility="{Binding infant_base, Converter={StaticResource NullToVisibilityConverter}}" Text="Tarifa por infante"></TextBlock>
+        </StackPanel>
+        </StackPanel>
         
-        <StackPanel Grid.Column="0">
-
-            <TextBlock Grid.Row="0" x:Uid="Buy_Details_Fare_Per_Adult"></TextBlock>
-            <TextBlock Grid.Row="1" x:Uid="Buy_Details_Fare_Per_Children"  Visibility="{Binding children_base, Converter={StaticResource NullToVisibilityConverter}}" ></TextBlock>
-            <TextBlock Grid.Row="2" x:Uid="Buy_Details_Fare_Per_Infant"  Visibility="{Binding infant_base, Converter={StaticResource NullToVisibilityConverter}}"></TextBlock>
-
-            <TextBlock Grid.Row="3" >
+        <!--DETAILS-->
+        <StackPanel Grid.Column="0" Grid.Row="2">
+        <TextBlock >
                 <Run Text="{Binding adult_quantity}"></Run>
-                <Run  x:Uid="Buy_Details_Fare_Adult"></Run>
-            </TextBlock>
-            <TextBlock Grid.Row="4" Visibility="{Binding children_base, Converter={StaticResource NullToVisibilityConverter}}" >
+                <Run  x:Uid="Buy_Details_Fare_Adult" Text="1 adulto"></Run>
+        </TextBlock>
+        <TextBlock Visibility="{Binding children_base, Converter={StaticResource NullToVisibilityConverter}}" >
                 <Run Text="{Binding children_quantity}"></Run>
-                <Run  x:Uid="Buy_Details_Fare_Children"></Run>
-            </TextBlock>
-            <TextBlock Grid.Row="5" Visibility="{Binding infant_base, Converter={StaticResource NullToVisibilityConverter}}">
+                <Run  x:Uid="Buy_Details_Fare_Children" Text="1 menor"></Run>
+        </TextBlock>
+        <TextBlock  Visibility="{Binding infant_base, Converter={StaticResource NullToVisibilityConverter}}">
                 <Run Text="{Binding infant_quantity}"></Run>
-                <Run  x:Uid="Buy_Details_Fare_Infant"></Run>
-            </TextBlock>
-            
-            <TextBlock Grid.Row="6" x:Uid="Buy_Details_Taxes"></TextBlock>
-            <TextBlock Grid.Row="7" x:Uid="Buy_Details_AFIP"></TextBlock>
-            <TextBlock Grid.Row="8" x:Uid="Buy_Details_Charges"></TextBlock>
-            <TextBlock Grid.Row="9" x:Uid="Buy_Details_total"></TextBlock>
+                <Run  x:Uid="Buy_Details_Fare_Infant" Text="1 infante"></Run>
+        </TextBlock>
+
+        <TextBlock x:Uid="Buy_Details_Taxes" Text="impuestos y tasas"></TextBlock>
+        <TextBlock x:Uid="Buy_Details_AFIP" Text="Res. 3550/13 AFIP"></TextBlock>
+        <TextBlock x:Uid="Buy_Details_Charges" Text="Cargos"></TextBlock>
         </StackPanel>
         
-        <StackPanel Grid.Column="1">
-            <TextBlock Grid.Row="0" Text="{Binding adult_base}"></TextBlock>
-            <TextBlock Grid.Row="1" Text="{Binding children_base}"  Visibility="{Binding children_base, Converter={StaticResource NullToVisibilityConverter}}" ></TextBlock>
-            <TextBlock Grid.Row="2" Text="{Binding infant_base}"  Visibility="{Binding infant_base, Converter={StaticResource NullToVisibilityConverter}}"></TextBlock>
-            
-            <TextBlock Grid.Row="3" Text="{Binding adults_subtotal}"></TextBlock>
-            <TextBlock Grid.Row="4" Text="{Binding children_subtotal}"  Visibility="{Binding children_base, Converter={StaticResource NullToVisibilityConverter}}" ></TextBlock>
-            <TextBlock Grid.Row="5" Text="{Binding infants_subtotal}"  Visibility="{Binding infant_base, Converter={StaticResource NullToVisibilityConverter}}"></TextBlock>
-            
-            <TextBlock Grid.Row="6" Text="{Binding taxes}"></TextBlock>
-            <TextBlock Grid.Row="7" Text="{Binding retention}"></TextBlock>
-            <TextBlock Grid.Row="8" Text="{Binding charges}"></TextBlock>
-            <TextBlock Grid.Row="9" Text="{Binding total}"></TextBlock>
+        <!--TOTAL-->
+        <TextBlock Grid.Column="0" Grid.Row="4" x:Uid="Buy_Details_total" Text="Total"></TextBlock>
+
+
+
+
+
+        <!--PER PASSAGER-->
+        <StackPanel>
+        <TextBlock Grid.Row="0" Text="{Binding adult_base}"></TextBlock>
+        <TextBlock Grid.Row="1" Text="{Binding children_base}"  Visibility="{Binding children_base, Converter={StaticResource NullToVisibilityConverter}}" ></TextBlock>
+        <TextBlock Grid.Row="2" Text="{Binding infant_base}"  Visibility="{Binding infant_base, Converter={StaticResource NullToVisibilityConverter}}"></TextBlock>
         </StackPanel>
+
+        <!--DETAILS-->
+        <StackPanel>
+        <TextBlock Grid.Row="3" Text="{Binding adults_subtotal}"></TextBlock>
+        <TextBlock Grid.Row="4" Text="{Binding children_subtotal}"  Visibility="{Binding children_base, Converter={StaticResource NullToVisibilityConverter}}" ></TextBlock>
+        <TextBlock Grid.Row="5" Text="{Binding infants_subtotal}"  Visibility="{Binding infant_base, Converter={StaticResource NullToVisibilityConverter}}"></TextBlock>
+
+        <TextBlock Grid.Row="6" Text="{Binding taxes}"></TextBlock>
+        <TextBlock Grid.Row="7" Text="{Binding retention}"></TextBlock>
+        <TextBlock Grid.Row="8" Text="{Binding charges}"></TextBlock>
+        </StackPanel>
+
+        <!--TOTAL-->
+        <TextBlock Grid.Row="10" Text="{Binding total}"></TextBlock>
+
     </Grid>
 </UserControl>

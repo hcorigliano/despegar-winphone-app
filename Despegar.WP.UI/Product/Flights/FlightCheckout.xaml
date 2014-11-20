@@ -5,10 +5,11 @@
     xmlns:local="using:Despegar.WP.UI.Product.Flights"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:dev="using:Despegar.WP.UI.Developer.Controls"
     mc:Ignorable="d"
     Style="{StaticResource BasePage}">
 
-    <Grid x:Name="LayoutRoot">
+    <Grid x:Name="LayoutRoot" Style="{StaticResource MainContainerGrid}">
 
         <Grid.ChildrenTransitions>
             <TransitionCollection>
@@ -17,101 +18,74 @@
         </Grid.ChildrenTransitions>
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="{StaticResource Block1p}"/>
+            <RowDefinition Height="{StaticResource Square}"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <!-- Title Panel -->
-        <StackPanel Grid.Row="0" Margin="19,0,0,0">
-            <TextBlock x:Uid="AppTitle" Style="{ThemeResource TitleTextBlockStyle}" Margin="0,12,0,0"/>
-            <TextBlock x:Uid="Page_FlightCheckout" Margin="0,-6.5,0,26.5" Style="{ThemeResource HeaderTextBlockStyle}" CharacterSpacing="{ThemeResource PivotHeaderItemCharacterSpacing}"/>
-        </StackPanel>
+        <!-- Dev -->
+        <dev:UserControlDesignGrid />
 
-        
-        <!--Passenger Pivot-->
-        <!--xmlns:src="using:Despegar.WP.UI.Product.Flights.Checkout.Passagers"-->
-        <Pivot Grid.Row="1" x:Name="ContentRoot" Margin="19,9.5,19,0">
-            <PivotItem >
-                <PivotItem.Header>
-                    <TextBlock x:Uid="Flight_Checkout_Passagers" FontSize="36"></TextBlock>
-                </PivotItem.Header>
+        <!-- Title Panel -->
+        <Image Grid.Row="0" Style="{StaticResource TopLogo}" />
+        <TextBlock Grid.Row="1" x:Uid="Page_FlightSearch" Style="{StaticResource PageHeaderSmall}" Text="BUSQUEDA" />
+
+
+        <Pivot Grid.Row="2" x:Name="ContentRoot"  Style="{StaticResource PivotBaseMain}">
+            <PivotItem  x:Uid="Flight_Checkout_Passagers" Style="{StaticResource PivotItemBase}">
+
 
                 <ScrollViewer VerticalScrollBarVisibility="Auto" Height="400">
 
                     <StackPanel xmlns:src="using:Despegar.WP.UI.Product.Flights.Checkout.Passegers">
 
-                    <!--ItemsSource="{Binding passengers}"-->
-                    <ItemsControl x:Name="PassengerControl" DataContext="{Binding bookingfields.form}" ItemsSource="{Binding passengers}">
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <src:Passengers></src:Passengers>
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                    </ItemsControl>
-                </StackPanel>
+                        <ItemsControl x:Name="PassengerControl" DataContext="{Binding bookingfields.form}" ItemsSource="{Binding passengers}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <src:Passengers></src:Passengers>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </StackPanel>
                 </ScrollViewer>
             </PivotItem>
-        
-            
-            <!--Contact Pivot-->            
-            <PivotItem>
-                <PivotItem.Header>
-                    <TextBlock x:Uid="Flight_Checkout_Contact" FontSize="36"></TextBlock>
-                </PivotItem.Header>
-                <StackPanel xmlns:src="using:Despegar.WP.UI.Product.Flights.Checkout.Contact">
 
+
+            <!--Contact Pivot-->
+            <PivotItem x:Uid="Flight_Checkout_Contact" Style="{StaticResource PivotItemBase}">
+                <StackPanel xmlns:src="using:Despegar.WP.UI.Product.Flights.Checkout.Contact">
                     <src:ContactData x:Name="ContactControl" DataContext="{Binding bookingfields.form.contact}"></src:ContactData>
                 </StackPanel>
             </PivotItem>
 
             <!--Payments Pivot-->
-            <PivotItem>
-                <PivotItem.Header>
-                    <TextBlock x:Uid="Flight_Checkout_Payments" FontSize="36"></TextBlock>
-                </PivotItem.Header>
+            <PivotItem x:Uid="Flight_Checkout_Payments" Style="{StaticResource PivotItemBase}">
                 <StackPanel xmlns:src="using:Despegar.WP.UI.Product.Flights.Checkout.Payment">
-
                     <src:Payments x:Name="PaymentControl" DataContext="{Binding PaymentFormated}"></src:Payments>
-                    
                 </StackPanel>
             </PivotItem>
 
             <!--Card Data Pivot-->
-            <PivotItem>
-                <PivotItem.Header>
-                    <TextBlock x:Uid="Flight_Checkout_Card_Data" FontSize="36"></TextBlock>
-                </PivotItem.Header>
+            <PivotItem x:Uid="Flight_Checkout_Card_Data" Style="{StaticResource PivotItemBase}">
                 <StackPanel xmlns:src="using:Despegar.WP.UI.Product.Flights.Checkout.CardData">
-
                     <src:CardData x:Name="CardDataControl" DataContext="{Binding bookingfields.form.payment}"></src:CardData>
                 </StackPanel>
             </PivotItem>
-            
-            <!--Invoice Arg-->
-            <PivotItem>
-                <PivotItem.Header>
-                    <TextBlock x:Uid="Flight_Checkout_Invoice_Arg" FontSize="36"></TextBlock>
-                </PivotItem.Header>
-                <StackPanel xmlns:src="using:Despegar.WP.UI.Product.Flights.Checkout.Invoice">
 
+            <!--Invoice Arg-->
+            <PivotItem  x:Uid="Flight_Checkout_Invoice_Arg" Style="{StaticResource PivotItemBase}">
+                <StackPanel xmlns:src="using:Despegar.WP.UI.Product.Flights.Checkout.Invoice">
                     <src:InvoiceArg x:Name="InvoiceArgControl" DataContext="{Binding bookingfields.form.payment.invoice}"></src:InvoiceArg>
-                </StackPanel>                
-                
+                </StackPanel>
             </PivotItem>
 
             <!--Buy-->
-            <PivotItem>
-                <PivotItem.Header>
-                    <TextBlock x:Uid="Flight_Checkout_Buy" FontSize="36"></TextBlock>
-                </PivotItem.Header>
+            <PivotItem  x:Uid="Flight_Checkout_Buy"  Style="{StaticResource PivotItemBase}">
                 <StackPanel xmlns:src="using:Despegar.WP.UI.Product.Flights.Checkout.Buy">
-
                     <src:Buy x:Name="Buycontrol" DataContext="{Binding PriceFormated}"></src:Buy>
                 </StackPanel>
-
             </PivotItem>
 
         </Pivot>
-
     </Grid>
 </Page>

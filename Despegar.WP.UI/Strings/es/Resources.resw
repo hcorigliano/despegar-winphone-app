@@ -216,8 +216,8 @@
   <data name="Page_FlightResult_Adult.Text" xml:space="preserve">
     <value>Adulto</value>
   </data>
-  <data name="Flight_Checkout_Passagers.Text" xml:space="preserve">
-    <value>Pasajeros</value>
+  <data name="Flight_Checkout_Passagers.Header" xml:space="preserve">
+    <value>pasajeros</value>
   </data>
   <data name="Page_FlightResult_Child.Text" xml:space="preserve">
     <value>Niños</value>
@@ -264,8 +264,8 @@
   <data name="Contact_email_Confirmation.Text" xml:space="preserve">
     <value>Confirme su e-mail</value>
   </data>
-  <data name="Flight_Checkout_Contact.Text" xml:space="preserve">
-    <value>Información de contacto</value>
+  <data name="Flight_Checkout_Contact.Header" xml:space="preserve">
+    <value>datos de contacto</value>
   </data>
   <data name="Contact_Area_Code.Text" xml:space="preserve">
     <value>Area</value>
@@ -408,14 +408,14 @@
   <data name="Card_Data_Security_Code.Text" xml:space="preserve">
     <value>Código de seguridad</value>
   </data>
-  <data name="Flight_Checkout_Card_Data.Text" xml:space="preserve">
-    <value>Datos de la tarjeta</value>
+  <data name="Flight_Checkout_Card_Data.Header" xml:space="preserve">
+    <value>datos de la tarjeta</value>
   </data>
   <data name="address_floor.Text" xml:space="preserve">
     <value>Piso</value>
   </data>
-  <data name="Flight_Checkout_Invoice_Arg.Text" xml:space="preserve">
-    <value>Factura Fiscal</value>
+  <data name="Flight_Checkout_Invoice_Arg.Header" xml:space="preserve">
+    <value>factura Fiscal</value>
   </data>
   <data name="Invoice_Arg_City.Text" xml:space="preserve">
     <value>Ciudad</value>
@@ -447,8 +447,8 @@
   <data name="Invoice_Arg_Street.Text" xml:space="preserve">
     <value>Calle</value>
   </data>
-  <data name="Flight_Checkout_Payments.Text" xml:space="preserve">
-    <value>Forma de pago</value>
+  <data name="Flight_Checkout_Payments.Header" xml:space="preserve">
+    <value>forma de pago</value>
   </data>
   <data name="Common_Pays_With" xml:space="preserve">
     <value>Pagos con </value>
@@ -468,8 +468,8 @@
   <data name="Buy_Button.Content" xml:space="preserve">
     <value>Comprar</value>
   </data>
-  <data name="Flight_Checkout_Buy.Text" xml:space="preserve">
-    <value>Finalizar compra</value>
+  <data name="Flight_Checkout_Buy.Header" xml:space="preserve">
+    <value>finalizar compra</value>
   </data>
   <data name="Buy_Details_Afip.Text" xml:space="preserve">
     <value>Res. 3550 AFIP</value>
