@@ -9,9 +9,11 @@
     xmlns:dev="using:Despegar.WP.UI.Developer.Controls"
     xmlns:conv="using:Despegar.WP.UI.Common.Converter"
     mc:Ignorable="d"
-	d:DataContext="{d:DesignData /SampleData/SegmentSampleData.xaml}">
+	d:DataContext="{d:DesignData /SampleData/SegmentSampleData.xaml}"
+    x:Name="SegmentControl">
     <UserControl.Resources>
         <conv:StringConverter x:Key="stringFormatConverter"  />
+        <conv:StyleConverter x:Key="textColorConverter" TrueValue="{StaticResource FlightDetailTitleBlue}" FalseValue="{StaticResource FlightDetailTitleGreen}" />
     </UserControl.Resources>
     <Grid>
     	<Grid.RowDefinitions>
@@ -34,8 +36,8 @@
         <TextBlock Grid.Row="0" Style="{StaticResource FlightSegmentTitleWhite}">
             <Run x:Uid="Page_Flight_Detail_Segment" />
             <Run Text="1" />
-        </TextBlock>
-
+        </TextBlock>               
+        
         <TextBlock Grid.Row="1" Grid.Column="0" Style="{StaticResource FlightSegmentSubText}" >
             <Run  x:Uid="Page_Flight_Detail_Flight" Text="Vuelo" />
             <Run  Text=" " />
@@ -71,23 +73,23 @@
         </Grid>
 
         <StackPanel  Grid.Row="3"  Grid.Column="0">
-            <TextBlock Text="{Binding Path=departure_date}" Style="{StaticResource FlightDetailTitle}"  />
+            <TextBlock Text="{Binding Path=departure_date}" Style="{Binding IsReturn, ElementName=SegmentControl, Converter={StaticResource textColorConverter}}"  />
             <TextBlock Text="{Binding Path=departure_time}" Style="{StaticResource FlightSegmentSubText}" />
         </StackPanel>
  
         <StackPanel  Grid.Row="3"  Grid.Column="2">
-            <TextBlock x:Uid="Page_Flight_Outbound" Text="Sale" Style="{StaticResource FlightDetailTitle}" />
+            <TextBlock x:Uid="Page_Flight_Outbound" Text="Sale" Style="{Binding IsReturn, ElementName=SegmentControl, Converter={StaticResource textColorConverter}}" />
             <TextBlock Text="{Binding Path=from.city}" Style="{StaticResource FlightSegmentSmallText}" />
             <TextBlock Style="{StaticResource FlightSegmentSubText}" Text="{Binding Path=from.label}" />
          </StackPanel>
 
         <StackPanel  Grid.Row="4"  Grid.Column="0">
-            <TextBlock Text="{Binding Path=arrival_date}" Style="{StaticResource FlightDetailTitle}"  />
+            <TextBlock Text="{Binding Path=arrival_date}" Style="{Binding IsReturn, ElementName=SegmentControl, Converter={StaticResource textColorConverter}}"  />
             <TextBlock Text="{Binding Path=arrival_time}" Style="{StaticResource FlightSegmentSubText}" />
         </StackPanel>
 
         <StackPanel  Grid.Row="4"  Grid.Column="2">
-            <TextBlock x:Uid="Page_Flight_Outbound" Text="Llega" Style="{StaticResource FlightDetailTitle}" />
+            <TextBlock x:Uid="Page_Flight_Outbound" Text="Llega" Style="{Binding IsReturn, ElementName=SegmentControl, Converter={StaticResource textColorConverter}}" />
             <TextBlock Text="{Binding Path=to.city}" Style="{StaticResource FlightSegmentSmallText}" />
             <TextBlock Style="{StaticResource FlightSegmentSubText}" Text="{Binding Path=to.label}" />
         </StackPanel>
