@@ -14,6 +14,7 @@
     <UserControl.Resources>
         <conv:StringConverter x:Key="stringFormatConverter"  />
         <conv:StyleConverter x:Key="textColorConverter" TrueValue="{StaticResource FlightDetailTitleBlue}" FalseValue="{StaticResource FlightDetailTitleGreen}" />
+        <conv:VisibilityProConverter x:Key="visibilityConverter" TrueValue="Visible" FalseValue="Collapsed"  />
     </UserControl.Resources>
     <Grid>
     	<Grid.RowDefinitions>
@@ -45,7 +46,7 @@
             <Run  Text=" - " />
             <Run  Text="{Binding cabin_type}" />
         </TextBlock>
-        <TextBlock Grid.Row="1" Grid.Column="2" Style="{StaticResource FlightSegmentSubText}" x:Uid="Page_Flight_Detail_OperatedBy" Text="Operado por" />
+        <TextBlock Grid.Row="1" Grid.Column="2" Style="{StaticResource FlightSegmentSubText}" Visibility="{Binding HasOperatedBy, Converter={StaticResource visibilityConverter}}" x:Uid="Page_Flight_Detail_OperatedBy" Text="Operado por" />
 
         <Grid Grid.Row="2" Grid.Column="0">
             <Grid.ColumnDefinitions>
@@ -56,10 +57,10 @@
             <Grid Style="{StaticResource IconWhiteBig}">
               <Image Grid.Column="0" Source="{Binding airline.code, Converter={StaticResource stringFormatConverter}, ConverterParameter='/Assets/Icon/Airlines/ag_{0}logo@2x.png'}" Style="{StaticResource FlightDetailAirlineImage}"  />
             </Grid>
-            <TextBlock Grid.Column="1" Style="{Binding FlightDetailAirlineTitle}" Text="Aerolineas Argentinas" />
+            <TextBlock Grid.Column="1" Style="{Binding FlightDetailAirlineTitle}" Text="{Binding airline.name}" />
         </Grid>
 
-        <Grid Grid.Row="2" Grid.Column="2">
+        <Grid Grid.Row="2" Grid.Column="2" Visibility="{Binding HasOperatedBy, Converter={StaticResource visibilityConverter}}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="{StaticResource Block2p}"/>
                 <ColumnDefinition Width="*"/>
@@ -69,7 +70,7 @@
                <Image Grid.Column="0" Source="{Binding operated_by.code, Converter={StaticResource stringFormatConverter}, ConverterParameter='/Assets/Icon/Airlines/ag_{0}logo@2x.png'}" Style="{StaticResource FlightDetailAirlineImage}"  />
             </Grid>
             
-            <TextBlock Grid.Column="1" Style="{Binding FlightDetailAirlineTitle}" Text="American Airlines"  />
+            <TextBlock Grid.Column="1" Style="{Binding FlightDetailAirlineTitle}" Text="{Binding operated_by.name}"  />
         </Grid>
 
         <StackPanel  Grid.Row="3"  Grid.Column="0">
