@@ -33,17 +33,17 @@
         <StackPanel Grid.Row="1">
             <StackPanel Style="{StaticResource TextBoxInputContainer}" Visibility="{Binding first_name.required,Converter={StaticResource VisibilityConverter}}" >
                 <TextBlock Style="{StaticResource BaseTextLabel}" x:Uid="Passager_First_Name" Text="Nombre"></TextBlock>
-                <TextBox Style="{StaticResource InputBase}" x:Name="first_name" Text="{Binding first_name.coreValue,Mode=TwoWay}"></TextBox>
+                <TextBox Style="{StaticResource CheckoutInputBase}" x:Name="first_name" Text="{Binding first_name.coreValue,Mode=TwoWay}"></TextBox>
             </StackPanel>
 
             <StackPanel Style="{StaticResource TextBoxInputContainer}" Visibility="{Binding last_name.required,Converter={StaticResource VisibilityConverter}}">
                 <TextBlock Style="{StaticResource BaseTextLabel}" x:Uid="Passager_Last_Name" Text="Apellido"></TextBlock>
-                <TextBox Style="{StaticResource InputBase}" x:Name="last_name" Text="{Binding last_name.coreValue,Mode=TwoWay}"></TextBox>
+                <TextBox Style="{StaticResource CheckoutInputBase}" x:Name="last_name" Text="{Binding last_name.coreValue,Mode=TwoWay}"></TextBox>
             </StackPanel>
 
             <StackPanel Style="{StaticResource TextBoxInputContainer}" Visibility="{Binding nationality.required,Converter={StaticResource VisibilityConverter}}">
                 <TextBlock Style="{StaticResource BaseTextLabel}" x:Uid="Passager_Nationality" Text="Nacionalidad"></TextBlock>
-                <AutoSuggestBox Style="{StaticResource AutosuggestBoxBase}" x:Name="nationality" TextChanged="Autosuggest_TextChanged" SuggestionChosen="SuggestionChosen"></AutoSuggestBox>
+                <AutoSuggestBox  TextBoxStyle="{StaticResource InputBase}" Style="{StaticResource AutosuggestBoxBase}"  x:Name="nationality" TextChanged="Autosuggest_TextChanged" SuggestionChosen="SuggestionChosen"></AutoSuggestBox>
             </StackPanel>
 
             <StackPanel Style="{StaticResource TextBoxInputContainer}" Visibility="{Binding document.required,Converter={StaticResource VisibilityConverter}}">

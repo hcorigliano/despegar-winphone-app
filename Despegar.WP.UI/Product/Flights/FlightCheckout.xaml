@@ -24,7 +24,7 @@
         </Grid.RowDefinitions>
 
         <!-- Dev -->
-        <dev:UserControlDesignGrid />
+        <!--<dev:UserControlDesignGrid />-->
 
         <!-- Title Panel -->
         <Image Grid.Row="0" Style="{StaticResource TopLogo}" />
@@ -32,12 +32,12 @@
 
 
         <Pivot Grid.Row="2" x:Name="ContentRoot"  Style="{StaticResource PivotBaseMain}">
-            <PivotItem  x:Uid="Flight_Checkout_Passagers" Style="{StaticResource PivotItemBase}">
+            <PivotItem VerticalAlignment="Top" x:Uid="Flight_Checkout_Passagers" Style="{StaticResource PivotItemBase}">
 
 
-                <ScrollViewer VerticalScrollBarVisibility="Auto" Height="400">
+                <ScrollViewer VerticalScrollBarVisibility="Auto" Height="500">
 
-                    <StackPanel xmlns:src="using:Despegar.WP.UI.Product.Flights.Checkout.Passegers">
+                    <StackPanel  xmlns:src="using:Despegar.WP.UI.Product.Flights.Checkout.Passegers">
 
                         <ItemsControl x:Name="PassengerControl" DataContext="{Binding bookingfields.form}" ItemsSource="{Binding passengers}">
                             <ItemsControl.ItemTemplate>

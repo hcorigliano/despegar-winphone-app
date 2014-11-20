@@ -499,7 +499,7 @@
     <value>Impuestos y tasas</value>
   </data>
   <data name="Buy_Details_Total.Text" xml:space="preserve">
-    <value>Total</value>
+    <value>TOTAL</value>
   </data>
   <data name="Card_Data_Expiration.Text" xml:space="preserve">
     <value>Vencimiento</value>

@@ -15,22 +15,24 @@
     </UserControl.Resources>
 
 
-    <Grid >
+    <Grid Width="{StaticResource dBlock9p}" >
         <!-- Dev -->
-        <dev:UserControlDesignGrid />
+        <!--<dev:UserControlDesignGrid />-->
 
         <StackPanel Orientation="Horizontal">
                 <ItemsControl DataContext="{Binding}" ItemsSource="{Binding}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
-                        <WrapGrid Width="{StaticResource dBlock12p}" Orientation="Horizontal"/>
+                        <WrapGrid Width="{StaticResource dBlock10p}" Orientation="Horizontal"/>
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
 
                 <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <StackPanel Width="{StaticResource dBlock3}" Height="{StaticResource dBlock2}">
-                                <Image Source="{Binding card.code, Converter={StaticResource StringFormatConverter}, ConverterParameter='/Assets/Icon/CreditCard/{0}.png' , TargetNullValue='/Assets/Icon/CreditCard/GRL.png'}" Width="76" Margin="5,0,0,7"   />
+                            <StackPanel >
+                            <!--Style="{StaticResource ImageBase}"-->
+                            <!--Margin="0,0,9.6,9.6" Width="{StaticResource dBlock3}" Height="{StaticResource dBlock2}"-->
+                            <Image Margin="0,0,9.6,9.6" Width="{StaticResource dBlock3}" Height="{StaticResource dBlock2}"  Source="{Binding card.code, Converter={StaticResource StringFormatConverter}, ConverterParameter='/Assets/Icon/CreditCard/{0}.png' , TargetNullValue='/Assets/Icon/CreditCard/GRL.png'}"   />
                             </StackPanel>
 
                         </DataTemplate>

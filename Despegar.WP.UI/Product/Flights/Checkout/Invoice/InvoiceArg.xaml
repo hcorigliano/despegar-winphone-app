@@ -15,12 +15,12 @@
     </UserControl.Resources>
 
     <Grid >
-        <ScrollViewer VerticalScrollBarVisibility="Auto" Height="700">
+        <ScrollViewer VerticalScrollBarVisibility="Auto" Height="500">
             <StackPanel x:Name="contact">
                 <!--INVOICE-->
 
                 <!-- Dev -->
-                <dev:UserControlDesignGrid />
+                <!--<dev:UserControlDesignGrid />-->
 
                 <StackPanel Style="{StaticResource TextBoxInputContainer}" Visibility="{Binding fiscal_status.required,Converter={StaticResource VisibilityConverter}}">
                     <TextBlock Style="{StaticResource BaseTextLabel}" x:Uid="Invoice_Arg_Fiscal_Status" Text="Estado Fiscal"></TextBlock>
@@ -29,19 +29,19 @@
 
                 <StackPanel Style="{StaticResource TextBoxInputContainer}" Visibility="{Binding fiscal_id.required,Converter={StaticResource VisibilityConverter}}"  >
                     <TextBlock Style="{StaticResource BaseTextLabel}" x:Uid="Invoice_Arg_fiscal_id" Text="Cuil/Cuilt"></TextBlock>
-                    <TextBox Style="{StaticResource InputBase}" x:Name="fiscal_id" Text="{Binding fiscal_id.coreValue , Mode=TwoWay}"></TextBox>
+                    <TextBox InputScope="Number" Style="{StaticResource CheckoutInputBase}" x:Name="fiscal_id" Text="{Binding fiscal_id.coreValue , Mode=TwoWay}"></TextBox>
                 </StackPanel>
 
                 <StackPanel Style="{StaticResource TextBoxInputContainer}" x:Name="fiscal_name_StackPanel" Visibility="{Binding fiscal_name.required,Converter={StaticResource VisibilityConverter}}" >
                     <TextBlock Style="{StaticResource BaseTextLabel}" x:Uid="Invoice_Arg_fiscal_name" Text="Razon Social"></TextBlock>
-                    <TextBox Style="{StaticResource InputBase}" x:Name="fiscal_name" Text="{Binding fiscal_name.coreValue , Mode=TwoWay}"></TextBox>
+                    <TextBox Style="{StaticResource CheckoutInputBase}" x:Name="fiscal_name" Text="{Binding fiscal_name.coreValue , Mode=TwoWay}"></TextBox>
                 </StackPanel>
 
 
                 <!--ADDRESS-->
                 <StackPanel Style="{StaticResource TextBoxInputContainer}" Visibility="{Binding address.street.required,Converter={StaticResource VisibilityConverter}}" >
                     <TextBlock Style="{StaticResource BaseTextLabel}" x:Uid="Invoice_Arg_Street" Text="Calle"></TextBlock>
-                    <TextBox Style="{StaticResource InputBase}" x:Name="address_street" Text="{Binding address.street.coreValue , Mode=TwoWay}"></TextBox>
+                    <TextBox Style="{StaticResource CheckoutInputBase}" x:Name="address_street" Text="{Binding address.street.coreValue , Mode=TwoWay}"></TextBox>
                 </StackPanel>
 
                 <Grid>
@@ -56,20 +56,20 @@
 
                     <StackPanel Grid.Column="0" Style="{StaticResource TextBoxInputContainer}" Visibility="{Binding address.number.required,Converter={StaticResource VisibilityConverter}}" >
                         <TextBlock Style="{StaticResource BaseTextLabel}" x:Uid="Invoice_Arg_Number" Text="Numero"></TextBlock>
-                        <TextBox Style="{StaticResource InputBase}" x:Name="adrress_number" Text="{Binding address.number.coreValue , Mode=TwoWay}"></TextBox>
+                        <TextBox InputScope="Number" Style="{StaticResource CheckoutInputBase}" x:Name="adrress_number" Text="{Binding address.number.coreValue , Mode=TwoWay}"></TextBox>
                     </StackPanel>
 
                     <!--Visibility="{Binding address.floor.required,Converter={StaticResource VisibilityConverter}}"-->
                     <StackPanel Grid.Column="2" Style="{StaticResource TextBoxInputContainer}"  >
                         <TextBlock Style="{StaticResource BaseTextLabel}" x:Uid="Invoice_Arg_Floor" Text="Piso"></TextBlock>
-                        <TextBox Style="{StaticResource InputBase}" x:Name="address_floor" Text="{Binding address.floor.coreValue , Mode=TwoWay}"></TextBox>
+                        <TextBox InputScope="Number" Style="{StaticResource CheckoutInputBase}" x:Name="address_floor" Text="{Binding address.floor.coreValue , Mode=TwoWay}"></TextBox>
                     </StackPanel>
 
 
                     <!--Visibility="{Binding address.department.required,Converter={StaticResource VisibilityConverter}}"-->
                     <StackPanel Grid.Column="4" Style="{StaticResource TextBoxInputContainer}"  >
                         <TextBlock Style="{StaticResource BaseTextLabel}" x:Uid="Invoice_Arg_Department" Text="Dto"></TextBlock>
-                        <TextBox Style="{StaticResource InputBase}" x:Name="address_department" Text="{Binding address.department.coreValue , Mode=TwoWay}"></TextBox>
+                        <TextBox InputScope="Number" Style="{StaticResource CheckoutInputBase}" x:Name="address_department" Text="{Binding address.department.coreValue , Mode=TwoWay}"></TextBox>
                     </StackPanel>
 
                 </Grid>
@@ -81,7 +81,7 @@
                     </Grid.ColumnDefinitions>
                 <StackPanel Style="{StaticResource TextBoxInputContainer}" Visibility="{Binding address.postal_code.required,Converter={StaticResource VisibilityConverter}}" >
                     <TextBlock Style="{StaticResource BaseTextLabel}" x:Uid="Invoice_Arg_Postal_Code" Text="Codigo Postal"></TextBlock>
-                    <TextBox Style="{StaticResource InputBase}" x:Name="address_postal_code" Text="{Binding address.postal_code.coreValue , Mode=TwoWay}"></TextBox>
+                        <TextBox InputScope="Number"  Style="{StaticResource CheckoutInputBase}" x:Name="address_postal_code" Text="{Binding address.postal_code.coreValue , Mode=TwoWay}"></TextBox>
                 </StackPanel>
                 </Grid>
 
@@ -93,7 +93,7 @@
 
                 <StackPanel Style="{StaticResource TextBoxInputContainer}" Visibility="{Binding Address.city_id.required,Converter={StaticResource VisibilityConverter}}" >
                     <TextBlock Style="{StaticResource BaseTextLabel}" x:Uid="Invoice_Arg_City" Text="Ciudad"></TextBlock>
-                    <AutoSuggestBox  Style="{StaticResource AutosuggestBoxBase}" DataContext="{Binding}"  x:Name="address_city" TextChanged="FlightsTextBlock_TextChanged" LostFocus="Focus_Lost" SuggestionChosen="SuggestionChosen" TextMemberPath="full_name" ></AutoSuggestBox>
+                    <AutoSuggestBox  TextBoxStyle="{StaticResource InputBase}" Style="{StaticResource AutosuggestBoxBase}"  DataContext="{Binding}"  x:Name="address_city" TextChanged="FlightsTextBlock_TextChanged" LostFocus="Focus_Lost" SuggestionChosen="SuggestionChosen" TextMemberPath="full_name" ></AutoSuggestBox>
                 </StackPanel>
 
 

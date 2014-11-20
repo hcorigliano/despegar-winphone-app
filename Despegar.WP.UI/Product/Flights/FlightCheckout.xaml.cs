@@ -43,6 +43,9 @@ namespace Despegar.WP.UI.Product.Flights
             this.navigationHelper.SaveState += this.NavigationHelper_SaveState;
 
             InitilizePage();
+            
+            //For fix credit card null value
+            CardDataControl.DataContext = flightService.bookingfields.form.payment;
         }
 
         private void InitilizePage()

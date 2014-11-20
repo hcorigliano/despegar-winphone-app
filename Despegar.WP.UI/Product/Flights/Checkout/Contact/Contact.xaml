@@ -18,18 +18,18 @@
         <!-- Dev -->
         <!--<dev:UserControlDesignGrid Loaded="UserControlDesignGrid_Loaded" />-->
 
-        <ScrollViewer VerticalAlignment="Top" VerticalScrollBarVisibility="Auto" Height="400">
+        <ScrollViewer VerticalAlignment="Top" VerticalScrollBarVisibility="Auto" Height="500">
             <StackPanel x:Name="contact">
                 <!--Contact-->
 
                 <StackPanel Style="{StaticResource TextBoxInputContainer}" Visibility="{Binding email.required,Converter={StaticResource VisibilityConverter}}" >
                     <TextBlock Style="{StaticResource BaseTextLabel}" x:Uid="Contact_email" Text="Email"></TextBlock>
-                    <TextBox Style="{StaticResource InputBase}" x:Name="email" Text="{Binding email.coreValue , Mode=TwoWay}"></TextBox>
+                    <TextBox Style="{StaticResource CheckoutInputBase}" x:Name="email" Text="{Binding email.coreValue , Mode=TwoWay}"></TextBox>
                 </StackPanel>
 
                 <StackPanel Style="{StaticResource TextBoxInputContainer}" Visibility="{Binding email.required,Converter={StaticResource VisibilityConverter}}">
                     <TextBlock Style="{StaticResource BaseTextLabel}" x:Uid="Contact_email_Confirmation" Text="Email"></TextBlock>
-                    <TextBox Style="{StaticResource InputBase}" x:Name="emailConfirmation" ></TextBox>
+                    <TextBox Style="{StaticResource CheckoutInputBase}" x:Name="emailConfirmation" ></TextBox>
                 </StackPanel>
 
                 <StackPanel Style="{StaticResource TextBoxInputContainer}" Visibility="{Binding phones[0].type.required,Converter={StaticResource VisibilityConverter}}">
@@ -49,17 +49,17 @@
                     
                     <StackPanel Grid.Column="0" Style="{StaticResource TextBoxInputContainer}" Visibility="{Binding phones[0].country_code.required,Converter={StaticResource VisibilityConverter}}">
                         <TextBlock Style="{StaticResource BaseTextLabel}" x:Uid="Contact_Country_Code" Text="Pais"></TextBlock>
-                        <TextBox Style="{StaticResource InputBase}" x:Name="country_code" Text="{Binding phones[0].country_code.coreValue,Mode=TwoWay}"></TextBox>
+                        <TextBox InputScope="Number" Style="{StaticResource CheckoutInputBase}" x:Name="country_code" Text="{Binding phones[0].country_code.coreValue,Mode=TwoWay}"></TextBox>
                     </StackPanel>
 
                     <StackPanel Grid.Column="2" Style="{StaticResource TextBoxInputContainer}" Visibility="{Binding phones[0].area_code.required,Converter={StaticResource VisibilityConverter}}">
                         <TextBlock Style="{StaticResource BaseTextLabel}" x:Uid="Contact_Area_Code" Text="Area"></TextBlock>
-                        <TextBox Style="{StaticResource InputBase}" x:Name="area_code" Text="{Binding phones[0].area_code.coreValue,Mode=TwoWay}"></TextBox>
+                        <TextBox InputScope="Number" Style="{StaticResource CheckoutInputBase}" x:Name="area_code" Text="{Binding phones[0].area_code.coreValue,Mode=TwoWay}"></TextBox>
                     </StackPanel>
 
                     <StackPanel Grid.Column="4" Style="{StaticResource TextBoxInputContainer}" Visibility="{Binding phones[0].number.required,Converter={StaticResource VisibilityConverter}}">
                         <TextBlock Style="{StaticResource BaseTextLabel}" x:Uid="Contact_Number" Text=" Numero"></TextBlock>
-                        <TextBox Style="{StaticResource InputBase}" x:Name="number" Text="{Binding phones[0].number.coreValue,Mode=TwoWay}"></TextBox>
+                        <TextBox InputScope="Number" Style="{StaticResource CheckoutInputBase}" x:Name="number" Text="{Binding phones[0].number.coreValue,Mode=TwoWay}"></TextBox>
                     </StackPanel>
                 </Grid>
             </StackPanel>
