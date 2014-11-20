@@ -54,6 +54,7 @@
     <x:Double x:Key="dBlock2">49.6</x:Double> 
     <GridLength x:Key="Block2p">59.2</GridLength>
     <GridLength x:Key="Block3">79.2</GridLength>
+    <x:Double x:Key="dBlock3p">79.2</x:Double>
     <GridLength x:Key="Block3p">88.8</GridLength>
     <x:Double x:Key="dBlock3">79.2</x:Double>
     <GridLength x:Key="Block4">118.4</GridLength>

@@ -20,10 +20,10 @@
     	<Grid.RowDefinitions>
     		<RowDefinition Height="{StaticResource Block1p}" />
             <RowDefinition Height="{StaticResource Block1p}"/>
-            <RowDefinition Height="{StaticResource Block3p}"/>            
-            <RowDefinition Height="{StaticResource Block3p}"/>
-            <RowDefinition Height="{StaticResource Block3p}"/>
-            <RowDefinition Height="{StaticResource Block2}" />            
+            <RowDefinition MinHeight="{StaticResource dBlock3p}"/>
+            <RowDefinition MinHeight="{StaticResource dBlock3p}"/>
+            <RowDefinition MinHeight="{StaticResource dBlock3p}"/>
+            <RowDefinition MinHeight="{StaticResource dBlock2}" />            
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
