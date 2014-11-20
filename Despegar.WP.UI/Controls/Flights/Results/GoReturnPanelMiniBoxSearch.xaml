@@ -8,7 +8,7 @@
     x:Class="Despegar.WP.UI.Controls.Flights.Results.GoReturnPanelMiniBoxSearch"
     mc:Ignorable="d"
     d:DesignHeight="100"
-    d:DesignWidth="100"
+    d:DesignWidth="300"
     >
 
     <Grid>
@@ -17,7 +17,7 @@
 					<ColumnDefinition/>
 		</Grid.ColumnDefinitions>
 
-		<Grid Grid.Column="0" Style="{StaticResource IconBlue}">
+		<Grid Grid.Column="0" Style="{StaticResource IconBlue}" >
             <Image Style="{StaticResource FlightIconResult}"/>
          </Grid>
 

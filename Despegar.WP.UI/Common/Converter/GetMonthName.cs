@@ -40,7 +40,7 @@ namespace Despegar.WP.UI.Common.Converter
             }
             var cultureInfo = new CultureInfo(lan);
             DateTimeFormatInfo dfi = cultureInfo.DateTimeFormat;
-            return dfi.GetAbbreviatedMonthName(month);
+            return dfi.GetAbbreviatedMonthName(month).ToUpper();
             
         }
 
