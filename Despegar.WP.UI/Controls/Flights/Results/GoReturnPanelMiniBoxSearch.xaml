@@ -11,23 +11,36 @@
     d:DesignWidth="100"
     >
 
-    <Grid >
-        <StackPanel Orientation="Vertical">
+    <Grid>
+		<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="35"/>
+					<ColumnDefinition/>
+		</Grid.ColumnDefinitions>
+
+		<Grid Grid.Column="0" Style="{StaticResource IconBlue}">
+            <Image Style="{StaticResource FlightIconResult}"/>
+         </Grid>
+
+
+        <StackPanel Grid.Column="1" Orientation="Vertical">
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="{Binding OriginFlight}"/>
-                <Image Width="30"/>
+                <TextBlock Text="-"/>
                 <TextBlock Text="{Binding DestinationFlight}"/>
             </StackPanel>
-			<Grid>
+			<!--<Grid HorizontalAlignment="Left" >
 				<Grid.ColumnDefinitions>
-					<ColumnDefinition/>
+					<ColumnDefinition Width="40"/>
 					<ColumnDefinition/>
 				</Grid.ColumnDefinitions>
-				<TextBlock Text="{Binding TotalFlights}" Grid.ColumnSpan="2" Margin="40,0,23,0"/>
+                <TextBlock Text="{Binding TotalFlights}" Grid.Column="0" HorizontalAlignment="Right" />
                 <TextBlock x:Uid="Page_FlightResult_Flight" Grid.Column="1"/>
-			</Grid>
-            <Image Width="20" Height="20" Source="ms-appx:///Product/Legacy/Assets/Image/Icon/new.png"/>
-            
+			</Grid>-->
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="{Binding TotalFlights}" />
+                <TextBlock x:Uid="Page_FlightResult_Flight" />
+            </StackPanel>
         </StackPanel>
+        
     </Grid>
 </UserControl>

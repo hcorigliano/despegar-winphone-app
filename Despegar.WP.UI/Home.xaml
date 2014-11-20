@@ -5,6 +5,7 @@
     xmlns:local="using:Despegar.WP.UI"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:dev="using:Despegar.WP.UI.Developer.Controls"
     mc:Ignorable="d"  
     Style="{StaticResource BasePage}"
     NavigationCacheMode="Required"
@@ -23,81 +24,90 @@
         </Grid.ChildrenTransitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="{StaticResource Block1p}"/>
-            <RowDefinition Height="{StaticResource Block2}"/>
-            <RowDefinition Height="{StaticResource Offset}"/>
+            <RowDefinition Height="{StaticResource Block2p}"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <!--Title Section-->
-        <Image Grid.Row="0" Style="{StaticResource TopLogo}" />
-        <TextBlock  Grid.Row="1" x:Uid="Page_Home" Style="{StaticResource PageHeader}" Text="inicio" />
-        
+        <!-- DEV -->
+        <!--<dev:UserControlDesignGrid />-->
 
-        <ListView Grid.Row="3"  IsItemClickEnabled="True" ItemClick="ListView_ItemClick" ItemsSource="{Binding HomeOptions}" ItemContainerStyle="{StaticResource HomeButtonItemContainer}">
+        <!-- Title Section -->
+        <Image Grid.Row="0" Style="{StaticResource TopLogo}" />
+        <TextBlock  Grid.Row="1" x:Uid="Page_Home" Style="{StaticResource PageHeader}" Text="inicio" Grid.RowSpan="2" />
+
+        <ListView Grid.Row="2"  IsItemClickEnabled="True" ItemClick="ListView_ItemClick" ItemsSource="{Binding HomeOptions}" ItemContainerStyle="{StaticResource HomeButtonItemContainer}">
             <ListViewItem x:Name="Hotels">
                 <Grid DataContext="Hotels">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="{StaticResource Block3}"/>
-                            <ColumnDefinition Width="Auto"/>
-                        </Grid.ColumnDefinitions>
-
-                        <Image Grid.Column="0" Style="{StaticResource HomeHotelsButton}" />
-
-                        <StackPanel Grid.Column="1"  Style="{StaticResource HomeButtonTextContainer}">
-                            <TextBlock x:Uid="Page_Home_HotelsButton"     Style="{StaticResource HomeButtonTitle}" Text="Hoteles" />
-                            <TextBlock x:Uid="Page_Home_HotelsButtonSub"  Style="{StaticResource HomeButtonSub}" Text="Las mejoires ofertais" />
-                        </StackPanel>
-                    </Grid>
-                </ListViewItem>
-
-                <ListViewItem x:Name="Flights"> 
-                    <Grid DataContext="Flights">
-                        <Grid.ColumnDefinitions>
+                    <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="{StaticResource Block3}"/>
-                            <ColumnDefinition Width="Auto"/>
-                        </Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
 
-                        <Image Grid.Column="0" Style="{StaticResource HomeFlightsButton}" />
-
-                        <StackPanel Grid.Column="1"  Style="{StaticResource HomeButtonTextContainer}" >
-                            <TextBlock x:Uid="Page_Home_FlightsButton"     Style="{StaticResource HomeButtonTitle}" Text="Vuelos" />
-                            <TextBlock x:Uid="Page_Home_FlightsButtonSub"  Style="{StaticResource HomeButtonSub}" Text="Las mejoires ofertais" />
-                        </StackPanel>
+                    <Grid Grid.Column="0" Style="{StaticResource BaseHomeButtonBackground}">
+                        <Image Style="{StaticResource HomeHotelsButton}"  />
                     </Grid>
-                </ListViewItem>
+                    
+                    <StackPanel Grid.Column="1"  Style="{StaticResource HomeButtonTextContainer}">
+                        <TextBlock x:Uid="Page_Home_HotelsButton"     Style="{StaticResource HomeButtonTitle}" Text="Hoteles" />
+                        <!--<TextBlock x:Uid="Page_Home_HotelsButtonSub"  Style="{StaticResource HomeButtonSub}" Text="Las mejoires ofertais" />-->
+                    </StackPanel>
+                </Grid>
+            </ListViewItem>
 
-                <ListViewItem>
-                    <Grid DataContext="FlightStatus">
-                        <Grid.ColumnDefinitions>
+            <ListViewItem x:Name="Flights">
+                <Grid DataContext="Flights">
+                    <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="{StaticResource Block3}"/>
-                            <ColumnDefinition Width="Auto"/>
-                        </Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
 
-                        <Image Grid.Column="0"  Style="{StaticResource HomeFlightStatusButton}" />
-
-                        <StackPanel Grid.Column="1"  Style="{StaticResource HomeButtonTextContainer}">
-                            <TextBlock x:Uid="Page_Home_FlightStatusButton"     Style="{StaticResource HomeButtonTitle}" Text="Estado de Vuelos" />
-                            <TextBlock x:Uid="Page_Home_FlightStatusButtonSub"  Style="{StaticResource HomeButtonSub}" Text="Las mejoires ofertais" />
-                        </StackPanel>
+                    <Grid Grid.Column="0" Style="{StaticResource BaseHomeButtonBackground}">
+                        <Image Style="{StaticResource HomeFlightsButton}"  />
                     </Grid>
-                </ListViewItem>
+                    
+                    <StackPanel Grid.Column="1"  Style="{StaticResource HomeButtonTextContainer}" >
+                        <TextBlock x:Uid="Page_Home_FlightsButton"     Style="{StaticResource HomeButtonTitle}" Text="Vuelos" />
+                        <!--<TextBlock x:Uid="Page_Home_FlightsButtonSub"  Style="{StaticResource HomeButtonSub}" Text="Las mejoires ofertais" />-->
+                    </StackPanel>
+                </Grid>
+            </ListViewItem>
 
-                <ListViewItem>
-                    <Grid DataContext="MyDespegar">
-                        <Grid.ColumnDefinitions>
+            <ListViewItem>
+                <Grid DataContext="FlightStatus">
+                    <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="{StaticResource Block3}"/>
-                            <ColumnDefinition Width="Auto" />
-                        </Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
 
-                        <Image Grid.Column="0"  Style="{StaticResource HomeMyDespegarButton}" />
-
-                        <StackPanel Grid.Column="1" Style="{StaticResource HomeButtonTextContainer}">
-                            <TextBlock x:Uid="Page_Home_MyDespegarButton"     Style="{StaticResource HomeButtonTitle}" Text="Hoteles"  />
-                            <TextBlock x:Uid="Page_Home_MyDespegarButtonSub"  Style="{StaticResource HomeButtonSub}" Text="Las mejoires ofertais" />
-                        </StackPanel>
+                    <Grid Grid.Column="0" Style="{StaticResource BaseHomeButtonBackground}">
+                        <Image Style="{StaticResource HomeFlightStatusButton}"  />
                     </Grid>
-                </ListViewItem>
-         </ListView>
+                    
+                    <StackPanel Grid.Column="1"  Style="{StaticResource HomeButtonTextContainer}">
+                        <TextBlock x:Uid="Page_Home_FlightStatusButton"     Style="{StaticResource HomeButtonTitle}" Text="Estado de Vuelos" />
+                        <!--<TextBlock x:Uid="Page_Home_FlightStatusButtonSub"  Style="{StaticResource HomeButtonSub}" Text="Las mejoires ofertais" />-->
+                    </StackPanel>
+                </Grid>
+            </ListViewItem>
+
+            <ListViewItem>
+                <Grid DataContext="MyDespegar">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="{StaticResource Block3}"/>
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <Grid Grid.Column="0" Style="{StaticResource BaseHomeButtonBackground}">
+                        <Image Style="{StaticResource HomeMyDespegarButton}"  />
+                    </Grid>
+                    
+                    <StackPanel Grid.Column="1" Style="{StaticResource HomeButtonTextContainer}">
+                        <TextBlock x:Uid="Page_Home_MyDespegarButton"     Style="{StaticResource HomeButtonTitle}" Text="Hoteles"  />
+                        <!--<TextBlock x:Uid="Page_Home_MyDespegarButtonSub"  Style="{StaticResource HomeButtonSub}" Text="Las mejoires ofertais" />-->
+                    </StackPanel>
+                </Grid>
+            </ListViewItem>
+        </ListView>
 
     </Grid>
 </Page>

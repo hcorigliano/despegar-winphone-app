@@ -1,5 +1,7 @@
 ﻿using Despegar.Core.Business.Flight.Itineraries;
+using Despegar.Core.IService;
 using Despegar.WP.UI.Model.Classes.Flights;
+using Despegar.WP.UI.Model.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -76,6 +78,9 @@ namespace Despegar.WP.UI.Model
         }
 
         private Paging _paging;
+        
+        public Core.IService.IFlightService flightService;
+
         public Paging Paging{
             get { return _paging; }
             set {   _paging = value;
@@ -87,6 +92,15 @@ namespace Despegar.WP.UI.Model
         public FlightResultsModel()
         {
             this.InitializeModel();
+        }
+
+        public FlightResultsModel(INavigator navigator, IFlightService flightService)
+        {
+            // TODO: Complete member initialization
+
+            this.Navigator = navigator;
+            this.flightService = flightService;
+           
         }
 
         public new void InitializeModel()
@@ -108,7 +122,14 @@ namespace Despegar.WP.UI.Model
             {
                 Items = new List<BindableItem>();
             }
-            Items.AddRange( (itemList.Select(il=> new BindableItem(il))).ToList() );
+
+            if (itemList != null)
+            {
+                //Items.AddRange((itemList.Select(il => new BindableItem(il))).ToList());
+                var list = (itemList.Select(il => new BindableItem(il))).ToList();
+                this.Items = list;
+                //base.NotifyPropertyChanged("Items");
+            }
         }
 
         public void FillRoutedTemplate(Item item)
@@ -124,5 +145,43 @@ namespace Despegar.WP.UI.Model
         {
             throw new NotImplementedException();
         }
+
+        public List<Facet> SelectedFacets
+        {
+            get
+            {
+                var facetList = this._facets.Where(f => f.values.Any(fv => fv.selected == true));
+                return facetList.ToList();
+            }
+        }
+
+        public Value3 SelectedSorting
+        {
+            get
+            {
+                var selectedSortingList = this._sorting.values.FirstOrDefault(sr => sr.selected == true);
+                return selectedSortingList;
+            }
+        }
+
+
+
+        public void Clear()
+        {
+           
+            //this.cheapest_price = value.cheapest_price;
+            this.Currencies = null;
+
+            if (this.Items!=null) 
+                this.Items.Clear();
+
+            if (this.Items!=null)
+                this.Facets.Clear();
+
+            this.Sorting = null;
+            this.Paging = null;
+        }
+
+        public INavigator Navigator { get; set; }
     }
 }

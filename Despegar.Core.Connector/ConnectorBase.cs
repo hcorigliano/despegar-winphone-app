@@ -114,15 +114,13 @@ namespace Despegar.Core.Connector
             {
                 // HTTP Client error
                 var e = new WebConnectivityException(String.Format("[Connector]: Could not connect to Service URL ", httpMessage.RequestUri), ex);
-                customExceptionThrown = true;
                 Logger.LogCoreException(e);
                 throw e;
             }
-            catch (JsonSerializationException ex)
+            catch (JsonException ex)
             {
                 // Deserializer JSON.NET Error
                 var e = new JsonSerializerException(String.Format("[Connector]: Service call: {0}. Could not deserialize type '{1}' from service response data: {2}", httpMessage.RequestUri, typeof(T).FullName, response), ex);
-                customExceptionThrown = true;
                 Logger.LogCoreException(e);
                 throw e;
             }

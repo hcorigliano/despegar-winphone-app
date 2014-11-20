@@ -107,19 +107,21 @@
       <Project>{4bd277e3-3251-4cf8-8ee5-9ef410362d4f}</Project>
       <Name>Despegar.WP.UI.Model</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Common\Converter\BooleanToVisibilityConverter.cs" />
+    <Compile Include="Common\Converter\DateToLongString.cs" />
     <Compile Include="Common\Converter\MiniboxVisibilityConverter.cs" />
+    <Compile Include="Common\Converter\CheckoutConverters.cs" />
     <Compile Include="Common\Navigator.cs" />
     <Compile Include="Common\OldPagesManager.cs" />
-    <Compile Include="Controls\Classes\Minor.cs" />
     <Compile Include="Loading.xaml.cs">
       <DependentUpon>Loading.xaml</DependentUpon>
     </Compile>
-    <Compile Include="SampleData\CountrySelectionSample.cs" />
+    <Compile Include="Product\Flights\FlightMultipleEdit.xaml.cs">
+      <DependentUpon>FlightMultipleEdit.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Common\Converter\DayofWeekShortName.cs" />
     <Compile Include="Common\Converter\CommonConverters.cs" />
     <Compile Include="Common\Converter\GetMonthName.cs" />
@@ -140,9 +142,6 @@
     </Compile>
     <Compile Include="Controls\Flights\FlightSegment.xaml.cs">
       <DependentUpon>FlightSegment.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\Flights\FlightsSection.xaml.cs">
-      <DependentUpon>FlightsSection.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\Flights\QuantityPassagersControl.xaml.cs">
       <DependentUpon>QuantityPassagersControl.xaml</DependentUpon>
@@ -190,14 +189,35 @@
     <Compile Include="Home.xaml.cs">
       <DependentUpon>Home.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Product\Flights\Checkout\Buy\Buy.xaml.cs">
+      <DependentUpon>Buy.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Product\Flights\Checkout\Buy\Controls\BuyDetailsControl.xaml.cs">
+      <DependentUpon>BuyDetailsControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Product\Flights\Checkout\CardData\CardData.xaml.cs">
+      <DependentUpon>CardData.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Product\Flights\Checkout\Contact\Contact.xaml.cs">
       <DependentUpon>Contact.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Product\Flights\Checkout\Invoice\InvoiceArg.xaml.cs">
+      <DependentUpon>InvoiceArg.xaml</DependentUpon>
     </Compile>
     <Compile Include="Product\Flights\Checkout\Passegers\Passengers.xaml.cs">
       <DependentUpon>Passengers.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Product\Flights\Checkout\Payment\Controls\Cards.xaml.cs">
+      <DependentUpon>Cards.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Product\Flights\FlightFilters.xaml.cs">
       <DependentUpon>FlightFilters.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Product\Flights\Checkout\Payment\Controls\PaymentWithInterest.xaml.cs">
+      <DependentUpon>PaymentWithInterest.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Product\Flights\Checkout\Payment\Payments.xaml.cs">
+      <DependentUpon>Payments.xaml</DependentUpon>
     </Compile>
     <Compile Include="Product\Flights\FlightResults.xaml.cs">
       <DependentUpon>FlightResults.xaml</DependentUpon>
@@ -236,10 +256,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\Flights\FlightsSection.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Controls\Flights\Results\MiniBoxFlightRoutes.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -248,11 +264,23 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Product\Flights\Checkout\Buy\Buy.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\Flights\Results\SearchMiniBoxControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Product\Flights\Checkout\Buy\Controls\BuyDetailsControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Developer\Controls\UserControlDesignGrid.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Product\Flights\Checkout\CardData\CardData.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -265,6 +293,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Product\Flights\Checkout\Contact\Contact.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Product\Flights\Checkout\Invoice\InvoiceArg.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -284,6 +316,22 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Product\Flights\Checkout\Payment\Controls\Cards.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Product\Flights\FlightMultipleEdit.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Product\Flights\Checkout\Payment\Controls\PaymentWithInterest.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Product\Flights\Checkout\Payment\Payments.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Product\Flights\FlightSortBy.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -300,29 +348,242 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\ApplicationIcon.png" />
-    <Content Include="Assets\clock.jpg" />
-    <Content Include="Assets\country\Argentina.png" />
-    <Content Include="Assets\country\Australia.png" />
-    <Content Include="Assets\country\Bolivia.png" />
-    <Content Include="Assets\country\Brasil.png" />
-    <Content Include="Assets\country\Chile.png" />
-    <Content Include="Assets\country\Colombia.png" />
-    <Content Include="Assets\country\Costa Rica.png" />
-    <Content Include="Assets\country\Ecuador.png" />
-    <Content Include="Assets\country\El Salvador.png" />
-    <Content Include="Assets\country\España.png" />
-    <Content Include="Assets\country\Estados Unidos.png" />
-    <Content Include="Assets\country\Guatemala.png" />
-    <Content Include="Assets\country\Honduras.png" />
-    <Content Include="Assets\country\México.png" />
-    <Content Include="Assets\country\Nicaragua.png" />
-    <Content Include="Assets\country\Panamá.png" />
-    <Content Include="Assets\country\Paraguay.png" />
-    <Content Include="Assets\country\Peru.png" />
-    <Content Include="Assets\country\Puerto Rico.png" />
-    <Content Include="Assets\country\República Dominicana.png" />
-    <Content Include="Assets\country\Uruguay.png" />
-    <Content Include="Assets\country\Venezuela.png" />
+    <Content Include="Assets\country\AD.png" />
+    <Content Include="Assets\country\AE.png" />
+    <Content Include="Assets\country\AF.png" />
+    <Content Include="Assets\country\AG.png" />
+    <Content Include="Assets\country\AI.png" />
+    <Content Include="Assets\country\AL.png" />
+    <Content Include="Assets\country\AM.png" />
+    <Content Include="Assets\country\AN.png" />
+    <Content Include="Assets\country\AO.png" />
+    <Content Include="Assets\country\AQ.png" />
+    <Content Include="Assets\country\AR.png" />
+    <Content Include="Assets\country\AS.png" />
+    <Content Include="Assets\country\AT.png" />
+    <Content Include="Assets\country\AU.png" />
+    <Content Include="Assets\country\AW.png" />
+    <Content Include="Assets\country\AX.png" />
+    <Content Include="Assets\country\AZ.png" />
+    <Content Include="Assets\country\BA.png" />
+    <Content Include="Assets\country\BB.png" />
+    <Content Include="Assets\country\BD.png" />
+    <Content Include="Assets\country\BE.png" />
+    <Content Include="Assets\country\BF.png" />
+    <Content Include="Assets\country\BG.png" />
+    <Content Include="Assets\country\BH.png" />
+    <Content Include="Assets\country\BI.png" />
+    <Content Include="Assets\country\BJ.png" />
+    <Content Include="Assets\country\BL.png" />
+    <Content Include="Assets\country\BM.png" />
+    <Content Include="Assets\country\BN.png" />
+    <Content Include="Assets\country\BO.png" />
+    <Content Include="Assets\country\BR.png" />
+    <Content Include="Assets\country\BS.png" />
+    <Content Include="Assets\country\BT.png" />
+    <Content Include="Assets\country\BW.png" />
+    <Content Include="Assets\country\BY.png" />
+    <Content Include="Assets\country\BZ.png" />
+    <Content Include="Assets\country\CA.png" />
+    <Content Include="Assets\country\CC.png" />
+    <Content Include="Assets\country\CD.png" />
+    <Content Include="Assets\country\CF.png" />
+    <Content Include="Assets\country\CG.png" />
+    <Content Include="Assets\country\CH.png" />
+    <Content Include="Assets\country\CI.png" />
+    <Content Include="Assets\country\CK.png" />
+    <Content Include="Assets\country\CL.png" />
+    <Content Include="Assets\country\CM.png" />
+    <Content Include="Assets\country\CN.png" />
+    <Content Include="Assets\country\CO.png" />
+    <Content Include="Assets\country\CR.png" />
+    <Content Include="Assets\country\CU.png" />
+    <Content Include="Assets\country\CV.png" />
+    <Content Include="Assets\country\CX.png" />
+    <Content Include="Assets\country\CY.png" />
+    <Content Include="Assets\country\CZ.png" />
+    <Content Include="Assets\country\DE.png" />
+    <Content Include="Assets\country\DJ.png" />
+    <Content Include="Assets\country\DK.png" />
+    <Content Include="Assets\country\DM.png" />
+    <Content Include="Assets\country\DO.png" />
+    <Content Include="Assets\country\DZ.png" />
+    <Content Include="Assets\country\EC.png" />
+    <Content Include="Assets\country\EE.png" />
+    <Content Include="Assets\country\EG.png" />
+    <Content Include="Assets\country\EH.png" />
+    <Content Include="Assets\country\ER.png" />
+    <Content Include="Assets\country\ES.png" />
+    <Content Include="Assets\country\ET.png" />
+    <Content Include="Assets\country\EU.png" />
+    <Content Include="Assets\country\FI.png" />
+    <Content Include="Assets\country\FJ.png" />
+    <Content Include="Assets\country\FK.png" />
+    <Content Include="Assets\country\FM.png" />
+    <Content Include="Assets\country\FO.png" />
+    <Content Include="Assets\country\FR.png" />
+    <Content Include="Assets\country\GA.png" />
+    <Content Include="Assets\country\GB.png" />
+    <Content Include="Assets\country\GD.png" />
+    <Content Include="Assets\country\GE.png" />
+    <Content Include="Assets\country\Generico.png" />
+    <Content Include="Assets\country\GG.png" />
+    <Content Include="Assets\country\GH.png" />
+    <Content Include="Assets\country\GI.png" />
+    <Content Include="Assets\country\GL.png" />
+    <Content Include="Assets\country\GM.png" />
+    <Content Include="Assets\country\GN.png" />
+    <Content Include="Assets\country\GQ.png" />
+    <Content Include="Assets\country\GR.png" />
+    <Content Include="Assets\country\GS.png" />
+    <Content Include="Assets\country\GT.png" />
+    <Content Include="Assets\country\GU.png" />
+    <Content Include="Assets\country\GW.png" />
+    <Content Include="Assets\country\GY.png" />
+    <Content Include="Assets\country\HK.png" />
+    <Content Include="Assets\country\HN.png" />
+    <Content Include="Assets\country\HR.png" />
+    <Content Include="Assets\country\HT.png" />
+    <Content Include="Assets\country\HU.png" />
+    <Content Include="Assets\country\ID.png" />
+    <Content Include="Assets\country\IE.png" />
+    <Content Include="Assets\country\IL.png" />
+    <Content Include="Assets\country\IM.png" />
+    <Content Include="Assets\country\IN.png" />
+    <Content Include="Assets\country\IQ.png" />
+    <Content Include="Assets\country\IR.png" />
+    <Content Include="Assets\country\IS.png" />
+    <Content Include="Assets\country\IT.png" />
+    <Content Include="Assets\country\JE.png" />
+    <Content Include="Assets\country\JM.png" />
+    <Content Include="Assets\country\JO.png" />
+    <Content Include="Assets\country\JP.png" />
+    <Content Include="Assets\country\KE.png" />
+    <Content Include="Assets\country\KG.png" />
+    <Content Include="Assets\country\KH.png" />
+    <Content Include="Assets\country\KI.png" />
+    <Content Include="Assets\country\KM.png" />
+    <Content Include="Assets\country\KN.png" />
+    <Content Include="Assets\country\KP.png" />
+    <Content Include="Assets\country\KR.png" />
+    <Content Include="Assets\country\KV.png" />
+    <Content Include="Assets\country\KW.png" />
+    <Content Include="Assets\country\KY.png" />
+    <Content Include="Assets\country\KZ.png" />
+    <Content Include="Assets\country\LA.png" />
+    <Content Include="Assets\country\LB.png" />
+    <Content Include="Assets\country\LC.png" />
+    <Content Include="Assets\country\LI.png" />
+    <Content Include="Assets\country\LK.png" />
+    <Content Include="Assets\country\LR.png" />
+    <Content Include="Assets\country\LS.png" />
+    <Content Include="Assets\country\LT.png" />
+    <Content Include="Assets\country\LU.png" />
+    <Content Include="Assets\country\LV.png" />
+    <Content Include="Assets\country\LY.png" />
+    <Content Include="Assets\country\MA.png" />
+    <Content Include="Assets\country\MC.png" />
+    <Content Include="Assets\country\MD.png" />
+    <Content Include="Assets\country\ME.png" />
+    <Content Include="Assets\country\MG.png" />
+    <Content Include="Assets\country\MH.png" />
+    <Content Include="Assets\country\MK.png" />
+    <Content Include="Assets\country\ML.png" />
+    <Content Include="Assets\country\MM.png" />
+    <Content Include="Assets\country\MN.png" />
+    <Content Include="Assets\country\MO.png" />
+    <Content Include="Assets\country\MP.png" />
+    <Content Include="Assets\country\MR.png" />
+    <Content Include="Assets\country\MS.png" />
+    <Content Include="Assets\country\MT.png" />
+    <Content Include="Assets\country\MU.png" />
+    <Content Include="Assets\country\MV.png" />
+    <Content Include="Assets\country\MW.png" />
+    <Content Include="Assets\country\MX.png" />
+    <Content Include="Assets\country\MY.png" />
+    <Content Include="Assets\country\MZ.png" />
+    <Content Include="Assets\country\NA.png" />
+    <Content Include="Assets\country\NC.png" />
+    <Content Include="Assets\country\NE.png" />
+    <Content Include="Assets\country\NF.png" />
+    <Content Include="Assets\country\NG.png" />
+    <Content Include="Assets\country\NI.png" />
+    <Content Include="Assets\country\NL.png" />
+    <Content Include="Assets\country\NO.png" />
+    <Content Include="Assets\country\NP.png" />
+    <Content Include="Assets\country\NR.png" />
+    <Content Include="Assets\country\NU.png" />
+    <Content Include="Assets\country\NZ.png" />
+    <Content Include="Assets\country\OM.png" />
+    <Content Include="Assets\country\PA.png" />
+    <Content Include="Assets\country\PE.png" />
+    <Content Include="Assets\country\PG.png" />
+    <Content Include="Assets\country\PH.png" />
+    <Content Include="Assets\country\PK.png" />
+    <Content Include="Assets\country\PL.png" />
+    <Content Include="Assets\country\PN.png" />
+    <Content Include="Assets\country\PR.png" />
+    <Content Include="Assets\country\PS.png" />
+    <Content Include="Assets\country\PT.png" />
+    <Content Include="Assets\country\PW.png" />
+    <Content Include="Assets\country\PY.png" />
+    <Content Include="Assets\country\QA.png" />
+    <Content Include="Assets\country\RO.png" />
+    <Content Include="Assets\country\RS.png" />
+    <Content Include="Assets\country\RU.png" />
+    <Content Include="Assets\country\RW.png" />
+    <Content Include="Assets\country\SA.png" />
+    <Content Include="Assets\country\SB.png" />
+    <Content Include="Assets\country\SC.png" />
+    <Content Include="Assets\country\SD.png" />
+    <Content Include="Assets\country\SE.png" />
+    <Content Include="Assets\country\SG.png" />
+    <Content Include="Assets\country\SH.png" />
+    <Content Include="Assets\country\SI.png" />
+    <Content Include="Assets\country\SK.png" />
+    <Content Include="Assets\country\SL.png" />
+    <Content Include="Assets\country\SM.png" />
+    <Content Include="Assets\country\SN.png" />
+    <Content Include="Assets\country\SO.png" />
+    <Content Include="Assets\country\SR.png" />
+    <Content Include="Assets\country\SS.png" />
+    <Content Include="Assets\country\ST.png" />
+    <Content Include="Assets\country\SV.png" />
+    <Content Include="Assets\country\SY.png" />
+    <Content Include="Assets\country\SZ.png" />
+    <Content Include="Assets\country\TC.png" />
+    <Content Include="Assets\country\TD.png" />
+    <Content Include="Assets\country\TG.png" />
+    <Content Include="Assets\country\TH.png" />
+    <Content Include="Assets\country\TJ.png" />
+    <Content Include="Assets\country\TM.png" />
+    <Content Include="Assets\country\TN.png" />
+    <Content Include="Assets\country\TO.png" />
+    <Content Include="Assets\country\TP.png" />
+    <Content Include="Assets\country\TR.png" />
+    <Content Include="Assets\country\TT.png" />
+    <Content Include="Assets\country\TV.png" />
+    <Content Include="Assets\country\TW.png" />
+    <Content Include="Assets\country\TZ.png" />
+    <Content Include="Assets\country\UA.png" />
+    <Content Include="Assets\country\UG.png" />
+    <Content Include="Assets\country\US.png" />
+    <Content Include="Assets\country\UY.png" />
+    <Content Include="Assets\country\UZ.png" />
+    <Content Include="Assets\country\VA.png" />
+    <Content Include="Assets\country\VC.png" />
+    <Content Include="Assets\country\VE.png" />
+    <Content Include="Assets\country\VG.png" />
+    <Content Include="Assets\country\VI.png" />
+    <Content Include="Assets\country\VN.png" />
+    <Content Include="Assets\country\VU.png" />
+    <Content Include="Assets\country\WS.png" />
+    <Content Include="Assets\country\YE.png" />
+    <Content Include="Assets\country\YT.png" />
+    <Content Include="Assets\country\ZA.png" />
+    <Content Include="Assets\country\ZM.png" />
+    <Content Include="Assets\country\ZW.png" />
+    <Content Include="Assets\despegar-logo.white.png" />
     <Content Include="Assets\Helpers\a.png" />
     <Content Include="Assets\Helpers\matrix_green.png" />
     <Content Include="Assets\Helpers\matrix_magenta.png" />
@@ -330,22 +591,445 @@
     <Content Include="Assets\HomeButton_FlightStatus.png" />
     <Content Include="Assets\HomeButton_Hotels.png" />
     <Content Include="Assets\HomeButton_MyDespegar.png" />
-    <Content Include="Assets\Images\win_1.png" />
-    <Content Include="Assets\Images\win_10.png" />
-    <Content Include="Assets\Images\win_11.png" />
-    <Content Include="Assets\Images\win_12.png" />
-    <Content Include="Assets\Images\win_13.png" />
-    <Content Include="Assets\Images\win_14.png" />
-    <Content Include="Assets\Images\win_15.png" />
-    <Content Include="Assets\Images\win_0.png" />
-    <Content Include="Assets\Images\win_2.png" />
-    <Content Include="Assets\Images\win_3.png" />
-    <Content Include="Assets\Images\win_4.png" />
-    <Content Include="Assets\Images\win_5.png" />
-    <Content Include="Assets\Images\win_6.png" />
-    <Content Include="Assets\Images\win_7.png" />
-    <Content Include="Assets\Images\win_8.png" />
-    <Content Include="Assets\Images\win_9.png" />
+    <Content Include="Assets\Icon\Airlines\ag_0plogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_2dlogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_2klogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_2llogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_2rlogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_2tlogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_3clogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_3ilogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_3rlogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_4mlogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_4ologo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_5jlogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_5llogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_5plogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_5ulogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_6alogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_6hlogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_8rlogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_8ulogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_9clogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_9hlogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_9klogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_9ulogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_9vlogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_9wlogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_a1logo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_a3logo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_a4logo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_a7logo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_a8logo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_a9logo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_aalogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_ablogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_aclogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_adlogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_adologo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_aetlogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_aflogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_agalogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_ailogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_amlogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_anlogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_arlogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_aslogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_atlogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_aulogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_avlogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_aydlogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_aylogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_azlogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_b6logo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_balogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_bdlogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_belogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_bilogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_bjlogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_bmlogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_bqlogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_brlogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_buqlogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_bvlogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_bwlogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_c4logo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_c6logo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_calogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_cilogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_cmlogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_cologo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_cplogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_culogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_cxlogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_czlogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_d7logo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_delogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_dllogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_eblogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_eilogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_eklogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_enlogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_eqlogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_erlogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_etlogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_ewlogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_exlogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_eylogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_f9logo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_fflogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_filogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_fjlogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_fllogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_fmlogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_fqlogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_ftlogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_fulogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_g3logo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_g7logo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_gailogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_galogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_gflogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_ghlogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_gjlogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_gllogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_gulogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_h2logo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_halogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_hflogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_hplogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_hvlogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_i1logo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_iblogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_iclogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_iglogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_ijlogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_iralogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_irlogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_iwlogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_iylogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_j0logo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_jdlogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_jhlogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_jilogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_jjaalogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_jjlogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_jjrglogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_jklogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_jllogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_jmlogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_jplogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_jqlogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_kalogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_kelogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_kklogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_kllogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_klmlogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_kmlogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_kqlogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_kulogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_kxlogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_l7logo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_lalogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_lblogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_lclogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_ldlogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_lerlogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_lglogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_lhlogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_lhrglogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_lllogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_logo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_lologo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_lrlogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_lxlogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_lylogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_malogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_mclogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_mdlogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_melogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_mhlogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_milogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_mklogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_mllogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_mplogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_mslogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_multiplelogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_mxlogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_n6logo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_nflogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_nglogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_nhlogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_njlogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_nklogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_ntlogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_nulogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_nwlogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_nzlogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_o6logo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_oalogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_oclogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_oklogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_omlogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_oslogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_oylogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_ozlogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_p3logo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_p8logo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_p9logo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_pclogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_pglogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_pklogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_pllogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_prlogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_pslogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_pulogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_pylogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_pzlogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_qflogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_qrlogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_r7logo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_ralogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_rblogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_rglogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_rologo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_rutlogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_s3logo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_s4logo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_s7logo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_salogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_sblogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_sklogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_snlogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_splogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_sqlogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_srlogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_sslogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_sulogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_svlogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_swlogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_sylogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_t4logo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_talogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_taslogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_tclogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_tglogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_tklogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_tnlogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_tpelogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_tplogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_trlogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_tulogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_tuylogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_twalogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_twlogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_tzlogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_u2logo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_ualogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_uklogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_ullogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_unlogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_uslogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_uulogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_uxlogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_v0logo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_v7logo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_valogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_velogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_vhlogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_vklogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_vnlogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_vplogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_vslogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_vtlogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_vulogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_vvlogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_vwlogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_vxlogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_vylogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_w4logo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_whlogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_wjlogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_wklogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_xllogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_y4logo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_y8logo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_yxlogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_z5logo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_z6logo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_z8logo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_zelogo%402x.png" />
+    <Content Include="Assets\Icon\Airlines\ag_zzlogo%402x.png" />
+    <Content Include="Assets\Icon\App\arrow-right-small-white.png" />
+    <Content Include="Assets\Icon\App\calendar-medium-white.png" />
+    <Content Include="Assets\Icon\App\calendar-small-white.png" />
+    <Content Include="Assets\Icon\App\car-large-white.png" />
+    <Content Include="Assets\Icon\App\clock-xsmall-white.png" />
+    <Content Include="Assets\Icon\App\family-right-small-white.png" />
+    <Content Include="Assets\Icon\App\flight-large-white.png" />
+    <Content Include="Assets\Icon\App\flight-left-medium-white.png" />
+    <Content Include="Assets\Icon\App\flight-left-small-white.png" />
+    <Content Include="Assets\Icon\App\flight-right-medium-white.png" />
+    <Content Include="Assets\Icon\App\flight-right-small-white.png" />
+    <Content Include="Assets\Icon\App\flightstatus-large-white.png" />
+    <Content Include="Assets\Icon\App\hotel-large-white.png" />
+    <Content Include="Assets\Icon\App\midespegar-large-white.png" />
+    <Content Include="Assets\Icon\CreditCard\AX.png" />
+    <Content Include="Assets\Icon\CreditCard\AX_BRA.png" />
+    <Content Include="Assets\Icon\CreditCard\AX_CDC.png" />
+    <Content Include="Assets\Icon\CreditCard\AX_COM.png" />
+    <Content Include="Assets\Icon\CreditCard\AX_FRN.png" />
+    <Content Include="Assets\Icon\CreditCard\AX_GLC.png" />
+    <Content Include="Assets\Icon\CreditCard\AX_GUA.png" />
+    <Content Include="Assets\Icon\CreditCard\AX_HIP.png" />
+    <Content Include="Assets\Icon\CreditCard\AX_HSB.png" />
+    <Content Include="Assets\Icon\CreditCard\AX_ICBC.png" />
+    <Content Include="Assets\Icon\CreditCard\AX_ITAU.png" />
+    <Content Include="Assets\Icon\CreditCard\AX_MAC.png" />
+    <Content Include="Assets\Icon\CreditCard\AX_NAC.png" />
+    <Content Include="Assets\Icon\CreditCard\AX_NAR.png" />
+    <Content Include="Assets\Icon\CreditCard\AX_PAT.png" />
+    <Content Include="Assets\Icon\CreditCard\AX_PLA.png" />
+    <Content Include="Assets\Icon\CreditCard\AX_PRO.png" />
+    <Content Include="Assets\Icon\CreditCard\AX_RIO.png" />
+    <Content Include="Assets\Icon\CreditCard\AX_SAN.png" />
+    <Content Include="Assets\Icon\CreditCard\CA.png" />
+    <Content Include="Assets\Icon\CreditCard\CA_AFIRM.png" />
+    <Content Include="Assets\Icon\CreditCard\CA_AUS.png" />
+    <Content Include="Assets\Icon\CreditCard\CA_BAN.png" />
+    <Content Include="Assets\Icon\CreditCard\CA_BANJE.png" />
+    <Content Include="Assets\Icon\CreditCard\CA_BANOR.png" />
+    <Content Include="Assets\Icon\CreditCard\CA_BBVA.png" />
+    <Content Include="Assets\Icon\CreditCard\CA_BC.png" />
+    <Content Include="Assets\Icon\CreditCard\CA_BCI.png" />
+    <Content Include="Assets\Icon\CreditCard\CA_BERSA.png" />
+    <Content Include="Assets\Icon\CreditCard\CA_BOL.png" />
+    <Content Include="Assets\Icon\CreditCard\CA_BRA.png" />
+    <Content Include="Assets\Icon\CreditCard\CA_CDC.png" />
+    <Content Include="Assets\Icon\CreditCard\CA_CEN.png" />
+    <Content Include="Assets\Icon\CreditCard\CA_CIT.png" />
+    <Content Include="Assets\Icon\CreditCard\CA_CIU.png" />
+    <Content Include="Assets\Icon\CreditCard\CA_CMR.png" />
+    <Content Include="Assets\Icon\CreditCard\CA_COM.png" />
+    <Content Include="Assets\Icon\CreditCard\CA_COR.png" />
+    <Content Include="Assets\Icon\CreditCard\CA_CS.png" />
+    <Content Include="Assets\Icon\CreditCard\CA_DAV.png" />
+    <Content Include="Assets\Icon\CreditCard\CA_FAMSA.png" />
+    <Content Include="Assets\Icon\CreditCard\CA_FRN.png" />
+    <Content Include="Assets\Icon\CreditCard\CA_GLC.png" />
+    <Content Include="Assets\Icon\CreditCard\CA_HIP.png" />
+    <Content Include="Assets\Icon\CreditCard\CA_HSB.png" />
+    <Content Include="Assets\Icon\CreditCard\CA_HSBC.png" />
+    <Content Include="Assets\Icon\CreditCard\CA_ICBC.png" />
+    <Content Include="Assets\Icon\CreditCard\CA_INT.png" />
+    <Content Include="Assets\Icon\CreditCard\CA_INVEX.png" />
+    <Content Include="Assets\Icon\CreditCard\CA_ITAU.png" />
+    <Content Include="Assets\Icon\CreditCard\CA_IXE.png" />
+    <Content Include="Assets\Icon\CreditCard\CA_LIV.png" />
+    <Content Include="Assets\Icon\CreditCard\CA_MAC.png" />
+    <Content Include="Assets\Icon\CreditCard\CA_NAC.png" />
+    <Content Include="Assets\Icon\CreditCard\CA_NAT.png" />
+    <Content Include="Assets\Icon\CreditCard\CA_NBSF.png" />
+    <Content Include="Assets\Icon\CreditCard\CA_PAC.png" />
+    <Content Include="Assets\Icon\CreditCard\CA_PAT.png" />
+    <Content Include="Assets\Icon\CreditCard\CA_PRO.png" />
+    <Content Include="Assets\Icon\CreditCard\CA_SAN.png" />
+    <Content Include="Assets\Icon\CreditCard\CA_SB.png" />
+    <Content Include="Assets\Icon\CreditCard\CA_SCB.png" />
+    <Content Include="Assets\Icon\CreditCard\CA_SCR.png" />
+    <Content Include="Assets\Icon\CreditCard\CA_SJU.png" />
+    <Content Include="Assets\Icon\CreditCard\CA_TBANC.png" />
+    <Content Include="Assets\Icon\CreditCard\CD_DAV.png" />
+    <Content Include="Assets\Icon\CreditCard\CS.png" />
+    <Content Include="Assets\Icon\CreditCard\CS_CEN.png" />
+    <Content Include="Assets\Icon\CreditCard\DC.png" />
+    <Content Include="Assets\Icon\CreditCard\DC_CIT.png" />
+    <Content Include="Assets\Icon\CreditCard\DC_PIC.png" />
+    <Content Include="Assets\Icon\CreditCard\DS_PIC.png" />
+    <Content Include="Assets\Icon\CreditCard\EFECTIVO.png" />
+    <Content Include="Assets\Icon\CreditCard\GRL.png" />
+    <Content Include="Assets\Icon\CreditCard\IX_IXE.png" />
+    <Content Include="Assets\Icon\CreditCard\MC_BBVAB.png" />
+    <Content Include="Assets\Icon\CreditCard\MC_GUA.png" />
+    <Content Include="Assets\Icon\CreditCard\MC_NAR.png" />
+    <Content Include="Assets\Icon\CreditCard\MC_PIC.png" />
+    <Content Include="Assets\Icon\CreditCard\MC_PRB.png" />
+    <Content Include="Assets\Icon\CreditCard\MD.png" />
+    <Content Include="Assets\Icon\CreditCard\MD_GUA.png" />
+    <Content Include="Assets\Icon\CreditCard\VD.png" />
+    <Content Include="Assets\Icon\CreditCard\VD_INB.png" />
+    <Content Include="Assets\Icon\CreditCard\VD_PIC.png" />
+    <Content Include="Assets\Icon\CreditCard\VD_PRB.png" />
+    <Content Include="Assets\Icon\CreditCard\VI-SCR.png" />
+    <Content Include="Assets\Icon\CreditCard\VI.png" />
+    <Content Include="Assets\Icon\CreditCard\VI_AFIRM.png" />
+    <Content Include="Assets\Icon\CreditCard\VI_AMA.png" />
+    <Content Include="Assets\Icon\CreditCard\VI_AUS.png" />
+    <Content Include="Assets\Icon\CreditCard\VI_AZU.png" />
+    <Content Include="Assets\Icon\CreditCard\VI_BAJIO.png" />
+    <Content Include="Assets\Icon\CreditCard\VI_BAN.png" />
+    <Content Include="Assets\Icon\CreditCard\VI_BANJE.png" />
+    <Content Include="Assets\Icon\CreditCard\VI_BANOR.png" />
+    <Content Include="Assets\Icon\CreditCard\VI_BANRE.png" />
+    <Content Include="Assets\Icon\CreditCard\VI_BBVAB.png" />
+    <Content Include="Assets\Icon\CreditCard\VI_BBVAC.png" />
+    <Content Include="Assets\Icon\CreditCard\VI_BC.png" />
+    <Content Include="Assets\Icon\CreditCard\VI_BCI.png" />
+    <Content Include="Assets\Icon\CreditCard\VI_BERSA.png" />
+    <Content Include="Assets\Icon\CreditCard\VI_BLP.png" />
+    <Content Include="Assets\Icon\CreditCard\VI_BOL.png" />
+    <Content Include="Assets\Icon\CreditCard\VI_BSE.png" />
+    <Content Include="Assets\Icon\CreditCard\VI_BVA.png" />
+    <Content Include="Assets\Icon\CreditCard\VI_CDC.png" />
+    <Content Include="Assets\Icon\CreditCard\VI_CHA.png" />
+    <Content Include="Assets\Icon\CreditCard\VI_CIT.png" />
+    <Content Include="Assets\Icon\CreditCard\VI_CIU.png" />
+    <Content Include="Assets\Icon\CreditCard\VI_COM.png" />
+    <Content Include="Assets\Icon\CreditCard\VI_CORD.png" />
+    <Content Include="Assets\Icon\CreditCard\VI_CRE.png" />
+    <Content Include="Assets\Icon\CreditCard\VI_DAV.png" />
+    <Content Include="Assets\Icon\CreditCard\VI_FAMSA.png" />
+    <Content Include="Assets\Icon\CreditCard\VI_FOR.png" />
+    <Content Include="Assets\Icon\CreditCard\VI_FRN.png" />
+    <Content Include="Assets\Icon\CreditCard\VI_GUA.png" />
+    <Content Include="Assets\Icon\CreditCard\VI_HIP.png" />
+    <Content Include="Assets\Icon\CreditCard\VI_HSB.png" />
+    <Content Include="Assets\Icon\CreditCard\VI_HSBC.png" />
+    <Content Include="Assets\Icon\CreditCard\VI_ICBC.png" />
+    <Content Include="Assets\Icon\CreditCard\VI_INBUR.png" />
+    <Content Include="Assets\Icon\CreditCard\VI_INT.png" />
+    <Content Include="Assets\Icon\CreditCard\VI_INVEX.png" />
+    <Content Include="Assets\Icon\CreditCard\VI_ITAU.png" />
+    <Content Include="Assets\Icon\CreditCard\VI_IXE.png" />
+    <Content Include="Assets\Icon\CreditCard\VI_LIV.png" />
+    <Content Include="Assets\Icon\CreditCard\VI_MAC.png" />
+    <Content Include="Assets\Icon\CreditCard\VI_MIFEL.png" />
+    <Content Include="Assets\Icon\CreditCard\VI_NAC.png" />
+    <Content Include="Assets\Icon\CreditCard\VI_NAT.png" />
+    <Content Include="Assets\Icon\CreditCard\VI_NBLR.png" />
+    <Content Include="Assets\Icon\CreditCard\VI_NBSF.png" />
+    <Content Include="Assets\Icon\CreditCard\VI_NEU.png" />
+    <Content Include="Assets\Icon\CreditCard\VI_PAC.png" />
+    <Content Include="Assets\Icon\CreditCard\VI_PAT.png" />
+    <Content Include="Assets\Icon\CreditCard\VI_PIC.png" />
+    <Content Include="Assets\Icon\CreditCard\VI_PRB.png" />
+    <Content Include="Assets\Icon\CreditCard\VI_PRM.png" />
+    <Content Include="Assets\Icon\CreditCard\VI_PRO.png" />
+    <Content Include="Assets\Icon\CreditCard\VI_RI2.png" />
+    <Content Include="Assets\Icon\CreditCard\VI_RIO.png" />
+    <Content Include="Assets\Icon\CreditCard\VI_ROS.png" />
+    <Content Include="Assets\Icon\CreditCard\VI_RUM.png" />
+    <Content Include="Assets\Icon\CreditCard\VI_SAENZ.png" />
+    <Content Include="Assets\Icon\CreditCard\VI_SAN.png" />
+    <Content Include="Assets\Icon\CreditCard\VI_SB.png" />
+    <Content Include="Assets\Icon\CreditCard\VI_SCB.png" />
+    <Content Include="Assets\Icon\CreditCard\VI_SCR.png" />
+    <Content Include="Assets\Icon\CreditCard\VI_SJU.png" />
+    <Content Include="Assets\Icon\CreditCard\VI_SUP.png" />
+    <Content Include="Assets\Icon\CreditCard\VI_TBANC.png" />
+    <Content Include="Assets\Icon\CreditCard\VI_TER.png" />
+    <Content Include="Assets\Icon\CreditCard\VI_UNI.png" />
+    <Content Include="Assets\Icon\CreditCard\V_BCO.png" />
     <Content Include="Assets\Logo.scale-240.png" />
     <Content Include="Assets\Helpers\matrix_green_strong.png" />
     <Content Include="Assets\Helpers\matrix_red.png" />
@@ -354,7 +1038,6 @@
     <Content Include="Assets\SplashScreenImage.png" />
     <Content Include="Assets\Square71x71Logo.scale-240.png" />
     <Content Include="Assets\StoreLogo.scale-240.png" />
-    <Content Include="Assets\topLogo.png" />
     <Content Include="Assets\WideLogo.scale-240.png" />
     <Content Include="Assets\WindowsPhone_Background_480x800.png" />
     <Content Include="Product\Legacy\Assets\Image\ApplicationIcon.png" />
@@ -665,7 +1348,6 @@
   <ItemGroup>
     <Folder Include="Assets\en\" />
     <Folder Include="Assets\es\" />
-    <Folder Include="Assets\Icon\" />
     <Folder Include="Assets\pt\" />
     <Folder Include="Strings\en\" />
   </ItemGroup>

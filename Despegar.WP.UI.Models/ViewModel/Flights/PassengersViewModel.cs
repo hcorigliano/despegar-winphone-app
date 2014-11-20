@@ -100,14 +100,8 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
             this.GeneralAdults = 1;
             this.GeneralMinors = 0;
             MinorsList = new ObservableCollection<Minor>();
-            MinorsList.CollectionChanged += CollectionChangedHandler;
         }
-
-        private void CollectionChangedHandler(object sender, EventArgs e) 
-        { 
-           return;
-        }
-
+        
         /// <summary>
         /// Returns the available options for Adults passengers
         /// </summary>

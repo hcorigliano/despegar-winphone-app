@@ -1,0 +1,68 @@
+﻿<Page
+    x:Class="Despegar.WP.UI.Product.Flights.Checkout.CardData.CardData"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Despegar.WP.UI.Product.Flights.Checkout.CardData"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:conv="using:Despegar.WP.UI.Common.Converter"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Page.Resources>
+        <conv:VisibilityConverter x:Name="VisibilityConverter"/>
+        <conv:TypeToTextConverter x:Name="TypeToTextConverter"/>
+        <conv:DateToStringConverter x:Name="DateToStringConverter"/>
+        <conv:DateToExpirationStringConverter x:Name="DateToExpirationStringConverter"/>
+    </Page.Resources>
+    
+    <Grid>
+        <ScrollViewer VerticalScrollBarVisibility="Auto" Height="400">
+            <StackPanel x:Name="cardData">
+                <!--Card-->
+                
+                <!--TARJETA-->
+                <StackPanel>
+                    <TextBlock x:Uid="Card_Data_Card"></TextBlock>
+                    <ComboBox x:Name="card"  DisplayMemberPath="card.description" SelectedValue="{Binding card.phones[0].type.coreValue, Mode=TwoWay}" SelectedValuePath="card.code"  SelectionChanged="FillCardData"  ></ComboBox>
+                </StackPanel>
+
+                <StackPanel Visibility="{Binding card.number.required,Converter={StaticResource VisibilityConverter}}" >
+                    <TextBlock x:Uid="Card_Data_Number_Of_Card"></TextBlock>
+                    <TextBox x:Name="number" Text="{Binding card.number.coreValue , Mode=TwoWay}"></TextBox>
+                </StackPanel>
+
+                <StackPanel>
+                    <TextBlock x:Uid="Card_Data_Expiration"></TextBlock>
+                    <DatePicker DayFormat="{}{day.integer(1)}" Date="{Binding card.expiration.coreValue , Mode=TwoWay , Converter={StaticResource DateToExpirationStringConverter}}" ></DatePicker>  <!--BINDEAR MIN YEAR-->
+                </StackPanel>
+
+                <StackPanel Visibility="{Binding card.security_code.required,Converter={StaticResource VisibilityConverter}}" >
+                    <TextBlock x:Uid="Card_Data_Security_Code"></TextBlock>
+                    <TextBox x:Name="security_code" Text="{Binding card.security_code.coreValue , Mode=TwoWay}"></TextBox>
+                </StackPanel>
+
+                <StackPanel Visibility="{Binding card.owner_name.required,Converter={StaticResource VisibilityConverter}}" >
+                    <TextBlock x:Uid="Card_Data_owner_name"></TextBlock>
+                    <TextBox x:Name="owner_name" Text="{Binding card.owner_name.coreValue , Mode=TwoWay}"></TextBox>
+                </StackPanel>
+
+                <!--<StackPanel Visibility="{Binding card.owner_document.type.required,Converter={StaticResource VisibilityConverter}}">
+                    <TextBlock x:Uid="Card_Data_Document"></TextBlock>
+                    <ComboBox x:Name="owner_document_type" ItemsSource="{Binding card.owner_document.type.options}" DisplayMemberPath="description" SelectedValue="{Binding card.owner_document.type.coreValue, Mode=TwoWay}" SelectedValuePath="value"   ></ComboBox>
+                </StackPanel>-->
+
+                <StackPanel Visibility="{Binding card.owner_document.number.required,Converter={StaticResource VisibilityConverter}}" >
+                    <TextBlock x:Uid="Card_Data_Number_Document"></TextBlock>
+                    <TextBox x:Name="owner_document_number" Text="{Binding card.owner_document.number.coreValue , Mode=TwoWay}"></TextBox>
+                </StackPanel>
+
+                <StackPanel Visibility="{Binding card.email.required,Converter={StaticResource VisibilityConverter}}">
+                    <TextBlock x:Uid="Card_Data_Owner_Gender"></TextBlock>
+                    <ComboBox x:Name="owner_gender" ItemsSource="{Binding card.owner_gender.options}" DisplayMemberPath="description" SelectedValue="{Binding card.owner_gender.coreValue, Mode=TwoWay}" SelectedValuePath="value"   ></ComboBox>
+                </StackPanel>
+
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Page>

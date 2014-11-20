@@ -57,6 +57,7 @@
     <TargetPlatform Include="Windows, Version=8.1" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CommonServices.cs" />
     <Compile Include="ConfigurationService.cs" />
     <Compile Include="FlightService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

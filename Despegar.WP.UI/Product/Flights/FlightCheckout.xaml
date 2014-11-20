@@ -36,10 +36,12 @@
                     <TextBlock x:Uid="Flight_Checkout_Passagers" FontSize="36"></TextBlock>
                 </PivotItem.Header>
 
-                <StackPanel xmlns:src="using:Despegar.WP.UI.Product.Flights.Checkout.Passegers">
+                <ScrollViewer VerticalScrollBarVisibility="Auto" Height="400">
+
+                    <StackPanel xmlns:src="using:Despegar.WP.UI.Product.Flights.Checkout.Passegers">
 
                     <!--ItemsSource="{Binding passengers}"-->
-                    <ItemsControl x:Name="PassengerControl" ItemsSource="{Binding passengers}">
+                    <ItemsControl x:Name="PassengerControl" DataContext="{Binding bookingfields.form}" ItemsSource="{Binding passengers}">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
                                 <src:Passengers></src:Passengers>
@@ -47,46 +49,68 @@
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
                 </StackPanel>
+                </ScrollViewer>
             </PivotItem>
-
-
+        
             
-            
-            
+            <!--Contact Pivot-->            
             <PivotItem>
                 <PivotItem.Header>
                     <TextBlock x:Uid="Flight_Checkout_Contact" FontSize="36"></TextBlock>
                 </PivotItem.Header>
                 <StackPanel xmlns:src="using:Despegar.WP.UI.Product.Flights.Checkout.Contact">
 
-                    <src:ContactData x:Name="ContactControl"></src:ContactData>
-                    <Button Click="testo"></Button>
+                    <src:ContactData x:Name="ContactControl" DataContext="{Binding bookingfields.form.contact}"></src:ContactData>
                 </StackPanel>
             </PivotItem>
 
-
-
-
-
-                    <!--Contact Data-->
-            <!--xmlns:src="using:Despegar.WP.UI.Product.Flights.Checkout.Contact"--><!--
+            <!--Payments Pivot-->
             <PivotItem>
                 <PivotItem.Header>
-                    <TextBlock x:Uid="Flight_Checkout_Contact" FontSize="36"></TextBlock>
+                    <TextBlock x:Uid="Flight_Checkout_Payments" FontSize="36"></TextBlock>
                 </PivotItem.Header>
+                <StackPanel xmlns:src="using:Despegar.WP.UI.Product.Flights.Checkout.Payment">
 
-                <StackPanel xmlns:src="using:Despegar.WP.UI.Product.Flights.Checkout.Contact">
-
-                    --><!--ItemsSource="{Binding passengers}"--><!--
-                    <ItemsControl x:Name="ContactControl" ItemsSource="{Binding passengers}">
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <src:ContactData></src:ContactData>
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                    </ItemsControl>
+                    <src:Payments x:Name="PaymentControl" DataContext="{Binding PaymentFormated}"></src:Payments>
+                    
                 </StackPanel>
-            </PivotItem>-->
+            </PivotItem>
+
+            <!--Card Data Pivot-->
+            <PivotItem>
+                <PivotItem.Header>
+                    <TextBlock x:Uid="Flight_Checkout_Card_Data" FontSize="36"></TextBlock>
+                </PivotItem.Header>
+                <StackPanel xmlns:src="using:Despegar.WP.UI.Product.Flights.Checkout.CardData">
+
+                    <src:CardData x:Name="CardDataControl" DataContext="{Binding bookingfields.form.payment}"></src:CardData>
+                </StackPanel>
+            </PivotItem>
+            
+            <!--Invoice Arg-->
+            <PivotItem>
+                <PivotItem.Header>
+                    <TextBlock x:Uid="Flight_Checkout_Invoice_Arg" FontSize="36"></TextBlock>
+                </PivotItem.Header>
+                <StackPanel xmlns:src="using:Despegar.WP.UI.Product.Flights.Checkout.Invoice">
+
+                    <src:InvoiceArg x:Name="InvoiceArgControl" DataContext="{Binding bookingfields.form.payment.invoice}"></src:InvoiceArg>
+                </StackPanel>                
+                
+            </PivotItem>
+
+            <!--Buy-->
+            <PivotItem>
+                <PivotItem.Header>
+                    <TextBlock x:Uid="Flight_Checkout_Buy" FontSize="36"></TextBlock>
+                </PivotItem.Header>
+                <StackPanel xmlns:src="using:Despegar.WP.UI.Product.Flights.Checkout.Buy">
+
+                    <src:Buy x:Name="Buycontrol" DataContext="{Binding PriceFormated}"></src:Buy>
+                </StackPanel>
+
+            </PivotItem>
+
         </Pivot>
 
     </Grid>

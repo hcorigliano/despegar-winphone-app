@@ -5,13 +5,14 @@ using System.Text;
 using System.Threading.Tasks;
 using Despegar.Core.Business.Configuration;
 
+
 namespace Despegar.Core.IService
 {
     public interface IConfigurationService
     {
         Task<Configuration> GetConfigurations();
         Task<UpdateFields> CheckUpdate();
-        Task<CitiesFields> AutoCompleteCities(string CountryCode, string Search, string CityResult);
+        Task<List<CitiesFields>> AutoCompleteCities(string CountryCode, string Search, string CityResult);
         Task<Countries> GetCountries();
     }
 }
