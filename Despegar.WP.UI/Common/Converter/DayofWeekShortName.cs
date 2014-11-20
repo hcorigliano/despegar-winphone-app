@@ -17,6 +17,7 @@ namespace Despegar.WP.UI.Common.Converter
             
             string day = string.Empty;
 
+            // TODO: Use GLOBAL CONFIGURATION to obtain thte Current Language
             var roamingSettings = ApplicationData.Current.RoamingSettings;
             string lan = roamingSettings.Values["countryLanguage"] as string;
             lan = (lan == null) ? String.Empty : lan;
@@ -28,7 +29,7 @@ namespace Despegar.WP.UI.Common.Converter
                 System.DayOfWeek d = (System.DayOfWeek)value;
                 day = dateTimeInfo.GetAbbreviatedDayName(d);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 //TODO add log
                 return String.Empty;

@@ -37,7 +37,7 @@ namespace Despegar.WP.UI.Product.Flights
 
             flightResultModel = new FlightResultsModel(Navigator.Instance, GlobalConfiguration.CoreContext.GetFlightService());
             this.DataContext = flightResultModel;
-            this.CheckDeveloperTools();
+            //this.CheckDeveloperTools();
 
             //this.DataContext = flightResultModel;
             this.miniboxSearch.DataContext = flightSearchModel;
@@ -97,11 +97,13 @@ namespace Despegar.WP.UI.Product.Flights
             if (flightSearchModel.SearchStatus == SearchStates.SearchAgain)
             {
                 Itineraries = await flightResultModel.flightService.GetItineraries(flightSearchModel);
-                flightResultModel.Clear();
+                flightResultModel = new FlightResultsModel(Navigator.Instance, GlobalConfiguration.CoreContext.GetFlightService()); ;
                 flightResultModel.Itineraries = Itineraries;
                 flightSearchModel.SearchStatus = SearchStates.FirstSearch;
+                this.DataContext = flightResultModel;
             }
 
+            flightSearchModel.TotalFlights = Itineraries.total;
             this.miniboxSearch.DataContext = flightSearchModel;
         }
 

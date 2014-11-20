@@ -125,7 +125,10 @@ namespace Despegar.WP.UI.Model
 
             if (itemList != null)
             {
-                Items.AddRange((itemList.Select(il => new BindableItem(il))).ToList());
+                //Items.AddRange((itemList.Select(il => new BindableItem(il))).ToList());
+                var list = (itemList.Select(il => new BindableItem(il))).ToList();
+                this.Items = list;
+                //base.NotifyPropertyChanged("Items");
             }
         }
 

@@ -14,15 +14,17 @@
     
     <Grid>
     	<Grid.ColumnDefinitions>
-    		<ColumnDefinition/>
+    		<ColumnDefinition Width="35"/>
     		<ColumnDefinition/>
     	</Grid.ColumnDefinitions>
         
         <Grid.Resources>
             
         </Grid.Resources>
-        
-        <Image Grid.Column="0"></Image>
+
+        <Grid Grid.Column="0" Style="{StaticResource IconBlue}">
+            <Image Style="{StaticResource FamilyIconResult}"/>
+        </Grid>
         <StackPanel Grid.Column="1" HorizontalAlignment="Left" Height="Auto" VerticalAlignment="Top" Width="Auto">
             <TextBlock TextWrapping="Wrap" Text="{Binding TotalPassangers}"/>
             <TextBlock TextWrapping="Wrap" x:Uid="Page_FlightResult_Passangers"/>

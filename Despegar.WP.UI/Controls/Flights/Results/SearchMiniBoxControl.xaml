@@ -29,11 +29,11 @@
 		<Grid.RowDefinitions>
 			<RowDefinition/>
 			<RowDefinition Height="30"/>
+			<RowDefinition/>
+			<RowDefinition Height="30"/>
 		</Grid.RowDefinitions>
 
 		<Grid.ColumnDefinitions>
-			<ColumnDefinition/>
-			<ColumnDefinition/>
 			<ColumnDefinition/>
 			<ColumnDefinition/>
 		</Grid.ColumnDefinitions>
@@ -48,12 +48,12 @@
 			</Core:DataTriggerBehavior>
 		</Interactivity:Interaction.Behaviors>
 
-		<src:GoReturnPanelMiniBoxSearch x:Name="SearchedFlight" Grid.Column="0" DataContext="{Binding}" Grid.RowSpan="2" />
+		<src:GoReturnPanelMiniBoxSearch x:Name="SearchedFlight" Grid.Column="0" DataContext="{Binding}"  />
 		<src:DateDisplayMiniBoxSearch x:Name="SearchedGoDate" Grid.Column="1" DataContext="{Binding DepartureDate}"/>
-		<src:DateDisplayMiniBoxSearch x:Name="SearchedReturnDate" Grid.Column="2" DataContext="{Binding DestinationDate}"/>
-		<src:PaxCounterMiniBoxSearch x:Name="SearchedPax" Grid.Column="3" DataContext="{Binding}" Grid.RowSpan="2"/>
+		<src:DateDisplayMiniBoxSearch x:Name="SearchedReturnDate" Grid.Column="1" Grid.Row="2" DataContext="{Binding DestinationDate}"/>
+		<src:PaxCounterMiniBoxSearch x:Name="SearchedPax" Grid.Column="0" Grid.Row="2" DataContext="{Binding}" />
 		<TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="0,8,0,0" Grid.Row="1" TextWrapping="Wrap" Text="{Binding PageMode, Converter={StaticResource TextGoReturnConverter}}" VerticalAlignment="Top"/>
-        <TextBlock x:Name="textBlock" Grid.Column="2" HorizontalAlignment="Left" Margin="0,8,0,0" Grid.Row="1" TextWrapping="Wrap" Text="{Binding PageMode, Converter={StaticResource TextMultipleConverter}}" VerticalAlignment="Top"/>
+        <TextBlock x:Name="textBlock" Grid.Column="1" HorizontalAlignment="Left" Margin="0,8,0,0" Grid.Row="3" TextWrapping="Wrap" Text="{Binding PageMode, Converter={StaticResource TextMultipleConverter}}" VerticalAlignment="Top"/>
         
         
         

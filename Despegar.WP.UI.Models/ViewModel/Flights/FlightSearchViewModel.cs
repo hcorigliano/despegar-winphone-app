@@ -151,8 +151,8 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
       
         private async void Search()
         {           
-
-       
+            coreSearchModel.SearchStatus = Core.Business.SearchStates.FirstSearch;
+                  
             if (coreSearchModel.IsValid)
             {
                 FlightsItineraries intineraries = await flightService.GetItineraries(coreSearchModel);
