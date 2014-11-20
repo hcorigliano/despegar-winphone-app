@@ -54,6 +54,7 @@
     <x:Double x:Key="dBlock2">49.6</x:Double> 
     <GridLength x:Key="Block2p">59.2</GridLength>
     <GridLength x:Key="Block3">79.2</GridLength>
+    <x:Double x:Key="dBlock3p">79.2</x:Double>
     <GridLength x:Key="Block3p">88.8</GridLength>
     <x:Double x:Key="dBlock3">79.2</x:Double>
     <GridLength x:Key="Block4">118.4</GridLength>
@@ -798,8 +799,11 @@
         <!--<Setter Property="VerticalAlignment" Value="Top" />-->
         <Setter Property="Stretch" Value="Fill" />
     </Style>
-    <Style x:Key="FlightDetailTitle" TargetType="TextBlock" BasedOn="{StaticResource SegoeSemilight24}">
+    <Style x:Key="FlightDetailTitleGreen" TargetType="TextBlock" BasedOn="{StaticResource SegoeSemilight24}">
         <Setter Property="Foreground" Value="{StaticResource Green20Brush}" />
+    </Style>
+    <Style x:Key="FlightDetailTitleBlue" TargetType="TextBlock" BasedOn="{StaticResource SegoeSemilight24}">
+        <Setter Property="Foreground" Value="{StaticResource Blue20Brush}" />
     </Style>
 
     <!-- Flights Result -->
