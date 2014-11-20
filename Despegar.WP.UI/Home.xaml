@@ -32,6 +32,7 @@
         <Image Grid.Row="0" Style="{StaticResource TopLogo}" />
         <TextBlock  Grid.Row="1" x:Uid="Page_Home" Style="{StaticResource PageHeader}" Text="inicio" />
         
+
         <ListView Grid.Row="3"  IsItemClickEnabled="True" ItemClick="ListView_ItemClick" ItemsSource="{Binding HomeOptions}" ItemContainerStyle="{StaticResource HomeButtonItemContainer}">
             <ListViewItem x:Name="Hotels">
                 <Grid DataContext="Hotels">

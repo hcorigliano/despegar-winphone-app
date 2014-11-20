@@ -116,6 +116,9 @@
     <Compile Include="Common\Navigator.cs" />
     <Compile Include="Common\OldPagesManager.cs" />
     <Compile Include="Controls\Classes\Minor.cs" />
+    <Compile Include="Loading.xaml.cs">
+      <DependentUpon>Loading.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SampleData\CountrySelectionSample.cs" />
     <Compile Include="Common\Converter\DayofWeekShortName.cs" />
     <Compile Include="Common\Converter\CommonConverters.cs" />
@@ -187,9 +190,6 @@
     <Compile Include="Home.xaml.cs">
       <DependentUpon>Home.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Loading.xaml.cs">
-      <DependentUpon>Loading.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Product\Flights\Checkout\Contact\Contact.xaml.cs">
       <DependentUpon>Contact.xaml</DependentUpon>
     </Compile>
@@ -260,6 +260,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Loading.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Product\Flights\Checkout\Contact\Contact.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -326,6 +330,22 @@
     <Content Include="Assets\HomeButton_FlightStatus.png" />
     <Content Include="Assets\HomeButton_Hotels.png" />
     <Content Include="Assets\HomeButton_MyDespegar.png" />
+    <Content Include="Assets\Images\win_1.png" />
+    <Content Include="Assets\Images\win_10.png" />
+    <Content Include="Assets\Images\win_11.png" />
+    <Content Include="Assets\Images\win_12.png" />
+    <Content Include="Assets\Images\win_13.png" />
+    <Content Include="Assets\Images\win_14.png" />
+    <Content Include="Assets\Images\win_15.png" />
+    <Content Include="Assets\Images\win_0.png" />
+    <Content Include="Assets\Images\win_2.png" />
+    <Content Include="Assets\Images\win_3.png" />
+    <Content Include="Assets\Images\win_4.png" />
+    <Content Include="Assets\Images\win_5.png" />
+    <Content Include="Assets\Images\win_6.png" />
+    <Content Include="Assets\Images\win_7.png" />
+    <Content Include="Assets\Images\win_8.png" />
+    <Content Include="Assets\Images\win_9.png" />
     <Content Include="Assets\Logo.scale-240.png" />
     <Content Include="Assets\Helpers\matrix_green_strong.png" />
     <Content Include="Assets\Helpers\matrix_red.png" />
@@ -601,10 +621,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Home.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Loading.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

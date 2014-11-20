@@ -8,6 +8,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
+using Despegar.WP.UI.Developer;
 
 // The Blank Application template is documented at http://go.microsoft.com/fwlink/?LinkId=391641
 
@@ -29,6 +30,7 @@ namespace Despegar.WP.UI
             this.InitializeComponent();
             this.Suspending += this.OnSuspending;
 
+            
             // Initialize Core
             GlobalConfiguration.InitCore();
         }
@@ -49,6 +51,7 @@ namespace Despegar.WP.UI
 #endif
 
             Frame rootFrame = Window.Current.Content as Frame;
+
 
             // Do not repeat app initialization when the Window already has content,
             // just ensure that the window is active
@@ -81,6 +84,9 @@ namespace Despegar.WP.UI
                     }
                 }
 
+                //rootFrame.Navigate(typeof(Loading), e.Arguments);
+
+
                 rootFrame.ContentTransitions = null;
                 rootFrame.Navigated += this.RootFrame_FirstNavigated;
 
@@ -99,7 +105,7 @@ namespace Despegar.WP.UI
                  else
                  {
                      GlobalConfiguration.CoreContext.SetSite(roamingSettings.Values["countryCode"].ToString()); 
-                     if (!rootFrame.Navigate(typeof(Home), e.Arguments))
+                     if (!rootFrame.Navigate(typeof(Loading), e.Arguments))
                      {
                          throw new Exception("Failed to create Home page");
                      }

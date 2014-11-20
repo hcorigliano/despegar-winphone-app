@@ -26,8 +26,9 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
         #region ** Exposed Properties **
 
         private int numberOfSegments = 0;
-       
-        
+
+        public bool IsLoading;
+
         public int NumberOfSegments
         {
             get
@@ -177,9 +178,11 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
         {
             if (coreSearchModel.IsValid())
             {
+                IsLoading = true;
                 FlightsItineraries intineraries = await flightService.GetItineraries(coreSearchModel);
                 //TODO handle error with exceptions.
 
+                IsLoading = false;
                 var pageParameters = new PageParameters();
                 pageParameters.Itineraries = intineraries;
                 pageParameters.SearchModel = coreSearchModel;
