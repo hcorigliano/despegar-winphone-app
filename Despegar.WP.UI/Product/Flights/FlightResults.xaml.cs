@@ -14,6 +14,7 @@ using Windows.UI.Xaml.Navigation;
 using Despegar.Core.Business.Enums;
 using Despegar.Core.Business;
 using Despegar.Core.IService;
+using System.Collections.Generic;
 
 namespace Despegar.WP.UI.Product.Flights
 {
@@ -64,7 +65,14 @@ namespace Despegar.WP.UI.Product.Flights
         {
             base.OnNavigatingFrom(e);
 
-            flightSearchModel.SearchStatus = SearchStates.SearchAgain;
+
+            if (e.Parameter != null)
+            {
+                if (e.Parameter.GetType() == typeof(List<Facet>) || e.Parameter.GetType() == typeof(Sorting))
+                {
+                    flightSearchModel.SearchStatus = SearchStates.SearchAgain;
+                }
+            }
         }
 
         /// <summary>

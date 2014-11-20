@@ -14,7 +14,7 @@
     x:Class="Despegar.WP.UI.Product.Flights.FlightResults"
     mc:Ignorable="d"
     Style="{StaticResource BasePage}" 
-    
+    xmlns:dev="using:Despegar.WP.UI.Developer.Controls"
     >
     <Page.Resources>
         <DataTemplate x:Key="FlightItemDateTemplate">
@@ -75,8 +75,10 @@
     <Page.DataContext>
         <Model:FlightResultsModel/>
     </Page.DataContext>
-
+    
     <Grid x:Name="LayoutRoot" >
+        <!--<dev:UserControlDesignGrid />-->
+        
         <Interactivity:Interaction.Behaviors>
             <Core:EventTriggerBehavior SourceObject="{Binding ElementName=appBarFilter}" EventName="Click">
                 <Core:NavigateToPageAction TargetPage="Despegar.WP.UI.Product.Flights.FlightFilters" Parameter="{Binding Facets ,Mode=TwoWay}"/>
@@ -94,15 +96,15 @@
         </Grid.ChildrenTransitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="20"/>
+            <RowDefinition Height="5"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <StackPanel Grid.Row="0" Margin="19,0,0,0">
+        <StackPanel Grid.Row="0" Margin="32,-10,10,9.833">
             <TextBlock x:Uid="AppTitle" Style="{ThemeResource TitleTextBlockStyle}" Margin="0,12,0,0"/>
             <TextBlock x:Uid="Page_FlightResults" Margin="0,-6.5,0,26.5" Style="{ThemeResource HeaderTextBlockStyle}" CharacterSpacing="{ThemeResource PivotHeaderItemCharacterSpacing}"/>
 
-            <Controls:SearchMiniBoxControl Tapped="miniboxSearch_Tapped" x:Name="miniboxSearch" Height="Auto"/>
+            <Controls:SearchMiniBoxControl Tapped="miniboxSearch_Tapped" x:Name="miniboxSearch" Height="Auto" Margin="-1,0,1.333,0"/>
 
         </StackPanel>
 
@@ -110,7 +112,7 @@
             <TextBlock />
         </Grid>
         <Grid Grid.Row="2" x:Name="ContentRoot" Width="Auto" >
-            <ListBox Height="405" x:Name="lbFlights" ItemTemplate="{StaticResource FlightItemDateTemplate}" ItemsSource="{Binding Items}"  Tapped="ListBox_Tapped" HorizontalContentAlignment="Stretch" ScrollViewer.VerticalScrollBarVisibility="Visible" Margin="2,0,-2,0" >
+            <ListBox Height="325" x:Name="lbFlights" ItemTemplate="{StaticResource FlightItemDateTemplate}" ItemsSource="{Binding Items}"  Tapped="ListBox_Tapped" HorizontalContentAlignment="Stretch" ScrollViewer.VerticalScrollBarVisibility="Visible" Margin="2,0,-2,0" >
                 <ListBox.ItemContainerTransitions>
                     <TransitionCollection>
                         <EntranceThemeTransition FromVerticalOffset="100" FromHorizontalOffset="0"/>

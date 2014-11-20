@@ -9,9 +9,8 @@ namespace Despegar.WP.UI.Controls.Flights
 {
     public sealed partial class FlightSegment : UserControl
     {
-        public static readonly DependencyProperty ToDateProperty = DependencyProperty.Register("IsReturn", typeof(bool), typeof(FlightSegment), new PropertyMetadata(null));
+        public static readonly DependencyProperty IsReturnProperty = DependencyProperty.Register("IsReturn", typeof(bool), typeof(FlightSegment), new PropertyMetadata(null));
 
-        public bool IsReturn {get; set;}
 
         #region ** BoilerPlate Code **
         public event PropertyChangedEventHandler PropertyChanged;
@@ -22,6 +21,16 @@ namespace Despegar.WP.UI.Controls.Flights
                 PropertyChanged(this, new PropertyChangedEventArgs(p));
         }
         #endregion
+
+        public bool IsReturn
+        {
+            get { return (bool)GetValue(IsReturnProperty); }
+            set
+            {
+                SetValueAndNotify(IsReturnProperty, value);
+            }
+        }
+
 
         public FlightSegment() 
         {

@@ -59,7 +59,7 @@
                                     <RowDefinition Height="{StaticResource Square}" />
                                 </Grid.RowDefinitions>
 
-                                <TextBlock Grid.Row="0" Text="{Binding Path=from.city}" Style="{StaticResource FlightDetailTitle}" />
+                                <TextBlock Grid.Row="0" Text="{Binding Path=from.city}" Style="{StaticResource FlightDetailTitleGreen}" />
                                 <TextBlock Grid.Row="1" Text="{Binding Path=to.city}" Style="{StaticResource FlightSegmentSmallText}"  />
                             </Grid>
                         </Grid>

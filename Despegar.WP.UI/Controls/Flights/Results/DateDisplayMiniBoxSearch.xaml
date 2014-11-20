@@ -22,18 +22,14 @@
         <Grid.ColumnDefinitions>
 			<ColumnDefinition Width="35" />
             <ColumnDefinition />
-            <ColumnDefinition />
         </Grid.ColumnDefinitions>
 		<Grid Grid.Column="0" Style="{StaticResource IconBlue}">
 			<Image Style="{StaticResource CalendarIconResult}"/>
 		</Grid>
-        <StackPanel Grid.Column="1" HorizontalAlignment="Left" Height="Auto" VerticalAlignment="Top" Width="Auto">
-            <TextBlock  TextWrapping="Wrap" Text="{Binding LocalDateTime.DayOfWeek, Converter={StaticResource DayofWeekShortName},ConverterLanguage=es}" />
-            <TextBlock Text="{Binding LocalDateTime.Month, Converter={StaticResource GetMonthName},ConverterLanguage=es}"/>
-        </StackPanel>
-        <StackPanel Grid.Column="2">
-            <TextBlock Text="{Binding LocalDateTime.Day, Mode=OneWay}"  />
-        </StackPanel>
-        
+		<Grid Grid.Column="1" HorizontalAlignment="Left" Height="Auto" VerticalAlignment="Top" Width="Auto" Margin="0,6,0,0" >
+			<TextBlock Text="{Binding LocalDateTime.Day, Mode=OneWay}"  />
+			<TextBlock Text="{Binding LocalDateTime.Month, ConverterLanguage=es, Converter={StaticResource GetMonthName}}" Margin="30,0,0,0"/>
+			<TextBlock Text="{Binding LocalDateTime.Year}" Margin="70,0,0,0"/>
+		</Grid>       
     </Grid>
 </UserControl>

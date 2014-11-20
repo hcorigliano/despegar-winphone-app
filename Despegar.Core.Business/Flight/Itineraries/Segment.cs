@@ -19,5 +19,7 @@ namespace Despegar.Core.Business.Flight.Itineraries
         public string cabin_type { get; set; }
         public List<object> stopovers { get; set; }
         public OperatedBy operated_by { get; set; }
+
+        public bool HasOperatedBy {get{ return operated_by != null; }}
     }
 }

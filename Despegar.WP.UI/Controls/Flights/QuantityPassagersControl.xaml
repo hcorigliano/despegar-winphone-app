@@ -17,7 +17,7 @@
             <ColumnDefinition Width="1*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="{StaticResource Block3p}"  />
+            <RowDefinition MinHeight="{StaticResource dBlock3p}"  />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         
@@ -40,10 +40,10 @@
                 <DataTemplate>
                     <Grid>     
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="{StaticResource Block3p}"/>
+                            <RowDefinition MinHeight="{StaticResource dBlock3}"/>
                         </Grid.RowDefinitions>
                         
-                     <StackPanel Grid.Row="{Binding IndexZeroBased}" >
+                     <StackPanel Grid.Row="{Binding IndexZeroBased}">
                             <TextBlock Style="{StaticResource BaseTextLabel}" >
                                 <Run  x:Uid="Flights_Search_ChildrenAge" Text="Edad del menor" />
                                 <Run  Text="{Binding Index}"/>
