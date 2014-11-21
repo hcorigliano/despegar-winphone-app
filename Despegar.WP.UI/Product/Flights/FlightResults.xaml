@@ -15,8 +15,12 @@
     mc:Ignorable="d"
     Style="{StaticResource BasePage}" 
     xmlns:dev="using:Despegar.WP.UI.Developer.Controls"
+	xmlns:conv="using:Despegar.WP.UI.Common.Converter"
     >
+	
     <Page.Resources>
+	<conv:StringConverter x:Key="stringFormatConverter"  />
+
         <DataTemplate x:Key="FlightItemDateTemplate">
             <Grid>
                 <Grid.RowDefinitions>
@@ -28,9 +32,13 @@
                     <ColumnDefinition Width="300"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-
-                <Image Grid.Column="0" HorizontalAlignment="Left" Height="Auto"  VerticalAlignment="Top" Width="Auto"/>
-                <StackPanel Grid.Column="1"  HorizontalAlignment="Left" Height="Auto"  VerticalAlignment="Top" Width="Auto">
+				<!--<Grid Grid.Column="0">
+					<Image  HorizontalAlignment="Left" Height="Auto"  VerticalAlignment="Top" Width="Auto"/>
+				</Grid> //-->
+				<Grid Style="{StaticResource IconWhiteBig}">
+					<Image Grid.Column="0" Source="{Binding airline.code, Converter={StaticResource stringFormatConverter}, ConverterParameter='/Assets/Icon/Airlines/ag_{0}logo@2x.png'}" Style="{StaticResource FlightDetailAirlineImage}"  />
+				</Grid>
+                <StackPanel Grid.Column="1"  HorizontalAlignment="Left" Height="Auto"  VerticalAlignment="Top" Width="Auto" Margin="10,0,0,0">
                     <TextBlock TextWrapping="Wrap" Text="{Binding airline.name}" />
                     <TextBlock TextWrapping="Wrap" Text="{Binding outbound.Count}"/>
                 </StackPanel>
