@@ -86,7 +86,7 @@
     <SolidColorBrush x:Key="Black60Brush" Color="{StaticResource Black}" Opacity="0.6" />
     <SolidColorBrush x:Key="BlackBrush" Color="{StaticResource Black }" />
     <SolidColorBrush x:Key="Green20Brush" Color="{StaticResource Green20 }" />
-    <SolidColorBrush x:Key="Green40Brush" Color="{StaticResource f }" />
+    <SolidColorBrush x:Key="Green40Brush" Color="{StaticResource Green40 }" />
     <!-- ===================== Generic Fonts ======================== -->
     <Style x:Key="BaseText" TargetType="TextBlock" BasedOn="{StaticResource BaseTextBlockStyle}">
         <Setter Property="FontFamily" Value="Segoe UI" />

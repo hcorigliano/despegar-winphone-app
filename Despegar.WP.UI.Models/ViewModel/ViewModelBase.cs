@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Despegar.WP.UI.Model.Common;
+using Despegar.WP.UI.Model.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -13,6 +15,9 @@ namespace Despegar.WP.UI.Model.ViewModel
     /// </summary>
     public class ViewModelBase : INotifyPropertyChanged
     {
+        /// <summary>
+        /// Indicates whether the ViewModel is awaiting an operation to finish, so the View should display a Loading and block the user input.
+        /// </summary>
         private bool isLoading;
         public bool IsLoading
         {
@@ -20,14 +25,22 @@ namespace Despegar.WP.UI.Model.ViewModel
             set { isLoading = value; OnPropertyChanged(); }
         }
 
+        public delegate void ViewModelErrorHandler(object sender, ViewModelErrorArgs e);
+
+        public event ViewModelErrorHandler ViewModelError;
         public event PropertyChangedEventHandler PropertyChanged;
+
+        protected void OnViewModelError(string errorCode)
+        {
+            if (ViewModelError != null)
+                ViewModelError(this, new ViewModelErrorArgs(errorCode));
+        }
 
         protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
-            var eventHandler = PropertyChanged;
-            if (eventHandler != null)
+            if (PropertyChanged != null)
             {
-                eventHandler(this, new PropertyChangedEventArgs(propertyName));
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
         }
     }

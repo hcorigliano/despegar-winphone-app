@@ -62,6 +62,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppModelBase.cs" />
+    <Compile Include="Common\ViewModelErrorArgs.cs" />
     <Compile Include="ViewModel\Classes\Flights\FlightSearchNavigationData.cs" />
     <Compile Include="ViewModel\Classes\Flights\BindableItem.cs" />
     <Compile Include="Classes\Flights\Checkout\PaymentsFormated.cs" />

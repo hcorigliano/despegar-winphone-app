@@ -155,19 +155,28 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
             if (coreSearchModel.IsValid)
             {
                 IsLoading = true;
-                FlightsItineraries intineraries = await flightService.GetItineraries(coreSearchModel);
-                //TODO handle error with exceptions.
 
-                IsLoading = false;
-                var pageParameters = new PageParameters();
-                pageParameters.Itineraries = intineraries;
-                pageParameters.SearchModel = coreSearchModel;
+                try
+                {
+                    FlightsItineraries intineraries = await flightService.GetItineraries(coreSearchModel);
 
-                Navigator.GoTo(ViewModelPages.FlightsResults, pageParameters);
+                    var pageParameters = new PageParameters();
+                    pageParameters.Itineraries = intineraries;
+                    pageParameters.SearchModel = coreSearchModel;
+
+                    Navigator.GoTo(ViewModelPages.FlightsResults, pageParameters);
+                }
+                catch (Exception)
+                {
+                    OnViewModelError("SEARCH_FAILED");
+                }
+                finally {
+                    IsLoading = false;
+                }
             }
             else
-            {
-                // Error messages
+            {                
+                OnViewModelError("SEARCH_INVALID");
             }
         }
 
