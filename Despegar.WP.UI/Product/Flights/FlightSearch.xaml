@@ -9,6 +9,7 @@
     xmlns:Model="using:Despegar.WP.UI.Model"
     x:Class="Despegar.WP.UI.Product.Flights.FlightSearch"
     xmlns:src="using:Despegar.WP.UI.Controls.Flights"
+    xmlns:control="using:Despegar.WP.UI.Controls"
     xmlns:dev="using:Despegar.WP.UI.Developer.Controls"
     xmlns:Interactivity="using:Microsoft.Xaml.Interactivity" 
     xmlns:Core="using:Microsoft.Xaml.Interactions.Core"
@@ -38,7 +39,7 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-      
+        
         <!-- Title Panel -->
         <Image Grid.Row="0" Style="{StaticResource TopLogo}" />
         <TextBlock Grid.Row="1" x:Uid="Page_FlightSearch" Style="{StaticResource PageHeaderSmall}" Text="BUSQUEDA" FontFamily="Segoe WP Semibold" />

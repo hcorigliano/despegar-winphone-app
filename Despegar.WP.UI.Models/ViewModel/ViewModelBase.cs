@@ -13,6 +13,13 @@ namespace Despegar.WP.UI.Model.ViewModel
     /// </summary>
     public class ViewModelBase : INotifyPropertyChanged
     {
+        private bool isLoading;
+        public bool IsLoading
+        {
+            get { return isLoading; }
+            set { isLoading = value; OnPropertyChanged(); }
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
