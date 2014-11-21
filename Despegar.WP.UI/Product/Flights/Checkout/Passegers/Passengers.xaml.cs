@@ -41,7 +41,7 @@ namespace Despegar.WP.UI.Product.Flights.Checkout.Passegers
         {
             if (args.Reason == AutoSuggestionBoxTextChangeReason.UserInput && sender.Text != "" && sender.Text.Length >= 2)
             {
-                //nationality.ItemsSource = Countries.countries.Where(x => x.name.Contains(sender.Text)).ToList();
+                nationality.ItemsSource = Countries.countries.Where(x => x.name.Contains(sender.Text)).ToList();
             }
         }
 
