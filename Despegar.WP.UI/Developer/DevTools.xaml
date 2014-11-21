@@ -164,7 +164,7 @@
 
             <!-- Close Dialog Button -->
             <StackPanel Grid.Row="2">
-                <Button Content="Close" HorizontalAlignment="Stretch" Margin="7,0" Click="ClosePopup" Background="#FF0D2042" BorderBrush="#FF9AEABB">
+                <Button Content="Close" HorizontalAlignment="Stretch" Margin="7,0" Click="Button_Click" Background="#FF0D2042" BorderBrush="#FF9AEABB">
                 </Button>
             </StackPanel>
 

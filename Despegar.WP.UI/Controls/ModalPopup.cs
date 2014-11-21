@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Despegar.WP.UI.Common;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,25 +13,29 @@ namespace Despegar.WP.UI.Controls
     public class ModalPopup
     {
         private Popup popupControl;
+        private IPopupContent content;
 
-        public ModalPopup(UIElement content)
+        public ModalPopup(IPopupContent controlContent)
         {
             popupControl = new Popup();
             popupControl.IsLightDismissEnabled = false;
             popupControl.HorizontalAlignment = HorizontalAlignment.Center;
             popupControl.VerticalAlignment = VerticalAlignment.Center;
             // Set Modal Content
-            popupControl.Child = content;                
+            content = controlContent;
+            popupControl.Child = controlContent as UIElement;                
         }
 
         public void Show() 
         {
-            popupControl.IsOpen = true;  
+            popupControl.IsOpen = true;
+            content.Enter();
         }
 
         public void Hide()
         {
-            popupControl.IsOpen = false;            
+            //popupControl.IsOpen = false;
+            content.Leave();
         }
 
     }

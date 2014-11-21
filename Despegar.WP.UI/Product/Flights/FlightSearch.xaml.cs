@@ -66,7 +66,6 @@ namespace Despegar.WP.UI.Product.Flights
                     loadingPopup.Show();
                 else
                     loadingPopup.Hide();
-
             }
         }
        

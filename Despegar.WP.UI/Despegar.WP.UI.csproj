@@ -116,6 +116,7 @@
     <Compile Include="Common\Converter\CheckoutConverters.cs" />
     <Compile Include="Common\Converter\StyleConverter.cs" />
     <Compile Include="Common\Converter\VisibilityProConverter.cs" />
+    <Compile Include="Common\IPopupContent.cs" />
     <Compile Include="Common\Navigator.cs" />
     <Compile Include="Common\OldPagesManager.cs" />
     <Compile Include="Controls\Loading.xaml.cs">
@@ -936,6 +937,7 @@
     <Content Include="Assets\Icon\Airlines\ag_zelogo%402x.png" />
     <Content Include="Assets\Icon\Airlines\ag_zzlogo%402x.png" />
     <Content Include="Assets\Icon\App\arrow-right-small-white.png" />
+    <Content Include="Assets\Icon\App\bell-large-white.png" />
     <Content Include="Assets\Icon\App\calendar-medium-white.png" />
     <Content Include="Assets\Icon\App\calendar-small-white.png" />
     <Content Include="Assets\Icon\App\car-large-white.png" />
@@ -947,7 +949,6 @@
     <Content Include="Assets\Icon\App\flight-right-medium-white.png" />
     <Content Include="Assets\Icon\App\flight-right-small-white.png" />
     <Content Include="Assets\Icon\App\flightstatus-large-white.png" />
-    <Content Include="Assets\Icon\App\hotel-large-white.png" />
     <Content Include="Assets\Icon\App\midespegar-large-white.png" />
     <Content Include="Assets\Icon\CreditCard\AX-AME.png" />
     <Content Include="Assets\Icon\CreditCard\AX-BRA.png" />
