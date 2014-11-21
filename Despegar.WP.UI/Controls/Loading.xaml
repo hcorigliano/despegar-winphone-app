@@ -20,17 +20,10 @@
         </Grid.Background>
         
         <!--- TODO: Move to Styles -->
+
+        <Image x:Name="ImageView" Style="{StaticResource LoadingImage}"  />
+         <!--<TextBlock Style="{StaticResource SegoeSemilight17}"  Text="Buscando vuelos..." VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,140,0,0" />-->
         
-            <Image x:Name="ImageView" 
-                HorizontalAlignment="Center" 
-                VerticalAlignment="Center"
-                Stretch="Fill"
-                   Width="120"
-                   Height="120" />
-            <!--<TextBlock Style="{StaticResource SegoeSemilight17}"  Text="Buscando vuelos..." VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,140,0,0" />-->
-       
-        
-        <!--<Rectangle Width="100" Height="100" Fill="Red" />-->
     </Grid>
 
 </UserControl>

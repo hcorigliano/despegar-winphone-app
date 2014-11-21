@@ -34,9 +34,6 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
             get { return new ObservableCollection<FlightMultipleSegment>(coreSearchModel.MultipleSegments); }            
         }
 
-        private bool isLoading;
-        public bool IsLoading { get { return isLoading; } set { isLoading = value; OnPropertyChanged(); } }
-
         public string Origin 
         { 
             get {
