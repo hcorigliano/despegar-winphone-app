@@ -81,11 +81,13 @@ namespace Despegar.WP.UI.Model
         {
             flightService = GlobalConfiguration.CoreContext.GetFlightService();
             CommonServices = GlobalConfiguration.CoreContext.GetCommonService();
-            test();
+            //GetBookingFields();
         }
 
-        private async void test()
+        public async void GetBookingFields()
         {
+            IsLoading = true;
+
             BookingFieldPost book = new BookingFieldPost();
             book.inbound_choice = 1;
             book.outbound_choice = 1;
@@ -93,12 +95,22 @@ namespace Despegar.WP.UI.Model
 
             CoreBookingFields = await flightService.GetBookingFields(book);
 
+            FillsValueWithCoreValue(CoreBookingFields);
+
             CorePaymentFormated = FormatPayments();
 
             CorePriceFormated = PriceFormatedConverter(bookingfields);
 
             GetCountries();
 
+            IsLoading = false;
+
+        }
+
+        private void FillsValueWithCoreValue(BookingFields CoreBookingFields)
+        {
+            CoreBookingFields.form.contact.phones[0].country_code.coreValue = CoreBookingFields.form.contact.phones[0].country_code.value;
+            CoreBookingFields.form.contact.phones[0].area_code.coreValue = CoreBookingFields.form.contact.phones[0].area_code.value;
         }
 
         public async Task<BookingFields> GetBookingFields(BookingFieldPost bookingFieldPost)

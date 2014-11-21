@@ -6,6 +6,7 @@ using Despegar.WP.UI.Model;
 using Despegar.WP.UI.Model.Classes.Flights.Checkout;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -33,6 +34,7 @@ namespace Despegar.WP.UI.Product.Flights
         private NavigationHelper navigationHelper;
         private ObservableDictionary defaultViewModel = new ObservableDictionary();
         private FlightsCheckoutModel flightService = new FlightsCheckoutModel();
+        private Despegar.WP.UI.Controls.ModalPopup loadingPopup = new Despegar.WP.UI.Controls.ModalPopup(new Despegar.WP.UI.Controls.Loading());
 
         public FlightCheckout()
         {
@@ -44,8 +46,13 @@ namespace Despegar.WP.UI.Product.Flights
 
             InitilizePage();
             
+            flightService.PropertyChanged += Checkloading;
+
+            flightService.GetBookingFields();
+
             //For fix credit card null value
             CardDataControl.DataContext = flightService.bookingfields.form.payment;
+
         }
 
         private void InitilizePage()
@@ -135,8 +142,17 @@ namespace Despegar.WP.UI.Product.Flights
 
         }
 
+        private void Checkloading(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "IsLoading")
+            {
+                if ((sender as FlightsCheckoutModel).IsLoading)
+                    loadingPopup.Show();
+                else
+                    loadingPopup.Hide();
 
-
+            }
+        }
 
     }
 }

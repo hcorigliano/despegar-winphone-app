@@ -81,6 +81,7 @@
     <!-- ===================== Generic Brushes ======================= -->
     <SolidColorBrush x:Key="Blue20Brush" Color="{StaticResource Blue20}" />
     <SolidColorBrush x:Key="Blue60Brush" Color="{StaticResource Blue60}" />
+    <SolidColorBrush x:Key="Red20Brush" Color="{StaticResource Red20}" />
     <SolidColorBrush x:Key="WhiteBrush" Color="{StaticResource White}" />
     <SolidColorBrush x:Key="WhiteBrush60" Color="{StaticResource White}" Opacity="0.6" />
     <SolidColorBrush x:Key="Black60Brush" Color="{StaticResource Black}" Opacity="0.6" />
@@ -405,12 +406,17 @@
     </Style>
     <!-- Buttons -->
     <Style x:Key="ButtonBase" TargetType="Button">
-        <Setter Property="BorderBrush" Value="{StaticResource Blue20Brush}" />
+        <Setter Property="BorderBrush" Value="{StaticResource Red20Brush}" />
         <Setter Property="HorizontalAlignment" Value="Stretch" />
     </Style>
     <Style x:Key="ButtonBottom" TargetType="Button" BasedOn="{StaticResource ButtonBase}">
         <Setter Property="VerticalAlignment" Value="Bottom" />
         <Setter Property="Height" Value="{StaticResource dBlock1p_And_Half}" />
+    </Style>
+    <Style x:Key="ButtonBottomCheckout" TargetType="Button" BasedOn="{StaticResource ButtonBottom}">
+        <Setter Property="Width" Value="{StaticResource dBlock10p}" />
+        <Setter Property="BorderBrush" Value="{StaticResource Red20Brush}" />
+        
     </Style>
     <!-- ComboBox -->    
     <Style x:Key="ComboBoxBase" TargetType="ComboBox">

@@ -28,7 +28,7 @@
 
         <!-- Title Panel -->
         <Image Grid.Row="0" Style="{StaticResource TopLogo}" />
-        <TextBlock Grid.Row="1" x:Uid="Page_FlightSearch" Style="{StaticResource PageHeaderSmall}" Text="BUSQUEDA" />
+        <TextBlock Grid.Row="1" x:Uid="Page_Checkout" Style="{StaticResource PageHeaderSmall}" Text="COMPRAR VUELO" />
 
 
         <Pivot Grid.Row="2" x:Name="ContentRoot"  Style="{StaticResource PivotBaseMain}">

@@ -44,7 +44,7 @@
 
                 <StackPanel Grid.Row="0" Style="{StaticResource TextBoxInputContainer}" >
                     <TextBlock Style="{StaticResource BaseTextLabel}" x:Uid="Card_Data_Expiration" Text="Vencimiento"></TextBlock>
-                    <DatePicker Style="{StaticResource DatePickerBase}" DayVisible="False"   Date="{Binding card.expiration.coreValue , Mode=TwoWay , Converter={StaticResource DateToExpirationStringConverter}}" ></DatePicker>
+                        <DatePicker  MonthFormat="{}{month.full}" Style="{StaticResource DatePickerBase}" DayVisible="False"   Date="{Binding card.expiration.coreValue , Mode=TwoWay , Converter={StaticResource DateToExpirationStringConverter}}" ></DatePicker>
                     <!--BINDEAR MIN YEAR-->
                 </StackPanel>
                 </Grid>

@@ -510,4 +510,7 @@
   <data name="Page_Flight_Detail_Segment.Text" xml:space="preserve">
     <value>Tramo</value>
   </data>
+  <data name="Page_Checkout.Text" xml:space="preserve">
+    <value>COMPRAR VUELO</value>
+  </data>
 </root>
