@@ -406,7 +406,7 @@
     </Style>
     <!-- Buttons -->
     <Style x:Key="ButtonBase" TargetType="Button">
-        <Setter Property="BorderBrush" Value="{StaticResource Red20Brush}" />
+        <Setter Property="BorderBrush" Value="{StaticResource Blue20Brush}" />
         <Setter Property="HorizontalAlignment" Value="Stretch" />
     </Style>
     <Style x:Key="ButtonBottom" TargetType="Button" BasedOn="{StaticResource ButtonBase}">
