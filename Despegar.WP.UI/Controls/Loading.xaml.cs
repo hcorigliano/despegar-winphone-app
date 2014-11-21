@@ -17,6 +17,7 @@ using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Media.Imaging;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using Despegar.WP.UI.Common;
 
 
 namespace Despegar.WP.UI.Controls
@@ -24,7 +25,7 @@ namespace Despegar.WP.UI.Controls
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class Loading : UserControl
+    public sealed partial class Loading : UserControl, IPopupContent
     {
      
         public Loading()
@@ -58,5 +59,29 @@ namespace Despegar.WP.UI.Controls
             this.DataContext = Window.Current.Bounds;
         }
 
+        public void ShowLoading()
+        {
+            ShowDialogAnimation.Begin();
+        }
+
+        public void Enter()
+        {
+            ShowDialogAnimation.Begin();
+        }
+
+        public void Leave()
+        {
+            HideDialogAnimation.Begin();
+            HideDialogAnimation.Completed += DoClosePopup;
+        }
+
+        private void DoClosePopup(object sender, object e)
+        {
+            // in this example we assume the parent of the UserControl is a Popup 
+            Popup p = this.Parent as Popup;
+
+            // close the Popup
+            if (p != null) { p.IsOpen = false; }
+        }
     }
 }

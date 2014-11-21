@@ -761,7 +761,7 @@
         <Setter Property="Height" Value="45" />        
     </Style>
     <Style x:Key="HomeHotelsButton" TargetType="Image" BasedOn="{StaticResource BaseHomeButtonImage}">
-        <Setter Property="Source" Value="/Assets/Icon/App/hotel-large-white.png" />
+        <Setter Property="Source" Value="/Assets/Icon/App/bell-large-white.png" />
     </Style>
     <Style x:Key="HomeFlightsButton" TargetType="Image" BasedOn="{StaticResource BaseHomeButtonImage}">
         <Setter Property="Source" Value="/Assets/Icon/App/flight-large-white.png" />           

@@ -175,7 +175,7 @@
     <value>Partida</value>
   </data>
   <data name="Home_Settings.Label" xml:space="preserve">
-    <value>Configuración</value>
+    <value>Config</value>
   </data>
   <data name="Page_CountrySelection_selection.Text" xml:space="preserve">
     <value>Seleccione país</value>

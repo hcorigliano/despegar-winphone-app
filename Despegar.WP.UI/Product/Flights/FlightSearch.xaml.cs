@@ -11,6 +11,8 @@ using Despegar.Core.Business.Enums;
 using Despegar.WP.UI.Controls;
 using Windows.UI.Xaml.Data;
 using System.ComponentModel;
+using Despegar.WP.UI.Model.Common;
+using Windows.UI.Popups;
 
 namespace Despegar.WP.UI.Product.Flights
 {
@@ -31,11 +33,30 @@ namespace Despegar.WP.UI.Product.Flights
             this.CheckDeveloperTools();
 
             ViewModel = new FlightSearchViewModel(Navigator.Instance, GlobalConfiguration.CoreContext.GetFlightService());
+            ViewModel.ViewModelError += ErrorHandler;
             this.DataContext = ViewModel;
 
-            //Binding loadingBinding = new Binding() { Path = new PropertyPath("IsLoading"), Source = ViewModel, Mode = BindingMode.OneWay};
             ViewModel.PropertyChanged += Checkloading;            
         }
+
+        # region ** ERROR HANDLING **
+        private void ErrorHandler(object sender, ViewModelErrorArgs e) 
+        {
+            MessageDialog dialog;
+
+            switch(e.ErrorCode) 
+            {
+                case "SEARCH_FAILED":
+                    dialog = new MessageDialog("Por favor, revise su conexion a internet.", "Error de Conexión");
+                    dialog.ShowAsync();
+                    break;
+                case "SEARCH_INVALID":
+                    dialog = new MessageDialog("Por favor, revise los campos y vuelva a intentarlo.", "Búsqueda");
+                    dialog.ShowAsync();
+                    break;
+            }
+        }
+        #endregion
 
         private void Checkloading(object sender, PropertyChangedEventArgs e)
         {
@@ -45,10 +66,8 @@ namespace Despegar.WP.UI.Product.Flights
                     loadingPopup.Show();
                 else
                     loadingPopup.Hide();
-
             }
         }
-
        
         public NavigationHelper NavigationHelper
         {

@@ -9,9 +9,23 @@
     
     <UserControl.Resources>
         <Storyboard x:Name="loadingStoryboard" RepeatBehavior="Forever" />
+        <Storyboard x:Name="ShowDialogAnimation">
+            <DoubleAnimation Duration="0:0:.5" To="1" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="mainCanvas" d:IsOptimized="True">
+                <DoubleAnimation.EasingFunction>
+                    <QuadraticEase EasingMode="EaseIn" />
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+        </Storyboard>
+        <Storyboard x:Name="HideDialogAnimation">
+            <DoubleAnimation Duration="0:0:.5" To="0" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="mainCanvas" d:IsOptimized="True">
+                <DoubleAnimation.EasingFunction>
+                    <QuadraticEase EasingMode="EaseOut" />
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+        </Storyboard>
     </UserControl.Resources>
     
-    <Grid Width="{Binding Width}" Height="{Binding Height}" Opacity="1" x:Name="mainCanvas" >
+    <Grid Width="{Binding Width}" Height="{Binding Height}" Opacity="0" x:Name="mainCanvas" >
         <Grid.RowDefinitions>
             <RowDefinition/>
         </Grid.RowDefinitions>
@@ -22,7 +36,7 @@
         <!--- TODO: Move to Styles -->
 
         <Image x:Name="ImageView" Style="{StaticResource LoadingImage}"  />
-         <!--<TextBlock Style="{StaticResource SegoeSemilight17}"  Text="Buscando vuelos..." VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,140,0,0" />-->
+        <TextBlock Style="{StaticResource SegoeSemilight17}"  Text="Cargando..." VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,140,0,0" />
         
     </Grid>
 
