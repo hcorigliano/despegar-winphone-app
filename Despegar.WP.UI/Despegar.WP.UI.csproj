@@ -112,8 +112,10 @@
     </Compile>
     <Compile Include="Common\Converter\BooleanConverter.cs" />
     <Compile Include="Common\Converter\DateToLongString.cs" />
+    <Compile Include="Common\Converter\ImageGoReturnConverter.cs" />
     <Compile Include="Common\Converter\MiniboxVisibilityConverter.cs" />
     <Compile Include="Common\Converter\CheckoutConverters.cs" />
+    <Compile Include="Common\Converter\StyleColorResultConverter.cs" />
     <Compile Include="Common\Converter\StyleConverter.cs" />
     <Compile Include="Common\Converter\VisibilityProConverter.cs" />
     <Compile Include="Common\Navigator.cs" />
