@@ -8,14 +8,20 @@ using Windows.UI.Xaml;
 using Despegar.Core.Business.Flight.SearchBox;
 using Despegar.WP.UI.Model.Classes.Flights;
 using Despegar.Core.Business.Enums;
+using Despegar.WP.UI.Controls;
+using Windows.UI.Xaml.Data;
+using System.ComponentModel;
+using Despegar.WP.UI.Model.Common;
+using Windows.UI.Popups;
 
 namespace Despegar.WP.UI.Product.Flights
 {
     public sealed partial class FlightSearch : Page
     {
         private NavigationHelper navigationHelper;
-        public FlightSearchViewModel ViewModel { get; set; }
-       
+        private ModalPopup loadingPopup = new ModalPopup(new Loading());
+        public FlightSearchViewModel ViewModel { get; set; }        
+
         public FlightSearch()
         {
             this.InitializeComponent();
@@ -27,9 +33,42 @@ namespace Despegar.WP.UI.Product.Flights
             this.CheckDeveloperTools();
 
             ViewModel = new FlightSearchViewModel(Navigator.Instance, GlobalConfiguration.CoreContext.GetFlightService());
+            ViewModel.ViewModelError += ErrorHandler;
             this.DataContext = ViewModel;
+
+            ViewModel.PropertyChanged += Checkloading;            
         }
 
+        # region ** ERROR HANDLING **
+        private void ErrorHandler(object sender, ViewModelErrorArgs e) 
+        {
+            MessageDialog dialog;
+
+            switch(e.ErrorCode) 
+            {
+                case "SEARCH_FAILED":
+                    dialog = new MessageDialog("Por favor, revise su conexion a internet.", "Error de Conexión");
+                    dialog.ShowAsync();
+                    break;
+                case "SEARCH_INVALID":
+                    dialog = new MessageDialog("Por favor, revise los campos y vuelva a intentarlo.", "Búsqueda");
+                    dialog.ShowAsync();
+                    break;
+            }
+        }
+        #endregion
+
+        private void Checkloading(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "IsLoading") 
+            {
+                if ((sender as FlightSearchViewModel).IsLoading)
+                    loadingPopup.Show();
+                else
+                    loadingPopup.Hide();
+            }
+        }
+       
         public NavigationHelper NavigationHelper
         {
             get { return this.navigationHelper; }

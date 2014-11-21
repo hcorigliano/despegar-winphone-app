@@ -16,6 +16,7 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 using Despegar.WP.UI.Developer;
 using Windows.UI.Xaml;
+using Windows.UI.Popups;
 
 namespace Despegar.WP.UI
 {    
@@ -140,9 +141,11 @@ namespace Despegar.WP.UI
                     break;
                 case "Flights":
                     ViewModel.NavigateToFlights.Execute(null);
-                    break;                
+                    break;
                 default:
-                    throw new InvalidOperationException();
+                    var dialog = new MessageDialog("Proximamente estará disponible esta funcionalidad.", "Proximamente");
+                    dialog.ShowAsync();
+                    break;
             }
         }
         

@@ -16,7 +16,7 @@ using System;
 
 namespace Despegar.WP.UI.Developer
 {
-    public sealed partial class DevTools : UserControl
+    public sealed partial class DevTools : UserControl, IPopupContent
     {
         private DeveloperViewModel ViewModel { get; set; }
 
@@ -32,14 +32,17 @@ namespace Despegar.WP.UI.Developer
             // Default Picker Values
             this.OpacityPicker.SelectedValue = MetroGridHelper.Opacity;
             this.ColourPicker.SelectedColor = MetroGridHelper.Color;
+        }
 
+        public void Enter()
+        {
             ShowDialogAnimation.Begin();
         }
 
-        private void ClosePopup(object sender, RoutedEventArgs e)
+        public void Leave()
         {
             HideDialogAnimation.Begin();
-            HideDialogAnimation.Completed += DoClosePopup;                 
+            HideDialogAnimation.Completed += DoClosePopup;   
         }
 
         private void DoClosePopup(object sender, object e)
@@ -48,9 +51,12 @@ namespace Despegar.WP.UI.Developer
             Popup p = this.Parent as Popup;
 
             // close the Popup
-            if (p != null) { p.IsOpen = false; }     
+            if (p != null) { p.IsOpen = false; }
         }
 
-               
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Leave();
+        }
     }
 }

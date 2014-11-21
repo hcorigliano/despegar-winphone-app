@@ -1,0 +1,43 @@
+﻿<UserControl
+    x:Class="Despegar.WP.UI.Controls.Loading"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Despegar.WP.UI.Developer"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    
+    <UserControl.Resources>
+        <Storyboard x:Name="loadingStoryboard" RepeatBehavior="Forever" />
+        <Storyboard x:Name="ShowDialogAnimation">
+            <DoubleAnimation Duration="0:0:.5" To="1" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="mainCanvas" d:IsOptimized="True">
+                <DoubleAnimation.EasingFunction>
+                    <QuadraticEase EasingMode="EaseIn" />
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+        </Storyboard>
+        <Storyboard x:Name="HideDialogAnimation">
+            <DoubleAnimation Duration="0:0:.5" To="0" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="mainCanvas" d:IsOptimized="True">
+                <DoubleAnimation.EasingFunction>
+                    <QuadraticEase EasingMode="EaseOut" />
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+        </Storyboard>
+    </UserControl.Resources>
+    
+    <Grid Width="{Binding Width}" Height="{Binding Height}" Opacity="0" x:Name="mainCanvas" >
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.Background>
+            <SolidColorBrush Color="Black" Opacity="0.6"/>
+        </Grid.Background>
+        
+        <!--- TODO: Move to Styles -->
+
+        <Image x:Name="ImageView" Style="{StaticResource LoadingImage}"  />
+        <TextBlock Style="{StaticResource SegoeSemilight17}"  Text="Cargando..." VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,140,0,0" />
+        
+    </Grid>
+
+</UserControl>

@@ -2,6 +2,7 @@
 using Despegar.WP.UI.Common;
 using Despegar.WP.UI.Model;
 using Despegar.WP.UI.Model.ViewModel.Flights;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -103,11 +104,16 @@ namespace Despegar.WP.UI.Controls.Flights
         }
        
         private async void FlightsTextBlock_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
-        {           
+        {
             if (args.Reason == AutoSuggestionBoxTextChangeReason.UserInput && sender.Text != "" && sender.Text.Length >= 3)
             {
-                //TODO : TRY CATCH
-                sender.ItemsSource = (IEnumerable)(await GetCitiesAutocomplete(sender.Text));
+                try
+                {
+                    sender.ItemsSource = (IEnumerable)(await GetCitiesAutocomplete(sender.Text));
+                }
+                catch (Exception) {
+                    // do nothing. Try again...
+                }
             }
         }
 
