@@ -265,7 +265,7 @@
     <value>Confirme su e-mail</value>
   </data>
   <data name="Flight_Checkout_Contact.Header" xml:space="preserve">
-    <value>datos de contacto</value>
+    <value>contacto</value>
   </data>
   <data name="Contact_Area_Code.Text" xml:space="preserve">
     <value>Area</value>
@@ -409,13 +409,13 @@
     <value>Código de seguridad</value>
   </data>
   <data name="Flight_Checkout_Card_Data.Header" xml:space="preserve">
-    <value>datos de la tarjeta</value>
+    <value>datos de tarjeta</value>
   </data>
   <data name="address_floor.Text" xml:space="preserve">
     <value>Piso</value>
   </data>
   <data name="Flight_Checkout_Invoice_Arg.Header" xml:space="preserve">
-    <value>factura Fiscal</value>
+    <value>factura fiscal</value>
   </data>
   <data name="Invoice_Arg_City.Text" xml:space="preserve">
     <value>Ciudad</value>

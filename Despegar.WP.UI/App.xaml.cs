@@ -99,17 +99,12 @@ namespace Despegar.WP.UI
                  }
                  else
                  {
+                    
                      GlobalConfiguration.CoreContext.SetSite(roamingSettings.Values["countryCode"].ToString());
-                     if (!rootFrame.Navigate(typeof(FlightCheckout), e.Arguments))
+                     if (!rootFrame.Navigate(typeof(Home), e.Arguments))
                      {
                          throw new Exception("Failed to create Home page");
                      }
-
-                     //GlobalConfiguration.CoreContext.SetSite(roamingSettings.Values["countryCode"].ToString());
-                     //if (!rootFrame.Navigate(typeof(Home), e.Arguments))
-                     //{
-                     //    throw new Exception("Failed to create Home page");
-                     //}
 
                  }
             }
