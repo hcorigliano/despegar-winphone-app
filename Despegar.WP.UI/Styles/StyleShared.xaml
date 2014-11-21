@@ -49,18 +49,24 @@
     <GridLength x:Key="Offset">9.6</GridLength>
     <x:Double x:Key="dOffset">9.6</x:Double>
     <!-- Block Grid Measures-->
-    <GridLength x:Key="Block1p">29.6</GridLength>   <!--  Square + offset -->  
+    <GridLength x:Key="Block1">20</GridLength>
+    <GridLength x:Key="Block1p">29.6</GridLength>   <!--  Square + offset -->
+    <x:Double x:Key="dBlock1">20</x:Double>
+    <x:Double x:Key="dBlock1p">29.6</x:Double>
     <GridLength x:Key="Block2">49.6</GridLength>  <!-- (Square + offset) x2-->
     <x:Double x:Key="dBlock2">49.6</x:Double> 
     <GridLength x:Key="Block2p">59.2</GridLength>
     <GridLength x:Key="Block3">79.2</GridLength>
-    <x:Double x:Key="dBlock3p">79.2</x:Double>
     <GridLength x:Key="Block3p">88.8</GridLength>
     <x:Double x:Key="dBlock3">79.2</x:Double>
+    <x:Double x:Key="dBlock3p">88.8</x:Double>
     <GridLength x:Key="Block4">118.4</GridLength>
     <GridLength x:Key="Block4p">108.8</GridLength>
     <GridLength x:Key="Block6">168</GridLength>
     <GridLength x:Key="Block6p">177.6</GridLength>
+    <x:Double x:Key="dBlock9p">276</x:Double>
+    <x:Double x:Key="dBlock10p">305.6</x:Double>
+    <x:Double x:Key="dBlock12p">364.8</x:Double>
     <GridLength x:Key="Block1p_And_Half">39.6</GridLength>
     <x:Double x:Key="dBlock1p_And_Half">39.6</x:Double>
 
@@ -106,6 +112,10 @@
         <Setter Property="FontFamily" Value="Segoe UI SemiLight" />
         <Setter Property="FontSize" Value="19.2" />
     </Style>
+    <Style x:Key="SegoeLight24" TargetType="TextBlock" BasedOn="{StaticResource BaseText}">
+        <Setter Property="FontFamily" Value="Segoe UI Light" />
+        <Setter Property="FontSize" Value="19.2" />
+    </Style>
     <Style x:Key="SegoeLight28" TargetType="TextBlock" BasedOn="{StaticResource BaseText}">
         <Setter Property="FontFamily" Value="Segoe UI Light" />
         <Setter Property="FontSize" Value="22.4" />
@@ -132,6 +142,11 @@
         <Setter Property="Stretch" Value="None" />
         <Setter Property="HorizontalAlignment" Value="Left" />
         <Setter Property="VerticalAlignment" Value="Top" />        
+    </Style>
+    <Style x:Key="CreditCardImageBase" TargetType="Image" BasedOn="{StaticResource ImageBase}">
+        <Setter Property="Margin" Value="0,0,9.6,9.6" />
+        <Setter Property="Width" Value="{StaticResource dBlock3}" />
+        <Setter Property="Height" Value="{StaticResource dBlock2}" />
     </Style>
     <Style x:Key="MainContainerGrid" TargetType="Grid">
         <Setter Property="Margin" Value="19.2,12,19.2,0" />
@@ -313,6 +328,19 @@
         <Setter Property="IsTextPredictionEnabled" Value="false"></Setter>
         <Setter Property="Margin" Value="0,-7,0,0" />
     </Style>
+
+    <Style x:Key="CheckoutInputBase" TargetType="TextBox" BasedOn="{StaticResource InputBase}">
+        <Setter Property="Margin" Value="0,0,0,0" />
+    </Style>
+
+    <!-- RadioButton -->
+    <Style x:Key="CheckoutPaymentRadioButton" TargetType="RadioButton" >
+        <Setter Property="FontFamily" Value="Segoe UI Light" />
+        <Setter Property="FontSize" Value="19.2" />
+        <Setter Property="CharacterSpacing" Value="-20" />
+        <Setter Property="Foreground" Value="{StaticResource WhiteBrush}" />
+    </Style>
+
     <!-- AutoSuggestBox -->
     <Style x:Key="AutosuggestBoxBase" TargetType="AutoSuggestBox">
         <Setter Property="Height" Value="39.2" />
@@ -745,7 +773,11 @@
     </Style>
     <Style x:Key="HomeButtonTextContainer" TargetType="StackPanel">       
         <Setter Property="Margin" Value="{StaticResource Left_Offset}" />
-    </Style>   
+    </Style>
+    <Style x:Key="TextBoxInputContainer" TargetType="StackPanel">
+        <!--<Setter Property="Margin" Value="{StaticResource Left_Offset}" />-->
+        <Setter Property="MinHeight"  Value="{StaticResource dBlock3p}" />
+    </Style>
     <!-- Flights SearchBox -->
     <Style x:Key="FlightAirportIcon" TargetType="Image" BasedOn="{StaticResource IconImageBase}">       
         <Setter Property="Source" Value="/Assets/Icon/App/flight-right-small-white.png" />        
@@ -816,6 +848,28 @@
     <Style x:Key="FlightIconResult" TargetType="Image" BasedOn="{StaticResource IconImageBase}">
         <Setter Property="Source" Value="/Assets/Icon/App/flight-right-small-white.png" />
     </Style>
+
+    <!-- Flights Checkout -->
+    <Style x:Key="DetailCheckoutDetail" TargetType="TextBlock" BasedOn="{StaticResource SegoeSemilight17}">
+        <Setter Property="Height" Value="{StaticResource dBlock1p}" />
+    </Style>
+    <Style x:Key="DetailCheckoutTotal" TargetType="TextBlock" BasedOn="{StaticResource SegoeLight24}">
+        <Setter Property="Height" Value="{StaticResource dBlock1p}" />
+        <Setter Property="Foreground" Value="{StaticResource Yellow20}" />
+    </Style>
+    <Style x:Key="DetailCheckoutTotalPrice" TargetType="TextBlock" BasedOn="{StaticResource SegoeLight24}">
+        <Setter Property="Height" Value="{StaticResource dBlock1p}" />
+    </Style>
+    <Style x:Key="DetailCheckoutForeach" TargetType="TextBlock" BasedOn="{StaticResource SegoeSemilight24}">
+        <Setter Property="Height" Value="{StaticResource dBlock1p}" />
+    </Style>
+    <Style x:Key="DetailCheckoutForeachPrice" TargetType="TextBlock" BasedOn="{StaticResource SegoeSemilight17}">
+        <Setter Property="Height" Value="{StaticResource dBlock1p}" />
+    </Style>
+    <Style x:Key="DetailCheckoutDetailPrice" TargetType="TextBlock" BasedOn="{StaticResource SegoeRegular15}">
+        <Setter Property="Height" Value="{StaticResource dBlock1p}" />
+    </Style>
+
     <!-- ================== ThemeResources Overrides ================= -->
     <ResourceDictionary.ThemeDictionaries>
         <ResourceDictionary x:Key="Default">

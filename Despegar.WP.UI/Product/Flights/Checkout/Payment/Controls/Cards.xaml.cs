@@ -20,20 +20,11 @@ namespace Despegar.WP.UI.Product.Flights.Checkout.Payment.Controls
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class Cards : Page
+    public sealed partial class Cards : UserControl
     {
         public Cards()
         {
             this.InitializeComponent();
-        }
-
-        /// <summary>
-        /// Invoked when this page is about to be displayed in a Frame.
-        /// </summary>
-        /// <param name="e">Event data that describes how this page was reached.
-        /// This parameter is typically used to configure the page.</param>
-        protected override void OnNavigatedTo(NavigationEventArgs e)
-        {
         }
 
         private void Image_Load_Failed(object sender, ExceptionRoutedEventArgs e)

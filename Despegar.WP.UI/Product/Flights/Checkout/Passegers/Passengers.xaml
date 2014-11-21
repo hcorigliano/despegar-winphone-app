@@ -1,4 +1,4 @@
-﻿<Page
+﻿<UserControl
     x:Class="Despegar.WP.UI.Product.Flights.Checkout.Passegers.Passengers"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -6,57 +6,63 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:conv="using:Despegar.WP.UI.Common.Converter"
+    xmlns:dev="using:Despegar.WP.UI.Developer.Controls"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    >
 
-    <Page.Resources>
+    <UserControl.Resources>
         <conv:VisibilityConverter x:Name="VisibilityConverter"/>
         <conv:TypeToTextConverter x:Name="TypeToTextConverter"/>
         <conv:DateToStringConverter x:Name="DateToStringConverter"/>
-    </Page.Resources>
+    </UserControl.Resources>
 
-    <Grid>
-       
-            <StackPanel>
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition></ColumnDefinition>
-                        <ColumnDefinition></ColumnDefinition>
-                    </Grid.ColumnDefinitions>
-                    <TextBlock  Text="{Binding type , Converter={StaticResource TypeToTextConverter}}"></TextBlock>
-                </Grid>
+    <Grid VerticalAlignment="Top" >
 
-                <StackPanel Visibility="{Binding first_name.required,Converter={StaticResource VisibilityConverter}}" >
-                    <TextBlock x:Uid="Passager_First_Name"></TextBlock>
-                    <TextBox x:Name="first_name" Text="{Binding first_name.coreValue,Mode=TwoWay}"></TextBox>
-                </StackPanel>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="{StaticResource Block1p}"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition ></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <TextBlock Style="{StaticResource BaseTextLabel}" Grid.Column="0" Text="{Binding type , Converter={StaticResource TypeToTextConverter}}" Height="30" VerticalAlignment="Bottom"></TextBlock>
+        </Grid>
 
-                <StackPanel Visibility="{Binding last_name.required,Converter={StaticResource VisibilityConverter}}">
-                    <TextBlock x:Uid="Passager_Last_Name"></TextBlock>
-                    <TextBox x:Name="last_name" Text="{Binding last_name.coreValue,Mode=TwoWay}"></TextBox>
-                </StackPanel>
-
-                <StackPanel Visibility="{Binding nationality.required,Converter={StaticResource VisibilityConverter}}">
-                    <TextBlock x:Uid="Passager_Nationality"></TextBlock>
-                    <AutoSuggestBox x:Name="nationality" TextChanged="Autosuggest_TextChanged" SuggestionChosen="SuggestionChosen"></AutoSuggestBox>
-                </StackPanel>
-
-                <StackPanel Visibility="{Binding document.required,Converter={StaticResource VisibilityConverter}}">
-                    <TextBlock x:Uid="Passager_Document_Type"></TextBlock>
-                    <ComboBox x:Name="document" ItemsSource="{Binding document.type.options}" DisplayMemberPath="description" SelectedValue="{Binding document.type.coreValue, Mode=TwoWay}" SelectedValuePath="value"></ComboBox>
-                </StackPanel>
-
-                <StackPanel Visibility="{Binding birthdate.required,Converter={StaticResource VisibilityConverter}}">
-                    <TextBlock x:Uid="Passager_Birthdate"></TextBlock>
-                    <DatePicker x:Name="birthdate" Height="auto" Date="{Binding birthdate.coreValue , Mode=TwoWay , Converter={StaticResource DateToStringConverter}}"></DatePicker>
-                </StackPanel>
-
-                <StackPanel Visibility="{Binding gender.required,Converter={StaticResource VisibilityConverter}}">
-                    <TextBlock x:Uid="Passager_gender"></TextBlock>
-                    <ComboBox x:Name="gender" ItemsSource="{Binding gender.options}" DisplayMemberPath="description"  SelectedValue="{Binding gender.coreValue, Mode=TwoWay}" SelectedValuePath="value" ></ComboBox>
-                </StackPanel>
-
+        <StackPanel Grid.Row="1">
+            <StackPanel Style="{StaticResource TextBoxInputContainer}" Visibility="{Binding first_name.required,Converter={StaticResource VisibilityConverter}}" >
+                <TextBlock Style="{StaticResource BaseTextLabel}" x:Uid="Passager_First_Name" Text="Nombre"></TextBlock>
+                <TextBox Style="{StaticResource CheckoutInputBase}" x:Name="first_name" Text="{Binding first_name.coreValue,Mode=TwoWay}"></TextBox>
             </StackPanel>
 
+            <StackPanel Style="{StaticResource TextBoxInputContainer}" Visibility="{Binding last_name.required,Converter={StaticResource VisibilityConverter}}">
+                <TextBlock Style="{StaticResource BaseTextLabel}" x:Uid="Passager_Last_Name" Text="Apellido"></TextBlock>
+                <TextBox Style="{StaticResource CheckoutInputBase}" x:Name="last_name" Text="{Binding last_name.coreValue,Mode=TwoWay}"></TextBox>
+            </StackPanel>
+
+            <StackPanel Style="{StaticResource TextBoxInputContainer}" Visibility="{Binding nationality.required,Converter={StaticResource VisibilityConverter}}">
+                <TextBlock Style="{StaticResource BaseTextLabel}" x:Uid="Passager_Nationality" Text="Nacionalidad"></TextBlock>
+                <AutoSuggestBox  TextBoxStyle="{StaticResource InputBase}" Style="{StaticResource AutosuggestBoxBase}"  x:Name="nationality" TextChanged="Autosuggest_TextChanged" SuggestionChosen="SuggestionChosen"></AutoSuggestBox>
+            </StackPanel>
+
+            <StackPanel Style="{StaticResource TextBoxInputContainer}" Visibility="{Binding document.required,Converter={StaticResource VisibilityConverter}}">
+                <TextBlock Style="{StaticResource BaseTextLabel}" x:Uid="Passager_Document_Type" Text="Tipo de documento"></TextBlock>
+                <ComboBox Style="{StaticResource ComboBoxBase}"  x:Name="document" ItemsSource="{Binding document.type.options}" DisplayMemberPath="description" SelectedValue="{Binding document.type.coreValue, Mode=TwoWay}" SelectedValuePath="value"></ComboBox>
+            </StackPanel>
+
+            <StackPanel Style="{StaticResource TextBoxInputContainer}" Visibility="{Binding birthdate.required,Converter={StaticResource VisibilityConverter}}">
+                <TextBlock Style="{StaticResource BaseTextLabel}" x:Uid="Passager_Birthdate" Text="Fecha de nacimiento"></TextBlock>
+                <DatePicker Style="{StaticResource DatePickerBase}" x:Name="birthdate" Height="auto" Date="{Binding birthdate.coreValue , Mode=TwoWay , Converter={StaticResource DateToStringConverter}}"></DatePicker>
+            </StackPanel>
+
+            <StackPanel Style="{StaticResource TextBoxInputContainer}" Visibility="{Binding gender.required,Converter={StaticResource VisibilityConverter}}">
+                <TextBlock Style="{StaticResource BaseTextLabel}" x:Uid="Passager_gender" Text="Sexo"></TextBlock>
+                <ComboBox Style="{StaticResource ComboBoxBase}" x:Name="gender" ItemsSource="{Binding gender.options}" DisplayMemberPath="description"  SelectedValue="{Binding gender.coreValue, Mode=TwoWay}" SelectedValuePath="value" ></ComboBox>
+            </StackPanel>
+
+        </StackPanel>
+
     </Grid>
-</Page>
+
+</UserControl>

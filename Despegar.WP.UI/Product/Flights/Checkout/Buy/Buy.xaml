@@ -13,11 +13,14 @@
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="100" ></RowDefinition>
         </Grid.RowDefinitions>
-        <StackPanel xmlns:src="using:Despegar.WP.UI.Product.Flights.Checkout.Buy.Controls">
+        <StackPanel Grid.Row="0" xmlns:src="using:Despegar.WP.UI.Product.Flights.Checkout.Buy.Controls">
             <src:BuyDetailsControl DataContext="{Binding}"></src:BuyDetailsControl>            
         </StackPanel>
-        
-        <StackPanel Grid.Row="1">
+        <StackPanel Grid.Row="0" xmlns:src="using:Despegar.WP.UI.Product.Flights.Checkout.Buy.Controls">
+            <src:BuyDetailsControl DataContext="{Binding}"></src:BuyDetailsControl>
+        </StackPanel>
+
+        <StackPanel VerticalAlignment="Bottom" Grid.Row="1">
             <Button Click="OnButtonClicked" HorizontalAlignment="Center" VerticalAlignment="Bottom" x:Uid="Buy_Button"></Button>
         </StackPanel>
     </Grid>
