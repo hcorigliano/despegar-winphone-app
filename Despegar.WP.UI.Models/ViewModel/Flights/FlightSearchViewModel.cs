@@ -25,8 +25,7 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
         public INavigator Navigator { get; set; }
         public PassengersViewModel PassengersViewModel { get; set; }
         private IFlightService flightService { get; set; }
-        private FlightSearchModel coreSearchModel;
-
+        private FlightSearchModel coreSearchModel;        
 
         #region ** Exposed Properties **
 
@@ -155,9 +154,11 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
                   
             if (coreSearchModel.IsValid)
             {
+                IsLoading = true;
                 FlightsItineraries intineraries = await flightService.GetItineraries(coreSearchModel);
                 //TODO handle error with exceptions.
 
+                IsLoading = false;
                 var pageParameters = new PageParameters();
                 pageParameters.Itineraries = intineraries;
                 pageParameters.SearchModel = coreSearchModel;
