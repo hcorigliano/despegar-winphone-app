@@ -25,7 +25,7 @@
         </Storyboard>        
     </UserControl.Resources>
     
-    <Grid Width="{Binding Width}" Height="{Binding Height}" Opacity="1" x:Name="mainCanvas" >
+    <Grid Width="{Binding Width}" Height="{Binding Height}" Opacity="0" x:Name="mainCanvas" >
         <Grid.RowDefinitions>
             <RowDefinition/>
         </Grid.RowDefinitions>
