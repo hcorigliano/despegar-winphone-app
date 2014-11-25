@@ -4,6 +4,7 @@ using Despegar.Core.Service;
 using Despegar.WP.UI.Common;
 using Despegar.WP.UI.Model;
 using Despegar.WP.UI.Model.Classes.Flights.Checkout;
+using Despegar.WP.UI.Model.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -146,7 +147,7 @@ namespace Despegar.WP.UI.Product.Flights
         {
             if (e.PropertyName == "IsLoading")
             {
-                if ((sender as FlightsCheckoutModel).IsLoading)
+                if ((sender as ViewModelBase).IsLoading)
                     loadingPopup.Show();
                 else
                     loadingPopup.Hide();

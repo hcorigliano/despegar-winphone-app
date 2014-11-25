@@ -26,8 +26,11 @@ namespace Despegar.WP.UI.Model
 
         public async Task<List<Product>> GetProducts(string country)
         {
+            IsLoading = true;
             Configuration configuration = await configurationService.GetConfigurations();
             var Site = configuration.sites.FirstOrDefault(s => s.code == country);
+            IsLoading = false;
+
             return Site.products;
         }
 
