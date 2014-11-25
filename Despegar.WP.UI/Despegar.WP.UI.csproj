@@ -425,6 +425,7 @@
     <Content Include="Assets\Animations\loading\loading72.png" />
     <Content Include="Assets\Animations\loading\loading8.png" />
     <Content Include="Assets\Animations\loading\loading9.png" />
+    <Content Include="Assets\Animations\spritesheet.png" />
     <Content Include="Assets\ApplicationIcon.png" />
     <Content Include="Assets\country\AD.png" />
     <Content Include="Assets\country\AE.png" />

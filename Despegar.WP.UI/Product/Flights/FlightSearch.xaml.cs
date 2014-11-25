@@ -36,7 +36,8 @@ namespace Despegar.WP.UI.Product.Flights
             ViewModel.ViewModelError += ErrorHandler;
             this.DataContext = ViewModel;
 
-            ViewModel.PropertyChanged += Checkloading;            
+            ViewModel.PropertyChanged += Checkloading;
+            //ViewModel.IsLoading = true;
         }
 
         # region ** ERROR HANDLING **

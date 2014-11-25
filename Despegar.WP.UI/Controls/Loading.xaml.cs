@@ -27,41 +27,38 @@ namespace Despegar.WP.UI.Controls
     /// </summary>
     public sealed partial class Loading : UserControl, IPopupContent
     {
-     
+        private int NumberOfFrames = 73;
+        private int FrameSize = 120;
+
         public Loading()
         {
             this.InitializeComponent();
 
+            this.DataContext = Window.Current.Bounds;
+
+            // Create Loading Animation
             var animation = new ObjectAnimationUsingKeyFrames();
 
-            // Create the image element.
-            for (int i = 0; i <= 72; i++) //16 is the number of images that are going to be displayed
+            for (int i = 0; i < NumberOfFrames; i++)
             {
-                BitmapImage bitmapImage = new BitmapImage();
-                bitmapImage.UriSource = new Uri(String.Format("ms-appx:///Assets/Animations/loading/loading{0}.png", i));
+                TranslateTransform transform = new TranslateTransform();
+                transform.X = -i * FrameSize;
+                transform.Y = 0;
+
                 DiscreteObjectKeyFrame keyframe = new DiscreteObjectKeyFrame()
                 {
-                   KeyTime = KeyTime.FromTimeSpan(TimeSpan.FromMilliseconds(42 * i)), //Time Interval
-                   Value = bitmapImage
+                    KeyTime = KeyTime.FromTimeSpan(TimeSpan.FromMilliseconds(42 * i)), //Time Interval
+                    Value = transform
                 };
 
                 animation.KeyFrames.Add(keyframe);
-            } 
+            }
 
-            Storyboard.SetTarget(animation, ImageView);
-            Storyboard.SetTargetProperty(animation, "Source");
+            Storyboard.SetTarget(animation, ImageBrush);
+            Storyboard.SetTargetProperty(animation, "Transform");
 
             loadingStoryboard.Children.Add(animation);
-
-            //(this.Content as FrameworkElement).DataContext = this;
             loadingStoryboard.Begin();
-
-            this.DataContext = Window.Current.Bounds;
-        }
-
-        public void ShowLoading()
-        {
-            ShowDialogAnimation.Begin();
         }
 
         public void Enter()
