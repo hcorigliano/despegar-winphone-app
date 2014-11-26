@@ -16,15 +16,17 @@
     </UserControl.Resources>
 
     <Grid>
+    	<Grid.RowDefinitions>
+    		<RowDefinition/>
+    		<RowDefinition/>
+    	</Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="40"/>
-            <ColumnDefinition Width="30"/>
-            <ColumnDefinition Width="30"/>
-            <ColumnDefinition Width="30"/>
-            <ColumnDefinition Width="30"/>
-            <ColumnDefinition Width="30"/>
             <ColumnDefinition Width="50"/>
-            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="40"/>
+            <ColumnDefinition Width="40"/>
+            <ColumnDefinition Width="40"/>
+            <ColumnDefinition Width="40"/>
+            <ColumnDefinition Width="40"/>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
@@ -32,14 +34,16 @@
         <Grid Grid.Column="0" >
             <Image  HorizontalAlignment="Left" Height="30" Width="30" Margin="0,0,0,0" Grid.Row="0" VerticalAlignment="Top" Source="{Binding ConverterParameter='/Assets/Icon/App/flight-{0}-small-white.png', Converter={StaticResource ImageGoReturnConverter}}" />
         </Grid>
-        <TextBlock Style="{StaticResource BaseText}" Grid.Column="1" HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding from.code}" VerticalAlignment="Top"/>
-        <TextBlock Grid.Column="2" HorizontalAlignment="Left" Margin="0,0,0,0" TextWrapping="Wrap" Text="{Binding departure}" VerticalAlignment="Top"/>
+        <TextBlock Style="{StaticResource SegoeLight24}" Grid.Column="1" HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding from.code}" VerticalAlignment="Top"/>
+        <TextBlock Style="{StaticResource SegoeLight24}" Grid.Column="2" HorizontalAlignment="Left" Margin="0,0,0,0" TextWrapping="Wrap" Text="{Binding departure}" VerticalAlignment="Top"/>
+
         <Image Grid.Column="3" HorizontalAlignment="Left" Height="50" Margin="0,0,0,0" VerticalAlignment="Top" />
-        <TextBlock Grid.Column="4" HorizontalAlignment="Left" Margin="0,0,0,0" TextWrapping="Wrap" Text="{Binding to.code}" VerticalAlignment="Top"/>
-        <TextBlock Grid.Column="5" HorizontalAlignment="Left" Margin="0,0,0,0" TextWrapping="Wrap" Text="{Binding arrival}" VerticalAlignment="Top"/>
-        <TextBlock Grid.Column="6" HorizontalAlignment="Left" Margin="0,0,0,0" TextWrapping="Wrap" Text="{Binding duration}" VerticalAlignment="Top"/>
-        <TextBlock Grid.Column="7" HorizontalAlignment="Left" Margin="0,0,0,0" TextWrapping="Wrap" Text="{Binding layovers}" VerticalAlignment="Top"/>
-        <TextBlock Grid.Column="7" HorizontalAlignment="Left" Margin="20,0,0,0" TextWrapping="Wrap" VerticalAlignment="Top" x:Uid="Layovers"/>
+        <TextBlock Style="{StaticResource SegoeLight24}" Grid.Column="4" HorizontalAlignment="Left" Margin="0,0,0,0" TextWrapping="Wrap" Text="{Binding to.code}" VerticalAlignment="Top"/>
+        <TextBlock Style="{StaticResource SegoeLight24}" Grid.Column="5" HorizontalAlignment="Left" Margin="0,0,0,0" TextWrapping="Wrap" Text="{Binding arrival}" VerticalAlignment="Top"/>
+
+        <TextBlock Style="{StaticResource SegoeLight24}" Grid.Column="1" HorizontalAlignment="Left" Margin="0,0,0,0" TextWrapping="Wrap" Text="{Binding duration}" VerticalAlignment="Top" Grid.Row="1"/>
+        <TextBlock Style="{StaticResource SegoeLight24}" Grid.Column="3" Grid.ColumnSpan="3" HorizontalAlignment="Left" Margin="0,0,0,0" TextWrapping="Wrap" Text="{Binding layovers}" VerticalAlignment="Top" Grid.Row="1"/>
+        <TextBlock Style="{StaticResource SegoeLight24}" Grid.Column="3" Grid.ColumnSpan="3" HorizontalAlignment="Left" Margin="20,0,0,0" TextWrapping="Wrap" VerticalAlignment="Top" x:Uid="Layovers" Grid.Row="1"/>
 
     </Grid>
 </UserControl>
