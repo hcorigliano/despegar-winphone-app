@@ -29,7 +29,50 @@ namespace Despegar.Core.Service
         public async Task<FlightsItineraries> GetItineraries(FlightSearchModel searchModel)
         {           
             IConnector connector = context.GetServiceConnector(ServiceKey.FlightItineraries);
-            return await connector.GetAsync<FlightsItineraries>(searchModel.GetQueryUrl());
+            FlightsItineraries result = await connector.GetAsync<FlightsItineraries>(searchModel.GetQueryUrl());
+
+            // Add Indexes
+            if (result.items != null) 
+            {             
+                foreach (var item in result.items)
+                {
+                    // outbound
+                    if (item.outbound != null)
+                    {                        
+                        foreach (var route in item.outbound)
+                        {
+                            if (route.segments != null)
+                            {
+                                var i = 1;
+                                foreach (var segment in route.segments)
+                                {
+                                    segment.Index = i;
+                                    i++;
+                                }
+                            }
+                        }
+                    }
+   
+                        // inBound
+                    if (item.inbound != null)
+                    {
+                        foreach (var route in item.inbound)
+                        {
+                            if (route.segments != null)
+                            {
+                                var i = 1;
+                                foreach (var segment in route.segments)
+                                {
+                                    segment.Index = i;
+                                    i++;
+                                }
+                            }
+                        }
+                    }          
+                }
+             }
+
+            return result;
         }
         
         /// <summary>

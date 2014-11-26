@@ -36,7 +36,7 @@
 
         <TextBlock Grid.Row="0" Style="{StaticResource FlightSegmentTitleWhite}">
             <Run x:Uid="Page_Flight_Detail_Segment" />
-            <Run Text="1" />
+            <Run Text="{Binding Index}" />
         </TextBlock>               
         
         <TextBlock Grid.Row="1" Grid.Column="0" Style="{StaticResource FlightSegmentSubText}" >
