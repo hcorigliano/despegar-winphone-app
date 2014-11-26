@@ -17,11 +17,15 @@ using Windows.UI.Xaml.Navigation;
 using Despegar.WP.UI.Developer;
 using Windows.UI.Xaml;
 using Windows.UI.Popups;
+using Despegar.WP.UI.Controls;
+using System.ComponentModel;
+using Despegar.WP.UI.Model.ViewModel;
 
 namespace Despegar.WP.UI
 {    
     public sealed partial class Home : Page
     {
+        private ModalPopup loadingPopup = new ModalPopup(new Loading());
         private NavigationHelper navigationHelper;
         public List<Despegar.Core.Business.Configuration.Product> products;
         public Despegar.WP.UI.Model.HomeViewModel ViewModel { get; set; }
@@ -34,13 +38,25 @@ namespace Despegar.WP.UI
             this.navigationHelper.LoadState += this.NavigationHelper_LoadState;
             this.navigationHelper.SaveState += this.NavigationHelper_SaveState;
 
-            ViewModel = new Despegar.WP.UI.Model.HomeViewModel(Navigator.Instance, GlobalConfiguration.CoreContext.GetConfigurationService());
-            DataContext = ViewModel;
+            ViewModel = new Despegar.WP.UI.Model.HomeViewModel(Navigator.Instance, GlobalConfiguration.CoreContext.GetConfigurationService());            
+            ViewModel.PropertyChanged += Checkloading;
+
+            this.DataContext = ViewModel;
 
             // Developer Tools
             this.CheckDeveloperTools();
             SetupMenuItems(GlobalConfiguration.Site);
-            test();
+        }
+
+        private void Checkloading(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "IsLoading")
+            {
+                if ((sender as ViewModelBase).IsLoading)
+                    loadingPopup.Show();
+                else
+                    loadingPopup.Hide();
+            }
         }
 
         /// <summary>
@@ -51,15 +67,10 @@ namespace Despegar.WP.UI
             get { return this.navigationHelper; }
         }
 
-        private async void test()
-        {
-            IConfigurationService configurationService = GlobalConfiguration.CoreContext.GetConfigurationService();
-            Countries con = await configurationService.GetCountries();
-        }
-
         private async void SetupMenuItems(string country)
-        {
+        {            
             products = await ViewModel.GetProducts(country);
+            
 
             foreach (var product in products)
             {

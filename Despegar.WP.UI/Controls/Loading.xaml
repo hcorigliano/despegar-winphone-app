@@ -22,7 +22,7 @@
                     <QuadraticEase EasingMode="EaseOut" />
                 </DoubleAnimation.EasingFunction>
             </DoubleAnimation>
-        </Storyboard>
+        </Storyboard>        
     </UserControl.Resources>
     
     <Grid Width="{Binding Width}" Height="{Binding Height}" Opacity="0" x:Name="mainCanvas" >
@@ -34,8 +34,18 @@
         </Grid.Background>
         
         <!--- TODO: Move to Styles -->
+        <Rectangle Width="120" Height="120" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <Rectangle.Fill>
+                <ImageBrush x:Name="ImageBrush"
+                    ImageSource="/Assets/Animations/loading.png"
+                    Stretch="None"
+                    AlignmentX="Left"
+                    AlignmentY="Top" />
 
-        <Image x:Name="ImageView" Style="{StaticResource LoadingImage}"  />
+            </Rectangle.Fill>
+        </Rectangle>
+
+        <!--<Image x:Name="ImageView" Style="{StaticResource LoadingImage}"  />-->
         <TextBlock Style="{StaticResource SegoeSemilight17}"  Text="Cargando..." VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,140,0,0" />
         
     </Grid>

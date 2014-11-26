@@ -13,6 +13,7 @@ using Windows.UI.Xaml.Data;
 using System.ComponentModel;
 using Despegar.WP.UI.Model.Common;
 using Windows.UI.Popups;
+using Despegar.WP.UI.Model.ViewModel;
 
 namespace Despegar.WP.UI.Product.Flights
 {
@@ -34,9 +35,9 @@ namespace Despegar.WP.UI.Product.Flights
 
             ViewModel = new FlightSearchViewModel(Navigator.Instance, GlobalConfiguration.CoreContext.GetFlightService());
             ViewModel.ViewModelError += ErrorHandler;
-            this.DataContext = ViewModel;
+            ViewModel.PropertyChanged += Checkloading;
 
-            ViewModel.PropertyChanged += Checkloading;            
+            this.DataContext = ViewModel;            
         }
 
         # region ** ERROR HANDLING **
@@ -62,13 +63,13 @@ namespace Despegar.WP.UI.Product.Flights
         {
             if (e.PropertyName == "IsLoading") 
             {
-                if ((sender as FlightSearchViewModel).IsLoading)
+                if ((sender as ViewModelBase).IsLoading)
                     loadingPopup.Show();
                 else
                     loadingPopup.Hide();
             }
         }
-       
+
         public NavigationHelper NavigationHelper
         {
             get { return this.navigationHelper; }
