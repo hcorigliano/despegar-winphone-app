@@ -91,7 +91,7 @@
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
 
-                            <Grid Grid.Column="0" Style="{StaticResource IconBlueBig}">
+                            <Grid Grid.Column="0" Style="{StaticResource IconLightBlueBig}">
                                 <Image Style="{StaticResource FlightDetailAirlineReturnImage}" />
                             </Grid>
                             

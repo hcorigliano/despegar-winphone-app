@@ -80,6 +80,7 @@
     <GridLength x:Key="TwoColumnMiddleSpacing">19.2</GridLength>    
     <!-- ===================== Generic Brushes ======================= -->
     <SolidColorBrush x:Key="Blue20Brush" Color="{StaticResource Blue20}" />
+    <SolidColorBrush x:Key="Blue40Brush" Color="{StaticResource Blue40}" />
     <SolidColorBrush x:Key="Blue60Brush" Color="{StaticResource Blue60}" />
     <SolidColorBrush x:Key="Red20Brush" Color="{StaticResource Red20}" />
     <SolidColorBrush x:Key="WhiteBrush" Color="{StaticResource White}" />
@@ -125,7 +126,7 @@
         <Setter Property="FontFamily" Value="Segoe UI Semilight" />
         <Setter Property="FontSize" Value="43.2" />
         <Setter Property="FontWeight" Value="SemiLight" />
-    </Style>
+    </Style>   
     <!-- ===================== Generic Styles ======================== -->
     <Style x:Key="BasePage" TargetType="Page">
         <Setter Property="Background">
@@ -202,7 +203,10 @@
     <Style x:Key="IconBlue" TargetType="Grid" BasedOn="{StaticResource IconBase}">
         <Setter Property="Background"  Value="{StaticResource Blue20Brush}" />
     </Style>
-    <Style x:Key="IconBlueBig" TargetType="Grid" BasedOn="{StaticResource IconBlue}">
+    <Style x:Key="IconLightBlue" TargetType="Grid" BasedOn="{StaticResource IconBase}">
+        <Setter Property="Background"  Value="{StaticResource Blue40Brush}" />
+    </Style>
+    <Style x:Key="IconLightBlueBig" TargetType="Grid" BasedOn="{StaticResource IconLightBlue}">
         <Setter Property="Width"  Value="{StaticResource dBlock2}" />
         <Setter Property="Height" Value="{StaticResource dBlock2}" />
     </Style>
@@ -336,11 +340,9 @@
         <Setter Property="IsTextPredictionEnabled" Value="false"></Setter>
         <Setter Property="Margin" Value="0,-7,0,0" />
     </Style>
-
     <Style x:Key="CheckoutInputBase" TargetType="TextBox" BasedOn="{StaticResource InputBase}">
         <Setter Property="Margin" Value="0,0,0,0" />
     </Style>
-
     <!-- RadioButton -->
     <Style x:Key="CheckoutPaymentRadioButton" TargetType="RadioButton" >
         <Setter Property="FontFamily" Value="Segoe UI Light" />
@@ -348,7 +350,6 @@
         <Setter Property="CharacterSpacing" Value="-20" />
         <Setter Property="Foreground" Value="{StaticResource WhiteBrush}" />
     </Style>
-
     <!-- AutoSuggestBox -->
     <Style x:Key="AutosuggestBoxBase" TargetType="AutoSuggestBox">
         <Setter Property="Height" Value="39.2" />
@@ -823,7 +824,7 @@
     <Style x:Key="FlightSegmentTitleWhite" TargetType="TextBlock" BasedOn="{StaticResource SegoeLight28}">
     </Style>
     <Style x:Key="FlightReturnSegmentTitle" TargetType="TextBlock" BasedOn="{StaticResource SegoeLight28}">
-        <Setter Property="Foreground" Value="{StaticResource Blue20Brush}" />
+        <Setter Property="Foreground" Value="{StaticResource Blue60Brush}" />
     </Style>
     <Style x:Key="FlightSegmentAirports" TargetType="TextBlock" BasedOn="{StaticResource SegoeLight28}">
         <Setter Property="Margin" Value="5,0,0,0" />
@@ -848,7 +849,7 @@
         <Setter Property="Foreground" Value="{StaticResource Green20Brush}" />
     </Style>
     <Style x:Key="FlightDetailTitleBlue" TargetType="TextBlock" BasedOn="{StaticResource SegoeSemilight24}">
-        <Setter Property="Foreground" Value="{StaticResource Blue20Brush}" />
+        <Setter Property="Foreground" Value="{StaticResource Blue60Brush}" />
     </Style>
 
     <!-- Flights Result -->
