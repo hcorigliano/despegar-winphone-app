@@ -52,6 +52,12 @@ namespace Despegar.WP.UI.Product.Flights
 
             //For fix credit card null value
             CardDataControl.DataContext = flightService.bookingfields.form.payment;
+            
+            //VER EL MARTES
+            PassengerControl.DataContext = flightService.bookingfields.form;
+            
+
+
 
         }
 
