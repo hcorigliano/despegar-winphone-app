@@ -21,38 +21,43 @@
     <Page.Resources>
 	<conv:StringConverter x:Key="stringFormatConverter"  />
 
-        <DataTemplate x:Key="FlightItemDateTemplate">
-            <Grid>
+        <DataTemplate x:Key="FlightItemDateTemplate" >
+            <Grid >
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="80"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="50"/>
-                    <ColumnDefinition Width="300"/>
-                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="500"/>
                 </Grid.ColumnDefinitions>
 				<!--<Grid Grid.Column="0">
 					<Image  HorizontalAlignment="Left" Height="Auto"  VerticalAlignment="Top" Width="Auto"/>
 				</Grid> //-->
-				<Grid Style="{StaticResource IconWhiteBig}">
+				<Grid Style="{StaticResource IconWhite}">
 					<Image Grid.Column="0" Source="{Binding airline.code, Converter={StaticResource stringFormatConverter}, ConverterParameter='/Assets/Icon/Airlines/ag_{0}logo@2x.png'}" Style="{StaticResource FlightDetailAirlineImage}"  />
 				</Grid>
-                <StackPanel Grid.Column="1"  HorizontalAlignment="Left" Height="Auto"  VerticalAlignment="Top" Width="Auto" Margin="10,0,0,0">
-                    <TextBlock TextWrapping="Wrap" Text="{Binding airline.name}" />
-                    <TextBlock TextWrapping="Wrap" Text="{Binding outbound.Count}"/>
+                <StackPanel Grid.Column="1"  HorizontalAlignment="Left" Height="Auto"  VerticalAlignment="Top" Margin="10,0,0,0">
+                    <TextBlock TextWrapping="Wrap" Text="{Binding airline.name}" Style="{StaticResource BaseText}" />
+					<TextBlock HorizontalAlignment="Right" TextWrapping="Wrap" Text="{Binding price}" VerticalAlignment="Top" Style="{StaticResource BaseText}" />
+
+					
+                    <StackPanel HorizontalAlignment="Left" Height="24" VerticalAlignment="Top" Width="46" Orientation="Horizontal">
+                    	<TextBlock TextWrapping="Wrap" Text="{Binding outbound.Count}" Style="{StaticResource BaseText}" Height="25" Margin="0,0,-0.167,0"/>
+                        <TextBlock TextWrapping="Wrap" x:Uid="Page_Result_Available_Flights" Height="25"  Style="{StaticResource SegoeLight24}" />
+                    </StackPanel>
+					
                 </StackPanel>
-                <TextBlock Grid.Column="2"  HorizontalAlignment="Right" TextWrapping="Wrap" Text="{Binding price}" VerticalAlignment="Top"/>
                 <ItemsControl x:Name="RoutesItemControl"  Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" ItemsSource="{Binding RoutesCustom}" DataContext="{Binding}" Visibility="Collapsed">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                             <Grid Tapped="Grid_Tapped">
                                 <Grid.RowDefinitions>
-                                    <RowDefinition Height="30"/>
+                                    <RowDefinition Height="50"/>
                                     <RowDefinition/>
                                 </Grid.RowDefinitions>
                                 <UI:RouteItemControl DataContext="{Binding outbound}" d:IsHidden="True"/>
-                                <UI:RouteItemControl Height="30" x:Name="routeItemControl" Grid.Row="1" DataContext="{Binding inbound}" d:IsHidden="True" >
+                                <UI:RouteItemControl Height="50" x:Name="routeItemControl" Grid.Row="1" DataContext="{Binding inbound}" d:IsHidden="True" >
                                     <Interactivity:Interaction.Behaviors>
                                         <Core:DataTriggerBehavior Value="-1" Binding="{Binding choice}" >
                                             <Core:ChangePropertyAction PropertyName="Visibility">
@@ -119,8 +124,8 @@
         <Grid Grid.Row="1">
             <TextBlock />
         </Grid>
-        <Grid Grid.Row="2" x:Name="ContentRoot" Width="Auto" >
-            <ListBox Height="360" x:Name="lbFlights" ItemTemplate="{StaticResource FlightItemDateTemplate}" ItemsSource="{Binding Items}"  Tapped="ListBox_Tapped" HorizontalContentAlignment="Stretch" ScrollViewer.VerticalScrollBarVisibility="Visible" Margin="2,0,-2,0" >
+        <Grid Grid.Row="2" x:Name="ContentRoot" Width="Auto"  >
+            <ListBox Background="Transparent" Height="360" x:Name="lbFlights" ItemTemplate="{StaticResource FlightItemDateTemplate}" ItemsSource="{Binding Items}"  Tapped="ListBox_Tapped" HorizontalContentAlignment="Stretch" ScrollViewer.VerticalScrollBarVisibility="Visible" Margin="2,0,-2,0" >
                 <ListBox.ItemContainerTransitions>
                     <TransitionCollection>
                         <EntranceThemeTransition FromVerticalOffset="100" FromHorizontalOffset="0"/>
