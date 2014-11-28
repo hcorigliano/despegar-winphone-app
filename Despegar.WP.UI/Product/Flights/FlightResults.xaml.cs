@@ -15,6 +15,8 @@ using Despegar.Core.Business.Enums;
 using Despegar.Core.Business;
 using Despegar.Core.IService;
 using System.Collections.Generic;
+using Despegar.WP.UI.Model.ViewModel.Classes.Flights;
+using Despegar.WP.UI.Model.Classes.Flights;
 
 namespace Despegar.WP.UI.Product.Flights
 {
@@ -27,6 +29,7 @@ namespace Despegar.WP.UI.Product.Flights
         private ObservableDictionary defaultViewModel = new ObservableDictionary();
         private FlightResultsModel flightResultModel = new FlightResultsModel();
         private FlightSearchModel flightSearchModel = new FlightSearchModel();
+        private FlightsCrossParameter flightCrossParameter = new FlightsCrossParameter();
 
         public FlightResults()
         {
@@ -216,7 +219,9 @@ namespace Despegar.WP.UI.Product.Flights
             Grid grid = sender as Grid;
             if (grid!=null)
             {
-                OldPagesManager.GoTo(typeof(FlightDetail), grid.DataContext);
+                flightCrossParameter.Inbound = ((RoutesItems)grid.DataContext).inbound;
+                flightCrossParameter.Outbound = ((RoutesItems)grid.DataContext).outbound;
+                OldPagesManager.GoTo(typeof(FlightDetail), flightCrossParameter);
             }
         }
 
@@ -264,6 +269,8 @@ namespace Despegar.WP.UI.Product.Flights
 
             if (itemsControl == null) 
                 return;
+
+            flightCrossParameter.FlightId = ((BindableItem)listbox.SelectedItem).id;
 
             itemsControl.Visibility = SetVisualEffect(itemsControl.Visibility);
         }

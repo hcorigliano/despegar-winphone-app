@@ -515,5 +515,8 @@
   </data>
   <data name="Page_Result_Available_Flights.Text" xml:space="preserve">
     <value>Vuelos Disponibles</value>
+    </data>
+  <data name="Nationality_Selection_Popup_Selection.Text" xml:space="preserve">
+    <value>ELEGIR UNA NACIONALIDAD</value>
   </data>
 </root>

@@ -38,8 +38,7 @@
                 <ScrollViewer VerticalScrollBarVisibility="Auto" Height="500">
 
                     <StackPanel  xmlns:src="using:Despegar.WP.UI.Product.Flights.Checkout.Passegers">
-
-                        <ItemsControl x:Name="PassengerControl" DataContext="{Binding bookingfields.form}" ItemsSource="{Binding passengers}">
+                        <ItemsControl x:Name="PassengerControl" DataContext="{Binding bookingfields.form}" ItemsSource="{Binding passengers}" >
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
                                     <src:Passengers></src:Passengers>

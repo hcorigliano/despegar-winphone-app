@@ -5,6 +5,7 @@ using Despegar.WP.UI.Common;
 using Despegar.WP.UI.Model;
 using Despegar.WP.UI.Model.Classes.Flights.Checkout;
 using Despegar.WP.UI.Model.ViewModel;
+using Despegar.WP.UI.Model.ViewModel.Classes.Flights;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -34,32 +35,33 @@ namespace Despegar.WP.UI.Product.Flights
     {
         private NavigationHelper navigationHelper;
         private ObservableDictionary defaultViewModel = new ObservableDictionary();
-        private FlightsCheckoutModel flightService = new FlightsCheckoutModel();
+        private FlightsCheckoutModel flightService;
         private Despegar.WP.UI.Controls.ModalPopup loadingPopup = new Despegar.WP.UI.Controls.ModalPopup(new Despegar.WP.UI.Controls.Loading());
 
         public FlightCheckout()
         {
             this.InitializeComponent();
-
+            this.DataContext = flightService;
             this.navigationHelper = new NavigationHelper(this);
             this.navigationHelper.LoadState += this.NavigationHelper_LoadState;
             this.navigationHelper.SaveState += this.NavigationHelper_SaveState;
 
             InitilizePage();
             
-            flightService.PropertyChanged += Checkloading;
+            //flightService.PropertyChanged += Checkloading;
 
-            flightService.GetBookingFields();
+            //flightService.GetBookingFields();
 
             //For fix credit card null value
-            CardDataControl.DataContext = flightService.bookingfields.form.payment;
+            //CardDataControl.DataContext = flightService.bookingfields.form.payment;
+            
+            //VER EL MARTES
+            //PassengerControl.DataContext = flightService.bookingfields.form;
 
         }
 
         private void InitilizePage()
         {
-            LayoutRoot.DataContext = flightService;
-            
             //Notify to CardData 
             PaymentControl.OnUserControlButtonClicked += CardDataControl.OnUCButtonClicked;
             Buycontrol.OnUserControlButtonClicked += this.ValidateAndBuy;
@@ -95,6 +97,16 @@ namespace Despegar.WP.UI.Product.Flights
         /// session.  The state will be null the first time a page is visited.</param>
         private void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
         {
+            FlightsCrossParameter routes = e.NavigationParameter as FlightsCrossParameter;
+            flightService = new FlightsCheckoutModel(Navigator.Instance, routes);
+           
+            DataContext = flightService;
+
+            flightService.PropertyChanged += Checkloading;
+
+            //For fix credit card null value //TODO : HACERLO FUNCIONAR DE NUEVO
+            //CardDataControl.DataContext = flightService.bookingfields.form.payment;
+
         }
 
         /// <summary>
@@ -151,7 +163,6 @@ namespace Despegar.WP.UI.Product.Flights
                     loadingPopup.Show();
                 else
                     loadingPopup.Hide();
-
             }
         }
 

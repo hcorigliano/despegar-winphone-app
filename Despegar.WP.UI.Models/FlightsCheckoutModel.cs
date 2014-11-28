@@ -3,7 +3,9 @@ using Despegar.Core.Business.Configuration;
 using Despegar.Core.Business.Flight.BookingFields;
 using Despegar.Core.IService;
 using Despegar.WP.UI.Model.Classes.Flights.Checkout;
+using Despegar.WP.UI.Model.Interfaces;
 using Despegar.WP.UI.Model.ViewModel;
+using Despegar.WP.UI.Model.ViewModel.Classes.Flights;
 using Despegar.WP.UI.Models.Classes;
 using Newtonsoft.Json;
 using System;
@@ -18,10 +20,10 @@ namespace Despegar.WP.UI.Model
     public class FlightsCheckoutModel : ViewModelBase
     {
         #region 
+        FlightsCrossParameter CrossParameters = new FlightsCrossParameter();
+
         private IFlightService flightService;
         private ICommonServices CommonServices;
-
-        //public BookingFields bookingfields = new BookingFields();
 
         public Countries countries { get; set; }
 
@@ -77,11 +79,18 @@ namespace Despegar.WP.UI.Model
         }
         #endregion
 
+        public FlightsCheckoutModel(INavigator navigator, FlightsCrossParameter parameters)
+        {
+            flightService = GlobalConfiguration.CoreContext.GetFlightService();
+            CommonServices = GlobalConfiguration.CoreContext.GetCommonService();
+            CrossParameters = parameters;
+            GetBookingFields();
+        }
         public FlightsCheckoutModel()
         {
             flightService = GlobalConfiguration.CoreContext.GetFlightService();
             CommonServices = GlobalConfiguration.CoreContext.GetCommonService();
-            //GetBookingFields();
+
         }
 
         public async void GetBookingFields()
@@ -89,13 +98,18 @@ namespace Despegar.WP.UI.Model
             IsLoading = true;
 
             BookingFieldPost book = new BookingFieldPost();
-            book.inbound_choice = 1;
-            book.outbound_choice = 1;
-            book.itinerary_id = "prism_AR_0_FLIGHTS_A-1_C-0_I-0_RT-BUEMIA20141110-MIABUE20141111_xorigin-api!0!C_1212636001_843603426_-2008006059_1555498055_-278056197_804297563!1,6_1,4_1,5_1,2_1,3_1,1";
+            book.inbound_choice = CrossParameters.Inbound.choice;
+            book.outbound_choice = CrossParameters.Outbound.choice;
+            book.itinerary_id = CrossParameters.FlightId;//"prism_AR_0_FLIGHTS_A-1_C-0_I-0_RT-BUEMIA20141110-MIABUE20141111_xorigin-api!0!C_1212636001_843603426_-2008006059_1555498055_-278056197_804297563!1,6_1,4_1,5_1,2_1,3_1,1";
+            
+            //MOCKED
+            //book.inbound_choice = 1;
+            //book.outbound_choice = 1;
+            //book.itinerary_id = "prism_AR_0_FLIGHTS_A-1_C-0_I-0_RT-BUEMIA20141110-MIABUE20141111_xorigin-api!0!C_1212636001_843603426_-2008006059_1555498055_-278056197_804297563!1,6_1,4_1,5_1,2_1,3_1,1";
 
-            CoreBookingFields = await flightService.GetBookingFields(book);
+            bookingfields = await flightService.GetBookingFields(book);
 
-            FillsValueWithCoreValue(CoreBookingFields);
+            FillsValueWithCoreValue(bookingfields);
 
             CorePaymentFormated = FormatPayments();
 
