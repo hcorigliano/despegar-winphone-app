@@ -18,6 +18,7 @@ using Windows.UI.Xaml.Navigation;
 using Despegar.Core.Business.Flight.Itineraries;
 using Despegar.WP.UI.Model;
 using Despegar.WP.UI.Model.Classes.Flights;
+using Despegar.WP.UI.Model.ViewModel.Classes.Flights;
 
 namespace Despegar.WP.UI.Product.Flights
 {
@@ -52,11 +53,11 @@ namespace Despegar.WP.UI.Product.Flights
         /// session.  The state will be null the first time a page is visited.</param>
         private void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
         {
-            RoutesItems routes = e.NavigationParameter as RoutesItems;
+            FlightsCrossParameter routes = e.NavigationParameter as FlightsCrossParameter;
             if (routes != null)
             {
                 // Multiples are inserted as an Outbound collection of Routes
-                ViewModel = new FlightDetailsViewModel(Navigator.Instance, routes.outbound, routes.inbound);
+                ViewModel = new FlightDetailsViewModel(Navigator.Instance, routes);
             }
 
             // Check Search type

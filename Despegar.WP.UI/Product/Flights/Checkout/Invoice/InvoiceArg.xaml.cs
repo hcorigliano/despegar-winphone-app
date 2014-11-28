@@ -36,6 +36,7 @@ namespace Despegar.WP.UI.Product.Flights.Checkout.Invoice
 
         private async void FillStates(string country)
         {
+            //TODO : FIXIT
             FlightsCheckoutModel flightCheckoutModel = new FlightsCheckoutModel();
             try
             {
