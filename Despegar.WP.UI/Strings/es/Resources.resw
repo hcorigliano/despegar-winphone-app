@@ -417,34 +417,28 @@
   <data name="Flight_Checkout_Invoice_Arg.Header" xml:space="preserve">
     <value>factura fiscal</value>
   </data>
-  <data name="Invoice_Arg_City.Text" xml:space="preserve">
+  <data name="Flights_Checkout_Invoice_Arg_City.Label" xml:space="preserve">
     <value>Ciudad</value>
   </data>
-  <data name="Invoice_Arg_Department.Text" xml:space="preserve">
+  <data name="Flights_Checkout_Invoice_Arg_Department.Label" xml:space="preserve">
     <value>Dpto</value>
   </data>
-  <data name="Invoice_Arg_fiscal_id.Text" xml:space="preserve">
-    <value>Cuit/Cuil</value>
-  </data>
-  <data name="Invoice_Arg_fiscal_name.Text" xml:space="preserve">
+  <data name="Flights_Checkout_Invoice_Arg_fiscal_name.Label" xml:space="preserve">
     <value>Nombre ó razón social</value>
   </data>
-  <data name="Invoice_Arg_Fiscal_Status.Text" xml:space="preserve">
-    <value>Situación Fiscal</value>
-  </data>
-  <data name="Invoice_Arg_Floor.Text" xml:space="preserve">
+  <data name="Flights_Checkout_Invoice_Arg_Floor.Label" xml:space="preserve">
     <value>Piso</value>
   </data>
-  <data name="Invoice_Arg_Number.Text" xml:space="preserve">
+  <data name="Flights_Checkout_Invoice_Arg_Number.Label" xml:space="preserve">
     <value>Número</value>
   </data>
-  <data name="Invoice_Arg_Postal_Code.Text" xml:space="preserve">
+  <data name="Flights_Checkout_Invoice_Arg_Postal_Code.Label" xml:space="preserve">
     <value>Código Postal</value>
   </data>
-  <data name="Invoice_Arg_State.Text" xml:space="preserve">
+  <data name="Flights_Checkout_Invoice_Arg_State.Label" xml:space="preserve">
     <value>Provincia</value>
   </data>
-  <data name="Invoice_Arg_Street.Text" xml:space="preserve">
+  <data name="Flights_Checkout_Invoice_Arg_Street.Label" xml:space="preserve">
     <value>Calle</value>
   </data>
   <data name="Flight_Checkout_Payments.Header" xml:space="preserve">
@@ -512,5 +506,29 @@
   </data>
   <data name="Page_Checkout.Text" xml:space="preserve">
     <value>COMPRAR VUELO</value>
+  </data>
+  <data name="Flights_Checkout_Invoice_Arg_fiscal_id.Label" xml:space="preserve">
+    <value>Cuit/Cuil</value>
+  </data>
+  <data name="Flights_Checkout_Invoice_Arg_Fiscal_Status.Label" xml:space="preserve">
+    <value>Situación fiscal</value>
+  </data>
+  <data name="Flights_Checkout_Invoice_Arg_fiscal_id_ERROR_INVALID_CUIT" xml:space="preserve">
+    <value>Por favor, verifique el número ingresado</value>
+  </data>
+  <data name="Flights_Checkout_Invoice_Arg_fiscal_id_ERROR_REQUIRED" xml:space="preserve">
+    <value>Por favor, ingrese el número de CUIL/CUIT</value>
+  </data>
+  <data name="Flights_Checkout_Invoice_Arg_fiscal_name_ERROR_REQUIRED" xml:space="preserve">
+    <value>Por favor ingrese la razon social.</value>
+  </data>
+  <data name="Flights_Checkout_Invoice_Arg_Number_ERROR_REQUIRED" xml:space="preserve">
+    <value>Por favor ingrese el número</value>
+  </data>
+  <data name="Flights_Checkout_Invoice_Arg_Postal_Code_ERROR_REQUIRED" xml:space="preserve">
+    <value>Por favor ingrese el codigo postal</value>
+  </data>
+  <data name="Flights_Checkout_Invoice_Arg_Street_ERROR_REQUIRED" xml:space="preserve">
+    <value>Por favor ingrese la calle</value>
   </data>
 </root>

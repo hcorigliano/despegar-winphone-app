@@ -94,9 +94,8 @@
     <Compile Include="Flight\BookingFields\Currency.cs" />
     <Compile Include="Flight\BookingFields\Document.cs" />
     <Compile Include="Flight\BookingFields\Expiration.cs" />
-    <Compile Include="Flight\BookingFields\FieldDataTypeOpt.cs" />
-    <Compile Include="Flight\BookingFields\FieldDataType.cs" />
-    <Compile Include="Flight\BookingFields\FieldDataTypeVal.cs" />
+    <Compile Include="Flight\BookingFields\RegularOptionsField.cs" />
+    <Compile Include="Flight\BookingFields\RegularField.cs" />
     <Compile Include="Flight\BookingFields\Form.cs" />
     <Compile Include="Flight\BookingFields\Installment.cs" />
     <Compile Include="Flight\BookingFields\Installments.cs" />

@@ -10,8 +10,8 @@ namespace Despegar.Core.Business.Flight.BookingFields
         public bool required { get; set; }
         public Address address { get; set; }
         public string data_type { get; set; }
-        public FieldDataType fiscal_name { get; set; }
-        public FieldDataTypeOpt fiscal_status { get; set; }
-        public FieldDataTypeVal fiscal_id { get; set; }
+        public RegularField fiscal_name { get; set; }
+        public RegularOptionsField fiscal_status { get; set; }
+        public RegularField fiscal_id { get; set; }
     }
 }

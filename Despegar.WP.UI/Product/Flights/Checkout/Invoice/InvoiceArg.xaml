@@ -6,98 +6,96 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:conv="using:Despegar.WP.UI.Common.Converter"
+    xmlns:controls="using:Despegar.WP.UI.Controls"
     xmlns:dev="using:Despegar.WP.UI.Developer.Controls"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <UserControl.Resources>
-        <conv:VisibilityConverter x:Name="VisibilityConverter"/>
+        <conv:VisibilityConverter x:Name="VisibilityConverter" TrueValue="Visible" FalseValue="Collapsed" />
     </UserControl.Resources>
 
-    <Grid >
-        <ScrollViewer VerticalScrollBarVisibility="Auto" Height="500">
-            <StackPanel x:Name="contact">
-                <!--INVOICE-->
+        <ScrollViewer>
+            <StackPanel>
+            <!-- Dev -->
+            <!--<dev:UserControlDesignGrid />-->
 
-                <!-- Dev -->
-                <!--<dev:UserControlDesignGrid />-->
+            <!-- Fiscal Status -->
+            <StackPanel Visibility="{Binding fiscal_status.required, Converter={StaticResource VisibilityConverter}}">
+              <controls:FieldCombo x:Uid="Flights_Checkout_Invoice_Arg_Fiscal_Status" ItemsSource="{Binding fiscal_status.options}"  Value="{Binding fiscal_status.CoreValue, Mode=TwoWay}" />
+              <controls:ValidationError ErrorPrefix="Flights_Checkout_Invoice_Arg_Fiscal_Status" ErrorCode="{Binding fiscal_status.CurrentError}" />
+            </StackPanel>
+            <!-- CUIT -->
+            <StackPanel Visibility="{Binding fiscal_id.required, Converter={StaticResource VisibilityConverter}}">
+                <controls:NumericField x:Uid="Flights_Checkout_Invoice_Arg_fiscal_id" Value="{Binding fiscal_id.CoreValue, Mode=TwoWay}"  />
+                <controls:ValidationError ErrorPrefix="Flights_Checkout_Invoice_Arg_fiscal_id" ErrorCode="{Binding fiscal_id.CurrentError}" />
+            </StackPanel>
+            <!-- Razon Social -->
+            <StackPanel Visibility="{Binding fiscal_name.required, Converter={StaticResource VisibilityConverter}}">
+                <controls:Field x:Uid="Flights_Checkout_Invoice_Arg_fiscal_name" Value="{Binding fiscal_name.CoreValue, Mode=TwoWay}"/>
+                <controls:ValidationError ErrorPrefix="Flights_Checkout_Invoice_Arg_fiscal_name" ErrorCode="{Binding fiscal_name.CurrentError}" />
+            </StackPanel>
+            <!-- Street -->
+            <StackPanel Visibility="{Binding address.street.required, Converter={StaticResource VisibilityConverter}}">
+                <controls:Field  x:Uid="Flights_Checkout_Invoice_Arg_Street" Value="{Binding address.street.CoreValue, Mode=TwoWay}"  />
+                <controls:ValidationError ErrorPrefix="Flights_Checkout_Invoice_Arg_Street" ErrorCode="{Binding address.street.CurrentError}"/>
+            </StackPanel>
 
-                <StackPanel Style="{StaticResource TextBoxInputContainer}" Visibility="{Binding fiscal_status.required,Converter={StaticResource VisibilityConverter}}">
-                    <TextBlock Style="{StaticResource BaseTextLabel}" x:Uid="Invoice_Arg_Fiscal_Status" Text="Estado Fiscal"></TextBlock>
-                    <ComboBox Style="{StaticResource ComboBoxBase}" x:Name="fiscal_status" ItemsSource="{Binding fiscal_status.options}" DisplayMemberPath="description" SelectedValue="{Binding fiscal_status.coreValue, Mode=TwoWay}" SelectedValuePath="value"  SelectionChanged="FiscalStatus_Changed" ></ComboBox>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition MinHeight="{StaticResource dBlock1p}" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="{StaticResource Block6}"/>
+                    <ColumnDefinition Width="{StaticResource Offset}"/>
+                    <ColumnDefinition Width="{StaticResource Block3}"/>
+                    <ColumnDefinition Width="{StaticResource Offset}"/>
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                
+                <!-- Number -->
+                <controls:NumericField  x:Uid="Flights_Checkout_Invoice_Arg_Number" Grid.Column="0" Grid.Row="0"  Value="{Binding address.number.CoreValue, Mode=TwoWay}"  />
+                <!-- Floor -->
+                <controls:NumericField x:Uid="Flights_Checkout_Invoice_Arg_Floor" Grid.Column="2" Grid.Row="0"  Value="{Binding address.floor.CoreValue, Mode=TwoWay}"  />
+                <!-- Dept -->
+                <controls:Field  x:Uid="Flights_Checkout_Invoice_Arg_Department" Grid.Column="4" Grid.Row="0"  Value="{Binding address.department.CoreValue, Mode=TwoWay}"  />
+
+                <StackPanel Grid.ColumnSpan="5" Grid.Row="1">
+                    <controls:ValidationError ErrorPrefix="Flights_Checkout_Invoice_Arg_Number" ErrorCode="{Binding address.number.CurrentError}" Visibility="{Binding address.number.required, Converter={StaticResource VisibilityConverter}}" />
+                    <!--<controls:ValidationError ErrorPrefix="Flights_Checkout_Invoice_Arg_Floor"  ErrorCode="{Binding address.floor.CurrentError}" Visibility="{Binding address.floor.required, Converter={StaticResource VisibilityConverter}}" />-->
+                    <!--<controls:ValidationError ErrorPrefix="Flights_Checkout_Invoice_Arg_Department"  ErrorCode="{Binding address.department.CurrentError}" Visibility="{Binding address.department.required, Converter={StaticResource VisibilityConverter}}" />-->
                 </StackPanel>
+            </Grid>
 
-                <StackPanel Style="{StaticResource TextBoxInputContainer}" Visibility="{Binding fiscal_id.required,Converter={StaticResource VisibilityConverter}}"  >
-                    <TextBlock Style="{StaticResource BaseTextLabel}" x:Uid="Invoice_Arg_fiscal_id" Text="Cuil/Cuilt"></TextBlock>
-                    <TextBox InputScope="Number" Style="{StaticResource CheckoutInputBase}" x:Name="fiscal_id" Text="{Binding fiscal_id.coreValue , Mode=TwoWay}"></TextBox>
-                </StackPanel>
+            <!-- Postal Code -->
+            <Grid  Visibility="{Binding address.postal_code.required, Converter={StaticResource VisibilityConverter}}">
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="{StaticResource Block6}" />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                
+                <controls:NumericField Grid.Column="0" Grid.Row="0"  x:Uid="Flights_Checkout_Invoice_Arg_Postal_Code" Value="{Binding address.postal_code.CoreValue, Mode=TwoWay}"  />
+                <controls:ValidationError Grid.ColumnSpan="2" Grid.Row="1" ErrorPrefix="Flights_Checkout_Invoice_Arg_Postal_Code" ErrorCode="{Binding address.postal_code.CurrentError}" />
+            </Grid>
 
-                <StackPanel Style="{StaticResource TextBoxInputContainer}" x:Name="fiscal_name_StackPanel" Visibility="{Binding fiscal_name.required,Converter={StaticResource VisibilityConverter}}" >
-                    <TextBlock Style="{StaticResource BaseTextLabel}" x:Uid="Invoice_Arg_fiscal_name" Text="Razon Social"></TextBlock>
-                    <TextBox Style="{StaticResource CheckoutInputBase}" x:Name="fiscal_name" Text="{Binding fiscal_name.coreValue , Mode=TwoWay}"></TextBox>
-                </StackPanel>
-
-
-                <!--ADDRESS-->
-                <StackPanel Style="{StaticResource TextBoxInputContainer}" Visibility="{Binding address.street.required,Converter={StaticResource VisibilityConverter}}" >
-                    <TextBlock Style="{StaticResource BaseTextLabel}" x:Uid="Invoice_Arg_Street" Text="Calle"></TextBlock>
-                    <TextBox Style="{StaticResource CheckoutInputBase}" x:Name="address_street" Text="{Binding address.street.coreValue , Mode=TwoWay}"></TextBox>
-                </StackPanel>
-
-                <Grid>
-
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="{StaticResource Block6}"></ColumnDefinition>
-                        <ColumnDefinition Width="{StaticResource Offset}"></ColumnDefinition>
-                        <ColumnDefinition Width="{StaticResource Block3}"></ColumnDefinition>
-                        <ColumnDefinition Width="{StaticResource Offset}"></ColumnDefinition>
-                        <ColumnDefinition Width="{StaticResource Block3}"></ColumnDefinition>
-                    </Grid.ColumnDefinitions>
-
-                    <StackPanel Grid.Column="0" Style="{StaticResource TextBoxInputContainer}" Visibility="{Binding address.number.required,Converter={StaticResource VisibilityConverter}}" >
-                        <TextBlock Style="{StaticResource BaseTextLabel}" x:Uid="Invoice_Arg_Number" Text="Numero"></TextBlock>
-                        <TextBox InputScope="Number" Style="{StaticResource CheckoutInputBase}" x:Name="adrress_number" Text="{Binding address.number.coreValue , Mode=TwoWay}"></TextBox>
-                    </StackPanel>
-
-                    <!--Visibility="{Binding address.floor.required,Converter={StaticResource VisibilityConverter}}"-->
-                    <StackPanel Grid.Column="2" Style="{StaticResource TextBoxInputContainer}"  >
-                        <TextBlock Style="{StaticResource BaseTextLabel}" x:Uid="Invoice_Arg_Floor" Text="Piso"></TextBlock>
-                        <TextBox InputScope="Number" Style="{StaticResource CheckoutInputBase}" x:Name="address_floor" Text="{Binding address.floor.coreValue , Mode=TwoWay}"></TextBox>
-                    </StackPanel>
-
-
-                    <!--Visibility="{Binding address.department.required,Converter={StaticResource VisibilityConverter}}"-->
-                    <StackPanel Grid.Column="4" Style="{StaticResource TextBoxInputContainer}"  >
-                        <TextBlock Style="{StaticResource BaseTextLabel}" x:Uid="Invoice_Arg_Department" Text="Dto"></TextBlock>
-                        <TextBox InputScope="Number" Style="{StaticResource CheckoutInputBase}" x:Name="address_department" Text="{Binding address.department.coreValue , Mode=TwoWay}"></TextBox>
-                    </StackPanel>
-
-                </Grid>
-
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="{StaticResource Block6}"></ColumnDefinition>
-                        <ColumnDefinition></ColumnDefinition>
-                    </Grid.ColumnDefinitions>
-                <StackPanel Style="{StaticResource TextBoxInputContainer}" Visibility="{Binding address.postal_code.required,Converter={StaticResource VisibilityConverter}}" >
-                    <TextBlock Style="{StaticResource BaseTextLabel}" x:Uid="Invoice_Arg_Postal_Code" Text="Codigo Postal"></TextBlock>
-                        <TextBox InputScope="Number"  Style="{StaticResource CheckoutInputBase}" x:Name="address_postal_code" Text="{Binding address.postal_code.coreValue , Mode=TwoWay}"></TextBox>
-                </StackPanel>
-                </Grid>
-
-                <StackPanel Style="{StaticResource TextBoxInputContainer}" Visibility="{Binding address.state.required,Converter={StaticResource VisibilityConverter}}" >
-                    <TextBlock Style="{StaticResource BaseTextLabel}" x:Uid="Invoice_Arg_State" Text="Provincia"></TextBlock>
-                    <ComboBox Style="{StaticResource ComboBoxBase}" x:Name="address_state"  DisplayMemberPath="name" SelectedValue="{Binding address.state.coreValue, Mode=TwoWay}" SelectedValuePath="code"  SelectionChanged="FiscalStatus_Changed" ></ComboBox>
-                </StackPanel>
-
-
-                <StackPanel Style="{StaticResource TextBoxInputContainer}" Visibility="{Binding Address.city_id.required,Converter={StaticResource VisibilityConverter}}" >
-                    <TextBlock Style="{StaticResource BaseTextLabel}" x:Uid="Invoice_Arg_City" Text="Ciudad"></TextBlock>
-                    <AutoSuggestBox  TextBoxStyle="{StaticResource InputBase}" Style="{StaticResource AutosuggestBoxBase}"  DataContext="{Binding}"  x:Name="address_city" TextChanged="FlightsTextBlock_TextChanged" LostFocus="Focus_Lost" SuggestionChosen="SuggestionChosen" TextMemberPath="full_name" ></AutoSuggestBox>
-                </StackPanel>
-
+            <!-- State -->
+            <StackPanel Visibility="{Binding address.state.required, Converter={StaticResource VisibilityConverter}}">
+                <controls:FieldCombo x:Uid="Flights_Checkout_Invoice_Arg_State"   Value="{Binding address.state.CoreValue, Mode=TwoWay}"  />
+                <controls:ValidationError ErrorPrefix="Flights_Checkout_Invoice_Arg_State" ErrorCode="{Binding address.state.CurrentError}"  />
+            </StackPanel>
+                
+            <!-- City  TODO: x:Uid="Invoice_Arg_City" -->
+            <StackPanel Style="{StaticResource TextBoxInputContainer}" Visibility="{Binding Address.city_id.required,Converter={StaticResource VisibilityConverter}}" >
+                <TextBlock Style="{StaticResource BaseTextLabel}"  Text="Ciudad"></TextBlock>
+                <AutoSuggestBox  TextBoxStyle="{StaticResource InputBase}" Style="{StaticResource AutosuggestBoxBase}"  DataContext="{Binding}"  x:Name="address_city" TextChanged="FlightsTextBlock_TextChanged" LostFocus="Focus_Lost" SuggestionChosen="SuggestionChosen" TextMemberPath="full_name" ></AutoSuggestBox>
+            </StackPanel>
 
             </StackPanel>
         </ScrollViewer>
-    </Grid>
+    
 </UserControl>

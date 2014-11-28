@@ -14,13 +14,13 @@ namespace Despegar.Core.Business.Dynamics
             dynamic result = new ExpandoObject();
             result.type = passenger.type;
             result.document = new ExpandoObject();
-            result.document.type = passenger.document.type.coreValue;
-            result.document.number = passenger.document.number.coreValue;
-            result.first_name = passenger.first_name.coreValue;
-            result.last_name = passenger.last_name.coreValue;
-            result.nationality = passenger.nationality.coreValue;
+            result.document.type = passenger.document.type.CoreValue;
+            result.document.number = passenger.document.number.CoreValue;
+            result.first_name = passenger.first_name.CoreValue;
+            result.last_name = passenger.last_name.CoreValue;
+            result.nationality = passenger.nationality.CoreValue;
             result.birthdate = passenger.birthdate.coreValue;
-            result.gender = passenger.gender.coreValue;
+            result.gender = passenger.gender.CoreValue;
 
             //Agregar todos los que falten
             return result;
@@ -29,10 +29,10 @@ namespace Despegar.Core.Business.Dynamics
         public static dynamic BuildPhones(Phone phone)
         {
             dynamic result = new ExpandoObject();
-            result.type = phone.type.coreValue;
-            result.area_code = phone.area_code.coreValue;
-            result.number = phone.number.coreValue;
-            result.country_code = phone.country_code.coreValue;
+            result.type = phone.type.CoreValue;
+            result.area_code = phone.area_code.CoreValue;
+            result.number = phone.number.CoreValue;
+            result.country_code = phone.country_code.CoreValue;
 
             return result;
         }
@@ -47,38 +47,38 @@ namespace Despegar.Core.Business.Dynamics
             
             result.form.contact = new ExpandoObject();
             result.form.contact.phones = bookingFields.form.contact.phones.Select(p => BuildPhones(p)).ToList();
-            result.form.contact.email = bookingFields.form.contact.email.coreValue;
+            result.form.contact.email = bookingFields.form.contact.email.CoreValue;
 
             result.form.payment = new ExpandoObject();
             result.form.payment.card = new ExpandoObject();
-            result.form.payment.card.security_code = bookingFields.form.payment.card.security_code.coreValue;
-            result.form.payment.card.owner_gender = bookingFields.form.payment.card.owner_gender.coreValue;
+            result.form.payment.card.security_code = bookingFields.form.payment.card.security_code.CoreValue;
+            result.form.payment.card.owner_gender = bookingFields.form.payment.card.owner_gender.CoreValue;
             result.form.payment.card.expiration = bookingFields.form.payment.card.expiration.coreValue;
-            result.form.payment.card.number = bookingFields.form.payment.card.number.coreValue;
-            result.form.payment.card.owner_name = bookingFields.form.payment.card.owner_name.coreValue;
+            result.form.payment.card.number = bookingFields.form.payment.card.number.CoreValue;
+            result.form.payment.card.owner_name = bookingFields.form.payment.card.owner_name.CoreValue;
             result.form.payment.card.owner_document = new ExpandoObject();
-            result.form.payment.card.owner_document.type = bookingFields.form.payment.card.owner_document.type.coreValue;
-            result.form.payment.card.owner_document.number = bookingFields.form.payment.card.number.coreValue;
+            result.form.payment.card.owner_document.type = bookingFields.form.payment.card.owner_document.type.CoreValue;
+            result.form.payment.card.owner_document.number = bookingFields.form.payment.card.number.CoreValue;
             result.form.payment.installment = new ExpandoObject();
-            result.form.payment.installment.card_type = bookingFields.form.payment.installment.card_type.coreValue;
-            result.form.payment.installment.card_code = bookingFields.form.payment.installment.card_code.coreValue;
-            result.form.payment.installment.complete_card_code = bookingFields.form.payment.installment.complete_card_code.coreValue;
+            result.form.payment.installment.card_type = bookingFields.form.payment.installment.card_type.CoreValue;
+            result.form.payment.installment.card_code = bookingFields.form.payment.installment.card_code.CoreValue;
+            result.form.payment.installment.complete_card_code = bookingFields.form.payment.installment.complete_card_code.CoreValue;
             result.form.payment.installment.quantity = bookingFields.form.payment.installment.quantity.coreValue;
 
             if (bookingFields.form.payment.invoice != null)
             {
                 result.form.payment.invoice = new ExpandoObject();
-                result.form.payment.invoice.fiscal_id = bookingFields.form.payment.invoice.fiscal_id.coreValue;
+                result.form.payment.invoice.fiscal_id = bookingFields.form.payment.invoice.fiscal_id.CoreValue;
                 result.form.payment.invoice.address = new ExpandoObject();
-                result.form.payment.invoice.address.number = bookingFields.form.payment.invoice.address.number.coreValue;
-                result.form.payment.invoice.address.floor = bookingFields.form.payment.invoice.address.floor.coreValue;
-                result.form.payment.invoice.address.city_id = bookingFields.form.payment.invoice.address.city_id.coreValue;
-                result.form.payment.invoice.address.state = bookingFields.form.payment.invoice.address.state.coreValue;
+                result.form.payment.invoice.address.number = bookingFields.form.payment.invoice.address.number.CoreValue;
+                result.form.payment.invoice.address.floor = bookingFields.form.payment.invoice.address.floor.CoreValue;
+                result.form.payment.invoice.address.city_id = bookingFields.form.payment.invoice.address.city_id.CoreValue;
+                result.form.payment.invoice.address.state = bookingFields.form.payment.invoice.address.state.CoreValue;
                 result.form.payment.invoice.address.country = bookingFields.form.payment.invoice.address.country.value;
-                result.form.payment.invoice.address.postal_code = bookingFields.form.payment.invoice.address.postal_code.coreValue;
-                result.form.payment.invoice.address.department = bookingFields.form.payment.invoice.address.department.coreValue;
-                result.form.payment.invoice.address.street = bookingFields.form.payment.invoice.address.street.coreValue;
-                result.form.payment.invoice.fiscal_status = bookingFields.form.payment.invoice.fiscal_status.coreValue;
+                result.form.payment.invoice.address.postal_code = bookingFields.form.payment.invoice.address.postal_code.CoreValue;
+                result.form.payment.invoice.address.department = bookingFields.form.payment.invoice.address.department.CoreValue;
+                result.form.payment.invoice.address.street = bookingFields.form.payment.invoice.address.street.CoreValue;
+                result.form.payment.invoice.fiscal_status = bookingFields.form.payment.invoice.fiscal_status.CoreValue;
             }
 
             return result;

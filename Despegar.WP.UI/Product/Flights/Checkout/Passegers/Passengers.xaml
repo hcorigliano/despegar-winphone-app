@@ -11,7 +11,7 @@
     >
 
     <UserControl.Resources>
-        <conv:VisibilityConverter x:Name="VisibilityConverter"/>
+        <conv:VisibilityConverter x:Name="VisibilityConverter" TrueValue="Visible" FalseValue="Collapsed"/>
         <conv:TypeToTextConverter x:Name="TypeToTextConverter"/>
         <conv:DateToStringConverter x:Name="DateToStringConverter"/>
     </UserControl.Resources>

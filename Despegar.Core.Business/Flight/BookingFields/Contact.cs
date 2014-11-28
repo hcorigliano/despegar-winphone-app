@@ -7,10 +7,14 @@ namespace Despegar.Core.Business.Flight.BookingFields
 {
     public class Contact
     {
-        public bool required { get; set; }
-        public FieldDataTypeVal email { get; set; }
-        public List<Phone> phones { get; set; }
-        public FieldDataType offers { get; set; }
+        // MAPI Fields
         public string data_type { get; set; }
+        public bool required { get; set; }
+        public RegularField email { get; set; }
+        public RegularField offers { get; set; }
+        public List<Phone> phones { get; set; }
+
+        // Custom
+        public Phone Phone { get { return phones.FirstOrDefault(); } }
     }
 }

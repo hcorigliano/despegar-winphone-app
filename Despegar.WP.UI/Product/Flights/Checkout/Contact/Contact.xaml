@@ -7,36 +7,44 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:conv="using:Despegar.WP.UI.Common.Converter"
     xmlns:dev="using:Despegar.WP.UI.Developer.Controls"
+    xmlns:controls="using:Despegar.WP.UI.Controls"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <UserControl.Resources>
-        <conv:VisibilityConverter x:Name="VisibilityConverter"/>
+        <conv:VisibilityConverter x:Name="VisibilityConverter" TrueValue="Visible" FalseValue="Collapsed" />
     </UserControl.Resources>
 
     <Grid>
         <!-- Dev -->
         <!--<dev:UserControlDesignGrid Loaded="UserControlDesignGrid_Loaded" />-->
 
-        <ScrollViewer VerticalAlignment="Top" VerticalScrollBarVisibility="Auto" Height="500">
+        <ScrollViewer Grid.Row="0">
             <StackPanel x:Name="contact">
-                <!--Contact-->
-
-                <StackPanel Style="{StaticResource TextBoxInputContainer}" Visibility="{Binding email.required,Converter={StaticResource VisibilityConverter}}" >
+                
+                <!--<controls:Field x:Uid="Contact_email" Value="{Binding email.CoreValue, Mode=TwoWay}" Visibility="{Binding email.required, Converter={StaticResource VisibilityConverter}}" />
+                <controls:ValidationError ValidationError="{Binding email.CurrentError}" />
+                
+                <controls:Field x:Uid="Contact_email_Confirmation" Value="{Binding email.CoreValue, Mode=TwoWay}" Visibility="{Binding email.required, Converter={StaticResource VisibilityConverter}}" />
+                <controls:ValidationError ValidationError="{Binding email.CurrentError}" />
+                
+                <controls:Field x:Uid="Contact_Phone" Value="{Binding email.CoreValue, Mode=TwoWay}" Visibility="{Binding Phone.type.required, Converter={StaticResource VisibilityConverter}}" />
+                <controls:ValidationError ValidationError="{Binding email.CurrentError}" />-->
+                
+                <StackPanel Style="{StaticResource TextBoxInputContainer}" Visibility="{Binding email.required, Converter={StaticResource VisibilityConverter}}" >
                     <TextBlock Style="{StaticResource BaseTextLabel}" x:Uid="Contact_email" Text="Email"></TextBlock>
                     <TextBox Style="{StaticResource CheckoutInputBase}" x:Name="email" Text="{Binding email.coreValue , Mode=TwoWay}"></TextBox>
                 </StackPanel>
 
-                <StackPanel Style="{StaticResource TextBoxInputContainer}" Visibility="{Binding email.required,Converter={StaticResource VisibilityConverter}}">
+                <StackPanel Style="{StaticResource TextBoxInputContainer}" Visibility="{Binding email.required, Converter={StaticResource VisibilityConverter}}">
                     <TextBlock Style="{StaticResource BaseTextLabel}" x:Uid="Contact_email_Confirmation" Text="Email"></TextBlock>
                     <TextBox Style="{StaticResource CheckoutInputBase}" x:Name="emailConfirmation" ></TextBox>
                 </StackPanel>
 
-                <StackPanel Style="{StaticResource TextBoxInputContainer}" Visibility="{Binding phones[0].type.required,Converter={StaticResource VisibilityConverter}}">
+                <StackPanel Style="{StaticResource TextBoxInputContainer}" Visibility="{Binding phones[0].type.required, Converter={StaticResource VisibilityConverter}}">
                     <TextBlock Style="{StaticResource BaseTextLabel}" x:Uid="Contact_Phone" Text="Tipo de Telefono"></TextBlock>
-                    <ComboBox Style="{StaticResource ComboBoxBase}" x:Name="phone_Type" ItemsSource="{Binding phones[0].type.options}" DisplayMemberPath="description" SelectedValue="{Binding phones[0].type.coreValue, Mode=TwoWay}" SelectedValuePath="value"   ></ComboBox>
+                    <ComboBox Style="{StaticResource ComboBoxBase}" x:Name="phone_Type" ItemsSource="{Binding phones[0].type.options}" DisplayMemberPath="description" SelectedValue="{Binding phones[0].type.coreValue, Mode=TwoWay}" SelectedValuePath="value"></ComboBox>
                 </StackPanel>
-
 
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -62,7 +70,10 @@
                         <TextBox InputScope="Number" Style="{StaticResource CheckoutInputBase}" x:Name="number" Text="{Binding phones[0].number.coreValue,Mode=TwoWay}"></TextBox>
                     </StackPanel>
                 </Grid>
+                
             </StackPanel>
         </ScrollViewer>
+        
     </Grid>
+    
 </UserControl>

@@ -7,7 +7,7 @@ using Windows.UI.Xaml;
 
 namespace Despegar.WP.UI.Common.Converter
 {
-    public class VisibilityProConverter : BooleanConverter<Visibility>
+    public class VisibilityConverter : BooleanConverter<Visibility>
     {
     }
 }

@@ -19,13 +19,9 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
-// The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
-
 namespace Despegar.WP.UI.Product.Flights.Checkout.Invoice
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
+   
     public sealed partial class InvoiceArg : UserControl
     {
         public InvoiceArg()
@@ -36,10 +32,10 @@ namespace Despegar.WP.UI.Product.Flights.Checkout.Invoice
 
         private async void FillStates(string country)
         {
-            FlightsCheckoutModel flightCheckoutModel = new FlightsCheckoutModel();
+            //FlightsCheckoutModel flightCheckoutModel = new FlightsCheckoutModel();
             try
             {
-                address_state.ItemsSource = await flightCheckoutModel.GetStates("AR");
+                //address_state.ItemsSource = await flightCheckoutModel.GetStates("AR");
             }
             catch { }
         }
@@ -49,8 +45,8 @@ namespace Despegar.WP.UI.Product.Flights.Checkout.Invoice
             if (args.Reason == AutoSuggestionBoxTextChangeReason.UserInput && sender.Text != "" && sender.Text.Length >= 3)
             {
                 //TODO : TRY CATCH
-                State state = (State)address_state.SelectedItem;
-                sender.ItemsSource = (IEnumerable)(await FlightsCheckoutModel.GetCities("AR", sender.Text, state.id));
+                //State state = (State)address_state.SelectedItem;
+                //sender.ItemsSource = (IEnumerable)(await FlightsCheckoutModel.GetCities("AR", sender.Text, state.id));
             }
         }
 
@@ -58,11 +54,11 @@ namespace Despegar.WP.UI.Product.Flights.Checkout.Invoice
         {
             if (((ComboBox)sender).SelectedValue.ToString() == "FINAL")
             {
-                fiscal_name_StackPanel.Visibility = Visibility.Collapsed;
+                //fiscal_name_StackPanel.Visibility = Visibility.Collapsed;
             }
             else
             {
-                fiscal_name_StackPanel.Visibility = Visibility.Visible;
+                //fiscal_name_StackPanel.Visibility = Visibility.Visible;
             }
         }
 
@@ -73,9 +69,8 @@ namespace Despegar.WP.UI.Product.Flights.Checkout.Invoice
 
         private void SuggestionChosen(AutoSuggestBox sender, AutoSuggestBoxSuggestionChosenEventArgs args)
         {
-
             Despegar.Core.Business.Flight.BookingFields.Invoice context = (Despegar.Core.Business.Flight.BookingFields.Invoice)this.DataContext;
-            context.address.city_id.coreValue = ((CitiesFields)args.SelectedItem).id;
+            context.address.city_id.CoreValue = ((CitiesFields)args.SelectedItem).id;
         }
     }
 }

@@ -14,7 +14,7 @@
     <UserControl.Resources>
         <conv:StringConverter x:Key="stringFormatConverter"  />
         <conv:StyleConverter x:Key="textColorConverter" TrueValue="{StaticResource FlightDetailTitleBlue}" FalseValue="{StaticResource FlightDetailTitleGreen}" />
-        <conv:VisibilityProConverter x:Key="visibilityConverter" TrueValue="Visible" FalseValue="Collapsed"  />
+        <conv:VisibilityConverter x:Key="visibilityConverter" TrueValue="Visible" FalseValue="Collapsed"  />
     </UserControl.Resources>
     <Grid>
     	<Grid.RowDefinitions>

@@ -34,7 +34,6 @@
         <Pivot Grid.Row="2" x:Name="ContentRoot"  Style="{StaticResource PivotBaseMain}">
             <PivotItem VerticalAlignment="Top" x:Uid="Flight_Checkout_Passagers" Style="{StaticResource PivotItemBase}">
 
-
                 <ScrollViewer VerticalScrollBarVisibility="Auto" Height="500">
 
                     <StackPanel  xmlns:src="using:Despegar.WP.UI.Product.Flights.Checkout.Passegers">
@@ -49,7 +48,6 @@
                     </StackPanel>
                 </ScrollViewer>
             </PivotItem>
-
 
             <!--Contact Pivot-->
             <PivotItem x:Uid="Flight_Checkout_Contact" Style="{StaticResource PivotItemBase}">
@@ -72,11 +70,9 @@
                 </StackPanel>
             </PivotItem>
 
-            <!--Invoice Arg-->
-            <PivotItem  x:Uid="Flight_Checkout_Invoice_Arg" Style="{StaticResource PivotItemBase}">
-                <StackPanel xmlns:src="using:Despegar.WP.UI.Product.Flights.Checkout.Invoice">
-                    <src:InvoiceArg x:Name="InvoiceArgControl" DataContext="{Binding bookingfields.form.payment.invoice}"></src:InvoiceArg>
-                </StackPanel>
+            <!-- Invoice Arg -->
+            <PivotItem x:Uid="Flight_Checkout_Invoice_Arg" Style="{StaticResource PivotItemBase}" xmlns:src="using:Despegar.WP.UI.Product.Flights.Checkout.Invoice">
+                <src:InvoiceArg x:Name="InvoiceArgControl" DataContext="{Binding bookingfields.form.payment.invoice}" />
             </PivotItem>
 
             <!--Buy-->

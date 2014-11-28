@@ -1,39 +1,18 @@
 ﻿using Despegar.Core.Business.Dynamics;
-using Despegar.Core.Business.Flight.BookingFields;
-using Despegar.Core.Service;
 using Despegar.WP.UI.Common;
 using Despegar.WP.UI.Model;
-using Despegar.WP.UI.Model.Classes.Flights.Checkout;
 using Despegar.WP.UI.Model.ViewModel;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
-using Windows.Graphics.Display;
-using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
-
-// The Basic Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
 
 namespace Despegar.WP.UI.Product.Flights
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
     public sealed partial class FlightCheckout : Page
     {
         private NavigationHelper navigationHelper;
-        private ObservableDictionary defaultViewModel = new ObservableDictionary();
         private FlightsCheckoutModel flightService = new FlightsCheckoutModel();
         private Despegar.WP.UI.Controls.ModalPopup loadingPopup = new Despegar.WP.UI.Controls.ModalPopup(new Despegar.WP.UI.Controls.Loading());
 
@@ -51,9 +30,8 @@ namespace Despegar.WP.UI.Product.Flights
 
             flightService.GetBookingFields();
 
-            //For fix credit card null value
+            // For fix credit card null value
             CardDataControl.DataContext = flightService.bookingfields.form.payment;
-
         }
 
         private void InitilizePage()
@@ -71,15 +49,6 @@ namespace Despegar.WP.UI.Product.Flights
         public NavigationHelper NavigationHelper
         {
             get { return this.navigationHelper; }
-        }
-
-        /// <summary>
-        /// Gets the view model for this <see cref="Page"/>.
-        /// This can be changed to a strongly typed view model.
-        /// </summary>
-        public ObservableDictionary DefaultViewModel
-        {
-            get { return this.defaultViewModel; }
         }
 
         /// <summary>
@@ -140,7 +109,6 @@ namespace Despegar.WP.UI.Product.Flights
         {
             var toConvert = DynamicFlightBookingFieldsToPost.ToDynamic(flightService.bookingfields);
             flightService.CompleteCheckOut(toConvert);
-
         }
 
         private void Checkloading(object sender, PropertyChangedEventArgs e)
@@ -154,6 +122,5 @@ namespace Despegar.WP.UI.Product.Flights
 
             }
         }
-
     }
 }

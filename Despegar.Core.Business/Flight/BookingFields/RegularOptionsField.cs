@@ -6,8 +6,16 @@ using System.Threading.Tasks;
 
 namespace Despegar.Core.Business.Flight.BookingFields
 {
-    public class FieldDataTypeOpt :FieldDataType
+    public class RegularOptionsField : RegularField
     {
         public List<Option> options { get; set; }
+
+        public new void Validate() 
+        {
+            // TODO: Validate
+            if(String.IsNullOrWhiteSpace(CoreValue))
+            {
+            }
+        }
     }
 }

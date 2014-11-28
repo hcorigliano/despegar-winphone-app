@@ -48,7 +48,7 @@ namespace Despegar.WP.UI.Product.Flights.Checkout.Passegers
         private void SuggestionChosen(AutoSuggestBox sender, AutoSuggestBoxSuggestionChosenEventArgs args)
         {
             Despegar.Core.Business.Flight.BookingFields.Passenger context = (Despegar.Core.Business.Flight.BookingFields.Passenger)this.DataContext;
-            context.nationality.coreValue = ((CountryFields)args.SelectedItem).id;
+            context.nationality.CoreValue = ((CountryFields)args.SelectedItem).id;
         }
 
     }
