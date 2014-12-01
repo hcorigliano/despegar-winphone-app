@@ -1,5 +1,6 @@
 ﻿using Despegar.Core.Business.Common.State;
 using Despegar.Core.Business.Configuration;
+using Despegar.Core.Business.Flight.BookingCompletePostResponse;
 using Despegar.Core.Business.Flight.BookingFields;
 using Despegar.Core.IService;
 using Despegar.WP.UI.Model.Classes.Flights.Checkout;
@@ -98,14 +99,14 @@ namespace Despegar.WP.UI.Model
             IsLoading = true;
 
             BookingFieldPost book = new BookingFieldPost();
-            book.inbound_choice = CrossParameters.Inbound.choice;
-            book.outbound_choice = CrossParameters.Outbound.choice;
-            book.itinerary_id = CrossParameters.FlightId;//"prism_AR_0_FLIGHTS_A-1_C-0_I-0_RT-BUEMIA20141110-MIABUE20141111_xorigin-api!0!C_1212636001_843603426_-2008006059_1555498055_-278056197_804297563!1,6_1,4_1,5_1,2_1,3_1,1";
+            //book.inbound_choice = CrossParameters.Inbound.choice;
+            //book.outbound_choice = CrossParameters.Outbound.choice;
+            //book.itinerary_id = CrossParameters.FlightId;//"prism_AR_0_FLIGHTS_A-1_C-0_I-0_RT-BUEMIA20141110-MIABUE20141111_xorigin-api!0!C_1212636001_843603426_-2008006059_1555498055_-278056197_804297563!1,6_1,4_1,5_1,2_1,3_1,1";
             
             //MOCKED
-            //book.inbound_choice = 1;
-            //book.outbound_choice = 1;
-            //book.itinerary_id = "prism_AR_0_FLIGHTS_A-1_C-0_I-0_RT-BUEMIA20141110-MIABUE20141111_xorigin-api!0!C_1212636001_843603426_-2008006059_1555498055_-278056197_804297563!1,6_1,4_1,5_1,2_1,3_1,1";
+            book.inbound_choice = 1;
+            book.outbound_choice = 1;
+            book.itinerary_id = "prism_AR_0_FLIGHTS_A-1_C-0_I-0_RT-BUEMIA20150610-MIABUE20150611_xorigin-api!0!C_2075990976!1,1";
 
             bookingfields = await flightService.GetBookingFields(book);
 
@@ -132,9 +133,12 @@ namespace Despegar.WP.UI.Model
             return (await flightService.GetBookingFields(bookingFieldPost));
         }
         
-        public void CompleteCheckOut(dynamic form)
+        public async void CompleteCheckOut(dynamic form)
         {
-            string json = JsonConvert.SerializeObject(form);
+            BookingCompletePostResponse response = await flightService.CompleteBooking(form, bookingfields.id);
+            //BookingCompletePostResponse response = await flightService.CompleteBooking(form, "214ecbd4-7964-11e4-8980-fa163ec96567");
+            //TODO : Go to Tks or Risk Questions
+            int i = 1;
         }
 
         public async Task<List<State>> GetStates(string country)
