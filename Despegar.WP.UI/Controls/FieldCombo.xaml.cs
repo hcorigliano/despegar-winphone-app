@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Despegar.Core.Business.Flight.BookingFields;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
@@ -19,9 +20,11 @@ namespace Despegar.WP.UI.Controls
 {
     public sealed partial class FieldCombo : UserControl
     {
-        public static readonly DependencyProperty ValueProperty = DependencyProperty.Register("Value", typeof(string), typeof(FieldCombo), new PropertyMetadata(null));
+        public static readonly DependencyProperty ValueProperty = DependencyProperty.Register("Value", typeof(string), typeof(FieldCombo), new PropertyMetadata(null));       
         public static readonly DependencyProperty ItemsSourceProperty = DependencyProperty.Register("ItemsSource", typeof(object), typeof(FieldCombo), new PropertyMetadata(null));
         public static readonly DependencyProperty LabelProperty = DependencyProperty.Register("Label", typeof(string), typeof(FieldCombo), new PropertyMetadata(null));
+        public static readonly DependencyProperty CodePathProperty = DependencyProperty.Register("CodePath", typeof(string), typeof(FieldCombo), new PropertyMetadata(null));
+        public static readonly DependencyProperty DisplayTextPathProperty = DependencyProperty.Register("DisplayTextPath", typeof(string), typeof(FieldCombo), new PropertyMetadata(null));
 
         #region ** BoilerPlate Code **
         public event PropertyChangedEventHandler PropertyChanged;
@@ -60,6 +63,26 @@ namespace Despegar.WP.UI.Controls
             set
             {
                 SetValueAndNotify(LabelProperty, value);
+            }
+        }
+
+        // Bindable Property from XAML
+        public object CodePath
+        {
+            get { return GetValue(CodePathProperty); }
+            set
+            {
+                SetValueAndNotify(CodePathProperty, value);
+            }
+        }
+
+        // Bindable Property from XAML
+        public object DisplayTextPath
+        {
+            get { return GetValue(DisplayTextPathProperty); }
+            set
+            {
+                SetValueAndNotify(DisplayTextPathProperty, value);
             }
         }
 

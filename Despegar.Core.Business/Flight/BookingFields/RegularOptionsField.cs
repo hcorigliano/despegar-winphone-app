@@ -9,12 +9,26 @@ namespace Despegar.Core.Business.Flight.BookingFields
     public class RegularOptionsField : RegularField
     {
         public List<Option> options { get; set; }
+       
+        public override void Validate()
+        {            
+            // Combobox bever shows error, there is always a selected value
+        }
 
-        public new void Validate() 
+        /// <summary>
+        /// Sets the API Default Value of the Field
+        /// </summary>
+        public override void SetDefaultValue()
         {
-            // TODO: Validate
-            if(String.IsNullOrWhiteSpace(CoreValue))
+            if (value == null)
             {
+                // Select first option available
+                if (options != null && options.Count > 0)                
+                    this.CoreValue = options.FirstOrDefault().value;
+                
+            } else {
+                // API default                
+                this.CoreValue = value;
             }
         }
     }

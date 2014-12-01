@@ -21,29 +21,20 @@ using Windows.UI.Xaml.Navigation;
 
 namespace Despegar.WP.UI.Product.Flights.Checkout.Invoice
 {
-   
+   /// <summary>
+   /// This control will also act as a ViewModel for this Checkout Section
+   /// </summary>
     public sealed partial class InvoiceArg : UserControl
     {
+        // API Booking Field Data
+        public InvoiceArg DataItem { get { return DataContext as InvoiceArg; } }
+
         public InvoiceArg()
         {
             this.InitializeComponent();
-            FillStates("AR");
         }
 
-        private async void FillStates(string country)
-        {
-            //FlightsCheckoutModel flightCheckoutModel = new FlightsCheckoutModel();
-            try
-            {
-                //address_state.ItemsSource = await flightCheckoutModel.GetStates("AR");
-            }
-            catch 
-            {
- 
-            }
-        }
-
-        private async void FlightsTextBlock_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
+        private void FlightsTextBlock_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
         {
             if (args.Reason == AutoSuggestionBoxTextChangeReason.UserInput && sender.Text != "" && sender.Text.Length >= 3)
             {
@@ -72,7 +63,7 @@ namespace Despegar.WP.UI.Product.Flights.Checkout.Invoice
 
         private void SuggestionChosen(AutoSuggestBox sender, AutoSuggestBoxSuggestionChosenEventArgs args)
         {
-            Despegar.Core.Business.Flight.BookingFields.Invoice context = (Despegar.Core.Business.Flight.BookingFields.Invoice)this.DataContext;
+            Despegar.Core.Business.Flight.BookingFields.InvoiceArg context = (Despegar.Core.Business.Flight.BookingFields.InvoiceArg)this.DataContext;
             context.address.city_id.CoreValue = ((CitiesFields)args.SelectedItem).id;
         }
     }

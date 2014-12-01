@@ -9,32 +9,33 @@
     xmlns:controls="using:Despegar.WP.UI.Controls"
     xmlns:dev="using:Despegar.WP.UI.Developer.Controls"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    x:Name="InvoiceArgControl">
 
     <UserControl.Resources>
-        <conv:VisibilityConverter x:Name="VisibilityConverter" TrueValue="Visible" FalseValue="Collapsed" />
+        <conv:VisibilityConverter x:Name="VisibilityConverter" TrueValue="Visible" FalseValue="Collapsed" />        
     </UserControl.Resources>
 
         <ScrollViewer>
-            <StackPanel>
+        <StackPanel DataContext="{Binding CoreBookingFields.form.payment.invoice}">
             <!-- Dev -->
             <!--<dev:UserControlDesignGrid />-->
 
             <!-- Fiscal Status -->
             <StackPanel Visibility="{Binding fiscal_status.required, Converter={StaticResource VisibilityConverter}}">
-              <controls:FieldCombo x:Uid="Flights_Checkout_Invoice_Arg_Fiscal_Status" ItemsSource="{Binding fiscal_status.options}"  Value="{Binding fiscal_status.CoreValue, Mode=TwoWay}" />
+              <controls:FieldCombo x:Uid="Flights_Checkout_Invoice_Arg_Fiscal_Status" ItemsSource="{Binding fiscal_status.options}"  Value="{Binding fiscal_status.CoreValue, Mode=TwoWay}" CodePath="value" DisplayTextPath="description" />
               <controls:ValidationError ErrorPrefix="Flights_Checkout_Invoice_Arg_Fiscal_Status" ErrorCode="{Binding fiscal_status.CurrentError}" />
+            </StackPanel>
+            <!-- Razon Social -->
+            <StackPanel Visibility="{Binding DataContext.IsFiscalNameRequired, ElementName=InvoiceArgControl, Converter={StaticResource VisibilityConverter}}">
+                <controls:Field x:Uid="Flights_Checkout_Invoice_Arg_fiscal_name" Value="{Binding fiscal_name.CoreValue, Mode=TwoWay}"/>
+                <controls:ValidationError ErrorPrefix="Flights_Checkout_Invoice_Arg_fiscal_name" ErrorCode="{Binding fiscal_name.CurrentError}" />
             </StackPanel>
             <!-- CUIT -->
             <StackPanel Visibility="{Binding fiscal_id.required, Converter={StaticResource VisibilityConverter}}">
                 <controls:NumericField x:Uid="Flights_Checkout_Invoice_Arg_fiscal_id" Value="{Binding fiscal_id.CoreValue, Mode=TwoWay}"  />
                 <controls:ValidationError ErrorPrefix="Flights_Checkout_Invoice_Arg_fiscal_id" ErrorCode="{Binding fiscal_id.CurrentError}" />
-            </StackPanel>
-            <!-- Razon Social -->
-            <StackPanel Visibility="{Binding fiscal_name.required, Converter={StaticResource VisibilityConverter}}">
-                <controls:Field x:Uid="Flights_Checkout_Invoice_Arg_fiscal_name" Value="{Binding fiscal_name.CoreValue, Mode=TwoWay}"/>
-                <controls:ValidationError ErrorPrefix="Flights_Checkout_Invoice_Arg_fiscal_name" ErrorCode="{Binding fiscal_name.CurrentError}" />
-            </StackPanel>
+            </StackPanel>            
             <!-- Street -->
             <StackPanel Visibility="{Binding address.street.required, Converter={StaticResource VisibilityConverter}}">
                 <controls:Field  x:Uid="Flights_Checkout_Invoice_Arg_Street" Value="{Binding address.street.CoreValue, Mode=TwoWay}"  />
@@ -85,15 +86,15 @@
 
             <!-- State -->
             <StackPanel Visibility="{Binding address.state.required, Converter={StaticResource VisibilityConverter}}">
-                <controls:FieldCombo x:Uid="Flights_Checkout_Invoice_Arg_State"   Value="{Binding address.state.CoreValue, Mode=TwoWay}"  />
+                <controls:FieldCombo x:Uid="Flights_Checkout_Invoice_Arg_State" ItemsSource="{Binding DataContext.ArgentinaStates, ElementName=InvoiceArgControl}"  Value="{Binding address.state.CoreValue, Mode=TwoWay}" CodePath="id" DisplayTextPath="name"  />
                 <controls:ValidationError ErrorPrefix="Flights_Checkout_Invoice_Arg_State" ErrorCode="{Binding address.state.CurrentError}"  />
             </StackPanel>
                 
             <!-- City  TODO: x:Uid="Invoice_Arg_City" -->
-            <StackPanel Style="{StaticResource TextBoxInputContainer}" Visibility="{Binding Address.city_id.required,Converter={StaticResource VisibilityConverter}}" >
+            <!--<StackPanel Style="{StaticResource TextBoxInputContainer}" Visibility="{Binding Address.city_id.required,Converter={StaticResource VisibilityConverter}}" >
                 <TextBlock Style="{StaticResource BaseTextLabel}"  Text="Ciudad"></TextBlock>
                 <AutoSuggestBox  TextBoxStyle="{StaticResource InputBase}" Style="{StaticResource AutosuggestBoxBase}"  DataContext="{Binding}"  x:Name="address_city" TextChanged="FlightsTextBlock_TextChanged" LostFocus="Focus_Lost" SuggestionChosen="SuggestionChosen" TextMemberPath="full_name" ></AutoSuggestBox>
-            </StackPanel>
+            </StackPanel>-->
 
             </StackPanel>
         </ScrollViewer>

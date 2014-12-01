@@ -52,7 +52,7 @@ namespace Despegar.Core.Business.Flight.BookingFields
         /// <summary>
         /// Validates this field and adds the Errors
         /// </summary>
-        public void Validate()
+        public virtual void Validate()
         {
             CurrentError = null;
             Errors.Clear();
@@ -82,7 +82,7 @@ namespace Despegar.Core.Business.Flight.BookingFields
         /// <summary>
         /// Sets the API Default Value of the Field
         /// </summary>
-        public void SetDefaultValue() 
+        public virtual void SetDefaultValue() 
         {
             this.CoreValue = value != null ? value : String.Empty;
         }

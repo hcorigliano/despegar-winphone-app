@@ -1,5 +1,6 @@
 ﻿using Despegar.Core.Business.Dynamics;
 using Despegar.WP.UI.Common;
+using Despegar.WP.UI.Controls;
 using Despegar.WP.UI.Model;
 using Despegar.WP.UI.Model.ViewModel;
 using System;
@@ -10,13 +11,13 @@ using Windows.UI.Xaml.Navigation;
 
 namespace Despegar.WP.UI.Product.Flights
 {
-    public sealed partial class FlightCheckout : Page
+    public sealed partial class FlightCheckoutArg : Page
     {
         private NavigationHelper navigationHelper;
-        private FlightsCheckoutModel flightService = new FlightsCheckoutModel();
-        private Despegar.WP.UI.Controls.ModalPopup loadingPopup = new Despegar.WP.UI.Controls.ModalPopup(new Despegar.WP.UI.Controls.Loading());
+        private FlightsCheckoutModelArg ViewModel;
+        private ModalPopup loadingPopup = new ModalPopup(new Loading());
 
-        public FlightCheckout()
+        public FlightCheckoutArg()
         {
             this.InitializeComponent();
 
@@ -24,25 +25,24 @@ namespace Despegar.WP.UI.Product.Flights
             this.navigationHelper.LoadState += this.NavigationHelper_LoadState;
             this.navigationHelper.SaveState += this.NavigationHelper_SaveState;
 
-            InitilizePage();
-            
-            flightService.PropertyChanged += Checkloading;
+            // Initialize Checkout Argentina
+            ViewModel = new FlightsCheckoutModelArg(Navigator.Instance, GlobalConfiguration.CoreContext.GetFlightService(), GlobalConfiguration.CoreContext.GetCommonService(), GlobalConfiguration.CoreContext.GetConfigurationService());
+            ViewModel.PropertyChanged += Checkloading;
 
-            flightService.GetBookingFields();
+            this.DataContext = ViewModel;
 
-            // For fix credit card null value
-            CardDataControl.DataContext = flightService.bookingfields.form.payment;
-        }
 
-        private void InitilizePage()
-        {
-            LayoutRoot.DataContext = flightService;
-            
-            //Notify to CardData 
+            // Init Checkout
+            ViewModel.Init();
+
+            // Notify to CardData
             PaymentControl.OnUserControlButtonClicked += CardDataControl.OnUCButtonClicked;
-            Buycontrol.OnUserControlButtonClicked += this.ValidateAndBuy;
+            //Buycontrol.OnUserControlButtonClicked += this.ValidateAndBuy;
+                       
+            // For fix credit card null value
+            //CardDataControl.DataContext = ViewModel.bookingfields.form.payment;            
         }
-       
+
         /// <summary>
         /// Gets the <see cref="NavigationHelper"/> associated with this <see cref="Page"/>.
         /// </summary>
@@ -78,6 +78,18 @@ namespace Despegar.WP.UI.Product.Flights
         {
         }
 
+        private void Checkloading(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "IsLoading")
+            {
+                if ((sender as ViewModelBase).IsLoading)
+                    loadingPopup.Show();
+                else
+                    loadingPopup.Hide();
+
+            }
+        }
+
         #region NavigationHelper registration
 
         /// <summary>
@@ -104,23 +116,6 @@ namespace Despegar.WP.UI.Product.Flights
         }
 
         #endregion
-
-        private void ValidateAndBuy(object sender, RoutedEventArgs e)
-        {
-            var toConvert = DynamicFlightBookingFieldsToPost.ToDynamic(flightService.bookingfields);
-            flightService.CompleteCheckOut(toConvert);
-        }
-
-        private void Checkloading(object sender, PropertyChangedEventArgs e)
-        {
-            if (e.PropertyName == "IsLoading")
-            {
-                if ((sender as ViewModelBase).IsLoading)
-                    loadingPopup.Show();
-                else
-                    loadingPopup.Hide();
-
-            }
-        }
+     
     }
 }

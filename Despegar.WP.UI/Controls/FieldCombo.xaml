@@ -10,7 +10,12 @@
 
     <StackPanel Style="{StaticResource CheckoutFieldContainer}">
         <TextBlock Style="{StaticResource BaseTextLabel}" Text="{Binding Label}"  />
-        <ComboBox ItemsSource="{Binding ItemsSource}" SelectedItem="{Binding Value, Mode=TwoWay}" DisplayMemberPath="description" SelectedValuePath="value" Style="{StaticResource ComboBoxBase}" />
+        <ComboBox x:Name="fieldCombo"
+                  ItemsSource="{Binding ItemsSource}" 
+                  SelectedValue="{Binding Value, Mode=TwoWay}"
+                  SelectedValuePath="{Binding CodePath}" 
+                  DisplayMemberPath="{Binding DisplayTextPath}"                   
+                  Style="{StaticResource ComboBoxBase}" />
     </StackPanel>
 
 </UserControl>

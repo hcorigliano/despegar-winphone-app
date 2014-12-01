@@ -139,10 +139,7 @@
     <value>México</value>
   </data>
   <data name="Flights_Arrives_In" xml:space="preserve">
-    <value>LLega de </value>
-  </data>
-  <data name="Flights_Connect_with_pending" xml:space="preserve">
-    <value>Conexión con espera de </value>
+    <value>Llega de </value>
   </data>
   <data name="Flights_Duration" xml:space="preserve">
     <value>Duración total del vuelo </value>
@@ -527,5 +524,8 @@
   </data>
   <data name="Flights_Checkout_Invoice_Arg_Street_ERROR_REQUIRED" xml:space="preserve">
     <value>Por favor ingrese la calle</value>
+  </data>
+  <data name="Flights_Connect_with_pending" xml:space="preserve">
+    <value>Conexión con espera de </value>
   </data>
 </root>

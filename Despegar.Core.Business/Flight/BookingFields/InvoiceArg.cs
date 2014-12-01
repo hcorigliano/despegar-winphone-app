@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Despegar.Core.Business.Flight.BookingFields
 {
-    public class Invoice
+    public class InvoiceArg
     {
         public bool required { get; set; }
         public Address address { get; set; }

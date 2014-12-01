@@ -1,8 +1,11 @@
 ﻿using Despegar.Core.Business.Common.State;
 using Despegar.Core.Business.Configuration;
+using Despegar.Core.Business.Dynamics;
 using Despegar.Core.Business.Flight.BookingFields;
 using Despegar.Core.IService;
+using Despegar.Core.Log;
 using Despegar.WP.UI.Model.Classes.Flights.Checkout;
+using Despegar.WP.UI.Model.Interfaces;
 using Despegar.WP.UI.Model.ViewModel;
 using Despegar.WP.UI.Models.Classes;
 using Newtonsoft.Json;
@@ -15,28 +18,17 @@ using System.Windows.Input;
 
 namespace Despegar.WP.UI.Model
 {
-    public class FlightsCheckoutModel : ViewModelBase
-    {
-        #region 
+    public class FlightsCheckoutModelArg : ViewModelBase
+    {        
+        #region ** Private **
+        private INavigator navigator;
         private IFlightService flightService;
-        private ICommonServices CommonServices;
+        private ICommonServices commonServices;
+        private IConfigurationService configurationService;        
+        public Countries Countries { get; set; }
+        public List<State> ArgentinaStates { get; set; }
 
-        //public BookingFields bookingfields = new BookingFields();
-
-        public Countries countries { get; set; }
-
-        private BookingFields CoreBookingFields;
-
-        public BookingFields bookingfields
-        {
-            get { return CoreBookingFields; }
-            set
-            {
-                CoreBookingFields = value;
-                OnPropertyChanged();
-            }
-        }
-
+        // En DUDA
         private PaymentsFormated CorePaymentFormated;
         public PaymentsFormated PaymentFormated
         {
@@ -47,8 +39,8 @@ namespace Despegar.WP.UI.Model
                 OnPropertyChanged();
             }
         }
-
         private PriceFormated CorePriceFormated;
+
         public PriceFormated PriceFormated
         {
             get { return CorePriceFormated; }
@@ -58,35 +50,98 @@ namespace Despegar.WP.UI.Model
                 OnPropertyChanged();
             }
         }
-
-        public ICommand FormatPaymentsCommand
-        {
-            get
-            {
-                return new RelayCommand(() => { FormatPayments(); });
-            }
-        }
-
-
-        public ICommand GetCountriesCommand
-        {
-            get
-            {
-                return new RelayCommand(() => GetCountries());
-            }
-        }
+        // en duda
         #endregion
 
-        public FlightsCheckoutModel()
-        {
-            flightService = GlobalConfiguration.CoreContext.GetFlightService();
-            CommonServices = GlobalConfiguration.CoreContext.GetCommonService();
+        #region ** Public Interface **
+        public BookingFields CoreBookingFields { get; set; }
+
+        public bool InvoiceRequired { get { return CoreBookingFields.form.payment.invoice != null; } }
+
+        public bool IsFiscalNameRequired { get { return CoreBookingFields.form.payment.invoice.fiscal_status.required && CoreBookingFields.form.payment.invoice.fiscal_status.CoreValue != "FINAL"; } }
+
+        public ICommand ValidateAndBuyCommand
+        { 
+           get 
+           {
+               return new RelayCommand(() => ValidateAndBuy());
+           } 
         }
 
-        public async void GetBookingFields()
+        #endregion
+
+        public FlightsCheckoutModelArg(INavigator navigator, IFlightService flightServices, ICommonServices commonServices, IConfigurationService configService)
+        {
+            this.navigator = navigator;
+            this.flightService = flightServices;
+            this.commonServices = commonServices;
+            this.configurationService = configService;
+        }
+        
+        /// <summary>
+        /// Loads the initial required data for the Checkout Form
+        /// </summary>
+        public async void Init()
         {
             IsLoading = true;
 
+            try
+            {
+                await GetBookingFields();
+                await LoadCountries();
+                ArgentinaStates = await LoadStates();
+
+                // Format Payments
+                CorePaymentFormated = FormatPayments();
+                CorePriceFormated = PriceFormatedConverter(CoreBookingFields);
+                // Set Known Default Values
+                CoreBookingFields.form.contact.phones[0].country_code.SetDefaultValue();
+                CoreBookingFields.form.contact.phones[0].area_code.SetDefaultValue();
+
+                if (InvoiceRequired)
+                {
+                    CoreBookingFields.form.payment.invoice.fiscal_status.PropertyChanged += Fiscal_status_PropertyChanged;
+
+                    CoreBookingFields.form.payment.invoice.fiscal_status.SetDefaultValue();
+                    CoreBookingFields.form.payment.invoice.address.state.CoreValue = ArgentinaStates.FirstOrDefault().id; // TODO CHECK THIS why does not work
+                }
+            }
+            catch (Exception e)
+            {
+                Logger.Log("[App:FlightsCheckout] Exception " + e.Message);
+                IsLoading = false;
+                OnViewModelError("CHECKOUT_INIT_FAILED");
+            }
+
+            IsLoading = false;
+        }
+
+        private void Fiscal_status_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "CoreValue") 
+            {
+                OnPropertyChanged("IsFiscalNameRequired");
+            }
+        }
+
+        private async Task<BookingFields> GetBookingFields(BookingFieldPost bookingFieldPost)
+        {           
+            return (await flightService.GetBookingFields(bookingFieldPost));
+        }
+
+        private static async Task<List<CitiesFields>> GetCities(string CountryCode, string Search, string cityresult)
+        {
+            IConfigurationService configurationService = GlobalConfiguration.CoreContext.GetConfigurationService();
+            return await configurationService.AutoCompleteCities(CountryCode, Search, cityresult);
+        }
+
+        private async Task<List<State>> LoadStates()
+        {
+            return (await commonServices.GetStates("AR"));
+        }
+        
+        private async Task GetBookingFields()
+        {
             // HARDCODE
             BookingFieldPost book = new BookingFieldPost();
             book.inbound_choice = 1;
@@ -94,44 +149,20 @@ namespace Despegar.WP.UI.Model
             book.itinerary_id = "prism_AR_0_FLIGHTS_A-1_C-0_I-0_RT-BUEMIA20141110-MIABUE20141111_xorigin-api!0!C_1212636001_843603426_-2008006059_1555498055_-278056197_804297563!1,6_1,4_1,5_1,2_1,3_1,1";
 
             CoreBookingFields = await flightService.GetBookingFields(book);
-
-            FillsValueWithCoreValue(CoreBookingFields);
-
-            CorePaymentFormated = FormatPayments();
-
-            CorePriceFormated = PriceFormatedConverter(bookingfields);
-
-            GetCountries();
-
-            IsLoading = false;
         }
 
-        private void FillsValueWithCoreValue(BookingFields CoreBookingFields)
+        private async Task LoadCountries()
         {
-            CoreBookingFields.form.contact.phones[0].country_code.CoreValue = CoreBookingFields.form.contact.phones[0].country_code.value;
-            CoreBookingFields.form.contact.phones[0].area_code.CoreValue = CoreBookingFields.form.contact.phones[0].area_code.value;
+            Countries = await configurationService.GetCountries();
         }
 
-        public async Task<BookingFields> GetBookingFields(BookingFieldPost bookingFieldPost)
-        {           
-            return (await flightService.GetBookingFields(bookingFieldPost));
-        }
-        
-        public void CompleteCheckOut(dynamic form)
-        {
-            string json = JsonConvert.SerializeObject(form);
-        }
+        #region ** Utils ** 
 
-        public async Task<List<State>> GetStates(string country)
-        {
-            return (await CommonServices.GetStates(country));
-        }
-
-        public PaymentsFormated FormatPayments()
+        private PaymentsFormated FormatPayments()
         {
             //TODO: REFACTOR
             //Payments payments   +  static
-            Payments payments = bookingfields.payments; //added line
+            Payments payments = CoreBookingFields.payments; //added line
             PaymentsFormated formated = new PaymentsFormated();
             FillFormatedWithInterest(payments.with_interest, formated.with_interest);
             FillFormatedWithoutInterest(payments.without_interest, formated.without_interest);
@@ -210,19 +241,6 @@ namespace Despegar.WP.UI.Model
             paymentsFilter.GrupLabelText = sb.ToString() + " " + loader.GetString("Common_Pay_Of");
         }
 
-        private async void GetCountries()
-        {
-            IConfigurationService configurationService = GlobalConfiguration.CoreContext.GetConfigurationService();
-            countries = await configurationService.GetCountries();
-
-        }
-
-        public static async Task<List<CitiesFields>> GetCities(string CountryCode, string Search, string cityresult)
-        {
-            IConfigurationService configurationService = GlobalConfiguration.CoreContext.GetConfigurationService();
-            return await configurationService.AutoCompleteCities(CountryCode, Search, cityresult);
-        }
-
         private PriceFormated PriceFormatedConverter(BookingFields booking)
         {
             PriceFormated formated = new PriceFormated();
@@ -248,6 +266,13 @@ namespace Despegar.WP.UI.Model
                 formated.infant_base = (formated.infants_subtotal / Convert.ToInt32(formated.infant_quantity)).ToString();
 
             return formated;
+        }
+
+        #endregion
+
+        private void ValidateAndBuy() 
+        {
+            dynamic objectToSerialize = DynamicFlightBookingFieldsToPost.ToDynamic(this.CoreBookingFields);
         }
     }
 }

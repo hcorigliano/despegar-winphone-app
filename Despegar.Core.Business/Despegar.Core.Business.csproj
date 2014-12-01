@@ -99,7 +99,7 @@
     <Compile Include="Flight\BookingFields\Form.cs" />
     <Compile Include="Flight\BookingFields\Installment.cs" />
     <Compile Include="Flight\BookingFields\Installments.cs" />
-    <Compile Include="Flight\BookingFields\Invoice.cs" />
+    <Compile Include="Flight\BookingFields\InvoiceArg.cs" />
     <Compile Include="Flight\BookingFields\Option.cs" />
     <Compile Include="Flight\BookingFields\OwnerDocument.cs" />
     <Compile Include="Flight\BookingFields\Passenger.cs" />

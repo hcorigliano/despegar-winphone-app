@@ -239,8 +239,8 @@
     <Compile Include="Product\Flights\FlightResults.xaml.cs">
       <DependentUpon>FlightResults.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Product\Flights\FlightCheckout.xaml.cs">
-      <DependentUpon>FlightCheckout.xaml</DependentUpon>
+    <Compile Include="Product\Flights\FlightCheckoutArg.xaml.cs">
+      <DependentUpon>FlightCheckoutArg.xaml</DependentUpon>
     </Compile>
     <Compile Include="Product\Flights\FlightDetail.xaml.cs">
       <DependentUpon>FlightDetail.xaml</DependentUpon>
@@ -1538,7 +1538,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Product\Flights\FlightCheckout.xaml">
+    <Page Include="Product\Flights\FlightCheckoutArg.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
