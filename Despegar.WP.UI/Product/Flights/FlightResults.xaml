@@ -20,44 +20,47 @@
 	
     <Page.Resources>
 	<conv:StringConverter x:Key="stringFormatConverter"  />
+        <!--<CollectionViewSource x:Name="cvsFlights" IsSourceGrouped="True" Source="{Binding Items}" ItemsPath="{Binding RoutesCustom}"/>-->
+        <CollectionViewSource x:Name="cvsFlights" Source="{Binding Items}" IsSourceGrouped="False" ItemsPath="{Binding Items.RoutesCustom}">
+            
+        </CollectionViewSource>
 
         <DataTemplate x:Key="FlightItemDateTemplate" >
-            <Grid >
+            <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="80"/>
+                    <RowDefinition Height="{StaticResource Block2p}"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="50"/>
-                    <ColumnDefinition Width="500"/>
+                    <ColumnDefinition Width="{StaticResource Block2p}"/>
+                    <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
-				<!--<Grid Grid.Column="0">
-					<Image  HorizontalAlignment="Left" Height="Auto"  VerticalAlignment="Top" Width="Auto"/>
-				</Grid> //-->
-				<Grid Style="{StaticResource IconWhite}">
-					<Image Grid.Column="0" Source="{Binding airline.code, Converter={StaticResource stringFormatConverter}, ConverterParameter='/Assets/Icon/Airlines/ag_{0}logo@2x.png'}" Style="{StaticResource FlightDetailAirlineImage}"  />
+                <Grid Grid.Column="0">
+                    <Image  HorizontalAlignment="Left" Height="Auto"  VerticalAlignment="Top" Width="Auto"/>
+                </Grid>
+                <Grid Grid.Column="0" Style="{StaticResource IconWhite}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="Auto" Height="Auto" >
+					<Image Source="{Binding airline.code, Converter={StaticResource stringFormatConverter}, ConverterParameter='/Assets/Icon/Airlines/ag_{0}logo@2x.png'}" Style="{StaticResource FlightDetailAirlineImage}" Width="Auto" Height="Auto"  />
 				</Grid>
-                <StackPanel Grid.Column="1"  HorizontalAlignment="Left" Height="Auto"  VerticalAlignment="Top" Margin="10,0,0,0">
-                    <TextBlock TextWrapping="Wrap" Text="{Binding airline.name}" Style="{StaticResource BaseText}" />
-					<TextBlock HorizontalAlignment="Right" TextWrapping="Wrap" Text="{Binding price}" VerticalAlignment="Top" Style="{StaticResource BaseText}" />
-
-					
-                    <StackPanel HorizontalAlignment="Left" Height="24" VerticalAlignment="Top" Width="46" Orientation="Horizontal">
-                    	<TextBlock TextWrapping="Wrap" Text="{Binding outbound.Count}" Style="{StaticResource BaseText}" Height="25" Margin="0,0,-0.167,0"/>
-                        <TextBlock TextWrapping="Wrap" x:Uid="Page_Result_Available_Flights" Height="25"  Style="{StaticResource SegoeLight24}" />
+                <StackPanel Grid.Column="1"  HorizontalAlignment="Left" Height="Auto"  VerticalAlignment="Top" Margin="{StaticResource Left_Offset}" >
+                    <TextBlock TextWrapping="Wrap" Text="{Binding airline.name}" Style="{StaticResource SegoeRegular15}" Foreground="#FF319FDA"  />
+                    <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding price}" VerticalAlignment="Top" Style="{StaticResource SegoeRegular17}" />
+                    
+                    <StackPanel Height="24" VerticalAlignment="Top" Orientation="Horizontal">
+                    	<TextBlock TextWrapping="Wrap" Text="{Binding outbound.Count}" Style="{StaticResource SegoeRegular15}" Height="25" />
+                        <TextBlock TextWrapping="Wrap" x:Uid="Page_Result_Available_Flights" Height="25"  Style="{StaticResource SegoeRegular15}" Margin="{StaticResource Left_Offset}" />
                     </StackPanel>
 					
                 </StackPanel>
-                <ItemsControl x:Name="RoutesItemControl"  Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" ItemsSource="{Binding RoutesCustom}" DataContext="{Binding}" Visibility="Collapsed">
+                <ItemsControl x:Name="RoutesItemControl"  Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" ItemsSource="{Binding RoutesCustom}" DataContext="{Binding}" Visibility="Collapsed" d:IsHidden="True">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                             <Grid Tapped="Grid_Tapped">
                                 <Grid.RowDefinitions>
-                                    <RowDefinition Height="50"/>
-                                    <RowDefinition/>
+                                    <RowDefinition Height="{StaticResource Block2p}"/>
+                                    <RowDefinition Height="{StaticResource Block2p}"/>
                                 </Grid.RowDefinitions>
                                 <UI:RouteItemControl DataContext="{Binding outbound}" d:IsHidden="True"/>
-                                <UI:RouteItemControl Height="50" x:Name="routeItemControl" Grid.Row="1" DataContext="{Binding inbound}" d:IsHidden="True" >
+                                <UI:RouteItemControl x:Name="routeItemControl" Grid.Row="1" DataContext="{Binding inbound}" d:IsHidden="True" >
                                     <Interactivity:Interaction.Behaviors>
                                         <Core:DataTriggerBehavior Value="-1" Binding="{Binding choice}" >
                                             <Core:ChangePropertyAction PropertyName="Visibility">
@@ -75,7 +78,77 @@
             </Grid>
 
         </DataTemplate>
+
+
+        <!--<DataTemplate x:Key="FlightItemDateTemplate">
+            <Grid >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="{StaticResource Block2p}"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="{StaticResource Block2p}"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <ItemsControl x:Name="RoutesItemControl"  Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" ItemsSource="{Binding RoutesCustom}" DataContext="{Binding}" >
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Tapped="Grid_Tapped">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="{StaticResource Block2p}"/>
+                                    <RowDefinition Height="{StaticResource Block2p}"/>
+                                </Grid.RowDefinitions>
+                                <UI:RouteItemControl DataContext="{Binding outbound}" d:IsHidden="True"/>
+                                <UI:RouteItemControl x:Name="routeItemControl" Grid.Row="1" DataContext="{Binding inbound}" d:IsHidden="True" >
+                                    <Interactivity:Interaction.Behaviors>
+                                        <Core:DataTriggerBehavior Value="-1" Binding="{Binding choice}" >
+                                            <Core:ChangePropertyAction PropertyName="Visibility">
+                                                <Core:ChangePropertyAction.Value>
+                                                    <Visibility>Collapsed</Visibility>
+                                                </Core:ChangePropertyAction.Value>
+                                            </Core:ChangePropertyAction>
+                                        </Core:DataTriggerBehavior>
+                                    </Interactivity:Interaction.Behaviors>
+                                </UI:RouteItemControl>
+                            </Grid>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </Grid>
+
+        </DataTemplate>-->
+        
+        <DataTemplate x:Key="HeaderTemplateListView">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="{StaticResource Block2p}"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="{StaticResource Block2p}"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0" Style="{StaticResource IconWhite}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="Auto" Height="Auto" >
+                    <Image Source="{Binding airline.code, Converter={StaticResource stringFormatConverter}, ConverterParameter='/Assets/Icon/Airlines/ag_{0}logo@2x.png'}" Style="{StaticResource FlightDetailAirlineImage}" Width="Auto" Height="Auto"  />
+                </Grid>
+                <StackPanel Grid.Column="1"  HorizontalAlignment="Left" Height="Auto"  VerticalAlignment="Top" Margin="{StaticResource Left_Offset}" >
+                    <TextBlock TextWrapping="Wrap" Text="{Binding airline.name}" Style="{StaticResource SegoeRegular15}" Foreground="#FF319FDA"  />
+                    <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding price}" VerticalAlignment="Top" Style="{StaticResource SegoeRegular17}" />
+
+                    <StackPanel Height="24" VerticalAlignment="Top" Orientation="Horizontal">
+                        <TextBlock TextWrapping="Wrap" Text="{Binding outbound.Count}" Style="{StaticResource SegoeRegular15}" Height="25" />
+                        <TextBlock TextWrapping="Wrap" x:Uid="Page_Result_Available_Flights" Height="25"  Style="{StaticResource SegoeRegular15}" Margin="{StaticResource Left_Offset}" />
+                    </StackPanel>
+
+                </StackPanel>
+            </Grid>
+        </DataTemplate>
+        
+        
     </Page.Resources>
+	<Page.Background>
+		<ImageBrush AlignmentX="Left" AlignmentY="Top" ImageSource="ms-appx:/Assets/WindowsPhone_Background_480x800.png" Stretch="UniformToFill"/>
+	</Page.Background>
     <Page.BottomAppBar>
         <CommandBar ClosedDisplayMode="Minimal">
             <AppBarButton x:Name="appBarFilter" Icon="Filter" x:Uid="AppBarButton_Filters" >
@@ -125,13 +198,24 @@
             <TextBlock />
         </Grid>
         <Grid Grid.Row="2" x:Name="ContentRoot" Width="Auto"  >
-            <ListBox Background="Transparent" Height="360" x:Name="lbFlights" ItemTemplate="{StaticResource FlightItemDateTemplate}" ItemsSource="{Binding Items}"  Tapped="ListBox_Tapped" HorizontalContentAlignment="Stretch" ScrollViewer.VerticalScrollBarVisibility="Visible" Margin="2,0,-2,0" >
+            <!--<ListBox Background="Transparent" Height="360" x:Name="lbFlights" ItemTemplate="{StaticResource FlightItemDateTemplate}" ItemsSource="{Binding Items}"  Tapped="ListBox_Tapped" HorizontalContentAlignment="Stretch" ScrollViewer.VerticalScrollBarVisibility="Visible" Margin="2,0,-2,0" >
                 <ListBox.ItemContainerTransitions>
                     <TransitionCollection>
                         <EntranceThemeTransition FromVerticalOffset="100" FromHorizontalOffset="0"/>
                     </TransitionCollection>
                 </ListBox.ItemContainerTransitions>
-            </ListBox>
+            </ListBox>-->
+
+
+            <ListView Tapped="ListBox_Tapped" ItemTemplate="{StaticResource FlightItemDateTemplate}"  ItemsSource="{Binding Source={StaticResource cvsFlights}}"  DataContext="{Binding}" Background="Transparent" Height="360" x:Name="lbFlights"  HorizontalContentAlignment="Stretch" ScrollViewer.VerticalScrollBarVisibility="Visible" Margin="32,0,24,0" > 
+                <ListView.ItemContainerTransitions>
+                    <TransitionCollection>
+                        <EntranceThemeTransition FromVerticalOffset="100" FromHorizontalOffset="0"/>
+                    </TransitionCollection>
+                </ListView.ItemContainerTransitions>
+            </ListView>
+
+
         </Grid>
 
     </Grid>
