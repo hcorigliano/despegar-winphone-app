@@ -357,9 +357,6 @@
   <data name="Page_Flight_Detail_Buy.Text" xml:space="preserve">
     <value>Comprar</value>
   </data>
-  <data name="Page_Flight_Detail_Cancel.Text" xml:space="preserve">
-    <value>Cancelar</value>
-  </data>
   <data name="Page_Flight_Detail_TimeWait.Text" xml:space="preserve">
     <value>Conexion con espera de</value>
   </data>

@@ -26,8 +26,8 @@
                     <ColumnDefinition Width="{StaticResource Block6}"></ColumnDefinition>
                     <ColumnDefinition></ColumnDefinition>
                 </Grid.ColumnDefinitions>-->
-        <Button Grid.Row="1" Style="{StaticResource ButtonBottomCheckout}" Click="OnButtonClicked" HorizontalAlignment="Center" VerticalAlignment="Bottom" x:Uid="Buy_Button"></Button>
-            <!--</Grid>-->
+        <Button Grid.Row="1" Style="{StaticResource ButtonBottomRed}" Click="OnButtonClicked" x:Uid="Buy_Button" />
+        <!--</Grid>-->
         <!--</StackPanel>-->
     </Grid>
 </Page>

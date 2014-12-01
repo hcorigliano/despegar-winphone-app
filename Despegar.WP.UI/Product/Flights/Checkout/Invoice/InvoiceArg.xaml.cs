@@ -37,7 +37,10 @@ namespace Despegar.WP.UI.Product.Flights.Checkout.Invoice
             {
                 //address_state.ItemsSource = await flightCheckoutModel.GetStates("AR");
             }
-            catch { }
+            catch 
+            {
+ 
+            }
         }
 
         private async void FlightsTextBlock_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
