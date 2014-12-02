@@ -35,12 +35,14 @@
     <Color x:Key="Blue20">#013D93</Color>
     <Color x:Key="Blue40">#014EC0</Color>
     <Color x:Key="Blue60">#1D77FE</Color>
-    <Color x:Key="Blue80">#019FDA</Color>
+    <Color x:Key="Blue80">#319FDA</Color>
     <Color x:Key="Blue100">#66CCFF</Color>
     <Color x:Key="Blue120">#B5CBFC</Color>
     <Color x:Key="Blue140">#BAE8FF</Color>
     <Color x:Key="Green20">#008C23</Color>
     <Color x:Key="Green40">#1ECB3F</Color>
+
+    
 
     <!-- ===================== Measure Constants ===================== -->
     <!-- Base Grid Measures-->
@@ -349,6 +351,11 @@
         <Setter Property="Foreground" Value="{StaticResource WhiteBrush}" />
     </Style>
 
+    <!-- Checkbox -->
+    
+    <Style x:Key="CheckboxBase" TargetType="CheckBox" >
+        <Setter Property="BorderBrush" Value="{StaticResource Blue20Brush}" />
+    </Style>
     <!-- AutoSuggestBox -->
     <Style x:Key="AutosuggestBoxBase" TargetType="AutoSuggestBox">
         <Setter Property="Height" Value="39.2" />
@@ -869,6 +876,19 @@
     <Style x:Key="DetailCheckoutTotal" TargetType="TextBlock" BasedOn="{StaticResource SegoeLight24}">
         <Setter Property="Height" Value="{StaticResource dBlock1p}" />
         <Setter Property="Foreground" Value="{StaticResource Yellow20}" />
+    </Style>
+    <Style x:Key="DetailCheckoutTerms" TargetType="TextBlock" BasedOn="{StaticResource SegoeRegular15}">
+        <Setter Property="Height" Value="{StaticResource dBlock1p}" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
+        <Setter Property="Margin" Value="0,8,0,0" />
+    </Style>
+    <Style x:Key="DetailCheckoutTermsButton" TargetType="TextBlock" BasedOn="{StaticResource SegoeRegular15}">
+        <Setter Property="Height" Value="{StaticResource dBlock1p}" />
+        <Setter Property="Foreground" Value="{StaticResource Blue80 }" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
+        <Setter Property="Margin" Value="0,8,0,0" />
     </Style>
     <Style x:Key="DetailCheckoutTotalPrice" TargetType="TextBlock" BasedOn="{StaticResource SegoeLight24}">
         <Setter Property="Height" Value="{StaticResource dBlock1p}" />
