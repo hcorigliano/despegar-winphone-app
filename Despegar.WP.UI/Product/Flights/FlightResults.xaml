@@ -26,6 +26,7 @@
         </CollectionViewSource>
 
         <DataTemplate x:Key="FlightItemDateTemplate" >
+            <StackPanel Margin="{StaticResource Top_Offset}">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="{StaticResource Block2p}"/>
@@ -35,14 +36,14 @@
                     <ColumnDefinition Width="{StaticResource Block2p}"/>
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
-                <Grid Grid.Column="0">
+                <!--<Grid Grid.Column="0">
                     <Image  HorizontalAlignment="Left" Height="Auto"  VerticalAlignment="Top" Width="Auto"/>
-                </Grid>
+                </Grid>-->
                 <Grid Grid.Column="0" Style="{StaticResource IconWhite}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="Auto" Height="Auto" >
 					<Image Source="{Binding airline.code, Converter={StaticResource stringFormatConverter}, ConverterParameter='/Assets/Icon/Airlines/ag_{0}logo@2x.png'}" Style="{StaticResource FlightDetailAirlineImage}" Width="Auto" Height="Auto"  />
 				</Grid>
                 <StackPanel Grid.Column="1"  HorizontalAlignment="Left" Height="Auto"  VerticalAlignment="Top" Margin="{StaticResource Left_Offset}" >
-                    <TextBlock TextWrapping="Wrap" Text="{Binding airline.name}" Style="{StaticResource SegoeRegular15}" Foreground="#FF319FDA"  />
+                    <TextBlock TextWrapping="Wrap" Text="{Binding airline.name}" Style="{StaticResource SegoeLight24}" Foreground="#FF319FDA"  />
                     <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding price}" VerticalAlignment="Top" Style="{StaticResource SegoeRegular17}" />
                     
                     <StackPanel Height="24" VerticalAlignment="Top" Orientation="Horizontal">
@@ -51,7 +52,11 @@
                     </StackPanel>
 					
                 </StackPanel>
-                <ItemsControl x:Name="RoutesItemControl"  Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" ItemsSource="{Binding RoutesCustom}" DataContext="{Binding}" Visibility="Collapsed" d:IsHidden="True">
+                
+                
+            </Grid>
+
+                <ItemsControl x:Name="RoutesItemControl" ItemsSource="{Binding RoutesCustom}" DataContext="{Binding}" Visibility="Collapsed" d:IsHidden="True" Margin="{StaticResource Top_Offset}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                             <Grid Tapped="Grid_Tapped">
@@ -60,7 +65,7 @@
                                     <RowDefinition Height="{StaticResource Block2p}"/>
                                 </Grid.RowDefinitions>
                                 <UI:RouteItemControl DataContext="{Binding outbound}" d:IsHidden="True"/>
-                                <UI:RouteItemControl x:Name="routeItemControl" Grid.Row="1" DataContext="{Binding inbound}" d:IsHidden="True" >
+                                <UI:RouteItemControl  x:Name="routeItemControl" Grid.Row="1" DataContext="{Binding inbound}" d:IsHidden="True" >
                                     <Interactivity:Interaction.Behaviors>
                                         <Core:DataTriggerBehavior Value="-1" Binding="{Binding choice}" >
                                             <Core:ChangePropertyAction PropertyName="Visibility">
@@ -75,8 +80,15 @@
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
-            </Grid>
 
+
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="{StaticResource Block1p}"></RowDefinition>
+                    </Grid.RowDefinitions>
+                </Grid>
+            </StackPanel>
+            
         </DataTemplate>
 
 
