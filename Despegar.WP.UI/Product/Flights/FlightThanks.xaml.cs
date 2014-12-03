@@ -1,4 +1,6 @@
 ﻿using Despegar.WP.UI.Common;
+using Despegar.WP.UI.Model.Interfaces;
+using Despegar.WP.UI.Model.ViewModel.Classes.Flights;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -67,6 +69,8 @@ namespace Despegar.WP.UI.Product.Flights
         /// session.  The state will be null the first time a page is visited.</param>
         private void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
         {
+            FlightsCrossParameter crossParameters = e.NavigationParameter as FlightsCrossParameter;
+            DataContext = crossParameters;
         }
 
         /// <summary>
@@ -107,5 +111,10 @@ namespace Despegar.WP.UI.Product.Flights
         }
 
         #endregion
+
+        private void GoToHome(object sender, RoutedEventArgs e)
+        {
+            Navigator.Instance.GoTo(ViewModelPages.Home, null);
+        }
     }
 }

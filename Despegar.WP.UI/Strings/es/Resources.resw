@@ -525,4 +525,22 @@
   <data name="Buy_Buy_conditions.Text" xml:space="preserve">
     <value>condiciones de compra</value>
   </data>
+  <data name="Common_Booking_Detail.Text" xml:space="preserve">
+    <value>Detalle de reserva</value>
+  </data>
+  <data name="Flight_Thanks.Text" xml:space="preserve">
+    <value>muchas gracias</value>
+  </data>
+  <data name="Flight_Thanks_Continue_Explain.Text" xml:space="preserve">
+    <value>Su pago está siendo procesado. Una vez que el pago se procese exitosamente recibirá un e-mail con la información de compra.</value>
+  </data>
+  <data name="Flight_Thanks_How_Continue.Text" xml:space="preserve">
+    <value>¿Cómo continúa el proceso de compra?</value>
+  </data>
+  <data name="Flight_Thanks_Request_Is.Text" xml:space="preserve">
+    <value>Su número de solicitud de compra es:</value>
+  </data>
+  <data name="Generic_Acept.Content" xml:space="preserve">
+    <value>Aceptar</value>
+  </data>
 </root>

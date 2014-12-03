@@ -1,5 +1,5 @@
 ﻿<UserControl
-    x:Class="Despegar.WP.UI.Controls.Flights.FlightSegment"
+    x:Class="Despegar.WP.UI.Controls.Flights.Detail.FlightSegment"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:Despegar.WP.UI.Controls.Flights"

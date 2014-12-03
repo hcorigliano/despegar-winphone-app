@@ -5,7 +5,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
 
-namespace Despegar.WP.UI.Controls.Flights
+namespace Despegar.WP.UI.Controls.Flights.Detail
 {
     public sealed partial class FlightSegment : UserControl
     {

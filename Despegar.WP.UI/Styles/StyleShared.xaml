@@ -58,6 +58,7 @@
     <GridLength x:Key="Block2">49.6</GridLength>  <!-- (Square + offset) x2-->
     <x:Double x:Key="dBlock2">49.6</x:Double> 
     <GridLength x:Key="Block2p">59.2</GridLength>
+    <x:Double x:Key="dBlock2p">59.2</x:Double>
     <GridLength x:Key="Block3">79.2</GridLength>
     <GridLength x:Key="Block3p">88.8</GridLength>
     <x:Double x:Key="dBlock3">79.2</x:Double>
@@ -816,6 +817,35 @@
     </Style>
     <Style x:Key="CountryButtonItemContainer" TargetType="ListViewItem">
         <Setter Property="Padding" Value="{StaticResource Bottom_Offset}" />
+    </Style>
+    <!-- Thanks Page -->
+    <Style x:Key="Thanks_PageHeader" TargetType="TextBlock" BasedOn="{StaticResource SegoeSemilight54}">
+        <Setter Property="Height" Value="{StaticResource dBlock2p}" />
+    </Style>
+    <Style x:Key="Thanks_Request_Is" TargetType="TextBlock" BasedOn="{StaticResource SegoeSemilight24}">
+        <Setter Property="Height" Value="{StaticResource dBlock1p}" />
+        <Setter Property="Opacity" Value="0.6" />
+    </Style>
+    <Style x:Key="Thanks_Request" TargetType="TextBlock" BasedOn="{StaticResource SegoeLight28}">
+        <Setter Property="Height" Value="{StaticResource dBlock1p}" />
+        <Setter Property="Foreground" Value="{StaticResource Blue80}" />
+    </Style>
+    <Style x:Key="Thanks_How_Continue" TargetType="TextBlock" BasedOn="{StaticResource SegoeSemilight17}">
+        <Setter Property="Height" Value="{StaticResource dBlock1p}" />
+        <Setter Property="Opacity" Value="0.6" />
+    </Style>
+    <Style x:Key="Thanks_Continue_Explain" TargetType="TextBlock" BasedOn="{StaticResource SegoeRegular15}">
+        <Setter Property="Height" Value="{StaticResource dBlock1p}" />
+        <Setter Property="Opacity" Value="0.6" />
+        <Setter Property="TextWrapping" Value="Wrap" />
+    </Style>
+    <Style x:Key="Thanks_Booking_Detail" TargetType="TextBlock" BasedOn="{StaticResource SegoeLight24}">
+        <Setter Property="Height" Value="{StaticResource dBlock1p}" />
+        <Setter Property="Foreground" Value="{StaticResource Blue80}" />
+    </Style>
+    <Style x:Key="Thanks_Button" TargetType="Button" BasedOn="{StaticResource ButtonBase}">
+        <Setter Property="Height" Value="{StaticResource dBlock1p}" />
+        <Setter Property="Width" Value="{StaticResource dBlock10p}" />
     </Style>
     <!-- Flights Details-->
     <Style x:Key="FlightDetailAirlineImage" TargetType="Image" BasedOn="{StaticResource IconBigImageBase}">

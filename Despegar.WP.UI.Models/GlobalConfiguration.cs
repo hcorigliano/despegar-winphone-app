@@ -39,7 +39,7 @@ namespace Despegar.WP.UI.Model
             //GlobalConfiguration.CoreContext.AddMock(MockKey.FlightCitiesAutocompleteBue);
             //GlobalConfiguration.CoreContext.AddMock(MockKey.ItinerarieBueToLax);
 
-            CoreContext.EnableMock(MockKey.BookingFieldBuetoMia);
+            //CoreContext.EnableMock(MockKey.BookingFieldBuetoMia);
 
             //CoreContext.EnableMock(MockKey.BookingFieldsBueLaxChildInfant);
             CoreContext.EnableMock(MockKey.CountriesDefault);

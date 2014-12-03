@@ -39,8 +39,7 @@ namespace Despegar.Core.Business.Dynamics
 
         public static object ToDynamic(BookingFields bookingFields)
         {
-            //TODO: Estos son los datos minimos para hacer una compra de un vuelo en Arg.
-            bookingFields = FillBookingFields(bookingFields);
+            //bookingFields = FillBookingFields(bookingFields);
 
             dynamic result = new ExpandoObject();
             result.form = new ExpandoObject();
@@ -124,16 +123,19 @@ namespace Despegar.Core.Business.Dynamics
             bookingFields.form.payment.installment.card_code.coreValue = "VI";
             bookingFields.form.payment.installment.card_type.coreValue = "CREDIT";
             bookingFields.form.payment.installment.quantity.coreValue = "1";
-            bookingFields.form.payment.invoice.address.city_id.coreValue = "6585";
-            bookingFields.form.payment.invoice.address.country.coreValue = "AR";
-            bookingFields.form.payment.invoice.address.department.coreValue = "A";
-            bookingFields.form.payment.invoice.address.number.coreValue = "1234";
-            bookingFields.form.payment.invoice.address.postal_code.coreValue = "7777";
-            bookingFields.form.payment.invoice.address.state.coreValue = "B";
-            bookingFields.form.payment.invoice.address.street.coreValue = "La Calle";
-            bookingFields.form.payment.invoice.fiscal_id.coreValue = "20121231238";
-            bookingFields.form.payment.invoice.fiscal_name.coreValue = "RazonSocial";
-            bookingFields.form.payment.invoice.fiscal_status.coreValue = "INSCR";
+            if (bookingFields.form.payment.invoice != null)
+            {
+                bookingFields.form.payment.invoice.address.city_id.coreValue = "6585";
+                bookingFields.form.payment.invoice.address.country.coreValue = "AR";
+                bookingFields.form.payment.invoice.address.department.coreValue = "A";
+                bookingFields.form.payment.invoice.address.number.coreValue = "1234";
+                bookingFields.form.payment.invoice.address.postal_code.coreValue = "7777";
+                bookingFields.form.payment.invoice.address.state.coreValue = "B";
+                bookingFields.form.payment.invoice.address.street.coreValue = "La Calle";
+                bookingFields.form.payment.invoice.fiscal_id.coreValue = "20121231238";
+                bookingFields.form.payment.invoice.fiscal_name.coreValue = "RazonSocial";
+                bookingFields.form.payment.invoice.fiscal_status.coreValue = "INSCR";
+            }
             bookingFields.form.payment.installment.complete_card_code.coreValue = "VI";
             return bookingFields;
         }

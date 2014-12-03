@@ -1,0 +1,51 @@
+﻿<UserControl
+    x:Class="Despegar.WP.UI.Controls.Flights.Detail.FlightsSegmentReturn"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Despegar.WP.UI.Controls.Flights.Detail"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:src="using:Despegar.WP.UI.Controls.Flights.Detail"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="{StaticResource Block2p}"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Route Header -->
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="{StaticResource Block2p}"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.Column="0" Style="{StaticResource IconBlueBig}">
+                <Image Style="{StaticResource FlightDetailAirlineReturnImage}" />
+            </Grid>
+
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="{StaticResource Block1p}" />
+                    <RowDefinition Height="{StaticResource Square}" />
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Row="0" Text="{Binding from.city}" Style="{StaticResource FlightReturnSegmentTitle}" />
+                <TextBlock Grid.Row="1" Text="{Binding to.city}" Style="{StaticResource FlightSegmentSmallText}"  />
+            </Grid>
+        </Grid>
+
+        <!-- Inbound Segments -->
+        <ItemsControl Grid.Row="1" x:Name="SegmentControlInbound" ItemsSource="{Binding segments}">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <src:FlightSegment IsReturn="true" />
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+
+    </Grid>
+</UserControl>
