@@ -30,8 +30,8 @@
 
         <!-- Content -->
         <Pivot Grid.Row="2" Style="{StaticResource PivotBaseMain}" x:Name="MainPivot">
-            
-            <PivotItem x:Uid="Page_Flight_Detail_Go" Header="ida" Style="{StaticResource PivotItemBase}" DataContext="{Binding OutModel}">
+
+            <PivotItem x:Uid="Page_Flight_Detail_Go" Header="ida" Style="{StaticResource PivotItemBase}" DataContext="{Binding CrossParameters.Outbound}">
                 <ScrollViewer>
                     <Grid>                                                
                         <Grid.RowDefinitions>
@@ -76,7 +76,7 @@
                 </ScrollViewer>
             </PivotItem>
 
-            <PivotItem x:Name="ReturnPivot" x:Uid="Page_Flight_Detail_Return" Header="vuelta" Style="{StaticResource PivotItemBase}" DataContext="{Binding InModel}">
+            <PivotItem x:Name="ReturnPivot" x:Uid="Page_Flight_Detail_Return" Header="vuelta" Style="{StaticResource PivotItemBase}" DataContext="{Binding CrossParameters.Inbound}">
                 <ScrollViewer>
                     <Grid>
                         <Grid.RowDefinitions>

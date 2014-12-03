@@ -54,6 +54,11 @@
                 <ComboBox Style="{StaticResource ComboBoxBase}"  x:Name="document" ItemsSource="{Binding document.type.options}" DisplayMemberPath="description" SelectedValue="{Binding document.type.coreValue, Mode=TwoWay}" SelectedValuePath="value"></ComboBox>
             </StackPanel>
 
+            <StackPanel Style="{StaticResource TextBoxInputContainer}" Visibility="{Binding document.required,Converter={StaticResource VisibilityConverter}}">
+                <TextBlock Style="{StaticResource BaseTextLabel}" x:Uid="Passager_Document_Number" Text="Numero de documento"></TextBlock>
+                <TextBox Style="{StaticResource CheckoutInputBase}" x:Name="document_number" Text="{Binding document.number.coreValue,Mode=TwoWay}"></TextBox>
+            </StackPanel>
+
             <StackPanel Style="{StaticResource TextBoxInputContainer}" Visibility="{Binding birthdate.required,Converter={StaticResource VisibilityConverter}}">
                 <TextBlock Style="{StaticResource BaseTextLabel}" x:Uid="Passager_Birthdate" Text="Fecha de nacimiento"></TextBlock>
                 <DatePicker Style="{StaticResource DatePickerBase}" x:Name="birthdate" Height="auto" Date="{Binding birthdate.coreValue , Mode=TwoWay , Converter={StaticResource DateToStringConverter}}"></DatePicker>

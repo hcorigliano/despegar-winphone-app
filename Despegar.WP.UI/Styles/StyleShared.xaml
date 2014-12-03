@@ -62,6 +62,10 @@
     <x:Double x:Key="dBlock3p">88.8</x:Double>
     <GridLength x:Key="Block4">118.4</GridLength>
     <GridLength x:Key="Block4p">108.8</GridLength>
+    <GridLength x:Key="Block5">138.4</GridLength>
+    <GridLength x:Key="Block5p">148</GridLength>
+    <x:Double x:Key="dBlock5">138.4</x:Double>
+    <x:Double x:Key="dBlock5p">148</x:Double>
     <GridLength x:Key="Block6">168</GridLength>
     <GridLength x:Key="Block6p">177.6</GridLength>
     <x:Double x:Key="dBlock9p">276</x:Double>
@@ -96,6 +100,11 @@
     </Style>
     <Style x:Key="SegoeRegular15" TargetType="TextBlock" BasedOn="{StaticResource BaseText}">
         <Setter Property="FontSize" Value="12" />
+        <Setter Property="FontWeight" Value="Normal" />
+        <Setter Property="Opacity" Value="0.6" />
+    </Style>
+    <Style x:Key="SegoeRegular17" TargetType="TextBlock" BasedOn="{StaticResource BaseText}">
+        <Setter Property="FontSize" Value="12.9" />
         <Setter Property="FontWeight" Value="Normal" />
         <Setter Property="Opacity" Value="0.6" />
     </Style>

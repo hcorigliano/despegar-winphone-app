@@ -15,6 +15,8 @@ using Despegar.Core.Business.Enums;
 using Despegar.Core.Business;
 using Despegar.Core.IService;
 using System.Collections.Generic;
+using Despegar.WP.UI.Model.ViewModel.Classes.Flights;
+using Despegar.WP.UI.Model.Classes.Flights;
 
 namespace Despegar.WP.UI.Product.Flights
 {
@@ -27,6 +29,7 @@ namespace Despegar.WP.UI.Product.Flights
         private ObservableDictionary defaultViewModel = new ObservableDictionary();
         private FlightResultsModel flightResultModel = new FlightResultsModel();
         private FlightSearchModel flightSearchModel = new FlightSearchModel();
+        private FlightsCrossParameter flightCrossParameter = new FlightsCrossParameter();
 
         public FlightResults()
         {
@@ -216,7 +219,9 @@ namespace Despegar.WP.UI.Product.Flights
             Grid grid = sender as Grid;
             if (grid!=null)
             {
-                OldPagesManager.GoTo(typeof(FlightDetail), grid.DataContext);
+                flightCrossParameter.Inbound = ((RoutesItems)grid.DataContext).inbound;
+                flightCrossParameter.Outbound = ((RoutesItems)grid.DataContext).outbound;
+                OldPagesManager.GoTo(typeof(FlightDetail), flightCrossParameter);
             }
         }
 
@@ -244,26 +249,28 @@ namespace Despegar.WP.UI.Product.Flights
 
         private void ListBox_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            ListBox listbox = sender as ListBox;
-            ListBoxItem listboxitem;
+            ListView listview = sender as ListView;
+            ListViewItem listviewitem;
             int index = 0;
 
-            if (listbox == null)
+            if (listview == null)
                 return;
             
-            index = listbox.SelectedIndex;
+            index = listview.SelectedIndex;
 
             if (index == -1) return;
 
-            listboxitem = listbox.ContainerFromIndex(index) as ListBoxItem;
-            if (listboxitem == null) 
+            listviewitem = listview.ContainerFromIndex(index) as ListViewItem;
+            if (listviewitem == null) 
                 return;
 
             //ItemsControl itemsControl = FindDescendant<ItemsControl>(listboxitem);
-            ItemsControl itemsControl = FindChildControl<ItemsControl>(listboxitem, "RoutesItemControl") as ItemsControl;
+            ItemsControl itemsControl = FindChildControl<ItemsControl>(listviewitem, "RoutesItemControl") as ItemsControl;
 
             if (itemsControl == null) 
                 return;
+
+            flightCrossParameter.FlightId = ((BindableItem)listview.SelectedItem).id;
 
             itemsControl.Visibility = SetVisualEffect(itemsControl.Visibility);
         }
