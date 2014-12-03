@@ -165,6 +165,22 @@ namespace Despegar.WP.UI.Model
         }
 
 
+        public string SelectedCurrency
+        {
+            get
+            {
+                if (this.Currencies == null) return String.Empty;
+
+                var _cur = this.Currencies.values.Where(x => x.selected == true).FirstOrDefault();
+
+                if (_cur == null)
+                    return String.Empty;
+
+
+                return ((Value)_cur).label;
+            }
+        }
+
 
         public void Clear()
         {

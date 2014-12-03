@@ -117,6 +117,7 @@
     <Compile Include="Common\Converter\CheckoutConverters.cs" />
     <Compile Include="Common\Converter\StyleColorResultConverter.cs" />
     <Compile Include="Common\Converter\StyleConverter.cs" />
+    <Compile Include="Common\Converter\TimeDurationConverter.cs" />
     <Compile Include="Common\Converter\VisibilityProConverter.cs" />
     <Compile Include="Common\IPopupContent.cs" />
     <Compile Include="Common\Navigator.cs" />
@@ -880,6 +881,7 @@
     <Content Include="Assets\Icon\Airlines\ag_z8logo%402x.png" />
     <Content Include="Assets\Icon\Airlines\ag_zelogo%402x.png" />
     <Content Include="Assets\Icon\Airlines\ag_zzlogo%402x.png" />
+    <Content Include="Assets\Icon\App\arrow-left-small-white.png" />
     <Content Include="Assets\Icon\App\arrow-right-small-white.png" />
     <Content Include="Assets\Icon\App\bell-large-white.png" />
     <Content Include="Assets\Icon\App\calendar-medium-white.png" />

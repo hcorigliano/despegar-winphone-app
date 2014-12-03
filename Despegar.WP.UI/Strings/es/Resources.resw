@@ -522,4 +522,10 @@
   <data name="Generic_Go_Return" xml:space="preserve">
     <value>ida y vuelta</value>
   </data>
+  <data name="Generic_Hs.Text" xml:space="preserve">
+    <value>hs</value>
+  </data>
+  <data name="Generic_Mins.Text" xml:space="preserve">
+    <value>min</value>
+  </data>
 </root>
