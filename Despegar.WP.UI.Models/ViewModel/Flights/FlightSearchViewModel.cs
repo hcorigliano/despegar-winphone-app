@@ -158,6 +158,7 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
 
                 try
                 {
+                    UpdatePassengers();
                     FlightsItineraries intineraries = await flightService.GetItineraries(coreSearchModel);
 
                     var pageParameters = new PageParameters();

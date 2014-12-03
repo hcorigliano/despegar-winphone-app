@@ -87,7 +87,7 @@
 
                 <StackPanel Style="{StaticResource TextBoxInputContainer}" Visibility="{Binding address.state.required,Converter={StaticResource VisibilityConverter}}" >
                     <TextBlock Style="{StaticResource BaseTextLabel}" x:Uid="Invoice_Arg_State" Text="Provincia"></TextBlock>
-                    <ComboBox Style="{StaticResource ComboBoxBase}" x:Name="address_state"  DisplayMemberPath="name" SelectedValue="{Binding address.state.coreValue, Mode=TwoWay}" SelectedValuePath="code"  SelectionChanged="FiscalStatus_Changed" ></ComboBox>
+                    <ComboBox Style="{StaticResource ComboBoxBase}" x:Name="address_state"  DisplayMemberPath="name" SelectedValue="{Binding address.state.coreValue, Mode=TwoWay}" SelectedValuePath="id"  SelectionChanged="FiscalStatus_Changed" ></ComboBox>
                 </StackPanel>
 
 
