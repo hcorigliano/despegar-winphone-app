@@ -122,6 +122,12 @@
     <Compile Include="Common\IPopupContent.cs" />
     <Compile Include="Common\Navigator.cs" />
     <Compile Include="Common\OldPagesManager.cs" />
+    <Compile Include="Controls\Flights\Detail\FlightsSegmentGo.xaml.cs">
+      <DependentUpon>FlightsSegmentGo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Flights\Detail\FlightsSegmentReturn.xaml.cs">
+      <DependentUpon>FlightsSegmentReturn.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Loading.xaml.cs">
       <DependentUpon>Loading.xaml</DependentUpon>
     </Compile>
@@ -152,7 +158,7 @@
     <Compile Include="Controls\Flights\DateControlSimple.xaml.cs">
       <DependentUpon>DateControlSimple.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Flights\FlightSegment.xaml.cs">
+    <Compile Include="Controls\Flights\Detail\FlightSegment.xaml.cs">
       <DependentUpon>FlightSegment.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\Flights\QuantityPassagersControl.xaml.cs">
@@ -265,6 +271,14 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Strings\AppResources.cs" />
     <Page Include="Controls\Flights\DateControlSimple.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Flights\Detail\FlightsSegmentGo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Flights\Detail\FlightsSegmentReturn.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -1448,7 +1462,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\Flights\FlightSegment.xaml">
+    <Page Include="Controls\Flights\Detail\FlightSegment.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
