@@ -249,28 +249,28 @@ namespace Despegar.WP.UI.Product.Flights
 
         private void ListBox_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            ListBox listbox = sender as ListBox;
-            ListBoxItem listboxitem;
+            ListView listview = sender as ListView;
+            ListViewItem listviewitem;
             int index = 0;
 
-            if (listbox == null)
+            if (listview == null)
                 return;
             
-            index = listbox.SelectedIndex;
+            index = listview.SelectedIndex;
 
             if (index == -1) return;
 
-            listboxitem = listbox.ContainerFromIndex(index) as ListBoxItem;
-            if (listboxitem == null) 
+            listviewitem = listview.ContainerFromIndex(index) as ListViewItem;
+            if (listviewitem == null) 
                 return;
 
             //ItemsControl itemsControl = FindDescendant<ItemsControl>(listboxitem);
-            ItemsControl itemsControl = FindChildControl<ItemsControl>(listboxitem, "RoutesItemControl") as ItemsControl;
+            ItemsControl itemsControl = FindChildControl<ItemsControl>(listviewitem, "RoutesItemControl") as ItemsControl;
 
             if (itemsControl == null) 
                 return;
 
-            flightCrossParameter.FlightId = ((BindableItem)listbox.SelectedItem).id;
+            flightCrossParameter.FlightId = ((BindableItem)listview.SelectedItem).id;
 
             itemsControl.Visibility = SetVisualEffect(itemsControl.Visibility);
         }

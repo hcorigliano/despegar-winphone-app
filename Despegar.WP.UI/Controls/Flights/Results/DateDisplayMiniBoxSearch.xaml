@@ -26,10 +26,10 @@
 		<Grid Grid.Column="0" Style="{StaticResource IconBlue}">
 			<Image Style="{StaticResource CalendarIconResult}"/>
 		</Grid>
-		<Grid Grid.Column="1" HorizontalAlignment="Left" Height="Auto" VerticalAlignment="Top" Width="Auto" Margin="0,6,0,0" >
-			<TextBlock Text="{Binding LocalDateTime.Day, Mode=OneWay}"  />
-			<TextBlock Text="{Binding LocalDateTime.Month, ConverterLanguage=es, Converter={StaticResource GetMonthName}}" Margin="30,0,0,0"/>
-			<TextBlock Text="{Binding LocalDateTime.Year}" Margin="70,0,0,0"/>
-		</Grid>       
+		<StackPanel Grid.Column="1" HorizontalAlignment="Left" Height="Auto" VerticalAlignment="Top" Width="Auto" Orientation="Horizontal" >
+            <TextBlock Text="{Binding LocalDateTime.Day, Mode=OneWay}" Style="{StaticResource SegoeLight28}" />
+            <TextBlock Text="{Binding LocalDateTime.Month, ConverterLanguage=es, Converter={StaticResource GetMonthName}}" Margin="{StaticResource Left_Offset}" Style="{StaticResource SegoeLight28}"/>
+            <TextBlock Text="{Binding LocalDateTime.Year}" Margin="{StaticResource Left_Offset}" Style="{StaticResource SegoeLight28}"/>
+		</StackPanel>       
     </Grid>
 </UserControl>

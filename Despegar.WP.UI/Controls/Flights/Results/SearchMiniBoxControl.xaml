@@ -27,15 +27,15 @@
         </Grid.ChildrenTransitions>
 
         <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition Height="30"/>
-            <RowDefinition/>
-            <RowDefinition Height="30"/>
+            <RowDefinition Height="{StaticResource Block2}" />
+            <RowDefinition Height="{StaticResource TwoColumnMiddleSpacing}"/>
+            <RowDefinition Height="{StaticResource Block2}" />
+            <RowDefinition Height="{StaticResource TwoColumnMiddleSpacing}"/>
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="73*" />
-            <ColumnDefinition Width="77*"/>
+            <ColumnDefinition Width="{StaticResource Block6p}" />
+            <ColumnDefinition Width="{StaticResource Block6p}"/>
         </Grid.ColumnDefinitions>
 
         <Interactivity:Interaction.Behaviors>
@@ -51,9 +51,9 @@
         <src:GoReturnPanelMiniBoxSearch x:Name="SearchedFlight" Grid.Column="0" DataContext="{Binding}" Margin="0,0,0.167,0.333"  />
         <src:DateDisplayMiniBoxSearch x:Name="SearchedGoDate" Grid.Column="1" DataContext="{Binding DepartureDate}" Margin="1.333,0,0,0"/>
         <src:DateDisplayMiniBoxSearch x:Name="SearchedReturnDate" Grid.Column="1" Grid.Row="2" DataContext="{Binding DestinationDate}" Margin="1.333,0,0,0"/>
-        <src:PaxCounterMiniBoxSearch x:Name="SearchedPax" Grid.Column="0" Grid.Row="1" DataContext="{Binding}" Margin="0,29.667,-0.833,3" Grid.RowSpan="3" />
-        <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="37,8,0,0" Grid.Row="1" TextWrapping="Wrap" Text="{Binding PageMode, Converter={StaticResource TextGoReturnConverter}}" VerticalAlignment="Top" Height="13" Width="100"/>
-        <TextBlock x:Name="textBlock" Grid.Column="1" HorizontalAlignment="Left" Margin="37,8,0,0" Grid.Row="3" TextWrapping="Wrap" Text="{Binding PageMode, Converter={StaticResource TextMultipleConverter}}" VerticalAlignment="Top" Height="13" Width="100"/>
+        <src:PaxCounterMiniBoxSearch x:Name="SearchedPax" Grid.Column="0" Grid.Row="2" DataContext="{Binding}" />
+        <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="37,26,0,0" Grid.Row="0" TextWrapping="Wrap" Text="{Binding PageMode, Converter={StaticResource TextGoReturnConverter}}" VerticalAlignment="Top" Height="13" Width="100" Style="{StaticResource SegoeRegular15}"/>
+        <TextBlock x:Name="textBlock" Grid.Column="1" HorizontalAlignment="Left" Margin="37,26,0,0" Grid.Row="2" TextWrapping="Wrap" Text="{Binding PageMode, Converter={StaticResource TextMultipleConverter}}" VerticalAlignment="Top" Height="13" Width="100" Style="{StaticResource SegoeRegular15}"/>
 
     </Grid>
 </UserControl>

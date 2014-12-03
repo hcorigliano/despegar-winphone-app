@@ -24,9 +24,9 @@
 
         <StackPanel Grid.Column="1" Orientation="Vertical">
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="{Binding OriginFlight}"/>
-                <TextBlock Text="-"/>
-                <TextBlock Text="{Binding DestinationFlight}"/>
+                <TextBlock Text="{Binding OriginFlight}" Style="{StaticResource SegoeLight28}"/>
+                <TextBlock Text="-" Style="{StaticResource SegoeLight28}"/>
+                <TextBlock Text="{Binding DestinationFlight}" Style="{StaticResource SegoeLight28}"/>
             </StackPanel>
 			<!--<Grid HorizontalAlignment="Left" >
 				<Grid.ColumnDefinitions>
@@ -37,8 +37,8 @@
                 <TextBlock x:Uid="Page_FlightResult_Flight" Grid.Column="1"/>
 			</Grid>-->
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="{Binding TotalFlights}" />
-                <TextBlock x:Uid="Page_FlightResult_Flight" />
+                <TextBlock Text="{Binding TotalFlights}" Style="{StaticResource SegoeRegular15}"/>
+                <TextBlock Margin="{StaticResource Left_Offset}" x:Uid="Page_FlightResult_Flight" Style="{StaticResource SegoeRegular15}"/>
             </StackPanel>
         </StackPanel>
         

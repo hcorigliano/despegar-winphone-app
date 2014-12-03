@@ -301,19 +301,19 @@
     <value>Las mejores ofertas</value>
   </data>
   <data name="Generic_Go" xml:space="preserve">
-    <value>Ida</value>
+    <value>ida</value>
   </data>
   <data name="Flights_Search_SearchButton.Content" xml:space="preserve">
     <value>Buscar vuelos</value>
   </data>
   <data name="Generic_Multiple" xml:space="preserve">
-    <value>Multiple</value>
+    <value>múltiple</value>
   </data>
   <data name="Flights_Search_Departure" xml:space="preserve">
     <value>Partida</value>
   </data>
   <data name="Generic_Return" xml:space="preserve">
-    <value>Vuelta</value>
+    <value>vuelta</value>
   </data>
   <data name="Flights_Search_Destination" xml:space="preserve">
     <value>Destino</value>
@@ -521,6 +521,9 @@
   </data>
   <data name="Buy_Acept_Conditions.Text" xml:space="preserve">
     <value>Lei y acepto las</value>
+  </data>
+  <data name="Generic_Go_Return" xml:space="preserve">
+    <value>ida y vuelta</value>
   </data>
   <data name="Buy_Buy_conditions.Text" xml:space="preserve">
     <value>condiciones de compra</value>
