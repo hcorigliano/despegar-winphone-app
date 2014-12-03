@@ -52,6 +52,7 @@
     <Compile Include="Configuration\Domain.cs" />
     <Compile Include="Configuration\Product.cs" />
     <Compile Include="Configuration\Site.cs" />
+    <Compile Include="Configuration\UpaField.cs" />
     <Compile Include="Configuration\UpdateFields.cs" />
     <Compile Include="Culture\Site.cs" />
     <Compile Include="Dynamics\DynamicFlightBookingFieldsToPost.cs" />

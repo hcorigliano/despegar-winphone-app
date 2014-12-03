@@ -9,6 +9,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
+using Windows.Security.ExchangeActiveSyncProvisioning;
 
 // The Blank Application template is documented at http://go.microsoft.com/fwlink/?LinkId=391641
 
@@ -29,6 +30,7 @@ namespace Despegar.WP.UI
         {
             this.InitializeComponent();
             this.Suspending += this.OnSuspending;
+
 
             // Initialize Core
             GlobalConfiguration.InitCore();
