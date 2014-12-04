@@ -7,9 +7,11 @@ namespace Despegar.Core.Business.Flight.BookingFields
 {
     public class Quantity
     {
+        // MAPI Fields
         public bool required { get; set; }
         public string data_type { get; set; }
-        public string coreValue { get; set; }
-        public bool corePostEnable { get; set; }
+        // Custom
+        public string CoreValue { get; set; }
+        public bool CorePostEnable { get; set; }
     }
 }

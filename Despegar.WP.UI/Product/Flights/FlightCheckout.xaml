@@ -35,7 +35,7 @@
             
             <!-- Passengers -->
             <PivotItem x:Uid="Flight_Checkout_Passagers" Style="{StaticResource PivotItemBase}" xmlns:src="using:Despegar.WP.UI.Product.Flights.Checkout.Passegers">
-                <src:Passengers x:Name="PassengersControl" />
+                <src:Passengers  />
             </PivotItem>
 
             <!--Contact Pivot-->

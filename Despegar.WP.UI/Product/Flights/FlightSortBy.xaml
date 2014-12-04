@@ -13,18 +13,29 @@
         <DataTemplate x:Key="FlightSortByDateTemplate">
             <Grid>
                 <RadioButton GroupName="FlightSortByGroup" Content="{Binding label}" HorizontalAlignment="Left" VerticalAlignment="Top" IsChecked="{Binding selected ,Mode=TwoWay}"/>
+                <!--Style="{StaticResource SegoeLight24}"-->
 			</Grid>
         </DataTemplate>
     </Page.Resources>
-	<Page.BottomAppBar>
-		<CommandBar>
-			<AppBarButton Icon="Accept" Label="Aceptar" Click="AppBarButton_Click"/>
+    <Page.BottomAppBar>
+        <CommandBar>
+            <AppBarButton Icon="Accept" Label="Aceptar" Click="AppBarButton_Click"/>
             <AppBarButton Icon="Cancel" Label="Cancelar" Click="AppBarCancelButton_Click" Name="AppBarCancelButton" />
-		</CommandBar>
-	</Page.BottomAppBar>
+        </CommandBar>
+    </Page.BottomAppBar>
 
+    <Grid Style="{StaticResource MainContainerGrid}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="{StaticResource Block1p}"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
 
-    <ListView Name="lvSelection" DataContext="{Binding Mode=TwoWay}" ItemTemplate="{StaticResource FlightSortByDateTemplate}" ItemsSource="{Binding values}" IsItemClickEnabled="True">
+        <!-- Title Panel -->
+        <Image Grid.Row="0" Style="{StaticResource TopLogo}" />
+        <TextBlock Grid.Row="1" Style="{StaticResource PageHeaderSmall}" Text="Order" FontFamily="Segoe WP Semibold" />
         
+    <ListView Grid.Row="2" Name="lvSelection" DataContext="{Binding Mode=TwoWay}" ItemTemplate="{StaticResource FlightSortByDateTemplate}" ItemsSource="{Binding values}" IsItemClickEnabled="True">
     </ListView>
+    </Grid>
 </Page>

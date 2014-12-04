@@ -6,7 +6,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:Interactivity="using:Microsoft.Xaml.Interactivity" xmlns:Core="using:Microsoft.Xaml.Interactions.Core"
     x:Class="Despegar.WP.UI.Product.Flights.FlightDetail"
-    xmlns:src="using:Despegar.WP.UI.Controls.Flights"
+    xmlns:src="using:Despegar.WP.UI.Controls.Flights.Detail"
     xmlns:dev="using:Despegar.WP.UI.Developer.Controls"
     mc:Ignorable="d"
     Style="{StaticResource BasePage}">
@@ -30,92 +30,16 @@
 
         <!-- Content -->
         <Pivot Grid.Row="2" Style="{StaticResource PivotBaseMain}" x:Name="MainPivot">
-            
-            <PivotItem x:Uid="Page_Flight_Detail_Go" Header="ida" Style="{StaticResource PivotItemBase}" DataContext="{Binding OutModel}">
+
+            <PivotItem x:Uid="Page_Flight_Detail_Go" Header="ida" Style="{StaticResource PivotItemBase}" DataContext="{Binding CrossParameters.Outbound}">
                 <ScrollViewer>
-                    <Grid>                                                
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="{StaticResource Block2p}"/>
-                            <RowDefinition Height="*"/>
-                        </Grid.RowDefinitions>
-
-                        <!-- DEV -->
-                        <!--<dev:UserControlDesignGrid />-->
-                        
-                        <!-- Route Header -->
-                        <Grid Grid.Row="0">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="{StaticResource Block2p}" />
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
-
-                            <Grid Grid.Column="0" Style="{StaticResource IconGreenBig}">
-                                <Image Style="{StaticResource FlightDetailAirlineImage}" />
-                            </Grid>
-
-                            <Grid Grid.Column="1">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="{StaticResource Block1p}" />
-                                    <RowDefinition Height="{StaticResource Square}" />
-                                </Grid.RowDefinitions>
-
-                                <TextBlock Grid.Row="0" Text="{Binding Path=from.city}" Style="{StaticResource FlightDetailTitleGreen}" />
-                                <TextBlock Grid.Row="1" Text="{Binding Path=to.city}" Style="{StaticResource FlightSegmentSmallText}"  />
-                            </Grid>
-                        </Grid>
-
-                        <!-- Outbound Segments -->
-                        <ItemsControl Grid.Row="1"  x:Name="SegmentControlOutbound" ItemsSource="{Binding segments}">
-                            <ItemsControl.ItemTemplate>
-                                <DataTemplate>
-                                    <src:FlightSegment IsReturn="false" />
-                                </DataTemplate>
-                            </ItemsControl.ItemTemplate>
-                        </ItemsControl>
-                    </Grid>
+                    <src:FlightsSegmentGo DataContext="{Binding}"/>
                 </ScrollViewer>
             </PivotItem>
 
-            <PivotItem x:Name="ReturnPivot" x:Uid="Page_Flight_Detail_Return" Header="vuelta" Style="{StaticResource PivotItemBase}" DataContext="{Binding InModel}">
+            <PivotItem x:Name="ReturnPivot" x:Uid="Page_Flight_Detail_Return" Header="vuelta" Style="{StaticResource PivotItemBase}" DataContext="{Binding CrossParameters.Inbound}">
                 <ScrollViewer>
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="{StaticResource Block2p}"/>
-                            <RowDefinition Height="*"/>
-                        </Grid.RowDefinitions>
-
-                        <!-- Route Header -->
-                        <Grid Grid.Row="0">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="{StaticResource Block2p}"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-
-                            <Grid Grid.Column="0" Style="{StaticResource IconLightBlueBig}">
-                                <Image Style="{StaticResource FlightDetailAirlineReturnImage}" />
-                            </Grid>
-                            
-                            <Grid Grid.Column="1">
-                             <Grid.RowDefinitions>
-                                <RowDefinition Height="{StaticResource Block1p}" />
-                                <RowDefinition Height="{StaticResource Square}" />
-                             </Grid.RowDefinitions>
-
-                                <TextBlock Grid.Row="0" Text="{Binding from.city}" Style="{StaticResource FlightReturnSegmentTitle}" />
-                                <TextBlock Grid.Row="1" Text="{Binding to.city}" Style="{StaticResource FlightSegmentSmallText}"  />
-                        </Grid>
-                    </Grid>
-                        
-                       <!-- Inbound Segments -->
-                        <ItemsControl Grid.Row="1" x:Name="SegmentControlInbound" ItemsSource="{Binding segments}">
-						<ItemsControl.ItemTemplate>
-							<DataTemplate>
-                                  <src:FlightSegment IsReturn="true" />
-							</DataTemplate>
-						</ItemsControl.ItemTemplate>
-					</ItemsControl>
-                    
-                    </Grid>
+                    <src:FlightsSegmentReturn DataContext="{Binding}"/>
                 </ScrollViewer>
             </PivotItem>
             

@@ -8,7 +8,9 @@
     xmlns:conv="using:Despegar.WP.UI.Common.Converter"
     xmlns:controls="using:Despegar.WP.UI.Controls"
     xmlns:dev="using:Despegar.WP.UI.Developer.Controls"
+    xmlns:src="using:Despegar.WP.UI.Product.Flights.Checkout.Passegers.Controls"
     mc:Ignorable="d"
+    x:Name="passengerControl"
     >
     <UserControl.Resources>
         <conv:VisibilityConverter x:Name="VisibilityConverter" TrueValue="Visible" FalseValue="Collapsed"/>
@@ -52,13 +54,14 @@
                             <!-- Nationality -->
                             <StackPanel Style="{StaticResource TextBoxInputContainer}" Visibility="{Binding nationality.required, Converter={StaticResource VisibilityConverter}}">
                                 <TextBlock Style="{StaticResource BaseTextLabel}" x:Uid="Flights_Checkout_Passenger_Nationality" Text="Nacionalidad" />
-                                <AutoSuggestBox Text="{Binding nationality.DefaultViewValue}" TextBoxStyle="{StaticResource InputBase}" Style="{StaticResource AutosuggestBoxBase}"  x:Name="nationality" TextChanged="Autosuggest_TextChanged" SuggestionChosen="SuggestionChosen" />
+                                <!--<AutoSuggestBox Text="{Binding nationality.DefaultViewValue}" TextBoxStyle="{StaticResource InputBase}" Style="{StaticResource AutosuggestBoxBase}"  x:Name="nationality" TextChanged="Autosuggest_TextChanged" SuggestionChosen="SuggestionChosen" />-->
+                                <src:NationalitySelection x:Name="NationalitySelection" ItemsSource="{Binding DataContext.Countries, ElementName=passengerControl , Mode=TwoWay}" SelectedItem="{Binding nationality.CoreValue , Mode=TwoWay}"  />
                             </StackPanel>
                             <!-- Nro Documento -->
                             <StackPanel Visibility="{Binding document.number.required, Converter={StaticResource VisibilityConverter}}">
                                 <controls:Field x:Uid="Flights_Checkout_Passenger_Document_Number" Value="{Binding document.number.CoreValue, Mode=TwoWay}" />
                                 <controls:ValidationError ErrorPrefix="Flights_Checkout_Passenger_Document_Number" ErrorCode="{Binding document.number.CurrentError}" />
-                            </StackPanel>
+                            </StackPanel>                          
                             <!-- Document Type -->
                             <StackPanel Visibility="{Binding document.type.required, Converter={StaticResource VisibilityConverter}}">
                                 <controls:FieldCombo x:Uid="Flights_Checkout_Passenger_Document_Type"  ItemsSource="{Binding document.type.options}"  Value="{Binding document.type.CoreValue, Mode=TwoWay}" DisplayTextPath="description" CodePath="value" />

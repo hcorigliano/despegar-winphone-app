@@ -118,14 +118,21 @@
     <Compile Include="Common\Converter\StyleColorResultConverter.cs" />
     <Compile Include="Common\Converter\StyleConverter.cs" />
     <Compile Include="Common\Converter\VisibilityConverter.cs" />
+    <Compile Include="Common\Converter\TimeDurationConverter.cs" />
     <Compile Include="Common\IPopupContent.cs" />
     <Compile Include="Common\Navigator.cs" />
     <Compile Include="Common\OldPagesManager.cs" />
     <Compile Include="Controls\Field.xaml.cs">
       <DependentUpon>Field.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Flights\Detail\FlightsSegmentGo.xaml.cs">
+      <DependentUpon>FlightsSegmentGo.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\FieldCombo.xaml.cs">
       <DependentUpon>FieldCombo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Flights\Detail\FlightsSegmentReturn.xaml.cs">
+      <DependentUpon>FlightsSegmentReturn.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\Loading.xaml.cs">
       <DependentUpon>Loading.xaml</DependentUpon>
@@ -133,8 +140,14 @@
     <Compile Include="Controls\NumericField.xaml.cs">
       <DependentUpon>NumericField.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Product\Flights\Checkout\Passegers\Controls\NationalitySelection.xaml.cs">
+      <DependentUpon>NationalitySelection.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\ValidationError.xaml.cs">
       <DependentUpon>ValidationError.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Product\Flights\Checkout\Passegers\Controls\NationalitySelectionPopup.xaml.cs">
+      <DependentUpon>NationalitySelectionPopup.xaml</DependentUpon>
     </Compile>
     <Compile Include="Product\Flights\FlightMultipleEdit.xaml.cs">
       <DependentUpon>FlightMultipleEdit.xaml</DependentUpon>
@@ -157,7 +170,7 @@
     <Compile Include="Controls\Flights\DateControlSimple.xaml.cs">
       <DependentUpon>DateControlSimple.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Flights\FlightSegment.xaml.cs">
+    <Compile Include="Controls\Flights\Detail\FlightSegment.xaml.cs">
       <DependentUpon>FlightSegment.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\Flights\QuantityPassagersControl.xaml.cs">
@@ -281,6 +294,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controls\Flights\Detail\FlightsSegmentGo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Flights\Detail\FlightsSegmentReturn.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\Flights\Results\MiniBoxFlightRoutes.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -330,6 +351,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Product\Flights\Checkout\Invoice\InvoiceArgentina.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Product\Flights\Checkout\Passegers\Controls\NationalitySelection.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Product\Flights\Checkout\Passegers\Controls\NationalitySelectionPopup.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -896,6 +925,9 @@
     <Content Include="Assets\Icon\Airlines\ag_z8logo%402x.png" />
     <Content Include="Assets\Icon\Airlines\ag_zelogo%402x.png" />
     <Content Include="Assets\Icon\Airlines\ag_zzlogo%402x.png" />
+    <Content Include="Assets\Icon\App\arrow-left-small-white.scale-100.png" />
+    <Content Include="Assets\Icon\App\arrow-left-small-white.scale-140.png" />
+    <Content Include="Assets\Icon\App\arrow-left-small-white.scale-240.png" />
     <Content Include="Assets\Icon\App\arrow-right-small-white.scale-100.png" />
     <Content Include="Assets\Icon\App\arrow-right-small-white.scale-140.png" />
     <Content Include="Assets\Icon\App\arrow-right-small-white.scale-240.png" />
@@ -1506,7 +1538,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\Flights\FlightSegment.xaml">
+    <Page Include="Controls\Flights\Detail\FlightSegment.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

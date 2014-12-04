@@ -44,9 +44,11 @@ namespace Despegar.WP.UI.Product.Flights.Checkout.CardData
             {
                 Despegar.Core.Business.Flight.BookingFields.Payment payments = this.DataContext as Despegar.Core.Business.Flight.BookingFields.Payment;
                 payments.installment.bank_code.CoreValue = item.card.bank;
-                payments.installment.quantity.coreValue = item.installments.quantity.ToString();
+                payments.installment.quantity.CoreValue = item.installments.quantity.ToString();
                 payments.installment.card_code.CoreValue = item.card.code;
+                payments.installment.card_code.CoreValue = item.card.company;
                 payments.installment.card_type.CoreValue = item.card.type;
+                payments.installment.complete_card_code.CoreValue = item.card.code;
 
             }
            

@@ -23,7 +23,7 @@ namespace Despegar.WP.UI.Developer
         public DevTools()
         {
             this.InitializeComponent();
-            this.DataContext = Window.Current.Bounds;
+            
 
             // Load State
             ViewModel = new DeveloperViewModel();

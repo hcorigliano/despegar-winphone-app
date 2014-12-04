@@ -11,35 +11,57 @@
     d:DesignWidth="400">
 
     <UserControl.Resources>
+        <Converter:TimeDurationConverterToMins x:Key="TimeDurationConverterToMins"/>
+        <Converter:TimeDurationConverterToHours x:Key="TimeDurationConverterToHours"/>
+        <Converter:StyleColorResultConverter x:Key="StyleColorResultConverter"/>
         <Converter:ImageGoReturnConverter x:Key="ImageGoReturnConverter"/>
         <Converter:StyleConverter x:Key="GridColorConverter" TrueValue="{StaticResource FlightDetailTitleBlue}" FalseValue="{StaticResource FlightDetailTitleGreen}" />
     </UserControl.Resources>
 
     <Grid>
+    	<Grid.RowDefinitions>
+    		<RowDefinition Height="{StaticResource Block1p}"/>
+    		<RowDefinition Height="{StaticResource Block1}"/>
+    	</Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="40"/>
-            <ColumnDefinition Width="30"/>
-            <ColumnDefinition Width="30"/>
-            <ColumnDefinition Width="30"/>
-            <ColumnDefinition Width="30"/>
-            <ColumnDefinition Width="30"/>
-            <ColumnDefinition Width="50"/>
-            <ColumnDefinition Width="100"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="{StaticResource Block1p}"/>
+            <ColumnDefinition Width="{StaticResource Block2p}"/>
+            <ColumnDefinition Width="{StaticResource Block2p}"/>
+            <ColumnDefinition Width="{StaticResource Block1p}"/>
+            <ColumnDefinition Width="{StaticResource Block2p}"/>
+            <ColumnDefinition Width="{StaticResource Block2p}"/>
+            <ColumnDefinition Width="Auto"/>
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
         <!--Style="{Binding IsReturn, ElementName=SegmentControl, Converter={StaticResource textColorConverter}}"-->
-        <Grid Grid.Column="0" >
-            <Image  HorizontalAlignment="Left" Height="30" Width="30" Margin="0,0,0,0" Grid.Row="0" VerticalAlignment="Top" Source="{Binding ConverterParameter='/Assets/Icon/App/flight-{0}-small-white.png', Converter={StaticResource ImageGoReturnConverter}}" />
+        <Grid Grid.Column="0" Style="{Binding Converter={StaticResource StyleColorResultConverter}}">
+            <Image  HorizontalAlignment="Left"  Margin="3,3,3,3" VerticalAlignment="Top" Source="{Binding ConverterParameter='/Assets/Icon/App/flight-{0}-small-white.png', Converter={StaticResource ImageGoReturnConverter}}" />
         </Grid>
-        <TextBlock Grid.Column="1" HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding from.code}" VerticalAlignment="Top"/>
-        <TextBlock Grid.Column="2" HorizontalAlignment="Left" Margin="0,0,0,0" TextWrapping="Wrap" Text="{Binding departure}" VerticalAlignment="Top"/>
-        <Image Grid.Column="3" HorizontalAlignment="Left" Height="50" Margin="0,0,0,0" VerticalAlignment="Top" />
-        <TextBlock Grid.Column="4" HorizontalAlignment="Left" Margin="0,0,0,0" TextWrapping="Wrap" Text="{Binding to.code}" VerticalAlignment="Top"/>
-        <TextBlock Grid.Column="5" HorizontalAlignment="Left" Margin="0,0,0,0" TextWrapping="Wrap" Text="{Binding arrival}" VerticalAlignment="Top"/>
-        <TextBlock Grid.Column="6" HorizontalAlignment="Left" Margin="0,0,0,0" TextWrapping="Wrap" Text="{Binding duration}" VerticalAlignment="Top"/>
-        <TextBlock Grid.Column="7" HorizontalAlignment="Left" Margin="0,0,0,0" TextWrapping="Wrap" Text="{Binding layovers}" VerticalAlignment="Top"/>
-        <TextBlock Grid.Column="7" HorizontalAlignment="Left" Margin="20,0,0,0" TextWrapping="Wrap" VerticalAlignment="Top" x:Uid="Layovers"/>
+        <TextBlock Style="{StaticResource SegoeLight24}" Grid.Column="1" HorizontalAlignment="Left" Margin="{StaticResource Left_Offset}" TextWrapping="Wrap" Text="{Binding from.code}" VerticalAlignment="Top"/>
+        <TextBlock Style="{StaticResource SegoeLight24}" Grid.Column="2" HorizontalAlignment="Left" Margin="0,0,0,0" TextWrapping="Wrap" Text="{Binding departure}" VerticalAlignment="Top">
+            <TextBlock.Foreground>
+                <SolidColorBrush Color="White" Opacity="0.6"/>
+            </TextBlock.Foreground>
+        </TextBlock>
+        <Grid Grid.Column="3" Style="{Binding Converter={StaticResource StyleColorResultConverter}}" >
+            <Image HorizontalAlignment="Left" Margin="3,3,3,3" VerticalAlignment="Top" Source="{Binding ConverterParameter='/Assets/Icon/App/arrow-{0}-small-white.png', Converter={StaticResource ImageGoReturnConverter}}"/>
+		</Grid>
+        <TextBlock Style="{StaticResource SegoeLight24}" Grid.Column="4" HorizontalAlignment="Left" Margin="{StaticResource Left_Offset}" TextWrapping="Wrap" Text="{Binding to.code}" VerticalAlignment="Top"/>
+        <TextBlock Style="{StaticResource SegoeLight24}" Grid.Column="5" HorizontalAlignment="Left" Margin="0,0,0,0" TextWrapping="Wrap" Text="{Binding arrival}" VerticalAlignment="Top">
+            <TextBlock.Foreground>
+                <SolidColorBrush Color="White" Opacity="0.6"/>
+            </TextBlock.Foreground>
+        </TextBlock>
+
+        <StackPanel Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="5" Orientation="Horizontal">
+            <TextBlock Style="{StaticResource SegoeRegular15}"  HorizontalAlignment="Left" Margin="{StaticResource Left_Offset}" TextWrapping="Wrap" Text="{Binding duration, Converter={StaticResource TimeDurationConverterToHours}}" VerticalAlignment="Top" />
+            <TextBlock Style="{StaticResource SegoeRegular15}"   HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" x:Uid="Generic_Hs"/>
+            <TextBlock Style="{StaticResource SegoeRegular15}"  HorizontalAlignment="Left" Margin="{StaticResource Left_Offset}" TextWrapping="Wrap" Text="{Binding duration, Converter={StaticResource TimeDurationConverterToMins}}" VerticalAlignment="Top" />
+            <TextBlock Style="{StaticResource SegoeRegular15}"   HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" x:Uid="Generic_Mins"/>
+            <TextBlock Style="{StaticResource SegoeRegular15}"   HorizontalAlignment="Left" Margin="{StaticResource Left_Offset}" TextWrapping="Wrap" Text="{Binding layovers}" VerticalAlignment="Top"/>
+            <TextBlock Style="{StaticResource SegoeRegular15}"   HorizontalAlignment="Left" Margin="{StaticResource Left_Offset}" TextWrapping="Wrap" VerticalAlignment="Top" x:Uid="Layovers"/>
+        </StackPanel>
+        
 
     </Grid>
 </UserControl>

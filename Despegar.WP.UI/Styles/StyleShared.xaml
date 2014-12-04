@@ -35,12 +35,14 @@
     <Color x:Key="Blue20">#013D93</Color>
     <Color x:Key="Blue40">#014EC0</Color>
     <Color x:Key="Blue60">#1D77FE</Color>
-    <Color x:Key="Blue80">#019FDA</Color>
+    <Color x:Key="Blue80">#319FDA</Color>
     <Color x:Key="Blue100">#66CCFF</Color>
     <Color x:Key="Blue120">#B5CBFC</Color>
     <Color x:Key="Blue140">#BAE8FF</Color>
     <Color x:Key="Green20">#008C23</Color>
     <Color x:Key="Green40">#1ECB3F</Color>
+
+    
 
     <!-- ===================== Measure Constants ===================== -->
     <!-- Base Grid Measures-->
@@ -63,6 +65,10 @@
     <x:Double x:Key="dBlock3p">88.8</x:Double>
     <GridLength x:Key="Block4">118.4</GridLength>
     <GridLength x:Key="Block4p">108.8</GridLength>
+    <GridLength x:Key="Block5">138.4</GridLength>
+    <GridLength x:Key="Block5p">148</GridLength>
+    <x:Double x:Key="dBlock5">138.4</x:Double>
+    <x:Double x:Key="dBlock5p">148</x:Double>
     <GridLength x:Key="Block6">168</GridLength>
     <GridLength x:Key="Block6p">177.6</GridLength>
     <x:Double x:Key="dBlock9p">276</x:Double>
@@ -99,6 +105,11 @@
     </Style>
     <Style x:Key="SegoeRegular15" TargetType="TextBlock" BasedOn="{StaticResource BaseText}">
         <Setter Property="FontSize" Value="15" />
+        <Setter Property="FontWeight" Value="Normal" />
+        <Setter Property="Opacity" Value="0.6" />
+    </Style>
+    <Style x:Key="SegoeRegular17" TargetType="TextBlock" BasedOn="{StaticResource BaseText}">
+        <Setter Property="FontSize" Value="12.9" />
         <Setter Property="FontWeight" Value="Normal" />
         <Setter Property="Opacity" Value="0.6" />
     </Style>
@@ -203,8 +214,13 @@
         <Setter Property="Height" Value="{StaticResource dBlock2}" />
     </Style>
     <Style x:Key="IconBlue" TargetType="Grid" BasedOn="{StaticResource IconBase}">
-        <Setter Property="Background"  Value="{StaticResource Blue20Brush}" />
+        <Setter Property="Background"  Value="{StaticResource Blue40Brush}" />
     </Style>
+    <Style x:Key="IconBlueBig" TargetType="Grid" BasedOn="{StaticResource IconBase}">
+        <Setter Property="Background"  Value="{StaticResource Blue40Brush}" />
+        <Setter Property="Width"  Value="{StaticResource dBlock2}" />
+        <Setter Property="Height" Value="{StaticResource dBlock2}" />
+    </Style>   
     <Style x:Key="IconLightBlue" TargetType="Grid" BasedOn="{StaticResource IconBase}">
         <Setter Property="Background"  Value="{StaticResource Blue40Brush}" />
     </Style>
@@ -366,6 +382,11 @@
         <Setter Property="FontSize" Value="19.2" />
         <Setter Property="CharacterSpacing" Value="-20" />
         <Setter Property="Foreground" Value="{StaticResource WhiteBrush}" />
+    </Style>
+    <!-- Checkbox -->
+    
+    <Style x:Key="CheckboxBase" TargetType="CheckBox" >
+        <Setter Property="BorderBrush" Value="{StaticResource Blue20Brush}" />
     </Style>
     <!-- AutoSuggestBox -->
     <Style x:Key="AutosuggestBoxBase" TargetType="AutoSuggestBox">
@@ -899,7 +920,35 @@
     <Style x:Key="CountryButtonItemContainer" TargetType="ListViewItem">
         <Setter Property="Padding" Value="{StaticResource Bottom_Offset}" />
     </Style>
-    
+    <!-- Thanks Page -->
+    <Style x:Key="Thanks_PageHeader" TargetType="TextBlock" BasedOn="{StaticResource SegoeSemilight54}">
+        <Setter Property="Height" Value="{StaticResource dBlock2p}" />
+    </Style>
+    <Style x:Key="Thanks_Request_Is" TargetType="TextBlock" BasedOn="{StaticResource SegoeSemilight24}">
+        <Setter Property="Height" Value="{StaticResource dBlock1p}" />
+        <Setter Property="Opacity" Value="0.6" />
+    </Style>
+    <Style x:Key="Thanks_Request" TargetType="TextBlock" BasedOn="{StaticResource SegoeLight28}">
+        <Setter Property="Height" Value="{StaticResource dBlock1p}" />
+        <Setter Property="Foreground" Value="{StaticResource Blue80}" />
+    </Style>
+    <Style x:Key="Thanks_How_Continue" TargetType="TextBlock" BasedOn="{StaticResource SegoeSemilight17}">
+        <Setter Property="Height" Value="{StaticResource dBlock1p}" />
+        <Setter Property="Opacity" Value="0.6" />
+    </Style>
+    <Style x:Key="Thanks_Continue_Explain" TargetType="TextBlock" BasedOn="{StaticResource SegoeRegular15}">
+        <Setter Property="Height" Value="{StaticResource dBlock1p}" />
+        <Setter Property="Opacity" Value="0.6" />
+        <Setter Property="TextWrapping" Value="Wrap" />
+    </Style>
+    <Style x:Key="Thanks_Booking_Detail" TargetType="TextBlock" BasedOn="{StaticResource SegoeLight24}">
+        <Setter Property="Height" Value="{StaticResource dBlock1p}" />
+        <Setter Property="Foreground" Value="{StaticResource Blue80}" />
+    </Style>
+    <Style x:Key="Thanks_Button" TargetType="Button" BasedOn="{StaticResource ButtonBase}">
+        <Setter Property="Height" Value="{StaticResource dBlock1p}" />
+        <Setter Property="Width" Value="{StaticResource dBlock10p}" />
+    </Style>
     <!-- Flights Details-->
     <Style x:Key="FlightDetailAirlineImage" TargetType="Image" BasedOn="{StaticResource IconBigImageBase}">
         <Setter Property="Source" Value="/Assets/Icon/App/flight-right-small-white.png" />
@@ -970,6 +1019,19 @@
     <Style x:Key="DetailCheckoutTotal" TargetType="TextBlock" BasedOn="{StaticResource SegoeLight24}">
         <Setter Property="Height" Value="{StaticResource dBlock1p}" />
         <Setter Property="Foreground" Value="{StaticResource Yellow20}" />
+    </Style>
+    <Style x:Key="DetailCheckoutTerms" TargetType="TextBlock" BasedOn="{StaticResource SegoeRegular15}">
+        <Setter Property="Height" Value="{StaticResource dBlock1p}" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
+        <Setter Property="Margin" Value="0,8,0,0" />
+    </Style>
+    <Style x:Key="DetailCheckoutTermsButton" TargetType="TextBlock" BasedOn="{StaticResource SegoeRegular15}">
+        <Setter Property="Height" Value="{StaticResource dBlock1p}" />
+        <Setter Property="Foreground" Value="{StaticResource Blue80 }" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
+        <Setter Property="Margin" Value="0,8,0,0" />
     </Style>
     <Style x:Key="DetailCheckoutTotalPrice" TargetType="TextBlock" BasedOn="{StaticResource SegoeLight24}">
         <Setter Property="Height" Value="{StaticResource dBlock1p}" />

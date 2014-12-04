@@ -3,6 +3,7 @@ using Despegar.WP.UI.Common;
 using Despegar.WP.UI.Controls;
 using Despegar.WP.UI.Model;
 using Despegar.WP.UI.Model.ViewModel;
+using Despegar.WP.UI.Model.ViewModel.Classes.Flights;
 using System;
 using System.ComponentModel;
 using Windows.UI.Xaml;
@@ -20,33 +21,9 @@ namespace Despegar.WP.UI.Product.Flights
         public FlightCheckout()
         {
             this.InitializeComponent();
-
             this.navigationHelper = new NavigationHelper(this);
             this.navigationHelper.LoadState += this.NavigationHelper_LoadState;
-            this.navigationHelper.SaveState += this.NavigationHelper_SaveState;
-
-            // Initialize Checkout Argentina
-            ViewModel = new FlightsCheckoutModel(Navigator.Instance, GlobalConfiguration.CoreContext.GetFlightService(), GlobalConfiguration.CoreContext.GetCommonService(), GlobalConfiguration.CoreContext.GetConfigurationService());
-            ViewModel.PropertyChanged += Checkloading;
-
-            this.DataContext = ViewModel;
-
-            // Init Checkout
-            ViewModel.Init();
-
-            // View Adaptations
-            // TODO CHECK DECOLAR AND SITE
-            if (!ViewModel.InvoiceRequired) 
-            {
-                MainPivot.Items.RemoveAt(4);
-            }
-
-            // Notify to CardData
-            PaymentControl.OnUserControlButtonClicked += CardDataControl.OnUCButtonClicked;
-            //Buycontrol.OnUserControlButtonClicked += this.ValidateAndBuy;
-                       
-            // For fix credit card null value
-            //CardDataControl.DataContext = ViewModel.bookingfields.form.payment;            
+            this.navigationHelper.SaveState += this.NavigationHelper_SaveState;                      
         }
 
         /// <summary>
@@ -68,8 +45,36 @@ namespace Despegar.WP.UI.Product.Flights
         /// <see cref="Frame.Navigate(Type, Object)"/> when this page was initially requested and
         /// a dictionary of state preserved by this page during an earlier
         /// session.  The state will be null the first time a page is visited.</param>
-        private void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
+        private async void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
         {
+            FlightsCrossParameter crossParameters = e.NavigationParameter as FlightsCrossParameter;
+
+            // Initialize Checkout
+            ViewModel = new FlightsCheckoutModel(Navigator.Instance, GlobalConfiguration.CoreContext.GetFlightService(),
+                GlobalConfiguration.CoreContext.GetCommonService(), 
+                GlobalConfiguration.CoreContext.GetConfigurationService(), 
+                crossParameters);
+
+            ViewModel.PropertyChanged += Checkloading;
+            
+
+            // Init Checkout
+            await ViewModel.Init();
+
+            // View Adaptations
+            // TODO CHECK DECOLAR AND SITE
+            if (!ViewModel.InvoiceRequired)
+            {
+                MainPivot.Items.RemoveAt(4);
+            }
+
+            this.DataContext = ViewModel;
+
+            //For fix credit card null value 
+            CardDataControl.DataContext = ViewModel.CoreBookingFields.form.payment;
+
+            // Notify to CardData
+            PaymentControl.OnUserControlButtonClicked += CardDataControl.OnUCButtonClicked;
         }
 
         /// <summary>

@@ -66,10 +66,10 @@
                     <TextBox Style="{StaticResource CheckoutInputBase}" x:Name="owner_name" Text="{Binding card.owner_name.coreValue , Mode=TwoWay}"></TextBox>
                 </StackPanel>
 
-                <!--<StackPanel Visibility="{Binding card.owner_document.type.required,Converter={StaticResource VisibilityConverter}}">
-                    <TextBlock x:Uid="Card_Data_Document"></TextBlock>
-                    <ComboBox x:Name="owner_document_type" ItemsSource="{Binding card.owner_document.type.options}" DisplayMemberPath="description" SelectedValue="{Binding card.owner_document.type.coreValue, Mode=TwoWay}" SelectedValuePath="value"   ></ComboBox>
-                </StackPanel>-->
+                <StackPanel Style="{StaticResource TextBoxInputContainer}" Visibility="{Binding card.owner_document.type.required,Converter={StaticResource VisibilityConverter}}">
+                    <TextBlock Style="{StaticResource BaseTextLabel}" x:Uid="Card_Data_Document" Text="Tipo de Documento"></TextBlock>
+                    <ComboBox Style="{StaticResource ComboBoxBase}" x:Name="owner_document_type" ItemsSource="{Binding card.owner_document.type.options}" DisplayMemberPath="description" SelectedValue="{Binding card.owner_document.type.coreValue, Mode=TwoWay}" SelectedValuePath="value"   ></ComboBox>
+                </StackPanel>
 
                 <StackPanel Style="{StaticResource TextBoxInputContainer}" Visibility="{Binding card.owner_document.number.required,Converter={StaticResource VisibilityConverter}}" >
                     <TextBlock Style="{StaticResource BaseTextLabel}" x:Uid="Card_Data_Number_Document" Text="Numero de documento"></TextBlock>

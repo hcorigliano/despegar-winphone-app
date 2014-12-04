@@ -22,12 +22,12 @@ namespace Despegar.WP.UI.Common.Converter
 
                 if (value.GetType() == typeof(RouteInbound))
                 {
-                    return string.Format(parameter as string, right);
+                    return string.Format(parameter as string, left);
                 }
 
                 if (value.GetType() == typeof(RouteOutbound))
                 {
-                    return string.Format(parameter as string, left);
+                    return string.Format(parameter as string, right);
                 }
             }
 

@@ -298,19 +298,19 @@
     <value>Las mejores ofertas</value>
   </data>
   <data name="Generic_Go" xml:space="preserve">
-    <value>Ida</value>
+    <value>ida</value>
   </data>
   <data name="Flights_Search_SearchButton.Content" xml:space="preserve">
     <value>Buscar vuelos</value>
   </data>
   <data name="Generic_Multiple" xml:space="preserve">
-    <value>Multiple</value>
+    <value>múltiple</value>
   </data>
   <data name="Flights_Search_Departure" xml:space="preserve">
     <value>Partida</value>
   </data>
   <data name="Generic_Return" xml:space="preserve">
-    <value>Vuelta</value>
+    <value>vuelta</value>
   </data>
   <data name="Flights_Search_Destination" xml:space="preserve">
     <value>Destino</value>
@@ -504,44 +504,86 @@
   <data name="Flights_Checkout_Invoice_Arg_fiscal_id.Label" xml:space="preserve">
     <value>Cuit/Cuil</value>
   </data>
+  <data name="Page_Result_Available_Flights.Text" xml:space="preserve">
+    <value>Vuelos Disponibles</value>
+  </data>
   <data name="Flights_Checkout_Invoice_Arg_Fiscal_Status.Label" xml:space="preserve">
-    <value>Situación fiscal</value>
+    <value>Situación fiscal</value>     
+  </data>
+  <data name="Nationality_Selection_Popup_Selection.Text" xml:space="preserve">
+    <value>ELEGIR UNA NACIONALIDAD</value>
   </data>
   <data name="Flights_Checkout_Invoice_Arg_fiscal_id_ERROR_INVALID_CUIT" xml:space="preserve">
     <value>Por favor, verifique el número ingresado</value>
   </data>
+  <data name="Buy_Acept_Conditions.Text" xml:space="preserve">
+    <value>Lei y acepto las</value>
+  </data>
   <data name="Flights_Checkout_Invoice_Arg_fiscal_id_ERROR_REQUIRED" xml:space="preserve">
     <value>Por favor, ingrese el número de CUIL/CUIT</value>
+   </data>
+  <data name="Generic_Go_Return" xml:space="preserve">
+    <value>ida y vuelta</value>
   </data>
   <data name="Flights_Checkout_Invoice_Arg_fiscal_name_ERROR_REQUIRED" xml:space="preserve">
     <value>Por favor ingrese la razon social.</value>
   </data>
+  <data name="Buy_Buy_conditions.Text" xml:space="preserve">
+    <value>condiciones de compra</value>
+  </data>
   <data name="Flights_Checkout_Invoice_Arg_Number_ERROR_REQUIRED" xml:space="preserve">
     <value>Por favor ingrese el número</value>
+  </data>
+  <data name="Common_Booking_Detail.Text" xml:space="preserve">
+    <value>Detalle de reserva</value>
   </data>
   <data name="Flights_Checkout_Invoice_Arg_Postal_Code_ERROR_REQUIRED" xml:space="preserve">
     <value>Por favor ingrese el codigo postal</value>
   </data>
+  <data name="Flight_Thanks.Text" xml:space="preserve">
+    <value>muchas gracias</value>
+  </data>
   <data name="Flights_Checkout_Invoice_Arg_Street_ERROR_REQUIRED" xml:space="preserve">
     <value>Por favor ingrese la calle</value>
+    </data>
+  <data name="Flight_Thanks_Continue_Explain.Text" xml:space="preserve">
+    <value>Su pago está siendo procesado. Una vez que el pago se procese exitosamente recibirá un e-mail con la información de compra.</value>
   </data>
   <data name="Flights_Connect_with_pending" xml:space="preserve">
     <value>Conexión con espera de </value>
+    </data>
+  <data name="Flight_Thanks_How_Continue.Text" xml:space="preserve">
+    <value>¿Cómo continúa el proceso de compra?</value>
   </data>
   <data name="Flights_Checkout_Passenger_Document_Number_ERROR_INVALID_DOCUMENT_NUMBER_DIFFERENT_NUMBERS" xml:space="preserve">
     <value>Documento inválido</value>
+    </data>
+  <data name="Flight_Thanks_Request_Is.Text" xml:space="preserve">
+    <value>Su número de solicitud de compra es:</value>
   </data>
   <data name="Flights_Checkout_Passenger_Document_Number_ERROR_INVALID_DOCUMENT_ONLY_NUMBERS" xml:space="preserve">
     <value>El documento debe ser númerico</value>
+    </data>
+  <data name="Generic_Acept.Content" xml:space="preserve">
+    <value>Aceptar</value>
   </data>
   <data name="Flights_Checkout_Passenger_Document_Number_ERROR_INVALID_LENGTH_BETWEEN7_AND8" xml:space="preserve">
     <value>Documento inválido</value>
+    </data>
+  <data name="Generic_Hs.Text" xml:space="preserve">
+    <value>hs</value>
   </data>
   <data name="Flights_Checkout_Passenger_Document_Number_ERROR_REQUIRED" xml:space="preserve">
     <value>Campo requerido</value>
+    </data>
+  <data name="Generic_Mins.Text" xml:space="preserve">
+    <value>min</value>
   </data>
   <data name="Flights_Checkout_Passenger_First_Name_ERROR_INVALID_LENGTH_MAX28" xml:space="preserve">
     <value>La longtud maxima es 28 caracteres</value>
+    </data>
+  <data name="Page_Filters_Title.Text" xml:space="preserve">
+    <value>Filtros</value>
   </data>
   <data name="Flights_Checkout_Passenger_First_Name_ERROR_INVALID_NAMES" xml:space="preserve">
     <value>Verifique el nombre ingresado</value>

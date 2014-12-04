@@ -1,12 +1,14 @@
 ﻿using Despegar.Core.Business.Common.State;
 using Despegar.Core.Business.Configuration;
 using Despegar.Core.Business.Dynamics;
+using Despegar.Core.Business.Flight.BookingCompletePostResponse;
 using Despegar.Core.Business.Flight.BookingFields;
 using Despegar.Core.IService;
 using Despegar.Core.Log;
 using Despegar.WP.UI.Model.Classes.Flights.Checkout;
 using Despegar.WP.UI.Model.Interfaces;
 using Despegar.WP.UI.Model.ViewModel;
+using Despegar.WP.UI.Model.ViewModel.Classes.Flights;
 using Despegar.WP.UI.Models.Classes;
 using Newtonsoft.Json;
 using System;
@@ -21,11 +23,11 @@ namespace Despegar.WP.UI.Model
     public class FlightsCheckoutModel : ViewModelBase
     {        
         #region ** Private **
-        private INavigator navigator;
+        private INavigator navigator;        
         private IFlightService flightService;
         private ICommonServices commonServices;
         private IConfigurationService configurationService;        
-       
+        private FlightsCrossParameter CrossParameters;
 
         // En DUDA
         private PaymentsFormated CorePaymentFormated;
@@ -69,30 +71,30 @@ namespace Despegar.WP.UI.Model
            {
                return new RelayCommand(() => ValidateAndBuy());
            } 
-        }
-
+        }    
         #endregion
 
-        public FlightsCheckoutModel(INavigator navigator, IFlightService flightServices, ICommonServices commonServices, IConfigurationService configService)
+        public FlightsCheckoutModel(INavigator navigator, IFlightService flightServices, ICommonServices commonServices, IConfigurationService configService, FlightsCrossParameter parameters)
         {
             this.navigator = navigator;
             this.flightService = flightServices;
             this.commonServices = commonServices;
             this.configurationService = configService;
+            this.CrossParameters = parameters;
         }
         
         /// <summary>
         /// Loads the initial required data for the Checkout Form
         /// </summary>
-        public async void Init()
+        public async Task Init()
         {
             IsLoading = true;
-            var currentCountry = GlobalConfiguration.Site;
 
+            string currentCountry = GlobalConfiguration.Site;
             try
             {
                 await GetBookingFields();
-                await LoadCountries();
+                await LoadCountries();           
                 await LoadStates(currentCountry);
 
                 // Format Payments
@@ -153,19 +155,19 @@ namespace Despegar.WP.UI.Model
                 OnPropertyChanged("IsFiscalNameRequired");
             }
         }
-
-        private async Task<BookingFields> GetBookingFields(BookingFieldPost bookingFieldPost)
-        {           
-            return (await flightService.GetBookingFields(bookingFieldPost));
-        }
-
+       
         private async Task GetBookingFields()
-        {
-            // HARDCODE
+        {            
             BookingFieldPost book = new BookingFieldPost();
-            book.inbound_choice = 1;
-            book.outbound_choice = 1;
-            book.itinerary_id = "prism_AR_0_FLIGHTS_A-1_C-0_I-0_RT-BUEMIA20141110-MIABUE20141111_xorigin-api!0!C_1212636001_843603426_-2008006059_1555498055_-278056197_804297563!1,6_1,4_1,5_1,2_1,3_1,1";
+
+            // HARDCODE TEST ARG
+            //book.inbound_choice = 1;
+            //book.outbound_choice = 1;
+            //book.itinerary_id = "prism_AR_0_FLIGHTS_A-1_C-0_I-0_RT-BUEMIA20141110-MIABUE20141111_xorigin-api!0!C_1212636001_843603426_-2008006059_1555498055_-278056197_804297563!1,6_1,4_1,5_1,2_1,3_1,1";
+
+            book.inbound_choice = CrossParameters.Inbound.choice;
+            book.outbound_choice = CrossParameters.Outbound.choice;
+            book.itinerary_id = CrossParameters.FlightId;
 
             CoreBookingFields = await flightService.GetBookingFields(book);
         }
@@ -190,8 +192,7 @@ namespace Despegar.WP.UI.Model
 
         private PaymentsFormated FormatPayments()
         {
-            //TODO: REFACTOR
-            //Payments payments   +  static
+            //TODO: REFACTOR 
             Payments payments = CoreBookingFields.payments; //added line
             PaymentsFormated formated = new PaymentsFormated();
             FillFormatedWithInterest(payments.with_interest, formated.with_interest);
@@ -300,10 +301,16 @@ namespace Despegar.WP.UI.Model
 
         #endregion
 
-        private void ValidateAndBuy() 
+        private async void ValidateAndBuy() 
         {
-            //dynamic objectToSerialize = DynamicFlightBookingFieldsToPost.ToDynamic(this.CoreBookingFields);
-            //CoreBookingFields.form.payment.invoice.address.state.CoreValue = States.Skip(3).FirstOrDefault().id;
+            dynamic objectToSerialize = DynamicFlightBookingFieldsToPost.ToDynamic(this.CoreBookingFields);
+            CrossParameters.price = PriceFormated;
+            CrossParameters.BookingResponse = await flightService.CompleteBooking(objectToSerialize, CoreBookingFields.id);
+            //BookingCompletePostResponse response = await flightService.CompleteBooking(form, "214ecbd4-7964-11e4-8980-fa163ec96567");
+            //TODO : Go to Tks or Risk Questions}
+
+            if (CrossParameters.BookingResponse.booking_status == "checkout_successful")            
+                navigator.GoTo(ViewModelPages.FlightsThanks, CrossParameters);            
         }
     }
 }
