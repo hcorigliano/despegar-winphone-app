@@ -1,5 +1,5 @@
 ﻿<Page
-    x:Class="Despegar.WP.UI.Product.Flights.FlightCheckoutArg"
+    x:Class="Despegar.WP.UI.Product.Flights.FlightCheckout"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:Despegar.WP.UI.Product.Flights"
@@ -49,33 +49,33 @@
             <!--Contact Pivot-->
             <PivotItem x:Uid="Flight_Checkout_Contact" Style="{StaticResource PivotItemBase}">
                 <StackPanel xmlns:src="using:Despegar.WP.UI.Product.Flights.Checkout.Contact">
-                    <src:ContactData x:Name="ContactControl" DataContext="{Binding bookingfields.form.contact}"></src:ContactData>
+                    <src:ContactData x:Name="ContactControl" DataContext="{Binding bookingfields.form.contact}" />
                 </StackPanel>
             </PivotItem>
 
             <!--Payments Pivot-->
             <PivotItem x:Uid="Flight_Checkout_Payments" Style="{StaticResource PivotItemBase}">
                 <StackPanel xmlns:src="using:Despegar.WP.UI.Product.Flights.Checkout.Payment">
-                    <src:Payments x:Name="PaymentControl" DataContext="{Binding PaymentFormated}"></src:Payments>
+                    <src:Payments x:Name="PaymentControl" DataContext="{Binding PaymentFormated}" />
                 </StackPanel>
             </PivotItem>
 
             <!--Card Data Pivot-->
             <PivotItem x:Uid="Flight_Checkout_Card_Data" Style="{StaticResource PivotItemBase}">
                 <StackPanel xmlns:src="using:Despegar.WP.UI.Product.Flights.Checkout.CardData">
-                    <src:CardData x:Name="CardDataControl" DataContext="{Binding bookingfields.form.payment}"></src:CardData>
+                    <src:CardData x:Name="CardDataControl" DataContext="{Binding bookingfields.form.payment}" />
                 </StackPanel>
             </PivotItem>
 
             <!-- Invoice Arg -->
             <PivotItem x:Uid="Flight_Checkout_Invoice_Arg" Style="{StaticResource PivotItemBase}" xmlns:src="using:Despegar.WP.UI.Product.Flights.Checkout.Invoice">
-                <src:InvoiceArg x:Name="InvoiceArgControl"  />
+                <src:InvoiceArgentina x:Name="InvoiceArgControl"  />
             </PivotItem>
 
             <!--Buy-->
             <PivotItem  x:Uid="Flight_Checkout_Buy"  Style="{StaticResource PivotItemBase}">
                 <StackPanel xmlns:src="using:Despegar.WP.UI.Product.Flights.Checkout.Buy">
-                    <src:Buy x:Name="Buycontrol" DataContext="{Binding PriceFormated}"></src:Buy>
+                    <src:Buy x:Name="Buycontrol" />
                 </StackPanel>
             </PivotItem>
 

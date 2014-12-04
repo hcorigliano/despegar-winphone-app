@@ -11,13 +11,13 @@ using Windows.UI.Xaml.Navigation;
 
 namespace Despegar.WP.UI.Product.Flights
 {
-    public sealed partial class FlightCheckoutArg : Page
+    public sealed partial class FlightCheckout : Page
     {
         private NavigationHelper navigationHelper;
-        private FlightsCheckoutModelArg ViewModel;
+        private FlightsCheckoutModel ViewModel;
         private ModalPopup loadingPopup = new ModalPopup(new Loading());
 
-        public FlightCheckoutArg()
+        public FlightCheckout()
         {
             this.InitializeComponent();
 
@@ -26,11 +26,10 @@ namespace Despegar.WP.UI.Product.Flights
             this.navigationHelper.SaveState += this.NavigationHelper_SaveState;
 
             // Initialize Checkout Argentina
-            ViewModel = new FlightsCheckoutModelArg(Navigator.Instance, GlobalConfiguration.CoreContext.GetFlightService(), GlobalConfiguration.CoreContext.GetCommonService(), GlobalConfiguration.CoreContext.GetConfigurationService());
+            ViewModel = new FlightsCheckoutModel(Navigator.Instance, GlobalConfiguration.CoreContext.GetFlightService(), GlobalConfiguration.CoreContext.GetCommonService(), GlobalConfiguration.CoreContext.GetConfigurationService());
             ViewModel.PropertyChanged += Checkloading;
 
             this.DataContext = ViewModel;
-
 
             // Init Checkout
             ViewModel.Init();

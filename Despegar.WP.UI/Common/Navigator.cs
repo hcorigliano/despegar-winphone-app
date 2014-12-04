@@ -54,7 +54,7 @@ namespace Despegar.WP.UI.Common
                     view = typeof(FlightDetail);
                     break;
                 case ViewModelPages.FlightsCheckout:
-                    view = typeof(FlightCheckoutArg);
+                    view = typeof(FlightCheckout);
                     break;
                 case ViewModelPages.FlightsThanks:
                     //view = typeof(FlightsThanks); // TODO uncomment

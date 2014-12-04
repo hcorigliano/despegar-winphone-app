@@ -18,7 +18,7 @@ using System.Windows.Input;
 
 namespace Despegar.WP.UI.Model
 {
-    public class FlightsCheckoutModelArg : ViewModelBase
+    public class FlightsCheckoutModel : ViewModelBase
     {        
         #region ** Private **
         private INavigator navigator;
@@ -26,7 +26,7 @@ namespace Despegar.WP.UI.Model
         private ICommonServices commonServices;
         private IConfigurationService configurationService;        
         public Countries Countries { get; set; }
-        public List<State> ArgentinaStates { get; set; }
+        public List<State> States { get; set; }
 
         // En DUDA
         private PaymentsFormated CorePaymentFormated;
@@ -70,7 +70,7 @@ namespace Despegar.WP.UI.Model
 
         #endregion
 
-        public FlightsCheckoutModelArg(INavigator navigator, IFlightService flightServices, ICommonServices commonServices, IConfigurationService configService)
+        public FlightsCheckoutModel(INavigator navigator, IFlightService flightServices, ICommonServices commonServices, IConfigurationService configService)
         {
             this.navigator = navigator;
             this.flightService = flightServices;
@@ -84,27 +84,20 @@ namespace Despegar.WP.UI.Model
         public async void Init()
         {
             IsLoading = true;
+            var currentCountry = GlobalConfiguration.Site;
 
             try
             {
                 await GetBookingFields();
                 await LoadCountries();
-                ArgentinaStates = await LoadStates();
+                await LoadStates(currentCountry);
 
                 // Format Payments
                 CorePaymentFormated = FormatPayments();
                 CorePriceFormated = PriceFormatedConverter(CoreBookingFields);
-                // Set Known Default Values
-                CoreBookingFields.form.contact.phones[0].country_code.SetDefaultValue();
-                CoreBookingFields.form.contact.phones[0].area_code.SetDefaultValue();
 
-                if (InvoiceRequired)
-                {
-                    CoreBookingFields.form.payment.invoice.fiscal_status.PropertyChanged += Fiscal_status_PropertyChanged;
-
-                    CoreBookingFields.form.payment.invoice.fiscal_status.SetDefaultValue();
-                    CoreBookingFields.form.payment.invoice.address.state.CoreValue = ArgentinaStates.FirstOrDefault().id; // TODO CHECK THIS why does not work
-                }
+                // Set Known Default Values && Adapt Checkout to the country
+                ConfigureCountry(currentCountry);                
             }
             catch (Exception e)
             {
@@ -114,6 +107,25 @@ namespace Despegar.WP.UI.Model
             }
 
             IsLoading = false;
+        }
+
+        private void ConfigureCountry(string countryCode)
+        {
+            switch (countryCode)
+            {
+                case "AR":
+                    if (InvoiceRequired)
+                    {
+                        CoreBookingFields.form.payment.invoice.fiscal_status.PropertyChanged += Fiscal_status_PropertyChanged;
+
+                        CoreBookingFields.form.payment.invoice.fiscal_status.SetDefaultValue();
+                        CoreBookingFields.form.payment.invoice.address.state.CoreValue = States.FirstOrDefault().id; // NOT WORKING, MUST BE DONE AFTER THIS CODE or use A RegularOptionsField (The Source works bad)
+                    }
+
+                    CoreBookingFields.form.contact.phones[0].country_code.SetDefaultValue();
+                    CoreBookingFields.form.contact.phones[0].area_code.SetDefaultValue();
+               break;
+            }
         }
 
         private void Fiscal_status_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
@@ -129,17 +141,6 @@ namespace Despegar.WP.UI.Model
             return (await flightService.GetBookingFields(bookingFieldPost));
         }
 
-        private static async Task<List<CitiesFields>> GetCities(string CountryCode, string Search, string cityresult)
-        {
-            IConfigurationService configurationService = GlobalConfiguration.CoreContext.GetConfigurationService();
-            return await configurationService.AutoCompleteCities(CountryCode, Search, cityresult);
-        }
-
-        private async Task<List<State>> LoadStates()
-        {
-            return (await commonServices.GetStates("AR"));
-        }
-        
         private async Task GetBookingFields()
         {
             // HARDCODE
@@ -154,6 +155,17 @@ namespace Despegar.WP.UI.Model
         private async Task LoadCountries()
         {
             Countries = await configurationService.GetCountries();
+        }
+        
+        private async Task LoadStates(string countryCode)
+        {
+            States = await commonServices.GetStates(countryCode);
+        }
+
+        // Public because it is used from the InvoiceArg control
+        public async Task<List<CitiesFields>> GetCities(string CountryCode, string Search, string cityresult)
+        {            
+            return await configurationService.AutoCompleteCities(CountryCode, Search, cityresult);
         }
 
         #region ** Utils ** 
@@ -272,7 +284,8 @@ namespace Despegar.WP.UI.Model
 
         private void ValidateAndBuy() 
         {
-            dynamic objectToSerialize = DynamicFlightBookingFieldsToPost.ToDynamic(this.CoreBookingFields);
+            //dynamic objectToSerialize = DynamicFlightBookingFieldsToPost.ToDynamic(this.CoreBookingFields);
+            CoreBookingFields.form.payment.invoice.address.state.CoreValue = States.Skip(3).FirstOrDefault().id;
         }
     }
 }

@@ -5,10 +5,12 @@
     xmlns:local="using:Despegar.WP.UI.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:dev="using:Despegar.WP.UI.Developer.Controls"
     mc:Ignorable="d"
     >
 
     <StackPanel Style="{StaticResource CheckoutFieldContainer}">
+        <!--<dev:UserControlDesignGrid />-->
         <TextBlock Style="{StaticResource BaseTextLabel}" Text="{Binding Label}"  />
         <ComboBox x:Name="fieldCombo"
                   ItemsSource="{Binding ItemsSource}" 

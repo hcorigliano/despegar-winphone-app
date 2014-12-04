@@ -1,5 +1,5 @@
 ﻿<UserControl
-    x:Class="Despegar.WP.UI.Product.Flights.Checkout.Invoice.InvoiceArg"
+    x:Class="Despegar.WP.UI.Product.Flights.Checkout.Invoice.InvoiceArgentina"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:Despegar.WP.UI.Product.Flights.Checkout.Invoice"
@@ -86,15 +86,15 @@
 
             <!-- State -->
             <StackPanel Visibility="{Binding address.state.required, Converter={StaticResource VisibilityConverter}}">
-                <controls:FieldCombo x:Uid="Flights_Checkout_Invoice_Arg_State" ItemsSource="{Binding DataContext.ArgentinaStates, ElementName=InvoiceArgControl}"  Value="{Binding address.state.CoreValue, Mode=TwoWay}" CodePath="id" DisplayTextPath="name"  />
+                <controls:FieldCombo x:Uid="Flights_Checkout_Invoice_Arg_State" ItemsSource="{Binding DataContext.States, ElementName=InvoiceArgControl}"  Value="{Binding address.state.CoreValue, Mode=TwoWay}" CodePath="id" DisplayTextPath="name"  />
                 <controls:ValidationError ErrorPrefix="Flights_Checkout_Invoice_Arg_State" ErrorCode="{Binding address.state.CurrentError}"  />
             </StackPanel>
                 
-            <!-- City  TODO: x:Uid="Invoice_Arg_City" -->
-            <!--<StackPanel Style="{StaticResource TextBoxInputContainer}" Visibility="{Binding Address.city_id.required,Converter={StaticResource VisibilityConverter}}" >
-                <TextBlock Style="{StaticResource BaseTextLabel}"  Text="Ciudad"></TextBlock>
-                <AutoSuggestBox  TextBoxStyle="{StaticResource InputBase}" Style="{StaticResource AutosuggestBoxBase}"  DataContext="{Binding}"  x:Name="address_city" TextChanged="FlightsTextBlock_TextChanged" LostFocus="Focus_Lost" SuggestionChosen="SuggestionChosen" TextMemberPath="full_name" ></AutoSuggestBox>
-            </StackPanel>-->
+            <!-- City  TODO:  -->
+            <StackPanel Visibility="{Binding Address.city_id.required, Converter={StaticResource VisibilityConverter}}" >
+                <TextBlock Style="{StaticResource BaseTextLabel}" x:Uid="Flights_Checkout_Invoice_Arg_City" Text="Ciudad" />
+                <AutoSuggestBox TextBoxStyle="{StaticResource InputBase}" Style="{StaticResource AutosuggestBoxBase}" TextChanged="CityTexbox_TextChanged" SuggestionChosen="SuggestionChosen" TextMemberPath="full_name" />
+            </StackPanel>
 
             </StackPanel>
         </ScrollViewer>

@@ -218,8 +218,8 @@
     <Compile Include="Product\Flights\Checkout\Contact\Contact.xaml.cs">
       <DependentUpon>Contact.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Product\Flights\Checkout\Invoice\InvoiceArg.xaml.cs">
-      <DependentUpon>InvoiceArg.xaml</DependentUpon>
+    <Compile Include="Product\Flights\Checkout\Invoice\InvoiceArgentina.xaml.cs">
+      <DependentUpon>InvoiceArgentina.xaml</DependentUpon>
     </Compile>
     <Compile Include="Product\Flights\Checkout\Passegers\Passengers.xaml.cs">
       <DependentUpon>Passengers.xaml</DependentUpon>
@@ -239,8 +239,8 @@
     <Compile Include="Product\Flights\FlightResults.xaml.cs">
       <DependentUpon>FlightResults.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Product\Flights\FlightCheckoutArg.xaml.cs">
-      <DependentUpon>FlightCheckoutArg.xaml</DependentUpon>
+    <Compile Include="Product\Flights\FlightCheckout.xaml.cs">
+      <DependentUpon>FlightCheckout.xaml</DependentUpon>
     </Compile>
     <Compile Include="Product\Flights\FlightDetail.xaml.cs">
       <DependentUpon>FlightDetail.xaml</DependentUpon>
@@ -329,7 +329,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Product\Flights\Checkout\Invoice\InvoiceArg.xaml">
+    <Page Include="Product\Flights\Checkout\Invoice\InvoiceArgentina.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -1538,7 +1538,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Product\Flights\FlightCheckoutArg.xaml">
+    <Page Include="Product\Flights\FlightCheckout.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

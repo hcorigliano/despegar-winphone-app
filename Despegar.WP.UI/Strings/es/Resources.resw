@@ -411,7 +411,7 @@
   <data name="Flight_Checkout_Invoice_Arg.Header" xml:space="preserve">
     <value>factura fiscal</value>
   </data>
-  <data name="Flights_Checkout_Invoice_Arg_City.Label" xml:space="preserve">
+  <data name="Flights_Checkout_Invoice_Arg_City.Text" xml:space="preserve">
     <value>Ciudad</value>
   </data>
   <data name="Flights_Checkout_Invoice_Arg_Department.Label" xml:space="preserve">
