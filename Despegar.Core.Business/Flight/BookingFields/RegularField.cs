@@ -18,7 +18,6 @@ namespace Despegar.Core.Business.Flight.BookingFields
         // Custom
         private string currentError;
         private string coreValue;
-
         public string CoreValue 
         {
             get { return coreValue; }
@@ -35,6 +34,25 @@ namespace Despegar.Core.Business.Flight.BookingFields
         public bool CorePostEnable { get; set; }
         public List<string> Errors { get; set; }
         public string CurrentError { get { return currentError; } set { currentError = value; OnPropertyChanged(); } }
+
+        /// <summary>
+        /// Used for specifyng a FirstTime Value to Bind for the first Time in the View.
+        /// Useful when using AutosuggestBoxes and values of {id, name} pair
+        /// </summary>
+        private string defaultViewValue;
+        public string DefaultViewValue
+        {
+            get { return defaultViewValue; }
+            set
+            {
+                if (defaultViewValue != value)
+                {
+                    defaultViewValue = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
         public bool IsValid
         {
             get
@@ -86,5 +104,8 @@ namespace Despegar.Core.Business.Flight.BookingFields
         {
             this.CoreValue = value != null ? value : String.Empty;
         }
+
+        
+
     }
 }

@@ -25,8 +25,7 @@ namespace Despegar.WP.UI.Model
         private IFlightService flightService;
         private ICommonServices commonServices;
         private IConfigurationService configurationService;        
-        public Countries Countries { get; set; }
-        public List<State> States { get; set; }
+       
 
         // En DUDA
         private PaymentsFormated CorePaymentFormated;
@@ -55,6 +54,10 @@ namespace Despegar.WP.UI.Model
 
         #region ** Public Interface **
         public BookingFields CoreBookingFields { get; set; }
+
+        // Only Invoice Arg fields for now
+        public List<CountryFields> Countries { get; set; }
+        public List<State> States { get; set; }
 
         public bool InvoiceRequired { get { return CoreBookingFields.form.payment.invoice != null; } }
 
@@ -111,16 +114,31 @@ namespace Despegar.WP.UI.Model
 
         private void ConfigureCountry(string countryCode)
         {
+            // Common
+            foreach (var passanger in CoreBookingFields.form.passengers)
+            {
+                passanger.document.type.SetDefaultValue();
+                passanger.gender.SetDefaultValue();
+            }
+
+            // Country Specific
             switch (countryCode)
             {
                 case "AR":
+                    foreach (var passanger in CoreBookingFields.form.passengers)
+                    {
+                        passanger.nationality.CoreValue = "AR";
+                        passanger.nationality.DefaultViewValue = "Argentina";
+                    }
+                   
+                    // Invoice Arg
                     if (InvoiceRequired)
                     {
                         CoreBookingFields.form.payment.invoice.fiscal_status.PropertyChanged += Fiscal_status_PropertyChanged;
 
                         CoreBookingFields.form.payment.invoice.fiscal_status.SetDefaultValue();
                         CoreBookingFields.form.payment.invoice.address.state.CoreValue = States.FirstOrDefault().id; // NOT WORKING, MUST BE DONE AFTER THIS CODE or use A RegularOptionsField (The Source works bad)
-                    }
+                    }                    
 
                     CoreBookingFields.form.contact.phones[0].country_code.SetDefaultValue();
                     CoreBookingFields.form.contact.phones[0].area_code.SetDefaultValue();
@@ -154,7 +172,7 @@ namespace Despegar.WP.UI.Model
 
         private async Task LoadCountries()
         {
-            Countries = await configurationService.GetCountries();
+            Countries = (await configurationService.GetCountries()).countries;
         }
         
         private async Task LoadStates(string countryCode)
@@ -285,7 +303,7 @@ namespace Despegar.WP.UI.Model
         private void ValidateAndBuy() 
         {
             //dynamic objectToSerialize = DynamicFlightBookingFieldsToPost.ToDynamic(this.CoreBookingFields);
-            CoreBookingFields.form.payment.invoice.address.state.CoreValue = States.Skip(3).FirstOrDefault().id;
+            //CoreBookingFields.form.payment.invoice.address.state.CoreValue = States.Skip(3).FirstOrDefault().id;
         }
     }
 }

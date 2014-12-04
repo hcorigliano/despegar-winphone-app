@@ -225,13 +225,13 @@
   <data name="Page_FlightResult_Flight.Text" xml:space="preserve">
     <value>Vuelos</value>
   </data>
-  <data name="Passager_First_Name.Text" xml:space="preserve">
+  <data name="Flights_Checkout_Passenger_First_Name.Label" xml:space="preserve">
     <value>Nombre</value>
   </data>
   <data name="Page_FlightResult_Passangers.Text" xml:space="preserve">
     <value>Pasajeros</value>
   </data>
-  <data name="Passager_Last_Name.Text" xml:space="preserve">
+  <data name="Flights_Checkout_Passenger_Last_Name.Label" xml:space="preserve">
     <value>Apellido</value>
   </data>
   <data name="Generic_Child" xml:space="preserve">
@@ -240,19 +240,19 @@
   <data name="Generic_Infant" xml:space="preserve">
     <value>Bebé</value>
   </data>
-  <data name="Passager_Birthdate.Text" xml:space="preserve">
+  <data name="Flights_Checkout_Passager_Birthdate.Text" xml:space="preserve">
     <value>Fecha de nacimiento</value>
   </data>
-  <data name="Passager_Document_Number.Text" xml:space="preserve">
+  <data name="Flights_Checkout_Passenger_Document_Number.Label" xml:space="preserve">
     <value>Numero de documento</value>
   </data>
-  <data name="Passager_Document_Type.Text" xml:space="preserve">
+  <data name="Flights_Checkout_Passenger_Document_Type.Label" xml:space="preserve">
     <value>Tipo de documento</value>
   </data>
-  <data name="Passager_gender.Text" xml:space="preserve">
+  <data name="Flights_Checkout_Passenger_Gender.Label" xml:space="preserve">
     <value>Sexo</value>
   </data>
-  <data name="Passager_Nationality.Text" xml:space="preserve">
+  <data name="Flights_Checkout_Passenger_Nationality.Text" xml:space="preserve">
     <value>Nacionalidad</value>
   </data>
   <data name="Contact_email.Text" xml:space="preserve">
@@ -527,5 +527,41 @@
   </data>
   <data name="Flights_Connect_with_pending" xml:space="preserve">
     <value>Conexión con espera de </value>
+  </data>
+  <data name="Flights_Checkout_Passenger_Document_Number_ERROR_INVALID_DOCUMENT_NUMBER_DIFFERENT_NUMBERS" xml:space="preserve">
+    <value>Documento inválido</value>
+  </data>
+  <data name="Flights_Checkout_Passenger_Document_Number_ERROR_INVALID_DOCUMENT_ONLY_NUMBERS" xml:space="preserve">
+    <value>El documento debe ser númerico</value>
+  </data>
+  <data name="Flights_Checkout_Passenger_Document_Number_ERROR_INVALID_LENGTH_BETWEEN7_AND8" xml:space="preserve">
+    <value>Documento inválido</value>
+  </data>
+  <data name="Flights_Checkout_Passenger_Document_Number_ERROR_REQUIRED" xml:space="preserve">
+    <value>Campo requerido</value>
+  </data>
+  <data name="Flights_Checkout_Passenger_First_Name_ERROR_INVALID_LENGTH_MAX28" xml:space="preserve">
+    <value>La longtud maxima es 28 caracteres</value>
+  </data>
+  <data name="Flights_Checkout_Passenger_First_Name_ERROR_INVALID_NAMES" xml:space="preserve">
+    <value>Verifique el nombre ingresado</value>
+  </data>
+  <data name="Flights_Checkout_Passenger_First_Name_ERROR_REQUIRED" xml:space="preserve">
+    <value>Campo requerido</value>
+  </data>
+  <data name="Flights_Checkout_Passenger_Last_Name_ERROR_INVALID_LENGTH_MAX28" xml:space="preserve">
+    <value>La longtud maxima es 28 caracteres</value>
+  </data>
+  <data name="Flights_Checkout_Passenger_Last_Name_ERROR_INVALID_NAMES" xml:space="preserve">
+    <value>Verifique el nombre ingresado</value>
+  </data>
+  <data name="Flights_Checkout_Passenger_Last_Name_ERROR_REQUIRED" xml:space="preserve">
+    <value>Campo requerido</value>
+  </data>
+  <data name="Flights_Checkout_Passenger_Nationality_ERROR_INVALID_A_RCOUNTRY_CODE" xml:space="preserve">
+    <value>Nacionalidad debe ser Argentina</value>
+  </data>
+  <data name="Flights_Checkout_Passenger_Nationality_ERROR_REQUIRED" xml:space="preserve">
+    <value>Campo requerido</value>
   </data>
 </root>

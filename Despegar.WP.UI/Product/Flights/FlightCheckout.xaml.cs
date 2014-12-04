@@ -34,6 +34,13 @@ namespace Despegar.WP.UI.Product.Flights
             // Init Checkout
             ViewModel.Init();
 
+            // View Adaptations
+            // TODO CHECK DECOLAR AND SITE
+            if (!ViewModel.InvoiceRequired) 
+            {
+                MainPivot.Items.RemoveAt(4);
+            }
+
             // Notify to CardData
             PaymentControl.OnUserControlButtonClicked += CardDataControl.OnUCButtonClicked;
             //Buycontrol.OnUserControlButtonClicked += this.ValidateAndBuy;

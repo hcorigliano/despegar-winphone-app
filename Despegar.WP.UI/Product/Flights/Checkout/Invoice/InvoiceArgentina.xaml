@@ -24,7 +24,7 @@
             <!-- Fiscal Status -->
             <StackPanel Visibility="{Binding fiscal_status.required, Converter={StaticResource VisibilityConverter}}">
               <controls:FieldCombo x:Uid="Flights_Checkout_Invoice_Arg_Fiscal_Status" ItemsSource="{Binding fiscal_status.options}"  Value="{Binding fiscal_status.CoreValue, Mode=TwoWay}" CodePath="value" DisplayTextPath="description" />
-              <controls:ValidationError ErrorPrefix="Flights_Checkout_Invoice_Arg_Fiscal_Status" ErrorCode="{Binding fiscal_status.CurrentError}" />
+              <!--<controls:ValidationError ErrorPrefix="Flights_Checkout_Invoice_Arg_Fiscal_Status" ErrorCode="{Binding fiscal_status.CurrentError}" />-->
             </StackPanel>
             <!-- Razon Social -->
             <StackPanel Visibility="{Binding DataContext.IsFiscalNameRequired, ElementName=InvoiceArgControl, Converter={StaticResource VisibilityConverter}}">

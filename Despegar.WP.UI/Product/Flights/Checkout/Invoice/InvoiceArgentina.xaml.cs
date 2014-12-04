@@ -26,7 +26,6 @@ namespace Despegar.WP.UI.Product.Flights.Checkout.Invoice
    /// </summary>
     public sealed partial class InvoiceArgentina : UserControl
     {
-        // API Booking Field Data
         public FlightsCheckoutModel ViewModel { get { return DataContext as FlightsCheckoutModel; } }
 
         public InvoiceArgentina()

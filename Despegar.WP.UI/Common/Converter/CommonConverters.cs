@@ -68,8 +68,7 @@ namespace Despegar.WP.UI.Common.Converter
                 case "INFANT":
                     return loader.GetString("Generic_Infant");
                 default:
-                    return "";
-
+                    return String.Empty;
             }
         }        
 

@@ -31,26 +31,16 @@
         <TextBlock Grid.Row="1" x:Uid="Page_Checkout" Style="{StaticResource PageHeaderSmall}" Text="COMPRAR VUELO" />
 
 
-        <Pivot Grid.Row="2" x:Name="ContentRoot"  Style="{StaticResource PivotBaseMain}">
+        <Pivot Grid.Row="2" x:Name="MainPivot"  Style="{StaticResource PivotBaseMain}">
             
             <!-- Passengers -->
-            <PivotItem VerticalAlignment="Top" x:Uid="Flight_Checkout_Passagers" Style="{StaticResource PivotItemBase}">
-                <ScrollViewer>
-                    <ItemsControl x:Name="PassengerControl" DataContext="{Binding bookingfields.form}" ItemsSource="{Binding passengers}" xmlns:src="using:Despegar.WP.UI.Product.Flights.Checkout.Passegers">
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <src:Passengers />
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                    </ItemsControl>
-                </ScrollViewer>
+            <PivotItem x:Uid="Flight_Checkout_Passagers" Style="{StaticResource PivotItemBase}" xmlns:src="using:Despegar.WP.UI.Product.Flights.Checkout.Passegers">
+                <src:Passengers x:Name="PassengersControl" />
             </PivotItem>
 
             <!--Contact Pivot-->
-            <PivotItem x:Uid="Flight_Checkout_Contact" Style="{StaticResource PivotItemBase}">
-                <StackPanel xmlns:src="using:Despegar.WP.UI.Product.Flights.Checkout.Contact">
-                    <src:ContactData x:Name="ContactControl" DataContext="{Binding bookingfields.form.contact}" />
-                </StackPanel>
+            <PivotItem x:Uid="Flight_Checkout_Contact" Style="{StaticResource PivotItemBase}" xmlns:src="using:Despegar.WP.UI.Product.Flights.Checkout.Contact">
+                <src:ContactData />
             </PivotItem>
 
             <!--Payments Pivot-->
@@ -69,7 +59,7 @@
 
             <!-- Invoice Arg -->
             <PivotItem x:Uid="Flight_Checkout_Invoice_Arg" Style="{StaticResource PivotItemBase}" xmlns:src="using:Despegar.WP.UI.Product.Flights.Checkout.Invoice">
-                <src:InvoiceArgentina x:Name="InvoiceArgControl"  />
+                <src:InvoiceArgentina  />
             </PivotItem>
 
             <!--Buy-->
