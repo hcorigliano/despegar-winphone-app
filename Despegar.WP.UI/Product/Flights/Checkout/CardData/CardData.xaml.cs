@@ -48,10 +48,19 @@ namespace Despegar.WP.UI.Product.Flights.Checkout.CardData
                 payments.installment.card_code.coreValue = item.card.company;
                 payments.installment.card_type.coreValue = item.card.type;
                 payments.installment.complete_card_code.coreValue = item.card.code;
-
             }
-           
+         }
+        
+        private void CardNumber_Validation(object sender, RoutedEventArgs e)
+        {
+            PaymentDetail item = card.SelectedItem as PaymentDetail;
+            Despegar.Core.Business.Flight.BookingFields.Payment payments = this.DataContext as Despegar.Core.Business.Flight.BookingFields.Payment;
 
+
+            
+        
         }
+
+
     }
 }

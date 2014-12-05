@@ -40,7 +40,7 @@ namespace Despegar.Core.Business.Dynamics
         public static object ToDynamic(BookingFields bookingFields)
         {
             //TODO: Estos son los datos minimos para hacer una compra de un vuelo en Arg.
-            //bookingFields = FillBookingFields(bookingFields);
+            bookingFields = FillBookingFields(bookingFields);
 
             dynamic result = new ExpandoObject();
             result.form = new ExpandoObject();

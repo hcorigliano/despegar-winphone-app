@@ -32,7 +32,7 @@
 
                 <StackPanel Style="{StaticResource TextBoxInputContainer}"  Visibility="{Binding card.number.required,Converter={StaticResource VisibilityConverter}}" >
                     <TextBlock Style="{StaticResource BaseTextLabel}" x:Uid="Card_Data_Number_Of_Card" Text="Numero de tarjeta"></TextBlock>
-                    <TextBox InputScope="Number" Style="{StaticResource CheckoutInputBase}" x:Name="number" Text="{Binding card.number.coreValue , Mode=TwoWay}"></TextBox>
+                    <TextBox InputScope="Number" Style="{StaticResource CheckoutInputBase}" x:Name="number" LostFocus="CardNumber_Validation" Text="{Binding card.number.coreValue , Mode=TwoWay}"></TextBox>
                 </StackPanel>
 
                 <Grid>
