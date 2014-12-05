@@ -555,6 +555,9 @@
   <data name="Card_Data_Month.PlaceholderText" xml:space="preserve">
     <value>Mes</value>
   </data>
+  <data name="Page_Filters_Title.Text" xml:space="preserve">
+    <value>Filtros</value>
+  </data>
   <data name="Card_Data_Year.PlaceholderText" xml:space="preserve">
     <value>Año</value>
   </data>
