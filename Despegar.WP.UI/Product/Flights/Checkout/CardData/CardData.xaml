@@ -22,7 +22,7 @@
             <StackPanel VerticalAlignment="Top" x:Name="cardData">
                 <!--Card-->
                 <!-- Dev -->
-                <dev:UserControlDesignGrid />
+                <!--<dev:UserControlDesignGrid />-->
 
                 <!--TARJETA-->
                 <StackPanel Style="{StaticResource TextBoxInputContainer}" >
