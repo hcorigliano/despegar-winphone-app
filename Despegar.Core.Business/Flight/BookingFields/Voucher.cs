@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Despegar.Core.Business.Flight.BookingFields
 {
-    public class Voucher : FieldDataType
+    public class Voucher : RegularField
     {
         public int min_quantity { get; set; }
     }

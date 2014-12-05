@@ -11,8 +11,8 @@
 
     <Page.Resources>
         <conv:ListToVisibilityConverter x:Name="ListToVisibilityConverter"/>
-        <conv:VisibilityConverter x:Name="VisibilityConverter"/>
-        <conv:StringFormatConverter x:Name="StringFormatConverter"/>
+        <conv:VisibilityConverter x:Name="VisibilityConverter" TrueValue="Visible" FalseValue="Collapsed"/>
+        <conv:StringConverter x:Name="StringFormatConverter"/>
         <conv:PaymentDetailsToLabelConverter x:Name="PaymentDetailsToLabelConverter"/>
         <conv:PaymentDetailsToPaysConverter x:Name="PaymentDetailsToPaysConverter"/>
 

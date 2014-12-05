@@ -129,7 +129,7 @@ namespace Despegar.WP.UI.Developer
 
                 // Fill From EZE to MIA
                 FlightSearchViewModel viewModel = page.DataContext as FlightSearchViewModel;               
-                viewModel.PassengersViewModel.GeneralAdults = 1;
+                viewModel.PassengersViewModel.GeneralAdults = 2;
                 viewModel.PassengersViewModel.GeneralMinors = 0;
                 viewModel.FromDate = new System.DateTimeOffset(2015, 2, 10, 0, 0, 0, TimeSpan.FromDays(0));
                 viewModel.ToDate = new System.DateTimeOffset(2015, 3, 20, 0, 0, 0, TimeSpan.FromDays(0));

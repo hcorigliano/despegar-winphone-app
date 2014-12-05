@@ -15,20 +15,13 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
-// The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
-
 namespace Despegar.WP.UI.Product.Flights.Checkout.Contact
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
-    public sealed partial class ContactData : UserControl
+    public sealed partial class Contact : UserControl
     {
-        
-        public ContactData()
+        public Contact()
         {
             this.InitializeComponent();
         }
-
     }
 }

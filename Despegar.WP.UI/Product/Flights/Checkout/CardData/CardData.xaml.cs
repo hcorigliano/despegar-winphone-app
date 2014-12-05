@@ -68,12 +68,13 @@ namespace Despegar.WP.UI.Product.Flights.Checkout.CardData
             if (item != null)
             {
                 payments = this.DataContext as Despegar.Core.Business.Flight.BookingFields.Payment;
-                payments.installment.bank_code.coreValue = item.card.bank;
-                payments.installment.quantity.coreValue = item.installments.quantity.ToString();
-                payments.installment.card_code.coreValue = item.card.company;
-                payments.installment.card_type.coreValue = item.card.type;
-                payments.installment.complete_card_code.coreValue = item.card.code;
-            }
+                payments.installment.bank_code.CoreValue = item.card.bank;
+                payments.installment.quantity.CoreValue = item.installments.quantity.ToString();
+                payments.installment.card_code.CoreValue = item.card.code;
+                payments.installment.card_code.CoreValue = item.card.company;
+                payments.installment.card_type.CoreValue = item.card.type;
+                payments.installment.complete_card_code.CoreValue = item.card.code;
+           }
         }
 
         private void FillExpiration(object sender, RoutedEventArgs e)

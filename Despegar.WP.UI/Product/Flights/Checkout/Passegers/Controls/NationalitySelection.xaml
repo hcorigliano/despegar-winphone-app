@@ -5,24 +5,9 @@
     xmlns:local="using:Despegar.WP.UI.Product.Flights.Checkout.Passegers.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d"
-    d:DesignHeight="300"
-    d:DesignWidth="400">
+    mc:Ignorable="d">
 
-    <UserControl.Resources>
-    </UserControl.Resources>
-
-
-    <Grid>
-        
-        <Grid.RowDefinitions>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
-        </Grid.RowDefinitions>
-        
-        
-        <StackPanel Grid.Row="0">
-            <TextBox GotFocus="ShowPopup" IsReadOnly="True" x:Name="NationalityTextBox" Style="{StaticResource CheckoutInputBase}" Text="{Binding NationalityText}"></TextBox>
-        </StackPanel>
-    </Grid>
+    <StackPanel Grid.Row="0">
+        <TextBox GotFocus="ShowPopup" IsReadOnly="True" x:Name="NationalityTextBox" Style="{StaticResource CheckoutInputBase}" Text="{Binding NationalityText}" />
+    </StackPanel>
 </UserControl>
