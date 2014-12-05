@@ -18,23 +18,24 @@ namespace Despegar.WP.UI.Common.Converter
         {
             object val = value;
 
+            string green = "IconGreen";
+            string blue = "IconBlue";
+
             if (value != null)
             {
 
                 if (value.GetType() == typeof(RouteInbound))
                 {
-                    //return string.Format(parameter as string, right);
-                    return TrueValue;
+                    return App.Current.Resources[blue];
                 }
 
                 if (value.GetType() == typeof(RouteOutbound))
                 {
-                    //return string.Format(parameter as string, left);
-                    return FalseValue;
+                    return App.Current.Resources[green];
                 }
             }
 
-            return FalseValue;
+            return App.Current.Resources[green];
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)

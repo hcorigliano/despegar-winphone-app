@@ -117,10 +117,17 @@
     <Compile Include="Common\Converter\CheckoutConverters.cs" />
     <Compile Include="Common\Converter\StyleColorResultConverter.cs" />
     <Compile Include="Common\Converter\StyleConverter.cs" />
+    <Compile Include="Common\Converter\TimeDurationConverter.cs" />
     <Compile Include="Common\Converter\VisibilityProConverter.cs" />
     <Compile Include="Common\IPopupContent.cs" />
     <Compile Include="Common\Navigator.cs" />
     <Compile Include="Common\OldPagesManager.cs" />
+    <Compile Include="Controls\Flights\Detail\FlightsSegmentGo.xaml.cs">
+      <DependentUpon>FlightsSegmentGo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Flights\Detail\FlightsSegmentReturn.xaml.cs">
+      <DependentUpon>FlightsSegmentReturn.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Loading.xaml.cs">
       <DependentUpon>Loading.xaml</DependentUpon>
     </Compile>
@@ -151,7 +158,7 @@
     <Compile Include="Controls\Flights\DateControlSimple.xaml.cs">
       <DependentUpon>DateControlSimple.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Flights\FlightSegment.xaml.cs">
+    <Compile Include="Controls\Flights\Detail\FlightSegment.xaml.cs">
       <DependentUpon>FlightSegment.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\Flights\QuantityPassagersControl.xaml.cs">
@@ -264,6 +271,14 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Strings\AppResources.cs" />
     <Page Include="Controls\Flights\DateControlSimple.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Flights\Detail\FlightsSegmentGo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Flights\Detail\FlightsSegmentReturn.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -880,6 +895,7 @@
     <Content Include="Assets\Icon\Airlines\ag_z8logo%402x.png" />
     <Content Include="Assets\Icon\Airlines\ag_zelogo%402x.png" />
     <Content Include="Assets\Icon\Airlines\ag_zzlogo%402x.png" />
+    <Content Include="Assets\Icon\App\arrow-left-small-white.png" />
     <Content Include="Assets\Icon\App\arrow-right-small-white.png" />
     <Content Include="Assets\Icon\App\bell-large-white.png" />
     <Content Include="Assets\Icon\App\calendar-medium-white.png" />
@@ -1446,7 +1462,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\Flights\FlightSegment.xaml">
+    <Page Include="Controls\Flights\Detail\FlightSegment.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

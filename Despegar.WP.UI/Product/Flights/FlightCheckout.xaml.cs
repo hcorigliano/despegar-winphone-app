@@ -35,29 +35,18 @@ namespace Despegar.WP.UI.Product.Flights
     {
         private NavigationHelper navigationHelper;
         private ObservableDictionary defaultViewModel = new ObservableDictionary();
-        private FlightsCheckoutModel flightService;
+        private FlightsCheckoutModel flightModel;
         private Despegar.WP.UI.Controls.ModalPopup loadingPopup = new Despegar.WP.UI.Controls.ModalPopup(new Despegar.WP.UI.Controls.Loading());
 
         public FlightCheckout()
         {
             this.InitializeComponent();
-            this.DataContext = flightService;
+            this.DataContext = flightModel;
             this.navigationHelper = new NavigationHelper(this);
             this.navigationHelper.LoadState += this.NavigationHelper_LoadState;
             this.navigationHelper.SaveState += this.NavigationHelper_SaveState;
 
             InitilizePage();
-            
-            //flightService.PropertyChanged += Checkloading;
-
-            //flightService.GetBookingFields();
-
-            //For fix credit card null value
-            //CardDataControl.DataContext = flightService.bookingfields.form.payment;
-            
-            //VER EL MARTES
-            //PassengerControl.DataContext = flightService.bookingfields.form;
-
         }
 
         private void InitilizePage()
@@ -95,18 +84,19 @@ namespace Despegar.WP.UI.Product.Flights
         /// <see cref="Frame.Navigate(Type, Object)"/> when this page was initially requested and
         /// a dictionary of state preserved by this page during an earlier
         /// session.  The state will be null the first time a page is visited.</param>
-        private void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
+        private async void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
         {
-            FlightsCrossParameter routes = e.NavigationParameter as FlightsCrossParameter;
-            flightService = new FlightsCheckoutModel(Navigator.Instance, routes);
-           
-            DataContext = flightService;
+            FlightsCrossParameter crossParameters = e.NavigationParameter as FlightsCrossParameter;
+            flightModel = new FlightsCheckoutModel(Navigator.Instance, crossParameters);
 
-            flightService.PropertyChanged += Checkloading;
+            flightModel.PropertyChanged += Checkloading;
 
-            //For fix credit card null value //TODO : HACERLO FUNCIONAR DE NUEVO
-            //CardDataControl.DataContext = flightService.bookingfields.form.payment;
+            await flightModel.GetBookingFields(); //For fix credit card null value (await datacontext)
 
+            DataContext = flightModel;            
+
+            //For fix credit card null value 
+            CardDataControl.DataContext = flightModel.bookingfields.form.payment;
         }
 
         /// <summary>
@@ -150,9 +140,7 @@ namespace Despegar.WP.UI.Product.Flights
 
         private void ValidateAndBuy(object sender, RoutedEventArgs e)
         {
-            var toConvert = DynamicFlightBookingFieldsToPost.ToDynamic(flightService.bookingfields);
-            flightService.CompleteCheckOut(toConvert);
-
+            flightModel.CompleteCheckOut();
         }
 
         private void Checkloading(object sender, PropertyChangedEventArgs e)

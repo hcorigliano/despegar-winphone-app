@@ -519,7 +519,40 @@
   <data name="Nationality_Selection_Popup_Selection.Text" xml:space="preserve">
     <value>ELEGIR UNA NACIONALIDAD</value>
   </data>
+  <data name="Buy_Acept_Conditions.Text" xml:space="preserve">
+    <value>Lei y acepto las</value>
+  </data>
   <data name="Generic_Go_Return" xml:space="preserve">
     <value>ida y vuelta</value>
+  </data>
+  <data name="Buy_Buy_conditions.Text" xml:space="preserve">
+    <value>condiciones de compra</value>
+  </data>
+  <data name="Common_Booking_Detail.Text" xml:space="preserve">
+    <value>Detalle de reserva</value>
+  </data>
+  <data name="Flight_Thanks.Text" xml:space="preserve">
+    <value>muchas gracias</value>
+  </data>
+  <data name="Flight_Thanks_Continue_Explain.Text" xml:space="preserve">
+    <value>Su pago está siendo procesado. Una vez que el pago se procese exitosamente recibirá un e-mail con la información de compra.</value>
+  </data>
+  <data name="Flight_Thanks_How_Continue.Text" xml:space="preserve">
+    <value>¿Cómo continúa el proceso de compra?</value>
+  </data>
+  <data name="Flight_Thanks_Request_Is.Text" xml:space="preserve">
+    <value>Su número de solicitud de compra es:</value>
+  </data>
+  <data name="Generic_Acept.Content" xml:space="preserve">
+    <value>Aceptar</value>
+  </data>
+  <data name="Generic_Hs.Text" xml:space="preserve">
+    <value>hs</value>
+  </data>
+  <data name="Generic_Mins.Text" xml:space="preserve">
+    <value>min</value>
+  </data>
+  <data name="Page_Filters_Title.Text" xml:space="preserve">
+    <value>Filtros</value>
   </data>
 </root>

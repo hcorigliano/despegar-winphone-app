@@ -5,10 +5,16 @@
     xmlns:local="using:Despegar.WP.UI.Product.Flights"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:src="using:Despegar.WP.UI.Controls.Flights.Detail"
+    xmlns:dev="using:Despegar.WP.UI.Developer.Controls"
     mc:Ignorable="d"
     Style="{StaticResource BasePage}">
 
     <Grid x:Name="LayoutRoot" Style="{StaticResource MainContainerGrid}" >
+
+        <!-- Dev -->
+        <!--<dev:UserControlDesignGrid  />-->
+
         <Grid.ChildrenTransitions>
             <TransitionCollection>
                 <EntranceThemeTransition/>
@@ -16,13 +22,42 @@
         </Grid.ChildrenTransitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="{StaticResource Block1p}"/>
-            <RowDefinition Height="{StaticResource Block2}"/>
+            <RowDefinition Height="{StaticResource Block1p}"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
 
         <!-- Title Panel -->
         <Image Grid.Row="0" Style="{StaticResource TopLogo}" />
-        <TextBlock Grid.Row="1" x:Uid="Page_FlightSearch" Style="{StaticResource PageHeader}" Text="gracias" />
+        <TextBlock Grid.Row="1" x:Uid="Page_FlightSearch" Style="{StaticResource PageHeaderSmall}" Text="BUSQUEDA" FontFamily="Segoe WP Semibold" />
+        
+
+        <ScrollViewer Grid.Row="2">
+            <StackPanel >
+                <TextBlock Grid.Row="1" x:Uid="Flight_Thanks" Style="{StaticResource Thanks_PageHeader}" Text="gracias totales" />
+                <!--<TextBlock Text="¡Muchas gracias por su solicitud de compra!" />-->
+                <TextBlock Style="{StaticResource Thanks_Request_Is }" x:Uid="Flight_Thanks_Request_Is" Text="Su número de solicitud de compra es:" />
+                <TextBlock Style="{StaticResource Thanks_Request }" Text="{Binding BookingResponse.checkout_id}"/>
+                <TextBlock Style="{StaticResource Thanks_How_Continue}" x:Uid="Flight_Thanks_How_Continue" Text="¿Cómo continúa el proceso de compra?" />
+                <TextBlock Style="{StaticResource Thanks_Continue_Explain}" x:Uid="Flight_Thanks_Continue_Explain" Text="Su pago está siendo procesado. Una vez que el pago se procese exitosamente recibirá un e-mail con la información de compra." TextWrapping="Wrap"  />
+
+
+                <TextBlock Style="{StaticResource Thanks_Booking_Detail}" x:Uid="Common_Booking_Detail" Text="Detalle de reserva" />
+                <StackPanel xmlns:src="using:Despegar.WP.UI.Product.Flights.Checkout.Buy.Controls">
+                    <src:BuyDetailsControl DataContext="{Binding price}"></src:BuyDetailsControl>
+                </StackPanel>
+
+                <TextBlock Style="{StaticResource Thanks_Booking_Detail}" x:Uid="Generic_Go" Text="IDA" />
+                <src:FlightsSegmentGo DataContext="{Binding Outbound}"></src:FlightsSegmentGo>
+
+                <TextBlock Style="{StaticResource Thanks_Booking_Detail}" x:Uid="Generic_Return" Text="VUELTA" />
+                <src:FlightsSegmentReturn DataContext="{Binding Inbound}"></src:FlightsSegmentReturn>
+
+                
+            </StackPanel>
+        </ScrollViewer>
+
+        <Button Style="{StaticResource Thanks_Button }" Grid.Row="3" x:Uid="Generic_Acept" Content="Aceptar" HorizontalAlignment="Center" Click="GoToHome"></Button>
 
     </Grid>
 </Page>

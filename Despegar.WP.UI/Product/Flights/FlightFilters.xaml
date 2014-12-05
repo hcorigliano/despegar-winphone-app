@@ -8,20 +8,35 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
     <Page.Resources>
+        <CollectionViewSource x:Name="FiltersCollection" IsSourceGrouped="true" Source="{Binding}" ItemsPath="values" />
+
         <DataTemplate x:Key="FlightFilterTemplate">
             <Grid>
                 <!--<RadioButton GroupName="FlightSortByGroup" Content="{Binding label}" HorizontalAlignment="Left" VerticalAlignment="Top" IsChecked="{Binding selected ,Mode=TwoWay}"/>-->
-                <TextBlock Text="{Binding label}"></TextBlock>
-                <ItemsControl ItemsSource="{Binding values ,Mode=TwoWay}" DataContext="{Binding}" >
+
+
+                <!--<TextBlock Text="{Binding label}"></TextBlock>-->
+                <!--<ItemsControl ItemsSource="{Binding values ,Mode=TwoWay}" DataContext="{Binding}" >
                     <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-                            <CheckBox Content="{Binding label}" IsChecked="{Binding selected,Mode=TwoWay}" />
-                        </DataTemplate>
+                        <DataTemplate>-->
+                <CheckBox Margin="{StaticResource Left_Offset}" Content="{Binding label}" IsChecked="{Binding selected,Mode=TwoWay}" />
+                <!--</DataTemplate>
                     </ItemsControl.ItemTemplate>
-                </ItemsControl>
+                </ItemsControl>-->
             </Grid>
         </DataTemplate>
+
+        <DataTemplate x:Key="FlightHeaderFilterTemplate">
+            
+            <StackPanel Width="Auto">
+                
+                <TextBlock Style="{StaticResource SegoeLight24}" Text="{Binding label}"></TextBlock>
+                <Rectangle Height="1" Fill="White" Width="Auto" Stretch="Fill" ></Rectangle>
+            </StackPanel>
+            
+        </DataTemplate>
     </Page.Resources>
+
     <Page.BottomAppBar>
         <CommandBar>
             <AppBarButton Icon="Accept" Label="Aceptar" Click="AppBarButton_Click" />
@@ -29,7 +44,21 @@
         </CommandBar>
     </Page.BottomAppBar>
 
-    <ListView Header="Filtros" DataContext="{Binding Mode=TwoWay}" ItemTemplate="{StaticResource FlightFilterTemplate}" ItemsSource="{Binding}" IsItemClickEnabled="True">
-    	
-    </ListView>
+    <Grid Style="{StaticResource MainContainerGrid}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="{StaticResource Block1p}"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <!-- Title Panel -->
+        <Image Grid.Row="0" Style="{StaticResource TopLogo}" />
+        <TextBlock Grid.Row="1" x:Uid="Page_Filters_Title" Style="{StaticResource PageHeaderSmall}" Text="Filter" FontFamily="Segoe WP Semibold" />
+
+        <ListView Grid.Row="2" ItemTemplate="{StaticResource FlightFilterTemplate}" DataContext="{Binding Mode=TwoWay}"  ItemsSource="{Binding Source={StaticResource FiltersCollection}}" IsItemClickEnabled="True">
+            <ListView.GroupStyle>
+                <GroupStyle HidesIfEmpty="True" HeaderTemplate="{StaticResource FlightHeaderFilterTemplate}"/>
+            </ListView.GroupStyle>
+        </ListView>
+    </Grid>
 </Page>
