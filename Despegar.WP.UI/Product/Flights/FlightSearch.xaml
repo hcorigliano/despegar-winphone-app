@@ -26,7 +26,7 @@
     </Page.BottomAppBar>
     <Page.Resources>
         <conv:DateToLongString x:Key="dateConverter" />
-        <conv:VisibilityProConverter x:Key="visibilityConverter" TrueValue="Visible" FalseValue="Collapsed"  />
+        <conv:VisibilityConverter x:Key="visibilityConverter" TrueValue="Visible" FalseValue="Collapsed"  />
     </Page.Resources>
     <Grid Style="{StaticResource MainContainerGrid}">
         <Grid.ChildrenTransitions>

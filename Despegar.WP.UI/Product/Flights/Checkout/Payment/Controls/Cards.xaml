@@ -11,7 +11,7 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <UserControl.Resources>
-        <conv:StringFormatConverter x:Name="StringFormatConverter"/>
+        <conv:StringConverter x:Name="StringFormatConverter"/>
     </UserControl.Resources>
 
 

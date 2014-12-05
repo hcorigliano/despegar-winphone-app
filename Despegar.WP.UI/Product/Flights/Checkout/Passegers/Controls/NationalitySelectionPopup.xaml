@@ -6,19 +6,18 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    d:DesignHeight="300"
-    d:DesignWidth="400">
+   >
 
     <UserControl.Resources>
         <Storyboard x:Name="ShowDialogAnimation">
-            <DoubleAnimation Duration="0:0:.5" To="1" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="mainCanvas" d:IsOptimized="True">
+            <DoubleAnimation Duration="0:0:.3" To="1" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="mainCanvas" d:IsOptimized="True">
                 <DoubleAnimation.EasingFunction>
                     <QuadraticEase EasingMode="EaseIn" />
                 </DoubleAnimation.EasingFunction>
             </DoubleAnimation>
         </Storyboard>
         <Storyboard x:Name="HideDialogAnimation">
-            <DoubleAnimation Duration="0:0:.5" To="0" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="mainCanvas" d:IsOptimized="True">
+            <DoubleAnimation Duration="0:0:.3" To="0" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="mainCanvas" d:IsOptimized="True">
                 <DoubleAnimation.EasingFunction>
                     <QuadraticEase EasingMode="EaseOut" />
                 </DoubleAnimation.EasingFunction>
@@ -26,13 +25,13 @@
         </Storyboard>
     </UserControl.Resources>
 
-    <Grid  x:Name="mainCanvas" Background="Black" Opacity="1">
+    <Grid x:Name="mainCanvas" Background="Black" Opacity="0">
         <StackPanel Margin="20,40,0,0">
-            <TextBlock FontFamily="Segoe UI Symbol" Margin="0,0,0,20" FontSize="18" x:Uid="Nationality_Selection_Popup_Selection"></TextBlock>
+            <TextBlock FontFamily="Segoe UI Symbol" Margin="0,0,0,20" FontSize="18" x:Uid="Nationality_Selection_Popup_Selection" />
             <ListView SelectionChanged="SelectionChangedListBox" x:Name="NationalityControl" ItemsSource="{Binding ItemsSource}" SelectedValue="{Binding SelectedItem, Mode=TwoWay}" SelectedValuePath="id" >
                 <ListView.ItemTemplate>
                     <DataTemplate >
-                        <TextBlock FontFamily="Segoe UI" FontSize="24" Style="{StaticResource BaseText}" Text="{Binding name}"></TextBlock>
+                        <TextBlock FontFamily="Segoe UI" FontSize="24" Style="{StaticResource BaseText}" Text="{Binding name}"/>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>

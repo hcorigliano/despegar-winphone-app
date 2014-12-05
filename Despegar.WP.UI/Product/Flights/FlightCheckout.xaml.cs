@@ -1,76 +1,38 @@
 ﻿using Despegar.Core.Business.Dynamics;
-using Despegar.Core.Business.Flight.BookingFields;
-using Despegar.Core.Service;
 using Despegar.WP.UI.Common;
+using Despegar.WP.UI.Controls;
 using Despegar.WP.UI.Model;
-using Despegar.WP.UI.Model.Classes.Flights.Checkout;
 using Despegar.WP.UI.Model.ViewModel;
 using Despegar.WP.UI.Model.ViewModel.Classes.Flights;
+using Despegar.WP.UI.Product.Flights.Checkout.Passegers.Controls;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
-using Windows.Graphics.Display;
-using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
-
-// The Basic Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
 
 namespace Despegar.WP.UI.Product.Flights
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
     public sealed partial class FlightCheckout : Page
     {
         private NavigationHelper navigationHelper;
-        private ObservableDictionary defaultViewModel = new ObservableDictionary();
-        private FlightsCheckoutModel flightModel;
-        private Despegar.WP.UI.Controls.ModalPopup loadingPopup = new Despegar.WP.UI.Controls.ModalPopup(new Despegar.WP.UI.Controls.Loading());
+        private FlightsCheckoutViewModel ViewModel;
+        private ModalPopup loadingPopup = new ModalPopup(new Loading());
 
         public FlightCheckout()
         {
             this.InitializeComponent();
-            this.DataContext = flightModel;
             this.navigationHelper = new NavigationHelper(this);
             this.navigationHelper.LoadState += this.NavigationHelper_LoadState;
-            this.navigationHelper.SaveState += this.NavigationHelper_SaveState;
-
-            InitilizePage();
+            this.navigationHelper.SaveState += this.NavigationHelper_SaveState;                      
         }
 
-        private void InitilizePage()
-        {
-            //Notify to CardData 
-            PaymentControl.OnUserControlButtonClicked += CardDataControl.OnUCButtonClicked;
-            Buycontrol.OnUserControlButtonClicked += this.ValidateAndBuy;
-        }
-       
         /// <summary>
         /// Gets the <see cref="NavigationHelper"/> associated with this <see cref="Page"/>.
         /// </summary>
         public NavigationHelper NavigationHelper
         {
             get { return this.navigationHelper; }
-        }
-
-        /// <summary>
-        /// Gets the view model for this <see cref="Page"/>.
-        /// This can be changed to a strongly typed view model.
-        /// </summary>
-        public ObservableDictionary DefaultViewModel
-        {
-            get { return this.defaultViewModel; }
         }
 
         /// <summary>
@@ -87,16 +49,50 @@ namespace Despegar.WP.UI.Product.Flights
         private async void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
         {
             FlightsCrossParameter crossParameters = e.NavigationParameter as FlightsCrossParameter;
-            flightModel = new FlightsCheckoutModel(Navigator.Instance, crossParameters);
 
-            flightModel.PropertyChanged += Checkloading;
+            // Initialize Checkout
+            ViewModel = new FlightsCheckoutViewModel(Navigator.Instance, GlobalConfiguration.CoreContext.GetFlightService(),
+                GlobalConfiguration.CoreContext.GetCommonService(), 
+                GlobalConfiguration.CoreContext.GetConfigurationService(), 
+                crossParameters);
 
-            await flightModel.GetBookingFields(); //For fix credit card null value (await datacontext)
+            ViewModel.PropertyChanged += Checkloading;
+            
 
-            DataContext = flightModel;            
+            // Init Checkout
+            await ViewModel.Init();
 
-            //For fix credit card null value 
-            CardDataControl.DataContext = flightModel.bookingfields.form.payment;
+            // Set Defaults values and Country specifics
+            ConfigureFields();
+
+            this.DataContext = ViewModel;
+        }
+
+        /// <summary>
+        /// View Adaptations based on selected country
+        /// </summary>
+        private void ConfigureFields()
+        {
+            switch(GlobalConfiguration.Site) 
+            {
+                case "AR":
+                    if (!ViewModel.InvoiceRequired)
+                    {
+                        MainPivot.Items.RemoveAt(4);
+                    }
+
+                    // Passengers defaults                    
+                    //foreach (NationalitySelection control in this.FindVisualChildren<NationalitySelection>(PassengerControl))
+                    //    control.SetDisplayText("Argentina");
+                break;
+
+                default:
+                //For fix credit card null value 
+                CardDataControl.DataContext = ViewModel.CoreBookingFields.form.payment;
+                // Notify to CardData
+                PaymentControl.OnUserControlButtonClicked += CardDataControl.OnUCButtonClicked;
+                break;
+            }
         }
 
         /// <summary>
@@ -109,6 +105,18 @@ namespace Despegar.WP.UI.Product.Flights
         /// serializable state.</param>
         private void NavigationHelper_SaveState(object sender, SaveStateEventArgs e)
         {
+        }
+
+        private void Checkloading(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "IsLoading")
+            {
+                if ((sender as ViewModelBase).IsLoading)
+                    loadingPopup.Show();
+                else
+                    loadingPopup.Hide();
+
+            }
         }
 
         #region NavigationHelper registration
@@ -137,22 +145,6 @@ namespace Despegar.WP.UI.Product.Flights
         }
 
         #endregion
-
-        private void ValidateAndBuy(object sender, RoutedEventArgs e)
-        {
-            flightModel.CompleteCheckOut();
-        }
-
-        private void Checkloading(object sender, PropertyChangedEventArgs e)
-        {
-            if (e.PropertyName == "IsLoading")
-            {
-                if ((sender as ViewModelBase).IsLoading)
-                    loadingPopup.Show();
-                else
-                    loadingPopup.Hide();
-            }
-        }
-
+     
     }
 }
