@@ -21,7 +21,7 @@
     <Grid>
         
         <!-- Dev -->
-        <dev:UserControlDesignGrid  />
+        <!--<dev:UserControlDesignGrid  />-->
         
         <!--PaymentsFormated-->
         <ScrollViewer VerticalScrollBarVisibility="Auto" Height="500">
