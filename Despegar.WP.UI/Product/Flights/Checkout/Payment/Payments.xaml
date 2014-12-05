@@ -6,6 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:conv="using:Despegar.WP.UI.Common.Converter"
+    xmlns:dev="using:Despegar.WP.UI.Developer.Controls"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
@@ -15,8 +16,13 @@
         <conv:PaymentDetailsToLabelConverter x:Name="PaymentDetailsToLabelConverter"/>
         <conv:PaymentDetailsToPaysConverter x:Name="PaymentDetailsToPaysConverter"/>
     </Page.Resources>
-
+    
+    
     <Grid>
+        
+        <!-- Dev -->
+        <dev:UserControlDesignGrid  />
+        
         <!--PaymentsFormated-->
         <ScrollViewer VerticalScrollBarVisibility="Auto" Height="500">
             <StackPanel x:Name="payments" DataContext="{Binding}">
@@ -51,7 +57,7 @@
                 <!--TODO : Cambiar visibility-->
                 <RadioButton Visibility="{Binding with_interest.SixPays,Converter={StaticResource ListToVisibilityConverter}}" x:Name="radioButtonWithInterest" Content="{Binding with_interest.GrupLabelText}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
                 <StackPanel ></StackPanel>
-                <StackPanel  xmlns:src="using:Despegar.WP.UI.Product.Flights.Checkout.Payment.Controls" Visibility="{Binding IsChecked, ElementName=radioButtonWithInterest , Converter={StaticResource VisibilityConverter} }">
+                <StackPanel Margin="{StaticResource Left_Block1p}" xmlns:src="using:Despegar.WP.UI.Product.Flights.Checkout.Payment.Controls" Visibility="{Binding IsChecked, ElementName=radioButtonWithInterest , Converter={StaticResource VisibilityConverter} }">
                     <src:PaymentWithInterest x:Name="PaymentWithInterest" DataContext="{Binding with_interest}"></src:PaymentWithInterest>
                 </StackPanel>
 

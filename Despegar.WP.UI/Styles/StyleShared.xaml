@@ -83,6 +83,7 @@
     <x:Double x:Key="dIconSize">26.4</x:Double>
     <!-- Margins -->
     <Thickness x:Key="Left_Offset">9.6,0,0,0</Thickness>
+    <Thickness x:Key="Left_Block1p">29.6,0,0,0</Thickness>
     <Thickness x:Key="Bottom_Offset">0,0,0,9.6</Thickness>
     <Thickness x:Key="Top_Offset">0,9.6,0,0</Thickness>
     
