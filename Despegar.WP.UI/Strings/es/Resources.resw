@@ -552,4 +552,10 @@
   <data name="Generic_Mins.Text" xml:space="preserve">
     <value>min</value>
   </data>
+  <data name="Card_Data_Month.PlaceholderText" xml:space="preserve">
+    <value>Mes</value>
+  </data>
+  <data name="Card_Data_Year.PlaceholderText" xml:space="preserve">
+    <value>Año</value>
+  </data>
 </root>

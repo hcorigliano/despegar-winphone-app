@@ -69,7 +69,9 @@
     <GridLength x:Key="Block5p">148</GridLength>
     <x:Double x:Key="dBlock5">138.4</x:Double>
     <x:Double x:Key="dBlock5p">148</x:Double>
+    <x:Double x:Key="dBlock6">168</x:Double>
     <GridLength x:Key="Block6">168</GridLength>
+    <x:Double x:Key="dBlock6p">177.6</x:Double>
     <GridLength x:Key="Block6p">177.6</GridLength>
     <x:Double x:Key="dBlock9p">276</x:Double>
     <x:Double x:Key="dBlock10p">305.6</x:Double>

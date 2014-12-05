@@ -8,6 +8,7 @@ using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Phone.UI.Input;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -28,6 +29,9 @@ namespace Despegar.WP.UI.Product.Flights.Checkout.Passegers.Controls
             this.InitializeComponent();
             NationalityControl.Height = Window.Current.Bounds.Height;
             NationalityControl.Width = Window.Current.Bounds.Width;
+
+            HardwareButtons.BackPressed += HardwareButtons_BackPressed;
+
         }
 
         public void Enter()
@@ -57,5 +61,17 @@ namespace Despegar.WP.UI.Product.Flights.Checkout.Passegers.Controls
             //Leave();
             DoClosePopup();
         }
+
+        void HardwareButtons_BackPressed(object sender, BackPressedEventArgs e)
+        {
+            Frame rootFrame = Window.Current.Content as Frame;
+            if (rootFrame != null)
+            {
+                e.Handled = true;
+                DoClosePopup();
+            }
+            HardwareButtons.BackPressed -= HardwareButtons_BackPressed;
+        }
+
     }
 }

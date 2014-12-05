@@ -24,11 +24,36 @@ namespace Despegar.WP.UI.Product.Flights.Checkout.CardData
 
     public sealed partial class CardData : UserControl
     {
+        int[] Month = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 };
+        Despegar.Core.Business.Flight.BookingFields.Payment payments;
         
+
         public CardData()
         {
             this.InitializeComponent();
+            this.Loaded += testing;
+            MonthCombo.ItemsSource = Month;
         }
+
+        private void testing(object sender, RoutedEventArgs e)
+        {
+            if (this.DataContext != null)
+            {
+                payments = this.DataContext as Despegar.Core.Business.Flight.BookingFields.Payment;
+                string temp = payments.card.expiration.from;
+                int fromDate = Convert.ToInt32((temp.Split(new Char[] { '-' }))[0]);
+                temp = payments.card.expiration.to;
+                int toDate = Convert.ToInt32((temp.Split(new Char[] { '-' }))[0]);
+
+                List<int> list = new List<int>();
+                for (int i = fromDate; i <= toDate; i++)
+                {
+                    list.Add(i);
+                }
+                YearCombo.ItemsSource = list;
+            }
+        }
+
 
         public void OnUCButtonClicked(object sender, RoutedEventArgs e)
         {
@@ -42,16 +67,21 @@ namespace Despegar.WP.UI.Product.Flights.Checkout.CardData
             PaymentDetail item = card.SelectedItem as PaymentDetail;
             if (item != null)
             {
-                Despegar.Core.Business.Flight.BookingFields.Payment payments = this.DataContext as Despegar.Core.Business.Flight.BookingFields.Payment;
+                payments = this.DataContext as Despegar.Core.Business.Flight.BookingFields.Payment;
                 payments.installment.bank_code.coreValue = item.card.bank;
                 payments.installment.quantity.coreValue = item.installments.quantity.ToString();
                 payments.installment.card_code.coreValue = item.card.company;
                 payments.installment.card_type.coreValue = item.card.type;
                 payments.installment.complete_card_code.coreValue = item.card.code;
-
             }
-           
+        }
 
+        private void FillExpiration(object sender, RoutedEventArgs e)
+        {
+            if (YearCombo.SelectedValue != null && MonthCombo.SelectedValue != null)
+            {
+                payments.card.expiration.coreValue = YearCombo.SelectedValue.ToString() + "-" + MonthCombo.SelectedValue.ToString();
+            }
         }
     }
 }
