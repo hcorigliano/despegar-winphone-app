@@ -4,6 +4,7 @@ using Despegar.WP.UI.Controls;
 using Despegar.WP.UI.Model;
 using Despegar.WP.UI.Model.ViewModel;
 using Despegar.WP.UI.Model.ViewModel.Classes.Flights;
+using Despegar.WP.UI.Product.Flights.Checkout.Passegers.Controls;
 using System;
 using System.ComponentModel;
 using Windows.UI.Xaml;
@@ -15,7 +16,7 @@ namespace Despegar.WP.UI.Product.Flights
     public sealed partial class FlightCheckout : Page
     {
         private NavigationHelper navigationHelper;
-        private FlightsCheckoutModel ViewModel;
+        private FlightsCheckoutViewModel ViewModel;
         private ModalPopup loadingPopup = new ModalPopup(new Loading());
 
         public FlightCheckout()
@@ -50,7 +51,7 @@ namespace Despegar.WP.UI.Product.Flights
             FlightsCrossParameter crossParameters = e.NavigationParameter as FlightsCrossParameter;
 
             // Initialize Checkout
-            ViewModel = new FlightsCheckoutModel(Navigator.Instance, GlobalConfiguration.CoreContext.GetFlightService(),
+            ViewModel = new FlightsCheckoutViewModel(Navigator.Instance, GlobalConfiguration.CoreContext.GetFlightService(),
                 GlobalConfiguration.CoreContext.GetCommonService(), 
                 GlobalConfiguration.CoreContext.GetConfigurationService(), 
                 crossParameters);
@@ -61,20 +62,37 @@ namespace Despegar.WP.UI.Product.Flights
             // Init Checkout
             await ViewModel.Init();
 
-            // View Adaptations
-            // TODO CHECK DECOLAR AND SITE
-            if (!ViewModel.InvoiceRequired)
-            {
-                MainPivot.Items.RemoveAt(4);
-            }
+            // Set Defaults values and Country specifics
+            ConfigureFields();
 
             this.DataContext = ViewModel;
+        }
 
-            //For fix credit card null value 
-            CardDataControl.DataContext = ViewModel.CoreBookingFields.form.payment;
+        /// <summary>
+        /// View Adaptations based on selected country
+        /// </summary>
+        private void ConfigureFields()
+        {
+            switch(GlobalConfiguration.Site) 
+            {
+                case "AR":
+                    if (!ViewModel.InvoiceRequired)
+                    {
+                        MainPivot.Items.RemoveAt(4);
+                    }
 
-            // Notify to CardData
-            PaymentControl.OnUserControlButtonClicked += CardDataControl.OnUCButtonClicked;
+                    // Passengers defaults                    
+                    //foreach (NationalitySelection control in this.FindVisualChildren<NationalitySelection>(PassengerControl))
+                    //    control.SetDisplayText("Argentina");
+                break;
+
+                default:
+                //For fix credit card null value 
+                CardDataControl.DataContext = ViewModel.CoreBookingFields.form.payment;
+                // Notify to CardData
+                PaymentControl.OnUserControlButtonClicked += CardDataControl.OnUCButtonClicked;
+                break;
+            }
         }
 
         /// <summary>

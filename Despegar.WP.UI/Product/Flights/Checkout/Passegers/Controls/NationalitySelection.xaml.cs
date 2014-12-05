@@ -25,7 +25,7 @@ namespace Despegar.WP.UI.Product.Flights.Checkout.Passegers.Controls
     public sealed partial class NationalitySelection : UserControl
     {
         public static readonly DependencyProperty ItemsSourceProperty = DependencyProperty.Register("ItemsSource", typeof(object), typeof(NationalitySelection), new PropertyMetadata(null));
-        public static readonly DependencyProperty SelectedItemProperty = DependencyProperty.Register("SelectedItem", typeof(object), typeof(NationalitySelection), new PropertyMetadata(null));
+        public static readonly DependencyProperty SelectedItemProperty = DependencyProperty.Register("SelectedItem", typeof(object), typeof(NationalitySelection), new PropertyMetadata(null));      
         private ModalPopup popup;
 
         #region ** BoilerPlate Code **
@@ -46,7 +46,6 @@ namespace Despegar.WP.UI.Product.Flights.Checkout.Passegers.Controls
         }
 
         #endregion
-
 
         private string _NationalityText;
         public string NationalityText
@@ -97,6 +96,11 @@ namespace Despegar.WP.UI.Product.Flights.Checkout.Passegers.Controls
         private void ShowPopup(object sender, RoutedEventArgs e)
         {                      
             popup.Show();
+        }
+
+        public void SetDisplayText(string displayText)
+        {
+            NationalityTextBox.Text = displayText;
         }
 
     }

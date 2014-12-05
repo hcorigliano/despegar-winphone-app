@@ -1,4 +1,5 @@
 ﻿using Despegar.Core.Business.Configuration;
+using Despegar.WP.UI.Common;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -16,13 +17,10 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
-// The User Control item template is documented at http://go.microsoft.com/fwlink/?LinkId=234236
-
 namespace Despegar.WP.UI.Product.Flights.Checkout.Passegers.Controls
 {
-    public sealed partial class NationalitySelectionPopup : UserControl, Despegar.WP.UI.Common.IPopupContent
+    public sealed partial class NationalitySelectionPopup : UserControl, IPopupContent
     {
-
         public NationalitySelectionPopup()
         {
             this.InitializeComponent();
@@ -32,16 +30,16 @@ namespace Despegar.WP.UI.Product.Flights.Checkout.Passegers.Controls
 
         public void Enter()
         {
-            //ShowDialogAnimation.Begin();
+            ShowDialogAnimation.Begin();
         }
 
         public void Leave()
         {
-            //HideDialogAnimation.Begin();
-            //HideDialogAnimation.Completed += DoClosePopup;
+            HideDialogAnimation.Begin();
+            HideDialogAnimation.Completed += DoClosePopup;
         }
 
-        private void DoClosePopup()
+        private void DoClosePopup(object sender, object e)
         {
             // in this example we assume the parent of the UserControl is a Popup 
             Popup p = this.Parent as Popup;
@@ -54,8 +52,7 @@ namespace Despegar.WP.UI.Product.Flights.Checkout.Passegers.Controls
         {
             CountryFields countrySelected = (CountryFields)(((ListView)NationalityControl).SelectedItem);
             ((NationalitySelection)DataContext).NationalityText = countrySelected.name;
-            //Leave();
-            DoClosePopup();
+            Leave();
         }
     }
 }

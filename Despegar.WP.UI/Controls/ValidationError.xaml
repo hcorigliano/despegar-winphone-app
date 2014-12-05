@@ -25,6 +25,6 @@
                 &#xE171;
             </TextBlock>
         </Grid>
-        <TextBlock  Grid.Column="2"  x:Name="TextLabel" Style="{StaticResource CheckoutValidationErrorText}" />
+        <TextBlock Grid.Column="2"  x:Name="TextLabel" Style="{StaticResource CheckoutValidationErrorText}" Text="Error e argentina sos un wachin" />
     </Grid>
-</UserControl>
+</UserControl> 

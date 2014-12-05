@@ -30,12 +30,11 @@
         <Image Grid.Row="0" Style="{StaticResource TopLogo}" />
         <TextBlock Grid.Row="1" x:Uid="Page_Checkout" Style="{StaticResource PageHeaderSmall}" Text="COMPRAR VUELO" />
 
-
         <Pivot Grid.Row="2" x:Name="MainPivot"  Style="{StaticResource PivotBaseMain}">
             
             <!-- Passengers -->
             <PivotItem x:Uid="Flight_Checkout_Passagers" Style="{StaticResource PivotItemBase}" xmlns:src="using:Despegar.WP.UI.Product.Flights.Checkout.Passegers">
-                <src:Passengers  />
+                <src:Passengers  x:Name="PassengerControl"  />
             </PivotItem>
 
             <!--Contact Pivot-->

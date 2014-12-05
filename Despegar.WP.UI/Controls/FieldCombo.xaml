@@ -6,18 +6,23 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:dev="using:Despegar.WP.UI.Developer.Controls"
-    mc:Ignorable="d"
+    mc:Ignorable="d"    
     >
 
-    <StackPanel Style="{StaticResource CheckoutFieldContainer}">
+    <Grid>
+      <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" MinHeight="{StaticResource dBlock1}"  />
+            <RowDefinition Height="Auto" MinHeight="{StaticResource dBlock2p}"  />
+        </Grid.RowDefinitions>
+        
         <!--<dev:UserControlDesignGrid />-->
-        <TextBlock Style="{StaticResource BaseTextLabel}" Text="{Binding Label}"  />
-        <ComboBox x:Name="fieldCombo"
+        <TextBlock Grid.Row="0" Style="{StaticResource BaseTextLabel}" Text="{Binding Label}"  />
+        <ComboBox Grid.Row="1"  x:Name="fieldCombo"
                   ItemsSource="{Binding ItemsSource}" 
                   SelectedValue="{Binding Value, Mode=TwoWay}"
                   SelectedValuePath="{Binding CodePath}" 
                   DisplayMemberPath="{Binding DisplayTextPath}"                   
                   Style="{StaticResource ComboBoxBase}" />
-    </StackPanel>
-
+  
+    </Grid>
 </UserControl>

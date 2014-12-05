@@ -1,16 +1,13 @@
 ﻿using Despegar.Core.Business.Common.State;
 using Despegar.Core.Business.Configuration;
 using Despegar.Core.Business.Dynamics;
-using Despegar.Core.Business.Flight.BookingCompletePostResponse;
 using Despegar.Core.Business.Flight.BookingFields;
 using Despegar.Core.IService;
 using Despegar.Core.Log;
 using Despegar.WP.UI.Model.Classes.Flights.Checkout;
 using Despegar.WP.UI.Model.Interfaces;
-using Despegar.WP.UI.Model.ViewModel;
 using Despegar.WP.UI.Model.ViewModel.Classes.Flights;
 using Despegar.WP.UI.Models.Classes;
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,9 +15,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace Despegar.WP.UI.Model
+namespace Despegar.WP.UI.Model.ViewModel
 {
-    public class FlightsCheckoutModel : ViewModelBase
+    public class FlightsCheckoutViewModel : ViewModelBase
     {        
         #region ** Private **
         private INavigator navigator;        
@@ -74,7 +71,7 @@ namespace Despegar.WP.UI.Model
         }    
         #endregion
 
-        public FlightsCheckoutModel(INavigator navigator, IFlightService flightServices, ICommonServices commonServices, IConfigurationService configService, FlightsCrossParameter parameters)
+        public FlightsCheckoutViewModel(INavigator navigator, IFlightService flightServices, ICommonServices commonServices, IConfigurationService configService, FlightsCrossParameter parameters)
         {
             this.navigator = navigator;
             this.flightService = flightServices;
@@ -130,7 +127,6 @@ namespace Despegar.WP.UI.Model
                     foreach (var passanger in CoreBookingFields.form.passengers)
                     {
                         passanger.nationality.CoreValue = "AR";
-                        passanger.nationality.DefaultViewValue = "Argentina";
                     }
                    
                     // Invoice Arg

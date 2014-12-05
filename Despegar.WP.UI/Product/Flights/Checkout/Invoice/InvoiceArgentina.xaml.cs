@@ -2,6 +2,7 @@
 using Despegar.Core.Business.Configuration;
 using Despegar.Core.Business.Flight.BookingFields;
 using Despegar.WP.UI.Model;
+using Despegar.WP.UI.Model.ViewModel;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -26,7 +27,7 @@ namespace Despegar.WP.UI.Product.Flights.Checkout.Invoice
    /// </summary>
     public sealed partial class InvoiceArgentina : UserControl
     {
-        public FlightsCheckoutModel ViewModel { get { return DataContext as FlightsCheckoutModel; } }
+        public FlightsCheckoutViewModel ViewModel { get { return DataContext as FlightsCheckoutViewModel; } }
 
         public InvoiceArgentina()
         {
