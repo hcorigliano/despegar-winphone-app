@@ -10,11 +10,13 @@ namespace Despegar.Core.Business.Flight.BookingFields
         // MAPI Fields
         public string data_type { get; set; }
         public bool required { get; set; }
-        public RegularField email { get; set; }
+        private RegularField emailField;
+        public RegularField email { get { return emailField; } set { emailField = value; emailConfirmation = new EmailConfirmField(value); } }
         public RegularField offers { get; set; }
         public List<Phone> phones { get; set; }
 
         // Custom
-        public Phone Phone { get { return phones.FirstOrDefault(); } }
+        public RegularField emailConfirmation { get; set; }
+        public Phone Phone { get { return phones.FirstOrDefault(); } }     
     }
 }

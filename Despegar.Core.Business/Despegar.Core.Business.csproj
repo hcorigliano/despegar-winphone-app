@@ -58,6 +58,7 @@
     <Compile Include="Enums\FlightSearchChildEnum.cs" />
     <Compile Include="Enums\FlightSearchPagesEnum.cs" />
     <Compile Include="Enums\SearchStates.cs" />
+    <Compile Include="Flight\BookingFields\EmailConfirmField.cs" />
     <Compile Include="Flight\Itineraries\CheapestPrice.cs" />
     <Compile Include="Flight\SearchBox\FlightSearchModel.cs" />
     <Compile Include="Flight\BookingCompletePostResponse\Answers.cs" />

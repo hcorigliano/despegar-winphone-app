@@ -39,7 +39,7 @@
 
             <!--Contact Pivot-->
             <PivotItem x:Uid="Flight_Checkout_Contact" Style="{StaticResource PivotItemBase}" xmlns:src="using:Despegar.WP.UI.Product.Flights.Checkout.Contact">
-                <src:ContactData />
+                <src:Contact />
             </PivotItem>
 
             <!--Payments Pivot-->

@@ -124,11 +124,15 @@ namespace Despegar.WP.UI.Model.ViewModel
             switch (countryCode)
             {
                 case "AR":
+                    // Passengers
                     foreach (var passanger in CoreBookingFields.form.passengers)
                     {
                         passanger.nationality.CoreValue = "AR";
                     }
                    
+                    // Contact
+                    CoreBookingFields.form.contact.Phone.type.SetDefaultValue();
+
                     // Invoice Arg
                     if (InvoiceRequired)
                     {

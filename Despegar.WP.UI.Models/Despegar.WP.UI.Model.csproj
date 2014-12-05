@@ -90,7 +90,7 @@
     <Compile Include="ViewModel\Classes\AdvanceSearchModel.cs" />
     <Compile Include="ViewModel\Classes\CountryItem.cs" />
     <Compile Include="FlightResultsModel.cs" />
-    <Compile Include="ViewModel\HomeModel.cs" />
+    <Compile Include="ViewModel\HomeViewModel.cs" />
     <Compile Include="Interfaces\IInitializeModelInterface.cs" />
     <Compile Include="Interfaces\IValidateInterface.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -7,7 +7,8 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:conv="using:Despegar.WP.UI.Common.Converter"    
     mc:Ignorable="d"
-    MinHeight="{StaticResource dBlock1}">
+    MinHeight="{StaticResource dBlock1}"
+    >
     
     <UserControl.Resources>
         <conv:NullToOpacityConverter x:Name="VisibilityConverter" />
@@ -27,4 +28,4 @@
         </Grid>
         <TextBlock Grid.Column="2"  x:Name="TextLabel" Style="{StaticResource CheckoutValidationErrorText}" Text="Error e argentina sos un wachin" />
     </Grid>
-</UserControl> 
+</UserControl>

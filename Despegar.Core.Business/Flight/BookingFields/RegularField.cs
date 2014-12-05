@@ -59,7 +59,6 @@ namespace Despegar.Core.Business.Flight.BookingFields
 
             if (required && String.IsNullOrWhiteSpace(CoreValue))
             {
-                // TODO Add error
                 Errors.Add("REQUIRED");
                 CurrentError = "REQUIRED";
                 return;
@@ -71,7 +70,6 @@ namespace Despegar.Core.Business.Flight.BookingFields
                 {
                     if(!Regex.IsMatch(CoreValue, validation.regex))
                     {
-                        // TODO Add error
                         Errors.Add(validation.error_code);
                         CurrentError = validation.error_code;
                     }   

@@ -997,7 +997,6 @@
     <Style x:Key="FlightIconResult" TargetType="Image" BasedOn="{StaticResource IconImageBase}">
         <Setter Property="Source" Value="/Assets/Icon/App/flight-right-small-white.png" />
     </Style>
-  
 
     <!-- Checkout Common -->
     <Style x:Key="CheckoutFieldContainer" TargetType="StackPanel">

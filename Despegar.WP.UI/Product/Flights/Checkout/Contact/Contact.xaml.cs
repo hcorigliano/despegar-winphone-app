@@ -17,9 +17,9 @@ using Windows.UI.Xaml.Navigation;
 
 namespace Despegar.WP.UI.Product.Flights.Checkout.Contact
 {
-    public sealed partial class ContactData : UserControl
+    public sealed partial class Contact : UserControl
     {
-        public ContactData()
+        public Contact()
         {
             this.InitializeComponent();
         }
