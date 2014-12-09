@@ -7,14 +7,12 @@ using System.Threading.Tasks;
 
 namespace Despegar.WP.UI.Model.Classes.Flights.Checkout
 {
-
     public class PaymentsWithoutInterest
     {
         public List<PaymentDetail> OnePay { get; set; }
         public List<PaymentDetail> SixPays { get; set; }
         public List<PaymentDetail> TwelvePays { get; set; }
         public List<PaymentDetail> TwentyFourPays { get; set; }
-
 
         public PaymentsWithoutInterest()
         {
@@ -27,62 +25,25 @@ namespace Despegar.WP.UI.Model.Classes.Flights.Checkout
 
     //---------------------------------------------------------------------------//
 
-
-
-    public class PaymentsWithInterest
+    public class PaymentsWithInterest : PaymentsWithoutInterest
     {
-        public List<ListPays> OnePay { get; set; }
-        public List<ListPays> SixPays { get; set; }
-        public List<ListPays> TwelvePays { get; set; }
-        public List<ListPays> TwentyFourPays { get; set; }
-        public string GrupLabelText { get; set; }
-
-        public PaymentsWithInterest()
-        {
-            OnePay = new List<ListPays>();
-            SixPays = new List<ListPays>();
-            TwelvePays = new List<ListPays>();
-            TwentyFourPays = new List<ListPays>();
-            //TODO : RESOURCE          
-               
-
-            GrupLabelText = "";
-        }
-
-
-    }
-
-    public class ListPays
-    {
-        public List<PaymentDetail> Cards { get; set; }
-
-        public ListPays()
-        {
-            Cards = new List<PaymentDetail>();
-        }
+        public string GrupLabelText { get; set; }        
     }
 
     //---------------------------------------------------------------------------//
 
-    public class PaymentsFormated
+    public class InstallmentFormatted
     {
-        public PaymentsWithoutInterest pay_at_destination { get; set; }
-        public PaymentsWithInterest with_interest { get; set; }
-        public PaymentsWithoutInterest without_interest { get; set; }
+        public PaymentsWithoutInterest PayAtDestination { get; set; }
+        public PaymentsWithInterest WithInterest { get; set; }
+        public PaymentsWithoutInterest WithoutInterest { get; set; }
 
-        public PaymentsFormated()
+        public InstallmentFormatted()
         {
-            pay_at_destination = new PaymentsWithoutInterest();
-            with_interest = new PaymentsWithInterest();
-            without_interest = new PaymentsWithoutInterest();
+            PayAtDestination = new PaymentsWithoutInterest();
+            WithInterest = new PaymentsWithInterest();
+            WithoutInterest = new PaymentsWithoutInterest();
         }
 
-        static public List<PaymentDetail> CardToArray(PaymentDetail card)
-        {
-            List<PaymentDetail> array = new List<PaymentDetail>();
-            array.Add(card);
-            return array;
-
-        }
     }
 }

@@ -25,30 +25,6 @@ namespace Despegar.WP.UI.Model.ViewModel
         private ICommonServices commonServices;
         private IConfigurationService configurationService;        
         private FlightsCrossParameter CrossParameters;
-
-        // En DUDA
-        private PaymentsFormated CorePaymentFormated;
-        public PaymentsFormated PaymentFormated
-        {
-            get { return CorePaymentFormated; }
-            set
-            {
-                CorePaymentFormated = value;
-                OnPropertyChanged();
-            }
-        }
-        private PriceFormated CorePriceFormated;
-
-        public PriceFormated PriceFormated
-        {
-            get { return CorePriceFormated; }
-            set
-            {
-                CorePriceFormated = value;
-                OnPropertyChanged();
-            }
-        }
-        // en duda
         #endregion
 
         #region ** Public Interface **
@@ -61,6 +37,72 @@ namespace Despegar.WP.UI.Model.ViewModel
         public bool InvoiceRequired { get { return CoreBookingFields.form.payment.invoice != null; } }
 
         public bool IsFiscalNameRequired { get { return CoreBookingFields.form.payment.invoice.fiscal_status.required && CoreBookingFields.form.payment.invoice.fiscal_status.CoreValue != "FINAL"; } }
+
+        /// <summary>
+        /// For Details section
+        /// </summary>
+        private PriceFormated priceDetailsFormatted;
+        public PriceFormated PriceDetailsFormatted
+        {
+            get { return priceDetailsFormatted; }
+            set
+            {
+                priceDetailsFormatted = value;
+                OnPropertyChanged();
+            }
+        }
+     
+        private InstallmentFormatted installmentFormatted;
+        public InstallmentFormatted InstallmentFormatted
+        {
+            get { return installmentFormatted; }
+            set
+            {
+                installmentFormatted = value;
+                OnPropertyChanged();
+            }
+        }
+
+        /// <summary>
+        /// Selected "RadioButton" payment strategy
+        /// </summary>
+        private List<PaymentDetail> seletedInstallment;
+        public List<PaymentDetail> SelectedInstallment { get { return seletedInstallment; } 
+            set 
+            { 
+                seletedInstallment = value;
+              
+                // Select first by default
+                SelectedCard = value.FirstOrDefault();
+
+                OnPropertyChanged();
+                OnPropertyChanged("CurrentCards");
+            } 
+        }
+
+        private PaymentDetail selectedCard;
+        public PaymentDetail SelectedCard 
+        {
+            get { return selectedCard; }
+            set 
+            {
+                selectedCard = value;
+                
+                // Set POST data
+                if (selectedCard != null)
+                {
+                    var payments = CoreBookingFields.form.payment;
+                    payments.installment.bank_code.CoreValue = selectedCard.card.bank;
+                    payments.installment.quantity.CoreValue = selectedCard.installments.quantity.ToString();
+                    payments.installment.card_code.CoreValue = selectedCard.card.code;
+                    payments.installment.card_code.CoreValue = selectedCard.card.company;
+                    payments.installment.card_type.CoreValue = selectedCard.card.type;
+                    payments.installment.complete_card_code.CoreValue = selectedCard.card.code;
+                }
+
+                OnPropertyChanged(); // TODO: no esta actualizando el ComboBox de Tarjeta
+            }
+        }
 
         public ICommand ValidateAndBuyCommand
         { 
@@ -94,9 +136,9 @@ namespace Despegar.WP.UI.Model.ViewModel
                 await LoadCountries();           
                 await LoadStates(currentCountry);
 
-                // Format Payments
-                CorePaymentFormated = FormatPayments();
-                CorePriceFormated = PriceFormatedConverter(CoreBookingFields);
+                // Format Price details / Installments
+                FormatInstallments();
+                FormatPrice();
 
                 // Set Known Default Values && Adapt Checkout to the country
                 ConfigureCountry(currentCountry);                
@@ -114,13 +156,18 @@ namespace Despegar.WP.UI.Model.ViewModel
         private void ConfigureCountry(string countryCode)
         {
             // Common
+
+            // Passengers
             foreach (var passanger in CoreBookingFields.form.passengers)
             {
                 passanger.document.type.SetDefaultValue();
                 passanger.gender.SetDefaultValue();
             }
 
-            // Country Specific
+            // Card data
+            CoreBookingFields.form.payment.card.owner_document.type.SetDefaultValue(); 
+            CoreBookingFields.form.payment.card.owner_gender.SetDefaultValue(); 
+          
             switch (countryCode)
             {
                 case "AR":
@@ -140,11 +187,11 @@ namespace Despegar.WP.UI.Model.ViewModel
 
                         CoreBookingFields.form.payment.invoice.fiscal_status.SetDefaultValue();
                         CoreBookingFields.form.payment.invoice.address.state.CoreValue = States.FirstOrDefault().id; // NOT WORKING, MUST BE DONE AFTER THIS CODE or use A RegularOptionsField (The Source works bad)
-                    }                    
+                    }
 
                     CoreBookingFields.form.contact.phones[0].country_code.SetDefaultValue();
                     CoreBookingFields.form.contact.phones[0].area_code.SetDefaultValue();
-               break;
+               break;                
             }
         }
 
@@ -190,106 +237,102 @@ namespace Despegar.WP.UI.Model.ViewModel
 
         #region ** Utils ** 
 
-        private PaymentsFormated FormatPayments()
-        {
-            //TODO: REFACTOR 
-            Payments payments = CoreBookingFields.payments; //added line
-            PaymentsFormated formated = new PaymentsFormated();
-            FillFormatedWithInterest(payments.with_interest, formated.with_interest);
-            FillFormatedWithoutInterest(payments.without_interest, formated.without_interest);
+        /// <summary>
+        /// Format Credit Cards installments
+        /// </summary>
+        /// <returns></returns>
+        private void FormatInstallments()
+        {            
+            Payments payments = CoreBookingFields.payments;
+            InstallmentFormatted = new InstallmentFormatted();
 
-            //TODO : FILL PAY AT DESTINATION
-            return formated;
-        }
-
-        private static void FillFormatedWithoutInterest(List<PaymentDetail> list, PaymentsWithoutInterest paymentsFilter)
-        {
-            foreach(PaymentDetail item in list )
+            // With interest
+            foreach (PaymentDetail item in payments.without_interest)
             {
                 switch (item.installments.quantity)
                 {
                     case 1:
-                        paymentsFilter.OnePay.Add(item);
+                        InstallmentFormatted.WithoutInterest.OnePay.Add(item);
                         break;
                     case 6:
-                        paymentsFilter.SixPays.Add(item);
+                        InstallmentFormatted.WithoutInterest.SixPays.Add(item);
                         break;
                     case 12:
-                        paymentsFilter.TwelvePays.Add(item);
+                        InstallmentFormatted.WithoutInterest.TwelvePays.Add(item);
                         break;
                     case 24:
-                        paymentsFilter.TwentyFourPays.Add(item);
+                        InstallmentFormatted.WithoutInterest.TwentyFourPays.Add(item);
                         break;
                 }
             }
-        }
 
-        private static void FillFormatedWithInterest(List<PaymentDetail> list, PaymentsWithInterest paymentsFilter)
-        {
-            foreach (PaymentDetail item in list)
-            {
-                ListPays listPays = new ListPays();
-                listPays.Cards.Add(item);
+            // Without Interest
+            foreach (PaymentDetail item in payments.with_interest)
+            {              
                 switch (item.installments.quantity)
                 {
                     case 1:
-                        paymentsFilter.OnePay.Add(listPays);
+                        InstallmentFormatted.WithInterest.OnePay.Add(item);
                         break;
                     case 6:
-                        paymentsFilter.SixPays.Add(listPays);
+                        InstallmentFormatted.WithInterest.SixPays.Add(item);
                         break;
                     case 12:
-                        paymentsFilter.TwelvePays.Add(listPays);
+                        InstallmentFormatted.WithInterest.TwelvePays.Add(item);
                         break;
                     case 24:
-                        paymentsFilter.TwentyFourPays.Add(listPays);
+                        InstallmentFormatted.WithInterest.TwentyFourPays.Add(item);
                         break;
                 }
             }
 
             List<string> availablePayments = new List<string>();
 
-            if (paymentsFilter.OnePay.Count != 0)
-            {
+            if (InstallmentFormatted.WithInterest.OnePay.Count != 0)
                 availablePayments.Add("1");
-            }
-            if (paymentsFilter.SixPays.Count != 0)
-            {
+
+            if (InstallmentFormatted.WithInterest.SixPays.Count != 0)
                 availablePayments.Add("6");
-            }
-            if (paymentsFilter.TwelvePays.Count != 0)
-            {
+
+            if (InstallmentFormatted.WithInterest.TwelvePays.Count != 0)
                 availablePayments.Add("12");
-            }
-            if (paymentsFilter.TwentyFourPays.Count != 0)
-            {
+
+            if (InstallmentFormatted.WithInterest.TwentyFourPays.Count != 0)
                 availablePayments.Add("24");
-            }
-            var input = String.Join(" , ", availablePayments); 
+            
+            string input = String.Join(" , ", availablePayments);
             StringBuilder sb = new StringBuilder(input);
             sb[input.LastIndexOf(',')] = 'o';
+
             var loader = new Windows.ApplicationModel.Resources.ResourceLoader();
-            paymentsFilter.GrupLabelText = sb.ToString() + " " + loader.GetString("Common_Pay_Of");
+            InstallmentFormatted.WithInterest.GrupLabelText = sb.ToString() + " " + loader.GetString("Common_Pay_Of");
+
+            //TODO : FILL PAY AT DESTINATION
         }
 
-        private PriceFormated PriceFormatedConverter(BookingFields booking)
+        /// <summary>
+        /// Payment Details
+        /// </summary>
+        /// <param name="booking"></param>
+        /// <returns></returns>
+        private PriceFormated FormatPrice()
         {
             PriceFormated formated = new PriceFormated();
 
-            formated.currency = booking.price.currency;
-            formated.total = booking.price.total;
-            formated.taxes = booking.price.taxes;
-            formated.retention = booking.price.retention;
-            formated.charges = booking.price.charges;
-            formated.adult_base = booking.price.adult_base;
-            formated.adults_subtotal = booking.price.adults_subtotal;
-            formated.children_subtotal = booking.price.children_subtotal;
-            formated.infants_subtotal = booking.price.infants_subtotal;
-            formated.final_price = booking.price.final_price;
+            formated.currency = CoreBookingFields.price.currency;
+            formated.total = CoreBookingFields.price.total;
+            formated.taxes = CoreBookingFields.price.taxes;
+            formated.retention = CoreBookingFields.price.retention;
+            formated.charges = CoreBookingFields.price.charges;
+            formated.adult_base = CoreBookingFields.price.adult_base;
+            formated.adults_subtotal = CoreBookingFields.price.adults_subtotal;
+            formated.children_subtotal = CoreBookingFields.price.children_subtotal;
+            formated.infants_subtotal = CoreBookingFields.price.infants_subtotal;
+            formated.final_price = CoreBookingFields.price.final_price;
 
-            formated.children_quantity = booking.form.passengers.Count(p => p.type == "CHILD").ToString();
-            formated.infant_quantity = booking.form.passengers.Count(p => p.type == "INFANT").ToString();
-            formated.adult_quantity = booking.form.passengers.Count(p => p.type == "ADULT").ToString();
+            formated.children_quantity = CoreBookingFields.form.passengers.Count(p => p.type == "CHILD").ToString();
+            formated.infant_quantity = CoreBookingFields.form.passengers.Count(p => p.type == "INFANT").ToString();
+            formated.adult_quantity = CoreBookingFields.form.passengers.Count(p => p.type == "ADULT").ToString();
 
             if (formated.children_subtotal != null)
                 formated.children_base = (formated.children_subtotal / Convert.ToInt32(formated.children_quantity)).ToString();
@@ -304,13 +347,13 @@ namespace Despegar.WP.UI.Model.ViewModel
         private async void ValidateAndBuy() 
         {
             dynamic objectToSerialize = DynamicFlightBookingFieldsToPost.ToDynamic(this.CoreBookingFields);
-            CrossParameters.price = PriceFormated;
+            CrossParameters.price = PriceDetailsFormatted;
             CrossParameters.BookingResponse = await flightService.CompleteBooking(objectToSerialize, CoreBookingFields.id);
             //BookingCompletePostResponse response = await flightService.CompleteBooking(form, "214ecbd4-7964-11e4-8980-fa163ec96567");
             //TODO : Go to Tks or Risk Questions}
 
             if (CrossParameters.BookingResponse.booking_status == "checkout_successful")            
                 navigator.GoTo(ViewModelPages.FlightsThanks, CrossParameters);            
-        }
+        }       
     }
 }

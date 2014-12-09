@@ -93,7 +93,7 @@ namespace Despegar.Core.Connector
                 if (!httpResponse.IsSuccessStatusCode)
                 {
                     customExceptionThrown = true;
-                    var e =  new HTTPStatusErrorException(String.Format("[Connector]: HTTP Error code {0} Message: {1}" , httpResponse.StatusCode.ToString(), response));
+                    var e =  new HTTPStatusErrorException(String.Format("[Connector]: HTTP Error code {0} ({1}) Message: {2}", (int)httpResponse.StatusCode, httpResponse.StatusCode.ToString(), response));
                     Logger.LogCoreException(e);                    
                     throw e;
                 }
@@ -101,7 +101,7 @@ namespace Despegar.Core.Connector
                 // Check Empty Response
                 if (String.IsNullOrEmpty(response))
                 {
-                    var e = new HTTPStatusErrorException(String.Format("[Connector]: HTTP Error code {0} Message: {1}", httpResponse.StatusCode.ToString(), response));
+                    var e = new HTTPStatusErrorException(String.Format("[Connector]: HTTP Error code {0} ({1}) Message: {2}", (int)httpResponse.StatusCode, httpResponse.StatusCode.ToString(), response));
                     customExceptionThrown = true;
                     Logger.LogCoreException(e);
                     throw e;

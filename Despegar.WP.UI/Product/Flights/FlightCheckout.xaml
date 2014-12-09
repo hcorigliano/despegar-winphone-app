@@ -43,17 +43,13 @@
             </PivotItem>
 
             <!--Payments Pivot-->
-            <PivotItem x:Uid="Flight_Checkout_Payments" Style="{StaticResource PivotItemBase}">
-                <StackPanel xmlns:src="using:Despegar.WP.UI.Product.Flights.Checkout.Payment">
-                    <src:Payments x:Name="PaymentControl" DataContext="{Binding PaymentFormated}" />
-                </StackPanel>
+            <PivotItem x:Uid="Flight_Checkout_Payments" Style="{StaticResource PivotItemBase}" xmlns:src="using:Despegar.WP.UI.Product.Flights.Checkout.Payment">
+               <src:Payments  />
             </PivotItem>
 
             <!--Card Data Pivot-->
-            <PivotItem x:Uid="Flight_Checkout_Card_Data" Style="{StaticResource PivotItemBase}">
-                <StackPanel xmlns:src="using:Despegar.WP.UI.Product.Flights.Checkout.CardData">
-                    <src:CardData x:Name="CardDataControl" DataContext="{Binding bookingfields.form.payment}" />
-                </StackPanel>
+            <PivotItem x:Uid="Flight_Checkout_Card_Data" Style="{StaticResource PivotItemBase}" xmlns:src="using:Despegar.WP.UI.Product.Flights.Checkout.CardData">              
+                <src:CardData />
             </PivotItem>
 
             <!-- Invoice Arg -->
