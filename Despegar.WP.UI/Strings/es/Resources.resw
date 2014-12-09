@@ -433,7 +433,7 @@
     <value>Calle</value>
   </data>
   <data name="Flight_Checkout_Payments.Header" xml:space="preserve">
-    <value>Pago</value>
+    <value>pago</value>
   </data>
   <data name="Common_Pays_With" xml:space="preserve">
     <value>Pagos con </value>
