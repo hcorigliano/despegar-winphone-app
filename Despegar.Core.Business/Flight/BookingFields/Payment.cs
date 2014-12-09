@@ -10,7 +10,7 @@ namespace Despegar.Core.Business.Flight.BookingFields
         public bool required { get; set; }
         public Installment installment { get; set; }
         public Card2 card { get; set; }
-        public Invoice invoice { get; set; }
+        public InvoiceArg invoice { get; set; }
         public string data_type { get; set; }
     }
 }

@@ -18,14 +18,13 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
-// The User Control item template is documented at http://go.microsoft.com/fwlink/?LinkId=234236
-
 namespace Despegar.WP.UI.Product.Flights.Checkout.Passegers.Controls
 {
     public sealed partial class NationalitySelection : UserControl
     {
         public static readonly DependencyProperty ItemsSourceProperty = DependencyProperty.Register("ItemsSource", typeof(object), typeof(NationalitySelection), new PropertyMetadata(null));
-        public static readonly DependencyProperty SelectedItemProperty = DependencyProperty.Register("SelectedItem", typeof(object), typeof(NationalitySelection), new PropertyMetadata(null));
+        public static readonly DependencyProperty SelectedItemProperty = DependencyProperty.Register("SelectedItem", typeof(object), typeof(NationalitySelection), new PropertyMetadata(null));      
+        private ModalPopup popup;
 
         #region ** BoilerPlate Code **
         public event PropertyChangedEventHandler PropertyChanged;
@@ -45,7 +44,6 @@ namespace Despegar.WP.UI.Product.Flights.Checkout.Passegers.Controls
         }
 
         #endregion
-
 
         private string _NationalityText;
         public string NationalityText
@@ -83,6 +81,8 @@ namespace Despegar.WP.UI.Product.Flights.Checkout.Passegers.Controls
         {
             this.InitializeComponent();
             (this.Content as FrameworkElement).DataContext = this;
+
+            popup = new ModalPopup(new NationalitySelectionPopup() { DataContext = this });
         }
 
         private void SelectionChangedListBox(object sender, SelectionChangedEventArgs e)
@@ -92,11 +92,13 @@ namespace Despegar.WP.UI.Product.Flights.Checkout.Passegers.Controls
         }
 
         private void ShowPopup(object sender, RoutedEventArgs e)
-        {
-            NationalitySelectionPopup nsp = new NationalitySelectionPopup();
-            nsp.DataContext = this;
-            ModalPopup popup = new ModalPopup(nsp);
+        {                      
             popup.Show();
+        }
+
+        public void SetDisplayText(string displayText)
+        {
+            NationalityTextBox.Text = displayText;
         }
 
     }

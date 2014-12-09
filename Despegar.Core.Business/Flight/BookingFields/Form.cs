@@ -14,6 +14,6 @@ namespace Despegar.Core.Business.Flight.BookingFields
         public List<Voucher> vouchers { get; set; }
         public List<object> messages { get; set; }
         public List<object> destination_services { get; set; }
-        public FieldDataType coupon_beneficiary_id_type { get; set; }
+        public RegularField coupon_beneficiary_id_type { get; set; }
     }
 }

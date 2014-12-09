@@ -6,71 +6,80 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:conv="using:Despegar.WP.UI.Common.Converter"
+    xmlns:controls="using:Despegar.WP.UI.Controls"
     xmlns:dev="using:Despegar.WP.UI.Developer.Controls"
+    xmlns:src="using:Despegar.WP.UI.Product.Flights.Checkout.Passegers.Controls"
     mc:Ignorable="d"
     x:Name="passengerControl"
     >
-
     <UserControl.Resources>
-        <conv:VisibilityConverter x:Name="VisibilityConverter"/>
-        <conv:TypeToTextConverter x:Name="TypeToTextConverter"/>
-        <conv:DateToStringConverter x:Name="DateToStringConverter"/>
+        <conv:VisibilityConverter x:Name="VisibilityConverter" TrueValue="Visible" FalseValue="Collapsed"/>
+        <conv:TypeToTextConverter x:Name="TypeToTextConverter" />
+        <conv:DateToStringConverter x:Name="DateToStringConverter" />
     </UserControl.Resources>
 
-    <Grid VerticalAlignment="Top" >
+    <ScrollViewer>
+        <ItemsControl ItemsSource="{Binding CoreBookingFields.form.passengers}">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="{StaticResource Block1p}" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
 
-        <Grid.RowDefinitions>
-            <RowDefinition Height="{StaticResource Block1p}"></RowDefinition>
-            <RowDefinition Height="auto"></RowDefinition>
-        </Grid.RowDefinitions>
-        <Grid Grid.Row="0" >
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition ></ColumnDefinition>
-                <ColumnDefinition></ColumnDefinition>
-            </Grid.ColumnDefinitions>
-            <TextBlock Style="{StaticResource BaseTextLabel}" Grid.Column="0" Text="{Binding type , Converter={StaticResource TypeToTextConverter}}" Height="30" VerticalAlignment="Bottom"></TextBlock>
-        </Grid>
+                        <!-- Passenger type -->
+                        <Grid Grid.Row="0" >
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
 
-        <StackPanel Grid.Row="1">
-            <StackPanel Style="{StaticResource TextBoxInputContainer}" Visibility="{Binding first_name.required,Converter={StaticResource VisibilityConverter}}" >
-                <TextBlock Style="{StaticResource BaseTextLabel}" x:Uid="Passager_First_Name" Text="Nombre"></TextBlock>
-                <TextBox Style="{StaticResource CheckoutInputBase}" x:Name="first_name" Text="{Binding first_name.coreValue,Mode=TwoWay}"></TextBox>
-            </StackPanel>
-
-            <StackPanel Style="{StaticResource TextBoxInputContainer}" Visibility="{Binding last_name.required,Converter={StaticResource VisibilityConverter}}">
-                <TextBlock Style="{StaticResource BaseTextLabel}" x:Uid="Passager_Last_Name" Text="Apellido"></TextBlock>
-                <TextBox Style="{StaticResource CheckoutInputBase}" x:Name="last_name" Text="{Binding last_name.coreValue,Mode=TwoWay}"></TextBox>
-            </StackPanel>
-
-            <StackPanel Style="{StaticResource TextBoxInputContainer}" Visibility="{Binding nationality.required,Converter={StaticResource VisibilityConverter}}">
-                <TextBlock Style="{StaticResource BaseTextLabel}" x:Uid="Passager_Nationality" Text="Nacionalidad"></TextBlock>
-                <StackPanel  xmlns:src="using:Despegar.WP.UI.Product.Flights.Checkout.Passegers.Controls">
-                    <src:NationalitySelection x:Name="NationalitySelection" ItemsSource="{Binding Countries, ElementName=passengerControl , Mode=TwoWay}" SelectedItem="{Binding nationality.coreValue , Mode=TwoWay}"  />
-                </StackPanel>
-            </StackPanel>
-
-            <StackPanel Style="{StaticResource TextBoxInputContainer}" Visibility="{Binding document.required,Converter={StaticResource VisibilityConverter}}">
-                <TextBlock Style="{StaticResource BaseTextLabel}" x:Uid="Passager_Document_Type" Text="Tipo de documento"></TextBlock>
-                <ComboBox Style="{StaticResource ComboBoxBase}"  x:Name="document" ItemsSource="{Binding document.type.options}" DisplayMemberPath="description" SelectedValue="{Binding document.type.coreValue, Mode=TwoWay}" SelectedValuePath="value"></ComboBox>
-            </StackPanel>
-
-            <StackPanel Style="{StaticResource TextBoxInputContainer}" Visibility="{Binding document.required,Converter={StaticResource VisibilityConverter}}">
-                <TextBlock Style="{StaticResource BaseTextLabel}" x:Uid="Passager_Document_Number" Text="Numero de documento"></TextBlock>
-                <TextBox Style="{StaticResource CheckoutInputBase}" x:Name="document_number" Text="{Binding document.number.coreValue,Mode=TwoWay}"></TextBox>
-            </StackPanel>
-
-            <StackPanel Style="{StaticResource TextBoxInputContainer}" Visibility="{Binding birthdate.required,Converter={StaticResource VisibilityConverter}}">
-                <TextBlock Style="{StaticResource BaseTextLabel}" x:Uid="Passager_Birthdate" Text="Fecha de nacimiento"></TextBlock>
-                <DatePicker Style="{StaticResource DatePickerBase}" x:Name="birthdate" Height="auto" Date="{Binding birthdate.coreValue , Mode=TwoWay , Converter={StaticResource DateToStringConverter}}"></DatePicker>
-            </StackPanel>
-
-            <StackPanel Style="{StaticResource TextBoxInputContainer}" Visibility="{Binding gender.required,Converter={StaticResource VisibilityConverter}}">
-                <TextBlock Style="{StaticResource BaseTextLabel}" x:Uid="Passager_gender" Text="Sexo"></TextBlock>
-                <ComboBox Style="{StaticResource ComboBoxBase}" x:Name="gender" ItemsSource="{Binding gender.options}" DisplayMemberPath="description"  SelectedValue="{Binding gender.coreValue, Mode=TwoWay}" SelectedValuePath="value" ></ComboBox>
-            </StackPanel>
-
-        </StackPanel>
-
-    </Grid>
-
+                            <TextBlock Style="{StaticResource BaseTextLabel}" Grid.Column="0"
+                             Text="{Binding type , Converter={StaticResource TypeToTextConverter}}" />
+                        </Grid>
+ 
+                        <!-- Fields -->
+                        <StackPanel Grid.Row="1">
+                            <!-- First Name -->
+                            <StackPanel Visibility="{Binding first_name.required, Converter={StaticResource VisibilityConverter}}">
+                                <controls:Field x:Uid="Flights_Checkout_Passenger_First_Name" Value="{Binding first_name.CoreValue, Mode=TwoWay}" />
+                                <controls:ValidationError ErrorPrefix="Flights_Checkout_Passenger_First_Name" ErrorCode="{Binding first_name.CurrentError}" />
+                            </StackPanel>
+                            <!-- Last Name -->
+                            <StackPanel Visibility="{Binding last_name.required, Converter={StaticResource VisibilityConverter}}">
+                                <controls:Field x:Uid="Flights_Checkout_Passenger_Last_Name" Value="{Binding last_name.CoreValue, Mode=TwoWay}" />
+                                <controls:ValidationError ErrorPrefix="Flights_Checkout_Passenger_Last_Name" ErrorCode="{Binding last_name.CurrentError}" />
+                            </StackPanel>
+                            <!-- Nationality -->
+                            <StackPanel Style="{StaticResource TextBoxInputContainer}" Visibility="{Binding nationality.required, Converter={StaticResource VisibilityConverter}}">
+                                <TextBlock Style="{StaticResource BaseTextLabel}" x:Uid="Flights_Checkout_Passenger_Nationality" Text="Nacionalidad" />
+                                <src:NationalitySelection x:Name="NationalitySelection" ItemsSource="{Binding DataContext.Countries, ElementName=passengerControl , Mode=TwoWay}" SelectedItem="{Binding nationality.CoreValue , Mode=TwoWay}"  />
+                                <controls:ValidationError ErrorPrefix="Flights_Checkout_Passenger_Nationality" ErrorCode="{Binding nationality.CurrentError}" />
+                            </StackPanel>
+                            <!-- Nro Documento -->
+                            <StackPanel Visibility="{Binding document.number.required, Converter={StaticResource VisibilityConverter}}">
+                                <controls:NumericField x:Uid="Flights_Checkout_Passenger_Document_Number" Value="{Binding document.number.CoreValue, Mode=TwoWay}" />
+                                <controls:ValidationError ErrorPrefix="Flights_Checkout_Passenger_Document_Number" ErrorCode="{Binding document.number.CurrentError}" />
+                            </StackPanel>
+                            <!-- Document Type -->
+                            <StackPanel Visibility="{Binding document.type.required, Converter={StaticResource VisibilityConverter}}">
+                                <controls:FieldCombo x:Uid="Flights_Checkout_Passenger_Document_Type"  ItemsSource="{Binding document.type.options}"  Value="{Binding document.type.CoreValue, Mode=TwoWay}" DisplayTextPath="description" CodePath="value" />
+                            </StackPanel>
+                            <!-- Birthday -->
+                            <StackPanel Style="{StaticResource TextBoxInputContainer}" Visibility="{Binding birthdate.required,Converter={StaticResource VisibilityConverter}}">
+                                <TextBlock  Style="{StaticResource BaseTextLabel}" x:Uid="Flights_Checkout_Passager_Birthdate" Text="Fecha de nacimiento" />
+                                <DatePicker Style="{StaticResource DatePickerBase}"  Date="{Binding birthdate.CoreValue, Mode=TwoWay, Converter={StaticResource DateToStringConverter}}" />
+                            </StackPanel>
+                            <!-- Gender -->
+                            <StackPanel Visibility="{Binding gender.required, Converter={StaticResource VisibilityConverter}}">
+                                <controls:FieldCombo x:Uid="Flights_Checkout_Passenger_Gender"  ItemsSource="{Binding gender.options}"  Value="{Binding gender.CoreValue, Mode=TwoWay}" DisplayTextPath="description" CodePath="value" />
+                            </StackPanel>          
+                            
+                        </StackPanel>
+                    </Grid>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+    </ScrollViewer> 
 </UserControl>

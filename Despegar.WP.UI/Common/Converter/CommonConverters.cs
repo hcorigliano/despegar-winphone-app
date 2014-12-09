@@ -12,13 +12,12 @@ using Windows.UI.Xaml.Data;
 
 namespace Despegar.WP.UI.Common.Converter
 {
-    // TODO Replace for the VisibilityProConverter
-    public class VisibilityConverter : IValueConverter
+    public class NullToOpacityConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, string language)
         {
-            if (value == null) { return Visibility.Collapsed; }
-            else { return System.Convert.ToBoolean(value) ? Visibility.Visible : Visibility.Collapsed; }
+            if (value == null) { return 0d; }
+            return 1d;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)
@@ -69,8 +68,7 @@ namespace Despegar.WP.UI.Common.Converter
                 case "INFANT":
                     return loader.GetString("Generic_Infant");
                 default:
-                    return "";
-
+                    return String.Empty;
             }
         }        
 
@@ -134,19 +132,4 @@ namespace Despegar.WP.UI.Common.Converter
         }
     }
 
-    public class StringFormatConverter : IValueConverter
-    {
-        public object Convert(object value, Type targetType, object parameter, string language)
-        {
-            return string.Format(parameter as string, value);
-        }
-
-        public object ConvertBack(object value, Type targetType, object parameter, string language)
-        {
-            return null;
-        }
-    }
-
-
-   
 }

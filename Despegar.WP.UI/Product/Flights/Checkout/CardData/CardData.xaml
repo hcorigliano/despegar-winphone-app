@@ -23,7 +23,7 @@
                 <!--Card-->
                 <!-- Dev -->
                 <!--<dev:UserControlDesignGrid />-->
-                
+
                 <!--TARJETA-->
                 <StackPanel Style="{StaticResource TextBoxInputContainer}" >
                     <TextBlock Style="{StaticResource BaseTextLabel}" x:Uid="Card_Data_Card" Text="Tarjeta"></TextBlock>
@@ -35,32 +35,38 @@
                     <TextBox InputScope="Number" Style="{StaticResource CheckoutInputBase}" x:Name="number" Text="{Binding card.number.coreValue , Mode=TwoWay}"></TextBox>
                 </StackPanel>
 
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="{StaticResource Block6p}"></ColumnDefinition>
-                        <ColumnDefinition></ColumnDefinition>
-                    </Grid.ColumnDefinitions>
-               
 
-                <StackPanel Grid.Row="0" Style="{StaticResource TextBoxInputContainer}" >
+
+
+                <StackPanel Style="{StaticResource TextBoxInputContainer}" >
                     <TextBlock Style="{StaticResource BaseTextLabel}" x:Uid="Card_Data_Expiration" Text="Vencimiento"></TextBlock>
-                        <DatePicker  MonthFormat="{}{month.full}" Style="{StaticResource DatePickerBase}" DayVisible="False"   Date="{Binding card.expiration.coreValue , Mode=TwoWay , Converter={StaticResource DateToExpirationStringConverter}}" ></DatePicker>
-                    <!--BINDEAR MIN YEAR-->
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="{StaticResource Block6}"></ColumnDefinition>
+                            <ColumnDefinition Width="{StaticResource Offset}"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+
+                        <ComboBox Style="{StaticResource ComboBoxBase}" Width="{StaticResource dBlock6}" x:Uid="Card_Data_Month" Grid.Column="0" HorizontalAlignment="Left" x:Name="MonthCombo" SelectionChanged="FillExpiration"></ComboBox>
+                        <ComboBox Style="{StaticResource ComboBoxBase}" HorizontalAlignment="Right" Width="{StaticResource dBlock6p}" x:Uid="Card_Data_Year" Grid.Column="2" x:Name="YearCombo"  SelectionChanged="FillExpiration"></ComboBox>
+
+                        <!--BINDEAR MIN YEAR-->
+                    </Grid>
                 </StackPanel>
-                </Grid>
 
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="{StaticResource Block6p}"></ColumnDefinition>
+                        <ColumnDefinition Width="{StaticResource Block6}"></ColumnDefinition>
                         <ColumnDefinition></ColumnDefinition>
                     </Grid.ColumnDefinitions>
 
                     <StackPanel Grid.Column="0" Style="{StaticResource TextBoxInputContainer}" Visibility="{Binding card.security_code.required,Converter={StaticResource VisibilityConverter}}" >
-                    <TextBlock Style="{StaticResource BaseTextLabel}" x:Uid="Card_Data_Security_Code" Text="Codigo de seguridad"></TextBlock>
+                        <TextBlock Style="{StaticResource BaseTextLabel}" x:Uid="Card_Data_Security_Code" Text="Codigo de seguridad"></TextBlock>
                         <TextBox InputScope="Number" Style="{StaticResource CheckoutInputBase}" x:Name="security_code" Text="{Binding card.security_code.coreValue , Mode=TwoWay}"></TextBox>
-                </StackPanel>
+                    </StackPanel>
                 </Grid>
-                
+
                 <StackPanel Style="{StaticResource TextBoxInputContainer}" Visibility="{Binding card.owner_name.required,Converter={StaticResource VisibilityConverter}}" >
                     <TextBlock Style="{StaticResource BaseTextLabel}" x:Uid="Card_Data_owner_name" Text="Nombre del titular"></TextBlock>
                     <TextBox Style="{StaticResource CheckoutInputBase}" x:Name="owner_name" Text="{Binding card.owner_name.coreValue , Mode=TwoWay}"></TextBox>

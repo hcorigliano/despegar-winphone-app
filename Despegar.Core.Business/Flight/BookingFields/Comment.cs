@@ -5,9 +5,9 @@ using System.Text;
 
 namespace Despegar.Core.Business.Flight.BookingFields
 {
-    public class Comment : FieldDataType
+    public class Comment : RegularField
     {
-        public FieldDataType reference_code { get; set; }
-        public FieldDataType follow_reservation { get; set; }
+        public RegularField reference_code { get; set; }
+        public RegularField follow_reservation { get; set; }
     }
 }
