@@ -39,7 +39,7 @@ namespace Despegar.Core.Business.Dynamics
 
         public static object ToDynamic(BookingFields bookingFields)
         {
-            //bookingFields = FillBookingFields(bookingFields);
+            bookingFields = FillBookingFields(bookingFields);
 
             dynamic result = new ExpandoObject();
             result.form = new ExpandoObject();
@@ -128,7 +128,7 @@ namespace Despegar.Core.Business.Dynamics
                 bookingFields.form.payment.invoice.address.department.CoreValue = "A";
                 bookingFields.form.payment.invoice.address.number.CoreValue = "1234";
                 bookingFields.form.payment.invoice.address.postal_code.CoreValue = "7777";
-                bookingFields.form.payment.invoice.address.state.CoreValue = "B";
+                bookingFields.form.payment.invoice.address.state.CoreValue = "14061";
                 bookingFields.form.payment.invoice.address.street.CoreValue = "La Calle";
                 bookingFields.form.payment.invoice.fiscal_id.CoreValue = "20121231238";
                 bookingFields.form.payment.invoice.fiscal_name.CoreValue = "RazonSocial";
