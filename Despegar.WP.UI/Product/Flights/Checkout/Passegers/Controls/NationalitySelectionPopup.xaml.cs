@@ -65,7 +65,7 @@ namespace Despegar.WP.UI.Product.Flights.Checkout.Passegers.Controls
             if (rootFrame != null)
             {
                 e.Handled = true;
-                DoClosePopup();
+                DoClosePopup(null ,null);
             }
             HardwareButtons.BackPressed -= HardwareButtons_BackPressed;
         }

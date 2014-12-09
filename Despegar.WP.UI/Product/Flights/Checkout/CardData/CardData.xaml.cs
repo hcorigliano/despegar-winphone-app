@@ -81,7 +81,7 @@ namespace Despegar.WP.UI.Product.Flights.Checkout.CardData
         {
             if (YearCombo.SelectedValue != null && MonthCombo.SelectedValue != null)
             {
-                payments.card.expiration.coreValue = YearCombo.SelectedValue.ToString() + "-" + MonthCombo.SelectedValue.ToString();
+                payments.card.expiration.CoreValue = YearCombo.SelectedValue.ToString() + "-" + MonthCombo.SelectedValue.ToString();
             }
         }
     }
