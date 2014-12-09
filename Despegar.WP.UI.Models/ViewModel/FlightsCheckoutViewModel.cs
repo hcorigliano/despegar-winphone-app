@@ -304,7 +304,7 @@ namespace Despegar.WP.UI.Model.ViewModel
         private async void ValidateAndBuy() 
         {
             dynamic objectToSerialize = DynamicFlightBookingFieldsToPost.ToDynamic(this.CoreBookingFields);
-            CrossParameters.price = PriceFormated;
+            CrossParameters.PriceDetail = PriceFormated;
             CrossParameters.BookingResponse = await flightService.CompleteBooking(objectToSerialize, CoreBookingFields.id);
             //BookingCompletePostResponse response = await flightService.CompleteBooking(form, "214ecbd4-7964-11e4-8980-fa163ec96567");
             //TODO : Go to Tks or Risk Questions}

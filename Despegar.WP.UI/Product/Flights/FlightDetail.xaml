@@ -8,9 +8,14 @@
     x:Class="Despegar.WP.UI.Product.Flights.FlightDetail"
     xmlns:src="using:Despegar.WP.UI.Controls.Flights.Detail"
     xmlns:dev="using:Despegar.WP.UI.Developer.Controls"
+    xmlns:conv="using:Despegar.WP.UI.Common.Converter"
     mc:Ignorable="d"
     Style="{StaticResource BasePage}">
-
+    
+    <UserControl.Resources>
+        <conv:StringConverter x:Key="stringFormatConverter"/>
+    </UserControl.Resources>
+    
     <Grid x:Name="LayoutRoot" Style="{StaticResource MainContainerGrid}">
 		<Grid.ChildrenTransitions>
 			<TransitionCollection>
@@ -46,6 +51,8 @@
         </Pivot>
         
         <!-- Footer -->
-        <Button Grid.Row="3" x:Uid="Page_Flight_Detail_Buy.Text" Content="Comprar" Style="{StaticResource ButtonBottomRed}" Command="{Binding BuyCommand}"/>       
-	</Grid>
+        <!--<Button Content="{Binding CrossParameters.price, Converter={StaticResource stringFormatConverter}, ConverterParameter={StaticResource Page_Flight_Detail_Buy.Text }}"  Grid.Row="3"    Style="{StaticResource ButtonBottomRed}" Command="{Binding BuyCommand}"/>-->
+        <!--TODO : USAR RESOURCES-->
+        <Button Content="{Binding CrossParameters.price, Converter={StaticResource stringFormatConverter}, ConverterParameter='Comprar a {0}'}"  Grid.Row="3"    Style="{StaticResource ButtonBottomRed}" Command="{Binding BuyCommand}"/>
+    </Grid>
 </Page>

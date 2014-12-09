@@ -15,6 +15,8 @@ namespace Despegar.WP.UI.Model.ViewModel.Classes.Flights
         public Route Outbound { get; set; }
         public string FlightId { get; set; }
         public BookingCompletePostResponse BookingResponse { get; set; }
-        public PriceFormated price { get; set; }
+        public PriceFormated PriceDetail { get; set; }
+        public int price { get; set; }
+        
     }
 }

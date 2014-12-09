@@ -349,7 +349,7 @@
     <value>vuelta</value>
   </data>
   <data name="Page_Flight_Detail_Buy.Text" xml:space="preserve">
-    <value>Comprar</value>
+    <value>Comprar a {0}</value>
   </data>
   <data name="Page_Flight_Detail_TimeWait.Text" xml:space="preserve">
     <value>Conexion con espera de</value>
@@ -586,8 +586,8 @@
     <value>Filtros</value>
   </data>
   <data name="Card_Data_Year.PlaceholderText" xml:space="preserve">
-    <value>Año</value>    
-   </data>
+    <value>Año</value>
+  </data>
   <data name="Flights_Checkout_Passenger_First_Name_ERROR_INVALID_NAMES" xml:space="preserve">
     <value>Verifique el nombre ingresado</value>
   </data>

@@ -221,6 +221,7 @@ namespace Despegar.WP.UI.Product.Flights
             {
                 flightCrossParameter.Inbound = ((RoutesItems)grid.DataContext).inbound;
                 flightCrossParameter.Outbound = ((RoutesItems)grid.DataContext).outbound;
+                flightCrossParameter.price = ((RoutesItems)grid.DataContext).price;
                 OldPagesManager.GoTo(typeof(FlightDetail), flightCrossParameter);
             }
         }
