@@ -19,7 +19,10 @@ namespace Despegar.Core.Business.Dynamics
             result.first_name = passenger.first_name.CoreValue;
             result.last_name = passenger.last_name.CoreValue;
             result.nationality = passenger.nationality.CoreValue;
-            result.birthdate = passenger.birthdate.CoreValue;
+            if (passenger.birthdate != null)
+            {
+                result.birthdate = passenger.birthdate.CoreValue;
+            }
             result.gender = passenger.gender.CoreValue;
 
             //Agregar todos los que falten
@@ -39,7 +42,10 @@ namespace Despegar.Core.Business.Dynamics
 
         public static object ToDynamic(BookingFields bookingFields)
         {
-            bookingFields = FillBookingFields(bookingFields);
+
+            #if DEBUG
+                bookingFields = FillBookingFields(bookingFields);
+            #endif
 
             dynamic result = new ExpandoObject();
             result.form = new ExpandoObject();
@@ -104,7 +110,10 @@ namespace Despegar.Core.Business.Dynamics
             bookingFields.form.contact.phones[0].country_code.CoreValue = "54";
             bookingFields.form.contact.phones[0].number.CoreValue = "44444444";
             bookingFields.form.contact.phones[0].type.CoreValue = "HOME";
-            bookingFields.form.passengers[0].birthdate.CoreValue = "1988-11-27";
+            if (bookingFields.form.passengers[0].birthdate != null)
+            { 
+                bookingFields.form.passengers[0].birthdate.CoreValue = "1988-11-27"; 
+            }
             bookingFields.form.passengers[0].document.number.CoreValue = "12123123";
             bookingFields.form.passengers[0].document.type.CoreValue = "LOCAL";
             bookingFields.form.passengers[0].first_name.CoreValue = "Test";

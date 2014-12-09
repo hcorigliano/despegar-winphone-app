@@ -1,6 +1,7 @@
 ﻿using Despegar.Core.Business.Common.State;
 using Despegar.Core.Business.Configuration;
 using Despegar.Core.Business.Dynamics;
+using Despegar.Core.Business.Enums;
 using Despegar.Core.Business.Flight.BookingFields;
 using Despegar.Core.IService;
 using Despegar.Core.Log;
@@ -308,9 +309,44 @@ namespace Despegar.WP.UI.Model.ViewModel
             CrossParameters.BookingResponse = await flightService.CompleteBooking(objectToSerialize, CoreBookingFields.id);
             //BookingCompletePostResponse response = await flightService.CompleteBooking(form, "214ecbd4-7964-11e4-8980-fa163ec96567");
             //TODO : Go to Tks or Risk Questions}
+            //if (CrossParameters.BookingResponse.booking_status == "checkout_successful")            
+            //navigator.GoTo(ViewModelPages.FlightsThanks, CrossParameters);     
 
-            if (CrossParameters.BookingResponse.booking_status == "checkout_successful")            
-                navigator.GoTo(ViewModelPages.FlightsThanks, CrossParameters);            
+            switch (GetStatus(CrossParameters.BookingResponse.booking_status))
+            {
+                case BookingStatusEnum.checkout_successful:
+                    {
+                        navigator.GoTo(ViewModelPages.FlightsThanks, CrossParameters);
+                        break;
+                    }
+                //Please uncomment the case that you are to use.
+
+                //case BookingStatusEnum.booking_failed:
+                //case BookingStatusEnum.fix_credit_card:
+                //case BookingStatusEnum.new_credit_card:
+                //case BookingStatusEnum.payment_failed:
+                //case BookingStatusEnum.risk_review:
+                //case BookingStatusEnum.BookingCustomError:
+                default:
+                    break;
+            } 
+
+        }
+
+        private BookingStatusEnum GetStatus(string status)
+        {
+            try
+            {
+                BookingStatusEnum _status = (BookingStatusEnum)Enum.Parse(typeof(BookingStatusEnum), status);
+
+                return _status;
+            }
+            catch (Exception)
+            {
+
+                return BookingStatusEnum.BookingCustomError;
+            }
+
         }
     }
 }

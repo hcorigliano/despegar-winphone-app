@@ -13,32 +13,30 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" ></RowDefinition>
         </Grid.RowDefinitions>
-        
+
         <StackPanel Grid.Row="0" xmlns:src="using:Despegar.WP.UI.Product.Flights.Checkout.Buy.Controls">
             <src:BuyDetailsControl DataContext="{Binding PriceFormated}" />
         </StackPanel>
-        
+
 
         <StackPanel Grid.Row="1">
-            <Grid>
+            <!--<Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="35"></ColumnDefinition>
                     <ColumnDefinition Width="auto"></ColumnDefinition>
                     <ColumnDefinition Width="auto"></ColumnDefinition>
-                </Grid.ColumnDefinitions>
-        <Button x:Uid="Buy_Button" Grid.Row="1" Style="{StaticResource ButtonBottomRed}" Command="{Binding ValidateAndBuyCommand}" />
-                
-                <CheckBox Style="{StaticResource  CheckboxBase}" Grid.Column="0" x:Name="AcceptConditionsCheckBox" />
-
-                <TextBlock x:Uid="Buy_Acept_Conditions" Style="{StaticResource DetailCheckoutTerms}"  Grid.Column="1" Text="Lei y acepto las" />
-
-                <Button Grid.Column="2"  BorderBrush="Transparent"  Click="AcceptConditions_Click"  Background="Transparent">
+                </Grid.ColumnDefinitions>-->
+            <StackPanel Orientation="Horizontal">
+                <CheckBox Style="{StaticResource  CheckboxBase}" x:Name="AcceptConditionsCheckBox" HorizontalAlignment="Right">
+                    <TextBlock x:Uid="Buy_Acept_Conditions" Style="{StaticResource DetailCheckoutTerms}" Text="Lei y acepto las"/>
+                </CheckBox>
+                <Button BorderBrush="Transparent"  Click="AcceptConditions_Click"  Background="Transparent">
                     <TextBlock x:Uid="Buy_Buy_conditions"  Style="{StaticResource DetailCheckoutTermsButton}" Text="condiciones de compra"></TextBlock>
                 </Button>
+            </StackPanel>
+            <!--</Grid>-->
 
-            </Grid>
-        </StackPanel>                        
-        
-        <Button x:Uid="Buy_Button" Grid.Row="1" Style="{StaticResource ButtonBottomRed}" Command="{Binding ValidateAndBuyCommand}" />
+            <Button x:Uid="Buy_Button" Grid.Row="1" Style="{StaticResource ButtonBottomRed}" Command="{Binding ValidateAndBuyCommand}" />
+        </StackPanel>
     </Grid>
 </Page>
