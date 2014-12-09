@@ -55,6 +55,7 @@
     <Compile Include="Configuration\UpdateFields.cs" />
     <Compile Include="Culture\Site.cs" />
     <Compile Include="Dynamics\DynamicFlightBookingFieldsToPost.cs" />
+    <Compile Include="Enums\BookingStatusEnum.cs" />
     <Compile Include="Enums\FlightSearchChildEnum.cs" />
     <Compile Include="Enums\FlightSearchPagesEnum.cs" />
     <Compile Include="Enums\SearchStates.cs" />
