@@ -86,11 +86,7 @@ namespace Despegar.WP.UI.Product.Flights
                     //    control.SetDisplayText("Argentina");
                 break;
 
-                default:
-                //For fix credit card null value 
-                CardDataControl.DataContext = ViewModel.CoreBookingFields.form.payment;
-                // Notify to CardData
-                PaymentControl.OnUserControlButtonClicked += CardDataControl.OnUCButtonClicked;
+                default:               
                 break;
             }
         }

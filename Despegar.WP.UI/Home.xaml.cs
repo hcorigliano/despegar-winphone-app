@@ -20,6 +20,7 @@ using Windows.UI.Popups;
 using Despegar.WP.UI.Controls;
 using System.ComponentModel;
 using Despegar.WP.UI.Model.ViewModel;
+using Despegar.WP.UI.Product.Flights;
 
 namespace Despegar.WP.UI
 {    
@@ -153,9 +154,10 @@ namespace Despegar.WP.UI
                 case "Flights":
                     ViewModel.NavigateToFlights.Execute(null);
                     break;
-                //case "MyDespegar":
-                //    
-                //    break;
+                case "MyDespegar":
+                    //var f= Window.Current.Content as Frame;
+                    //f.Navigate(typeof(FlightCheckout), null);
+                    break;
                 default:
                     var dialog = new MessageDialog("Proximamente estará disponible esta funcionalidad.", "Proximamente");
                     dialog.ShowAsync();

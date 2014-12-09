@@ -8,7 +8,7 @@
     xmlns:conv="using:Despegar.WP.UI.Common.Converter"
     xmlns:dev="using:Despegar.WP.UI.Developer.Controls"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+   >
 
     <UserControl.Resources>
         <conv:StringConverter x:Name="StringFormatConverter"/>
@@ -20,7 +20,7 @@
         <!--<dev:UserControlDesignGrid />-->
 
         <StackPanel Orientation="Horizontal">
-                <ItemsControl DataContext="{Binding}" ItemsSource="{Binding}">
+            <ItemsControl ItemsSource="{Binding }">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <WrapGrid Width="{StaticResource dBlock10p}" Orientation="Horizontal"/>
@@ -28,14 +28,12 @@
                 </ItemsControl.ItemsPanel>
 
                 <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-                            <StackPanel >
-                            <!--Style="{StaticResource ImageBase}"-->
+                    <DataTemplate>
+                        <!--Style="{StaticResource ImageBase}"-->
                             <!--Margin="0,0,9.6,9.6" Width="{StaticResource dBlock3}" Height="{StaticResource dBlock2}"-->
-                            <Image Margin="0,0,9.6,9.6" Width="{StaticResource dBlock3}" Height="{StaticResource dBlock2}"  Source="{Binding card.code, Converter={StaticResource StringFormatConverter}, ConverterParameter='/Assets/Icon/CreditCard/{0}.png' , TargetNullValue='/Assets/Icon/CreditCard/GRL.png'}"   />
-                            </StackPanel>
-
-                        </DataTemplate>
+                        <Image Margin="0,0,9.6,9.6" Width="{StaticResource dBlock3}" Height="{StaticResource dBlock2}"  
+                               Source="{Binding card.code, Converter={StaticResource StringFormatConverter}, ConverterParameter='/Assets/Icon/CreditCard/{0}.png' , TargetNullValue='/Assets/Icon/CreditCard/GRL.png'}"   />
+                    </DataTemplate>
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
         </StackPanel>
