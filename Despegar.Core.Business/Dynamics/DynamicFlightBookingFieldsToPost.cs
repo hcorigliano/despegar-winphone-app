@@ -89,6 +89,8 @@ namespace Despegar.Core.Business.Dynamics
                 {
                     result.form.payment.invoice.address.department = bookingFields.form.payment.invoice.address.department.CoreValue;
                 }
+                result.form.payment.invoice.address.city_id = bookingFields.form.payment.invoice.address.city_id.CoreValue;
+                result.form.payment.invoice.address.state = bookingFields.form.payment.invoice.address.state.CoreValue;
                 result.form.payment.invoice.address.country = bookingFields.form.payment.invoice.address.country.value;
                 result.form.payment.invoice.address.postal_code = bookingFields.form.payment.invoice.address.postal_code.CoreValue;
                 result.form.payment.invoice.address.street = bookingFields.form.payment.invoice.address.street.CoreValue;
