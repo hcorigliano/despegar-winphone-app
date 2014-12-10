@@ -2,6 +2,7 @@
 using Despegar.Core.Business.Flight.BookingFields;
 using Despegar.Core.IService;
 using Despegar.WP.UI.Model;
+using Despegar.WP.UI.Model.ViewModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -18,6 +19,11 @@ namespace Despegar.WP.UI.Product.Flights.Checkout.Passegers
         {
             this.InitializeComponent();
             //nationality.Text = ViewModel.Countries.FirstOrDefault(x => x.id == ((Passenger)this.DataContext).nationality.value).id;
+        }
+
+        private void NationalitySelection_GotFocus(object sender, RoutedEventArgs e)
+        {
+            ((FlightsCheckoutViewModel)DataContext).NationalityIsOpen = true;
         }
     }
 }

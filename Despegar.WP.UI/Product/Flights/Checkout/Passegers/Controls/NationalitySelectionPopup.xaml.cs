@@ -27,13 +27,11 @@ namespace Despegar.WP.UI.Product.Flights.Checkout.Passegers.Controls
             this.InitializeComponent();
             NationalityControl.Height = Window.Current.Bounds.Height;
             NationalityControl.Width = Window.Current.Bounds.Width;
-
-            HardwareButtons.BackPressed += HardwareButtons_BackPressed;
-
         }
 
         public void Enter()
         {
+            HardwareButtons.BackPressed += HardwareButtons_BackPressed;
             ShowDialogAnimation.Begin();
         }
 
@@ -41,6 +39,7 @@ namespace Despegar.WP.UI.Product.Flights.Checkout.Passegers.Controls
         {
             HideDialogAnimation.Begin();
             HideDialogAnimation.Completed += DoClosePopup;
+            HardwareButtons.BackPressed -= HardwareButtons_BackPressed;
         }
 
         private void DoClosePopup(object sender, object e)
@@ -61,13 +60,8 @@ namespace Despegar.WP.UI.Product.Flights.Checkout.Passegers.Controls
 
         void HardwareButtons_BackPressed(object sender, BackPressedEventArgs e)
         {
-            Frame rootFrame = Window.Current.Content as Frame;
-            if (rootFrame != null)
-            {
-                e.Handled = true;
-                Leave();
-            }
-            HardwareButtons.BackPressed -= HardwareButtons_BackPressed;
+            e.Handled = true;
+            Leave();
         }
 
     }
