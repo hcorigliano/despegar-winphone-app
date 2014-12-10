@@ -9,7 +9,7 @@
     xmlns:dev="using:Despegar.WP.UI.Developer.Controls"
     xmlns:controls="using:Despegar.WP.UI.Controls"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+   >
 
     <UserControl.Resources>
         <conv:VisibilityConverter x:Name="VisibilityConverter" TrueValue="Visible" FalseValue="Collapsed" />

@@ -14,29 +14,30 @@ namespace Despegar.WP.UI.Common.Converter
         {
             var loader = new Windows.ApplicationModel.Resources.ResourceLoader();
             PaymentDetail paymentDetails = (PaymentDetail)value;
-            switch (paymentDetails.installments.quantity)
-            {
-                case 1:
-                    return "1 " + loader.GetString("Common_Pay_With");
-                case 6:
-                    if (paymentDetails.interest == 1.0)
-                    {
-                        return "6 " + loader.GetString("Common_Pays_Without_Interest");
-                    }
-                    return "6 " + loader.GetString("Common_Pays_With");
-                case 12:
-                    if (paymentDetails.interest == 1.0)
-                    {
-                        return "12 " + loader.GetString("Common_Pays_Without_Interest");
-                    }
-                    return "12 " + loader.GetString("Common_Pays_With");
-                case 24:
-                    if (paymentDetails.interest == 1.0)
-                    {
-                        return "24 " + loader.GetString("Common_Pays_Without_Interest");
-                    }
-                    return "24 " + loader.GetString("Common_Pays_With");
-            }
+
+                switch (paymentDetails.installments.quantity)
+                {
+                    case 1:
+                        return "1 " + loader.GetString("Common_Pay_With");
+                    case 6:
+                        if (paymentDetails.interest == 1.0)
+                        {
+                            return "6 " + loader.GetString("Common_Pays_Without_Interest");
+                        }
+                        return "6 " + loader.GetString("Common_Pays_With");
+                    case 12:
+                        if (paymentDetails.interest == 1.0)
+                        {
+                            return "12 " + loader.GetString("Common_Pays_Without_Interest");
+                        }
+                        return "12 " + loader.GetString("Common_Pays_With");
+                    case 24:
+                        if (paymentDetails.interest == 1.0)
+                        {
+                            return "24 " + loader.GetString("Common_Pays_Without_Interest");
+                        }
+                        return "24 " + loader.GetString("Common_Pays_With");
+                }
 
             return "";
         }

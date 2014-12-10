@@ -175,7 +175,7 @@
     <value>Seleccione país</value>
   </data>
   <data name="Page_FlightCheckout.Text" xml:space="preserve">
-    <value>Pago</value>
+    <value>pago</value>
   </data>
   <data name="Page_FlightResults.Text" xml:space="preserve">
     <value>Resultados</value>
@@ -253,7 +253,7 @@
     <value>Nacionalidad</value>
   </data>
   <data name="Flights_Checkout_Contact_email.Label" xml:space="preserve">
-    <value>E-mail</value>
+    <value>E-mail (donde recibirá su voucher)</value>
   </data>
   <data name="Flights_Checkout_Contact_email_Confirmation.Label" xml:space="preserve">
     <value>Confirme su e-mail</value>
@@ -372,14 +372,14 @@
   <data name="Page_Flights_Search_RemoveSegment.Label" xml:space="preserve">
     <value>Quitar</value>
   </data>
-  <data name="Card_Data_Card.Text" xml:space="preserve">
+  <data name="Flights_Checkout_Card_Data_Card.Label" xml:space="preserve">
     <value>Tarjeta</value>
   </data>
   <data name="Flights_Search_Multiple_Apply.Content" xml:space="preserve">
     <value>Aplicar</value>
   </data>
-  <data name="Card_Data_Document.Text" xml:space="preserve">
-    <value>Tipo de documento</value>
+  <data name="Flights_Checkout_Card_Data_Document.Label" xml:space="preserve">
+    <value>Número de documento</value>
   </data>
   <data name="Flights_Search_Multiple_Cancel.Content" xml:space="preserve">
     <value>Cancelar</value>
@@ -387,20 +387,20 @@
   <data name="Card_Data_Number_Document.Text" xml:space="preserve">
     <value>Número de documento</value>
   </data>
-  <data name="Card_Data_Number_Of_Card.Text" xml:space="preserve">
+  <data name="Flights_Checkout_Card_Data_Number_Of_Card.Label" xml:space="preserve">
     <value>Número de tarjeta</value>
   </data>
-  <data name="Card_Data_Owner_Gender.Text" xml:space="preserve">
+  <data name="Flights_Checkout_Card_Data_Gender.Label" xml:space="preserve">
     <value>Sexo</value>
   </data>
-  <data name="Card_Data_owner_name.Text" xml:space="preserve">
-    <value>Titular de la tarjeta</value>
+  <data name="Flights_Checkout_Card_Data_owner_name.Label" xml:space="preserve">
+    <value>Nombre y apellido del titular de la tarjeta</value>
   </data>
-  <data name="Card_Data_Security_Code.Text" xml:space="preserve">
+  <data name="Flights_Checkout_Card_Data_Security_Code.Label" xml:space="preserve">
     <value>Código de seguridad</value>
   </data>
   <data name="Flight_Checkout_Card_Data.Header" xml:space="preserve">
-    <value>datos de tarjeta</value>
+    <value>tarjeta</value>
   </data>
   <data name="address_floor.Text" xml:space="preserve">
     <value>Piso</value>
@@ -433,7 +433,7 @@
     <value>Calle</value>
   </data>
   <data name="Flight_Checkout_Payments.Header" xml:space="preserve">
-    <value>forma de pago</value>
+    <value>pago</value>
   </data>
   <data name="Common_Pays_With" xml:space="preserve">
     <value>Pagos con </value>
@@ -454,7 +454,7 @@
     <value>Comprar</value>
   </data>
   <data name="Flight_Checkout_Buy.Header" xml:space="preserve">
-    <value>finalizar compra</value>
+    <value>detalle</value>
   </data>
   <data name="Buy_Details_Afip.Text" xml:space="preserve">
     <value>Res. 3550 AFIP</value>
@@ -650,6 +650,69 @@
   </data>
   <data name="Flights_Checkout_Contact_Number_ERROR_REQUIRED" xml:space="preserve">
     <value>Por favor, ingrese el número</value>
+  </data>
+  <data name="Flights_Checkout_Card_Data_Document.PlaceholderText" xml:space="preserve">
+    <value>Como figura en el documento</value>
+  </data>
+  <data name="Flights_Checkout_Card_Data_Number_Of_Card.PlaceholderText" xml:space="preserve">
+    <value>Ej: 6598789654984650</value>
+  </data>
+  <data name="Flights_Checkout_Card_Data_owner_name.PlaceholderText" xml:space="preserve">
+    <value>Nombre y apellido del titular</value>
+  </data>
+  <data name="Flights_Checkout_Card_Data_Security_Code.PlaceholderText" xml:space="preserve">
+    <value>Ej: 543</value>
+  </data>
+  <data name="Flights_Checkout_Card_Data_Type.Label" xml:space="preserve">
+    <value>Tipo de documento</value>
+  </data>
+  <data name="Flights_Checkout_Contact_email.PlaceholderText" xml:space="preserve">
+    <value>Ingrese el e-mail del titular</value>
+  </data>
+  <data name="Flights_Checkout_Contact_email_Confirmation.PlaceholderText" xml:space="preserve">
+    <value>Ingrese el e-mail del titular</value>
+  </data>
+  <data name="Flights_Checkout_Contact_Number.PlaceholderText" xml:space="preserve">
+    <value>Ej: 54156423</value>
+  </data>
+  <data name="Flights_Checkout_Invoice_Arg_fiscal_id.PlaceholderText" xml:space="preserve">
+    <value>Cuil / Cuit</value>
+  </data>
+  <data name="Flights_Checkout_Passenger_Document_Number.PlaceholderText" xml:space="preserve">
+    <value>Ej: 316549876</value>
+  </data>
+  <data name="Flights_Checkout_Passenger_First_Name.PlaceholderText" xml:space="preserve">
+    <value>Como figura en el documento</value>
+  </data>
+  <data name="Flights_Checkout_Passenger_Last_Name.PlaceholderText" xml:space="preserve">
+    <value>Como figura en el documento</value>
+  </data>
+  <data name="Flights_Checkout_Card_Data_Document_ERROR_INVALID_DOCUMENT_NUMBER_A_R" xml:space="preserve">
+    <value>Por favor, verifique el numero ingresado</value>
+  </data>
+  <data name="Flights_Checkout_Card_Data_Document_ERROR_INVALID_DOCUMENT_NUMBER_DIFFERENT_NUMBERS" xml:space="preserve">
+    <value>Por favor, verifique el numero ingresado</value>
+  </data>
+  <data name="Flights_Checkout_Card_Data_Document_ERROR_INVALID_LENGTH_MIN7" xml:space="preserve">
+    <value>Por favor, verifique el numero ingresado</value>
+  </data>
+  <data name="Flights_Checkout_Card_Data_Document_ERROR_REQUIRED" xml:space="preserve">
+    <value>Por favor, ingrese el número de documento</value>
+  </data>
+  <data name="Flights_Checkout_Card_Data_Number_Of_Card_ERROR_REQUIRED" xml:space="preserve">
+    <value>Por favor, ingrese el numero de tarjeta</value>
+  </data>
+  <data name="Flights_Checkout_Card_Data_owner_name_ERROR_INVALID_CARD_OWNER_NAME" xml:space="preserve">
+    <value>Por favor, verifique el nombre ingresado</value>
+  </data>
+  <data name="Flights_Checkout_Card_Data_owner_name_ERROR_INVALID_CARD_OWNER_NAME_LENGTH" xml:space="preserve">
+    <value>Por favor, verifique el nombre ingresado</value>
+  </data>
+  <data name="Flights_Checkout_Card_Data_owner_name_ERROR_REQUIRED" xml:space="preserve">
+    <value>Por favor, ingrese el nombre y apellido del titular</value>
+  </data>
+  <data name="Flights_Checkout_Card_Data_Security_Code_ERROR_REQUIRED" xml:space="preserve">
+    <value>Por favor, ingrese el código de seguridad</value>
   </data>
   <data name="Page_Checkout_OP_FIX_CREDIT_CARD" xml:space="preserve">
     <value>Lo sentimos, hemos encontrado un error en los datos de su tarjeta. Por favor, revise los datos ingresados e intente nuevamente.</value>

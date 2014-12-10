@@ -13,5 +13,8 @@ namespace Despegar.Core.Business.Flight.BookingFields
         public double interest { get; set; }
         public double financial_cost { get; set; }
         public bool interest_by_bank { get; set; }
+
+        // Custom
+        public List<PaymentDetail> AsSimpleCardList { get { return new List<PaymentDetail>() { this }; } }
     }
 }

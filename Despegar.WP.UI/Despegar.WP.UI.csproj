@@ -648,6 +648,12 @@
     <Content Include="Assets\country\ZA.png" />
     <Content Include="Assets\country\ZM.png" />
     <Content Include="Assets\country\ZW.png" />
+    <Content Include="Assets\DecolarHidden\decolar-logo-white.scale-100.png" />
+    <Content Include="Assets\DecolarHidden\decolar-logo-white.scale-140.png" />
+    <Content Include="Assets\DecolarHidden\decolar-logo-white.scale-240.png" />
+    <Content Include="Assets\DecolarHidden\decolarsplash-white.scale-100.png" />
+    <Content Include="Assets\DecolarHidden\decolarsplash-white.scale-140.png" />
+    <Content Include="Assets\DecolarHidden\decolarsplash-white.scale-240.png" />
     <Content Include="Assets\despegar-logo.white.png" />
     <Content Include="Assets\Helpers\a.png" />
     <Content Include="Assets\Helpers\matrix_green.png" />
@@ -945,9 +951,6 @@
     <Content Include="Assets\Icon\App\calendar-small-white.scale-140.png" />
     <Content Include="Assets\Icon\App\calendar-small-white.scale-240.png" />
     <Content Include="Assets\Icon\App\car-large-white.png" />
-    <Content Include="Assets\decolar-logo-white.scale-100.png" />
-    <Content Include="Assets\decolar-logo-white.scale-140.png" />
-    <Content Include="Assets\decolar-logo-white.scale-240.png" />
     <Content Include="Assets\Icon\App\family-right-small-white.png" />
     <Content Include="Assets\Icon\App\family-small-white.scale-100.png" />
     <Content Include="Assets\Icon\App\family-small-white.scale-140.png" />

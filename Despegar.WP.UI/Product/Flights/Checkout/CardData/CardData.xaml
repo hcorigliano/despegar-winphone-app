@@ -7,8 +7,9 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:conv="using:Despegar.WP.UI.Common.Converter"
     xmlns:dev="using:Despegar.WP.UI.Developer.Controls"
-    mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    xmlns:controls="using:Despegar.WP.UI.Controls"
+    mc:Ignorable="d"   
+    x:Name="CardControl">
 
     <UserControl.Resources>
         <conv:VisibilityConverter x:Name="VisibilityConverter"/>
@@ -16,78 +17,61 @@
         <conv:DateToStringConverter x:Name="DateToStringConverter"/>
         <conv:DateToExpirationStringConverter x:Name="DateToExpirationStringConverter"/>
     </UserControl.Resources>
-
-    <Grid VerticalAlignment="Top">
-        <ScrollViewer VerticalScrollBarVisibility="Auto" Height="500">
-            <StackPanel VerticalAlignment="Top" x:Name="cardData">
-                <!--Card-->
-                <!-- Dev -->
-                <!--<dev:UserControlDesignGrid />-->
-
-                <!--TARJETA-->
-                <StackPanel Style="{StaticResource TextBoxInputContainer}" >
-                    <TextBlock Style="{StaticResource BaseTextLabel}" x:Uid="Card_Data_Card" Text="Tarjeta"></TextBlock>
-                    <ComboBox Style="{StaticResource ComboBoxBase}" x:Name="card"  DisplayMemberPath="card.description" SelectedValue="{Binding card.phones[0].type.coreValue, Mode=TwoWay}" SelectedValuePath="card.code"  SelectionChanged="FillCardData"  ></ComboBox>
-                </StackPanel>
-
-                <StackPanel Style="{StaticResource TextBoxInputContainer}"  Visibility="{Binding card.number.required,Converter={StaticResource VisibilityConverter}}" >
-                    <TextBlock Style="{StaticResource BaseTextLabel}" x:Uid="Card_Data_Number_Of_Card" Text="Numero de tarjeta"></TextBlock>
-                    <TextBox InputScope="Number" Style="{StaticResource CheckoutInputBase}" x:Name="number" Text="{Binding card.number.coreValue , Mode=TwoWay}"></TextBox>
-                </StackPanel>
-
-
-
-
-                <StackPanel Style="{StaticResource TextBoxInputContainer}" >
-                    <TextBlock Style="{StaticResource BaseTextLabel}" x:Uid="Card_Data_Expiration" Text="Vencimiento"></TextBlock>
-
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="{StaticResource Block6}"></ColumnDefinition>
-                            <ColumnDefinition Width="{StaticResource Offset}"></ColumnDefinition>
-                            <ColumnDefinition Width="*"></ColumnDefinition>
-                        </Grid.ColumnDefinitions>
-
-                        <ComboBox Style="{StaticResource ComboBoxBase}" Width="{StaticResource dBlock6}" x:Uid="Card_Data_Month" Grid.Column="0" HorizontalAlignment="Left" x:Name="MonthCombo" SelectionChanged="FillExpiration"></ComboBox>
-                        <ComboBox Style="{StaticResource ComboBoxBase}" HorizontalAlignment="Right" Width="{StaticResource dBlock6p}" x:Uid="Card_Data_Year" Grid.Column="2" x:Name="YearCombo"  SelectionChanged="FillExpiration"></ComboBox>
-
-                        <!--BINDEAR MIN YEAR-->
-                    </Grid>
-                </StackPanel>
+    
+    <ScrollViewer>
+        <StackPanel x:Name="cardData" DataContext="{Binding CoreBookingFields.form.payment}" >
+            <!--Card-->
+            <!-- Dev -->
+            <!--<dev:UserControlDesignGrid />-->
+           
+            <!-- Card -->
+            <controls:FieldCombo x:Uid="Flights_Checkout_Card_Data_Card" ItemsSource="{Binding DataContext.SelectedInstallment, ElementName=CardControl}" Value="{Binding DataContext.SelectedCard, Mode=TwoWay, ElementName=CardControl}"  DisplayTextPath="card.description" CodePath="card.code" />
+            <!-- Card Number -->
+            <controls:NumericField x:Uid="Flights_Checkout_Card_Data_Number_Of_Card" Value="{Binding card.number.CoreValue, Mode=TwoWay}" Visibility="{Binding card.number.required, Converter={StaticResource VisibilityConverter}}" />
+            <controls:ValidationError ErrorPrefix="Flights_Checkout_Card_Data_Number_Of_Card" ErrorCode="{Binding card.number.CurrentError}" Visibility="{Binding card.number.required, Converter={StaticResource VisibilityConverter}}" />
+            <!-- Expiration Date -->
+            <StackPanel Style="{StaticResource TextBoxInputContainer}">
+                <TextBlock Style="{StaticResource BaseTextLabel}" x:Uid="Card_Data_Expiration" Text="Vencimiento" />
 
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="{StaticResource Block6}"></ColumnDefinition>
-                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition Width="{StaticResource Block6}" />
+                        <ColumnDefinition Width="{StaticResource Offset}" />
+                        <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
 
-                    <StackPanel Grid.Column="0" Style="{StaticResource TextBoxInputContainer}" Visibility="{Binding card.security_code.required,Converter={StaticResource VisibilityConverter}}" >
-                        <TextBlock Style="{StaticResource BaseTextLabel}" x:Uid="Card_Data_Security_Code" Text="Codigo de seguridad"></TextBlock>
-                        <TextBox InputScope="Number" Style="{StaticResource CheckoutInputBase}" x:Name="security_code" Text="{Binding card.security_code.coreValue , Mode=TwoWay}"></TextBox>
-                    </StackPanel>
+                    <ComboBox ItemsSource="{Binding Months}" Style="{StaticResource ComboBoxBase}" Width="{StaticResource dBlock6}" x:Uid="Card_Data_Month" Grid.Column="0" HorizontalAlignment="Left"  x:Name="MonthCombo" SelectionChanged="FillExpiration" />
+                    <ComboBox ItemsSource="{Binding YearRange}" Style="{StaticResource ComboBoxBase}" HorizontalAlignment="Right" Width="{StaticResource dBlock6p}" x:Uid="Card_Data_Year" Grid.Column="2" x:Name="YearCombo"  SelectionChanged="FillExpiration" />
+
+                    <!--BINDEAR MIN YEAR-->
                 </Grid>
-
-                <StackPanel Style="{StaticResource TextBoxInputContainer}" Visibility="{Binding card.owner_name.required,Converter={StaticResource VisibilityConverter}}" >
-                    <TextBlock Style="{StaticResource BaseTextLabel}" x:Uid="Card_Data_owner_name" Text="Nombre del titular"></TextBlock>
-                    <TextBox Style="{StaticResource CheckoutInputBase}" x:Name="owner_name" Text="{Binding card.owner_name.coreValue , Mode=TwoWay}"></TextBox>
-                </StackPanel>
-
-                <StackPanel Style="{StaticResource TextBoxInputContainer}" Visibility="{Binding card.owner_document.type.required,Converter={StaticResource VisibilityConverter}}">
-                    <TextBlock Style="{StaticResource BaseTextLabel}" x:Uid="Card_Data_Document" Text="Tipo de Documento"></TextBlock>
-                    <ComboBox Style="{StaticResource ComboBoxBase}" x:Name="owner_document_type" ItemsSource="{Binding card.owner_document.type.options}" DisplayMemberPath="description" SelectedValue="{Binding card.owner_document.type.coreValue, Mode=TwoWay}" SelectedValuePath="value"   ></ComboBox>
-                </StackPanel>
-
-                <StackPanel Style="{StaticResource TextBoxInputContainer}" Visibility="{Binding card.owner_document.number.required,Converter={StaticResource VisibilityConverter}}" >
-                    <TextBlock Style="{StaticResource BaseTextLabel}" x:Uid="Card_Data_Number_Document" Text="Numero de documento"></TextBlock>
-                    <TextBox InputScope="Number" Style="{StaticResource CheckoutInputBase}" x:Name="owner_document_number" Text="{Binding card.owner_document.number.coreValue , Mode=TwoWay}"></TextBox>
-                </StackPanel>
-
-                <StackPanel Style="{StaticResource TextBoxInputContainer}" Visibility="{Binding card.email.required,Converter={StaticResource VisibilityConverter}}">
-                    <TextBlock Style="{StaticResource BaseTextLabel}" x:Uid="Card_Data_Owner_Gender" Text="Sexo"></TextBlock>
-                    <ComboBox Style="{StaticResource ComboBoxBase}" x:Name="owner_gender" ItemsSource="{Binding card.owner_gender.options}" DisplayMemberPath="description" SelectedValue="{Binding card.owner_gender.coreValue, Mode=TwoWay}" SelectedValuePath="value"   ></ComboBox>
-                </StackPanel>
-
             </StackPanel>
-        </ScrollViewer>
-    </Grid>
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="{StaticResource Block6}" />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+
+                <!-- Card Number -->
+                <StackPanel Grid.Column="0"  Visibility="{Binding card.security_code.required, Converter={StaticResource VisibilityConverter}}">
+                    <controls:NumericField x:Uid="Flights_Checkout_Card_Data_Security_Code" Value="{Binding card.security_code.CoreValue, Mode=TwoWay}"  />
+                </StackPanel>
+            </Grid>
+
+            <controls:ValidationError ErrorPrefix="Flights_Checkout_Card_Data_Security_Code" ErrorCode="{Binding card.security_code.CurrentError}" />
+            
+            <!-- Card Holder Name -->
+            <controls:Field x:Uid="Flights_Checkout_Card_Data_owner_name" Value="{Binding card.owner_name.CoreValue, Mode=TwoWay}" Visibility="{Binding card.owner_name.required, Converter={StaticResource VisibilityConverter}}" />
+            <controls:ValidationError ErrorPrefix="Flights_Checkout_Card_Data_owner_name" ErrorCode="{Binding card.owner_name.CurrentError}" Visibility="{Binding card.owner_name.required, Converter={StaticResource VisibilityConverter}}" />
+            <!-- Document Type-->
+            <controls:FieldCombo x:Uid="Flights_Checkout_Card_Data_Type" ItemsSource="{Binding card.owner_document.type.options}"  Value="{Binding card.owner_document.type.CoreValue, Mode=TwoWay}" Visibility="{Binding card.owner_document.type.required, Converter={StaticResource VisibilityConverter}}" DisplayTextPath="description" CodePath="value" />
+            <!-- Document -->
+            <controls:NumericField x:Uid="Flights_Checkout_Card_Data_Document" Value="{Binding card.owner_document.number.CoreValue, Mode=TwoWay}" Visibility="{Binding card.owner_document.number.required, Converter={StaticResource VisibilityConverter}}" />
+            <controls:ValidationError ErrorPrefix="Flights_Checkout_Card_Data_Document" ErrorCode="{Binding card.owner_document.number.CurrentError}" Visibility="{Binding card.owner_document.number.required, Converter={StaticResource VisibilityConverter}}" />                                  
+            <!-- Gender -->
+            <controls:FieldCombo x:Uid="Flights_Checkout_Card_Data_Gender" ItemsSource="{Binding card.owner_gender.options}"  Value="{Binding card.owner_gender.CoreValue, Mode=TwoWay}" Visibility="{Binding card.owner_gender.required, Converter={StaticResource VisibilityConverter}}" DisplayTextPath="description" CodePath="value" />           
+        </StackPanel>
+    </ScrollViewer>
+    
 </UserControl>
