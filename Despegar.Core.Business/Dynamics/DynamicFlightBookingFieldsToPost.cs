@@ -102,7 +102,7 @@ namespace Despegar.Core.Business.Dynamics
 
         private static BookingFields FillBookingFields(BookingFields bookingFields)
         {
-            bookingFields.form.contact.email.coreValue = "bookingvuelos@despegar.com";
+            bookingFields.form.contact.email.coreValue = "testchas@despegar.com";
             bookingFields.form.contact.phones[0].area_code.coreValue = "11";
             bookingFields.form.contact.phones[0].country_code.coreValue = "54";
             bookingFields.form.contact.phones[0].number.coreValue = "44444444";
