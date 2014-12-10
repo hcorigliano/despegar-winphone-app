@@ -23,5 +23,14 @@ namespace Despegar.WP.UI.Product.Flights.Checkout.RiskQuesions
         {
             this.InitializeComponent();
         }
+        public void Enter()
+        {
+        }
+
+        public void Leave()
+        {
+
+        }
+
     }
 }
