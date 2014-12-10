@@ -37,9 +37,9 @@ namespace Despegar.WP.UI.Product.Flights.Checkout.Passegers.Controls
 
         public void Leave()
         {
+            HardwareButtons.BackPressed -= HardwareButtons_BackPressed;
             HideDialogAnimation.Begin();
             HideDialogAnimation.Completed += DoClosePopup;
-            HardwareButtons.BackPressed -= HardwareButtons_BackPressed;
         }
 
         private void DoClosePopup(object sender, object e)
