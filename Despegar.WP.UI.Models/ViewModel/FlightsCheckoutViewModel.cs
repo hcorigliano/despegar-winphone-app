@@ -37,7 +37,16 @@ namespace Despegar.WP.UI.Model.ViewModel
 
         public bool InvoiceRequired { get { return CoreBookingFields.form.payment.invoice != null; } }
 
-        public bool IsFiscalNameRequired { get { return CoreBookingFields.form.payment.invoice.fiscal_status.required && CoreBookingFields.form.payment.invoice.fiscal_status.CoreValue != "FINAL"; } }
+        public bool IsFiscalNameRequired { //HERNAN: No integrar este codigo. Consecuencias: 1 docena de facturas.
+            get 
+            {
+                if (InvoiceRequired)
+                {
+                    return CoreBookingFields.form.payment.invoice.fiscal_status.required && CoreBookingFields.form.payment.invoice.fiscal_status.CoreValue != "FINAL";
+                }
+                else { return false; }
+            } 
+        }
 
         /// <summary>
         /// For Details section
