@@ -64,9 +64,15 @@ namespace Despegar.WP.UI.Product.Flights
             if (e.PropertyName == "IsLoading") 
             {
                 if ((sender as ViewModelBase).IsLoading)
+                {
+                    Windows.Phone.UI.Input.HardwareButtons.BackPressed -= navigationHelper.HardwareButtons_BackPressed;
                     loadingPopup.Show();
+                }
                 else
+                {
+                    Windows.Phone.UI.Input.HardwareButtons.BackPressed += navigationHelper.HardwareButtons_BackPressed;
                     loadingPopup.Hide();
+                }
             }
         }
 

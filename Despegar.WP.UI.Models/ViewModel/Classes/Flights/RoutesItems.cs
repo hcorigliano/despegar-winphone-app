@@ -12,11 +12,13 @@ namespace Despegar.WP.UI.Model.Classes.Flights
     {
         public RouteOutbound outbound { get; set; }
         public RouteInbound inbound { get; set; }
+        public int price { get; set; }
 
-        public RoutesItems( Route inboundItem , Route outboundItem )
+        public RoutesItems( Route inboundItem , Route outboundItem , int price )
         {
             inbound = new RouteInbound(inboundItem);
             outbound = new RouteOutbound(outboundItem);
+            this.price = price;
         }
     }
 }

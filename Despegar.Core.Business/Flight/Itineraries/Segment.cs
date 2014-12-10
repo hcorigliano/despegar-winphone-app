@@ -7,6 +7,7 @@ namespace Despegar.Core.Business.Flight.Itineraries
 {
     public class Segment
     {
+        
         public Airport from { get; set; }
         public Airport to { get; set; }
         public string duration { get; set; }
@@ -21,5 +22,6 @@ namespace Despegar.Core.Business.Flight.Itineraries
         public OperatedBy operated_by { get; set; }
 
         public bool HasOperatedBy {get{ return operated_by != null; }}
+        public int Index { get; set; }
     }
 }

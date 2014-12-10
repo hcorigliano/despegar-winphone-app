@@ -18,6 +18,7 @@ using Windows.UI.Xaml.Media.Imaging;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using Despegar.WP.UI.Common;
+using Windows.Phone.UI.Input;
 
 
 namespace Despegar.WP.UI.Controls
@@ -33,6 +34,9 @@ namespace Despegar.WP.UI.Controls
         public Loading()
         {
             this.InitializeComponent();
+
+            
+            this.Loaded += Loading_Loaded;
 
             this.DataContext = Window.Current.Bounds;
 
@@ -61,6 +65,11 @@ namespace Despegar.WP.UI.Controls
             loadingStoryboard.Begin();
         }
 
+        private void Loading_Loaded(object sender, RoutedEventArgs e)
+        {
+            HardwareButtons.BackPressed += HardwareButtons_BackPressed;
+        }
+
         public void Enter()
         {
             ShowDialogAnimation.Begin();
@@ -79,6 +88,19 @@ namespace Despegar.WP.UI.Controls
 
             // close the Popup
             if (p != null) { p.IsOpen = false; }
+
+            HardwareButtons.BackPressed -= HardwareButtons_BackPressed;
+
+        }
+
+        void HardwareButtons_BackPressed(object sender, BackPressedEventArgs e)
+        {
+            Frame rootFrame = Window.Current.Content as Frame;
+            if (rootFrame != null && !e.Handled)
+            {
+                e.Handled = true;
+            }
+            HardwareButtons.BackPressed -= HardwareButtons_BackPressed;
         }
     }
 }

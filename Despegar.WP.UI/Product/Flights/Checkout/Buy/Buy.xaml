@@ -6,36 +6,37 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    >
 
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" ></RowDefinition>
-            <RowDefinition Height="Auto" ></RowDefinition>
-            <RowDefinition Height="*"  ></RowDefinition>
         </Grid.RowDefinitions>
+
         <StackPanel Grid.Row="0" xmlns:src="using:Despegar.WP.UI.Product.Flights.Checkout.Buy.Controls">
-            <src:BuyDetailsControl DataContext="{Binding}"></src:BuyDetailsControl>
+            <src:BuyDetailsControl DataContext="{Binding PriceFormated}" />
         </StackPanel>
 
+
         <StackPanel Grid.Row="1">
-            <Grid>
+            <!--<Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="35"></ColumnDefinition>
                     <ColumnDefinition Width="auto"></ColumnDefinition>
                     <ColumnDefinition Width="auto"></ColumnDefinition>
-                </Grid.ColumnDefinitions>
-                
-                <CheckBox Style="{StaticResource  CheckboxBase}" Grid.Column="0" x:Name="AcceptConditionsCheckBox" />
-
-                <TextBlock x:Uid="Buy_Acept_Conditions" Style="{StaticResource DetailCheckoutTerms}"  Grid.Column="1" Text="Lei y acepto las" />
-
-                <Button Grid.Column="2"  BorderBrush="Transparent"  Click="AcceptConditions_Click"  Background="Transparent">
+                </Grid.ColumnDefinitions>-->
+            <StackPanel Orientation="Horizontal">
+                <CheckBox Style="{StaticResource  CheckboxBase}" x:Name="AcceptConditionsCheckBox" HorizontalAlignment="Right">
+                    <TextBlock x:Uid="Buy_Acept_Conditions" Style="{StaticResource DetailCheckoutTerms}" Text="Lei y acepto las"/>
+                </CheckBox>
+                <Button BorderBrush="Transparent"  Click="AcceptConditions_Click"  Background="Transparent">
                     <TextBlock x:Uid="Buy_Buy_conditions"  Style="{StaticResource DetailCheckoutTermsButton}" Text="condiciones de compra"></TextBlock>
                 </Button>
-                
-            </Grid>
+            </StackPanel>
+            <!--</Grid>-->
+
+            <Button x:Uid="Buy_Button" Grid.Row="1" Style="{StaticResource ButtonBottomRed}" Command="{Binding ValidateAndBuyCommand}" />
         </StackPanel>
-        <Button Grid.Row="2" Style="{StaticResource ButtonBottomCheckout}" Click="OnButtonClicked" HorizontalAlignment="Center" VerticalAlignment="Bottom" x:Uid="Buy_Button"></Button>
     </Grid>
 </Page>

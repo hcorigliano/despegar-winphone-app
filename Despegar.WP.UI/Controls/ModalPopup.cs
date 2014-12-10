@@ -34,7 +34,6 @@ namespace Despegar.WP.UI.Controls
 
         public void Hide()
         {
-            //popupControl.IsOpen = false;
             content.Leave();
         }
 

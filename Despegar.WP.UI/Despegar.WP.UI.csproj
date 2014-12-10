@@ -117,13 +117,19 @@
     <Compile Include="Common\Converter\CheckoutConverters.cs" />
     <Compile Include="Common\Converter\StyleColorResultConverter.cs" />
     <Compile Include="Common\Converter\StyleConverter.cs" />
+    <Compile Include="Common\Converter\VisibilityConverter.cs" />
     <Compile Include="Common\Converter\TimeDurationConverter.cs" />
-    <Compile Include="Common\Converter\VisibilityProConverter.cs" />
     <Compile Include="Common\IPopupContent.cs" />
     <Compile Include="Common\Navigator.cs" />
     <Compile Include="Common\OldPagesManager.cs" />
+    <Compile Include="Controls\Field.xaml.cs">
+      <DependentUpon>Field.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Flights\Detail\FlightsSegmentGo.xaml.cs">
       <DependentUpon>FlightsSegmentGo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\FieldCombo.xaml.cs">
+      <DependentUpon>FieldCombo.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\Flights\Detail\FlightsSegmentReturn.xaml.cs">
       <DependentUpon>FlightsSegmentReturn.xaml</DependentUpon>
@@ -131,8 +137,14 @@
     <Compile Include="Controls\Loading.xaml.cs">
       <DependentUpon>Loading.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\NumericField.xaml.cs">
+      <DependentUpon>NumericField.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Product\Flights\Checkout\Passegers\Controls\NationalitySelection.xaml.cs">
       <DependentUpon>NationalitySelection.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ValidationError.xaml.cs">
+      <DependentUpon>ValidationError.xaml</DependentUpon>
     </Compile>
     <Compile Include="Product\Flights\Checkout\Passegers\Controls\NationalitySelectionPopup.xaml.cs">
       <DependentUpon>NationalitySelectionPopup.xaml</DependentUpon>
@@ -222,8 +234,8 @@
     <Compile Include="Product\Flights\Checkout\Contact\Contact.xaml.cs">
       <DependentUpon>Contact.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Product\Flights\Checkout\Invoice\InvoiceArg.xaml.cs">
-      <DependentUpon>InvoiceArg.xaml</DependentUpon>
+    <Compile Include="Product\Flights\Checkout\Invoice\InvoiceArgentina.xaml.cs">
+      <DependentUpon>InvoiceArgentina.xaml</DependentUpon>
     </Compile>
     <Compile Include="Product\Flights\Checkout\Passegers\Passengers.xaml.cs">
       <DependentUpon>Passengers.xaml</DependentUpon>
@@ -273,6 +285,14 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Strings\AppResources.cs" />
+    <Page Include="Controls\Field.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\FieldCombo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\Flights\DateControlSimple.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -292,6 +312,14 @@
     <Page Include="Controls\Flights\RouteItemControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\NumericField.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ValidationError.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Product\Flights\Checkout\Buy\Buy.xaml">
       <SubType>Designer</SubType>
@@ -325,7 +353,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Product\Flights\Checkout\Invoice\InvoiceArg.xaml">
+    <Page Include="Product\Flights\Checkout\Invoice\InvoiceArgentina.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -389,7 +417,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\Animations\loading.png" />
-    <Content Include="Assets\ApplicationIcon.png" />
+    <Content Include="Assets\Badge.scale-100.png" />
+    <Content Include="Assets\Badge.scale-140.png" />
+    <Content Include="Assets\Badge.scale-240.png" />
     <Content Include="Assets\country\AD.png" />
     <Content Include="Assets\country\AE.png" />
     <Content Include="Assets\country\AF.png" />
@@ -625,6 +655,12 @@
     <Content Include="Assets\country\ZA.png" />
     <Content Include="Assets\country\ZM.png" />
     <Content Include="Assets\country\ZW.png" />
+    <Content Include="Assets\DecolarHidden\decolar-logo-white.scale-100.png" />
+    <Content Include="Assets\DecolarHidden\decolar-logo-white.scale-140.png" />
+    <Content Include="Assets\DecolarHidden\decolar-logo-white.scale-240.png" />
+    <Content Include="Assets\DecolarHidden\decolarsplash-white.scale-100.png" />
+    <Content Include="Assets\DecolarHidden\decolarsplash-white.scale-140.png" />
+    <Content Include="Assets\DecolarHidden\decolarsplash-white.scale-240.png" />
     <Content Include="Assets\despegar-logo.white.png" />
     <Content Include="Assets\Helpers\a.png" />
     <Content Include="Assets\Helpers\matrix_green.png" />
@@ -902,21 +938,51 @@
     <Content Include="Assets\Icon\Airlines\ag_z8logo%402x.png" />
     <Content Include="Assets\Icon\Airlines\ag_zelogo%402x.png" />
     <Content Include="Assets\Icon\Airlines\ag_zzlogo%402x.png" />
-    <Content Include="Assets\Icon\App\arrow-left-small-white.png" />
-    <Content Include="Assets\Icon\App\arrow-right-small-white.png" />
-    <Content Include="Assets\Icon\App\bell-large-white.png" />
-    <Content Include="Assets\Icon\App\calendar-medium-white.png" />
-    <Content Include="Assets\Icon\App\calendar-small-white.png" />
+    <Content Include="Assets\Icon\App\arrow-left-small-white.scale-100.png" />
+    <Content Include="Assets\Icon\App\arrow-left-small-white.scale-140.png" />
+    <Content Include="Assets\Icon\App\arrow-left-small-white.scale-240.png" />
+    <Content Include="Assets\Icon\App\arrow-right-small-white.scale-100.png" />
+    <Content Include="Assets\Icon\App\arrow-right-small-white.scale-140.png" />
+    <Content Include="Assets\Icon\App\arrow-right-small-white.scale-240.png" />
+    <Content Include="Assets\Icon\App\Badge.scale-100.png" />
+    <Content Include="Assets\Icon\App\Badge.scale-140.png" />
+    <Content Include="Assets\Icon\App\Badge.scale-240.png" />
+    <Content Include="Assets\Icon\App\bell-large-white.scale-100.png" />
+    <Content Include="Assets\Icon\App\bell-large-white.scale-140.png" />
+    <Content Include="Assets\Icon\App\bell-large-white.scale-240.png" />
+    <Content Include="Assets\Icon\App\bell.png" />
+    <Content Include="Assets\Icon\App\calendar-medium-white.scale-100.png" />
+    <Content Include="Assets\Icon\App\calendar-medium-white.scale-140.png" />
+    <Content Include="Assets\Icon\App\calendar-medium-white.scale-240.png" />
+    <Content Include="Assets\Icon\App\calendar-small-white.scale-100.png" />
+    <Content Include="Assets\Icon\App\calendar-small-white.scale-140.png" />
+    <Content Include="Assets\Icon\App\calendar-small-white.scale-240.png" />
     <Content Include="Assets\Icon\App\car-large-white.png" />
-    <Content Include="Assets\Icon\App\clock-xsmall-white.png" />
     <Content Include="Assets\Icon\App\family-right-small-white.png" />
-    <Content Include="Assets\Icon\App\flight-large-white.png" />
-    <Content Include="Assets\Icon\App\flight-left-medium-white.png" />
-    <Content Include="Assets\Icon\App\flight-left-small-white.png" />
-    <Content Include="Assets\Icon\App\flight-right-medium-white.png" />
-    <Content Include="Assets\Icon\App\flight-right-small-white.png" />
-    <Content Include="Assets\Icon\App\flightstatus-large-white.png" />
-    <Content Include="Assets\Icon\App\midespegar-large-white.png" />
+    <Content Include="Assets\Icon\App\family-small-white.scale-100.png" />
+    <Content Include="Assets\Icon\App\family-small-white.scale-140.png" />
+    <Content Include="Assets\Icon\App\family-small-white.scale-240.png" />
+    <Content Include="Assets\Icon\App\flight-large-white.scale-100.png" />
+    <Content Include="Assets\Icon\App\flight-large-white.scale-140.png" />
+    <Content Include="Assets\Icon\App\flight-large-white.scale-240.png" />
+    <Content Include="Assets\Icon\App\flight-left-medium-white.scale-100.png" />
+    <Content Include="Assets\Icon\App\flight-left-medium-white.scale-140.png" />
+    <Content Include="Assets\Icon\App\flight-left-medium-white.scale-240.png" />
+    <Content Include="Assets\Icon\App\flight-left-small-white.scale-100.png" />
+    <Content Include="Assets\Icon\App\flight-left-small-white.scale-140.png" />
+    <Content Include="Assets\Icon\App\flight-left-small-white.scale-240.png" />
+    <Content Include="Assets\Icon\App\flight-right-medium-white.scale-100.png" />
+    <Content Include="Assets\Icon\App\flight-right-medium-white.scale-140.png" />
+    <Content Include="Assets\Icon\App\flight-right-medium-white.scale-240.png" />
+    <Content Include="Assets\Icon\App\flight-right-small-white.scale-100.png" />
+    <Content Include="Assets\Icon\App\flight-right-small-white.scale-140.png" />
+    <Content Include="Assets\Icon\App\flight-right-small-white.scale-240.png" />
+    <Content Include="Assets\Icon\App\flightstatus-large-white.scale-100.png" />
+    <Content Include="Assets\Icon\App\flightstatus-large-white.scale-140.png" />
+    <Content Include="Assets\Icon\App\flightstatus-large-white.scale-240.png" />
+    <Content Include="Assets\Icon\App\midespegar.scale-100.png" />
+    <Content Include="Assets\Icon\App\midespegar.scale-140.png" />
+    <Content Include="Assets\Icon\App\midespegar.scale-240.png" />
     <Content Include="Assets\Icon\CreditCard\AX-AME.png" />
     <Content Include="Assets\Icon\CreditCard\AX-BRA.png" />
     <Content Include="Assets\Icon\CreditCard\AX-CDC.png" />
@@ -1148,7 +1214,59 @@
     <Content Include="Assets\Icon\CreditCard\VI-CIU.png" />
     <Content Include="Assets\Icon\CreditCard\VI-CMT.png" />
     <Content Include="Assets\Icon\CreditCard\VI-COM.png" />
+    <Content Include="Assets\Icon\CreditCard\VI-CORD.png" />
+    <Content Include="Assets\Icon\CreditCard\VI-CRE.png" />
+    <Content Include="Assets\Icon\CreditCard\VI-DAV.png" />
+    <Content Include="Assets\Icon\CreditCard\VI-FAMSA.png" />
+    <Content Include="Assets\Icon\CreditCard\VI-FOR.png" />
+    <Content Include="Assets\Icon\CreditCard\VI-FRN.png" />
+    <Content Include="Assets\Icon\CreditCard\VI-GLC.png" />
+    <Content Include="Assets\Icon\CreditCard\VI-GRL.png" />
+    <Content Include="Assets\Icon\CreditCard\VI-GUA.png" />
+    <Content Include="Assets\Icon\CreditCard\VI-HIP.png" />
+    <Content Include="Assets\Icon\CreditCard\VI-HSB.png" />
+    <Content Include="Assets\Icon\CreditCard\VI-HSBC.png" />
+    <Content Include="Assets\Icon\CreditCard\VI-ICBC.png" />
+    <Content Include="Assets\Icon\CreditCard\VI-INBUR.png" />
+    <Content Include="Assets\Icon\CreditCard\VI-INT.png" />
+    <Content Include="Assets\Icon\CreditCard\VI-INVEX.png" />
+    <Content Include="Assets\Icon\CreditCard\VI-ITA.png" />
+    <Content Include="Assets\Icon\CreditCard\VI-ITAU.png" />
+    <Content Include="Assets\Icon\CreditCard\VI-ITU.png" />
+    <Content Include="Assets\Icon\CreditCard\VI-IXE.png" />
+    <Content Include="Assets\Icon\CreditCard\VI-LIV.png" />
+    <Content Include="Assets\Icon\CreditCard\VI-LOJ.png" />
+    <Content Include="Assets\Icon\CreditCard\VI-MAC.png" />
+    <Content Include="Assets\Icon\CreditCard\VI-MAN.png" />
+    <Content Include="Assets\Icon\CreditCard\VI-MCH.png" />
+    <Content Include="Assets\Icon\CreditCard\VI-MIFEL.png" />
+    <Content Include="Assets\Icon\CreditCard\VI-MUT.png" />
+    <Content Include="Assets\Icon\CreditCard\VI-NAC.png" />
+    <Content Include="Assets\Icon\CreditCard\VI-NAT.png" />
+    <Content Include="Assets\Icon\CreditCard\VI-NBLR.png" />
+    <Content Include="Assets\Icon\CreditCard\VI-NBSF.png" />
+    <Content Include="Assets\Icon\CreditCard\VI-NEU.png" />
+    <Content Include="Assets\Icon\CreditCard\VI-PAC.png" />
+    <Content Include="Assets\Icon\CreditCard\VI-PAT.png" />
+    <Content Include="Assets\Icon\CreditCard\VI-PIC.png" />
+    <Content Include="Assets\Icon\CreditCard\VI-PRB.png" />
+    <Content Include="Assets\Icon\CreditCard\VI-PRM.png" />
+    <Content Include="Assets\Icon\CreditCard\VI-PRO.png" />
+    <Content Include="Assets\Icon\CreditCard\VI-RIO.png" />
+    <Content Include="Assets\Icon\CreditCard\VI-ROS.png" />
+    <Content Include="Assets\Icon\CreditCard\VI-RUM.png" />
+    <Content Include="Assets\Icon\CreditCard\VI-SAENZ.png" />
+    <Content Include="Assets\Icon\CreditCard\VI-SAN.png" />
+    <Content Include="Assets\Icon\CreditCard\VI-SB.png" />
+    <Content Include="Assets\Icon\CreditCard\VI-SCB.png" />
     <Content Include="Assets\Icon\CreditCard\VI-SCR.png" />
+    <Content Include="Assets\Icon\CreditCard\VI-SJU.png" />
+    <Content Include="Assets\Icon\CreditCard\VI-STR.png" />
+    <Content Include="Assets\Icon\CreditCard\VI-SUP.png" />
+    <Content Include="Assets\Icon\CreditCard\VI-TBANC.png" />
+    <Content Include="Assets\Icon\CreditCard\VI-TER.png" />
+    <Content Include="Assets\Icon\CreditCard\VI-TUC.png" />
+    <Content Include="Assets\Icon\CreditCard\VI-UNI.png" />
     <Content Include="Assets\Icon\CreditCard\VI.png" />
     <Content Include="Assets\Icon\CreditCard\VI_AFIRM.png" />
     <Content Include="Assets\Icon\CreditCard\VI_AMA.png" />
@@ -1220,14 +1338,26 @@
     <Content Include="Assets\Icon\CreditCard\VI_TER.png" />
     <Content Include="Assets\Icon\CreditCard\VI_UNI.png" />
     <Content Include="Assets\Icon\CreditCard\V_BCO.png" />
+    <Content Include="Assets\Logo.scale-100.png" />
+    <Content Include="Assets\Logo.scale-140.png" />
     <Content Include="Assets\Logo.scale-240.png" />
     <Content Include="Assets\Helpers\matrix_green_strong.png" />
     <Content Include="Assets\Helpers\matrix_red.png" />
     <Content Include="Assets\Helpers\matrix_red_strong.png" />
+    <Content Include="Assets\SmallLogo.scale-100.png" />
+    <Content Include="Assets\SmallLogo.scale-140.png" />
     <Content Include="Assets\SmallLogo.scale-240.png" />
-    <Content Include="Assets\SplashScreenImage.png" />
+    <Content Include="Assets\Splash.scale-100.png" />
+    <Content Include="Assets\Splash.scale-140.png" />
+    <Content Include="Assets\Splash.scale-240.png" />
+    <Content Include="Assets\Square71x71Logo.scale-100.png" />
+    <Content Include="Assets\Square71x71Logo.scale-140.png" />
     <Content Include="Assets\Square71x71Logo.scale-240.png" />
+    <Content Include="Assets\StoreLogo.scale-100.png" />
+    <Content Include="Assets\StoreLogo.scale-140.png" />
     <Content Include="Assets\StoreLogo.scale-240.png" />
+    <Content Include="Assets\WideLogo.scale-100.png" />
+    <Content Include="Assets\WideLogo.scale-140.png" />
     <Content Include="Assets\WideLogo.scale-240.png" />
     <Content Include="Assets\WindowsPhone_Background_480x800.png" />
     <Content Include="Product\Legacy\Assets\Image\ApplicationIcon.png" />
@@ -1455,6 +1585,7 @@
     <Content Include="Product\Legacy\Assets\Tiles\IconicTileSmall.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="StoreManifest.xml" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">

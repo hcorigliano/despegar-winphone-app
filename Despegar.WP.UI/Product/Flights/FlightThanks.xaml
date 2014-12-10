@@ -44,7 +44,7 @@
 
                 <TextBlock Style="{StaticResource Thanks_Booking_Detail}" x:Uid="Common_Booking_Detail" Text="Detalle de reserva" />
                 <StackPanel xmlns:src="using:Despegar.WP.UI.Product.Flights.Checkout.Buy.Controls">
-                    <src:BuyDetailsControl DataContext="{Binding price}"></src:BuyDetailsControl>
+                    <src:BuyDetailsControl DataContext="{Binding PriceDetail}"></src:BuyDetailsControl>
                 </StackPanel>
 
                 <TextBlock Style="{StaticResource Thanks_Booking_Detail}" x:Uid="Generic_Go" Text="IDA" />

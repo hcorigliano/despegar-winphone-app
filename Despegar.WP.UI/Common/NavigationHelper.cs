@@ -207,12 +207,15 @@ namespace Despegar.WP.UI.Common
         /// </summary>
         /// <param name="sender">Instance that triggered the event.</param>
         /// <param name="e">Event data describing the conditions that led to the event.</param>
-        private void HardwareButtons_BackPressed(object sender, Windows.Phone.UI.Input.BackPressedEventArgs e)
+        public void HardwareButtons_BackPressed(object sender, Windows.Phone.UI.Input.BackPressedEventArgs e)
         {
-            if (this.GoBackCommand.CanExecute(null))
+            if (!e.Handled)
             {
-                e.Handled = true;
-                this.GoBackCommand.Execute(null);
+                if (this.GoBackCommand.CanExecute(null))
+                {
+                    e.Handled = true;
+                    this.GoBackCommand.Execute(null);
+                }
             }
         }
 #else
