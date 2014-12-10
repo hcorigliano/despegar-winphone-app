@@ -651,4 +651,13 @@
   <data name="Flights_Checkout_Contact_Number_ERROR_REQUIRED" xml:space="preserve">
     <value>Por favor, ingrese el número</value>
   </data>
+  <data name="Page_Checkout_OP_FIX_CREDIT_CARD" xml:space="preserve">
+    <value>Lo sentimos, hemos encontrado un error en los datos de su tarjeta. Por favor, revise los datos ingresados e intente nuevamente.</value>
+  </data>
+  <data name="Page_Checkout_OP_NEW_CREDIT_CARD" xml:space="preserve">
+    <value>Lo sentimos, no hemos podido procesar el pago con la tarjeta ingresada. Por favor, ingrese una nueva tarjeta e intente nuevamente.</value>
+  </data>
+  <data name="Page_Checkout_OP_PAYMENT_FAILED" xml:space="preserve">
+    <value>Lo sentimos, no hemos podido procesar su pago. Si desea realizar un pago mediante transferencia bancaria, por favor comuníquese con [Teléfono país].</value>
+  </data>
 </root>

@@ -323,7 +323,12 @@ namespace Despegar.WP.UI.Model.ViewModel
 
                 //case BookingStatusEnum.booking_failed:
                 //case BookingStatusEnum.fix_credit_card:
-                //case BookingStatusEnum.new_credit_card:
+                case BookingStatusEnum.new_credit_card:
+                    {
+                        //ClearCreditCardFields();
+                       // GotFocusOnCreditCardData();
+                        break;
+                    }
                 //case BookingStatusEnum.payment_failed:
                 //case BookingStatusEnum.risk_review:
                 //case BookingStatusEnum.BookingCustomError:
