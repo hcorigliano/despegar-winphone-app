@@ -359,44 +359,52 @@ namespace Despegar.WP.UI.Model.ViewModel
        
         private async void ValidateAndBuy() 
         {
-            this.IsLoading = true;
-            dynamic bookingData = null;
-
             #if DEBUG
             // Fill Test data
             FillBookingFields(CoreBookingFields);
             #endif
 
-            bookingData = await DynamicFlightBookingFieldsToPost.ToDynamic(this.CoreBookingFields);            
-
-            CrossParameters.PriceDetail = PriceDetailsFormatted;
-            CrossParameters.BookingResponse = await flightService.CompleteBooking(bookingData, CoreBookingFields.id);
-            
-            //BookingCompletePostResponse response = await flightService.CompleteBooking(form, "214ecbd4-7964-11e4-8980-fa163ec96567");
-            //TODO : Go to Tks or Risk Questions}
-            //if (CrossParameters.BookingResponse.booking_status == "checkout_successful")            
-            //navigator.GoTo(ViewModelPages.FlightsThanks, CrossParameters);     
-
-            switch (GetStatus(CrossParameters.BookingResponse.booking_status))
-            {
-                case BookingStatusEnum.checkout_successful:
-                    {                                            
-                        navigator.GoTo(ViewModelPages.FlightsThanks, CrossParameters);
-                        break;
-                    }
-                //Please uncomment the case that you are to use.
-
-                //case BookingStatusEnum.booking_failed:
-                //case BookingStatusEnum.fix_credit_card:
-                //case BookingStatusEnum.new_credit_card:
-                //case BookingStatusEnum.payment_failed:
-                //case BookingStatusEnum.risk_review:
-                //case BookingStatusEnum.BookingCustomError:
-                default:
-                    break;
+            // Validation
+            if (!CoreBookingFields.IsValid)
+            {                
+                OnViewModelError("FORM_ERROR");
             }
+            else 
+            {
+                this.IsLoading = true;
+                dynamic bookingData = null;
 
-            this.IsLoading = false;
+                bookingData = await DynamicFlightBookingFieldsToPost.ToDynamic(this.CoreBookingFields);
+
+                CrossParameters.PriceDetail = PriceDetailsFormatted;
+                CrossParameters.BookingResponse = await flightService.CompleteBooking(bookingData, CoreBookingFields.id);
+
+                //BookingCompletePostResponse response = await flightService.CompleteBooking(form, "214ecbd4-7964-11e4-8980-fa163ec96567");
+                //TODO : Go to Tks or Risk Questions}
+                //if (CrossParameters.BookingResponse.booking_status == "checkout_successful")            
+                //navigator.GoTo(ViewModelPages.FlightsThanks, CrossParameters);     
+
+                switch (GetStatus(CrossParameters.BookingResponse.booking_status))
+                {
+                    case BookingStatusEnum.checkout_successful:
+                        {
+                            navigator.GoTo(ViewModelPages.FlightsThanks, CrossParameters);
+                            break;
+                        }
+                    //Please uncomment the case that you are to use.
+
+                    //case BookingStatusEnum.booking_failed:
+                    //case BookingStatusEnum.fix_credit_card:
+                    //case BookingStatusEnum.new_credit_card:
+                    //case BookingStatusEnum.payment_failed:
+                    //case BookingStatusEnum.risk_review:
+                    //case BookingStatusEnum.BookingCustomError:
+                    default:
+                        break;
+                }
+
+                this.IsLoading = false;
+            }
         }
 
         private BookingStatusEnum GetStatus(string status)

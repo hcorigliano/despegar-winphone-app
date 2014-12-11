@@ -714,4 +714,22 @@
   <data name="Flights_Checkout_Card_Data_Security_Code_ERROR_REQUIRED" xml:space="preserve">
     <value>Por favor, ingrese el código de seguridad</value>
   </data>
+  <data name="Flights_Checkout_ERROR_FORM_ERROR" xml:space="preserve">
+    <value>Por favor, verifique los datos ingresos y revise los campos marcados.</value>
+  </data>
+  <data name="Flights_Checkout_ERROR_FORM_ERROR_TITLE" xml:space="preserve">
+    <value>Formulario de Compra</value>
+  </data>
+  <data name="Flights_Search_ERROR_SEARCH_FAILED" xml:space="preserve">
+    <value>Por favor, revise su conexion a internet y vuelva a intentarlo.</value>
+  </data>
+  <data name="Flights_Search_ERROR_SEARCH_FAILED_TITLE" xml:space="preserve">
+    <value>Error de conexión</value>
+  </data>
+  <data name="Flights_Search_ERROR_SEARCH_INVALID" xml:space="preserve">
+    <value>Por favor, verifique los campos ingresados.</value>
+  </data>
+  <data name="Flights_Search_ERROR_SEARCH_INVALID_TITLE" xml:space="preserve">
+    <value>Búsqueda de Vuelos</value>
+  </data>
 </root>

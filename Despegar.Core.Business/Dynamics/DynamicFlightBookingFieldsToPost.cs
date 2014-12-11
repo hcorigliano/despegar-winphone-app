@@ -102,7 +102,5 @@ namespace Despegar.Core.Business.Dynamics
                 return result;
            });
         }
-
-       
     }
 }
