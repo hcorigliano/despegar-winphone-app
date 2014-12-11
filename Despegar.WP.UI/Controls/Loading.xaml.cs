@@ -95,12 +95,7 @@ namespace Despegar.WP.UI.Controls
 
         void HardwareButtons_BackPressed(object sender, BackPressedEventArgs e)
         {
-            Frame rootFrame = Window.Current.Content as Frame;
-            if (rootFrame != null && !e.Handled)
-            {
                 e.Handled = true;
-            }
-            HardwareButtons.BackPressed -= HardwareButtons_BackPressed;
         }
     }
 }

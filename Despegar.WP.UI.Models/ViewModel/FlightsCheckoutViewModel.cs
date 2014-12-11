@@ -37,7 +37,16 @@ namespace Despegar.WP.UI.Model.ViewModel
 
         public bool InvoiceRequired { get { return CoreBookingFields.form.payment.invoice != null; } }
 
-        public bool IsFiscalNameRequired { get { return CoreBookingFields.form.payment.invoice.fiscal_status.required && CoreBookingFields.form.payment.invoice.fiscal_status.CoreValue != "FINAL"; } }
+        public bool IsFiscalNameRequired { //HERNAN: No integrar este codigo. Consecuencias: 1 docena de facturas.
+            get 
+            {
+                if (InvoiceRequired)
+                {
+                    return CoreBookingFields.form.payment.invoice.fiscal_status.required && CoreBookingFields.form.payment.invoice.fiscal_status.CoreValue != "FINAL";
+                }
+                else { return false; }
+            } 
+        }
 
         public event EventHandler ShowRiskReview;
 
@@ -54,6 +63,8 @@ namespace Despegar.WP.UI.Model.ViewModel
                 OnPropertyChanged();
             }
         }
+
+        public bool NationalityIsOpen{get; set;}
      
         private InstallmentFormatted installmentFormatted;
         public InstallmentFormatted InstallmentFormatted
@@ -142,7 +153,7 @@ namespace Despegar.WP.UI.Model.ViewModel
 
                 // Format Price details / Installments
                 FormatInstallments();
-                FormatPrice();
+                PriceDetailsFormatted = FormatPrice();
 
                 // Set Known Default Values && Adapt Checkout to the country
                 ConfigureCountry(currentCountry);                
@@ -350,8 +361,9 @@ namespace Despegar.WP.UI.Model.ViewModel
 
         private async void ValidateAndBuy() 
         {
-            dynamic objectToSerialize = DynamicFlightBookingFieldsToPost.ToDynamic(this.CoreBookingFields);
+            this.IsLoading = true; 
             CrossParameters.PriceDetail = PriceDetailsFormatted;
+            dynamic objectToSerialize = DynamicFlightBookingFieldsToPost.ToDynamic(this.CoreBookingFields);
             CrossParameters.BookingResponse = await flightService.CompleteBooking(objectToSerialize, CoreBookingFields.id);
             //BookingCompletePostResponse response = await flightService.CompleteBooking(form, "214ecbd4-7964-11e4-8980-fa163ec96567");
             //TODO : Go to Tks or Risk Questions}
@@ -383,7 +395,8 @@ namespace Despegar.WP.UI.Model.ViewModel
                 //case BookingStatusEnum.BookingCustomError:
                 default:
                     break;
-            } 
+            }
+            this.IsLoading = false;
 
         }
 

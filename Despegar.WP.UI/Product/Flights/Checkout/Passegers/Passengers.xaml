@@ -54,7 +54,7 @@
                             <!-- Nationality -->
                             <StackPanel Style="{StaticResource TextBoxInputContainer}" Visibility="{Binding nationality.required, Converter={StaticResource VisibilityConverter}}">
                                 <TextBlock Style="{StaticResource BaseTextLabel}" x:Uid="Flights_Checkout_Passenger_Nationality" Text="Nacionalidad" />
-                                <src:NationalitySelection x:Name="NationalitySelection" ItemsSource="{Binding DataContext.Countries, ElementName=passengerControl , Mode=TwoWay}" SelectedItem="{Binding nationality.CoreValue , Mode=TwoWay}"  />
+                                <src:NationalitySelection GotFocus="NationalitySelection_GotFocus" x:Name="NationalitySelection" ItemsSource="{Binding DataContext.Countries, ElementName=passengerControl , Mode=TwoWay}" SelectedItem="{Binding nationality.CoreValue , Mode=TwoWay}"  />
                                 <controls:ValidationError ErrorPrefix="Flights_Checkout_Passenger_Nationality" ErrorCode="{Binding nationality.CurrentError}" />
                             </StackPanel>
                             <!-- Nro Documento -->
