@@ -40,7 +40,7 @@ namespace Despegar.Core.Business.Flight.BookingFields
             get
             {
               Validate(); 
-              return CurrentError != null; 
+              return CurrentError == null; 
            }
         }
 
@@ -61,6 +61,11 @@ namespace Despegar.Core.Business.Flight.BookingFields
             {
                 Errors.Add("REQUIRED");
                 CurrentError = "REQUIRED";
+                return;
+            }
+
+            if (!required && String.IsNullOrWhiteSpace(CoreValue))
+            {                
                 return;
             }
 
