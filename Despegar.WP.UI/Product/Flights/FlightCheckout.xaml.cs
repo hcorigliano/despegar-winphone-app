@@ -24,7 +24,7 @@ namespace Despegar.WP.UI.Product.Flights
             this.InitializeComponent();
             this.navigationHelper = new NavigationHelper(this);
             this.navigationHelper.LoadState += this.NavigationHelper_LoadState;
-            this.navigationHelper.SaveState += this.NavigationHelper_SaveState;                      
+            this.navigationHelper.SaveState += this.NavigationHelper_SaveState;
         }
 
         /// <summary>
@@ -57,6 +57,8 @@ namespace Despegar.WP.UI.Product.Flights
                 crossParameters);
 
             ViewModel.PropertyChanged += Checkloading;
+            ViewModel.ShowRiskReview += this.ShowRisk;
+
             
 
             // Init Checkout
@@ -66,6 +68,13 @@ namespace Despegar.WP.UI.Product.Flights
             ConfigureFields();
 
             this.DataContext = ViewModel;
+        }
+
+
+        private void ShowRisk(Object sender, EventArgs e )
+        {
+
+
         }
 
         /// <summary>

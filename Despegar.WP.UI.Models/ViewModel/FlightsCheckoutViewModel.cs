@@ -39,6 +39,8 @@ namespace Despegar.WP.UI.Model.ViewModel
 
         public bool IsFiscalNameRequired { get { return CoreBookingFields.form.payment.invoice.fiscal_status.required && CoreBookingFields.form.payment.invoice.fiscal_status.CoreValue != "FINAL"; } }
 
+        public event EventHandler ShowRiskReview;
+
         /// <summary>
         /// For Details section
         /// </summary>
@@ -121,6 +123,7 @@ namespace Despegar.WP.UI.Model.ViewModel
             this.commonServices = commonServices;
             this.configurationService = configService;
             this.CrossParameters = parameters;
+
         }
         
         /// <summary>
@@ -368,7 +371,15 @@ namespace Despegar.WP.UI.Model.ViewModel
                 //case BookingStatusEnum.fix_credit_card:
                 //case BookingStatusEnum.new_credit_card:
                 //case BookingStatusEnum.payment_failed:
-                //case BookingStatusEnum.risk_review:
+                case BookingStatusEnum.risk_review:
+                    {
+                        EventHandler RiskHandler = ShowRiskReview;
+                        if(RiskHandler != null)
+                        {
+                            RiskHandler(this, null);
+                        }
+                        break;
+                    }
                 //case BookingStatusEnum.BookingCustomError:
                 default:
                     break;
