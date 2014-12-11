@@ -14,6 +14,7 @@ using System.ComponentModel;
 using Despegar.WP.UI.Model.Common;
 using Windows.UI.Popups;
 using Despegar.WP.UI.Model.ViewModel;
+using Windows.Phone.UI.Input;
 
 namespace Despegar.WP.UI.Product.Flights
 {
@@ -36,6 +37,7 @@ namespace Despegar.WP.UI.Product.Flights
             ViewModel = new FlightSearchViewModel(Navigator.Instance, GlobalConfiguration.CoreContext.GetFlightService());
             ViewModel.ViewModelError += ErrorHandler;
             ViewModel.PropertyChanged += Checkloading;
+            HardwareButtons.BackPressed += HardwareButtons_BackPressed;
 
             this.DataContext = ViewModel;            
         }
@@ -61,18 +63,12 @@ namespace Despegar.WP.UI.Product.Flights
 
         private void Checkloading(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == "IsLoading") 
+            if (e.PropertyName == "IsLoading")
             {
                 if ((sender as ViewModelBase).IsLoading)
-                {
-                    Windows.Phone.UI.Input.HardwareButtons.BackPressed -= navigationHelper.HardwareButtons_BackPressed;
                     loadingPopup.Show();
-                }
                 else
-                {
-                    Windows.Phone.UI.Input.HardwareButtons.BackPressed += navigationHelper.HardwareButtons_BackPressed;
                     loadingPopup.Hide();
-                }
             }
         }
 
@@ -89,18 +85,13 @@ namespace Despegar.WP.UI.Product.Flights
         // TODO: what to do with this
         private void NavigationHelper_SaveState(object sender, SaveStateEventArgs e)
         {
-            //e.PageState["originFlight"] = airportsContainer.OriginAirportControl.Text;
-            //e.PageState["destinyFlight"] = airportsContainer.DestinyAirportControl.Text;
-            //e.PageState["originFlightCode"] = airportsContainer.AirportOrigin;
-            //e.PageState["destinyFlightCode"] = airportsContainer.AirportDestiny;
-
-            //e.PageState["FlightDateDeparture"] = dateControlContainer.DepartureDateControl.Date;
-            //e.PageState["FlightDateReturn"] = dateControlContainer.ReturnDateControl.Date;
 
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            HardwareButtons.BackPressed += HardwareButtons_BackPressed;
+
             //this.navigationHelper.OnNavigatedTo(e);            
             if (e.Parameter != null)
             {
@@ -132,7 +123,19 @@ namespace Despegar.WP.UI.Product.Flights
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
+            HardwareButtons.BackPressed -= HardwareButtons_BackPressed;
             //this.navigationHelper.OnNavigatedFrom(e);           
+        }
+
+        void HardwareButtons_BackPressed(object sender, BackPressedEventArgs e)
+        {
+            if (ViewModel != null)
+            {
+                if (ViewModel.IsLoading)
+                {
+                    e.Handled = true;
+                }
+            }
         }
 
         private void Pivot_SelectionChanged(object sender, SelectionChangedEventArgs e)
