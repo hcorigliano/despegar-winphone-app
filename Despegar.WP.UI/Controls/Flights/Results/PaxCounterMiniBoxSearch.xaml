@@ -26,7 +26,7 @@
             <Image Style="{StaticResource FamilyIconResult}"/>
         </Grid>
         <StackPanel Grid.Column="1" HorizontalAlignment="Left" Height="Auto" VerticalAlignment="Top" Width="Auto">
-            <TextBlock TextWrapping="Wrap" Text="{Binding TotalPassangers}" Style="{StaticResource SegoeLight28}"/>
+            <TextBlock TextWrapping="Wrap" Text="{Binding TotalPassangers}" Style="{StaticResource SegoeLight24}"/>
             <TextBlock TextWrapping="Wrap" x:Uid="Page_FlightResult_Passangers" Style="{StaticResource SegoeRegular15}"/>
         </StackPanel>
     </Grid>

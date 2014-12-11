@@ -27,9 +27,9 @@
 			<Image Style="{StaticResource CalendarIconResult}"/>
 		</Grid>
 		<StackPanel Grid.Column="1" HorizontalAlignment="Left" Height="Auto" VerticalAlignment="Top" Width="Auto" Orientation="Horizontal" >
-            <TextBlock Text="{Binding LocalDateTime.Day, Mode=OneWay}" Style="{StaticResource SegoeLight28}" />
-            <TextBlock Text="{Binding LocalDateTime.Month, ConverterLanguage=es, Converter={StaticResource GetMonthName}}" Margin="{StaticResource Left_Offset}" Style="{StaticResource SegoeLight28}"/>
-            <TextBlock Text="{Binding LocalDateTime.Year}" Margin="{StaticResource Left_Offset}" Style="{StaticResource SegoeLight28}"/>
+            <TextBlock Text="{Binding LocalDateTime.Day, Mode=OneWay}" Style="{StaticResource SegoeLight24}" />
+            <TextBlock Text="{Binding LocalDateTime.Month, ConverterLanguage=es, Converter={StaticResource GetMonthName}}" Margin="{StaticResource Left_Offset}" Style="{StaticResource SegoeLight24}"/>
+            <TextBlock Text="{Binding LocalDateTime.Year}" Margin="{StaticResource Left_Offset}" Style="{StaticResource SegoeLight24}"/>
 		</StackPanel>       
     </Grid>
 </UserControl>

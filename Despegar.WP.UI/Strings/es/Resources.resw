@@ -295,7 +295,7 @@
     <value>Las mejores ofertas</value>
   </data>
   <data name="Generic_Go" xml:space="preserve">
-    <value>ida</value>
+    <value>Ida</value>
   </data>
   <data name="Flights_Search_SearchButton.Content" xml:space="preserve">
     <value>Buscar vuelos</value>
@@ -307,7 +307,7 @@
     <value>Partida</value>
   </data>
   <data name="Generic_Return" xml:space="preserve">
-    <value>vuelta</value>
+    <value>Vuelta</value>
   </data>
   <data name="Flights_Search_Destination" xml:space="preserve">
     <value>Destino</value>
@@ -714,13 +714,13 @@
   <data name="Flights_Checkout_Card_Data_Security_Code_ERROR_REQUIRED" xml:space="preserve">
     <value>Por favor, ingrese el código de seguridad</value>
   </data>
-  <data name="Page_Checkout_OP_FIX_CREDIT_CARD" xml:space="preserve">
+  <data name="Page_Checkout_ERROR_OP_FIX_CREDIT_CARD" xml:space="preserve">
     <value>Lo sentimos, hemos encontrado un error en los datos de su tarjeta. Por favor, revise los datos ingresados e intente nuevamente.</value>
   </data>
-  <data name="Page_Checkout_OP_NEW_CREDIT_CARD" xml:space="preserve">
+  <data name="Page_Checkout_ERROR_OP_NEW_CREDIT_CARD" xml:space="preserve">
     <value>Lo sentimos, no hemos podido procesar el pago con la tarjeta ingresada. Por favor, ingrese una nueva tarjeta e intente nuevamente.</value>
   </data>
-  <data name="Page_Checkout_OP_PAYMENT_FAILED" xml:space="preserve">
+  <data name="Page_Checkout_ERROR_OP_PAYMENT_FAILED" xml:space="preserve">
     <value>Lo sentimos, no hemos podido procesar su pago. Si desea realizar un pago mediante transferencia bancaria, por favor comuníquese con [Teléfono país].</value>
   </data>
 </root>
