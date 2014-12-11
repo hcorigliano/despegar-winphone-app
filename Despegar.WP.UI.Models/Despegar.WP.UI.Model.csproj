@@ -72,9 +72,11 @@
     <Compile Include="ViewModel\Classes\Flights\EditMultiplesNavigationData.cs" />
     <Compile Include="ViewModel\Classes\Flights\RouteInbound.cs" />
     <Compile Include="ViewModel\Classes\Flights\RouteOutbound.cs" />
+    <Compile Include="ViewModel\Classes\HomeParameters.cs" />
     <Compile Include="ViewModel\Classes\Minor.cs" />
     <Compile Include="Interfaces\INavigator.cs" />
     <Compile Include="ViewModel\CountrySelectionViewModel.cs" />
+    <Compile Include="ViewModel\Flights\FlightThanksViewModel.cs" />
     <Compile Include="ViewModel\Flights\MultipleEditionViewModel.cs" />
     <Compile Include="ViewModel\Flights\PassengersViewModel.cs" />
     <Compile Include="ViewModel\Classes\Flights\RoutesItems.cs" />
@@ -82,8 +84,7 @@
     <Compile Include="ViewModel\Classes\Flights\BindableSegment.cs" />
     <Compile Include="ViewModel\Classes\RelayCommand.cs" />
     <Compile Include="ViewModel\Classes\PageParameters.cs" />
-    <Compile Include="FlightDetailsModel.cs" />
-    <Compile Include="FlightDetailsViewModel.cs" />
+    <Compile Include="ViewModel\Flights\FlightDetailsViewModel.cs" />
     <Compile Include="ViewModel\FlightsCheckoutViewModel.cs" />
     <Compile Include="ViewModel\Flights\FlightSearchViewModel.cs" />
     <Compile Include="GlobalConfiguration.cs" />
