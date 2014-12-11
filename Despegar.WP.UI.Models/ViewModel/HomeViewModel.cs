@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Linq;
+using Despegar.WP.UI.Model.ViewModel.Classes;
 
 namespace Despegar.WP.UI.Model
 {
@@ -18,10 +19,16 @@ namespace Despegar.WP.UI.Model
         private IConfigurationService configurationService;
         private INavigator Navigator;
 
-        public HomeViewModel(INavigator navigator, IConfigurationService configuracion)             
+        public HomeViewModel(INavigator navigator, IConfigurationService configuracion, HomeParameters parameters)
         {
             this.Navigator = navigator;
             this.configurationService = configuracion;
+
+            if (parameters != null)
+            {
+                if (parameters.ClearStack)
+                    navigator.ClearStack();
+            }
         }
 
         public async Task<List<Product>> GetProducts(string country)

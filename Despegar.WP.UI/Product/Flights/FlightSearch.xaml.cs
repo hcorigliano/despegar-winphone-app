@@ -15,6 +15,7 @@ using Despegar.WP.UI.Model.Common;
 using Windows.UI.Popups;
 using Despegar.WP.UI.Model.ViewModel;
 using Windows.Phone.UI.Input;
+using Windows.ApplicationModel.Resources;
 
 namespace Despegar.WP.UI.Product.Flights
 {
@@ -45,16 +46,17 @@ namespace Despegar.WP.UI.Product.Flights
         # region ** ERROR HANDLING **
         private void ErrorHandler(object sender, ViewModelErrorArgs e) 
         {
+            ResourceLoader manager = new ResourceLoader();
             MessageDialog dialog;
 
             switch(e.ErrorCode) 
             {
                 case "SEARCH_FAILED":
-                    dialog = new MessageDialog("Por favor, revise su conexion a internet.", "Error de Conexión");
+                    dialog = new MessageDialog(manager.GetString("Flights_Search_ERROR_SEARCH_FAILED"), manager.GetString("Flights_Search_ERROR_SEARCH_FAILED_TITLE"));
                     dialog.ShowAsync();
                     break;
                 case "SEARCH_INVALID":
-                    dialog = new MessageDialog("Por favor, revise los campos y vuelva a intentarlo.", "Búsqueda");
+                    dialog = new MessageDialog(manager.GetString("Flights_Search_ERROR_SEARCH_INVALID"), manager.GetString("Flights_Search_ERROR_SEARCH_INVALID_TITLE"));
                     dialog.ShowAsync();
                     break;
             }

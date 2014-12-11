@@ -21,6 +21,7 @@ using Despegar.WP.UI.Controls;
 using System.ComponentModel;
 using Despegar.WP.UI.Model.ViewModel;
 using Despegar.WP.UI.Product.Flights;
+using Despegar.WP.UI.Model.ViewModel.Classes;
 
 namespace Despegar.WP.UI
 {    
@@ -38,15 +39,10 @@ namespace Despegar.WP.UI
             this.navigationHelper = new NavigationHelper(this);
             this.navigationHelper.LoadState += this.NavigationHelper_LoadState;
             this.navigationHelper.SaveState += this.NavigationHelper_SaveState;
-
-            ViewModel = new Despegar.WP.UI.Model.HomeViewModel(Navigator.Instance, GlobalConfiguration.CoreContext.GetConfigurationService());            
-            ViewModel.PropertyChanged += Checkloading;
-
-            this.DataContext = ViewModel;
+            
 
             // Developer Tools
-            this.CheckDeveloperTools();
-            SetupMenuItems(GlobalConfiguration.Site);
+            this.CheckDeveloperTools();           
         }
 
         private void Checkloading(object sender, PropertyChangedEventArgs e)
@@ -100,7 +96,13 @@ namespace Despegar.WP.UI
         /// session.  The state will be null the first time a page is visited.</param>
         private void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
         {
+            var parameter = e.NavigationParameter as HomeParameters;
 
+            ViewModel = new Despegar.WP.UI.Model.HomeViewModel(Navigator.Instance, GlobalConfiguration.CoreContext.GetConfigurationService(), parameter);
+            ViewModel.PropertyChanged += Checkloading;
+            SetupMenuItems(GlobalConfiguration.Site);
+
+            this.DataContext = ViewModel;
         }
 
         /// <summary>

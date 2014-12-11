@@ -2,12 +2,15 @@
 using Despegar.WP.UI.Common;
 using Despegar.WP.UI.Controls;
 using Despegar.WP.UI.Model;
+using Despegar.WP.UI.Model.Common;
 using Despegar.WP.UI.Model.ViewModel;
 using Despegar.WP.UI.Model.ViewModel.Classes.Flights;
 using Despegar.WP.UI.Product.Flights.Checkout.Passegers.Controls;
 using System;
 using System.ComponentModel;
+using Windows.ApplicationModel.Resources;
 using Windows.Phone.UI.Input;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
@@ -70,15 +73,36 @@ namespace Despegar.WP.UI.Product.Flights
             // Set Defaults values and Country specifics
             ConfigureFields();
 
+            ViewModel.ViewModelError += ErrorHandler;
             this.DataContext = ViewModel;
         }
 
 
+<<<<<<< HEAD
         private void ShowRisk(Object sender, EventArgs e )
         {
 
 
         }
+=======
+        # region ** ERROR HANDLING **
+        private void ErrorHandler(object sender, ViewModelErrorArgs e)
+        {
+            ResourceLoader manager = new ResourceLoader();
+
+            MessageDialog dialog;
+
+            switch (e.ErrorCode)
+            {
+                case "FORM_ERROR":
+                    dialog = new MessageDialog(manager.GetString("Flights_Checkout_ERROR_FORM_ERROR"), manager.GetString("Flights_Checkout_ERROR_FORM_ERROR_TITLE"));
+                    dialog.ShowAsync();
+                    break;
+                // TODO: Handle other errors
+            }
+        }
+        #endregion
+>>>>>>> herno/mejoras
 
         /// <summary>
         /// View Adaptations based on selected country
