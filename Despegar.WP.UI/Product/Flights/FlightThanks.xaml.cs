@@ -9,6 +9,7 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Graphics.Display;
+using Windows.Phone.UI.Input;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -102,11 +103,13 @@ namespace Despegar.WP.UI.Product.Flights
         /// handlers that cannot cancel the navigation request.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            HardwareButtons.BackPressed += HardwareButtons_BackPressed;
             this.navigationHelper.OnNavigatedTo(e);
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
+            HardwareButtons.BackPressed -= HardwareButtons_BackPressed;
             this.navigationHelper.OnNavigatedFrom(e);
         }
 
@@ -115,6 +118,13 @@ namespace Despegar.WP.UI.Product.Flights
         private void GoToHome(object sender, RoutedEventArgs e)
         {
             Navigator.Instance.GoTo(ViewModelPages.Home, null);
+        }
+
+        void HardwareButtons_BackPressed(object sender, BackPressedEventArgs e)
+        {
+            e.Handled = true;
+            Navigator.Instance.GoTo(ViewModelPages.Home, null);
+            
         }
     }
 }

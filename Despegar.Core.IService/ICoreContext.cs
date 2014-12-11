@@ -53,6 +53,12 @@ namespace Despegar.Core.IService
         IConfigurationService GetConfigurationService();
 
         /// <summary>
+        /// returns UpaService Object
+        /// </summary>
+        /// <returns></returns>
+        IUPAService GetUpaService();
+
+        /// <summary>
         /// returns the CommonService Object
         /// </summary>
         /// <returns></returns>
