@@ -78,13 +78,11 @@ namespace Despegar.WP.UI.Product.Flights
         }
 
 
-<<<<<<< HEAD
+
         private void ShowRisk(Object sender, EventArgs e )
         {
-
-
         }
-=======
+
         # region ** ERROR HANDLING **
         private void ErrorHandler(object sender, ViewModelErrorArgs e)
         {
@@ -102,7 +100,7 @@ namespace Despegar.WP.UI.Product.Flights
             }
         }
         #endregion
->>>>>>> herno/mejoras
+
 
         /// <summary>
         /// View Adaptations based on selected country
