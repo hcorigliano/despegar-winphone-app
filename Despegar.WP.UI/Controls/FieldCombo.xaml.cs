@@ -20,7 +20,7 @@ namespace Despegar.WP.UI.Controls
 {
     public sealed partial class FieldCombo : UserControl
     {
-        public static readonly DependencyProperty ValueProperty = DependencyProperty.Register("Value", typeof(string), typeof(FieldCombo), new PropertyMetadata(null));       
+        public static readonly DependencyProperty ValueProperty = DependencyProperty.Register("Value", typeof(object), typeof(FieldCombo), new PropertyMetadata(null));       
         public static readonly DependencyProperty ItemsSourceProperty = DependencyProperty.Register("ItemsSource", typeof(object), typeof(FieldCombo), new PropertyMetadata(null));
         public static readonly DependencyProperty LabelProperty = DependencyProperty.Register("Label", typeof(string), typeof(FieldCombo), new PropertyMetadata(null));
         public static readonly DependencyProperty CodePathProperty = DependencyProperty.Register("CodePath", typeof(string), typeof(FieldCombo), new PropertyMetadata(null));
@@ -37,9 +37,9 @@ namespace Despegar.WP.UI.Controls
         #endregion
 
         // Bindable Property from XAML
-        public string Value
+        public object Value
         {
-            get { return (string)GetValue(ValueProperty); }
+            get { return (object)GetValue(ValueProperty); }
             set
             {
                 SetValueAndNotify(ValueProperty, value);
@@ -67,9 +67,9 @@ namespace Despegar.WP.UI.Controls
         }
 
         // Bindable Property from XAML
-        public object CodePath
+        public string CodePath
         {
-            get { return GetValue(CodePathProperty); }
+            get { return (string)GetValue(CodePathProperty); }
             set
             {
                 SetValueAndNotify(CodePathProperty, value);
@@ -77,9 +77,9 @@ namespace Despegar.WP.UI.Controls
         }
 
         // Bindable Property from XAML
-        public object DisplayTextPath
+        public string DisplayTextPath
         {
-            get { return GetValue(DisplayTextPathProperty); }
+            get { return (string)GetValue(DisplayTextPathProperty); }
             set
             {
                 SetValueAndNotify(DisplayTextPathProperty, value);

@@ -43,6 +43,7 @@ namespace Despegar.WP.UI.Model.ViewModel
             {
                 if (InvoiceRequired)
                 {
+                    //return false;
                     return CoreBookingFields.form.payment.invoice.fiscal_status.required && CoreBookingFields.form.payment.invoice.fiscal_status.CoreValue != "FINAL";
                 }
                 else { return false; }
@@ -87,17 +88,15 @@ namespace Despegar.WP.UI.Model.ViewModel
             set 
             { 
                 seletedInstallment = value;
-              
+                OnPropertyChanged();
+
                 // Select first by default
                 SelectedCard = value.FirstOrDefault();
-
-                OnPropertyChanged();
-                OnPropertyChanged("CurrentCards");
-            } 
+            }
         }
 
         private PaymentDetail selectedCard;
-        public PaymentDetail SelectedCard 
+        public PaymentDetail SelectedCard
         {
             get { return selectedCard; }
             set 
@@ -203,7 +202,12 @@ namespace Despegar.WP.UI.Model.ViewModel
                         CoreBookingFields.form.payment.invoice.fiscal_status.PropertyChanged += Fiscal_status_PropertyChanged;
 
                         CoreBookingFields.form.payment.invoice.fiscal_status.SetDefaultValue();
-                        //CoreBookingFields.form.payment.invoice.address.state.CoreValue = States.FirstOrDefault().id; // NOT WORKING, MUST BE DONE AFTER THIS CODE or use A RegularOptionsField (The Source works bad)
+                        CoreBookingFields.form.payment.invoice.address.country.SetDefaultValue();
+
+                        // Turn State into a MultipleField
+                        CoreBookingFields.form.payment.invoice.address.state.value = null;
+                        CoreBookingFields.form.payment.invoice.address.state.options = States.Select(x => new Option() { value= x.id, description = x.name }).ToList();
+                        CoreBookingFields.form.payment.invoice.address.state.SetDefaultValue();
                     }
 
                     CoreBookingFields.form.contact.phones[0].country_code.SetDefaultValue();
@@ -264,42 +268,48 @@ namespace Despegar.WP.UI.Model.ViewModel
             InstallmentFormatted = new InstallmentFormatted();
 
             // With interest
-            foreach (PaymentDetail item in payments.without_interest)
+            if (payments.without_interest != null)
             {
-                switch (item.installments.quantity)
+                foreach (PaymentDetail item in payments.without_interest)
                 {
-                    case 1:
-                        InstallmentFormatted.WithoutInterest.OnePay.Add(item);
-                        break;
-                    case 6:
-                        InstallmentFormatted.WithoutInterest.SixPays.Add(item);
-                        break;
-                    case 12:
-                        InstallmentFormatted.WithoutInterest.TwelvePays.Add(item);
-                        break;
-                    case 24:
-                        InstallmentFormatted.WithoutInterest.TwentyFourPays.Add(item);
-                        break;
+                    switch (item.installments.quantity)
+                    {
+                        case 1:
+                            InstallmentFormatted.WithoutInterest.OnePay.Add(item);
+                            break;
+                        case 6:
+                            InstallmentFormatted.WithoutInterest.SixPays.Add(item);
+                            break;
+                        case 12:
+                            InstallmentFormatted.WithoutInterest.TwelvePays.Add(item);
+                            break;
+                        case 24:
+                            InstallmentFormatted.WithoutInterest.TwentyFourPays.Add(item);
+                            break;
+                    }
                 }
             }
 
             // Without Interest
-            foreach (PaymentDetail item in payments.with_interest)
-            {              
-                switch (item.installments.quantity)
+            if (payments.with_interest != null)
+            {
+                foreach (PaymentDetail item in payments.with_interest)
                 {
-                    case 1:
-                        InstallmentFormatted.WithInterest.OnePay.Add(item);
-                        break;
-                    case 6:
-                        InstallmentFormatted.WithInterest.SixPays.Add(item);
-                        break;
-                    case 12:
-                        InstallmentFormatted.WithInterest.TwelvePays.Add(item);
-                        break;
-                    case 24:
-                        InstallmentFormatted.WithInterest.TwentyFourPays.Add(item);
-                        break;
+                    switch (item.installments.quantity)
+                    {
+                        case 1:
+                            InstallmentFormatted.WithInterest.OnePay.Add(item);
+                            break;
+                        case 6:
+                            InstallmentFormatted.WithInterest.SixPays.Add(item);
+                            break;
+                        case 12:
+                            InstallmentFormatted.WithInterest.TwelvePays.Add(item);
+                            break;
+                        case 24:
+                            InstallmentFormatted.WithInterest.TwentyFourPays.Add(item);
+                            break;
+                    }
                 }
             }
 
@@ -316,13 +326,17 @@ namespace Despegar.WP.UI.Model.ViewModel
 
             if (InstallmentFormatted.WithInterest.TwentyFourPays.Count != 0)
                 availablePayments.Add("24");
-            
-            string input = String.Join(" , ", availablePayments);
-            StringBuilder sb = new StringBuilder(input);
-            sb[input.LastIndexOf(',')] = 'o';
 
-            var loader = new Windows.ApplicationModel.Resources.ResourceLoader();
-            InstallmentFormatted.WithInterest.GrupLabelText = sb.ToString() + " " + loader.GetString("Common_Pay_Of");
+            if (availablePayments.Count != 0)
+            {
+                string input = String.Join(" , ", availablePayments);
+                StringBuilder sb = new StringBuilder(input);
+                sb[input.LastIndexOf(',')] = 'o';
+            
+
+                var loader = new Windows.ApplicationModel.Resources.ResourceLoader();
+                InstallmentFormatted.WithInterest.GrupLabelText = sb.ToString() + " " + loader.GetString("Common_Pay_Of");
+            }
 
             //TODO : FILL PAY AT DESTINATION
         }
@@ -469,44 +483,102 @@ namespace Despegar.WP.UI.Model.ViewModel
         private static BookingFields FillBookingFields(BookingFields bookingFields)
         {
             bookingFields.form.contact.email.CoreValue = "bookingvuelos@despegar.com";
+
             bookingFields.form.contact.phones[0].area_code.CoreValue = "11";
             bookingFields.form.contact.phones[0].country_code.CoreValue = "54";
             bookingFields.form.contact.phones[0].number.CoreValue = "44444444";
             bookingFields.form.contact.phones[0].type.CoreValue = "HOME";
+
             if (bookingFields.form.passengers[0].birthdate != null)
-            {
                 bookingFields.form.passengers[0].birthdate.CoreValue = "1988-11-27";
-            }
-            bookingFields.form.passengers[0].document.number.CoreValue = "12123123";
-            bookingFields.form.passengers[0].document.type.CoreValue = "LOCAL";
+            if (bookingFields.form.passengers[0].document != null)
+                bookingFields.form.passengers[0].document.type.CoreValue = "LOCAL";
             bookingFields.form.passengers[0].first_name.CoreValue = "Test";
             bookingFields.form.passengers[0].last_name.CoreValue = "Booking";
-            bookingFields.form.passengers[0].gender.CoreValue = "MALE";
-            bookingFields.form.passengers[0].nationality.CoreValue = "AR";
+            if (bookingFields.form.passengers[0].gender != null) { bookingFields.form.passengers[0].gender.CoreValue = "MALE"; }
             bookingFields.form.payment.card.expiration.CoreValue = "2015-11";
             bookingFields.form.payment.card.number.CoreValue = "4242424242424242";
-            bookingFields.form.payment.card.owner_document.number.CoreValue = "12123123";
-            bookingFields.form.payment.card.owner_document.type.CoreValue = "LOCAL";
-            bookingFields.form.payment.card.owner_gender.CoreValue = "MALE";
+
+            if (bookingFields.form.payment.card.owner_document != null)
+                bookingFields.form.payment.card.owner_document.type.CoreValue = "LOCAL";
+            if (bookingFields.form.payment.card.owner_gender != null)
+                bookingFields.form.payment.card.owner_gender.CoreValue = "MALE";
             bookingFields.form.payment.card.owner_name.CoreValue = "Test Booking";
             bookingFields.form.payment.card.security_code.CoreValue = "123";
             bookingFields.form.payment.installment.card_code.CoreValue = "VI";
             bookingFields.form.payment.installment.card_type.CoreValue = "CREDIT";
             bookingFields.form.payment.installment.quantity.CoreValue = "1";
-            if (bookingFields.form.payment.invoice != null)
-            {
-                bookingFields.form.payment.invoice.address.city_id.CoreValue = "6585";
-                bookingFields.form.payment.invoice.address.country.CoreValue = "AR";
-                bookingFields.form.payment.invoice.address.department.CoreValue = "A";
-                bookingFields.form.payment.invoice.address.number.CoreValue = "1234";
-                bookingFields.form.payment.invoice.address.postal_code.CoreValue = "7777";
-                bookingFields.form.payment.invoice.address.state.CoreValue = "14061";
-                bookingFields.form.payment.invoice.address.street.CoreValue = "La Calle";
-                bookingFields.form.payment.invoice.fiscal_id.CoreValue = "20121231238";
-                bookingFields.form.payment.invoice.fiscal_name.CoreValue = "RazonSocial";
-                bookingFields.form.payment.invoice.fiscal_status.CoreValue = "INSCR";
-            }
+
             bookingFields.form.payment.installment.complete_card_code.CoreValue = "VI";
+
+            if (bookingFields.form.payment.card.owner_document != null)
+                bookingFields.form.payment.card.owner_document.number.CoreValue = "12123123";
+            if (bookingFields.form.passengers[0].document != null && bookingFields.form.passengers[0].document.number != null)
+                bookingFields.form.passengers[0].document.number.CoreValue = "12123123";
+
+
+
+            if (bookingFields.form.passengers[0].nationality != null)
+            {
+                bookingFields.form.passengers[0].nationality.CoreValue = bookingFields.form.passengers[0].nationality.value;
+                switch (bookingFields.form.passengers[0].nationality.value)
+                {
+                    case "AR":
+
+                        if (bookingFields.form.payment.invoice != null)
+                        {
+                            bookingFields.form.payment.invoice.address.city_id.CoreValue = "6585";
+                            bookingFields.form.payment.invoice.address.country.CoreValue = "AR";
+                            bookingFields.form.payment.invoice.address.department.CoreValue = "A";
+                            bookingFields.form.payment.invoice.address.number.CoreValue = "1234";
+                            bookingFields.form.payment.invoice.address.postal_code.CoreValue = "7777";
+                            bookingFields.form.payment.invoice.address.state.CoreValue = "14061";
+                            bookingFields.form.payment.invoice.address.street.CoreValue = "La Calle";
+                            bookingFields.form.payment.invoice.fiscal_id.CoreValue = "20121231238";
+                            bookingFields.form.payment.invoice.fiscal_name.CoreValue = "RazonSocial";
+                            bookingFields.form.payment.invoice.fiscal_status.CoreValue = "INSCR";
+                        }
+                        break;
+
+                    case "BR":
+                        bookingFields.form.payment.card.owner_document.number.CoreValue = "85365865596";
+                        if (bookingFields.form.passengers[0].document.number != null)
+                            bookingFields.form.passengers[0].document.number.CoreValue = "85365865596";
+                        break;
+
+                    case "PE":
+                        if (bookingFields.form.payment.invoice != null)
+                        {
+                            bookingFields.form.payment.invoice.address.city.CoreValue = "6585";
+                            bookingFields.form.payment.invoice.address.country.CoreValue = "PE";
+                            bookingFields.form.payment.invoice.address.state.CoreValue = "14061";
+                            bookingFields.form.payment.invoice.address.street.CoreValue = "La Calle";
+                            bookingFields.form.payment.invoice.fiscal_id.CoreValue = "20121231238";
+                        }
+                        break;
+
+                    case "MX":
+                        {
+                            bookingFields.form.passengers[0].document.type.CoreValue = "PASSPORT";
+                            if (bookingFields.form.passengers[0].document.number != null)
+                                bookingFields.form.passengers[0].document.number.CoreValue = "12123123";
+                            break;
+                        }
+
+
+                    default:
+
+                        if (bookingFields.form.passengers[0].document.number != null)
+                            bookingFields.form.passengers[0].document.number.CoreValue = "12123123";
+                        break;
+                }
+            }
+            else
+            {
+
+            }
+
+
             return bookingFields;
         }
 

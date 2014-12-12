@@ -22,6 +22,7 @@ namespace Despegar.Core.Business.Flight.BookingFields
             bool contactValid = true;
             bool cardValid = true;
             bool invoiceValid = true;
+            bool installmentValid = true;
 
             sectionID = String.Empty;
 
@@ -78,8 +79,8 @@ namespace Despegar.Core.Business.Flight.BookingFields
                     cardValid = false;                
                 if (form.payment.card.number != null && !form.payment.card.number.IsValid)
                     cardValid = false;
-                //if (form.payment.card.expiration.IsValid)
-                //    isValid = false;
+                if (form.payment.card.expiration != null && !form.payment.card.expiration.IsValid)
+                    cardValid = false;
                 if (form.payment.card.owner_document != null) 
                 {
                     if (form.payment.card.owner_document.number != null && !form.payment.card.owner_document.number.IsValid)
@@ -89,9 +90,18 @@ namespace Despegar.Core.Business.Flight.BookingFields
                 }                                
             }
 
-
-            // Installment   TODO: Validate selection
-            //form.payment.installment.quantity;
+            // Installment
+            if (form.payment.installment != null)
+            {
+                if (form.payment.installment.card_code != null && !form.payment.installment.card_code.IsValid)
+                    installmentValid = false;
+                if (form.payment.installment.card_type != null && !form.payment.installment.card_type.IsValid)
+                    installmentValid = false;
+                if (form.payment.installment.complete_card_code != null && !form.payment.installment.complete_card_code.IsValid)
+                    installmentValid = false;
+                //if (form.payment.installment.quantity != null && !form.payment.installment.quantity.IsValid)
+                //    installmentValid = false;
+            }
 
              // Invoice Arg
             if (form.payment.invoice != null)
@@ -138,6 +148,11 @@ namespace Despegar.Core.Business.Flight.BookingFields
             if (!invoiceValid) 
             {
                 sectionID = "INVOICE";
+                return false;
+            }
+            if (!installmentValid)
+            {
+                sectionID = "INSTALLMENT";
                 return false;
             }
 

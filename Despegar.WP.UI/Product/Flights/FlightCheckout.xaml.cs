@@ -122,31 +122,34 @@ namespace Despegar.WP.UI.Product.Flights
         }
         #endregion
 
-
         /// <summary>
         /// View Adaptations based on selected country
         /// </summary>
         private void ConfigureFields()
         {
-            switch(GlobalConfiguration.Site) 
+            if (!ViewModel.InvoiceRequired)
             {
-                case "AR":
-                    if (!ViewModel.InvoiceRequired)
-                    {
-                        MainPivot.Items.RemoveAt(4);
-                    }
-
-                    // Passengers defaults                    
-                    //foreach (NationalitySelection control in this.FindVisualChildren<NationalitySelection>(PassengerControl))
-                    //    control.SetDisplayText("Argentina");
-                break;
-
-                default:               
-                break;
+                MainPivot.Items.RemoveAt(4);
             }
+
+            //switch(GlobalConfiguration.Site) 
+            //{
+            //    case "AR":
+            //        if (!ViewModel.InvoiceRequired)
+            //        {
+            //            MainPivot.Items.RemoveAt(4);
+            //        }
+
+            //        // Passengers defaults                    
+            //        //foreach (NationalitySelection control in this.FindVisualChildren<NationalitySelection>(PassengerControl))
+            //        //    control.SetDisplayText("Argentina");
+            //    break;
+
+            //    default:               
+            //    break;
+            //}
         }
 
-       
         private void NavigationHelper_SaveState(object sender, SaveStateEventArgs e)
         {
         }

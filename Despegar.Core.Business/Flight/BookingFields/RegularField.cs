@@ -31,7 +31,6 @@ namespace Despegar.Core.Business.Flight.BookingFields
                 }
             }
         }
-        public bool CorePostEnable { get; set; }
         public List<string> Errors { get; set; }
         public string CurrentError { get { return currentError; } set { currentError = value; OnPropertyChanged(); } }
 

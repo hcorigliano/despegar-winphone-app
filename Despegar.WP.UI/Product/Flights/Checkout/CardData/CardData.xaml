@@ -43,10 +43,10 @@
 
                     <ComboBox ItemsSource="{Binding Months}" Style="{StaticResource ComboBoxBase}" Width="{StaticResource dBlock6}" x:Uid="Card_Data_Month" Grid.Column="0" HorizontalAlignment="Left"  x:Name="MonthCombo" SelectionChanged="FillExpiration" />
                     <ComboBox ItemsSource="{Binding YearRange}" Style="{StaticResource ComboBoxBase}" HorizontalAlignment="Right" Width="{StaticResource dBlock6p}" x:Uid="Card_Data_Year" Grid.Column="2" x:Name="YearCombo"  SelectionChanged="FillExpiration" />
-
-                    <!--BINDEAR MIN YEAR-->
                 </Grid>
             </StackPanel>
+
+            <controls:ValidationError ErrorPrefix="Flights_Checkout_Card_Expiration" ErrorCode="{Binding card.expiration.CurrentError}" Visibility="{Binding card.expiration.required, Converter={StaticResource VisibilityConverter}}" />
 
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -63,15 +63,15 @@
             <controls:ValidationError ErrorPrefix="Flights_Checkout_Card_Data_Security_Code" ErrorCode="{Binding card.security_code.CurrentError}" />
             
             <!-- Card Holder Name -->
-            <controls:Field x:Uid="Flights_Checkout_Card_Data_owner_name" Value="{Binding card.owner_name.CoreValue, Mode=TwoWay}" Visibility="{Binding card.owner_name.required, Converter={StaticResource VisibilityConverter}}" />
-            <controls:ValidationError ErrorPrefix="Flights_Checkout_Card_Data_owner_name" ErrorCode="{Binding card.owner_name.CurrentError}" Visibility="{Binding card.owner_name.required, Converter={StaticResource VisibilityConverter}}" />
+            <controls:Field x:Uid="Flights_Checkout_Card_Data_owner_name" Value="{Binding card.owner_name.CoreValue, Mode=TwoWay}" Visibility="{Binding card.owner_name.required, FallbackValue=Collapsed, Converter={StaticResource VisibilityConverter}}" />
+            <controls:ValidationError ErrorPrefix="Flights_Checkout_Card_Data_owner_name" ErrorCode="{Binding card.owner_name.CurrentError}" Visibility="{Binding card.owner_name.required, FallbackValue=Collapsed, Converter={StaticResource VisibilityConverter}}" />
             <!-- Document Type-->
-            <controls:FieldCombo x:Uid="Flights_Checkout_Card_Data_Type" ItemsSource="{Binding card.owner_document.type.options}"  Value="{Binding card.owner_document.type.CoreValue, Mode=TwoWay}" Visibility="{Binding card.owner_document.type.required, Converter={StaticResource VisibilityConverter}}" DisplayTextPath="description" CodePath="value" />
+            <controls:FieldCombo x:Uid="Flights_Checkout_Card_Data_Type" ItemsSource="{Binding card.owner_document.type.options}"  Value="{Binding card.owner_document.type.SelectedOption, Mode=TwoWay}" Visibility="{Binding card.owner_document.type.required, FallbackValue=Collapsed, Converter={StaticResource VisibilityConverter}}" DisplayTextPath="description" CodePath="value" />
             <!-- Document -->
-            <controls:NumericField x:Uid="Flights_Checkout_Card_Data_Document" Value="{Binding card.owner_document.number.CoreValue, Mode=TwoWay}" Visibility="{Binding card.owner_document.number.required, Converter={StaticResource VisibilityConverter}}" />
-            <controls:ValidationError ErrorPrefix="Flights_Checkout_Card_Data_Document" ErrorCode="{Binding card.owner_document.number.CurrentError}" Visibility="{Binding card.owner_document.number.required, Converter={StaticResource VisibilityConverter}}" />                                  
+            <controls:NumericField x:Uid="Flights_Checkout_Card_Data_Document" Value="{Binding card.owner_document.number.CoreValue, Mode=TwoWay}" Visibility="{Binding card.owner_document.number.required, FallbackValue=Collapsed, Converter={StaticResource VisibilityConverter}}" />
+            <controls:ValidationError ErrorPrefix="Flights_Checkout_Card_Data_Document" ErrorCode="{Binding card.owner_document.number.CurrentError}" Visibility="{Binding card.owner_document.number.required, FallbackValue=Collapsed, Converter={StaticResource VisibilityConverter}}" />                                  
             <!-- Gender -->
-            <controls:FieldCombo x:Uid="Flights_Checkout_Card_Data_Gender" ItemsSource="{Binding card.owner_gender.options}"  Value="{Binding card.owner_gender.CoreValue, Mode=TwoWay}" Visibility="{Binding card.owner_gender.required, Converter={StaticResource VisibilityConverter}}" DisplayTextPath="description" CodePath="value" />           
+            <controls:FieldCombo x:Uid="Flights_Checkout_Card_Data_Gender" ItemsSource="{Binding card.owner_gender.options}"  Value="{Binding card.owner_gender.SelectedOption, Mode=TwoWay}" Visibility="{Binding card.owner_gender.required, FallbackValue=Collapsed, Converter={StaticResource VisibilityConverter}}" DisplayTextPath="description" CodePath="value" />           
         </StackPanel>
     </ScrollViewer>
     

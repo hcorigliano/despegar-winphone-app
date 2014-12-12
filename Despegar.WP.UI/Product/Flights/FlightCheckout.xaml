@@ -43,7 +43,7 @@
             </PivotItem>
 
             <!--Payments Pivot-->
-            <PivotItem x:Name="Pivot_PAYMENT"  x:Uid="Flight_Checkout_Payments" Style="{StaticResource PivotItemBase}" xmlns:src="using:Despegar.WP.UI.Product.Flights.Checkout.Payment">
+            <PivotItem x:Name="Pivot_INSTALLMENT"  x:Uid="Flight_Checkout_Payments" Style="{StaticResource PivotItemBase}" xmlns:src="using:Despegar.WP.UI.Product.Flights.Checkout.Payment">
                <src:Payments  />
             </PivotItem>
 

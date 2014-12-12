@@ -16,7 +16,6 @@ namespace Despegar.WP.UI.Product.Flights.Checkout.Payment
         }
 
         private void OnRadioButton_Clicked(object sender, RoutedEventArgs e)
-
         {
             RadioButton a = (RadioButton)e.OriginalSource;
             ViewModel.SelectedInstallment = a.DataContext as List<PaymentDetail>;

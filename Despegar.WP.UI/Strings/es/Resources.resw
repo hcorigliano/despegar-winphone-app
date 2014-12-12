@@ -741,6 +741,12 @@
   <data name="Flights_Search_ERROR_SEARCH_INVALID_TITLE" xml:space="preserve">
     <value>Búsqueda de Vuelos</value>
   </data>
+  <data name="Flights_Checkout_Card_Expiration_ERROR_INVALID_DATE" xml:space="preserve">
+    <value>Por favor, fechas está fuera de rango</value>
+  </data>
+  <data name="Flights_Checkout_Card_Expiration_ERROR_REQUIRED" xml:space="preserve">
+    <value>Por favor, ingrese la fecha de expiración de la tarjeta</value>
+  </data>
   <data name="Flights_Checkout_Invoice_Arg_City_ERROR_REQUIRED" xml:space="preserve">
     <value>Por favor, ingrese una ciudad</value>
   </data>
