@@ -48,6 +48,7 @@ namespace Despegar.WP.UI.Model.ViewModel
                 else { return false; }
             } 
         }
+        public bool IsTermsAndConditionsAccepted { get; set; }
 
         public event EventHandler ShowRiskReview;
 
@@ -202,7 +203,7 @@ namespace Despegar.WP.UI.Model.ViewModel
                         CoreBookingFields.form.payment.invoice.fiscal_status.PropertyChanged += Fiscal_status_PropertyChanged;
 
                         CoreBookingFields.form.payment.invoice.fiscal_status.SetDefaultValue();
-                        CoreBookingFields.form.payment.invoice.address.state.CoreValue = States.FirstOrDefault().id; // NOT WORKING, MUST BE DONE AFTER THIS CODE or use A RegularOptionsField (The Source works bad)
+                        //CoreBookingFields.form.payment.invoice.address.state.CoreValue = States.FirstOrDefault().id; // NOT WORKING, MUST BE DONE AFTER THIS CODE or use A RegularOptionsField (The Source works bad)
                     }
 
                     CoreBookingFields.form.contact.phones[0].country_code.SetDefaultValue();
@@ -366,6 +367,13 @@ namespace Despegar.WP.UI.Model.ViewModel
             // Fill Test data
             //FillBookingFields(CoreBookingFields);
 #endif
+
+            if (!IsTermsAndConditionsAccepted)
+            {
+                OnViewModelError("TERMS_AND_CONDITIONS_NOT_CHECKED");
+                return;
+            }
+
             string sectionID = "";
             // Validation
             if (!CoreBookingFields.IsValid(out sectionID))
@@ -424,6 +432,7 @@ namespace Despegar.WP.UI.Model.ViewModel
                 this.IsLoading = false;
             }
         }
+
         private void ClearCreditCardFields()
         {
             this.selectedCard.card = new Card();

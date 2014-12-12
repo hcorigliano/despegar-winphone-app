@@ -98,6 +98,10 @@ namespace Despegar.WP.UI.Product.Flights
                     string sectionID = (string)e.Parameter;
                     MainPivot.SelectedIndex = GetSectionIndex(sectionID);
                     break;
+                case "TERMS_AND_CONDITIONS_NOT_CHECKED":
+                    dialog = new MessageDialog(manager.GetString("TermsAndConditions_ERROR"), manager.GetString("TermsAndConditions_ERROR_TITLE"));
+                    dialog.ShowAsync();
+                    break;
 
                 // TODO: Handle other errors
             }

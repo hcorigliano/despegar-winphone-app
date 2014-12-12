@@ -1020,6 +1020,11 @@
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="HorizontalAlignment" Value="Center" />
     </Style>
+    <Style x:Key="AcceptTermsAndConditionsButton" TargetType="Button">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderBrush" Value="Transparent" />
+    </Style>
+
     <!-- Flights Checkout -->
     <Style x:Key="DetailCheckoutDetail" TargetType="TextBlock" BasedOn="{StaticResource SegoeSemilight17}">
         <Setter Property="Height" Value="{StaticResource dBlock1p}" />

@@ -741,4 +741,16 @@
   <data name="Flights_Search_ERROR_SEARCH_INVALID_TITLE" xml:space="preserve">
     <value>Búsqueda de Vuelos</value>
   </data>
+  <data name="Flights_Checkout_Invoice_Arg_City_ERROR_REQUIRED" xml:space="preserve">
+    <value>Por favor, ingrese una ciudad</value>
+  </data>
+  <data name="Flights_Checkout_Invoice_Arg_State_ERROR_REQUIRED" xml:space="preserve">
+    <value>Por favor, seleccione una provincia</value>
+  </data>
+  <data name="TermsAndConditions_ERROR" xml:space="preserve">
+    <value>Para comprar debe Leer y aceptar las condiciones de compra</value>
+  </data>
+  <data name="TermsAndConditions_ERROR_TITLE" xml:space="preserve">
+    <value>Condiciones de compra</value>
+  </data>
 </root>
