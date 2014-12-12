@@ -64,7 +64,7 @@
                             </StackPanel>
                             <!-- Document Type -->
                             <StackPanel Visibility="{Binding document.type.required, Converter={StaticResource VisibilityConverter}}">
-                                <controls:FieldCombo x:Uid="Flights_Checkout_Passenger_Document_Type"  ItemsSource="{Binding document.type.options}"  Value="{Binding document.type.CoreValue, Mode=TwoWay}" DisplayTextPath="description" CodePath="value" />
+                                <controls:FieldCombo x:Uid="Flights_Checkout_Passenger_Document_Type"  ItemsSource="{Binding document.type.options}"  Value="{Binding document.type.SelectedOption, Mode=TwoWay}" DisplayTextPath="description" CodePath="value" />
                             </StackPanel>
                             <!-- Birthday -->
                             <StackPanel Style="{StaticResource TextBoxInputContainer}" Visibility="{Binding birthdate.required,Converter={StaticResource VisibilityConverter}}">
@@ -73,7 +73,7 @@
                             </StackPanel>
                             <!-- Gender -->
                             <StackPanel Visibility="{Binding gender.required, Converter={StaticResource VisibilityConverter}}">
-                                <controls:FieldCombo x:Uid="Flights_Checkout_Passenger_Gender"  ItemsSource="{Binding gender.options}"  Value="{Binding gender.CoreValue, Mode=TwoWay}" DisplayTextPath="description" CodePath="value" />
+                                <controls:FieldCombo x:Uid="Flights_Checkout_Passenger_Gender"  ItemsSource="{Binding gender.options}"  Value="{Binding gender.SelectedOption, Mode=TwoWay}" DisplayTextPath="description" CodePath="value" />
                             </StackPanel>          
                             
                         </StackPanel>

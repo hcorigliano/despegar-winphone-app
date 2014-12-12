@@ -28,10 +28,10 @@ namespace Despegar.WP.UI.Product.Flights.Checkout.CardData
 
         private void FillExpiration(object sender, SelectionChangedEventArgs e)
         {
-            if (YearCombo.SelectedValue != null && MonthCombo.SelectedValue != null)
-            {
-                ViewModel.CoreBookingFields.form.payment.card.expiration.CoreValue = YearCombo.SelectedValue.ToString() + "-" + MonthCombo.SelectedValue.ToString();
-            }
+            ViewModel.CoreBookingFields.form.payment.card.expiration.CoreValue = null;
+
+            if (YearCombo.SelectedValue != null && MonthCombo.SelectedValue != null)            
+                ViewModel.CoreBookingFields.form.payment.card.expiration.CoreValue = YearCombo.SelectedValue.ToString() + "-" + MonthCombo.SelectedValue.ToString();            
         }
     }
 }

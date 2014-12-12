@@ -87,17 +87,15 @@ namespace Despegar.WP.UI.Model.ViewModel
             set 
             { 
                 seletedInstallment = value;
-              
+                OnPropertyChanged();
+
                 // Select first by default
                 SelectedCard = value.FirstOrDefault();
-
-                OnPropertyChanged();
-                OnPropertyChanged("CurrentCards");
-            } 
+            }
         }
 
         private PaymentDetail selectedCard;
-        public PaymentDetail SelectedCard 
+        public PaymentDetail SelectedCard
         {
             get { return selectedCard; }
             set 
@@ -203,7 +201,12 @@ namespace Despegar.WP.UI.Model.ViewModel
                         CoreBookingFields.form.payment.invoice.fiscal_status.PropertyChanged += Fiscal_status_PropertyChanged;
 
                         CoreBookingFields.form.payment.invoice.fiscal_status.SetDefaultValue();
-                        //CoreBookingFields.form.payment.invoice.address.state.CoreValue = States.FirstOrDefault().id; // NOT WORKING, MUST BE DONE AFTER THIS CODE or use A RegularOptionsField (The Source works bad)
+                        CoreBookingFields.form.payment.invoice.address.country.SetDefaultValue();
+
+                        // Turn State into a MultipleField
+                        CoreBookingFields.form.payment.invoice.address.state.value = null;
+                        CoreBookingFields.form.payment.invoice.address.state.options = States.Select(x => new Option() { value= x.id, description = x.name }).ToList();
+                        CoreBookingFields.form.payment.invoice.address.state.SetDefaultValue();
                     }
 
                     CoreBookingFields.form.contact.phones[0].country_code.SetDefaultValue();
@@ -365,7 +368,7 @@ namespace Despegar.WP.UI.Model.ViewModel
         {
 #if DEBUG
             // Fill Test data
-            //FillBookingFields(CoreBookingFields);
+            FillBookingFields(CoreBookingFields);
 #endif
 
             if (!IsTermsAndConditionsAccepted)

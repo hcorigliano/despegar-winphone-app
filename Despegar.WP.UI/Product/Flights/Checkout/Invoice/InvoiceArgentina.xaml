@@ -23,7 +23,7 @@
 
             <!-- Fiscal Status -->
             <StackPanel Visibility="{Binding fiscal_status.required, Converter={StaticResource VisibilityConverter}}">
-              <controls:FieldCombo x:Uid="Flights_Checkout_Invoice_Arg_Fiscal_Status" ItemsSource="{Binding fiscal_status.options}"  Value="{Binding fiscal_status.CoreValue, Mode=TwoWay}" CodePath="value" DisplayTextPath="description" />
+                <controls:FieldCombo x:Uid="Flights_Checkout_Invoice_Arg_Fiscal_Status" ItemsSource="{Binding fiscal_status.options}"  Value="{Binding fiscal_status.SelectedOption, Mode=TwoWay}" CodePath="value" DisplayTextPath="description" />
               <!--<controls:ValidationError ErrorPrefix="Flights_Checkout_Invoice_Arg_Fiscal_Status" ErrorCode="{Binding fiscal_status.CurrentError}" />-->
             </StackPanel>
             <!-- Razon Social -->
@@ -86,10 +86,10 @@
 
             <!-- State -->
             <StackPanel Visibility="{Binding address.state.required, Converter={StaticResource VisibilityConverter}}">
-                <controls:FieldCombo x:Uid="Flights_Checkout_Invoice_Arg_State" ItemsSource="{Binding DataContext.States, ElementName=InvoiceArgControl}"  Value="{Binding address.state.CoreValue, Mode=TwoWay}" CodePath="id" DisplayTextPath="name"  />
+                <controls:FieldCombo x:Uid="Flights_Checkout_Invoice_Arg_State" ItemsSource="{Binding address.state.options}"  Value="{Binding address.state.SelectedOption, Mode=TwoWay}" CodePath="value" DisplayTextPath="description"  />
                 <controls:ValidationError ErrorPrefix="Flights_Checkout_Invoice_Arg_State" ErrorCode="{Binding address.state.CurrentError}"  />
             </StackPanel>
-                
+
             <!-- City  TODO: -->
             <StackPanel Visibility="{Binding address.city_id.required, Converter={StaticResource VisibilityConverter}}" >
                 <TextBlock Style="{StaticResource BaseTextLabel}" x:Uid="Flights_Checkout_Invoice_Arg_City" Text="Ciudad" />
@@ -97,7 +97,7 @@
                 <controls:ValidationError ErrorPrefix="Flights_Checkout_Invoice_Arg_City" ErrorCode="{Binding address.city_id.CurrentError}"  />
             </StackPanel>
 
-            </StackPanel>
+           </StackPanel>
         </ScrollViewer>
     
 </UserControl>

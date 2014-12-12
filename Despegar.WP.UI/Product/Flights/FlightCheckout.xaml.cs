@@ -114,7 +114,6 @@ namespace Despegar.WP.UI.Product.Flights
         }
         #endregion
 
-
         /// <summary>
         /// View Adaptations based on selected country
         /// </summary>
@@ -138,7 +137,6 @@ namespace Despegar.WP.UI.Product.Flights
             }
         }
 
-       
         private void NavigationHelper_SaveState(object sender, SaveStateEventArgs e)
         {
         }
