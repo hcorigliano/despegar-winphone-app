@@ -58,10 +58,12 @@
             </PivotItem>
 
             <!--Buy-->
-            <PivotItem  x:Uid="Flight_Checkout_Buy"  Style="{StaticResource PivotItemBase}">
-                <StackPanel xmlns:src="using:Despegar.WP.UI.Product.Flights.Checkout.Buy">
-                    <src:Buy x:Name="Buycontrol" />
+            <PivotItem  x:Uid="Flight_Checkout_Buy"  Style="{StaticResource PivotItemBase}" xmlns:src="using:Despegar.WP.UI.Product.Flights.Checkout.Buy">
+                <StackPanel >
+                    <src:Buy x:Name="Buycontrol" Height="426"/>
+                    <Button x:Uid="Buy_Button" Style="{StaticResource ButtonBottomRed}" Command="{Binding ValidateAndBuyCommand}" VerticalAlignment="Bottom" />
                 </StackPanel>
+                
             </PivotItem>
 
         </Pivot>
