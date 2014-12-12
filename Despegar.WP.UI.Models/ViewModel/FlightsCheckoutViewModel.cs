@@ -364,13 +364,13 @@ namespace Despegar.WP.UI.Model.ViewModel
         {
 #if DEBUG
             // Fill Test data
-            FillBookingFields(CoreBookingFields);
+            //FillBookingFields(CoreBookingFields);
 #endif
-
+            string sectionID = "";
             // Validation
-            if (!CoreBookingFields.IsValid)
+            if (!CoreBookingFields.IsValid(out sectionID))
             {
-                OnViewModelError("FORM_ERROR");
+                OnViewModelError("FORM_ERROR", sectionID);
             }
             else
             {
