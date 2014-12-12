@@ -36,6 +36,8 @@ namespace Despegar.WP.UI.Product.Flights.Checkout.Invoice
 
         private async void CityTexbox_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
         {
+            ViewModel.CoreBookingFields.form.payment.invoice.address.city_id.CoreValue = null;
+
             if (args.Reason == AutoSuggestionBoxTextChangeReason.UserInput && sender.Text != "" && sender.Text.Length >= 3)
             {                
                 try 

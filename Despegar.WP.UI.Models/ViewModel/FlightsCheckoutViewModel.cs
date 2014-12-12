@@ -48,6 +48,7 @@ namespace Despegar.WP.UI.Model.ViewModel
                 else { return false; }
             } 
         }
+        public bool IsTermsAndConditionsAccepted { get; set; }
 
         public event EventHandler ShowRiskReview;
 
@@ -202,7 +203,7 @@ namespace Despegar.WP.UI.Model.ViewModel
                         CoreBookingFields.form.payment.invoice.fiscal_status.PropertyChanged += Fiscal_status_PropertyChanged;
 
                         CoreBookingFields.form.payment.invoice.fiscal_status.SetDefaultValue();
-                        CoreBookingFields.form.payment.invoice.address.state.CoreValue = States.FirstOrDefault().id; // NOT WORKING, MUST BE DONE AFTER THIS CODE or use A RegularOptionsField (The Source works bad)
+                        //CoreBookingFields.form.payment.invoice.address.state.CoreValue = States.FirstOrDefault().id; // NOT WORKING, MUST BE DONE AFTER THIS CODE or use A RegularOptionsField (The Source works bad)
                     }
 
                     CoreBookingFields.form.contact.phones[0].country_code.SetDefaultValue();
@@ -364,13 +365,20 @@ namespace Despegar.WP.UI.Model.ViewModel
         {
 #if DEBUG
             // Fill Test data
-            FillBookingFields(CoreBookingFields);
+            //FillBookingFields(CoreBookingFields);
 #endif
 
-            // Validation
-            if (!CoreBookingFields.IsValid)
+            if (!IsTermsAndConditionsAccepted)
             {
-                OnViewModelError("FORM_ERROR");
+                OnViewModelError("TERMS_AND_CONDITIONS_NOT_CHECKED");
+                return;
+            }
+
+            string sectionID = "";
+            // Validation
+            if (!CoreBookingFields.IsValid(out sectionID))
+            {
+                OnViewModelError("FORM_ERROR", sectionID);
             }
             else
             {
@@ -396,13 +404,18 @@ namespace Despegar.WP.UI.Model.ViewModel
                         }
                     //Please uncomment the case that you are to use.
 
-                    //case BookingStatusEnum.booking_failed:
+                    case BookingStatusEnum.booking_failed:
+                        {
+                            OnViewModelError("BOOKING_FAILED", CrossParameters.BookingResponse.checkout_id);
+                            break;
+                        }
                     //case BookingStatusEnum.fix_credit_card:
                     case BookingStatusEnum.new_credit_card:
                         {
                             this.selectedCard.hasError = true;
                             this.selectedCard.CustomErrorType = BookingStatusEnum.new_credit_card.ToString();
                             ClearCreditCardFields();
+                            //sectionID = "CARD";
                             //GotFocusOnCreditCardData();
                             break;
                         }
@@ -424,6 +437,7 @@ namespace Despegar.WP.UI.Model.ViewModel
                 this.IsLoading = false;
             }
         }
+
         private void ClearCreditCardFields()
         {
             this.selectedCard.card = new Card();

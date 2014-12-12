@@ -90,10 +90,11 @@
                 <controls:ValidationError ErrorPrefix="Flights_Checkout_Invoice_Arg_State" ErrorCode="{Binding address.state.CurrentError}"  />
             </StackPanel>
                 
-            <!-- City  TODO:  -->
-            <StackPanel Visibility="{Binding Address.city_id.required, Converter={StaticResource VisibilityConverter}}" >
+            <!-- City  TODO: -->
+            <StackPanel Visibility="{Binding address.city_id.required, Converter={StaticResource VisibilityConverter}}" >
                 <TextBlock Style="{StaticResource BaseTextLabel}" x:Uid="Flights_Checkout_Invoice_Arg_City" Text="Ciudad" />
                 <AutoSuggestBox TextBoxStyle="{StaticResource InputBase}" Style="{StaticResource AutosuggestBoxBase}" TextChanged="CityTexbox_TextChanged" SuggestionChosen="SuggestionChosen" TextMemberPath="full_name" />
+                <controls:ValidationError ErrorPrefix="Flights_Checkout_Invoice_Arg_City" ErrorCode="{Binding address.city_id.CurrentError}"  />
             </StackPanel>
 
             </StackPanel>
