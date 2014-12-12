@@ -13,5 +13,6 @@ namespace Despegar.Core.Business.Flight.BookingFields
         public RegularField fiscal_name { get; set; }
         public RegularOptionsField fiscal_status { get; set; }
         public RegularField fiscal_id { get; set; }
+        public RegularField card_holder_name { get; set; }
     }
 }

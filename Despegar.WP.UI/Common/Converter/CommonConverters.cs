@@ -132,4 +132,18 @@ namespace Despegar.WP.UI.Common.Converter
         }
     }
 
+    public class ZeroPriceToVisibilityConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, string language)
+        {
+            if ((double)value == 0.0) { return Visibility.Collapsed; }
+            return Visibility.Visible;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, string language)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
 }
