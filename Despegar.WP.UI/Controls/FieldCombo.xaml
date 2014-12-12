@@ -19,7 +19,7 @@
         <TextBlock Grid.Row="0" Style="{StaticResource BaseTextLabel}" Text="{Binding Label}"  />
         <ComboBox Grid.Row="1"  x:Name="fieldCombo"
                   ItemsSource="{Binding ItemsSource}" 
-                  SelectedValue="{Binding Value, Mode=TwoWay}"
+                  SelectedItem="{Binding Value, Mode=TwoWay}"
                   SelectedValuePath="{Binding CodePath}" 
                   DisplayMemberPath="{Binding DisplayTextPath}"                   
                   Style="{StaticResource ComboBoxBase}" />

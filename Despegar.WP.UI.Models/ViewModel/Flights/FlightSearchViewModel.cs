@@ -161,11 +161,20 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
                     UpdatePassengers();
                     FlightsItineraries intineraries = await flightService.GetItineraries(coreSearchModel);
 
-                    var pageParameters = new PageParameters();
-                    pageParameters.Itineraries = intineraries;
-                    pageParameters.SearchModel = coreSearchModel;
+                    if(intineraries.items.Count != 0)
+                    {
+                        var pageParameters = new PageParameters();
+                        pageParameters.Itineraries = intineraries;
+                        pageParameters.SearchModel = coreSearchModel;
 
-                    Navigator.GoTo(ViewModelPages.FlightsResults, pageParameters);
+                        Navigator.GoTo(ViewModelPages.FlightsResults, pageParameters);
+
+                    }else{
+
+                        var msg = new MessageDialog("Lo sentimos, no hemos encontrado ningún resultado para su búsqueda.Por favor, inténtelo nuevamente modificando alguno de los criterios de búsqueda. ");
+                        await msg.ShowAsync();
+
+                    }
                 }
                 catch (Exception)
                 {

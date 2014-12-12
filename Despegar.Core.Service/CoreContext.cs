@@ -134,6 +134,11 @@ namespace Despegar.Core.Service
             return new ConfigurationService(this);
         }
 
+        public IUPAService GetUpaService()
+        {
+            return new UPAService(this);
+        }
+
         public ICommonServices GetCommonService()
         {
             return new CommonServices(this);

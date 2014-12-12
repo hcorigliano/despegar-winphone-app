@@ -24,9 +24,9 @@
 
         <StackPanel Grid.Column="1" Orientation="Vertical">
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="{Binding OriginFlight}" Style="{StaticResource SegoeLight28}"/>
-                <TextBlock Text="-" Style="{StaticResource SegoeLight28}"/>
-                <TextBlock Text="{Binding DestinationFlight}" Style="{StaticResource SegoeLight28}"/>
+                <TextBlock Text="{Binding OriginFlight}" Style="{StaticResource SegoeLight24}"/>
+                <TextBlock Text="-" Style="{StaticResource SegoeLight24}"/>
+                <TextBlock Text="{Binding DestinationFlight}" Style="{StaticResource SegoeLight24}"/>
             </StackPanel>
 			<!--<Grid HorizontalAlignment="Left" >
 				<Grid.ColumnDefinitions>

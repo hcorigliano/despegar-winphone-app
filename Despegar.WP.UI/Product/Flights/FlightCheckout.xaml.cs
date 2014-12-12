@@ -2,12 +2,16 @@
 using Despegar.WP.UI.Common;
 using Despegar.WP.UI.Controls;
 using Despegar.WP.UI.Model;
+using Despegar.WP.UI.Model.Common;
 using Despegar.WP.UI.Model.ViewModel;
 using Despegar.WP.UI.Model.ViewModel.Classes.Flights;
 using Despegar.WP.UI.Product.Flights.Checkout.Passegers.Controls;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
+using Windows.ApplicationModel.Resources;
 using Windows.Phone.UI.Input;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
@@ -54,13 +58,15 @@ namespace Despegar.WP.UI.Product.Flights
             FlightsCrossParameter crossParameters = e.NavigationParameter as FlightsCrossParameter;
 
             // Initialize Checkout
-            ViewModel = new FlightsCheckoutViewModel(Navigator.Instance, GlobalConfiguration.CoreContext.GetFlightService(),
+            ViewModel = new FlightsCheckoutViewModel(
+                Navigator.Instance, 
+                GlobalConfiguration.CoreContext.GetFlightService(),
                 GlobalConfiguration.CoreContext.GetCommonService(), 
                 GlobalConfiguration.CoreContext.GetConfigurationService(), 
                 crossParameters);
 
             ViewModel.PropertyChanged += Checkloading;
-            
+            ViewModel.ShowRiskReview += this.ShowRisk;            
 
             // Init Checkout
             await ViewModel.Init();
@@ -68,8 +74,45 @@ namespace Despegar.WP.UI.Product.Flights
             // Set Defaults values and Country specifics
             ConfigureFields();
 
+            ViewModel.ViewModelError += ErrorHandler;
             this.DataContext = ViewModel;
         }
+
+        private void ShowRisk(Object sender, EventArgs e )
+        {
+        }
+
+        # region ** ERROR HANDLING **
+        private void ErrorHandler(object sender, ViewModelErrorArgs e)
+        {
+            ResourceLoader manager = new ResourceLoader();
+            MessageDialog dialog;
+
+            switch (e.ErrorCode)
+            {
+                case "FORM_ERROR":
+                    dialog = new MessageDialog(manager.GetString("Flights_Checkout_ERROR_FORM_ERROR"), manager.GetString("Flights_Checkout_ERROR_FORM_ERROR_TITLE"));
+                    dialog.ShowAsync();
+
+                    // Go to Pivot with errors
+                    string sectionID = (string)e.Parameter;
+                    MainPivot.SelectedIndex = GetSectionIndex(sectionID);
+                    break;
+                case "TERMS_AND_CONDITIONS_NOT_CHECKED":
+                    dialog = new MessageDialog(manager.GetString("TermsAndConditions_ERROR"), manager.GetString("TermsAndConditions_ERROR_TITLE"));
+                    dialog.ShowAsync();
+                    break;
+
+                // TODO: Handle other errors
+            }
+        }
+
+        private int GetSectionIndex(string sectionID)
+        {
+            PivotItem errorPivot = this.FindName("Pivot_" + sectionID) as PivotItem;
+            return MainPivot.Items.IndexOf(errorPivot);
+        }
+        #endregion
 
         /// <summary>
         /// View Adaptations based on selected country
@@ -99,14 +142,6 @@ namespace Despegar.WP.UI.Product.Flights
             //}
         }
 
-        /// <summary>
-        /// Preserves state associated with this page in case the application is suspended or the
-        /// page is discarded from the navigation cache.  Values must conform to the serialization
-        /// requirements of <see cref="SuspensionManager.SessionState"/>.
-        /// </summary>
-        /// <param name="sender">The source of the event; typically <see cref="NavigationHelper"/></param>
-        /// <param name="e">Event data that provides an empty dictionary to be populated with
-        /// serializable state.</param>
         private void NavigationHelper_SaveState(object sender, SaveStateEventArgs e)
         {
         }

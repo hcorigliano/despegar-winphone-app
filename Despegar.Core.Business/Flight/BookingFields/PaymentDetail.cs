@@ -16,5 +16,7 @@ namespace Despegar.Core.Business.Flight.BookingFields
 
         // Custom
         public List<PaymentDetail> AsSimpleCardList { get { return new List<PaymentDetail>() { this }; } }
+        public string CustomErrorType { get; set; }
+        public bool hasError { get; set; }
     }
 }

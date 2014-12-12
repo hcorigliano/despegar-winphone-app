@@ -2,6 +2,8 @@
 using Despegar.Core.IService;
 using Despegar.Core.Log;
 using Despegar.Core.Service;
+using Despegar.Core.Business.Configuration;
+
 
 namespace Despegar.WP.UI.Model
 {
@@ -10,7 +12,8 @@ namespace Despegar.WP.UI.Model
     /// </summary>
     public static class GlobalConfiguration
     {
-        public static ICoreContext CoreContext { get; set; }        
+        public static ICoreContext CoreContext { get; set; }
+        //private IUPAService upaService;
         public static string Site { get { return CoreContext.GetSite(); } }
         public static string Language { get { return CoreContext.GetLanguage();} }
    
@@ -19,13 +22,21 @@ namespace Despegar.WP.UI.Model
         /// This method should be called on app Init
         /// </summary>
         public static void InitCore() 
-        {            
+        {
+            //Set vars with client info
+            ClientDeviceInfo ClientInfo = new ClientDeviceInfo();
+            string xclient = ClientInfo.GetClientInfo();
+            string uow = ClientInfo.GetUOW();
+           
             // TODO: Set Site and Language
             CoreContext = new CoreContext();
-            CoreContext.Configure("WindowsPhone8App", "wp8-uow");
+            CoreContext.Configure(xclient, uow);
+
+            LoadUPA();
 
             //TODO : (1)
             //CoreContext.SetSite(SiteCode.Argentina);
+
 
 
             // Enable Verbose logging
@@ -38,9 +49,7 @@ namespace Despegar.WP.UI.Model
             //CoreContext.AddMock(MockKey.AirlineTest);
             //GlobalConfiguration.CoreContext.AddMock(MockKey.FlightCitiesAutocompleteBue);
             //GlobalConfiguration.CoreContext.AddMock(MockKey.ItinerarieBueToLax);
-
             //CoreContext.EnableMock(MockKey.BookingFieldBuetoMia);
-
             //CoreContext.EnableMock(MockKey.BookingFieldsBueLaxChildInfant);
             CoreContext.EnableMock(MockKey.CountriesDefault);
 
@@ -51,7 +60,13 @@ namespace Despegar.WP.UI.Model
         /// </summary>
         public static void ChangeSite(string siteCode) 
         {
-            CoreContext.SetSite(siteCode);
+            CoreContext.SetSite(siteCode);       
+        }
+
+        public static async void LoadUPA()
+        {
+            IUPAService upaService = CoreContext.GetUpaService();
+            UpaField upaField = await upaService.GetUPA();
         }
     }
 }
