@@ -78,7 +78,7 @@
 
 
         <!--PER PASSAGER-->
-        <StackPanel Margin="0,4,0,0"  Grid.Column="1"  Grid.Row="0" >
+        <StackPanel Margin="0,5,0,0"  Grid.Column="1"  Grid.Row="0" >
             <TextBlock Style="{StaticResource DetailCheckoutForeachPrice}" >
                 <Run Text="{Binding currency.mask}"></Run>
                 <Run Text="{Binding adult_base}"></Run>
