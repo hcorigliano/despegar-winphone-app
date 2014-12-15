@@ -176,13 +176,17 @@ namespace Despegar.WP.UI.Model.ViewModel
             // Passengers
             foreach (var passanger in CoreBookingFields.form.passengers)
             {
-                passanger.document.type.SetDefaultValue();
-                passanger.gender.SetDefaultValue();
+                if (passanger.document != null && passanger.document.type != null)
+                    passanger.document.type.SetDefaultValue();
+                if (passanger.gender != null)
+                    passanger.gender.SetDefaultValue();
             }
 
             // Card data
-            CoreBookingFields.form.payment.card.owner_document.type.SetDefaultValue(); 
-            CoreBookingFields.form.payment.card.owner_gender.SetDefaultValue(); 
+            if (CoreBookingFields.form.payment.card.owner_document != null && CoreBookingFields.form.payment.card.owner_document.type != null)
+                CoreBookingFields.form.payment.card.owner_document.type.SetDefaultValue();
+            if (CoreBookingFields.form.payment.card.owner_gender != null)
+                CoreBookingFields.form.payment.card.owner_gender.SetDefaultValue(); 
           
             switch (countryCode)
             {
@@ -396,58 +400,65 @@ namespace Despegar.WP.UI.Model.ViewModel
             }
             else
             {
-                this.IsLoading = true;
-                dynamic bookingData = null;
-
-                bookingData = await DynamicFlightBookingFieldsToPost.ToDynamic(this.CoreBookingFields);
-
-                CrossParameters.PriceDetail = PriceDetailsFormatted;
-                CrossParameters.BookingResponse = await flightService.CompleteBooking(bookingData, CoreBookingFields.id);
-
-                //BookingCompletePostResponse response = await flightService.CompleteBooking(form, "214ecbd4-7964-11e4-8980-fa163ec96567");
-                //TODO : Go to Tks or Risk Questions}
-                //if (CrossParameters.BookingResponse.booking_status == "checkout_successful")            
-                //navigator.GoTo(ViewModelPages.FlightsThanks, CrossParameters);     
-
-                switch (GetStatus(CrossParameters.BookingResponse.booking_status))
+                try
                 {
-                    case BookingStatusEnum.checkout_successful:
-                        {
-                            navigator.GoTo(ViewModelPages.FlightsThanks, CrossParameters);
-                            break;
-                        }
-                    //Please uncomment the case that you are to use.
+                    this.IsLoading = true;
+                    dynamic bookingData = null;
 
-                    case BookingStatusEnum.booking_failed:
-                        {
-                            OnViewModelError("BOOKING_FAILED", CrossParameters.BookingResponse.checkout_id);
-                            break;
-                        }
-                    //case BookingStatusEnum.fix_credit_card:
-                    case BookingStatusEnum.new_credit_card:
-                        {
-                            this.selectedCard.hasError = true;
-                            this.selectedCard.CustomErrorType = BookingStatusEnum.new_credit_card.ToString();
-                            ClearCreditCardFields();
-                            //sectionID = "CARD";
-                            //GotFocusOnCreditCardData();
-                            break;
-                        }
-                    //case BookingStatusEnum.payment_failed:
-                    case BookingStatusEnum.risk_review:
-                        {
-                            EventHandler RiskHandler = ShowRiskReview;
-                            if (RiskHandler != null)
+                    bookingData = await DynamicFlightBookingFieldsToPost.ToDynamic(this.CoreBookingFields);
+
+                    CrossParameters.PriceDetail = PriceDetailsFormatted;
+                    CrossParameters.BookingResponse = await flightService.CompleteBooking(bookingData, CoreBookingFields.id);
+
+                    //BookingCompletePostResponse response = await flightService.CompleteBooking(form, "214ecbd4-7964-11e4-8980-fa163ec96567");
+                    //TODO : Go to Tks or Risk Questions}
+                    //if (CrossParameters.BookingResponse.booking_status == "checkout_successful")            
+                    //navigator.GoTo(ViewModelPages.FlightsThanks, CrossParameters);     
+
+                    switch (GetStatus(CrossParameters.BookingResponse.booking_status))
+                    {
+                        case BookingStatusEnum.checkout_successful:
                             {
-                                RiskHandler(this, null);
+                                navigator.GoTo(ViewModelPages.FlightsThanks, CrossParameters);
+                                break;
                             }
-                            break;
-                        }
-                    //case BookingStatusEnum.BookingCustomError:
-                    default:
-                        break;
-                }
+                        //Please uncomment the case that you are to use.
 
+                        case BookingStatusEnum.booking_failed:
+                            {
+                                OnViewModelError("BOOKING_FAILED", CrossParameters.BookingResponse.checkout_id);
+                                break;
+                            }
+                        //case BookingStatusEnum.fix_credit_card:
+                        case BookingStatusEnum.new_credit_card:
+                            {
+                                this.selectedCard.hasError = true;
+                                this.selectedCard.CustomErrorType = BookingStatusEnum.new_credit_card.ToString();
+                                ClearCreditCardFields();
+                                //sectionID = "CARD";
+                                //GotFocusOnCreditCardData();
+                                break;
+                            }
+                        //case BookingStatusEnum.payment_failed:
+                        case BookingStatusEnum.risk_review:
+                            {
+                                EventHandler RiskHandler = ShowRiskReview;
+                                if (RiskHandler != null)
+                                {
+                                    RiskHandler(this, null);
+                                }
+                                break;
+                            }
+                        //case BookingStatusEnum.BookingCustomError:
+                        default:
+                            break;
+                    }
+
+                }
+                catch
+                {
+                    OnViewModelError("COMPLETE_BOOKING_CONECTION_FAILED");
+                }
                 this.IsLoading = false;
             }
         }
