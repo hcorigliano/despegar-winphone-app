@@ -759,4 +759,8 @@
   <data name="TermsAndConditions_ERROR_TITLE" xml:space="preserve">
     <value>Condiciones de compra</value>
   </data>
+  <data name="Page_Checkout_ERROR_OP_BOOKING_FAILED" xml:space="preserve">
+    <value>Lo sentimos, su solicitud de compra N° {0} no puede ser procesada por falta de disponibilidad del vuelo.
+La reserva no ha sido generada y no se le cobrará ningún cargo por la transacción.</value>
+  </data>
 </root>

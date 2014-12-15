@@ -107,7 +107,9 @@ namespace Despegar.WP.UI.Product.Flights
                     {
                         string ticketid = e.Parameter as string;
                         ticketid = (ticketid!=null)?ticketid:String.Empty;
-                        dialog = new MessageDialog("the following is for the ticket number "+ticketid+" which is a very hard to resolve.","fail");
+                        string phrase = manager.GetString("Page_Checkout_ERROR_OP_BOOKING_FAILED");
+
+                        dialog = new MessageDialog(String.Format(phrase,ticketid), manager.GetString("Flights_Checkout_ERROR_FORM_ERROR_TITLE"));
                         dialog.ShowAsync();
                         break;
                     }
