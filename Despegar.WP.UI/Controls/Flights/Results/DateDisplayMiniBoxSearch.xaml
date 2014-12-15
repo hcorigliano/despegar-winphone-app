@@ -20,16 +20,16 @@
 
     <Grid Width="Auto" Height="Auto" >
         <Grid.ColumnDefinitions>
-			<ColumnDefinition Width="35" />
+			<ColumnDefinition Width="{StaticResource Block1p}" />
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
-		<Grid Grid.Column="0" Style="{StaticResource IconBlue}">
+		<Grid Grid.Column="0" Style="{StaticResource IconBlue}" Height="{StaticResource dBlock1p}">
 			<Image Style="{StaticResource CalendarIconResult}"/>
 		</Grid>
 		<StackPanel Grid.Column="1" HorizontalAlignment="Left" Height="Auto" VerticalAlignment="Top" Width="Auto" Orientation="Horizontal" >
-            <TextBlock Text="{Binding LocalDateTime.Day, Mode=OneWay}" Style="{StaticResource SegoeLight24}" />
-            <TextBlock Text="{Binding LocalDateTime.Month, ConverterLanguage=es, Converter={StaticResource GetMonthName}}" Margin="{StaticResource Left_Offset}" Style="{StaticResource SegoeLight24}"/>
-            <TextBlock Text="{Binding LocalDateTime.Year}" Margin="{StaticResource Left_Offset}" Style="{StaticResource SegoeLight24}"/>
+            <TextBlock Text="{Binding LocalDateTime.Day, Mode=OneWay}" Style="{StaticResource SegoeLight20}" />
+            <TextBlock Text="{Binding LocalDateTime.Month, ConverterLanguage=es, Converter={StaticResource GetMonthName}}" Margin="{StaticResource Left_Offset}" Style="{StaticResource SegoeLight20}"/>
+            <TextBlock Text="{Binding LocalDateTime.Year}" Margin="{StaticResource Left_Offset}" Style="{StaticResource SegoeLight20}"/>
 		</StackPanel>       
     </Grid>
 </UserControl>

@@ -106,6 +106,11 @@
         <Setter Property="CharacterSpacing" Value="-20" />
         <Setter Property="Foreground" Value="{StaticResource WhiteBrush}" />
     </Style>
+    <Style x:Key="SegoeRegular13" TargetType="TextBlock" BasedOn="{StaticResource BaseText}">
+        <Setter Property="FontSize" Value="13" />
+        <Setter Property="FontWeight" Value="Normal" />
+        <Setter Property="Opacity" Value="0.6" />
+    </Style>
     <Style x:Key="SegoeRegular15" TargetType="TextBlock" BasedOn="{StaticResource BaseText}">
         <Setter Property="FontSize" Value="15" />
         <Setter Property="FontWeight" Value="Normal" />
@@ -134,6 +139,14 @@
     <Style x:Key="SegoeSemilight24" TargetType="TextBlock" BasedOn="{StaticResource BaseText}">
         <Setter Property="FontFamily" Value="Segoe UI SemiLight" />
         <Setter Property="FontSize" Value="24" />
+    </Style>
+    <Style x:Key="SegoeLight20" TargetType="TextBlock" BasedOn="{StaticResource BaseText}">
+        <Setter Property="FontFamily" Value="Segoe UI Light" />
+        <Setter Property="FontSize" Value="20" />
+    </Style>
+    <Style x:Key="SegoeLight22" TargetType="TextBlock" BasedOn="{StaticResource BaseText}">
+        <Setter Property="FontFamily" Value="Segoe UI Light" />
+        <Setter Property="FontSize" Value="22" />
     </Style>
     <Style x:Key="SegoeLight24" TargetType="TextBlock" BasedOn="{StaticResource BaseText}">
         <Setter Property="FontFamily" Value="Segoe UI Light" />
