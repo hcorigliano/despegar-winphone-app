@@ -983,7 +983,7 @@
     <Style x:Key="FlightSegmentSmallText" TargetType="TextBlock" BasedOn="{StaticResource SegoeSemilight17}">
     </Style>
     <Style x:Key="FlightSegmentSubText" TargetType="TextBlock" BasedOn="{StaticResource SegoeRegular15}">
-        <Setter Property="TextWrapping" Value="Wrap" />
+        <Setter Property="TextWrapping" Value="Wrap" />        
     </Style>
     <Style x:Key="FlightDetailAirlineTitle" TargetType="TextBlock" BasedOn="{StaticResource SegoeSemilight17}">        
         <Setter Property="TextWrapping" Value="Wrap" />
