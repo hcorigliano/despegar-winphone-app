@@ -36,20 +36,20 @@
             <StackPanel>
                 <TextBlock Grid.Row="1" x:Uid="Flight_Thanks" Style="{StaticResource Thanks_PageHeader}" Text="gracias totales" />
                 <!--<TextBlock Text="¡Muchas gracias por su solicitud de compra!" />-->
-                <TextBlock Style="{StaticResource Thanks_Request_Is }" x:Uid="Flight_Thanks_Request_Is" Text="Su número de solicitud de compra es:" />
+                <TextBlock TextWrapping="Wrap" Style="{StaticResource Thanks_Request_Is }" x:Uid="Flight_Thanks_Request_Is" Text="Su número de solicitud de compra es:"  />
                 <TextBlock Style="{StaticResource Thanks_Request }" Text="{Binding BookingResponse.checkout_id}"/>
                 <TextBlock Style="{StaticResource Thanks_How_Continue}" x:Uid="Flight_Thanks_How_Continue" Text="¿Cómo continúa el proceso de compra?" />
-                <TextBlock Style="{StaticResource Thanks_Continue_Explain}" x:Uid="Flight_Thanks_Continue_Explain" Text="Su pago está siendo procesado. Una vez que el pago se procese exitosamente recibirá un e-mail con la información de compra." TextWrapping="Wrap"  />
+                <TextBlock TextWrapping="Wrap" Style="{StaticResource Thanks_Continue_Explain}" x:Uid="Flight_Thanks_Continue_Explain" Text="Su pago está siendo procesado. Una vez que el pago se procese exitosamente recibirá un e-mail con la información de compra."   />
 
-                <TextBlock Style="{StaticResource Thanks_Booking_Detail}" x:Uid="Common_Booking_Detail" Text="Detalle de reserva" />
+                <TextBlock Style="{StaticResource Thanks_Booking_Detail_Blue}" x:Uid="Common_Booking_Detail" Text="Detalle de reserva" />
                 <StackPanel xmlns:src="using:Despegar.WP.UI.Product.Flights.Checkout.Buy.Controls">
                     <src:BuyDetailsControl DataContext="{Binding PriceDetail}" />
                 </StackPanel>
 
-                <TextBlock Style="{StaticResource Thanks_Booking_Detail}" x:Uid="Generic_Go" Text="IDA" />
+                <TextBlock Style="{StaticResource Thanks_Booking_Detail_Green}" x:Uid="Generic_Go" Text="IDA" />
                 <src:FlightsSegmentGo DataContext="{Binding Outbound}" />
 
-                <TextBlock Style="{StaticResource Thanks_Booking_Detail}" x:Uid="Generic_Return" Text="VUELTA" />
+                <TextBlock Style="{StaticResource Thanks_Booking_Detail_Blue}" x:Uid="Generic_Return" Text="VUELTA" />
                 <src:FlightsSegmentReturn DataContext="{Binding Inbound}" />
 
 
