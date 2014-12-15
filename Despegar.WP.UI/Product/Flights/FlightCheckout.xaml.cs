@@ -68,13 +68,14 @@ namespace Despegar.WP.UI.Product.Flights
             ViewModel.PropertyChanged += Checkloading;
             ViewModel.ShowRiskReview += this.ShowRisk;            
 
+            ViewModel.ViewModelError += ErrorHandler;
+
             // Init Checkout
             await ViewModel.Init();
 
             // Set Defaults values and Country specifics
             ConfigureFields();
 
-            ViewModel.ViewModelError += ErrorHandler;
             this.DataContext = ViewModel;
         }
 
@@ -113,6 +114,18 @@ namespace Despegar.WP.UI.Product.Flights
                         dialog.ShowAsync();
                         break;
                     }
+
+               case "COMPLETE_BOOKING_CONECTION_FAILED":
+                    dialog = new MessageDialog(manager.GetString("Flights_Search_ERROR_SEARCH_FAILED"), manager.GetString("Flights_Search_ERROR_SEARCH_FAILED_TITLE"));
+                    dialog.ShowAsync();
+                    break;
+
+               case "CHECKOUT_INIT_FAILED":
+                    dialog = new MessageDialog(manager.GetString("Flights_Search_ERROR_SEARCH_FAILED"), manager.GetString("Flights_Search_ERROR_SEARCH_FAILED_TITLE"));
+                    dialog.ShowAsync();
+                    this.navigationHelper.GoBack();
+                    break;
+                    
                 // TODO: Handle other errors
             }
         }

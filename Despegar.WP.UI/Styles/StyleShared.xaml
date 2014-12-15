@@ -73,6 +73,7 @@
     <GridLength x:Key="Block6">168</GridLength>
     <x:Double x:Key="dBlock6p">177.6</x:Double>
     <GridLength x:Key="Block6p">177.6</GridLength>
+    <GridLength x:Key="Block7p">207.2</GridLength>
     <x:Double x:Key="dBlock9p">276</x:Double>
     <x:Double x:Key="dBlock10p">305.6</x:Double>
     <x:Double x:Key="dBlock12p">364.8</x:Double>
@@ -996,7 +997,7 @@
     <Style x:Key="FlightSegmentSmallText" TargetType="TextBlock" BasedOn="{StaticResource SegoeSemilight17}">
     </Style>
     <Style x:Key="FlightSegmentSubText" TargetType="TextBlock" BasedOn="{StaticResource SegoeRegular15}">
-        <Setter Property="TextWrapping" Value="Wrap" />
+        <Setter Property="TextWrapping" Value="Wrap" />        
     </Style>
     <Style x:Key="FlightDetailAirlineTitle" TargetType="TextBlock" BasedOn="{StaticResource SegoeSemilight17}">        
         <Setter Property="TextWrapping" Value="Wrap" />
@@ -1046,10 +1047,12 @@
     <!-- Flights Checkout -->
     <Style x:Key="DetailCheckoutDetail" TargetType="TextBlock" BasedOn="{StaticResource SegoeSemilight17}">
         <Setter Property="Height" Value="{StaticResource dBlock1p}" />
+        <Setter Property="VerticalAlignment" Value="Center" />
     </Style>
     <Style x:Key="DetailCheckoutTotal" TargetType="TextBlock" BasedOn="{StaticResource SegoeLight24}">
         <Setter Property="Height" Value="{StaticResource dBlock1p}" />
         <Setter Property="Foreground" Value="{StaticResource Yellow20}" />
+        <Setter Property="VerticalAlignment" Value="Center" />
     </Style>
     <Style x:Key="DetailCheckoutTerms" TargetType="TextBlock" BasedOn="{StaticResource SegoeRegular15}">
         <Setter Property="Height" Value="{StaticResource dBlock1p}" />
@@ -1066,15 +1069,19 @@
     </Style>
     <Style x:Key="DetailCheckoutTotalPrice" TargetType="TextBlock" BasedOn="{StaticResource SegoeLight24}">
         <Setter Property="Height" Value="{StaticResource dBlock1p}" />
+        <Setter Property="VerticalAlignment" Value="Center" />
     </Style>
     <Style x:Key="DetailCheckoutForeach" TargetType="TextBlock" BasedOn="{StaticResource SegoeSemilight24}">
         <Setter Property="Height" Value="{StaticResource dBlock1p}" />
+        <Setter Property="VerticalAlignment" Value="Center" />
     </Style>
     <Style x:Key="DetailCheckoutForeachPrice" TargetType="TextBlock" BasedOn="{StaticResource SegoeSemilight17}">
         <Setter Property="Height" Value="{StaticResource dBlock1p}" />
+        <Setter Property="VerticalAlignment" Value="Center" />
     </Style>
     <Style x:Key="DetailCheckoutDetailPrice" TargetType="TextBlock" BasedOn="{StaticResource SegoeRegular15}">
         <Setter Property="Height" Value="{StaticResource dBlock1p}" />
+        <Setter Property="VerticalAlignment" Value="Center" />
     </Style>
     <!-- ================== ThemeResources Overrides ================= -->
     <ResourceDictionary.ThemeDictionaries>

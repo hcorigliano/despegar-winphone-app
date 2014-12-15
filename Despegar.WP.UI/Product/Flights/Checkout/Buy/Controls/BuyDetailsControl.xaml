@@ -32,7 +32,7 @@
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="{StaticResource Block6p}"></ColumnDefinition>
+            <ColumnDefinition Width="{StaticResource Block7p}"></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
@@ -78,17 +78,17 @@
 
 
         <!--PER PASSAGER-->
-        <StackPanel Grid.Column="1"  Grid.Row="0" >
+        <StackPanel Margin="0,5,0,0"  Grid.Column="1"  Grid.Row="0" >
             <TextBlock Style="{StaticResource DetailCheckoutForeachPrice}" >
-                <Run Text="$"></Run>
+                <Run Text="{Binding currency.mask}"></Run>
                 <Run Text="{Binding adult_base}"></Run>
             </TextBlock>
             <TextBlock Style="{StaticResource DetailCheckoutForeachPrice}" Visibility="{Binding children_base, Converter={StaticResource NullToVisibilityConverter}}" >
-                <Run Text="$"></Run>
+                <Run Text="{Binding currency.mask}"></Run>
                 <Run  Text="{Binding children_base}" ></Run>
             </TextBlock>
             <TextBlock Style="{StaticResource DetailCheckoutForeachPrice}" Visibility="{Binding infant_base, Converter={StaticResource NullToVisibilityConverter}}">
-                <Run Text="$"></Run>
+                <Run Text="{Binding currency.mask}"></Run>
                 <Run Text="{Binding infant_base}"></Run>
             </TextBlock>
         </StackPanel>
@@ -96,35 +96,35 @@
         <!--DETAILS-->
         <StackPanel Grid.Column="1"  Grid.Row="2">
             <TextBlock Style="{StaticResource DetailCheckoutDetailPrice}" Grid.Row="3" >
-                <Run Text="$"></Run>
+                <Run Text="{Binding currency.mask}"></Run>
                 <Run Text="{Binding adults_subtotal}"></Run>
             </TextBlock>
             <TextBlock Style="{StaticResource DetailCheckoutDetailPrice}" Grid.Row="4"  Visibility="{Binding children_base, Converter={StaticResource NullToVisibilityConverter}}" >
-                <Run Text="$"></Run>
+                <Run Text="{Binding currency.mask}"></Run>
                 <Run Text="{Binding children_subtotal}" ></Run>
             </TextBlock>
             <TextBlock Style="{StaticResource DetailCheckoutDetailPrice}" Grid.Row="5"  Visibility="{Binding infant_base, Converter={StaticResource NullToVisibilityConverter}}">
-                <Run Text="$"></Run>
+                <Run Text="{Binding currency.mask}"></Run>
                 <Run Text="{Binding infants_subtotal}"></Run>
             </TextBlock>
 
             <TextBlock Style="{StaticResource DetailCheckoutDetailPrice}" Grid.Row="6" >
-                <Run Text="$"></Run>
+                <Run Text="{Binding currency.mask}"></Run>
                 <Run Text="{Binding taxes}"></Run>
             </TextBlock>
             <TextBlock Style="{StaticResource DetailCheckoutDetailPrice}" Grid.Row="7"  Visibility="{Binding retention, Converter={StaticResource ZeroPriceToVisibilityConverter}}">
-                <Run Text="$"></Run>
+                <Run Text="{Binding currency.mask}"></Run>
                 <Run Text="{Binding retention}"></Run>
             </TextBlock>
             <TextBlock Style="{StaticResource DetailCheckoutDetailPrice}"  Grid.Row="8" >
-                <Run Text="$"></Run>
+                <Run Text="{Binding currency.mask}"></Run>
                 <Run Text="{Binding charges}"></Run>
             </TextBlock>
         </StackPanel>
 
         <!--TOTAL-->
         <TextBlock Style="{StaticResource DetailCheckoutTotalPrice}" Grid.Column="1"  Grid.Row="4" >
-            <Run Text="$"></Run>
+            <Run Text="{Binding currency.mask}"></Run>
                 <Run Text="{Binding total}"></Run>
         </TextBlock>
 
