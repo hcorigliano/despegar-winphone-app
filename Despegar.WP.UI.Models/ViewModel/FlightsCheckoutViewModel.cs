@@ -36,7 +36,7 @@ namespace Despegar.WP.UI.Model.ViewModel
         public List<CountryFields> Countries { get; set; }
         public List<State> States { get; set; }
 
-        public bool InvoiceRequired { get { return CoreBookingFields.form.payment.invoice != null; } }
+        public bool InvoiceRequired { get { return GlobalConfiguration.Site == "AR"  && CoreBookingFields.form.payment.invoice != null; } }
 
         public bool IsFiscalNameRequired { //HERNAN: No integrar este codigo. Consecuencias: 1 docena de facturas.
             get 
@@ -379,7 +379,7 @@ namespace Despegar.WP.UI.Model.ViewModel
         {
 #if DEBUG
             // Fill Test data
-            //FillBookingFields(CoreBookingFields);
+            FillBookingFields(CoreBookingFields);
 #endif
 
             if (!IsTermsAndConditionsAccepted)

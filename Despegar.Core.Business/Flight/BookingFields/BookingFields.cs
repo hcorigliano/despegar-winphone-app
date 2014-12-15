@@ -104,7 +104,7 @@ namespace Despegar.Core.Business.Flight.BookingFields
             }
 
              // Invoice Arg
-            if (form.payment.invoice != null)
+            if (form.passengers[0].nationality != null && form.passengers[0].nationality.value == "AR" && form.payment.invoice != null)
             {
                 if (form.payment.invoice.address.city_id != null && !form.payment.invoice.address.city_id.IsValid)
                     invoiceValid = false;

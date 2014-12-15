@@ -18,6 +18,7 @@ namespace Despegar.Core.Business.Dynamics
             result.type = passenger.type;
             if (passenger.document != null)
             {
+                result.document = new ExpandoObject();
                 if (passenger.document.type != null)
                     result.document.type = passenger.document.type.CoreValue;
                 if (passenger.document.number != null)

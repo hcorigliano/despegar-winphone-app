@@ -51,8 +51,8 @@
         </Pivot>
         
         <!-- Footer -->
-        <!--<Button Content="{Binding CrossParameters.price, Converter={StaticResource stringFormatConverter}, ConverterParameter={StaticResource Page_Flight_Detail_Buy.Text }}"  Grid.Row="3"    Style="{StaticResource ButtonBottomRed}" Command="{Binding BuyCommand}"/>-->
+        <Button x:Uid="Buy_Button" Grid.Row="3"  Content="Comprar"  Style="{StaticResource ButtonBottomRed}" Command="{Binding BuyCommand}"/>
         <!--TODO : USAR RESOURCES-->
-        <Button Content="{Binding CrossParameters.price, Converter={StaticResource stringFormatConverter}, ConverterParameter='Comprar a {0}'}"  Grid.Row="3"    Style="{StaticResource ButtonBottomRed}" Command="{Binding BuyCommand}"/>
+        <!--<Button Content="{Binding CrossParameters.price, Converter={StaticResource stringFormatConverter}, ConverterParameter='Comprar a {0}'}"  Grid.Row="3"    Style="{StaticResource ButtonBottomRed}" Command="{Binding BuyCommand}"/>-->
     </Grid>
 </Page>

@@ -949,9 +949,13 @@
         <Setter Property="Opacity" Value="0.6" />
         <Setter Property="TextWrapping" Value="Wrap" />
     </Style>
-    <Style x:Key="Thanks_Booking_Detail" TargetType="TextBlock" BasedOn="{StaticResource SegoeLight24}">
+    <Style x:Key="Thanks_Booking_Detail_Blue" TargetType="TextBlock" BasedOn="{StaticResource SegoeLight24}">
         <Setter Property="Height" Value="{StaticResource dBlock1p}" />
         <Setter Property="Foreground" Value="{StaticResource Blue80}" />
+    </Style>
+    <Style x:Key="Thanks_Booking_Detail_Green" TargetType="TextBlock" BasedOn="{StaticResource SegoeLight24}">
+        <Setter Property="Height" Value="{StaticResource dBlock1p}" />
+        <Setter Property="Foreground" Value="{StaticResource Green40Brush}" />
     </Style>
     <Style x:Key="Thanks_Button" TargetType="Button" BasedOn="{StaticResource ButtonBase}">
         <Setter Property="Height" Value="{StaticResource dBlock1p}" />
