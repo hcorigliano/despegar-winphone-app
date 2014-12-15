@@ -36,7 +36,7 @@
             <StackPanel>
                 <TextBlock Grid.Row="1" x:Uid="Flight_Thanks" Style="{StaticResource Thanks_PageHeader}" Text="gracias totales" />
                 <!--<TextBlock Text="¡Muchas gracias por su solicitud de compra!" />-->
-                <TextBlock TextWrapping="Wrap" Style="{StaticResource Thanks_Request_Is }" x:Uid="Flight_Thanks_Request_Is" Text="Su número de solicitud de compra es:"  />
+                <TextBlock  Style="{StaticResource Thanks_Request_Is }" x:Uid="Flight_Thanks_Request_Is" Text="Su número de solicitud de compra es:"  />
                 <TextBlock Style="{StaticResource Thanks_Request }" Text="{Binding BookingResponse.checkout_id}"/>
                 <TextBlock Style="{StaticResource Thanks_How_Continue}" x:Uid="Flight_Thanks_How_Continue" Text="¿Cómo continúa el proceso de compra?" />
                 <TextBlock TextWrapping="Wrap" Style="{StaticResource Thanks_Continue_Explain}" x:Uid="Flight_Thanks_Continue_Explain" Text="Su pago está siendo procesado. Una vez que el pago se procese exitosamente recibirá un e-mail con la información de compra."   />

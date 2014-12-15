@@ -933,7 +933,8 @@
         <Setter Property="Height" Value="{StaticResource dBlock2p}" />
     </Style>
     <Style x:Key="Thanks_Request_Is" TargetType="TextBlock" BasedOn="{StaticResource SegoeSemilight24}">
-        <Setter Property="Height" Value="{StaticResource dBlock1p}" />
+        <Setter Property="TextWrapping" Value="WrapWholeWords" />
+        <Setter Property="Height" Value="{StaticResource dBlock2p}" />
         <Setter Property="Opacity" Value="0.6" />
     </Style>
     <Style x:Key="Thanks_Request" TargetType="TextBlock" BasedOn="{StaticResource SegoeLight28}">
@@ -945,7 +946,7 @@
         <Setter Property="Opacity" Value="0.6" />
     </Style>
     <Style x:Key="Thanks_Continue_Explain" TargetType="TextBlock" BasedOn="{StaticResource SegoeRegular15}">
-        <Setter Property="Height" Value="{StaticResource dBlock1p}" />
+        <Setter Property="Height" Value="{StaticResource dBlock3p}" />
         <Setter Property="Opacity" Value="0.6" />
         <Setter Property="TextWrapping" Value="Wrap" />
     </Style>
