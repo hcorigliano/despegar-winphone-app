@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Despegar.WP.UI.Controls;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -19,6 +20,7 @@ namespace Despegar.WP.UI.Product.Flights.Checkout.RiskQuesions
 {
     public sealed partial class RiskQuestionsPopUp : UserControl, Despegar.WP.UI.Common.IPopupContent
     {
+
         public RiskQuestionsPopUp()
         {
             this.InitializeComponent();

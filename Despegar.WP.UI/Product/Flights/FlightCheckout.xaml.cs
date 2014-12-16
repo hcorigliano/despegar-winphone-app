@@ -5,6 +5,7 @@ using Despegar.WP.UI.Model;
 using Despegar.WP.UI.Model.ViewModel;
 using Despegar.WP.UI.Model.ViewModel.Classes.Flights;
 using Despegar.WP.UI.Product.Flights.Checkout.Passegers.Controls;
+using Despegar.WP.UI.Product.Flights.Checkout.RiskQuesions;
 using System;
 using System.ComponentModel;
 using Windows.Phone.UI.Input;
@@ -19,6 +20,7 @@ namespace Despegar.WP.UI.Product.Flights
         private NavigationHelper navigationHelper;
         private FlightsCheckoutViewModel ViewModel;
         private ModalPopup loadingPopup = new ModalPopup(new Loading());
+        private ModalPopup riskPopup; 
 
         public FlightCheckout()
         {
@@ -71,12 +73,14 @@ namespace Despegar.WP.UI.Product.Flights
             ConfigureFields();
 
             this.DataContext = ViewModel;
+            riskPopup = new ModalPopup(new RiskQuestionsPopUp() { DataContext = ViewModel });
+            
         }
 
 
         private void ShowRisk(Object sender, EventArgs e )
         {
-
+            riskPopup.Show();
 
         }
 

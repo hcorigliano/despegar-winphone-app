@@ -14,6 +14,6 @@ namespace Despegar.Core.Business.Flight.BookingCompletePostResponse
         public string mandatory { get; set; }
         public string free_text { get; set; }
         public FreeTextDescription free_text_description { get; set; }
-        public Answers answers { get; set; }
+        public List<Answers> answers { get; set; }
     }
 }

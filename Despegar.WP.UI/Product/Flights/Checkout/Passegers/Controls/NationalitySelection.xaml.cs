@@ -83,6 +83,7 @@ namespace Despegar.WP.UI.Product.Flights.Checkout.Passegers.Controls
             (this.Content as FrameworkElement).DataContext = this;
 
             popup = new ModalPopup(new NationalitySelectionPopup() { DataContext = this });
+            
         }
 
         private void SelectionChangedListBox(object sender, SelectionChangedEventArgs e)

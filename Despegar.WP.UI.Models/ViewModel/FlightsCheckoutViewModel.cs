@@ -2,6 +2,7 @@
 using Despegar.Core.Business.Configuration;
 using Despegar.Core.Business.Dynamics;
 using Despegar.Core.Business.Enums;
+using Despegar.Core.Business.Flight.BookingCompletePostResponse;
 using Despegar.Core.Business.Flight.BookingFields;
 using Despegar.Core.IService;
 using Despegar.Core.Log;
@@ -29,11 +30,35 @@ namespace Despegar.WP.UI.Model.ViewModel
         #endregion
 
         #region ** Public Interface **
+
+
         public BookingFields CoreBookingFields { get; set; }
 
         // Only Invoice Arg fields for now
         public List<CountryFields> Countries { get; set; }
         public List<State> States { get; set; }
+
+        public List<RiskQuestion> FreeTextQuestions {
+            get
+            {
+                if(CrossParameters.BookingResponse != null)
+                {
+                    return CrossParameters.BookingResponse.risk_questions.Where(x => x.free_text == "true").ToList();
+                }
+                else
+                {
+                    return null;
+                }
+            }
+        }
+
+        public List<RiskQuestion> ChoiceQuestions
+        {
+            get
+            {
+                return CrossParameters.BookingResponse.risk_questions.Where(x => x.free_text == "false").ToList();
+            }
+        }
 
         public bool InvoiceRequired { get { return CoreBookingFields.form.payment.invoice != null; } }
 

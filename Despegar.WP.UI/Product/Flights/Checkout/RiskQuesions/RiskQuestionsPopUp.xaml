@@ -8,8 +8,22 @@
     mc:Ignorable="d"
     d:DesignHeight="300"
     d:DesignWidth="400">
-    
-    <Grid>
 
+    <Grid>
+        <ItemsControl ItemsSource="{Binding FreeTextQuestions}">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="30" />
+                            <RowDefinition Height="40" />
+                        </Grid.RowDefinitions>
+                        <!-- Fields -->
+                        <TextBlock Style="{StaticResource BaseTextLabel}" Grid.Column="0" Text="{Binding title }" />
+                        <TextBox x:Name="Respuesta"  Grid.Row="1" />
+                    </Grid>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
     </Grid>
 </UserControl>

@@ -113,8 +113,11 @@ namespace Despegar.Core.Service
         /// <returns></returns>
         public async Task<BookingCompletePostResponse> CompleteBooking(object bookingCompletePost,string id)
         {
-            string serviceUrl = String.Format(ServiceURL.GetServiceURL(ServiceKey.BookingCompletePost),id);
-            IConnector connector = context.GetServiceConnector(ServiceKey.BookingCompletePost);
+            //string serviceUrl = String.Format(ServiceURL.GetServiceURL(ServiceKey.BookingCompletePost),id);
+            //IConnector connector = context.GetServiceConnector(ServiceKey.BookingCompletePost);
+
+            string serviceUrl = String.Format(ServiceURL.GetServiceURL(ServiceKey.Risk), id);
+            IConnector connector = context.GetServiceConnector(ServiceKey.Risk);
 
             return await connector.PostAsync<BookingCompletePostResponse>(serviceUrl, bookingCompletePost);
         }
