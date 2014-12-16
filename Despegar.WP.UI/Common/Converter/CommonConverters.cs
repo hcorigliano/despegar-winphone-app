@@ -146,4 +146,29 @@ namespace Despegar.WP.UI.Common.Converter
         }
     }
 
+    public class CurrencyConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, string language)
+        {
+            if (value != null)
+            {
+                try
+                {
+                    return ((double)value).ToString("N0");
+                }
+                catch
+                {
+                    return ((int)value).ToString("N0");
+                }
+            }
+            return null;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, string language)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+
 }
