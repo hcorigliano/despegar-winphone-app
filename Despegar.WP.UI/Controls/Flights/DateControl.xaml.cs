@@ -47,6 +47,12 @@ namespace Despegar.WP.UI.Controls.Flights
         {
             this.InitializeComponent();
             (this.Content as FrameworkElement).DataContext = this;
+
+            this.departure.MinYear = DateTimeOffset.Now;
+            this.departure.MaxYear = DateTimeOffset.Now.AddYears(1);
+
+            this.ToDateControl.MinYear = DateTimeOffset.Now;
+            this.ToDateControl.MaxYear = DateTimeOffset.Now.AddYears(1);
         }        
     }
 }

@@ -186,7 +186,8 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
             }
             else
             {                
-                OnViewModelError("SEARCH_INVALID");
+                //OnViewModelError("SEARCH_INVALID",coreSearchModel.SearchErrors);
+                OnViewModelError("Default", coreSearchModel.SearchErrors);
             }
         }
 
