@@ -216,12 +216,12 @@ namespace Despegar.WP.UI.Product.Flights
 
         private void Grid_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            Grid grid = sender as Grid;
-            if (grid!=null)
+            Button button = sender as Button;
+            if (button != null)
             {
-                flightCrossParameter.Inbound = ((RoutesItems)grid.DataContext).inbound;
-                flightCrossParameter.Outbound = ((RoutesItems)grid.DataContext).outbound;
-                flightCrossParameter.price = ((RoutesItems)grid.DataContext).price;
+                flightCrossParameter.Inbound = ((RoutesItems)button.DataContext).inbound;
+                flightCrossParameter.Outbound = ((RoutesItems)button.DataContext).outbound;
+                flightCrossParameter.price = ((RoutesItems)button.DataContext).price;
                 OldPagesManager.GoTo(typeof(FlightDetail), flightCrossParameter);
             }
         }

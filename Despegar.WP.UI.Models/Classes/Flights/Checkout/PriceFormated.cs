@@ -1,6 +1,7 @@
 ﻿using Despegar.Core.Business.Flight.BookingFields;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;

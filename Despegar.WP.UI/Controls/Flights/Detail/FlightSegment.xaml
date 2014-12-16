@@ -19,7 +19,8 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="{StaticResource Block1p}" />
-            <RowDefinition MinHeight="{StaticResource dBlock1p}" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="{StaticResource Offset}"/>
             <RowDefinition MinHeight="{StaticResource dBlock3p}"/>
             <RowDefinition MinHeight="{StaticResource dBlock3p}"/>
             <RowDefinition Height="{StaticResource Block1p}" />
@@ -41,16 +42,17 @@
             <Run Text="{Binding Index}" />
         </TextBlock>
 
-        <TextBlock Grid.Row="1" Grid.Column="0" Style="{StaticResource FlightSegmentSubText}" >
+        <TextBlock Grid.Row="1" Grid.Column="0" Style="{StaticResource FlightSegmentSubText}"  >
             <Run  x:Uid="Page_Flight_Detail_Flight" Text="Vuelo" />
             <Run  Text=" " />
             <Run  Text="{Binding flight_id}" />
             <Run  Text=" - " />
             <Run  Text="{Binding cabin_type}" />
         </TextBlock>
-        <TextBlock Grid.Row="1" Grid.Column="1" Style="{StaticResource FlightSegmentSubText}" Visibility="{Binding HasOperatedBy, Converter={StaticResource visibilityConverter}}" x:Uid="Page_Flight_Detail_OperatedBy" Text="Operado por" />
 
-        <Grid Grid.Row="2" Grid.Column="0">
+        <TextBlock Grid.Row="1" Grid.Column="2" Style="{StaticResource FlightSegmentSubText}" Visibility="{Binding HasOperatedBy, Converter={StaticResource visibilityConverter}}"  x:Uid="Page_Flight_Detail_OperatedBy" Text="Operado por" />
+
+        <Grid Grid.Row="3" Grid.Column="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="{StaticResource Block2p}"/>
                 <ColumnDefinition Width="*"/>
@@ -62,7 +64,7 @@
             <TextBlock Grid.Column="1" Style="{Binding FlightDetailAirlineTitle}" Text="{Binding airline.name}" />
         </Grid>
 
-        <Grid Grid.Row="2" Grid.Column="2" Visibility="{Binding HasOperatedBy, Converter={StaticResource visibilityConverter}}" >
+        <Grid Grid.Row="3" Grid.Column="2" Visibility="{Binding HasOperatedBy, Converter={StaticResource visibilityConverter}}" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="{StaticResource Block2p}"/>
                 <ColumnDefinition Width="*"/>
@@ -75,12 +77,12 @@
             <TextBlock Grid.Column="2" Style="{Binding FlightDetailAirlineTitle}" Text="{Binding operated_by.name}"  />
         </Grid>
 
-        <StackPanel  Grid.Row="3"  Grid.Column="0" >
+        <StackPanel  Grid.Row="4"  Grid.Column="0" >
             <TextBlock Text="{Binding Path=departure_date}" Style="{Binding IsReturn, ElementName=SegmentControl, Converter={StaticResource textColorConverter}}"  />
             <TextBlock Text="{Binding Path=departure_time}" Style="{StaticResource FlightSegmentSubText}" />
         </StackPanel>
 
-        <StackPanel  Grid.Row="3"  Grid.Column="2"  >
+        <StackPanel  Grid.Row="4"  Grid.Column="2"  >
             <TextBlock x:Uid="Page_Flight_Outbound" Text="Sale" Style="{Binding IsReturn, ElementName=SegmentControl, Converter={StaticResource textColorConverter}}" />
             <TextBlock Style="{StaticResource FlightSegmentSmallText}" >                
                 <Run Text="{Binding Path=from.city}" />                
@@ -89,12 +91,12 @@
             <TextBlock Style="{StaticResource FlightSegmentSubText}" Text="{Binding Path=from.label}" />
         </StackPanel>
 
-        <StackPanel  Grid.Row="5"  Grid.Column="0" >
+        <StackPanel  Grid.Row="6"  Grid.Column="0" >
             <TextBlock Text="{Binding Path=arrival_date}" Style="{Binding IsReturn, ElementName=SegmentControl, Converter={StaticResource textColorConverter}}"  />
             <TextBlock Text="{Binding Path=arrival_time}" Style="{StaticResource FlightSegmentSubText}" />
         </StackPanel>
 
-        <StackPanel  Grid.Row="5"  Grid.Column="2">
+        <StackPanel  Grid.Row="6"  Grid.Column="2">
             <TextBlock x:Uid="Page_Flight_Inbound" Text="Llega" Style="{Binding IsReturn, ElementName=SegmentControl, Converter={StaticResource textColorConverter}}" />
             <TextBlock Style="{StaticResource FlightSegmentSmallText}" >
                 <Run Text="{Binding Path=to.city}" />                
@@ -103,7 +105,7 @@
             <TextBlock Style="{StaticResource FlightSegmentSubText}" Text="{Binding Path=to.label}" />
         </StackPanel>
 
-        <StackPanel Grid.Row="7" Grid.ColumnSpan="3" Orientation="Horizontal">
+        <StackPanel Grid.Row="8" Grid.ColumnSpan="3" Orientation="Horizontal">
             <TextBlock  Style="{StaticResource ClockGlyph}"> 
                 &#xE2AD;
             </TextBlock>

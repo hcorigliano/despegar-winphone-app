@@ -23,7 +23,7 @@
             <controls:Field x:Uid="Flights_Checkout_Contact_email_Confirmation" Value="{Binding emailConfirmation.CoreValue, Mode=TwoWay}" Visibility="{Binding emailConfirmation.required, Converter={StaticResource VisibilityConverter}}" />
             <controls:ValidationError ErrorPrefix="Flights_Checkout_Contact_email_Confirmation" ErrorCode="{Binding emailConfirmation.CurrentError}" Visibility="{Binding emailConfirmation.required, Converter={StaticResource VisibilityConverter}}" />
 
-            <controls:FieldCombo x:Uid="Flights_Checkout_Contact_Phone" ItemsSource="{Binding Phone.type.options}"  Value="{Binding Phone.type.CoreValue, Mode=TwoWay}" Visibility="{Binding Phone.type.required, Converter={StaticResource VisibilityConverter}}" DisplayTextPath="description" CodePath="value"/>
+            <controls:FieldCombo x:Uid="Flights_Checkout_Contact_Phone" ItemsSource="{Binding Phone.type.options}"  Value="{Binding Phone.type.SelectedOption, Mode=TwoWay}" Visibility="{Binding Phone.type.required, Converter={StaticResource VisibilityConverter}}" DisplayTextPath="description" CodePath="value"/>
 
             <Grid>
                 <Grid.RowDefinitions>

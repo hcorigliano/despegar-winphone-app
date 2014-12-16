@@ -52,28 +52,28 @@
                                 <controls:ValidationError ErrorPrefix="Flights_Checkout_Passenger_Last_Name" ErrorCode="{Binding last_name.CurrentError}" />
                             </StackPanel>
                             <!-- Nationality -->
-                            <StackPanel Style="{StaticResource TextBoxInputContainer}" Visibility="{Binding nationality.required, Converter={StaticResource VisibilityConverter}}">
+                            <StackPanel Style="{StaticResource TextBoxInputContainer}" Visibility="{Binding nationality.required, FallbackValue=Collapsed, Converter={StaticResource VisibilityConverter}}">
                                 <TextBlock Style="{StaticResource BaseTextLabel}" x:Uid="Flights_Checkout_Passenger_Nationality" Text="Nacionalidad" />
                                 <src:NationalitySelection GotFocus="NationalitySelection_GotFocus" x:Name="NationalitySelection" ItemsSource="{Binding DataContext.Countries, ElementName=passengerControl , Mode=TwoWay}" SelectedItem="{Binding nationality.CoreValue , Mode=TwoWay}"  />
                                 <controls:ValidationError ErrorPrefix="Flights_Checkout_Passenger_Nationality" ErrorCode="{Binding nationality.CurrentError}" />
                             </StackPanel>
                             <!-- Nro Documento -->
-                            <StackPanel Visibility="{Binding document.number.required, Converter={StaticResource VisibilityConverter}}">
+                            <StackPanel Visibility="{Binding document.number.required, FallbackValue=Collapsed, Converter={StaticResource VisibilityConverter}}">
                                 <controls:NumericField x:Uid="Flights_Checkout_Passenger_Document_Number" Value="{Binding document.number.CoreValue, Mode=TwoWay}" />
                                 <controls:ValidationError ErrorPrefix="Flights_Checkout_Passenger_Document_Number" ErrorCode="{Binding document.number.CurrentError}" />
                             </StackPanel>
                             <!-- Document Type -->
-                            <StackPanel Visibility="{Binding document.type.required, Converter={StaticResource VisibilityConverter}}">
-                                <controls:FieldCombo x:Uid="Flights_Checkout_Passenger_Document_Type"  ItemsSource="{Binding document.type.options}"  Value="{Binding document.type.CoreValue, Mode=TwoWay}" DisplayTextPath="description" CodePath="value" />
+                            <StackPanel Visibility="{Binding document.type.required, FallbackValue=Collapsed, Converter={StaticResource VisibilityConverter}}">
+                                <controls:FieldCombo x:Uid="Flights_Checkout_Passenger_Document_Type"  ItemsSource="{Binding document.type.options}"  Value="{Binding document.type.SelectedOption, Mode=TwoWay}" DisplayTextPath="description" CodePath="value" />
                             </StackPanel>
                             <!-- Birthday -->
-                            <StackPanel Style="{StaticResource TextBoxInputContainer}" Visibility="{Binding birthdate.required,Converter={StaticResource VisibilityConverter}}">
+                            <StackPanel Style="{StaticResource TextBoxInputContainer}" Visibility="{Binding birthdate.required, FallbackValue=Collapsed,Converter={StaticResource VisibilityConverter}}">
                                 <TextBlock  Style="{StaticResource BaseTextLabel}" x:Uid="Flights_Checkout_Passager_Birthdate" Text="Fecha de nacimiento" />
                                 <DatePicker Style="{StaticResource DatePickerBase}"  Date="{Binding birthdate.CoreValue, Mode=TwoWay, Converter={StaticResource DateToStringConverter}}" />
                             </StackPanel>
                             <!-- Gender -->
-                            <StackPanel Visibility="{Binding gender.required, Converter={StaticResource VisibilityConverter}}">
-                                <controls:FieldCombo x:Uid="Flights_Checkout_Passenger_Gender"  ItemsSource="{Binding gender.options}"  Value="{Binding gender.CoreValue, Mode=TwoWay}" DisplayTextPath="description" CodePath="value" />
+                            <StackPanel Visibility="{Binding gender.required, FallbackValue=Collapsed, Converter={StaticResource VisibilityConverter}}">
+                                <controls:FieldCombo x:Uid="Flights_Checkout_Passenger_Gender"  ItemsSource="{Binding gender.options}"  Value="{Binding gender.SelectedOption, Mode=TwoWay}" DisplayTextPath="description" CodePath="value" />
                             </StackPanel>          
                             
                         </StackPanel>

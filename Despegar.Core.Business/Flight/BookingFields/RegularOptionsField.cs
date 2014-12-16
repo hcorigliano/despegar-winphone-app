@@ -9,10 +9,29 @@ namespace Despegar.Core.Business.Flight.BookingFields
     public class RegularOptionsField : RegularField
     {
         public List<Option> options { get; set; }
+
+        private Option selectedOption;
+        public Option SelectedOption
+        {
+            get { return selectedOption; }
+            set
+            {
+                selectedOption = value;
+
+                if (value != null)
+                   CoreValue = value.value;
+
+                OnPropertyChanged();
+            }
+        }
        
         public override void Validate()
-        {            
-            // Combobox bever shows error, there is always a selected value
+        {
+            if (this.required && this.SelectedOption == null)
+            {
+                Errors.Add("REQUIRED");
+                CurrentError = "REQUIRED";
+            }
         }
 
         /// <summary>
@@ -24,11 +43,11 @@ namespace Despegar.Core.Business.Flight.BookingFields
             {
                 // Select first option available
                 if (options != null && options.Count > 0)                
-                    this.CoreValue = options.FirstOrDefault().value;
+                    this.SelectedOption = options.FirstOrDefault();
                 
             } else {
                 // API default                
-                this.CoreValue = value;
+                this.SelectedOption = options.SingleOrDefault(x => x.value == value);
             }
         }
     }

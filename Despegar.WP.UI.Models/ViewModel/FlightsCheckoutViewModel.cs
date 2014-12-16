@@ -12,10 +12,12 @@ using Despegar.WP.UI.Model.ViewModel.Classes.Flights;
 using Despegar.WP.UI.Models.Classes;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+
 
 namespace Despegar.WP.UI.Model.ViewModel
 {
@@ -37,7 +39,6 @@ namespace Despegar.WP.UI.Model.ViewModel
         // Only Invoice Arg fields for now
         public List<CountryFields> Countries { get; set; }
         public List<State> States { get; set; }
-
         public List<RiskQuestion> FreeTextQuestions {
             get
             {
@@ -60,18 +61,20 @@ namespace Despegar.WP.UI.Model.ViewModel
             }
         }
 
-        public bool InvoiceRequired { get { return CoreBookingFields.form.payment.invoice != null; } }
+        public bool InvoiceRequired { get { return GlobalConfiguration.Site == "AR"  && CoreBookingFields.form.payment.invoice != null; } }
 
         public bool IsFiscalNameRequired { //HERNAN: No integrar este codigo. Consecuencias: 1 docena de facturas.
             get 
             {
                 if (InvoiceRequired)
                 {
+                    //return false;
                     return CoreBookingFields.form.payment.invoice.fiscal_status.required && CoreBookingFields.form.payment.invoice.fiscal_status.CoreValue != "FINAL";
                 }
                 else { return false; }
             } 
         }
+        public bool IsTermsAndConditionsAccepted { get; set; }
 
         public event EventHandler ShowRiskReview;
 
@@ -110,17 +113,15 @@ namespace Despegar.WP.UI.Model.ViewModel
             set 
             { 
                 seletedInstallment = value;
-              
+                OnPropertyChanged();
+
                 // Select first by default
                 SelectedCard = value.FirstOrDefault();
-
-                OnPropertyChanged();
-                OnPropertyChanged("CurrentCards");
-            } 
+            }
         }
 
         private PaymentDetail selectedCard;
-        public PaymentDetail SelectedCard 
+        public PaymentDetail SelectedCard
         {
             get { return selectedCard; }
             set 
@@ -200,13 +201,17 @@ namespace Despegar.WP.UI.Model.ViewModel
             // Passengers
             foreach (var passanger in CoreBookingFields.form.passengers)
             {
-                passanger.document.type.SetDefaultValue();
-                passanger.gender.SetDefaultValue();
+                if (passanger.document != null && passanger.document.type != null)
+                    passanger.document.type.SetDefaultValue();
+                if (passanger.gender != null)
+                    passanger.gender.SetDefaultValue();
             }
 
             // Card data
-            CoreBookingFields.form.payment.card.owner_document.type.SetDefaultValue(); 
-            CoreBookingFields.form.payment.card.owner_gender.SetDefaultValue(); 
+            if (CoreBookingFields.form.payment.card.owner_document != null && CoreBookingFields.form.payment.card.owner_document.type != null)
+                CoreBookingFields.form.payment.card.owner_document.type.SetDefaultValue();
+            if (CoreBookingFields.form.payment.card.owner_gender != null)
+                CoreBookingFields.form.payment.card.owner_gender.SetDefaultValue(); 
           
             switch (countryCode)
             {
@@ -226,7 +231,12 @@ namespace Despegar.WP.UI.Model.ViewModel
                         CoreBookingFields.form.payment.invoice.fiscal_status.PropertyChanged += Fiscal_status_PropertyChanged;
 
                         CoreBookingFields.form.payment.invoice.fiscal_status.SetDefaultValue();
-                        CoreBookingFields.form.payment.invoice.address.state.CoreValue = States.FirstOrDefault().id; // NOT WORKING, MUST BE DONE AFTER THIS CODE or use A RegularOptionsField (The Source works bad)
+                        CoreBookingFields.form.payment.invoice.address.country.SetDefaultValue();
+
+                        // Turn State into a MultipleField
+                        CoreBookingFields.form.payment.invoice.address.state.value = null;
+                        CoreBookingFields.form.payment.invoice.address.state.options = States.Select(x => new Option() { value= x.id, description = x.name }).ToList();
+                        CoreBookingFields.form.payment.invoice.address.state.SetDefaultValue();
                     }
 
                     CoreBookingFields.form.contact.phones[0].country_code.SetDefaultValue();
@@ -287,42 +297,48 @@ namespace Despegar.WP.UI.Model.ViewModel
             InstallmentFormatted = new InstallmentFormatted();
 
             // With interest
-            foreach (PaymentDetail item in payments.without_interest)
+            if (payments.without_interest != null)
             {
-                switch (item.installments.quantity)
+                foreach (PaymentDetail item in payments.without_interest)
                 {
-                    case 1:
-                        InstallmentFormatted.WithoutInterest.OnePay.Add(item);
-                        break;
-                    case 6:
-                        InstallmentFormatted.WithoutInterest.SixPays.Add(item);
-                        break;
-                    case 12:
-                        InstallmentFormatted.WithoutInterest.TwelvePays.Add(item);
-                        break;
-                    case 24:
-                        InstallmentFormatted.WithoutInterest.TwentyFourPays.Add(item);
-                        break;
+                    switch (item.installments.quantity)
+                    {
+                        case 1:
+                            InstallmentFormatted.WithoutInterest.OnePay.Add(item);
+                            break;
+                        case 6:
+                            InstallmentFormatted.WithoutInterest.SixPays.Add(item);
+                            break;
+                        case 12:
+                            InstallmentFormatted.WithoutInterest.TwelvePays.Add(item);
+                            break;
+                        case 24:
+                            InstallmentFormatted.WithoutInterest.TwentyFourPays.Add(item);
+                            break;
+                    }
                 }
             }
 
             // Without Interest
-            foreach (PaymentDetail item in payments.with_interest)
-            {              
-                switch (item.installments.quantity)
+            if (payments.with_interest != null)
+            {
+                foreach (PaymentDetail item in payments.with_interest)
                 {
-                    case 1:
-                        InstallmentFormatted.WithInterest.OnePay.Add(item);
-                        break;
-                    case 6:
-                        InstallmentFormatted.WithInterest.SixPays.Add(item);
-                        break;
-                    case 12:
-                        InstallmentFormatted.WithInterest.TwelvePays.Add(item);
-                        break;
-                    case 24:
-                        InstallmentFormatted.WithInterest.TwentyFourPays.Add(item);
-                        break;
+                    switch (item.installments.quantity)
+                    {
+                        case 1:
+                            InstallmentFormatted.WithInterest.OnePay.Add(item);
+                            break;
+                        case 6:
+                            InstallmentFormatted.WithInterest.SixPays.Add(item);
+                            break;
+                        case 12:
+                            InstallmentFormatted.WithInterest.TwelvePays.Add(item);
+                            break;
+                        case 24:
+                            InstallmentFormatted.WithInterest.TwentyFourPays.Add(item);
+                            break;
+                    }
                 }
             }
 
@@ -339,13 +355,17 @@ namespace Despegar.WP.UI.Model.ViewModel
 
             if (InstallmentFormatted.WithInterest.TwentyFourPays.Count != 0)
                 availablePayments.Add("24");
-            
-            string input = String.Join(" , ", availablePayments);
-            StringBuilder sb = new StringBuilder(input);
-            sb[input.LastIndexOf(',')] = 'o';
 
-            var loader = new Windows.ApplicationModel.Resources.ResourceLoader();
-            InstallmentFormatted.WithInterest.GrupLabelText = sb.ToString() + " " + loader.GetString("Common_Pay_Of");
+            if (availablePayments.Count != 0)
+            {
+                string input = String.Join(" , ", availablePayments);
+                StringBuilder sb = new StringBuilder(input);
+                sb[input.LastIndexOf(',')] = 'o';
+            
+
+                var loader = new Windows.ApplicationModel.Resources.ResourceLoader();
+                InstallmentFormatted.WithInterest.GrupLabelText = sb.ToString() + " " + loader.GetString("Common_Pay_Of");
+            }
 
             //TODO : FILL PAY AT DESTINATION
         }
@@ -384,45 +404,95 @@ namespace Despegar.WP.UI.Model.ViewModel
 
         #endregion
 
-        private async void ValidateAndBuy() 
+        private async void ValidateAndBuy()
         {
-            this.IsLoading = true; 
-            CrossParameters.PriceDetail = PriceDetailsFormatted;
-            dynamic objectToSerialize = DynamicFlightBookingFieldsToPost.ToDynamic(this.CoreBookingFields);
-            CrossParameters.BookingResponse = await flightService.CompleteBooking(objectToSerialize, CoreBookingFields.id);
-            //BookingCompletePostResponse response = await flightService.CompleteBooking(form, "214ecbd4-7964-11e4-8980-fa163ec96567");
-            //TODO : Go to Tks or Risk Questions}
-            //if (CrossParameters.BookingResponse.booking_status == "checkout_successful")            
-            //navigator.GoTo(ViewModelPages.FlightsThanks, CrossParameters);     
+#if DEBUG
+            // Fill Test data
+            FillBookingFields(CoreBookingFields);
+#endif
 
-            switch (GetStatus(CrossParameters.BookingResponse.booking_status))
+            if (!IsTermsAndConditionsAccepted)
             {
-                case BookingStatusEnum.checkout_successful:
-                    {
-                        navigator.GoTo(ViewModelPages.FlightsThanks, CrossParameters);
-                        break;
-                    }
-                //Please uncomment the case that you are to use.
-
-                //case BookingStatusEnum.booking_failed:
-                //case BookingStatusEnum.fix_credit_card:
-                //case BookingStatusEnum.new_credit_card:
-                //case BookingStatusEnum.payment_failed:
-                case BookingStatusEnum.risk_review:
-                    {
-                        EventHandler RiskHandler = ShowRiskReview;
-                        if(RiskHandler != null)
-                        {
-                            RiskHandler(this, null);
-                        }
-                        break;
-                    }
-                //case BookingStatusEnum.BookingCustomError:
-                default:
-                    break;
+                OnViewModelError("TERMS_AND_CONDITIONS_NOT_CHECKED");
+                return;
             }
-            this.IsLoading = false;
 
+            string sectionID = "";
+            // Validation
+            if (!CoreBookingFields.IsValid(out sectionID))
+            {
+                OnViewModelError("FORM_ERROR", sectionID);
+            }
+            else
+            {
+                try
+                {
+                    this.IsLoading = true;
+                    dynamic bookingData = null;
+
+                    bookingData = await DynamicFlightBookingFieldsToPost.ToDynamic(this.CoreBookingFields);
+
+                    CrossParameters.PriceDetail = PriceDetailsFormatted;
+                    CrossParameters.BookingResponse = await flightService.CompleteBooking(bookingData, CoreBookingFields.id);
+
+                    //BookingCompletePostResponse response = await flightService.CompleteBooking(form, "214ecbd4-7964-11e4-8980-fa163ec96567");
+                    //TODO : Go to Tks or Risk Questions}
+                    //if (CrossParameters.BookingResponse.booking_status == "checkout_successful")            
+                    //navigator.GoTo(ViewModelPages.FlightsThanks, CrossParameters);     
+
+                    switch (GetStatus(CrossParameters.BookingResponse.booking_status))
+                    {
+                        case BookingStatusEnum.checkout_successful:
+                            {
+                                navigator.GoTo(ViewModelPages.FlightsThanks, CrossParameters);
+                                break;
+                            }
+                        //Please uncomment the case that you are to use.
+
+                        case BookingStatusEnum.booking_failed:
+                            {
+                                OnViewModelError("BOOKING_FAILED", CrossParameters.BookingResponse.checkout_id);
+                                break;
+                            }
+                        //case BookingStatusEnum.fix_credit_card:
+                        case BookingStatusEnum.new_credit_card:
+                            {
+                                this.selectedCard.hasError = true;
+                                this.selectedCard.CustomErrorType = BookingStatusEnum.new_credit_card.ToString();
+                                ClearCreditCardFields();
+                                //sectionID = "CARD";
+                                //GotFocusOnCreditCardData();
+                                break;
+                            }
+                        //case BookingStatusEnum.payment_failed:
+                        case BookingStatusEnum.risk_review:
+                            {
+                                EventHandler RiskHandler = ShowRiskReview;
+                                if (RiskHandler != null)
+                                {
+                                    RiskHandler(this, null);
+                                }
+                                break;
+                            }
+                        //case BookingStatusEnum.BookingCustomError:
+                        default:
+                            break;
+                    }
+
+                }
+                catch
+                {
+                    OnViewModelError("COMPLETE_BOOKING_CONECTION_FAILED");
+                }
+                this.IsLoading = false;
+            }
+        }
+
+        private void ClearCreditCardFields()
+        {
+            this.selectedCard.card = new Card();
+
+            OnPropertyChanged("SelectedCard");
         }
 
         private BookingStatusEnum GetStatus(string status)
@@ -439,6 +509,114 @@ namespace Despegar.WP.UI.Model.ViewModel
                 return BookingStatusEnum.BookingCustomError;
             }
 
-        }       
+        }
+
+        /// <summary>
+        /// Test method, DEBUG ONLY
+        /// </summary>
+        /// <param name="bookingFields"></param>
+        /// <returns></returns>
+        private static BookingFields FillBookingFields(BookingFields bookingFields)
+        {
+            bookingFields.form.contact.email.CoreValue = "bookingvuelos@despegar.com";
+
+            bookingFields.form.contact.phones[0].area_code.CoreValue = "11";
+            bookingFields.form.contact.phones[0].country_code.CoreValue = "54";
+            bookingFields.form.contact.phones[0].number.CoreValue = "44444444";
+            bookingFields.form.contact.phones[0].type.CoreValue = "HOME";
+
+            if (bookingFields.form.passengers[0].birthdate != null)
+                bookingFields.form.passengers[0].birthdate.CoreValue = "1988-11-27";
+            if (bookingFields.form.passengers[0].document != null)
+                bookingFields.form.passengers[0].document.type.CoreValue = "LOCAL";
+            bookingFields.form.passengers[0].first_name.CoreValue = "Test";
+            bookingFields.form.passengers[0].last_name.CoreValue = "Booking";
+            if (bookingFields.form.passengers[0].gender != null) { bookingFields.form.passengers[0].gender.CoreValue = "MALE"; }
+            bookingFields.form.payment.card.expiration.CoreValue = "2015-11";
+            bookingFields.form.payment.card.number.CoreValue = "4242424242424242";
+
+            if (bookingFields.form.payment.card.owner_document != null)
+                bookingFields.form.payment.card.owner_document.type.CoreValue = "LOCAL";
+            if (bookingFields.form.payment.card.owner_gender != null)
+                bookingFields.form.payment.card.owner_gender.CoreValue = "MALE";
+            bookingFields.form.payment.card.owner_name.CoreValue = "Test Booking";
+            bookingFields.form.payment.card.security_code.CoreValue = "123";
+            bookingFields.form.payment.installment.card_code.CoreValue = "VI";
+            bookingFields.form.payment.installment.card_type.CoreValue = "CREDIT";
+            bookingFields.form.payment.installment.quantity.CoreValue = "1";
+
+            bookingFields.form.payment.installment.complete_card_code.CoreValue = "VI";
+
+            if (bookingFields.form.payment.card.owner_document != null)
+                bookingFields.form.payment.card.owner_document.number.CoreValue = "12123123";
+            if (bookingFields.form.passengers[0].document != null && bookingFields.form.passengers[0].document.number != null)
+                bookingFields.form.passengers[0].document.number.CoreValue = "12123123";
+
+
+
+            if (bookingFields.form.passengers[0].nationality != null)
+            {
+                bookingFields.form.passengers[0].nationality.CoreValue = bookingFields.form.passengers[0].nationality.value;
+                switch (bookingFields.form.passengers[0].nationality.value)
+                {
+                    case "AR":
+
+                        if (bookingFields.form.payment.invoice != null)
+                        {
+                            bookingFields.form.payment.invoice.address.city_id.CoreValue = "6585";
+                            bookingFields.form.payment.invoice.address.country.CoreValue = "AR";
+                            bookingFields.form.payment.invoice.address.department.CoreValue = "A";
+                            bookingFields.form.payment.invoice.address.number.CoreValue = "1234";
+                            bookingFields.form.payment.invoice.address.postal_code.CoreValue = "7777";
+                            bookingFields.form.payment.invoice.address.state.CoreValue = "14061";
+                            bookingFields.form.payment.invoice.address.street.CoreValue = "La Calle";
+                            bookingFields.form.payment.invoice.fiscal_id.CoreValue = "20121231238";
+                            bookingFields.form.payment.invoice.fiscal_name.CoreValue = "RazonSocial";
+                            bookingFields.form.payment.invoice.fiscal_status.CoreValue = "INSCR";
+                        }
+                        break;
+
+                    case "BR":
+                        bookingFields.form.payment.card.owner_document.number.CoreValue = "85365865596";
+                        if (bookingFields.form.passengers[0].document.number != null)
+                            bookingFields.form.passengers[0].document.number.CoreValue = "85365865596";
+                        break;
+
+                    case "PE":
+                        if (bookingFields.form.payment.invoice != null)
+                        {
+                            bookingFields.form.payment.invoice.address.city.CoreValue = "6585";
+                            bookingFields.form.payment.invoice.address.country.CoreValue = "PE";
+                            bookingFields.form.payment.invoice.address.state.CoreValue = "14061";
+                            bookingFields.form.payment.invoice.address.street.CoreValue = "La Calle";
+                            bookingFields.form.payment.invoice.fiscal_id.CoreValue = "20121231238";
+                        }
+                        break;
+
+                    case "MX":
+                        {
+                            bookingFields.form.passengers[0].document.type.CoreValue = "PASSPORT";
+                            if (bookingFields.form.passengers[0].document.number != null)
+                                bookingFields.form.passengers[0].document.number.CoreValue = "12123123";
+                            break;
+                        }
+
+
+                    default:
+
+                        if (bookingFields.form.passengers[0].document.number != null)
+                            bookingFields.form.passengers[0].document.number.CoreValue = "12123123";
+                        break;
+                }
+            }
+            else
+            {
+
+            }
+
+
+            return bookingFields;
+        }
+
     }
 }

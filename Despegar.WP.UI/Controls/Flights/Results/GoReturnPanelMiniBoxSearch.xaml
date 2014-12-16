@@ -13,32 +13,24 @@
 
     <Grid>
 		<Grid.ColumnDefinitions>
-					<ColumnDefinition Width="35"/>
+					<ColumnDefinition Width="{StaticResource Block1p}"/>
 					<ColumnDefinition/>
 		</Grid.ColumnDefinitions>
 
-		<Grid Grid.Column="0" Style="{StaticResource IconBlue}" >
+		<Grid Grid.Column="0" Style="{StaticResource IconBlue}" Height="{StaticResource dBlock1p}" >
             <Image Style="{StaticResource FlightIconResult}"/>
          </Grid>
 
 
         <StackPanel Grid.Column="1" Orientation="Vertical">
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="{Binding OriginFlight}" Style="{StaticResource SegoeLight28}"/>
-                <TextBlock Text="-" Style="{StaticResource SegoeLight28}"/>
-                <TextBlock Text="{Binding DestinationFlight}" Style="{StaticResource SegoeLight28}"/>
+                <TextBlock Text="{Binding OriginFlight}" Style="{StaticResource SegoeLight20}"/>
+                <TextBlock Text="-" Style="{StaticResource SegoeLight20}"/>
+                <TextBlock Text="{Binding DestinationFlight}" Style="{StaticResource SegoeLight20}"/>
             </StackPanel>
-			<!--<Grid HorizontalAlignment="Left" >
-				<Grid.ColumnDefinitions>
-					<ColumnDefinition Width="40"/>
-					<ColumnDefinition/>
-				</Grid.ColumnDefinitions>
-                <TextBlock Text="{Binding TotalFlights}" Grid.Column="0" HorizontalAlignment="Right" />
-                <TextBlock x:Uid="Page_FlightResult_Flight" Grid.Column="1"/>
-			</Grid>-->
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="{Binding TotalFlights}" Style="{StaticResource SegoeRegular15}"/>
-                <TextBlock Margin="{StaticResource Left_Offset}" x:Uid="Page_FlightResult_Flight" Style="{StaticResource SegoeRegular15}"/>
+                <TextBlock Text="{Binding TotalFlights}" Style="{StaticResource SegoeRegular13}"/>
+                <TextBlock Margin="{StaticResource Left_Offset}" x:Uid="Page_FlightResult_Flight" Style="{StaticResource SegoeRegular13}"/>
             </StackPanel>
         </StackPanel>
         

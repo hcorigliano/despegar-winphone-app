@@ -64,7 +64,7 @@
     <x:Double x:Key="dBlock3">79.2</x:Double>
     <x:Double x:Key="dBlock3p">88.8</x:Double>
     <GridLength x:Key="Block4">118.4</GridLength>
-    <GridLength x:Key="Block4p">108.8</GridLength>
+    <GridLength x:Key="Block4p">138.4</GridLength>
     <GridLength x:Key="Block5">138.4</GridLength>
     <GridLength x:Key="Block5p">148</GridLength>
     <x:Double x:Key="dBlock5">138.4</x:Double>
@@ -73,6 +73,7 @@
     <GridLength x:Key="Block6">168</GridLength>
     <x:Double x:Key="dBlock6p">177.6</x:Double>
     <GridLength x:Key="Block6p">177.6</GridLength>
+    <GridLength x:Key="Block7p">207.2</GridLength>
     <x:Double x:Key="dBlock9p">276</x:Double>
     <x:Double x:Key="dBlock10p">305.6</x:Double>
     <x:Double x:Key="dBlock12p">364.8</x:Double>
@@ -106,6 +107,11 @@
         <Setter Property="CharacterSpacing" Value="-20" />
         <Setter Property="Foreground" Value="{StaticResource WhiteBrush}" />
     </Style>
+    <Style x:Key="SegoeRegular13" TargetType="TextBlock" BasedOn="{StaticResource BaseText}">
+        <Setter Property="FontSize" Value="13" />
+        <Setter Property="FontWeight" Value="Normal" />
+        <Setter Property="Opacity" Value="0.6" />
+    </Style>
     <Style x:Key="SegoeRegular15" TargetType="TextBlock" BasedOn="{StaticResource BaseText}">
         <Setter Property="FontSize" Value="15" />
         <Setter Property="FontWeight" Value="Normal" />
@@ -113,6 +119,11 @@
     </Style>
     <Style x:Key="SegoeRegular17" TargetType="TextBlock" BasedOn="{StaticResource BaseText}">
         <Setter Property="FontSize" Value="12.9" />
+        <Setter Property="FontWeight" Value="Normal" />
+        <Setter Property="Opacity" Value="0.6" />
+    </Style>
+    <Style x:Key="SegoeRegular24" TargetType="TextBlock" BasedOn="{StaticResource BaseText}">
+        <Setter Property="FontSize" Value="24" />
         <Setter Property="FontWeight" Value="Normal" />
         <Setter Property="Opacity" Value="0.6" />
     </Style>
@@ -129,6 +140,14 @@
     <Style x:Key="SegoeSemilight24" TargetType="TextBlock" BasedOn="{StaticResource BaseText}">
         <Setter Property="FontFamily" Value="Segoe UI SemiLight" />
         <Setter Property="FontSize" Value="24" />
+    </Style>
+    <Style x:Key="SegoeLight20" TargetType="TextBlock" BasedOn="{StaticResource BaseText}">
+        <Setter Property="FontFamily" Value="Segoe UI Light" />
+        <Setter Property="FontSize" Value="20" />
+    </Style>
+    <Style x:Key="SegoeLight22" TargetType="TextBlock" BasedOn="{StaticResource BaseText}">
+        <Setter Property="FontFamily" Value="Segoe UI Light" />
+        <Setter Property="FontSize" Value="22" />
     </Style>
     <Style x:Key="SegoeLight24" TargetType="TextBlock" BasedOn="{StaticResource BaseText}">
         <Setter Property="FontFamily" Value="Segoe UI Light" />
@@ -928,7 +947,8 @@
         <Setter Property="Height" Value="{StaticResource dBlock2p}" />
     </Style>
     <Style x:Key="Thanks_Request_Is" TargetType="TextBlock" BasedOn="{StaticResource SegoeSemilight24}">
-        <Setter Property="Height" Value="{StaticResource dBlock1p}" />
+        <Setter Property="TextWrapping" Value="WrapWholeWords" />
+        <Setter Property="Height" Value="{StaticResource dBlock2p}" />
         <Setter Property="Opacity" Value="0.6" />
     </Style>
     <Style x:Key="Thanks_Request" TargetType="TextBlock" BasedOn="{StaticResource SegoeLight28}">
@@ -940,13 +960,17 @@
         <Setter Property="Opacity" Value="0.6" />
     </Style>
     <Style x:Key="Thanks_Continue_Explain" TargetType="TextBlock" BasedOn="{StaticResource SegoeRegular15}">
-        <Setter Property="Height" Value="{StaticResource dBlock1p}" />
+        <Setter Property="Height" Value="{StaticResource dBlock3p}" />
         <Setter Property="Opacity" Value="0.6" />
         <Setter Property="TextWrapping" Value="Wrap" />
     </Style>
-    <Style x:Key="Thanks_Booking_Detail" TargetType="TextBlock" BasedOn="{StaticResource SegoeLight24}">
+    <Style x:Key="Thanks_Booking_Detail_Blue" TargetType="TextBlock" BasedOn="{StaticResource SegoeLight24}">
         <Setter Property="Height" Value="{StaticResource dBlock1p}" />
         <Setter Property="Foreground" Value="{StaticResource Blue80}" />
+    </Style>
+    <Style x:Key="Thanks_Booking_Detail_Green" TargetType="TextBlock" BasedOn="{StaticResource SegoeLight24}">
+        <Setter Property="Height" Value="{StaticResource dBlock1p}" />
+        <Setter Property="Foreground" Value="{StaticResource Green40Brush}" />
     </Style>
     <Style x:Key="Thanks_Button" TargetType="Button" BasedOn="{StaticResource ButtonBase}">
         <Setter Property="Height" Value="{StaticResource dBlock1p}" />
@@ -973,7 +997,7 @@
     <Style x:Key="FlightSegmentSmallText" TargetType="TextBlock" BasedOn="{StaticResource SegoeSemilight17}">
     </Style>
     <Style x:Key="FlightSegmentSubText" TargetType="TextBlock" BasedOn="{StaticResource SegoeRegular15}">
-        <Setter Property="TextWrapping" Value="Wrap" />
+        <Setter Property="TextWrapping" Value="Wrap" />        
     </Style>
     <Style x:Key="FlightDetailAirlineTitle" TargetType="TextBlock" BasedOn="{StaticResource SegoeSemilight17}">        
         <Setter Property="TextWrapping" Value="Wrap" />
@@ -1015,13 +1039,20 @@
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="HorizontalAlignment" Value="Center" />
     </Style>
+    <Style x:Key="AcceptTermsAndConditionsButton" TargetType="Button">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderBrush" Value="Transparent" />
+    </Style>
+
     <!-- Flights Checkout -->
     <Style x:Key="DetailCheckoutDetail" TargetType="TextBlock" BasedOn="{StaticResource SegoeSemilight17}">
         <Setter Property="Height" Value="{StaticResource dBlock1p}" />
+        <Setter Property="VerticalAlignment" Value="Center" />
     </Style>
     <Style x:Key="DetailCheckoutTotal" TargetType="TextBlock" BasedOn="{StaticResource SegoeLight24}">
         <Setter Property="Height" Value="{StaticResource dBlock1p}" />
         <Setter Property="Foreground" Value="{StaticResource Yellow20}" />
+        <Setter Property="VerticalAlignment" Value="Center" />
     </Style>
     <Style x:Key="DetailCheckoutTerms" TargetType="TextBlock" BasedOn="{StaticResource SegoeRegular15}">
         <Setter Property="Height" Value="{StaticResource dBlock1p}" />
@@ -1038,15 +1069,19 @@
     </Style>
     <Style x:Key="DetailCheckoutTotalPrice" TargetType="TextBlock" BasedOn="{StaticResource SegoeLight24}">
         <Setter Property="Height" Value="{StaticResource dBlock1p}" />
+        <Setter Property="VerticalAlignment" Value="Center" />
     </Style>
     <Style x:Key="DetailCheckoutForeach" TargetType="TextBlock" BasedOn="{StaticResource SegoeSemilight24}">
         <Setter Property="Height" Value="{StaticResource dBlock1p}" />
+        <Setter Property="VerticalAlignment" Value="Center" />
     </Style>
     <Style x:Key="DetailCheckoutForeachPrice" TargetType="TextBlock" BasedOn="{StaticResource SegoeSemilight17}">
         <Setter Property="Height" Value="{StaticResource dBlock1p}" />
+        <Setter Property="VerticalAlignment" Value="Center" />
     </Style>
     <Style x:Key="DetailCheckoutDetailPrice" TargetType="TextBlock" BasedOn="{StaticResource SegoeRegular15}">
         <Setter Property="Height" Value="{StaticResource dBlock1p}" />
+        <Setter Property="VerticalAlignment" Value="Center" />
     </Style>
     <!-- ================== ThemeResources Overrides ================= -->
     <ResourceDictionary.ThemeDictionaries>

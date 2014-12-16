@@ -24,40 +24,39 @@
             <RowDefinition Height="{StaticResource Block1p}"/>
             <RowDefinition Height="{StaticResource Block1p}"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="auto" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
         <!-- Title Panel -->
         <Image Grid.Row="0" Style="{StaticResource TopLogo}" />
-        <TextBlock Grid.Row="1" x:Uid="Page_FlightSearch" Style="{StaticResource PageHeaderSmall}" Text="BUSQUEDA" FontFamily="Segoe WP Semibold" />
-        
+        <TextBlock Grid.Row="1" x:Uid="Page_FlightSearch" Style="{StaticResource PageHeaderSmall}" Text="BUSQUEDA"  />
 
-        <ScrollViewer Grid.Row="2">
-            <StackPanel >
+
+        <ScrollViewer Grid.Row="2" DataContext="{Binding FlightParameters}">
+            <StackPanel>
                 <TextBlock Grid.Row="1" x:Uid="Flight_Thanks" Style="{StaticResource Thanks_PageHeader}" Text="gracias totales" />
                 <!--<TextBlock Text="¡Muchas gracias por su solicitud de compra!" />-->
-                <TextBlock Style="{StaticResource Thanks_Request_Is }" x:Uid="Flight_Thanks_Request_Is" Text="Su número de solicitud de compra es:" />
+                <TextBlock  Style="{StaticResource Thanks_Request_Is }" x:Uid="Flight_Thanks_Request_Is" Text="Su número de solicitud de compra es:"  />
                 <TextBlock Style="{StaticResource Thanks_Request }" Text="{Binding BookingResponse.checkout_id}"/>
                 <TextBlock Style="{StaticResource Thanks_How_Continue}" x:Uid="Flight_Thanks_How_Continue" Text="¿Cómo continúa el proceso de compra?" />
-                <TextBlock Style="{StaticResource Thanks_Continue_Explain}" x:Uid="Flight_Thanks_Continue_Explain" Text="Su pago está siendo procesado. Una vez que el pago se procese exitosamente recibirá un e-mail con la información de compra." TextWrapping="Wrap"  />
+                <TextBlock TextWrapping="Wrap" Style="{StaticResource Thanks_Continue_Explain}" x:Uid="Flight_Thanks_Continue_Explain" Text="Su pago está siendo procesado. Una vez que el pago se procese exitosamente recibirá un e-mail con la información de compra."   />
 
-
-                <TextBlock Style="{StaticResource Thanks_Booking_Detail}" x:Uid="Common_Booking_Detail" Text="Detalle de reserva" />
+                <TextBlock Style="{StaticResource Thanks_Booking_Detail_Blue}" x:Uid="Common_Booking_Detail" Text="Detalle de reserva" />
                 <StackPanel xmlns:src="using:Despegar.WP.UI.Product.Flights.Checkout.Buy.Controls">
-                    <src:BuyDetailsControl DataContext="{Binding PriceDetail}"></src:BuyDetailsControl>
+                    <src:BuyDetailsControl DataContext="{Binding PriceDetail}" />
                 </StackPanel>
 
-                <TextBlock Style="{StaticResource Thanks_Booking_Detail}" x:Uid="Generic_Go" Text="IDA" />
-                <src:FlightsSegmentGo DataContext="{Binding Outbound}"></src:FlightsSegmentGo>
+                <TextBlock Style="{StaticResource Thanks_Booking_Detail_Green}" x:Uid="Generic_Go" Text="IDA" />
+                <src:FlightsSegmentGo DataContext="{Binding Outbound}" />
 
-                <TextBlock Style="{StaticResource Thanks_Booking_Detail}" x:Uid="Generic_Return" Text="VUELTA" />
-                <src:FlightsSegmentReturn DataContext="{Binding Inbound}"></src:FlightsSegmentReturn>
+                <TextBlock Style="{StaticResource Thanks_Booking_Detail_Blue}" x:Uid="Generic_Return" Text="VUELTA" />
+                <src:FlightsSegmentReturn DataContext="{Binding Inbound}" />
 
-                
+
             </StackPanel>
         </ScrollViewer>
 
-        <Button Style="{StaticResource Thanks_Button }" Grid.Row="3" x:Uid="Generic_Acept" Content="Aceptar" HorizontalAlignment="Center" Click="GoToHome"></Button>
+        <Button Style="{StaticResource Thanks_Button}" Grid.Row="3" x:Uid="Generic_Acept" Content="Aceptar" HorizontalAlignment="Center" Command="{Binding NavigateToHomeCommand}" />
 
     </Grid>
 </Page>

@@ -14,7 +14,7 @@
     
     <Grid>
     	<Grid.ColumnDefinitions>
-    		<ColumnDefinition Width="35"/>
+    		<ColumnDefinition Width="{StaticResource Block1p}"/>
     		<ColumnDefinition/>
     	</Grid.ColumnDefinitions>
         
@@ -22,12 +22,12 @@
             
         </Grid.Resources>
 
-        <Grid Grid.Column="0" Style="{StaticResource IconBlue}">
+        <Grid Grid.Column="0" Style="{StaticResource IconBlue}" Height="{StaticResource dBlock1p}">
             <Image Style="{StaticResource FamilyIconResult}"/>
         </Grid>
         <StackPanel Grid.Column="1" HorizontalAlignment="Left" Height="Auto" VerticalAlignment="Top" Width="Auto">
-            <TextBlock TextWrapping="Wrap" Text="{Binding TotalPassangers}" Style="{StaticResource SegoeLight28}"/>
-            <TextBlock TextWrapping="Wrap" x:Uid="Page_FlightResult_Passangers" Style="{StaticResource SegoeRegular15}"/>
+            <TextBlock TextWrapping="Wrap" Text="{Binding TotalPassangers}" Style="{StaticResource SegoeLight20}"/>
+            <TextBlock TextWrapping="Wrap" x:Uid="Page_FlightResult_Passangers" Style="{StaticResource SegoeRegular13}"/>
         </StackPanel>
     </Grid>
 

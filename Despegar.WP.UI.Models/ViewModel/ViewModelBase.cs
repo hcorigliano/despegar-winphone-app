@@ -36,6 +36,12 @@ namespace Despegar.WP.UI.Model.ViewModel
                 ViewModelError(this, new ViewModelErrorArgs(errorCode));
         }
 
+        protected void OnViewModelError(string errorCode, object parameter)
+        {
+            if (ViewModelError != null)
+                ViewModelError(this, new ViewModelErrorArgs(errorCode, parameter));
+        }
+
         protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             if (PropertyChanged != null)

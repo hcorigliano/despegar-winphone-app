@@ -111,7 +111,7 @@ namespace Despegar.WP.UI.Developer
 
                     // Update UI
                     var pivotItem = page.FindVisualChildren<PivotItem>(page).Skip(1).First();
-                    var userControl = page.FindVisualChildren<SearchAirport>(pivotItem).First();
+                    var userControl = page.FindVisualChildren<SearchAirport>(pivotItem).FirstOrDefault();
                     userControl.UpdateAirportBoxes("EZE", "Aeropuerto Buenos Aires Ministro ¨Pistarini Ezeiza, Buenos Aires, Argentina", "MIA", "Miami, Florida, Estados Unidos");
                 
                 });

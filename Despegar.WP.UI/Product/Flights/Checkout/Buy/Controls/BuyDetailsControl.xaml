@@ -14,8 +14,10 @@
 
     <UserControl.Resources>
         <conv:NullToVisibilityConverter x:Name="NullToVisibilityConverter" ></conv:NullToVisibilityConverter>
+        <conv:CurrencyConverter x:Name="CurrencyConverter" ></conv:CurrencyConverter>
+        <conv:ZeroPriceToVisibilityConverter x:Name="ZeroPriceToVisibilityConverter" ></conv:ZeroPriceToVisibilityConverter>
     </UserControl.Resources>
-
+    
 
 
     <Grid>
@@ -31,7 +33,7 @@
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="{StaticResource Block6p}"></ColumnDefinition>
+            <ColumnDefinition Width="{StaticResource Block7p}"></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
@@ -65,7 +67,7 @@
             </TextBlock>
 
             <TextBlock Style="{StaticResource DetailCheckoutDetail}" x:Uid="Buy_Details_Taxes" Text="impuestos y tasas"></TextBlock>
-            <TextBlock Style="{StaticResource DetailCheckoutDetail}" x:Uid="Buy_Details_AFIP" Text="Res. 3550/13 AFIP"></TextBlock>
+            <TextBlock Style="{StaticResource DetailCheckoutDetail}" x:Uid="Buy_Details_AFIP" Text="Res. 3550/13 AFIP" Visibility="{Binding retention, Converter={StaticResource ZeroPriceToVisibilityConverter}}"></TextBlock>
             <TextBlock Style="{StaticResource DetailCheckoutDetail}" x:Uid="Buy_Details_Charges" Text="Cargos"></TextBlock>
         </StackPanel>
 
@@ -77,54 +79,54 @@
 
 
         <!--PER PASSAGER-->
-        <StackPanel Grid.Column="1"  Grid.Row="0" >
+        <StackPanel Margin="0,5,0,0"  Grid.Column="1"  Grid.Row="0" >
             <TextBlock Style="{StaticResource DetailCheckoutForeachPrice}" >
-                <Run Text="$"></Run>
-                <Run Text="{Binding adult_base}"></Run>
+                <Run Text="{Binding currency.mask}"></Run>
+                <Run Text="{Binding adult_base , Converter={StaticResource CurrencyConverter}}" ></Run>
             </TextBlock>
             <TextBlock Style="{StaticResource DetailCheckoutForeachPrice}" Visibility="{Binding children_base, Converter={StaticResource NullToVisibilityConverter}}" >
-                <Run Text="$"></Run>
-                <Run  Text="{Binding children_base}" ></Run>
+                <Run Text="{Binding currency.mask}"></Run>
+                <Run  Text="{Binding children_base, Converter={StaticResource CurrencyConverter}}" ></Run>
             </TextBlock>
             <TextBlock Style="{StaticResource DetailCheckoutForeachPrice}" Visibility="{Binding infant_base, Converter={StaticResource NullToVisibilityConverter}}">
-                <Run Text="$"></Run>
-                <Run Text="{Binding infant_base}"></Run>
+                <Run Text="{Binding currency.mask}"></Run>
+                <Run Text="{Binding infant_base, Converter={StaticResource CurrencyConverter}}"></Run>
             </TextBlock>
         </StackPanel>
 
         <!--DETAILS-->
         <StackPanel Grid.Column="1"  Grid.Row="2">
             <TextBlock Style="{StaticResource DetailCheckoutDetailPrice}" Grid.Row="3" >
-                <Run Text="$"></Run>
-                <Run Text="{Binding adults_subtotal}"></Run>
+                <Run Text="{Binding currency.mask}"></Run>
+                <Run Text="{Binding adults_subtotal, Converter={StaticResource CurrencyConverter}}"></Run>
             </TextBlock>
             <TextBlock Style="{StaticResource DetailCheckoutDetailPrice}" Grid.Row="4"  Visibility="{Binding children_base, Converter={StaticResource NullToVisibilityConverter}}" >
-                <Run Text="$"></Run>
-                <Run Text="{Binding children_subtotal}" ></Run>
+                <Run Text="{Binding currency.mask}"></Run>
+                <Run Text="{Binding children_subtotal, Converter={StaticResource CurrencyConverter}}" ></Run>
             </TextBlock>
             <TextBlock Style="{StaticResource DetailCheckoutDetailPrice}" Grid.Row="5"  Visibility="{Binding infant_base, Converter={StaticResource NullToVisibilityConverter}}">
-                <Run Text="$"></Run>
-                <Run Text="{Binding infants_subtotal}"></Run>
+                <Run Text="{Binding currency.mask}"></Run>
+                <Run Text="{Binding infants_subtotal, Converter={StaticResource CurrencyConverter}}"></Run>
             </TextBlock>
 
             <TextBlock Style="{StaticResource DetailCheckoutDetailPrice}" Grid.Row="6" >
-                <Run Text="$"></Run>
-                <Run Text="{Binding taxes}"></Run>
+                <Run Text="{Binding currency.mask}"></Run>
+                <Run Text="{Binding taxes, Converter={StaticResource CurrencyConverter}}"></Run>
             </TextBlock>
-            <TextBlock Style="{StaticResource DetailCheckoutDetailPrice}" Grid.Row="7" >
-                <Run Text="$"></Run>
-                <Run Text="{Binding retention}"></Run>
+            <TextBlock Style="{StaticResource DetailCheckoutDetailPrice}" Grid.Row="7"  Visibility="{Binding retention, Converter={StaticResource ZeroPriceToVisibilityConverter}}">
+                <Run Text="{Binding currency.mask}"></Run>
+                <Run Text="{Binding retention, Converter={StaticResource CurrencyConverter}}"></Run>
             </TextBlock>
-            <TextBlock Style="{StaticResource DetailCheckoutDetailPrice}" Grid.Row="8" >
-                <Run Text="$"></Run>
-                <Run Text="{Binding charges}"></Run>
+            <TextBlock Style="{StaticResource DetailCheckoutDetailPrice}"  Grid.Row="8" >
+                <Run Text="{Binding currency.mask}"></Run>
+                <Run Text="{Binding charges, Converter={StaticResource CurrencyConverter}}"></Run>
             </TextBlock>
         </StackPanel>
 
         <!--TOTAL-->
         <TextBlock Style="{StaticResource DetailCheckoutTotalPrice}" Grid.Column="1"  Grid.Row="4" >
-            <Run Text="$"></Run>
-                <Run Text="{Binding total}"></Run>
+            <Run Text="{Binding currency.mask}"></Run>
+                <Run Text="{Binding total, Converter={StaticResource CurrencyConverter}}"></Run>
         </TextBlock>
 
     </Grid>

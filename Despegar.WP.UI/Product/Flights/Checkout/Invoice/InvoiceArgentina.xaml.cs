@@ -35,11 +35,12 @@ namespace Despegar.WP.UI.Product.Flights.Checkout.Invoice
         }
 
         private async void CityTexbox_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
-        {
+        {           
             if (args.Reason == AutoSuggestionBoxTextChangeReason.UserInput && sender.Text != "" && sender.Text.Length >= 3)
-            {                
+            {
                 try 
                 {
+                   ViewModel.CoreBookingFields.form.payment.invoice.address.city_id.CoreValue = null;
                    string stateId = ViewModel.CoreBookingFields.form.payment.invoice.address.state.CoreValue;
                    sender.ItemsSource = (IEnumerable)(await ViewModel.GetCities("AR", sender.Text, stateId));
                 }
