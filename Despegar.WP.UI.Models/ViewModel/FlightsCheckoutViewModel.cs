@@ -432,11 +432,12 @@ namespace Despegar.WP.UI.Model.ViewModel
                         //case BookingStatusEnum.fix_credit_card:
                         case BookingStatusEnum.new_credit_card:
                             {
+                                this.selectedCard.card = new Card();
                                 this.selectedCard.hasError = true;
                                 this.selectedCard.CustomErrorType = BookingStatusEnum.new_credit_card.ToString();
-                                ClearCreditCardFields();
-                                //sectionID = "CARD";
-                                //GotFocusOnCreditCardData();
+                               
+                                OnPropertyChanged("SelectedCard");
+                                OnViewModelError("FORM_ERROR", "CARD");
                                 break;
                             }
                         //case BookingStatusEnum.payment_failed:
@@ -461,13 +462,6 @@ namespace Despegar.WP.UI.Model.ViewModel
                 }
                 this.IsLoading = false;
             }
-        }
-
-        private void ClearCreditCardFields()
-        {
-            this.selectedCard.card = new Card();
-
-            OnPropertyChanged("SelectedCard");
         }
 
         private BookingStatusEnum GetStatus(string status)
