@@ -116,7 +116,7 @@ namespace Despegar.WP.UI.Model.ViewModel
                     payments.installment.complete_card_code.CoreValue = selectedCard.card.code;
                 }
 
-                OnPropertyChanged(); // TODO: no esta actualizando el ComboBox de Tarjeta
+                OnPropertyChanged();
             }
         }
 

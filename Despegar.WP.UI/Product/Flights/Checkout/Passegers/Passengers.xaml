@@ -43,12 +43,12 @@
                         <StackPanel Grid.Row="1">
                             <!-- First Name -->
                             <StackPanel Visibility="{Binding first_name.required, Converter={StaticResource VisibilityConverter}}">
-                                <controls:Field x:Uid="Flights_Checkout_Passenger_First_Name" Value="{Binding first_name.CoreValue, Mode=TwoWay}" />
+                                <controls:Field InputType="TextOnly" x:Uid="Flights_Checkout_Passenger_First_Name" Value="{Binding first_name.CoreValue, Mode=TwoWay}"  />
                                 <controls:ValidationError ErrorPrefix="Flights_Checkout_Passenger_First_Name" ErrorCode="{Binding first_name.CurrentError}" />
                             </StackPanel>
                             <!-- Last Name -->
                             <StackPanel Visibility="{Binding last_name.required, Converter={StaticResource VisibilityConverter}}">
-                                <controls:Field x:Uid="Flights_Checkout_Passenger_Last_Name" Value="{Binding last_name.CoreValue, Mode=TwoWay}" />
+                                <controls:Field InputType="TextOnly"  x:Uid="Flights_Checkout_Passenger_Last_Name" Value="{Binding last_name.CoreValue, Mode=TwoWay}" />
                                 <controls:ValidationError ErrorPrefix="Flights_Checkout_Passenger_Last_Name" ErrorCode="{Binding last_name.CurrentError}" />
                             </StackPanel>
                             <!-- Nationality -->
@@ -59,7 +59,7 @@
                             </StackPanel>
                             <!-- Nro Documento -->
                             <StackPanel Visibility="{Binding document.number.required, FallbackValue=Collapsed, Converter={StaticResource VisibilityConverter}}">
-                                <controls:NumericField x:Uid="Flights_Checkout_Passenger_Document_Number" Value="{Binding document.number.CoreValue, Mode=TwoWay}" />
+                                <controls:Field InputType="Numeric"  x:Uid="Flights_Checkout_Passenger_Document_Number" Value="{Binding document.number.CoreValue, Mode=TwoWay}" />
                                 <controls:ValidationError ErrorPrefix="Flights_Checkout_Passenger_Document_Number" ErrorCode="{Binding document.number.CurrentError}" />
                             </StackPanel>
                             <!-- Document Type -->
