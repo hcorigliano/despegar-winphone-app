@@ -5,6 +5,7 @@ using Despegar.Core.Business.Enums;
 using Despegar.Core.Business.Flight.BookingFields;
 using Despegar.Core.IService;
 using Despegar.Core.Log;
+//using Despegar.LegacyCore.Connector.Domain.API;
 using Despegar.WP.UI.Model.Classes.Flights.Checkout;
 using Despegar.WP.UI.Model.Interfaces;
 using Despegar.WP.UI.Model.ViewModel.Classes.Flights;
@@ -28,6 +29,7 @@ namespace Despegar.WP.UI.Model.ViewModel
         private ICommonServices commonServices;
         private IConfigurationService configurationService;        
         private FlightsCrossParameter CrossParameters;
+        private Despegar.LegacyCore.Connector.Domain.API.ValidationCreditcards CreditCardsValidations;
         #endregion
 
         #region ** Public Interface **
@@ -114,9 +116,33 @@ namespace Despegar.WP.UI.Model.ViewModel
                     payments.installment.card_code.CoreValue = selectedCard.card.company;
                     payments.installment.card_type.CoreValue = selectedCard.card.type;
                     payments.installment.complete_card_code.CoreValue = selectedCard.card.code;
+
+                    Despegar.LegacyCore.Connector.Domain.API.ValidationCreditcard validation = CreditCardsValidations.data.FirstOrDefault(x => x.bankCode == (selectedCard.card.bank == "" ? "*" : selectedCard.card.bank ) && x.cardCode == selectedCard.card.company);
+                    
+                    Validation valNumber = new Validation();
+                    valNumber.error_code = "NUMBER";
+                    valNumber.regex = validation.numberRegex;
+                    CoreBookingFields.form.payment.card.number.validations = new List<Validation>();
+                    CoreBookingFields.form.payment.card.number.validations.Add(valNumber);
+
+                    Validation valLength= new Validation();
+                    valLength.error_code = "LENGTH";
+                    valLength.regex = validation.lengthRegex;
+                    CoreBookingFields.form.payment.card.number.validations.Add(valLength);
+
+                    Validation valCode = new Validation();
+                    valCode.error_code = "CODE";
+                    valCode.regex = validation.codeRegex;
+                    CoreBookingFields.form.payment.card.security_code.validations = new List<Validation>();
+                    CoreBookingFields.form.payment.card.security_code.validations.Add(valCode); //.number.validations.Add(val);
+
+                    
+                    
+                    int test = 0;
+
                 }
 
-                OnPropertyChanged(); // TODO: no esta actualizando el ComboBox de Tarjeta
+                OnPropertyChanged(); 
             }
         }
 
@@ -158,7 +184,10 @@ namespace Despegar.WP.UI.Model.ViewModel
                 PriceDetailsFormatted = FormatPrice();
 
                 // Set Known Default Values && Adapt Checkout to the country
-                ConfigureCountry(currentCountry);                
+                ConfigureCountry(currentCountry);              
+  
+                //Get validations for credit cards
+                GetCreditCardsValidations();
             }
             catch (Exception e)
             {
@@ -168,6 +197,11 @@ namespace Despegar.WP.UI.Model.ViewModel
             }
 
             IsLoading = false;
+        }
+
+        private async void GetCreditCardsValidations()
+        {
+            CreditCardsValidations = await Despegar.LegacyCore.Service.APIValidationCreditcards.GetAll();
         }
 
         private void ConfigureCountry(string countryCode)
