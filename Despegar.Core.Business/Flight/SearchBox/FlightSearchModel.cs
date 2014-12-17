@@ -129,6 +129,12 @@ namespace Despegar.Core.Business.Flight.SearchBox
                         if (!CommonValidations())
                             return false;
 
+                        if (DestinationDate < DepartureDate)
+                        {
+                            SearchErrors = new CustomError("fecha partida menor a llegada.", "FLIGHT_SEARCH_DESTINATIONDATE_SMALLER_THAN_DEPARTURE_ERROR_MESSAGE", "isValid");
+                            return false;
+                        }
+
                         if (DepartureDate < DateTime.Today)
                         {
                             // Cannot fly in the past.
@@ -138,13 +144,13 @@ namespace Despegar.Core.Business.Flight.SearchBox
 
                         if (DestinationDate < DateTime.Today) {
                             // Cannot fly in the past.
-                            SearchErrors = new CustomError("Fecha hasta tiene que ser mayor a la de hoy.", "FLIGHT_SEARCH_DESTINATIONDATE_SMALLER_THAN_TODAY_ERROR_MESSAGE", "isValid");
+                            SearchErrors = new CustomError("Fecha tiene que ser mayor a la de hoy.", "FLIGHT_SEARCH_DESTINATIONDATE_SMALLER_THAN_TODAY_ERROR_MESSAGE", "isValid");
                             return false;
                         }
 
                         if (DateTime.Today.AddDays(329.0) < DestinationDate)
                         {
-                            SearchErrors = new CustomError("La fecha hasta no puede ser superior a la fecha ", "FLIGHT_SEARCH_DESTINATIONDATE_GREATER_THAN_MAXDAY_ERROR_MESSAGE", "isValid", true, DateTime.Today.AddDays(329.0).ToString("dd-MM-yyyy"));
+                            SearchErrors = new CustomError("La fecha no puede ser superior a la fecha ", "FLIGHT_SEARCH_DESTINATIONDATE_GREATER_THAN_MAXDAY_ERROR_MESSAGE", "isValid", true, DateTime.Today.AddDays(329.0).ToString("dd-MM-yyyy"));
                             return false;
                         }
                         break;

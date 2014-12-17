@@ -790,4 +790,7 @@ La reserva no ha sido generada y no se le cobrará ningún cargo por la transacc
   <data name="FLIGHT_SEARCH_NO_ORIGIN_ERROR_MESSAGE" xml:space="preserve">
     <value>Debe que seleccionar origen.</value>
   </data>
+  <data name="FLIGHT_SEARCH_DESTINATIONDATE_SMALLER_THAN_DEPARTURE_ERROR_MESSAGE" xml:space="preserve">
+    <value>La fecha de partida tiene que ser anterior a la de llegada.</value>
+  </data>
 </root>
