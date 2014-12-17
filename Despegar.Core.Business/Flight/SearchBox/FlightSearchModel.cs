@@ -144,7 +144,7 @@ namespace Despegar.Core.Business.Flight.SearchBox
 
                         if (DateTime.Today.AddDays(329.0) < DestinationDate)
                         {
-                            SearchErrors = new CustomError("La fecha hasta no puede ser superior a la fecha " + DateTime.Today.AddDays(329.0).ToString("dd-MM-YYYY"), "FLIGTH_SEARCH_DESTINATIONDATE_GREATER_THAN_TODAY_ERROR_MESSAGE", "isValid");
+                            SearchErrors = new CustomError("La fecha hasta no puede ser superior a la fecha " + DateTime.Today.AddDays(329.0).ToString("dd-MM-yyyy"), "FLIGTH_SEARCH_DESTINATIONDATE_GREATER_THAN_TODAY_ERROR_MESSAGE", "isValid");
                             return false;
                         }
                         break;
