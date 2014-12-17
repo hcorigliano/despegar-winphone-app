@@ -382,7 +382,7 @@ namespace Despegar.WP.UI.Model.ViewModel
         {
 #if DEBUG
             // Fill Test data
-            //FillBookingFields(CoreBookingFields);
+            FillBookingFields(CoreBookingFields);
 #endif
 
             if (!IsTermsAndConditionsAccepted)
@@ -433,8 +433,11 @@ namespace Despegar.WP.UI.Model.ViewModel
                             {
                                 this.selectedCard.card = new Card();
                                 this.selectedCard.hasError = true;
-                                this.selectedCard.CustomErrorType = BookingStatusEnum.new_credit_card.ToString();
-                               
+                                this.selectedCard.CustomErrorType = BookingStatusEnum.new_credit_card.ToString().ToUpper();
+                                this.CoreBookingFields.form.payment.card.number.CoreValue = String.Empty;
+                                this.CoreBookingFields.form.payment.card.expiration.CoreValue = String.Empty;
+                                this.CoreBookingFields.form.payment.card.security_code.CoreValue = String.Empty;
+
                                 OnPropertyChanged("SelectedCard");
                                 OnViewModelError("FORM_ERROR", "CARD");
                                 break;
@@ -455,7 +458,7 @@ namespace Despegar.WP.UI.Model.ViewModel
                     }
 
                 }
-                catch
+                catch (Exception ex)
                 {
                     OnViewModelError("COMPLETE_BOOKING_CONECTION_FAILED");
                 }
