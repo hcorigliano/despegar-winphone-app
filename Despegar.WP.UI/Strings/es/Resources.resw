@@ -763,4 +763,7 @@
     <value>Lo sentimos, su solicitud de compra N° {0} no puede ser procesada por falta de disponibilidad del vuelo.
 La reserva no ha sido generada y no se le cobrará ningún cargo por la transacción.</value>
   </data>
+  <data name="Flights_Checkout_Passager_Birthdate_ERROR_REQUIRED" xml:space="preserve">
+    <value>Por favor ingrese una fecha valida</value>
+  </data>
 </root>
