@@ -817,4 +817,10 @@ La reserva no ha sido generada y no se le cobrará ningún cargo por la transacc
   <data name="Flights_Checkout_Card_Data_Security_Code_ERROR_CODE" xml:space="preserve">
     <value>Verifique el codigo de seguridad</value>
   </data>
+  <data name="Flights_Search_ERROR_BOOKING_FAILED" xml:space="preserve">
+    <value>Lo sentimos no hemos podido procesar la reserva. Vuelva a buscar un vuelo y reintentelo.</value>
+  </data>
+  <data name="Flights_Search_ERROR_BOOKING_FAILED_TITLE" xml:space="preserve">
+    <value>Error</value>
+  </data>
 </root>

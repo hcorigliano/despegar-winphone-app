@@ -489,9 +489,17 @@ namespace Despegar.WP.UI.Model.ViewModel
                     }
 
                 }
-                catch
+                catch(Exception e)
                 {
-                    OnViewModelError("COMPLETE_BOOKING_CONECTION_FAILED");
+                    var test = e;
+
+                    if (e.Message.Contains("HTTP Error code 404 (NotFound)"))
+                        OnViewModelError("COMPLETE_BOOKING_CONECTION_FAILED");
+                    else
+                    {
+                        OnViewModelError("COMPLETE_BOOKING_BOOKING_FAILED");
+                    }
+
                 }
                 this.IsLoading = false;
             }
