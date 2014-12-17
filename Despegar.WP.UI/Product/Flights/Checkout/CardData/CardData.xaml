@@ -26,7 +26,7 @@
            
             <!-- Card -->
             <controls:FieldCombo x:Uid="Flights_Checkout_Card_Data_Card" ItemsSource="{Binding DataContext.SelectedInstallment, ElementName=CardControl}" Value="{Binding DataContext.SelectedCard, Mode=TwoWay, ElementName=CardControl}"  DisplayTextPath="card.description" CodePath="card.code" />
-            <!--<controls:ValidationError ErrorPrefix="Page_Checkout" ErrorCode="{Binding Datacontext.SelectedCard.CustomErrorType}" Visibility="{Binding Datacontext.SelectedCard.HasError, Converter={StaticResource VisibilityConverter}}" ></controls:ValidationError>-->
+            <controls:ValidationError ErrorPrefix="Page_Checkout" ErrorCode="{Binding Datacontext.SelectedCard.CustomErrorType}" Visibility="{Binding Datacontext.SelectedCard.HasError, Converter={StaticResource VisibilityConverter}}" ></controls:ValidationError>
             <!-- Card Number -->
             <controls:NumericField x:Uid="Flights_Checkout_Card_Data_Number_Of_Card" Value="{Binding card.number.CoreValue, Mode=TwoWay}" Visibility="{Binding card.number.required, Converter={StaticResource VisibilityConverter}}" />
             <controls:ValidationError ErrorPrefix="Flights_Checkout_Card_Data_Number_Of_Card" ErrorCode="{Binding card.number.CurrentError}" Visibility="{Binding card.number.required, Converter={StaticResource VisibilityConverter}}" />
