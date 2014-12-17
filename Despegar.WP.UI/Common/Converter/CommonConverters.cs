@@ -152,22 +152,17 @@ namespace Despegar.WP.UI.Common.Converter
         {
             if (value != null)
             {
-                try
+                var type = value.GetType();
+                if(type == typeof(int) )
                 {
-                    
                     return ((int)value).ToString("N0");
                 }
-                catch
+                if (type == typeof(double))
                 {
-                    try
-                    {
-                        return ((double)value).ToString("N0");
-                    }
-                    catch
-                    {
-                        return value;
-                    }
+                    return ((double)value).ToString("N0");
                 }
+                return value;
+               
             }
             return null;
         }

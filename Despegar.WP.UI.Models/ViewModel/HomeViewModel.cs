@@ -52,7 +52,8 @@ namespace Despegar.WP.UI.Model
         public ICommand NavigateToFlights 
          {
             get
-            { 
+            {
+                APIConnector.Instance.Channel = ApplicationConfig.Instance.Country = GlobalConfiguration.Site;  // TODO: Only for CardsValidations in Checkout
                 return new RelayCommand(() => Navigator.GoTo(ViewModelPages.FlightsSearch, null)); 
             }
         }

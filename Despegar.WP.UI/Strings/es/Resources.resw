@@ -808,4 +808,13 @@ La reserva no ha sido generada y no se le cobrará ningún cargo por la transacc
   <data name="Flights_Checkout_Payment_FinancialCost.Text" xml:space="preserve">
     <value>Costo financiero de la reserva:</value>
   </data>
+  <data name="Flights_Checkout_Card_Data_Number_Of_Card_ERROR_LENGTH" xml:space="preserve">
+    <value>Verifique el numero de tarjeta. Longitud invalida</value>
+  </data>
+  <data name="Flights_Checkout_Card_Data_Number_Of_Card_ERROR_NUMBER" xml:space="preserve">
+    <value>Verifique el numero de tarjeta</value>
+  </data>
+  <data name="Flights_Checkout_Card_Data_Security_Code_ERROR_CODE" xml:space="preserve">
+    <value>Verifique el codigo de seguridad</value>
+  </data>
 </root>

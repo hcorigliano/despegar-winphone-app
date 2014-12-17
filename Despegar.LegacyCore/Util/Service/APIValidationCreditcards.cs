@@ -11,7 +11,7 @@ using Newtonsoft.Json;
 
 namespace Despegar.LegacyCore.Service
 {
-    class APIValidationCreditcards
+    public class APIValidationCreditcards
     {
 
         public static async Task<ValidationCreditcards> GetAll()
