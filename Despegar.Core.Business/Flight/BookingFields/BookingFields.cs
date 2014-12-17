@@ -29,8 +29,8 @@ namespace Despegar.Core.Business.Flight.BookingFields
             // Passengers           
             foreach (var passenger in form.passengers) 
             {
-                //if (passenger.birthdate.IsValid)
-                //    isValid = false;
+                if (passenger.birthdate != null && !passenger.birthdate.IsValid)
+                    passengerValid = false;
                 if (passenger.first_name != null && !passenger.first_name.IsValid)
                     passengerValid = false;
                 if (passenger.last_name != null && !passenger.last_name.IsValid)

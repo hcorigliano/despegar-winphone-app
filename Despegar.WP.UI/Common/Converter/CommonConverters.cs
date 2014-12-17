@@ -154,11 +154,19 @@ namespace Despegar.WP.UI.Common.Converter
             {
                 try
                 {
-                    return ((double)value).ToString("N0");
+                    
+                    return ((int)value).ToString("N0");
                 }
                 catch
                 {
-                    return ((int)value).ToString("N0");
+                    try
+                    {
+                        return ((double)value).ToString("N0");
+                    }
+                    catch
+                    {
+                        return value;
+                    }
                 }
             }
             return null;

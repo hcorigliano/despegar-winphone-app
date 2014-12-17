@@ -70,6 +70,7 @@
                             <StackPanel Style="{StaticResource TextBoxInputContainer}" Visibility="{Binding birthdate.required, FallbackValue=Collapsed,Converter={StaticResource VisibilityConverter}}">
                                 <TextBlock  Style="{StaticResource BaseTextLabel}" x:Uid="Flights_Checkout_Passager_Birthdate" Text="Fecha de nacimiento" />
                                 <DatePicker Style="{StaticResource DatePickerBase}"  Date="{Binding birthdate.CoreValue, Mode=TwoWay, Converter={StaticResource DateToStringConverter}}" />
+                                <controls:ValidationError ErrorPrefix="Flights_Checkout_Passager_Birthdate" ErrorCode="{Binding birthdate.CurrentError}" />
                             </StackPanel>
                             <!-- Gender -->
                             <StackPanel Visibility="{Binding gender.required, FallbackValue=Collapsed, Converter={StaticResource VisibilityConverter}}">

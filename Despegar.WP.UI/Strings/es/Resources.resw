@@ -765,6 +765,9 @@ La reserva no ha sido generada y no se le cobrará ningún cargo por la transacc
   </data>
   <data name="FLIGHT_SEARCH_ADULT_INFANT_MATCH_ERROR_MESSAGE" xml:space="preserve">
     <value>Tiene que haber un adulto por cada infante.</value>
+    </data>
+  <data name="Flights_Checkout_Passager_Birthdate_ERROR_REQUIRED" xml:space="preserve">
+    <value>Por favor ingrese una fecha valida</value>
   </data>
   <data name="FLIGHT_SEARCH_AIRPORT_NO_SELECTED_ERROR_MESSAGE" xml:space="preserve">
     <value>Seleccione destino para el segmento.</value>
