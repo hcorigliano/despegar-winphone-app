@@ -435,7 +435,7 @@
   <data name="Flight_Checkout_Payments.Header" xml:space="preserve">
     <value>pago</value>
   </data>
-  <data name="Common_Pays_With" xml:space="preserve">
+  <data name="Common_Payment_With" xml:space="preserve">
     <value>con</value>
   </data>
   <data name="Common_Pays_Without_Interest" xml:space="preserve">
@@ -801,5 +801,11 @@ La reserva no ha sido generada y no se le cobrará ningún cargo por la transacc
   </data>
   <data name="Common_With" xml:space="preserve">
     <value>con</value>
+  </data>
+  <data name="Common_Pays_With" xml:space="preserve">
+    <value>Pagos con</value>
+  </data>
+  <data name="Flights_Checkout_Payment_FinancialCost.Text" xml:space="preserve">
+    <value>Costo financiero de la reserva:</value>
   </data>
 </root>
