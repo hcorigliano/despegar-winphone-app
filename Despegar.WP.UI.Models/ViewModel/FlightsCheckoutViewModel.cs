@@ -342,8 +342,6 @@ namespace Despegar.WP.UI.Model.ViewModel
                 var loader = new Windows.ApplicationModel.Resources.ResourceLoader();
                 InstallmentFormatted.WithInterest.GrupLabelText = sb.ToString() + " " + loader.GetString("Common_Pay_Of");
             }
-
-            //TODO : FILL PAY AT DESTINATION
         }
 
         /// <summary>

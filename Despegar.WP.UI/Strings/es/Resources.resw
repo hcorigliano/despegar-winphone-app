@@ -436,10 +436,10 @@
     <value>pago</value>
   </data>
   <data name="Common_Pays_With" xml:space="preserve">
-    <value>Pagos con </value>
+    <value>con</value>
   </data>
   <data name="Common_Pays_Without_Interest" xml:space="preserve">
-    <value>Pagos sin interés con </value>
+    <value>sin interés</value>
   </data>
   <data name="Common_Pay_With" xml:space="preserve">
     <value>Pago con</value>
@@ -795,5 +795,11 @@ La reserva no ha sido generada y no se le cobrará ningún cargo por la transacc
   </data>
   <data name="FLIGHT_SEARCH_DESTINATIONDATE_SMALLER_THAN_DEPARTURE_ERROR_MESSAGE" xml:space="preserve">
     <value>La fecha de partida tiene que ser anterior a la de llegada.</value>
+  </data>
+  <data name="Common_Payments" xml:space="preserve">
+    <value>Pagos</value>
+  </data>
+  <data name="Common_With" xml:space="preserve">
+    <value>con</value>
   </data>
 </root>
