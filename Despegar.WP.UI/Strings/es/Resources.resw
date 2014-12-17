@@ -770,13 +770,13 @@ La reserva no ha sido generada y no se le cobrará ningún cargo por la transacc
     <value>Seleccione destino para el segmento.</value>
   </data>
   <data name="FLIGHT_SEARCH_DEPARTUREDATE_SMALLER_THAN_TODAY_ERROR_MESSAGE" xml:space="preserve">
-    <value>Tienes que seleccionar un día más grande al de hoy para la fecha de salida.</value>
+    <value>Tienes que seleccionar un día a partir de mañana en adelante para la fecha de partida.</value>
   </data>
   <data name="FLIGHT_SEARCH_DESTINATIONDATE_GREATER_THAN_MAXDAY_ERROR_MESSAGE" xml:space="preserve">
-    <value>La fecha hasta no puede ser superior a la fecha {0}</value>
+    <value>La fecha de regreso no puede ser superior a la fecha {0}</value>
   </data>
   <data name="FLIGHT_SEARCH_DESTINATIONDATE_SMALLER_THAN_TODAY_ERROR_MESSAGE" xml:space="preserve">
-    <value>Fecha hasta tiene que ser mayor a la de hoy.</value>
+    <value>Fecha regreso tiene que ser mayor a la de hoy.</value>
   </data>
   <data name="FLIGHT_SEARCH_MIN_ADULTS_ERROR_MESSAGE" xml:space="preserve">
     <value>Tiene que haber al menos un adulto.</value>
@@ -786,5 +786,8 @@ La reserva no ha sido generada y no se le cobrará ningún cargo por la transacc
   </data>
   <data name="FLIGHT_SEARCH_SEGMENT_MAX_ERROR_MESSAGE" xml:space="preserve">
     <value>Cantidad de segmentos máximo excedido.</value>
+  </data>
+  <data name="FLIGHT_SEARCH_NO_ORIGIN_ERROR_MESSAGE" xml:space="preserve">
+    <value>Debe que seleccionar origen.</value>
   </data>
 </root>

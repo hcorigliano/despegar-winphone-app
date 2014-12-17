@@ -197,7 +197,14 @@ namespace Despegar.Core.Business.Flight.SearchBox
 
         private bool CommonValidations() 
         {
-            if (String.IsNullOrEmpty(OriginFlight) || String.IsNullOrEmpty(DestinationFlight))
+            if (String.IsNullOrEmpty(OriginFlight))
+            {
+                // No origin
+                SearchErrors = new CustomError("Debe que seleccionar origen.", "FLIGHT_SEARCH_NO_ORIGIN_ERROR_MESSAGE", "CommonValidations");
+                return false;
+            }
+
+            if (String.IsNullOrEmpty(DestinationFlight))
             {
                 // No destinations
                 SearchErrors = new CustomError("Debe que seleccionar destino.", "FLIGHT_SEARCH_NO_DESTINY_ERROR_MESSAGE", "CommonValidations");
