@@ -10,7 +10,9 @@ namespace Despegar.Core.Business.CustomErrors
     {
         public string Message { get; set; }
         public string Code { get; set; }
-        public string Method {get;set;}
+        public string Method { get; set; }
+        public bool HasDates { get; set; }
+        public string Date { get; set; }
 
         public CustomError(string message)
         {
@@ -28,6 +30,15 @@ namespace Despegar.Core.Business.CustomErrors
             this.Message = message;
             this.Code = code;
             this.Method = method;
+        }
+
+        public CustomError(string message, string code, string method, bool hasDates, string date)
+        {
+            this.Message = message;
+            this.Code = code;
+            this.Method = method;
+            this.HasDates = hasDates;
+            this.Date = date;
         }
     }
 }

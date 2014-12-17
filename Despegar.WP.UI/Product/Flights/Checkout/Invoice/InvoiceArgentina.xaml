@@ -28,17 +28,17 @@
             </StackPanel>
             <!-- Razon Social -->
             <StackPanel Visibility="{Binding DataContext.IsFiscalNameRequired, ElementName=InvoiceArgControl, Converter={StaticResource VisibilityConverter}}">
-                <controls:Field x:Uid="Flights_Checkout_Invoice_Arg_fiscal_name" Value="{Binding fiscal_name.CoreValue, Mode=TwoWay}"/>
+                <controls:Field InputType="AlphaNumeric" x:Uid="Flights_Checkout_Invoice_Arg_fiscal_name" Value="{Binding fiscal_name.CoreValue, Mode=TwoWay}"/>
                 <controls:ValidationError ErrorPrefix="Flights_Checkout_Invoice_Arg_fiscal_name" ErrorCode="{Binding fiscal_name.CurrentError}" />
             </StackPanel>
             <!-- CUIT -->
             <StackPanel Visibility="{Binding fiscal_id.required, Converter={StaticResource VisibilityConverter}}">
-                <controls:NumericField x:Uid="Flights_Checkout_Invoice_Arg_fiscal_id" Value="{Binding fiscal_id.CoreValue, Mode=TwoWay}"  />
+                <controls:Field InputType="Numeric" x:Uid="Flights_Checkout_Invoice_Arg_fiscal_id" Value="{Binding fiscal_id.CoreValue, Mode=TwoWay}"  />
                 <controls:ValidationError ErrorPrefix="Flights_Checkout_Invoice_Arg_fiscal_id" ErrorCode="{Binding fiscal_id.CurrentError}" />
             </StackPanel>            
             <!-- Street -->
             <StackPanel Visibility="{Binding address.street.required, Converter={StaticResource VisibilityConverter}}">
-                <controls:Field  x:Uid="Flights_Checkout_Invoice_Arg_Street" Value="{Binding address.street.CoreValue, Mode=TwoWay}"  />
+                <controls:Field InputType="AlphaNumeric"  x:Uid="Flights_Checkout_Invoice_Arg_Street" Value="{Binding address.street.CoreValue, Mode=TwoWay}"  />
                 <controls:ValidationError ErrorPrefix="Flights_Checkout_Invoice_Arg_Street" ErrorCode="{Binding address.street.CurrentError}"/>
             </StackPanel>
 
@@ -56,11 +56,11 @@
                 </Grid.ColumnDefinitions>
                 
                 <!-- Number -->
-                <controls:NumericField  x:Uid="Flights_Checkout_Invoice_Arg_Number" Grid.Column="0" Grid.Row="0"  Value="{Binding address.number.CoreValue, Mode=TwoWay}"  />
+                <controls:Field InputType="Numeric"  x:Uid="Flights_Checkout_Invoice_Arg_Number" Grid.Column="0" Grid.Row="0"  Value="{Binding address.number.CoreValue, Mode=TwoWay}"  />
                 <!-- Floor -->
-                <controls:NumericField x:Uid="Flights_Checkout_Invoice_Arg_Floor" Grid.Column="2" Grid.Row="0"  Value="{Binding address.floor.CoreValue, Mode=TwoWay}"  />
+                <controls:Field InputType="AlphaNumeric" x:Uid="Flights_Checkout_Invoice_Arg_Floor" Grid.Column="2" Grid.Row="0"  Value="{Binding address.floor.CoreValue, Mode=TwoWay}"  />
                 <!-- Dept -->
-                <controls:Field  x:Uid="Flights_Checkout_Invoice_Arg_Department" Grid.Column="4" Grid.Row="0"  Value="{Binding address.department.CoreValue, Mode=TwoWay}"  />
+                <controls:Field InputType="AlphaNumeric" x:Uid="Flights_Checkout_Invoice_Arg_Department" Grid.Column="4" Grid.Row="0"  Value="{Binding address.department.CoreValue, Mode=TwoWay}"  />
 
                 <StackPanel Grid.ColumnSpan="5" Grid.Row="1">
                     <controls:ValidationError ErrorPrefix="Flights_Checkout_Invoice_Arg_Number" ErrorCode="{Binding address.number.CurrentError}" Visibility="{Binding address.number.required, Converter={StaticResource VisibilityConverter}}" />
@@ -79,8 +79,8 @@
                     <ColumnDefinition Width="{StaticResource Block6}" />
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
-                
-                <controls:NumericField Grid.Column="0" Grid.Row="0"  x:Uid="Flights_Checkout_Invoice_Arg_Postal_Code" Value="{Binding address.postal_code.CoreValue, Mode=TwoWay}"  />
+
+                <controls:Field InputType="Numeric" Grid.Column="0" Grid.Row="0"  x:Uid="Flights_Checkout_Invoice_Arg_Postal_Code" Value="{Binding address.postal_code.CoreValue, Mode=TwoWay}"  />
                 <controls:ValidationError Grid.ColumnSpan="2" Grid.Row="1" ErrorPrefix="Flights_Checkout_Invoice_Arg_Postal_Code" ErrorCode="{Binding address.postal_code.CurrentError}" />
             </Grid>
 

@@ -129,22 +129,28 @@ namespace Despegar.Core.Business.Flight.SearchBox
                         if (!CommonValidations())
                             return false;
 
+                        if (DestinationDate < DepartureDate)
+                        {
+                            SearchErrors = new CustomError("fecha partida menor a llegada.", "FLIGHT_SEARCH_DESTINATIONDATE_SMALLER_THAN_DEPARTURE_ERROR_MESSAGE", "isValid");
+                            return false;
+                        }
+
                         if (DepartureDate < DateTime.Today)
                         {
                             // Cannot fly in the past.
-                            SearchErrors = new CustomError("Tienes que seleccionar un día más grande al de hoy para la fecha de salida.", "FLIGTH_SEARCH_DEPARTUREDATE_SMALLER_THAN_TODAY_ERROR_MESSAGE", "isValid");
+                            SearchErrors = new CustomError("Tienes que seleccionar un día más grande al de hoy para la fecha de salida.", "FLIGHT_SEARCH_DEPARTUREDATE_SMALLER_THAN_TODAY_ERROR_MESSAGE", "isValid");
                             return false;
                         }
 
                         if (DestinationDate < DateTime.Today) {
                             // Cannot fly in the past.
-                            SearchErrors = new CustomError("Fecha hasta tiene que ser mayor a la de hoy.", "FLIGTH_SEARCH_DESTINATIONDATE_SMALLER_THAN_TODAY_ERROR_MESSAGE", "isValid");
+                            SearchErrors = new CustomError("Fecha tiene que ser mayor a la de hoy.", "FLIGHT_SEARCH_DESTINATIONDATE_SMALLER_THAN_TODAY_ERROR_MESSAGE", "isValid");
                             return false;
                         }
 
                         if (DateTime.Today.AddDays(329.0) < DestinationDate)
                         {
-                            SearchErrors = new CustomError("La fecha hasta no puede ser superior a la fecha " + DateTime.Today.AddDays(329.0).ToString("dd-MM-yyyy"), "FLIGTH_SEARCH_DESTINATIONDATE_GREATER_THAN_TODAY_ERROR_MESSAGE", "isValid");
+                            SearchErrors = new CustomError("La fecha no puede ser superior a la fecha ", "FLIGHT_SEARCH_DESTINATIONDATE_GREATER_THAN_MAXDAY_ERROR_MESSAGE", "isValid", true, DateTime.Today.AddDays(329.0).ToString("dd-MM-yyyy"));
                             return false;
                         }
                         break;
@@ -158,7 +164,7 @@ namespace Despegar.Core.Business.Flight.SearchBox
                         if (DepartureDate < DateTime.Today)
                         {
                             // Cannot fly in the past.
-                            SearchErrors = new CustomError("Fecha desde tiene que ser mayor a la de hoy.", "FLIGTH_SEARCH_DEPARTUREDATE_SMALLER_THAN_TODAY_ERROR_MESSAGE", "isValid");
+                            SearchErrors = new CustomError("Fecha desde tiene que ser mayor a la de hoy.", "FLIGHT_SEARCH_DEPARTUREDATE_SMALLER_THAN_TODAY_ERROR_MESSAGE", "isValid");
                             return false;
                         }
 
@@ -168,7 +174,7 @@ namespace Despegar.Core.Business.Flight.SearchBox
                         if (MultipleSegments.Count > MAX_MULTIPLE_SEGMENTS)
                         {
                             // Maximum exceeded
-                            SearchErrors = new CustomError("Cantidad de segmentos máximo excedido.", "FLIGTH_SEARCH_DEPARTUREDATE_SMALLER_THAN_TODAY_ERROR_MESSAGE", "isValid");
+                            SearchErrors = new CustomError("Cantidad de segmentos máximo excedido.", "FLIGHT_SEARCH_SEGMENT_MAX_ERROR_MESSAGE", "isValid");
                             return false;
                         }
 
@@ -177,14 +183,14 @@ namespace Despegar.Core.Business.Flight.SearchBox
                             if (segment.DepartureDate < DateTime.Today)
                             {
                                 // Cannot fly in the past.
-                                SearchErrors = new CustomError("Fecha desde tiene que ser mayor a la de hoy.", "FLIGTH_SEARCH_SEGMENT_DAY_SMALLER_THAN_TODAY_ERROR_MESSAGE", "isValid");
+                                SearchErrors = new CustomError("Fecha desde tiene que ser mayor a la de hoy.", "FLIGHT_SEARCH_DEPARTUREDATE_SMALLER_THAN_TODAY_ERROR_MESSAGE", "isValid");
                                 return false;
                             }
 
                             if (String.IsNullOrEmpty(segment.AirportOrigin) || String.IsNullOrEmpty(segment.AirportDestination))
                             {
                                 // No destinations
-                                SearchErrors = new CustomError("Seleccione destino para el segmento.", "FLIGTH_SEARCH_AIRPORT_NO_SELECTED_ERROR_MESSAGE", "isValid");
+                                SearchErrors = new CustomError("Seleccione destino para el segmento.", "FLIGHT_SEARCH_AIRPORT_NO_SELECTED_ERROR_MESSAGE", "isValid");
                                 return false;
                             }
                         }
@@ -197,23 +203,30 @@ namespace Despegar.Core.Business.Flight.SearchBox
 
         private bool CommonValidations() 
         {
-            if (String.IsNullOrEmpty(OriginFlight) || String.IsNullOrEmpty(DestinationFlight))
+            if (String.IsNullOrEmpty(OriginFlight))
+            {
+                // No origin
+                SearchErrors = new CustomError("Debe que seleccionar origen.", "FLIGHT_SEARCH_NO_ORIGIN_ERROR_MESSAGE", "CommonValidations");
+                return false;
+            }
+
+            if (String.IsNullOrEmpty(DestinationFlight))
             {
                 // No destinations
-                SearchErrors = new CustomError("Debe que seleccionar destino.", "FLIGTH_SEARCH_NO_DESTINY_ERROR_MESSAGE", "CommonValidations");
+                SearchErrors = new CustomError("Debe que seleccionar destino.", "FLIGHT_SEARCH_NO_DESTINY_ERROR_MESSAGE", "CommonValidations");
                 return false;
             }
 
             if (AdultsInFlights <= 0)
             {
-                SearchErrors = new CustomError("Tiene que haber al menos un adulto.", "FLIGTH_SEARCH_MIN_ADULTS_ERROR_MESSAGE", "CommonValidations");
+                SearchErrors = new CustomError("Tiene que haber al menos un adulto.", "FLIGHT_SEARCH_MIN_ADULTS_ERROR_MESSAGE", "CommonValidations");
                 // Adult obligatory
                 return false;
             }
 
             if (AdultsInFlights < InfantsInFlights)
             {
-                SearchErrors = new CustomError("Tiene que haber un adulto por cada infante.", "FLIGTH_SEARCH_ADULT_INFANT_MATCH_ERROR_MESSAGE", "CommonValidations");
+                SearchErrors = new CustomError("Tiene que haber un adulto por cada infante.", "FLIGHT_SEARCH_ADULT_INFANT_MATCH_ERROR_MESSAGE", "CommonValidations");
                 // An adult foreach infant
                 return false;
             }
