@@ -1,5 +1,4 @@
 ﻿using Despegar.Core.Business;
-using Despegar.Core.Business.Culture;
 using Despegar.Core.Connector;
 using Despegar.Core.IService;
 using Despegar.Core.Log;
@@ -45,6 +44,11 @@ namespace Despegar.Core.Service
         public string GetLanguage() 
         { 
             return IsDECOLAR ? "PT" : "ES"; 
+        }
+
+        public string GetUOW()
+        {
+            return uow;
         }
 
         /// <summary>
@@ -143,6 +147,11 @@ namespace Despegar.Core.Service
         {
             return new CommonServices(this);
         }
+
+        public ICouponsService GetCouponsService()
+        {
+            return new CouponService(this);
+        }
         #endregion
 
         #region ** Core private **
@@ -161,6 +170,6 @@ namespace Despegar.Core.Service
         }
 
         #endregion
-    
+        
     }
 }

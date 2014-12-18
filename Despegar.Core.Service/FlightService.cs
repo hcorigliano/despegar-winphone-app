@@ -97,10 +97,6 @@ namespace Despegar.Core.Service
         {
             string serviceUrl = ServiceURL.GetServiceURL(ServiceKey.FlightsBookingFields);
             IConnector connector = context.GetServiceConnector(ServiceKey.FlightsBookingFields);
-            //#if DEBUG
-            //serviceUrl += "&test=test";
-            //#endif
-
 
             return await connector.PostAsync<BookingFields>(serviceUrl, bookingFieldPost);
         }

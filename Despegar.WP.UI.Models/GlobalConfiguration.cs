@@ -16,6 +16,7 @@ namespace Despegar.WP.UI.Model
         //private IUPAService upaService;
         public static string Site { get { return CoreContext.GetSite(); } }
         public static string Language { get { return CoreContext.GetLanguage();} }
+        public static string UPAId { get; set; }
    
         /// <summary>
         /// Initializes the CoreContext object and configures it
@@ -66,7 +67,13 @@ namespace Despegar.WP.UI.Model
         public static async void LoadUPA()
         {
             IUPAService upaService = CoreContext.GetUpaService();
-            UpaField upaField = await upaService.GetUPA();
+            var field = await upaService.GetUPA();
+
+            if (field != null)
+                UPAId = field.id;
+            else
+                UPAId = null;
         }
+
     }
 }

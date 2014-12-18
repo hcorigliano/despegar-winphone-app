@@ -741,6 +741,12 @@
   <data name="Flights_Search_ERROR_SEARCH_INVALID_TITLE" xml:space="preserve">
     <value>Búsqueda de Vuelos</value>
   </data>
+  <data name="Flights_Checkout_Card_Data_Coupon.Label" xml:space="preserve">
+    <value>Código de referencia</value>
+  </data>
+  <data name="Flights_Checkout_Card_Data_Coupon_ERROR_INVALID" xml:space="preserve">
+    <value>El código ingresado no es válido</value>
+  </data>
   <data name="Flights_Checkout_Card_Expiration_ERROR_INVALID_DATE" xml:space="preserve">
     <value>Por favor, fechas está fuera de rango</value>
   </data>
@@ -816,5 +822,14 @@ La reserva no ha sido generada y no se le cobrará ningún cargo por la transacc
   </data>
   <data name="Flights_Checkout_Card_Data_Security_Code_ERROR_CODE" xml:space="preserve">
     <value>Verifique el codigo de seguridad</value>
+  </data>
+  <data name="Checkout_Coupons_ERROR_INVALID_VOUCHER" xml:space="preserve">
+    <value>El cupon no existe o es inválido.</value>
+  </data>
+  <data name="Checkout_Coupon_Valid" xml:space="preserve">
+    <value>El cupon es válido. Tiene un descuento del</value>
+  </data>
+  <data name="Flights_Checkout_Card_Data_Coupon.PlaceholderText" xml:space="preserve">
+    <value>Ej: AMX012</value>
   </data>
 </root>

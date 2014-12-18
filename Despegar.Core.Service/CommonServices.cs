@@ -10,7 +10,7 @@ using Despegar.Core.Business;
 
 namespace Despegar.Core.Service
 {
-    class CommonServices : ICommonServices
+    public class CommonServices : ICommonServices
     {
         private CoreContext context;
 

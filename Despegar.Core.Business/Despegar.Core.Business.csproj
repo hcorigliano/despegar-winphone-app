@@ -56,7 +56,8 @@
     <Compile Include="Configuration\Site.cs" />
     <Compile Include="Configuration\UpaField.cs" />
     <Compile Include="Configuration\UpdateFields.cs" />
-    <Compile Include="Culture\Site.cs" />
+    <Compile Include="Coupons\CouponParameter.cs" />
+    <Compile Include="Coupons\CouponResponse.cs" />
     <Compile Include="Dynamics\DynamicFlightBookingFieldsToPost.cs" />
     <Compile Include="Enums\BookingStatusEnum.cs" />
     <Compile Include="Enums\FlightSearchChildEnum.cs" />

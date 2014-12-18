@@ -119,6 +119,7 @@
     <Compile Include="Common\Converter\StyleConverter.cs" />
     <Compile Include="Common\Converter\VisibilityConverter.cs" />
     <Compile Include="Common\Converter\TimeDurationConverter.cs" />
+    <Compile Include="Common\Converter\VoucherSuccessTextConverter.cs" />
     <Compile Include="Common\IPopupContent.cs" />
     <Compile Include="Common\Navigator.cs" />
     <Compile Include="Common\OldPagesManager.cs" />

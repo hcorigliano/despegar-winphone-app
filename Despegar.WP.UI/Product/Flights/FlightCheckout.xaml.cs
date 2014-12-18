@@ -63,6 +63,7 @@ namespace Despegar.WP.UI.Product.Flights
                 GlobalConfiguration.CoreContext.GetFlightService(),
                 GlobalConfiguration.CoreContext.GetCommonService(), 
                 GlobalConfiguration.CoreContext.GetConfigurationService(), 
+                GlobalConfiguration.CoreContext.GetCouponsService(),
                 crossParameters);
 
             ViewModel.PropertyChanged += Checkloading;

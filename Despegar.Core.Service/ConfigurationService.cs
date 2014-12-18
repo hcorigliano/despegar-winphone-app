@@ -10,7 +10,7 @@ using Despegar.Core.IService;
 
 namespace Despegar.Core.Service
 {
-    class ConfigurationService : IConfigurationService
+    public class ConfigurationService : IConfigurationService
     {
         private CoreContext context;
 
