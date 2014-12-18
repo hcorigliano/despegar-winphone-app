@@ -1,4 +1,5 @@
 ﻿using Despegar.Core.Business;
+using Despegar.Core.Business.Configuration;
 
 namespace Despegar.Core.IService
 {
@@ -76,5 +77,18 @@ namespace Despegar.Core.IService
         /// </summary>
         /// <param name="Site">Example: AR,CO,MX etc. </param>
         void SetSite(string siteCode);
+
+
+        /// <summary>
+        /// Returns configuaration pre-load from mapi.
+        /// </summary>
+        /// <returns></returns>
+        Configuration GetConfiguration();
+
+        /// <summary>
+        /// load the configuration from mapi
+        /// </summary>
+        /// <param name="value"></param>
+        void SetConfiguration(Configuration value);
     }
 }

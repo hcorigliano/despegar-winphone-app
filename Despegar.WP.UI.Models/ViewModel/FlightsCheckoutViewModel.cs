@@ -487,16 +487,29 @@ namespace Despegar.WP.UI.Model.ViewModel
                     //Please uncomment the case that you are to use.
 
                     //case BookingStatusEnum.booking_failed:
-                    //case BookingStatusEnum.fix_credit_card:
+                        case BookingStatusEnum.fix_credit_card:
+                            {
+                                OnViewModelError("ONLINE_PAYMENT_ERROR_FIX_CREDIT_CARD", "CARD");
+                                break;
+                            }
                     case BookingStatusEnum.new_credit_card:
                         {
-                            this.selectedCard.hasError = true;
-                            this.selectedCard.CustomErrorType = BookingStatusEnum.new_credit_card.ToString();
-                            ClearCreditCardFields();
-                            //GotFocusOnCreditCardData();
+                                //this.selectedCard.card = new Card();
+                                //this.selectedCard.hasError = true;
+                                //this.selectedCard.CustomErrorType = BookingStatusEnum.new_credit_card.ToString().ToUpper();
+                                this.CoreBookingFields.form.payment.card.number.CoreValue = String.Empty;
+                                this.CoreBookingFields.form.payment.card.expiration.CoreValue = String.Empty;
+                                this.CoreBookingFields.form.payment.card.security_code.CoreValue = String.Empty;
+
+                                OnViewModelError("ONLINE_PAYMENT_ERROR_NEW_CREDIT_CARD", "CARD");
+                                break;
+                            }
+                        case BookingStatusEnum.payment_failed:
+                        case BookingStatusEnum.risk_evaluation_failed:
+                            {
+                                OnViewModelError("ONLINE_PAYMENT_FAILED", "CARD");
                             break;
                         }
-                    //case BookingStatusEnum.payment_failed:
                     case BookingStatusEnum.risk_review:
                         {
                             EventHandler RiskHandler = ShowRiskReview;
@@ -510,6 +523,16 @@ namespace Despegar.WP.UI.Model.ViewModel
                     default:
                         break;
                 }
+
+                catch(Exception e)
+                    var test = e;
+
+                    if (e.Message.Contains("HTTP Error code 404 (NotFound)"))
+                        OnViewModelError("COMPLETE_BOOKING_CONECTION_FAILED");
+                    else
+                    {
+                        OnViewModelError("COMPLETE_BOOKING_BOOKING_FAILED");
+                    }
 
                 this.IsLoading = false;
             }

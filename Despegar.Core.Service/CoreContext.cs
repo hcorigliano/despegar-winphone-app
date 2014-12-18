@@ -6,6 +6,7 @@ using System.Linq;
 using System;
 using System.Collections.Generic;
 using Windows.Storage;
+using Despegar.Core.Business.Configuration;
 
 namespace Despegar.Core.Service
 {
@@ -33,6 +34,8 @@ namespace Despegar.Core.Service
         // Connectors
         private MapiConnector mapiConnector;
         private Apiv1Connector apiv1Connector;
+
+        private Configuration configuration;
 
         #region ** Public Interface **
 
@@ -151,6 +154,18 @@ namespace Despegar.Core.Service
         public ICouponsService GetCouponsService()
         {
             return new CouponService(this);
+        }
+
+
+        public Configuration GetConfiguration()
+        {
+            return configuration;
+        }
+
+
+        public void SetConfiguration(Configuration conf)
+        {
+            configuration = conf;
         }
         #endregion
 
