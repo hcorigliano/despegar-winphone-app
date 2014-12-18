@@ -428,21 +428,30 @@ namespace Despegar.WP.UI.Model.ViewModel
                                 OnViewModelError("BOOKING_FAILED", CrossParameters.BookingResponse.checkout_id);
                                 break;
                             }
-                        //case BookingStatusEnum.fix_credit_card:
+                        case BookingStatusEnum.fix_credit_card:
+                            {
+                                OnViewModelError("ONLINE_PAYMENT_ERROR_FIX_CREDIT_CARD", "CARD");
+                                break;
+                            }
                         case BookingStatusEnum.new_credit_card:
                             {
-                                this.selectedCard.card = new Card();
-                                this.selectedCard.hasError = true;
-                                this.selectedCard.CustomErrorType = BookingStatusEnum.new_credit_card.ToString().ToUpper();
+                                //this.selectedCard.card = new Card();
+                                //this.selectedCard.hasError = true;
+                                //this.selectedCard.CustomErrorType = BookingStatusEnum.new_credit_card.ToString().ToUpper();
                                 this.CoreBookingFields.form.payment.card.number.CoreValue = String.Empty;
                                 this.CoreBookingFields.form.payment.card.expiration.CoreValue = String.Empty;
                                 this.CoreBookingFields.form.payment.card.security_code.CoreValue = String.Empty;
 
                                 OnPropertyChanged("SelectedCard");
-                                OnViewModelError("FORM_ERROR", "CARD");
+                                OnViewModelError("ONLINE_PAYMENT_ERROR_NEW_CREDIT_CARD", "CARD");
                                 break;
                             }
-                        //case BookingStatusEnum.payment_failed:
+                        case BookingStatusEnum.payment_failed:
+                        case BookingStatusEnum.risk_evaluation_failed:
+                            {
+                                OnViewModelError("ONLINE_PAYMENT_FAILED", "CARD");
+                                break;
+                            }
                         case BookingStatusEnum.risk_review:
                             {
                                 EventHandler RiskHandler = ShowRiskReview;

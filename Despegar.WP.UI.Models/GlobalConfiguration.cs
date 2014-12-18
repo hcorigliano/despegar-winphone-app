@@ -16,7 +16,7 @@ namespace Despegar.WP.UI.Model
         //private IUPAService upaService;
         public static string Site { get { return CoreContext.GetSite(); } }
         public static string Language { get { return CoreContext.GetLanguage();} }
-   
+
         /// <summary>
         /// Initializes the CoreContext object and configures it
         /// This method should be called on app Init
@@ -36,8 +36,6 @@ namespace Despegar.WP.UI.Model
 
             //TODO : (1)
             //CoreContext.SetSite(SiteCode.Argentina);
-
-
 
             // Enable Verbose logging
             #if DEBUG

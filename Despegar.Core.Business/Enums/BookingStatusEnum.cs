@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Despegar.Core.Business.Enums
 {
-    public enum  BookingStatusEnum
+    public enum BookingStatusEnum
     {
         checkout_successful,
         booking_failed,
@@ -14,6 +14,7 @@ namespace Despegar.Core.Business.Enums
         payment_failed,
         new_credit_card,
         risk_review,
-        BookingCustomError
+        BookingCustomError,
+        risk_evaluation_failed
     }
 }

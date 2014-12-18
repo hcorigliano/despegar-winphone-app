@@ -7,6 +7,7 @@ using System.Linq;
 using System;
 using System.Collections.Generic;
 using Windows.Storage;
+using Despegar.Core.Business.Configuration;
 
 namespace Despegar.Core.Service
 {
@@ -34,6 +35,8 @@ namespace Despegar.Core.Service
         // Connectors
         private MapiConnector mapiConnector;
         private Apiv1Connector apiv1Connector;
+
+        private Configuration configuration;
 
         #region ** Public Interface **
 
@@ -143,6 +146,19 @@ namespace Despegar.Core.Service
         {
             return new CommonServices(this);
         }
+
+
+
+        public Configuration GetConfiguration()
+        {
+            return configuration;
+        }
+
+
+        public void SetConfiguration(Configuration conf)
+        {
+            configuration = conf;
+        }
         #endregion
 
         #region ** Core private **
@@ -161,6 +177,6 @@ namespace Despegar.Core.Service
         }
 
         #endregion
-    
+
     }
 }

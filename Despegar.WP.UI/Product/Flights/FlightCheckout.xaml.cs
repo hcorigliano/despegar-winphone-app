@@ -1,4 +1,5 @@
-﻿using Despegar.Core.Business.Dynamics;
+﻿using Despegar.Core.Business.Configuration;
+using Despegar.Core.Business.Dynamics;
 using Despegar.WP.UI.Common;
 using Despegar.WP.UI.Controls;
 using Despegar.WP.UI.Model;
@@ -15,6 +16,7 @@ using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
+using System.Linq;
 
 namespace Despegar.WP.UI.Product.Flights
 {
@@ -88,6 +90,7 @@ namespace Despegar.WP.UI.Product.Flights
         {
             ResourceLoader manager = new ResourceLoader();
             MessageDialog dialog;
+            string pageID;
 
             switch (e.ErrorCode)
             {
@@ -125,8 +128,56 @@ namespace Despegar.WP.UI.Product.Flights
                     dialog.ShowAsync();
                     this.navigationHelper.GoBack();
                     break;
-                    
+               case "ONLINE_PAYMENT_ERROR_NEW_CREDIT_CARD":
+                    dialog = new MessageDialog(manager.GetString("Flights_Checkout_Card_Data_Card_ERROR_NEW_CREDIT_CARD"), manager.GetString("Flights_Checkout_ERROR_FORM_ERROR_TITLE"));
+                    dialog.ShowAsync();
+
+                    // Go to Pivot with errors
+                    pageID = (string)e.Parameter;
+                    MainPivot.SelectedIndex = GetSectionIndex(pageID);
+                    break;
+
+               case "ONLINE_PAYMENT_ERROR_FIX_CREDIT_CARD":
+                    {
+                        dialog = new MessageDialog(manager.GetString("Flights_Checkout_Card_Data_Card_ERROR_ONLINE_PAYMENT_ERROR_FIX_CREDIT_CARD"), manager.GetString("Flights_Checkout_ERROR_FORM_ERROR_TITLE"));
+                        dialog.ShowAsync();
+                        pageID = (string)e.Parameter;
+                        MainPivot.SelectedIndex = GetSectionIndex(pageID);
+                    }
+                    break;
+
+               case "ONLINE_PAYMENT_FAILED":
+                    {
+                        //string ticketid = e.Parameter as string;
+                        //ticketid = (ticketid != null) ? ticketid : String.Empty;
+
+                        string phone = GetContactPhone();
+                        string phrase = manager.GetString("Flights_Checkout_Card_Data_Card_ERROR_OP_PAYMENT_FAILED");
+                        dialog = new MessageDialog(String.Format(phrase, phone), manager.GetString("Flights_Checkout_ERROR_FORM_ERROR_TITLE"));
+                        dialog.ShowAsync();
+                        break;
+                    }
+
                 // TODO: Handle other errors
+            }
+        }
+
+        private string GetContactPhone()
+        {
+            try
+            {
+
+                Configuration conf = GlobalConfiguration.CoreContext.GetConfiguration();
+
+                if (conf == null) return String.Empty;
+                string countrySelected = GlobalConfiguration.Site;
+                string phone = (conf.sites.FirstOrDefault(si => si.code == countrySelected) as Site).contact.phone;
+
+                return phone;
+            }catch(Exception ex)
+            {
+                //TODO add logs
+                return String.Empty;
             }
         }
 
