@@ -416,7 +416,7 @@ namespace Despegar.WP.UI.Model.ViewModel
         {
 #if DEBUG
             // Fill Test data
-            FillBookingFields(CoreBookingFields);
+            //FillBookingFields(CoreBookingFields);
 #endif
 
             if (!IsTermsAndConditionsAccepted)
