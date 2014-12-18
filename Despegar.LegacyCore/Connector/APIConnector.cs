@@ -34,7 +34,7 @@ namespace Despegar.LegacyCore.Connector
             Logger.Info("[connector:init] APIConnector Instance created");
 
             x_uow = String.Format("WP8-{0}", ApplicationConfig.Instance.DeviceId);
-            Channel = ApplicationConfig.Instance.Country != "" ? ApplicationConfig.Instance.Country : "_default_";
+            Channel = ApplicationConfig.Instance.Country != "" ? ApplicationConfig.Instance.Country :  "_default_";
 
             HttpClientHandler handler = new HttpClientHandler();
             if (handler.SupportsAutomaticDecompression)

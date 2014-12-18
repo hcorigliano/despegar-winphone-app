@@ -31,11 +31,11 @@ namespace Despegar.WP.UI.Common.Converter
                     b.Inlines.Add(new Run() { Text = loader.GetString("Common_Pays_Without_Interest") });
                     text.Inlines.Add(b);
 
-                    text.Inlines.Add(new Run() { Text = " " + loader.GetString("Common_Pays_With") });
+                    text.Inlines.Add(new Run() { Text = " " + loader.GetString("Common_Payment_With") });
                 }
                 else 
                 {
-                    text.Inlines.Add(new Run() { Text = "6 " + loader.GetString("Common_Pay_With") });
+                    text.Inlines.Add(new Run() { Text =  paymentDetails.installments.quantity + " " + loader.GetString("Common_Pays_With") });
                 }
             }           
 

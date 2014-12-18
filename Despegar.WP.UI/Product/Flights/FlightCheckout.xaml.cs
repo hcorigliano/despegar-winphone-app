@@ -158,6 +158,13 @@ namespace Despegar.WP.UI.Product.Flights
                         break;
                     }
 
+                case "COMPLETE_BOOKING_BOOKING_FAILED":
+                    dialog = new MessageDialog(manager.GetString("Flights_Search_ERROR_BOOKING_FAILED"), manager.GetString("Flights_Search_ERROR_SEARCH_FAILED_TITLE"));
+                    dialog.ShowAsync();
+                    this.navigationHelper.GoBack();
+                    this.navigationHelper.GoBack();
+                    break;
+                    
                 // TODO: Handle other errors
             }
         }

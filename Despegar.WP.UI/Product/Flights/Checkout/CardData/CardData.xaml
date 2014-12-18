@@ -54,7 +54,7 @@
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
 
-                <!-- Card Number -->
+                <!-- Card Security Number -->
                 <StackPanel Grid.Column="0"  Visibility="{Binding card.security_code.required, Converter={StaticResource VisibilityConverter}}">
                     <controls:Field InputType="Numeric" x:Uid="Flights_Checkout_Card_Data_Security_Code" Value="{Binding card.security_code.CoreValue, Mode=TwoWay}"  />
                 </StackPanel>
