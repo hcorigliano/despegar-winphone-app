@@ -22,6 +22,7 @@ namespace Despegar.Core.Business.Flight.BookingFields
             bool cardValid = true;
             bool invoiceValid = true;
             bool installmentValid = true;
+            bool voucherValid = true;
 
             sectionID = String.Empty;
 
@@ -129,6 +130,10 @@ namespace Despegar.Core.Business.Flight.BookingFields
                     invoiceValid = false; 
             }
 
+            // Voucher
+            if (!form.Voucher.IsValid)
+                voucherValid = false;
+
             if (!passengerValid)
             {
                 sectionID = "PASSENGERS";
@@ -139,7 +144,7 @@ namespace Despegar.Core.Business.Flight.BookingFields
                 sectionID = "CONTACT";
                 return false;
             }
-            if (!cardValid)
+            if (!cardValid || !voucherValid)
             {
                 sectionID = "CARD";
                 return false;

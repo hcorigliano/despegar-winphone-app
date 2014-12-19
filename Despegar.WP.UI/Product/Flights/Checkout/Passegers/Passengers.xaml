@@ -42,12 +42,12 @@
                         <!-- Fields -->
                         <StackPanel Grid.Row="1">
                             <!-- First Name -->
-                            <StackPanel Visibility="{Binding first_name.required, Converter={StaticResource VisibilityConverter}}">
+                            <StackPanel Visibility="{Binding first_name.required, Converter={StaticResource VisibilityConverter}, FallbackValue=Collapsed}">
                                 <controls:Field InputType="TextOnly" x:Uid="Flights_Checkout_Passenger_First_Name" Value="{Binding first_name.CoreValue, Mode=TwoWay}"  />
                                 <controls:ValidationError ErrorPrefix="Flights_Checkout_Passenger_First_Name" ErrorCode="{Binding first_name.CurrentError}" />
                             </StackPanel>
                             <!-- Last Name -->
-                            <StackPanel Visibility="{Binding last_name.required, Converter={StaticResource VisibilityConverter}}">
+                            <StackPanel Visibility="{Binding last_name.required, Converter={StaticResource VisibilityConverter}, FallbackValue=Collapsed}">
                                 <controls:Field InputType="TextOnly"  x:Uid="Flights_Checkout_Passenger_Last_Name" Value="{Binding last_name.CoreValue, Mode=TwoWay}" />
                                 <controls:ValidationError ErrorPrefix="Flights_Checkout_Passenger_Last_Name" ErrorCode="{Binding last_name.CurrentError}" />
                             </StackPanel>

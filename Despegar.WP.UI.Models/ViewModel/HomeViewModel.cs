@@ -35,6 +35,10 @@ namespace Despegar.WP.UI.Model
         {
             IsLoading = true;
             Configuration configuration = await configurationService.GetConfigurations();
+            
+            // It saves the configutation.
+            GlobalConfiguration.CoreContext.SetConfiguration(configuration);
+
             var Site = configuration.sites.FirstOrDefault(s => s.code == country);
             IsLoading = false;
 
