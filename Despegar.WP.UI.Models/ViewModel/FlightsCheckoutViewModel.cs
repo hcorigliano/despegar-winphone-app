@@ -512,14 +512,17 @@ namespace Despegar.WP.UI.Model.ViewModel
 
                     bookingData = await DynamicFlightBookingFieldsToPost.ToDynamic(this.CoreBookingFields);
 
+                    // Buy
                     CrossParameters.PriceDetail = PriceDetailsFormatted;
                     CrossParameters.BookingResponse = await flightService.CompleteBooking(bookingData, CoreBookingFields.id);
 
-                    //BookingCompletePostResponse response = await flightService.CompleteBooking(form, "214ecbd4-7964-11e4-8980-fa163ec96567");
-                    //TODO : Go to Tks or Risk Questions}
-                    //if (CrossParameters.BookingResponse.booking_status == "checkout_successful")            
-                    //navigator.GoTo(ViewModelPages.FlightsThanks, CrossParameters);     
+                    if (CrossParameters.BookingResponse.Error != null) 
+                    { 
+                        // API Error ocurred, Check CODE and inform the user
+                        OnViewModelError("API_ERROR", CrossParameters.BookingResponse.Error.ErrorCode);
+                    }
 
+                    // Booking processed, check the status of Booking request
                     switch (GetStatus(CrossParameters.BookingResponse.booking_status))
                     {
                         case BookingStatusEnum.checkout_successful:
