@@ -7,6 +7,7 @@ using System.Xml;
 using System.Xml.Linq;
 using Windows.ApplicationModel;
 using Windows.Security.ExchangeActiveSyncProvisioning;
+using Windows.Storage;
 
 
 namespace Despegar.WP.UI.Model
@@ -49,7 +50,12 @@ namespace Despegar.WP.UI.Model
 
         public string GetUOW()
         {
-            return string.Format("Brand:{0} Platform:{1} AppVersion:{2} ",appBrand,deviceType,appVersion);
+            var roamingSettings = ApplicationData.Current.RoamingSettings;
+            if (roamingSettings.Values["UUID"] == null)
+            {
+                roamingSettings.Values["UUID"] = System.Guid.NewGuid().ToString().Replace("-", "");
+            }
+            return "WindowsPhone-" + appBrand + "-" + appVersion + "-" + roamingSettings.Values["UUID"].ToString() ;
         }
     }
 } 
