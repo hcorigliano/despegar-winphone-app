@@ -42,7 +42,12 @@ namespace Despegar.WP.UI
             
 
             // Developer Tools
-            this.CheckDeveloperTools();           
+            this.CheckDeveloperTools();  
+         
+            //Google Analytics
+            GoogleAnalyticContainer ga = new GoogleAnalyticContainer();
+            ga.Tracker = GoogleAnalytics.EasyTracker.GetTracker();
+            ga.SendView("Home");
         }
 
         private void Checkloading(object sender, PropertyChangedEventArgs e)
