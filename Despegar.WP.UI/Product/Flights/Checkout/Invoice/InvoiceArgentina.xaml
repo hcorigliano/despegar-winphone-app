@@ -58,7 +58,7 @@
                 <!-- Number -->
                 <controls:Field InputType="Numeric"  x:Uid="Flights_Checkout_Invoice_Arg_Number" Grid.Column="0" Grid.Row="0"  Value="{Binding address.number.CoreValue, Mode=TwoWay}"  />
                 <!-- Floor -->
-                <controls:Field InputType="AlphaNumeric" x:Uid="Flights_Checkout_Invoice_Arg_Floor" Grid.Column="2" Grid.Row="0"  Value="{Binding address.floor.CoreValue, Mode=TwoWay}"  />
+                <controls:Field InputType="Numeric" x:Uid="Flights_Checkout_Invoice_Arg_Floor" Grid.Column="2" Grid.Row="0"  Value="{Binding address.floor.CoreValue, Mode=TwoWay}"  />
                 <!-- Dept -->
                 <controls:Field InputType="AlphaNumeric" x:Uid="Flights_Checkout_Invoice_Arg_Department" Grid.Column="4" Grid.Row="0"  Value="{Binding address.department.CoreValue, Mode=TwoWay}"  />
 

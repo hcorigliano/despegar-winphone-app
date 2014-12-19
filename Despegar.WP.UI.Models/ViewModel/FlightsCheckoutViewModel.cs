@@ -114,7 +114,7 @@ namespace Despegar.WP.UI.Model.ViewModel
                     payments.installment.complete_card_code.CoreValue = selectedCard.card.code;
                 }
 
-                OnPropertyChanged(); // TODO: no esta actualizando el ComboBox de Tarjeta
+                OnPropertyChanged(); 
             }
         }
 
@@ -177,10 +177,13 @@ namespace Despegar.WP.UI.Model.ViewModel
             // Common
 
             // Passengers
-            foreach (var passanger in CoreBookingFields.form.passengers)
+            foreach (Passenger passanger in CoreBookingFields.form.passengers)
             {
-                passanger.document.type.SetDefaultValue();
-                passanger.gender.SetDefaultValue();
+                if (passanger.document != null)
+                    passanger.document.type.SetDefaultValue();
+
+                if (passanger.gender != null)
+                    passanger.gender.SetDefaultValue();
             }
 
             // Card data
@@ -482,24 +485,24 @@ namespace Despegar.WP.UI.Model.ViewModel
                     switch (GetStatus(CrossParameters.BookingResponse.booking_status))
                     {
                         case BookingStatusEnum.checkout_successful:
-                            {
+                            
                                 navigator.GoTo(ViewModelPages.FlightsThanks, CrossParameters);
                                 break;
-                            }
+                            
                         //Please uncomment the case that you are to use.
 
                         case BookingStatusEnum.booking_failed:
-                            {
+                            
                                 OnViewModelError("BOOKING_FAILED", CrossParameters.BookingResponse.checkout_id);
                                 break;
-                            }
+                            
                         case BookingStatusEnum.fix_credit_card:
-                            {
+                            
                                 OnViewModelError("ONLINE_PAYMENT_ERROR_FIX_CREDIT_CARD", "CARD");
                                 break;
-                            }
+                            
                         case BookingStatusEnum.new_credit_card:
-                            {
+                            
                                 //this.selectedCard.card = new Card();
                                 //this.selectedCard.hasError = true;
                                 //this.selectedCard.CustomErrorType = BookingStatusEnum.new_credit_card.ToString().ToUpper();
@@ -510,22 +513,22 @@ namespace Despegar.WP.UI.Model.ViewModel
                                 OnPropertyChanged("SelectedCard");
                                 OnViewModelError("ONLINE_PAYMENT_ERROR_NEW_CREDIT_CARD", "CARD");
                                 break;
-                            }
+                            
                         case BookingStatusEnum.payment_failed:
                         case BookingStatusEnum.risk_evaluation_failed:
-                            {
+                            
                                 OnViewModelError("ONLINE_PAYMENT_FAILED", "CARD");
                                 break;
-                            }
+                            
                         case BookingStatusEnum.risk_review:
-                            {
+                            
                                 EventHandler RiskHandler = ShowRiskReview;
                                 if (RiskHandler != null)
                                 {
                                     RiskHandler(this, null);
                                 }
                                 break;
-                            }
+                            
                         //case BookingStatusEnum.BookingCustomError:
                         default:
                             break;
