@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Despegar.Core.Business.Flight.BookingCompletePost
 {
-    public class RiskQuestion
+    public class RiskAnswer
     {
         public string question_id { get; set; }
         public string answer_id { get; set; }

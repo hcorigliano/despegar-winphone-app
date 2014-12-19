@@ -2,6 +2,7 @@
 using Despegar.Core.Business.Configuration;
 using Despegar.Core.Business.Dynamics;
 using Despegar.Core.Business.Enums;
+//using Despegar.Core.Business.Flight.BookingCompletePost;
 using Despegar.Core.Business.Flight.BookingCompletePostResponse;
 using Despegar.Core.Business.Flight.BookingFields;
 using Despegar.Core.IService;
@@ -39,12 +40,12 @@ namespace Despegar.WP.UI.Model.ViewModel
         // Only Invoice Arg fields for now
         public List<CountryFields> Countries { get; set; }
         public List<State> States { get; set; }
-        public List<RiskQuestion> FreeTextQuestions {
+        public List<Despegar.Core.Business.Flight.BookingCompletePostResponse.RiskQuestion> FreeTextQuestions {
             get
             {
                 if(CrossParameters.BookingResponse != null)
                 {
-                    return CrossParameters.BookingResponse.risk_questions.Where(x => x.free_text == "true").ToList();
+                    return CrossParameters.BookingResponse.risk_questions.Where(x => x.free_text == "True").ToList();
                 }
                 else
                 {
@@ -53,11 +54,18 @@ namespace Despegar.WP.UI.Model.ViewModel
             }
         }
 
-        public List<RiskQuestion> ChoiceQuestions
+        public List<Despegar.Core.Business.Flight.BookingCompletePostResponse.RiskQuestion> ChoiceQuestions
         {
             get
             {
-                return CrossParameters.BookingResponse.risk_questions.Where(x => x.free_text == "false").ToList();
+                if(CrossParameters.BookingResponse != null)
+                {
+                    return CrossParameters.BookingResponse.risk_questions.Where(x => x.free_text == "False").ToList();
+                }
+                else
+                {
+                    return null;
+                }
             }
         }
 
@@ -142,6 +150,14 @@ namespace Despegar.WP.UI.Model.ViewModel
 
                 OnPropertyChanged(); // TODO: no esta actualizando el ComboBox de Tarjeta
             }
+        }
+
+        public ICommand SendRiskAnswersCommand
+        {
+            get
+            {
+                return new RelayCommand(() => SendRiskAnswers());
+            } 
         }
 
         public ICommand ValidateAndBuyCommand
@@ -488,6 +504,28 @@ namespace Despegar.WP.UI.Model.ViewModel
             }
         }
 
+        private async void SendRiskAnswers()
+        {
+            List<Despegar.Core.Business.Flight.BookingCompletePost.RiskAnswer> answers = new List<Despegar.Core.Business.Flight.BookingCompletePost.RiskAnswer>();
+            BookingCompletePostResponse BookingResponse = new BookingCompletePostResponse();
+
+            foreach(RiskQuestion question in FreeTextQuestions)
+            {
+                question.risk_answer.question_id = question.id;
+                answers.Add(question.risk_answer);
+            }
+
+            foreach (RiskQuestion question in ChoiceQuestions)
+            {
+                question.risk_answer.question_id = question.id;
+                question.risk_answer.answer_id = question.risk_answer.answer_id;
+                answers.Add(question.risk_answer);
+            }
+
+            BookingResponse = await flightService.CompleteBooking(answers, null);
+
+        }
+        
         private void ClearCreditCardFields()
         {
             this.selectedCard.card = new Card();

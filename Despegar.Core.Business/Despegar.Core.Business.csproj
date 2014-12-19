@@ -81,7 +81,7 @@
     <Compile Include="Flight\BookingCompletePost\Passenger.cs" />
     <Compile Include="Flight\BookingCompletePost\Payment.cs" />
     <Compile Include="Flight\BookingCompletePost\Phone.cs" />
-    <Compile Include="Flight\BookingCompletePost\RiskQuestion.cs" />
+    <Compile Include="Flight\BookingCompletePost\RiskAnswer.cs" />
     <Compile Include="Flight\BookingCompletePost\TypeAndNumber.cs" />
     <Compile Include="Flight\Itineraries\Route.cs" />
     <Compile Include="Flight\SearchBox\FlightMultipleSegment.cs" />

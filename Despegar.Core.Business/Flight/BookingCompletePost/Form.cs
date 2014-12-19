@@ -17,6 +17,6 @@ namespace Despegar.Core.Business.Flight.BookingCompletePost
         public OfflinePayment offline_payment { get; set; }
         public ExternalDebit external_debit { get; set; }
         public string sessionId { get; set; }
-        public List<RiskQuestion> risk_questions { get; set; }
+        public List<RiskAnswer> risk_questions { get; set; }
     }
 }

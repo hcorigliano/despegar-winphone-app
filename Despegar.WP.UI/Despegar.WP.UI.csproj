@@ -149,7 +149,7 @@
     <Compile Include="Product\Flights\Checkout\Passegers\Controls\NationalitySelectionPopup.xaml.cs">
       <DependentUpon>NationalitySelectionPopup.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Product\Flights\Checkout\RiskQuesions\RiskQuestionsPopUp.xaml.cs">
+    <Compile Include="Product\Flights\Checkout\RiskQuestions\RiskQuestionsPopUp.xaml.cs">
       <DependentUpon>RiskQuestionsPopUp.xaml</DependentUpon>
     </Compile>
     <Compile Include="Product\Flights\FlightMultipleEdit.xaml.cs">
@@ -377,7 +377,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Product\Flights\Checkout\RiskQuesions\RiskQuestionsPopUp.xaml">
+    <Page Include="Product\Flights\Checkout\RiskQuestions\RiskQuestionsPopUp.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

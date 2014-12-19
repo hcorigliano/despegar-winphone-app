@@ -1,11 +1,9 @@
-﻿using Despegar.Core.Business.Configuration;
-using Despegar.WP.UI.Common;
+﻿using Despegar.WP.UI.Common;
+using Despegar.WP.UI.Controls;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.IO;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
@@ -18,20 +16,23 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
-namespace Despegar.WP.UI.Product.Flights.Checkout.Passegers.Controls
+// The User Control item template is documented at http://go.microsoft.com/fwlink/?LinkId=234236
+
+namespace Despegar.WP.UI.Product.Flights.Checkout.RiskQuestions
 {
-    public sealed partial class NationalitySelectionPopup : UserControl, IPopupContent
+    public sealed partial class RiskQuestionsPopUp : UserControl, IPopupContent
     {
-        public NationalitySelectionPopup()
+
+        public RiskQuestionsPopUp()
         {
             this.InitializeComponent();
-            NationalityControl.Height = Window.Current.Bounds.Height;
-            NationalityControl.Width = Window.Current.Bounds.Width;
-            
+            mainCanvas.Height = Window.Current.Bounds.Height;
+            mainCanvas.Width = Window.Current.Bounds.Width;
         }
 
         public void Enter()
         {
+            var test = this.DataContext;
             HardwareButtons.BackPressed += HardwareButtons_BackPressed;
             ShowDialogAnimation.Begin();
         }
@@ -52,18 +53,10 @@ namespace Despegar.WP.UI.Product.Flights.Checkout.Passegers.Controls
             if (p != null) { p.IsOpen = false; }
         }
 
-        private void SelectionChangedListBox(object sender, SelectionChangedEventArgs e)
-        {
-            CountryFields countrySelected = (CountryFields)(((ListView)NationalityControl).SelectedItem);
-            ((NationalitySelection)DataContext).NationalityText = countrySelected.name;
-            Leave();
-        }
-
         void HardwareButtons_BackPressed(object sender, BackPressedEventArgs e)
         {
             e.Handled = true;
             Leave();
         }
-
     }
 }
