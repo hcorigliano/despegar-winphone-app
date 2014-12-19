@@ -163,10 +163,10 @@ namespace Despegar.WP.UI
                 case "Flights":
                     ViewModel.NavigateToFlights.Execute(null);
                     break;
-                case "MyDespegar":
+                //case "MyDespegar":
                     //var f= Window.Current.Content as Frame;
                     //f.Navigate(typeof(FlightCheckout), null);
-                    break;
+                    //break;
                 default:
                     var dialog = new MessageDialog("Proximamente estará disponible esta funcionalidad.", "Proximamente");
                     dialog.ShowAsync();
