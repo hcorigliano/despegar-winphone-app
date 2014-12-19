@@ -40,8 +40,6 @@ namespace Despegar.WP.UI.Model
             #if DECOLAR
                 appBrand = "Decolar";            
             #endif
-
-
          }
 
         public string GetClientInfo()

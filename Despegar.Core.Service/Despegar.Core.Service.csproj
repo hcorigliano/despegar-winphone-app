@@ -43,6 +43,10 @@
       <Project>{54c368e1-6a4b-46bd-ba1f-f04b97c45e83}</Project>
       <Name>Despegar.Core.Connector</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Despegar.Core.Exceptions\Despegar.Core.Exceptions.csproj">
+      <Project>{9359897f-8df6-4787-80db-b68ed851088e}</Project>
+      <Name>Despegar.Core.Exceptions</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Despegar.Core.IService\Despegar.Core.IService.csproj">
       <Project>{3c3cdca2-e9fc-4207-b71e-22a1c423d5f8}</Project>
       <Name>Despegar.Core.IService</Name>

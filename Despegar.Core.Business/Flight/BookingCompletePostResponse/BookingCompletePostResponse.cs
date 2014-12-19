@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Despegar.Core.Exceptions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,5 +14,7 @@ namespace Despegar.Core.Business.Flight.BookingCompletePostResponse
         public string checkout_id { get; set; }
         public string booking_status { get; set; }
         public List<RiskQuestion> risk_questions { get; set; }
+
+        public MAPIError Error { get; set; }
     }
 }
