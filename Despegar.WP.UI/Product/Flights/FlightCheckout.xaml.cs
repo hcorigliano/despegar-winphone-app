@@ -167,8 +167,34 @@ namespace Despegar.WP.UI.Product.Flights
                     this.navigationHelper.GoBack();
                     this.navigationHelper.GoBack();
                     break;
-                    
-                // TODO: Handle other errors
+                case "API_ERROR":
+                    switch(((int)e.Parameter)) 
+                    {
+                            // TODO: check this cases:
+
+                            //EXPIRED_SESSION("10", "^.*booking_id not found.*$"),
+                            //BENEFICIARY_TYPE_INVALID_ERROR("11", "^.*Invalid value for CouponBeneficiaryIdType.*$"),
+                            //INVALID_BIRTHDAY("13", ".*birthday.value:  INVALID_VALUE.*"),
+                            //MISSING_BIRTHDAY("14", ".*birthday.value:  MISSING_FIELD.*"),
+
+                            //// this field is called card_holder_name in V3 and fiscal_name in MAPI
+                            //MISSING_FISCAL_NAME("15", ".*invoice.card_holder_name.value:  MISSING_FIELD.*"), 
+
+                            //COUPON_INVALID("20", buildStandardErrorMessage("100")),
+                            //COUPON_EXPIRED("22", buildStandardErrorMessage("202")),
+                            //COUPON_NO_USES_REMAINING("23", buildStandardErrorMessage("203")),
+                            //COUPON_WRONG_COUNTRY("24", buildStandardErrorMessage("204")),
+                            //COUPON_INVALID_BENEFICIARY("26", buildStandardErrorMessage("206")),
+                            //COUPON_ALREADY_USED_BY_USER("27", buildStandardErrorMessage("207")),
+                            //COUPON_INVALID_DATE("43", buildStandardErrorMessage("423")),
+                            //BOOKING_ITEM_NOT_FOUND("60", ".*Item .* was not found.*"); // TODO reproduce this error, got it from new relic  
+
+                        default:
+                            break;
+                    }
+                    dialog = new MessageDialog(manager.GetString("Flights_Search_ERROR_BOOKING_FAILED"), manager.GetString("Flights_Search_ERROR_SEARCH_FAILED_TITLE"));
+                    dialog.ShowAsync();                    
+                    break;
             }
         }
 

@@ -6,6 +6,7 @@ using Despegar.Core.Business.Flight.CitiesAutocomplete;
 using Despegar.Core.Business.Flight.Itineraries;
 using Despegar.Core.Business.Flight.SearchBox;
 using Despegar.Core.Connector;
+using Despegar.Core.Exceptions;
 using Despegar.Core.IService;
 using System;
 using System.Threading.Tasks;
@@ -112,7 +113,18 @@ namespace Despegar.Core.Service
             string serviceUrl = String.Format(ServiceURL.GetServiceURL(ServiceKey.BookingCompletePost),id);
             IConnector connector = context.GetServiceConnector(ServiceKey.BookingCompletePost);
 
-            return await connector.PostAsync<BookingCompletePostResponse>(serviceUrl, bookingCompletePost);
+            try
+            {
+              return await connector.PostAsync<BookingCompletePostResponse>(serviceUrl, bookingCompletePost);
+            }
+            catch (APIErrorException e)
+            {               
+               return new BookingCompletePostResponse() { Error = e.ErrorData };                
+            }
+            catch(Exception e)
+            {
+                throw e; // redundant
+            }
         }
 
         public async Task<CitiesAutocomplete> GetNearCities(double latitude, double longitude)
