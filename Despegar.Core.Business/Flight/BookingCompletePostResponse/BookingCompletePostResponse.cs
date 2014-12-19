@@ -15,6 +15,6 @@ namespace Despegar.Core.Business.Flight.BookingCompletePostResponse
         public string booking_status { get; set; }
         public List<RiskQuestion> risk_questions { get; set; }
 
-        public IAPIError Error { get; set; }
+        public MAPIError Error { get; set; }
     }
 }

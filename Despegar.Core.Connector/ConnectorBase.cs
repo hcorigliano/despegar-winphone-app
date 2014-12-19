@@ -93,8 +93,21 @@ namespace Despegar.Core.Connector
                 if (!httpResponse.IsSuccessStatusCode)
                 {
                     customExceptionThrown = true;
-                    var e =  new HTTPStatusErrorException(String.Format("[Connector]: HTTP Error code {0} ({1}) Message: {2}", (int)httpResponse.StatusCode, httpResponse.StatusCode.ToString(), response));
-                    Logger.LogCoreException(e);                    
+                    Exception e = null;
+
+                    try
+                    {
+                        // Try to Parse an API Error
+                         e = new APIErrorException();
+                         ((APIErrorException)e).ErrorData = JsonConvert.DeserializeObject<MAPIError>(response);
+                    }
+                    catch (Exception) 
+                    {
+                        e = new HTTPStatusErrorException(String.Format("[Connector]: HTTP Error code {0} ({1}) Message: {2}", (int)httpResponse.StatusCode, httpResponse.StatusCode.ToString(), response));
+                        throw e;
+                    }
+
+                    Logger.LogCoreException(e);
                     throw e;
                 }
 

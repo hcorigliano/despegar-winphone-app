@@ -8,7 +8,7 @@ namespace Despegar.Core.Exceptions
 {
     public class APIErrorException : Exception
     {
-        public IAPIError ErrorData { get; set; }
+        public MAPIError ErrorData { get; set; }
 
          public APIErrorException()
         {            

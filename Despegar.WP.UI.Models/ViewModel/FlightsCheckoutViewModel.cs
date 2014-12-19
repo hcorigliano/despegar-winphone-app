@@ -519,7 +519,8 @@ namespace Despegar.WP.UI.Model.ViewModel
                     if (CrossParameters.BookingResponse.Error != null) 
                     { 
                         // API Error ocurred, Check CODE and inform the user
-                        OnViewModelError("API_ERROR", CrossParameters.BookingResponse.Error.ErrorCode);
+                        OnViewModelError("API_ERROR", CrossParameters.BookingResponse.Error.code);
+                        return;
                     }
 
                     // Booking processed, check the status of Booking request
@@ -574,13 +575,7 @@ namespace Despegar.WP.UI.Model.ViewModel
                         default:
                             break;
                     }
-
                 }
-                //catch(InvalidCheckoutFormException)
-                //{
-                //    // Some field has errors, correct them
-
-                //}
                 catch (HTTPStatusErrorException)
                 {
                     OnViewModelError("COMPLETE_BOOKING_CONECTION_FAILED");
@@ -589,6 +584,7 @@ namespace Despegar.WP.UI.Model.ViewModel
                 {
                     OnViewModelError("COMPLETE_BOOKING_BOOKING_FAILED"); 
                 }
+
                 this.IsLoading = false;
             }
         }
