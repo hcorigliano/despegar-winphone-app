@@ -116,6 +116,8 @@ namespace Despegar.WP.UI.Product.Flights
 
                         dialog = new MessageDialog(String.Format(phrase,ticketid), manager.GetString("Flights_Checkout_ERROR_FORM_ERROR_TITLE"));
                         dialog.ShowAsync();
+                        this.navigationHelper.GoBack();
+                        this.navigationHelper.GoBack();
                         break;
                     }
 

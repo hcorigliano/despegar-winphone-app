@@ -4,6 +4,7 @@ using Despegar.Core.Business.Coupons;
 using Despegar.Core.Business.Dynamics;
 using Despegar.Core.Business.Enums;
 using Despegar.Core.Business.Flight.BookingFields;
+using Despegar.Core.Exceptions;
 using Despegar.Core.IService;
 using Despegar.Core.Log;
 using Despegar.WP.UI.Model.Classes.Flights.Checkout;
@@ -186,6 +187,10 @@ namespace Despegar.WP.UI.Model.ViewModel
                     passanger.gender.SetDefaultValue();
             }
 
+            // Contact
+            if (CoreBookingFields.form.contact.Phone != null)
+              CoreBookingFields.form.contact.Phone.type.SetDefaultValue();
+
             // Card data
             if (CoreBookingFields.form.payment.card.owner_document != null)
               CoreBookingFields.form.payment.card.owner_document.type.SetDefaultValue();
@@ -200,9 +205,6 @@ namespace Despegar.WP.UI.Model.ViewModel
                     {
                         passanger.nationality.CoreValue = "AR";
                     }
-
-                    // Contact
-                    CoreBookingFields.form.contact.Phone.type.SetDefaultValue();
 
                     // Invoice Arg
                     if (InvoiceRequired)
@@ -297,47 +299,48 @@ namespace Despegar.WP.UI.Model.ViewModel
             }
 
             // Without Interest
-            foreach (PaymentDetail item in payments.with_interest)
-            {              
-                switch (item.installments.quantity)
+            if (payments.with_interest != null) 
+            {
+                foreach (PaymentDetail item in payments.with_interest)
                 {
-                    case 1:
-                        InstallmentFormatted.WithInterest.OnePay.Add(item);
-                        break;
-                    case 6:
-                        InstallmentFormatted.WithInterest.SixPays.Add(item);
-                        break;
-                    case 12:
-                        InstallmentFormatted.WithInterest.TwelvePays.Add(item);
-                        break;
-                    case 24:
-                        InstallmentFormatted.WithInterest.TwentyFourPays.Add(item);
-                        break;
-                }
+                    switch (item.installments.quantity)
+                    {
+                        case 1:
+                            InstallmentFormatted.WithInterest.OnePay.Add(item);
+                            break;
+                        case 6:
+                            InstallmentFormatted.WithInterest.SixPays.Add(item);
+                            break;
+                        case 12:
+                            InstallmentFormatted.WithInterest.TwelvePays.Add(item);
+                            break;
+                        case 24:
+                            InstallmentFormatted.WithInterest.TwentyFourPays.Add(item);
+                            break;
+                    }
             }
 
-            List<string> availablePayments = new List<string>();
+                List<string> availablePayments = new List<string>();
 
-            if (InstallmentFormatted.WithInterest.OnePay.Count != 0)
-                availablePayments.Add("1");
+                if (InstallmentFormatted.WithInterest.OnePay.Count != 0)
+                    availablePayments.Add("1");
 
-            if (InstallmentFormatted.WithInterest.SixPays.Count != 0)
-                availablePayments.Add("6");
+                if (InstallmentFormatted.WithInterest.SixPays.Count != 0)
+                    availablePayments.Add("6");
 
-            if (InstallmentFormatted.WithInterest.TwelvePays.Count != 0)
-                availablePayments.Add("12");
+                if (InstallmentFormatted.WithInterest.TwelvePays.Count != 0)
+                    availablePayments.Add("12");
 
-            if (InstallmentFormatted.WithInterest.TwentyFourPays.Count != 0)
-                availablePayments.Add("24");
-            
-            string input = String.Join(" , ", availablePayments);
-            StringBuilder sb = new StringBuilder(input);
-            sb[input.LastIndexOf(',')] = 'o';
+                if (InstallmentFormatted.WithInterest.TwentyFourPays.Count != 0)
+                    availablePayments.Add("24");
 
-            var loader = new Windows.ApplicationModel.Resources.ResourceLoader();
-            InstallmentFormatted.WithInterest.GrupLabelText = sb.ToString() + " " + loader.GetString("Common_Pay_Of");
+                string input = String.Join(" , ", availablePayments);
+                StringBuilder sb = new StringBuilder(input);
+                sb[input.LastIndexOf(',')] = 'o';
 
-            //TODO : FILL PAY AT DESTINATION
+                var loader = new Windows.ApplicationModel.Resources.ResourceLoader();
+                InstallmentFormatted.WithInterest.GrupLabelText = sb.ToString() + " " + loader.GetString("Common_Pay_Of");
+            }
         }
 
         /// <summary>
@@ -535,17 +538,18 @@ namespace Despegar.WP.UI.Model.ViewModel
                     }
 
                 }
-                catch (Exception e)
+                //catch(InvalidCheckoutFormException)
+                //{
+                //    // Some field has errors, correct them
+
+                //}
+                catch (HTTPStatusErrorException)
                 {
-                    var test = e;
-
-                    if (e.Message.Contains("HTTP Error code 404 (NotFound)"))
-                        OnViewModelError("COMPLETE_BOOKING_CONECTION_FAILED");
-                    else
-                    {
-                        OnViewModelError("COMPLETE_BOOKING_BOOKING_FAILED");
-                    }
-
+                    OnViewModelError("COMPLETE_BOOKING_CONECTION_FAILED");
+                }
+                catch (Exception)
+                {
+                    OnViewModelError("COMPLETE_BOOKING_BOOKING_FAILED"); 
                 }
                 this.IsLoading = false;
             }
