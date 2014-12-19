@@ -31,6 +31,7 @@ namespace Despegar.WP.UI.Model.ViewModel
         private IConfigurationService configurationService;
         private ICouponsService couponsService;
         private FlightsCrossParameter CrossParameters;
+        private Despegar.LegacyCore.Connector.Domain.API.ValidationCreditcards CreditCardsValidations;
         #endregion
 
         #region ** Public Interface **
@@ -112,6 +113,26 @@ namespace Despegar.WP.UI.Model.ViewModel
                     payments.installment.card_code.CoreValue = selectedCard.card.company;
                     payments.installment.card_type.CoreValue = selectedCard.card.type;
                     payments.installment.complete_card_code.CoreValue = selectedCard.card.code;
+
+                    Despegar.LegacyCore.Connector.Domain.API.ValidationCreditcard validation = CreditCardsValidations.data.FirstOrDefault(x => x.bankCode == (selectedCard.card.bank == "" ? "*" : selectedCard.card.bank) && x.cardCode == selectedCard.card.company);
+
+                    Validation valNumber = new Validation();
+                    valNumber.error_code = "NUMBER";
+                    valNumber.regex = validation.numberRegex;
+                    CoreBookingFields.form.payment.card.number.validations = new List<Validation>();
+                    CoreBookingFields.form.payment.card.number.validations.Add(valNumber);
+
+                    Validation valLength = new Validation();
+                    valLength.error_code = "LENGTH";
+                    valLength.regex = validation.lengthRegex;
+                    CoreBookingFields.form.payment.card.number.validations.Add(valLength);
+
+                    Validation valCode = new Validation();
+                    valCode.error_code = "CODE";
+                    valCode.regex = validation.codeRegex;
+                    CoreBookingFields.form.payment.card.security_code.validations = new List<Validation>();
+                    CoreBookingFields.form.payment.card.security_code.validations.Add(valCode); //.number.validations.Add(val);
+
                 }
 
                 OnPropertyChanged(); // TODO: no esta actualizando el ComboBox de Tarjeta
@@ -160,7 +181,10 @@ namespace Despegar.WP.UI.Model.ViewModel
                 PriceDetailsFormatted = FormatPrice();
 
                 // Set Known Default Values && Adapt Checkout to the country
-                ConfigureCountry(currentCountry);                
+                ConfigureCountry(currentCountry);
+
+                //Get validations for credit cards
+                GetCreditCardsValidations();
             }
             catch (Exception e)
             {
@@ -172,6 +196,11 @@ namespace Despegar.WP.UI.Model.ViewModel
             IsLoading = false;
         }
 
+        private async void GetCreditCardsValidations()
+        {
+            CreditCardsValidations = await Despegar.LegacyCore.Service.APIValidationCreditcards.GetAll();
+        }
+
         private void ConfigureCountry(string countryCode)
         {
             // Common
@@ -179,12 +208,14 @@ namespace Despegar.WP.UI.Model.ViewModel
             // Passengers
             foreach (var passanger in CoreBookingFields.form.passengers)
             {
-                passanger.document.type.SetDefaultValue();
-                passanger.gender.SetDefaultValue();
+                if (passanger.document != null && passanger.document.type != null)
+                    passanger.document.type.SetDefaultValue();
+                if (passanger.gender != null)
+                    passanger.gender.SetDefaultValue();
             }
 
             // Card data
-            if (CoreBookingFields.form.payment.card.owner_document != null)
+            if (CoreBookingFields.form.payment.card.owner_document != null && CoreBookingFields.form.payment.card.owner_document.type != null)
               CoreBookingFields.form.payment.card.owner_document.type.SetDefaultValue();
             if (CoreBookingFields.form.payment.card.owner_gender != null)
                CoreBookingFields.form.payment.card.owner_gender.SetDefaultValue();
@@ -274,42 +305,48 @@ namespace Despegar.WP.UI.Model.ViewModel
             InstallmentFormatted = new InstallmentFormatted();
 
             // With interest
-            foreach (PaymentDetail item in payments.without_interest)
+            if (payments.without_interest != null)
             {
-                switch (item.installments.quantity)
+                foreach (PaymentDetail item in payments.without_interest)
                 {
-                    case 1:
-                        InstallmentFormatted.WithoutInterest.OnePay.Add(item);
-                        break;
-                    case 6:
-                        InstallmentFormatted.WithoutInterest.SixPays.Add(item);
-                        break;
-                    case 12:
-                        InstallmentFormatted.WithoutInterest.TwelvePays.Add(item);
-                        break;
-                    case 24:
-                        InstallmentFormatted.WithoutInterest.TwentyFourPays.Add(item);
-                        break;
+                    switch (item.installments.quantity)
+                    {
+                        case 1:
+                            InstallmentFormatted.WithoutInterest.OnePay.Add(item);
+                            break;
+                        case 6:
+                            InstallmentFormatted.WithoutInterest.SixPays.Add(item);
+                            break;
+                        case 12:
+                            InstallmentFormatted.WithoutInterest.TwelvePays.Add(item);
+                            break;
+                        case 24:
+                            InstallmentFormatted.WithoutInterest.TwentyFourPays.Add(item);
+                            break;
+                    }
                 }
             }
 
             // Without Interest
-            foreach (PaymentDetail item in payments.with_interest)
-            {              
-                switch (item.installments.quantity)
+            if (payments.with_interest != null)
+            {
+                foreach (PaymentDetail item in payments.with_interest)
                 {
-                    case 1:
-                        InstallmentFormatted.WithInterest.OnePay.Add(item);
-                        break;
-                    case 6:
-                        InstallmentFormatted.WithInterest.SixPays.Add(item);
-                        break;
-                    case 12:
-                        InstallmentFormatted.WithInterest.TwelvePays.Add(item);
-                        break;
-                    case 24:
-                        InstallmentFormatted.WithInterest.TwentyFourPays.Add(item);
-                        break;
+                    switch (item.installments.quantity)
+                    {
+                        case 1:
+                            InstallmentFormatted.WithInterest.OnePay.Add(item);
+                            break;
+                        case 6:
+                            InstallmentFormatted.WithInterest.SixPays.Add(item);
+                            break;
+                        case 12:
+                            InstallmentFormatted.WithInterest.TwelvePays.Add(item);
+                            break;
+                        case 24:
+                            InstallmentFormatted.WithInterest.TwentyFourPays.Add(item);
+                            break;
+                    }
                 }
             }
 
@@ -326,13 +363,16 @@ namespace Despegar.WP.UI.Model.ViewModel
 
             if (InstallmentFormatted.WithInterest.TwentyFourPays.Count != 0)
                 availablePayments.Add("24");
-            
-            string input = String.Join(" , ", availablePayments);
-            StringBuilder sb = new StringBuilder(input);
-            sb[input.LastIndexOf(',')] = 'o';
 
-            var loader = new Windows.ApplicationModel.Resources.ResourceLoader();
-            InstallmentFormatted.WithInterest.GrupLabelText = sb.ToString() + " " + loader.GetString("Common_Pay_Of");
+            if (availablePayments.Count != 0)
+            {
+                string input = String.Join(" , ", availablePayments);
+                StringBuilder sb = new StringBuilder(input);
+                sb[input.LastIndexOf(',')] = 'o';
+
+                var loader = new Windows.ApplicationModel.Resources.ResourceLoader();
+                InstallmentFormatted.WithInterest.GrupLabelText = sb.ToString() + " " + loader.GetString("Common_Pay_Of");
+            }
 
             //TODO : FILL PAY AT DESTINATION
         }
