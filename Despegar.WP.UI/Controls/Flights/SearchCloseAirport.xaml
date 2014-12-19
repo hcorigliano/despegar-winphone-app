@@ -1,0 +1,78 @@
+﻿<UserControl
+    x:Class="Despegar.WP.UI.Controls.Flights.SearchCloseAirport"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Despegar.WP.UI.Controls.Flights"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    
+
+    >
+
+    <UserControl.Resources>
+        <CollectionViewSource x:Name="mocksCvs" IsSourceGrouped="True" Source="{Binding MockGroups}" />
+        <Storyboard x:Name="ShowDialogAnimation">
+            <DoubleAnimation Duration="0:0:.5" To="1" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="mainCanvas" d:IsOptimized="True">
+                <DoubleAnimation.EasingFunction>
+                    <QuadraticEase EasingMode="EaseIn" />
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+        </Storyboard>
+        <Storyboard x:Name="HideDialogAnimation">
+            <DoubleAnimation Duration="0:0:.5" To="0" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="mainCanvas" d:IsOptimized="True">
+                <DoubleAnimation.EasingFunction>
+                    <QuadraticEase EasingMode="EaseOut" />
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+        </Storyboard>
+    </UserControl.Resources>
+
+    <!--Width="{Binding Viewport.Width}" Height="{Binding Viewport.Height}"-->
+    <Grid Height="350" Width="350" Opacity="0.6" x:Name="mainCanvas"  HorizontalAlignment="Center" VerticalAlignment="Center" >
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.Background>
+            <SolidColorBrush Color="Black" Opacity="0.4"/>
+        </Grid.Background>
+
+        <Grid Height="350" Width="350" Background="#FF091423" HorizontalAlignment="Center" VerticalAlignment="Center" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="{StaticResource Block2p}"/>
+                <RowDefinition Height="{StaticResource Block2p}" />
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <StackPanel Grid.Row="0">
+                <StackPanel.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF3C6EA0"/>
+                        <GradientStop Color="#FF112649" Offset="1"/>
+                    </LinearGradientBrush>
+                </StackPanel.Background>
+                <TextBlock Style="{StaticResource PageHeaderSmall}" Margin="0,20,0,0" Text="Seleccionar aeropuerto" HorizontalAlignment="Center" VerticalAlignment="Center"  />
+            </StackPanel>
+
+            <TextBlock Margin="5,0,0,0"  Style="{StaticResource BaseTextLabel}" Grid.Row="1">
+                <Run x:Uid="Flight_Close_Airport_Select_Airport" Text="Seleccione un aeropuerto cercano a "></Run>
+                <Run x:Name="searchedAirport" Text="{Binding searchedAirport}"></Run>
+            </TextBlock>
+
+            <ListView Grid.Row="2" ItemsSource="{Binding}" Tapped="ListView_Tapped"  >
+
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+
+                        <TextBlock Margin="5,0,0,0" Style="{StaticResource BaseText}" Text="{Binding name}"></TextBlock>
+
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+
+            </ListView>
+
+        </Grid>
+    </Grid>
+    
+</UserControl>
+    

@@ -823,4 +823,7 @@ La reserva no ha sido generada y no se le cobrará ningún cargo por la transacc
   <data name="Flights_Search_ERROR_BOOKING_FAILED_TITLE" xml:space="preserve">
     <value>Error</value>
   </data>
+  <data name="Flight_Close_Airport_Select_Airport.Text" xml:space="preserve">
+    <value>Seleccionar aeropuerto cercano a</value>
+  </data>
 </root>

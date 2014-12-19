@@ -82,8 +82,8 @@ namespace Despegar.Core.Service
         /// <returns></returns>
         public async Task<CitiesAutocomplete> GetCitiesAutocomplete(string cityString)
         {
-            string serviceUrl = String.Format(ServiceURL.GetServiceURL(ServiceKey.FlightCitiesAutocomplete), cityString);
-            IConnector connector = context.GetServiceConnector(ServiceKey.FlightCitiesAutocomplete);
+            string serviceUrl = String.Format(ServiceURL.GetServiceURL(ServiceKey.FlightsCitiesAutocomplete), cityString);
+            IConnector connector = context.GetServiceConnector(ServiceKey.FlightsCitiesAutocomplete);
 
             return await connector.GetAsync<CitiesAutocomplete>(serviceUrl);
         }
@@ -117,6 +117,15 @@ namespace Despegar.Core.Service
             IConnector connector = context.GetServiceConnector(ServiceKey.BookingCompletePost);
 
             return await connector.PostAsync<BookingCompletePostResponse>(serviceUrl, bookingCompletePost);
+        }
+
+        public async Task<CitiesAutocomplete> GetNearCities(double latitude, double longitude)
+        {
+            string serviceUrl = String.Format(ServiceURL.GetServiceURL(ServiceKey.FlightsNearCities), latitude, longitude);
+            serviceUrl = serviceUrl.Replace(',', '.');
+            IConnector connector = context.GetServiceConnector(ServiceKey.FlightsNearCities);
+
+            return await connector.GetAsync<CitiesAutocomplete>(serviceUrl);
         }
         
     }
