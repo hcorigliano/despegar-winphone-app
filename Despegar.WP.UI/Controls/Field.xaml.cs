@@ -34,8 +34,10 @@ namespace Despegar.WP.UI.Controls
         public static readonly DependencyProperty LabelProperty = DependencyProperty.Register("Label", typeof(string), typeof(Field), new PropertyMetadata(null));
         public static readonly DependencyProperty PlaceholderTextProperty = DependencyProperty.Register("PlaceholderText", typeof(string), typeof(Field), new PropertyMetadata(null));
         public static readonly DependencyProperty InputTypeProperty = DependencyProperty.Register("InputType", typeof(InputType), typeof(Field), new PropertyMetadata(InputType.AlphaNumeric, inputTypeChanged));
-        private Regex regex;
 
+        public event RoutedEventHandler TextChanged;
+
+        private Regex regex;
         private string lastInputText = String.Empty;
 
         private static void inputTypeChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
@@ -135,7 +137,11 @@ namespace Despegar.WP.UI.Controls
 
             if (regex.IsMatch(control.Text) || control.Text == "")
             {
-                //do nothing, is valid
+                // Input is valid
+
+                // Notify text change
+                if(TextChanged != null)
+                  TextChanged(sender, e);
             }
             else
             {
@@ -145,6 +151,8 @@ namespace Despegar.WP.UI.Controls
 
             // Save the current value to resume it if the next input was invalid
             lastInputText = control.Text;
-        }
+
+            
+        }     
     }
 }

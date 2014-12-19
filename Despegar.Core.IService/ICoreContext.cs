@@ -1,6 +1,5 @@
 ﻿using Despegar.Core.Business;
 using Despegar.Core.Business.Configuration;
-using Despegar.Core.Business.Culture;
 
 namespace Despegar.Core.IService
 {
@@ -13,6 +12,8 @@ namespace Despegar.Core.IService
         string GetSite();
 
         string GetLanguage();
+
+        string GetUOW();
 
         /// <summary>
         /// Enables a specified Mock
@@ -64,6 +65,12 @@ namespace Despegar.Core.IService
         /// </summary>
         /// <returns></returns>
         ICommonServices GetCommonService();
+
+        /// <summary>
+        /// returns the Coupons Service Object
+        /// </summary>
+        /// <returns></returns>
+        ICouponsService GetCouponsService();
 
         /// <summary>
         /// Re-configures the Core for the new Site

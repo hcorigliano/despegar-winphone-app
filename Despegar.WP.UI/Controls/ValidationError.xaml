@@ -11,10 +11,10 @@
     >
     
     <UserControl.Resources>
-        <conv:NullToOpacityConverter x:Name="VisibilityConverter" />
+        <conv:NullToOpacityConverter x:Name="OpacityConv" />
     </UserControl.Resources>
 
-    <Grid Margin="0,7,0,0" Opacity="{Binding ErrorCode, Converter={StaticResource VisibilityConverter}}">
+    <Grid Margin="0,7,0,0" Opacity="{Binding ErrorCode, Converter={StaticResource OpacityConv}}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="{StaticResource Square}" />
             <ColumnDefinition Width="5" />
