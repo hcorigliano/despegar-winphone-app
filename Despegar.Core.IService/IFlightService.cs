@@ -17,5 +17,6 @@ namespace Despegar.Core.IService
         Task<FlightsItineraries> GetItineraries(FlightSearchModel model);
         Task<BookingFields> GetBookingFields(BookingFieldPost bookingFieldPost);
         Task<BookingCompletePostResponse> CompleteBooking(object bookingCompletePost,string id);
+        Task<CitiesAutocomplete> GetNearCities(double latitude, double longitude);
     }
 }

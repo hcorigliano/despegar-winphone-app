@@ -128,28 +128,47 @@ namespace Despegar.WP.UI.Controls.Flights
             return await flightService.GetCitiesAutocomplete(cityString);
         }
 
-        private void SuggestionChosen(AutoSuggestBox sender, AutoSuggestBoxSuggestionChosenEventArgs args)
+        private async Task<CitiesAutocomplete> GetNearCities(double latitude , double longitude)
+        {
+            var flightService = GlobalConfiguration.CoreContext.GetFlightService();  // There is no need to test this control with Unit Tests, so we inject this dependency directly
+            return await flightService.GetNearCities(latitude,longitude);
+        }
+
+        private async void SuggestionChosen(AutoSuggestBox sender, AutoSuggestBoxSuggestionChosenEventArgs args)
         {
             //  Saves ID city in InvoiceDefinition
             var selected = (CityAutocomplete)args.SelectedItem;
             if (selected != null)
             {
-                if (sender.Name == "DestinyInput")
+                if (selected.type == "city" && !selected.has_airport)
                 {
-                    SelectedDestinationCode = selected.code;
-                    SelectedDestinationText = selected.name;
+                    var data = await GetNearCities(selected.geo_location.latitude, selected.geo_location.longitude);
+                    SearchCloseAirport SearchAirport = new SearchCloseAirport(this, sender.Name, selected.name) { DataContext = data };
+                    ModalPopup popup = new ModalPopup(SearchAirport);
+                    popup.Show();
+                    //UpdateTextbox(sender);
+                    sender.IsSuggestionListOpen = false;
                 }
-                else if (sender.Name == "OriginInput")
+                else
                 {
-                    SelectedOriginCode = selected.code;
-                    SelectedOriginText = selected.name;
-                }
+                    if (sender.Name == "DestinyInput")
+                    {
 
+                        SelectedDestinationCode = selected.code;
+                        SelectedDestinationText = selected.name;
+                    }
+                    else if (sender.Name == "OriginInput")
+                    {
+                        SelectedOriginCode = selected.code;
+                        SelectedOriginText = selected.name;
+                    }
                 //For Fix Focus_Lost
                 sender.ItemsSource = null;
                 List<CityAutocomplete> source = new List<CityAutocomplete>();
                 source.Add(selected);
                 sender.ItemsSource = source;
+                }
+
             }
         }
 
@@ -222,6 +241,24 @@ namespace Despegar.WP.UI.Controls.Flights
             DestinyInput.Text = destinationText;
 
             UpdateTextbox(OriginInput);
+            UpdateTextbox(DestinyInput);
+        }
+
+        public void UpdateAirportBoxesOrigin(string originCode, string originText)
+        {
+            OriginInput.ItemsSource = new List<CityAutocomplete>() { new CityAutocomplete() { code = originCode, name = originText } };
+
+            OriginInput.Text = originText;
+
+            UpdateTextbox(OriginInput);
+        }
+
+        public void UpdateAirportBoxesDestiny( string destinationCode, string destinationText)
+        {
+            DestinyInput.ItemsSource = new List<CityAutocomplete>() { new CityAutocomplete() { code = destinationCode, name = destinationText } };
+
+            DestinyInput.Text = destinationText;
+
             UpdateTextbox(DestinyInput);
         }
     }

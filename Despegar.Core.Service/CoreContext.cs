@@ -1,5 +1,4 @@
 ﻿using Despegar.Core.Business;
-using Despegar.Core.Business.Culture;
 using Despegar.Core.Connector;
 using Despegar.Core.IService;
 using Despegar.Core.Log;
@@ -7,6 +6,7 @@ using System.Linq;
 using System;
 using System.Collections.Generic;
 using Windows.Storage;
+using Despegar.Core.Business.Configuration;
 
 namespace Despegar.Core.Service
 {
@@ -35,6 +35,8 @@ namespace Despegar.Core.Service
         private MapiConnector mapiConnector;
         private Apiv1Connector apiv1Connector;
 
+        private Configuration configuration;
+
         #region ** Public Interface **
 
         public string GetSite()
@@ -45,6 +47,11 @@ namespace Despegar.Core.Service
         public string GetLanguage() 
         { 
             return IsDECOLAR ? "PT" : "ES"; 
+        }
+
+        public string GetUOW()
+        {
+            return uow;
         }
 
         /// <summary>
@@ -143,6 +150,23 @@ namespace Despegar.Core.Service
         {
             return new CommonServices(this);
         }
+
+        public ICouponsService GetCouponsService()
+        {
+            return new CouponService(this);
+        }
+
+
+        public Configuration GetConfiguration()
+        {
+            return configuration;
+        }
+
+
+        public void SetConfiguration(Configuration conf)
+        {
+            configuration = conf;
+        }
         #endregion
 
         #region ** Core private **
@@ -161,6 +185,6 @@ namespace Despegar.Core.Service
         }
 
         #endregion
-    
+        
     }
 }

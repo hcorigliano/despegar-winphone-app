@@ -35,12 +35,14 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .NET Framework is automatically included -->
+    <Folder Include="Common\Cards\" />
   </ItemGroup>
   <ItemGroup>
     <TargetPlatform Include="WindowsPhoneApp, Version=8.1" />
     <TargetPlatform Include="Windows, Version=8.1" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\CustomErrors\CustomError.cs" />
     <Compile Include="Common\State\State.cs" />
     <Compile Include="Bindable.cs" />
     <Compile Include="Configuration\CitiesFields.cs" />
@@ -54,7 +56,8 @@
     <Compile Include="Configuration\Site.cs" />
     <Compile Include="Configuration\UpaField.cs" />
     <Compile Include="Configuration\UpdateFields.cs" />
-    <Compile Include="Culture\Site.cs" />
+    <Compile Include="Coupons\CouponParameter.cs" />
+    <Compile Include="Coupons\CouponResponse.cs" />
     <Compile Include="Dynamics\DynamicFlightBookingFieldsToPost.cs" />
     <Compile Include="Enums\BookingStatusEnum.cs" />
     <Compile Include="Enums\FlightSearchChildEnum.cs" />

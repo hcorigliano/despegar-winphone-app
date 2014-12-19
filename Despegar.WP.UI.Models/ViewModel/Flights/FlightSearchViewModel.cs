@@ -151,14 +151,15 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
         private async void Search()
         {           
             coreSearchModel.SearchStatus = Core.Business.SearchStates.FirstSearch;
-                  
+            UpdatePassengers();
+
             if (coreSearchModel.IsValid)
             {
                 IsLoading = true;
 
                 try
                 {
-                    UpdatePassengers();
+                    
                     FlightsItineraries intineraries = await flightService.GetItineraries(coreSearchModel);
 
                     if(intineraries.items.Count != 0)
@@ -186,7 +187,7 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
             }
             else
             {                
-                OnViewModelError("SEARCH_INVALID");
+                OnViewModelError("SEARCH_INVALID_WITH_MESSAGE", coreSearchModel.SearchErrors);
             }
         }
 

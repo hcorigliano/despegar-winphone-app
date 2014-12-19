@@ -11,7 +11,7 @@
 
     <StackPanel Style="{StaticResource CheckoutFieldContainer}">
         <TextBlock Style="{StaticResource BaseTextLabel}" Text="{Binding Label}" />
-        <TextBox Style="{StaticResource CheckoutInputBase}" Text="{Binding Value, Mode=TwoWay}"  PlaceholderText="{Binding PlaceholderText}" />
+        <TextBox x:Name="InnerTextbox" Style="{StaticResource CheckoutInputBase}" Text="{Binding Value, Mode=TwoWay}"  PlaceholderText="{Binding PlaceholderText}" TextChanged="TextBox_TextChanged" />
     </StackPanel>
 
 </UserControl>

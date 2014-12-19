@@ -48,6 +48,7 @@
     <Compile Include="ICommonServices.cs" />
     <Compile Include="IConfigurationService.cs" />
     <Compile Include="ICoreContext.cs" />
+    <Compile Include="ICouponsService.cs" />
     <Compile Include="IFlightService.cs" />
     <Compile Include="IUPAService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

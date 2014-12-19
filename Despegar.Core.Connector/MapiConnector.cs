@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 namespace Despegar.Core.Connector
 {
     public class MapiConnector : ConnectorBase
-    {        
-        private static readonly string DOMAIN = "mobile.despegar.com/v3/";
+    {
+        private static readonly string DOMAIN = "https://mobile.despegar.com/v3/";
         private static readonly string APIKEY_WINDOWS_PHONE = "24b56c96e09146298eca3093f6f990c9";
         private string XUoW;
         private string x_client;   // Example: "WindowsPhone8App";
@@ -56,7 +56,6 @@ namespace Despegar.Core.Connector
         protected override string GetBaseUrl()
         {
             return new StringBuilder()
-              .Append("https://")
               .Append(DOMAIN)                           
               .ToString();
         }

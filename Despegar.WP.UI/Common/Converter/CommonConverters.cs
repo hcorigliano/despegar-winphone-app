@@ -82,16 +82,9 @@ namespace Despegar.WP.UI.Common.Converter
     {
         public object Convert(object value, Type targetType, object parameter, string language)
         {
-            
-            if(value == null)
-            { 
-                return "";
-            }
-            else
-            {
-                return ((DateTimeOffset)value).ToString("yyyy-MM-dd");
-            }
+            return null;
         }
+
         public object ConvertBack(object value, Type targetType, object parameter, string language)
         {
             if (value == null)
@@ -152,14 +145,17 @@ namespace Despegar.WP.UI.Common.Converter
         {
             if (value != null)
             {
-                try
-                {
-                    return ((double)value).ToString("N0");
-                }
-                catch
+                var type = value.GetType();
+                if(type == typeof(int) )
                 {
                     return ((int)value).ToString("N0");
                 }
+                if (type == typeof(double))
+                {
+                    return ((double)value).ToString("N0");
+                }
+                return value;
+               
             }
             return null;
         }

@@ -1,4 +1,5 @@
 ﻿using Despegar.Core.Business.Flight.BookingFields;
+using Despegar.WP.UI.Controls;
 using Despegar.WP.UI.Model.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -32,6 +33,11 @@ namespace Despegar.WP.UI.Product.Flights.Checkout.CardData
 
             if (YearCombo.SelectedValue != null && MonthCombo.SelectedValue != null)            
                 ViewModel.CoreBookingFields.form.payment.card.expiration.CoreValue = YearCombo.SelectedValue.ToString() + "-" + MonthCombo.SelectedValue.ToString();            
+        }
+      
+        private void Voucher_LostFocus(object sender, RoutedEventArgs e)
+        {
+            ViewModel.ValidateVoucher();
         }
     }
 }

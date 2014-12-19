@@ -4,7 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Data;
+using Windows.UI.Xaml.Documents;
 
 namespace Despegar.WP.UI.Common.Converter
 {
@@ -15,31 +17,29 @@ namespace Despegar.WP.UI.Common.Converter
             var loader = new Windows.ApplicationModel.Resources.ResourceLoader();
             PaymentDetail paymentDetails = (PaymentDetail)value;
 
-                switch (paymentDetails.installments.quantity)
-                {
-                    case 1:
-                        return "1 " + loader.GetString("Common_Pay_With");
-                    case 6:
-                        if (paymentDetails.interest == 1.0)
-                        {
-                            return "6 " + loader.GetString("Common_Pays_Without_Interest");
-                        }
-                        return "6 " + loader.GetString("Common_Pays_With");
-                    case 12:
-                        if (paymentDetails.interest == 1.0)
-                        {
-                            return "12 " + loader.GetString("Common_Pays_Without_Interest");
-                        }
-                        return "12 " + loader.GetString("Common_Pays_With");
-                    case 24:
-                        if (paymentDetails.interest == 1.0)
-                        {
-                            return "24 " + loader.GetString("Common_Pays_Without_Interest");
-                        }
-                        return "24 " + loader.GetString("Common_Pays_With");
-                }
+            TextBlock text = new TextBlock();
 
-            return "";
+            if (paymentDetails.installments.quantity == 1)
+                text.Inlines.Add(new Run() { Text = "1 " + loader.GetString("Common_Pay_With") });
+            else 
+            {
+                if (paymentDetails.interest == 1.0)
+                {
+                    text.Inlines.Add(new Run() { Text =  paymentDetails.installments.quantity + " " + loader.GetString("Common_Payments") + " " });
+
+                    var b = new Bold();
+                    b.Inlines.Add(new Run() { Text = loader.GetString("Common_Pays_Without_Interest") });
+                    text.Inlines.Add(b);
+
+                    text.Inlines.Add(new Run() { Text = " " + loader.GetString("Common_Payment_With") });
+                }
+                else 
+                {
+                    text.Inlines.Add(new Run() { Text =  paymentDetails.installments.quantity + " " + loader.GetString("Common_Pays_With") });
+                }
+            }           
+
+            return new ContentControl() { Content = text };;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)

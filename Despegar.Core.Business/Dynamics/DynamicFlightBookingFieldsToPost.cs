@@ -117,6 +117,14 @@ namespace Despegar.Core.Business.Dynamics
                      }
                  }
 
+
+                 // Voucher
+
+                 if (bookingFields.form.Voucher != null)
+                 {
+                     result.form.vouchers = bookingFields.form.vouchers.Select(x => x.CoreValue).ToList();
+                 }
+
                  return result;
 
              });

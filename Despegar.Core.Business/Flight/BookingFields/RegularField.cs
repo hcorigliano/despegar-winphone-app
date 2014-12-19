@@ -79,6 +79,8 @@ namespace Despegar.Core.Business.Flight.BookingFields
                     }   
                 }
             }
+
+            OnPropertyChanged("IsValid");
         }
 
         /// <summary>

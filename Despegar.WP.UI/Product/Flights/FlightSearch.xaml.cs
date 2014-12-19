@@ -16,6 +16,8 @@ using Windows.UI.Popups;
 using Despegar.WP.UI.Model.ViewModel;
 using Windows.Phone.UI.Input;
 using Windows.ApplicationModel.Resources;
+using Despegar.Core.Business.CustomErrors;
+using System.Collections.Generic;
 
 namespace Despegar.WP.UI.Product.Flights
 {
@@ -57,6 +59,23 @@ namespace Despegar.WP.UI.Product.Flights
                     break;
                 case "SEARCH_INVALID":
                     dialog = new MessageDialog(manager.GetString("Flights_Search_ERROR_SEARCH_INVALID"), manager.GetString("Flights_Search_ERROR_SEARCH_INVALID_TITLE"));
+                    dialog.ShowAsync();
+                    break;
+
+                case "SEARCH_INVALID_WITH_MESSAGE":
+                    //List<CustomError> message = e.Parameter as List<CustomError>;
+                    CustomError message = e.Parameter as CustomError;
+                    if (message == null) break;
+
+                    string msg = manager.GetString(message.Code);
+                    
+                    if (message.HasDates)
+                    {
+                        string msgunformated = msg;
+                        msg = string.Format(msgunformated,message.Date);
+                    }
+
+                    dialog = new MessageDialog(msg, manager.GetString("Flights_Search_ERROR_SEARCH_INVALID_TITLE"));
                     dialog.ShowAsync();
                     break;
             }

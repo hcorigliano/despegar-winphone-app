@@ -22,6 +22,7 @@
         <conv:TextHeaderConverter x:Key="TextHeaderConverter"/>
         <conv:StringConverter x:Key="stringFormatConverter"  />
         <!--<CollectionViewSource x:Name="cvsFlights" IsSourceGrouped="True" Source="{Binding Items}" ItemsPath="{Binding RoutesCustom}"/>-->
+        <conv:CurrencyConverter x:Name="CurrencyConverter" ></conv:CurrencyConverter>
         <CollectionViewSource x:Name="cvsFlights" Source="{Binding Items}" IsSourceGrouped="False" ItemsPath="{Binding Items.RoutesCustom}"/>
 
         <DataTemplate x:Key="FlightItemDateTemplate" >
@@ -43,8 +44,9 @@
                     	<TextBlock TextWrapping="Wrap" Text="{Binding airline.name}" Style="{StaticResource SegoeLight24}" Foreground="#FF319FDA"  Margin="0,0,-1,0" d:IsHidden="True"  />
                         
                     	<StackPanel Orientation="Horizontal" Margin="0,25,0,-14">
-                    		<TextBlock HorizontalAlignment="Left" Text="$" VerticalAlignment="Top" Style="{StaticResource SegoeSemilight17}"/>
-                            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding price}" VerticalAlignment="Top" Style="{StaticResource SegoeSemilight17}" />
+                            <TextBlock HorizontalAlignment="Left" Text="{Binding currency.mask}" VerticalAlignment="Top" Style="{StaticResource SegoeSemilight17}"/>
+                            <TextBlock HorizontalAlignment="Left" Text='  ' VerticalAlignment="Top" Style="{StaticResource SegoeSemilight17}"/>
+                            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding price, Converter={StaticResource CurrencyConverter}}" VerticalAlignment="Top" Style="{StaticResource SegoeSemilight17}" />
                     	</StackPanel>
                         
 

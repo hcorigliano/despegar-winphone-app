@@ -12,7 +12,6 @@ namespace Despegar.Core.Business.Flight.BookingFields
         public Price price { get; set; }
         public Payments payments { get; set; }
         public Form form { get; set; }
-        public object terms_and_conditions { get; set; }
 
         // Custom
         // NOTE FOR DEVS: Do NOT use && operator to include every condition in one IF. It won't trigger the validations of each field.      
@@ -23,14 +22,15 @@ namespace Despegar.Core.Business.Flight.BookingFields
             bool cardValid = true;
             bool invoiceValid = true;
             bool installmentValid = true;
+            bool voucherValid = true;
 
             sectionID = String.Empty;
 
             // Passengers           
             foreach (var passenger in form.passengers) 
             {
-                //if (passenger.birthdate.IsValid)
-                //    isValid = false;
+                if (passenger.birthdate != null && !passenger.birthdate.IsValid)
+                    passengerValid = false;
                 if (passenger.first_name != null && !passenger.first_name.IsValid)
                     passengerValid = false;
                 if (passenger.last_name != null && !passenger.last_name.IsValid)
@@ -130,6 +130,10 @@ namespace Despegar.Core.Business.Flight.BookingFields
                     invoiceValid = false; 
             }
 
+            // Voucher
+            if (!form.Voucher.IsValid)
+                voucherValid = false;
+
             if (!passengerValid)
             {
                 sectionID = "PASSENGERS";
@@ -140,7 +144,7 @@ namespace Despegar.Core.Business.Flight.BookingFields
                 sectionID = "CONTACT";
                 return false;
             }
-            if (!cardValid)
+            if (!cardValid || !voucherValid)
             {
                 sectionID = "CARD";
                 return false;
