@@ -89,11 +89,15 @@ namespace Despegar.WP.UI
 
                 // Check persist information
                  var roamingSettings = ApplicationData.Current.RoamingSettings;
+
+#if DECOLAR
+                // Decolar forced to BRASIL always
+                 roamingSettings.Values["countryCode"] = "BR";
+#endif
+
+                // Load Country/Site
                  if (roamingSettings.Values["countryCode"] == null)
                  {
-                     // When the navigation stack isn't restored navigate to the first page,
-                     // configuring the new page by passing required information as a navigation
-                     // parameter
                      if (!rootFrame.Navigate(typeof(CountrySelection), e.Arguments))
                      {
                          throw new Exception("Failed to create initial page");
@@ -107,7 +111,6 @@ namespace Despegar.WP.UI
                      {
                          throw new Exception("Failed to create Home page");
                      }
-
                  }
             }
 

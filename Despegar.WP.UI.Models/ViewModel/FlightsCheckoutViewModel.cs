@@ -9,6 +9,7 @@ using Despegar.Core.Business.Flight.BookingFields;
 using Despegar.Core.Exceptions;
 using Despegar.Core.IService;
 using Despegar.Core.Log;
+using Despegar.LegacyCore.Connector.Domain.API;
 using Despegar.WP.UI.Model.Classes.Flights.Checkout;
 using Despegar.WP.UI.Model.Interfaces;
 using Despegar.WP.UI.Model.ViewModel.Classes.Flights;
@@ -43,7 +44,7 @@ namespace Despegar.WP.UI.Model.ViewModel
 
         public BookingFields CoreBookingFields { get; set; }                
         public List<CountryFields> Countries { get; set; }
-        public List<State> States { get; set; }
+        public List<Despegar.Core.Business.Common.State.State> States { get; set; }
         public bool InvoiceRequired { get { return CoreBookingFields != null? CoreBookingFields.form.payment.invoice != null : false; } }
         public List<Despegar.Core.Business.Flight.BookingCompletePostResponse.RiskQuestion> FreeTextQuestions {
             get
@@ -150,25 +151,27 @@ namespace Despegar.WP.UI.Model.ViewModel
                     payments.installment.card_type.CoreValue = selectedCard.card.type;
                     payments.installment.complete_card_code.CoreValue = selectedCard.card.code;
 
-                    Despegar.LegacyCore.Connector.Domain.API.ValidationCreditcard validation = CreditCardsValidations.data.FirstOrDefault(x => x.bankCode == (selectedCard.card.bank == "" ? "*" : selectedCard.card.bank) && x.cardCode == selectedCard.card.company);
+                    if (CreditCardsValidations != null)
+                    {
+                        ValidationCreditcard validation = CreditCardsValidations.data.FirstOrDefault(x => x.bankCode == (selectedCard.card.bank == "" ? "*" : selectedCard.card.bank) && x.cardCode == selectedCard.card.company);
 
-                    Validation valNumber = new Validation();
-                    valNumber.error_code = "NUMBER";
-                    valNumber.regex = validation.numberRegex;
-                    CoreBookingFields.form.payment.card.number.validations = new List<Validation>();
-                    CoreBookingFields.form.payment.card.number.validations.Add(valNumber);
+                        Validation valNumber = new Validation();
+                        valNumber.error_code = "NUMBER";
+                        valNumber.regex = validation.numberRegex;
+                        CoreBookingFields.form.payment.card.number.validations = new List<Validation>();
+                        CoreBookingFields.form.payment.card.number.validations.Add(valNumber);
 
-                    Validation valLength = new Validation();
-                    valLength.error_code = "LENGTH";
-                    valLength.regex = validation.lengthRegex;
-                    CoreBookingFields.form.payment.card.number.validations.Add(valLength);
+                        Validation valLength = new Validation();
+                        valLength.error_code = "LENGTH";
+                        valLength.regex = validation.lengthRegex;
+                        CoreBookingFields.form.payment.card.number.validations.Add(valLength);
 
-                    Validation valCode = new Validation();
-                    valCode.error_code = "CODE";
-                    valCode.regex = validation.codeRegex;
-                    CoreBookingFields.form.payment.card.security_code.validations = new List<Validation>();
-                    CoreBookingFields.form.payment.card.security_code.validations.Add(valCode); //.number.validations.Add(val);
-
+                        Validation valCode = new Validation();
+                        valCode.error_code = "CODE";
+                        valCode.regex = validation.codeRegex;
+                        CoreBookingFields.form.payment.card.security_code.validations = new List<Validation>();
+                        CoreBookingFields.form.payment.card.security_code.validations.Add(valCode); //.number.validations.Add(val);
+                    }
                 }
 
                 OnPropertyChanged(); 
@@ -336,7 +339,7 @@ namespace Despegar.WP.UI.Model.ViewModel
         }
 
         // Public because it is used from the InvoiceArg control
-        public async Task<List<CitiesFields>> GetCities(string CountryCode, string Search, string cityresult)
+        public async Task<List<Despegar.Core.Business.Configuration.CitiesFields>> GetCities(string CountryCode, string Search, string cityresult)
         {
             return await configurationService.AutoCompleteCities(CountryCode, Search, cityresult);
         }

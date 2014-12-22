@@ -868,4 +868,7 @@ La reserva no ha sido generada y no se le cobrará ningún cargo por la transacc
   <data name="Voucher_ERROR_TITLE" xml:space="preserve">
     <value>Cupón inválido</value>
   </data>
+  <data name="Checkout_Bank_Interest" xml:space="preserve">
+    <value>Intereses liquidados por la entidad bancaria</value>
+  </data>
 </root>
