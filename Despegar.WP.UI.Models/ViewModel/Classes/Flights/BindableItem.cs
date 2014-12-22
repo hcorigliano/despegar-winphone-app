@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Despegar.Core.Business.Flight.Itineraries;
+using Despegar.WP.UI.Model.Common;
 
 namespace Despegar.WP.UI.Model.Classes.Flights
 {
@@ -60,5 +61,6 @@ namespace Despegar.WP.UI.Model.Classes.Flights
 
             }
         }
+
     }
 }

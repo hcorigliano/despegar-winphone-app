@@ -1,7 +1,9 @@
 ﻿using Despegar.Core.Business.Flight.Itineraries;
 using Despegar.Core.IService;
 using Despegar.WP.UI.Model.Classes.Flights;
+using Despegar.WP.UI.Model.Common;
 using Despegar.WP.UI.Model.Interfaces;
+using Despegar.WP.UI.Model.ViewModel.Classes.Results;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -127,6 +129,7 @@ namespace Despegar.WP.UI.Model
             {
                 //Items.AddRange((itemList.Select(il => new BindableItem(il))).ToList());
                 var list = (itemList.Select(il => new BindableItem(il))).ToList();
+                //var bList = new IncrementalLoadingCollection<BindableItemsLoadingCollection, BindableItem>();
                 this.Items = list;
                 //base.NotifyPropertyChanged("Items");
             }

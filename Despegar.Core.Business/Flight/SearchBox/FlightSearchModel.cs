@@ -69,7 +69,7 @@ namespace Despegar.Core.Business.Flight.SearchBox
             AddMultipleSegment();
 
             // TODO these values are going to be handle next interation
-            this.LimitResult = 20;
+            this.LimitResult = 200;
             this.Offset = 0;
 
             //this.SearchErrors = new List<CustomError>();

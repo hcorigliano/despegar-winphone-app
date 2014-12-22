@@ -67,6 +67,8 @@
   <ItemGroup>
     <Compile Include="AppModelBase.cs" />
     <Compile Include="ClientDeviceInfo.cs" />
+    <Compile Include="Common\IIncrementalSource.cs" />
+    <Compile Include="Common\IncrementalLoadingCollection.cs" />
     <Compile Include="Common\ViewModelErrorArgs.cs" />
     <Compile Include="ViewModel\Classes\Flights\FlightsCrossParameter.cs" />
     <Compile Include="ViewModel\Classes\Flights\FlightSearchNavigationData.cs" />
@@ -80,6 +82,7 @@
     <Compile Include="ViewModel\Classes\HomeParameters.cs" />
     <Compile Include="ViewModel\Classes\Minor.cs" />
     <Compile Include="Interfaces\INavigator.cs" />
+    <Compile Include="ViewModel\Classes\Results\BindableItemsLoadingCollection.cs" />
     <Compile Include="ViewModel\CountrySelectionViewModel.cs" />
     <Compile Include="ViewModel\Flights\FlightThanksViewModel.cs" />
     <Compile Include="ViewModel\Flights\MultipleEditionViewModel.cs" />
