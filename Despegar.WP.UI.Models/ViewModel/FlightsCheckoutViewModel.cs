@@ -755,11 +755,15 @@ namespace Despegar.WP.UI.Model.ViewModel
 
             VoucherResult = await couponsService.Validity(parameter);
 
-            if (VoucherResult != null)
+            if (VoucherResult.Error == null)
                 field.IsApplied = true; // Voucher OK!
             else
-                // Invalid coupon. Please, Try again 
+            {
+                // Notify Coupon Error
                 field.IsApplied = false;
+                OnViewModelError("VOUCHER_VALIDITY_ERROR", VoucherResult.Error.ToString());
+                VoucherResult = null;
+            }
 
             field.Validate();
             IsLoading = false;

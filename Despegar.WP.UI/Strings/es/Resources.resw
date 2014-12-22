@@ -844,4 +844,28 @@ La reserva no ha sido generada y no se le cobrará ningún cargo por la transacc
   <data name="Flight_Close_Airport_Select_Airport.Text" xml:space="preserve">
     <value>Seleccionar aeropuerto cercano a</value>
   </data>
+  <data name="Voucher_ERROR_COUPON_ALREADY_USED_BY_USER" xml:space="preserve">
+    <value>El cupón ya ha sido usado. No puede volver a usarse.</value>
+  </data>
+  <data name="Voucher_ERROR_COUPON_EXPIRED" xml:space="preserve">
+    <value>El cupón ingresado ha expirado. No es posible utilizarlo.</value>
+  </data>
+  <data name="Voucher_ERROR_COUPON_INVALID" xml:space="preserve">
+    <value>El cupón no existe o es inválido. Por favor, verifique el código ingresado.</value>
+  </data>
+  <data name="Voucher_ERROR_COUPON_INVALID_BENEFICIARY" xml:space="preserve">
+    <value>El beneficiario del cupón no es válido.</value>
+  </data>
+  <data name="Voucher_ERROR_COUPON_INVALID_DATE" xml:space="preserve">
+    <value>La fecha no es válida para este cupón.</value>
+  </data>
+  <data name="Voucher_ERROR_COUPON_NO_USES_REMAINING" xml:space="preserve">
+    <value>Los usos del cupón han sido agotados.</value>
+  </data>
+  <data name="Voucher_ERROR_COUPON_WRONG_COUNTRY" xml:space="preserve">
+    <value>El cupón no es válido para este pais.</value>
+  </data>
+  <data name="Voucher_ERROR_TITLE" xml:space="preserve">
+    <value>Cupón inválido</value>
+  </data>
 </root>
