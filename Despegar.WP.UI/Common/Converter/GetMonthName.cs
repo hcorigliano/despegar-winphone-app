@@ -34,7 +34,7 @@ namespace Despegar.WP.UI.Common.Converter
             {
                 int.TryParse(val, out month);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return String.Empty;
             }

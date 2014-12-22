@@ -83,11 +83,11 @@ namespace Despegar.WP.UI.Developer
                 .ToList();                        
         }
 
-        private void ShowInvalidMessage()
+        private async void ShowInvalidMessage()
         {
             Logger.Log("[Developer Tools]: Can't use this functionality in this page. Go to the correct page.");
             var msg = new MessageDialog("Not available for current View.");
-            msg.ShowAsync();
+            await msg.ShowAsync();
         }
 
         public ICommand FillFlightsOneWaySearchBox_MIAMI
