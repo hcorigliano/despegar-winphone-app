@@ -30,13 +30,7 @@ namespace Despegar.WP.UI.Product.Flights.Checkout.Payment.Controls
 
         private void Image_Load_Failed(object sender, ExceptionRoutedEventArgs e)
         {
-            //var test = ((Image)sender).Source;
-            //int i = 1;
-            //((Image)sender).Source = new ImageSource
-            ((Image)sender).Source = new BitmapImage(new Uri("ms-appx:/Assets/Icon/CreditCard/GRL.png", UriKind.Absolute));//BitmapImage(new Uri(@"/Assets/Icon/CreditCard/GRL.png", UriKind.RelativeOrAbsolute));
-            //File.Exists("path to file")
-            //int i = 1;
-            //((Image)sender).SetValue( //Source = new ImageSource()
+            ((Image)sender).Source = new BitmapImage(new Uri("ms-appx:/Assets/Icon/CreditCard/GRL.png", UriKind.Absolute));
         }
     }
 }

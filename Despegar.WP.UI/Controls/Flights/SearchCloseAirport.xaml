@@ -28,7 +28,6 @@
         </Storyboard>
     </UserControl.Resources>
 
-    <!--Width="{Binding Viewport.Width}" Height="{Binding Viewport.Height}"-->
     <Grid Height="350" Width="350" Opacity="0.6" x:Name="mainCanvas"  HorizontalAlignment="Center" VerticalAlignment="Center" >
         <Grid.RowDefinitions>
             <RowDefinition/>
@@ -37,7 +36,7 @@
             <SolidColorBrush Color="Black" Opacity="0.4"/>
         </Grid.Background>
 
-        <Grid Height="350" Width="350" Background="#FF091423" HorizontalAlignment="Center" VerticalAlignment="Center" >
+        <Grid Height="350" Width="350" Background="#444444"  HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="mainGrid" >
             <Grid.RowDefinitions>
                 <RowDefinition Height="{StaticResource Block2p}"/>
                 <RowDefinition Height="{StaticResource Block2p}" />
@@ -45,16 +44,10 @@
             </Grid.RowDefinitions>
 
             <StackPanel Grid.Row="0">
-                <StackPanel.Background>
-                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                        <GradientStop Color="#FF3C6EA0"/>
-                        <GradientStop Color="#FF112649" Offset="1"/>
-                    </LinearGradientBrush>
-                </StackPanel.Background>
-                <TextBlock Style="{StaticResource PageHeaderSmall}" Margin="0,20,0,0" Text="Seleccionar aeropuerto" HorizontalAlignment="Center" VerticalAlignment="Center"  />
+                <TextBlock Style="{StaticResource SegoeLight28}" Margin="20,20,0,0" Text="Seleccionar aeropuerto" HorizontalAlignment="Left" VerticalAlignment="Center"  />
             </StackPanel>
 
-            <TextBlock Margin="5,0,0,0"  Style="{StaticResource BaseTextLabel}" Grid.Row="1">
+            <TextBlock Margin="20,0,0,0"  Style="{StaticResource SegoeRegular15}" Grid.Row="1">
                 <Run x:Uid="Flight_Close_Airport_Select_Airport" Text="Seleccione un aeropuerto cercano a "></Run>
                 <Run x:Name="searchedAirport" Text="{Binding searchedAirport}"></Run>
             </TextBlock>
@@ -64,7 +57,7 @@
                 <ListView.ItemTemplate>
                     <DataTemplate>
 
-                        <TextBlock Margin="5,0,0,0" Style="{StaticResource BaseText}" Text="{Binding name}"></TextBlock>
+                        <TextBlock Margin="20,0,0,35" Style="{StaticResource SegoeLight22}" Text="{Binding name}"></TextBlock>
 
                     </DataTemplate>
                 </ListView.ItemTemplate>
