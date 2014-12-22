@@ -21,7 +21,7 @@ namespace Despegar.WP.UI.Common.Converter
                 string[] durationTime = ((string)value).Split(new Char[] { ':' });
                 return durationTime[0];
 
-            }catch(Exception ex)
+            }catch(Exception)
             {
                 return 0;
             }
@@ -50,7 +50,7 @@ namespace Despegar.WP.UI.Common.Converter
 
                 return durationTime[1];
 
-            }catch(Exception ex)
+            }catch(Exception)
             {
                 return 0;
             }

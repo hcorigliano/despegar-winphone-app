@@ -1,27 +1,16 @@
-﻿using Despegar.Core.Business.Configuration;
-using Despegar.Core.IService;
-using Despegar.LegacyCore;
-using Despegar.LegacyCore.Connector;
-using Despegar.LegacyCore.ViewModel;
-using Despegar.WP.UI.Common;
+﻿using Despegar.WP.UI.Common;
+using Despegar.WP.UI.Controls;
 using Despegar.WP.UI.Model;
-using Despegar.WP.UI.Product.Legacy;
+using Despegar.WP.UI.Model.ViewModel;
+using Despegar.WP.UI.Model.ViewModel.Classes;
 using Despegar.WP.UI.Strings;
 using System;
-using System.Windows;
 using System.Collections.Generic;
-using System.Linq;
+using System.ComponentModel;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
-using Despegar.WP.UI.Developer;
-using Windows.UI.Xaml;
-using Windows.UI.Popups;
-using Despegar.WP.UI.Controls;
-using System.ComponentModel;
-using Despegar.WP.UI.Model.ViewModel;
-using Despegar.WP.UI.Product.Flights;
-using Despegar.WP.UI.Model.ViewModel.Classes;
 
 namespace Despegar.WP.UI
 {    
@@ -151,7 +140,7 @@ namespace Despegar.WP.UI
 
         #endregion
 
-        private void ListView_ItemClick(object sender, ItemClickEventArgs e)
+        private async void ListView_ItemClick(object sender, ItemClickEventArgs e)
         {
             string selectedButton = (string)((e.ClickedItem as Grid).DataContext);
 
@@ -168,8 +157,12 @@ namespace Despegar.WP.UI
                     //f.Navigate(typeof(FlightCheckout), null);
                     //break;
                 default:
+#if DECOLAR
+                    var dialog = new MessageDialog("Esta funcionalidade estará disponível em breve.", "Em Breve");
+#else
                     var dialog = new MessageDialog("Proximamente estará disponible esta funcionalidad.", "Proximamente");
-                    dialog.ShowAsync();
+#endif
+                    await dialog.ShowAsync();
                     break;
             }
         }

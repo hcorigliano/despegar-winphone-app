@@ -13,9 +13,11 @@ namespace Despegar.WP.UI.Common.Converter
     {
         public object Convert(object value, Type targetType, object parameter, string language)
         {
+            if (value == null) return String.Empty;
+
+
             FlightSearchPages val = (FlightSearchPages)value;
             var loader = new Windows.ApplicationModel.Resources.ResourceLoader();
-            if (val == null) return String.Empty;
 
             switch ( val)
             {
@@ -41,10 +43,10 @@ namespace Despegar.WP.UI.Common.Converter
 
         public object Convert(object value, Type targetType, object parameter, string language)
         {
+            if (value == null) return String.Empty;
 
             FlightSearchPages val = (FlightSearchPages)value;
             var loader = new Windows.ApplicationModel.Resources.ResourceLoader();
-            if (val == null) return String.Empty;
 
             switch (val)
             {
