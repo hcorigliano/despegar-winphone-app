@@ -8,7 +8,6 @@ using Despegar.Core.Business.Enums;
 using Despegar.WP.UI.Model;
 using Despegar.Core.Business.CustomErrors;
 
-
 namespace Despegar.Core.Business.Flight.SearchBox
 {
     public class FlightSearchModel : BusinessModelBase
@@ -45,6 +44,10 @@ namespace Despegar.Core.Business.Flight.SearchBox
 
         public CustomError SearchErrors { get; set; }
 
+        public int EmissionAnticipationDay { get; set; }
+
+        public int LastAvailableHours { get; set; }
+
         public FlightSearchModel()
         {
             //TODO uncomment following code for advance search
@@ -58,8 +61,8 @@ namespace Despegar.Core.Business.Flight.SearchBox
             this.OriginFlightText = string.Empty;
             this.DestinationFlightText = string.Empty;
 
-            this.DepartureDate = DateTime.Today.AddDays(2);
-            this.DestinationDate = DateTime.Today.AddDays(2);
+            this.DepartureDate = DateTime.Today.AddDays(EmissionAnticipationDay);
+            this.DestinationDate = DateTime.Today.AddDays(EmissionAnticipationDay);
 
             this.MultipleSegments = new List<FlightMultipleSegment>();
             AddMultipleSegment();
@@ -276,5 +279,11 @@ namespace Despegar.Core.Business.Flight.SearchBox
             }
         }
 
+
+        public void UpdateSearchDays()
+        {
+            this.DepartureDate = DateTime.Today.AddDays(EmissionAnticipationDay);
+            this.DestinationDate = DateTime.Today.AddDays(EmissionAnticipationDay);
+        }
     }
 }

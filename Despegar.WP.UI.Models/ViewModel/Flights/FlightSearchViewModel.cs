@@ -1,4 +1,5 @@
-﻿using Despegar.Core.Business.Enums;
+﻿using Despegar.Core.Business.Configuration;
+using Despegar.Core.Business.Enums;
 using Despegar.Core.Business.Flight;
 using Despegar.Core.Business.Flight.CitiesAutocomplete;
 using Despegar.Core.Business.Flight.Itineraries;
@@ -146,6 +147,36 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
             this.flightService = flightService;
             this.coreSearchModel = new FlightSearchModel();
             this.PassengersViewModel = new PassengersViewModel();
+
+            GetParameterSearchfromConfiguration(this.coreSearchModel);
+
+            coreSearchModel.UpdateSearchDays();
+        }
+
+        private void GetParameterSearchfromConfiguration(FlightSearchModel model)
+        {
+            Configuration conf = GlobalConfiguration.CoreContext.GetConfiguration();
+            string site = GlobalConfiguration.Site;
+
+            var site2return = conf.sites.Where(s => s.code == site).FirstOrDefault();
+            if (site2return == null)
+                return;
+
+            var _s = site2return.products.Where(p=>p.name == "flights").FirstOrDefault();
+            if (_s == null)
+                return;
+          
+            model.EmissionAnticipationDay = _s.emission_anticipation_days;
+            int last =0;
+
+            try
+            {
+                last = Convert.ToInt32(_s.last_available_hour);
+            }catch( Exception ex){
+                last=0;
+            }
+
+            model.LastAvailableHours = last;
         }        
       
         private async void Search()
