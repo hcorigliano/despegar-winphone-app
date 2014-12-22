@@ -44,7 +44,7 @@ namespace Despegar.WP.UI.Model.ViewModel
         public BookingFields CoreBookingFields { get; set; }                
         public List<CountryFields> Countries { get; set; }
         public List<State> States { get; set; }
-        public bool InvoiceRequired { get { return CoreBookingFields.form.payment.invoice != null; } }
+        public bool InvoiceRequired { get { return CoreBookingFields != null? CoreBookingFields.form.payment.invoice != null : false; } }
         public List<Despegar.Core.Business.Flight.BookingCompletePostResponse.RiskQuestion> FreeTextQuestions {
             get
             {
@@ -789,11 +789,15 @@ namespace Despegar.WP.UI.Model.ViewModel
 
             VoucherResult = await couponsService.Validity(parameter);
 
-            if (VoucherResult != null)
+            if (VoucherResult.Error == null)
                 field.IsApplied = true; // Voucher OK!
             else
-                // Invalid coupon. Please, Try again 
+            {
+                // Notify Coupon Error
                 field.IsApplied = false;
+                OnViewModelError("VOUCHER_VALIDITY_ERROR", VoucherResult.Error.ToString());
+                VoucherResult = null;
+            }
 
             field.Validate();
             IsLoading = false;

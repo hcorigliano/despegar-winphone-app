@@ -23,13 +23,7 @@ namespace Despegar.WP.UI.Controls.Flights
     {
         private SearchAirport searchAirport;
         private string SelectedName;
-        //public string searchedAirport;
-
-        //public SearchCloseAirport(SearchAirport searchAirport)
-        //{
-        //    this.InitializeComponent();
-        //    this.searchAirport = searchAirport;
-        //}
+        
 
         public SearchCloseAirport(SearchAirport searchAirport, string selectedName , string airportName)
         {
@@ -38,8 +32,11 @@ namespace Despegar.WP.UI.Controls.Flights
             this.SelectedName = selectedName;
 
             searchedAirport.Text = airportName;
-
-            mainCanvas.Margin = new Thickness((Window.Current.Bounds.Width - mainCanvas.Width) / 2, (Window.Current.Bounds.Height - mainCanvas.Height) / 2, 0, 0);
+            mainGrid.Width = Window.Current.Bounds.Width;
+            mainGrid.Height = Window.Current.Bounds.Height - 230;
+            mainCanvas.Width = Window.Current.Bounds.Width;
+            mainCanvas.Height = Window.Current.Bounds.Height;
+            mainCanvas.Margin = new Thickness(0, (Window.Current.Bounds.Height - mainCanvas.Height) / 2, 0, 0);
         }
 
         public void Enter()

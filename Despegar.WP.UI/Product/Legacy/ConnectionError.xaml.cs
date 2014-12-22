@@ -1,8 +1,10 @@
 ﻿using Despegar.WP.UI.Common;
+using System;
 using System.Net.NetworkInformation;
 using Windows.Phone.UI.Input;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
 
 namespace Despegar.WP.UI.Product.Legacy
@@ -14,9 +16,8 @@ namespace Despegar.WP.UI.Product.Legacy
             this.InitializeComponent();
 
             #if DECOLAR
-            MainLogo.Source = new BitmapImage(new Uri("/Assets/Image/decolar-logo.png", UriKind.RelativeOrAbsolute));
+            MainLogo.Source = new BitmapImage(new Uri("ms-appx:/Product/Legacy/Assets/Image/decolar-logo.png", UriKind.Absolute));
             #endif
-
         }
 
         protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)

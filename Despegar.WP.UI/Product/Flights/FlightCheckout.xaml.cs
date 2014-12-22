@@ -98,7 +98,7 @@ namespace Despegar.WP.UI.Product.Flights
         }
 
         # region ** ERROR HANDLING **
-        private void ErrorHandler(object sender, ViewModelErrorArgs e)
+        private async void ErrorHandler(object sender, ViewModelErrorArgs e)
         {
             ResourceLoader manager = new ResourceLoader();
             MessageDialog dialog;
@@ -108,7 +108,7 @@ namespace Despegar.WP.UI.Product.Flights
             {
                 case "FORM_ERROR":
                     dialog = new MessageDialog(manager.GetString("Flights_Checkout_ERROR_FORM_ERROR"), manager.GetString("Flights_Checkout_ERROR_FORM_ERROR_TITLE"));
-                    dialog.ShowAsync();
+                    await dialog.ShowAsync();
 
                     // Go to Pivot with errors
                     string sectionID = (string)e.Parameter;
@@ -116,7 +116,7 @@ namespace Despegar.WP.UI.Product.Flights
                     break;
                 case "TERMS_AND_CONDITIONS_NOT_CHECKED":
                     dialog = new MessageDialog(manager.GetString("TermsAndConditions_ERROR"), manager.GetString("TermsAndConditions_ERROR_TITLE"));
-                    dialog.ShowAsync();
+                    await dialog.ShowAsync();
                     break;
 
                 case "BOOKING_FAILED":
@@ -126,7 +126,7 @@ namespace Despegar.WP.UI.Product.Flights
                         string phrase = manager.GetString("Flights_Checkout_Card_Data_Card_ERROR_OP_BOOKING_FAILED");
 
                         dialog = new MessageDialog(String.Format(phrase,ticketid), manager.GetString("Flights_Checkout_ERROR_FORM_ERROR_TITLE"));
-                        dialog.ShowAsync();
+                        await dialog.ShowAsync();
                         this.navigationHelper.GoBack();
                         this.navigationHelper.GoBack();
                         break;
@@ -134,17 +134,17 @@ namespace Despegar.WP.UI.Product.Flights
 
                case "COMPLETE_BOOKING_CONECTION_FAILED":
                     dialog = new MessageDialog(manager.GetString("Flights_Search_ERROR_SEARCH_FAILED"), manager.GetString("Flights_Search_ERROR_SEARCH_FAILED_TITLE"));
-                    dialog.ShowAsync();
+                    await dialog.ShowAsync();
                     break;
 
                case "CHECKOUT_INIT_FAILED":
                     dialog = new MessageDialog(manager.GetString("Flights_Search_ERROR_SEARCH_FAILED"), manager.GetString("Flights_Search_ERROR_SEARCH_FAILED_TITLE"));
-                    dialog.ShowAsync();
+                    await dialog.ShowAsync();
                     this.navigationHelper.GoBack();
                     break;
                case "ONLINE_PAYMENT_ERROR_NEW_CREDIT_CARD":
                     dialog = new MessageDialog(manager.GetString("Flights_Checkout_Card_Data_Card_ERROR_NEW_CREDIT_CARD"), manager.GetString("Flights_Checkout_ERROR_FORM_ERROR_TITLE"));
-                    dialog.ShowAsync();
+                    await dialog.ShowAsync();
 
                     // Go to Pivot with errors
                     pageID = (string)e.Parameter;
@@ -154,7 +154,7 @@ namespace Despegar.WP.UI.Product.Flights
                case "ONLINE_PAYMENT_ERROR_FIX_CREDIT_CARD":
                     {
                         dialog = new MessageDialog(manager.GetString("Flights_Checkout_Card_Data_Card_ERROR_ONLINE_PAYMENT_ERROR_FIX_CREDIT_CARD"), manager.GetString("Flights_Checkout_ERROR_FORM_ERROR_TITLE"));
-                        dialog.ShowAsync();
+                        await dialog.ShowAsync();
                         pageID = (string)e.Parameter;
                         MainPivot.SelectedIndex = GetSectionIndex(pageID);
                     }
@@ -168,44 +168,21 @@ namespace Despegar.WP.UI.Product.Flights
                         string phone = GetContactPhone();
                         string phrase = manager.GetString("Flights_Checkout_Card_Data_Card_ERROR_OP_PAYMENT_FAILED");
                         dialog = new MessageDialog(String.Format(phrase, phone), manager.GetString("Flights_Checkout_ERROR_FORM_ERROR_TITLE"));
-                        dialog.ShowAsync();
+                        await dialog.ShowAsync();
                         break;
                     }
 
                 case "COMPLETE_BOOKING_BOOKING_FAILED":
                     dialog = new MessageDialog(manager.GetString("Flights_Search_ERROR_BOOKING_FAILED"), manager.GetString("Flights_Search_ERROR_SEARCH_FAILED_TITLE"));
-                    dialog.ShowAsync();
+                    await dialog.ShowAsync();
                     this.navigationHelper.GoBack();
                     this.navigationHelper.GoBack();
                     break;
-                case "API_ERROR":
-                    switch(((int)e.Parameter)) 
-                    {
-                            // TODO: check this cases:
-
-                            //EXPIRED_SESSION("10", "^.*booking_id not found.*$"),
-                            //BENEFICIARY_TYPE_INVALID_ERROR("11", "^.*Invalid value for CouponBeneficiaryIdType.*$"),
-                            //INVALID_BIRTHDAY("13", ".*birthday.value:  INVALID_VALUE.*"),
-                            //MISSING_BIRTHDAY("14", ".*birthday.value:  MISSING_FIELD.*"),
-
-                            //// this field is called card_holder_name in V3 and fiscal_name in MAPI
-                            //MISSING_FISCAL_NAME("15", ".*invoice.card_holder_name.value:  MISSING_FIELD.*"), 
-
-                            //COUPON_INVALID("20", buildStandardErrorMessage("100")),
-                            //COUPON_EXPIRED("22", buildStandardErrorMessage("202")),
-                            //COUPON_NO_USES_REMAINING("23", buildStandardErrorMessage("203")),
-                            //COUPON_WRONG_COUNTRY("24", buildStandardErrorMessage("204")),
-                            //COUPON_INVALID_BENEFICIARY("26", buildStandardErrorMessage("206")),
-                            //COUPON_ALREADY_USED_BY_USER("27", buildStandardErrorMessage("207")),
-                            //COUPON_INVALID_DATE("43", buildStandardErrorMessage("423")),
-                            //BOOKING_ITEM_NOT_FOUND("60", ".*Item .* was not found.*"); // TODO reproduce this error, got it from new relic  
-
-                        default:
-                            break;
-                    }
-                    dialog = new MessageDialog(manager.GetString("Flights_Search_ERROR_BOOKING_FAILED"), manager.GetString("Flights_Search_ERROR_SEARCH_FAILED_TITLE"));
-                    dialog.ShowAsync();                    
+                case "VOUCHER_VALIDITY_ERROR":
+                    dialog = new MessageDialog(manager.GetString("Voucher_ERROR_" + (string)e.Parameter), manager.GetString("Voucher_ERROR_TITLE"));
+                    await dialog.ShowAsync();                    
                     break;
+                    // TODO: CHECKOUT SESSION EXPIRED -> Handle that error
             }
         }
 
@@ -213,7 +190,7 @@ namespace Despegar.WP.UI.Product.Flights
         {
             try
             {
-
+                // TODO: Refactor GLOVAL COnfig to return the current Configuration, and not query it here.
                 Configuration conf = GlobalConfiguration.CoreContext.GetConfiguration();
 
                 if (conf == null) return String.Empty;
@@ -221,7 +198,8 @@ namespace Despegar.WP.UI.Product.Flights
                 string phone = (conf.sites.FirstOrDefault(si => si.code == countrySelected) as Site).contact.phone;
 
                 return phone;
-            }catch(Exception ex)
+            } 
+            catch(Exception)
             {
                 //TODO add logs
                 return String.Empty;
