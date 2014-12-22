@@ -31,8 +31,8 @@
                     <DataTemplate>
                         <!--Style="{StaticResource ImageBase}"-->
                             <!--Margin="0,0,9.6,9.6" Width="{StaticResource dBlock3}" Height="{StaticResource dBlock2}"-->
-                        <Image Margin="0,0,9.6,9.6" Width="{StaticResource dBlock3}" Height="{StaticResource dBlock2}"  
-                               Source="{Binding card.code, Converter={StaticResource StringFormatConverter}, ConverterParameter='/Assets/Icon/CreditCard/{0}.png' , TargetNullValue='/Assets/Icon/CreditCard/GRL.png'}"   />
+                        <Image Margin="0,0,9.6,9.6" Width="{StaticResource dBlock3}" Height="{StaticResource dBlock2}" ImageFailed="Image_Load_Failed"  
+                               Source="{Binding card.code, Converter={StaticResource StringFormatConverter}, ConverterParameter='/Assets/Icon/CreditCard/{0}.png' , TargetNullValue='/Assets/Icon/CreditCard/GRL.png' }"   />
                     </DataTemplate>
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
