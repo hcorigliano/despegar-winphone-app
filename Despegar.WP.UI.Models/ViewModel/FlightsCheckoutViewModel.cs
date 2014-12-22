@@ -15,6 +15,7 @@ using Despegar.WP.UI.Model.ViewModel.Classes.Flights;
 using Despegar.WP.UI.Models.Classes;
 using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.Globalization;
 using System.Linq;
 using System.Text;
@@ -87,6 +88,8 @@ namespace Despegar.WP.UI.Model.ViewModel
         private CouponResponse voucherResult;
         public CouponResponse VoucherResult { get { return voucherResult; } set { voucherResult = value; OnPropertyChanged(); } }
         public event EventHandler ShowRiskReview;
+        public event EventHandler HideRiskReview;
+
 
         /// <summary>
         /// For Details section
@@ -533,6 +536,8 @@ namespace Despegar.WP.UI.Model.ViewModel
 
         private async void SendRiskAnswers()
         {
+            this.IsLoading = true;
+
             List<Despegar.Core.Business.Flight.BookingCompletePost.RiskAnswer> answers = new List<Despegar.Core.Business.Flight.BookingCompletePost.RiskAnswer>();
             BookingCompletePostResponse BookingResponse = new BookingCompletePostResponse();
 
@@ -549,7 +554,20 @@ namespace Despegar.WP.UI.Model.ViewModel
                 answers.Add(question.risk_answer);
             }
 
-            BookingResponse = await flightService.CompleteBooking(answers, null);
+            dynamic result = new ExpandoObject();
+            result.form = new ExpandoObject();
+            result.form.risk_questions = answers;
+
+            BookingResponse = await flightService.CompleteBooking(result, CoreBookingFields.id);
+            this.IsLoading = false;
+
+            EventHandler AnswerHandler = HideRiskReview;
+            if (AnswerHandler != null)
+            {
+                AnswerHandler(this, null);
+            }
+            
+            AnalizeBookingStatus(BookingResponse.booking_status);
 
         }
         
@@ -583,7 +601,8 @@ namespace Despegar.WP.UI.Model.ViewModel
         /// <returns></returns>
         private static BookingFields FillBookingFields(BookingFields bookingFields)
         {
-            bookingFields.form.contact.email.CoreValue = "bookingvuelos@despegar.com";
+            bookingFields.form.contact.email.CoreValue = "testchas@despegar.com";
+            bookingFields.form.contact.emailConfirmation.CoreValue = "testchas@despegar.com";
             bookingFields.form.contact.phones[0].area_code.CoreValue = "11";
             bookingFields.form.contact.phones[0].country_code.CoreValue = "54";
             bookingFields.form.contact.phones[0].number.CoreValue = "44444444";
@@ -631,7 +650,7 @@ namespace Despegar.WP.UI.Model.ViewModel
         {
 #if DEBUG
             // Fill Test data
-            //FillBookingFields(CoreBookingFields);
+            FillBookingFields(CoreBookingFields);
 #endif
 
             if (!IsTermsAndConditionsAccepted)
@@ -663,61 +682,14 @@ namespace Despegar.WP.UI.Model.ViewModel
                     { 
                         // API Error ocurred, Check CODE and inform the user
                         OnViewModelError("API_ERROR", CrossParameters.BookingResponse.Error.code);
+                        this.IsLoading = false;
                         return;
                     }
 
                     // Booking processed, check the status of Booking request
-                    switch (GetStatus(CrossParameters.BookingResponse.booking_status))
-                    {
-                        case BookingStatusEnum.checkout_successful:
-                            
-                                navigator.GoTo(ViewModelPages.FlightsThanks, CrossParameters);
-                                break;
-                            
-                        //Please uncomment the case that you are to use.
-
-                        case BookingStatusEnum.booking_failed:
-                            
-                                OnViewModelError("BOOKING_FAILED", CrossParameters.BookingResponse.checkout_id);
-                                break;
-                            
-                        case BookingStatusEnum.fix_credit_card:
-                            
-                                OnViewModelError("ONLINE_PAYMENT_ERROR_FIX_CREDIT_CARD", "CARD");
-                                break;
-                            
-                        case BookingStatusEnum.new_credit_card:
-                            
-                                //this.selectedCard.card = new Card();
-                                //this.selectedCard.hasError = true;
-                                //this.selectedCard.CustomErrorType = BookingStatusEnum.new_credit_card.ToString().ToUpper();
-                                this.CoreBookingFields.form.payment.card.number.CoreValue = String.Empty;
-                                this.CoreBookingFields.form.payment.card.expiration.CoreValue = String.Empty;
-                                this.CoreBookingFields.form.payment.card.security_code.CoreValue = String.Empty;
-
-                                OnPropertyChanged("SelectedCard");
-                                OnViewModelError("ONLINE_PAYMENT_ERROR_NEW_CREDIT_CARD", "CARD");
-                                break;
-                            
-                        case BookingStatusEnum.payment_failed:
-                        case BookingStatusEnum.risk_evaluation_failed:
-                            
-                                OnViewModelError("ONLINE_PAYMENT_FAILED", "CARD");
-                                break;
-                            
-                        case BookingStatusEnum.risk_review:
-                            
-                                EventHandler RiskHandler = ShowRiskReview;
-                                if (RiskHandler != null)
-                                {
-                                    RiskHandler(this, null);
-                                }
-                                break;
-                            
-                        //case BookingStatusEnum.BookingCustomError:
-                        default:
-                            break;
-                    }
+                    AnalizeBookingStatus(CrossParameters.BookingResponse.booking_status);
+                    
+                    
                 }
                 catch (HTTPStatusErrorException)
                 {
@@ -731,6 +703,68 @@ namespace Despegar.WP.UI.Model.ViewModel
                 this.IsLoading = false;
             }
         }
+
+
+        /// <summary>
+        /// Validates the booking status
+        /// </summary>
+        private void AnalizeBookingStatus(string status)
+        {
+            switch (GetStatus(status))
+            {
+                case BookingStatusEnum.checkout_successful:
+
+                    navigator.GoTo(ViewModelPages.FlightsThanks, CrossParameters);
+                    break;
+
+                //Please uncomment the case that you are to use.
+
+                case BookingStatusEnum.booking_failed:
+
+                    OnViewModelError("BOOKING_FAILED", CrossParameters.BookingResponse.checkout_id);
+                    break;
+
+                case BookingStatusEnum.fix_credit_card:
+
+                    OnViewModelError("ONLINE_PAYMENT_ERROR_FIX_CREDIT_CARD", "CARD");
+                    break;
+
+                case BookingStatusEnum.new_credit_card:
+
+                    //this.selectedCard.card = new Card();
+                    //this.selectedCard.hasError = true;
+                    //this.selectedCard.CustomErrorType = BookingStatusEnum.new_credit_card.ToString().ToUpper();
+                    this.CoreBookingFields.form.payment.card.number.CoreValue = String.Empty;
+                    this.CoreBookingFields.form.payment.card.expiration.CoreValue = String.Empty;
+                    this.CoreBookingFields.form.payment.card.security_code.CoreValue = String.Empty;
+
+                    OnPropertyChanged("SelectedCard");
+                    OnViewModelError("ONLINE_PAYMENT_ERROR_NEW_CREDIT_CARD", "CARD");
+                    break;
+
+                case BookingStatusEnum.payment_failed:
+                case BookingStatusEnum.risk_evaluation_failed:
+
+                    OnViewModelError("ONLINE_PAYMENT_FAILED", "CARD");
+                    break;
+
+                case BookingStatusEnum.risk_review:
+
+                    EventHandler RiskHandler = ShowRiskReview;
+                    if (RiskHandler != null)
+                    {
+                        RiskHandler(this, null);
+                    }
+                    break;
+
+                //case BookingStatusEnum.BookingCustomError:
+                default:
+                    break;
+            }
+
+        }
+
+
 
         /// <summary>
         /// Validates the reference code against the service and sets the Validation errors or succcess

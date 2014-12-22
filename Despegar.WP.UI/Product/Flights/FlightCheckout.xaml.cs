@@ -71,7 +71,8 @@ namespace Despegar.WP.UI.Product.Flights
                 crossParameters);
 
             ViewModel.PropertyChanged += Checkloading;
-            ViewModel.ShowRiskReview += this.ShowRisk;            
+            ViewModel.ShowRiskReview += this.ShowRisk;
+            ViewModel.HideRiskReview += this.HideRisk;            
             ViewModel.ViewModelError += ErrorHandler;
 
             // Init Checkout
@@ -88,6 +89,12 @@ namespace Despegar.WP.UI.Product.Flights
         {
             riskPopup = new ModalPopup(new RiskQuestionsPopUp() { DataContext = ViewModel });
             riskPopup.Show();
+        }
+
+        private void HideRisk(Object sender, EventArgs e)
+        {
+            riskPopup.Hide();
+
         }
 
         # region ** ERROR HANDLING **

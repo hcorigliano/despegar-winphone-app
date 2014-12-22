@@ -36,7 +36,7 @@
                                 </Grid.RowDefinitions>
                                 <!-- Fields -->
                                 <TextBlock Style="{StaticResource BaseTextLabel}" Grid.Row="0" Text="{Binding title }" />
-                                <TextBox x:Name="respuesta"  Grid.Row="1" Style="{StaticResource CheckoutInputBase}" Text="{Binding risk_answer.answer_text , Mode=TwoWay}"/>
+                                <TextBox x:Name="respuesta"  Grid.Row="1" Style="{StaticResource CheckoutInputBase}" Text="{Binding risk_answer.text , Mode=TwoWay}"/>
                             </Grid>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>

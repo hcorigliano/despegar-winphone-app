@@ -24,7 +24,7 @@ namespace Despegar.Core.Business.Flight.BookingCompletePostResponse
              {
                 selectedChoice = value; 
                 risk_answer.answer_id = value.id;
-                risk_answer.answer_text = value.text;
+                risk_answer.text = value.text;
             }
         }
 
