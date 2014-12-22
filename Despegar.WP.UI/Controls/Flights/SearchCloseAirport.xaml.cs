@@ -32,12 +32,10 @@ namespace Despegar.WP.UI.Controls.Flights
             this.SelectedName = selectedName;
 
             searchedAirport.Text = airportName;
-            //(Window.Current.Bounds.Width - mainCanvas.Width) / 2
             mainGrid.Width = Window.Current.Bounds.Width;
             mainGrid.Height = Window.Current.Bounds.Height - 230;
             mainCanvas.Width = Window.Current.Bounds.Width;
             mainCanvas.Height = Window.Current.Bounds.Height;
-                //(Window.Current.Bounds.Height - mainCanvas.Height) / 2
             mainCanvas.Margin = new Thickness(0, (Window.Current.Bounds.Height - mainCanvas.Height) / 2, 0, 0);
         }
 
