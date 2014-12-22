@@ -15,11 +15,6 @@ namespace Despegar.WP.UI.Product.Flights.Checkout.Payment.Controls
             this.InitializeComponent();
         }  
 
-        private void Image_Load_Failed(object sender, ExceptionRoutedEventArgs e)
-        {                         
-            //((Image)sender).Source = new BitmapImage(new Uri("/Assets/Icon/CreditCard/GRL.png", UriKind.Relative));
-        }
-
         private void OnRadioButton_Clicked(object sender, RoutedEventArgs e)
         {
             RadioButton a = (RadioButton)e.OriginalSource;
