@@ -1,4 +1,5 @@
-﻿using Despegar.WP.UI.Common;
+﻿using Despegar.Core.Business.Flight.Itineraries;
+using Despegar.WP.UI.Common;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -40,7 +41,12 @@ namespace Despegar.WP.UI.Product.Flights
         /// This parameter is typically used to configure the page.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            this.DataContext = e.Parameter;
+            List<Facet> facet;
+            if (e.Parameter == null) return;
+            facet = e.Parameter as List<Facet>;
+            if (facet == null) return;
+
+            this.DataContext = facet;
         }
 
         /// <summary>

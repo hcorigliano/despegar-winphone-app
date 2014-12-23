@@ -436,7 +436,7 @@
     <value>pagamento</value>
   </data>
   <data name="Common_Payment_With" xml:space="preserve">
-    <value>con</value>
+    <value>com</value>
   </data>
   <data name="Common_Pays_Without_Interest" xml:space="preserve">
     <value>sem juros</value>
