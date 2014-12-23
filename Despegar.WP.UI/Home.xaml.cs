@@ -7,6 +7,7 @@ using Despegar.WP.UI.Strings;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using Windows.ApplicationModel.Resources;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -66,10 +67,20 @@ namespace Despegar.WP.UI
             get { return this.navigationHelper; }
         }
 
+        // TODO: Refactor. Use DATABINDINGS!!
         private async void SetupMenuItems(string country)
-        {            
+        {
             products = await ViewModel.GetProducts(country);
-            
+
+            // Failed to get configurations
+            if (products == null) 
+            {
+                ResourceLoader manager = new ResourceLoader();
+                MessageDialog dialog = new MessageDialog(manager.GetString("Page_Home_Configuration_Error"), "Error");
+                await dialog.ShowAsync();
+                Application.Current.Exit();
+                return;
+            }
 
             foreach (var product in products)
             {
