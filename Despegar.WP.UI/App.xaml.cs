@@ -10,6 +10,8 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
 using Windows.Security.ExchangeActiveSyncProvisioning;
+using Windows.UI.Popups;
+using Windows.ApplicationModel.Resources;
 
 // The Blank Application template is documented at http://go.microsoft.com/fwlink/?LinkId=391641
 
@@ -31,9 +33,16 @@ namespace Despegar.WP.UI
             this.InitializeComponent();
             this.Suspending += this.OnSuspending;
 
+          
+        }
 
-            // Initialize Core
-            GlobalConfiguration.InitCore();
+        private async static void NotifyAndClose()
+        {
+            MessageDialog dialog;
+            ResourceLoader manager = new ResourceLoader();
+            dialog = new MessageDialog(manager.GetString("Flights_Search_ERROR_SEARCH_FAILED"), manager.GetString("Flights_Search_ERROR_SEARCH_FAILED_TITLE")); //Error en la conexion a internet.
+            await dialog.ShowAsync();
+            Application.Current.Exit();
         }
 
         /// <summary>
@@ -42,8 +51,18 @@ namespace Despegar.WP.UI
         /// search results, and so forth.
         /// </summary>
         /// <param name="e">Details about the launch request and process.</param>
-        protected override void OnLaunched(LaunchActivatedEventArgs e)
+        protected async override void OnLaunched(LaunchActivatedEventArgs e)
         {
+            try
+            {
+                // Initialize Core
+                await GlobalConfiguration.InitCore();
+            }
+            catch (Exception)
+            {
+                NotifyAndClose();
+            }
+
 #if DEBUG
             if (System.Diagnostics.Debugger.IsAttached)
             {
