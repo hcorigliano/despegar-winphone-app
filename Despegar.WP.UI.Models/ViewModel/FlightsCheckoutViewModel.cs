@@ -22,6 +22,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Windows.ApplicationModel.Resources;
+using Windows.UI.Popups;
 
 
 namespace Despegar.WP.UI.Model.ViewModel
@@ -534,43 +535,6 @@ namespace Despegar.WP.UI.Model.ViewModel
             return formated;
         }
 
-        private async void SendRiskAnswers()
-        {
-            this.IsLoading = true;
-
-            List<Despegar.Core.Business.Flight.BookingCompletePost.RiskAnswer> answers = new List<Despegar.Core.Business.Flight.BookingCompletePost.RiskAnswer>();
-            BookingCompletePostResponse BookingResponse = new BookingCompletePostResponse();
-
-            foreach(RiskQuestion question in FreeTextQuestions)
-            {
-                question.risk_answer.question_id = question.id;
-                answers.Add(question.risk_answer);
-            }
-
-            foreach (RiskQuestion question in ChoiceQuestions)
-            {
-                question.risk_answer.question_id = question.id;
-                question.risk_answer.answer_id = question.risk_answer.answer_id;
-                answers.Add(question.risk_answer);
-            }
-
-            dynamic result = new ExpandoObject();
-            result.form = new ExpandoObject();
-            result.form.risk_questions = answers;
-
-            BookingResponse = await flightService.CompleteBooking(result, CoreBookingFields.id);
-            this.IsLoading = false;
-
-            EventHandler AnswerHandler = HideRiskReview;
-            if (AnswerHandler != null)
-            {
-                AnswerHandler(this, null);
-            }
-            
-            AnalizeBookingStatus(BookingResponse.booking_status);
-
-        }
-        
         private void ClearCreditCardFields()
         {
             this.selectedCard.card = new Card();
@@ -703,6 +667,67 @@ namespace Despegar.WP.UI.Model.ViewModel
                 this.IsLoading = false;
             }
         }
+
+        private async void SendRiskAnswers()
+        {
+            ResourceLoader manager = new ResourceLoader();
+
+            if (ValidateAnswers())
+            {
+                this.IsLoading = true;
+                List<Despegar.Core.Business.Flight.BookingCompletePost.RiskAnswer> answers = new List<Despegar.Core.Business.Flight.BookingCompletePost.RiskAnswer>();
+                BookingCompletePostResponse BookingResponse = new BookingCompletePostResponse();
+
+                foreach (RiskQuestion question in FreeTextQuestions)
+                {
+                    question.risk_answer.question_id = question.id;
+                    answers.Add(question.risk_answer);
+                }
+
+                foreach (RiskQuestion question in ChoiceQuestions)
+                {
+                    question.risk_answer.question_id = question.id;
+                    question.risk_answer.answer_id = question.risk_answer.answer_id;
+                    answers.Add(question.risk_answer);
+                }
+
+                dynamic result = new ExpandoObject();
+                result.form = new ExpandoObject();
+                result.form.risk_questions = answers;
+
+                BookingResponse = await flightService.CompleteBooking(result, CoreBookingFields.id);
+                this.IsLoading = false;
+
+                EventHandler AnswerHandler = HideRiskReview;
+                if (AnswerHandler != null)
+                {
+                    AnswerHandler(this, null);
+                }
+
+                AnalizeBookingStatus(BookingResponse.booking_status);
+
+            }
+            else
+            {
+                var msg = new MessageDialog(manager.GetString("Flight_Checkout_Risk_Error"));
+                await msg.ShowAsync();
+            }
+
+        }
+
+        private bool ValidateAnswers()
+        {
+            foreach (RiskQuestion question in CrossParameters.BookingResponse.risk_questions)
+            {
+                if (question.risk_answer.text == null || question.risk_answer.text == "")
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+        
 
 
         /// <summary>
