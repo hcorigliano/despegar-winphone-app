@@ -1,8 +1,10 @@
 ﻿using Despegar.WP.UI.Common;
+using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Media.Imaging;
 
 
 namespace Despegar.WP.UI.Controls.Flights.Detail
@@ -36,6 +38,12 @@ namespace Despegar.WP.UI.Controls.Flights.Detail
         {
             this.InitializeComponent();
             //(this.Content as FrameworkElement).DataContext = this;
+        }
+
+
+        private void Image_ImageFailed(object sender, ExceptionRoutedEventArgs e)
+        {
+            ((Image)sender).Source = new BitmapImage(new Uri("ms-appx:/Assets/Icon/Airlines/ag_default@2x.png", UriKind.Absolute));
         }
     }
 }
