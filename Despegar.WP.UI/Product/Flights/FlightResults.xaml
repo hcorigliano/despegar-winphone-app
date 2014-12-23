@@ -38,14 +38,13 @@
                     </Grid.ColumnDefinitions>
                     
                     <Grid Grid.Column="0" Style="{StaticResource IconWhite}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="Auto" Height="Auto" >
-                        <Image Source="{Binding airline.code, ConverterParameter=/Assets/Icon/Airlines/ag_\{0\}logo@2x.png, Converter={StaticResource stringFormatConverter}}" Style="{StaticResource FlightDetailAirlineImage}" Width="Auto" Height="Auto"  />
+                        <Image Source="{Binding airline.code, ConverterParameter=/Assets/Icon/Airlines/ag_\{0\}logo@2x.png, Converter={StaticResource stringFormatConverter}}" Style="{StaticResource FlightDetailAirlineImage}" Width="Auto" Height="Auto" ImageFailed="Image_ImageFailed"  />
                     </Grid>
                     <Grid Grid.Column="1"  HorizontalAlignment="Left" Height="Auto"  VerticalAlignment="Top" Margin="{StaticResource Left_Offset}" >
                     	<TextBlock TextWrapping="Wrap" Text="{Binding airline.name}" Style="{StaticResource SegoeLight24}" Foreground="#FF319FDA"  Margin="0,0,-1,0" d:IsHidden="True"  />
                         
                     	<StackPanel Orientation="Horizontal" Margin="0,25,0,-14">
                             <TextBlock HorizontalAlignment="Left" Text="{Binding currency.mask}" VerticalAlignment="Top" Style="{StaticResource SegoeSemilight17}"/>
-                            <TextBlock HorizontalAlignment="Left" Text='  ' VerticalAlignment="Top" Style="{StaticResource SegoeSemilight17}"/>
                             <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding price, Converter={StaticResource CurrencyConverter}}" VerticalAlignment="Top" Style="{StaticResource SegoeSemilight17}" />
                     	</StackPanel>
                         
@@ -109,7 +108,7 @@
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
                 <Grid Grid.Column="0" Style="{StaticResource IconWhite}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="Auto" Height="Auto" >
-                    <Image Source="{Binding airline.code, ConverterParameter=/Assets/Icon/Airlines/ag_\{0\}logo@2x.png, Converter={StaticResource stringFormatConverter}}" Style="{StaticResource FlightDetailAirlineImage}" Width="Auto" Height="Auto"  />
+                    <Image Source="{Binding airline.code, ConverterParameter=/Assets/Icon/Airlines/ag_\{0\}logo@2x.png, Converter={StaticResource stringFormatConverter}}" Style="{StaticResource FlightDetailAirlineImage}" Width="Auto" Height="Auto" ImageFailed="Image_ImageFailed" />
                 </Grid>
                 <StackPanel Grid.Column="1"  HorizontalAlignment="Left" Height="Auto"  VerticalAlignment="Top" Margin="{StaticResource Left_Offset}" >
                     <TextBlock TextWrapping="Wrap" Text="{Binding airline.name}" Style="{StaticResource SegoeRegular15}" Foreground="#FF319FDA"  />
