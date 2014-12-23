@@ -136,7 +136,7 @@
     <value>México</value>
   </data>
   <data name="Flights_Arrives_In" xml:space="preserve">
-    <value>Llega de </value>
+    <value>Vem de </value>
   </data>
   <data name="Flights_Duration" xml:space="preserve">
     <value>Duración total del vuelo </value>
@@ -253,10 +253,10 @@
     <value>Nacionalidad</value>
   </data>
   <data name="Flights_Checkout_Contact_email.Label" xml:space="preserve">
-    <value>E-mail (donde recibirá su voucher)</value>
+    <value>E-mail (onde você receber o seu voucher)</value>
   </data>
   <data name="Flights_Checkout_Contact_email_Confirmation.Label" xml:space="preserve">
-    <value>Confirme su e-mail</value>
+    <value>Confirme seu e-mail</value>
   </data>
   <data name="Flight_Checkout_Contact.Header" xml:space="preserve">
     <value>contato</value>
@@ -271,7 +271,7 @@
     <value>Número</value>
   </data>
   <data name="Flights_Checkout_Contact_Phone.Label" xml:space="preserve">
-    <value>Teléfono</value>
+    <value>Telefone</value>
   </data>
   <data name="Page_Home_MyDespegarButton.Text" xml:space="preserve">
     <value>Mi Despegar</value>
@@ -373,7 +373,7 @@
     <value>Quitar</value>
   </data>
   <data name="Flights_Checkout_Card_Data_Card.Label" xml:space="preserve">
-    <value>Tarjeta</value>
+    <value>cartão</value>
   </data>
   <data name="Flights_Search_Multiple_Apply.Content" xml:space="preserve">
     <value>Aplicar</value>
@@ -388,16 +388,16 @@
     <value>C.P.F. do titular do cartão</value>
   </data>
   <data name="Flights_Checkout_Card_Data_Number_Of_Card.Label" xml:space="preserve">
-    <value>Número de tarjeta</value>
+    <value>Número do cartão</value>
   </data>
   <data name="Flights_Checkout_Card_Data_Gender.Label" xml:space="preserve">
     <value>Sexo</value>
   </data>
   <data name="Flights_Checkout_Card_Data_owner_name.Label" xml:space="preserve">
-    <value>Nombre y apellido del titular de la tarjeta</value>
+    <value>Nome e sobrenome do titular do cartão</value>
   </data>
   <data name="Flights_Checkout_Card_Data_Security_Code.Label" xml:space="preserve">
-    <value>Código de seguridad</value>
+    <value>Código de segurança</value>
   </data>
   <data name="Flight_Checkout_Card_Data.Header" xml:space="preserve">
     <value>Cartão</value>
@@ -538,25 +538,25 @@
     <value>Por favor ingrese el codigo postal</value>
   </data>
   <data name="Flight_Thanks.Text" xml:space="preserve">
-    <value>muchas gracias</value>
+    <value>muito obrigado</value>
   </data>
   <data name="Flights_Checkout_Invoice_Arg_Street_ERROR_REQUIRED" xml:space="preserve">
     <value>Por favor ingrese la calle</value>
   </data>
   <data name="Flight_Thanks_Continue_Explain.Text" xml:space="preserve">
-    <value>Su pago está siendo procesado. Una vez que el pago se procese exitosamente recibirá un e-mail con la información de compra.</value>
+    <value>O seu pagamento está sendo processado. Assim que o pagamento é processado com sucesso, você receberá um e-mail com as informações de compra.</value>
   </data>
   <data name="Flights_Connect_with_pending" xml:space="preserve">
     <value>Conexión con espera de </value>
   </data>
   <data name="Flight_Thanks_How_Continue.Text" xml:space="preserve">
-    <value>¿Cómo continúa el proceso de compra?</value>
+    <value>Como continua o processo?</value>
   </data>
   <data name="Flights_Checkout_Passenger_Document_Number_ERROR_INVALID_DOCUMENT_NUMBER_DIFFERENT_NUMBERS" xml:space="preserve">
     <value>Documento inválido</value>
   </data>
   <data name="Flight_Thanks_Request_Is.Text" xml:space="preserve">
-    <value>Su número de solicitud de compra es:</value>
+    <value>Seu número de requisição de compra é:</value>
   </data>
   <data name="Flights_Checkout_Passenger_Document_Number_ERROR_INVALID_DOCUMENT_ONLY_NUMBERS" xml:space="preserve">
     <value>El documento debe ser númerico</value>
@@ -613,67 +613,67 @@
     <value>AR</value>
   </data>
   <data name="Flights_Checkout_Contact_Area_Code_ERROR_INVALID_LENGTH_MIN1" xml:space="preserve">
-    <value>Por favor, verifique el codigo de area ingresado</value>
+    <value>Por favor, verificar o código de área entrou</value>
   </data>
   <data name="Flights_Checkout_Contact_Area_Code_ERROR_INVALID_PHONE_COUNTRY_CODE" xml:space="preserve">
-    <value>Por favor, verifique el codigo de area ingresado</value>
+    <value>Por favor, verificar o código de área entrou</value>
   </data>
   <data name="Flights_Checkout_Contact_Area_Code_ERROR_REQUIRED" xml:space="preserve">
-    <value>Por favor, ingrese el código de area</value>
+    <value>Por favor, digite o código de área entrou</value>
   </data>
   <data name="Flights_Checkout_Contact_Country_Code_ERROR_INVALID_LENGTH_MIN1" xml:space="preserve">
-    <value>Por favor, verifique el codigo de país ingresado</value>
+    <value>Por favor, verificar o código de país entrou</value>
   </data>
   <data name="Flights_Checkout_Contact_Country_Code_ERROR_INVALID_PHONE_COUNTRY_CODE" xml:space="preserve">
-    <value>Por favor, verifique el codigo de país ingresado</value>
+    <value>Por favor, verificar o código de país entrou</value>
   </data>
   <data name="Flights_Checkout_Contact_Country_Code_ERROR_REQUIRED" xml:space="preserve">
-    <value>Por favor, ingrese el codigo de país</value>
+    <value>digite o código do país</value>
   </data>
   <data name="Flights_Checkout_Contact_email_Confirmation_ERROR_INVALID_EMAIL_MATCH" xml:space="preserve">
-    <value>Las direcciones de Email deben coincidir</value>
+    <value>Os endereços de email deve corresponder</value>
   </data>
   <data name="Flights_Checkout_Contact_email_Confirmation_ERROR_REQUIRED" xml:space="preserve">
-    <value>Por favor, confirme el email</value>
+    <value>Por favor, confirme o e-mail</value>
   </data>
   <data name="Flights_Checkout_Contact_email_ERROR_REQUIRED" xml:space="preserve">
-    <value>Por favor, ingrese un email</value>
+    <value>Por favor, indique um e-mail</value>
   </data>
   <data name="Flights_Checkout_Contact_Number_ERROR_INVALID_LENGTH_MAX20" xml:space="preserve">
-    <value>Por favor, verifique el número ingresado</value>
+    <value>Por favor, verifique o número introduzido</value>
   </data>
   <data name="Flights_Checkout_Contact_Number_ERROR_INVALID_LENGTH_MIN5" xml:space="preserve">
-    <value>Por favor, verifique el número ingresado</value>
+    <value>Por favor, verifique o número introduzido</value>
   </data>
   <data name="Flights_Checkout_Contact_Number_ERROR_INVALID_PHONE_NUMBER" xml:space="preserve">
-    <value>Por favor, verifique el número ingresado</value>
+    <value>Por favor, verifique o número introduzido</value>
   </data>
   <data name="Flights_Checkout_Contact_Number_ERROR_REQUIRED" xml:space="preserve">
-    <value>Por favor, ingrese el número</value>
+    <value>Por favor, insira o número</value>
   </data>
   <data name="Flights_Checkout_Card_Data_Document.PlaceholderText" xml:space="preserve">
-    <value>Como figura en el documento</value>
+    <value>Conforme consta do documento</value>
   </data>
   <data name="Flights_Checkout_Card_Data_Number_Of_Card.PlaceholderText" xml:space="preserve">
-    <value>Ej: 6598789654984650</value>
+    <value>Ex: 6598789654984650</value>
   </data>
   <data name="Flights_Checkout_Card_Data_owner_name.PlaceholderText" xml:space="preserve">
-    <value>Nombre y apellido del titular</value>
+    <value>Nome e sobrenome do titular</value>
   </data>
   <data name="Flights_Checkout_Card_Data_Security_Code.PlaceholderText" xml:space="preserve">
-    <value>Ej: 543</value>
+    <value>Ex: 543</value>
   </data>
   <data name="Flights_Checkout_Card_Data_Type.Label" xml:space="preserve">
-    <value>Tipo de documento</value>
+    <value>Tipo de Documento</value>
   </data>
   <data name="Flights_Checkout_Contact_email.PlaceholderText" xml:space="preserve">
-    <value>Ingrese el e-mail del titular</value>
+    <value>Digite o e-mail do proprietário</value>
   </data>
   <data name="Flights_Checkout_Contact_email_Confirmation.PlaceholderText" xml:space="preserve">
-    <value>Ingrese el e-mail del titular</value>
+    <value>Digite o e-mail do proprietário</value>
   </data>
   <data name="Flights_Checkout_Contact_Number.PlaceholderText" xml:space="preserve">
-    <value>Ej: 54156423</value>
+    <value>Ex: 54156423</value>
   </data>
   <data name="Flights_Checkout_Invoice_Arg_fiscal_id.PlaceholderText" xml:space="preserve">
     <value>Cuil / Cuit</value>
@@ -688,40 +688,40 @@
     <value>Como figura en el documento</value>
   </data>
   <data name="Flights_Checkout_Card_Data_Document_ERROR_INVALID_DOCUMENT_NUMBER_A_R" xml:space="preserve">
-    <value>Por favor, verifique el numero ingresado</value>
+    <value>Por favor, verifique o número introduzido</value>
   </data>
   <data name="Flights_Checkout_Card_Data_Document_ERROR_INVALID_DOCUMENT_NUMBER_DIFFERENT_NUMBERS" xml:space="preserve">
-    <value>Por favor, verifique el numero ingresado</value>
+    <value>Por favor, verifique o número introduzido</value>
   </data>
   <data name="Flights_Checkout_Card_Data_Document_ERROR_INVALID_LENGTH_MIN7" xml:space="preserve">
-    <value>Por favor, verifique el numero ingresado</value>
+    <value>Por favor, verifique o número introduzido</value>
   </data>
   <data name="Flights_Checkout_Card_Data_Document_ERROR_REQUIRED" xml:space="preserve">
-    <value>Por favor, ingrese el número de documento</value>
+    <value>Por favor, digite o número do documento</value>
   </data>
   <data name="Flights_Checkout_Card_Data_Number_Of_Card_ERROR_REQUIRED" xml:space="preserve">
-    <value>Por favor, ingrese el numero de tarjeta</value>
+    <value>Por favor, digite o número do cartão</value>
   </data>
   <data name="Flights_Checkout_Card_Data_owner_name_ERROR_INVALID_CARD_OWNER_NAME" xml:space="preserve">
-    <value>Por favor, verifique el nombre ingresado</value>
+    <value>Por favor, verifique o nome introduzido</value>
   </data>
   <data name="Flights_Checkout_Card_Data_owner_name_ERROR_INVALID_CARD_OWNER_NAME_LENGTH" xml:space="preserve">
-    <value>Por favor, verifique el nombre ingresado</value>
+    <value>Por favor, verifique o nome introduzido</value>
   </data>
   <data name="Flights_Checkout_Card_Data_owner_name_ERROR_REQUIRED" xml:space="preserve">
-    <value>Por favor, ingrese el nombre y apellido del titular</value>
+    <value>Por favor, digite o nome e sobrenome do proprietário</value>
   </data>
   <data name="Flights_Checkout_Card_Data_Security_Code_ERROR_REQUIRED" xml:space="preserve">
-    <value>Por favor, ingrese el código de seguridad</value>
+    <value>Por favor, digite o código de segurança</value>
   </data>
   <data name="Flights_Checkout_Card_Data_Card_ERROR_NEW_CREDIT_CARD" xml:space="preserve">
-    <value>Lo sentimos, no hemos podido procesar el pago con la tarjeta ingresada. Por favor, ingrese una nueva tarjeta e intente nuevamente.</value>
+    <value>Desculpe, não foi possível processar o pagamento com o cartão inserido. Por favor insira um novo cartão e tente novamente.</value>
   </data>
   <data name="Flights_Checkout_Card_Data_Card_ERROR_OP_PAYMENT_FAILED" xml:space="preserve">
-    <value>Lo sentimos, no hemos podido procesar su pago. Si desea realizar un pago mediante transferencia bancaria, por favor comuníquese con {0}.</value>
+    <value>Desculpe, não foi possível processar o pagamento. Se você deseja pagar por transferência bancária, por favor, entre em contato com {0}.</value>
   </data>
   <data name="Flights_Checkout_ERROR_FORM_ERROR" xml:space="preserve">
-    <value>Por favor, verifique los datos ingresos y revise los campos marcados.</value>
+    <value>Por favor, verifique os dados de renda e verificar os campos destacados.</value>
   </data>
   <data name="Flights_Checkout_ERROR_FORM_ERROR_TITLE" xml:space="preserve">
     <value>Formulario de Compra</value>
@@ -739,16 +739,16 @@
     <value>Búsqueda de Vuelos</value>
   </data>
   <data name="Flights_Checkout_Card_Data_Coupon.Label" xml:space="preserve">
-    <value>Código de referencia</value>
+    <value>Código de referência</value>
   </data>
   <data name="Flights_Checkout_Card_Data_Coupon_ERROR_INVALID" xml:space="preserve">
-    <value>El código ingresado no es válido</value>
+    <value>O código digitado não é válido</value>
   </data>
   <data name="Flights_Checkout_Card_Expiration_ERROR_INVALID_DATE" xml:space="preserve">
-    <value>Por favor, fechas está fuera de rango</value>
+    <value>Por favor, datas está fora de alcance</value>
   </data>
   <data name="Flights_Checkout_Card_Expiration_ERROR_REQUIRED" xml:space="preserve">
-    <value>Por favor, ingrese la fecha de expiración de la tarjeta</value>
+    <value>Por favor, digite a data de validade do cartão</value>
   </data>
   <data name="Flights_Checkout_Invoice_Arg_City_ERROR_REQUIRED" xml:space="preserve">
     <value>Por favor, ingrese una ciudad</value>
@@ -763,8 +763,8 @@
     <value>Condiciones de compra</value>
   </data>
   <data name="Flights_Checkout_Card_Data_Card_ERROR_OP_BOOKING_FAILED" xml:space="preserve">
-    <value>Lo sentimos, su solicitud de compra N° {0} no puede ser procesada por falta de disponibilidad del vuelo.
-La reserva no ha sido generada y no se le cobrará ningún cargo por la transacción.</value>
+    <value>Desculpe, o seu pedido de compra No. {0} não pode ser processado devido à indisponibilidade do voo.
+A reserva não foi gerado e não cobra nenhuma taxa para a transação.</value>
   </data>
   <data name="FLIGHT_SEARCH_ADULT_INFANT_MATCH_ERROR_MESSAGE" xml:space="preserve">
     <value>O número de bebês não poderia exceder a dos adultos</value>
@@ -806,7 +806,7 @@ La reserva no ha sido generada y no se le cobrará ningún cargo por la transacc
     <value>con</value>
   </data>
   <data name="Flights_Checkout_Card_Data_Card_ERROR_ONLINE_PAYMENT_ERROR_FIX_CREDIT_CARD" xml:space="preserve">
-    <value>Lo sentimos, hemos encontrado un error en los datos de su tarjeta. Por favor, revise los datos ingresados e intente nuevamente.</value>
+    <value>Desculpe, que encontrou um erro no seu cartão de crédito. Por favor, verifique os dados inseridos e tente novamente.</value>
   </data>
   <data name="Common_Pays_With" xml:space="preserve">
     <value>Parcelas com</value>
@@ -815,13 +815,13 @@ La reserva no ha sido generada y no se le cobrará ningún cargo por la transacc
     <value>Costo financiero de la reserva:</value>
   </data>
   <data name="Flights_Checkout_Card_Data_Number_Of_Card_ERROR_LENGTH" xml:space="preserve">
-    <value>Verifique el numero de tarjeta. Longitud invalida</value>
+    <value>Verifique o número do cartão. comprimento invalida</value>
   </data>
   <data name="Flights_Checkout_Card_Data_Number_Of_Card_ERROR_NUMBER" xml:space="preserve">
-    <value>Verifique el numero de tarjeta</value>
+    <value>Verifique o número do cartão</value>
   </data>
   <data name="Flights_Checkout_Card_Data_Security_Code_ERROR_CODE" xml:space="preserve">
-    <value>Verifique el codigo de seguridad</value>
+    <value>Verifique o código de segurança</value>
   </data>
   <data name="Checkout_Coupons_ERROR_INVALID_VOUCHER" xml:space="preserve">
     <value>O cupom não existe ou é inválido.</value>
@@ -836,10 +836,10 @@ La reserva no ha sido generada y no se le cobrará ningún cargo por la transacc
     <value>Error</value>
   </data>
   <data name="Flights_Checkout_Card_Data_Coupon.PlaceholderText" xml:space="preserve">
-    <value>Ej: AMX012</value>
+    <value>Ex: AMX012</value>
   </data>
   <data name="Flights_Checkout_Contact_email_ERROR_INVALID_EMAIL" xml:space="preserve">
-    <value>Por favor, ingrese un email válido</value>
+    <value>Por favor insira um endereço de e-mail válido</value>
   </data>
   <data name="Flight_Close_Airport_Select_Airport.Text" xml:space="preserve">
     <value>Escolha o aeroporto perto de</value>
