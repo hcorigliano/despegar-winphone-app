@@ -27,7 +27,7 @@ namespace Despegar.WP.UI.Product.Legacy
 
             #if DECOLAR            
               // TODO: will not compile!
-              MainLogo.Source = new BitmapImage(new Uri("/Assets/Image/decolar-logo.png", UriKind.RelativeOrAbsolute));
+            MainLogo.Source = new BitmapImage(new Uri("ms-appx:/Product/Legacy/Assets/Image/decolar-logo.png", UriKind.Absolute));
             #endif            
         }
 

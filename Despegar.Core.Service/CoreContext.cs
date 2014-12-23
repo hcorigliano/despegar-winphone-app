@@ -51,6 +51,7 @@ namespace Despegar.Core.Service
 
         public string GetUOW()
         {
+            //return Despegar.WP.UI.Model. ClientDeviceInfoGetUOW();
             return uow;
         }
 
@@ -105,6 +106,7 @@ namespace Despegar.Core.Service
             // Init Connectors
             if (mapiConnector == null)
                 mapiConnector = new MapiConnector();
+            mapiConnector.ConfigureClientAndUow(x_client, this.uow);
 
             if (apiv1Connector == null)
                 apiv1Connector = new Apiv1Connector();
@@ -122,8 +124,8 @@ namespace Despegar.Core.Service
         {
             Logger.LogCore("Changing Site...");
 
-            this.site = siteCode;         
-            mapiConnector.Configure(x_client, uow, site, GetLanguage());
+            this.site = siteCode;
+            mapiConnector.ConfigureSiteAndLanguage(site, GetLanguage());
             apiv1Connector.Configure(x_client, uow, site);
 
             

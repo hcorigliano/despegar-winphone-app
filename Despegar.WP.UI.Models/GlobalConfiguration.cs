@@ -43,8 +43,13 @@ namespace Despegar.WP.UI.Model
              Logger.Configure(true, true);
             #endif
 
-            // Add Service Mocks
-            CoreContext.EnableMock(MockKey.ConfigurationsDefault); //keep on! No URL yet.
+             
+#if DECOLAR
+            CoreContext.SetSite("BR");
+#endif
+
+             // Add Service Mocks
+            //CoreContext.EnableMock(MockKey.ConfigurationsDefault); //keep on! No URL yet.
             //CoreContext.AddMock(MockKey.AirlineTest);
             //GlobalConfiguration.CoreContext.AddMock(MockKey.FlightCitiesAutocompleteBue);
             //GlobalConfiguration.CoreContext.AddMock(MockKey.ItinerarieBueToLax);
@@ -52,8 +57,6 @@ namespace Despegar.WP.UI.Model
             //CoreContext.EnableMock(MockKey.BookingFieldsBueLaxChildInfant);
             CoreContext.EnableMock(MockKey.CountriesDefault);
             CoreContext.EnableMock(MockKey.Risk);
-
-
         }
 
         /// <summary>

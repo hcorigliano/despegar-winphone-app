@@ -189,10 +189,10 @@
         <Setter Property="Margin" Value="19.2,12,19.2,0" />
     </Style>
     <Style x:Key="TopLogo" TargetType="Image" BasedOn="{StaticResource ImageBase}">
-        <Setter Property="Source" Value="/Assets/despegar-logo.white.png" />
+        <Setter Property="Source" Value="/Assets/brandLogo.png" />
         <Setter Property="Stretch" Value="Fill"/>
-        <Setter Property="Width" Value="100" />
-        <Setter Property="Height" Value="20" />
+        <Setter Property="Width" Value="76" />
+        <Setter Property="Height" Value="18" />
     </Style>
     <Style x:Key="BottomGrid" TargetType="Grid">
         <Setter  Property="VerticalAlignment" Value="Bottom" />

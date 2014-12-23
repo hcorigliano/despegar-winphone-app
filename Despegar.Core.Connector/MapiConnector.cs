@@ -19,10 +19,14 @@ namespace Despegar.Core.Connector
             Logger.LogCore("MAPI Connector created.");
         }
 
-        public void Configure(string x_client, string uow, string site, string language)
+        public void ConfigureClientAndUow(string x_client, string uow)
         {
             this.x_client = x_client;
             this.XUoW = uow;
+        }
+
+        public void ConfigureSiteAndLanguage(string site, string language)
+        {
             this.site = site;
             this.language = language;
         }

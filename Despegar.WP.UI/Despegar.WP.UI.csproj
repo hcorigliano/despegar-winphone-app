@@ -18,26 +18,26 @@
     <ExpressionBlendVersion>12.0.50716.0</ExpressionBlendVersion>
     <AppxBundlePlatforms>neutral</AppxBundlePlatforms>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Despegar-Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_PHONE_APP</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;NETFX_CORE;WINDOWS_PHONE_APP;</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Despegar-Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_PHONE_APP</DefineConstants>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_PHONE_APP;</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|ARM'">
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Despegar-Debug|ARM' ">
     <DebugSymbols>true</DebugSymbols>
     <OutputPath>bin\ARM\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_PHONE_APP</DefineConstants>
@@ -48,7 +48,7 @@
     <ErrorReport>prompt</ErrorReport>
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|ARM'">
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Despegar-Release|ARM' ">
     <OutputPath>bin\ARM\Release\</OutputPath>
     <DefineConstants>TRACE;NETFX_CORE;WINDOWS_PHONE_APP</DefineConstants>
     <Optimize>true</Optimize>
@@ -59,7 +59,7 @@
     <ErrorReport>prompt</ErrorReport>
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Despegar-Debug|x86' ">
     <DebugSymbols>true</DebugSymbols>
     <OutputPath>bin\x86\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_PHONE_APP</DefineConstants>
@@ -70,7 +70,7 @@
     <ErrorReport>prompt</ErrorReport>
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Despegar-Release|x86' ">
     <OutputPath>bin\x86\Release\</OutputPath>
     <DefineConstants>TRACE;NETFX_CORE;WINDOWS_PHONE_APP</DefineConstants>
     <Optimize>true</Optimize>
@@ -413,9 +413,11 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <AppxManifest Include="Package.appxmanifest">
+    <None Include="Compilation\prebuild_despegar.bat" />
+    <None Include="Compilation\prebuild_decolar.bat" />
+    <None Include="Compilation\Despegar\Despegar.appxmanifestX">
       <SubType>Designer</SubType>
-    </AppxManifest>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Content Include="analytics.xml" />
@@ -423,6 +425,9 @@
     <Content Include="Assets\Badge.scale-100.png" />
     <Content Include="Assets\Badge.scale-140.png" />
     <Content Include="Assets\Badge.scale-240.png" />
+    <Content Include="Assets\brandLogo.scale-100.png" />
+    <Content Include="Assets\brandLogo.scale-140.png" />
+    <Content Include="Assets\brandLogo.scale-240.png" />
     <Content Include="Assets\country\AD.png" />
     <Content Include="Assets\country\AE.png" />
     <Content Include="Assets\country\AF.png" />
@@ -658,13 +663,12 @@
     <Content Include="Assets\country\ZA.png" />
     <Content Include="Assets\country\ZM.png" />
     <Content Include="Assets\country\ZW.png" />
-    <Content Include="Assets\DecolarHidden\decolar-logo-white.scale-100.png" />
-    <Content Include="Assets\DecolarHidden\decolar-logo-white.scale-140.png" />
-    <Content Include="Assets\DecolarHidden\decolar-logo-white.scale-240.png" />
-    <Content Include="Assets\DecolarHidden\decolarsplash-white.scale-100.png" />
-    <Content Include="Assets\DecolarHidden\decolarsplash-white.scale-140.png" />
-    <Content Include="Assets\DecolarHidden\decolarsplash-white.scale-240.png" />
-    <Content Include="Assets\despegar-logo.white.png" />
+    <Content Include="Compilation\Decolar\decolar-logo-white.scale-100.png" />
+    <Content Include="Compilation\Decolar\decolar-logo-white.scale-140.png" />
+    <Content Include="Compilation\Decolar\decolar-logo-white.scale-240.png" />
+    <Content Include="Compilation\Decolar\decolarsplash-white.scale-100.png" />
+    <Content Include="Compilation\Decolar\decolarsplash-white.scale-140.png" />
+    <Content Include="Compilation\Decolar\decolarsplash-white.scale-240.png" />
     <Content Include="Assets\Helpers\a.png" />
     <Content Include="Assets\Helpers\matrix_green.png" />
     <Content Include="Assets\Helpers\matrix_magenta.png" />
@@ -1363,6 +1367,12 @@
     <Content Include="Assets\WideLogo.scale-140.png" />
     <Content Include="Assets\WideLogo.scale-240.png" />
     <Content Include="Assets\WindowsPhone_Background_480x800.png" />
+    <Content Include="Compilation\Despegar\despegar-logo-white.scale-100.png" />
+    <Content Include="Compilation\Despegar\despegar-logo-white.scale-140.png" />
+    <Content Include="Compilation\Despegar\despegar-logo-white.scale-240.png" />
+    <Content Include="Compilation\Despegar\despegarsplash-white.scale-100.png" />
+    <Content Include="Compilation\Despegar\despegarsplash-white.scale-140.png" />
+    <Content Include="Compilation\Despegar\despegarsplash-white.scale-240.png" />
     <Content Include="Product\Legacy\Assets\Image\ApplicationIcon.png" />
     <Content Include="Product\Legacy\Assets\Image\ApplicationNormalIcon.png" />
     <Content Include="Product\Legacy\Assets\Image\ApplicationWideIcon.png" />
@@ -1711,9 +1721,17 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
+    <None Include="Compilation\Decolar\Decolar.appxmanifestX">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <DesignData Include="SampleData\SegmentSampleData.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AppxManifest Include="Package.appxmanifest">
+      <SubType>Designer</SubType>
+    </AppxManifest>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">
     <VisualStudioVersion>12.0</VisualStudioVersion>
@@ -1721,7 +1739,89 @@
   <PropertyGroup Condition=" '$(TargetPlatformIdentifier)' == '' ">
     <TargetPlatformIdentifier>WindowsPhoneApp</TargetPlatformIdentifier>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Decolar-Debug|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Decolar-Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;NETFX_CORE;WINDOWS_PHONE_APP;DECOLAR;</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Decolar-Debug|ARM'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\ARM\Decolar-Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_PHONE_APP</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <NoStdLib>true</NoStdLib>
+    <DebugType>full</DebugType>
+    <PlatformTarget>ARM</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Decolar-Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Decolar-Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_PHONE_APP</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <NoStdLib>true</NoStdLib>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Decolar-Release|AnyCPU'">
+    <OutputPath>bin\Decolar-Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_PHONE_APP;DECOLAR;</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoStdLib>true</NoStdLib>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Decolar-Release|ARM'">
+    <OutputPath>bin\ARM\Decolar-Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_PHONE_APP</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008</NoWarn>
+    <NoStdLib>true</NoStdLib>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>ARM</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Decolar-Release|x86'">
+    <OutputPath>bin\x86\Decolar-Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_PHONE_APP</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008</NoWarn>
+    <NoStdLib>true</NoStdLib>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>if "$(ConfigurationName)" == "Decolar-Debug" call "$(ProjectDir)Compilation\prebuild_decolar.bat" "$(ProjectDir)"
+if "$(ConfigurationName)" == "Decolar-Release" call "$(ProjectDir)Compilation\prebuild_decolar.bat" "$(ProjectDir)"
+if "$(ConfigurationName)" == "Despegar-Debug" call "$(ProjectDir)Compilation\prebuild_despegar.bat" "$(ProjectDir)"
+if "$(ConfigurationName)" == "Despegar-Release" call "$(ProjectDir)Compilation\prebuild_despegar.bat" "$(ProjectDir)"</PreBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

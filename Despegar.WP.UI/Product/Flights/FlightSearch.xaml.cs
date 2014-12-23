@@ -46,7 +46,7 @@ namespace Despegar.WP.UI.Product.Flights
         }
 
         # region ** ERROR HANDLING **
-        private void ErrorHandler(object sender, ViewModelErrorArgs e) 
+        private async void ErrorHandler(object sender, ViewModelErrorArgs e) 
         {
             ResourceLoader manager = new ResourceLoader();
             MessageDialog dialog;
@@ -55,11 +55,11 @@ namespace Despegar.WP.UI.Product.Flights
             {
                 case "SEARCH_FAILED":
                     dialog = new MessageDialog(manager.GetString("Flights_Search_ERROR_SEARCH_FAILED"), manager.GetString("Flights_Search_ERROR_SEARCH_FAILED_TITLE"));
-                    dialog.ShowAsync();
+                    await dialog.ShowAsync();
                     break;
                 case "SEARCH_INVALID":
                     dialog = new MessageDialog(manager.GetString("Flights_Search_ERROR_SEARCH_INVALID"), manager.GetString("Flights_Search_ERROR_SEARCH_INVALID_TITLE"));
-                    dialog.ShowAsync();
+                    await dialog.ShowAsync();
                     break;
 
                 case "SEARCH_INVALID_WITH_MESSAGE":
@@ -76,7 +76,7 @@ namespace Despegar.WP.UI.Product.Flights
                     }
 
                     dialog = new MessageDialog(msg, manager.GetString("Flights_Search_ERROR_SEARCH_INVALID_TITLE"));
-                    dialog.ShowAsync();
+                    await dialog.ShowAsync();
                     break;
             }
         }

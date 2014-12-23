@@ -9,6 +9,6 @@ namespace Despegar.Core.Business.Flight.BookingCompletePost
     {
         public string question_id { get; set; }
         public string answer_id { get; set; }
-        public string answer_text { get; set; }
+        public string text { get; set; }
     }
 }
