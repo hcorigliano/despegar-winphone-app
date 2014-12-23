@@ -418,6 +418,7 @@
     <None Include="Compilation\Despegar\Despegar.appxmanifestX">
       <SubType>Designer</SubType>
     </None>
+    <PRIResource Include="Strings\pt\Resources.resw" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="analytics.xml" />
