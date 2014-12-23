@@ -38,11 +38,12 @@ namespace Despegar.WP.UI.Model.ViewModel
         {
             Configuration temp = await configurationService.GetConfigurations();
 
-#if !Decolar
-            Site site = temp.sites.FirstOrDefault(x => x.code == "BR");
-            if(site != null)
-                temp.sites.Remove(site);
-#endif
+            #if !Decolar
+                Site site = temp.sites.FirstOrDefault(x => x.code == "BR");
+                if(site != null)
+                    temp.sites.Remove(site);
+            #endif
+
             Configurations = temp;
         }
 
