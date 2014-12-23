@@ -46,7 +46,7 @@
         </Rectangle>
 
         <!--<Image x:Name="ImageView" Style="{StaticResource LoadingImage}"  />-->
-        <TextBlock Style="{StaticResource SegoeSemilight17}"  Text="Cargando..." VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,140,0,0" />
+        <TextBlock Style="{StaticResource SegoeSemilight17}" x:Uid="Loading" Text="Cargando..." VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,140,0,0" />
         
     </Grid>
 
