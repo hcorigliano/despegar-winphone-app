@@ -874,4 +874,7 @@ A reserva não foi gerado e não cobra nenhuma taxa para a transação.</value>
   <data name="Page_Home_Configuration_Error" xml:space="preserve">
     <value>Ocorreu um erro ao iniciar o aplicativo. Por favor, reinicie o aplicativo .</value>
   </data>
+  <data name="Loading.Text" xml:space="preserve">
+    <value>Carregando...</value>
+  </data>
 </root>
