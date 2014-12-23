@@ -274,7 +274,7 @@
     <value>Telefone</value>
   </data>
   <data name="Page_Home_MyDespegarButton.Text" xml:space="preserve">
-    <value>Mi Despegar</value>
+    <value>Meu Decolar</value>
   </data>
   <data name="Page_Home_FlightsButton.Text" xml:space="preserve">
     <value>vôo</value>
@@ -289,10 +289,10 @@
     <value>Las mejores ofertas</value>
   </data>
   <data name="Page_Home_HotelsButton.Text" xml:space="preserve">
-    <value>Hoteles</value>
+    <value>Hoteís</value>
   </data>
   <data name="Page_Home_HotelsButtonSub.Text" xml:space="preserve">
-    <value>Las mejores ofertas</value>
+    <value>As melhores ofertas</value>
   </data>
   <data name="Generic_Go" xml:space="preserve">
     <value>Ida</value>
