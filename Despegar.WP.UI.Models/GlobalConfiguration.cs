@@ -57,7 +57,7 @@ namespace Despegar.WP.UI.Model
             //CoreContext.EnableMock(MockKey.BookingFieldsBueLaxChildInfant);
             CoreContext.EnableMock(MockKey.CountriesDefault);
             CoreContext.EnableMock(MockKey.Risk);
-            CoreContext.EnableMock(MockKey.ConfigurationErroneus);
+            //CoreContext.EnableMock(MockKey.ConfigurationErroneus);
         }
 
         /// <summary>
