@@ -16,7 +16,7 @@ namespace Despegar.LegacyCore.ViewModel
     public class HomeViewModel : INotifyPropertyChanged
     {
         public bool Geolocation { get; set; }
-        public static string Domain { get { return "http://m.despegar.com.ar/"; } }
+       
 
         public HomeViewModel()
         {
@@ -28,5 +28,14 @@ namespace Despegar.LegacyCore.ViewModel
 
         public void NotifyPropertyChanged(string propertyName) { if (PropertyChanged != null) PropertyChanged(this, new PropertyChangedEventArgs(propertyName)); }
         public event PropertyChangedEventHandler PropertyChanged;
+
+        public static string GetDomain(string siteCode)
+        {
+#if DECOLAR
+            return "http://m.decolar.com/";
+#else
+            return "http://m.despegar.com." + siteCode.ToLowerInvariant() + "/";
+#endif
+        }
     }
 }
