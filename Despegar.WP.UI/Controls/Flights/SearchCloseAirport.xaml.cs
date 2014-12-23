@@ -7,6 +7,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Phone.UI.Input;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -41,6 +42,7 @@ namespace Despegar.WP.UI.Controls.Flights
 
         public void Enter()
         {
+            HardwareButtons.BackPressed += HardwareButtons_BackPressed;
             Windows.UI.ViewManagement.InputPane.GetForCurrentView().TryHide();
             
             ShowDialogAnimation.Begin();
@@ -48,6 +50,7 @@ namespace Despegar.WP.UI.Controls.Flights
 
         public void Leave()
         {
+            HardwareButtons.BackPressed -= HardwareButtons_BackPressed;
             HideDialogAnimation.Begin();
             HideDialogAnimation.Completed += DoClosePopup;  
         }
@@ -77,5 +80,12 @@ namespace Despegar.WP.UI.Controls.Flights
             Leave();
         }
 
+        void HardwareButtons_BackPressed(object sender, BackPressedEventArgs e)
+        {
+            searchAirport.UpdateAirportBoxesDestiny("", "");
+            searchAirport.UpdateAirportBoxesOrigin("", "");
+            e.Handled = true;
+            Leave();
+        }
     }
 }
