@@ -2,7 +2,9 @@
 using Despegar.Core.IService;
 using Despegar.Core.Log;
 using Despegar.Core.Service;
-using Despegar.Core.Business.Configuration;
+using Windows.Storage;
+using System;
+using System.Threading.Tasks;
 
 
 namespace Despegar.WP.UI.Model
@@ -22,7 +24,7 @@ namespace Despegar.WP.UI.Model
         /// Initializes the CoreContext object and configures it
         /// This method should be called on app Init
         /// </summary>
-        public static void InitCore() 
+        public async static Task InitCore() 
         {
             //Set vars with client info
             ClientDeviceInfo ClientInfo = new ClientDeviceInfo();
@@ -33,7 +35,7 @@ namespace Despegar.WP.UI.Model
             CoreContext = new CoreContext();
             CoreContext.Configure(xclient, uow);
 
-            LoadUPA();
+            await LoadUPA();
 
             //TODO : (1)
             //CoreContext.SetSite(SiteCode.Argentina);
@@ -56,7 +58,8 @@ namespace Despegar.WP.UI.Model
             //CoreContext.EnableMock(MockKey.BookingFieldBuetoMia);
             //CoreContext.EnableMock(MockKey.BookingFieldsBueLaxChildInfant);
             CoreContext.EnableMock(MockKey.CountriesDefault);
-            CoreContext.EnableMock(MockKey.Risk);
+           
+            //CoreContext.EnableMock(MockKey.ConfigurationErroneus);
         }
 
         /// <summary>
@@ -67,16 +70,34 @@ namespace Despegar.WP.UI.Model
             CoreContext.SetSite(siteCode);       
         }
 
-        public static async void LoadUPA()
+        public static async Task LoadUPA()
         {
             IUPAService upaService = CoreContext.GetUpaService();
-            var field = await upaService.GetUPA();
 
-            if (field != null)
-                UPAId = field.id;
+            var roamingSettings = ApplicationData.Current.RoamingSettings;
+            if (roamingSettings.Values["UPA"] == null)
+            {
+                var field = await upaService.GetUPA();
+
+                if (field != null)
+                {
+                    UPAId = field.id;
+                }
+                else
+                {
+                    UPAId = null;
+                }
+
+                roamingSettings.Values["UPA"] = UPAId;
+
+            }
             else
-                UPAId = null;
+            {
+                UPAId = roamingSettings.Values["UPA"].ToString();
+            }
+
         }
 
+    
     }
 }

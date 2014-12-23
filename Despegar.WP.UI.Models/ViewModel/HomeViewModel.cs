@@ -34,12 +34,22 @@ namespace Despegar.WP.UI.Model
         public async Task<List<Product>> GetProducts(string country)
         {
             IsLoading = true;
-            Configuration configuration = await configurationService.GetConfigurations();
-            
-            // It saves the configutation.
-            GlobalConfiguration.CoreContext.SetConfiguration(configuration);
 
+            Configuration configuration;            
+
+            try
+            {
+                configuration = await configurationService.GetConfigurations();
+            }
+            catch(Exception)
+            {
+                IsLoading = false;
+                return null;
+            }
+            
+            GlobalConfiguration.CoreContext.SetConfiguration(configuration);
             var Site = configuration.sites.FirstOrDefault(s => s.code == country);
+
             IsLoading = false;
 
             return Site.products;
@@ -73,7 +83,7 @@ namespace Despegar.WP.UI.Model
         private void LoadBrowser(string relativePath)
         {
             APIConnector.Instance.Channel = ApplicationConfig.Instance.Country = GlobalConfiguration.Site;  // TODO: Legacy code
-            ApplicationConfig.Instance.ResetBrowsingPages(new Uri(Despegar.LegacyCore.ViewModel.HomeViewModel.Domain + relativePath));
+            ApplicationConfig.Instance.ResetBrowsingPages(new Uri(Despegar.LegacyCore.ViewModel.HomeViewModel.GetDomain(GlobalConfiguration.Site) + relativePath));
 
             Navigator.GoTo(ViewModelPages.LegacyBrowser, null);            
         }
