@@ -59,7 +59,7 @@
             </Grid.ColumnDefinitions>
 
             <Grid Style="{StaticResource IconWhiteBig}">
-                <Image Grid.Column="0" Source="{Binding airline.code, Converter={StaticResource stringFormatConverter}, ConverterParameter='/Assets/Icon/Airlines/ag_{0}logo@2x.png'}" Style="{StaticResource FlightDetailAirlineImage}"  />
+                <Image Grid.Column="0" Source="{Binding airline.code, Converter={StaticResource stringFormatConverter}, ConverterParameter='/Assets/Icon/Airlines/ag_{0}logo@2x.png'}" Style="{StaticResource FlightDetailAirlineImage}" ImageFailed="Image_ImageFailed"  />
             </Grid>
             <TextBlock Grid.Column="1" Style="{Binding FlightDetailAirlineTitle}" Text="{Binding airline.name}" />
         </Grid>

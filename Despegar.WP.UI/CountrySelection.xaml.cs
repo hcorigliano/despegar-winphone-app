@@ -57,8 +57,8 @@ namespace Despegar.WP.UI
             // Persist selection
             var roamingSettings = ApplicationData.Current.RoamingSettings;
             roamingSettings.Values["countryCode"] = countrySelected.code;
-            roamingSettings.Values["countryName"] = countrySelected.name;
-            roamingSettings.Values["countryLanguage"] = countrySelected.language;
+            roamingSettings.Values["countryName"] = countrySelected.name; // not used?
+            roamingSettings.Values["countryLanguage"] = countrySelected.language; // not used?
                     
             ViewModel.ChangeCountry(countrySelected);
             ViewModel.NavigateToHome.Execute(null);

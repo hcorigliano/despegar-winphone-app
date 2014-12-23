@@ -17,6 +17,7 @@ using Despegar.Core.IService;
 using System.Collections.Generic;
 using Despegar.WP.UI.Model.ViewModel.Classes.Flights;
 using Despegar.WP.UI.Model.Classes.Flights;
+using Windows.UI.Xaml.Media.Imaging;
 
 namespace Despegar.WP.UI.Product.Flights
 {
@@ -304,6 +305,11 @@ namespace Despegar.WP.UI.Product.Flights
         private void appBarFilter_Click(object sender, RoutedEventArgs e)
         {
             OldPagesManager.GoTo(typeof(FlightFilters), null);
+        }
+
+        private void Image_ImageFailed(object sender, ExceptionRoutedEventArgs e)
+        {
+            ((Image)sender).Source = new BitmapImage(new Uri("ms-appx:/Assets/Icon/Airlines/ag_default@2x.png", UriKind.Absolute));
         }
        
     }

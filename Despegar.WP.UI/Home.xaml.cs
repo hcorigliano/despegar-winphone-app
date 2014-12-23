@@ -32,6 +32,12 @@ namespace Despegar.WP.UI
 
             // Developer Tools
             this.CheckDeveloperTools();  
+            
+#if DECOLAR
+            // Remove Country Selection from BAR for DECOLAR
+            CommandBar bar = BottomAppBar as CommandBar;
+            bar.PrimaryCommands.RemoveAt(0);
+#endif
          
             //Google Analytics
             #if !DEBUG
