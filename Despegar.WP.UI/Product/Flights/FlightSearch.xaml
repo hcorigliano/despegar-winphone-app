@@ -81,7 +81,8 @@
                             <RowDefinition />
                         </Grid.RowDefinitions>
 
-                        <src:SearchAirport  Grid.Row="0"  
+                        <src:SearchAirport  x:Name="OneWaySearchAirportControl"
+                                            Grid.Row="0"  
                                             SelectedOriginCode="{Binding Origin, Mode=TwoWay}" 
                                             SelectedDestinationCode="{Binding Destination, Mode=TwoWay}" 
                                             SelectedOriginText="{Binding OriginText, Mode=TwoWay}"  
