@@ -95,11 +95,11 @@ namespace Despegar.WP.UI.Product.Flights
             PageParameters pageParameters = e.NavigationParameter as PageParameters;
 
             FlightsItineraries Itineraries = new FlightsItineraries();
-            
+
             flightResultModel.Itineraries = pageParameters.Itineraries as FlightsItineraries;
             Itineraries = pageParameters.Itineraries as FlightsItineraries;
             flightSearchModel = pageParameters.SearchModel as FlightSearchModel;
-           
+
             flightSearchModel.FacetsSearch = flightResultModel.SelectedFacets;
             flightSearchModel.SortingValuesSearch = flightResultModel.SelectedSorting;
             flightSearchModel.SortingCriteriaSearch = flightResultModel.Sorting.criteria;
@@ -241,7 +241,7 @@ namespace Despegar.WP.UI.Product.Flights
             // Iterate whole listbox tree and search for this items
             ItemsControl itemsControl = FindDescendant<ItemsControl>(currentSelectedListBoxItem);
 
-            if (itemsControl == null) 
+            if (itemsControl == null)
                 return;
             itemsControl.Visibility = SetVisualEffect(itemsControl.Visibility);
 
@@ -255,30 +255,39 @@ namespace Despegar.WP.UI.Product.Flights
 
             if (listview == null)
                 return;
-            
+
             index = listview.SelectedIndex;
 
             if (index == -1) return;
 
             listviewitem = listview.ContainerFromIndex(index) as ListViewItem;
-            if (listviewitem == null) 
+            if (listviewitem == null)
                 return;
 
             //ItemsControl itemsControl = FindDescendant<ItemsControl>(listboxitem);
             ItemsControl itemsControl = FindChildControl<ItemsControl>(listviewitem, "RoutesItemControl") as ItemsControl;
 
-            if (itemsControl == null) 
+            if (itemsControl == null)
                 return;
 
             flightCrossParameter.FlightId = ((BindableItem)listview.SelectedItem).id;
+
+            var list = itemsControl.DataContext as BindableItem;
+            //itemsControl.DataContext.RoutesCustom
+            if (list != null && flightSearchModel.PageMode == FlightSearchPages.Multiple)
+            {
+                flightCrossParameter.MultipleRoutes = list.RoutesCustom;
+            }
+            else { flightCrossParameter.MultipleRoutes = null; }
 
             itemsControl.Visibility = SetVisualEffect(itemsControl.Visibility);
         }
 
         private Visibility SetVisualEffect(Visibility visibility)
         {
-            switch (visibility){
-                case  Visibility.Collapsed:
+            switch (visibility)
+            {
+                case Visibility.Collapsed:
                     return Visibility.Visible;
                 case Visibility.Visible:
                     return Visibility.Collapsed;
@@ -287,7 +296,7 @@ namespace Despegar.WP.UI.Product.Flights
         }
 
 
-        public void GoBack() 
+        public void GoBack()
         {
             if (navigationHelper.CanGoBack())
             {
@@ -309,6 +318,6 @@ namespace Despegar.WP.UI.Product.Flights
         {
             ((Image)sender).Source = new BitmapImage(new Uri("ms-appx:/Assets/Icon/Airlines/ag_default@2x.png", UriKind.Absolute));
         }
-       
+
     }
 }
