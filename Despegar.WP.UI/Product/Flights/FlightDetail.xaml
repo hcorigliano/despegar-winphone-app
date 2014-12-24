@@ -35,12 +35,26 @@
 
         <!-- Content -->
         <Pivot Grid.Row="2" Style="{StaticResource PivotBaseMain}" x:Name="MainPivot">
+            
+            <!--Multiple-->
+            <PivotItem x:Uid="Page_Flight_Detail_Go" Header="ida" Style="{StaticResource PivotItemBase}" DataContext="{Binding CrossParameters.MultipleRoutes}">
+                <ScrollViewer>
+                    <ItemsControl ItemsSource="{Binding}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <src:FlightsSegmentGo DataContext="{Binding Outbound}"/>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </ScrollViewer>
+            </PivotItem>
 
             <PivotItem x:Uid="Page_Flight_Detail_Go" Header="ida" Style="{StaticResource PivotItemBase}" DataContext="{Binding CrossParameters.Outbound}">
                 <ScrollViewer>
                     <src:FlightsSegmentGo DataContext="{Binding}"/>
                 </ScrollViewer>
             </PivotItem>
+
 
             <PivotItem x:Name="ReturnPivot" x:Uid="Page_Flight_Detail_Return" Header="vuelta" Style="{StaticResource PivotItemBase}" DataContext="{Binding CrossParameters.Inbound}">
                 <ScrollViewer>
