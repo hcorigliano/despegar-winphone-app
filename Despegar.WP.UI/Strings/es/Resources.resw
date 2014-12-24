@@ -149,7 +149,7 @@
   </data>
   <data name="Flights_Operated_By" xml:space="preserve">
     <value>Operado por </value>
-  </data>
+  </data>   
   <data name="Flights_Passager_Baby_In_Arms" xml:space="preserve">
     <value>0 a 24 meses (En brazos)</value>
   </data>
@@ -187,7 +187,7 @@
     <value>Gracias</value>
   </data>
   <data name="Page_Home.Text" xml:space="preserve">
-    <value>Início</value>
+    <value>Inicio</value>
   </data>
   <data name="Flight_Search_Add_Section.Content" xml:space="preserve">
     <value>Agregar otro tramo</value>
@@ -262,7 +262,7 @@
     <value>contacto</value>
   </data>
   <data name="Flights_Checkout_Contact_Area_Code.Label" xml:space="preserve">
-    <value>Area</value>
+    <value>Área</value>
   </data>
   <data name="Flights_Checkout_Contact_Country_Code.Label" xml:space="preserve">
     <value>País</value>
@@ -352,7 +352,7 @@
     <value>Comprar a {0}</value>
   </data>
   <data name="Page_Flight_Detail_TimeWait.Text" xml:space="preserve">
-    <value>Conexion con espera de</value>
+    <value>Conexión con espera de</value>
   </data>
   <data name="Page_Flight_InBound.Text" xml:space="preserve">
     <value>Llega</value>
@@ -489,8 +489,8 @@
   <data name="Card_Data_Expiration.Text" xml:space="preserve">
     <value>Vencimiento</value>
   </data>
-  <data name="Page_Flight_Search_SelectSegment" xml:space="preserve">
-    <value>Seleccion su ruta</value>
+  <data name="Page_Flight_Search_SelectSegment.Text" xml:space="preserve">
+    <value>Selección su ruta</value>
   </data>
   <data name="Page_Flight_Detail_Segment.Text" xml:space="preserve">
     <value>Tramo</value>
@@ -514,7 +514,7 @@
     <value>Por favor, verifique el número ingresado</value>
   </data>
   <data name="Buy_Acept_Conditions.Text" xml:space="preserve">
-    <value>Lei y acepto las</value>
+    <value>Leí y acepto las</value>
   </data>
   <data name="Flights_Checkout_Invoice_Arg_fiscal_id_ERROR_REQUIRED" xml:space="preserve">
     <value>Por favor, ingrese el número de CUIL/CUIT</value>
@@ -523,7 +523,7 @@
     <value>ida y vuelta</value>
   </data>
   <data name="Flights_Checkout_Invoice_Arg_fiscal_name_ERROR_REQUIRED" xml:space="preserve">
-    <value>Por favor ingrese la razon social.</value>
+    <value>Por favor ingrese la razón social.</value>
   </data>
   <data name="Buy_Buy_conditions.Text" xml:space="preserve">
     <value>condiciones de compra</value>
@@ -535,7 +535,7 @@
     <value>Detalle de reserva</value>
   </data>
   <data name="Flights_Checkout_Invoice_Arg_Postal_Code_ERROR_REQUIRED" xml:space="preserve">
-    <value>Por favor ingrese el codigo postal</value>
+    <value>Por favor ingrese el código postal</value>
   </data>
   <data name="Flight_Thanks.Text" xml:space="preserve">
     <value>muchas gracias</value>
@@ -544,7 +544,7 @@
     <value>Por favor ingrese la calle</value>
   </data>
   <data name="Flight_Thanks_Continue_Explain.Text" xml:space="preserve">
-    <value>Su pago está siendo procesado. Una vez que el pago se procese exitosamente recibirá un e-mail con la información de compra.</value>
+    <value>Su pago está siendo procesado. Una vez que el pago se procese éxitosamente recibirá un e-mail con la información de compra.</value>
   </data>
   <data name="Flights_Connect_with_pending" xml:space="preserve">
     <value>Conexión con espera de </value>
@@ -559,7 +559,7 @@
     <value>Su número de solicitud de compra es:</value>
   </data>
   <data name="Flights_Checkout_Passenger_Document_Number_ERROR_INVALID_DOCUMENT_ONLY_NUMBERS" xml:space="preserve">
-    <value>El documento debe ser númerico</value>
+    <value>El documento debe ser numérico</value>
   </data>
   <data name="Generic_Acept.Content" xml:space="preserve">
     <value>Aceptar</value>
@@ -580,7 +580,7 @@
     <value>Mes</value>
   </data>
   <data name="Flights_Checkout_Passenger_First_Name_ERROR_INVALID_LENGTH_MAX28" xml:space="preserve">
-    <value>La longtud maxima es 28 caracteres</value>
+    <value>La longitud máxima es 28 caracteres</value>
   </data>
   <data name="Page_Filters_Title.Text" xml:space="preserve">
     <value>Filtros</value>
@@ -595,7 +595,7 @@
     <value>Por favor, ingrese el nombre</value>
   </data>
   <data name="Flights_Checkout_Passenger_Last_Name_ERROR_INVALID_LENGTH_MAX28" xml:space="preserve">
-    <value>La longtud maxima es 28 caracteres</value>
+    <value>La longitud máxima es 28 caracteres</value>
   </data>
   <data name="Flights_Checkout_Passenger_Last_Name_ERROR_INVALID_NAMES" xml:space="preserve">
     <value>Verifique el nombre ingresado</value>
@@ -613,31 +613,31 @@
     <value>AR</value>
   </data>
   <data name="Flights_Checkout_Contact_Area_Code_ERROR_INVALID_LENGTH_MIN1" xml:space="preserve">
-    <value>Por favor, verifique el codigo de area ingresado</value>
+    <value>Por favor, verifique el código de área ingresado</value>
   </data>
   <data name="Flights_Checkout_Contact_Area_Code_ERROR_INVALID_PHONE_COUNTRY_CODE" xml:space="preserve">
-    <value>Por favor, verifique el codigo de area ingresado</value>
+    <value>Por favor, verifique el código de área ingresado</value>
   </data>
   <data name="Flights_Checkout_Contact_Area_Code_ERROR_REQUIRED" xml:space="preserve">
-    <value>Por favor, ingrese el código de area</value>
+    <value>Por favor, ingrese el código de área</value>
   </data>
   <data name="Flights_Checkout_Contact_Country_Code_ERROR_INVALID_LENGTH_MIN1" xml:space="preserve">
-    <value>Por favor, verifique el codigo de país ingresado</value>
+    <value>Por favor, verifique el código de país ingresado</value>
   </data>
   <data name="Flights_Checkout_Contact_Country_Code_ERROR_INVALID_PHONE_COUNTRY_CODE" xml:space="preserve">
-    <value>Por favor, verifique el codigo de país ingresado</value>
+    <value>Por favor, verifique el código de país ingresado</value>
   </data>
   <data name="Flights_Checkout_Contact_Country_Code_ERROR_REQUIRED" xml:space="preserve">
-    <value>Por favor, ingrese el codigo de país</value>
+    <value>Por favor, ingrese el código de país</value>
   </data>
   <data name="Flights_Checkout_Contact_email_Confirmation_ERROR_INVALID_EMAIL_MATCH" xml:space="preserve">
-    <value>Las direcciones de Email deben coincidir</value>
+    <value>Las direcciones de e-mail deben coincidir</value>
   </data>
   <data name="Flights_Checkout_Contact_email_Confirmation_ERROR_REQUIRED" xml:space="preserve">
-    <value>Por favor, confirme el email</value>
+    <value>Por favor, confirme el e-mail</value>
   </data>
   <data name="Flights_Checkout_Contact_email_ERROR_REQUIRED" xml:space="preserve">
-    <value>Por favor, ingrese un email</value>
+    <value>Por favor, ingrese un e-mail</value>
   </data>
   <data name="Flights_Checkout_Contact_Number_ERROR_INVALID_LENGTH_MAX20" xml:space="preserve">
     <value>Por favor, verifique el número ingresado</value>
@@ -727,7 +727,7 @@
     <value>Formulario de Compra</value>
   </data>
   <data name="Flights_Search_ERROR_SEARCH_FAILED" xml:space="preserve">
-    <value>Por favor, revise su conexion a internet y vuelva a intentarlo.</value>
+    <value>Por favor, revise su conexión a Internet y vuelva a intentarlo.</value>
   </data>
   <data name="Flights_Search_ERROR_SEARCH_FAILED_TITLE" xml:space="preserve">
     <value>Error de conexión</value>
@@ -748,7 +748,7 @@
     <value>Por favor, fechas está fuera de rango</value>
   </data>
   <data name="Flights_Checkout_Card_Expiration_ERROR_REQUIRED" xml:space="preserve">
-    <value>Por favor, ingrese la fecha de expiración de la tarjeta</value>
+    <value>Por favor, ingrese la fecha de expiación de la tarjeta</value>
   </data>
   <data name="Flights_Checkout_Invoice_Arg_City_ERROR_REQUIRED" xml:space="preserve">
     <value>Por favor, ingrese una ciudad</value>
@@ -821,16 +821,16 @@ La reserva no ha sido generada y no se le cobrará ningún cargo por la transacc
     <value>Verifique el numero de tarjeta</value>
   </data>
   <data name="Flights_Checkout_Card_Data_Security_Code_ERROR_CODE" xml:space="preserve">
-    <value>Verifique el codigo de seguridad</value>
+    <value>Verifique el código de seguridad</value>
   </data>
   <data name="Checkout_Coupons_ERROR_INVALID_VOUCHER" xml:space="preserve">
-    <value>El cupon no existe o es inválido.</value>
+    <value>El cupón no existe o es inválido.</value>
   </data>
   <data name="Flights_Search_ERROR_BOOKING_FAILED" xml:space="preserve">
     <value>Lo sentimos no hemos podido procesar la reserva. Vuelva a buscar un vuelo y reintentelo.</value>
   </data>
   <data name="Checkout_Coupon_Valid" xml:space="preserve">
-    <value>El cupon es válido. Tiene un descuento del</value>
+    <value>El cupón es válido. Tiene un descuento del</value>
   </data>
   <data name="Flights_Search_ERROR_BOOKING_FAILED_TITLE" xml:space="preserve">
     <value>Error</value>
@@ -839,7 +839,7 @@ La reserva no ha sido generada y no se le cobrará ningún cargo por la transacc
     <value>Ej: AMX012</value>
   </data>
   <data name="Flights_Checkout_Contact_email_ERROR_INVALID_EMAIL" xml:space="preserve">
-    <value>Por favor, ingrese un email válido</value>
+    <value>Por favor, ingrese un e-mail válido</value>
   </data>
   <data name="Flight_Close_Airport_Select_Airport.Text" xml:space="preserve">
     <value>Seleccionar aeropuerto cercano a</value>
@@ -863,7 +863,7 @@ La reserva no ha sido generada y no se le cobrará ningún cargo por la transacc
     <value>Los usos del cupón han sido agotados.</value>
   </data>
   <data name="Voucher_ERROR_COUPON_WRONG_COUNTRY" xml:space="preserve">
-    <value>El cupón no es válido para este pais.</value>
+    <value>El cupón no es válido para este país.</value>
   </data>
   <data name="Voucher_ERROR_TITLE" xml:space="preserve">
     <value>Cupón inválido</value>

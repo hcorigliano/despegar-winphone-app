@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using Windows.ApplicationModel.Resources;
+using Windows.Foundation;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -21,6 +22,8 @@ namespace Despegar.WP.UI
         private NavigationHelper navigationHelper;
         public List<Despegar.Core.Business.Configuration.Product> products;
         public Despegar.WP.UI.Model.HomeViewModel ViewModel { get; set; }
+        private IAsyncOperation<IUICommand> asyncCommand = null;
+
 
         public Home()
         {
@@ -174,12 +177,19 @@ namespace Despegar.WP.UI
                     //f.Navigate(typeof(FlightCheckout), null);
                     //break;
                 default:
+
 #if DECOLAR
                     var dialog = new MessageDialog("Esta funcionalidade estará disponível em breve.", "Em Breve");
 #else
                     var dialog = new MessageDialog("Proximamente estará disponible esta funcionalidad.", "Proximamente");
 #endif
-                    await dialog.ShowAsync();
+                    if (asyncCommand != null)
+                    {
+                        asyncCommand.Cancel();
+                    }
+              
+                        asyncCommand = dialog.ShowAsync();
+                    
                     break;
             }
         }

@@ -277,7 +277,7 @@
     <value>Meu Decolar</value>
   </data>
   <data name="Page_Home_FlightsButton.Text" xml:space="preserve">
-    <value>vôos</value>
+    <value>Vôos</value>
   </data>
   <data name="Page_Home_FlightsButtonSub.Text" xml:space="preserve">
     <value>As melhores ofertas</value>
@@ -352,7 +352,7 @@
     <value>Comprar a {0}</value>
   </data>
   <data name="Page_Flight_Detail_TimeWait.Text" xml:space="preserve">
-    <value>Conexion con espera de</value>
+    <value>Conecte-se com espera</value>
   </data>
   <data name="Page_Flight_InBound.Text" xml:space="preserve">
     <value>Chega</value>
@@ -489,8 +489,8 @@
   <data name="Card_Data_Expiration.Text" xml:space="preserve">
     <value>Cartão válido até</value>
   </data>
-  <data name="Page_Flight_Search_SelectSegment" xml:space="preserve">
-    <value>Seleccion su ruta</value>
+  <data name="Page_Flight_Search_SelectSegment.Text" xml:space="preserve">
+    <value>Seleccion sua rota</value>
   </data>
   <data name="Page_Flight_Detail_Segment.Text" xml:space="preserve">
     <value>Trecho</value>
