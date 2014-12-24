@@ -149,7 +149,7 @@
   </data>
   <data name="Flights_Operated_By" xml:space="preserve">
     <value>Operado por </value>
-  </data>   
+  </data>
   <data name="Flights_Passager_Baby_In_Arms" xml:space="preserve">
     <value>0 a 24 meses (En brazos)</value>
   </data>
@@ -879,5 +879,8 @@ La reserva no ha sido generada y no se le cobrará ningún cargo por la transacc
   </data>
   <data name="Loading.Text" xml:space="preserve">
     <value>Cargando...</value>
+  </data>
+  <data name="Page_Checkout_RiskAlert_Title.Text" xml:space="preserve">
+    <value>Por favor, complete las siguientes preguntas de riesgo.</value>
   </data>
 </root>

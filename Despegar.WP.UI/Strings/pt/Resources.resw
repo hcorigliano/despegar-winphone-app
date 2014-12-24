@@ -187,7 +187,7 @@
     <value>Muito obrigado</value>
   </data>
   <data name="Page_Home.Text" xml:space="preserve">
-    <value>Início</value>
+    <value>Inicio</value>
   </data>
   <data name="Flight_Search_Add_Section.Content" xml:space="preserve">
     <value>Adicionar outro trecho</value>
@@ -400,7 +400,7 @@
     <value>Código de segurança</value>
   </data>
   <data name="Flight_Checkout_Card_Data.Header" xml:space="preserve">
-    <value>Cartão</value>
+    <value>cartão</value>
   </data>
   <data name="address_floor.Text" xml:space="preserve">
     <value>Andar</value>
@@ -876,5 +876,8 @@ A reserva não foi gerado e não cobra nenhuma taxa para a transação.</value>
   </data>
   <data name="Loading.Text" xml:space="preserve">
     <value>Carregando...</value>
+  </data>
+  <data name="Page_Checkout_RiskAlert_Title.Text" xml:space="preserve">
+    <value>Por favor, preencha os seguintes questões de risco .</value>
   </data>
 </root>
