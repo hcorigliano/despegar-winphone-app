@@ -321,7 +321,10 @@ namespace Despegar.WP.UI.Model.ViewModel
             //book.outbound_choice = 1;
             //book.itinerary_id = "prism_AR_0_FLIGHTS_A-1_C-0_I-0_RT-BUEMIA20141110-MIABUE20141111_xorigin-api!0!C_1212636001_843603426_-2008006059_1555498055_-278056197_804297563!1,6_1,4_1,5_1,2_1,3_1,1";
 
-            book.inbound_choice = CrossParameters.Inbound.choice;
+            if (CrossParameters.Inbound.choice != -1)
+                book.inbound_choice = CrossParameters.Inbound.choice; //-1
+            else
+                book.inbound_choice = null;
             book.outbound_choice = CrossParameters.Outbound.choice;
             book.itinerary_id = CrossParameters.FlightId;
             book.mobile_identifier = deviceID;
