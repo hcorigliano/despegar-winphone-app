@@ -90,7 +90,7 @@
                         <src:DateControlSimple  Grid.Row="1" SelectedDate="{Binding FromDate, Mode=TwoWay}" />
                         <src:QuantityPassagersControl  Grid.Row="2" DataContext="{Binding PassengersViewModel}"   Adults="{Binding Adults, Mode=TwoWay}" Children="{Binding Children, Mode=TwoWay}"  Infants="{Binding Infants, Mode=TwoWay}"   />
 
-                        <Button Command="{Binding SearchCommand}" Grid.Row="4"  Style="{StaticResource ButtonBottom}" Content="Buscar vuelos"/>
+                        <Button x:Uid="Flights_Search_SearchButton" Command="{Binding SearchCommand}" Grid.Row="4"  Style="{StaticResource ButtonBottom}" Content="Buscar vuelos"/>
                     </Grid>
                 </ScrollViewer>
             </PivotItem>
@@ -128,7 +128,7 @@
                                         </Grid.ColumnDefinitions>
 
                                         <TextBlock Grid.Row="0" Grid.ColumnSpan="2" Style="{StaticResource FlightSegmentTitle}" >
-                                           <Run x:Uid="Page_Flight_Serch_Section" Text="Tramo" />
+                                           <Run x:Uid="Page_Flight_Search_Section" Text="Tramo" />
                                            <Run Text="{Binding Index}" />
                                         </TextBlock>
 
@@ -230,7 +230,7 @@
 
                         <src:QuantityPassagersControl  Grid.Row="1" DataContext="{Binding PassengersViewModel}"   Adults="{Binding Adults, Mode=TwoWay}" Children="{Binding Children, Mode=TwoWay}"  Infants="{Binding Infants, Mode=TwoWay}"   />
 
-                        <Button Grid.Row="2" Command="{Binding SearchCommand}"  Style="{StaticResource ButtonBottom}" Content="Buscar vuelos"/>
+                        <Button  x:Uid="Flights_Search_SearchButton" Grid.Row="2" Command="{Binding SearchCommand}"  Style="{StaticResource ButtonBottom}" Content="Buscar vuelos"/>
                     </Grid>
                 </ScrollViewer>
             </PivotItem>

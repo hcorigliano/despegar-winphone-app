@@ -28,7 +28,7 @@ namespace Despegar.WP.UI.Product.Flights
     {
         private NavigationHelper navigationHelper;
         private ObservableDictionary defaultViewModel = new ObservableDictionary();
-        private FlightResultsModel flightResultModel = new FlightResultsModel();
+        private FlightResultsViewModel flightResultModel;
         private FlightSearchModel flightSearchModel = new FlightSearchModel();
         private FlightsCrossParameter flightCrossParameter = new FlightsCrossParameter();
 
@@ -40,7 +40,7 @@ namespace Despegar.WP.UI.Product.Flights
             this.navigationHelper.LoadState += this.NavigationHelper_LoadState;
             this.navigationHelper.SaveState += this.NavigationHelper_SaveState;
 
-            flightResultModel = new FlightResultsModel(Navigator.Instance, GlobalConfiguration.CoreContext.GetFlightService());
+            flightResultModel = new FlightResultsViewModel(Navigator.Instance, GlobalConfiguration.CoreContext.GetFlightService());
             this.DataContext = flightResultModel;
             //this.CheckDeveloperTools();
 
@@ -92,11 +92,9 @@ namespace Despegar.WP.UI.Product.Flights
         /// session.  The state will be null the first time a page is visited.</param>
         private async void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
         {
-
             PageParameters pageParameters = e.NavigationParameter as PageParameters;
 
             FlightsItineraries Itineraries = new FlightsItineraries();
-
             
             flightResultModel.Itineraries = pageParameters.Itineraries as FlightsItineraries;
             Itineraries = pageParameters.Itineraries as FlightsItineraries;
@@ -109,7 +107,7 @@ namespace Despegar.WP.UI.Product.Flights
             if (flightSearchModel.SearchStatus == SearchStates.SearchAgain)
             {
                 Itineraries = await flightResultModel.flightService.GetItineraries(flightSearchModel);
-                flightResultModel = new FlightResultsModel(Navigator.Instance, GlobalConfiguration.CoreContext.GetFlightService()); ;
+                flightResultModel = new FlightResultsViewModel(Navigator.Instance, GlobalConfiguration.CoreContext.GetFlightService()); ;
                 flightResultModel.Itineraries = Itineraries;
                 flightSearchModel.SearchStatus = SearchStates.FirstSearch;
                 this.DataContext = flightResultModel;

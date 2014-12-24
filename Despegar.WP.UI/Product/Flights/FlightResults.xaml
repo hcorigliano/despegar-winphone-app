@@ -137,10 +137,6 @@
         </CommandBar>
     </Page.BottomAppBar>
 
-    <Page.DataContext>
-        <Model:FlightResultsModel/>
-    </Page.DataContext>
-
     <Grid x:Name="LayoutRoot" Style="{StaticResource MainContainerGrid}" >
         <!--<dev:UserControlDesignGrid />-->
         
