@@ -49,8 +49,8 @@
                 <TextBlock Style="{StaticResource Thanks_Booking_Detail_Green}" x:Uid="Generic_Go" Text="IDA" />
                 <src:FlightsSegmentGo DataContext="{Binding Outbound}" />
 
-                <TextBlock Style="{StaticResource Thanks_Booking_Detail_Blue}" x:Uid="Generic_Return" Text="VUELTA" />
-                <src:FlightsSegmentReturn DataContext="{Binding Inbound}" />
+                <TextBlock Style="{StaticResource Thanks_Booking_Detail_Blue}" x:Uid="Generic_Return" Text="VUELTA" x:Name="FlightsSegmentReturnTextBlock"/>
+                <src:FlightsSegmentReturn DataContext="{Binding Inbound}" x:Name="FlightsSegmentReturnSrc" />
 
 
             </StackPanel>
