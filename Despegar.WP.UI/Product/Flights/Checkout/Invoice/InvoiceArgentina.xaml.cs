@@ -55,5 +55,19 @@ namespace Despegar.WP.UI.Product.Flights.Checkout.Invoice
         {
             ViewModel.CoreBookingFields.form.payment.invoice.address.city_id.CoreValue = ((CitiesFields)args.SelectedItem).id;
         }
+
+        private void AutoSuggestBox_KeyDown(object sender, KeyRoutedEventArgs e)
+        {
+            if (e.Key == Windows.System.VirtualKey.Back)
+            {
+                AutoSuggestBox asb = sender as AutoSuggestBox;
+
+                if (asb!=null)
+                {
+                    asb.Text = String.Empty;
+                    ViewModel.CoreBookingFields.form.payment.invoice.address.city_id.CoreValue = null;
+                }
+            }
+        }
     }
 }
