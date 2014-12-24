@@ -12,6 +12,8 @@ using Windows.UI.Xaml.Navigation;
 using Windows.Security.ExchangeActiveSyncProvisioning;
 using Windows.UI.Popups;
 using Windows.ApplicationModel.Resources;
+using BugSense;
+using BugSense.Model;
 
 // The Blank Application template is documented at http://go.microsoft.com/fwlink/?LinkId=391641
 
@@ -30,6 +32,11 @@ namespace Despegar.WP.UI
         /// </summary>
         public App()
         {
+            #if !DEBUG
+                // Initialize BugSense
+                BugSenseHandler.Instance.InitAndStartSession(new ExceptionManager(Current), "w8c5825c");
+            #endif
+
             this.InitializeComponent();
             this.Suspending += this.OnSuspending;
 
