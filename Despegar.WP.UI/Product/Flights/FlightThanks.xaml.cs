@@ -38,6 +38,11 @@ namespace Despegar.WP.UI.Product.Flights
             ViewModel.FlightParameters = crossParameters;
 
             DataContext = ViewModel;
+            if (ViewModel.FlightParameters.Inbound.choice == -1)
+            {
+                FlightsSegmentReturnTextBlock.Visibility = Visibility.Collapsed;
+                FlightsSegmentReturnSrc.Visibility = Visibility.Collapsed;
+            }
         }
 
         private void NavigationHelper_SaveState(object sender, SaveStateEventArgs e)
