@@ -877,4 +877,7 @@ La reserva no ha sido generada y no se le cobrará ningún cargo por la transacc
   <data name="Page_Home_Configuration_Error" xml:space="preserve">
     <value>Ha ocurrido un error al iniciar la aplicación. Por favor, reinicie la app.</value>
   </data>
+  <data name="Home_Update_Error" xml:space="preserve">
+    <value>Debe actualizar esta aplicacion para poder seguir utilizandolo</value>
+  </data>
 </root>
