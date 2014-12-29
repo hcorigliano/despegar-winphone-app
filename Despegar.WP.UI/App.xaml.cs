@@ -34,8 +34,13 @@ namespace Despegar.WP.UI
         {
             #if !DEBUG
                 // Initialize BugSense
-                BugSenseHandler.Instance.InitAndStartSession(new ExceptionManager(Current), "w8c5825c");
+                #if DECOLAR
+                    BugSenseHandler.Instance.InitAndStartSession(new ExceptionManager(Current), "w8c0267b");
+                #else
+                    BugSenseHandler.Instance.InitAndStartSession(new ExceptionManager(Current), "w8c3afd3");
+                #endif
             #endif
+
 
             this.InitializeComponent();
             this.Suspending += this.OnSuspending;
