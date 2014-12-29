@@ -26,34 +26,45 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
         public INavigator Navigator { get; set; }
         public PassengersViewModel PassengersViewModel { get; set; }
         private IFlightService flightService { get; set; }
-        private FlightSearchModel coreSearchModel;        
+        private FlightSearchModel coreSearchModel;
 
         #region ** Exposed Properties **
 
         public ObservableCollection<FlightMultipleSegment> MultipleSegments
         {
-            get { return new ObservableCollection<FlightMultipleSegment>(coreSearchModel.MultipleSegments); }            
+            get { return new ObservableCollection<FlightMultipleSegment>(coreSearchModel.MultipleSegments); }
         }
 
-        public string Origin 
-        { 
-            get {
+        public void AddMultipleSegmentsMock(List<FlightMultipleSegment> value)
+        {
+            if (coreSearchModel != null && value != null)
+            {
+                coreSearchModel.MultipleSegments.Clear();
+                coreSearchModel.MultipleSegments.AddRange(value);
+            }
+        }
+
+        public string Origin
+        {
+            get
+            {
                 return coreSearchModel.OriginFlight;
             }
-            set {
+            set
+            {
                 coreSearchModel.OriginFlight = value;
                 OnPropertyChanged();
             }
         }
 
-        public string Destination 
+        public string Destination
         {
             get { return coreSearchModel.DestinationFlight; }
             set
             {
                 coreSearchModel.DestinationFlight = value;
                 OnPropertyChanged();
-            } 
+            }
         }
 
         public string OriginText
@@ -86,8 +97,8 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
             {
                 coreSearchModel.DepartureDate = value;
 
-                if(coreSearchModel.PageMode == FlightSearchPages.RoundTrip)
-                    ToDate = value; 
+                if (coreSearchModel.PageMode == FlightSearchPages.RoundTrip)
+                    ToDate = value;
 
                 OnPropertyChanged();
             }
@@ -125,17 +136,18 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
             {
                 return new RelayCommand(() => Search());
             }
-        }       
+        }
 
         public ICommand EditMultipleSegment
         {
             get
             {
                 // TODO navigate to 
-                return new RelayCommand<ItemClickEventArgs>((x) => 
-                  { int segmentIndex = (x.ClickedItem as FlightMultipleSegment).Index;
-                    Navigator.GoTo(ViewModelPages.FlightsMultiplEdit, new EditMultiplesNavigationData (){ SelectedSegmentIndex = segmentIndex, SearchModel = coreSearchModel, PassengerModel = PassengersViewModel });
-                });
+                return new RelayCommand<ItemClickEventArgs>((x) =>
+                  {
+                      int segmentIndex = (x.ClickedItem as FlightMultipleSegment).Index;
+                      Navigator.GoTo(ViewModelPages.FlightsMultiplEdit, new EditMultiplesNavigationData() { SelectedSegmentIndex = segmentIndex, SearchModel = coreSearchModel, PassengerModel = PassengersViewModel });
+                  });
             }
         }
 
@@ -162,25 +174,27 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
             if (site2return == null)
                 return;
 
-            var _s = site2return.products.Where(p=>p.name == "flights").FirstOrDefault();
+            var _s = site2return.products.Where(p => p.name == "flights").FirstOrDefault();
             if (_s == null)
                 return;
-          
+
             model.EmissionAnticipationDay = _s.emission_anticipation_days;
-            int last =0;
+            int last = 0;
 
             try
             {
                 last = Convert.ToInt32(_s.last_available_hour);
-            }catch( Exception ex){
-                last=0;
+            }
+            catch (Exception ex)
+            {
+                last = 0;
             }
 
             model.LastAvailableHours = last;
-        }        
-      
+        }
+
         private async void Search()
-        {           
+        {
             coreSearchModel.SearchStatus = Core.Business.SearchStates.FirstSearch;
             UpdatePassengers();
 
@@ -190,10 +204,10 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
 
                 try
                 {
-                    
+
                     FlightsItineraries intineraries = await flightService.GetItineraries(coreSearchModel);
 
-                    if(intineraries.items.Count != 0)
+                    if (intineraries.items.Count != 0)
                     {
                         var pageParameters = new PageParameters();
                         pageParameters.Itineraries = intineraries;
@@ -201,7 +215,9 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
 
                         Navigator.GoTo(ViewModelPages.FlightsResults, pageParameters);
 
-                    }else{
+                    }
+                    else
+                    {
 
                         var msg = new MessageDialog("Lo sentimos, no hemos encontrado ningún resultado para su búsqueda.Por favor, inténtelo nuevamente modificando alguno de los criterios de búsqueda. ");
                         await msg.ShowAsync();
@@ -212,12 +228,13 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
                 {
                     OnViewModelError("SEARCH_FAILED");
                 }
-                finally {
+                finally
+                {
                     IsLoading = false;
                 }
             }
             else
-            {                
+            {
                 OnViewModelError("SEARCH_INVALID_WITH_MESSAGE", coreSearchModel.SearchErrors);
             }
         }
@@ -242,7 +259,7 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
             // Notify Changes
             OnPropertyChanged("MultipleSegments");
             OnPropertyChanged("FromDate");
-            OnPropertyChanged("To"); 
+            OnPropertyChanged("To");
             OnPropertyChanged("Origin");
             OnPropertyChanged("Destination");
         }

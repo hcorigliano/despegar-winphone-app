@@ -161,8 +161,8 @@ namespace Despegar.WP.UI.Developer
                     FlightSearchViewModel viewModel = page.DataContext as FlightSearchViewModel;
                     viewModel.PassengersViewModel.GeneralAdults = 1;
                     viewModel.PassengersViewModel.GeneralMinors = 0;
-                    viewModel.FromDate = new System.DateTimeOffset(2015, 1, 21, 0, 0, 0, TimeSpan.FromDays(0));
-                    viewModel.ToDate = new System.DateTimeOffset(2015, 1, 28, 0, 0, 0, TimeSpan.FromDays(0));
+                    viewModel.FromDate = new System.DateTimeOffset(DateTime.Today.Year, DateTime.Today.Month + 1, 19, 0, 0, 0,TimeSpan.FromDays(0));
+                    viewModel.ToDate = new System.DateTimeOffset(DateTime.Today.Year, DateTime.Today.Month + 2, 19, 0, 0, 0, TimeSpan.FromDays(0));
 
                     // Update UI
                     //var pivotItem = page.FindVisualChildren<PivotItem>(page).Skip(2).First();
@@ -186,9 +186,13 @@ namespace Despegar.WP.UI.Developer
                     fms3.AirportOrigin = "SAO";
                     fms3.AirportDestination = "EZE";
 
-                    viewModel.MultipleSegments.Add(fms1);
-                    viewModel.MultipleSegments.Add(fms2);
-                    viewModel.MultipleSegments.Add(fms3);
+                    List<Core.Business.Flight.SearchBox.FlightMultipleSegment> segmentList = new List<Core.Business.Flight.SearchBox.FlightMultipleSegment>();
+                    segmentList.Add(fms1);
+                    segmentList.Add(fms2);
+                    segmentList.Add(fms3);
+
+
+                    viewModel.AddMultipleSegmentsMock(segmentList);
 
                     //coreSearchModel.MultipleSegments.Clear();
                     //coreSearchModel.MultipleSegments.AddRange(Segments);
