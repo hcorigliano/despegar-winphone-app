@@ -43,6 +43,10 @@ namespace Despegar.WP.UI.Product.Flights
                 FlightsSegmentReturnTextBlock.Visibility = Visibility.Collapsed;
                 FlightsSegmentReturnSrc.Visibility = Visibility.Collapsed;
             }
+            if (ViewModel.FlightParameters.MultipleRoutes == null)
+                FlightsSegmentGoSrcMultiple.Visibility = Visibility.Collapsed;
+            else
+                FlightsSegmentGoSrc.Visibility = Visibility.Collapsed;
         }
 
         private void NavigationHelper_SaveState(object sender, SaveStateEventArgs e)

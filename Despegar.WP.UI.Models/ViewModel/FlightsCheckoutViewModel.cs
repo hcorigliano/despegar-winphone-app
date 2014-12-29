@@ -325,7 +325,12 @@ namespace Despegar.WP.UI.Model.ViewModel
                 book.inbound_choice = CrossParameters.Inbound.choice; //-1
             else
                 book.inbound_choice = null;
-            book.outbound_choice = CrossParameters.Outbound.choice;
+            
+            if (CrossParameters.Outbound.choice != 0) //TODO: Verificar por que es 0 en multiples
+                book.outbound_choice = CrossParameters.Outbound.choice;
+            else
+                book.outbound_choice = null;
+
             book.itinerary_id = CrossParameters.FlightId;
             book.mobile_identifier = deviceID;
 

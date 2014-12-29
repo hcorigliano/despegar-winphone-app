@@ -42,7 +42,7 @@
                     <ItemsControl ItemsSource="{Binding}">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
-                                <src:FlightsSegmentGo DataContext="{Binding Outbound}"/>
+                                <src:FlightsSegmentGo DataContext="{Binding outbound}"/>
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
