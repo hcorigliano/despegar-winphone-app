@@ -223,7 +223,7 @@
     <value>vôos</value>
   </data>
   <data name="Flights_Checkout_Passenger_First_Name.Label" xml:space="preserve">
-    <value>nome</value>
+    <value>Nome</value>
   </data>
   <data name="Page_FlightResult_Passangers.Text" xml:space="preserve">
     <value>Passageiros</value>
@@ -373,7 +373,7 @@
     <value>Apagar</value>
   </data>
   <data name="Flights_Checkout_Card_Data_Card.Label" xml:space="preserve">
-    <value>cartão</value>
+    <value>Cartão</value>
   </data>
   <data name="Flights_Search_Multiple_Apply.Content" xml:space="preserve">
     <value>Aplicar</value>
