@@ -64,6 +64,13 @@ namespace Despegar.WP.UI.Product.Flights
             if (!ViewModel.IsTwoWaySearch) 
             {
                 // Remove "Return" pivot item
+                MainPivot.Items.RemoveAt(2);
+            }
+
+
+            if (ViewModel.CrossParameters.MultipleRoutes != null)
+            {
+                // Remove "Go" pivot item (Only multiple)
                 MainPivot.Items.RemoveAt(1);
             }
 
