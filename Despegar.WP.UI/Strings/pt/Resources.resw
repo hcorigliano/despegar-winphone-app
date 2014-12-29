@@ -883,4 +883,7 @@ A reserva não foi gerado e não cobra nenhuma taxa para a transação.</value>
   <data name="Home_Update_Error" xml:space="preserve">
     <value>Esta aplicação deve atualizar para continuar a usá-lo</value>
   </data>
+  <data name="Home_Update_Error_Title" xml:space="preserve">
+    <value>Atualização necessária</value>
+  </data>
 </root>
