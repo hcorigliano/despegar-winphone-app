@@ -884,6 +884,9 @@ La reserva no ha sido generada y no se le cobrará ningún cargo por la transacc
     <value>Por favor, complete las siguientes preguntas de riesgo.</value>
   </data>
   <data name="Home_Update_Error" xml:space="preserve">
-    <value>Debe actualizar esta aplicacion para poder seguir utilizandolo</value>
+    <value>Debe actualizar esta aplicacion para poder seguir utilizándola.</value>
+  </data>
+  <data name="Home_Update_Error_Title" xml:space="preserve">
+    <value>Actualización requerida</value>
   </data>
 </root>
