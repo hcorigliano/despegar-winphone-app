@@ -69,7 +69,24 @@ namespace Despegar.Core.Service
                                 }
                             }
                         }
-                    }          
+                    }
+
+                    if (item.routes != null && item.inbound == null && result.items == null)
+                    {
+                        //Multiple
+                        foreach(var route in item.routes)
+                        {
+                            if (route.segments != null)
+                            {
+                                var i = 1;
+                                foreach (var segment in route.segments)
+                                {
+                                    segment.Index = i;
+                                    i++;
+                                }
+                            }
+                        }
+                    }
                 }
              }
 

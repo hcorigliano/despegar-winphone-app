@@ -35,9 +35,9 @@ namespace Despegar.Core.Service
         /// Checks if the app needs to be updated
         /// </summary>
         /// <returns></returns>
-        public async Task<UpdateFields> CheckUpdate()     
+        public async Task<UpdateFields> CheckUpdate(string AppVersion, string OsVersion, string Source, string Device)     
         {
-            string serviceUrl = ServiceURL.GetServiceURL(ServiceKey.Update);
+            string serviceUrl = string.Format(ServiceURL.GetServiceURL(ServiceKey.Update), AppVersion, OsVersion,  Source, Device);
             IConnector connector = context.GetServiceConnector(ServiceKey.Update);
 
             return await connector.GetAsync<UpdateFields>(serviceUrl);

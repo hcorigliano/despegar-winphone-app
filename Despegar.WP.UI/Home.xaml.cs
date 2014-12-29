@@ -1,4 +1,7 @@
-﻿using Despegar.WP.UI.Common;
+﻿using Despegar.Core.Business.Configuration;
+using Despegar.Core.IService;
+using Despegar.Core.Service;
+using Despegar.WP.UI.Common;
 using Despegar.WP.UI.Controls;
 using Despegar.WP.UI.Model;
 using Despegar.WP.UI.Model.ViewModel;
@@ -7,6 +10,9 @@ using Despegar.WP.UI.Strings;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Threading.Tasks;
+using System.Xml;
+using Windows.ApplicationModel;
 using Windows.ApplicationModel.Resources;
 using Windows.Foundation;
 using Windows.UI.Popups;
@@ -18,6 +24,7 @@ namespace Despegar.WP.UI
 {    
     public sealed partial class Home : Page
     {
+        private IConfigurationService configurationService;
         private ModalPopup loadingPopup = new ModalPopup(new Loading());
         private NavigationHelper navigationHelper;
         public List<Despegar.Core.Business.Configuration.Product> products;
@@ -28,7 +35,6 @@ namespace Despegar.WP.UI
         public Home()
         {
             this.InitializeComponent();
-
             this.navigationHelper = new NavigationHelper(this);
             this.navigationHelper.LoadState += this.NavigationHelper_LoadState;
             this.navigationHelper.SaveState += this.NavigationHelper_SaveState;
@@ -36,11 +42,15 @@ namespace Despegar.WP.UI
 
             // Developer Tools
             this.CheckDeveloperTools();  
-            
+
 #if DECOLAR
             // Remove Country Selection from BAR for DECOLAR
             CommandBar bar = BottomAppBar as CommandBar;
-            bar.PrimaryCommands.RemoveAt(0);
+            bar.PrimaryCommands.RemoveAt(0);           
+
+    #if !DEBUG
+            this.BottomAppBar = null;
+    #endif
 #endif
          
             //Google Analytics
@@ -50,6 +60,7 @@ namespace Despegar.WP.UI
             ga.SendView("Home");
             #endif
         }
+
 
         private void Checkloading(object sender, PropertyChangedEventArgs e)
         {
@@ -85,18 +96,16 @@ namespace Despegar.WP.UI
                 return;
             }
 
-            foreach (var product in products)
-            {
-                switch(product.name)
-                {
-                    case "hotels":
-                        Hotels.Visibility = (product.status == "ENABLED") ? Visibility.Visible : Visibility.Collapsed;
-                        break;
-                    case "flights":
-                        Flights.Visibility = (product.status == "ENABLED") ? Visibility.Visible : Visibility.Collapsed;
-                        break;
-                }
-            }
+            if (products.Exists(x => x.name == "hotels" && x.status == "ENABLED") )
+                Hotels.Visibility = Visibility.Visible;
+            else
+                Hotels.Visibility = Visibility.Collapsed;
+
+            if (products.Exists(x => x.name == "flights" && x.status == "ENABLED"))
+                Flights.Visibility = Visibility.Visible;
+            else
+                Flights.Visibility = Visibility.Collapsed;
+
         }
 
         /// <summary>
@@ -119,6 +128,42 @@ namespace Despegar.WP.UI
             SetupMenuItems(GlobalConfiguration.Site);
 
             this.DataContext = ViewModel;
+        }
+
+        public static string GetAppVersion()
+        {
+
+            Package package = Package.Current;
+            PackageId packageId = package.Id;
+            PackageVersion version = packageId.Version;
+
+            return string.Format("{0}.{1}.{2}.{3}", version.Major, version.Minor, version.Build, version.Revision);
+
+        }
+
+        private async Task ValidateUpdate()
+        {
+            ResourceLoader manager = new ResourceLoader();
+            configurationService = GlobalConfiguration.CoreContext.GetConfigurationService();
+            UpdateFields data = await configurationService.CheckUpdate( GetAppVersion(),"8.1", "X", "X");
+
+            if (data.force_update)
+            {
+                MessageDialog dialog = new MessageDialog(manager.GetString("Home_Update_Error"));
+                await dialog.ShowAsync();
+                await Windows.System.Launcher.LaunchUriAsync(new Uri("ms-windows-store:navigate?appid=" + Windows.ApplicationModel.Store.CurrentApp.AppId));
+
+//                MarketplaceDetailTask marketplaceDetailTask = new MarketplaceDetailTask();
+//#if DECOLAR
+//                marketplaceDetailTask.ContentIdentifier = "e544d4bb-be44-4db8-9882-268f0b5631a3";
+//#else
+//                marketplaceDetailTask.ContentIdentifier = "f7d63cbc-dae6-4608-b695-31a1e095c4e7";
+//#endif
+//                marketplaceDetailTask.ContentType = MarketplaceContentType.Applications;
+//                marketplaceDetailTask.Show();
+
+                App.Current.Exit();
+            }
         }
 
         /// <summary>
@@ -148,8 +193,9 @@ namespace Despegar.WP.UI
         /// </summary>
         /// <param name="e">Provides data for navigation methods and event
         /// handlers that cannot cancel the navigation request.</param>
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
+            await ValidateUpdate(); 
             this.navigationHelper.OnNavigatedTo(e);
         }
 
