@@ -143,5 +143,58 @@ namespace Despegar.WP.UI.Developer
         }
 
 
+        public ICommand FillFlightsMultipleSearchBox
+        {
+            get
+            {
+                return new RelayCommand(() =>
+                {
+                    
+                    var page = (Window.Current.Content as Frame).Content as FlightSearch;
+                    if (page == null)
+                    {
+                        ShowInvalidMessage();
+                        return;
+                    }
+
+                    // Fill From EZE to MIA
+                    FlightSearchViewModel viewModel = page.DataContext as FlightSearchViewModel;
+                    viewModel.PassengersViewModel.GeneralAdults = 1;
+                    viewModel.PassengersViewModel.GeneralMinors = 0;
+                    viewModel.FromDate = new System.DateTimeOffset(2015, 1, 21, 0, 0, 0, TimeSpan.FromDays(0));
+                    viewModel.ToDate = new System.DateTimeOffset(2015, 1, 28, 0, 0, 0, TimeSpan.FromDays(0));
+
+                    // Update UI
+                    //var pivotItem = page.FindVisualChildren<PivotItem>(page).Skip(2).First();
+                    /*var userControl = page.FindVisualChildren<SearchAirport>(pivotItem).First();
+                    userControl.UpdateAirportBoxes("EZE", "Aeropuerto Buenos Aires Ministro ¨Pistarini Ezeiza, Buenos Aires, Argentina", "MIA", "Miami, Florida, Estados Unidos");
+                    */
+
+                    Core.Business.Flight.SearchBox.FlightMultipleSegment fms1 = new Core.Business.Flight.SearchBox.FlightMultipleSegment();
+                    fms1.DepartureDate = new System.DateTimeOffset(2015, 1, 21, 0, 0, 0, TimeSpan.FromDays(0));
+                    fms1.AirportOrigin = "EZE";
+                    fms1.AirportDestination = "LIM";
+
+
+                    Core.Business.Flight.SearchBox.FlightMultipleSegment fms2 = new Core.Business.Flight.SearchBox.FlightMultipleSegment();
+                    fms2.DepartureDate = new System.DateTimeOffset(2015, 2, 21, 0, 0, 0, TimeSpan.FromDays(0));
+                    fms2.AirportOrigin = "LIM";
+                    fms2.AirportDestination = "SAO";
+
+                    Core.Business.Flight.SearchBox.FlightMultipleSegment fms3 = new Core.Business.Flight.SearchBox.FlightMultipleSegment();
+                    fms3.DepartureDate = new System.DateTimeOffset(2015, 3, 21, 0, 0, 0, TimeSpan.FromDays(0));
+                    fms3.AirportOrigin = "SAO";
+                    fms3.AirportDestination = "EZE";
+
+                    viewModel.MultipleSegments.Add(fms1);
+                    viewModel.MultipleSegments.Add(fms2);
+                    viewModel.MultipleSegments.Add(fms3);
+
+                    //coreSearchModel.MultipleSegments.Clear();
+                    //coreSearchModel.MultipleSegments.AddRange(Segments);
+                });
+            }
+        }
+
     }
 }

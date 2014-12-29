@@ -90,7 +90,7 @@
                                     <Button Content="SearchBox Ida y Vuelta - MIA"  Command="{Binding FillFlightsTwoWaySearchBox_MIAMI}" Style="{StaticResource btnStlye}"   />
                                     <Button Content="SearchBox Ida - MIA" Command="{Binding FillFlightsOneWaySearchBox_MIAMI}" Style="{StaticResource btnStlye}"  />
 
-                                    <Button Content="SearchBox Multiples - 3 Tramos"  Style="{StaticResource btnStlye}"   />
+                                    <Button Content="SearchBox Multiples - 3 Tramos"  Style="{StaticResource btnStlye}" Command="{Binding FillFlightsMultipleSearchBox}"  />
                                 </StackPanel>
                                 
                                 <StackPanel Margin="0,10,0,0">

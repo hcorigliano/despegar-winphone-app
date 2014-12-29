@@ -36,23 +36,23 @@
                         <ColumnDefinition Width="{StaticResource Block2p}"/>
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
-                    
+
                     <Grid Grid.Column="0" Style="{StaticResource IconWhite}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="Auto" Height="Auto" >
                         <Image Source="{Binding airline.code, ConverterParameter=/Assets/Icon/Airlines/ag_\{0\}logo@2x.png, Converter={StaticResource stringFormatConverter}}" Style="{StaticResource FlightDetailAirlineImage}" Width="Auto" Height="Auto" ImageFailed="Image_ImageFailed"  />
                     </Grid>
                     <Grid Grid.Column="1"  HorizontalAlignment="Left" Height="Auto"  VerticalAlignment="Top" Margin="{StaticResource Left_Offset}" >
-                    	<TextBlock TextWrapping="Wrap" Text="{Binding airline.name}" Style="{StaticResource SegoeLight24}" Foreground="#FF319FDA"  Margin="0,0,-1,0" d:IsHidden="True"  />
-                        
-                    	<StackPanel Orientation="Horizontal" Margin="0,25,0,-14">
+                        <TextBlock TextWrapping="Wrap" Text="{Binding airline.name}" Style="{StaticResource SegoeLight24}" Foreground="#FF319FDA"  Margin="0,0,-1,0" d:IsHidden="True"  />
+
+                        <StackPanel Orientation="Horizontal" Margin="0,25,0,-14">
                             <TextBlock HorizontalAlignment="Left" Text="{Binding currency.mask}" VerticalAlignment="Top" Style="{StaticResource SegoeSemilight17}"/>
                             <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding price, Converter={StaticResource CurrencyConverter}}" VerticalAlignment="Top" Style="{StaticResource SegoeSemilight17}" />
-                    	</StackPanel>
-                        
+                        </StackPanel>
 
-                    	<StackPanel VerticalAlignment="Top" Orientation="Horizontal" Margin="0,42,0,-30">
-                    		<TextBlock TextWrapping="Wrap" Text="{Binding outbound.Count}" Style="{StaticResource SegoeRegular15}" />
-                    		<TextBlock TextWrapping="Wrap" x:Uid="Page_Result_Available_Flights" Style="{StaticResource SegoeRegular15}" Margin="{StaticResource Left_Offset}" />
-                    	</StackPanel>
+
+                        <StackPanel VerticalAlignment="Top" Orientation="Horizontal" Margin="0,42,0,-30">
+                            <TextBlock TextWrapping="Wrap" Text="{Binding outbound.Count}" Style="{StaticResource SegoeRegular15}" />
+                            <TextBlock TextWrapping="Wrap" x:Uid="Page_Result_Available_Flights" Style="{StaticResource SegoeRegular15}" Margin="{StaticResource Left_Offset}" />
+                        </StackPanel>
 
                     </Grid>
 
@@ -63,14 +63,14 @@
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                             <Button BorderBrush="Transparent" Background="Transparent" Tapped="Grid_Tapped">
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="{StaticResource Block1p}"/>
-                                    <RowDefinition Height="{StaticResource Block2p}"/>
-                                    <RowDefinition Height="{StaticResource Block2p}"/>
-                                </Grid.RowDefinitions>
-                                <UI:RouteItemControl DataContext="{Binding outbound}" Grid.Row="1" d:IsHidden="True"/>
-                                    <UI:RouteItemControl  x:Name="routeItemControl" Grid.Row="2" DataContext="{Binding inbound}" d:IsHidden="True" >
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="{StaticResource Block1p}"/>
+                                        <RowDefinition Height="{StaticResource Block2p}"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                    <UI:RouteItemControl DataContext="{Binding outbound}" Grid.Row="1" d:IsHidden="True"/>
+                                    <UI:RouteItemControl Height="{StaticResource dBlock2p}"  x:Name="routeItemControl" Grid.Row="2" DataContext="{Binding inbound}" d:IsHidden="True" >
                                         <Interactivity:Interaction.Behaviors>
                                             <Core:DataTriggerBehavior Value="-1" Binding="{Binding choice}" >
                                                 <Core:ChangePropertyAction PropertyName="Visibility">
@@ -126,8 +126,8 @@
 
     </Page.Resources>
     <Page.Background>
-		<ImageBrush AlignmentX="Left" AlignmentY="Top" ImageSource="ms-appx:/Assets/WindowsPhone_Background_480x800.png" Stretch="UniformToFill"/>
-	</Page.Background>
+        <ImageBrush AlignmentX="Left" AlignmentY="Top" ImageSource="ms-appx:/Assets/WindowsPhone_Background_480x800.png" Stretch="UniformToFill"/>
+    </Page.Background>
     <Page.BottomAppBar>
         <CommandBar ClosedDisplayMode="Minimal">
             <AppBarButton x:Name="appBarFilter" Icon="Filter" x:Uid="AppBarButton_Filters" >
@@ -139,7 +139,7 @@
 
     <Grid x:Name="LayoutRoot" Style="{StaticResource MainContainerGrid}" >
         <!--<dev:UserControlDesignGrid />-->
-        
+
         <Interactivity:Interaction.Behaviors>
             <Core:EventTriggerBehavior SourceObject="{Binding ElementName=appBarFilter}" EventName="Click">
                 <Core:NavigateToPageAction TargetPage="Despegar.WP.UI.Product.Flights.FlightFilters" Parameter="{Binding Facets ,Mode=TwoWay}"/>
@@ -168,7 +168,7 @@
                 <RowDefinition Height="{StaticResource Block2p}"></RowDefinition>
                 <RowDefinition Height="{StaticResource Block4p}"></RowDefinition>
             </Grid.RowDefinitions>
-            
+
             <!-- Title Panel -->
             <Image  Style="{StaticResource TopLogo}" Grid.Row="0" />
             <TextBlock Grid.Row="1"  x:Uid="Page_FlightResults" Style="{StaticResource PageHeaderSmall}" FontFamily="Segoe WP Semibold" />
@@ -183,7 +183,7 @@
             <TextBlock />
         </Grid>
         <Grid Grid.Row="2" x:Name="ContentRoot" Width="Auto"  >
-            <ListView Tapped="ListBox_Tapped" ItemTemplate="{StaticResource FlightItemDateTemplate}"  ItemsSource="{Binding Source={StaticResource cvsFlights}}"  DataContext="{Binding}" Background="Transparent" Height="320" x:Name="lbFlights"  HorizontalContentAlignment="Stretch" ScrollViewer.VerticalScrollBarVisibility="Visible" > 
+            <ListView Tapped="ListBox_Tapped" ItemTemplate="{StaticResource FlightItemDateTemplate}"  ItemsSource="{Binding Source={StaticResource cvsFlights}}"  DataContext="{Binding}" Background="Transparent" Height="320" x:Name="lbFlights"  HorizontalContentAlignment="Stretch" ScrollViewer.VerticalScrollBarVisibility="Visible" >
                 <ListView.ItemContainerTransitions>
                     <TransitionCollection>
                         <EntranceThemeTransition FromVerticalOffset="100" FromHorizontalOffset="0"/>
