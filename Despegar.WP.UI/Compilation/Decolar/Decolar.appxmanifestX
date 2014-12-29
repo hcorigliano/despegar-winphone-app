@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/2010/manifest" xmlns:m2="http://schemas.microsoft.com/appx/2013/manifest" xmlns:m3="http://schemas.microsoft.com/appx/2014/manifest" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest">
-  <Identity Name="b18213ff-e70c-45ef-a33a-94c6d79a0ef3" Publisher="CN=ariel.salazar" Version="3.0.0.0" />
-  <mp:PhoneIdentity PhoneProductId="2cdfbe2f-6d04-42e6-82d1-a6dc490ec7fd" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
+  <Identity Name="e544d4bb-be44-4db8-9882-268f0b5631a3" Publisher="CN=ariel.salazar" Version="3.0.0.0" />
+  <mp:PhoneIdentity PhoneProductId="9b612485-bdb1-4c35-89c1-d1577a1fe8e8" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
     <DisplayName>Decolar.com</DisplayName>
     <PublisherDisplayName>Decolar.com</PublisherDisplayName>
