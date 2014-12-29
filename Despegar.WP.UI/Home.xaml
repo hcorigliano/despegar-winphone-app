@@ -36,7 +36,7 @@
         <TextBlock  Grid.Row="1" x:Uid="Page_Home" Style="{StaticResource PageHeader}" Text="inicio" Grid.RowSpan="2" />
 
         <ListView Grid.Row="2"  IsItemClickEnabled="True" ItemClick="ListView_ItemClick" ItemContainerStyle="{StaticResource HomeButtonItemContainer}" Margin="{StaticResource Top_Offset}">
-            <ListViewItem x:Name="Hotels" Visibility="Collapsed" Margin="{StaticResource Top_Offset}">
+            <ListViewItem x:Name="Hotels"  Margin="{StaticResource Top_Offset}">
                 <Grid DataContext="Hotels">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="{StaticResource Block3}"/>
@@ -54,7 +54,7 @@
                 </Grid>
             </ListViewItem>
 
-            <ListViewItem x:Name="Flights" Visibility="Collapsed">
+            <ListViewItem x:Name="Flights" >
                 <Grid DataContext="Flights">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="{StaticResource Block3}"/>

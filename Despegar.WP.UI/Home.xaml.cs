@@ -96,19 +96,16 @@ namespace Despegar.WP.UI
                 return;
             }
 
-            foreach (var product in products)
-            {
-                switch(product.name)
-                {
+            if (products.Exists(x => x.name == "hotels" && x.status == "ENABLED") )
+                Hotels.Visibility = Visibility.Visible;
+            else
+                Hotels.Visibility = Visibility.Collapsed;
 
-                    case "hotels":
-                        Hotels.Visibility = (product.status == "ENABLED") ? Visibility.Visible : Visibility.Collapsed;
-                        break;
-                    case "flights":
-                        Flights.Visibility = (product.status == "ENABLED") ? Visibility.Visible : Visibility.Collapsed;
-                        break;
-                }
-            }
+            if (products.Exists(x => x.name == "flights" && x.status == "ENABLED"))
+                Flights.Visibility = Visibility.Visible;
+            else
+                Flights.Visibility = Visibility.Collapsed;
+
         }
 
         /// <summary>
