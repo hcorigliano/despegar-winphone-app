@@ -55,7 +55,7 @@ namespace Despegar.Core.Service
                     }
    
                         // inBound
-                    else if (item.inbound != null)
+                    if (item.inbound != null)
                     {
                         foreach (var route in item.inbound)
                         {
@@ -70,9 +70,10 @@ namespace Despegar.Core.Service
                             }
                         }
                     }
-          
-                    else if (item.routes != null)
+
+                    if (item.routes != null && item.inbound == null && result.items == null)
                     {
+                        //Multiple
                         foreach(var route in item.routes)
                         {
                             if (route.segments != null)

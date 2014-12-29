@@ -73,6 +73,8 @@ namespace Despegar.WP.UI.Product.Flights
                 // Remove "Go" pivot item (Only multiple)
                 MainPivot.Items.RemoveAt(1);
             }
+            else
+                MainPivot.Items.RemoveAt(0);
 
             DataContext = ViewModel;
         }
