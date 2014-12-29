@@ -149,19 +149,9 @@ namespace Despegar.WP.UI
 
             if (data.force_update)
             {
-                MessageDialog dialog = new MessageDialog(manager.GetString("Home_Update_Error"));
+                MessageDialog dialog = new MessageDialog(manager.GetString("Home_Update_Error"), manager.GetString("Home_Update_Error_Title"));
                 await dialog.ShowAsync();
-                await Windows.System.Launcher.LaunchUriAsync(new Uri("ms-windows-store:navigate?appid=" + Windows.ApplicationModel.Store.CurrentApp.AppId));
-
-//                MarketplaceDetailTask marketplaceDetailTask = new MarketplaceDetailTask();
-//#if DECOLAR
-//                marketplaceDetailTask.ContentIdentifier = "e544d4bb-be44-4db8-9882-268f0b5631a3";
-//#else
-//                marketplaceDetailTask.ContentIdentifier = "f7d63cbc-dae6-4608-b695-31a1e095c4e7";
-//#endif
-//                marketplaceDetailTask.ContentType = MarketplaceContentType.Applications;
-//                marketplaceDetailTask.Show();
-
+                await Windows.System.Launcher.LaunchUriAsync(new Uri("ms-windows-store:navigate?appid=" + Package.Current.Id.Name));
                 App.Current.Exit();
             }
         }
