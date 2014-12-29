@@ -89,6 +89,7 @@ namespace Despegar.WP.UI
             {
                 switch(product.name)
                 {
+
                     case "hotels":
                         Hotels.Visibility = (product.status == "ENABLED") ? Visibility.Visible : Visibility.Collapsed;
                         break;
