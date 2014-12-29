@@ -260,6 +260,11 @@
         <Setter Property="Height" Value="16" />
         <Setter Property="Background"  Value="{StaticResource Blue40Brush}" />
     </Style>
+    <Style x:Key="IconWhiteSmall" TargetType="Grid" BasedOn="{StaticResource IconBase}">
+        <Setter Property="Width"  Value="16" />
+        <Setter Property="Height" Value="16" />
+        <Setter Property="Background"  Value="{StaticResource WhiteBrush}" />
+    </Style>
     <!-- Base Fonts -->
     <Style x:Key="PageHeader" TargetType="TextBlock" BasedOn="{StaticResource SegoeSemilight54}">        
     </Style>
@@ -476,8 +481,7 @@
     </Style>
     <Style x:Key="ButtonBottomCheckout" TargetType="Button" BasedOn="{StaticResource ButtonBottom}">
         <Setter Property="Width" Value="{StaticResource dBlock10p}" />
-        <Setter Property="BorderBrush" Value="{StaticResource Red20Brush}" />
-        
+        <Setter Property="BorderBrush" Value="{StaticResource Red20Brush}" />        
     </Style>
     <Style x:Key="ButtonBottomRed" TargetType="Button" BasedOn="{StaticResource ButtonBase}">
         <Setter Property="VerticalAlignment" Value="Bottom" />
@@ -879,7 +883,19 @@
         <Setter Property="Margin" Value="0,3,0,0" />
     </Style>
     <!--  ================= User Controls Styles  ================== -->
-
+    <Style x:Key="AlertBlue" TargetType="Grid">
+        <Setter Property="Background" Value="{StaticResource Blue40Brush}" />
+    </Style>
+    <Style x:Key="AlertWhiteText" TargetType="TextBlock" BasedOn="{StaticResource BaseTextLabel}">
+        <Setter Property="Foreground" Value="White" />
+    </Style>
+    <Style x:Key="AlertGlyph" TargetType="TextBlock">
+        <Setter Property="FontFamily" Value="Segoe UI Symbol" />
+        <Setter Property="FontSize" Value="11" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="Foreground" Value="{StaticResource Blue40Brush}"/>
+    </Style>
     <!--  ================= Page Specific Styles  ================== -->
     <!-- Home Page -->
     <Style x:Key="BaseHomeButtonBackground" TargetType="Grid" BasedOn="{StaticResource IconBlue}">

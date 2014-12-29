@@ -46,7 +46,9 @@ namespace Despegar.WP.UI
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
-            ViewModel.LoadConfigurations();
+            
+            ViewModel.LoadConfigurations(); 
+
         }
         
         private void ListView_ItemClick(object sender, ItemClickEventArgs e)

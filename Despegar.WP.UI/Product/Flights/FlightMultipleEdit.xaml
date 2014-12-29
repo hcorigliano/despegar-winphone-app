@@ -12,10 +12,6 @@
     NavigationCacheMode="Disabled" 
    >
     
-    <Page.BottomAppBar>
-        <CommandBar />
-    </Page.BottomAppBar>
-    
     <Page.Resources>
         <DataTemplate x:Key="segmentTemplate">
             <ScrollViewer>

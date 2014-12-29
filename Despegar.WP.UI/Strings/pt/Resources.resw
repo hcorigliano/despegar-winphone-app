@@ -175,31 +175,31 @@
     <value>Seleccione país</value>
   </data>
   <data name="Page_FlightCheckout.Text" xml:space="preserve">
-    <value>pago</value>
+    <value>pagamento</value>
   </data>
   <data name="Page_FlightResults.Text" xml:space="preserve">
     <value>Resultados</value>
   </data>
   <data name="Page_FlightSearch.Text" xml:space="preserve">
-    <value>BUSQUEDA</value>
+    <value>PROCURAR</value>
   </data>
   <data name="Page_FlightThanks.Text" xml:space="preserve">
-    <value>Gracias</value>
+    <value>Muito obrigado</value>
   </data>
   <data name="Page_Home.Text" xml:space="preserve">
-    <value>Início</value>
+    <value>Inicio</value>
   </data>
   <data name="Flight_Search_Add_Section.Content" xml:space="preserve">
     <value>Adicionar outro trecho</value>
   </data>
   <data name="Flight_Search_Sub_Section.Content" xml:space="preserve">
-    <value>Remover trecho</value>
+    <value>Apagar trecho</value>
   </data>
   <data name="Page_Flight_Search_Section.Text" xml:space="preserve">
-    <value>Tramo </value>
+    <value>Trecho</value>
   </data>
   <data name="Flight_Search_Multple.Header" xml:space="preserve">
-    <value>Múltiplos</value>
+    <value>múltiplos</value>
   </data>
   <data name="Flight_Search_One_Way.Header" xml:space="preserve">
     <value>ida</value>
@@ -214,28 +214,28 @@
     <value>passageiros</value>
   </data>
   <data name="Page_FlightResult_Child.Text" xml:space="preserve">
-    <value>Niños</value>
+    <value>Meninos</value>
   </data>
   <data name="Generic_Adult" xml:space="preserve">
     <value>Adulto</value>
   </data>
   <data name="Page_FlightResult_Flight.Text" xml:space="preserve">
-    <value>Vuelos</value>
+    <value>vôos</value>
   </data>
   <data name="Flights_Checkout_Passenger_First_Name.Label" xml:space="preserve">
-    <value>nome</value>
+    <value>Nome</value>
   </data>
   <data name="Page_FlightResult_Passangers.Text" xml:space="preserve">
-    <value>Pasajeros</value>
+    <value>Passageiros</value>
   </data>
   <data name="Flights_Checkout_Passenger_Last_Name.Label" xml:space="preserve">
     <value>Sobrenome</value>
   </data>
   <data name="Generic_Child" xml:space="preserve">
-    <value>Menor</value>
+    <value>Crianças</value>
   </data>
   <data name="Generic_Infant" xml:space="preserve">
-    <value>Bebé</value>
+    <value>Bebê</value>
   </data>
   <data name="Flights_Checkout_Passager_Birthdate.Text" xml:space="preserve">
     <value>Data de nascimento</value>
@@ -274,31 +274,31 @@
     <value>Telefone</value>
   </data>
   <data name="Page_Home_MyDespegarButton.Text" xml:space="preserve">
-    <value>Mi Despegar</value>
+    <value>Meu Decolar</value>
   </data>
   <data name="Page_Home_FlightsButton.Text" xml:space="preserve">
-    <value>Vuelos</value>
+    <value>Vôos</value>
   </data>
   <data name="Page_Home_FlightsButtonSub.Text" xml:space="preserve">
-    <value>Las mejores ofertas</value>
+    <value>As melhores ofertas</value>
   </data>
   <data name="Page_Home_FlightStatusButton.Text" xml:space="preserve">
-    <value>Estados de Vuelos</value>
+    <value>Status de vôos</value>
   </data>
   <data name="Page_Home_FlightStatusButtonSub.Text" xml:space="preserve">
-    <value>Las mejores ofertas</value>
+    <value>As melhores ofertas</value>
   </data>
   <data name="Page_Home_HotelsButton.Text" xml:space="preserve">
-    <value>Hoteles</value>
+    <value>Hoteís</value>
   </data>
   <data name="Page_Home_HotelsButtonSub.Text" xml:space="preserve">
-    <value>Las mejores ofertas</value>
+    <value>As melhores ofertas</value>
   </data>
   <data name="Generic_Go" xml:space="preserve">
-    <value>Ida</value>
+    <value>ida</value>
   </data>
   <data name="Flights_Search_SearchButton.Content" xml:space="preserve">
-    <value>Buscar vuelos</value>
+    <value>Procurar vôos</value>
   </data>
   <data name="Generic_Multiple" xml:space="preserve">
     <value>múltiple</value>
@@ -307,22 +307,22 @@
     <value>saída</value>
   </data>
   <data name="Generic_Return" xml:space="preserve">
-    <value>Vuelta</value>
+    <value>Retorno</value>
   </data>
   <data name="Flights_Search_Destination" xml:space="preserve">
     <value>destino</value>
   </data>
   <data name="Page_Flight_Details_Return.Text" xml:space="preserve">
-    <value>Vuelta</value>
+    <value>retorno</value>
   </data>
   <data name="Flights_Search_Origin" xml:space="preserve">
-    <value>Origen</value>
+    <value>Origem</value>
   </data>
   <data name="AppBarButton_Filters.Label" xml:space="preserve">
     <value>Flters</value>
   </data>
   <data name="Flights_Search_Return" xml:space="preserve">
-    <value>Regreso</value>
+    <value>Retorno</value>
   </data>
   <data name="AppBarButton_OrderBy.Label" xml:space="preserve">
     <value>Ordenar</value>
@@ -340,40 +340,40 @@
     <value>CONFIGURACION</value>
   </data>
   <data name="Page_Detail_TitleDetail.Text" xml:space="preserve">
-    <value>DETALLE</value>
+    <value>DETALHE</value>
   </data>
   <data name="Page_Flight_Detail_Go.Header" xml:space="preserve">
     <value>ida</value>
   </data>
   <data name="Page_Flight_Detail_Return.Header" xml:space="preserve">
-    <value>vuelta</value>
+    <value>retorno</value>
   </data>
   <data name="Page_Flight_Detail_Buy.Text" xml:space="preserve">
     <value>Comprar a {0}</value>
   </data>
   <data name="Page_Flight_Detail_TimeWait.Text" xml:space="preserve">
-    <value>Conexion con espera de</value>
+    <value>Conecte-se com espera</value>
   </data>
   <data name="Page_Flight_InBound.Text" xml:space="preserve">
-    <value>Llega</value>
+    <value>Chega</value>
   </data>
   <data name="Page_Flight_Outbound.Text" xml:space="preserve">
-    <value>Sale</value>
+    <value>Sai</value>
   </data>
   <data name="Page_Flight_Detail_Flight" xml:space="preserve">
-    <value>Vuelo</value>
+    <value>vôo</value>
   </data>
   <data name="Page_Flight_Detail_OperatedBy" xml:space="preserve">
     <value>Operado por</value>
   </data>
   <data name="Page_Flights_Search_AddSegment.Label" xml:space="preserve">
-    <value>Agregar</value>
+    <value>Adicionar</value>
   </data>
   <data name="Page_Flights_Search_RemoveSegment.Label" xml:space="preserve">
-    <value>Quitar</value>
+    <value>Apagar</value>
   </data>
   <data name="Flights_Checkout_Card_Data_Card.Label" xml:space="preserve">
-    <value>cartão</value>
+    <value>Cartão</value>
   </data>
   <data name="Flights_Search_Multiple_Apply.Content" xml:space="preserve">
     <value>Aplicar</value>
@@ -400,7 +400,7 @@
     <value>Código de segurança</value>
   </data>
   <data name="Flight_Checkout_Card_Data.Header" xml:space="preserve">
-    <value>Cartão</value>
+    <value>cartão</value>
   </data>
   <data name="address_floor.Text" xml:space="preserve">
     <value>Andar</value>
@@ -436,7 +436,7 @@
     <value>pagamento</value>
   </data>
   <data name="Common_Payment_With" xml:space="preserve">
-    <value>con</value>
+    <value>com</value>
   </data>
   <data name="Common_Pays_Without_Interest" xml:space="preserve">
     <value>sem juros</value>
@@ -489,20 +489,20 @@
   <data name="Card_Data_Expiration.Text" xml:space="preserve">
     <value>Cartão válido até</value>
   </data>
-  <data name="Page_Flight_Search_SelectSegment" xml:space="preserve">
-    <value>Seleccion su ruta</value>
+  <data name="Page_Flight_Search_SelectSegment.Text" xml:space="preserve">
+    <value>Seleccion sua rota</value>
   </data>
   <data name="Page_Flight_Detail_Segment.Text" xml:space="preserve">
-    <value>Tramo</value>
+    <value>Trecho</value>
   </data>
   <data name="Page_Checkout.Text" xml:space="preserve">
-    <value>COMPRAR VUELO</value>
+    <value>COMPRAR VÔO</value>
   </data>
   <data name="Flights_Checkout_Invoice_Arg_fiscal_id.Label" xml:space="preserve">
     <value>Cuit/Cuil</value>
   </data>
   <data name="Page_Result_Available_Flights.Text" xml:space="preserve">
-    <value>Vuelos Disponibles</value>
+    <value>Vôo disponibles</value>
   </data>
   <data name="Flights_Checkout_Invoice_Arg_Fiscal_Status.Label" xml:space="preserve">
     <value>Situación fiscal</value>
@@ -520,7 +520,7 @@
     <value>Por favor, ingrese el número de CUIL/CUIT</value>
   </data>
   <data name="Generic_Go_Return" xml:space="preserve">
-    <value>ida y vuelta</value>
+    <value>ida e volta</value>
   </data>
   <data name="Flights_Checkout_Invoice_Arg_fiscal_name_ERROR_REQUIRED" xml:space="preserve">
     <value>Por favor ingrese la razon social.</value>
@@ -873,6 +873,12 @@ A reserva não foi gerado e não cobra nenhuma taxa para a transação.</value>
   </data>
   <data name="Page_Home_Configuration_Error" xml:space="preserve">
     <value>Ocorreu um erro ao iniciar o aplicativo. Por favor, reinicie o aplicativo .</value>
+  </data>
+  <data name="Loading.Text" xml:space="preserve">
+    <value>Carregando...</value>
+  </data>
+  <data name="Page_Checkout_RiskAlert_Title.Text" xml:space="preserve">
+    <value>Por favor, preencha os seguintes questões de risco .</value>
   </data>
   <data name="Home_Update_Error" xml:space="preserve">
     <value>Esta aplicação deve atualizar para continuar a usá-lo</value>

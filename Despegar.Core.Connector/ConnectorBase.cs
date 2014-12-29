@@ -101,7 +101,7 @@ namespace Despegar.Core.Connector
                             throw new Exception("Http error");
 
                         // Try to Parse an API Error                        
-                        e = new APIErrorException();
+                        e = new APIErrorException("API response is an Error: " + response);
                         ((APIErrorException)e).ErrorData = JsonConvert.DeserializeObject<MAPIError>(response);
                     }
                     catch (Exception) 

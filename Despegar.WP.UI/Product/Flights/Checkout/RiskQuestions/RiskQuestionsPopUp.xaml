@@ -5,6 +5,7 @@
     xmlns:local="using:Despegar.WP.UI.Product.Flights.Checkout.RiskQuesions"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:con="using:Despegar.WP.UI.Controls"
     mc:Ignorable="d">
 
     <UserControl.Resources>
@@ -23,13 +24,23 @@
             </DoubleAnimation>
         </Storyboard>
     </UserControl.Resources>
+    
+    <ScrollViewer>
+        <Grid x:Name="mainCanvas" Opacity="1"  Background="Black">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
 
-        <Grid x:Name="mainCanvas" Background="Black" Opacity="0">
-        <StackPanel Margin="20,40,20,0">
-            <ItemsControl ItemsSource="{Binding FreeTextQuestions}">
+            <StackPanel Grid.Row="0" Margin="20,40,20,0">
+
+                <con:Alert x:Uid="Page_Checkout_RiskAlert_Title" />
+
+                <ItemsControl ItemsSource="{Binding FreeTextQuestions}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <Grid>                         
+                            <Grid>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="20" />
                                     <RowDefinition Height="40" />
@@ -61,10 +72,11 @@
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
-            <!-- Footer -->
-            <Button Command="{Binding SendRiskAnswersCommand}"  Style="{StaticResource ButtonBottom}" Content="Enviar respuestas"/>
-        </StackPanel>
-        </Grid>
-</UserControl>
+            </StackPanel>
 
-    
+            <!-- Footer -->
+            <Button Margin="25,0,25,0" Grid.Row="1" Command="{Binding SendRiskAnswersCommand}"  Style="{StaticResource ButtonBottom}" Content="Enviar respuestas"/>
+
+        </Grid>
+    </ScrollViewer>
+</UserControl>   

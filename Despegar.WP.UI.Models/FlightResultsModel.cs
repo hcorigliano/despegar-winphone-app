@@ -3,6 +3,7 @@ using Despegar.Core.IService;
 using Despegar.WP.UI.Model.Classes.Flights;
 using Despegar.WP.UI.Model.Common;
 using Despegar.WP.UI.Model.Interfaces;
+using Despegar.WP.UI.Model.ViewModel;
 using Despegar.WP.UI.Model.ViewModel.Classes.Results;
 using System;
 using System.Collections.Generic;
@@ -15,11 +16,15 @@ using Windows.UI.Xaml.Controls;
 
 namespace Despegar.WP.UI.Model
 {
-    public class FlightResultsModel : AppModelBase, Interfaces.IInitializeModelInterface, Interfaces.IValidateInterface
+    public class FlightResultsViewModel : ViewModelBase
     {
+        private Paging _paging;
+
+        private INavigator Navigator { get; set; }
+        public IFlightService flightService;
+
         public FlightsItineraries Itineraries
-        {
-            
+        {            
             set
             {
                 //TODO initialize all variables needed for this page.
@@ -45,7 +50,7 @@ namespace Despegar.WP.UI.Model
             get { return _currencies; }
             set { 
                 _currencies = value;
-                base.NotifyPropertyChanged("Currencies");
+                OnPropertyChanged();
             }
         }
         
@@ -55,7 +60,7 @@ namespace Despegar.WP.UI.Model
             get { return _items; }
             set {
                 _items = value;
-                base.NotifyPropertyChanged("Items");
+                OnPropertyChanged();
             }
         }
 
@@ -66,7 +71,7 @@ namespace Despegar.WP.UI.Model
                 }
             set {
                 _facets = value;
-                base.NotifyPropertyChanged("Facets");
+                OnPropertyChanged();
                 }
         }
 
@@ -75,49 +80,41 @@ namespace Despegar.WP.UI.Model
             get { return _sorting; } 
             set{
                 _sorting = value;
-                base.NotifyPropertyChanged("Sorting");
+                OnPropertyChanged();
                 } 
         }
 
-        private Paging _paging;
-        
-        public Core.IService.IFlightService flightService;
+        public List<Facet> SelectedFacets
+        {
+            get
+            {
+                var facetList = this._facets.Where(f => f.values.Any(fv => fv.selected == true));
+                return facetList.ToList();
+            }
+        }
+
+        public Value3 SelectedSorting
+        {
+            get
+            {
+                var selectedSortingList = this._sorting.values.FirstOrDefault(sr => sr.selected == true);
+                return selectedSortingList;
+            }
+        }
 
         public Paging Paging{
             get { return _paging; }
             set {   _paging = value;
-                    base.NotifyPropertyChanged("Paging");     
+            OnPropertyChanged();   
             }
         }
 
-
-        public FlightResultsModel()
+        public FlightResultsViewModel(INavigator navigator, IFlightService flightService)
         {
-            this.InitializeModel();
-        }
-
-        public FlightResultsModel(INavigator navigator, IFlightService flightService)
-        {
-            // TODO: Complete member initialization
-
             this.Navigator = navigator;
-            this.flightService = flightService;
-           
+            this.flightService = flightService;           
         }
-
-        public new void InitializeModel()
-        {
-            base.InitializeModel();
-
-        }
-
-        public new void Validate()
-        {
-            base.Validate();
-
-            //Validate each variable for this model
-        }
-
+        
         private void FillItems(List<Item> itemList)
         {
             if (Items == null)
@@ -143,31 +140,7 @@ namespace Despegar.WP.UI.Model
                 _item.LinkFlightRoutes();
             }
         }
-
-        public bool isValid()
-        {
-            throw new NotImplementedException();
-        }
-
-        public List<Facet> SelectedFacets
-        {
-            get
-            {
-                var facetList = this._facets.Where(f => f.values.Any(fv => fv.selected == true));
-                return facetList.ToList();
-            }
-        }
-
-        public Value3 SelectedSorting
-        {
-            get
-            {
-                var selectedSortingList = this._sorting.values.FirstOrDefault(sr => sr.selected == true);
-                return selectedSortingList;
-            }
-        }
-
-
+       
         public string SelectedCurrency
         {
             get
@@ -183,7 +156,6 @@ namespace Despegar.WP.UI.Model
                 return ((Value)_cur).label;
             }
         }
-
 
         public void Clear()
         {
@@ -201,6 +173,5 @@ namespace Despegar.WP.UI.Model
             this.Paging = null;
         }
 
-        public INavigator Navigator { get; set; }
     }
 }

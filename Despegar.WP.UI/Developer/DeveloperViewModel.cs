@@ -106,12 +106,12 @@ namespace Despegar.WP.UI.Developer
                     // Fill From EZE to MIA
                     FlightSearchViewModel viewModel = page.DataContext as FlightSearchViewModel;            
                     viewModel.PassengersViewModel.GeneralAdults = 1;
-                    viewModel.PassengersViewModel.GeneralMinors = 1;
+                    viewModel.PassengersViewModel.GeneralMinors = 0;
                     viewModel.FromDate = new System.DateTimeOffset(2015, 2, 10, 0, 0, 0, TimeSpan.FromDays(0));
 
                     // Update UI
                     var pivotItem = page.FindVisualChildren<PivotItem>(page).Skip(1).First();
-                    var userControl = page.FindVisualChildren<SearchAirport>(pivotItem).FirstOrDefault();
+                    var userControl = pivotItem.FindName("OneWaySearchAirportControl") as SearchAirport;
                     userControl.UpdateAirportBoxes("EZE", "Aeropuerto Buenos Aires Ministro ¨Pistarini Ezeiza, Buenos Aires, Argentina", "MIA", "Miami, Florida, Estados Unidos");
                 
                 });

@@ -93,7 +93,7 @@
             <!-- City  TODO: -->
             <StackPanel Visibility="{Binding address.city_id.required, Converter={StaticResource VisibilityConverter}, FallbackValue=Collapsed}" >
                 <TextBlock Style="{StaticResource BaseTextLabel}" x:Uid="Flights_Checkout_Invoice_Arg_City" Text="Ciudad" />
-                <AutoSuggestBox TextBoxStyle="{StaticResource InputBase}" Style="{StaticResource AutosuggestBoxBase}" TextChanged="CityTexbox_TextChanged" SuggestionChosen="SuggestionChosen" TextMemberPath="full_name" />
+                <AutoSuggestBox TextBoxStyle="{StaticResource InputBase}" Style="{StaticResource AutosuggestBoxBase}" TextChanged="CityTexbox_TextChanged" SuggestionChosen="SuggestionChosen" TextMemberPath="full_name" KeyDown="AutoSuggestBox_KeyDown" />
                 <controls:ValidationError ErrorPrefix="Flights_Checkout_Invoice_Arg_City" ErrorCode="{Binding address.city_id.CurrentError}"  />
             </StackPanel>
 

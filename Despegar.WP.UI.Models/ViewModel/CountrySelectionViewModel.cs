@@ -15,6 +15,7 @@ namespace Despegar.WP.UI.Model.ViewModel
     {
         private IConfigurationService configurationService;
         private INavigator Navigator { get; set; }
+        
         private Configuration configuration;
         public Configuration Configurations
         {
@@ -35,7 +36,15 @@ namespace Despegar.WP.UI.Model.ViewModel
 
         public async void LoadConfigurations() 
         {
-            Configurations = await configurationService.GetConfigurations();
+            Configuration temp = await configurationService.GetConfigurations();
+
+            #if !Decolar
+                Site site = temp.sites.FirstOrDefault(x => x.code == "BR");
+                if(site != null)
+                    temp.sites.Remove(site);
+            #endif
+
+            Configurations = temp;
         }
 
         public ICommand NavigateToHome

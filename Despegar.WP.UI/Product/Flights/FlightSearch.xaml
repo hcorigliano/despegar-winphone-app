@@ -81,7 +81,8 @@
                             <RowDefinition />
                         </Grid.RowDefinitions>
 
-                        <src:SearchAirport  Grid.Row="0"  
+                        <src:SearchAirport  x:Name="OneWaySearchAirportControl"
+                                            Grid.Row="0"  
                                             SelectedOriginCode="{Binding Origin, Mode=TwoWay}" 
                                             SelectedDestinationCode="{Binding Destination, Mode=TwoWay}" 
                                             SelectedOriginText="{Binding OriginText, Mode=TwoWay}"  
@@ -90,7 +91,7 @@
                         <src:DateControlSimple  Grid.Row="1" SelectedDate="{Binding FromDate, Mode=TwoWay}" />
                         <src:QuantityPassagersControl  Grid.Row="2" DataContext="{Binding PassengersViewModel}"   Adults="{Binding Adults, Mode=TwoWay}" Children="{Binding Children, Mode=TwoWay}"  Infants="{Binding Infants, Mode=TwoWay}"   />
 
-                        <Button Command="{Binding SearchCommand}" Grid.Row="4"  Style="{StaticResource ButtonBottom}" Content="Buscar vuelos"/>
+                        <Button x:Uid="Flights_Search_SearchButton" Command="{Binding SearchCommand}" Grid.Row="4"  Style="{StaticResource ButtonBottom}" Content="Buscar vuelos"/>
                     </Grid>
                 </ScrollViewer>
             </PivotItem>
@@ -128,7 +129,7 @@
                                         </Grid.ColumnDefinitions>
 
                                         <TextBlock Grid.Row="0" Grid.ColumnSpan="2" Style="{StaticResource FlightSegmentTitle}" >
-                                           <Run x:Uid="Page_Flight_Serch_Section" Text="Tramo" />
+                                           <Run x:Uid="Page_Flight_Search_Section" Text="Tramo" />
                                            <Run Text="{Binding Index}" />
                                         </TextBlock>
 
@@ -143,8 +144,8 @@
                                                 <Image Style="{StaticResource FlightAirportIcon}"/>
                                             </Grid>
 
-                                            <TextBlock Grid.Column="1" Style="{StaticResource FlightSegmentAirports}">
-                                                   <Run Text="{Binding AirportOrigin}"/>
+                                            <TextBlock Grid.Column="1" Style="{StaticResource FlightSegmentAirports}"  FontSize="22" Margin="5,3,0,0">
+                                                 <Run Text="{Binding AirportOrigin}"/>
                                                  <Run Text="-" />                                                 
                                                  <Run Text="{Binding AirportDestination}" />
                                             </TextBlock>
@@ -160,7 +161,7 @@
                                                 <Image Style="{StaticResource CalendarIcon}"/>
                                             </Grid>
 
-                                            <TextBlock Grid.Column="1"  Text="{Binding DepartureDate, Converter={StaticResource dateConverter}}" Style="{StaticResource FlightSegmentAirports}" />
+                                            <TextBlock Grid.Column="1"  Text="{Binding DepartureDate, Converter={StaticResource dateConverter}}" Style="{StaticResource FlightSegmentAirports}"  FontSize="22" Margin="5,3,0,0" />
                                         </Grid>
 
                                         <TextBlock Visibility="{Binding IsNew, Converter={StaticResource visibilityConverter}, ConverterParameter=Normal}" Grid.Row="1" Grid.ColumnSpan="3" x:Uid="Page_Flight_Search_SelectSegment" Text="Seleccione su ruta"  Style="{StaticResource BaseTextLabel}"/>
@@ -191,7 +192,7 @@
                                            <Run Text=" 1" />
                                     </TextBlock>
 
-                                    <Grid Grid.Row="1" Grid.Column="0" Visibility="Collapsed">
+                                    <Grid Grid.Row="1" Grid.Column="0" >
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="{StaticResource Block1p}" />
                                             <ColumnDefinition Width="*" />
@@ -201,14 +202,15 @@
                                             <Image  Style="{StaticResource FlightAirportIcon}"/>
                                         </Grid>
 
-                                        <TextBlock Grid.Column="1" Style="{StaticResource FlightSegmentAirports}">
+                                        
+                                        <TextBlock Grid.Column="1" Style="{StaticResource FlightSegmentAirports}" FontSize="22" Margin="5,3,0,0">
                                                  <Run Text="BUE"/>
                                                  <Run Text=" - " />                                                 
                                                  <Run Text="CSS" />
                                         </TextBlock>
                                     </Grid>
 
-                                    <Grid Grid.Row="1" Grid.Column="2" Visibility="Collapsed">
+                                    <Grid Grid.Row="1" Grid.Column="2" >
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="{StaticResource Block1p}" />
                                             <ColumnDefinition Width="*" />
@@ -218,7 +220,7 @@
                                             <Image  Style="{StaticResource CalendarIcon}"/>
                                         </Grid>
 
-                                        <TextBlock Grid.Column="1" Text="16 NOV 2014"  Style="{StaticResource FlightSegmentAirports}"/>
+                                        <TextBlock Grid.Column="1" Text="16 NOV 2014"  Style="{StaticResource FlightSegmentAirports}" FontSize="22" Margin="5,3,0,0"/>
                                     </Grid>
 
                                     
@@ -229,7 +231,7 @@
 
                         <src:QuantityPassagersControl  Grid.Row="1" DataContext="{Binding PassengersViewModel}"   Adults="{Binding Adults, Mode=TwoWay}" Children="{Binding Children, Mode=TwoWay}"  Infants="{Binding Infants, Mode=TwoWay}"   />
 
-                        <Button Grid.Row="2" Command="{Binding SearchCommand}"  Style="{StaticResource ButtonBottom}" Content="Buscar vuelos"/>
+                        <Button  x:Uid="Flights_Search_SearchButton" Grid.Row="2" Command="{Binding SearchCommand}"  Style="{StaticResource ButtonBottom}" Content="Buscar vuelos"/>
                     </Grid>
                 </ScrollViewer>
             </PivotItem>
