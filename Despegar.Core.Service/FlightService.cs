@@ -71,7 +71,7 @@ namespace Despegar.Core.Service
                         }
                     }
 
-                    if (item.routes != null && item.inbound == null && result.items == null)
+                    if (item.routes != null && item.inbound == null && item.outbound == null)
                     {
                         //Multiple
                         foreach(var route in item.routes)
