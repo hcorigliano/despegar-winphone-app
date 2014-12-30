@@ -14,9 +14,27 @@ namespace Despegar.WP.UI.BugSense
     /// </summary>
     public class BugTracker : IBugTracker
     {
+        private static IBugTracker instance;
+
+        public static IBugTracker Instance
+        {
+            get
+            {
+                if (instance == null)
+                {
+                    instance = new BugTracker();
+                    breadCrumbCounter = 0;
+                }
+
+                return instance;
+            }
+        }
+        private static int breadCrumbCounter;
+
         public void LeaveBreadcrumb(string breadcrumb) 
         {
-            BugSenseHandler.Instance.LeaveBreadCrumb(breadcrumb);
+            BugSenseHandler.Instance.LeaveBreadCrumb("[" + breadCrumbCounter + "] " + breadcrumb);
+            breadCrumbCounter++;
         }
 
         public void LogException(Exception exception)
@@ -29,16 +47,14 @@ namespace Despegar.WP.UI.BugSense
             BugSenseHandler.Instance.LogException(exception, extrasExtraDataList as LimitedCrashExtraDataList);
         }
 
-        private static IBugTracker instance;
-        public static IBugTracker Instance
+        public void SetExtraData(string key, string value)
         {
-            get
+            LimitedCrashExtraDataList extras = BugSenseHandler.Instance.CrashExtraData;
+            extras.Add(new CrashExtraData
             {
-                if (instance == null)
-                    instance = new BugTracker();
-
-                return instance;
-            }
+                Key = key,
+                Value = value
+            });
         }
     }
 }

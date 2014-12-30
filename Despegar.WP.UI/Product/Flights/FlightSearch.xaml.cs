@@ -49,6 +49,8 @@ namespace Despegar.WP.UI.Product.Flights
         # region ** ERROR HANDLING **
         private async void ErrorHandler(object sender, ViewModelErrorArgs e) 
         {
+            BugTracker.Instance.LeaveBreadcrumb("Flight Search Error Raised: " + e.ErrorCode);
+
             ResourceLoader manager = new ResourceLoader();
             MessageDialog dialog;
 
@@ -62,9 +64,7 @@ namespace Despegar.WP.UI.Product.Flights
                     dialog = new MessageDialog(manager.GetString("Flights_Search_ERROR_SEARCH_INVALID"), manager.GetString("Flights_Search_ERROR_SEARCH_INVALID_TITLE"));
                     await dialog.ShowAsync();
                     break;
-
                 case "SEARCH_INVALID_WITH_MESSAGE":
-                    //List<CustomError> message = e.Parameter as List<CustomError>;
                     CustomError message = e.Parameter as CustomError;
                     if (message == null) break;
 
@@ -73,7 +73,7 @@ namespace Despegar.WP.UI.Product.Flights
                     if (message.HasDates)
                     {
                         string msgunformated = msg;
-                        msg = string.Format(msgunformated,message.Date);
+                        msg = string.Format(msgunformated, message.Date);
                     }
 
                     dialog = new MessageDialog(msg, manager.GetString("Flights_Search_ERROR_SEARCH_INVALID_TITLE"));
@@ -112,16 +112,17 @@ namespace Despegar.WP.UI.Product.Flights
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            HardwareButtons.BackPressed += HardwareButtons_BackPressed;
+            BugTracker.Instance.LeaveBreadcrumb("Flight Search View");
 
-            //this.navigationHelper.OnNavigatedTo(e);            
+            HardwareButtons.BackPressed += HardwareButtons_BackPressed;
+                  
             if (e.Parameter != null)
             {
                 // Navigated from somewhere else
                 var parameters = e.Parameter as FlightSearchNavigationData;
                 ViewModel.InitializeWith(parameters.SearchModel, parameters.PassengerModel);
 
-                // Set Current Pivor Item
+                // Set Current Pivot Item
                 switch (parameters.SearchModel.PageMode)
                 {
                     case FlightSearchPages.RoundTrip:
@@ -137,7 +138,10 @@ namespace Despegar.WP.UI.Product.Flights
 
                 // If it is coming from Multiples edit, remove the "Multiples edit" View from the stack
                 if (parameters.NavigatedFromMultiples && e.NavigationMode == NavigationMode.New)
+                {
+                    BugTracker.Instance.LeaveBreadcrumb("Flight Search View - Back from Multiples Edit");
                     ViewModel.Navigator.RemoveBackEntry();
+                }
 
                 this.DataContext = ViewModel;
             }
@@ -151,6 +155,8 @@ namespace Despegar.WP.UI.Product.Flights
 
         void HardwareButtons_BackPressed(object sender, BackPressedEventArgs e)
         {
+            BugTracker.Instance.LeaveBreadcrumb("Flight Search View - Back button pressed");
+
             if (ViewModel != null)
             {
                 if (ViewModel.IsLoading)

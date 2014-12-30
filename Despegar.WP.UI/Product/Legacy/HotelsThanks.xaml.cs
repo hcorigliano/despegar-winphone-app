@@ -11,6 +11,7 @@ using Windows.Phone.UI.Input;
 using Windows.UI.Xaml.Navigation;
 using Windows.UI.Xaml.Media.Imaging;
 using Despegar.WP.UI.Common;
+using Despegar.WP.UI.BugSense;
 
 namespace Despegar.WP.UI.Product.Legacy
 {
@@ -39,6 +40,7 @@ namespace Despegar.WP.UI.Product.Legacy
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {        
             HardwareButtons.BackPressed += HardwareButtons_BackPressed;
+            BugTracker.Instance.LeaveBreadcrumb("Hotel Thanks");
         }
 
         private void HardwareButtons_BackPressed(object sender, BackPressedEventArgs e)

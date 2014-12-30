@@ -32,14 +32,12 @@ namespace Despegar.WP.UI
         public Despegar.WP.UI.Model.HomeViewModel ViewModel { get; set; }
         private IAsyncOperation<IUICommand> asyncCommand = null;
 
-
         public Home()
         {
             this.InitializeComponent();
             this.navigationHelper = new NavigationHelper(this);
             this.navigationHelper.LoadState += this.NavigationHelper_LoadState;
             this.navigationHelper.SaveState += this.NavigationHelper_SaveState;
-            
 
             // Developer Tools
             this.CheckDeveloperTools();  
@@ -61,7 +59,6 @@ namespace Despegar.WP.UI
             ga.SendView("Home");
             #endif
         }
-
 
         private void Checkloading(object sender, PropertyChangedEventArgs e)
         {
@@ -133,13 +130,11 @@ namespace Despegar.WP.UI
 
         public static string GetAppVersion()
         {
-
             Package package = Package.Current;
             PackageId packageId = package.Id;
             PackageVersion version = packageId.Version;
 
             return string.Format("{0}.{1}.{2}.{3}", version.Major, version.Minor, version.Build, version.Revision);
-
         }
 
         private async Task ValidateUpdate()
@@ -149,13 +144,13 @@ namespace Despegar.WP.UI
 #else
             string productID = "f7d63cbc-dae6-4608-b695-31a1e095c4e7";
 #endif
-
+            BugTracker.Instance.LeaveBreadcrumb("Validate App Version");
             ResourceLoader manager = new ResourceLoader();
             configurationService = GlobalConfiguration.CoreContext.GetConfigurationService();
             UpdateFields data = await configurationService.CheckUpdate( GetAppVersion(),"8.1", "X", "X");
 
             if (data.force_update)
-            {
+            {                
                 MessageDialog dialog = new MessageDialog(manager.GetString("Home_Update_Error"), manager.GetString("Home_Update_Error_Title"));
                 await dialog.ShowAsync();
                 await Windows.System.Launcher.LaunchUriAsync(new Uri("ms-windows-store:navigate?appid=" + productID));
@@ -192,6 +187,7 @@ namespace Despegar.WP.UI
         /// handlers that cannot cancel the navigation request.</param>
         protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
+            BugTracker.Instance.LeaveBreadcrumb("Home View");
             await ValidateUpdate(); 
             this.navigationHelper.OnNavigatedTo(e);
         }

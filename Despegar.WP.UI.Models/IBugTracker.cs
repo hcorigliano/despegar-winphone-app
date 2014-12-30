@@ -13,5 +13,7 @@ namespace Despegar.WP.UI.Model
         void LogException(Exception exception);
 
         void LogException(Exception exception, object extrasExtraDataList);
+
+        void SetExtraData(string key, string value);
     }
 }

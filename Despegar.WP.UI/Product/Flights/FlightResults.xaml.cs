@@ -93,6 +93,8 @@ namespace Despegar.WP.UI.Product.Flights
         /// session.  The state will be null the first time a page is visited.</param>
         private async void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
         {
+            BugTracker.Instance.LeaveBreadcrumb("Flight Results View");
+
             PageParameters pageParameters = e.NavigationParameter as PageParameters;
 
             FlightsItineraries Itineraries = new FlightsItineraries();
@@ -107,6 +109,7 @@ namespace Despegar.WP.UI.Product.Flights
 
             if (flightSearchModel.SearchStatus == SearchStates.SearchAgain)
             {
+                BugTracker.Instance.LeaveBreadcrumb("Flights Minibox Search View");
                 Itineraries = await flightResultModel.flightService.GetItineraries(flightSearchModel);
                 flightResultModel = new FlightResultsViewModel(Navigator.Instance, GlobalConfiguration.CoreContext.GetFlightService(), BugTracker.Instance); ;
                 flightResultModel.Itineraries = Itineraries;
@@ -296,17 +299,18 @@ namespace Despegar.WP.UI.Product.Flights
             return visibility;
         }
 
-
         public void GoBack()
         {
             if (navigationHelper.CanGoBack())
             {
+                BugTracker.Instance.LeaveBreadcrumb("Flight Result - Back button");
                 navigationHelper.GoBack();
             }
         }
 
         private void miniboxSearch_Tapped(object sender, TappedRoutedEventArgs e)
         {
+            BugTracker.Instance.LeaveBreadcrumb("Flight Result Minibox Hit");
             GoBack();
         }
 

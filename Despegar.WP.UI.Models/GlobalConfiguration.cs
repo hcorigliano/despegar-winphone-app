@@ -15,7 +15,6 @@ namespace Despegar.WP.UI.Model
     public static class GlobalConfiguration
     {
         public static ICoreContext CoreContext { get; set; }
-        //private IUPAService upaService;
         public static string Site { get { return CoreContext.GetSite(); } }
         public static string Language { get { return CoreContext.GetLanguage();} }
         public static string UPAId { get; set; }
@@ -30,15 +29,11 @@ namespace Despegar.WP.UI.Model
             ClientDeviceInfo ClientInfo = new ClientDeviceInfo();
             string xclient = ClientInfo.GetClientInfo();
             string uow = ClientInfo.GetUOW();
-           
-            // TODO: Set Site and Language
+                       
             CoreContext = new CoreContext();
             CoreContext.Configure(xclient, uow);
 
-            await LoadUPA();
-
-            //TODO : (1)
-            //CoreContext.SetSite(SiteCode.Argentina);
+            await LoadUPA();      
 
             // Enable Verbose logging
             #if DEBUG
@@ -98,6 +93,5 @@ namespace Despegar.WP.UI.Model
 
         }
 
-    
     }
 }
