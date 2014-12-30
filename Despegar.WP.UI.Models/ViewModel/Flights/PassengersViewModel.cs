@@ -95,7 +95,7 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
             }
         }
 
-        public PassengersViewModel()
+        public PassengersViewModel(IBugTracker t) : base(t)
         {
             this.GeneralAdults = 1;
             this.GeneralMinors = 0;

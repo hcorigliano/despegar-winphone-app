@@ -21,7 +21,8 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
 
         public ObservableCollection<FlightMultipleSegment> Segments { get; set; }
 
-        public MultipleEditionViewModel(INavigator navigator) 
+        public MultipleEditionViewModel(INavigator navigator, IBugTracker t)
+            : base(t) 
         {
             this.navigator = navigator;
         }

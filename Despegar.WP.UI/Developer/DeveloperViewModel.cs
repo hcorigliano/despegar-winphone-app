@@ -64,7 +64,7 @@ namespace Despegar.WP.UI.Developer
         }
         #endregion
 
-        public DeveloperViewModel()
+        public DeveloperViewModel() : base(null)
         {
             // Load Mocks list
             var mocks = Mock.AllMocks

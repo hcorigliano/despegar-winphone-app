@@ -198,7 +198,7 @@ namespace Despegar.WP.UI.Model.ViewModel
         }    
         #endregion
 
-        public FlightsCheckoutViewModel(INavigator navigator, IFlightService flightServices, ICommonServices commonServices, IConfigurationService configService, ICouponsService couponService ,FlightsCrossParameter parameters)
+        public FlightsCheckoutViewModel(INavigator navigator, IFlightService flightServices, ICommonServices commonServices, IConfigurationService configService, ICouponsService couponService ,FlightsCrossParameter parameters, IBugTracker t) : base(t)
         {
             this.navigator = navigator;
             this.flightService = flightServices;

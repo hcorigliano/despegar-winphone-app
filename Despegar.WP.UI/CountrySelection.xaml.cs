@@ -23,6 +23,7 @@ using Despegar.Core.IService;
 using Despegar.Core.Business.Configuration;
 using Despegar.WP.UI.Common;
 using Despegar.WP.UI.Model.ViewModel;
+using Despegar.WP.UI.BugSense;
 
 namespace Despegar.WP.UI
 {    
@@ -33,7 +34,7 @@ namespace Despegar.WP.UI
         public CountrySelection()
         {
             this.InitializeComponent();
-            ViewModel = new CountrySelectionViewModel(Navigator.Instance, GlobalConfiguration.CoreContext.GetConfigurationService());
+            ViewModel = new CountrySelectionViewModel(Navigator.Instance, GlobalConfiguration.CoreContext.GetConfigurationService(), BugTracker.Instance);
             DataContext = ViewModel;
             this.CheckDeveloperTools();
         }

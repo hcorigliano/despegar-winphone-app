@@ -111,24 +111,22 @@ namespace Despegar.WP.UI
                 // Initialize Core
                 try
                 {
-                    BugTracker.LeaveBreadcrumb("App Started");
-                    
+                    BugTracker.Instance.LeaveBreadcrumb("App Started");                    
                     await GlobalConfiguration.InitCore();
-
-                    BugTracker.LeaveBreadcrumb("Core Initialized");
+                    BugTracker.Instance.LeaveBreadcrumb("Core Initialized");
                 }
                 catch (Exception ex)
                 {
-                    BugTracker.LogException(ex);
+                    BugTracker.Instance.LogException(ex);
                     NotifyAndClose();
                 }
 
                 // TODO: Legacy code
                 if (!ApplicationConfig.Instance.Initialized)
                 {
-                    BugTracker.LeaveBreadcrumb("Init Legacy Core");
+                    BugTracker.Instance.LeaveBreadcrumb("Init Legacy Core");
                     ApplicationConfig.Instance.Init();
-                    BugTracker.LeaveBreadcrumb("Legacy core initialized");
+                    BugTracker.Instance.LeaveBreadcrumb("Legacy core initialized");
                 }
                 // Check persist information
                 var roamingSettings = ApplicationData.Current.RoamingSettings;
@@ -158,7 +156,7 @@ namespace Despegar.WP.UI
 
             // Ensure the current window is active
             Window.Current.Activate();
-            BugTracker.LeaveBreadcrumb("App Launched");
+            BugTracker.Instance.LeaveBreadcrumb("App Launched");
         }
 
         /// <summary>

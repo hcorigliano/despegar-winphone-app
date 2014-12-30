@@ -18,6 +18,7 @@ using Windows.Phone.UI.Input;
 using Windows.ApplicationModel.Resources;
 using Despegar.Core.Business.CustomErrors;
 using System.Collections.Generic;
+using Despegar.WP.UI.BugSense;
 
 namespace Despegar.WP.UI.Product.Flights
 {
@@ -37,7 +38,7 @@ namespace Despegar.WP.UI.Product.Flights
 
             this.CheckDeveloperTools();
 
-            ViewModel = new FlightSearchViewModel(Navigator.Instance, GlobalConfiguration.CoreContext.GetFlightService());
+            ViewModel = new FlightSearchViewModel(Navigator.Instance, GlobalConfiguration.CoreContext.GetFlightService(), BugTracker.Instance);
             ViewModel.ViewModelError += ErrorHandler;
             ViewModel.PropertyChanged += Checkloading;
             HardwareButtons.BackPressed += HardwareButtons_BackPressed;

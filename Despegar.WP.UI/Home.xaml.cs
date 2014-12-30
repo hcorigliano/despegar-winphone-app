@@ -1,6 +1,7 @@
 ﻿using Despegar.Core.Business.Configuration;
 using Despegar.Core.IService;
 using Despegar.Core.Service;
+using Despegar.WP.UI.BugSense;
 using Despegar.WP.UI.Common;
 using Despegar.WP.UI.Controls;
 using Despegar.WP.UI.Model;
@@ -123,7 +124,7 @@ namespace Despegar.WP.UI
         {
             var parameter = e.NavigationParameter as HomeParameters;
 
-            ViewModel = new Despegar.WP.UI.Model.HomeViewModel(Navigator.Instance, GlobalConfiguration.CoreContext.GetConfigurationService(), parameter);
+            ViewModel = new Despegar.WP.UI.Model.HomeViewModel(Navigator.Instance, GlobalConfiguration.CoreContext.GetConfigurationService(), parameter, BugTracker.Instance);
             ViewModel.PropertyChanged += Checkloading;
             SetupMenuItems(GlobalConfiguration.Site);
 
