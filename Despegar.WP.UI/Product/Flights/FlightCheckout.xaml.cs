@@ -18,6 +18,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 using System.Linq;
+using Despegar.WP.UI.BugSense;
 
 namespace Despegar.WP.UI.Product.Flights
 {
@@ -74,7 +75,8 @@ namespace Despegar.WP.UI.Product.Flights
                 GlobalConfiguration.CoreContext.GetCommonService(), 
                 GlobalConfiguration.CoreContext.GetConfigurationService(), 
                 GlobalConfiguration.CoreContext.GetCouponsService(),
-                crossParameters);
+                crossParameters, 
+                BugTracker.Instance);
 
             ViewModel.PropertyChanged += Checkloading;
             ViewModel.ShowRiskReview += this.ShowRisk;

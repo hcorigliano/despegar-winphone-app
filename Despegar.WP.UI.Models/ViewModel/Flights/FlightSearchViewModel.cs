@@ -153,12 +153,12 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
 
         #endregion
 
-        public FlightSearchViewModel(INavigator navigator, IFlightService flightService)
+        public FlightSearchViewModel(INavigator navigator, IFlightService flightService, IBugTracker t) : base(t)
         {
             this.Navigator = navigator;
             this.flightService = flightService;
             this.coreSearchModel = new FlightSearchModel();
-            this.PassengersViewModel = new PassengersViewModel();
+            this.PassengersViewModel = new PassengersViewModel(t);
 
             GetParameterSearchfromConfiguration(this.coreSearchModel);
 

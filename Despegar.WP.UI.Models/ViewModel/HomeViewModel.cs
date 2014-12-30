@@ -19,8 +19,8 @@ namespace Despegar.WP.UI.Model
         private IConfigurationService configurationService;
         private INavigator Navigator;
 
-        public HomeViewModel(INavigator navigator, IConfigurationService configuracion, HomeParameters parameters)
-        {
+        public HomeViewModel(INavigator navigator, IConfigurationService configuracion, HomeParameters parameters, IBugTracker t) : base(t)
+        {            
             this.Navigator = navigator;
             this.configurationService = configuracion;
 

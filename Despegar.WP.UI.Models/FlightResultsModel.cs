@@ -109,7 +109,7 @@ namespace Despegar.WP.UI.Model
             }
         }
 
-        public FlightResultsViewModel(INavigator navigator, IFlightService flightService)
+        public FlightResultsViewModel(INavigator navigator, IFlightService flightService, IBugTracker t) :  base(t)
         {
             this.Navigator = navigator;
             this.flightService = flightService;           

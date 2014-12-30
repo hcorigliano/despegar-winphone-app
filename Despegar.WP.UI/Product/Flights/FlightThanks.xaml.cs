@@ -1,4 +1,5 @@
-﻿using Despegar.WP.UI.Common;
+﻿using Despegar.WP.UI.BugSense;
+using Despegar.WP.UI.Common;
 using Despegar.WP.UI.Model.Interfaces;
 using Despegar.WP.UI.Model.ViewModel.Classes.Flights;
 using Despegar.WP.UI.Model.ViewModel.Flights;
@@ -40,7 +41,7 @@ namespace Despegar.WP.UI.Product.Flights
         {
             FlightsCrossParameter crossParameters = e.NavigationParameter as FlightsCrossParameter;
 
-            ViewModel = new FlightThanksViewModel(Navigator.Instance);
+            ViewModel = new FlightThanksViewModel(Navigator.Instance, BugTracker.Instance);
             ViewModel.FlightParameters = crossParameters;
 
             DataContext = ViewModel;

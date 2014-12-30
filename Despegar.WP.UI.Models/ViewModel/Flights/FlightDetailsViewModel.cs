@@ -1,5 +1,6 @@
 ﻿using Despegar.Core.Business.Flight.Itineraries;
 using Despegar.WP.UI.Model.Interfaces;
+using Despegar.WP.UI.Model.ViewModel;
 using Despegar.WP.UI.Model.ViewModel.Classes.Flights;
 using Despegar.WP.UI.Models.Classes;
 using System;
@@ -11,7 +12,7 @@ using System.Windows.Input;
 
 namespace Despegar.WP.UI.Model
 {
-    public class FlightDetailsViewModel
+    public class FlightDetailsViewModel : ViewModelBase
     {
         private INavigator navigator;
         public FlightsCrossParameter CrossParameters { get; set; } 
@@ -21,7 +22,7 @@ namespace Despegar.WP.UI.Model
         /// </summary>
         /// <param name="outBound"></param>
         /// <param name="route2"></param>
-        public FlightDetailsViewModel(INavigator navigator, FlightsCrossParameter parameters) //Route outBound, Route inBound)
+        public FlightDetailsViewModel(INavigator navigator, FlightsCrossParameter parameters, IBugTracker t) : base(t) //Route outBound, Route inBound)
         {
             this.navigator = navigator;
             CrossParameters = parameters;

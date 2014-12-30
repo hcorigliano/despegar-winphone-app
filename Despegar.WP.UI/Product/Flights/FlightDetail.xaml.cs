@@ -19,6 +19,7 @@ using Despegar.Core.Business.Flight.Itineraries;
 using Despegar.WP.UI.Model;
 using Despegar.WP.UI.Model.Classes.Flights;
 using Despegar.WP.UI.Model.ViewModel.Classes.Flights;
+using Despegar.WP.UI.BugSense;
 
 namespace Despegar.WP.UI.Product.Flights
 {
@@ -64,7 +65,7 @@ namespace Despegar.WP.UI.Product.Flights
             if (routes != null)
             {
                 // Multiples are inserted as an Outbound collection of Routes
-                ViewModel = new FlightDetailsViewModel(Navigator.Instance, routes);
+                ViewModel = new FlightDetailsViewModel(Navigator.Instance, routes, BugTracker.Instance);
             }
 
             // Check Search type

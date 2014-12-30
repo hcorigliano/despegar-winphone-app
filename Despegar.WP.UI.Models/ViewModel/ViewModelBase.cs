@@ -29,6 +29,12 @@ namespace Despegar.WP.UI.Model.ViewModel
 
         public event ViewModelErrorHandler ViewModelError;
         public event PropertyChangedEventHandler PropertyChanged;
+        public IBugTracker Tracker { get; set; }
+
+        public ViewModelBase(IBugTracker tracker) 
+        {
+            this.Tracker = tracker;
+        }
 
         protected void OnViewModelError(string errorCode)
         {

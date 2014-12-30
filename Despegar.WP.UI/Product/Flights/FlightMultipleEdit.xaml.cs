@@ -6,6 +6,7 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 using System.Linq;
 using Windows.UI.Xaml;
+using Despegar.WP.UI.BugSense;
 
 namespace Despegar.WP.UI.Product.Flights
 {
@@ -21,7 +22,7 @@ namespace Despegar.WP.UI.Product.Flights
             this.navigationHelper.LoadState += this.NavigationHelper_LoadState;
             this.navigationHelper.SaveState += this.NavigationHelper_SaveState;
 
-            ViewModel = new MultipleEditionViewModel(Navigator.Instance);
+            ViewModel = new MultipleEditionViewModel(Navigator.Instance, BugTracker.Instance);
             this.DataContext = ViewModel;
             this.CheckDeveloperTools();
         }   

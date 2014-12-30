@@ -11,7 +11,7 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
         private INavigator navigator;
         public FlightsCrossParameter FlightParameters { get; set; }
 
-        public FlightThanksViewModel(INavigator nav) 
+        public FlightThanksViewModel(INavigator nav, IBugTracker t) : base(t) 
         {
             this.navigator = nav;
         }

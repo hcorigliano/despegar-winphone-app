@@ -27,7 +27,7 @@ namespace Despegar.WP.UI.Model.ViewModel
             }
         }
 
-        public CountrySelectionViewModel(INavigator navigator, IConfigurationService configService) 
+        public CountrySelectionViewModel(INavigator navigator, IConfigurationService configService, IBugTracker t) : base(t) 
         {
             configuration = null;
             this.Navigator = navigator;

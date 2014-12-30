@@ -18,6 +18,7 @@ using System.Collections.Generic;
 using Despegar.WP.UI.Model.ViewModel.Classes.Flights;
 using Despegar.WP.UI.Model.Classes.Flights;
 using Windows.UI.Xaml.Media.Imaging;
+using Despegar.WP.UI.BugSense;
 
 namespace Despegar.WP.UI.Product.Flights
 {
@@ -40,7 +41,7 @@ namespace Despegar.WP.UI.Product.Flights
             this.navigationHelper.LoadState += this.NavigationHelper_LoadState;
             this.navigationHelper.SaveState += this.NavigationHelper_SaveState;
 
-            flightResultModel = new FlightResultsViewModel(Navigator.Instance, GlobalConfiguration.CoreContext.GetFlightService());
+            flightResultModel = new FlightResultsViewModel(Navigator.Instance, GlobalConfiguration.CoreContext.GetFlightService(), BugTracker.Instance);
             this.DataContext = flightResultModel;
             //this.CheckDeveloperTools();
 
@@ -114,7 +115,7 @@ namespace Despegar.WP.UI.Product.Flights
             if (flightSearchModel.SearchStatus == SearchStates.SearchAgain)
             {
                 Itineraries = await flightResultModel.flightService.GetItineraries(flightSearchModel);
-                flightResultModel = new FlightResultsViewModel(Navigator.Instance, GlobalConfiguration.CoreContext.GetFlightService()); ;
+                flightResultModel = new FlightResultsViewModel(Navigator.Instance, GlobalConfiguration.CoreContext.GetFlightService(), BugTracker.Instance); ;
                 flightResultModel.Itineraries = Itineraries;
                 flightSearchModel.SearchStatus = SearchStates.FirstSearch;
                 this.DataContext = flightResultModel;

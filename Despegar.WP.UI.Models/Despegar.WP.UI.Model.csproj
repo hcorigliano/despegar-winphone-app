@@ -88,6 +88,7 @@
     <Compile Include="Common\IIncrementalSource.cs" />
     <Compile Include="Common\IncrementalLoadingCollection.cs" />
     <Compile Include="Common\ViewModelErrorArgs.cs" />
+    <Compile Include="IBugTracker.cs" />
     <Compile Include="ViewModel\Classes\Flights\FlightsCrossParameter.cs" />
     <Compile Include="ViewModel\Classes\Flights\FlightSearchNavigationData.cs" />
     <Compile Include="ViewModel\Classes\Flights\BindableItem.cs" />
@@ -122,15 +123,6 @@
     <Compile Include="Interfaces\IValidateInterface.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
-  </ItemGroup>
-  <ItemGroup />
-  <ItemGroup>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.6.0.6\lib\portable-net40+sl5+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -110,6 +110,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="BugSense\BugTracker.cs" />
     <Compile Include="Common\Converter\BooleanConverter.cs" />
     <Compile Include="Common\Converter\DateToLongString.cs" />
     <Compile Include="Common\Converter\ImageGoReturnConverter.cs" />
