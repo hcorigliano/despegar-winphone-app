@@ -161,8 +161,9 @@ namespace Despegar.WP.UI.Developer
                     FlightSearchViewModel viewModel = page.DataContext as FlightSearchViewModel;
                     viewModel.PassengersViewModel.GeneralAdults = 1;
                     viewModel.PassengersViewModel.GeneralMinors = 0;
-                    viewModel.FromDate = new System.DateTimeOffset(DateTime.Today.Year, DateTime.Today.Month + 1, 19, 0, 0, 0,TimeSpan.FromDays(0));
-                    viewModel.ToDate = new System.DateTimeOffset(DateTime.Today.Year, DateTime.Today.Month + 2, 19, 0, 0, 0, TimeSpan.FromDays(0));
+                   
+                    viewModel.FromDate = new System.DateTimeOffset(2015,5, 19, 0, 0, 0, TimeSpan.FromDays(0));
+                    viewModel.ToDate = new System.DateTimeOffset(2015, 6, 19, 0, 0, 0, TimeSpan.FromDays(0));
 
                     // Update UI
                     //var pivotItem = page.FindVisualChildren<PivotItem>(page).Skip(2).First();
