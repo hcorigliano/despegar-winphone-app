@@ -143,6 +143,12 @@ namespace Despegar.WP.UI
 
         private async Task ValidateUpdate()
         {
+#if DECOLAR
+            string productID = "e544d4bb-be44-4db8-9882-268f0b5631a3";
+#else
+            string productID = "f7d63cbc-dae6-4608-b695-31a1e095c4e7";
+#endif
+
             ResourceLoader manager = new ResourceLoader();
             configurationService = GlobalConfiguration.CoreContext.GetConfigurationService();
             UpdateFields data = await configurationService.CheckUpdate( GetAppVersion(),"8.1", "X", "X");
@@ -151,7 +157,7 @@ namespace Despegar.WP.UI
             {
                 MessageDialog dialog = new MessageDialog(manager.GetString("Home_Update_Error"), manager.GetString("Home_Update_Error_Title"));
                 await dialog.ShowAsync();
-                await Windows.System.Launcher.LaunchUriAsync(new Uri("ms-windows-store:navigate?appid=" + Package.Current.Id.Name));
+                await Windows.System.Launcher.LaunchUriAsync(new Uri("ms-windows-store:navigate?appid=" + productID));
                 App.Current.Exit();
             }
         }

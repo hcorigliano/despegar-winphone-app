@@ -1,5 +1,5 @@
-MainPackage=C:\FUENTES\WindowsMobile\Despegar.WP.UI\bin\Release\Despegar.WP.UI_1.0.0.1_Bundle\Despegar.WP.UI_1.0.0.1_AnyCPU.appx
-SymbolPackage=C:\FUENTES\WindowsMobile\Despegar.WP.UI\AppPackages\Despegar.WP.UI_1.0.0.1_Test\Despegar.WP.UI_1.0.0.1_AnyCPU.appxsym
-ResourcePack=C:\FUENTES\WindowsMobile\Despegar.WP.UI\bin\Release\Despegar.WP.UI_1.0.0.1_Bundle\Despegar.WP.UI_1.0.0.1_language-pt.appx
-ResourcePack=C:\FUENTES\WindowsMobile\Despegar.WP.UI\bin\Release\Despegar.WP.UI_1.0.0.1_Bundle\Despegar.WP.UI_1.0.0.1_scale-100.appx
-ResourcePack=C:\FUENTES\WindowsMobile\Despegar.WP.UI\bin\Release\Despegar.WP.UI_1.0.0.1_Bundle\Despegar.WP.UI_1.0.0.1_scale-140.appx
+MainPackage=C:\FUENTES\WPApp\Despegar.WP.UI\bin\Release\Despegar.WP.UI_3.0.0.0_Bundle\Despegar.WP.UI_3.0.0.0_AnyCPU_Despegar-Release.appx
+SymbolPackage=C:\FUENTES\WPApp\Despegar.WP.UI\AppPackages\Despegar.WP.UI_3.0.0.0_Despegar-Release_Test\Despegar.WP.UI_3.0.0.0_AnyCPU_Despegar-Release.appxsym
+ResourcePack=C:\FUENTES\WPApp\Despegar.WP.UI\bin\Release\Despegar.WP.UI_3.0.0.0_Bundle\Despegar.WP.UI_3.0.0.0_language-pt.appx
+ResourcePack=C:\FUENTES\WPApp\Despegar.WP.UI\bin\Release\Despegar.WP.UI_3.0.0.0_Bundle\Despegar.WP.UI_3.0.0.0_scale-100.appx
+ResourcePack=C:\FUENTES\WPApp\Despegar.WP.UI\bin\Release\Despegar.WP.UI_3.0.0.0_Bundle\Despegar.WP.UI_3.0.0.0_scale-140.appx
