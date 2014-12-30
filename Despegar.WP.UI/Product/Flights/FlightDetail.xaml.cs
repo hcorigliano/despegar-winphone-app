@@ -38,6 +38,13 @@ namespace Despegar.WP.UI.Product.Flights
             this.navigationHelper.LoadState += this.NavigationHelper_LoadState;
             this.navigationHelper.SaveState += this.NavigationHelper_SaveState;
             this.CheckDeveloperTools();
+
+
+            #if !DEBUG
+                GoogleAnalyticContainer ga = new GoogleAnalyticContainer();
+                ga.Tracker = GoogleAnalytics.EasyTracker.GetTracker();
+                ga.SendView("FlightDetail");
+            #endif
         }
 
         /// <summary>

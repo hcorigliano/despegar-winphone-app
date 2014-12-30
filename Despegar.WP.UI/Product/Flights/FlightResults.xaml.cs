@@ -46,6 +46,13 @@ namespace Despegar.WP.UI.Product.Flights
 
             //this.DataContext = flightResultModel;
             this.miniboxSearch.DataContext = flightSearchModel;
+
+            //Google Analytics
+            #if !DEBUG
+                GoogleAnalyticContainer ga = new GoogleAnalyticContainer();
+                ga.Tracker = GoogleAnalytics.EasyTracker.GetTracker();
+                ga.SendView("FlightResults");
+            #endif
         }
 
         /// <summary>

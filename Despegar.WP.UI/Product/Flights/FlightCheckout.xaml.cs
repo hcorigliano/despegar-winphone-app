@@ -36,6 +36,12 @@ namespace Despegar.WP.UI.Product.Flights
             this.navigationHelper.SaveState += this.NavigationHelper_SaveState;
 
             HardwareButtons.BackPressed += HardwareButtons_BackPressed;
+
+            #if !DEBUG
+                GoogleAnalyticContainer ga = new GoogleAnalyticContainer();
+                ga.Tracker = GoogleAnalytics.EasyTracker.GetTracker();
+                ga.SendView("FlightCheckout");
+            #endif
         }
 
         /// <summary>
