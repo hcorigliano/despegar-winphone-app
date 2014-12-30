@@ -681,10 +681,6 @@
     <Content Include="Assets\Helpers\a.png" />
     <Content Include="Assets\Helpers\matrix_green.png" />
     <Content Include="Assets\Helpers\matrix_magenta.png" />
-    <Content Include="Assets\HomeButton_Flights.png" />
-    <Content Include="Assets\HomeButton_FlightStatus.png" />
-    <Content Include="Assets\HomeButton_Hotels.png" />
-    <Content Include="Assets\HomeButton_MyDespegar.png" />
     <Content Include="Assets\Icon\Airlines\ag_0plogo%402x.png" />
     <Content Include="Assets\Icon\Airlines\ag_2dlogo%402x.png" />
     <Content Include="Assets\Icon\Airlines\ag_2klogo%402x.png" />
