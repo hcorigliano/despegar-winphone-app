@@ -14,6 +14,8 @@ using Windows.UI.Popups;
 using Windows.ApplicationModel.Resources;
 using BugSense;
 using BugSense.Model;
+using BugSense.Core.Model;
+using Despegar.WP.UI.BugSense;
 
 // The Blank Application template is documented at http://go.microsoft.com/fwlink/?LinkId=391641
 
@@ -44,8 +46,6 @@ namespace Despegar.WP.UI
 
             this.InitializeComponent();
             this.Suspending += this.OnSuspending;
-
-          
         }
 
         private async static void NotifyAndClose()
@@ -65,16 +65,6 @@ namespace Despegar.WP.UI
         /// <param name="e">Details about the launch request and process.</param>
         protected async override void OnLaunched(LaunchActivatedEventArgs e)
         {
-            try
-            {
-                // Initialize Core
-                await GlobalConfiguration.InitCore();
-            }
-            catch (Exception)
-            {
-                NotifyAndClose();
-            }
-
 #if DEBUG
             if (System.Diagnostics.Debugger.IsAttached)
             {
@@ -118,8 +108,30 @@ namespace Despegar.WP.UI
                 rootFrame.ContentTransitions = null;
                 rootFrame.Navigated += this.RootFrame_FirstNavigated;
 
+                // Initialize Core
+                try
+                {
+                    BugTracker.LeaveBreadcrumb("App Started");
+                    
+                    await GlobalConfiguration.InitCore();
+
+                    BugTracker.LeaveBreadcrumb("Core Initialized");
+                }
+                catch (Exception ex)
+                {
+                    BugTracker.LogException(ex);
+                    NotifyAndClose();
+                }
+
+                // TODO: Legacy code
+                if (!ApplicationConfig.Instance.Initialized)
+                {
+                    BugTracker.LeaveBreadcrumb("Init Legacy Core");
+                    ApplicationConfig.Instance.Init();
+                    BugTracker.LeaveBreadcrumb("Legacy core initialized");
+                }
                 // Check persist information
-                 var roamingSettings = ApplicationData.Current.RoamingSettings;
+                var roamingSettings = ApplicationData.Current.RoamingSettings;
 
 #if DECOLAR
                 // Decolar forced to BRASIL always
@@ -136,7 +148,6 @@ namespace Despegar.WP.UI
                  }
                  else
                  {
-                    
                      GlobalConfiguration.CoreContext.SetSite(roamingSettings.Values["countryCode"].ToString());
                      if (!rootFrame.Navigate(typeof(Home), e.Arguments))
                      {
@@ -145,12 +156,9 @@ namespace Despegar.WP.UI
                  }
             }
 
-            // TODO: Legacy code
-            if (!ApplicationConfig.Instance.Initialized)
-                ApplicationConfig.Instance.Init();
-            
             // Ensure the current window is active
             Window.Current.Activate();
+            BugTracker.LeaveBreadcrumb("App Launched");
         }
 
         /// <summary>
