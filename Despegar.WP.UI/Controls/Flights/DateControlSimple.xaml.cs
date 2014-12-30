@@ -37,6 +37,10 @@ namespace Despegar.WP.UI.Controls.Flights
         {
             this.InitializeComponent();
             (this.Content as FrameworkElement).DataContext = this;
+
+            this.DatePickerControl.MinYear = DateTimeOffset.Now;
+            this.DatePickerControl.MaxYear = DateTimeOffset.Now.AddYears(1);
+
         }
 
     }
