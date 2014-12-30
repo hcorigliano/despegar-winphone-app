@@ -15,7 +15,7 @@ namespace Despegar.WP.UI.Common
         public void SendView(string pagePath)
         {
             
-            Tracker.SendView( prefix + pagePath+ "/" + GlobalConfiguration.Site);
+            Tracker.SendView( prefix + pagePath);
         }
     }
 }
