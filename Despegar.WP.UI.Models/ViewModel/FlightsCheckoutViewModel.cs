@@ -213,6 +213,7 @@ namespace Despegar.WP.UI.Model.ViewModel
         /// </summary>
         public async Task Init()
         {
+            this.Tracker.LeaveBreadcrumb("Flight checkout view model init");
             IsLoading = true;
 
             string currentCountry = GlobalConfiguration.Site;
@@ -233,9 +234,11 @@ namespace Despegar.WP.UI.Model.ViewModel
 
                 //Get validations for credit cards
                 GetCreditCardsValidations();
+                this.Tracker.LeaveBreadcrumb("Flight checkout view model init complete");
             }
             catch (Exception e)
             {
+                this.Tracker.LogException(e);
                 Logger.Log("[App:FlightsCheckout] Exception " + e.Message);
                 IsLoading = false;
                 OnViewModelError("CHECKOUT_INIT_FAILED");
@@ -246,11 +249,13 @@ namespace Despegar.WP.UI.Model.ViewModel
 
         private async void GetCreditCardsValidations()
         {
+            this.Tracker.LeaveBreadcrumb("Flight checkout view model get credit cards validations");
             CreditCardsValidations = await Despegar.LegacyCore.Service.APIValidationCreditcards.GetAll();
         }
 
         private void ConfigureCountry(string countryCode)
         {
+            this.Tracker.LeaveBreadcrumb("Flight checkout view model configure country");
             // Common
 
             // Passengers
@@ -300,6 +305,7 @@ namespace Despegar.WP.UI.Model.ViewModel
                     CoreBookingFields.form.contact.phones[0].area_code.SetDefaultValue();
                     break;
             }
+            this.Tracker.LeaveBreadcrumb("Flight checkout view model configure country complete");
         }
 
         #region ** Private Misc ** 
@@ -314,12 +320,9 @@ namespace Despegar.WP.UI.Model.ViewModel
 
         private async Task GetBookingFields(string deviceID)
         {
-            BookingFieldPost book = new BookingFieldPost();
+            this.Tracker.LeaveBreadcrumb("Flight checkout view model get booking fields init" );
 
-            // HARDCODE TEST ARG
-            //book.inbound_choice = 1;
-            //book.outbound_choice = 1;
-            //book.itinerary_id = "prism_AR_0_FLIGHTS_A-1_C-0_I-0_RT-BUEMIA20141110-MIABUE20141111_xorigin-api!0!C_1212636001_843603426_-2008006059_1555498055_-278056197_804297563!1,6_1,4_1,5_1,2_1,3_1,1";
+            BookingFieldPost book = new BookingFieldPost();
 
             if (CrossParameters.Inbound.choice != -1)
                 book.inbound_choice = CrossParameters.Inbound.choice; //-1
@@ -335,6 +338,8 @@ namespace Despegar.WP.UI.Model.ViewModel
             book.mobile_identifier = deviceID;
 
             CoreBookingFields = await flightService.GetBookingFields(book);
+
+            this.Tracker.LeaveBreadcrumb("Flight checkout view model get booking fields complete");
         }
 
         private async Task LoadCountries()
@@ -521,6 +526,8 @@ namespace Despegar.WP.UI.Model.ViewModel
         /// <returns></returns>
         private PriceFormated FormatPrice()
         {
+            this.Tracker.LeaveBreadcrumb("Flight checkout view model format price init");
+
             PriceFormated formated = new PriceFormated();
 
             formated.currency = CoreBookingFields.price.currency;
@@ -543,7 +550,10 @@ namespace Despegar.WP.UI.Model.ViewModel
             if (formated.infants_subtotal != null)
                 formated.infant_base = (formated.infants_subtotal / Convert.ToInt32(formated.infant_quantity)).ToString();
 
+            this.Tracker.LeaveBreadcrumb("Flight checkout view model format price complete");
+
             return formated;
+
         }
 
         private void ClearCreditCardFields()
@@ -561,9 +571,9 @@ namespace Despegar.WP.UI.Model.ViewModel
 
                 return _status;
             }
-            catch (Exception)
+            catch (Exception e)
             {
-
+                this.Tracker.LogException(e);
                 return BookingStatusEnum.BookingCustomError;
             }
 
@@ -623,6 +633,7 @@ namespace Despegar.WP.UI.Model.ViewModel
 
         private async void ValidateAndBuy()
         {
+            this.Tracker.LeaveBreadcrumb("Flight checkout view model validate and buy init");
 #if DEBUG
             // Fill Test data
             FillBookingFields(CoreBookingFields);
@@ -631,6 +642,7 @@ namespace Despegar.WP.UI.Model.ViewModel
             if (!IsTermsAndConditionsAccepted)
             {
                 OnViewModelError("TERMS_AND_CONDITIONS_NOT_CHECKED");
+                this.Tracker.LeaveBreadcrumb("Flight checkout view model validate and buy terms not accepted");
                 return;
             }
 
@@ -638,6 +650,7 @@ namespace Despegar.WP.UI.Model.ViewModel
             // Validation
             if (!CoreBookingFields.IsValid(out sectionID))
             {
+                this.Tracker.LeaveBreadcrumb("Flight checkout view model validate and buy fields not valid");
                 OnViewModelError("FORM_ERROR", sectionID);
             }
             else
@@ -654,7 +667,8 @@ namespace Despegar.WP.UI.Model.ViewModel
                     CrossParameters.BookingResponse = await flightService.CompleteBooking(bookingData, CoreBookingFields.id);
 
                     if (CrossParameters.BookingResponse.Error != null) 
-                    { 
+                    {
+                        this.Tracker.LeaveBreadcrumb("Flight checkout view model validate and buy booking response error" + CrossParameters.BookingResponse.Error.code.ToString());
                         // API Error ocurred, Check CODE and inform the user
                         OnViewModelError("API_ERROR", CrossParameters.BookingResponse.Error.code);
                         this.IsLoading = false;
@@ -663,24 +677,26 @@ namespace Despegar.WP.UI.Model.ViewModel
 
                     // Booking processed, check the status of Booking request
                     AnalizeBookingStatus(CrossParameters.BookingResponse.booking_status);
-                    
-                    
                 }
-                catch (HTTPStatusErrorException)
+                catch (HTTPStatusErrorException e)
                 {
+                    this.Tracker.LogException(e);
                     OnViewModelError("COMPLETE_BOOKING_CONECTION_FAILED");
                 }
-                catch (Exception)
+                catch (Exception e)
                 {
+                    this.Tracker.LogException(e);
                     OnViewModelError("COMPLETE_BOOKING_BOOKING_FAILED"); 
                 }
 
+                this.Tracker.LeaveBreadcrumb("Flight checkout view model validate and buy complete");
                 this.IsLoading = false;
             }
         }
 
         private async void SendRiskAnswers()
         {
+            this.Tracker.LeaveBreadcrumb("Flight checkout view model Risk init");
             ResourceLoader manager = new ResourceLoader();
 
             if (ValidateAnswers())
@@ -723,6 +739,7 @@ namespace Despegar.WP.UI.Model.ViewModel
                 var msg = new MessageDialog(manager.GetString("Flight_Checkout_Risk_Error"));
                 await msg.ShowAsync();
             }
+            this.Tracker.LeaveBreadcrumb("Flight checkout view model Risk complete");
 
         }
 
@@ -746,6 +763,8 @@ namespace Despegar.WP.UI.Model.ViewModel
         /// </summary>
         private void AnalizeBookingStatus(string status)
         {
+            this.Tracker.LeaveBreadcrumb("Flight checkout view model booking status" + status);
+
             switch (GetStatus(status))
             {
                 case BookingStatusEnum.checkout_successful:
@@ -807,6 +826,8 @@ namespace Despegar.WP.UI.Model.ViewModel
         /// </summary>
         public async void ValidateVoucher()
         {
+            this.Tracker.LeaveBreadcrumb("Flight checkout view model validate voucher init");
+
             IsLoading = true;
             ResourceLoader loader = new ResourceLoader();
             var field = CoreBookingFields.form.Voucher;
@@ -837,6 +858,9 @@ namespace Despegar.WP.UI.Model.ViewModel
 
             field.Validate();
             IsLoading = false;
+
+            this.Tracker.LeaveBreadcrumb("Flight checkout view model validate voucher complete");
+
         }
 
     }

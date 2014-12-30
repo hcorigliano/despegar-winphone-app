@@ -37,6 +37,12 @@ namespace Despegar.WP.UI.Product.Flights
             this.navigationHelper.SaveState += this.NavigationHelper_SaveState;
 
             HardwareButtons.BackPressed += HardwareButtons_BackPressed;
+
+            #if !DEBUG
+                GoogleAnalyticContainer ga = new GoogleAnalyticContainer();
+                ga.Tracker = GoogleAnalytics.EasyTracker.GetTracker();
+                ga.SendView("FlightCheckout");
+            #endif
         }
 
         /// <summary>
@@ -60,6 +66,7 @@ namespace Despegar.WP.UI.Product.Flights
         /// session.  The state will be null the first time a page is visited.</param>
         private async void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
         {
+            BugTracker.Instance.LeaveBreadcrumb("Flight checkout start");
             FlightsCrossParameter crossParameters = e.NavigationParameter as FlightsCrossParameter;
 
             // Initialize Checkout
@@ -84,7 +91,8 @@ namespace Despegar.WP.UI.Product.Flights
             ConfigureFields();
 
             this.DataContext = ViewModel;
-            
+
+            BugTracker.Instance.LeaveBreadcrumb("Flight checkout ready");
         }
 
         private void ShowRisk(Object sender, EventArgs e )
@@ -96,12 +104,13 @@ namespace Despegar.WP.UI.Product.Flights
         private void HideRisk(Object sender, EventArgs e)
         {
             riskPopup.Hide();
-
         }
 
         # region ** ERROR HANDLING **
         private async void ErrorHandler(object sender, ViewModelErrorArgs e)
         {
+            BugTracker.Instance.LeaveBreadcrumb("Flight checkout Error raised - " + e.ErrorCode);
+
             ResourceLoader manager = new ResourceLoader();
             MessageDialog dialog;
             string pageID;
@@ -200,8 +209,9 @@ namespace Despegar.WP.UI.Product.Flights
 
                 return phone;
             } 
-            catch(Exception)
+            catch(Exception e)
             {
+                BugTracker.Instance.LogException(e);
                 //TODO add logs
                 return String.Empty;
             }

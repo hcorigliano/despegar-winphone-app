@@ -37,7 +37,7 @@ namespace Despegar.View
             BugTracker.Instance.LeaveBreadcrumb("Hotel Checkout View");
             
             #if DECOLAR
-            MainLogo.Source = new BitmapImage(new Uri("/Assets/Image/decolar-logo.png", UriKind.RelativeOrAbsolute));
+            MainLogo.Source = new BitmapImage(new Uri("ms-appx:/Product/Legacy/Assets/Image/decolar-logo.png", UriKind.Absolute));
             #endif
 
             if (!NetworkInterface.GetIsNetworkAvailable())
