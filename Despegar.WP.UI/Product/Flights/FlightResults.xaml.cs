@@ -116,8 +116,18 @@ namespace Despegar.WP.UI.Product.Flights
 
             if (flightSearchModel.SearchStatus == SearchStates.SearchAgain)
             {
+                // Filtro / Ordenamiento aplicado
                 BugTracker.Instance.LeaveBreadcrumb("Flights Minibox Search View");
-                Itineraries = await flightResultModel.flightService.GetItineraries(flightSearchModel);
+                try
+                {
+                    Itineraries = await flightResultModel.flightService.GetItineraries(flightSearchModel);
+                }
+                catch(Exception ex) 
+                {
+                    // Will not filter the results, but it will keep the last list status
+                    BugTracker.Instance.LogException(ex);
+                }
+
                 flightResultModel = new FlightResultsViewModel(Navigator.Instance, GlobalConfiguration.CoreContext.GetFlightService(), BugTracker.Instance); ;
                 flightResultModel.Itineraries = Itineraries;
                 flightSearchModel.SearchStatus = SearchStates.FirstSearch;
@@ -232,6 +242,7 @@ namespace Despegar.WP.UI.Product.Flights
                 flightCrossParameter.Inbound = ((RoutesItems)button.DataContext).inbound;
                 flightCrossParameter.Outbound = ((RoutesItems)button.DataContext).outbound;
                 flightCrossParameter.price = ((RoutesItems)button.DataContext).price;
+                // TODO: Use ViewModel NAVIGATOR!!
                 OldPagesManager.GoTo(typeof(FlightDetail), flightCrossParameter);
             }
         }
@@ -330,6 +341,5 @@ namespace Despegar.WP.UI.Product.Flights
         {
             ((Image)sender).Source = new BitmapImage(new Uri("ms-appx:/Assets/Icon/Airlines/ag_default@2x.png", UriKind.Absolute));
         }
-
     }
 }
