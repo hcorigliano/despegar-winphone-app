@@ -12,6 +12,7 @@ using Windows.UI.Xaml.Navigation;
 using Windows.UI.Xaml.Media.Imaging;
 using Despegar.WP.UI.Common;
 using Despegar.WP.UI.BugSense;
+using Despegar.WP.UI.Model;
 
 namespace Despegar.WP.UI.Product.Legacy
 {
@@ -27,6 +28,8 @@ namespace Despegar.WP.UI.Product.Legacy
             MainLogo.Source = new BitmapImage(new Uri("ms-appx:/Product/Legacy/Assets/Image/decolar-logo.png", UriKind.Absolute));
             #endif            
             
+            BugTracker.Instance.LogEvent("Hotels Purchase " + GlobalConfiguration.Site);
+
             ThanksViewModel = new HotelsThanksViewModel();
             HotelsThanksView.DataContext = ThanksViewModel;
             StackPepe.DataContext = ThanksViewModel.AvailabilityModel;
