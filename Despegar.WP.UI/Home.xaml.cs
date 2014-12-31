@@ -29,6 +29,7 @@ namespace Despegar.WP.UI
         private ModalPopup loadingPopup = new ModalPopup(new Loading());
         public List<Despegar.Core.Business.Configuration.Product> products;
         public Despegar.WP.UI.Model.HomeViewModel ViewModel { get; set; }
+        private bool versionChecked = false;
 
         public Home()
         {
@@ -150,11 +151,15 @@ namespace Despegar.WP.UI
 
             ViewModel = new Despegar.WP.UI.Model.HomeViewModel(Navigator.Instance, GlobalConfiguration.CoreContext.GetConfigurationService(), parameter, BugTracker.Instance);
             ViewModel.PropertyChanged += Checkloading;
-            SetupMenuItems(GlobalConfiguration.Site);
+                       
+            if (!versionChecked) 
+            {
+                SetupMenuItems(GlobalConfiguration.Site);                            
+                await ValidateUpdate();
+                versionChecked = true;
+            }
 
             this.DataContext = ViewModel;
-
-            await ValidateUpdate(); 
         }   
 
         private async void ListView_ItemClick(object sender, ItemClickEventArgs e)
