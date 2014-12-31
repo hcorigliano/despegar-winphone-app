@@ -1,6 +1,7 @@
 ﻿using Despegar.Core.Business;
 using Despegar.Core.Log;
 using Despegar.WP.UI.Common;
+using Despegar.WP.UI.Controls;
 using Despegar.WP.UI.Controls.Flights;
 using Despegar.WP.UI.Model;
 using Despegar.WP.UI.Model.ViewModel;
@@ -87,7 +88,7 @@ namespace Despegar.WP.UI.Developer
         {
             Logger.Log("[Developer Tools]: Can't use this functionality in this page. Go to the correct page.");
             var msg = new MessageDialog("Not available for current View.");
-            await msg.ShowAsync();
+            await msg.ShowSafelyAsync();
         }
 
         public ICommand FillFlightsOneWaySearchBox_MIAMI
@@ -141,7 +142,6 @@ namespace Despegar.WP.UI.Developer
 
             }); }
         }
-
 
         public ICommand FillFlightsMultipleSearchBox
         {

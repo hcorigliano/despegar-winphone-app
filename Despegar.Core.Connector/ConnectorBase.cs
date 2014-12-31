@@ -104,10 +104,9 @@ namespace Despegar.Core.Connector
                         e = new APIErrorException("API response is an Error: " + response);
                         ((APIErrorException)e).ErrorData = JsonConvert.DeserializeObject<MAPIError>(response);
                     }
-                    catch (Exception) 
+                    catch (Exception ex) 
                     {
-                        e = new HTTPStatusErrorException(String.Format("[Connector]: HTTP Error code {0} ({1}) Message: {2}", (int)httpResponse.StatusCode, httpResponse.StatusCode.ToString(), response), e);
-                        throw e;
+                        e = new HTTPStatusErrorException(String.Format("[Connector]: HTTP Error code {0} ({1}) Message: {2}", (int)httpResponse.StatusCode, httpResponse.StatusCode.ToString(), response), ex);                        
                     }
 
                     Logger.LogCoreException(e);

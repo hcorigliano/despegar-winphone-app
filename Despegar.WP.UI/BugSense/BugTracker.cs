@@ -56,5 +56,10 @@ namespace Despegar.WP.UI.BugSense
                 Value = value
             });
         }
+
+        public void LogEvent(string eventName)
+        {
+            BugSenseHandler.Instance.LogEvent(eventName);
+        }
     }
 }

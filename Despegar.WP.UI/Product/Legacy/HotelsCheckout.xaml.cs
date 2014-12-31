@@ -8,6 +8,7 @@ using Despegar.WP.UI.BugSense;
 using Despegar.WP.UI.Common;
 using Despegar.WP.UI.Product.Legacy;
 using Despegar.WP.UI.Strings;
+using Despegar.WP.UI.Controls;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -281,7 +282,7 @@ namespace Despegar.View
                 messageDialog.Commands.Add(new UICommand("OK"));
                 messageDialog.DefaultCommandIndex = 0;
 
-                await messageDialog.ShowAsync();
+                await messageDialog.ShowSafelyAsync();
             }
         }
 

@@ -27,17 +27,12 @@ namespace Despegar.WP.UI
     {
         private IConfigurationService configurationService;
         private ModalPopup loadingPopup = new ModalPopup(new Loading());
-        private NavigationHelper navigationHelper;
         public List<Despegar.Core.Business.Configuration.Product> products;
         public Despegar.WP.UI.Model.HomeViewModel ViewModel { get; set; }
-        private IAsyncOperation<IUICommand> asyncCommand = null;
 
         public Home()
         {
-            this.InitializeComponent();
-            this.navigationHelper = new NavigationHelper(this);
-            this.navigationHelper.LoadState += this.NavigationHelper_LoadState;
-            this.navigationHelper.SaveState += this.NavigationHelper_SaveState;
+            this.InitializeComponent();   
 
             // Developer Tools
             this.CheckDeveloperTools();  
@@ -69,15 +64,7 @@ namespace Despegar.WP.UI
                 else
                     loadingPopup.Hide();
             }
-        }
-
-        /// <summary>
-        /// Gets the <see cref="NavigationHelper"/> associated with this <see cref="Page"/>.
-        /// </summary>
-        public NavigationHelper NavigationHelper
-        {
-            get { return this.navigationHelper; }
-        }
+        }       
 
         // TODO: Refactor. Use DATABINDINGS!!
         private async void SetupMenuItems(string country)
@@ -89,7 +76,7 @@ namespace Despegar.WP.UI
             {
                 ResourceLoader manager = new ResourceLoader();
                 MessageDialog dialog = new MessageDialog(manager.GetString("Page_Home_Configuration_Error"), "Error");
-                await dialog.ShowAsync();
+                await dialog.ShowSafelyAsync();
                 Application.Current.Exit();
                 return;
             }
@@ -105,29 +92,7 @@ namespace Despegar.WP.UI
                 Flights.Visibility = Visibility.Collapsed;
 
         }
-
-        /// <summary>
-        /// Populates the page with content passed during navigation.  Any saved state is also
-        /// provided when recreating a page from a prior session.
-        /// </summary>
-        /// <param name="sender">
-        /// The source of the event; typically <see cref="NavigationHelper"/>
-        /// </param>
-        /// <param name="e">Event data that provides both the navigation parameter passed to
-        /// <see cref="Frame.Navigate(Type, Object)"/> when this page was initially requested and
-        /// a dictionary of state preserved by this page during an earlier
-        /// session.  The state will be null the first time a page is visited.</param>
-        private void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
-        {
-            var parameter = e.NavigationParameter as HomeParameters;
-
-            ViewModel = new Despegar.WP.UI.Model.HomeViewModel(Navigator.Instance, GlobalConfiguration.CoreContext.GetConfigurationService(), parameter, BugTracker.Instance);
-            ViewModel.PropertyChanged += Checkloading;
-            SetupMenuItems(GlobalConfiguration.Site);
-
-            this.DataContext = ViewModel;
-        }
-
+    
         public static string GetAppVersion()
         {
             Package package = Package.Current;
@@ -139,6 +104,7 @@ namespace Despegar.WP.UI
 
         private async Task ValidateUpdate()
         {
+            bool error = false;
 #if DECOLAR
             string productID = "e544d4bb-be44-4db8-9882-268f0b5631a3";
 #else
@@ -147,57 +113,49 @@ namespace Despegar.WP.UI
             BugTracker.Instance.LeaveBreadcrumb("Validate App Version");
             ResourceLoader manager = new ResourceLoader();
             configurationService = GlobalConfiguration.CoreContext.GetConfigurationService();
-            UpdateFields data = await configurationService.CheckUpdate( GetAppVersion(),"8.1", "X", "X");
 
-            if (data.force_update)
-            {                
-                MessageDialog dialog = new MessageDialog(manager.GetString("Home_Update_Error"), manager.GetString("Home_Update_Error_Title"));
-                await dialog.ShowAsync();
-                await Windows.System.Launcher.LaunchUriAsync(new Uri("ms-windows-store:navigate?appid=" + productID));
+            try
+            {
+                UpdateFields data = await configurationService.CheckUpdate(GetAppVersion(), "8.1", "X", "X");
+                
+                if (data.force_update)
+                {                    
+                    MessageDialog dialog = new MessageDialog(manager.GetString("Home_Update_Error"), manager.GetString("Home_Update_Error_Title"));
+                    await dialog.ShowSafelyAsync();
+                    await Windows.System.Launcher.LaunchUriAsync(new Uri("ms-windows-store:navigate?appid=" + productID));
+                    App.Current.Exit();
+                }
+
+                BugTracker.Instance.LeaveBreadcrumb("Update Service call succesful");
+            }
+            catch (Exception ex)
+            {
+                BugTracker.Instance.LogException(ex);
+                error = true;
+            }
+
+            if (error) 
+            {
+                MessageDialog errorDialog = new MessageDialog(manager.GetString("Flights_Search_ERROR_SEARCH_FAILED"), manager.GetString("Flights_Search_ERROR_SEARCH_FAILED_TITLE"));
+                await errorDialog.ShowSafelyAsync();
                 App.Current.Exit();
             }
         }
 
-        /// <summary>
-        /// Preserves state associated with this page in case the application is suspended or the
-        /// page is discarded from the navigation cache.  Values must conform to the serialization
-        /// requirements of <see cref="SuspensionManager.SessionState"/>.
-        /// </summary>
-        /// <param name="sender">The source of the event; typically <see cref="NavigationHelper"/></param>
-        /// <param name="e">Event data that provides an empty dictionary to be populated with
-        /// serializable state.</param>
-        private void NavigationHelper_SaveState(object sender, SaveStateEventArgs e)
-        {
-        }
-
-        #region NavigationHelper registration
-
-        /// <summary>
-        /// The methods provided in this section are simply used to allow
-        /// NavigationHelper to respond to the page's navigation methods.
-        /// <para>
-        /// Page specific logic should be placed in event handlers for the  
-        /// <see cref="NavigationHelper.LoadState"/>
-        /// and <see cref="NavigationHelper.SaveState"/>.
-        /// The navigation parameter is available in the LoadState method 
-        /// in addition to page state preserved during an earlier session.
-        /// </para>
-        /// </summary>
-        /// <param name="e">Provides data for navigation methods and event
-        /// handlers that cannot cancel the navigation request.</param>
         protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
             BugTracker.Instance.LeaveBreadcrumb("Home View");
+
+            var parameter = e.Parameter as HomeParameters;
+
+            ViewModel = new Despegar.WP.UI.Model.HomeViewModel(Navigator.Instance, GlobalConfiguration.CoreContext.GetConfigurationService(), parameter, BugTracker.Instance);
+            ViewModel.PropertyChanged += Checkloading;
+            SetupMenuItems(GlobalConfiguration.Site);
+
+            this.DataContext = ViewModel;
+
             await ValidateUpdate(); 
-            this.navigationHelper.OnNavigatedTo(e);
-        }
-
-        protected override void OnNavigatedFrom(NavigationEventArgs e)
-        {
-            this.navigationHelper.OnNavigatedFrom(e);
-        }
-
-        #endregion
+        }   
 
         private async void ListView_ItemClick(object sender, ItemClickEventArgs e)
         {
@@ -222,12 +180,8 @@ namespace Despegar.WP.UI
 #else
                     var dialog = new MessageDialog("Proximamente estará disponible esta funcionalidad.", "Proximamente");
 #endif
-                    if (asyncCommand != null)
-                    {
-                        asyncCommand.Cancel();
-                    }
-              
-                        asyncCommand = dialog.ShowAsync();
+                                        
+                    await dialog.ShowSafelyAsync();
                     
                     break;
             }
