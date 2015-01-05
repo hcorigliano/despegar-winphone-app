@@ -61,6 +61,8 @@ namespace Despegar.WP.UI.Product.Flights
         /// session.  The state will be null the first time a page is visited.</param>
         private void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
         {
+            BugTracker.Instance.LeaveBreadcrumb("Flight Detail View");
+
             FlightsCrossParameter routes = e.NavigationParameter as FlightsCrossParameter;
             if (routes != null)
             {

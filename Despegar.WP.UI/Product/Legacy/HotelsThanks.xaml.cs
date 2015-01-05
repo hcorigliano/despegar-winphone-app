@@ -11,6 +11,8 @@ using Windows.Phone.UI.Input;
 using Windows.UI.Xaml.Navigation;
 using Windows.UI.Xaml.Media.Imaging;
 using Despegar.WP.UI.Common;
+using Despegar.WP.UI.BugSense;
+using Despegar.WP.UI.Model;
 
 namespace Despegar.WP.UI.Product.Legacy
 {
@@ -23,9 +25,11 @@ namespace Despegar.WP.UI.Product.Legacy
             InitializeComponent();
 
             #if DECOLAR
-            MainLogo.Source = new BitmapImage(new Uri("/Assets/Image/decolar-logo.png", UriKind.RelativeOrAbsolute));
+            MainLogo.Source = new BitmapImage(new Uri("ms-appx:/Product/Legacy/Assets/Image/decolar-logo.png", UriKind.Absolute));
             #endif            
             
+            BugTracker.Instance.LogEvent("Hotels Purchase " + GlobalConfiguration.Site);
+
             ThanksViewModel = new HotelsThanksViewModel();
             HotelsThanksView.DataContext = ThanksViewModel;
             StackPepe.DataContext = ThanksViewModel.AvailabilityModel;
@@ -39,6 +43,7 @@ namespace Despegar.WP.UI.Product.Legacy
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {        
             HardwareButtons.BackPressed += HardwareButtons_BackPressed;
+            BugTracker.Instance.LeaveBreadcrumb("Hotel Thanks");
         }
 
         private void HardwareButtons_BackPressed(object sender, BackPressedEventArgs e)

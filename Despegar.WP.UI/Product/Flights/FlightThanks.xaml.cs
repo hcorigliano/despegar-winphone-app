@@ -1,5 +1,6 @@
 ﻿using Despegar.WP.UI.BugSense;
 using Despegar.WP.UI.Common;
+using Despegar.WP.UI.Model;
 using Despegar.WP.UI.Model.Interfaces;
 using Despegar.WP.UI.Model.ViewModel.Classes.Flights;
 using Despegar.WP.UI.Model.ViewModel.Flights;
@@ -14,32 +15,26 @@ namespace Despegar.WP.UI.Product.Flights
 {
     public sealed partial class FlightThanks : Page
     {
-        private NavigationHelper navigationHelper;
         private FlightThanksViewModel ViewModel;
 
         public FlightThanks()
         {
-            this.InitializeComponent();
+            this.InitializeComponent();           
+        }
 
-            this.navigationHelper = new NavigationHelper(this);
-            this.navigationHelper.LoadState += this.NavigationHelper_LoadState;
-            this.navigationHelper.SaveState += this.NavigationHelper_SaveState;
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            BugTracker.Instance.LeaveBreadcrumb("Flight Thanks View");
+            BugTracker.Instance.LogEvent("Flight Purchase " + GlobalConfiguration.Site);
 
-            #if !DEBUG
+            HardwareButtons.BackPressed += HardwareButtons_BackPressed;            
+#if !DEBUG
                 GoogleAnalyticContainer ga = new GoogleAnalyticContainer();
                 ga.Tracker = GoogleAnalytics.EasyTracker.GetTracker();
                 ga.SendView("FlightThanks");
-            #endif
-        }
+#endif
 
-        public NavigationHelper NavigationHelper
-        {
-            get { return this.navigationHelper; }
-        }
-
-        private void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
-        {
-            FlightsCrossParameter crossParameters = e.NavigationParameter as FlightsCrossParameter;
+            FlightsCrossParameter crossParameters = e.Parameter as FlightsCrossParameter;
 
             ViewModel = new FlightThanksViewModel(Navigator.Instance, BugTracker.Instance);
             ViewModel.FlightParameters = crossParameters;
@@ -56,20 +51,9 @@ namespace Despegar.WP.UI.Product.Flights
                 FlightsSegmentGoSrc.Visibility = Visibility.Collapsed;
         }
 
-        private void NavigationHelper_SaveState(object sender, SaveStateEventArgs e)
-        {
-        }
-
-        protected override void OnNavigatedTo(NavigationEventArgs e)
-        {
-            HardwareButtons.BackPressed += HardwareButtons_BackPressed;
-            this.navigationHelper.OnNavigatedTo(e);
-        }
-
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
             HardwareButtons.BackPressed -= HardwareButtons_BackPressed;
-            this.navigationHelper.OnNavigatedFrom(e);
         }
 
         private void HardwareButtons_BackPressed(object sender, BackPressedEventArgs e)

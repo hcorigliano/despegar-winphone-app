@@ -15,7 +15,6 @@ namespace Despegar.WP.UI.Model
     public static class GlobalConfiguration
     {
         public static ICoreContext CoreContext { get; set; }
-        //private IUPAService upaService;
         public static string Site { get { return CoreContext.GetSite(); } }
         public static string Language { get { return CoreContext.GetLanguage();} }
         public static string UPAId { get; set; }
@@ -30,35 +29,27 @@ namespace Despegar.WP.UI.Model
             ClientDeviceInfo ClientInfo = new ClientDeviceInfo();
             string xclient = ClientInfo.GetClientInfo();
             string uow = ClientInfo.GetUOW();
-           
-            // TODO: Set Site and Language
+                       
             CoreContext = new CoreContext();
             CoreContext.Configure(xclient, uow);
 
             await LoadUPA();
 
-            //TODO : (1)
-            //CoreContext.SetSite(SiteCode.Argentina);
-
             // Enable Verbose logging
-            #if DEBUG
+#if DEBUG
              Logger.Configure(true, true);
-            #endif
+#endif
 
-             
+
 #if DECOLAR
             CoreContext.SetSite("BR");
 #endif
 
-             // Add Service Mocks
-            //CoreContext.EnableMock(MockKey.ConfigurationsDefault); //keep on! No URL yet.
-            //CoreContext.AddMock(MockKey.AirlineTest);
-            //GlobalConfiguration.CoreContext.AddMock(MockKey.FlightCitiesAutocompleteBue);
-            //GlobalConfiguration.CoreContext.AddMock(MockKey.ItinerarieBueToLax);
-            //CoreContext.EnableMock(MockKey.BookingFieldBuetoMia);
-            //CoreContext.EnableMock(MockKey.BookingFieldsBueLaxChildInfant);
+            // Enable Service Mocks
             CoreContext.EnableMock(MockKey.CountriesDefault);
-           
+
+            // Service Error testing mocks
+            //CoreContext.EnableMock(MockKey.ForceUpdateErroneus);
             //CoreContext.EnableMock(MockKey.ConfigurationErroneus);
         }
 
@@ -98,6 +89,5 @@ namespace Despegar.WP.UI.Model
 
         }
 
-    
     }
 }

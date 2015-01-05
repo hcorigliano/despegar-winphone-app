@@ -47,12 +47,20 @@ namespace Despegar.WP.UI.Model
                 return null;
             }
             
-            GlobalConfiguration.CoreContext.SetConfiguration(configuration);
-            var Site = configuration.sites.FirstOrDefault(s => s.code == country);
+            if(configuration != null)
+            {
+                GlobalConfiguration.CoreContext.SetConfiguration(configuration);
+                var Site = configuration.sites.FirstOrDefault(s => s.code == country);
 
-            IsLoading = false;
+                IsLoading = false;
+                return Site.products;
 
-            return Site.products;
+            }else{
+
+                IsLoading = false;
+                return null;
+            }
+
         }
 
         public ICommand NavigateToHotelsLegacy

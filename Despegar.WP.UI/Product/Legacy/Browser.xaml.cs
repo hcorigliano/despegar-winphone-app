@@ -1,5 +1,6 @@
 ﻿using Despegar.LegacyCore;
 using Despegar.View;
+using Despegar.WP.UI.BugSense;
 using Despegar.WP.UI.Common;
 using System;
 using System.Net.NetworkInformation;
@@ -38,6 +39,7 @@ namespace Despegar.WP.UI.Product.Legacy
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            BugTracker.Instance.LeaveBreadcrumb("Hotels Legacy View");
             base.OnNavigatedTo(e);
 
             if (!NetworkInterface.GetIsNetworkAvailable())
@@ -67,6 +69,8 @@ namespace Despegar.WP.UI.Product.Legacy
 
         private void EmbbededBrowser_Navigating(object sender, WebViewNavigationStartingEventArgs e)
         {
+            BugTracker.Instance.LeaveBreadcrumb("Hotel Navigating to:" + e.Uri.ToString());
+
             if (!_firstPage && !e.Uri.Equals(_currentPage)) 
             {
                 e.Cancel = true;
@@ -142,10 +146,12 @@ namespace Despegar.WP.UI.Product.Legacy
 
         private void HardwareButtons_BackPressed(object sender, BackPressedEventArgs e)
         {
+            BugTracker.Instance.LeaveBreadcrumb("Hotel Browser - Back button pressed");
             e.Handled = true;            
 
             if (!NetworkInterface.GetIsNetworkAvailable())
             {
+                BugTracker.Instance.LeaveBreadcrumb("Hotel Browser - No internet availabel. Closing app.");
                 Application.Current.Exit();
             }
             else

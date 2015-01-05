@@ -1,4 +1,5 @@
 ﻿using Despegar.Core.Business.Flight.Itineraries;
+using Despegar.WP.UI.BugSense;
 using Despegar.WP.UI.Common;
 using System;
 using System.Collections.Generic;
@@ -41,6 +42,7 @@ namespace Despegar.WP.UI.Product.Flights
         /// This parameter is typically used to configure the page.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            BugTracker.Instance.LeaveBreadcrumb("Flight Search Filter View");
             List<Facet> facet;
             if (e.Parameter == null) return;
             facet = e.Parameter as List<Facet>;

@@ -146,6 +146,7 @@
     <Compile Include="Controls\Loading.xaml.cs">
       <DependentUpon>Loading.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\SafeMessageDialog.cs" />
     <Compile Include="Product\Flights\Checkout\Passegers\Controls\NationalitySelection.xaml.cs">
       <DependentUpon>NationalitySelection.xaml</DependentUpon>
     </Compile>

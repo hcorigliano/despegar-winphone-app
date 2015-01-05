@@ -4,9 +4,11 @@ using Despegar.LegacyCore.Connector.Domain.API;
 //using System.Windows.Media.Imaging;
 using Despegar.LegacyCore.Util;
 using Despegar.LegacyCore.ViewModel;
+using Despegar.WP.UI.BugSense;
 using Despegar.WP.UI.Common;
 using Despegar.WP.UI.Product.Legacy;
 using Despegar.WP.UI.Strings;
+using Despegar.WP.UI.Controls;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -32,9 +34,11 @@ namespace Despegar.View
         public HotelsCheckout()
         {
             InitializeComponent();
+
+            BugTracker.Instance.LeaveBreadcrumb("Hotel Checkout View");
             
             #if DECOLAR
-            MainLogo.Source = new BitmapImage(new Uri("/Assets/Image/decolar-logo.png", UriKind.RelativeOrAbsolute));
+            MainLogo.Source = new BitmapImage(new Uri("ms-appx:/Product/Legacy/Assets/Image/decolar-logo.png", UriKind.Absolute));
             #endif
 
             if (!NetworkInterface.GetIsNetworkAvailable())
@@ -70,6 +74,7 @@ namespace Despegar.View
 
         private void HardwareButtons_BackPressed(object sender, BackPressedEventArgs e)
         {
+            BugTracker.Instance.LeaveBreadcrumb("Hotel Checkout View - Back buton pressed");
             e.Handled = true;
 
             if (!NetworkInterface.GetIsNetworkAvailable())
@@ -234,6 +239,7 @@ namespace Despegar.View
 
         private void AcceptConditions_Click(object sender, RoutedEventArgs e)
         {
+            BugTracker.Instance.LeaveBreadcrumb("Hotel Checkout View - Conditions opened");
             //ConfigurationModel Configuration = new ConfigurationModel();
             string domain = "https://secure.despegar.com.ar/book/hotels/checkout/conditions/wp";
 
@@ -258,6 +264,7 @@ namespace Despegar.View
             }
             else
             {
+                BugTracker.Instance.LeaveBreadcrumb("Hotel Checkout Buy");
                 errMessage = await CheckoutViewModel.ValidateAndBuy();
                 err = !string.IsNullOrEmpty(errMessage);
             }
@@ -268,12 +275,14 @@ namespace Despegar.View
             //else if (errMessage == AppResources.GetLegacyString("CheckoutLabel_Message_AdditionalDataNeeded"))
             //    NavigationService.Navigate(new Uri("/View/HotelsRiskQuestions.xaml", UriKind.RelativeOrAbsolute));
 
-            else {
+            else 
+            {
+                BugTracker.Instance.LeaveBreadcrumb("Hotel Checkout View - Checkout error");
                 var messageDialog = new MessageDialog(errMessage, AppResources.GetLegacyString("CheckoutLabel_Message_CheckTheInformation"));
                 messageDialog.Commands.Add(new UICommand("OK"));
                 messageDialog.DefaultCommandIndex = 0;
 
-                await messageDialog.ShowAsync();
+                await messageDialog.ShowSafelyAsync();
             }
         }
 

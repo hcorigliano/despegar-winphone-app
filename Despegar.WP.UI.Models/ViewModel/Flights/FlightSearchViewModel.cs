@@ -185,7 +185,7 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
             {
                 last = Convert.ToInt32(_s.last_available_hour);
             }
-            catch (Exception ex)
+            catch (Exception )
             {
                 last = 0;
             }
@@ -201,6 +201,18 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
             if (coreSearchModel.IsValid)
             {
                 IsLoading = true;
+                
+                string airports = String.Format("{0} - {1}", 
+                    coreSearchModel.OriginFlightText, coreSearchModel.DestinationFlightText);
+
+                string extra = String.Format("{0} to {1}, [Passengers]: {2}",
+                    coreSearchModel.DepartureDate.ToString("yyyy-MM-dd"),
+                    coreSearchModel.DestinationDate != null ? coreSearchModel.DestinationDate.ToString("yyyy-MM-dd") : "-",
+                    "Adults " + coreSearchModel.AdultsInFlights + " Child: " + coreSearchModel.ChildrenInFlights);
+
+                Tracker.LeaveBreadcrumb("Flight Search performed");
+                Tracker.SetExtraData("LastFlightAirports", airports);
+                Tracker.SetExtraData("LastFlightExtra", extra);                
 
                 try
                 {

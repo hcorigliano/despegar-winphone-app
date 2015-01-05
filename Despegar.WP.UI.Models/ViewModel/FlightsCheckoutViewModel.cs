@@ -46,7 +46,16 @@ namespace Despegar.WP.UI.Model.ViewModel
         public BookingFields CoreBookingFields { get; set; }                
         public List<CountryFields> Countries { get; set; }
         public List<Despegar.Core.Business.Common.State.State> States { get; set; }
-        public bool InvoiceRequired { get { return CoreBookingFields != null? CoreBookingFields.form.payment.invoice != null : false; } }
+        public bool InvoiceRequired
+        {
+            get
+            {
+                if (GlobalConfiguration.Site == "AR")                
+                    return CoreBookingFields != null ? CoreBookingFields.form.payment.invoice != null : false;                
+
+                return false;
+            }
+        }
         public List<Despegar.Core.Business.Flight.BookingCompletePostResponse.RiskQuestion> FreeTextQuestions {
             get
             {
@@ -75,7 +84,9 @@ namespace Despegar.WP.UI.Model.ViewModel
                 }
             }
         }
-        public bool IsFiscalNameRequired { //HERNAN: No integrar este codigo. Consecuencias: 1 docena de facturas.
+
+        public bool IsFiscalNameRequired 
+        {
             get 
             {
                 if (InvoiceRequired)
@@ -85,13 +96,13 @@ namespace Despegar.WP.UI.Model.ViewModel
                 else { return false; }
             } 
         }
+
         public bool IsTermsAndConditionsAccepted { get; set; }
         public bool NationalityIsOpen { get; set; }
         private CouponResponse voucherResult;
         public CouponResponse VoucherResult { get { return voucherResult; } set { voucherResult = value; OnPropertyChanged(); } }
         public event EventHandler ShowRiskReview;
         public event EventHandler HideRiskReview;
-
 
         /// <summary>
         /// For Details section

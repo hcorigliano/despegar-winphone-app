@@ -1,6 +1,7 @@
 ﻿using Despegar.LegacyCore;
 using Despegar.WP.UI.Model;
 using Despegar.WP.UI.Product.Flights;
+using Despegar.WP.UI.Controls;
 using System;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
@@ -53,7 +54,7 @@ namespace Despegar.WP.UI
             MessageDialog dialog;
             ResourceLoader manager = new ResourceLoader();
             dialog = new MessageDialog(manager.GetString("Flights_Search_ERROR_SEARCH_FAILED"), manager.GetString("Flights_Search_ERROR_SEARCH_FAILED_TITLE")); //Error en la conexion a internet.
-            await dialog.ShowAsync();
+            await dialog.ShowSafelyAsync();
             Application.Current.Exit();
         }
 
@@ -154,9 +155,10 @@ namespace Despegar.WP.UI
                  }
             }
 
-            // Ensure the current window is active
-            Window.Current.Activate();
             BugTracker.Instance.LeaveBreadcrumb("App Launched");
+
+            // Ensure the current window is active
+            Window.Current.Activate();            
         }
 
         /// <summary>
