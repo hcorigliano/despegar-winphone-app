@@ -42,6 +42,8 @@ namespace Despegar.WP.UI
                 #else
                     BugSenseHandler.Instance.InitAndStartSession(new ExceptionManager(Current), "w8c3afd3");
                 #endif
+            #else
+                BugSenseHandler.Instance.InitAndStartSession(new ExceptionManager(Current), "w8c612a1"); //Test Crash Repo
             #endif
 
 
