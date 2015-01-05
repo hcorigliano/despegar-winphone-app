@@ -49,11 +49,11 @@ namespace Despegar.WP.UI.Product.Flights
             this.miniboxSearch.DataContext = flightSearchModel;
 
             //Google Analytics
-            #if !DEBUG
+#if !DEBUG
                 GoogleAnalyticContainer ga = new GoogleAnalyticContainer();
                 ga.Tracker = GoogleAnalytics.EasyTracker.GetTracker();
                 ga.SendView("FlightResults");
-            #endif
+#endif
         }
 
         /// <summary>
@@ -100,29 +100,42 @@ namespace Despegar.WP.UI.Product.Flights
         /// session.  The state will be null the first time a page is visited.</param>
         private async void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
         {
-            PageParameters pageParameters = e.NavigationParameter as PageParameters;
-
-            FlightsItineraries Itineraries = new FlightsItineraries();
-
-            flightResultModel.Itineraries = pageParameters.Itineraries as FlightsItineraries;
-            Itineraries = pageParameters.Itineraries as FlightsItineraries;
-            flightSearchModel = pageParameters.SearchModel as FlightSearchModel;
-
-            flightSearchModel.FacetsSearch = flightResultModel.SelectedFacets;
-            flightSearchModel.SortingValuesSearch = flightResultModel.SelectedSorting;
-            flightSearchModel.SortingCriteriaSearch = flightResultModel.Sorting.criteria;
-
-            if (flightSearchModel.SearchStatus == SearchStates.SearchAgain)
+            try
             {
-                Itineraries = await flightResultModel.flightService.GetItineraries(flightSearchModel);
-                flightResultModel = new FlightResultsViewModel(Navigator.Instance, GlobalConfiguration.CoreContext.GetFlightService(), BugTracker.Instance); ;
-                flightResultModel.Itineraries = Itineraries;
-                flightSearchModel.SearchStatus = SearchStates.FirstSearch;
-                this.DataContext = flightResultModel;
-            }
 
-            flightSearchModel.TotalFlights = Itineraries.total;
-            this.miniboxSearch.DataContext = flightSearchModel;
+                PageParameters pageParameters = e.NavigationParameter as PageParameters;
+
+                FlightsItineraries Itineraries = new FlightsItineraries();
+
+                flightResultModel.Itineraries = pageParameters.Itineraries as FlightsItineraries;
+                Itineraries = pageParameters.Itineraries as FlightsItineraries;
+                flightSearchModel = pageParameters.SearchModel as FlightSearchModel;
+
+                flightSearchModel.FacetsSearch = flightResultModel.SelectedFacets;
+                flightSearchModel.SortingValuesSearch = flightResultModel.SelectedSorting;
+                flightSearchModel.SortingCriteriaSearch = flightResultModel.Sorting.criteria;
+
+                if (flightSearchModel.SearchStatus == SearchStates.SearchAgain)
+                {
+                    Itineraries = await flightResultModel.flightService.GetItineraries(flightSearchModel);
+                    flightResultModel = new FlightResultsViewModel(Navigator.Instance, GlobalConfiguration.CoreContext.GetFlightService(), BugTracker.Instance); ;
+                    flightResultModel.Itineraries = Itineraries;
+                    flightSearchModel.SearchStatus = SearchStates.FirstSearch;
+                    this.DataContext = flightResultModel;
+                }
+
+                flightSearchModel.TotalFlights = Itineraries.total;
+                this.miniboxSearch.DataContext = flightSearchModel;
+
+            }
+            catch (Exception ex)
+            {
+                //OnViewModelError("SEARCH_FAILED");
+            }
+            finally
+            {
+                //IsLoading = false;
+            }
         }
 
         /// <summary>
