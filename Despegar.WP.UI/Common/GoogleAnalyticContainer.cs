@@ -10,8 +10,13 @@ namespace Despegar.WP.UI.Common
     public sealed class GoogleAnalyticContainer
     {
         public GoogleAnalytics.Core.Tracker Tracker { get; set; }
-        public string prefix = "WindowsPhone8.1/Despegar.com/";
 
+        #if DECOLAR
+            public string prefix = "WindowsPhone8.1/Decolar.com/";
+        #else
+            public string prefix = "WindowsPhone8.1/Despegar.com/";
+        #endif
+        
         public void SendView(string pagePath)
         {
             

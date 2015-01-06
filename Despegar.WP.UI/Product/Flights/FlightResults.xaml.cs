@@ -49,11 +49,11 @@ namespace Despegar.WP.UI.Product.Flights
             this.miniboxSearch.DataContext = flightSearchModel;
 
             //Google Analytics
-            #if !DEBUG
+#if !DEBUG
                 GoogleAnalyticContainer ga = new GoogleAnalyticContainer();
                 ga.Tracker = GoogleAnalytics.EasyTracker.GetTracker();
                 ga.SendView("FlightResults");
-            #endif
+#endif
         }
 
         /// <summary>
@@ -102,20 +102,21 @@ namespace Despegar.WP.UI.Product.Flights
         {
             BugTracker.Instance.LeaveBreadcrumb("Flight Results View");
 
-            PageParameters pageParameters = e.NavigationParameter as PageParameters;
 
-            FlightsItineraries Itineraries = new FlightsItineraries();
+                PageParameters pageParameters = e.NavigationParameter as PageParameters;
 
-            flightResultModel.Itineraries = pageParameters.Itineraries as FlightsItineraries;
-            Itineraries = pageParameters.Itineraries as FlightsItineraries;
-            flightSearchModel = pageParameters.SearchModel as FlightSearchModel;
+                FlightsItineraries Itineraries = new FlightsItineraries();
 
-            flightSearchModel.FacetsSearch = flightResultModel.SelectedFacets;
-            flightSearchModel.SortingValuesSearch = flightResultModel.SelectedSorting;
-            flightSearchModel.SortingCriteriaSearch = flightResultModel.Sorting.criteria;
+                flightResultModel.Itineraries = pageParameters.Itineraries as FlightsItineraries;
+                Itineraries = pageParameters.Itineraries as FlightsItineraries;
+                flightSearchModel = pageParameters.SearchModel as FlightSearchModel;
 
-            if (flightSearchModel.SearchStatus == SearchStates.SearchAgain)
-            {
+                flightSearchModel.FacetsSearch = flightResultModel.SelectedFacets;
+                flightSearchModel.SortingValuesSearch = flightResultModel.SelectedSorting;
+                flightSearchModel.SortingCriteriaSearch = flightResultModel.Sorting.criteria;
+
+                if (flightSearchModel.SearchStatus == SearchStates.SearchAgain)
+                {
                 // Filtro / Ordenamiento aplicado
                 BugTracker.Instance.LeaveBreadcrumb("Flights Minibox Search View");
                 try
@@ -128,14 +129,14 @@ namespace Despegar.WP.UI.Product.Flights
                     BugTracker.Instance.LogException(ex);
                 }
 
-                flightResultModel = new FlightResultsViewModel(Navigator.Instance, GlobalConfiguration.CoreContext.GetFlightService(), BugTracker.Instance); ;
-                flightResultModel.Itineraries = Itineraries;
-                flightSearchModel.SearchStatus = SearchStates.FirstSearch;
-                this.DataContext = flightResultModel;
-            }
+                    flightResultModel = new FlightResultsViewModel(Navigator.Instance, GlobalConfiguration.CoreContext.GetFlightService(), BugTracker.Instance);
+                    flightResultModel.Itineraries = Itineraries;
+                    flightSearchModel.SearchStatus = SearchStates.FirstSearch;
+                    this.DataContext = flightResultModel;
+                }
 
-            flightSearchModel.TotalFlights = Itineraries.total;
-            this.miniboxSearch.DataContext = flightSearchModel;
+                flightSearchModel.TotalFlights = Itineraries.total;
+                this.miniboxSearch.DataContext = flightSearchModel;
         }
 
         /// <summary>
