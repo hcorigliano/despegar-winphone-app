@@ -9,6 +9,8 @@ using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
+using Windows.ApplicationModel.Resources;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
@@ -143,11 +145,20 @@ namespace Despegar.WP.UI.Controls.Flights
                 if (selected.type == "city" && !selected.has_airport)
                 {
                     var data = await GetNearCities(selected.geo_location.latitude, selected.geo_location.longitude);
-                    SearchCloseAirport SearchAirport = new SearchCloseAirport(this, sender.Name, selected.name) { DataContext = data };
-                    ModalPopup popup = new ModalPopup(SearchAirport);
-                    popup.Show();
-                    //UpdateTextbox(sender);
-                    sender.IsSuggestionListOpen = false;
+                    if(data != null)
+                    {  
+                        SearchCloseAirport SearchAirport = new SearchCloseAirport(this, sender.Name, selected.name) { DataContext = data };
+                        ModalPopup popup = new ModalPopup(SearchAirport);
+                        popup.Show();
+                        //UpdateTextbox(sender);
+                        sender.IsSuggestionListOpen = false;
+                    }else
+                    {
+                        ResourceLoader manager = new ResourceLoader();
+                        MessageDialog dialog = new MessageDialog(manager.GetString("Flight_SearchAirport_Error"), "Error");
+                        await dialog.ShowSafelyAsync();
+                        sender.Text = "";
+                    }
                 }
                 else
                 {
@@ -162,11 +173,11 @@ namespace Despegar.WP.UI.Controls.Flights
                         SelectedOriginCode = selected.code;
                         SelectedOriginText = selected.name;
                     }
-                //For Fix Focus_Lost
-                sender.ItemsSource = null;
-                List<CityAutocomplete> source = new List<CityAutocomplete>();
-                source.Add(selected);
-                sender.ItemsSource = source;
+                    //For Fix Focus_Lost
+                    sender.ItemsSource = null;
+                    List<CityAutocomplete> source = new List<CityAutocomplete>();
+                    source.Add(selected);
+                    sender.ItemsSource = source;
                 }
 
             }

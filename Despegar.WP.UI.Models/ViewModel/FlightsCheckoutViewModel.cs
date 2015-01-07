@@ -260,8 +260,19 @@ namespace Despegar.WP.UI.Model.ViewModel
 
         private async void GetCreditCardsValidations()
         {
-            this.Tracker.LeaveBreadcrumb("Flight checkout view model get credit cards validations");
-            CreditCardsValidations = await Despegar.LegacyCore.Service.APIValidationCreditcards.GetAll();
+            try
+            {
+                this.Tracker.LeaveBreadcrumb("Flight checkout view model get credit cards validations");
+                CreditCardsValidations = await Despegar.LegacyCore.Service.APIValidationCreditcards.GetAll();
+            }
+            catch (Exception e)
+            {
+                this.Tracker.LogException(e);
+                Logger.Log("[App:FlightsCheckout] Exception " + e.Message);
+                IsLoading = false;
+                OnViewModelError("CHECKOUT_INIT_FAILED");
+            }
+
         }
 
         private void ConfigureCountry(string countryCode)

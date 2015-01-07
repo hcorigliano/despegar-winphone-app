@@ -120,7 +120,7 @@ namespace Despegar.WP.UI
                 }
                 catch (Exception ex)
                 {
-                    BugTracker.Instance.LogException(ex);
+                   // BugTracker.Instance.LogException(ex);
                     NotifyAndClose();
                 }
 

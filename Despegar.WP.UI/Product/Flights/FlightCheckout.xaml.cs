@@ -211,7 +211,7 @@ namespace Despegar.WP.UI.Product.Flights
             } 
             catch(Exception e)
             {
-                BugTracker.Instance.LogException(e);
+                //BugTracker.Instance.LogException(e);
                 //TODO add logs
                 return String.Empty;
             }

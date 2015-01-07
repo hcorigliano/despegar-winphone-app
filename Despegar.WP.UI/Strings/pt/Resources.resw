@@ -886,4 +886,7 @@ A reserva não foi gerado e não cobra nenhuma taxa para a transação.</value>
   <data name="Home_Update_Error_Title" xml:space="preserve">
     <value>Atualização necessária</value>
   </data>
+  <data name="Flight_SearchAirport_Error" xml:space="preserve">
+    <value>Houve um erro na conexão com a Internet. Por favor, re - entrar na cidade.</value>
+  </data>
 </root>

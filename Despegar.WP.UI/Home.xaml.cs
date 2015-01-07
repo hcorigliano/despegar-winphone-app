@@ -68,7 +68,7 @@ namespace Despegar.WP.UI
         }       
 
         // TODO: Refactor. Use DATABINDINGS!!
-        private async void SetupMenuItems(string country)
+        private async Task SetupMenuItems(string country)
         {
             products = await ViewModel.GetProducts(country);
 
@@ -131,35 +131,37 @@ namespace Despegar.WP.UI
             }
             catch (Exception ex)
             {
-                BugTracker.Instance.LogException(ex);
                 error = true;
             }
 
-            if (error) 
+            //HACK NECESARIO YA QUE DENTRO DEL CATCH NO PODEMOS PONER UN AWAIT
+            if (error)
             {
-                MessageDialog errorDialog = new MessageDialog(manager.GetString("Flights_Search_ERROR_SEARCH_FAILED"), manager.GetString("Flights_Search_ERROR_SEARCH_FAILED_TITLE"));
-                await errorDialog.ShowSafelyAsync();
-                App.Current.Exit();
+                MessageDialog dialog = new MessageDialog(manager.GetString("Page_Home_Configuration_Error"), "Error");
+                await dialog.ShowSafelyAsync();
+                Application.Current.Exit();
             }
         }
 
         protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
+           
             BugTracker.Instance.LeaveBreadcrumb("Home View");
 
             var parameter = e.Parameter as HomeParameters;
 
             ViewModel = new Despegar.WP.UI.Model.HomeViewModel(Navigator.Instance, GlobalConfiguration.CoreContext.GetConfigurationService(), parameter, BugTracker.Instance);
             ViewModel.PropertyChanged += Checkloading;
-                       
-            if (!versionChecked) 
+
+            if (!versionChecked)
             {
-                SetupMenuItems(GlobalConfiguration.Site);                            
+                await SetupMenuItems(GlobalConfiguration.Site);
                 await ValidateUpdate();
                 versionChecked = true;
             }
 
             this.DataContext = ViewModel;
+           
         }   
 
         private async void ListView_ItemClick(object sender, ItemClickEventArgs e)

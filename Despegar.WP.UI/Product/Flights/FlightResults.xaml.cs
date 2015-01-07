@@ -125,7 +125,7 @@ namespace Despegar.WP.UI.Product.Flights
                 catch(Exception ex) 
                 {
                     // Will not filter the results, but it will keep the last list status
-                    BugTracker.Instance.LogException(ex);
+                  //  BugTracker.Instance.LogException(ex);
                 }
 
                 flightResultModel = new FlightResultsViewModel(Navigator.Instance, GlobalConfiguration.CoreContext.GetFlightService(), BugTracker.Instance); ;
