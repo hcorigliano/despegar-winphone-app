@@ -22,6 +22,8 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
+using Windows.ApplicationModel.Resources;
+using System.Threading.Tasks;
 
 
 namespace Despegar.View
@@ -36,22 +38,22 @@ namespace Despegar.View
             InitializeComponent();
 
             BugTracker.Instance.LeaveBreadcrumb("Hotel Checkout View");
-            
+            HardwareButtons.BackPressed += HardwareButtons_BackPressed;
+
             #if DECOLAR
             MainLogo.Source = new BitmapImage(new Uri("ms-appx:/Product/Legacy/Assets/Image/decolar-logo.png", UriKind.Absolute));
             #endif
 
-            if (!NetworkInterface.GetIsNetworkAvailable())
-                return;
+            #if !DEBUG
+                GoogleAnalyticContainer ga = new GoogleAnalyticContainer();
+                ga.Tracker = GoogleAnalytics.EasyTracker.GetTracker();
+                ga.SendView("HotelsCheckout");
+            #endif
+        }
 
-            //CardSelector.SetValue(Microsoft.Phone.Controls.ListPicker.ItemCountThresholdProperty, 30);
-            //MonthPicker.SetValue(Microsoft.Phone.Controls.ListPicker.ItemCountThresholdProperty, 20);
-            //YearPicker.SetValue(Microsoft.Phone.Controls.ListPicker.ItemCountThresholdProperty, 15);
-
-            CheckoutViewModel =  new  HotelsCheckoutViewModel();
-            CheckoutViewModel.FieldsLoaded += ViewModel_FieldsLoaded;
-            HotelsCheckoutView.DataContext = CheckoutViewModel;
-            FillStatesListPicker();                   
+        private void FormatHotelCheckoutView()
+        {
+            
         }
 
         protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
@@ -62,14 +64,56 @@ namespace Despegar.View
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
+            Init();
+        }
 
+        private async Task Init()
+        {
             if (!NetworkInterface.GetIsNetworkAvailable())
             {
                 OldPagesManager.GoTo(typeof(ConnectionError), null);
                 return;
             }
 
-            HardwareButtons.BackPressed += HardwareButtons_BackPressed;
+            try
+            {
+                CheckoutViewModel = new HotelsCheckoutViewModel();
+
+                CheckoutViewModel.FieldsLoaded += ViewModel_FieldsLoaded;
+
+                await CheckoutViewModel.InitializeHotelCheckout();
+            }
+            catch (Exception ex)
+            {
+                ResourceLoader manager = new ResourceLoader("LegacyStrings");
+                MessageDialog dialog;
+                BugTracker.Instance.LeaveBreadcrumb("Init Hotel Checkout Error");
+
+                switch (ex.Message)
+                {
+                    case "RoomReservationExeption":
+                        dialog = new MessageDialog(manager.GetString("Checkout_Error_Reservation"), manager.GetString("Checkout_Error_Reservation_Title"));
+                        dialog.ShowSafelyAsync();
+
+                        OldPagesManager.GoBack();
+                        OldPagesManager.GoBack();
+                        break;
+
+                    default:
+                        dialog = new MessageDialog(manager.GetString("Checkout_General_Error"), manager.GetString("Checkout_General_Error_Title"));
+                        dialog.ShowSafelyAsync();
+
+                        OldPagesManager.GoBack();
+                        OldPagesManager.GoBack();
+                        break;
+                }
+
+                return;
+            }
+
+            HotelsCheckoutView.DataContext = CheckoutViewModel;
+            FillStatesListPicker();
+            FormatHotelCheckoutView();
         }
 
         private void HardwareButtons_BackPressed(object sender, BackPressedEventArgs e)
@@ -92,8 +136,12 @@ namespace Despegar.View
         private void ViewModel_FieldsLoaded(object sender, EventArgs e)
         {
             Logger.Info("[view:HotelsCheckout]: Booking fields loaded");
+
             if (!CheckoutViewModel.InvoiceDefinitionIsRequired)
                 CheckoutForm.Items.Remove(InvoiceDefinitionPivotItem);
+
+            if (CheckoutViewModel.CardDefinition == null)
+                CheckoutForm.Items.Remove(PaymentDefinitionPivotItem);
         }
 
         private void Input_Focus(object sender, RoutedEventArgs e)
@@ -133,15 +181,17 @@ namespace Despegar.View
             CheckoutViewModel.PaymentId = sender.DataContext.id;
             sender.DataContext.Selected = true;
 
-            CheckoutViewModel.CardDefinition.Cards = new ObservableCollection<Despegar.LegacyCore.Connector.Domain.API.HotelCreditCard>();
+            if (CheckoutViewModel.CardDefinition != null)
+                CheckoutViewModel.CardDefinition.Cards = new ObservableCollection<Despegar.LegacyCore.Connector.Domain.API.HotelCreditCard>();
+
             var items = CheckoutViewModel.AvailabilityInfo.paymentMethod.payments.Find(it => { return it.id == CheckoutViewModel.PaymentId; }).creditCards;
                 
                 foreach (var it in items)
 	            {
 		             CheckoutViewModel.CardDefinition.Cards.Add(it);
 	            }
-                
-            CardSelector.ItemsSource = CheckoutViewModel.CardDefinition.Cards;
+            if (CheckoutViewModel.CardDefinition != null)  
+                CardSelector.ItemsSource = CheckoutViewModel.CardDefinition.Cards;
             Logger.Info(String.Format("[view:hotel:checkout] Selected payment:{0}", CheckoutViewModel.PaymentId));
         }
         

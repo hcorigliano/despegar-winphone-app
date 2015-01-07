@@ -622,7 +622,7 @@
 			</PivotItem>
 
             <!-- PAYMENT DEFINITION -->
-			<PivotItem x:Uid="/LegacyStrings/HotelCheckoutCardDataTitle" Margin="0" Padding="8,0">
+			<PivotItem x:Name="PaymentDefinitionPivotItem" x:Uid="/LegacyStrings/HotelCheckoutCardDataTitle" Margin="0" Padding="8,0">
 				<ScrollViewer>
 					<StackPanel Margin="10,0">
 						<!-- CARD DEFINITIONS -->
