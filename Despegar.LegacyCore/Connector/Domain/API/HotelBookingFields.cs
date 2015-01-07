@@ -103,7 +103,8 @@ namespace Despegar.LegacyCore.Connector.Domain.API
 
             string serialized = "{";
             serialized += "\"passengerDefinitions\" : [ " + String.Join(",", passDef) + " ],";
-            serialized += "\"paymentDefinition\" : "+paymentDefinition.Serialize()+",";
+            if (paymentDefinition != null)
+                serialized += "\"paymentDefinition\" : "+paymentDefinition.Serialize()+",";
             if (vouchDef.Count > 0) serialized += "\"voucherDefinitions\" : [" + String.Join(",", vouchDef) + "],";
             serialized += "\"contactDefinition\" : "+ contactDefinition.Serialize();
             serialized += "}";
@@ -284,7 +285,7 @@ namespace Despegar.LegacyCore.Connector.Domain.API
             get 
             {
                 if (selected != null) return selected;
-                else if (Cards != null) return Cards[0];
+                else if (Cards != null && Cards.Count != 0) return Cards[0];
                 else return selected;
             } set { selected = value; } }
         

@@ -55,11 +55,12 @@ namespace Despegar.LegacyCore.Connector.Domain.API
             set { suggestedRoom = value; }
         }
 
-        public HotelRoom Room 
-        { 
+        private HotelRoom room;
+        public HotelRoom Room
+        {
             get
             {
-                HotelRoom room = new HotelRoom();
+                room = new HotelRoom();
                 for (int i = 0; i < rooms.Count; i++)
                     if (rooms[i].id == SelectedRoom)
                         room = rooms[i];

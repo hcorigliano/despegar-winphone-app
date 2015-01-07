@@ -12,13 +12,16 @@ using Despegar.LegacyCore.Model;
 using Despegar.LegacyCore;
 using System.Text.RegularExpressions;
 using Windows.ApplicationModel.Resources;
+using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml;
 
 
 namespace Despegar.LegacyCore.ViewModel
 {
     public class HotelsCheckoutViewModel : INotifyPropertyChanged
     {
-        
+        //private NavigationHelper navigationHelper;
+
         private HotelsBookingModel BookingModel { get; set; }
         private HotelBookingFields BookingFields { get; set; }
         private ValidationCreditcardsModel CreditCardsValidationModel { get; set; }
@@ -35,7 +38,7 @@ namespace Despegar.LegacyCore.ViewModel
         public HotelContactDefinition ContactDefinition { get; set; }
         public HotelInvoiceDefinition InvoiceDefinition { get; set; }
         public List<State> StatesDefinition { get; set; }
-        public void NotifyPropertyChanged(string propertyName) { PropertyChanged(this, new PropertyChangedEventArgs(propertyName)); }
+        public void NotifyPropertyChanged(string propertyName) { if(PropertyChanged != null) PropertyChanged(this, new PropertyChangedEventArgs(propertyName)); }
         public event PropertyChangedEventHandler PropertyChanged;
         public event EventHandler FieldsLoaded;
 
@@ -46,10 +49,9 @@ namespace Despegar.LegacyCore.ViewModel
         {
             Loading = "Visible";
             Logger.Info("[vm:hotel:checkout] Hotel Checkout ViewModel initialized");
-            InitializeHotelCheckout();
         }
 
-        public async void InitializeHotelCheckout()
+        public async Task InitializeHotelCheckout()
         {
             BookingModel = new HotelsBookingModel();
             AvailabilityModel = new HotelsAvailabilityModel();
@@ -68,9 +70,20 @@ namespace Despegar.LegacyCore.ViewModel
 
             BookingFields = await BookingModel.GetBookingFields(Availability.Item.SessionTicket, ApplicationConfig.Instance.DeviceDescription);
 
+            if (Availability.Item.SelectedRoom.Length >= 3) 
+                Availability.Item.SelectedRoom = Availability.Item.SelectedRoom.Substring(0, 2).Replace("&", "");
+
             // prepare view model:
             AvailabilityInfo = Availability.Item;
+
             AvailabilityInfo.Currency = AvailabilityModel.Currency;
+            
+            if (AvailabilityInfo.Room.Prices == null)
+            {
+                //Room not found
+                throw new Exception("RoomReservationExeption");
+            }
+            
             AvailabilityInfo.Room.Prices.Currency = AvailabilityModel.Currency;
             AvailabilityInfo.Room.Prices.Nights = AvailabilityModel.Nights;
             AvailabilityInfo.Room.Prices.Rooms = AvailabilityModel.Rooms;
@@ -79,10 +92,12 @@ namespace Despegar.LegacyCore.ViewModel
             
             Loading = "Collapsed";
             PassengerDefinitions = BookingFields.data.InputDefinition.passengerDefinitions;
-            CardDefinition       = BookingFields.data.InputDefinition.paymentDefinition.cardDefinition;
+            if (BookingFields.data.InputDefinition.paymentDefinition != null)
+                CardDefinition       = BookingFields.data.InputDefinition.paymentDefinition.cardDefinition;
             VoucherDefinitions   = BookingFields.data.InputDefinition.voucherDefinitions;
             ContactDefinition    = BookingFields.data.InputDefinition.contactDefinition;
-            InvoiceDefinition = BookingFields.data.InputDefinition.paymentDefinition.InvoiceDefinition;
+            if (BookingFields.data.InputDefinition.paymentDefinition != null)
+                InvoiceDefinition = BookingFields.data.InputDefinition.paymentDefinition.InvoiceDefinition;
             cityModel = new CitiesModel();
             
 
@@ -176,7 +191,9 @@ namespace Despegar.LegacyCore.ViewModel
 
                 bool passErr = PassengerDefinitions.Any(it => { return it.Validate(); });
                 bool contErr = ContactDefinition.Validate();
-                bool cardErr = CardDefinition.Validate();
+                bool cardErr = false;
+                if (CardDefinition != null)
+                    cardErr = CardDefinition.Validate();
                 bool fiscalDataErr = InvoiceDefinitionIsRequired ? InvoiceDefinition.Validate() : false;
 
 

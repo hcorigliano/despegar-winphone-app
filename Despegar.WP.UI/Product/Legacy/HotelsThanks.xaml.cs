@@ -26,8 +26,14 @@ namespace Despegar.WP.UI.Product.Legacy
 
             #if DECOLAR
             MainLogo.Source = new BitmapImage(new Uri("ms-appx:/Product/Legacy/Assets/Image/decolar-logo.png", UriKind.Absolute));
-            #endif            
-            
+            #endif         
+   
+            #if !DEBUG
+                GoogleAnalyticContainer ga = new GoogleAnalyticContainer();
+                ga.Tracker = GoogleAnalytics.EasyTracker.GetTracker();
+                ga.SendView("HotelsThanks");
+            #endif
+
             BugTracker.Instance.LogEvent("Hotels Purchase " + GlobalConfiguration.Site);
 
             ThanksViewModel = new HotelsThanksViewModel();
