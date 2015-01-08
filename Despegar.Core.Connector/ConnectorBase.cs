@@ -97,12 +97,18 @@ namespace Despegar.Core.Connector
 
                     try
                     {
+                        // Check Empty Response
                         if (String.IsNullOrWhiteSpace(response))
-                            throw new Exception("Http error");
-
-                        // Try to Parse an API Error                        
-                        e = new APIErrorException("API response is an Error: " + response);
-                        ((APIErrorException)e).ErrorData = JsonConvert.DeserializeObject<MAPIError>(response);
+                        {
+                            e = new HTTPStatusErrorException(String.Format("[Connector]: HTTP Error code {0} ({1}) Message: {2}", (int)httpResponse.StatusCode, httpResponse.StatusCode.ToString(), response));
+                            customExceptionThrown = true;
+                        }
+                        else
+                        {
+                            // Try to Parse an API Error                        
+                            e = new APIErrorException("API response is an Error: " + response);
+                            ((APIErrorException)e).ErrorData = JsonConvert.DeserializeObject<MAPIError>(response);
+                        }
                     }
                     catch (Exception ex) 
                     {
@@ -113,17 +119,9 @@ namespace Despegar.Core.Connector
                     throw e;
                 }
 
-                // Check Empty Response
-                if (String.IsNullOrEmpty(response))
-                {
-                    var e = new HTTPStatusErrorException(String.Format("[Connector]: HTTP Error code {0} ({1}) Message: {2}", (int)httpResponse.StatusCode, httpResponse.StatusCode.ToString(), response));
-                    customExceptionThrown = true;
-                    Logger.LogCoreException(e);
-                    throw e;
-                }
-
                 // Deserialize JSON data to .NET object
                 return JsonConvert.DeserializeObject<T>(response);
+
             }
             catch (HttpRequestException ex)
             {
