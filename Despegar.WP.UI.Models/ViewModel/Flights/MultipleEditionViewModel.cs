@@ -1,4 +1,5 @@
 ﻿using Despegar.Core.Business.Flight.SearchBox;
+using Despegar.Core.Log;
 using Despegar.WP.UI.Model.Classes.Flights;
 using Despegar.WP.UI.Model.Interfaces;
 using Despegar.WP.UI.Models.Classes;

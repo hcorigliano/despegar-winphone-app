@@ -88,7 +88,6 @@
     <Compile Include="Common\IIncrementalSource.cs" />
     <Compile Include="Common\IncrementalLoadingCollection.cs" />
     <Compile Include="Common\ViewModelErrorArgs.cs" />
-    <Compile Include="IBugTracker.cs" />
     <Compile Include="ViewModel\Classes\Flights\FlightsCrossParameter.cs" />
     <Compile Include="ViewModel\Classes\Flights\FlightSearchNavigationData.cs" />
     <Compile Include="ViewModel\Classes\Flights\BindableItem.cs" />

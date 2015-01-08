@@ -1,5 +1,6 @@
 ﻿using Despegar.Core.Business.Configuration;
 using Despegar.Core.IService;
+using Despegar.Core.Log;
 using Despegar.WP.UI.Model.Interfaces;
 using Despegar.WP.UI.Models.Classes;
 using System;

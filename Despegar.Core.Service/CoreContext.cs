@@ -30,6 +30,7 @@ namespace Despegar.Core.Service
         private string site;
         private string x_client;
         private string uow;
+        private IBugTracker bugtracker;
 
         // Connectors
         private MapiConnector mapiConnector;
@@ -105,11 +106,11 @@ namespace Despegar.Core.Service
 
             // Init Connectors
             if (mapiConnector == null)
-                mapiConnector = new MapiConnector();
+                mapiConnector = new MapiConnector(bugtracker);
             mapiConnector.ConfigureClientAndUow(x_client, this.uow);
 
             if (apiv1Connector == null)
-                apiv1Connector = new Apiv1Connector();
+                apiv1Connector = new Apiv1Connector(bugtracker);
             
             Logger.LogCore("Core Initialized.");
         }
@@ -187,6 +188,12 @@ namespace Despegar.Core.Service
         }
 
         #endregion
-        
+
+
+
+        public void SetBugTracker(IBugTracker bugtracker)
+        {
+            this.bugtracker = bugtracker;
+        }
     }
 }

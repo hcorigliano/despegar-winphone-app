@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Linq;
 using Despegar.WP.UI.Model.ViewModel.Classes;
+using Despegar.Core.Log;
 
 namespace Despegar.WP.UI.Model
 {

@@ -23,7 +23,7 @@ namespace Despegar.WP.UI.Model
         /// Initializes the CoreContext object and configures it
         /// This method should be called on app Init
         /// </summary>
-        public async static Task InitCore() 
+        public async static Task InitCore(IBugTracker bugtracker) 
         {
             //Set vars with client info
             ClientDeviceInfo ClientInfo = new ClientDeviceInfo();
@@ -31,9 +31,9 @@ namespace Despegar.WP.UI.Model
             string uow = ClientInfo.GetUOW();
                        
             CoreContext = new CoreContext();
+            CoreContext.SetBugTracker(bugtracker);
             CoreContext.Configure(xclient, uow);
-
-            await LoadUPA();
+            await LoadUPA(bugtracker);
 
             // Enable Verbose logging
 #if DEBUG
@@ -61,14 +61,14 @@ namespace Despegar.WP.UI.Model
             CoreContext.SetSite(siteCode);       
         }
 
-        public static async Task LoadUPA()
+        public static async Task LoadUPA(IBugTracker bugtracker)
         {
             IUPAService upaService = CoreContext.GetUpaService();
 
             var roamingSettings = ApplicationData.Current.RoamingSettings;
             if (roamingSettings.Values["UPA"] == null)
             {
-                var field = await upaService.GetUPA();
+                var field = await upaService.GetUPA(bugtracker);
 
                 if (field != null)
                 {
