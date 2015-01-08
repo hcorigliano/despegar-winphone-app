@@ -1,5 +1,6 @@
 ﻿using Despegar.Core.Business.Flight.Itineraries;
 using Despegar.Core.IService;
+using Despegar.Core.Log;
 using Despegar.WP.UI.Model.Classes.Flights;
 using Despegar.WP.UI.Model.Common;
 using Despegar.WP.UI.Model.Interfaces;

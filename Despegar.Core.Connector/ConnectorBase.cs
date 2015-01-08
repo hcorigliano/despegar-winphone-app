@@ -11,6 +11,7 @@ namespace Despegar.Core.Connector
 {
     public abstract class ConnectorBase : IConnector
     {
+        private IBugTracker bugtracker;
         public object syncLock = new Object();        
         private HttpClient httpClient;
 
@@ -18,13 +19,15 @@ namespace Despegar.Core.Connector
         /// Initializes a new instance of Connector
         /// </summary>
         /// <param name="client">The X_CLIENT header</param>
-        public ConnectorBase() {
+        public ConnectorBase(IBugTracker bugTracker) {
             // Create Http Client            
             HttpClientHandler handler = new HttpClientHandler();
             if (handler.SupportsAutomaticDecompression)
                 handler.AutomaticDecompression = DecompressionMethods.Deflate | DecompressionMethods.GZip;
 
             this.httpClient = new HttpClient(handler);
+
+            this.bugtracker = bugTracker;
         }
 
         /// <summary>
@@ -73,6 +76,7 @@ namespace Despegar.Core.Connector
             return await ProcessRequest<T>(httpMessage);
         }
 
+
         /// <summary>
         /// Launches the HTTP request and returns the JSON-deserialized response
         /// </summary>
@@ -85,6 +89,10 @@ namespace Despegar.Core.Connector
 
             try
             {
+                //Log last url
+                if ( bugtracker != null)
+                    bugtracker.LogURL(httpMessage.RequestUri.AbsoluteUri);
+
                 // Call Service
                 HttpResponseMessage httpResponse = await httpClient.SendAsync(httpMessage);
                 response = await httpResponse.Content.ReadAsStringAsync();

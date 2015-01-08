@@ -115,7 +115,7 @@ namespace Despegar.WP.UI
                 try
                 {
                     BugTracker.Instance.LeaveBreadcrumb("App Started");                    
-                    await GlobalConfiguration.InitCore();
+                    await GlobalConfiguration.InitCore(BugTracker.Instance);
                     BugTracker.Instance.LeaveBreadcrumb("Core Initialized");
                 }
                 catch (Exception ex)

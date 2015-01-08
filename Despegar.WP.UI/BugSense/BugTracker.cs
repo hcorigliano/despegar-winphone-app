@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Despegar.Core.Log;
 
 namespace Despegar.WP.UI.BugSense
 {
@@ -60,6 +61,11 @@ namespace Despegar.WP.UI.BugSense
         public void LogEvent(string eventName)
         {
             BugSenseHandler.Instance.LogEvent(eventName);
+        }
+
+        public void LogURL(string url)
+        {
+            this.SetExtraData("LastURL", url);
         }
     }
 }

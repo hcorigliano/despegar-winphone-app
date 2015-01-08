@@ -5,6 +5,7 @@ using Despegar.Core.Business.Flight.CitiesAutocomplete;
 using Despegar.Core.Business.Flight.Itineraries;
 using Despegar.Core.Business.Flight.SearchBox;
 using Despegar.Core.IService;
+using Despegar.Core.Log;
 using Despegar.WP.UI.Model.Classes;
 using Despegar.WP.UI.Model.Classes.Flights;
 using Despegar.WP.UI.Model.Interfaces;

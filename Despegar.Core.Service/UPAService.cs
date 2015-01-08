@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Despegar.Core.Business.Configuration;
+using Despegar.Core.Log;
 
 
 namespace Despegar.Core.Service
@@ -19,10 +20,10 @@ namespace Despegar.Core.Service
             // TODO: Complete member initialization
             this.coreContext = coreContext;
         }
-       public async Task<UpaField> GetUPA()
+        public async Task<UpaField> GetUPA(IBugTracker bugtracker)
         {
             string serviceUrl = "t";
-            IConnector connector = new UPAConnector();
+            IConnector connector = new UPAConnector(bugtracker);
 
             return await connector.GetAsync<UpaField>(serviceUrl);
 

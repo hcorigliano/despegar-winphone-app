@@ -1,5 +1,6 @@
 ﻿using Despegar.Core.Business;
 using Despegar.Core.Business.Configuration;
+using Despegar.Core.Log;
 
 namespace Despegar.Core.IService
 {
@@ -90,5 +91,11 @@ namespace Despegar.Core.IService
         /// </summary>
         /// <param name="value"></param>
         void SetConfiguration(Configuration value);
+
+        /// <summary>
+        /// Sets the bug tracker instance to log core events and errors
+        /// </summary>
+        /// <param name="bugtracker"></param>
+        void SetBugTracker(IBugTracker bugtracker);
     }
 }

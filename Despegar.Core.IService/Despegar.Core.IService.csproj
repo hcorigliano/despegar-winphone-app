@@ -57,6 +57,10 @@
       <Project>{c4b34083-7e2a-461b-b525-4c238314655a}</Project>
       <Name>Despegar.Core.Business</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Despegar.Core.Log\Despegar.Core.Log.csproj">
+      <Project>{0c50151e-91de-45c5-bb01-b03ec44d7735}</Project>
+      <Name>Despegar.Core.Log</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <TargetPlatform Include="WindowsPhoneApp, Version=8.1" />

@@ -1,4 +1,5 @@
-﻿using Despegar.WP.UI.Model.Interfaces;
+﻿using Despegar.Core.Log;
+using Despegar.WP.UI.Model.Interfaces;
 using Despegar.WP.UI.Model.ViewModel.Classes;
 using Despegar.WP.UI.Model.ViewModel.Classes.Flights;
 using Despegar.WP.UI.Models.Classes;

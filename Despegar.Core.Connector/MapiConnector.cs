@@ -15,7 +15,9 @@ namespace Despegar.Core.Connector
         private string site;
         private string language;
 
-        public MapiConnector() : base() {
+        public MapiConnector(IBugTracker bugtracker)
+            : base(bugtracker)
+        {
             Logger.LogCore("MAPI Connector created.");
         }
 

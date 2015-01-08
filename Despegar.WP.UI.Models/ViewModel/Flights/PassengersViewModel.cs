@@ -1,4 +1,5 @@
 ﻿using Despegar.Core.Business.Enums;
+using Despegar.Core.Log;
 using Despegar.WP.UI.Model.Classes;
 using Despegar.WP.UI.Model.Classes.Flights;
 using Despegar.WP.UI.Models.Controls.Classes;

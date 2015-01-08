@@ -1,4 +1,5 @@
-﻿using Despegar.WP.UI.Model.Common;
+﻿using Despegar.Core.Log;
+using Despegar.WP.UI.Model.Common;
 using Despegar.WP.UI.Model.Interfaces;
 using System;
 using System.Collections.Generic;

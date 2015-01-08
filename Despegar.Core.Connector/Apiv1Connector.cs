@@ -45,7 +45,9 @@ namespace Despegar.Core.Connector
         };
 
 
-        public Apiv1Connector() : base() {
+        public Apiv1Connector(IBugTracker bugtracker)
+            : base(bugtracker)
+        {
             Logger.LogCore("MAPI Connector created.");
         }
 
