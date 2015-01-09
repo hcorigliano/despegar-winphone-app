@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Despegar.Core.Service
 {
-    class HotelService : IHotelService
+    public class HotelService : IHotelService
     {
         private CoreContext context;
 
@@ -26,5 +26,6 @@ namespace Despegar.Core.Service
 
             return await connector.GetAsync<HotelsAutocomplete>(serviceUrl);
         }
+
     }
 }

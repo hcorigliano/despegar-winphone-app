@@ -3,14 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Despegar.Core.Business.Hotels
+namespace Despegar.Core.Business.Hotels.HotelsAutocomplete
 {
     public class GeoLocation
     {
-        public class GeoLocation
-        {
-            public double latitude { get; set; }
-            public double longitude { get; set; }
-        }
+        public double latitude { get; set; }
+        public double longitude { get; set; }
     }
+
 }

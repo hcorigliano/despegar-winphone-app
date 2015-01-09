@@ -8,6 +8,6 @@ namespace Despegar.Core.Business.Hotels.HotelsAutocomplete
 {
     public class HotelsAutocomplete
     {
-        public List<HotelAutocomplete> HotelsAutocomplete { get; set; }
+        public List<HotelAutocomplete> Hotels { get; set; }
     }
 }
