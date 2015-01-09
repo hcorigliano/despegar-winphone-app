@@ -45,6 +45,12 @@ namespace Despegar.Core.IService
         void Configure(string x_client, string uow);
 
         /// <summary>
+        /// Returns the hoteles service object
+        /// </summary>
+        /// <returns></returns>
+        IHotelService GetHotelService();
+
+        /// <summary>
         /// Returns the Flight service object
         /// </summary> 
         IFlightService GetFlightService();

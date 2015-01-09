@@ -106,6 +106,9 @@
     <Compile Include="Flight\BookingCompletePost\TypeAndNumber.cs" />
     <Compile Include="Flight\Itineraries\Route.cs" />
     <Compile Include="Flight\SearchBox\FlightMultipleSegment.cs" />
+    <Compile Include="Hotels\HotelsAutocomplete\GeoLocation.cs" />
+    <Compile Include="Hotels\HotelsAutocomplete\HotelAutocomplete.cs" />
+    <Compile Include="Hotels\HotelsAutocomplete\HotelsAutocomplete.cs" />
     <Compile Include="Mock.cs" />
     <Compile Include="Flight\BookingFields\Address.cs" />
     <Compile Include="Flight\BookingFields\Birthdate.cs" />

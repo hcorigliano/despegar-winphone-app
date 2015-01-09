@@ -134,6 +134,11 @@ namespace Despegar.Core.Service
             Logger.LogCore("Site Changed.");
         }
 
+        public IHotelService GetHotelService()
+        {
+            return new HotelService(this);
+        }
+
         public IFlightService GetFlightService() 
         {
             return new FlightService(this);
