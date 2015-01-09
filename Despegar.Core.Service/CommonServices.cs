@@ -7,6 +7,7 @@ using Despegar.Core.Connector;
 using Despegar.Core.IService;
 using Despegar.Core.Business.Common.State;
 using Despegar.Core.Business;
+using Despegar.Core.Business.CreditCard;
 
 namespace Despegar.Core.Service
 {
@@ -26,6 +27,14 @@ namespace Despegar.Core.Service
             IConnector connector = context.GetServiceConnector(ServiceKey.States);
 
             return await connector.GetAsync<List<State>>(serviceUrl);
+        }
+
+        public async Task<ValidationCreditcards> GetCreditCardValidations()
+        {
+            string serviceUrl = String.Format(ServiceURL.GetServiceURL(ServiceKey.CreditCardValidation));
+            IConnector connector = context.GetServiceConnector(ServiceKey.CreditCardValidation);
+
+            return await connector.GetAsync<ValidationCreditcards>(serviceUrl);
         }
     }
 }

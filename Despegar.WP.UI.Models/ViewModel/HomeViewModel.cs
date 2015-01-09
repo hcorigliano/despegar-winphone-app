@@ -1,7 +1,5 @@
 using Despegar.Core.Business.Configuration;
 using Despegar.Core.IService;
-using Despegar.LegacyCore;
-using Despegar.LegacyCore.Connector;
 using Despegar.WP.UI.Model.Interfaces;
 using Despegar.WP.UI.Model.ViewModel;
 using Despegar.WP.UI.Models.Classes;
@@ -21,7 +19,7 @@ namespace Despegar.WP.UI.Model
         private INavigator Navigator;
 
         public HomeViewModel(INavigator navigator, IConfigurationService configuracion, HomeParameters parameters, IBugTracker t) : base(t)
-        {            
+        {
             this.Navigator = navigator;
             this.configurationService = configuracion;
 
@@ -36,19 +34,19 @@ namespace Despegar.WP.UI.Model
         {
             IsLoading = true;
 
-            Configuration configuration;            
+            Configuration configuration;
 
             try
             {
                 configuration = await configurationService.GetConfigurations();
             }
-            catch(Exception)
+            catch (Exception)
             {
                 IsLoading = false;
                 return null;
             }
-            
-            if(configuration != null)
+
+            if (configuration != null)
             {
                 GlobalConfiguration.CoreContext.SetConfiguration(configuration);
                 var Site = configuration.sites.FirstOrDefault(s => s.code == country);
@@ -56,27 +54,27 @@ namespace Despegar.WP.UI.Model
                 IsLoading = false;
                 return Site.products;
 
-            }else{
+            }
+            else
+            {
 
                 IsLoading = false;
                 return null;
             }
-
         }
 
         public ICommand NavigateToHotelsLegacy
         {
             get
             {
-                return new RelayCommand<string>((legacyPath) => LoadBrowser(legacyPath)); 
+                return new RelayCommand(() => { return; }); 
             }
         }
 
         public ICommand NavigateToFlights 
          {
             get
-            {
-                APIConnector.Instance.Channel = ApplicationConfig.Instance.Country = GlobalConfiguration.Site;  // TODO: Only for CardsValidations in Checkout
+            {                
                 return new RelayCommand(() => Navigator.GoTo(ViewModelPages.FlightsSearch, null)); 
             }
         }
@@ -87,15 +85,6 @@ namespace Despegar.WP.UI.Model
             {
                 return new RelayCommand(() => Navigator.GoTo(ViewModelPages.CountrySelecton, null));
             }
-        }  
-      
-        private void LoadBrowser(string relativePath)
-        {
-            APIConnector.Instance.Channel = ApplicationConfig.Instance.Country = GlobalConfiguration.Site;  // TODO: Legacy code
-            ApplicationConfig.Instance.ResetBrowsingPages(new Uri(Despegar.LegacyCore.ViewModel.HomeViewModel.GetDomain(GlobalConfiguration.Site) + relativePath));
-
-            Navigator.GoTo(ViewModelPages.LegacyBrowser, null);            
-        }
-
+        }           
     }
 }

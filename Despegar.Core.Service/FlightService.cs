@@ -1,5 +1,6 @@
 ﻿
 using Despegar.Core.Business;
+using Despegar.Core.Business.CreditCard;
 using Despegar.Core.Business.Flight.BookingCompletePostResponse;
 using Despegar.Core.Business.Flight.BookingFields;
 using Despegar.Core.Business.Flight.CitiesAutocomplete;
@@ -151,7 +152,7 @@ namespace Despegar.Core.Service
             IConnector connector = context.GetServiceConnector(ServiceKey.FlightsNearCities);
 
             return await connector.GetAsync<CitiesAutocomplete>(serviceUrl);
-        }
-        
+        }      
+
     }
 }

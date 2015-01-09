@@ -1,4 +1,5 @@
 ﻿using Despegar.Core.Business.Common.State;
+using Despegar.Core.Business.CreditCard;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,5 +11,6 @@ namespace Despegar.Core.IService
     public interface ICommonServices
     {
         Task<List<State>> GetStates(string country);
+        Task<ValidationCreditcards> GetCreditCardValidations();
     }
 }

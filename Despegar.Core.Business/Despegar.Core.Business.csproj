@@ -75,6 +75,7 @@
     <Compile Include="Configuration\UpdateFields.cs" />
     <Compile Include="Coupons\CouponParameter.cs" />
     <Compile Include="Coupons\CouponResponse.cs" />
+    <Compile Include="CreditCard\ValidationCreditcards.cs" />
     <Compile Include="Dynamics\DynamicFlightBookingFieldsToPost.cs" />
     <Compile Include="Enums\BookingStatusEnum.cs" />
     <Compile Include="Enums\FlightSearchChildEnum.cs" />

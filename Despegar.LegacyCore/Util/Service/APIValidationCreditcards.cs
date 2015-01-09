@@ -13,7 +13,6 @@ namespace Despegar.LegacyCore.Service
 {
     public class APIValidationCreditcards
     {
-
         public static async Task<ValidationCreditcards> GetAll()
         {
             APIConnector ConnectorAPI = APIConnector.Instance;

@@ -1,7 +1,6 @@
 ﻿using Despegar.Core.Log;
 using Despegar.WP.UI.Model.Interfaces;
 using Despegar.WP.UI.Product.Flights;
-using Despegar.WP.UI.Product.Legacy;
 using System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -37,10 +36,7 @@ namespace Despegar.WP.UI.Common
                     break;
                 case ViewModelPages.CountrySelecton:
                     view = typeof(CountrySelection);
-                    break;
-                case ViewModelPages.LegacyBrowser:
-                    view = typeof(Browser);
-                    break;
+                    break;                
                 case ViewModelPages.FlightsSearch:
                     view = typeof(FlightSearch);
                     break;
