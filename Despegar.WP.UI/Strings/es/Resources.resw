@@ -892,4 +892,7 @@ La reserva no ha sido generada y no se le cobrará ningún cargo por la transacc
   <data name="Flight_SearchAirport_Error" xml:space="preserve">
     <value>Hubo un error con su conexion a Internet. Por favor vuelva a ingresar la ciudad.</value>
   </data>
+  <data name="FLIGHT_SEARCH_DEPARTUREDATE_SMALLER_THAN_ERROR_MESSAGE" xml:space="preserve">
+    <value>Tienes que seleccionar una fecha mayor o igual al {0}</value>
+  </data>
 </root>
