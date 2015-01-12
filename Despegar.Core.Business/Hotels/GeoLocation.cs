@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Despegar.Core.Business.Hotels.HotelsAutocomplete
+namespace Despegar.Core.Business.Hotels
 {
     public class GeoLocation
     {

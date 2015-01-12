@@ -4,6 +4,7 @@ namespace Despegar.Core.Business
 {
     public enum ServiceKey
     {
+        HotelsAvailability,
         HotelsAutocomplete,
         FlightsAirlines,
         FlightsCitiesAutocomplete,
@@ -27,6 +28,7 @@ namespace Despegar.Core.Business
     {    
         private static readonly Dictionary<ServiceKey, string> serviceURLRepo = new Dictionary<ServiceKey, string>
         {
+            {ServiceKey.HotelsAvailability, "mapi-hotels/availability?id={0}&checkin={1}&checkout={2}&distribution={3}&currency_code={4}&type=quick&offset={5}&limit={6}&sort={7}&order={8}" },
             {ServiceKey.HotelsAutocomplete, "mapi-cross/autocomplete/hotels?search={0}" },
             {ServiceKey.FlightsAirlines, "mapi-flights/airlines?description={0}" },
             {ServiceKey.FlightsCitiesAutocomplete, "mapi-cross/autocomplete/flights?search={0}" },

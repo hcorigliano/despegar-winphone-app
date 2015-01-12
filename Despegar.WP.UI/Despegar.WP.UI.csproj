@@ -273,6 +273,12 @@
     <Compile Include="Product\Flights\FlightThanks.xaml.cs">
       <DependentUpon>FlightThanks.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Product\Hotels\HotelsDetails.xaml.cs">
+      <DependentUpon>HotelsDetails.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Product\Hotels\HotelsSearch.xaml.cs">
+      <DependentUpon>HotelsSearch.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Strings\AppResources.cs" />
     <Page Include="Controls\Alert.xaml">
@@ -396,6 +402,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Product\Flights\FlightSortBy.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Product\Hotels\HotelsDetails.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Product\Hotels\HotelsSearch.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

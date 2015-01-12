@@ -71,6 +71,14 @@ namespace Despegar.WP.UI.Model
             }
         }
 
+        public ICommand NavigateToHotels
+        {
+            get
+            {
+                return new RelayCommand(() => Navigator.GoTo(ViewModelPages.HotelsSearch, null)); 
+            }
+        }
+
         public ICommand NavigateToFlights 
          {
             get
