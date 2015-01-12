@@ -1,7 +1,7 @@
 ﻿using Despegar.Core.Log;
 using Despegar.WP.UI.Model.Interfaces;
 using Despegar.WP.UI.Product.Flights;
-using Despegar.WP.UI.Product.Legacy;
+using Despegar.WP.UI.Product.Hotels;
 using System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -37,10 +37,7 @@ namespace Despegar.WP.UI.Common
                     break;
                 case ViewModelPages.CountrySelecton:
                     view = typeof(CountrySelection);
-                    break;
-                case ViewModelPages.LegacyBrowser:
-                    view = typeof(Browser);
-                    break;
+                    break;                
                 case ViewModelPages.FlightsSearch:
                     view = typeof(FlightSearch);
                     break;
@@ -58,6 +55,12 @@ namespace Despegar.WP.UI.Common
                     break;
                 case ViewModelPages.FlightsThanks:
                     view = typeof(FlightThanks); // TODO uncomment
+                    break;
+                case ViewModelPages.HotelsDetails:
+                    view = typeof(HotelsDetails); // TODO uncomment
+                    break;
+                case ViewModelPages.HotelsSearch:
+                    view = typeof(HotelsSearch); // TODO uncomment
                     break;
                 // Add More pages-viewmodel mappings down here
             }

@@ -17,8 +17,6 @@ using System.Collections.ObjectModel;
 using Despegar.WP.UI.Model.Classes;
 using Windows.Storage;
 using Despegar.WP.UI.Model;
-using Despegar.LegacyCore.Connector;
-using Despegar.LegacyCore;
 using Despegar.Core.IService;
 using Despegar.Core.Business.Configuration;
 using Despegar.WP.UI.Common;
@@ -26,7 +24,7 @@ using Despegar.WP.UI.Model.ViewModel;
 using Despegar.WP.UI.BugSense;
 
 namespace Despegar.WP.UI
-{    
+{
     public sealed partial class CountrySelection : Page
     {
         public CountrySelectionViewModel ViewModel { get; set; }
@@ -49,7 +47,6 @@ namespace Despegar.WP.UI
             base.OnNavigatedTo(e);
             
             ViewModel.LoadConfigurations(); 
-
         }
         
         private void ListView_ItemClick(object sender, ItemClickEventArgs e)

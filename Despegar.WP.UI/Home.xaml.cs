@@ -171,7 +171,7 @@ namespace Despegar.WP.UI
             switch (selectedButton)
             {
                 case "Hotels":
-                    ViewModel.NavigateToHotelsLegacy.Execute(AppResources.GetLegacyString("HomeProductHotelsUrl"));
+                    ViewModel.NavigateToHotels.Execute(null);
                     break;
                 case "Flights":
                     ViewModel.NavigateToFlights.Execute(null);
