@@ -16,7 +16,8 @@ namespace Despegar.Core.Business
         Update,
         CitiesAutocomplete,
         Countries,
-        CouponsValidity
+        CouponsValidity,
+        CreditCardValidation
     }
 
     /// <summary>
@@ -39,6 +40,7 @@ namespace Despegar.Core.Business
             {ServiceKey.CitiesAutocomplete,"mapi-cross/autocomplete/{0}/{1}?administrative_division_id={2}&city_result=5"}, 
             {ServiceKey.Countries,"mapi-cross/apps/"}, 
             {ServiceKey.CouponsValidity,"mapi-coupons/{0}/validity?beneficiary={1}&total_amount={2}&currency={3}&quotation={4}&products={5}"},
+            {ServiceKey.CreditCardValidation,"/booking/validation/creditcards"}
         };
 
         public static string GetServiceURL(ServiceKey key)

@@ -1,5 +1,4 @@
-﻿using Despegar.LegacyCore;
-using Despegar.WP.UI.Model;
+﻿using Despegar.WP.UI.Model;
 using Despegar.WP.UI.Product.Flights;
 using Despegar.WP.UI.Controls;
 using System;
@@ -114,23 +113,16 @@ namespace Despegar.WP.UI
                 // Initialize Core
                 try
                 {
-                    BugTracker.Instance.LeaveBreadcrumb("App Started");                    
+                    BugTracker.Instance.LeaveBreadcrumb("App Started");
                     await GlobalConfiguration.InitCore(BugTracker.Instance);
                     BugTracker.Instance.LeaveBreadcrumb("Core Initialized");
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                    // BugTracker.Instance.LogException(ex);
                     NotifyAndClose();
-                }
-
-                // TODO: Legacy code
-                if (!ApplicationConfig.Instance.Initialized)
-                {
-                    BugTracker.Instance.LeaveBreadcrumb("Init Legacy Core");
-                    ApplicationConfig.Instance.Init();
-                    BugTracker.Instance.LeaveBreadcrumb("Legacy core initialized");
-                }
+                }                
+               
                 // Check persist information
                 var roamingSettings = ApplicationData.Current.RoamingSettings;
 

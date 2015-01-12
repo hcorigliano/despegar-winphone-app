@@ -27,16 +27,17 @@ namespace Despegar.Core.Service
         /// Contains the list of services to mock when they are called
         /// </summary>
         private List<Mock> appliedMocks = new List<Mock>();
+        private List<ServiceKey> v1Services = new List<ServiceKey>() { ServiceKey.CreditCardValidation };
         private string site;
         private string x_client;
         private string uow;
         private IBugTracker bugtracker;
+        private Configuration configuration;
 
         // Connectors
         private MapiConnector mapiConnector;
         private Apiv1Connector apiv1Connector;
-
-        private Configuration configuration;
+        
 
         #region ** Public Interface **
 
@@ -181,6 +182,7 @@ namespace Despegar.Core.Service
 
         internal IConnector GetServiceConnector(ServiceKey key)
         {
+            // Mocked service?
             var mock = appliedMocks.FirstOrDefault(x=> x.ServiceID == key);
             if (mock != null)
             {
@@ -188,7 +190,9 @@ namespace Despegar.Core.Service
                 return new MockConnector(mock.Content);
             }
 
-            // Return the real connector
+            if (v1Services.Any(x => x == key))
+                return apiv1Connector;
+
             return mapiConnector;
         }
 

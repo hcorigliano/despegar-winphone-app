@@ -12,9 +12,8 @@ namespace Despegar.Core.Connector
     public class Apiv1Connector : ConnectorBase
     {
         private static readonly string DOMAIN = "api.despegar.com/v1";
-        private static readonly string APIKEY_WINDOWS_PHONE = "24b56c96e09146298eca3093f6f990c9";
         private string XUoW;
-        private string x_client;   // Example: "WindowsPhone8App";
+        private string x_client;
         private string site;
         private string currentAPIKey;
         private static readonly Dictionary<string, string> ApiKeysV1 = new Dictionary<string, string>()
@@ -74,7 +73,7 @@ namespace Despegar.Core.Connector
 
         protected override void SetCustomHeaders(HttpRequestMessage httpMessage)
         {
-            httpMessage.Headers.Add("X-ApiKey", APIKEY_WINDOWS_PHONE);
+            httpMessage.Headers.Add("X-ApiKey", this.currentAPIKey);
             httpMessage.Headers.Add("X-UOW", XUoW);
             httpMessage.Headers.Add("X-Client", x_client);           
             //httpMessage.Headers.Add("Accept-Encoding", ENCODING);

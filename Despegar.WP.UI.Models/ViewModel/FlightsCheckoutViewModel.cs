@@ -1,15 +1,13 @@
-﻿using Despegar.Core.Business.Common.State;
-using Despegar.Core.Business.Configuration;
+﻿using Despegar.Core.Business.Configuration;
 using Despegar.Core.Business.Coupons;
+using Despegar.Core.Business.CreditCard;
 using Despegar.Core.Business.Dynamics;
 using Despegar.Core.Business.Enums;
-//using Despegar.Core.Business.Flight.BookingCompletePost;
 using Despegar.Core.Business.Flight.BookingCompletePostResponse;
 using Despegar.Core.Business.Flight.BookingFields;
 using Despegar.Core.Exceptions;
 using Despegar.Core.IService;
 using Despegar.Core.Log;
-using Despegar.LegacyCore.Connector.Domain.API;
 using Despegar.WP.UI.Model.Classes.Flights.Checkout;
 using Despegar.WP.UI.Model.Interfaces;
 using Despegar.WP.UI.Model.ViewModel.Classes.Flights;
@@ -25,19 +23,18 @@ using System.Windows.Input;
 using Windows.ApplicationModel.Resources;
 using Windows.UI.Popups;
 
-
 namespace Despegar.WP.UI.Model.ViewModel
 {
     public class FlightsCheckoutViewModel : ViewModelBase
-    {        
+    {
         #region ** Private **
-        private INavigator navigator;        
+        private INavigator navigator;
         private IFlightService flightService;
         private ICommonServices commonServices;
         private IConfigurationService configurationService;
         private ICouponsService couponsService;
         private FlightsCrossParameter CrossParameters;
-        private Despegar.LegacyCore.Connector.Domain.API.ValidationCreditcards CreditCardsValidations;
+        private ValidationCreditcards CreditCardsValidations;
         #endregion
 
         #region ** Public Interface **
@@ -263,7 +260,7 @@ namespace Despegar.WP.UI.Model.ViewModel
             try
             {
                 this.Tracker.LeaveBreadcrumb("Flight checkout view model get credit cards validations");
-                CreditCardsValidations = await Despegar.LegacyCore.Service.APIValidationCreditcards.GetAll();
+                CreditCardsValidations = await commonServices.GetCreditCardValidations();
             }
             catch (Exception e)
             {
@@ -272,7 +269,6 @@ namespace Despegar.WP.UI.Model.ViewModel
                 IsLoading = false;
                 OnViewModelError("CHECKOUT_INIT_FAILED");
             }
-
         }
 
         private void ConfigureCountry(string countryCode)
@@ -778,8 +774,6 @@ namespace Despegar.WP.UI.Model.ViewModel
             return true;
         }
         
-
-
         /// <summary>
         /// Validates the booking status
         /// </summary>
@@ -840,8 +834,6 @@ namespace Despegar.WP.UI.Model.ViewModel
             }
 
         }
-
-
 
         /// <summary>
         /// Validates the reference code against the service and sets the Validation errors or succcess
