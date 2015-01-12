@@ -21,7 +21,7 @@ namespace Despegar.Core.Service
 
         public async Task<HotelsAutocomplete> GetHotelsAutocomplete(string hotelString)
         {
-            string serviceUrl = ServiceURL.GetServiceURL(ServiceKey.HotelsAutocomplete);
+            string serviceUrl = string.Format(ServiceURL.GetServiceURL(ServiceKey.HotelsAutocomplete),hotelString);
             IConnector connector = context.GetServiceConnector(ServiceKey.HotelsAutocomplete);
 
             return await connector.GetAsync<HotelsAutocomplete>(serviceUrl);
