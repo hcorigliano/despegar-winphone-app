@@ -48,6 +48,8 @@ namespace Despegar.Core.Business.Flight.SearchBox
 
         public int LastAvailableHours { get; set; }
 
+        private DateTime DateBoundary { get; set; }
+
         public FlightSearchModel()
         {
             //TODO uncomment following code for advance search
@@ -138,16 +140,17 @@ namespace Despegar.Core.Business.Flight.SearchBox
                             return false;
                         }
 
-                        if (DepartureDate < DateTime.Today)
+                        if (DepartureDate < DateBoundary)
                         {
                             // Cannot fly in the past.
-                            SearchErrors = new CustomError("Tienes que seleccionar un día más grande al de hoy para la fecha de salida.", "FLIGHT_SEARCH_DEPARTUREDATE_SMALLER_THAN_TODAY_ERROR_MESSAGE", "isValid");
+                            SearchErrors = new CustomError(string.Empty, "FLIGHT_SEARCH_DEPARTUREDATE_SMALLER_THAN_ERROR_MESSAGE", "isValid",true,DateBoundary.ToString("dd-MM-yyyy"));
                             return false;
                         }
 
-                        if (DestinationDate < DateTime.Today) {
+                        if (DestinationDate < DateBoundary)
+                        {
                             // Cannot fly in the past.
-                            SearchErrors = new CustomError("Fecha tiene que ser mayor a la de hoy.", "FLIGHT_SEARCH_DESTINATIONDATE_SMALLER_THAN_TODAY_ERROR_MESSAGE", "isValid");
+                            SearchErrors = new CustomError(string.Empty, "FLIGHT_SEARCH_DEPARTUREDATE_SMALLER_THAN_ERROR_MESSAGE", "isValid", true, DateBoundary.ToString("dd-MM-yyyy"));
                             return false;
                         }
 
@@ -164,10 +167,11 @@ namespace Despegar.Core.Business.Flight.SearchBox
                             return false;
                         }
 
-                        if (DepartureDate < DateTime.Today)
+                        if (DepartureDate < DateBoundary)
                         {
                             // Cannot fly in the past.
-                            SearchErrors = new CustomError("Fecha desde tiene que ser mayor a la de hoy.", "FLIGHT_SEARCH_DEPARTUREDATE_SMALLER_THAN_TODAY_ERROR_MESSAGE", "isValid");
+                            //SearchErrors = new CustomError("Fecha desde tiene que ser mayor a la de hoy.", "FLIGHT_SEARCH_DEPARTUREDATE_SMALLER_THAN_TODAY_ERROR_MESSAGE", "isValid");
+                            SearchErrors = new CustomError(string.Empty, "FLIGHT_SEARCH_DEPARTUREDATE_SMALLER_THAN_ERROR_MESSAGE", "isValid", true, DateBoundary.ToString("dd-MM-yyyy"));
                             return false;
                         }
 
@@ -183,10 +187,10 @@ namespace Despegar.Core.Business.Flight.SearchBox
 
                         foreach (var segment in MultipleSegments)
                         {
-                            if (segment.DepartureDate < DateTime.Today)
+                            if (segment.DepartureDate < DateBoundary)
                             {
                                 // Cannot fly in the past.
-                                SearchErrors = new CustomError("Fecha desde tiene que ser mayor a la de hoy.", "FLIGHT_SEARCH_DEPARTUREDATE_SMALLER_THAN_TODAY_ERROR_MESSAGE", "isValid");
+                                SearchErrors = new CustomError(string.Empty, "FLIGHT_SEARCH_DEPARTUREDATE_SMALLER_THAN_ERROR_MESSAGE", "isValid", true, DateBoundary.ToString("dd-MM-yyyy"));
                                 return false;
                             }
 
@@ -282,8 +286,22 @@ namespace Despegar.Core.Business.Flight.SearchBox
 
         public void UpdateSearchDays()
         {
-            this.DepartureDate = DateTime.Today.AddDays(EmissionAnticipationDay);
-            this.DestinationDate = DateTime.Today.AddDays(EmissionAnticipationDay);
+            DateTime daysToAdd;
+            DateTime daysToCompare = new DateTime(DateTime.Now.Year,DateTime.Now.Month,DateTime.Now.Day,LastAvailableHours,0,0);
+
+            if (DateTime.Compare(DateTime.Now, daysToCompare) > 0)
+            {
+                daysToAdd = DateTime.Today.AddDays(EmissionAnticipationDay + 1);
+            }
+            else
+            {
+                daysToAdd = DateTime.Today.AddDays(EmissionAnticipationDay);
+            }
+
+            this.DepartureDate = daysToAdd;
+            this.DestinationDate = daysToAdd;
+
+            DateBoundary = daysToAdd;
         }
     }
 }
