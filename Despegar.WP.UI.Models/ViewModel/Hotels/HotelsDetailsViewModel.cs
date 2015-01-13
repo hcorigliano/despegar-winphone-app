@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Despegar.WP.UI.Model.ViewModel.Hotels
 {
-    class HotelsDetailsViewModel : ViewModelBase
+    public class HotelsDetailsViewModel : ViewModelBase
     {
         public INavigator navigator { get; set; }
         public IHotelService hotelService { get; set; }

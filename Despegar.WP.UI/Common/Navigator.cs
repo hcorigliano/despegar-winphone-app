@@ -62,6 +62,9 @@ namespace Despegar.WP.UI.Common
                 case ViewModelPages.HotelsSearch:
                     view = typeof(HotelsSearch); // TODO uncomment
                     break;
+                case ViewModelPages.HotelsResults:
+                    view = typeof(HotelsResults); // TODO uncomment
+                    break;
                 // Add More pages-viewmodel mappings down here
             }
 

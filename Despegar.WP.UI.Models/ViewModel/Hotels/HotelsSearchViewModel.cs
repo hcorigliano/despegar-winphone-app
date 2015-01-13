@@ -35,7 +35,7 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
         private async void SearchHotels()
         {
             CitiesAvailability  cities = await hotelService.GetHotelsAvailability(982 , "2015-03-01" , "2015-03-05" , "2" , "ars" , 0 , 30 , "" , "" );
-            navigator.GoTo(ViewModelPages.HotelsDetails, cities);
+            navigator.GoTo(ViewModelPages.HotelsResults, cities);
             //return cities;
         }
 

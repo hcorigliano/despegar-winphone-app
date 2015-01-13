@@ -1,7 +1,4 @@
-﻿using Despegar.WP.UI.BugSense;
-using Despegar.WP.UI.Common;
-using Despegar.WP.UI.Model;
-using Despegar.WP.UI.Model.ViewModel.Hotels;
+﻿using Despegar.Core.Business.Hotels.CitiesAvailability;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -24,15 +21,11 @@ namespace Despegar.WP.UI.Product.Hotels
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class HotelsSearch : Page
+    public sealed partial class HotelsResults : Page
     {
-        public HotelsSearchViewModel hotelSearchViewModel { get; set; }
-
-        public HotelsSearch()
+        public HotelsResults()
         {
             this.InitializeComponent();
-            hotelSearchViewModel = new HotelsSearchViewModel(Navigator.Instance, GlobalConfiguration.CoreContext.GetHotelService(), BugTracker.Instance);
-            this.DataContext = hotelSearchViewModel;
         }
 
         /// <summary>
@@ -42,6 +35,8 @@ namespace Despegar.WP.UI.Product.Hotels
         /// This parameter is typically used to configure the page.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            CitiesAvailability citiesAvailability = e.Parameter as CitiesAvailability; //TODO: Never is null?
+            this.DataContext = citiesAvailability;
         }
     }
 }
