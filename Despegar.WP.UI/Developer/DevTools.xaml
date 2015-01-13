@@ -127,6 +127,10 @@
                                     <controls:ColorPicker x:Name="ColourPicker" Grid.Row="1" Grid.Column="1" VerticalAlignment="Top"  HorizontalAlignment="Right" SelectedColor="{Binding DesignGridColor, Mode=TwoWay}" Height="55"  Width="180" Margin="0,0,10,0"  />
                                 </Grid>
 
+                                
+                                <TextBlock FontSize="28" Margin="0,8,0,0">Measure Tool</TextBlock>
+                                <CheckBox Content="Enabled" IsChecked="{Binding MeasureToolEnabled, Mode=TwoWay}" />
+
                             </StackPanel>
                         </ScrollViewer>
                     </PivotItem>
