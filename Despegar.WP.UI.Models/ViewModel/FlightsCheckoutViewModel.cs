@@ -33,7 +33,7 @@ namespace Despegar.WP.UI.Model.ViewModel
         private ICommonServices commonServices;
         private IConfigurationService configurationService;
         private ICouponsService couponsService;
-        private FlightsCrossParameter CrossParameters;
+        private FlightsCrossParameter flightCrossParameters;
         private ValidationCreditcards CreditCardsValidations;
         #endregion
 
@@ -56,9 +56,9 @@ namespace Despegar.WP.UI.Model.ViewModel
         public List<Despegar.Core.Business.Flight.BookingCompletePostResponse.RiskQuestion> FreeTextQuestions {
             get
             {
-                if(CrossParameters.BookingResponse != null)
+                if(flightCrossParameters.BookingResponse != null)
                 {
-                    return CrossParameters.BookingResponse.risk_questions.Where(x => x.free_text == "True").ToList();
+                    return flightCrossParameters.BookingResponse.risk_questions.Where(x => x.free_text == "True").ToList();
                 }
                 else
                 {
@@ -71,9 +71,9 @@ namespace Despegar.WP.UI.Model.ViewModel
         {
             get
             {
-                if(CrossParameters.BookingResponse != null)
+                if(flightCrossParameters.BookingResponse != null)
                 {
-                    return CrossParameters.BookingResponse.risk_questions.Where(x => x.free_text == "False").ToList();
+                    return flightCrossParameters.BookingResponse.risk_questions.Where(x => x.free_text == "False").ToList();
                 }
                 else
                 {
@@ -213,7 +213,7 @@ namespace Despegar.WP.UI.Model.ViewModel
             this.commonServices = commonServices;
             this.configurationService = configService;
             this.couponsService = couponService;
-            this.CrossParameters = parameters;
+            this.flightCrossParameters = parameters;
         }
         
         /// <summary>
@@ -342,17 +342,17 @@ namespace Despegar.WP.UI.Model.ViewModel
 
             BookingFieldPost book = new BookingFieldPost();
 
-            if (CrossParameters.Inbound.choice != -1)
-                book.inbound_choice = CrossParameters.Inbound.choice; //-1
+            if (flightCrossParameters.Inbound.choice != -1)
+                book.inbound_choice = flightCrossParameters.Inbound.choice; //-1
             else
                 book.inbound_choice = null;
             
-            if (CrossParameters.Outbound.choice != 0) //TODO: Verificar por que es 0 en multiples
-                book.outbound_choice = CrossParameters.Outbound.choice;
+            if (flightCrossParameters.Outbound.choice != 0) //TODO: Verificar por que es 0 en multiples
+                book.outbound_choice = flightCrossParameters.Outbound.choice;
             else
                 book.outbound_choice = null;
 
-            book.itinerary_id = CrossParameters.FlightId;
+            book.itinerary_id = flightCrossParameters.FlightId;
             book.mobile_identifier = deviceID;
 
             CoreBookingFields = await flightService.GetBookingFields(book);
@@ -681,20 +681,20 @@ namespace Despegar.WP.UI.Model.ViewModel
                     bookingData = await DynamicFlightBookingFieldsToPost.ToDynamic(this.CoreBookingFields);
 
                     // Buy
-                    CrossParameters.PriceDetail = PriceDetailsFormatted;
-                    CrossParameters.BookingResponse = await flightService.CompleteBooking(bookingData, CoreBookingFields.id);
+                    flightCrossParameters.PriceDetail = PriceDetailsFormatted;
+                    flightCrossParameters.BookingResponse = await flightService.CompleteBooking(bookingData, CoreBookingFields.id);
 
-                    if (CrossParameters.BookingResponse.Error != null) 
+                    if (flightCrossParameters.BookingResponse.Error != null) 
                     {
-                        this.Tracker.LeaveBreadcrumb("Flight checkout view model validate and buy booking response error" + CrossParameters.BookingResponse.Error.code.ToString());
+                        this.Tracker.LeaveBreadcrumb("Flight checkout view model validate and buy booking response error" + flightCrossParameters.BookingResponse.Error.code.ToString());
                         // API Error ocurred, Check CODE and inform the user
-                        OnViewModelError("API_ERROR", CrossParameters.BookingResponse.Error.code);
+                        OnViewModelError("API_ERROR", flightCrossParameters.BookingResponse.Error.code);
                         this.IsLoading = false;
                         return;
                     }
 
                     // Booking processed, check the status of Booking request
-                    AnalizeBookingStatus(CrossParameters.BookingResponse.booking_status);
+                    AnalizeBookingStatus(flightCrossParameters.BookingResponse.booking_status);
                 }
                 catch (HTTPStatusErrorException e)
                 {
@@ -763,7 +763,7 @@ namespace Despegar.WP.UI.Model.ViewModel
 
         private bool ValidateAnswers()
         {
-            foreach (RiskQuestion question in CrossParameters.BookingResponse.risk_questions)
+            foreach (RiskQuestion question in flightCrossParameters.BookingResponse.risk_questions)
             {
                 if (question.risk_answer.text == null || question.risk_answer.text == "")
                 {
@@ -785,14 +785,14 @@ namespace Despegar.WP.UI.Model.ViewModel
             {
                 case BookingStatusEnum.checkout_successful:
 
-                    navigator.GoTo(ViewModelPages.FlightsThanks, CrossParameters);
+                    navigator.GoTo(ViewModelPages.FlightsThanks, flightCrossParameters);
                     break;
 
                 //Please uncomment the case that you are to use.
 
                 case BookingStatusEnum.booking_failed:
 
-                    OnViewModelError("BOOKING_FAILED", CrossParameters.BookingResponse.checkout_id);
+                    OnViewModelError("BOOKING_FAILED", flightCrossParameters.BookingResponse.checkout_id);
                     break;
 
                 case BookingStatusEnum.fix_credit_card:

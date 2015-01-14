@@ -34,18 +34,18 @@ namespace Despegar.WP.UI.Product.Flights
                 ga.SendView("FlightThanks");
 #endif
 
-            FlightsCrossParameter crossParameters = e.Parameter as FlightsCrossParameter;
+            FlightsCrossParameter flightsCrossParameters = e.Parameter as FlightsCrossParameter;
 
             ViewModel = new FlightThanksViewModel(Navigator.Instance, BugTracker.Instance);
-            ViewModel.FlightParameters = crossParameters;
+            ViewModel.flightCrossParameters = flightsCrossParameters;
 
             DataContext = ViewModel;
-            if (ViewModel.FlightParameters.Inbound.choice == -1)
+            if (ViewModel.flightCrossParameters.Inbound.choice == -1)
             {
                 FlightsSegmentReturnTextBlock.Visibility = Visibility.Collapsed;
                 FlightsSegmentReturnSrc.Visibility = Visibility.Collapsed;
             }
-            if (ViewModel.FlightParameters.MultipleRoutes == null)
+            if (ViewModel.flightCrossParameters.MultipleRoutes == null)
                 FlightsSegmentGoSrcMultiple.Visibility = Visibility.Collapsed;
             else
                 FlightsSegmentGoSrc.Visibility = Visibility.Collapsed;

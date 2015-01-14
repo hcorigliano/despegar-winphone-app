@@ -889,4 +889,31 @@ A reserva não foi gerado e não cobra nenhuma taxa para a transação.</value>
   <data name="Flight_SearchAirport_Error" xml:space="preserve">
     <value>Houve um erro na conexão com a Internet. Por favor, re - entrar na cidade.</value>
   </data>
+  <data name="String1" xml:space="preserve">
+    <value>Page_HotelsResults</value>
+  </data>
+  <data name="Common_Room" xml:space="preserve">
+    <value>quarto</value>
+  </data>
+  <data name="Common_Rooms" xml:space="preserve">
+    <value>quartos</value>
+  </data>
+  <data name="Common_Adult" xml:space="preserve">
+    <value>adulto</value>
+  </data>
+  <data name="Common_Adults" xml:space="preserve">
+    <value>adultos</value>
+  </data>
+  <data name="Common_Child" xml:space="preserve">
+    <value>criança</value>
+  </data>
+  <data name="Common_Childs" xml:space="preserve">
+    <value>crianças</value>
+  </data>
+  <data name="Common_Night" xml:space="preserve">
+    <value>noite</value>
+  </data>
+  <data name="Common_Nights" xml:space="preserve">
+    <value>noites</value>
+  </data>
 </root>

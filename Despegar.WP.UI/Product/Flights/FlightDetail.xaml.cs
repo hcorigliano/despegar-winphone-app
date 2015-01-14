@@ -78,7 +78,7 @@ namespace Despegar.WP.UI.Product.Flights
             }
 
 
-            if (ViewModel.CrossParameters.MultipleRoutes != null)
+            if (ViewModel.flightsCrossParameters.MultipleRoutes != null)
             {
                 // Remove "Go" pivot item (Only multiple)
                 MainPivot.Items.RemoveAt(1);

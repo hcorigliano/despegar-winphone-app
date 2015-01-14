@@ -5,9 +5,10 @@ using System.Text;
 
 namespace Despegar.Core.Business.Hotels.CitiesAvailability
 {
-    public class MaxAndMinValue
+    public class IdCodeAndName
     {
-        public object min { get; set; }
-        public object max { get; set; }
+        public string id { get; set; }
+        public string code { get; set; }
+        public string name { get; set; }
     }
 }

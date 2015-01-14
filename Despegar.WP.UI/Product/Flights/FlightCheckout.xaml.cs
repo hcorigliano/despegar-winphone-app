@@ -67,7 +67,7 @@ namespace Despegar.WP.UI.Product.Flights
         private async void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
         {
             BugTracker.Instance.LeaveBreadcrumb("Flight checkout start");
-            FlightsCrossParameter crossParameters = e.NavigationParameter as FlightsCrossParameter;
+            FlightsCrossParameter flightsCrossParameters = e.NavigationParameter as FlightsCrossParameter;
 
             // Initialize Checkout
             ViewModel = new FlightsCheckoutViewModel(
@@ -76,7 +76,7 @@ namespace Despegar.WP.UI.Product.Flights
                 GlobalConfiguration.CoreContext.GetCommonService(), 
                 GlobalConfiguration.CoreContext.GetConfigurationService(), 
                 GlobalConfiguration.CoreContext.GetCouponsService(),
-                crossParameters, 
+                flightsCrossParameters, 
                 BugTracker.Instance);
 
             ViewModel.PropertyChanged += Checkloading;

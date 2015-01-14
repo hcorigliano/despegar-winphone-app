@@ -5,12 +5,11 @@ using System.Text;
 
 namespace Despegar.Core.Business.Hotels.CitiesAvailability
 {
-    public class NearbyCity
+    public class SearchedCity
     {
         public string id { get; set; }
         public string code { get; set; }
         public string name { get; set; }
         public IdCodeAndName country { get; set; }
-        public string distance { get; set; }
     }
 }

@@ -1,4 +1,8 @@
 ﻿using Despegar.Core.Business.Hotels.CitiesAvailability;
+using Despegar.WP.UI.BugSense;
+using Despegar.WP.UI.Common;
+using Despegar.WP.UI.Model;
+using Despegar.WP.UI.Model.ViewModel.Hotels;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -18,25 +22,42 @@ using Windows.UI.Xaml.Navigation;
 
 namespace Despegar.WP.UI.Product.Hotels
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
+
     public sealed partial class HotelsResults : Page
     {
+        private NavigationHelper navigationHelper;
+        public HotelsResultsViewModel hotelResultsViewModel { get; set; } 
+
         public HotelsResults()
         {
             this.InitializeComponent();
+
+            this.navigationHelper = new NavigationHelper(this);
+            //this.navigationHelper.LoadState += this.NavigationHelper_LoadState;
+            //this.navigationHelper.SaveState += this.NavigationHelper_SaveState;
         }
 
-        /// <summary>
-        /// Invoked when this page is about to be displayed in a Frame.
-        /// </summary>
-        /// <param name="e">Event data that describes how this page was reached.
-        /// This parameter is typically used to configure the page.</param>
+        public NavigationHelper NavigationHelper
+        {
+            get { return this.navigationHelper; }
+        }
+
+   
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            
             CitiesAvailability citiesAvailability = e.Parameter as CitiesAvailability; //TODO: Never is null?
-            this.DataContext = citiesAvailability;
+            hotelResultsViewModel = new HotelsResultsViewModel(Navigator.Instance, GlobalConfiguration.CoreContext.GetHotelService(), BugTracker.Instance);
+            hotelResultsViewModel.citiesAvailability = citiesAvailability;
+            hotelResultsViewModel.init();
+            this.DataContext = hotelResultsViewModel;
         }
+
+        private void ReSearchTapped(object sender, TappedRoutedEventArgs e)
+        {
+            NavigationHelper.GoBack();
+        }
+
+
     }
 }

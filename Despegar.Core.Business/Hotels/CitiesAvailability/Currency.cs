@@ -5,12 +5,10 @@ using System.Text;
 
 namespace Despegar.Core.Business.Hotels.CitiesAvailability
 {
-    public class NearbyCity
+    public class Currency
     {
-        public string id { get; set; }
         public string code { get; set; }
-        public string name { get; set; }
-        public IdCodeAndName country { get; set; }
-        public string distance { get; set; }
+        public string mask { get; set; }
+        public double ratio { get; set; }
     }
 }

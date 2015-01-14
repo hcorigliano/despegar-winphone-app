@@ -892,4 +892,31 @@ La reserva no ha sido generada y no se le cobrará ningún cargo por la transacc
   <data name="Flight_SearchAirport_Error" xml:space="preserve">
     <value>Hubo un error con su conexion a Internet. Por favor vuelva a ingresar la ciudad.</value>
   </data>
+  <data name="Page_HotelsResults" xml:space="preserve">
+    <value>RESULTADO</value>
+  </data>
+  <data name="Common_Room" xml:space="preserve">
+    <value>habitación</value>
+  </data>
+  <data name="Common_Rooms" xml:space="preserve">
+    <value>habitaciónes</value>
+  </data>
+  <data name="Common_Adult" xml:space="preserve">
+    <value>adulto</value>
+  </data>
+  <data name="Common_Adults" xml:space="preserve">
+    <value>adultos</value>
+  </data>
+  <data name="Common_Child" xml:space="preserve">
+    <value>menor</value>
+  </data>
+  <data name="Common_Childs" xml:space="preserve">
+    <value>menores</value>
+  </data>
+  <data name="Common_Night" xml:space="preserve">
+    <value>noche</value>
+  </data>
+  <data name="Common_Nights" xml:space="preserve">
+    <value>noches</value>
+  </data>
 </root>

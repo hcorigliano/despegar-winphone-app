@@ -112,6 +112,7 @@
     <Compile Include="Common\Converter\ImageGoReturnConverter.cs" />
     <Compile Include="Common\Converter\MiniboxVisibilityConverter.cs" />
     <Compile Include="Common\Converter\CheckoutConverters.cs" />
+    <Compile Include="Common\Converter\PluralOrSingularResourceConverter.cs" />
     <Compile Include="Common\Converter\StyleColorResultConverter.cs" />
     <Compile Include="Common\Converter\StyleConverter.cs" />
     <Compile Include="Common\Converter\VisibilityConverter.cs" />
@@ -141,6 +142,9 @@
     </Compile>
     <Compile Include="Controls\Hotels\Details\HotelItem.xaml.cs">
       <DependentUpon>HotelItem.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Hotels\Details\MiniBoxSearch.xaml.cs">
+      <DependentUpon>MiniBoxSearch.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\Loading.xaml.cs">
       <DependentUpon>Loading.xaml</DependentUpon>
@@ -324,6 +328,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\Hotels\Details\HotelItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Hotels\Details\MiniBoxSearch.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

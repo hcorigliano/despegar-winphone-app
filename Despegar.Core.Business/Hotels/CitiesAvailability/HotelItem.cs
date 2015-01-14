@@ -5,10 +5,11 @@ using System.Text;
 
 namespace Despegar.Core.Business.Hotels.CitiesAvailability
 {
-    public class Item
+    public class HotelItem
     {
+        public string id { get; set; }
         public Hotel hotel { get; set; }
-        public object price { get; set; }
-        public City city { get; set; }
+        public Price price { get; set; }
+        public string payment_description { get; set; }
     }
 }

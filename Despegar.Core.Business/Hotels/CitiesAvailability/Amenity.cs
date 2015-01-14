@@ -5,8 +5,9 @@ using System.Text;
 
 namespace Despegar.Core.Business.Hotels.CitiesAvailability
 {
-    public class City : IdCodeAndName
+    public class Amenity
     {
-        public IdCodeAndName country { get; set; }
+        public string id { get; set; }
+        public string description { get; set; }
     }
 }
