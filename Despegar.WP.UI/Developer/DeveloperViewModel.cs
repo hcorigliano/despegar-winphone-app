@@ -34,8 +34,18 @@ namespace Despegar.WP.UI.Developer
             get { return MetroGridHelper.IsVisible; }
             set
             {
-                OnPropertyChanged("DesignGridEnabled");
+                OnPropertyChanged();
                 MetroGridHelper.IsVisible = value;
+            }
+        }
+
+        public bool MeasureToolEnabled
+        {
+            get { return MeasureTool.IsVisible; }
+            set
+            {
+                MeasureTool.IsVisible = value;
+                OnPropertyChanged();                
             }
         }
       
@@ -44,7 +54,7 @@ namespace Despegar.WP.UI.Developer
             get { return MetroGridHelper.Color; }
             set
             {
-                OnPropertyChanged("DesignGridColor");
+                OnPropertyChanged();
                 MetroGridHelper.Color = value;
             }
         }
@@ -55,7 +65,7 @@ namespace Despegar.WP.UI.Developer
 
             set {
                 MetroGridHelper.Opacity = value;
-                OnPropertyChanged("Opacity");
+                OnPropertyChanged();
             }
         }
 

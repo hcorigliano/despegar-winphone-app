@@ -44,11 +44,13 @@
         <Image Grid.Row="0" Style="{StaticResource TopLogo}" />
         <TextBlock Grid.Row="1" x:Uid="Page_FlightSearch" Style="{StaticResource PageHeaderSmall}" Text="BUSQUEDA" FontFamily="Segoe WP Semibold" />
 
+        <!--<dev:UserControlDesignGrid />-->
+
         <Pivot x:Name="MainPivotControl" Grid.Row="2"  Style="{StaticResource PivotBaseMain}" SelectionChanged="Pivot_SelectionChanged">
             <!--ReoundTrip Flights-->
             <PivotItem x:Uid="Flight_Search_Round_Trip" Header="ida y vuelta" Style="{StaticResource PivotItemBase}">
                 <ScrollViewer>
-                    <Grid>
+                    <Grid>                        
                         <Grid.RowDefinitions>
                             <RowDefinition Height="{StaticResource Block6p}" />
                             <RowDefinition Height="{StaticResource Block3p}" />

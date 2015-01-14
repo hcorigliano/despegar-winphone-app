@@ -892,6 +892,9 @@ A reserva não foi gerado e não cobra nenhuma taxa para a transação.</value>
   <data name="String1" xml:space="preserve">
     <value>Page_HotelsResults</value>
   </data>
+  <data name="FLIGHT_SEARCH_DEPARTUREDATE_SMALLER_THAN_ERROR_MESSAGE" xml:space="preserve">
+    <value>Você deve selecionar um dia a partir de {0}</value>
+  </data>
   <data name="Common_Room" xml:space="preserve">
     <value>quarto</value>
   </data>
