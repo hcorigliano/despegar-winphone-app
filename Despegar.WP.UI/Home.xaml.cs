@@ -125,7 +125,7 @@ namespace Despegar.WP.UI
 
                 BugTracker.Instance.LeaveBreadcrumb("Update Service call succesful");
             }
-            catch (Exception ex)
+            catch (Exception )
             {
                 error = true;
             }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Despegar.Core.Business.Hotels.BookingFields
 {
-    public class BookingFields
+    public class HotelsBookingFields
     {
         public string id { get; set; }
         public Items items { get; set; }

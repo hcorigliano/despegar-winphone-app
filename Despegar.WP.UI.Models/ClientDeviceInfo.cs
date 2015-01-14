@@ -19,8 +19,8 @@ namespace Despegar.WP.UI.Model
          private String deviceBrandName;
          private String deviceModelName;
          private String deviceOsName;
-         private String deviceOsVersion;
-         private String deviceOsVersionCode;
+         //private String deviceOsVersion;
+         //private String deviceOsVersionCode;
          private String appVersion;
          private String appBrand;
 

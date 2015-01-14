@@ -52,9 +52,6 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <!-- A reference to the entire .NET Framework is automatically included -->
-  </ItemGroup>
-  <ItemGroup>
     <TargetPlatform Include="WindowsPhoneApp, Version=8.1" />
     <TargetPlatform Include="Windows, Version=8.1" />
   </ItemGroup>
@@ -76,7 +73,7 @@
     <Compile Include="Coupons\CouponParameter.cs" />
     <Compile Include="Coupons\CouponResponse.cs" />
     <Compile Include="CreditCard\ValidationCreditcards.cs" />
-    <Compile Include="Dynamics\DynamicFlightBookingFieldsToPost.cs" />
+    <Compile Include="Forms\BookingFormBuilder.cs" />
     <Compile Include="Enums\BookingStatusEnum.cs" />
     <Compile Include="Enums\FlightSearchChildEnum.cs" />
     <Compile Include="Enums\FlightSearchPagesEnum.cs" />
@@ -197,6 +194,14 @@
       <Project>{9359897f-8df6-4787-80db-b68ed851088e}</Project>
       <Name>Despegar.Core.Exceptions</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.7\lib\portable-net40+sl5+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

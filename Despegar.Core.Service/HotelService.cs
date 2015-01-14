@@ -47,12 +47,12 @@ namespace Despegar.Core.Service
             
         }
 
-        public async Task<BookingFields> GetBookingFields(BookingFieldsPost bookingFieldPost)
+        public async Task<HotelsBookingFields> GetBookingFields(BookingFieldsPost bookingFieldPost)
         {
             string serviceUrl = ServiceURL.GetServiceURL(ServiceKey.HotelsBookingFields);
             IConnector connector = context.GetServiceConnector(ServiceKey.HotelsBookingFields);
 
-            return await connector.PostAsync<BookingFields>(serviceUrl, bookingFieldPost);
+            return await connector.PostAsync<HotelsBookingFields>(serviceUrl, bookingFieldPost);
         }
 
         //public async Task<BookingCompletePostResponse> CompleteBooking(object bookingCompletePost, string id)
