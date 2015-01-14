@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Despegar.Core.Business.Flight.BookingFields
+namespace Despegar.Core.Business.Common.Checkout
 {
     public class RegularOptionsField : RegularField
     {

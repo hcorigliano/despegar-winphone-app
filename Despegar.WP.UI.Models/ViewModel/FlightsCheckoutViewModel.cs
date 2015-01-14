@@ -1,4 +1,5 @@
-﻿using Despegar.Core.Business.Configuration;
+﻿using Despegar.Core.Business.Common.Checkout;
+using Despegar.Core.Business.Configuration;
 using Despegar.Core.Business.Coupons;
 using Despegar.Core.Business.CreditCard;
 using Despegar.Core.Business.Dynamics;

@@ -5,13 +5,13 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace Despegar.Core.Business.Flight.BookingFields
+namespace Despegar.Core.Business.Common.Checkout
 {
     public class RegularField : Bindable
     {
         // MAPI fields
+        public string data_type { get; set; }
         public bool required { get; set; }
-        public string data_type { get; set; }        
         public string value { get; set; }
         public List<Validation> validations { get; set; }
 

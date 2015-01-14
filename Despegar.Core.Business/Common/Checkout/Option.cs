@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Despegar.Core.Business.Flight.BookingFields
+namespace Despegar.Core.Business.Common.Checkout
 {
     public class Option
     {

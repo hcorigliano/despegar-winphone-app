@@ -1,11 +1,9 @@
-﻿using Despegar.Core.Business.Flight.BookingFields;
+﻿using Despegar.Core.Business.Common.Checkout;
+using Despegar.Core.Business.Flight.BookingFields;
 using System;
-using System.Collections.Generic;
 using System.Dynamic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using Despegar.WP.UI.Model;
 
 
 namespace Despegar.Core.Business.Dynamics

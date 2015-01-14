@@ -1,21 +1,17 @@
 ﻿using Despegar.Core.Business.Configuration;
 using Despegar.Core.IService;
-using Despegar.Core.Service;
 using Despegar.WP.UI.BugSense;
 using Despegar.WP.UI.Common;
 using Despegar.WP.UI.Controls;
 using Despegar.WP.UI.Model;
 using Despegar.WP.UI.Model.ViewModel;
 using Despegar.WP.UI.Model.ViewModel.Classes;
-using Despegar.WP.UI.Strings;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Threading.Tasks;
-using System.Xml;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Resources;
-using Windows.Foundation;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -145,7 +141,6 @@ namespace Despegar.WP.UI
 
         protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
-           
             BugTracker.Instance.LeaveBreadcrumb("Home View");
 
             var parameter = e.Parameter as HomeParameters;
@@ -161,7 +156,6 @@ namespace Despegar.WP.UI
             }
 
             this.DataContext = ViewModel;
-           
         }   
 
         private async void ListView_ItemClick(object sender, ItemClickEventArgs e)
