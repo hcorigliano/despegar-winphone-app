@@ -54,6 +54,8 @@ namespace Despegar.Core.Business.Dynamics
                  dynamic result = new ExpandoObject();
                  result.form = new ExpandoObject();
 
+                 result.form.booking_status = bookingFields.form.booking_status;
+
                  result.form.passengers = bookingFields.form.passengers.Select(p => BuildPassenger(p)).ToList();
 
                  result.form.contact = new ExpandoObject();

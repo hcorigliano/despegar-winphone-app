@@ -574,12 +574,6 @@ namespace Despegar.WP.UI.Model.ViewModel
 
         }
 
-        private void ClearCreditCardFields()
-        {
-            this.selectedCard.card = new Card();
-
-            OnPropertyChanged("SelectedCard");
-        }
 
         private BookingStatusEnum GetStatus(string status)
         {
@@ -604,8 +598,8 @@ namespace Despegar.WP.UI.Model.ViewModel
         /// <returns></returns>
         private static BookingFields FillBookingFields(BookingFields bookingFields)
         {
-            bookingFields.form.contact.email.CoreValue = "testchas@despegar.com";
-            bookingFields.form.contact.emailConfirmation.CoreValue = "testchas@despegar.com";
+            bookingFields.form.contact.email.CoreValue = "bookingvuelos@despegar.com";
+            bookingFields.form.contact.emailConfirmation.CoreValue = "bookingvuelos@despegar.com";
             bookingFields.form.contact.phones[0].area_code.CoreValue = "11";
             bookingFields.form.contact.phones[0].country_code.CoreValue = "54";
             bookingFields.form.contact.phones[0].number.CoreValue = "44444444";
@@ -621,7 +615,7 @@ namespace Despegar.WP.UI.Model.ViewModel
             bookingFields.form.passengers[0].gender.CoreValue = "MALE";
             bookingFields.form.passengers[0].nationality.CoreValue = "AR";
             bookingFields.form.payment.card.expiration.CoreValue = "2015-11";
-            bookingFields.form.payment.card.number.CoreValue = "4242424242424242";
+            bookingFields.form.payment.card.number.CoreValue = "4242424242424245";
             bookingFields.form.payment.card.owner_document.number.CoreValue = "12123123";
             bookingFields.form.payment.card.owner_document.type.CoreValue = "LOCAL";
             bookingFields.form.payment.card.owner_gender.CoreValue = "MALE";
@@ -739,6 +733,7 @@ namespace Despegar.WP.UI.Model.ViewModel
                 dynamic result = new ExpandoObject();
                 result.form = new ExpandoObject();
                 result.form.risk_questions = answers;
+                result.form.booking_status = "risk_review";
 
                 BookingResponse = await flightService.CompleteBooking(result, CoreBookingFields.id);
                 this.IsLoading = false;
@@ -788,8 +783,6 @@ namespace Despegar.WP.UI.Model.ViewModel
                     navigator.GoTo(ViewModelPages.FlightsThanks, CrossParameters);
                     break;
 
-                //Please uncomment the case that you are to use.
-
                 case BookingStatusEnum.booking_failed:
 
                     OnViewModelError("BOOKING_FAILED", CrossParameters.BookingResponse.checkout_id);
@@ -797,20 +790,19 @@ namespace Despegar.WP.UI.Model.ViewModel
 
                 case BookingStatusEnum.fix_credit_card:
 
+                    this.CoreBookingFields.form.booking_status = "fix_credit_card";
                     OnViewModelError("ONLINE_PAYMENT_ERROR_FIX_CREDIT_CARD", "CARD");
                     break;
 
                 case BookingStatusEnum.new_credit_card:
 
-                    //this.selectedCard.card = new Card();
-                    //this.selectedCard.hasError = true;
-                    //this.selectedCard.CustomErrorType = BookingStatusEnum.new_credit_card.ToString().ToUpper();
                     this.CoreBookingFields.form.payment.card.number.CoreValue = String.Empty;
                     this.CoreBookingFields.form.payment.card.expiration.CoreValue = String.Empty;
                     this.CoreBookingFields.form.payment.card.security_code.CoreValue = String.Empty;
+                    this.CoreBookingFields.form.booking_status = "new_credit_card";
 
                     OnPropertyChanged("SelectedCard");
-                    OnViewModelError("ONLINE_PAYMENT_ERROR_NEW_CREDIT_CARD", "CARD");
+                    OnViewModelError("ONLINE_PAYMENT_ERROR_NEW_CREDIT_CARD", "INSTALLMENT");
                     break;
 
                 case BookingStatusEnum.payment_failed:
