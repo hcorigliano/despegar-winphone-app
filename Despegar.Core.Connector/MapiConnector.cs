@@ -71,12 +71,12 @@ namespace Despegar.Core.Connector
             httpMessage.Headers.Add("X-ApiKey", APIKEY_WINDOWS_PHONE);
             httpMessage.Headers.Add("X-UOW", XUoW);
             httpMessage.Headers.Add("X-Client", x_client);
-            httpMessage.Headers.Add("X-Version", "beta");
-            httpMessage.Headers.Add("XDESP-TOTEM-MOCK-OSS-RESULT", "CHANNEL_REJECTED");
-            httpMessage.Headers.Add("XDESP-TOTEM-MOCK-OSS-FEE-RESULT", "CHANNEL_REJECTED");
-            httpMessage.Headers.Add("XDESP-TOTEM-MOCK-MILES-SECOND-STATUS", "CONFIRMED");
-            httpMessage.Headers.Add("XDESP-TOTEM-MOCK-MILES-STATUS", "CONFIRMED");
-            httpMessage.Headers.Add("XDESP-TOTEM-MOCK-MILES-REQUEST", "SUCCEEDED");
+            //httpMessage.Headers.Add("X-Version", "beta");
+            //httpMessage.Headers.Add("XDESP-TOTEM-MOCK-OSS-RESULT", "CHANNEL_REJECTED");
+            //httpMessage.Headers.Add("XDESP-TOTEM-MOCK-OSS-FEE-RESULT", "CHANNEL_REJECTED");
+            //httpMessage.Headers.Add("XDESP-TOTEM-MOCK-MILES-SECOND-STATUS", "CONFIRMED");
+            //httpMessage.Headers.Add("XDESP-TOTEM-MOCK-MILES-STATUS", "CONFIRMED");
+            //httpMessage.Headers.Add("XDESP-TOTEM-MOCK-MILES-REQUEST", "SUCCEEDED");
         }
     
         private string IncludeSiteAndLanguage(string relativeServiceUrl)
