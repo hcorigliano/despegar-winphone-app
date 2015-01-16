@@ -31,11 +31,6 @@ namespace Despegar.WP.UI.Product.Flights
         public FlightSearch()
         {
             this.InitializeComponent();
-            
-            this.navigationHelper = new NavigationHelper(this);
-            this.navigationHelper.LoadState += this.NavigationHelper_LoadState;
-            this.navigationHelper.SaveState += this.NavigationHelper_SaveState;
-
             this.CheckDeveloperTools();
 
             ViewModel = new FlightSearchViewModel(Navigator.Instance, GlobalConfiguration.CoreContext.GetFlightService(), BugTracker.Instance);
@@ -83,33 +78,6 @@ namespace Despegar.WP.UI.Product.Flights
         }
         #endregion
 
-        private void Checkloading(object sender, PropertyChangedEventArgs e)
-        {
-            if (e.PropertyName == "IsLoading")
-            {
-                if ((sender as ViewModelBase).IsLoading)
-                    loadingPopup.Show();
-                else
-                    loadingPopup.Hide();
-            }
-        }
-
-        public NavigationHelper NavigationHelper
-        {
-            get { return this.navigationHelper; }
-        }
-
-        private void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
-        {
-           
-        }
-
-        // TODO: what to do with this
-        private void NavigationHelper_SaveState(object sender, SaveStateEventArgs e)
-        {
-
-        }
-
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             BugTracker.Instance.LeaveBreadcrumb("Flight Search View");
@@ -150,7 +118,6 @@ namespace Despegar.WP.UI.Product.Flights
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
             HardwareButtons.BackPressed -= HardwareButtons_BackPressed;
-            //this.navigationHelper.OnNavigatedFrom(e);           
         }
 
         void HardwareButtons_BackPressed(object sender, BackPressedEventArgs e)
@@ -163,6 +130,17 @@ namespace Despegar.WP.UI.Product.Flights
                 {
                     e.Handled = true;
                 }
+            }
+        }
+
+        private void Checkloading(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "IsLoading")
+            {
+                if ((sender as ViewModelBase).IsLoading)
+                    loadingPopup.Show();
+                else
+                    loadingPopup.Hide();
             }
         }
 
