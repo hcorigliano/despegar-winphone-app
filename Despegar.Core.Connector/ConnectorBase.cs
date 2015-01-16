@@ -1,6 +1,6 @@
 ﻿using Despegar.Core.Exceptions;
-using Newtonsoft.Json;
 using Despegar.Core.Log;
+using Newtonsoft.Json;
 using System;
 using System.Net;
 using System.Net.Http;

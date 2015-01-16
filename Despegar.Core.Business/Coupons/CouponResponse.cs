@@ -32,6 +32,6 @@ namespace Despegar.Core.Business.Coupons
         //additional_info: { }
 
         // Custom
-        public VoucherErrors Error { get; set; }
+        public VoucherErrors? Error { get; set; }
     }
 }

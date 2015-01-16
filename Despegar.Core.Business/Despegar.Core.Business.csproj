@@ -52,9 +52,6 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <!-- A reference to the entire .NET Framework is automatically included -->
-  </ItemGroup>
-  <ItemGroup>
     <TargetPlatform Include="WindowsPhoneApp, Version=8.1" />
     <TargetPlatform Include="Windows, Version=8.1" />
   </ItemGroup>
@@ -76,12 +73,12 @@
     <Compile Include="Coupons\CouponParameter.cs" />
     <Compile Include="Coupons\CouponResponse.cs" />
     <Compile Include="CreditCard\ValidationCreditcards.cs" />
-    <Compile Include="Dynamics\DynamicFlightBookingFieldsToPost.cs" />
+    <Compile Include="Forms\BookingFormBuilder.cs" />
     <Compile Include="Enums\BookingStatusEnum.cs" />
     <Compile Include="Enums\FlightSearchChildEnum.cs" />
     <Compile Include="Enums\FlightSearchPagesEnum.cs" />
     <Compile Include="Enums\SearchStates.cs" />
-    <Compile Include="Flight\BookingFields\EmailConfirmField.cs" />
+    <Compile Include="Common\Checkout\EmailConfirmField.cs" />
     <Compile Include="Flight\Itineraries\CheapestPrice.cs" />
     <Compile Include="Flight\SearchBox\FlightSearchModel.cs" />
     <Compile Include="Flight\BookingCompletePostResponse\Answers.cs" />
@@ -107,6 +104,27 @@
     <Compile Include="Flight\Itineraries\Route.cs" />
     <Compile Include="Flight\SearchBox\FlightMultipleSegment.cs" />
     <Compile Include="Hotels\CitiesAvailability\Amenity.cs" />
+    <Compile Include="Hotels\BookingFields\AdditionalData.cs" />
+    <Compile Include="Hotels\BookingFields\Card.cs" />
+    <Compile Include="Hotels\BookingFields\CheckoutMethod.cs" />
+    <Compile Include="Hotels\BookingFields\CheckoutMethodKey.cs" />
+    <Compile Include="Hotels\BookingFields\Contact.cs" />
+    <Compile Include="Hotels\BookingFields\Installments.cs" />
+    <Compile Include="Hotels\BookingFields\ItemsKey.cs" />
+    <Compile Include="Hotels\BookingFields\BookingFields.cs" />
+    <Compile Include="Hotels\BookingFields\BookingFieldsPost.cs" />
+    <Compile Include="Hotels\BookingFields\Fees.cs" />
+    <Compile Include="Hotels\BookingFields\Form.cs" />
+    <Compile Include="Hotels\BookingFields\ItemPrice.cs" />
+    <Compile Include="Hotels\BookingFields\Items.cs" />
+    <Compile Include="Hotels\BookingFields\MessageDict.cs" />
+    <Compile Include="Hotels\BookingFields\Nightly.cs" />
+    <Compile Include="Hotels\BookingFields\Passenger.cs" />
+    <Compile Include="Hotels\BookingFields\Payment.cs" />
+    <Compile Include="Hotels\BookingFields\PaymentForm.cs" />
+    <Compile Include="Hotels\BookingFields\PaymentOptions.cs" />
+    <Compile Include="Hotels\BookingFields\PriceDestination.cs" />
+    <Compile Include="Hotels\BookingFields\Currency.cs" />
     <Compile Include="Hotels\CitiesAvailability\CitiesAvailability.cs" />
     <Compile Include="Hotels\CitiesAvailability\City.cs" />
     <Compile Include="Hotels\CitiesAvailability\Currencies.cs" />
@@ -128,33 +146,32 @@
     <Compile Include="Hotels\HotelsAutocomplete\HotelsAutocomplete.cs" />
     <Compile Include="Hotels\SearchDetails.cs" />
     <Compile Include="Mock.cs" />
-    <Compile Include="Flight\BookingFields\Address.cs" />
+    <Compile Include="Common\Checkout\Address.cs" />
     <Compile Include="Flight\BookingFields\Birthdate.cs" />
     <Compile Include="Flight\BookingFields\BookingFieldPost.cs" />
     <Compile Include="Flight\BookingFields\BookingFields.cs" />
     <Compile Include="Flight\BookingFields\Card.cs" />
-    <Compile Include="Flight\BookingFields\Card2.cs" />
+    <Compile Include="Common\Checkout\CardField.cs" />
     <Compile Include="Flight\BookingFields\Comment.cs" />
     <Compile Include="Flight\BookingFields\Contact.cs" />
     <Compile Include="Flight\BookingFields\Currency.cs" />
     <Compile Include="Flight\BookingFields\Document.cs" />
-    <Compile Include="Flight\BookingFields\Expiration.cs" />
-    <Compile Include="Flight\BookingFields\RegularOptionsField.cs" />
-    <Compile Include="Flight\BookingFields\RegularField.cs" />
+    <Compile Include="Common\Checkout\Expiration.cs" />
+    <Compile Include="Common\Checkout\RegularOptionsField.cs" />
+    <Compile Include="Common\Checkout\RegularField.cs" />
     <Compile Include="Flight\BookingFields\Form.cs" />
-    <Compile Include="Flight\BookingFields\Installment.cs" />
+    <Compile Include="Common\Checkout\Installment.cs" />
     <Compile Include="Flight\BookingFields\Installments.cs" />
-    <Compile Include="Flight\BookingFields\InvoiceArg.cs" />
-    <Compile Include="Flight\BookingFields\Option.cs" />
-    <Compile Include="Flight\BookingFields\OwnerDocument.cs" />
+    <Compile Include="Common\Checkout\InvoiceArg.cs" />
+    <Compile Include="Common\Checkout\Option.cs" />
+    <Compile Include="Common\Checkout\OwnerDocument.cs" />
     <Compile Include="Flight\BookingFields\Passenger.cs" />
     <Compile Include="Flight\BookingFields\Payment.cs" />
     <Compile Include="Flight\BookingFields\Payments.cs" />
-    <Compile Include="Flight\BookingFields\Phone.cs" />
+    <Compile Include="Common\Checkout\Phone.cs" />
     <Compile Include="Flight\BookingFields\Price.cs" />
-    <Compile Include="Flight\BookingFields\Quantity.cs" />
-    <Compile Include="Flight\BookingFields\Validation.cs" />
-    <Compile Include="Flight\BookingFields\Voucher.cs" />
+    <Compile Include="Common\Checkout\Validation.cs" />
+    <Compile Include="Common\Checkout\Voucher.cs" />
     <Compile Include="Flight\BookingFields\PaymentDetail.cs" />
     <Compile Include="Flight\CitiesAutocomplete\CitiesAutocomplete.cs" />
     <Compile Include="Flight\CitiesAutocomplete\City.cs" />
@@ -182,6 +199,14 @@
       <Project>{9359897f-8df6-4787-80db-b68ed851088e}</Project>
       <Name>Despegar.Core.Exceptions</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.7\lib\portable-net40+sl5+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

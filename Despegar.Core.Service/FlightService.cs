@@ -111,12 +111,12 @@ namespace Despegar.Core.Service
         /// </summary>
         /// <param name="bookingFieldPost"></param>
         /// <returns></returns>
-        public async Task<BookingFields> GetBookingFields(BookingFieldPost bookingFieldPost)
+        public async Task<FlightBookingFields> GetBookingFields(BookingFieldPost bookingFieldPost)
         {
             string serviceUrl = ServiceURL.GetServiceURL(ServiceKey.FlightsBookingFields);
             IConnector connector = context.GetServiceConnector(ServiceKey.FlightsBookingFields);
 
-            return await connector.PostAsync<BookingFields>(serviceUrl, bookingFieldPost);
+            return await connector.PostAsync<FlightBookingFields>(serviceUrl, bookingFieldPost);
         }
 
         /// <summary>
@@ -127,8 +127,8 @@ namespace Despegar.Core.Service
         /// <returns></returns>
         public async Task<BookingCompletePostResponse> CompleteBooking(object bookingCompletePost,string id)
         {
-            string serviceUrl = String.Format(ServiceURL.GetServiceURL(ServiceKey.BookingCompletePost),id);
-            IConnector connector = context.GetServiceConnector(ServiceKey.BookingCompletePost);           
+            string serviceUrl = String.Format(ServiceURL.GetServiceURL(ServiceKey.FlightsBookingCompletePost),id);
+            IConnector connector = context.GetServiceConnector(ServiceKey.FlightsBookingCompletePost);           
 
             try
             {

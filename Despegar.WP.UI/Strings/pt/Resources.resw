@@ -922,4 +922,25 @@ A reserva não foi gerado e não cobra nenhuma taxa para a transação.</value>
   <data name="Common_Discount_Mobile_Fare" xml:space="preserve">
     <value>Taxa para dispositivos móveis</value>
   </data>
+  <data name="Page_Hotels_Checkout.Text" xml:space="preserve">
+    <value>VOOS DE COMPRA</value>
+  </data>
+  <data name="Hotels_Checkout_Buy.Header" xml:space="preserve">
+    <value>detalhe</value>
+  </data>
+  <data name="Hotels_Checkout_Card_Data.Header" xml:space="preserve">
+    <value>cartão</value>
+  </data>
+  <data name="Hotels_Checkout_Contact.Header" xml:space="preserve">
+    <value>contato</value>
+  </data>
+  <data name="Hotels_Checkout_Invoice_Arg.Header" xml:space="preserve">
+    <value>factura fiscal</value>
+  </data>
+  <data name="Hotels_Checkout_Payments.Header" xml:space="preserve">
+    <value>pagamento</value>
+  </data>
+  <data name="Hotels_Checkout_Rooms.Header" xml:space="preserve">
+    <value>quartos</value>
+  </data>
 </root>

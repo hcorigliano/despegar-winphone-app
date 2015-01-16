@@ -17,8 +17,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Despegar.Core.Business", "D
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Despegar.Core.Exceptions", "Despegar.Core.Exceptions\Despegar.Core.Exceptions.csproj", "{9359897F-8DF6-4787-80DB-B68ED851088E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Despegar.LegacyCore", "Despegar.LegacyCore\Despegar.LegacyCore.csproj", "{8447A9FC-A65C-4FED-9DE3-CA9EEA1470DF}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Despegar.Core.Log", "Despegar.Core.Log\Despegar.Core.Log.csproj", "{0C50151E-91DE-45C5-BB01-B03EC44D7735}"
 EndProject
 Global
@@ -169,30 +167,6 @@ Global
 		{9359897F-8DF6-4787-80DB-B68ED851088E}.Despegar-Release|Any CPU.Build.0 = Despegar-Release|Any CPU
 		{9359897F-8DF6-4787-80DB-B68ED851088E}.Despegar-Release|ARM.ActiveCfg = Despegar-Release|Any CPU
 		{9359897F-8DF6-4787-80DB-B68ED851088E}.Despegar-Release|x86.ActiveCfg = Despegar-Release|Any CPU
-		{8447A9FC-A65C-4FED-9DE3-CA9EEA1470DF}.Decolar-Debug|Any CPU.ActiveCfg = Decolar-Debug|Any CPU
-		{8447A9FC-A65C-4FED-9DE3-CA9EEA1470DF}.Decolar-Debug|Any CPU.Build.0 = Decolar-Debug|Any CPU
-		{8447A9FC-A65C-4FED-9DE3-CA9EEA1470DF}.Decolar-Debug|ARM.ActiveCfg = Decolar-Debug|ARM
-		{8447A9FC-A65C-4FED-9DE3-CA9EEA1470DF}.Decolar-Debug|ARM.Build.0 = Decolar-Debug|ARM
-		{8447A9FC-A65C-4FED-9DE3-CA9EEA1470DF}.Decolar-Debug|x86.ActiveCfg = Decolar-Debug|x86
-		{8447A9FC-A65C-4FED-9DE3-CA9EEA1470DF}.Decolar-Debug|x86.Build.0 = Decolar-Debug|x86
-		{8447A9FC-A65C-4FED-9DE3-CA9EEA1470DF}.Decolar-Release|Any CPU.ActiveCfg = Decolar-Release|Any CPU
-		{8447A9FC-A65C-4FED-9DE3-CA9EEA1470DF}.Decolar-Release|Any CPU.Build.0 = Decolar-Release|Any CPU
-		{8447A9FC-A65C-4FED-9DE3-CA9EEA1470DF}.Decolar-Release|ARM.ActiveCfg = Decolar-Release|ARM
-		{8447A9FC-A65C-4FED-9DE3-CA9EEA1470DF}.Decolar-Release|ARM.Build.0 = Decolar-Release|ARM
-		{8447A9FC-A65C-4FED-9DE3-CA9EEA1470DF}.Decolar-Release|x86.ActiveCfg = Decolar-Release|x86
-		{8447A9FC-A65C-4FED-9DE3-CA9EEA1470DF}.Decolar-Release|x86.Build.0 = Decolar-Release|x86
-		{8447A9FC-A65C-4FED-9DE3-CA9EEA1470DF}.Despegar-Debug|Any CPU.ActiveCfg = Despegar-Debug|Any CPU
-		{8447A9FC-A65C-4FED-9DE3-CA9EEA1470DF}.Despegar-Debug|Any CPU.Build.0 = Despegar-Debug|Any CPU
-		{8447A9FC-A65C-4FED-9DE3-CA9EEA1470DF}.Despegar-Debug|ARM.ActiveCfg = Despegar-Debug|ARM
-		{8447A9FC-A65C-4FED-9DE3-CA9EEA1470DF}.Despegar-Debug|ARM.Build.0 = Despegar-Debug|ARM
-		{8447A9FC-A65C-4FED-9DE3-CA9EEA1470DF}.Despegar-Debug|x86.ActiveCfg = Despegar-Debug|x86
-		{8447A9FC-A65C-4FED-9DE3-CA9EEA1470DF}.Despegar-Debug|x86.Build.0 = Despegar-Debug|x86
-		{8447A9FC-A65C-4FED-9DE3-CA9EEA1470DF}.Despegar-Release|Any CPU.ActiveCfg = Despegar-Release|Any CPU
-		{8447A9FC-A65C-4FED-9DE3-CA9EEA1470DF}.Despegar-Release|Any CPU.Build.0 = Despegar-Release|Any CPU
-		{8447A9FC-A65C-4FED-9DE3-CA9EEA1470DF}.Despegar-Release|ARM.ActiveCfg = Despegar-Release|ARM
-		{8447A9FC-A65C-4FED-9DE3-CA9EEA1470DF}.Despegar-Release|ARM.Build.0 = Despegar-Release|ARM
-		{8447A9FC-A65C-4FED-9DE3-CA9EEA1470DF}.Despegar-Release|x86.ActiveCfg = Despegar-Release|x86
-		{8447A9FC-A65C-4FED-9DE3-CA9EEA1470DF}.Despegar-Release|x86.Build.0 = Despegar-Release|x86
 		{0C50151E-91DE-45C5-BB01-B03EC44D7735}.Decolar-Debug|Any CPU.ActiveCfg = Decolar-Debug|Any CPU
 		{0C50151E-91DE-45C5-BB01-B03EC44D7735}.Decolar-Debug|Any CPU.Build.0 = Decolar-Debug|Any CPU
 		{0C50151E-91DE-45C5-BB01-B03EC44D7735}.Decolar-Debug|ARM.ActiveCfg = Decolar-Debug|Any CPU

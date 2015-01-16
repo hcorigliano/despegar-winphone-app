@@ -289,6 +289,27 @@
     <Compile Include="Product\Flights\FlightThanks.xaml.cs">
       <DependentUpon>FlightThanks.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Product\Hotels\Checkout\Buy.xaml.cs">
+      <DependentUpon>Buy.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Product\Hotels\Checkout\CardData.xaml.cs">
+      <DependentUpon>CardData.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Product\Hotels\Checkout\Contact.xaml.cs">
+      <DependentUpon>Contact.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Product\Hotels\Checkout\InvoiceArgentina.xaml.cs">
+      <DependentUpon>InvoiceArgentina.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Product\Hotels\Checkout\Payments.xaml.cs">
+      <DependentUpon>Payments.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Product\Hotels\Checkout\Rooms.xaml.cs">
+      <DependentUpon>Rooms.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Product\Hotels\HotelsCheckout.xaml.cs">
+      <DependentUpon>HotelsCheckout.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Product\Hotels\HotelsDetails.xaml.cs">
       <DependentUpon>HotelsDetails.xaml</DependentUpon>
     </Compile>
@@ -437,6 +458,34 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Product\Flights\FlightSortBy.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Product\Hotels\Checkout\Buy.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Product\Hotels\Checkout\CardData.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Product\Hotels\Checkout\Contact.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Product\Hotels\Checkout\InvoiceArgentina.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Product\Hotels\Checkout\Payments.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Product\Hotels\Checkout\Rooms.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Product\Hotels\HotelsCheckout.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -1489,6 +1538,7 @@
     <Folder Include="Assets\en\" />
     <Folder Include="Assets\es\" />
     <Folder Include="Assets\pt\" />
+    <Folder Include="Product\Hotels\Checkout\Controls\" />
     <Folder Include="Strings\en\" />
   </ItemGroup>
   <ItemGroup>

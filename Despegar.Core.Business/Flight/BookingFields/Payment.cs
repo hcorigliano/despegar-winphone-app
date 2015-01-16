@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Despegar.Core.Business.Common.Checkout;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,7 +11,7 @@ namespace Despegar.Core.Business.Flight.BookingFields
         // MAPI fields
         public bool required { get; set; }
         public Installment installment { get; set; }
-        public Card2 card { get; set; }
+        public CardField card { get; set; }
         public InvoiceArg invoice { get; set; }
         public string data_type { get; set; }
 
