@@ -19,7 +19,10 @@
             <ColumnDefinition Width="{StaticResource Block2}"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <Image Grid.Column="0" Height="{StaticResource dBlock2}" Width="{StaticResource dBlock2}"></Image>
+        <Canvas Grid.Column="0" Height="{StaticResource dBlock2}" Width="{StaticResource dBlock2}" >
+            <Rectangle Canvas.ZIndex="-1" Fill="Blue"/>
+            <Image  Canvas.ZIndex="1" Height="{StaticResource dBlock2}" Width="{StaticResource dBlock2}"  Source="\Assets\Icon\App\calendar-temp.png"></Image>
+        </Canvas>
         <Grid Grid.Column="1">
             <Grid.RowDefinitions>
                 <RowDefinition/>

@@ -11,5 +11,6 @@ namespace Despegar.Core.Business.Hotels.CitiesAvailability
         public Hotel hotel { get; set; }
         public Price price { get; set; }
         public string payment_description { get; set; }
+        public int? distance { get; set; }
     }
 }

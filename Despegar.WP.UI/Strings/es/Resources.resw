@@ -922,4 +922,7 @@ La reserva no ha sido generada y no se le cobrará ningún cargo por la transacc
   <data name="Common_Nights" xml:space="preserve">
     <value>noches</value>
   </data>
+  <data name="Common_Discount_Mobile_Fare" xml:space="preserve">
+    <value>Tarifa para dispositivos móviles</value>
+  </data>
 </root>

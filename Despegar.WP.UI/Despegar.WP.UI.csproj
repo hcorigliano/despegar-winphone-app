@@ -109,6 +109,8 @@
     <Compile Include="BugSense\BugTracker.cs" />
     <Compile Include="Common\Converter\BooleanConverter.cs" />
     <Compile Include="Common\Converter\DateToLongString.cs" />
+    <Compile Include="Common\Converter\DiscountConverter.cs" />
+    <Compile Include="Common\Converter\ImageConverters.cs" />
     <Compile Include="Common\Converter\ImageGoReturnConverter.cs" />
     <Compile Include="Common\Converter\MiniboxVisibilityConverter.cs" />
     <Compile Include="Common\Converter\CheckoutConverters.cs" />
@@ -695,6 +697,8 @@
     <Content Include="Assets\country\ZA.png" />
     <Content Include="Assets\country\ZM.png" />
     <Content Include="Assets\country\ZW.png" />
+    <Content Include="Assets\Icon\App\calendar-temp.png" />
+    <Content Include="Assets\Icon\App\star-temp.png" />
     <Content Include="BugSense\BugSense - SDK License Agreement.txt" />
     <Content Include="Compilation\Decolar\decolar-logo-white.scale-100.png" />
     <Content Include="Compilation\Decolar\decolar-logo-white.scale-140.png" />
