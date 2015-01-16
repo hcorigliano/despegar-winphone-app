@@ -687,7 +687,7 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
 
                     if (flightCrossParameters.BookingResponse.Error != null) 
                     {
-                        this.Tracker.LeaveBreadcrumb("Flight checkout MAPI booking error response code: " + CrossParameters.BookingResponse.Error.code.ToString());
+                        this.Tracker.LeaveBreadcrumb("Flight checkout MAPI booking error response code: " + flightCrossParameters.BookingResponse.Error.code.ToString());
                         // API Error ocurred, Check CODE and inform the user
                         OnViewModelError("API_ERROR", flightCrossParameters.BookingResponse.Error.code);
                         this.IsLoading = false;

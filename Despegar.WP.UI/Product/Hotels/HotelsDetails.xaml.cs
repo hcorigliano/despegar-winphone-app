@@ -15,7 +15,6 @@ using Windows.UI.Xaml.Navigation;
 using Despegar.WP.UI.Model.ViewModel.Hotels;
 using Despegar.Core.Business.Hotels.CitiesAvailability;
 
-// The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
 
 namespace Despegar.WP.UI.Product.Hotels
 {
