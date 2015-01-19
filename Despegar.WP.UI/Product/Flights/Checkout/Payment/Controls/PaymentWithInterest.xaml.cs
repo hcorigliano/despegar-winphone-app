@@ -1,5 +1,5 @@
 ﻿using Despegar.Core.Business.Flight.BookingFields;
-using Despegar.WP.UI.Model.ViewModel;
+using Despegar.WP.UI.Model.ViewModel.Flights;
 using System.Collections.Generic;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;

@@ -7,7 +7,8 @@ namespace Despegar.Core.Business.Hotels.CitiesAvailability
 {
     public class Currencies
     {
-        public List<Value> values { get; set; }
         public string criteria { get; set; }
+        public List<Value> values { get; set; }
+
     }
 }

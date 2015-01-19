@@ -3,6 +3,7 @@
 // Please see http://go.microsoft.com/fwlink/?LinkID=131993 for details.
 // All other rights reserved.
 
+using Despegar.WP.UI.Developer.Controls;
 using System.Collections.Generic;
 using System.Diagnostics;
 using Windows.ApplicationModel.Core;
@@ -27,7 +28,7 @@ namespace System.Windows
         private static bool _visible;
         private static double _opacity = 0.2;
         private static Color _color = Colors.Red;
-        private static List<Rectangle> _squares;
+        private static List<DesingUnit> _squares;
         private static Grid _grid;
 
         /// <summary>
@@ -84,7 +85,7 @@ namespace System.Windows
                 var brush = new SolidColorBrush(_color);
                 foreach (var square in _squares)
                 {
-                    square.Fill = brush;
+                    square.InnerRect.Fill = brush;
                 }
                 if (_grid != null)
                 {
@@ -103,7 +104,7 @@ namespace System.Windows
         /// </summary>
         private static async void BuildGrid()
         {
-            _squares = new List<Rectangle>();
+            _squares = new List<DesingUnit>();
 
             var frame = Window.Current.Content as Frame;
             if (frame == null || VisualTreeHelper.GetChildrenCount(frame) == 0)
@@ -169,118 +170,55 @@ namespace System.Windows
             // orientation change event and re-draw/remove squares.
             double width = frame.ActualWidth;
             double height = frame.ActualHeight;
-            double max = Math.Max(width, height);
-
-            #if WINDOWS_APP
- 
-                const double strokeWidth = 2.0;
- 
-                var horizontalLine = new Line
-                {
-                    IsHitTestVisible = false,
-                    Stroke = brush,
-                    X1 = 0,
-                    X2 = max,
-                    Y1 = 100 + (strokeWidth / 2),
-                    Y2 = 100 + (strokeWidth / 2),
-                    StrokeThickness = strokeWidth,
-                };
-                _grid.Children.Add(horizontalLine);
-                _squares.Add(horizontalLine);
-                var horizontalLine2 = new Line
-                {
-                    IsHitTestVisible = false,
-                    Stroke = brush,
-                    X1 = 0,
-                    X2 = max,
-                    Y1 = 140 + (strokeWidth / 2),
-                    Y2 = 140 + (strokeWidth / 2),
-                    StrokeThickness = strokeWidth,
-                };
-                _grid.Children.Add(horizontalLine2);
-                _squares.Add(horizontalLine2);
- 
-                var verticalLine = new Line
-                {
-                    IsHitTestVisible = false,
-                    Stroke = brush,
-                    X1 = 120 - (strokeWidth / 2),
-                    X2 = 120 - (strokeWidth / 2),
-                    Y1 = 0,
-                    Y2 = max,
-                    StrokeThickness = strokeWidth,
-                };
-                _grid.Children.Add(verticalLine);
-                _squares.Add(verticalLine);
- 
-                var horizontalBottomLine = new Line
-                {
-                    IsHitTestVisible = false,
-                    Stroke = brush,
-                    X1 = 0,
-                    X2 = max,
-                    Y1 = height - 130 + (strokeWidth / 2),
-                    Y2 = height - 130 + (strokeWidth / 2),
-                    StrokeThickness = strokeWidth,
-                };
-                _grid.Children.Add(horizontalBottomLine);
-                _squares.Add(horizontalBottomLine);
-                var horizontalBottomLine2 = new Line
-                {
-                    IsHitTestVisible = false,
-                    Stroke = brush,
-                    X1 = 0,
-                    X2 = max,
-                    Y1 = height - 50 + (strokeWidth / 2),
-                    Y2 = height - 50 + (strokeWidth / 2),
-                    StrokeThickness = strokeWidth,
-                };
-                _grid.Children.Add(horizontalBottomLine2);
-                _squares.Add(horizontalBottomLine2);
- 
-            #endif
-
+            double max = Math.Max(width, height); 
+         
             double tileWidth = 20;
             double tileHeight = 20;
-
-#if WINDOWS_PHONE_APP
             double x = 19.2;
             double y = 38.4;
             double block = 29.6;
-#else
-    double x = 120;
-    double y = 140;
-    double block = 40;
-#endif
+
+            int xCounter = 1;
+            int yCounter = 1;  
 
             for (; x < /*width*/ max; x += block)
             {
-#if WINDOWS_PHONE_APP
                 y = 38.4;
-#else           
-        y = 140;
-#endif
+                yCounter = 1;
 
                 for (; y < /*height*/ max; y += block)
                 {
-                    var rect = new Rectangle
+                    var rect = new DesingUnit
                     {
                         Width = tileWidth,
                         Height = tileHeight,
                         VerticalAlignment = VerticalAlignment.Top,
                         HorizontalAlignment = HorizontalAlignment.Left,
                         Margin = new Thickness(x, y, 0, 0),
-                        IsHitTestVisible = false,
-                        Fill = brush,
+                        IsHitTestVisible = false,                        
                     };
+
+                    rect.InnerRect.Fill = brush;
+                    rect.InnerText.Text = "";
+
+                    if (yCounter == 1) // first line                        
+                       rect.InnerText.Text = xCounter.ToString();
+
+                    if (xCounter == 1) // first column                        
+                        rect.InnerText.Text = yCounter.ToString();
+
                     _grid.Children.Add(rect);
                     _squares.Add(rect);
+
+                    yCounter++;
                 }
+
+                xCounter++;
             }
 
-            _grid.Visibility = _visible ? Visibility.Visible : Visibility.Collapsed;
             _grid.Opacity = _opacity;
-
+            _grid.Visibility = _visible ? Visibility.Visible : Visibility.Collapsed;
+            
             // For performance reasons a single surface should ideally be used
             // for the grid.
             _grid.CacheMode = new BitmapCache();

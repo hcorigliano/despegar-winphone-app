@@ -237,7 +237,7 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
 
                     }
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     OnViewModelError("SEARCH_FAILED");
                 }

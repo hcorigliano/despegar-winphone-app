@@ -16,7 +16,7 @@ namespace Despegar.WP.UI.Model
     public class FlightDetailsViewModel : ViewModelBase
     {
         private INavigator navigator;
-        public FlightsCrossParameter CrossParameters { get; set; } 
+        public FlightsCrossParameter flightsCrossParameters { get; set; } 
 
         /// <summary>
         /// Inbound + Outbound Initialization
@@ -26,12 +26,12 @@ namespace Despegar.WP.UI.Model
         public FlightDetailsViewModel(INavigator navigator, FlightsCrossParameter parameters, IBugTracker t) : base(t) //Route outBound, Route inBound)
         {
             this.navigator = navigator;
-            CrossParameters = parameters;
+            flightsCrossParameters = parameters;
         }
 
         public bool IsTwoWaySearch
         {
-            get { return this.CrossParameters.Inbound.segments != null; }
+            get { return this.flightsCrossParameters.Inbound.segments != null; }
         }
 
         public ICommand BuyCommand
@@ -41,7 +41,7 @@ namespace Despegar.WP.UI.Model
                 return new RelayCommand(() =>
                 {
                     // Todo send product data
-                    navigator.GoTo(ViewModelPages.FlightsCheckout, CrossParameters);
+                    navigator.GoTo(ViewModelPages.FlightsCheckout, flightsCrossParameters);
                 });
             }
         }

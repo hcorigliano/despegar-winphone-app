@@ -10,7 +10,7 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
     public class FlightThanksViewModel : ViewModelBase
     {
         private INavigator navigator;
-        public FlightsCrossParameter FlightParameters { get; set; }
+        public FlightsCrossParameter flightCrossParameters { get; set; }
 
         public FlightThanksViewModel(INavigator nav, IBugTracker t) : base(t) 
         {

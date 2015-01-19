@@ -8,12 +8,12 @@ namespace Despegar.Core.Business.Hotels.CitiesAvailability
 {
     public class CitiesAvailability
     {
-        public Currencies currencies { get; set; }
-        public List<Item> items { get; set; }
-        public bool final_result { get; set; }
-        public List<Facet> facets { get; set; }
         public Sorting sorting { get; set; }
-        public NearbyCity nearby_city { get; set; }
+        public Extra extra { get; set; }
         public Paging paging { get; set; }
+        public List<HotelItem> items { get; set; }
+        public List<Facet> facets { get; set; }
+        public Currencies currencies { get; set; }
+        public SearchDetails searchDetails { get; set; }
     }
 }

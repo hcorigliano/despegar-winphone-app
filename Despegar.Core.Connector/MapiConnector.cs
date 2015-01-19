@@ -71,6 +71,10 @@ namespace Despegar.Core.Connector
             httpMessage.Headers.Add("X-ApiKey", APIKEY_WINDOWS_PHONE);
             httpMessage.Headers.Add("X-UOW", XUoW);
             httpMessage.Headers.Add("X-Client", x_client);           
+
+            if (httpMessage.RequestUri.AbsoluteUri.Contains("https://mobile.despegar.com/v3/mapi-hotels/"))
+                httpMessage.Headers.Add("X-Version", "mapi-hotels-v3_1.1.0");
+
         }
     
         private string IncludeSiteAndLanguage(string relativeServiceUrl)

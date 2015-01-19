@@ -1,0 +1,59 @@
+﻿<Page
+    x:Class="Despegar.WP.UI.Product.Hotels.HotelsResults"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Despegar.WP.UI.Product.Hotels"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Style="{StaticResource BasePage}">
+
+
+    <Grid x:Name="LayoutRoot" Style="{StaticResource MainContainerGrid}" >
+
+        <!-- Dev -->
+        <!--<dev:UserControlDesignGrid  />-->
+
+        <Grid.ChildrenTransitions>
+            <TransitionCollection>
+                <EntranceThemeTransition/>
+            </TransitionCollection>
+        </Grid.ChildrenTransitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="{StaticResource Block1p}"/>
+            <RowDefinition Height="{StaticResource Block1p}"/>
+            <RowDefinition Height="{StaticResource Block2p}"/>
+            <RowDefinition Height="*"/>
+            <!--<RowDefinition Height="Auto" />-->
+        </Grid.RowDefinitions>
+
+        <!-- Title Panel -->
+        <Image Grid.Row="0" Style="{StaticResource TopLogo}" />
+        <TextBlock Grid.Row="1" x:Uid="Page_HotelsResults" Style="{StaticResource PageHeaderSmall}" Text="RESULTADO"  />
+        <TextBlock Grid.Row="2" Text="hoteles" Style="{StaticResource PageHeader}" ></TextBlock>
+        <!--</Grid>-->
+        <Grid Grid.Row="3">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="{StaticResource Block2p}"/>
+                    <RowDefinition Height="{StaticResource Block1p}"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+
+
+                <StackPanel xmlns:src="using:Despegar.WP.UI.Controls.Hotels.Details" Grid.Row="0" >
+                <src:MiniBoxSearch DataContext="{Binding citiesAvailability.searchDetails}"  Tapped="ReSearchTapped"/>
+                </StackPanel>
+
+                <TextBlock Grid.Row="1" Text="Tarifa por persona por noche"/>
+
+                <ListView Grid.Row="2" xmlns:src="using:Despegar.WP.UI.Controls.Hotels.Details" ItemsSource="{Binding citiesAvailability.items}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <src:HotelItem DataContext="{Binding }"></src:HotelItem>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+        </Grid>
+    </Grid>
+</Page>

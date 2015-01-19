@@ -1,11 +1,4 @@
-﻿using Despegar.Core.Business.Configuration;
-using Despegar.Core.Business.Flight.BookingFields;
-using Despegar.Core.IService;
-using Despegar.WP.UI.Model;
-using Despegar.WP.UI.Model.ViewModel;
-using System.ComponentModel;
-using System.Linq;
-using System.Runtime.CompilerServices;
+﻿using Despegar.WP.UI.Model.ViewModel.Flights;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
