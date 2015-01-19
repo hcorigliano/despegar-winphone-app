@@ -17,6 +17,10 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Windows.Phone.UI.Input;
+using System.ComponentModel;
+using Despegar.WP.UI.Model.ViewModel;
+using Despegar.WP.UI.Controls;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
 
@@ -27,13 +31,17 @@ namespace Despegar.WP.UI.Product.Hotels
     /// </summary>
     public sealed partial class HotelsSearch : Page
     {
-        public HotelsSearchViewModel hotelSearchViewModel { get; set; }
+        public HotelsSearchViewModel ViewModel { get; set; }
+        private ModalPopup loadingPopup = new ModalPopup(new Loading());
+
 
         public HotelsSearch()
         {
             this.InitializeComponent();
-            hotelSearchViewModel = new HotelsSearchViewModel(Navigator.Instance, GlobalConfiguration.CoreContext.GetHotelService(), BugTracker.Instance);
-            this.DataContext = hotelSearchViewModel;
+            ViewModel = new HotelsSearchViewModel(Navigator.Instance, GlobalConfiguration.CoreContext.GetHotelService(), BugTracker.Instance);
+            ViewModel.PropertyChanged += Checkloading;
+            HardwareButtons.BackPressed += HardwareButtons_BackPressed;
+            this.DataContext = ViewModel;
         }
 
         /// <summary>
@@ -44,6 +52,36 @@ namespace Despegar.WP.UI.Product.Hotels
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
         }
+
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            HardwareButtons.BackPressed -= HardwareButtons_BackPressed;
+        }
+
+        void HardwareButtons_BackPressed(object sender, BackPressedEventArgs e)
+        {
+            BugTracker.Instance.LeaveBreadcrumb("Flight Search View - Back button pressed");
+
+            if (ViewModel != null)
+            {
+                if (ViewModel.IsLoading)
+                {
+                    e.Handled = true;
+                }
+            }
+        }
+
+        private void Checkloading(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "IsLoading")
+            {
+                if ((sender as ViewModelBase).IsLoading)
+                    loadingPopup.Show();
+                else
+                    loadingPopup.Hide();
+            }
+        }
+
 
     }
 }

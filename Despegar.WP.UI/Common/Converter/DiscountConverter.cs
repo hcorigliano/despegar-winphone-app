@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Data;
 
 namespace Despegar.WP.UI.Common.Converter
@@ -13,7 +14,7 @@ namespace Despegar.WP.UI.Common.Converter
         {
             var loader = new Windows.ApplicationModel.Resources.ResourceLoader();
 
-            if (value != null && (string)value == "STANDARD") //MOBILE
+            if (value != null && (string)value == "MOBILE") //MOBILE
                 return loader.GetString("Common_Discount_Mobile_Fare");
             return "";
             
@@ -33,6 +34,23 @@ namespace Despegar.WP.UI.Common.Converter
                 return "assets\\PhoneDisccountLogo.png";
             return "";
 
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, string language)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    public class DiscountVisibilityConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, string language)
+        {
+            if(value == null)
+                return Visibility.Collapsed;
+            if ((string)value == "MOBILE")
+                return Visibility.Visible;
+            return Visibility.Collapsed;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)

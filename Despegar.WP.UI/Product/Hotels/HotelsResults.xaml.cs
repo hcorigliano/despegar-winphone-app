@@ -27,9 +27,9 @@ namespace Despegar.WP.UI.Product.Hotels
 
         public HotelsResults()
         {
-            this.InitializeComponent();         
+            this.InitializeComponent();
         }
-   
+
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             

@@ -5,11 +5,31 @@
     xmlns:local="using:Despegar.WP.UI.Product.Hotels"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:Interactivity="using:Microsoft.Xaml.Interactivity" 
+    xmlns:Core="using:Microsoft.Xaml.Interactions.Core"
     mc:Ignorable="d"
     Style="{StaticResource BasePage}">
 
+    <Page.BottomAppBar>
+        <CommandBar ClosedDisplayMode="Minimal">
+            <AppBarButton x:Name="appBarFilter" Icon="Filter" x:Uid="AppBarButton_Filters" >
+            </AppBarButton>
+            <AppBarButton x:Name="appBarSortBy" Icon="Sort" x:Uid="AppBarButton_OrderBy" >
+            </AppBarButton>
+        </CommandBar>
+    </Page.BottomAppBar>
+
 
     <Grid x:Name="LayoutRoot" Style="{StaticResource MainContainerGrid}" >
+
+        <Interactivity:Interaction.Behaviors>
+            <Core:EventTriggerBehavior SourceObject="{Binding ElementName=appBarFilter}" EventName="Click">
+                <Core:NavigateToPageAction TargetPage="Despegar.WP.UI.Product.Hotels.HotelsFilters" Parameter="{Binding CitiesAvailability.facets ,Mode=TwoWay}"/>
+            </Core:EventTriggerBehavior>
+            <Core:EventTriggerBehavior SourceObject="{Binding ElementName=appBarSortBy}" EventName="Click">
+                <Core:NavigateToPageAction TargetPage="Despegar.WP.UI.Product.Flights.FlightSortBy"  Parameter="{Binding CitiesAvailability.sorting, Mode=TwoWay}"/>
+            </Core:EventTriggerBehavior>
+        </Interactivity:Interaction.Behaviors>
 
         <!-- Dev -->
         <!--<dev:UserControlDesignGrid  />-->
@@ -33,27 +53,27 @@
         <TextBlock Grid.Row="2" Text="hoteles" Style="{StaticResource PageHeader}" ></TextBlock>
         <!--</Grid>-->
         <Grid Grid.Row="3">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="{StaticResource Block2p}"/>
-                    <RowDefinition Height="{StaticResource Block1p}"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="{StaticResource Block2p}"/>
+                <RowDefinition Height="{StaticResource Block1p}"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
 
 
 
-                <StackPanel xmlns:src="using:Despegar.WP.UI.Controls.Hotels.Details" Grid.Row="0" >
-                <src:MiniBoxSearch DataContext="{Binding citiesAvailability.searchDetails}"  Tapped="ReSearchTapped"/>
-                </StackPanel>
+            <StackPanel xmlns:src="using:Despegar.WP.UI.Controls.Hotels.Details" Grid.Row="0" >
+                <src:MiniBoxSearch DataContext="{Binding CitiesAvailability.searchDetails}"  Tapped="ReSearchTapped"/>
+            </StackPanel>
 
-                <TextBlock Grid.Row="1" Text="Tarifa por persona por noche"/>
+            <TextBlock Grid.Row="1" Text="Tarifa por persona por noche"/>
 
-                <ListView Grid.Row="2" xmlns:src="using:Despegar.WP.UI.Controls.Hotels.Details" ItemsSource="{Binding citiesAvailability.items}">
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <src:HotelItem DataContext="{Binding }"></src:HotelItem>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
+            <ListView Grid.Row="2" xmlns:src="using:Despegar.WP.UI.Controls.Hotels.Details" ItemsSource="{Binding CitiesAvailability.items}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <src:HotelItem  DataContext="{Binding }"></src:HotelItem>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
         </Grid>
     </Grid>
 </Page>

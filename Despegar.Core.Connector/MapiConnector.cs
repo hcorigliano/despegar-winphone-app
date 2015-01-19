@@ -70,10 +70,19 @@ namespace Despegar.Core.Connector
         {
             httpMessage.Headers.Add("X-ApiKey", APIKEY_WINDOWS_PHONE);
             httpMessage.Headers.Add("X-UOW", XUoW);
+          
+            //httpMessage.Headers.Add("X-Version", "beta");
+            //httpMessage.Headers.Add("XDESP-TOTEM-MOCK-OSS-RESULT", "CHANNEL_REJECTED");
+            //httpMessage.Headers.Add("XDESP-TOTEM-MOCK-OSS-FEE-RESULT", "CHANNEL_REJECTED");
+            //httpMessage.Headers.Add("XDESP-TOTEM-MOCK-MILES-SECOND-STATUS", "CONFIRMED");
+            //httpMessage.Headers.Add("XDESP-TOTEM-MOCK-MILES-STATUS", "CONFIRMED");
+            //httpMessage.Headers.Add("XDESP-TOTEM-MOCK-MILES-REQUEST", "SUCCEEDED");
+
             httpMessage.Headers.Add("X-Client", x_client);           
 
             if (httpMessage.RequestUri.AbsoluteUri.Contains("https://mobile.despegar.com/v3/mapi-hotels/"))
                 httpMessage.Headers.Add("X-Version", "mapi-hotels-v3_1.1.0");
+
 
         }
     
