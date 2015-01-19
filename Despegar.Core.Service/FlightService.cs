@@ -111,7 +111,7 @@ namespace Despegar.Core.Service
         /// </summary>
         /// <param name="bookingFieldPost"></param>
         /// <returns></returns>
-        public async Task<FlightBookingFields> GetBookingFields(BookingFieldPost bookingFieldPost)
+        public async Task<FlightBookingFields> GetBookingFields(FlightsBookingFieldRequest bookingFieldPost)
         {
             string serviceUrl = ServiceURL.GetServiceURL(ServiceKey.FlightsBookingFields);
             IConnector connector = context.GetServiceConnector(ServiceKey.FlightsBookingFields);

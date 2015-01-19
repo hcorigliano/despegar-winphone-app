@@ -42,7 +42,7 @@ namespace Despegar.WP.UI.Product.Flights
         /// This parameter is typically used to configure the page.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            BugTracker.Instance.LeaveBreadcrumb("Flight Search Filter View");
+            BugTracker.Instance.LeaveBreadcrumb("Flight search Filter View");
             List<Facet> facet;
             if (e.Parameter == null) return;
             facet = e.Parameter as List<Facet>;

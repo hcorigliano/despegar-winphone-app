@@ -33,7 +33,7 @@
 
             <!-- Rooms -->
             <PivotItem x:Name="Pivot_ROOMS" x:Uid="Hotels_Checkout_Rooms" Style="{StaticResource PivotItemBase}" xmlns:src="using:Despegar.WP.UI.Product.Hotels.Checkout">
-                <src:Rooms  x:Name="RoomsControl" />
+                <src:Rooms x:Name="RoomsControl" />
             </PivotItem>
 
             <!--Contact Pivot-->
@@ -58,7 +58,7 @@
 
             <!--Buy-->
             <PivotItem  x:Uid="Hotels_Checkout_Buy"  Style="{StaticResource PivotItemBase}" xmlns:src="using:Despegar.WP.UI.Product.Hotels.Checkout">
-                <StackPanel >
+                <StackPanel>
                     <src:Buy x:Name="Buycontrol" Height="426"/>
                     <Button x:Uid="Buy_Button" Style="{StaticResource ButtonBottomRed}" Command="{Binding ValidateAndBuyCommand}" VerticalAlignment="Bottom" />
                 </StackPanel>

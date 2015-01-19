@@ -8,6 +8,6 @@ namespace Despegar.Core.Business.Hotels.BookingFields
     public class Fees
     {
         public string title { get; set; }
-        public MessageDict messages { get; set; }
+        public List<string> messages { get; set; }
     }
 }

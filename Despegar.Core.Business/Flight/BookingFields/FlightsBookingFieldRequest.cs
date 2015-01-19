@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Despegar.Core.Business.Flight.BookingFields
 {
-    public class BookingFieldPost
+    public class FlightsBookingFieldRequest
     {
         public string itinerary_id { get; set; }
         public int ? outbound_choice { get; set; }

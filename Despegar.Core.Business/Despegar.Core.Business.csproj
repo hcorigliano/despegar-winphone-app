@@ -112,12 +112,11 @@
     <Compile Include="Hotels\BookingFields\Installments.cs" />
     <Compile Include="Hotels\BookingFields\ItemsKey.cs" />
     <Compile Include="Hotels\BookingFields\BookingFields.cs" />
-    <Compile Include="Hotels\BookingFields\BookingFieldsPost.cs" />
+    <Compile Include="Hotels\BookingFields\HotelsBookingFieldsRequest.cs" />
     <Compile Include="Hotels\BookingFields\Fees.cs" />
     <Compile Include="Hotels\BookingFields\Form.cs" />
     <Compile Include="Hotels\BookingFields\ItemPrice.cs" />
     <Compile Include="Hotels\BookingFields\Items.cs" />
-    <Compile Include="Hotels\BookingFields\MessageDict.cs" />
     <Compile Include="Hotels\BookingFields\Nightly.cs" />
     <Compile Include="Hotels\BookingFields\Passenger.cs" />
     <Compile Include="Hotels\BookingFields\Payment.cs" />
@@ -148,8 +147,8 @@
     <Compile Include="Mock.cs" />
     <Compile Include="Common\Checkout\Address.cs" />
     <Compile Include="Flight\BookingFields\Birthdate.cs" />
-    <Compile Include="Flight\BookingFields\BookingFieldPost.cs" />
-    <Compile Include="Flight\BookingFields\BookingFields.cs" />
+    <Compile Include="Flight\BookingFields\FlightsBookingFieldRequest.cs" />
+    <Compile Include="Flight\BookingFields\FlightBookingFields.cs" />
     <Compile Include="Flight\BookingFields\Card.cs" />
     <Compile Include="Common\Checkout\CardField.cs" />
     <Compile Include="Flight\BookingFields\Comment.cs" />
