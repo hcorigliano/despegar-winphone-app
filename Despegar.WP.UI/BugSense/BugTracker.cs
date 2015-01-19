@@ -40,12 +40,12 @@ namespace Despegar.WP.UI.BugSense
 
         public void LogException(Exception exception)
         {
-            BugSenseHandler.Instance.LogException(exception);
+            //BugSenseHandler.Instance.LogException(exception);
         }
 
         public void LogException(Exception exception, object extrasExtraDataList) 
         {
-            BugSenseHandler.Instance.LogException(exception, extrasExtraDataList as LimitedCrashExtraDataList);
+            //BugSenseHandler.Instance.LogException(exception, extrasExtraDataList as LimitedCrashExtraDataList);
         }
 
         public void SetExtraData(string key, string value)
