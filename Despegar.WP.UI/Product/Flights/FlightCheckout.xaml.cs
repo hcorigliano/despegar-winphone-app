@@ -31,7 +31,6 @@ namespace Despegar.WP.UI.Product.Flights
             this.InitializeComponent();
             this.navigationHelper = new NavigationHelper(this);
             this.navigationHelper.LoadState += this.NavigationHelper_LoadState;
-            this.navigationHelper.SaveState += this.NavigationHelper_SaveState;
 
             HardwareButtons.BackPressed += HardwareButtons_BackPressed;
 
@@ -117,8 +116,6 @@ namespace Despegar.WP.UI.Product.Flights
                 case "FORM_ERROR":
                     dialog = new MessageDialog(manager.GetString("Flights_Checkout_ERROR_FORM_ERROR"), manager.GetString("Flights_Checkout_ERROR_FORM_ERROR_TITLE"));
                     await dialog.ShowSafelyAsync();
-
-                    // Go to Pivot with errors
                     string sectionID = (string)e.Parameter;
                     MainPivot.SelectedIndex = GetSectionIndex(sectionID);
                     break;
@@ -126,25 +123,19 @@ namespace Despegar.WP.UI.Product.Flights
                     dialog = new MessageDialog(manager.GetString("TermsAndConditions_ERROR"), manager.GetString("TermsAndConditions_ERROR_TITLE"));
                     await dialog.ShowSafelyAsync();
                     break;
-
                 case "BOOKING_FAILED":
-                    
-                        string ticketid = e.Parameter as string;
-                        ticketid = (ticketid!=null)?ticketid:String.Empty;
-                        string phrase = manager.GetString("Flights_Checkout_Card_Data_Card_ERROR_OP_BOOKING_FAILED");
-
-                        dialog = new MessageDialog(String.Format(phrase,ticketid), manager.GetString("Flights_Checkout_ERROR_FORM_ERROR_TITLE"));
-                        await dialog.ShowSafelyAsync();
-                        this.navigationHelper.GoBack();
-                        this.navigationHelper.GoBack();
-                        break;
-                    
-
+                    string ticketid = e.Parameter as string;
+                    ticketid = (ticketid!=null)?ticketid:String.Empty;
+                    string phrase = manager.GetString("Flights_Checkout_Card_Data_Card_ERROR_OP_BOOKING_FAILED");
+                    dialog = new MessageDialog(String.Format(phrase,ticketid), manager.GetString("Flights_Checkout_ERROR_FORM_ERROR_TITLE"));
+                    await dialog.ShowSafelyAsync();
+                    this.navigationHelper.GoBack();
+                    this.navigationHelper.GoBack();
+                    break;   
                case "COMPLETE_BOOKING_CONECTION_FAILED":
                     dialog = new MessageDialog(manager.GetString("Flights_Search_ERROR_SEARCH_FAILED"), manager.GetString("Flights_Checkout_ERROR_FORM_ERROR_TITLE"));
                     await dialog.ShowSafelyAsync();
                     break;
-
                case "CHECKOUT_INIT_FAILED":
                     dialog = new MessageDialog(manager.GetString("Flights_Search_ERROR_SEARCH_FAILED"), manager.GetString("Flights_Checkout_ERROR_FORM_ERROR_TITLE"));
                     await dialog.ShowSafelyAsync();
@@ -153,27 +144,23 @@ namespace Despegar.WP.UI.Product.Flights
                case "ONLINE_PAYMENT_ERROR_NEW_CREDIT_CARD":
                     dialog = new MessageDialog(manager.GetString("Flights_Checkout_Card_Data_Card_ERROR_NEW_CREDIT_CARD"), manager.GetString("Flights_Checkout_ERROR_FORM_ERROR_TITLE"));
                     await dialog.ShowSafelyAsync();
-
-                    // Go to Pivot with errors
                     pageID = (string)e.Parameter;
                     MainPivot.SelectedIndex = GetSectionIndex(pageID);
                     break;
-
                case "ONLINE_PAYMENT_ERROR_FIX_CREDIT_CARD":
-                    
-                        dialog = new MessageDialog(manager.GetString("Flights_Checkout_Card_Data_Card_ERROR_ONLINE_PAYMENT_ERROR_FIX_CREDIT_CARD"), manager.GetString("Flights_Checkout_ERROR_FORM_ERROR_TITLE"));
-                        await dialog.ShowSafelyAsync();
-                        pageID = (string)e.Parameter;
-                        MainPivot.SelectedIndex = GetSectionIndex(pageID);                    
+                    dialog = new MessageDialog(manager.GetString("Flights_Checkout_Card_Data_Card_ERROR_ONLINE_PAYMENT_ERROR_FIX_CREDIT_CARD"), manager.GetString("Flights_Checkout_ERROR_FORM_ERROR_TITLE"));
+                    await dialog.ShowSafelyAsync();
+                    pageID = (string)e.Parameter;
+                    MainPivot.SelectedIndex = GetSectionIndex(pageID);                    
                     break;
                case "ONLINE_PAYMENT_FAILED": {             
-                        //string ticketid = e.Parameter as string;
-                        //ticketid = (ticketid != null) ? ticketid : String.Empty;
-                        string phone = GetContactPhone();
-                        string phrase2 = manager.GetString("Flights_Checkout_Card_Data_Card_ERROR_OP_PAYMENT_FAILED");
-                        dialog = new MessageDialog(String.Format(phrase2, phone), manager.GetString("Flights_Checkout_ERROR_FORM_ERROR_TITLE"));
-                        await dialog.ShowSafelyAsync();
-                        break;                    
+                    //string ticketid = e.Parameter as string;
+                    //ticketid = (ticketid != null) ? ticketid : String.Empty;
+                    string phone = GetContactPhone();
+                    string phrase2 = manager.GetString("Flights_Checkout_Card_Data_Card_ERROR_OP_PAYMENT_FAILED");
+                    dialog = new MessageDialog(String.Format(phrase2, phone), manager.GetString("Flights_Checkout_ERROR_FORM_ERROR_TITLE"));
+                    await dialog.ShowSafelyAsync();
+                    break;                    
                  }
                 case "COMPLETE_BOOKING_BOOKING_FAILED":
                     dialog = new MessageDialog(manager.GetString("Flights_Search_ERROR_BOOKING_FAILED"), manager.GetString("Flights_Checkout_ERROR_FORM_ERROR_TITLE"));
@@ -230,27 +217,6 @@ namespace Despegar.WP.UI.Product.Flights
             {
                 MainPivot.Items.RemoveAt(4);
             }
-
-            //switch(GlobalConfiguration.Site) 
-            //{
-            //    case "AR":
-            //        if (!ViewModel.InvoiceRequired)
-            //        {
-            //            MainPivot.Items.RemoveAt(4);
-            //        }
-
-            //        // Passengers defaults                    
-            //        //foreach (NationalitySelection control in this.FindVisualChildren<NationalitySelection>(PassengerControl))
-            //        //    control.SetDisplayText("Argentina");
-            //    break;
-
-            //    default:               
-            //    break;
-            //}
-        }
-
-        private void NavigationHelper_SaveState(object sender, SaveStateEventArgs e)
-        {
         }
 
         private void Checkloading(object sender, PropertyChangedEventArgs e)

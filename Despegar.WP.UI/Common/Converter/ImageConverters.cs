@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Despegar.Core.Business.Hotels.CitiesAvailability;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,6 +20,22 @@ namespace Despegar.WP.UI.Common.Converter
                 return Visibility.Visible;
             return Visibility.Collapsed;
 
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, string language)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    public class AmenitiesVisibiliryConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, string language)
+        {
+            if (((List<Amenity>)value).Exists(x => x.id == parameter.ToString()))
+                return Visibility.Visible;
+            else
+                return Visibility.Collapsed;    
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)

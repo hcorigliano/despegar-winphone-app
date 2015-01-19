@@ -18,12 +18,12 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
         public INavigator Navigator { get; set; }        
         public CitiesAvailability CitiesAvailability { get; set; }
 
-
         public HotelsResultsViewModel(INavigator navigator, IHotelService hotelService, IBugTracker t)
             : base(t)
         {
             this.Navigator = navigator;
             this.hotelService = hotelService;
         }
+
     }
 }
