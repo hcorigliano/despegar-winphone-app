@@ -37,7 +37,7 @@
         <Pivot Grid.Row="2" Style="{StaticResource PivotBaseMain}" x:Name="MainPivot">
             
             <!--Multiple-->
-            <PivotItem x:Uid="Page_Flight_Detail_Go" Header="ida" Style="{StaticResource PivotItemBase}" DataContext="{Binding CrossParameters.MultipleRoutes}">
+            <PivotItem x:Uid="Page_Flight_Detail_Go" Header="ida" Style="{StaticResource PivotItemBase}" DataContext="{Binding flightsCrossParameters.MultipleRoutes}">
                 <ScrollViewer>
                     <ItemsControl ItemsSource="{Binding}">
                         <ItemsControl.ItemTemplate>
@@ -49,14 +49,14 @@
                 </ScrollViewer>
             </PivotItem>
 
-            <PivotItem x:Uid="Page_Flight_Detail_Go" Header="ida" Style="{StaticResource PivotItemBase}" DataContext="{Binding CrossParameters.Outbound}">
+            <PivotItem x:Uid="Page_Flight_Detail_Go" Header="ida" Style="{StaticResource PivotItemBase}" DataContext="{Binding flightsCrossParameters.Outbound}">
                 <ScrollViewer>
                     <src:FlightsSegmentGo DataContext="{Binding}"/>
                 </ScrollViewer>
             </PivotItem>
 
 
-            <PivotItem x:Name="ReturnPivot" x:Uid="Page_Flight_Detail_Return" Header="vuelta" Style="{StaticResource PivotItemBase}" DataContext="{Binding CrossParameters.Inbound}">
+            <PivotItem x:Name="ReturnPivot" x:Uid="Page_Flight_Detail_Return" Header="vuelta" Style="{StaticResource PivotItemBase}" DataContext="{Binding flightsCrossParameters.Inbound}">
                 <ScrollViewer>
                     <src:FlightsSegmentReturn DataContext="{Binding}"/>
                 </ScrollViewer>
@@ -67,6 +67,6 @@
         <!-- Footer -->
         <Button x:Uid="Buy_Button" Grid.Row="3"  Content="Comprar"  Style="{StaticResource ButtonBottomRed}" Command="{Binding BuyCommand}"/>
         <!--TODO : USAR RESOURCES-->
-        <!--<Button Content="{Binding CrossParameters.price, Converter={StaticResource stringFormatConverter}, ConverterParameter='Comprar a {0}'}"  Grid.Row="3"    Style="{StaticResource ButtonBottomRed}" Command="{Binding BuyCommand}"/>-->
+        <!--<Button Content="{Binding flightsCrossParameters.price, Converter={StaticResource stringFormatConverter}, ConverterParameter='Comprar a {0}'}"  Grid.Row="3"    Style="{StaticResource ButtonBottomRed}" Command="{Binding BuyCommand}"/>-->
     </Grid>
 </Page>

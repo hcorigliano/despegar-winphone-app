@@ -32,7 +32,7 @@
         <TextBlock Grid.Row="1" x:Uid="Page_FlightSearch" Style="{StaticResource PageHeaderSmall}" Text="BUSQUEDA"  />
 
 
-        <ScrollViewer Grid.Row="2" DataContext="{Binding FlightParameters}">
+        <ScrollViewer Grid.Row="2" DataContext="{Binding flightCrossParameters}">
             <StackPanel>
                 <TextBlock Grid.Row="1" x:Uid="Flight_Thanks" Style="{StaticResource Thanks_PageHeader}" Text="gracias totales" />
                 <!--<TextBlock Text="¡Muchas gracias por su solicitud de compra!" />-->

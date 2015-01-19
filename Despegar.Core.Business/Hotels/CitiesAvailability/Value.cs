@@ -9,6 +9,8 @@ namespace Despegar.Core.Business.Hotels.CitiesAvailability
     {
         public string value { get; set; }
         public string label { get; set; }
+        public int count { get; set; }
         public bool selected { get; set; }
+
     }
 }

@@ -1,10 +1,15 @@
-﻿using System;
+﻿using Despegar.WP.UI.BugSense;
+using Despegar.WP.UI.Common;
+using Despegar.WP.UI.Model;
+using Despegar.WP.UI.Model.ViewModel.Hotels;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Phone.UI.Input;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -12,10 +17,6 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
-using Despegar.WP.UI.Model.ViewModel.Hotels;
-using Despegar.WP.UI.Common;
-using Despegar.WP.UI.Model;
-using Despegar.WP.UI.BugSense;
 using Windows.Phone.UI.Input;
 using System.ComponentModel;
 using Despegar.WP.UI.Model.ViewModel;
@@ -30,7 +31,6 @@ namespace Despegar.WP.UI.Product.Hotels
     /// </summary>
     public sealed partial class HotelsSearch : Page
     {
-
         public HotelsSearchViewModel ViewModel { get; set; }
         private ModalPopup loadingPopup = new ModalPopup(new Loading());
 

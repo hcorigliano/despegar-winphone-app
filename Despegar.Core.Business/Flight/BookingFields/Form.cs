@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Despegar.Core.Business.Common.Checkout;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;

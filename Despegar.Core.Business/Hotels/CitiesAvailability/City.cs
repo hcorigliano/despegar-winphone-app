@@ -2,14 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Despegar.Core.Business.Hotels.CitiesAvailability
 {
-    public class City
+    public class City : IdCodeAndName
     {
-        public int id { get; set; }
-        public string code { get; set; }
-        public string name { get; set; }
+        public IdCodeAndName country { get; set; }
     }
 }
