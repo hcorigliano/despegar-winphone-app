@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30723.0
+VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Despegar.WP.UI", "Despegar.WP.UI\Despegar.WP.UI.csproj", "{F4D22562-7CB1-4CB4-92D8-B56CE20B6F5C}"
 EndProject
@@ -55,9 +55,9 @@ Global
 		{F4D22562-7CB1-4CB4-92D8-B56CE20B6F5C}.Decolar-Release|x86.ActiveCfg = Decolar-Release|x86
 		{F4D22562-7CB1-4CB4-92D8-B56CE20B6F5C}.Decolar-Release|x86.Build.0 = Decolar-Release|x86
 		{F4D22562-7CB1-4CB4-92D8-B56CE20B6F5C}.Decolar-Release|x86.Deploy.0 = Decolar-Release|x86
-		{F4D22562-7CB1-4CB4-92D8-B56CE20B6F5C}.Despegar-Debug|Any CPU.ActiveCfg = Despegar-Debug|Any CPU
-		{F4D22562-7CB1-4CB4-92D8-B56CE20B6F5C}.Despegar-Debug|Any CPU.Build.0 = Despegar-Debug|Any CPU
-		{F4D22562-7CB1-4CB4-92D8-B56CE20B6F5C}.Despegar-Debug|Any CPU.Deploy.0 = Despegar-Debug|Any CPU
+		{F4D22562-7CB1-4CB4-92D8-B56CE20B6F5C}.Despegar-Debug|Any CPU.ActiveCfg = Despegar-Debug|x86
+		{F4D22562-7CB1-4CB4-92D8-B56CE20B6F5C}.Despegar-Debug|Any CPU.Build.0 = Despegar-Debug|x86
+		{F4D22562-7CB1-4CB4-92D8-B56CE20B6F5C}.Despegar-Debug|Any CPU.Deploy.0 = Despegar-Debug|x86
 		{F4D22562-7CB1-4CB4-92D8-B56CE20B6F5C}.Despegar-Debug|ARM.ActiveCfg = Despegar-Debug|ARM
 		{F4D22562-7CB1-4CB4-92D8-B56CE20B6F5C}.Despegar-Debug|ARM.Build.0 = Despegar-Debug|ARM
 		{F4D22562-7CB1-4CB4-92D8-B56CE20B6F5C}.Despegar-Debug|ARM.Deploy.0 = Despegar-Debug|ARM

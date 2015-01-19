@@ -1,4 +1,5 @@
-﻿<Page
+﻿<Page xmlns:Maps1="using:Despegar.WP.UI.Controls.Maps"  
+      xmlns:Maps="using:Windows.UI.Xaml.Controls.Maps" 
     x:Class="Despegar.WP.UI.Product.Hotels.HotelsDetails"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -9,6 +10,24 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition>
+            </ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100" ></RowDefinition>
+            <RowDefinition Height="500"></RowDefinition>
+        </Grid.RowDefinitions>
 
+       <!--TODO the servicetoken used in this line is for test, before send to prod token should change-->
+        <!--<Maps:MapControl Grid.Row="1" Name="HotelMap" MapServiceToken="AjES8G-jtTGtkPzU7SY2cW6xa_Rp6HOvgzd0JVehbeKpMQyG2DN0X__wqB_NhGaH"  >
+            
+        </Maps:MapControl>-->
+
+        <Maps1:CustomMapControl Grid.Row="1" >
+        </Maps1:CustomMapControl>
+
+        <Button Content="center the map" HorizontalAlignment="Left" VerticalAlignment="Top"  />
     </Grid>
 </Page>
