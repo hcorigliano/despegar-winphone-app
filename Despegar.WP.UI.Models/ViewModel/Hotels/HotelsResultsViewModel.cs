@@ -16,28 +16,12 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
         public INavigator navigator { get; set; }
         public IHotelService hotelService { get; set; }
         public CitiesAvailability citiesAvailability { get; set; }
-        public string reSearchTextRoomAndNights { get; set; }
-
 
         public HotelsResultsViewModel(INavigator navigator, IHotelService hotelService, IBugTracker t)
             : base(t)
         {
             this.navigator = navigator;
             this.hotelService = hotelService;
-        }
-
-        public void init()
-        {
-            
-            if(citiesAvailability.searchDetails.Rooms == 1)
-                reSearchTextRoomAndNights = citiesAvailability.searchDetails.Rooms.ToString() + " habitación - ";
-            else
-                reSearchTextRoomAndNights = citiesAvailability.searchDetails.Rooms.ToString() + " habitaciónes - ";
-
-            if (citiesAvailability.searchDetails.Nights == 1)
-                reSearchTextRoomAndNights += citiesAvailability.searchDetails.Nights.ToString() + " noche";
-            else
-                reSearchTextRoomAndNights += citiesAvailability.searchDetails.Nights.ToString() + " noches";
         }
 
     }

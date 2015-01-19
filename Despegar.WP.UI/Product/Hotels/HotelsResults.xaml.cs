@@ -32,6 +32,7 @@ namespace Despegar.WP.UI.Product.Hotels
         {
             this.InitializeComponent();
 
+
             this.navigationHelper = new NavigationHelper(this);
             //this.navigationHelper.LoadState += this.NavigationHelper_LoadState;
             //this.navigationHelper.SaveState += this.NavigationHelper_SaveState;
@@ -49,7 +50,6 @@ namespace Despegar.WP.UI.Product.Hotels
             CitiesAvailability citiesAvailability = e.Parameter as CitiesAvailability; //TODO: Never is null?
             hotelResultsViewModel = new HotelsResultsViewModel(Navigator.Instance, GlobalConfiguration.CoreContext.GetHotelService(), BugTracker.Instance);
             hotelResultsViewModel.citiesAvailability = citiesAvailability;
-            hotelResultsViewModel.init();
             this.DataContext = hotelResultsViewModel;
         }
 

@@ -22,6 +22,7 @@ namespace Despegar.WP.UI.Controls.Hotels.Details
         public HotelItem()
         {
             this.InitializeComponent();
+            MainGrid.Width = Window.Current.Bounds.Width - 50;
         }
     }
 }
