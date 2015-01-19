@@ -18,46 +18,31 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
-// The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
-
 namespace Despegar.WP.UI.Product.Hotels
 {
 
     public sealed partial class HotelsResults : Page
     {
-        private NavigationHelper navigationHelper;
-        public HotelsResultsViewModel hotelResultsViewModel { get; set; } 
+        public HotelsResultsViewModel ViewModel { get; set; } 
 
         public HotelsResults()
         {
             this.InitializeComponent();
-
-
-            this.navigationHelper = new NavigationHelper(this);
-            //this.navigationHelper.LoadState += this.NavigationHelper_LoadState;
-            //this.navigationHelper.SaveState += this.NavigationHelper_SaveState;
         }
 
-        public NavigationHelper NavigationHelper
-        {
-            get { return this.navigationHelper; }
-        }
-
-   
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             
             CitiesAvailability citiesAvailability = e.Parameter as CitiesAvailability; //TODO: Never is null?
-            hotelResultsViewModel = new HotelsResultsViewModel(Navigator.Instance, GlobalConfiguration.CoreContext.GetHotelService(), BugTracker.Instance);
-            hotelResultsViewModel.citiesAvailability = citiesAvailability;
-            this.DataContext = hotelResultsViewModel;
+            ViewModel = new HotelsResultsViewModel(Navigator.Instance, GlobalConfiguration.CoreContext.GetHotelService(), BugTracker.Instance);
+            ViewModel.CitiesAvailability = citiesAvailability;
+            this.DataContext = ViewModel;
         }
 
         private void ReSearchTapped(object sender, TappedRoutedEventArgs e)
         {
-            NavigationHelper.GoBack();
+            ViewModel.Navigator.GoBack();
         }
-
 
     }
 }

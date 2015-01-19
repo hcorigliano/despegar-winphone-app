@@ -56,8 +56,5 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
             }
         }
 
-
-
-
     }
 }

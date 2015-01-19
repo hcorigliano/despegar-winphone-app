@@ -123,7 +123,7 @@ namespace Despegar.WP.UI.Product.Flights
                 {
                     Itineraries = await flightResultModel.flightService.GetItineraries(flightSearchModel);
                 }
-                catch(Exception ex) 
+                catch(Exception)
                 {
                     // Will not filter the results, but it will keep the last list status
                   //  BugTracker.Instance.LogException(ex);

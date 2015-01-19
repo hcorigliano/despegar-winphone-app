@@ -79,7 +79,6 @@
     <TargetPlatform Include="Windows, Version=8.1" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AppModelBase.cs" />
     <Compile Include="ClientDeviceInfo.cs" />
     <Compile Include="Common\IIncrementalSource.cs" />
     <Compile Include="Common\IncrementalLoadingCollection.cs" />
@@ -107,17 +106,18 @@
     <Compile Include="ViewModel\Classes\RelayCommand.cs" />
     <Compile Include="ViewModel\Classes\PageParameters.cs" />
     <Compile Include="ViewModel\Flights\FlightDetailsViewModel.cs" />
-    <Compile Include="ViewModel\FlightsCheckoutViewModel.cs" />
+    <Compile Include="ViewModel\Flights\FlightsCheckoutViewModel.cs" />
     <Compile Include="ViewModel\Flights\FlightSearchViewModel.cs" />
     <Compile Include="GlobalConfiguration.cs" />
     <Compile Include="ViewModel\Classes\AdvanceSearchModel.cs" />
     <Compile Include="ViewModel\Classes\CountryItem.cs" />
-    <Compile Include="FlightResultsModel.cs" />
+    <Compile Include="ViewModel\Flights\FlightResultsViewModel.cs" />
     <Compile Include="ViewModel\HomeViewModel.cs" />
     <Compile Include="Interfaces\IInitializeModelInterface.cs" />
     <Compile Include="Interfaces\IValidateInterface.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModel\Hotels\HotelsCrossParameters.cs" />
+    <Compile Include="ViewModel\Hotels\HotelsCheckoutViewModel.cs" />
     <Compile Include="ViewModel\Hotels\HotelsDetailsViewModel.cs" />
     <Compile Include="ViewModel\Hotels\HotelsResultsViewModel.cs" />
     <Compile Include="ViewModel\Hotels\HotelsSearchViewModel.cs" />

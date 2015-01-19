@@ -1,24 +1,21 @@
 ﻿using Despegar.Core.Business.Configuration;
-using Despegar.Core.Business.Dynamics;
+using Despegar.WP.UI.BugSense;
 using Despegar.WP.UI.Common;
 using Despegar.WP.UI.Controls;
 using Despegar.WP.UI.Model;
 using Despegar.WP.UI.Model.Common;
 using Despegar.WP.UI.Model.ViewModel;
 using Despegar.WP.UI.Model.ViewModel.Classes.Flights;
-using Despegar.WP.UI.Product.Flights.Checkout.Passegers.Controls;
+using Despegar.WP.UI.Model.ViewModel.Flights;
 using Despegar.WP.UI.Product.Flights.Checkout.RiskQuestions;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using Windows.ApplicationModel.Resources;
 using Windows.Phone.UI.Input;
 using Windows.UI.Popups;
-using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
-using System.Linq;
-using Despegar.WP.UI.BugSense;
 
 namespace Despegar.WP.UI.Product.Flights
 {
@@ -209,7 +206,7 @@ namespace Despegar.WP.UI.Product.Flights
 
                 return phone;
             } 
-            catch(Exception e)
+            catch(Exception )
             {
                 //BugTracker.Instance.LogException(e);
                 //TODO add logs

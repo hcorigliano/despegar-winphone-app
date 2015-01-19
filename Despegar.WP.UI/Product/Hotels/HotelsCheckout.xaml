@@ -1,0 +1,69 @@
+﻿<Page
+    x:Class="Despegar.WP.UI.Product.Hotels.HotelsCheckout"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Despegar.WP.UI.Product.Hotels"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Style="{StaticResource BasePage}">
+
+    <Grid Style="{StaticResource MainContainerGrid}">
+
+        <Grid.ChildrenTransitions>
+            <TransitionCollection>
+                <EntranceThemeTransition/>
+            </TransitionCollection>
+        </Grid.ChildrenTransitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="{StaticResource Block1p}"/>
+            <RowDefinition Height="{StaticResource Square}"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Dev -->
+        <!--<dev:UserControlDesignGrid />-->
+
+        <!-- Title Panel -->
+        <Image Grid.Row="0" Style="{StaticResource TopLogo}" />
+        <TextBlock Grid.Row="1" x:Uid="Page_Hotels_Checkout" Style="{StaticResource PageHeaderSmall}" Text="COMPRAR HOTEL" />
+
+        <Pivot Grid.Row="2" x:Name="MainPivot"  Style="{StaticResource PivotBaseMain}">
+
+            <!-- Rooms -->
+            <PivotItem x:Name="Pivot_ROOMS" x:Uid="Hotels_Checkout_Rooms" Style="{StaticResource PivotItemBase}" xmlns:src="using:Despegar.WP.UI.Product.Hotels.Checkout">
+                <src:Rooms  x:Name="RoomsControl" />
+            </PivotItem>
+
+            <!--Contact Pivot-->
+            <PivotItem x:Name="Pivot_CONTACT"  x:Uid="Hotels_Checkout_Contact" Style="{StaticResource PivotItemBase}" xmlns:src="using:Despegar.WP.UI.Product.Hotels.Checkout">
+                <src:Contact />
+            </PivotItem>
+
+            <!--Payments Pivot-->
+            <PivotItem x:Name="Pivot_INSTALLMENT"  x:Uid="Hotels_Checkout_Payments" Style="{StaticResource PivotItemBase}" xmlns:src="using:Despegar.WP.UI.Product.Hotels.Checkout">
+                <src:Payments  />
+            </PivotItem>
+            
+            <!--Card Data Pivot-->
+            <PivotItem x:Name="Pivot_CARD"  x:Uid="Hotels_Checkout_Card_Data" Style="{StaticResource PivotItemBase}" xmlns:src="using:Despegar.WP.UI.Product.Hotels.Checkout">
+                <src:CardData />
+            </PivotItem>
+
+             <!--Invoice Arg--> 
+            <PivotItem x:Name="Pivot_INVOICE"  x:Uid="Hotels_Checkout_Invoice_Arg" Style="{StaticResource PivotItemBase}" xmlns:src="using:Despegar.WP.UI.Product.Hotels.Checkout">
+                <src:InvoiceArgentina  />
+            </PivotItem>
+
+            <!--Buy-->
+            <PivotItem  x:Uid="Hotels_Checkout_Buy"  Style="{StaticResource PivotItemBase}" xmlns:src="using:Despegar.WP.UI.Product.Hotels.Checkout">
+                <StackPanel >
+                    <src:Buy x:Name="Buycontrol" Height="426"/>
+                    <Button x:Uid="Buy_Button" Style="{StaticResource ButtonBottomRed}" Command="{Binding ValidateAndBuyCommand}" VerticalAlignment="Bottom" />
+                </StackPanel>
+            </PivotItem>
+
+        </Pivot>
+    </Grid>
+</Page>
