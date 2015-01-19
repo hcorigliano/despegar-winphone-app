@@ -313,6 +313,9 @@
     <Compile Include="Product\Hotels\HotelsDetails.xaml.cs">
       <DependentUpon>HotelsDetails.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Product\Hotels\HotelsFilters.xaml.cs">
+      <DependentUpon>HotelsFilters.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Product\Hotels\HotelsResults.xaml.cs">
       <DependentUpon>HotelsResults.xaml</DependentUpon>
     </Compile>
@@ -747,7 +750,12 @@
     <Content Include="Assets\country\ZM.png" />
     <Content Include="Assets\country\ZW.png" />
     <Content Include="Assets\Icon\App\calendar-temp.png" />
-    <Content Include="Assets\Icon\App\star-temp.png" />
+    <Content Include="Assets\Icon\App\coffee-small-white.scale-100.png" />
+    <Content Include="Assets\Icon\App\parking-small-white.scale-100.png" />
+    <Content Include="Assets\Icon\App\reception-small-white.scale-100.png" />
+    <Content Include="Assets\Icon\App\star-small-yellow.scale-100.png" />
+    <Content Include="Assets\Icon\App\walkingman-small-white.scale-100.png" />
+    <Content Include="Assets\Icon\App\wifi-small-white.scale-100.png" />
     <Content Include="BugSense\BugSense - SDK License Agreement.txt" />
     <Content Include="Compilation\Decolar\decolar-logo-white.scale-100.png" />
     <Content Include="Compilation\Decolar\decolar-logo-white.scale-140.png" />
@@ -1323,6 +1331,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Product\Flights\FlightThanks.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Product\Hotels\HotelsFilters.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
