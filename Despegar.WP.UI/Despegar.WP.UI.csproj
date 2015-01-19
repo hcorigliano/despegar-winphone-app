@@ -313,6 +313,9 @@
     <Compile Include="Product\Hotels\HotelsDetails.xaml.cs">
       <DependentUpon>HotelsDetails.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Product\Hotels\HotelsFilters.xaml.cs">
+      <DependentUpon>HotelsFilters.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Product\Hotels\HotelsResults.xaml.cs">
       <DependentUpon>HotelsResults.xaml</DependentUpon>
     </Compile>
@@ -1328,6 +1331,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Product\Flights\FlightThanks.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Product\Hotels\HotelsFilters.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
