@@ -130,6 +130,11 @@ namespace Despegar.WP.UI.Product.Flights
                 {
                     e.Handled = true;
                 }
+                else
+                {
+                    ViewModel.Navigator.GoBack();
+                    e.Handled = true;
+                }
             }
         }
 
