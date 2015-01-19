@@ -14,20 +14,27 @@
             <ColumnDefinition>
             </ColumnDefinition>
         </Grid.ColumnDefinitions>
- 
+
         <Grid.RowDefinitions>
-            <RowDefinition Height="100" ></RowDefinition>
-            <RowDefinition Height="500"></RowDefinition>
+            <RowDefinition Height="200" ></RowDefinition>
+            <RowDefinition Height="300"></RowDefinition>
         </Grid.RowDefinitions>
 
-       <!--TODO the servicetoken used in this line is for test, before send to prod token should change-->
+        <!--TODO the servicetoken used in this line is for test, before send to prod token should change-->
         <!--<Maps:MapControl Grid.Row="1" Name="HotelMap" MapServiceToken="AjES8G-jtTGtkPzU7SY2cW6xa_Rp6HOvgzd0JVehbeKpMQyG2DN0X__wqB_NhGaH"  >
             
         </Maps:MapControl>-->
 
+        <VariableSizedWrapGrid Grid.Row="0" >
+            <Image Name="something"  Source="ms-appx:///Assets/maps/Badge.scale-240.png"
+                   VariableSizedWrapGrid.ColumnSpan="2"
+                   VariableSizedWrapGrid.RowSpan="2"
+                   >
+            </Image>
+        </VariableSizedWrapGrid>
+
         <Maps1:CustomMapControl Grid.Row="1" >
         </Maps1:CustomMapControl>
 
-        <Button Content="center the map" HorizontalAlignment="Left" VerticalAlignment="Top"  />
     </Grid>
 </Page>
