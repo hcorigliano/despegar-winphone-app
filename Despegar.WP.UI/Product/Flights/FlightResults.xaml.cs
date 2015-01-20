@@ -118,7 +118,7 @@ namespace Despegar.WP.UI.Product.Flights
                 if (flightSearchModel.SearchStatus == SearchStates.SearchAgain)
                 {
                 // Filtro / Ordenamiento aplicado
-                BugTracker.Instance.LeaveBreadcrumb("Flights Minibox Search View");
+                BugTracker.Instance.LeaveBreadcrumb("Flights Minibox search View");
                 try
                 {
                     Itineraries = await flightResultModel.flightService.GetItineraries(flightSearchModel);

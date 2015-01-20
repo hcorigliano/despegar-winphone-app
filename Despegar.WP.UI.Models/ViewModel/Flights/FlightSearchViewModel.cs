@@ -211,7 +211,7 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
                     coreSearchModel.DestinationDate != null ? coreSearchModel.DestinationDate.ToString("yyyy-MM-dd") : "-",
                     "Adults " + coreSearchModel.AdultsInFlights + " Child: " + coreSearchModel.ChildrenInFlights);
 
-                Tracker.LeaveBreadcrumb("Flight Search performed");
+                Tracker.LeaveBreadcrumb("Flight search performed");
                 Tracker.SetExtraData("LastFlightAirports", airports);
                 Tracker.SetExtraData("LastFlightExtra", extra);                
 

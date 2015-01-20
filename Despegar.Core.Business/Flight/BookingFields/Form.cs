@@ -19,5 +19,6 @@ namespace Despegar.Core.Business.Flight.BookingFields
         public string booking_status { get; set; }
         // Custom
         public Voucher Voucher { get { return  vouchers != null ? vouchers.FirstOrDefault() : null; } }
+        public string booking_status { get; set; }
     }
 }
