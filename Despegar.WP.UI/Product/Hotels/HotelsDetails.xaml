@@ -16,21 +16,48 @@
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="200" ></RowDefinition>
+            <RowDefinition Height="300"></RowDefinition>
             <RowDefinition Height="300"></RowDefinition>
         </Grid.RowDefinitions>
 
-        <!--TODO the servicetoken used in this line is for test, before send to prod token should change-->
-        <!--<Maps:MapControl Grid.Row="1" Name="HotelMap" MapServiceToken="AjES8G-jtTGtkPzU7SY2cW6xa_Rp6HOvgzd0JVehbeKpMQyG2DN0X__wqB_NhGaH"  >
-            
-        </Maps:MapControl>-->
+        <VariableSizedWrapGrid  Orientation="Horizontal" MaximumRowsOrColumns="4" Grid.Row="0" >
+            <Image Source="ms-appx:///Assets/maps/mappin.png"
+                        Height="75"
+                        Width="75"
+                       VariableSizedWrapGrid.ColumnSpan="2"
+                       VariableSizedWrapGrid.RowSpan="2"
+                     ></Image>
 
-        <VariableSizedWrapGrid Grid.Row="0" >
-            <Image Name="something"  Source="ms-appx:///Assets/maps/Badge.scale-240.png"
+            <Image Source="ms-appx:///Assets/maps/mappin.png"
+                        Height="35"
+                        Width="35"></Image>
+            <Image Source="ms-appx:///Assets/maps/mappin.png"
+                        Height="35"
+                        Width="35"></Image>
+            <Image Source="ms-appx:///Assets/maps/mappin.png"
+                        Height="35"
+                        Width="35"></Image>
+            <Image Source="ms-appx:///Assets/maps/mappin.png"
+                        Height="35"
+                        Width="35"></Image>
+            <Image Source="ms-appx:///Assets/maps/mappin.png"
+                        Height="35"
+                        Width="35"></Image>
+            <Image Source="ms-appx:///Assets/maps/mappin.png"
+                        Height="35"
+                        Width="35"></Image>
+            <Image Source="ms-appx:///Assets/maps/mappin.png"
+                        Height="75"
+                        Width="75"
                    VariableSizedWrapGrid.ColumnSpan="2"
-                   VariableSizedWrapGrid.RowSpan="2"
-                   >
+                   VariableSizedWrapGrid.RowSpan="2">
             </Image>
+            <Image Source="ms-appx:///Assets/maps/mappin.png"
+                        Height="35"
+                        Width="35"></Image>
+            <Image Source="ms-appx:///Assets/maps/mappin.png"
+                        Height="35"
+                        Width="35"></Image>
         </VariableSizedWrapGrid>
 
         <Maps1:CustomMapControl Grid.Row="1" >
