@@ -156,6 +156,12 @@
     </Compile>
     <Compile Include="Controls\Maps\CustomMapViewModel.cs" />
     <Compile Include="Controls\Maps\CustomPinPoint.cs" />
+    <Compile Include="Controls\PhotoGallery\PhotoGalleryControl.xaml.cs">
+      <DependentUpon>PhotoGalleryControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\PhotoGallery\PhotoPresenter.xaml.cs">
+      <DependentUpon>PhotoPresenter.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\SafeMessageDialog.cs" />
     <Compile Include="Developer\Controls\DesingUnit.xaml.cs">
       <DependentUpon>DesingUnit.xaml</DependentUpon>
@@ -374,6 +380,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\Hotels\Details\MiniBoxSearch.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\PhotoGallery\PhotoGalleryControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\PhotoGallery\PhotoPresenter.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -1366,7 +1380,6 @@
     <Folder Include="Assets\en\" />
     <Folder Include="Assets\es\" />
     <Folder Include="Assets\pt\" />
-    <Folder Include="Controls\PhotoGallery\" />
     <Folder Include="Product\Hotels\Checkout\Controls\" />
     <Folder Include="Strings\en\" />
   </ItemGroup>

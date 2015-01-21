@@ -1,4 +1,5 @@
-﻿<Page xmlns:Maps1="using:Despegar.WP.UI.Controls.Maps"  
+﻿<Page xmlns:Maps1="using:Despegar.WP.UI.Controls.Maps"
+      xmlns:PhotoGallery="using:Despegar.WP.UI.Controls.PhotoGallery"  
       xmlns:Maps="using:Windows.UI.Xaml.Controls.Maps" 
     x:Class="Despegar.WP.UI.Product.Hotels.HotelsDetails"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
@@ -16,52 +17,15 @@
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="300"></RowDefinition>
-            <RowDefinition Height="300"></RowDefinition>
+            <RowDefinition Height="200"></RowDefinition>
+            <RowDefinition ></RowDefinition>
         </Grid.RowDefinitions>
 
-        <VariableSizedWrapGrid  Orientation="Horizontal" MaximumRowsOrColumns="4" Grid.Row="0" >
-            <Image Source="ms-appx:///Assets/maps/mappin.png"
-                        Height="75"
-                        Width="75"
-                       VariableSizedWrapGrid.ColumnSpan="2"
-                       VariableSizedWrapGrid.RowSpan="2"
-                     ></Image>
+        
+        <!--<Maps1:CustomMapControl Grid.Row="1" >
+        </Maps1:CustomMapControl>-->
 
-            <Image Source="ms-appx:///Assets/maps/mappin.png"
-                        Height="35"
-                        Width="35"></Image>
-            <Image Source="ms-appx:///Assets/maps/mappin.png"
-                        Height="35"
-                        Width="35"></Image>
-            <Image Source="ms-appx:///Assets/maps/mappin.png"
-                        Height="35"
-                        Width="35"></Image>
-            <Image Source="ms-appx:///Assets/maps/mappin.png"
-                        Height="35"
-                        Width="35"></Image>
-            <Image Source="ms-appx:///Assets/maps/mappin.png"
-                        Height="35"
-                        Width="35"></Image>
-            <Image Source="ms-appx:///Assets/maps/mappin.png"
-                        Height="35"
-                        Width="35"></Image>
-            <Image Source="ms-appx:///Assets/maps/mappin.png"
-                        Height="75"
-                        Width="75"
-                   VariableSizedWrapGrid.ColumnSpan="2"
-                   VariableSizedWrapGrid.RowSpan="2">
-            </Image>
-            <Image Source="ms-appx:///Assets/maps/mappin.png"
-                        Height="35"
-                        Width="35"></Image>
-            <Image Source="ms-appx:///Assets/maps/mappin.png"
-                        Height="35"
-                        Width="35"></Image>
-        </VariableSizedWrapGrid>
-
-        <Maps1:CustomMapControl Grid.Row="1" >
-        </Maps1:CustomMapControl>
+        <PhotoGallery:PhotoGalleryControl Grid.Row="1" DataContext="{Binding ImagesTestList}" ></PhotoGallery:PhotoGalleryControl>
 
     </Grid>
 </Page>

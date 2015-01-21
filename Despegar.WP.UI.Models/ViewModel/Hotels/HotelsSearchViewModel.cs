@@ -33,6 +33,15 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
             }
         }
 
+        public ICommand GotoPage
+        {
+            get
+            {
+                return new RelayCommand(() => navigator.GoTo(ViewModelPages.HotelsDetails, null));
+            }
+        }
+
+
         private async void SearchHotels()
         {
             CitiesAvailability cities = await hotelService.GetHotelsAvailability("2015-03-01", "2015-03-05", 982, "2", "ars", 0, 30, ""); //982 , "2015-03-01" , "2015-03-05" , "2" , "ars" , 0 , 30 , "" , "" );
