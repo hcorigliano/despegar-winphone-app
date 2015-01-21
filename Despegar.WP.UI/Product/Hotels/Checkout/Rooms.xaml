@@ -24,19 +24,11 @@
                                 <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
 
-                            <!-- Passenger type -->
-                            <Grid Grid.Row="0" >
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition />
-                                    <ColumnDefinition />
-                                </Grid.ColumnDefinitions>
-
-                                <TextBlock Style="{StaticResource BaseTextLabel}" Grid.Column="0">
-                                    <Run x:Uid="Hotels_Checkout_Propiertary" />
-                                    <Run Text=" " />
-                                    <Run Text="{Binding Index}" />
-                                </TextBlock>
-                            </Grid>
+                            <!-- Passenger Index -->                        
+                            <TextBlock Style="{StaticResource SegoeRegular24}" Grid.Row="0">
+                                <Run x:Uid="Hotels_Checkout_Propiertary" />
+                                <Run Text="{Binding Index}" />
+                            </TextBlock>
 
                             <!-- Fields -->
                             <StackPanel Grid.Row="1">

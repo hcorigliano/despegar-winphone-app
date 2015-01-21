@@ -142,9 +142,9 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
             HotelsBookingFieldsRequest bookRequest = new HotelsBookingFieldsRequest();
 
             // TODO
-            bookRequest.token = "691397d-debf-4b20-8a7c-06109e6843bd";
-            bookRequest.hotel_id = "536627";
-            bookRequest.room_choices = new List<string>() { "2" };
+            bookRequest.token = "e0128a1a-e14c-4bc2-945a-2471c363898c";
+            bookRequest.hotel_id = "242284";
+            bookRequest.room_choices = new List<string>() { "42" };
             bookRequest.mobile_identifier = deviceID;
 
             CoreBookingFields = await hotelService.GetBookingFields(bookRequest);

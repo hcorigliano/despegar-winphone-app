@@ -955,13 +955,19 @@ La reserva no ha sido generada y no se le cobrará ningún cargo por la transacc
   <data name="Flights_Checkout_Contact_Number_ERROR_INVALID_LENGTH" xml:space="preserve">
     <value>Por favor, verifique el número ingresado</value>
   </data>
-  <data name="Hotels_Checkout_Passenger_First_Name" xml:space="preserve">
+  <data name="Hotels_Checkout_Passenger_First_Name.Label" xml:space="preserve">
     <value>Nombre/s</value>
   </data>
-  <data name="Hotels_Checkout_Passenger_Last_Name" xml:space="preserve">
+  <data name="Hotels_Checkout_Passenger_Last_Name.Label" xml:space="preserve">
     <value>Apellido/s</value>
   </data>
   <data name="Hotels_Checkout_Propiertary.Text" xml:space="preserve">
     <value>Titular de la habitación</value>
+  </data>
+  <data name="Hotels_Checkout_Passenger_First_Name_ERROR_REQUIRED" xml:space="preserve">
+    <value>Por favor, ingrese el nombre</value>
+  </data>
+  <data name="Hotels_Checkout_Passenger_Last_Name_ERROR_REQUIRED" xml:space="preserve">
+    <value>Por favor, ingrese el apellido</value>
   </data>
 </root>
