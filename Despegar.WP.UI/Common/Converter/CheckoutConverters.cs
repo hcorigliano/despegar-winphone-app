@@ -54,19 +54,13 @@ namespace Despegar.WP.UI.Common.Converter
         {
             var loader = new Windows.ApplicationModel.Resources.ResourceLoader();
             PaymentDetail paymentDetails = (PaymentDetail)value;
-            switch (paymentDetails.installments.quantity)
-            {
-                case 1:
-                    return "1 " + loader.GetString("Common_Pay_Of") + "$" + paymentDetails.installments.first.ToString();
-                case 6:
-                    return "1 " + loader.GetString("Common_Pay_Of") + "$" + paymentDetails.installments.first.ToString() + " + 5 " + loader.GetString("Common_Pays_Of") + "$" + paymentDetails.installments.others.ToString();
-                case 12:
-                    return "1 " + loader.GetString("Common_Pay_Of") + "$" + paymentDetails.installments.first.ToString() + " + 11 " + loader.GetString("Common_Pays_Of") + "$" + paymentDetails.installments.others.ToString();
-                case 24:
-                    return "1 " + loader.GetString("Common_Pay_Of") + "$" + paymentDetails.installments.first.ToString() + " + 23 " + loader.GetString("Common_Pays_Of") + "$" + paymentDetails.installments.others.ToString();
-            }
 
-            return "";
+            string text = "1 " + loader.GetString("Common_Pay_Of") + "$" + paymentDetails.installments.first.ToString();
+
+            if (paymentDetails.installments.quantity > 1)           
+                text += " + " + (paymentDetails.installments.quantity - 1) + " " + loader.GetString("Common_Pays_Of") + "$" + paymentDetails.installments.others.ToString();
+            
+            return text;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)

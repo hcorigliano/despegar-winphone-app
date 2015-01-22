@@ -128,15 +128,15 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
         /// <summary>
         /// Selected "RadioButton" payment strategy
         /// </summary>
-        private List<PaymentDetail> seletedInstallment;
-        public List<PaymentDetail> SelectedInstallment { get { return seletedInstallment; } 
+        private InstallmentOption selectedInstallment;
+        public InstallmentOption SelectedInstallment { get { return selectedInstallment; } 
             set 
             { 
-                seletedInstallment = value;
+                selectedInstallment = value;
                 OnPropertyChanged();
 
                 // Select first by default
-                SelectedCard = value.FirstOrDefault();
+                SelectedCard = value.FirstCard;                
             }
         }
 
@@ -382,21 +382,21 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
             Payments payments = CoreBookingFields.payments;
             InstallmentFormatted = new InstallmentFormatted();
 
-            // With interest
+            // Without interest
             if (payments.without_interest != null)
             {
                 foreach (PaymentDetail item in payments.without_interest)
                 {
-                    InstallmentFormatted.AddWithoutInterest(item, false);                    
+                    InstallmentFormatted.AddWithouInterestInstallment(item);                    
                 }
             }
 
-            // Without Interest
+            // With Interest
             if (payments.with_interest != null)
             {
                 foreach (PaymentDetail item in payments.with_interest)
                 {
-                    InstallmentFormatted.AddWithoutInterest(item, true);     
+                    InstallmentFormatted.AddWithInterestInstallment(item);     
                 }
             }
             

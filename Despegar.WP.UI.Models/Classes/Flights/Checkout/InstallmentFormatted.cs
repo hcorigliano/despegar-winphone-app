@@ -15,7 +15,9 @@ namespace Despegar.WP.UI.Model.Classes.Flights.Checkout
     public class InstallmentOption
     {
         public int InstallmentQuantity { get; set; }
-        public List<PaymentDetail> Cards { get; set; }       
+        public List<PaymentDetail> Cards { get; set; }
+
+        public PaymentDetail FirstCard { get { return Cards[0]; } }
 
         // For "WithInterest" payments
         public string GrupLabelText { get; set; }
@@ -32,17 +34,22 @@ namespace Despegar.WP.UI.Model.Classes.Flights.Checkout
     public class InstallmentFormatted
     {
         //public List<InstallmentOption> PayAtDestination;  // TODO
-        public List<InstallmentOption> WithInterest;
-        public List<InstallmentOption> WithoutInterest;
+        public List<InstallmentOption> WithInterest { get; set; }
+        public List<InstallmentOption> WithoutInterest { get; set; }
         public string ResourceLabel { get; set; }
         public string GrupLabelText 
         { 
             get 
             {
-                string input = String.Join(" , ", WithInterest.Select(x => x.InstallmentQuantity.ToString()));
-                StringBuilder sb = new StringBuilder(input);
-                sb[input.LastIndexOf(',')] = 'o';
-                return sb.ToString() + " " + ResourceLabel;
+                if (WithInterest.Count > 0) 
+                {
+                    string input = String.Join(" , ", WithInterest.Select(x => x.InstallmentQuantity.ToString()).Distinct());
+                    StringBuilder sb = new StringBuilder(input);
+                    sb[input.LastIndexOf(',')] = 'o';
+                    return sb.ToString() + " " + ResourceLabel;
+                } 
+                else 
+                    return String.Empty;
             } 
         }
 
@@ -53,20 +60,28 @@ namespace Despegar.WP.UI.Model.Classes.Flights.Checkout
             WithoutInterest = new List<InstallmentOption>();
         }
 
-        public void AddWithoutInterest(PaymentDetail payment, bool withInterest)
+        public void AddWithouInterestInstallment(PaymentDetail payment)
         {
-            var list = withInterest ? WithInterest : WithoutInterest;
             int quantity = payment.installments.quantity;
 
-            InstallmentOption installment = list.FirstOrDefault(z => z.InstallmentQuantity == quantity);
+            InstallmentOption installment = WithoutInterest.FirstOrDefault(z => z.InstallmentQuantity == quantity);
 
             if (installment == null)
             {
                 installment = new InstallmentOption(quantity);
-                list.Add(installment);
+                WithoutInterest.Add(installment);
             }
 
             installment.Cards.Add(payment);
-        }       
+        }
+
+        public void AddWithInterestInstallment(PaymentDetail payment)
+        {            
+            // Each Card is a separated Installments, Cards are not grouped here.  It is one card per installment
+            var installment = new InstallmentOption(payment.installments.quantity);
+            installment.Cards.Add(payment);
+            WithInterest.Add(installment);            
+        }
+
     }
 }

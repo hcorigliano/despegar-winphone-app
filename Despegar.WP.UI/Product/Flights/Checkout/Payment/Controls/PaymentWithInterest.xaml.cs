@@ -1,4 +1,5 @@
 ﻿using Despegar.Core.Business.Flight.BookingFields;
+using Despegar.WP.UI.Model.Classes.Flights.Checkout;
 using Despegar.WP.UI.Model.ViewModel.Flights;
 using System.Collections.Generic;
 using Windows.UI.Xaml;
@@ -18,7 +19,7 @@ namespace Despegar.WP.UI.Product.Flights.Checkout.Payment.Controls
         private void OnRadioButton_Clicked(object sender, RoutedEventArgs e)
         {
             RadioButton a = (RadioButton)e.OriginalSource;
-            ViewModel.SelectedInstallment =  new List<PaymentDetail> { a.DataContext as PaymentDetail };
+            ViewModel.SelectedInstallment = a.DataContext as InstallmentOption;
         }
 
     }
