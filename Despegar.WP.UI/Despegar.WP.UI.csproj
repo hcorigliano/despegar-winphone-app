@@ -159,6 +159,7 @@
     <Compile Include="Controls\PhotoGallery\PhotoGalleryControl.xaml.cs">
       <DependentUpon>PhotoGalleryControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\PhotoGallery\PhotoGalleryViewModel.cs" />
     <Compile Include="Controls\PhotoGallery\PhotoPresenter.xaml.cs">
       <DependentUpon>PhotoPresenter.xaml</DependentUpon>
     </Compile>

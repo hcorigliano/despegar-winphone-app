@@ -22,10 +22,12 @@ namespace Despegar.WP.UI.Controls.PhotoGallery
     {
         //TODO create property to set the size of picture
         static string URLCONTENT = "http://staticontent.com/media/pictures/{0}/118x118";
+        public PhotoGalleryViewModel photoGalleryViewModel { get; set; }
 
         public PhotoGalleryControl()
         {    
             this.InitializeComponent();
+            photoGalleryViewModel = new PhotoGalleryViewModel();
         }
 
         private void VariableSizedWrapGrid_DataContextChanged(FrameworkElement sender, DataContextChangedEventArgs args)
@@ -33,34 +35,53 @@ namespace Despegar.WP.UI.Controls.PhotoGallery
             if (args.NewValue != null)
             {
                 List<string> keyList = new List<string>();
-                keyList.AddRange(args.NewValue as List<string>);
 
-
-                foreach (string key in keyList)
+                if (args.NewValue as List<string> != null)
                 {
+                    keyList.AddRange(args.NewValue as List<string>);
 
-                    string urlimage = String.Format(URLCONTENT, key);
-
-                    Uri imageURI = new Uri(urlimage, UriKind.Absolute);
-                    BitmapImage bmi = new BitmapImage();
-                    bmi.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
-                    bmi.UriSource = imageURI;
-                    
-
-                    Grid gridvariable = sender as Grid;
-                    var imagesItems = gridvariable.Children.Where(r => r.GetType() == typeof(Image));
-
-                    foreach (Image item in imagesItems)
+                    foreach (string key in keyList)
                     {
-                        if (item.Source==null)
+
+                        string urlimage = String.Format(URLCONTENT, key);
+
+                        Uri imageURI = new Uri(urlimage, UriKind.Absolute);
+                        BitmapImage bmi = new BitmapImage();
+                        bmi.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
+                        bmi.UriSource = imageURI;
+
+                        Grid gridvariable = sender as Grid;
+                        var imagesItems = gridvariable.Children.Where(r => r.GetType() == typeof(Image));
+
+                        foreach (Image item in imagesItems)
                         {
-                            item.Source = bmi;
-                            item.Tag = key;
-                            break;
+                            if (item.Source == null)
+                            {
+                                item.Source = bmi;
+                                item.Tag = key;
+                                break;
+                            }
                         }
                     }
+
+                   // if (photoGalleryViewModel.PictureListName == null)
+                   // {
+                    photoGalleryViewModel.PictureListName = new List<string>();
+                   // }
+                    photoGalleryViewModel.PictureListName.AddRange(keyList);
                 }
             }
+        }
+
+        private void Image_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+
+            Image image = sender as Image;
+
+            photoGalleryViewModel.SelectedPicture = image.Tag as string;
+             
+            var f = Window.Current.Content as Frame;
+            f.Navigate(typeof(PhotoPresenter), photoGalleryViewModel);
         }
     }
 }
