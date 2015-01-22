@@ -948,11 +948,35 @@ La reserva no ha sido generada y no se le cobrará ningún cargo por la transacc
   </data>
   <data name="Page_HotelsSearch_Promo_SubTitle" xml:space="preserve">
     <value>hotel cercano para esta noche</value>
+  </data> 
+  <data name="Flights_Checkout_Contact_Area_Code_ERROR_INVALID_PHONE_AREA_CODE" xml:space="preserve">
+    <value>Por favor verifique el código de area ingresado</value>
   </data>
   <data name="Page_HotelsSearch_Promo_Title" xml:space="preserve">
     <value>hotel para hoy</value>
   </data>
+  <data name="Flights_Checkout_Contact_Area_Code_ERROR_NOT_NUMERIC" xml:space="preserve">
+    <value>Por favor verifique el código de país ingresado</value>
+  </data>
   <data name="Page_HotelsSearch_Title" xml:space="preserve">
     <value>hoteles</value>
+  </data>
+  <data name="Flights_Checkout_Contact_Number_ERROR_INVALID_LENGTH" xml:space="preserve">
+    <value>Por favor, verifique el número ingresado</value>
+  </data>
+  <data name="Hotels_Checkout_Passenger_First_Name.Label" xml:space="preserve">
+    <value>Nombre/s</value>
+  </data>
+  <data name="Hotels_Checkout_Passenger_Last_Name.Label" xml:space="preserve">
+    <value>Apellido/s</value>
+  </data>
+  <data name="Hotels_Checkout_Propiertary.Text" xml:space="preserve">
+    <value>Titular de la habitación</value>
+  </data>
+  <data name="Hotels_Checkout_Passenger_First_Name_ERROR_REQUIRED" xml:space="preserve">
+    <value>Por favor, ingrese el nombre</value>
+  </data>
+  <data name="Hotels_Checkout_Passenger_Last_Name_ERROR_REQUIRED" xml:space="preserve">
+    <value>Por favor, ingrese el apellido</value>
   </data>
 </root>

@@ -5,6 +5,7 @@ using Despegar.Core.Service;
 using Windows.Storage;
 using System;
 using System.Threading.Tasks;
+using Despegar.Core.Business.Configuration;
 
 
 namespace Despegar.WP.UI.Model
@@ -17,7 +18,8 @@ namespace Despegar.WP.UI.Model
         public static ICoreContext CoreContext { get; set; }
         public static string Site { get { return CoreContext.GetSite(); } }
         public static string Language { get { return CoreContext.GetLanguage();} }
-        public static string UPAId { get; set; }
+        private static string upadId;
+        public static string UPAId { get { return upadId != null ? upadId : CoreContext.GetUOW(); } set { upadId = value; } }
 
         /// <summary>
         /// Initializes the CoreContext object and configures it
@@ -62,13 +64,14 @@ namespace Despegar.WP.UI.Model
         }
 
         public static async Task LoadUPA(IBugTracker bugtracker)
-        {
-            IUPAService upaService = CoreContext.GetUpaService();
-
+        {            
             var roamingSettings = ApplicationData.Current.RoamingSettings;
+
             if (roamingSettings.Values["UPA"] == null)
             {
-                var field = await upaService.GetUPA(bugtracker);
+                // Adquire UPA ID
+                IUPAService upaService = CoreContext.GetUpaService();
+                UpaField field = await upaService.GetUPA(bugtracker);
 
                 if (field != null)
                 {
@@ -79,11 +82,12 @@ namespace Despegar.WP.UI.Model
                     UPAId = null;
                 }
 
+                // Save UPA in Mobile Device
                 roamingSettings.Values["UPA"] = UPAId;
-
             }
             else
             {
+                // Load UPA from Moible Device
                 UPAId = roamingSettings.Values["UPA"].ToString();
             }
 

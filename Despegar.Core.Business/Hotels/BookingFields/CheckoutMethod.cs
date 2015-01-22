@@ -5,8 +5,7 @@ using System.Text;
 
 namespace Despegar.Core.Business.Hotels.BookingFields
 {
-    public class CheckoutMethod
+    public class CheckoutMethod : Dictionary<string, CheckoutMethodKey>
     {
-        public CheckoutMethodKey key { get; set; }
     }
 }

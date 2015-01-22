@@ -16,9 +16,11 @@
         <conv:TypeDiscountImageConverter x:Name="TypeDiscountImageConverter"/>
         <conv:NullToVisibilityConverter x:Name="NullToVisibilityConverter"/>
         <conv:StarsVisibilityConverter x:Name="StarsVisibilityConverter"/>
+        <conv:DiscountVisibilityConverter x:Name="DiscountVisibilityConverter"/>
+        <conv:AmenitiesVisibiliryConverter x:Name="AmenitiesVisibiliryConverter"/>
     </UserControl.Resources>
 
-    <Grid Margin="0,0,0,10">
+    <Grid x:Name="MainGrid" Margin="0,0,0,10">
         <Grid.RowDefinitions>
             <RowDefinition Height="{StaticResource Block4}" />
             <RowDefinition Height="{StaticResource Block1p}" />
@@ -30,7 +32,7 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
 
-            
+
             <Image Grid.Column="0"  Height="{StaticResource dBlock4}" Width="{StaticResource dBlock4}"  Source="{Binding hotel.main_picture , Converter={StaticResource StringFormatConverter}, ConverterParameter='http://staticontent.com/media/pictures/{0}/118x118' }"/>
             <Rectangle Width="30" Height="30" Stroke="#FF50BB30" Fill="#FF56A039" VerticalAlignment="Top" HorizontalAlignment="Right" />
             <TextBlock Grid.Column="0" Text="{Binding hotel.rating}" VerticalAlignment="Top" HorizontalAlignment="Right" />
@@ -46,7 +48,7 @@
 
                 <!--NAME-->
                 <TextBlock Grid.Row="0" Text="{Binding hotel.name}"></TextBlock>
-                
+
                 <!--STARS GRID AND DISTANCE-->
                 <Grid Grid.Row="1">
                     <Grid.ColumnDefinitions>
@@ -59,35 +61,41 @@
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
 
-                    <Image Grid.Column="0" Source="/Assets/Icon/App/star-temp.png" Visibility="{Binding hotel.stars , Converter={StaticResource StarsVisibilityConverter} ,ConverterParameter=1 }" />
-                    <Image Grid.Column="1" Source="/Assets/Icon/App/star-temp.png" Visibility="{Binding hotel.stars , Converter={StaticResource StarsVisibilityConverter} ,ConverterParameter=2 }" />
-                    <Image Grid.Column="2" Source="/Assets/Icon/App/star-temp.png" Visibility="{Binding hotel.stars , Converter={StaticResource StarsVisibilityConverter} ,ConverterParameter=3 }" />
-                    <Image Grid.Column="3" Source="/Assets/Icon/App/star-temp.png" Visibility="{Binding hotel.stars , Converter={StaticResource StarsVisibilityConverter} ,ConverterParameter=4 }" />
-                    <Image Grid.Column="4" Source="/Assets/Icon/App/star-temp.png" Visibility="{Binding hotel.stars , Converter={StaticResource StarsVisibilityConverter} ,ConverterParameter=5 }" />
+                    <Image Grid.Column="0" Source="/Assets/Icon/App/star-small-yellow.scale-100.png" Visibility="{Binding hotel.stars , Converter={StaticResource StarsVisibilityConverter} ,ConverterParameter=1 }" />
+                    <Image Grid.Column="1" Source="/Assets/Icon/App/star-small-yellow.scale-100.png" Visibility="{Binding hotel.stars , Converter={StaticResource StarsVisibilityConverter} ,ConverterParameter=2 }"/>
+                    <Image Grid.Column="2" Source="/Assets/Icon/App/star-small-yellow.scale-100.png" Visibility="{Binding hotel.stars , Converter={StaticResource StarsVisibilityConverter} ,ConverterParameter=3 }" />
+                    <Image Grid.Column="3" Source="/Assets/Icon/App/star-small-yellow.scale-100.png" Visibility="{Binding hotel.stars , Converter={StaticResource StarsVisibilityConverter} ,ConverterParameter=4 }" />
+                    <Image Grid.Column="4" Source="/Assets/Icon/App/star-small-yellow.scale-100.png" Visibility="{Binding hotel.stars , Converter={StaticResource StarsVisibilityConverter} ,ConverterParameter=5 }" />
 
 
 
 
-                    <Image Grid.Column="5" Source="//assets/Caminando.png" Visibility="{Binding distance ,Converter={StaticResource NullToVisibilityConverter}}" />
+                    <Image Grid.Column="5" Source="/assets/Icon/App/walkingman-small-white.scale-100.png" Visibility="{Binding distance ,Converter={StaticResource NullToVisibilityConverter}}" />
                     <TextBlock Grid.Column="6" Visibility="{Binding distance ,Converter={StaticResource NullToVisibilityConverter}}">
                         <Run Text="{Binding distance}"/>
                         <Run Text=" m" />
                     </TextBlock>
                 </Grid>
-                
+
                 <!--AMENITIES GRID-->
                 <Grid Grid.Row="2">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="auto"/>
                     </Grid.ColumnDefinitions>
+
+                    <Image Grid.Column="0" Source="/Assets/Icon/App/coffee-small-white.scale-100.png" Visibility="{Binding hotel.amenities ,Converter={StaticResource AmenitiesVisibiliryConverter} ,ConverterParameter='BREAKFST'}" />
+                    <Image Grid.Column="1" Source="/Assets/Icon/App/parking-small-white.scale-100.png" Visibility="{Binding hotel.amenities ,Converter={StaticResource AmenitiesVisibiliryConverter} ,ConverterParameter='PARKING'}"/>
+                    <Image Grid.Column="2" Source="/Assets/Icon/App/reception-small-white.scale-100.png" Visibility="{Binding hotel.amenities ,Converter={StaticResource AmenitiesVisibiliryConverter} ,ConverterParameter='PISCN'}"/>
+                    <Image Grid.Column="3" Source="/Assets/Icon/App/wifi-small-white.scale-100.png" Visibility="{Binding hotel.amenities ,Converter={StaticResource AmenitiesVisibiliryConverter} ,ConverterParameter='WIFI'}"/>
+
                 </Grid>
-                
+
                 <!--PAYMENT DESCRIPTION-->
                 <TextBlock Grid.Row="3" Text="{Binding payment_description}" />
-                
+
             </Grid>
 
         </Grid>
@@ -131,10 +139,10 @@
                 <Line Stretch="Fill" Stroke="white" StrokeThickness="2 " X1="1" Width="120" VerticalAlignment="Center"  HorizontalAlignment="Center"   />
             </Grid>-->
 
-            <Canvas Grid.Row="1" Grid.Column="0" HorizontalAlignment="Left" Visibility="{Binding price.promo_type , Converter={StaticResource NullToVisibilityConverter} }">
+            <Canvas Grid.Row="1" Grid.Column="0" HorizontalAlignment="Left" Visibility="{Binding price.promo_type , Converter={StaticResource DiscountVisibilityConverter} }">
                 <Rectangle Canvas.ZIndex="-1" Width="180" Height="15" Stroke="#FF50BB30" Fill="#FF56A039" HorizontalAlignment="Left" />
                 <TextBlock  Canvas.ZIndex="0" Text="{Binding price.promo_type,  Converter={StaticResource TypeDiscountTextConverter}}" HorizontalAlignment="Left"/>
-                
+
             </Canvas>
 
             <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding price.best}" HorizontalAlignment="Right"/>

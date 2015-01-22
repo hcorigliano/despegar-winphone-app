@@ -127,6 +127,9 @@
     <Compile Include="Controls\Alert.xaml.cs">
       <DependentUpon>Alert.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Maps\CustomMapControl.xaml.cs">
+      <DependentUpon>CustomMapControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Field.xaml.cs">
       <DependentUpon>Field.xaml</DependentUpon>
     </Compile>
@@ -160,6 +163,8 @@
     <Compile Include="Controls\Loading.xaml.cs">
       <DependentUpon>Loading.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Maps\CustomMapViewModel.cs" />
+    <Compile Include="Controls\Maps\CustomPinPoint.cs" />
     <Compile Include="Controls\SafeMessageDialog.cs" />
     <Compile Include="Developer\Controls\DesingUnit.xaml.cs">
       <DependentUpon>DesingUnit.xaml</DependentUpon>
@@ -322,6 +327,9 @@
     <Compile Include="Product\Hotels\HotelsDetails.xaml.cs">
       <DependentUpon>HotelsDetails.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Product\Hotels\HotelsFilters.xaml.cs">
+      <DependentUpon>HotelsFilters.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Product\Hotels\HotelsResults.xaml.cs">
       <DependentUpon>HotelsResults.xaml</DependentUpon>
     </Compile>
@@ -331,6 +339,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Strings\AppResources.cs" />
     <Page Include="Controls\Alert.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Maps\CustomMapControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -767,11 +779,17 @@
     <Content Include="Assets\country\ZA.png" />
     <Content Include="Assets\country\ZM.png" />
     <Content Include="Assets\country\ZW.png" />
+    <Content Include="Assets\maps\mappin.png" />
     <Content Include="Assets\Icon\App\calendar-temp.png" />
     <Content Include="Assets\Icon\App\compass-small-white.scale-100.png" />
     <Content Include="Assets\Icon\App\compass-small-white.scale-140.png" />
     <Content Include="Assets\Icon\App\compass-small-white.scale-240.png" />
-    <Content Include="Assets\Icon\App\star-temp.png" />
+    <Content Include="Assets\Icon\App\coffee-small-white.scale-100.png" />
+    <Content Include="Assets\Icon\App\parking-small-white.scale-100.png" />
+    <Content Include="Assets\Icon\App\reception-small-white.scale-100.png" />
+    <Content Include="Assets\Icon\App\star-small-yellow.scale-100.png" />
+    <Content Include="Assets\Icon\App\walkingman-small-white.scale-100.png" />
+    <Content Include="Assets\Icon\App\wifi-small-white.scale-100.png" />
     <Content Include="BugSense\BugSense - SDK License Agreement.txt" />
     <Content Include="Compilation\Decolar\decolar-logo-white.scale-100.png" />
     <Content Include="Compilation\Decolar\decolar-logo-white.scale-140.png" />
@@ -1350,6 +1368,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Product\Hotels\HotelsFilters.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Product\Hotels\HotelsResults.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -1368,6 +1390,7 @@
     <Folder Include="Assets\en\" />
     <Folder Include="Assets\es\" />
     <Folder Include="Assets\pt\" />
+    <Folder Include="Controls\PhotoGallery\" />
     <Folder Include="Product\Hotels\Checkout\Controls\" />
     <Folder Include="Strings\en\" />
   </ItemGroup>
@@ -1376,6 +1399,9 @@
   </ItemGroup>
   <ItemGroup>
     <SDKReference Include="BehaviorsXamlSDKManaged, Version=12.0" />
+    <SDKReference Include="Microsoft.VCLibs, Version=12.0">
+      <Name>Microsoft Visual C++ 2013 Runtime Package for Windows Phone</Name>
+    </SDKReference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="BugSense-WP8.1">

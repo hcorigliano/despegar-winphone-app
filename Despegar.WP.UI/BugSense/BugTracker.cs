@@ -38,14 +38,18 @@ namespace Despegar.WP.UI.BugSense
             breadCrumbCounter++;
         }
 
+        /// <summary>
+        ///  Warning, This method will send a "Crash report" to Splunk mint and it will count for the Error rate.
+        /// </summary>
+        /// <param name="exception"></param>
         public void LogException(Exception exception)
         {
-            BugSenseHandler.Instance.LogException(exception);
+            //BugSenseHandler.Instance.LogException(exception);
         }
 
-        public void LogException(Exception exception, object extrasExtraDataList) 
+        public void LogException(Exception exception, object extrasExtraDataList)
         {
-            BugSenseHandler.Instance.LogException(exception, extrasExtraDataList as LimitedCrashExtraDataList);
+            //BugSenseHandler.Instance.LogException(exception, extrasExtraDataList as LimitedCrashExtraDataList);
         }
 
         public void SetExtraData(string key, string value)
