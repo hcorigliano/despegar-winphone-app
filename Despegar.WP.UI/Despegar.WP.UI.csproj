@@ -303,6 +303,9 @@
     <Compile Include="Product\Hotels\Checkout\Contact.xaml.cs">
       <DependentUpon>Contact.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Product\Hotels\Checkout\Controls\PaymentWithInterest.xaml.cs">
+      <DependentUpon>PaymentWithInterest.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Product\Hotels\Checkout\InvoiceArgentina.xaml.cs">
       <DependentUpon>InvoiceArgentina.xaml</DependentUpon>
     </Compile>
@@ -482,6 +485,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Product\Hotels\Checkout\Contact.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Product\Hotels\Checkout\Controls\PaymentWithInterest.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -1367,7 +1374,6 @@
     <Folder Include="Assets\es\" />
     <Folder Include="Assets\pt\" />
     <Folder Include="Controls\PhotoGallery\" />
-    <Folder Include="Product\Hotels\Checkout\Controls\" />
     <Folder Include="Strings\en\" />
   </ItemGroup>
   <ItemGroup>

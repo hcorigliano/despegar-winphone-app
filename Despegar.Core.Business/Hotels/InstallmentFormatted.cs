@@ -1,11 +1,12 @@
 ﻿using Despegar.Core.Business.Flight.BookingFields;
+using Despegar.Core.Business.Hotels.BookingFields;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Despegar.Core.Business.Common.Checkout
+namespace Despegar.Core.Business.Hotels
 {    
     //---------------------------------------------------------------------------//
 
@@ -15,9 +16,9 @@ namespace Despegar.Core.Business.Common.Checkout
     public class InstallmentOption
     {
         public int InstallmentQuantity { get; set; }
-        public List<PaymentDetail> Cards { get; set; }
+        public List<HotelPayment> Cards { get; set; }
 
-        public PaymentDetail FirstCard { get { return Cards[0]; } }
+        public HotelPayment FirstCard { get { return Cards[0]; } }
 
         // For "WithInterest" payments
         public string GrupLabelText { get; set; }
@@ -25,7 +26,7 @@ namespace Despegar.Core.Business.Common.Checkout
         public InstallmentOption(int quantity)
         {
             this.InstallmentQuantity = quantity;
-            this.Cards = new List<PaymentDetail>();
+            this.Cards = new List<HotelPayment>();
         }
     }
 
@@ -33,7 +34,7 @@ namespace Despegar.Core.Business.Common.Checkout
 
     public class InstallmentFormatted
     {
-        //public List<InstallmentOption> PayAtDestination;  // TODO
+        public List<InstallmentOption> PayAtDestination { get; set; }
         public List<InstallmentOption> WithInterest { get; set; }
         public List<InstallmentOption> WithoutInterest { get; set; }
         public string ResourceLabel { get; set; }
@@ -55,12 +56,12 @@ namespace Despegar.Core.Business.Common.Checkout
 
         public InstallmentFormatted()
         {
-            //PayAtDestination = new PaymentsWithoutInterest();
+            PayAtDestination = new List<InstallmentOption>();
             WithInterest = new List<InstallmentOption>();
             WithoutInterest = new List<InstallmentOption>();
         }
 
-        public void AddWithouInterestInstallment(PaymentDetail payment)
+        public void AddWithouInterestInstallment(HotelPayment payment)
         {
             int quantity = payment.installments.quantity;
 
@@ -75,12 +76,27 @@ namespace Despegar.Core.Business.Common.Checkout
             installment.Cards.Add(payment);
         }
 
-        public void AddWithInterestInstallment(PaymentDetail payment)
+        public void AddWithInterestInstallment(HotelPayment payment)
         {            
             // Each Card is a separated Installments, Cards are not grouped here.  It is one card per installment
             var installment = new InstallmentOption(payment.installments.quantity);
             installment.Cards.Add(payment);
             WithInterest.Add(installment);            
+        }
+
+        public void AddPayAtDestinationInstallment(HotelPayment payment)
+        {
+            int quantity = payment.installments.quantity;
+
+            InstallmentOption installment = PayAtDestination.FirstOrDefault(z => z.InstallmentQuantity == quantity);
+
+            if (installment == null)
+            {
+                installment = new InstallmentOption(quantity);
+                PayAtDestination.Add(installment);
+            }
+
+            installment.Cards.Add(payment);
         }
 
     }

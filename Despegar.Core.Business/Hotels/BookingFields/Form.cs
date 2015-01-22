@@ -12,7 +12,8 @@ namespace Despegar.Core.Business.Hotels.BookingFields
         public Contact contact { get; set; }
         public CheckoutMethod checkout_method { get; set; }
         public AdditionalData additional_data { get; set; }
-
+         
+        // Custom
         public InvoiceArg Invoice { get { return checkout_method.FirstOrDefault().Value.payment.invoice; } }
     }
 }

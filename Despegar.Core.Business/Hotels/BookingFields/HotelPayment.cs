@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Despegar.Core.Business.Hotels.BookingFields
 {
-    public class Payment
+    public class HotelPayment
     {
         public string id { get; set; }
         public string type { get; set; }

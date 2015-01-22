@@ -5,11 +5,63 @@
     xmlns:local="using:Despegar.WP.UI.Product.Hotels.Checkout"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:conv="using:Despegar.WP.UI.Common.Converter"
+    xmlns:src="using:Despegar.WP.UI.Product.Hotels.Checkout"
+    xmlns:dev="using:Despegar.WP.UI.Developer.Controls"
     mc:Ignorable="d"
-    d:DesignHeight="300"
-    d:DesignWidth="400">
+    >
     
-    <Grid>
+    <UserControl.Resources>
+        <conv:ListToVisibilityConverter x:Name="ListToVisibilityConverter"/>
+        <conv:VisibilityConverter x:Name="VisibilityConverter" TrueValue="Visible" FalseValue="Collapsed" />
+        <conv:PaymentDetailsToLabelConverter x:Name="PaymentDetailsToLabelConverter"/>
+        <conv:PaymentDetailsToPaysConverter x:Name="PaymentDetailsToPaysConverter"/>
+    </UserControl.Resources>
 
-    </Grid>
+    <ScrollViewer>
+        <StackPanel>
+
+            <!-- Pay At Destination --><!--
+            <RadioButton Style="{StaticResource CheckoutPaymentRadioButton}" 
+                                      DataContext="{Binding }"  
+                                      Content="Pago en destino"                                       
+                                      x:Name="radioButton"
+                                      GroupName="MainRadios" />
+
+            --><!-- Without Interest --><!--
+            <ItemsControl ItemsSource="{Binding InstallmentFormatted.WithoutInterest}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel>
+                            <RadioButton Style="{StaticResource CheckoutPaymentRadioButton}" 
+                                      DataContext="{Binding }"  
+                                      Content="{Binding FirstCard, Converter={StaticResource PaymentDetailsToLabelConverter}}" 
+                                      Checked="OnRadioButton_Clicked"                                      
+                                      x:Name="radioButton"
+                                      GroupName="MainRadios" />
+
+                            <src:Cards DataContext="{Binding Cards}" Margin="-15,0,0,0" />
+
+                            <TextBlock Style="{StaticResource SegoeRegular15}" 
+                              Text="{Binding FirstCard, Converter={StaticResource PaymentDetailsToPaysConverter}}" 
+                              Visibility="{Binding IsChecked, ElementName=radioButton, Converter={StaticResource VisibilityConverter} }" />
+
+                        </StackPanel>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+
+            --><!-- With Interest --><!--
+            <RadioButton Visibility="{Binding InstallmentFormatted.WithInterest, Converter={StaticResource ListToVisibilityConverter}}" 
+                         Content="{Binding InstallmentFormatted.GrupLabelText}" 
+                         GroupName="MainRadios"
+                         x:Name="radioButtonWithInterest"  />
+
+            <StackPanel Margin="{StaticResource Left_Block1p}" Visibility="{Binding IsChecked, ElementName=radioButtonWithInterest, Converter={StaticResource VisibilityConverter} }">
+                <src:PaymentWithInterest x:Name="PaymentWithInterest" />
+            </StackPanel>-->
+
+        </StackPanel>
+    </ScrollViewer>
+
 </UserControl>

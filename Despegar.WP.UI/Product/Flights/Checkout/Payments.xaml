@@ -30,7 +30,7 @@
                                       Content="{Binding FirstCard, Converter={StaticResource PaymentDetailsToLabelConverter}}" 
                                       Checked="OnRadioButton_Clicked"                                      
                                       x:Name="radioButton"
-                                      GroupName="WithouInterest"/>
+                                      GroupName="WithouInterest" />
 
                         <src:Cards DataContext="{Binding Cards}" Margin="-15,0,0,0" />
                         

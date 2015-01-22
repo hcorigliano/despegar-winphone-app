@@ -5,6 +5,7 @@ using Despegar.Core.Business.CreditCard;
 using Despegar.Core.Business.Enums;
 using Despegar.Core.Business.Flight.BookingCompletePostResponse;
 using Despegar.Core.Business.Flight.BookingFields;
+using Despegar.Core.Business.Flights;
 using Despegar.Core.Business.Forms;
 using Despegar.Core.Exceptions;
 using Despegar.Core.IService;
