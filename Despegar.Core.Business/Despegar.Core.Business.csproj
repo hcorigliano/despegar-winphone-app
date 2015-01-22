@@ -144,6 +144,7 @@
     <Compile Include="Hotels\GeoLocation.cs" />
     <Compile Include="Hotels\HotelsAutocomplete\HotelAutocomplete.cs" />
     <Compile Include="Hotels\HotelsAutocomplete\HotelsAutocomplete.cs" />
+    <Compile Include="Hotels\SearchBox\HotelSearchModel.cs" />
     <Compile Include="Hotels\SearchDetails.cs" />
     <Compile Include="Mock.cs" />
     <Compile Include="Common\Checkout\Address.cs" />

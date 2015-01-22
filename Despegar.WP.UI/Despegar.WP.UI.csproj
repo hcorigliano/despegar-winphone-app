@@ -142,11 +142,20 @@
     <Compile Include="Controls\Flights\SearchCloseAirport.xaml.cs">
       <DependentUpon>SearchCloseAirport.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Hotels\DateControl.xaml.cs">
+      <DependentUpon>DateControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Hotels\Details\HotelItem.xaml.cs">
       <DependentUpon>HotelItem.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\Hotels\Details\MiniBoxSearch.xaml.cs">
       <DependentUpon>MiniBoxSearch.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Hotels\QuantityRoomsControl.xaml.cs">
+      <DependentUpon>QuantityRoomsControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Hotels\SearchHotelControl.xaml.cs">
+      <DependentUpon>SearchHotelControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\Loading.xaml.cs">
       <DependentUpon>Loading.xaml</DependentUpon>
@@ -357,11 +366,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controls\Hotels\DateControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Controls\Hotels\Details\HotelItem.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\Hotels\Details\MiniBoxSearch.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Hotels\QuantityRoomsControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Hotels\SearchHotelControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -747,6 +768,9 @@
     <Content Include="Assets\country\ZM.png" />
     <Content Include="Assets\country\ZW.png" />
     <Content Include="Assets\Icon\App\calendar-temp.png" />
+    <Content Include="Assets\Icon\App\compass-small-white.scale-100.png" />
+    <Content Include="Assets\Icon\App\compass-small-white.scale-140.png" />
+    <Content Include="Assets\Icon\App\compass-small-white.scale-240.png" />
     <Content Include="Assets\Icon\App\star-temp.png" />
     <Content Include="BugSense\BugSense - SDK License Agreement.txt" />
     <Content Include="Compilation\Decolar\decolar-logo-white.scale-100.png" />
