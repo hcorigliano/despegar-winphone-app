@@ -56,6 +56,7 @@
     <TargetPlatform Include="Windows, Version=8.1" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\Checkout\InstallmentFormatted.cs" />
     <Compile Include="Common\CustomErrors\CustomError.cs" />
     <Compile Include="Common\State\State.cs" />
     <Compile Include="Bindable.cs" />
@@ -73,6 +74,7 @@
     <Compile Include="Coupons\CouponParameter.cs" />
     <Compile Include="Coupons\CouponResponse.cs" />
     <Compile Include="CreditCard\ValidationCreditcards.cs" />
+    <Compile Include="Flight\BookingFields\PriceFormated.cs" />
     <Compile Include="Forms\BookingFormBuilder.cs" />
     <Compile Include="Enums\BookingStatusEnum.cs" />
     <Compile Include="Enums\FlightSearchChildEnum.cs" />

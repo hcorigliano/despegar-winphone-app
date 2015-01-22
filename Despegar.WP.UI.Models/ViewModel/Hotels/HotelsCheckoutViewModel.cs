@@ -24,7 +24,6 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
         private IConfigurationService configurationService;
         private ICommonServices commonServices;
         private ICouponsService couponsService;
-        private IBugTracker bugTracker;
         private ValidationCreditcards creditCardsValidations;
         private HotelsCrossParameters crossParams;
         #endregion

@@ -9,7 +9,6 @@ using Despegar.Core.Business.Forms;
 using Despegar.Core.Exceptions;
 using Despegar.Core.IService;
 using Despegar.Core.Log;
-using Despegar.WP.UI.Model.Classes.Flights.Checkout;
 using Despegar.WP.UI.Model.Interfaces;
 using Despegar.WP.UI.Model.ViewModel.Classes.Flights;
 using Despegar.WP.UI.Models.Classes;
@@ -453,7 +452,7 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
 
                 return _status;
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return BookingStatusEnum.BookingCustomError;
             }
@@ -558,11 +557,11 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
                     // Booking processed, check the status of Booking request
                     AnalizeBookingStatus(flightCrossParameters.BookingResponse.booking_status);
                 }
-                catch (HTTPStatusErrorException e)
+                catch (HTTPStatusErrorException )
                 {
                     OnViewModelError("COMPLETE_BOOKING_CONECTION_FAILED");
                 }
-                catch (Exception e)
+                catch (Exception )
                 {
                     OnViewModelError("COMPLETE_BOOKING_BOOKING_FAILED"); 
                 }

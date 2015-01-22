@@ -24,7 +24,6 @@ namespace Despegar.WP.UI.Product.Flights
 {
     public sealed partial class FlightSearch : Page
     {
-        private NavigationHelper navigationHelper;
         private ModalPopup loadingPopup = new ModalPopup(new Loading());
         public FlightSearchViewModel ViewModel { get; set; }        
 

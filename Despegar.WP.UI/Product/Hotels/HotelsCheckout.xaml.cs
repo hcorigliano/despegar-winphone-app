@@ -6,7 +6,7 @@ using Despegar.WP.UI.Model.Common;
 using Despegar.WP.UI.Model.ViewModel;
 using Despegar.WP.UI.Model.ViewModel.Classes.Flights;
 using Despegar.WP.UI.Model.ViewModel.Hotels;
-using Despegar.WP.UI.Product.Flights.Checkout.RiskQuestions;
+using Despegar.WP.UI.Product.Flights.Checkout;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
