@@ -6,62 +6,67 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Despegar.WP.UI.Model.Classes.Flights.Checkout
-{
-    public class PaymentsWithoutInterest
-    {
-        public List<PaymentDetail> OnePay { get; set; }
-        public List<PaymentDetail> TwoPays { get; set; }
-        public List<PaymentDetail> ThreePays { get; set; }
-        public List<PaymentDetail> FourPays { get; set; }
-        public List<PaymentDetail> FivePays { get; set; }
-        public List<PaymentDetail> SixPays { get; set; }
-        public List<PaymentDetail> SevenPays { get; set; }
-        public List<PaymentDetail> EightPays { get; set; }
-        public List<PaymentDetail> NinePays { get; set; }
-        public List<PaymentDetail> TenPays { get; set; }
-        public List<PaymentDetail> ElevenPays { get; set; }
-        public List<PaymentDetail> TwelvePays { get; set; }
-        public List<PaymentDetail> TwentyFourPays { get; set; }
-
-        public PaymentsWithoutInterest()
-        {
-            OnePay = new List<PaymentDetail>();
-            TwoPays = new List<PaymentDetail>();
-            ThreePays = new List<PaymentDetail>();
-            FourPays = new List<PaymentDetail>();
-            FivePays = new List<PaymentDetail>();
-            SixPays = new List<PaymentDetail>();
-            SevenPays = new List<PaymentDetail>();
-            EightPays = new List<PaymentDetail>();
-            NinePays = new List<PaymentDetail>();
-            TenPays = new List<PaymentDetail>();
-            ElevenPays = new List<PaymentDetail>();
-            TwelvePays = new List<PaymentDetail>();
-            TwentyFourPays = new List<PaymentDetail>();
-        }
-    }
-
+{    
     //---------------------------------------------------------------------------//
 
-    public class PaymentsWithInterest : PaymentsWithoutInterest
+    /// <summary>
+    /// Represents an installment with a fixed quantity (I.E: one pay,  two pays, three pays)  and the corresponding list of cards to choose from.
+    /// </summary>
+    public class InstallmentOption
     {
-        public string GrupLabelText { get; set; }        
+        public int InstallmentQuantity { get; set; }
+        public List<PaymentDetail> Cards { get; set; }       
+
+        // For "WithInterest" payments
+        public string GrupLabelText { get; set; }
+
+        public InstallmentOption(int quantity)
+        {
+            this.InstallmentQuantity = quantity;
+            this.Cards = new List<PaymentDetail>();
+        }
     }
 
     //---------------------------------------------------------------------------//
 
     public class InstallmentFormatted
     {
-        public PaymentsWithoutInterest PayAtDestination { get; set; }
-        public PaymentsWithInterest WithInterest { get; set; }
-        public PaymentsWithoutInterest WithoutInterest { get; set; }
+        //public List<InstallmentOption> PayAtDestination;  // TODO
+        public List<InstallmentOption> WithInterest;
+        public List<InstallmentOption> WithoutInterest;
+        public string ResourceLabel { get; set; }
+        public string GrupLabelText 
+        { 
+            get 
+            {
+                string input = String.Join(" , ", WithInterest.Select(x => x.InstallmentQuantity.ToString()));
+                StringBuilder sb = new StringBuilder(input);
+                sb[input.LastIndexOf(',')] = 'o';
+                return sb.ToString() + " " + ResourceLabel;
+            } 
+        }
 
         public InstallmentFormatted()
         {
-            PayAtDestination = new PaymentsWithoutInterest();
-            WithInterest = new PaymentsWithInterest();
-            WithoutInterest = new PaymentsWithoutInterest();
+            //PayAtDestination = new PaymentsWithoutInterest();
+            WithInterest = new List<InstallmentOption>();
+            WithoutInterest = new List<InstallmentOption>();
         }
 
+        public void AddWithoutInterest(PaymentDetail payment, bool withInterest)
+        {
+            var list = withInterest ? WithInterest : WithoutInterest;
+            int quantity = payment.installments.quantity;
+
+            InstallmentOption installment = list.FirstOrDefault(z => z.InstallmentQuantity == quantity);
+
+            if (installment == null)
+            {
+                installment = new InstallmentOption(quantity);
+                list.Add(installment);
+            }
+
+            installment.Cards.Add(payment);
+        }       
     }
 }

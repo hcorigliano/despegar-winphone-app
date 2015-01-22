@@ -6,6 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:conv="using:Despegar.WP.UI.Common.Converter"
+    xmlns:src="using:Despegar.WP.UI.Product.Flights.Checkout.Payment.Controls"
     mc:Ignorable="d"
     >
 
@@ -15,426 +16,52 @@
         <conv:PaymentDetailsToLabelConverter x:Name="PaymentDetailsToLabelConverter"/>
         <conv:PaymentDetailsToPaysConverter x:Name="PaymentDetailsToPaysConverter"/>
         <conv:CurrencyConverter x:Name="CurrencyConverter" />
-        <BitmapImage x:Key="DefaultImage" UriSource="/Assets/Icon/CreditCard/GRL.png" />
+        <!--<BitmapImage x:Key="DefaultImage" UriSource="/Assets/Icon/CreditCard/GRL.png" />-->
     </UserControl.Resources>
 
-    <Grid x:Name="PaymentGrid">
-        <StackPanel xmlns:src="using:Despegar.WP.UI.Product.Flights.Checkout.Payment.Controls">
+   
+    <StackPanel>
+        
+        <ItemsControl ItemsSource="{Binding InstallmentFormatted.WithInterest}">
+              <ItemsControl.ItemTemplate>
+                   <DataTemplate>
 
-            <ItemsControl x:Name="PaymentControlOnePay" ItemsSource="{Binding InstallmentFormatted.WithInterest.OnePay}">
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel>
+                        <ItemsControl  ItemsSource="{Binding InstallmentFormatted.Cards}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel>
 
-                            <RadioButton Style="{StaticResource CheckoutPaymentRadioButton}" 
-                                         Checked="OnRadioButton_Clicked"
-                                         GroupName="WithInteres" 
-                                         Visibility="{Binding Converter={StaticResource NullVisibilityConverter}}"  
-                                         Content="{Binding  Converter={StaticResource PaymentDetailsToLabelConverter}}" 
-                                         x:Name="radioButton"
-                                         HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
-
-                            <StackPanel xmlns:src="using:Despegar.WP.UI.Product.Flights.Checkout.Payment.Controls" >
-                                <src:Cards  DataContext="{Binding AsSimpleCardList}" Margin="-15,0,0,0" />
-                            </StackPanel>
-
-                            <StackPanel Visibility="{Binding IsChecked, ElementName=radioButton , Converter={StaticResource VisibilityConverter} }">
-                                <!--<Image Source="{Binding [0].card.code, Converter={StaticResource StringFormatConverter}, ConverterParameter='/Assets/Icon/CreditCard/{0}.png'}" Width="76" Margin="5,0,0,7" />-->
-                            <TextBlock Style="{StaticResource SegoeRegular15}" 
-                                       Text="{Binding Converter={StaticResource PaymentDetailsToPaysConverter}}" 
-                                        />
-                            <!-- CFT -->
-                                <TextBlock Style="{StaticResource SegoeRegular15}" Visibility="{Binding interest_by_bank, Converter={StaticResource VisibilityConverter}, ConverterParameter=Inverted}" >
-                                    <Run x:Uid="Flights_Checkout_Payment_FinancialCost" />
-                                    <Run Text=" $" />
-                                    <Run Text="{Binding financial_cost, Converter={StaticResource CurrencyConverter}}" />
-                                </TextBlock>
-
-                                <TextBlock x:Uid="Checkout_Bank_Interest" Style="{StaticResource SegoeRegular15}" Visibility="{Binding interest_by_bank, Converter={StaticResource VisibilityConverter}}" />
-                            </StackPanel>
-                        </StackPanel>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
+                                        <RadioButton Style="{StaticResource CheckoutPaymentRadioButton}" 
+                                            Checked="OnRadioButton_Clicked"
+                                            GroupName="WithInteres" 
+                                            Visibility="{Binding Converter={StaticResource NullVisibilityConverter}}"  
+                                            Content="{Binding  Converter={StaticResource PaymentDetailsToLabelConverter}}" 
+                                            x:Name="radioButton" />
 
 
-            <ItemsControl x:Name="PaymentControlTwoPays" ItemsSource="{Binding InstallmentFormatted.WithInterest.TwoPays}">
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel>
+                                        <src:Cards DataContext="{Binding AsSimpleCardList}" Margin="-15,0,0,0" />
 
-                            <RadioButton Style="{StaticResource CheckoutPaymentRadioButton}" 
-                                         Checked="OnRadioButton_Clicked"
-                                         GroupName="WithInteres" 
-                                         Visibility="{Binding Converter={StaticResource NullVisibilityConverter}}"  
-                                         Content="{Binding  Converter={StaticResource PaymentDetailsToLabelConverter}}" 
-                                         x:Name="radioButton"
-                                         HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+                                        <StackPanel Visibility="{Binding IsChecked, ElementName=radioButton , Converter={StaticResource VisibilityConverter} }">
+                                            <TextBlock Style="{StaticResource SegoeRegular15}"  Text="{Binding Converter={StaticResource PaymentDetailsToPaysConverter}}"  />
+                                            
+                                            <!-- CFT -->
+                                            <TextBlock Style="{StaticResource SegoeRegular15}" Visibility="{Binding interest_by_bank, Converter={StaticResource VisibilityConverter}, ConverterParameter=Inverted}" >
+                                                <Run x:Uid="Flights_Checkout_Payment_FinancialCost" />
+                                                <Run Text=" $" />
+                                                <Run Text="{Binding financial_cost, Converter={StaticResource CurrencyConverter}}" />
+                                            </TextBlock>
 
-                            <StackPanel xmlns:src="using:Despegar.WP.UI.Product.Flights.Checkout.Payment.Controls" >
-                                <src:Cards  DataContext="{Binding AsSimpleCardList}" Margin="-15,0,0,0" />
-                            </StackPanel>
-                            <!--<Image Source="{Binding [0].card.code, Converter={StaticResource StringFormatConverter}, ConverterParameter='/Assets/Icon/CreditCard/{0}.png'}" Width="76" Margin="5,0,0,7" />-->
-                            <TextBlock Style="{StaticResource SegoeRegular15}" 
-                                       Text="{Binding Converter={StaticResource PaymentDetailsToPaysConverter}}" 
-                                       Visibility="{Binding IsChecked, ElementName=radioButton , Converter={StaticResource VisibilityConverter} }" />
-                            <!-- CFT -->
-                            <TextBlock Style="{StaticResource SegoeRegular15}" Visibility="{Binding IsChecked, ElementName=radioButton , Converter={StaticResource VisibilityConverter} }" >
-                                <Run x:Uid="Flights_Checkout_Payment_FinancialCost" />
-                                <Run Text=" $" />
-                                <Run Text="{Binding financial_cost, Converter={StaticResource CurrencyConverter}}" />
-                            </TextBlock>
-                        </StackPanel>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
+                                            <TextBlock x:Uid="Checkout_Bank_Interest" Style="{StaticResource SegoeRegular15}" Visibility="{Binding interest_by_bank, Converter={StaticResource VisibilityConverter}}" />
+                                        </StackPanel>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
 
-
-            <ItemsControl x:Name="PaymentControlThreePays" ItemsSource="{Binding InstallmentFormatted.WithInterest.ThreePays}">
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel>
-
-                            <RadioButton Style="{StaticResource CheckoutPaymentRadioButton}" 
-                                         Checked="OnRadioButton_Clicked"
-                                         GroupName="WithInteres" 
-                                         Visibility="{Binding Converter={StaticResource NullVisibilityConverter}}"  
-                                         Content="{Binding  Converter={StaticResource PaymentDetailsToLabelConverter}}" 
-                                         x:Name="radioButton"
-                                         HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
-
-                            <StackPanel xmlns:src="using:Despegar.WP.UI.Product.Flights.Checkout.Payment.Controls" >
-                                <src:Cards  DataContext="{Binding AsSimpleCardList}" Margin="-15,0,0,0" />
-                            </StackPanel>
-                            <!--<Image Source="{Binding [0].card.code, Converter={StaticResource StringFormatConverter}, ConverterParameter='/Assets/Icon/CreditCard/{0}.png'}" Width="76" Margin="5,0,0,7" />-->
-                            <TextBlock Style="{StaticResource SegoeRegular15}" 
-                                       Text="{Binding Converter={StaticResource PaymentDetailsToPaysConverter}}" 
-                                       Visibility="{Binding IsChecked, ElementName=radioButton , Converter={StaticResource VisibilityConverter} }" />
-                            <!-- CFT -->
-                            <TextBlock Style="{StaticResource SegoeRegular15}" Visibility="{Binding IsChecked, ElementName=radioButton , Converter={StaticResource VisibilityConverter} }" >
-                                <Run x:Uid="Flights_Checkout_Payment_FinancialCost" />
-                                <Run Text=" $" />
-                                <Run Text="{Binding financial_cost, Converter={StaticResource CurrencyConverter}}" />
-                            </TextBlock>
-                        </StackPanel>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
-
-
-            <ItemsControl x:Name="PaymentControlFourPays" ItemsSource="{Binding InstallmentFormatted.WithInterest.FourPays}">
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel>
-
-                            <RadioButton Style="{StaticResource CheckoutPaymentRadioButton}" 
-                                         Checked="OnRadioButton_Clicked"
-                                         GroupName="WithInteres" 
-                                         Visibility="{Binding Converter={StaticResource NullVisibilityConverter}}"  
-                                         Content="{Binding  Converter={StaticResource PaymentDetailsToLabelConverter}}" 
-                                         x:Name="radioButton"
-                                         HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
-
-                            <StackPanel xmlns:src="using:Despegar.WP.UI.Product.Flights.Checkout.Payment.Controls" >
-                                <src:Cards  DataContext="{Binding AsSimpleCardList}" Margin="-15,0,0,0" />
-                            </StackPanel>
-                            <!--<Image Source="{Binding [0].card.code, Converter={StaticResource StringFormatConverter}, ConverterParameter='/Assets/Icon/CreditCard/{0}.png'}" Width="76" Margin="5,0,0,7" />-->
-                            <TextBlock Style="{StaticResource SegoeRegular15}" 
-                                       Text="{Binding Converter={StaticResource PaymentDetailsToPaysConverter}}" 
-                                       Visibility="{Binding IsChecked, ElementName=radioButton , Converter={StaticResource VisibilityConverter} }" />
-                            <!-- CFT -->
-                            <TextBlock Style="{StaticResource SegoeRegular15}" Visibility="{Binding IsChecked, ElementName=radioButton , Converter={StaticResource VisibilityConverter} }" >
-                                <Run x:Uid="Flights_Checkout_Payment_FinancialCost" />
-                                <Run Text=" $" />
-                                <Run Text="{Binding financial_cost, Converter={StaticResource CurrencyConverter}}" />
-                            </TextBlock>
-                        </StackPanel>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
-
-
-            <ItemsControl x:Name="PaymentControlFivePays" ItemsSource="{Binding InstallmentFormatted.WithInterest.FivePays}">
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel>
-
-                            <RadioButton Style="{StaticResource CheckoutPaymentRadioButton}" 
-                                         Checked="OnRadioButton_Clicked"
-                                         GroupName="WithInteres" 
-                                         Visibility="{Binding Converter={StaticResource NullVisibilityConverter}}"  
-                                         Content="{Binding  Converter={StaticResource PaymentDetailsToLabelConverter}}" 
-                                         x:Name="radioButton"
-                                         HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
-
-                            <StackPanel xmlns:src="using:Despegar.WP.UI.Product.Flights.Checkout.Payment.Controls" >
-                                <src:Cards  DataContext="{Binding AsSimpleCardList}" Margin="-15,0,0,0" />
-                            </StackPanel>
-                            <!--<Image Source="{Binding [0].card.code, Converter={StaticResource StringFormatConverter}, ConverterParameter='/Assets/Icon/CreditCard/{0}.png'}" Width="76" Margin="5,0,0,7" />-->
-                            <TextBlock Style="{StaticResource SegoeRegular15}" 
-                                       Text="{Binding Converter={StaticResource PaymentDetailsToPaysConverter}}" 
-                                       Visibility="{Binding IsChecked, ElementName=radioButton , Converter={StaticResource VisibilityConverter} }" />
-                            <!-- CFT -->
-                            <TextBlock Style="{StaticResource SegoeRegular15}" Visibility="{Binding IsChecked, ElementName=radioButton , Converter={StaticResource VisibilityConverter} }" >
-                                <Run x:Uid="Flights_Checkout_Payment_FinancialCost" />
-                                <Run Text=" $" />
-                                <Run Text="{Binding financial_cost, Converter={StaticResource CurrencyConverter}}" />
-                            </TextBlock>
-                        </StackPanel>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
-
-            <ItemsControl x:Name="PaymentControlSixPays" ItemsSource="{Binding InstallmentFormatted.WithInterest.SixPays}">
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel>
-                            <RadioButton Style="{StaticResource CheckoutPaymentRadioButton}"  
-                                         Checked="OnRadioButton_Clicked" 
-                                         GroupName="WithInteres"  
-                                         Visibility="{Binding Converter={StaticResource NullVisibilityConverter}}"  
-                                         x:Name="radioButton" 
-                                         Content="{Binding Converter={StaticResource PaymentDetailsToLabelConverter}}" 
-                                         HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
-                            
-                            <StackPanel xmlns:src="using:Despegar.WP.UI.Product.Flights.Checkout.Payment.Controls" >
-                                <src:Cards DataContext="{Binding AsSimpleCardList}" Margin="-15,0,0,0" />
-                            </StackPanel>
-                            <!--<Image Source="{Binding [0].card.code, Converter={StaticResource StringFormatConverter}, ConverterParameter='/Assets/Icon/CreditCard/{0}.png'}"  ImageFailed="Image_Load_Failed" Width="76" Margin="5,0,0,7"   />-->
-                            <TextBlock Style="{StaticResource SegoeRegular15}" 
-                                       Text="{Binding  Converter={StaticResource PaymentDetailsToPaysConverter}}" 
-                                       Visibility="{Binding IsChecked, ElementName=radioButton , Converter={StaticResource VisibilityConverter} }"/>
-                            <!-- CFT -->
-                            <TextBlock Style="{StaticResource SegoeRegular15}" Visibility="{Binding IsChecked, ElementName=radioButton , Converter={StaticResource VisibilityConverter} }" >
-                                <Run x:Uid="Flights_Checkout_Payment_FinancialCost" />
-                                <Run Text=" $" />
-                                <Run Text="{Binding financial_cost, Converter={StaticResource CurrencyConverter}}" />
-                            </TextBlock>
-                        </StackPanel>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
-
-
-            <ItemsControl x:Name="PaymentControlSevenPays" ItemsSource="{Binding InstallmentFormatted.WithInterest.SevenPays}">
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel>
-
-                            <RadioButton Style="{StaticResource CheckoutPaymentRadioButton}" 
-                                         Checked="OnRadioButton_Clicked"
-                                         GroupName="WithInteres" 
-                                         Visibility="{Binding Converter={StaticResource NullVisibilityConverter}}"  
-                                         Content="{Binding  Converter={StaticResource PaymentDetailsToLabelConverter}}" 
-                                         x:Name="radioButton"
-                                         HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
-
-                            <StackPanel xmlns:src="using:Despegar.WP.UI.Product.Flights.Checkout.Payment.Controls" >
-                                <src:Cards  DataContext="{Binding AsSimpleCardList}" Margin="-15,0,0,0" />
-                            </StackPanel>
-                            <!--<Image Source="{Binding [0].card.code, Converter={StaticResource StringFormatConverter}, ConverterParameter='/Assets/Icon/CreditCard/{0}.png'}" Width="76" Margin="5,0,0,7" />-->
-                            <TextBlock Style="{StaticResource SegoeRegular15}" 
-                                       Text="{Binding Converter={StaticResource PaymentDetailsToPaysConverter}}" 
-                                       Visibility="{Binding IsChecked, ElementName=radioButton , Converter={StaticResource VisibilityConverter} }" />
-                            <!-- CFT -->
-                            <TextBlock Style="{StaticResource SegoeRegular15}" Visibility="{Binding IsChecked, ElementName=radioButton , Converter={StaticResource VisibilityConverter} }" >
-                                <Run x:Uid="Flights_Checkout_Payment_FinancialCost" />
-                                <Run Text=" $" />
-                                <Run Text="{Binding financial_cost, Converter={StaticResource CurrencyConverter}}" />
-                            </TextBlock>
-                        </StackPanel>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
-
-
-            <ItemsControl x:Name="PaymentControlEightPays" ItemsSource="{Binding InstallmentFormatted.WithInterest.EightPays}">
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel>
-
-                            <RadioButton Style="{StaticResource CheckoutPaymentRadioButton}" 
-                                         Checked="OnRadioButton_Clicked"
-                                         GroupName="WithInteres" 
-                                         Visibility="{Binding Converter={StaticResource NullVisibilityConverter}}"  
-                                         Content="{Binding  Converter={StaticResource PaymentDetailsToLabelConverter}}" 
-                                         x:Name="radioButton"
-                                         HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
-
-                            <StackPanel xmlns:src="using:Despegar.WP.UI.Product.Flights.Checkout.Payment.Controls" >
-                                <src:Cards  DataContext="{Binding AsSimpleCardList}" Margin="-15,0,0,0" />
-                            </StackPanel>
-                            <!--<Image Source="{Binding [0].card.code, Converter={StaticResource StringFormatConverter}, ConverterParameter='/Assets/Icon/CreditCard/{0}.png'}" Width="76" Margin="5,0,0,7" />-->
-                            <TextBlock Style="{StaticResource SegoeRegular15}" 
-                                       Text="{Binding Converter={StaticResource PaymentDetailsToPaysConverter}}" 
-                                       Visibility="{Binding IsChecked, ElementName=radioButton , Converter={StaticResource VisibilityConverter} }" />
-                            <!-- CFT -->
-                            <TextBlock Style="{StaticResource SegoeRegular15}" Visibility="{Binding IsChecked, ElementName=radioButton , Converter={StaticResource VisibilityConverter} }" >
-                                <Run x:Uid="Flights_Checkout_Payment_FinancialCost" />
-                                <Run Text=" $" />
-                                <Run Text="{Binding financial_cost, Converter={StaticResource CurrencyConverter}}" />
-                            </TextBlock>
-                        </StackPanel>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
-
-
-            <ItemsControl x:Name="PaymentControlNinePays" ItemsSource="{Binding InstallmentFormatted.WithInterest.NinePays}">
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel>
-
-                            <RadioButton Style="{StaticResource CheckoutPaymentRadioButton}" 
-                                         Checked="OnRadioButton_Clicked"
-                                         GroupName="WithInteres" 
-                                         Visibility="{Binding Converter={StaticResource NullVisibilityConverter}}"  
-                                         Content="{Binding  Converter={StaticResource PaymentDetailsToLabelConverter}}" 
-                                         x:Name="radioButton"
-                                         HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
-
-                            <StackPanel xmlns:src="using:Despegar.WP.UI.Product.Flights.Checkout.Payment.Controls" >
-                                <src:Cards  DataContext="{Binding AsSimpleCardList}" Margin="-15,0,0,0" />
-                            </StackPanel>
-                            <!--<Image Source="{Binding [0].card.code, Converter={StaticResource StringFormatConverter}, ConverterParameter='/Assets/Icon/CreditCard/{0}.png'}" Width="76" Margin="5,0,0,7" />-->
-                            <TextBlock Style="{StaticResource SegoeRegular15}" 
-                                       Text="{Binding Converter={StaticResource PaymentDetailsToPaysConverter}}" 
-                                       Visibility="{Binding IsChecked, ElementName=radioButton , Converter={StaticResource VisibilityConverter} }" />
-                            <!-- CFT -->
-                            <TextBlock Style="{StaticResource SegoeRegular15}" Visibility="{Binding IsChecked, ElementName=radioButton , Converter={StaticResource VisibilityConverter} }" >
-                                <Run x:Uid="Flights_Checkout_Payment_FinancialCost" />
-                                <Run Text=" $" />
-                                <Run Text="{Binding financial_cost, Converter={StaticResource CurrencyConverter}}" />
-                            </TextBlock>
-                        </StackPanel>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
-
-
-            <ItemsControl x:Name="PaymentControlTenPays" ItemsSource="{Binding InstallmentFormatted.WithInterest.TenPays}">
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel>
-
-                            <RadioButton Style="{StaticResource CheckoutPaymentRadioButton}" 
-                                         Checked="OnRadioButton_Clicked"
-                                         GroupName="WithInteres" 
-                                         Visibility="{Binding Converter={StaticResource NullVisibilityConverter}}"  
-                                         Content="{Binding  Converter={StaticResource PaymentDetailsToLabelConverter}}" 
-                                         x:Name="radioButton"
-                                         HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
-
-                            <StackPanel xmlns:src="using:Despegar.WP.UI.Product.Flights.Checkout.Payment.Controls" >
-                                <src:Cards  DataContext="{Binding AsSimpleCardList}" Margin="-15,0,0,0" />
-                            </StackPanel>
-                            <!--<Image Source="{Binding [0].card.code, Converter={StaticResource StringFormatConverter}, ConverterParameter='/Assets/Icon/CreditCard/{0}.png'}" Width="76" Margin="5,0,0,7" />-->
-                            <TextBlock Style="{StaticResource SegoeRegular15}" 
-                                       Text="{Binding Converter={StaticResource PaymentDetailsToPaysConverter}}" 
-                                       Visibility="{Binding IsChecked, ElementName=radioButton , Converter={StaticResource VisibilityConverter} }" />
-                            <!-- CFT -->
-                            <TextBlock Style="{StaticResource SegoeRegular15}" Visibility="{Binding IsChecked, ElementName=radioButton , Converter={StaticResource VisibilityConverter} }" >
-                                <Run x:Uid="Flights_Checkout_Payment_FinancialCost" />
-                                <Run Text=" $" />
-                                <Run Text="{Binding financial_cost, Converter={StaticResource CurrencyConverter}}" />
-                            </TextBlock>
-                        </StackPanel>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
-
-
-            <ItemsControl x:Name="PaymentControlElevenPays" ItemsSource="{Binding InstallmentFormatted.WithInterest.ElevenPays}">
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel>
-
-                            <RadioButton Style="{StaticResource CheckoutPaymentRadioButton}" 
-                                         Checked="OnRadioButton_Clicked"
-                                         GroupName="WithInteres" 
-                                         Visibility="{Binding Converter={StaticResource NullVisibilityConverter}}"  
-                                         Content="{Binding  Converter={StaticResource PaymentDetailsToLabelConverter}}" 
-                                         x:Name="radioButton"
-                                         HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
-
-                            <StackPanel xmlns:src="using:Despegar.WP.UI.Product.Flights.Checkout.Payment.Controls" >
-                                <src:Cards  DataContext="{Binding AsSimpleCardList}" Margin="-15,0,0,0" />
-                            </StackPanel>
-                            <!--<Image Source="{Binding [0].card.code, Converter={StaticResource StringFormatConverter}, ConverterParameter='/Assets/Icon/CreditCard/{0}.png'}" Width="76" Margin="5,0,0,7" />-->
-                            <TextBlock Style="{StaticResource SegoeRegular15}" 
-                                       Text="{Binding Converter={StaticResource PaymentDetailsToPaysConverter}}" 
-                                       Visibility="{Binding IsChecked, ElementName=radioButton , Converter={StaticResource VisibilityConverter} }" />
-                            <!-- CFT -->
-                            <TextBlock Style="{StaticResource SegoeRegular15}" Visibility="{Binding IsChecked, ElementName=radioButton , Converter={StaticResource VisibilityConverter} }" >
-                                <Run x:Uid="Flights_Checkout_Payment_FinancialCost" />
-                                <Run Text=" $" />
-                                <Run Text="{Binding financial_cost, Converter={StaticResource CurrencyConverter}}" />
-                            </TextBlock>
-                        </StackPanel>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
-
-            <ItemsControl  x:Name="PaymentControlTwelvePays" ItemsSource="{Binding InstallmentFormatted.WithInterest.TwelvePays}">
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel >
-
-                            <RadioButton Style="{StaticResource CheckoutPaymentRadioButton}"  
-                                         Checked="OnRadioButton_Clicked" GroupName="WithInteres" 
-                                         Visibility="{Binding Converter={StaticResource NullVisibilityConverter}}"  
-                                         x:Name="radioButton" 
-                                         Content="{Binding Converter={StaticResource PaymentDetailsToLabelConverter}}" 
-                                         HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
-                            <StackPanel xmlns:src="using:Despegar.WP.UI.Product.Flights.Checkout.Payment.Controls" >
-                                <src:Cards DataContext="{Binding AsSimpleCardList}" Margin="-15,0,0,0" />
-                            </StackPanel>
-                            <!--<Image Source="{  Binding [0].card.code, Converter={StaticResource StringFormatConverter}, ConverterParameter='/Assets/Icon/CreditCard/{0}.png'}" Width="76" Margin="5,0,0,7"  />-->
-                            <TextBlock Style="{StaticResource SegoeRegular15}" 
-                                       Text="{Binding Converter={StaticResource PaymentDetailsToPaysConverter}}" 
-                                       Visibility="{Binding IsChecked, ElementName=radioButton , Converter={StaticResource VisibilityConverter} }"/>
-                            <!-- CFT -->
-                            <TextBlock Style="{StaticResource SegoeRegular15}" Visibility="{Binding IsChecked, ElementName=radioButton , Converter={StaticResource VisibilityConverter} }" >
-                                <Run x:Uid="Flights_Checkout_Payment_FinancialCost" />
-                                <Run Text=" $" />
-                                <Run Text="{Binding financial_cost, Converter={StaticResource CurrencyConverter}}" />
-                            </TextBlock>
-                        </StackPanel>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
-
-            <ItemsControl x:Name="PaymentControlTwentyFourPays" ItemsSource="{Binding InstallmentFormatted.WithInterest.TwentyFourPays}">
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel>
-
-                            <RadioButton Style="{StaticResource CheckoutPaymentRadioButton}" 
-                                         Checked="OnRadioButton_Clicked" 
-                                         GroupName="WithInteres"  
-                                         Visibility="{Binding  Converter={StaticResource NullVisibilityConverter}}"  
-                                         x:Name="radioButton"  
-                                         Content="{Binding Converter={StaticResource PaymentDetailsToLabelConverter}}" 
-                                         HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
-                            
-                            <StackPanel xmlns:src="using:Despegar.WP.UI.Product.Flights.Checkout.Payment.Controls" >
-                                <src:Cards DataContext="{Binding AsSimpleCardList}"  Margin="-15,0,0,0" />
-                            </StackPanel>
-                            <!--<Image Source="{Binding [0].card.code, Converter={StaticResource StringFormatConverter}, ConverterParameter='/Assets/Icon/CreditCard/{0}.png'}" Width="76" Margin="5,0,0,7" />-->
-                            <TextBlock Style="{StaticResource SegoeRegular15}"
-                                       Text="{Binding Converter={StaticResource PaymentDetailsToPaysConverter}}" 
-                                       Visibility="{Binding IsChecked, ElementName=radioButton , Converter={StaticResource VisibilityConverter} }"></TextBlock>
-                            <!-- CFT -->
-                            <TextBlock Style="{StaticResource SegoeRegular15}" Visibility="{Binding IsChecked, ElementName=radioButton , Converter={StaticResource VisibilityConverter} }" >
-                                <Run x:Uid="Flights_Checkout_Payment_FinancialCost" />
-                                <Run Text=" $" />
-                                <Run Text="{Binding financial_cost, Converter={StaticResource CurrencyConverter}}" />
-                            </TextBlock>
-                        </StackPanel>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
-
-        </StackPanel>
-    </Grid>
+                   </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+        
+    </StackPanel>
+    
 </UserControl>

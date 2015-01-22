@@ -410,6 +410,8 @@
         <Setter Property="FontSize" Value="19.2" />
         <Setter Property="CharacterSpacing" Value="-20" />
         <Setter Property="Foreground" Value="{StaticResource WhiteBrush}" />
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+        <Setter Property="VerticalAlignment" Value="Stretch" />
     </Style>
     <!-- Checkbox -->
     

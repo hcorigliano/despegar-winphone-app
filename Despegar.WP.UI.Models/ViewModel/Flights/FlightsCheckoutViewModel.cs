@@ -378,7 +378,7 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
         /// </summary>
         /// <returns></returns>
         private void FormatInstallments()
-        {            
+        {
             Payments payments = CoreBookingFields.payments;
             InstallmentFormatted = new InstallmentFormatted();
 
@@ -387,48 +387,7 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
             {
                 foreach (PaymentDetail item in payments.without_interest)
                 {
-                    switch (item.installments.quantity)
-                    {
-                        case 1:
-                            InstallmentFormatted.WithoutInterest.OnePay.Add(item);
-                            break;
-                        case 2:
-                            InstallmentFormatted.WithoutInterest.TwoPays.Add(item);
-                            break;
-                        case 3:
-                            InstallmentFormatted.WithoutInterest.ThreePays.Add(item);
-                            break;
-                        case 4:
-                            InstallmentFormatted.WithoutInterest.FourPays.Add(item);
-                            break;
-                        case 5:
-                            InstallmentFormatted.WithoutInterest.FivePays.Add(item);
-                            break;
-                        case 6:
-                            InstallmentFormatted.WithoutInterest.SixPays.Add(item);
-                            break;
-                        case 7:
-                            InstallmentFormatted.WithoutInterest.SevenPays.Add(item);
-                            break;
-                        case 8:
-                            InstallmentFormatted.WithoutInterest.EightPays.Add(item);
-                            break;
-                        case 9:
-                            InstallmentFormatted.WithoutInterest.NinePays.Add(item);
-                            break;
-                        case 10:
-                            InstallmentFormatted.WithoutInterest.TenPays.Add(item);
-                            break;
-                        case 11:
-                            InstallmentFormatted.WithoutInterest.ElevenPays.Add(item);
-                            break;
-                        case 12:
-                            InstallmentFormatted.WithoutInterest.TwelvePays.Add(item);
-                            break;
-                        case 24:
-                            InstallmentFormatted.WithoutInterest.TwentyFourPays.Add(item);
-                            break;
-                    }
+                    InstallmentFormatted.AddWithoutInterest(item, false);                    
                 }
             }
 
@@ -437,100 +396,14 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
             {
                 foreach (PaymentDetail item in payments.with_interest)
                 {
-                    switch (item.installments.quantity)
-                    {
-                        case 1:
-                            InstallmentFormatted.WithInterest.OnePay.Add(item);
-                            break;
-                        case 2:
-                            InstallmentFormatted.WithInterest.TwoPays.Add(item);
-                            break;
-                        case 3:
-                            InstallmentFormatted.WithInterest.ThreePays.Add(item);
-                            break;
-                        case 4:
-                            InstallmentFormatted.WithInterest.FourPays.Add(item);
-                            break;
-                        case 5:
-                            InstallmentFormatted.WithInterest.FivePays.Add(item);
-                            break;
-                        case 6:
-                            InstallmentFormatted.WithInterest.SixPays.Add(item);
-                            break;
-                        case 7:
-                            InstallmentFormatted.WithInterest.SevenPays.Add(item);
-                            break;
-                        case 8:
-                            InstallmentFormatted.WithInterest.EightPays.Add(item);
-                            break;
-                        case 9:
-                            InstallmentFormatted.WithInterest.NinePays.Add(item);
-                            break;
-                        case 10:
-                            InstallmentFormatted.WithInterest.TenPays.Add(item);
-                            break;
-                        case 11:
-                            InstallmentFormatted.WithInterest.ElevenPays.Add(item);
-                            break;
-                        case 12:
-                            InstallmentFormatted.WithInterest.TwelvePays.Add(item);
-                            break;
-                        case 24:
-                            InstallmentFormatted.WithInterest.TwentyFourPays.Add(item);
-                            break;
-                    }
+                    InstallmentFormatted.AddWithoutInterest(item, true);     
                 }
             }
-
-                List<string> availablePayments = new List<string>();
-
-                if (InstallmentFormatted.WithInterest.OnePay.Count != 0)
-                    availablePayments.Add("1");
-
-                if (InstallmentFormatted.WithInterest.TwoPays.Count != 0)
-                    availablePayments.Add("2");
-
-                if (InstallmentFormatted.WithInterest.ThreePays.Count != 0)
-                    availablePayments.Add("3");
-
-                if (InstallmentFormatted.WithInterest.FourPays.Count != 0)
-                    availablePayments.Add("4");
-
-                if (InstallmentFormatted.WithInterest.FivePays.Count != 0)
-                    availablePayments.Add("5");
-
-                if (InstallmentFormatted.WithInterest.SixPays.Count != 0)
-                    availablePayments.Add("6");
-
-                if (InstallmentFormatted.WithInterest.SevenPays.Count != 0)
-                    availablePayments.Add("7");
-
-                if (InstallmentFormatted.WithInterest.EightPays.Count != 0)
-                    availablePayments.Add("8");
-
-                if (InstallmentFormatted.WithInterest.NinePays.Count != 0)
-                    availablePayments.Add("9");
-
-                if (InstallmentFormatted.WithInterest.TenPays.Count != 0)
-                    availablePayments.Add("10");
-
-                if (InstallmentFormatted.WithInterest.ElevenPays.Count != 0)
-                    availablePayments.Add("11");
-
-                if (InstallmentFormatted.WithInterest.TwelvePays.Count != 0)
-                    availablePayments.Add("12");
-
-                if (InstallmentFormatted.WithInterest.TwentyFourPays.Count != 0)
-                    availablePayments.Add("24");
-
-            if (availablePayments.Count != 0)
-            {
-                string input = String.Join(" , ", availablePayments);
-                StringBuilder sb = new StringBuilder(input);
-                sb[input.LastIndexOf(',')] = 'o';
-
+            
+            if (InstallmentFormatted.WithInterest.Count != 0)
+            {                
                 var loader = new Windows.ApplicationModel.Resources.ResourceLoader();
-                InstallmentFormatted.WithInterest.GrupLabelText = sb.ToString() + " " + loader.GetString("Common_Pay_Of");
+                InstallmentFormatted.ResourceLabel = loader.GetString("Common_Pay_Of");
             }
         }
 
