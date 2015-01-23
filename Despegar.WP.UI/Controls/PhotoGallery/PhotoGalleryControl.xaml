@@ -25,6 +25,7 @@
 
         <Image Grid.ColumnSpan="2" Grid.RowSpan="2" Stretch="Fill"
 			Tag="0"
+            Margin="{StaticResource Square_Offset}"
 			HorizontalAlignment="Center"
 			VerticalAlignment="Center"
             Tapped="Image_Tapped"
@@ -32,24 +33,28 @@
         </Image>
         <Image Grid.Column="2" Stretch="Fill"
 			Tag="1"
+            Margin="{StaticResource Square_Offset}"
 			HorizontalAlignment="Center"
 			VerticalAlignment="Center"
                Tapped="Image_Tapped"
                />
         <Image Grid.Column="3" Stretch="Fill"
 			Tag="2"
+            Margin="{StaticResource Square_Offset}"
 			HorizontalAlignment="Center"
 			VerticalAlignment="Center"
                Tapped="Image_Tapped"
                />
         <Image Grid.Row="1" Grid.Column="2" Stretch="Fill"
 			Tag="3"
+            Margin="{StaticResource Square_Offset}"
 			HorizontalAlignment="Center"
 			VerticalAlignment="Center"
                Tapped="Image_Tapped"
                />
         <Image Grid.Row="1" Grid.Column="3" Stretch="Fill"
 			Tag="4"
+            Margin="{StaticResource Square_Offset}"
 			HorizontalAlignment="Center"
 			VerticalAlignment="Center"
                Tapped="Image_Tapped"
@@ -57,24 +62,28 @@
 
         <Image Grid.Row="2" Stretch="Fill"
 			Tag="5"
+            Margin="{StaticResource Square_Offset}"
 			HorizontalAlignment="Center"
 			VerticalAlignment="Center"
                Tapped="Image_Tapped"
                />
         <Image Grid.Row="2" Grid.Column="1" Stretch="Fill"
 			Tag="6"
+            Margin="{StaticResource Square_Offset}"
 			HorizontalAlignment="Center"
 			VerticalAlignment="Center"
                Tapped="Image_Tapped"
                />
         <Image Grid.Row="3" Stretch="Fill"
 			Tag="7"
+            Margin="{StaticResource Square_Offset}"
 			HorizontalAlignment="Center"
 			VerticalAlignment="Center"
                Tapped="Image_Tapped"
                />
         <Image Grid.Row="3" Grid.Column="1" Stretch="Fill"
 			Tag="8"
+            Margin="{StaticResource Square_Offset}"
 			HorizontalAlignment="Center"
 			VerticalAlignment="Center"
                Tapped="Image_Tapped"
@@ -82,6 +91,7 @@
 
         <Image Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2" Grid.RowSpan="2" Stretch="Fill"
 			Tag="9"
+            Margin="{StaticResource Square_Offset}"
 			HorizontalAlignment="Center"
 			VerticalAlignment="Center"
                Tapped="Image_Tapped"

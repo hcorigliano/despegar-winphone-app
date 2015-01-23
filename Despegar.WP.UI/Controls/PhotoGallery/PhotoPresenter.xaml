@@ -24,7 +24,7 @@
                         </Ellipse.Fill>
                     </Ellipse>-->
                     <Border Background="WhiteSmoke" >
-                        <Image  Source="{Binding UriSource}" Height="300" Margin="10" >
+                        <Image  Source="{Binding UriSource}" Height="300" Margin="{StaticResource Square_Offset}" >
                         </Image>
                     </Border>
                 </DataTemplate>
