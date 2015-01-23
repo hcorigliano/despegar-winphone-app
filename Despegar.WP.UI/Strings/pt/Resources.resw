@@ -940,4 +940,13 @@ A reserva não foi gerado e não cobra nenhuma taxa para a transação.</value>
   <data name="Hotels_Checkout_Rooms.Header" xml:space="preserve">
     <value>quartos</value>
   </data>
+  <data name="AppBarButton_Next.Label" xml:space="preserve">
+    <value>Seguiente</value>
+  </data>
+  <data name="AppBarButton_Previous.Label" xml:space="preserve">
+    <value>Anterior</value>
+  </data>
+  <data name="Page_Order_Title" xml:space="preserve">
+    <value>Ordem</value>
+  </data>
 </root>

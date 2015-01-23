@@ -22,6 +22,7 @@
 
         <Image Grid.Row="0" Style="{StaticResource TopLogo}" />
         <TextBlock Grid.Row="1" x:Uid="Page_FlightSearch" Style="{StaticResource PageHeaderSmall}" Text="BUSQUEDA" FontFamily="Segoe WP Semibold" />
+        <Button Command="{Binding SearchCommand}" Content="Click Me"></Button>
 
 
     </Grid>

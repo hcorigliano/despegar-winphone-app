@@ -19,27 +19,24 @@
             <ColumnDefinition Width="{StaticResource Block2}"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <Canvas Grid.Column="0" Height="{StaticResource dBlock2}" Width="{StaticResource dBlock2}" >
-            <Rectangle Canvas.ZIndex="-1" Fill="Blue"/>
-            <Image  Canvas.ZIndex="1" Height="{StaticResource dBlock2}" Width="{StaticResource dBlock2}"  Source="\Assets\Icon\App\calendar-temp.png"></Image>
-        </Canvas>
-        <Grid Grid.Column="1">
+        <Grid Grid.Column="0" Height="{StaticResource dBlock2}" Width="{StaticResource dBlock2}" Background="{StaticResource Blue40Brush}">
+            <Image Source="/Assets/Icon/App/calendar-temp.png"></Image> <!--Height="{StaticResource dBlock2}" Width="{StaticResource dBlock2}"-->
+        </Grid>
+        <Grid Grid.Column="1" Margin="{StaticResource Left_Offset}">
             <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <!--<TextBlock x:Uid="" Text="{Binding reSearchTextRoomAndNights}" Grid.Row="0"/>-->
 
-            <TextBlock Grid.Row="0">
+            <TextBlock Grid.Row="0" Style="{StaticResource SegoeLight28}" VerticalAlignment="Center">
                 <Run Text="{Binding Rooms}"/>
-                <Run Text=" "/>
                 <Run Text="{Binding Rooms , Converter={StaticResource PluralOrSingularResourceConverter} ,ConverterParameter='Room'}"/>
-                <Run Text=" - "/>
+                <Run Text="-"/>
                 <Run Text="{Binding Nights}"/>
-                <Run Text=" "/>
                 <Run Text="{Binding Nights , Converter={StaticResource PluralOrSingularResourceConverter} ,ConverterParameter='Night'}"/>
             </TextBlock>
-            <TextBlock Grid.Row="1">
+            <TextBlock Grid.Row="1" Style="{StaticResource SegoeRegular17}" VerticalAlignment="Center">
                 <Run Text="{Binding Adults}"/>
                 <Run Text=" "/>
                 <Run Text="{Binding Adults , Converter={StaticResource PluralOrSingularResourceConverter} ,ConverterParameter='Adult'}"/>

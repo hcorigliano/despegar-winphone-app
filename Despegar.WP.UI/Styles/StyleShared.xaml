@@ -86,6 +86,7 @@
     <!-- Margins -->
     <Thickness x:Key="Left_Offset">9.6,0,0,0</Thickness>
     <Thickness x:Key="Left_Block1p">29.6,0,0,0</Thickness>
+    <Thickness x:Key="Bottom_Block1p">0,0,0,29.6</Thickness>
     <Thickness x:Key="Bottom_Offset">0,0,0,9.6</Thickness>
     <Thickness x:Key="Top_Offset">0,9.6,0,0</Thickness>
     
@@ -127,6 +128,12 @@
         <Setter Property="FontSize" Value="24" />
         <Setter Property="FontWeight" Value="Normal" />
         <Setter Property="Opacity" Value="0.6" />
+    </Style>
+    <Style x:Key="SegoeSemibold15" TargetType="TextBlock" BasedOn="{StaticResource BaseText}">
+        <Setter Property="FontFamily" Value="Segoe UI Semibold" />
+        <Setter Property="FontSize" Value="15" />
+        <Setter Property="CharacterSpacing" Value="40" />
+        <Setter Property="FontWeight" Value="SemiBold" />
     </Style>
     <Style x:Key="SegoeSemibold17" TargetType="TextBlock" BasedOn="{StaticResource BaseText}">
         <Setter Property="FontFamily" Value="Segoe UI Semibold" />
