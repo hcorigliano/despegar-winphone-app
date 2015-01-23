@@ -264,14 +264,11 @@
     <Compile Include="Product\Flights\Checkout\Passengers.xaml.cs">
       <DependentUpon>Passengers.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Product\Flights\Checkout\Controls\Cards.xaml.cs">
+    <Compile Include="Controls\Checkout\Cards.xaml.cs">
       <DependentUpon>Cards.xaml</DependentUpon>
     </Compile>
     <Compile Include="Product\Flights\FlightFilters.xaml.cs">
       <DependentUpon>FlightFilters.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Product\Flights\Checkout\Controls\PaymentWithInterest.xaml.cs">
-      <DependentUpon>PaymentWithInterest.xaml</DependentUpon>
     </Compile>
     <Compile Include="Product\Flights\Checkout\Payments.xaml.cs">
       <DependentUpon>Payments.xaml</DependentUpon>
@@ -456,15 +453,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Product\Flights\Checkout\Controls\Cards.xaml">
+    <Page Include="Controls\Checkout\Cards.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Product\Flights\FlightMultipleEdit.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Product\Flights\Checkout\Controls\PaymentWithInterest.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -1404,9 +1397,6 @@
     </Reference>
     <Reference Include="System.Net.Http.Primitives">
       <HintPath>..\packages\Microsoft.Net.Http.2.2.28\lib\wpa81\System.Net.Http.Primitives.dll</HintPath>
-    </Reference>
-    <Reference Include="WinRTXamlToolkit">
-      <HintPath>..\packages\WinRTXamlToolkit.WindowsPhone.1.7.4.0\lib\wpa\WinRTXamlToolkit.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

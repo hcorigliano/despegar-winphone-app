@@ -34,7 +34,7 @@ namespace Despegar.Core.Business.Hotels
 
     public class InstallmentFormatted
     {
-        public List<InstallmentOption> PayAtDestination { get; set; }
+        public InstallmentOption PayAtDestination { get; set; }
         public List<InstallmentOption> WithInterest { get; set; }
         public List<InstallmentOption> WithoutInterest { get; set; }
         public string ResourceLabel { get; set; }
@@ -56,7 +56,7 @@ namespace Despegar.Core.Business.Hotels
 
         public InstallmentFormatted()
         {
-            PayAtDestination = new List<InstallmentOption>();
+            PayAtDestination = new InstallmentOption(1);
             WithInterest = new List<InstallmentOption>();
             WithoutInterest = new List<InstallmentOption>();
         }
@@ -86,17 +86,7 @@ namespace Despegar.Core.Business.Hotels
 
         public void AddPayAtDestinationInstallment(HotelPayment payment)
         {
-            int quantity = payment.installments.quantity;
-
-            InstallmentOption installment = PayAtDestination.FirstOrDefault(z => z.InstallmentQuantity == quantity);
-
-            if (installment == null)
-            {
-                installment = new InstallmentOption(quantity);
-                PayAtDestination.Add(installment);
-            }
-
-            installment.Cards.Add(payment);
+            PayAtDestination.Cards.Add(payment);
         }
 
     }

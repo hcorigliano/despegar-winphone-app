@@ -1,5 +1,5 @@
 ﻿<UserControl
-    x:Class="Despegar.WP.UI.Product.Flights.Checkout.Controls.Cards"
+    x:Class="Despegar.WP.UI.Controls.Checkout.Cards"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:Despegar.WP.UI.Product.Flights.Checkout.Payment.Controls"
@@ -12,6 +12,7 @@
 
     <UserControl.Resources>
         <conv:StringConverter x:Name="StringFormatConverter"/>
+        <conv:CardListConverter x:Name="CardListConverter"/>
     </UserControl.Resources>
 
 
@@ -20,7 +21,7 @@
         <!--<dev:UserControlDesignGrid />-->
 
         <StackPanel Orientation="Horizontal">
-            <ItemsControl ItemsSource="{Binding }">
+            <ItemsControl ItemsSource="{Binding CardsSource, Converter={StaticResource CardListConverter}}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <WrapGrid Width="{StaticResource dBlock10p}" Orientation="Horizontal"/>
@@ -28,11 +29,10 @@
                 </ItemsControl.ItemsPanel>
 
                 <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <!--Style="{StaticResource ImageBase}"-->
-                            <!--Margin="0,0,9.6,9.6" Width="{StaticResource dBlock3}" Height="{StaticResource dBlock2}"-->
+                    <DataTemplate>                        
                         <Image Margin="0,0,9.6,9.6" Width="{StaticResource dBlock3}" Height="{StaticResource dBlock2}" ImageFailed="Image_Load_Failed"  
-                               Source="{Binding card.code, Converter={StaticResource StringFormatConverter}, ConverterParameter='/Assets/Icon/CreditCard/{0}.png' , TargetNullValue='/Assets/Icon/CreditCard/GRL.png' }"   />
+                               Source="{Binding card.code, Converter={StaticResource StringFormatConverter}, ConverterParameter='/Assets/Icon/CreditCard/{0}.png' , 
+                              TargetNullValue='/Assets/Icon/CreditCard/GRL.png' }"   />
                     </DataTemplate>
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>

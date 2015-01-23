@@ -151,8 +151,6 @@ namespace Despegar.WP.UI.Controls
 
             // Save the current value to resume it if the next input was invalid
             lastInputText = control.Text;
-
-            
         }     
     }
 }

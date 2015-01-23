@@ -970,4 +970,7 @@ La reserva no ha sido generada y no se le cobrará ningún cargo por la transacc
   <data name="Hotels_Checkout_Passenger_Last_Name_ERROR_REQUIRED" xml:space="preserve">
     <value>Por favor, ingrese el apellido</value>
   </data>
+  <data name="Page_Hotels_Checkout_PayAtDestination.Content" xml:space="preserve">
+    <value>Pago en destino</value>
+  </data>
 </root>

@@ -6,7 +6,8 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:conv="using:Despegar.WP.UI.Common.Converter"
-    xmlns:src="using:Despegar.WP.UI.Product.Hotels.Checkout"
+    xmlns:src="using:Despegar.WP.UI.Product.Hotels.Checkout.Controls"
+    xmlns:src2="using:Despegar.WP.UI.Controls.Checkout"
     xmlns:dev="using:Despegar.WP.UI.Developer.Controls"
     mc:Ignorable="d"
     >
@@ -21,14 +22,17 @@
     <ScrollViewer>
         <StackPanel>
 
-            <!-- Pay At Destination --><!--
+             <!--Pay At Destination-->
             <RadioButton Style="{StaticResource CheckoutPaymentRadioButton}" 
+                                      x:Uid="Page_Hotels_Checkout_PayAtDestination"
                                       DataContext="{Binding }"  
                                       Content="Pago en destino"                                       
                                       x:Name="radioButton"
                                       GroupName="MainRadios" />
 
-            --><!-- Without Interest --><!--
+            <src2:Cards CardsSource="{Binding InstallmentFormatted.PayAtDestination.Cards}" Margin="-15,0,0,0" />
+            
+             <!--Without Interest--> 
             <ItemsControl ItemsSource="{Binding InstallmentFormatted.WithoutInterest}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
@@ -40,7 +44,7 @@
                                       x:Name="radioButton"
                                       GroupName="MainRadios" />
 
-                            <src:Cards DataContext="{Binding Cards}" Margin="-15,0,0,0" />
+                            <src2:Cards CardsSource="{Binding Cards}" Margin="-15,0,0,0" />
 
                             <TextBlock Style="{StaticResource SegoeRegular15}" 
                               Text="{Binding FirstCard, Converter={StaticResource PaymentDetailsToPaysConverter}}" 
@@ -51,7 +55,7 @@
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
 
-            --><!-- With Interest --><!--
+             <!--With Interest--> 
             <RadioButton Visibility="{Binding InstallmentFormatted.WithInterest, Converter={StaticResource ListToVisibilityConverter}}" 
                          Content="{Binding InstallmentFormatted.GrupLabelText}" 
                          GroupName="MainRadios"
@@ -59,7 +63,7 @@
 
             <StackPanel Margin="{StaticResource Left_Block1p}" Visibility="{Binding IsChecked, ElementName=radioButtonWithInterest, Converter={StaticResource VisibilityConverter} }">
                 <src:PaymentWithInterest x:Name="PaymentWithInterest" />
-            </StackPanel>-->
+            </StackPanel>
 
         </StackPanel>
     </ScrollViewer>

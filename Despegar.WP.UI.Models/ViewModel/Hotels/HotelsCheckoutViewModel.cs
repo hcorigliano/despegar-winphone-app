@@ -206,30 +206,24 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
             var item = CoreBookingFields.items.First().Value.payment;
 
             // Pay at destination
-            if (item.without_interest != null)
+            if (item.at_destination != null)
             {
                 foreach (HotelPayment payment in item.at_destination)
-                {
                     InstallmentFormatted.AddPayAtDestinationInstallment(payment);
-                }
             }
 
             // Without interest
             if (item.without_interest != null)
             {
                 foreach (HotelPayment payment in item.without_interest)
-                {
                     InstallmentFormatted.AddWithouInterestInstallment(payment);
-                }
             }
 
             // With Interest
             if (item.with_interest != null)
             {
                 foreach (HotelPayment payment in item.with_interest)
-                {
                     InstallmentFormatted.AddWithInterestInstallment(payment);
-                }
             }
 
             if (InstallmentFormatted.WithInterest.Count != 0)
@@ -269,7 +263,7 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
             HotelsBookingFieldsRequest bookRequest = new HotelsBookingFieldsRequest();
 
             // TODO
-            bookRequest.token = "fee2f96a-d2c1-4f52-9e38-8ea8dd26a50a";
+            bookRequest.token = "fe9d4ef2-e6b9-4943-9827-5c7c9ce6e2c5";
             bookRequest.hotel_id = "298331";
             bookRequest.room_choices = new List<string>() { "11" };
             bookRequest.mobile_identifier = deviceID;
