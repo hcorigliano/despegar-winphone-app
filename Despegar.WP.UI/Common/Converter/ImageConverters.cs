@@ -13,13 +13,9 @@ namespace Despegar.WP.UI.Common.Converter
     {
         public object Convert(object value, Type targetType, object parameter, string language)
         {
-            if (value == null)
-                return Visibility.Collapsed;
-
-            if ((int)value >= System.Convert.ToInt32(parameter)) //MOBILE
+            if (value != null && (int)value >= System.Convert.ToInt32(parameter)) //MOBILE
                 return Visibility.Visible;
             return Visibility.Collapsed;
-
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)
@@ -32,10 +28,9 @@ namespace Despegar.WP.UI.Common.Converter
     {
         public object Convert(object value, Type targetType, object parameter, string language)
         {
-            if (((List<Amenity>)value).Exists(x => x.id == parameter.ToString()))
+            if (value != null && ((List<Amenity>)value).Exists(x => x.id == parameter.ToString()))
                 return Visibility.Visible;
-            else
-                return Visibility.Collapsed;    
+            return Visibility.Collapsed;    
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)

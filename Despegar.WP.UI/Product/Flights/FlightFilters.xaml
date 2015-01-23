@@ -52,8 +52,8 @@
         </Grid.RowDefinitions>
 
         <!-- Title Panel -->
-        <Image Grid.Row="0" Style="{StaticResource TopLogo}" />
-        <TextBlock Grid.Row="1" x:Uid="Page_Filters_Title" Style="{StaticResource PageHeaderSmall}" Text="Filter" FontFamily="Segoe WP Semibold" />
+        <Image Grid.Row="0" Style="{StaticResource TopLogo}" /><!--Text="Filter"-->
+        <TextBlock Grid.Row="1" x:Uid="Page_Filters_Title" Style="{StaticResource PageHeaderSmall}"  FontFamily="Segoe WP Semibold" />
 
         <ListView Grid.Row="2" ItemTemplate="{StaticResource FlightFilterTemplate}" DataContext="{Binding Mode=TwoWay}"  ItemsSource="{Binding Source={StaticResource FiltersCollection}}" IsItemClickEnabled="True">
             <ListView.GroupStyle>

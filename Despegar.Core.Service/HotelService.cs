@@ -30,9 +30,9 @@ namespace Despegar.Core.Service
             return await connector.GetAsync<HotelsAutocomplete>(serviceUrl);
         }
 
-        public async Task<CitiesAvailability> GetHotelsAvailability(string checkin, string checkout, int destinationNumber, string distribution, string currency, int offset, int limit, string order)
+        public async Task<CitiesAvailability> GetHotelsAvailability(string checkin, string checkout, int destinationNumber, string distribution, string currency, int offset, int limit, string extraParameters)
         {
-            string serviceUrl = String.Format(ServiceURL.GetServiceURL(ServiceKey.HotelsAvailability), checkin, checkout, destinationNumber, distribution, currency, offset, limit, order);
+            string serviceUrl = String.Format(ServiceURL.GetServiceURL(ServiceKey.HotelsAvailability), checkin, checkout, destinationNumber, distribution, currency, offset, limit, extraParameters);
             IConnector connector = context.GetServiceConnector(ServiceKey.HotelsAutocomplete);
 
             return await connector.GetAsync<CitiesAvailability>(serviceUrl);            

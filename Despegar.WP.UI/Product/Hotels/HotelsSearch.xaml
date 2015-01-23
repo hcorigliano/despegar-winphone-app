@@ -51,8 +51,8 @@
             <Grid Grid.Column="1" Margin="8,0,0,0">
                 <Grid.RowDefinitions>
                     <RowDefinition/>
-                    <RowDefinition/>
-                </Grid.RowDefinitions>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
 
                 <TextBlock  Grid.Row="0" x:Uid="Page_HotelsSearch_Promo_Title" Style="{StaticResource SegoeLight24}" Text="Hotel para hoy" />
                 <TextBlock  Grid.Row="1" x:Uid="Page_HotelsSearch_Promo_SubTitle" Style="{StaticResource SegoeRegular17}" Text="Hotel cercano para esta noche" />

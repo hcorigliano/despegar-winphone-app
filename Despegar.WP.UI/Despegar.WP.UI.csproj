@@ -115,6 +115,7 @@
     <Compile Include="Common\Converter\MiniboxVisibilityConverter.cs" />
     <Compile Include="Common\Converter\CheckoutConverters.cs" />
     <Compile Include="Common\Converter\PluralOrSingularResourceConverter.cs" />
+    <Compile Include="Common\Converter\RatingToColorConverter.cs" />
     <Compile Include="Common\Converter\StyleColorResultConverter.cs" />
     <Compile Include="Common\Converter\StyleConverter.cs" />
     <Compile Include="Common\Converter\VisibilityConverter.cs" />

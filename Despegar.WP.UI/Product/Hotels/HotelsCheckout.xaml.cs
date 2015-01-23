@@ -57,8 +57,8 @@ namespace Despegar.WP.UI.Product.Hotels
 
             // Initialize Checkout
             ViewModel = new HotelsCheckoutViewModel(
-                Navigator.Instance,                
-                GlobalConfiguration.CoreContext.GetHotelService(),                
+                Navigator.Instance,
+                GlobalConfiguration.CoreContext.GetHotelService(),
                 GlobalConfiguration.CoreContext.GetCommonService(),
                 GlobalConfiguration.CoreContext.GetConfigurationService(),
                 GlobalConfiguration.CoreContext.GetCouponsService(),
