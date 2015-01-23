@@ -11,7 +11,7 @@ namespace Despegar.WP.UI.Controls.PhotoGallery
     {
         public List<string> PictureListName { get; set; }
         private List<BitmapImage> _ImageList { get; set; }
-        static string URLCONTENT = "http://staticontent.com/media/pictures/{0}/118x118";
+        static string URLCONTENT = "http://staticontent.com/media/pictures/{0}/300x300";
         public ICollection<BitmapImage> ImageList
         {
             get

@@ -4,89 +4,88 @@
     xmlns:local="using:Despegar.WP.UI.Controls.PhotoGallery"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:conv="using:Despegar.WP.UI.Common.Converter"
-    xmlns:Interactivity="using:Microsoft.Xaml.Interactivity" xmlns:Core="using:Microsoft.Xaml.Interactions.Core"
     x:Class="Despegar.WP.UI.Controls.PhotoGallery.PhotoGalleryControl"
     mc:Ignorable="d"
     d:DesignHeight="400"
     d:DesignWidth="400">
-    <UserControl.Resources>
-        <conv:StringConverter x:Key="StringFormatConverter"  />
-    </UserControl.Resources>
-	<Grid DataContext="{Binding}" DataContextChanged="VariableSizedWrapGrid_DataContextChanged">
-		<Grid.RowDefinitions>
-			<RowDefinition/>
-			<RowDefinition/>
-			<RowDefinition/>
-			<RowDefinition/>
-		</Grid.RowDefinitions>
-        
-		<Grid.ColumnDefinitions>
-			<ColumnDefinition/>
-			<ColumnDefinition/>
-			<ColumnDefinition/>
-			<ColumnDefinition/>
-		</Grid.ColumnDefinitions>
+    <Grid DataContext="{Binding}" DataContextChanged="VariableSizedWrapGrid_DataContextChanged">
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
 
-		<Image Grid.ColumnSpan="2" Grid.RowSpan="2" Stretch="Fill"
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <Image Grid.ColumnSpan="2" Grid.RowSpan="2" Stretch="Fill"
 			Tag="0"
 			HorizontalAlignment="Center"
 			VerticalAlignment="Center"
             Tapped="Image_Tapped"
                >
-			<!--<Interactivity:Interaction.Behaviors>
-				<Core:EventTriggerBehavior EventName="Tapped">
-                    <Core:NavigateToPageAction TargetPage="Despegar.WP.UI.Controls.PhotoGallery.PhotoPresenter" Parameter="{Binding photoGalleryViewModel}"  />
-                </Core:EventTriggerBehavior>
-			</Interactivity:Interaction.Behaviors>-->
-		</Image>
-		<Image Grid.Column="2" Stretch="Fill"
+        </Image>
+        <Image Grid.Column="2" Stretch="Fill"
 			Tag="1"
 			HorizontalAlignment="Center"
 			VerticalAlignment="Center"
+               Tapped="Image_Tapped"
                />
-		<Image Grid.Column="3" Stretch="Fill"
+        <Image Grid.Column="3" Stretch="Fill"
 			Tag="2"
 			HorizontalAlignment="Center"
 			VerticalAlignment="Center"
+               Tapped="Image_Tapped"
                />
-		<Image Grid.Row="1" Grid.Column="2" Stretch="Fill"
+        <Image Grid.Row="1" Grid.Column="2" Stretch="Fill"
 			Tag="3"
 			HorizontalAlignment="Center"
 			VerticalAlignment="Center"
+               Tapped="Image_Tapped"
                />
-		<Image Grid.Row="1" Grid.Column="3" Stretch="Fill"
+        <Image Grid.Row="1" Grid.Column="3" Stretch="Fill"
 			Tag="4"
 			HorizontalAlignment="Center"
 			VerticalAlignment="Center"
+               Tapped="Image_Tapped"
                />
 
-		<Image Grid.Row="2" Stretch="Fill"
+        <Image Grid.Row="2" Stretch="Fill"
 			Tag="5"
 			HorizontalAlignment="Center"
 			VerticalAlignment="Center"
+               Tapped="Image_Tapped"
                />
-		<Image Grid.Row="2" Grid.Column="1" Stretch="Fill"
+        <Image Grid.Row="2" Grid.Column="1" Stretch="Fill"
 			Tag="6"
 			HorizontalAlignment="Center"
 			VerticalAlignment="Center"
+               Tapped="Image_Tapped"
                />
-		<Image Grid.Row="3" Stretch="Fill"
+        <Image Grid.Row="3" Stretch="Fill"
 			Tag="7"
 			HorizontalAlignment="Center"
 			VerticalAlignment="Center"
+               Tapped="Image_Tapped"
                />
-		<Image Grid.Row="3" Grid.Column="1" Stretch="Fill"
+        <Image Grid.Row="3" Grid.Column="1" Stretch="Fill"
 			Tag="8"
 			HorizontalAlignment="Center"
 			VerticalAlignment="Center"
+               Tapped="Image_Tapped"
                />
-        
-		<Image Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2" Grid.RowSpan="2" Stretch="Fill"
+
+        <Image Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2" Grid.RowSpan="2" Stretch="Fill"
 			Tag="9"
 			HorizontalAlignment="Center"
 			VerticalAlignment="Center"
+               Tapped="Image_Tapped"
                />
-	</Grid>
+    </Grid>
 
 </UserControl>

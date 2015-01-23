@@ -7,27 +7,6 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-	<!--<Page.Resources>
-        <Style x:Key="ItemsControlStyle" TargetType="ItemsControl">
-            <Setter Property="ItemsPanel">
-                <Setter.Value>
-                    <ItemsPanelTemplate>
-                        <VirtualizingStackPanel Orientation="Horizontal"/>
-                    </ItemsPanelTemplate>
-                </Setter.Value>
-            </Setter>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="ItemsControl">
-                        <ScrollViewer HorizontalSnapPointsType="MandatorySingle"  HorizontalAlignment="Left" VerticalAlignment="Center" VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Auto" VerticalScrollMode="Disabled" HorizontalScrollMode="Auto" ZoomMode="Disabled">
-                            <ItemsPresenter />
-                        </ScrollViewer>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-    </Page.Resources>-->
-
 
     <ScrollViewer x:Name="scrollViewer" HorizontalSnapPointsType="MandatorySingle"  HorizontalAlignment="Left" VerticalAlignment="Center" VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Auto" VerticalScrollMode="Disabled" HorizontalScrollMode="Auto" ZoomMode="Disabled">
         <ItemsControl DataContext="{Binding}" ItemsSource="{Binding ImageList}" ScrollViewer.VerticalScrollBarVisibility="Disabled" >
@@ -39,20 +18,18 @@
             </ItemsControl.ItemsPanel>
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <Image Source="{Binding UriSource}" Height="320" ></Image>
+                    <!--<Ellipse Height="300" Width="300">
+                        <Ellipse.Fill>
+                            <ImageBrush ImageSource="{Binding UriSource}" />
+                        </Ellipse.Fill>
+                    </Ellipse>-->
+                    <Border Background="WhiteSmoke" >
+                        <Image  Source="{Binding UriSource}" Height="300" Margin="10" >
+                        </Image>
+                    </Border>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>
-
     </ScrollViewer>
-
-
-    <!--<ItemsControl DataContext="{Binding}" ItemsSource="{Binding ImageList}" Style="{StaticResource ItemsControlStyle}">
-        <ItemsControl.ItemTemplate>
-            <DataTemplate>
-                <Image Source="{Binding UriSource}" Height="320" ></Image>
-            </DataTemplate>
-        </ItemsControl.ItemTemplate>
-    </ItemsControl>-->
     
 </Page>

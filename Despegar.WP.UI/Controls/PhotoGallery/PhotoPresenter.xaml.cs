@@ -42,5 +42,6 @@ namespace Despegar.WP.UI.Controls.PhotoGallery
             this.DataContext = e.Parameter as PhotoGalleryViewModel;
         }
 
+
     }
 }
