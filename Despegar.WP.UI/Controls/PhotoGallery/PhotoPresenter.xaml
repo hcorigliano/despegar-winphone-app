@@ -8,45 +8,21 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <!--<Grid>
-        <CarouselPanel>
-            <ItemsControl>
-                <ItemsControl.Template>
-                    
-                </ItemsControl.Template>
-            </ItemsControl>
-        </CarouselPanel>
-    </Grid>-->
-   <!-- <ScrollViewer HorizontalScrollMode="Enabled"> 
-    <ItemsControl  x:Name="CarouselHost"
-            Height="100"
-            Width="600">
-        <ItemsControl.ItemsPanel>
-            <ItemsPanelTemplate>
-                <CarouselPanel Background="Cyan" />
-            </ItemsPanelTemplate>
-        </ItemsControl.ItemsPanel>
-    </ItemsControl>
-    </ScrollViewer>-->
 
-    <ScrollViewer x:Name="scrollViewer" HorizontalSnapPointsType="MandatorySingle"  HorizontalAlignment="Left" VerticalAlignment="Center" VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Auto" VerticalScrollMode="Disabled" HorizontalScrollMode="Auto" ZoomMode="Disabled">
-        <!--<StackPanel Orientation="Horizontal">
-            <Image Height="270" AutomationProperties.Name="Image of a cliff" Source="http://staticontent.com/media/pictures/b4f5c320-0f80-40df-b725-7de4c4892dea/480x270" Stretch="None" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-            <Image Height="270" AutomationProperties.Name="Image of grapes" Source="http://staticontent.com/media/pictures/3574ee67-738c-4808-bdd7-f26502de9c4e/480x270" Stretch="None" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-            <Image Height="270" AutomationProperties.Name="Image of Mount Rainier" Source="http://staticontent.com/media/pictures/b4f5c320-0f80-40df-b725-7de4c4892dea/480x270" Stretch="None" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-            <Image Height="270" AutomationProperties.Name="Image of a sunset" Source="http://staticontent.com/media/pictures/3574ee67-738c-4808-bdd7-f26502de9c4e/480x270" Stretch="None" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-            <Image Height="270" AutomationProperties.Name="Image of a valley" Source="http://staticontent.com/media/pictures/b4f5c320-0f80-40df-b725-7de4c4892dea/480x270" Stretch="None" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-        </StackPanel>-->
-        <StackPanel Orientation="Horizontal" Name="photocontainer">
+    <ScrollViewer x:Name="scrollViewer" HorizontalSnapPointsType="MandatorySingle"  HorizontalAlignment="Left" VerticalAlignment="Center" VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Auto" VerticalScrollMode="Disabled" HorizontalScrollMode="Auto" ZoomMode="Disabled"> 
+        <ItemsControl DataContext="{Binding}" ItemsSource="{Binding ImageList}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="Horizontal"></StackPanel>
+                    </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Image Source="{Binding UriSource}" Height="320" ></Image>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
 
-            <ItemsControl ItemsSource="{Binding ImageList}" DataContext="{Binding}"  Margin="{StaticResource Top_Offset}" DataContextChanged="RoutesItemControl_DataContextChanged">
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <Image Source="{Binding UriSource}" Height="320" ></Image>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
-        </StackPanel>
     </ScrollViewer>
-    
+
 </Page>

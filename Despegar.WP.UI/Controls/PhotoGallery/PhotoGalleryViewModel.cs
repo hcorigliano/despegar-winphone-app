@@ -16,6 +16,7 @@ namespace Despegar.WP.UI.Controls.PhotoGallery
         {
             get
             {
+                if (PictureListName == null) return null;
 
                 if (this._ImageList == null)
                 {

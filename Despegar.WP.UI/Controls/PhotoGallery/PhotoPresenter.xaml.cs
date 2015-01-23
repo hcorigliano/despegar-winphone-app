@@ -39,17 +39,8 @@ namespace Despegar.WP.UI.Controls.PhotoGallery
         /// This parameter is typically used to configure the page.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            //this.CarouselHost.Items.Add("x");
-            //this.CarouselHost.Items.Add("y");
-            //this.CarouselHost.Items.Add("z");
-            //this.CarouselHost.Items.Add("q");
-
             this.DataContext = e.Parameter as PhotoGalleryViewModel;
         }
 
-        private void RoutesItemControl_DataContextChanged(FrameworkElement sender, DataContextChangedEventArgs args)
-        {
-
-        }
     }
 }
