@@ -37,7 +37,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="{StaticResource Block1p}"/>
             <RowDefinition Height="Auto"/>
-            <RowDefinition/>
+            <RowDefinition />
         </Grid.RowDefinitions>
         
         <!-- Title Panel -->
