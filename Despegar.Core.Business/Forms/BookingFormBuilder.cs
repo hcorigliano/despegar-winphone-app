@@ -163,6 +163,8 @@ namespace Despegar.Core.Business.Forms
                     form.Add("vouchers", vouchers);                    
                 }
 
+                form.Add("booking_status", bookingFields.form.booking_status);
+
                 form.Add("passengers", passengers);
                 form.Add("contact", contact);
                 form.Add("payment", payment);

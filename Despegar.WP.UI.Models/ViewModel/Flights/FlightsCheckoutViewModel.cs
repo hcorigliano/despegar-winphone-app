@@ -35,12 +35,10 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
         private IConfigurationService configurationService;
         private ICouponsService couponsService;
         private FlightsCrossParameter flightCrossParameters;
-        private ValidationCreditcards CreditCardsValidations;
+        private ValidationCreditcards creditCardsValidations;
         #endregion
 
         #region ** Public Interface **
-
-
         public FlightBookingFields CoreBookingFields { get; set; }                
         public List<CountryFields> Countries { get; set; }
         public List<Despegar.Core.Business.Common.State.State> States { get; set; }
@@ -161,9 +159,9 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
                     payments.installment.card_type.CoreValue = selectedCard.card.type;
                     payments.installment.complete_card_code.CoreValue = selectedCard.card.code;
 
-                    if (CreditCardsValidations != null)
+                    if (creditCardsValidations != null)
                     {
-                        ValidationCreditcard validation = CreditCardsValidations.data.FirstOrDefault(x => x.bankCode == (selectedCard.card.bank == "" ? "*" : selectedCard.card.bank) && x.cardCode == selectedCard.card.company);
+                        ValidationCreditcard validation = creditCardsValidations.data.FirstOrDefault(x => x.bankCode == (selectedCard.card.bank == "" ? "*" : selectedCard.card.bank) && x.cardCode == selectedCard.card.company);
 
                         Validation valNumber = new Validation();
                         valNumber.error_code = "NUMBER";
@@ -226,7 +224,7 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
             IsLoading = true;
 
             string currentCountry = GlobalConfiguration.Site;
-            string deviceId = GlobalConfiguration.UPAId != null ? GlobalConfiguration.UPAId : GlobalConfiguration.CoreContext.GetUOW();
+            string deviceId = GlobalConfiguration.UPAId;
 
             try
             {
@@ -246,8 +244,7 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
                 this.Tracker.LeaveBreadcrumb("Flight checkout view model init complete");
             }
             catch (Exception e)
-            {
-                this.Tracker.LogException(e);
+            {                
                 Logger.Log("[App:FlightsCheckout] Exception " + e.Message);
                 IsLoading = false;
                 OnViewModelError("CHECKOUT_INIT_FAILED");
@@ -261,11 +258,10 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
             try
             {
                 this.Tracker.LeaveBreadcrumb("Flight checkout view model get credit cards validations");
-                CreditCardsValidations = await commonServices.GetCreditCardValidations();
+                creditCardsValidations = await commonServices.GetCreditCardValidations();
             }
             catch (Exception e)
             {
-                this.Tracker.LogException(e);
                 Logger.Log("[App:FlightsCheckout] Exception " + e.Message);
                 IsLoading = false;
                 OnViewModelError("CHECKOUT_INIT_FAILED");
@@ -341,7 +337,7 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
         {
             this.Tracker.LeaveBreadcrumb("Flight checkout view model get booking fields init" );
 
-            BookingFieldPost book = new BookingFieldPost();
+            FlightsBookingFieldRequest book = new FlightsBookingFieldRequest();
 
             if (flightCrossParameters.Inbound.choice != -1)
                 book.inbound_choice = flightCrossParameters.Inbound.choice; //-1
@@ -372,9 +368,9 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
         }
 
         // Public because it is used from the InvoiceArg control
-        public async Task<List<Despegar.Core.Business.Configuration.CitiesFields>> GetCities(string CountryCode, string Search, string cityresult)
+        public async Task<List<Despegar.Core.Business.Configuration.CitiesFields>> GetCities(string countryCode, string search, string cityresult)
         {
-            return await configurationService.AutoCompleteCities(CountryCode, Search, cityresult);
+            return await configurationService.AutoCompleteCities(countryCode, search, cityresult);
         }
 
         /// <summary>
@@ -586,10 +582,8 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
             }
             catch (Exception e)
             {
-                this.Tracker.LogException(e);
                 return BookingStatusEnum.BookingCustomError;
             }
-
         }
 
         /// <summary>
@@ -693,12 +687,10 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
                 }
                 catch (HTTPStatusErrorException e)
                 {
-                    this.Tracker.LogException(e);
                     OnViewModelError("COMPLETE_BOOKING_CONECTION_FAILED");
                 }
                 catch (Exception e)
                 {
-                    this.Tracker.LogException(e);
                     OnViewModelError("COMPLETE_BOOKING_BOOKING_FAILED"); 
                 }
 

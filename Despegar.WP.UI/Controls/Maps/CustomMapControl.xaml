@@ -1,0 +1,36 @@
+﻿<UserControl
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Despegar.WP.UI.Controls.Maps"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:Maps="using:Windows.UI.Xaml.Controls.Maps"
+    xmlns:Interactivity="using:Microsoft.Xaml.Interactivity" xmlns:Core="using:Microsoft.Xaml.Interactions.Core"
+    x:Class="Despegar.WP.UI.Controls.Maps.CustomMapControl"   
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="600">
+
+    <Grid>
+       
+        <Maps:MapControl x:Name="mainMap" LandmarksVisible="True" ZoomLevel="12">
+            <Maps:MapItemsControl ItemsSource="{Binding Locations}">
+                <Maps:MapItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel>
+                            <TextBlock Text="{Binding Title}" Foreground="Black" FontWeight="Bold" ></TextBlock>
+                            <Image Height="25"
+                                      Source="ms-appx:///Assets/maps/mappin.png"
+                                      Maps:MapControl.Location="{Binding Geopoint}"
+                                      Maps:MapControl.NormalizedAnchorPoint="{Binding Anchor}"
+                                      Tapped="Image_Tapped"
+                                      >
+                            </Image>
+                        </StackPanel>
+                    </DataTemplate>
+                </Maps:MapItemsControl.ItemTemplate>
+            </Maps:MapItemsControl>
+        </Maps:MapControl>
+
+    </Grid>
+</UserControl>

@@ -1,5 +1,6 @@
 ﻿using Despegar.Core.Business.Hotels;
 using Despegar.Core.Business.Hotels.CitiesAvailability;
+using Despegar.Core.Business.Hotels.SearchBox;
 using Despegar.Core.IService;
 using Despegar.Core.Log;
 using Despegar.WP.UI.Model.Interfaces;
@@ -15,21 +16,80 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
 {
     public class HotelsSearchViewModel : ViewModelBase
     {
-        public INavigator navigator { get; set; }
+        public INavigator Navigator { get; set; }
         public IHotelService hotelService { get; set; }
-
+        private HotelSearchModel coreSearchModel;
 
         public HotelsSearchViewModel(INavigator navigator, IHotelService hotelService, IBugTracker t) : base(t)
         {
-            this.navigator = navigator;
+            this.Navigator = navigator;
             this.hotelService = hotelService;
+            this.coreSearchModel = new HotelSearchModel();
         }
+
+        public string Destination
+        {
+            get { return coreSearchModel.DestinationHotel; }
+            set
+            {
+                coreSearchModel.DestinationHotel = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string DestinationText
+        {
+            get { return coreSearchModel.DestinationHotelText; }
+            set
+            {
+                coreSearchModel.DestinationHotelText = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public DateTimeOffset FromDate
+        {
+            get { return coreSearchModel.DepartureDate; }
+            set
+            {
+                coreSearchModel.DepartureDate = value;
+                OnPropertyChanged();
+        }
+        }
+
+        public DateTimeOffset ToDate
+        {
+            get { return coreSearchModel.DestinationDate; }
+            set
+            {
+                coreSearchModel.DestinationDate = value;
+                OnPropertyChanged();
+            }
+        }
+
 
         public ICommand SearchCommand
         {
             get
             {
                 return new RelayCommand(() => SearchHotels());
+            }
+        }
+
+        /// <summary>
+        /// Returns the available options for Adults passengers
+        /// </summary>
+        public IEnumerable<int> RoomOptions
+        {
+            get
+            {
+                List<int> options = new List<int>();
+
+                // 1 is the Minimum Adult count
+                for (int i = 1; i <= 8 ; i++)
+                    options.Add(i);
+
+                return options;
             }
         }
 
@@ -43,7 +103,7 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
             hotelCrossParameters.SearchParameters.destinationNumber = 4451; //982
 
             //int child = hotelCrossParameters.SearchParameters.Childs ;
-            navigator.GoTo(ViewModelPages.HotelsResults, hotelCrossParameters);
+            Navigator.GoTo(ViewModelPages.HotelsResults, hotelCrossParameters);
 
             //CitiesAvailability cities = await hotelService.GetHotelsAvailability("2015-03-01", "2015-03-05", 982, "2", "ars", 0, 30, "",""); //982 , "2015-03-01" , "2015-03-05" , "2" , "ars" , 0 , 30 , "" , "" );
             //cities.searchDetails =  new HotelsSearchParameters();

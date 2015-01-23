@@ -5,10 +5,50 @@
     xmlns:local="using:Despegar.WP.UI.Product.Hotels.Checkout"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:conv="using:Despegar.WP.UI.Common.Converter"
+    xmlns:controls="using:Despegar.WP.UI.Controls"
     mc:Ignorable="d"
     >
+    <UserControl.Resources>
+        <conv:VisibilityConverter x:Name="VisibilityConverter" TrueValue="Visible" FalseValue="Collapsed"/>
+    </UserControl.Resources>
     
     <Grid>
+        <ScrollViewer>
+            <ItemsControl ItemsSource="{Binding CoreBookingFields.form.passengers}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="{StaticResource Block1p}" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
 
+                            <!-- Passenger Index -->                        
+                            <TextBlock Style="{StaticResource SegoeRegular24}" Grid.Row="0">
+                                <Run x:Uid="Hotels_Checkout_Propiertary" />
+                                <Run Text="{Binding Index}" />
+                            </TextBlock>
+
+                            <!-- Fields -->
+                            <StackPanel Grid.Row="1">
+                                <!-- First Name -->
+                                <StackPanel Visibility="{Binding first_name.required, Converter={StaticResource VisibilityConverter}, FallbackValue=Collapsed}">
+                                    <controls:Field InputType="TextOnly" x:Uid="Hotels_Checkout_Passenger_First_Name" Value="{Binding first_name.CoreValue, Mode=TwoWay}"  />
+                                    <controls:ValidationError ErrorPrefix="Hotels_Checkout_Passenger_First_Name" ErrorCode="{Binding first_name.CurrentError}" />
+                                </StackPanel>
+                                <!-- Last Name -->
+                                <StackPanel Visibility="{Binding last_name.required, Converter={StaticResource VisibilityConverter}, FallbackValue=Collapsed}">
+                                    <controls:Field InputType="TextOnly"  x:Uid="Hotels_Checkout_Passenger_Last_Name" Value="{Binding last_name.CoreValue, Mode=TwoWay}" />
+                                    <controls:ValidationError ErrorPrefix="Hotels_Checkout_Passenger_Last_Name" ErrorCode="{Binding last_name.CurrentError}" />
+                                </StackPanel>                                                               
+                            </StackPanel>
+                            
+                        </Grid>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
     </Grid>
+    
 </UserControl>

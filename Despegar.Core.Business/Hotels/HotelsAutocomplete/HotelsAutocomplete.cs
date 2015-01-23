@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace Despegar.Core.Business.Hotels.HotelsAutocomplete
 {
-    public class HotelsAutocomplete
+    public class HotelsAutocomplete : List<HotelAutocomplete>
     {
-        public List<HotelAutocomplete> Hotels { get; set; }
+
     }
 }

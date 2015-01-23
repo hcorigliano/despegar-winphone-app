@@ -16,5 +16,11 @@ namespace Despegar.Core.Business.Hotels.HotelsAutocomplete
         public string country_code { get; set; }
         public bool has_airport { get; set; }
         public int? city_id { get; set; }
+
+
+        public override string ToString()
+        {
+            return this.name;
+        }
     }
 }

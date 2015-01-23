@@ -5,8 +5,17 @@
     xmlns:local="using:Despegar.WP.UI.Product.Hotels"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:Classes="using:Despegar.WP.UI.Model.Classes"
+    xmlns:Model="using:Despegar.WP.UI.Model"
+    xmlns:src="using:Despegar.WP.UI.Controls.Hotels"
+    xmlns:control="using:Despegar.WP.UI.Controls"
+    xmlns:dev="using:Despegar.WP.UI.Developer.Controls"
+    xmlns:Interactivity="using:Microsoft.Xaml.Interactivity" 
+    xmlns:Core="using:Microsoft.Xaml.Interactions.Core"
+    xmlns:conv="using:Despegar.WP.UI.Common.Converter"
+
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    Style="{StaticResource BasePage}">
 
     <Grid Style="{StaticResource MainContainerGrid}">
         <Grid.ChildrenTransitions>
@@ -17,12 +26,48 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="{StaticResource Block1p}"/>
             <RowDefinition Height="Auto"/>
-            <RowDefinition/>
+            <RowDefinition Height="{StaticResource Block2p}" />
+            <RowDefinition Height="{StaticResource Block2p}"/>
+            <RowDefinition Height="{StaticResource Block3p}"/>
+            <RowDefinition Height="{StaticResource Block3p}"/>
+            <RowDefinition Height="{StaticResource Block3p}"/>
+            <RowDefinition />
         </Grid.RowDefinitions>
 
         <Image Grid.Row="0" Style="{StaticResource TopLogo}" />
-        <TextBlock Grid.Row="1" x:Uid="Page_FlightSearch" Style="{StaticResource PageHeaderSmall}" Text="BUSQUEDA" FontFamily="Segoe WP Semibold" />
-        <Button Command="{Binding SearchCommand}" Content="Click Me"></Button>
+        <TextBlock Grid.Row="1" x:Uid="Page_HotelsSearch" Style="{StaticResource PageHeaderSmall}" Text="BUSQUEDA" FontFamily="Segoe WP Semibold" />
+        <TextBlock Grid.Row="2" x:Uid="Page_HotelsSearch_Title" Style="{StaticResource PageHeader}" Text="hoteles"/>
+
+        <Grid Grid.Row="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.Column="0" Background="{StaticResource Blue40Brush}" Height="37" Width="37">
+                <Image Style="{StaticResource HotelForTodayIcon}" Height="23" Width="23"  />
+            </Grid>
+           
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+                <TextBlock  Grid.Row="0" x:Uid="Page_HotelsSearch_Promo_Title" Style="{StaticResource SegoeLight24}" Text="Hotel para hoy" />
+                <TextBlock  Grid.Row="1" x:Uid="Page_HotelsSearch_Promo_SubTitle" Style="{StaticResource SegoeRegular17}" Text="Hotel cercano para esta noche" />
+
+            </Grid>
+        </Grid>
+
+        <src:SearchHotelControl Grid.Row="4"   
+                                           SelectedDestinationCode="{Binding Destination, Mode=TwoWay}"  
+                                           SelectedDestinationText="{Binding DestinationText, Mode=TwoWay}" />
+
+        <src:DateControl Grid.Row="5"  FromDate="{Binding FromDate, Mode=TwoWay}" ToDate="{Binding ToDate, Mode=TwoWay}" />
+
+        <Button x:Uid="Hotels_Search_SearchButton" Command="{Binding SearchCommand}" Grid.Row="6"  Style="{StaticResource ButtonBottom}" Content="Buscar hoteles"/>
+
 
 
     </Grid>

@@ -13,11 +13,13 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
-namespace Despegar.WP.UI.Product.Hotels.Checkout
+// The User Control item template is documented at http://go.microsoft.com/fwlink/?LinkId=234236
+
+namespace Despegar.WP.UI.Controls.Hotels
 {
-    public sealed partial class Contact : UserControl
+    public sealed partial class QuantityRoomsControl : UserControl
     {
-        public Contact()
+        public QuantityRoomsControl()
         {
             this.InitializeComponent();
         }

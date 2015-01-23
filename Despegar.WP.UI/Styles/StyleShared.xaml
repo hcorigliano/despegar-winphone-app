@@ -946,6 +946,11 @@
         <Setter Property="MinHeight"  Value="{StaticResource dBlock3p}" />
     </Style>
     
+    <!-- Hotel SearchBox -->
+    <Style x:Key="HotelForTodayIcon" TargetType="Image" BasedOn="{StaticResource IconImageBase}">
+        <Setter Property="Source" Value="/Assets/Icon/App/compass-small-white.scale-100.png" />
+    </Style>
+    
     <!-- Flights SearchBox -->
     <Style x:Key="FlightAirportIcon" TargetType="Image" BasedOn="{StaticResource IconImageBase}">       
         <Setter Property="Source" Value="/Assets/Icon/App/flight-right-small-white.png" />        

@@ -6,6 +6,7 @@ using Despegar.WP.UI.Controls;
 using Despegar.WP.UI.Model;
 using Despegar.WP.UI.Model.ViewModel;
 using Despegar.WP.UI.Model.ViewModel.Classes;
+using Despegar.WP.UI.Product.Hotels;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -170,10 +171,10 @@ namespace Despegar.WP.UI
                 case "Flights":
                     ViewModel.NavigateToFlights.Execute(null);
                     break;
-                //case "MyDespegar":
-                    //var f= Window.Current.Content as Frame;
-                    //f.Navigate(typeof(FlightCheckout), null);
-                    //break;
+                case "MyDespegar":
+                    var f = Window.Current.Content as Frame;
+                    f.Navigate(typeof(HotelsCheckout), null);
+                    break;
                 default:
 
 #if DECOLAR

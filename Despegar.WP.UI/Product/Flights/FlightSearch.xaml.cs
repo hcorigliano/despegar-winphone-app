@@ -24,7 +24,6 @@ namespace Despegar.WP.UI.Product.Flights
 {
     public sealed partial class FlightSearch : Page
     {
-        private NavigationHelper navigationHelper;
         private ModalPopup loadingPopup = new ModalPopup(new Loading());
         public FlightSearchViewModel ViewModel { get; set; }        
 
@@ -44,7 +43,7 @@ namespace Despegar.WP.UI.Product.Flights
         # region ** ERROR HANDLING **
         private async void ErrorHandler(object sender, ViewModelErrorArgs e) 
         {
-            BugTracker.Instance.LeaveBreadcrumb("Flight Search Error Raised: " + e.ErrorCode);
+            BugTracker.Instance.LeaveBreadcrumb("Flight search Error Raised: " + e.ErrorCode);
 
             ResourceLoader manager = new ResourceLoader();
             MessageDialog dialog;
@@ -80,7 +79,7 @@ namespace Despegar.WP.UI.Product.Flights
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            BugTracker.Instance.LeaveBreadcrumb("Flight Search View");
+            BugTracker.Instance.LeaveBreadcrumb("Flight search View");
 
             HardwareButtons.BackPressed += HardwareButtons_BackPressed;
                   
@@ -107,7 +106,7 @@ namespace Despegar.WP.UI.Product.Flights
                 // If it is coming from Multiples edit, remove the "Multiples edit" View from the stack
                 if (parameters.NavigatedFromMultiples && e.NavigationMode == NavigationMode.New)
                 {
-                    BugTracker.Instance.LeaveBreadcrumb("Flight Search View - Back from Multiples Edit");
+                    BugTracker.Instance.LeaveBreadcrumb("Flight search View - Back from Multiples Edit");
                     ViewModel.Navigator.RemoveBackEntry();
                 }
 
@@ -122,7 +121,7 @@ namespace Despegar.WP.UI.Product.Flights
 
         void HardwareButtons_BackPressed(object sender, BackPressedEventArgs e)
         {
-            BugTracker.Instance.LeaveBreadcrumb("Flight Search View - Back button pressed");
+            BugTracker.Instance.LeaveBreadcrumb("Flight search View - Back button pressed");
 
             if (ViewModel != null)
             {

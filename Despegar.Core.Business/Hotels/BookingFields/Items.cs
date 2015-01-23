@@ -5,8 +5,7 @@ using System.Text;
 
 namespace Despegar.Core.Business.Hotels.BookingFields
 {
-    public class Items
+    public class Items : Dictionary<string, ItemsKey>
     {
-        public ItemsKey key { get; set; }
     }
 }
