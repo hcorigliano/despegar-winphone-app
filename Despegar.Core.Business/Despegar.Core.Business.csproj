@@ -56,6 +56,7 @@
     <TargetPlatform Include="Windows, Version=8.1" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Flight\InstallmentFormatted.cs" />
     <Compile Include="Common\CustomErrors\CustomError.cs" />
     <Compile Include="Common\State\State.cs" />
     <Compile Include="Bindable.cs" />
@@ -73,6 +74,7 @@
     <Compile Include="Coupons\CouponParameter.cs" />
     <Compile Include="Coupons\CouponResponse.cs" />
     <Compile Include="CreditCard\ValidationCreditcards.cs" />
+    <Compile Include="Flight\BookingFields\PriceFormated.cs" />
     <Compile Include="Forms\BookingFormBuilder.cs" />
     <Compile Include="Enums\BookingStatusEnum.cs" />
     <Compile Include="Enums\FlightSearchChildEnum.cs" />
@@ -119,7 +121,7 @@
     <Compile Include="Hotels\BookingFields\Items.cs" />
     <Compile Include="Hotels\BookingFields\Nightly.cs" />
     <Compile Include="Hotels\BookingFields\Passenger.cs" />
-    <Compile Include="Hotels\BookingFields\Payment.cs" />
+    <Compile Include="Hotels\BookingFields\HotelPayment.cs" />
     <Compile Include="Hotels\BookingFields\PaymentForm.cs" />
     <Compile Include="Hotels\BookingFields\PaymentOptions.cs" />
     <Compile Include="Hotels\BookingFields\PriceDestination.cs" />
@@ -156,6 +158,7 @@
     <Compile Include="Hotels\HotelsAutocomplete\HotelAutocomplete.cs" />
     <Compile Include="Hotels\HotelsAutocomplete\HotelsAutocomplete.cs" />
     <Compile Include="Hotels\SearchBox\HotelSearchModel.cs" />
+    <Compile Include="Hotels\InstallmentFormatted.cs" />
     <Compile Include="Hotels\SearchDetails.cs" />
     <Compile Include="Mock.cs" />
     <Compile Include="Common\Checkout\Address.cs" />

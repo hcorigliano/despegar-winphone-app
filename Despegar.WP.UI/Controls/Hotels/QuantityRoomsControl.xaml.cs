@@ -1,24 +1,35 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
+﻿using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
 
-// The User Control item template is documented at http://go.microsoft.com/fwlink/?LinkId=234236
 
 namespace Despegar.WP.UI.Controls.Hotels
 {
     public sealed partial class QuantityRoomsControl : UserControl
     {
+        public static readonly DependencyProperty RoomsProperty = DependencyProperty.Register("Rooms", typeof(int), typeof(QuantityRoomsControl), new PropertyMetadata(null));
+
+        #region ** BoilerPlate Code **
+        public event PropertyChangedEventHandler PropertyChanged;
+        private void SetValueAndNotify(DependencyProperty property, object value, [CallerMemberName] string p = null)
+        {
+            SetValue(property, value);
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(p));
+        }
+        #endregion
+
+        public int Rooms
+        {
+            get { return (int)GetValue(RoomsProperty); }
+            set
+            {
+                SetValueAndNotify(RoomsProperty, value);
+            }
+        }
+
+
         public QuantityRoomsControl()
         {
             this.InitializeComponent();

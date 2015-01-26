@@ -10,6 +10,22 @@
     mc:Ignorable="d">
 
 
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="{StaticResource Block3p}"/>
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+
+        <StackPanel Grid.Row="0" >
+            <TextBlock Style="{StaticResource BaseTextLabel}" x:Uid="Hotels_Search_Rooms" Text="Habitaciones" />
+            <ComboBox  Style="{StaticResource ComboBoxBase}" ItemsSource="{Binding RoomOptions, Mode=TwoWay}" SelectedItem="{Binding RoomsSelectedOpotion, Mode=TwoWay}"   />
+        </StackPanel>
+
+
+    </Grid>
+    
+    
     <!--<Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*" />

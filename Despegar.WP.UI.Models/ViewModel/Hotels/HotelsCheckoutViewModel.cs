@@ -2,6 +2,8 @@
 using Despegar.Core.Business.Configuration;
 using Despegar.Core.Business.Coupons;
 using Despegar.Core.Business.CreditCard;
+using Despegar.Core.Business.Flight.BookingFields;
+using Despegar.Core.Business.Hotels;
 using Despegar.Core.Business.Hotels.BookingFields;
 using Despegar.Core.IService;
 using Despegar.Core.Log;
@@ -10,9 +12,11 @@ using Despegar.WP.UI.Model.ViewModel.Classes.Flights;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.ApplicationModel.Resources;
 
 namespace Despegar.WP.UI.Model.ViewModel.Hotels
 {
@@ -24,7 +28,6 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
         private IConfigurationService configurationService;
         private ICommonServices commonServices;
         private ICouponsService couponsService;
-        private IBugTracker bugTracker;
         private ValidationCreditcards creditCardsValidations;
         private HotelsCrossParameters crossParams;
         #endregion
@@ -92,7 +95,7 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
                 await LoadStates(currentCountry);
 
                 // Format Price details / Installments
-                //FormatInstallments();
+                FormatInstallments();
                 //PriceDetailsFormatted = FormatPrice();
 
                 // Set Known Default Values && Adapt Checkout to the country
@@ -110,6 +113,170 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
             }
 
             IsLoading = false;
+        }
+
+        /// <summary>
+        /// Selected "RadioButton" payment strategy
+        /// </summary>
+        private InstallmentOption selectedInstallment;
+        public InstallmentOption SelectedInstallment
+        {
+            get { return selectedInstallment; }
+            set
+            {
+                selectedInstallment = value;
+                OnPropertyChanged();
+
+                // Select first by default
+                SelectedCard = value.FirstCard;
+            }
+        }
+
+        private InstallmentFormatted installmentFormatted;
+        public InstallmentFormatted InstallmentFormatted
+        {
+            get { return installmentFormatted; }
+            set
+            {
+                installmentFormatted = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private HotelPayment selectedCard;
+        public HotelPayment SelectedCard
+        {
+            get { return selectedCard; }
+            set
+            {
+                selectedCard = value;
+
+                // Set POST data
+                if (selectedCard != null)
+                {
+                    PaymentForm payments = CoreBookingFields.form.checkout_method.FirstItem.payment;
+                    payments.installment.bank_code.CoreValue = selectedCard.card.bank;
+                    //payments.installment.quantity.CoreValue = selectedCard.installments.quantity.ToString();
+                    payments.installment.card_code.CoreValue = selectedCard.card.code;
+                    payments.installment.card_code.CoreValue = selectedCard.card.company;
+                    payments.installment.card_type.CoreValue = selectedCard.card.type;
+                    //payments.installment.complete_card_code.CoreValue = selectedCard.card.code;
+
+                    if (creditCardsValidations != null)
+                    {
+                        ValidationCreditcard validation = creditCardsValidations
+                            .data.FirstOrDefault(x => x.bankCode == (String.IsNullOrWhiteSpace(selectedCard.card.bank) ? "*" : selectedCard.card.bank) && x.cardCode == selectedCard.card.company);
+
+                        Validation valNumber = new Validation();
+                        valNumber.error_code = "NUMBER";
+                        valNumber.regex = validation.numberRegex;
+                        payments.card.number.validations = new List<Validation>();
+                        payments.card.number.validations.Add(valNumber);
+
+                        Validation valLength = new Validation();
+                        valLength.error_code = "LENGTH";
+                        valLength.regex = validation.lengthRegex;
+                        payments.card.number.validations.Add(valLength);
+
+                        Validation valCode = new Validation();
+                        valCode.error_code = "CODE";
+                        valCode.regex = validation.codeRegex;
+                        payments.card.security_code.validations = new List<Validation>();
+                        payments.card.security_code.validations.Add(valCode); //.number.validations.Add(val);
+                    }
+                }
+
+                OnPropertyChanged();
+            }
+        }
+
+        // Public because it is used from the InvoiceArg control
+        public async Task<List<CitiesFields>> GetCities(string countryCode, string search, string cityresult)
+        {
+            return await configurationService.AutoCompleteCities(countryCode, search, cityresult);
+        }
+
+        /// <summary>
+        /// Validates the reference code against the service and sets the Validation errors or succcess
+        /// </summary>
+        public async void ValidateVoucher()
+        {
+            this.Tracker.LeaveBreadcrumb("Hotels view model validate voucher init");
+
+            IsLoading = true;
+            ResourceLoader loader = new ResourceLoader();
+            Voucher field = CoreBookingFields.form.Voucher;
+
+            field.IsApplied = false;
+
+            var pricing = CoreBookingFields.items.FirstOrDefault().Value.price;  // TODO: Find out better about the items in th
+
+            CouponParameter parameter = new CouponParameter()
+            {
+                Beneficiary = CoreBookingFields.form.contact.email != null ? CoreBookingFields.form.contact.email.CoreValue : "",
+                TotalAmount = pricing.total.ToString(),
+                CurrencyCode = pricing.currency.code,
+                Product = "hotel",
+                Quotation = String.Format(CultureInfo.InvariantCulture, "{0:0.#################}", pricing.currency.ratio),
+                ReferenceCode = field.CoreValue,
+            };
+
+            VoucherResult = await couponsService.Validity(parameter);
+
+            if (!VoucherResult.Error.HasValue)
+                field.IsApplied = true; // Voucher OK!
+            else
+            {
+                // Notify Coupon Error
+                field.IsApplied = false;
+                OnViewModelError("VOUCHER_VALIDITY_ERROR", VoucherResult.Error.ToString());
+                VoucherResult = null;
+            }
+
+            field.Validate();
+            IsLoading = false;
+
+            this.Tracker.LeaveBreadcrumb("Flight checkout view model validate voucher complete");
+        }
+
+        /// <summary>
+        /// Format Credit Cards installments
+        /// </summary>
+        /// <returns></returns>
+        private void FormatInstallments()
+        {
+            //var payments = CoreBookingFields.items.First().Value.payment.with_interest.
+            InstallmentFormatted = new InstallmentFormatted();
+
+            // TODO: More Items???
+            var item = CoreBookingFields.items.First().Value.payment;
+
+            // Pay at destination
+            if (item.at_destination != null)
+            {
+                foreach (HotelPayment payment in item.at_destination)
+                    InstallmentFormatted.AddPayAtDestinationInstallment(payment);
+            }
+
+            // Without interest
+            if (item.without_interest != null)
+            {
+                foreach (HotelPayment payment in item.without_interest)
+                    InstallmentFormatted.AddWithouInterestInstallment(payment);
+            }
+
+            // With Interest
+            if (item.with_interest != null)
+            {
+                foreach (HotelPayment payment in item.with_interest)
+                    InstallmentFormatted.AddWithInterestInstallment(payment);
+            }
+
+            if (InstallmentFormatted.WithInterest.Count != 0)
+            {
+                var loader = new Windows.ApplicationModel.Resources.ResourceLoader();
+                InstallmentFormatted.ResourceLabel = loader.GetString("Common_Pay_Of");
+            }
         }
 
         private async void GetCreditCardsValidations()
@@ -142,9 +309,9 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
             HotelsBookingFieldsRequest bookRequest = new HotelsBookingFieldsRequest();
 
             // TODO
-            bookRequest.token = "e0128a1a-e14c-4bc2-945a-2471c363898c";
-            bookRequest.hotel_id = "242284";
-            bookRequest.room_choices = new List<string>() { "42" };
+            bookRequest.token = "c66602c8-09b5-4c11-92f7-9713cc4e1552";
+            bookRequest.hotel_id = "298331";
+            bookRequest.room_choices = new List<string>() { "3" };
             bookRequest.mobile_identifier = deviceID;
 
             CoreBookingFields = await hotelService.GetBookingFields(bookRequest);
@@ -160,13 +327,8 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
         private async Task LoadStates(string countryCode)
         {
             States = await commonServices.GetStates(countryCode);
-        }
+        }        
 
-        // Public because it is used from the InvoiceArg control
-        public async Task<List<CitiesFields>> GetCities(string countryCode, string search, string cityresult)
-        {
-            return await configurationService.AutoCompleteCities(countryCode, search, cityresult);
-        }
 
     }
 }

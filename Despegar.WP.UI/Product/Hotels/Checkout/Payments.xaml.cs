@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Despegar.Core.Business.Hotels;
+using Despegar.WP.UI.Model.ViewModel.Hotels;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -13,15 +15,21 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
-// The User Control item template is documented at http://go.microsoft.com/fwlink/?LinkId=234236
-
 namespace Despegar.WP.UI.Product.Hotels.Checkout
 {
     public sealed partial class Payments : UserControl
     {
+        private HotelsCheckoutViewModel ViewModel { get { return DataContext as HotelsCheckoutViewModel; } }
+
         public Payments()
         {
             this.InitializeComponent();
+        }
+
+        private void OnRadioButton_Clicked(object sender, RoutedEventArgs e)
+        {
+            RadioButton a = (RadioButton)e.OriginalSource;
+            ViewModel.SelectedInstallment = a.DataContext as InstallmentOption;
         }
     }
 }

@@ -25,12 +25,12 @@
         </Grid.ChildrenTransitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="{StaticResource Block1p}"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="{StaticResource Block1p}"/>
             <RowDefinition Height="{StaticResource Block2p}" />
             <RowDefinition Height="{StaticResource Block2p}"/>
             <RowDefinition Height="{StaticResource Block3p}"/>
             <RowDefinition Height="{StaticResource Block3p}"/>
-            <RowDefinition Height="{StaticResource Block3p}"/>
+            <RowDefinition Height="{StaticResource Block7p}"/>
             <RowDefinition />
         </Grid.RowDefinitions>
 
@@ -44,11 +44,11 @@
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
 
-            <Grid Grid.Column="0" Background="{StaticResource Blue40Brush}" Height="37" Width="37">
+            <Grid Grid.Column="0" Background="{StaticResource Blue40Brush}" Height="33" Width="33" VerticalAlignment="Top">
                 <Image Style="{StaticResource HotelForTodayIcon}" Height="23" Width="23"  />
             </Grid>
            
-            <Grid Grid.Column="1">
+            <Grid Grid.Column="1" Margin="8,0,0,0">
                 <Grid.RowDefinitions>
                     <RowDefinition/>
             <RowDefinition/>
@@ -66,9 +66,10 @@
 
         <src:DateControl Grid.Row="5"  FromDate="{Binding FromDate, Mode=TwoWay}" ToDate="{Binding ToDate, Mode=TwoWay}" />
 
-        <Button x:Uid="Hotels_Search_SearchButton" Command="{Binding SearchCommand}" Grid.Row="6"  Style="{StaticResource ButtonBottom}" Content="Buscar hoteles"/>
+        <src:QuantityRoomsControl  Grid.Row="6" DataContext="{Binding RoomsViewModel}"   Rooms="{Binding Rooms, Mode=TwoWay}" />
 
 
+        <Button x:Uid="Hotels_Search_SearchButton" Command="{Binding SearchCommand}" Grid.Row="7"  Style="{StaticResource ButtonBottom}" Content="Buscar hoteles"/>
 
     </Grid>
 </Page>

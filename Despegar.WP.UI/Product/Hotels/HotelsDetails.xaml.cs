@@ -34,45 +34,27 @@ namespace Despegar.WP.UI.Product.Hotels
         public HotelsDetails()
         {
             this.InitializeComponent();
+
+            hotelDetailViewModel = new HotelsDetailsViewModel(null, null, null);
+            this.DataContext = hotelDetailViewModel;
         }
 
         protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
             HardwareButtons.BackPressed += HardwareButtons_BackPressed;
             if(ViewModel == null)
-            {
+        {
                 ViewModel = new HotelsDetailsViewModel(Navigator.Instance, GlobalConfiguration.CoreContext.GetHotelService(), BugTracker.Instance) { CrossParameters = e.Parameter as HotelsCrossParameters };
                 await ViewModel.Init();
             }
             
         }
-
+            
         private void HardwareButtons_BackPressed(object sender, BackPressedEventArgs e)
         {
             e.Handled = true;
             Navigator.Instance.GoBack();
         }
-
-        //private  void HotelMap_Tapped(object sender, TappedRoutedEventArgs e)
-        //{
-        //    HotelMap.Center = new Windows.Devices.Geolocation.Geopoint(new Windows.Devices.Geolocation.BasicGeoposition() { Latitude = -34.6653, Longitude = -58.7275 });
-        //    HotelMap.ZoomLevel = 12;
-        //    HotelMap.LandmarksVisible = true;
-
-        //    //var pushpin = CreatePushPin();
-        //    //HotelMap.Children.Add(pushpin);
-
-        //    var location = new Windows.Devices.Geolocation.Geopoint(new Windows.Devices.Geolocation.BasicGeoposition() { Latitude = -34.6653, Longitude = -58.7275 });
-
-        //    MapIcon mapicon = new MapIcon();
-        //    mapicon.Location = location;
-        //    mapicon.NormalizedAnchorPoint = new Point(0.5, 1.0);
-        //    mapicon.Title = "Ehh Merlo loco";
-
-        //    HotelMap.MapElements.Add(mapicon);
-        //    //await HotelMap.TrySetViewAsync(location, 15D, 0, 0, Windows.UI.Xaml.Controls.Maps.MapAnimationKind.Bow);
-            
-        //}
 
        
     }
