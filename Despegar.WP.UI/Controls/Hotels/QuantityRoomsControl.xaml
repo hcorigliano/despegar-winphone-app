@@ -22,7 +22,27 @@
             <ComboBox  Style="{StaticResource ComboBoxBase}" ItemsSource="{Binding RoomOptions, Mode=TwoWay}" SelectedItem="{Binding RoomsSelectedOpotion, Mode=TwoWay}"   />
         </StackPanel>
 
+        <ItemsControl Grid.Row="1"  ItemsSource="{Binding MinorsList}">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition MinHeight="{StaticResource dBlock3p}"/>
+                        </Grid.RowDefinitions>
 
+                        
+                        <StackPanel Grid.Row="{Binding IndexZeroBased}">
+                            <TextBlock Style="{StaticResource BaseTextLabel}" >
+                                <Run  x:Uid="Hotels_Search_RoomDetail" Text="Habitacion" />
+                                <Run  Text="{Binding Index}"/>
+                            </TextBlock>
+                            <ComboBox  Style="{StaticResource ComboBoxWrappable}" ItemsSource="{Binding OptionsItems}" SelectedItem="{Binding SelectedAge, Mode=TwoWay}"   />
+                        </StackPanel>
+                    </Grid>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+        
     </Grid>
     
     
