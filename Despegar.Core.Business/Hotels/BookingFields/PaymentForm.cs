@@ -13,6 +13,5 @@ namespace Despegar.Core.Business.Hotels.BookingFields
         public InvoiceArg invoice { get; set; }
         public Installment installment { get; set; }
         //public object billingAddress { get; set; }  not used anymore
-
     }
 }

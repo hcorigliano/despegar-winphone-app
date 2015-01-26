@@ -33,32 +33,32 @@
         <Pivot Grid.Row="2" x:Name="MainPivot"  Style="{StaticResource PivotBaseMain}">
             
             <!-- Passengers -->
-            <PivotItem x:Name="Pivot_PASSENGERS" x:Uid="Flight_Checkout_Passagers" Style="{StaticResource PivotItemBase}" xmlns:src="using:Despegar.WP.UI.Product.Flights.Checkout.Passegers">
+            <PivotItem x:Name="Pivot_PASSENGERS" x:Uid="Flight_Checkout_Passagers" Style="{StaticResource PivotItemBase}" xmlns:src="using:Despegar.WP.UI.Product.Flights.Checkout">
                 <src:Passengers  x:Name="PassengerControl"  />
             </PivotItem>
 
             <!--Contact Pivot-->
-            <PivotItem x:Name="Pivot_CONTACT"  x:Uid="Flight_Checkout_Contact" Style="{StaticResource PivotItemBase}" xmlns:src="using:Despegar.WP.UI.Product.Flights.Checkout.Contact">
+            <PivotItem x:Name="Pivot_CONTACT"  x:Uid="Flight_Checkout_Contact" Style="{StaticResource PivotItemBase}" xmlns:src="using:Despegar.WP.UI.Product.Flights.Checkout">
                 <src:Contact />
             </PivotItem>
 
             <!--Payments Pivot-->
-            <PivotItem x:Name="Pivot_INSTALLMENT"  x:Uid="Flight_Checkout_Payments" Style="{StaticResource PivotItemBase}" xmlns:src="using:Despegar.WP.UI.Product.Flights.Checkout.Payment">
+            <PivotItem x:Name="Pivot_INSTALLMENT"  x:Uid="Flight_Checkout_Payments" Style="{StaticResource PivotItemBase}" xmlns:src="using:Despegar.WP.UI.Product.Flights.Checkout">
                <src:Payments  />
             </PivotItem>
 
             <!--Card Data Pivot-->
-            <PivotItem x:Name="Pivot_CARD"  x:Uid="Flight_Checkout_Card_Data" Style="{StaticResource PivotItemBase}" xmlns:src="using:Despegar.WP.UI.Product.Flights.Checkout.CardData">              
+            <PivotItem x:Name="Pivot_CARD"  x:Uid="Flight_Checkout_Card_Data" Style="{StaticResource PivotItemBase}" xmlns:src="using:Despegar.WP.UI.Product.Flights.Checkout">              
                 <src:CardData />
             </PivotItem>
 
             <!-- Invoice Arg -->
-            <PivotItem x:Name="Pivot_INVOICE"  x:Uid="Flight_Checkout_Invoice_Arg" Style="{StaticResource PivotItemBase}" xmlns:src="using:Despegar.WP.UI.Product.Flights.Checkout.Invoice">
+            <PivotItem x:Name="Pivot_INVOICE"  x:Uid="Flight_Checkout_Invoice_Arg" Style="{StaticResource PivotItemBase}" xmlns:src="using:Despegar.WP.UI.Product.Flights.Checkout">
                 <src:InvoiceArgentina  />
             </PivotItem>
 
             <!--Buy-->
-            <PivotItem  x:Uid="Flight_Checkout_Buy"  Style="{StaticResource PivotItemBase}" xmlns:src="using:Despegar.WP.UI.Product.Flights.Checkout.Buy">
+            <PivotItem  x:Uid="Flight_Checkout_Buy"  Style="{StaticResource PivotItemBase}" xmlns:src="using:Despegar.WP.UI.Product.Flights.Checkout">
                 <StackPanel >
                     <src:Buy x:Name="Buycontrol" Height="426"/>
                     <Button x:Uid="Buy_Button" Style="{StaticResource ButtonBottomRed}" Command="{Binding ValidateAndBuyCommand}" VerticalAlignment="Bottom" />

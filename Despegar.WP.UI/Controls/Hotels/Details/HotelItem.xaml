@@ -25,7 +25,7 @@
     <Grid x:Name="MainGrid" Margin="{StaticResource Bottom_Block1p}">
         <Grid.RowDefinitions>
             <RowDefinition Height="{StaticResource Block4}" />
-            <RowDefinition /> <!--Height="{StaticResource Block1p}"-->
+            <RowDefinition /> 
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0">
@@ -40,11 +40,8 @@
                 <TextBlock Grid.Column="0" Text="{Binding hotel.rating , Converter={StaticResource StringToN1Converter}}" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource SegoeSemibold17}"/>
             </Grid> 
             
-            <!--<Rectangle Width="30" Height="30" Stroke="#FF50BB30" Fill="#FF56A039" VerticalAlignment="Top" HorizontalAlignment="Right" />-->
-            <!--<TextBlock Grid.Column="0" Text="{Binding hotel.rating}" VerticalAlignment="Top" HorizontalAlignment="Right" />-->
-
             <!--HOTEL NAME AND DESCRIPTION GRID-->
-            <Grid Margin="9.6,0,0,0" Grid.Column="1">
+            <Grid Margin="{StaticResource Left_Offset}" Grid.Column="1">
                 <Grid.RowDefinitions>
                     <RowDefinition/>
                     <RowDefinition/>
@@ -53,7 +50,7 @@
                 </Grid.RowDefinitions>
 
                 <!--NAME-->
-                <TextBlock Grid.Row="0" Text="{Binding hotel.name}" Style="{StaticResource SegoeLight24}" TextTrimming="CharacterEllipsis" VerticalAlignment="Center"/>
+                <TextBlock Grid.Row="0" Text="{Binding hotel.name}" Style="{StaticResource SegoeLight24}" TextTrimming="CharacterEllipsis" VerticalAlignment="Top"/>
 
                 <!--STARS GRID AND DISTANCE-->
                 <Grid Grid.Row="1">
@@ -72,9 +69,6 @@
                     <Image Grid.Column="2" Source="/Assets/Icon/App/star-small-yellow.scale-100.png" Visibility="{Binding hotel.stars , Converter={StaticResource StarsVisibilityConverter} ,ConverterParameter=3 }" VerticalAlignment="Center"/>
                     <Image Grid.Column="3" Source="/Assets/Icon/App/star-small-yellow.scale-100.png" Visibility="{Binding hotel.stars , Converter={StaticResource StarsVisibilityConverter} ,ConverterParameter=4 }" VerticalAlignment="Center"/>
                     <Image Grid.Column="4" Source="/Assets/Icon/App/star-small-yellow.scale-100.png" Visibility="{Binding hotel.stars , Converter={StaticResource StarsVisibilityConverter} ,ConverterParameter=5 }" VerticalAlignment="Center"/>
-
-
-
 
                     <Image Grid.Column="5" Source="/assets/Icon/App/walkingman-small-white.scale-100.png" Visibility="{Binding distance ,Converter={StaticResource NullToVisibilityConverter}}" VerticalAlignment="Center"/>
                     <TextBlock Grid.Column="6" Visibility="{Binding distance ,Converter={StaticResource NullToVisibilityConverter}}" VerticalAlignment="Center">
@@ -99,7 +93,7 @@
                 </Grid>
 
                 <!--PAYMENT DESCRIPTION-->
-                <TextBlock Grid.Row="3" Text="{Binding payment_description}" Style="{StaticResource SegoeRegular15}" VerticalAlignment="Center"/>
+                <TextBlock Height="{StaticResource dBlock2p}" Grid.Row="3" Text="{Binding payment_description}" Style="{StaticResource SegoeRegular13}"  TextWrapping="Wrap" VerticalAlignment="Center"/>
 
             </Grid>
 
@@ -108,7 +102,6 @@
         <Grid Grid.Row="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="{StaticResource Block1}"/>
-                <!--<RowDefinition Height="9.6"/>-->
                 <RowDefinition Height="{StaticResource Block1}"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
@@ -127,7 +120,6 @@
                     
                 </Grid>
 
-
             </Grid>
 
 
@@ -144,11 +136,6 @@
                 <Border BorderThickness="0,0,0,1" BorderBrush="#FF949494" />
 
             </Grid>
-
-            <!--<Grid Height="30">
-                <TextBlock Text="This is a test" FontSize="22" Height="34" HorizontalAlignment="Center" Foreground="White"   />
-                <Line Stretch="Fill" Stroke="white" StrokeThickness="2 " X1="1" Width="120" VerticalAlignment="Center"  HorizontalAlignment="Center"   />
-            </Grid>-->
 
             <Grid Grid.Row="1" Background="#FF50BB30" Width="180" Height="{StaticResource dBlock1}"  Grid.Column="0" HorizontalAlignment="Left"  Visibility="{Binding price.promo_type , Converter={StaticResource DiscountVisibilityConverter} }">
                 <TextBlock Text="{Binding price.promo_type,  Converter={StaticResource TypeDiscountTextConverter}}" Style="{StaticResource SegoeRegular15}" VerticalAlignment="Center" HorizontalAlignment="Left"/>
