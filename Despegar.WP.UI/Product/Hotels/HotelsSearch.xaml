@@ -71,7 +71,5 @@
 
         <Button x:Uid="Hotels_Search_SearchButton" Command="{Binding SearchCommand}" Grid.Row="7"  Style="{StaticResource ButtonBottom}" Content="Buscar hoteles"/>
 
-
-
     </Grid>
 </Page>
