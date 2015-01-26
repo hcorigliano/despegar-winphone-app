@@ -6,6 +6,7 @@ namespace Despegar.Core.Business
     {
         HotelsAvailability,
         HotelsAutocomplete,
+        HotelsGetDetails,
         HotelsBookingFields,
         HotelsBookingCompletePost,
         FlightsAirlines,
@@ -33,6 +34,7 @@ namespace Despegar.Core.Business
             {ServiceKey.HotelsAvailability, "mapi-hotels/availability?checkin_date={0}&checkout_date={1}&destination={2}&distribution={3}&currency_code={4}&offset={5}&limit={6}&{7}" },
             {ServiceKey.HotelsAutocomplete, "mapi-cross/autocomplete/hotels?search={0}" },
             //{ServiceKey.HotelsAutocomplete, "mapi-cross/autocomplete/hotels?search={0}" },
+            {ServiceKey.HotelsGetDetails , "mapi-hotels/availability/{0}?checkin_date={1}&checkout_date={2}&distribution={3}"},
             {ServiceKey.HotelsBookingFields,"mapi-hotels/bookings?"},
             {ServiceKey.HotelsBookingCompletePost,"mobile.despegar.com/v3/mapi-hotels/bookings/{0}/forms/{1}"},
 

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Despegar.Core.Business.Hotels.CitiesAvailability
+namespace Despegar.Core.Business.Hotels
 {
     public class Currency
     {

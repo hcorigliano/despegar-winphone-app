@@ -103,7 +103,7 @@
     <Compile Include="Flight\BookingCompletePost\TypeAndNumber.cs" />
     <Compile Include="Flight\Itineraries\Route.cs" />
     <Compile Include="Flight\SearchBox\FlightMultipleSegment.cs" />
-    <Compile Include="Hotels\CitiesAvailability\Amenity.cs" />
+    <Compile Include="Hotels\Amenity.cs" />
     <Compile Include="Hotels\BookingFields\AdditionalData.cs" />
     <Compile Include="Hotels\BookingFields\Card.cs" />
     <Compile Include="Hotels\BookingFields\CheckoutMethod.cs" />
@@ -125,9 +125,9 @@
     <Compile Include="Hotels\BookingFields\PriceDestination.cs" />
     <Compile Include="Hotels\BookingFields\Currency.cs" />
     <Compile Include="Hotels\CitiesAvailability\CitiesAvailability.cs" />
-    <Compile Include="Hotels\CitiesAvailability\City.cs" />
+    <Compile Include="Hotels\City.cs" />
     <Compile Include="Hotels\CitiesAvailability\Currencies.cs" />
-    <Compile Include="Hotels\CitiesAvailability\Currency.cs" />
+    <Compile Include="Hotels\Currency.cs" />
     <Compile Include="Hotels\CitiesAvailability\Extra.cs" />
     <Compile Include="Hotels\CitiesAvailability\Facet.cs" />
     <Compile Include="Hotels\CitiesAvailability\Hotel.cs" />
@@ -141,6 +141,18 @@
     <Compile Include="Hotels\CitiesAvailability\Sorting.cs" />
     <Compile Include="Hotels\CitiesAvailability\Value.cs" />
     <Compile Include="Hotels\GeoLocation.cs" />
+    <Compile Include="Hotels\HotelDetails\BedOption.cs" />
+    <Compile Include="Hotels\HotelDetails\CancellationPolicy.cs" />
+    <Compile Include="Hotels\HotelDetails\Layout.cs" />
+    <Compile Include="Hotels\HotelDetails\MealPlan.cs" />
+    <Compile Include="Hotels\HotelDetails\Price.cs" />
+    <Compile Include="Hotels\HotelDetails\Room.cs" />
+    <Compile Include="Hotels\HotelDetails\RoomAvailability.cs" />
+    <Compile Include="Hotels\HotelDetails\Roompack.cs" />
+    <Compile Include="Hotels\HotelDetails\Time.cs" />
+    <Compile Include="Hotels\HotelDetails\CheckoutConditions.cs" />
+    <Compile Include="Hotels\HotelDetails\Hotel.cs" />
+    <Compile Include="Hotels\HotelDetails\HotelDatails.cs" />
     <Compile Include="Hotels\HotelsAutocomplete\HotelAutocomplete.cs" />
     <Compile Include="Hotels\HotelsAutocomplete\HotelsAutocomplete.cs" />
     <Compile Include="Hotels\SearchBox\HotelSearchModel.cs" />
@@ -208,6 +220,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

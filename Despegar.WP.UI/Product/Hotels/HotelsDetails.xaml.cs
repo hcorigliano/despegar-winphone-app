@@ -15,8 +15,12 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using Windows.UI.Xaml.Shapes;
-using Despegar.WP.UI.Model.ViewModel.Hotels;
 using Despegar.Core.Business.Hotels.CitiesAvailability;
+using Windows.Phone.UI.Input;
+using Despegar.WP.UI.Common;
+using Despegar.WP.UI.Model;
+using Despegar.WP.UI.BugSense;
+using Despegar.WP.UI.Model.ViewModel.Hotels;
 
 
 namespace Despegar.WP.UI.Product.Hotels
@@ -26,15 +30,27 @@ namespace Despegar.WP.UI.Product.Hotels
     /// </summary>
     public sealed partial class HotelsDetails : Page
     {
-        public HotelsDetailsViewModel hotelDetailViewModel { get; set; }
+        public HotelsDetailsViewModel ViewModel { get; set; }
         public HotelsDetails()
         {
             this.InitializeComponent();
         }
 
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
+            HardwareButtons.BackPressed += HardwareButtons_BackPressed;
+            if(ViewModel == null)
+            {
+                ViewModel = new HotelsDetailsViewModel(Navigator.Instance, GlobalConfiguration.CoreContext.GetHotelService(), BugTracker.Instance) { CrossParameters = e.Parameter as HotelsCrossParameters };
+                await ViewModel.Init();
+            }
             
+        }
+
+        private void HardwareButtons_BackPressed(object sender, BackPressedEventArgs e)
+        {
+            e.Handled = true;
+            Navigator.Instance.GoBack();
         }
 
         //private  void HotelMap_Tapped(object sender, TappedRoutedEventArgs e)

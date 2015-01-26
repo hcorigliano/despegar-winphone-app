@@ -29,10 +29,5 @@ namespace Despegar.Core.Business.Hotels.SearchBox
             
             }
         }
-                    
-
-
-
-        
     }
 }

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+VisualStudioVersion = 12.0.30723.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Despegar.WP.UI", "Despegar.WP.UI\Despegar.WP.UI.csproj", "{F4D22562-7CB1-4CB4-92D8-B56CE20B6F5C}"
 EndProject
@@ -83,6 +83,7 @@ Global
 		{4BD277E3-3251-4CF8-8EE5-9EF410362D4F}.Despegar-Debug|Any CPU.Build.0 = Despegar-Debug|Any CPU
 		{4BD277E3-3251-4CF8-8EE5-9EF410362D4F}.Despegar-Debug|ARM.ActiveCfg = Despegar-Debug|Any CPU
 		{4BD277E3-3251-4CF8-8EE5-9EF410362D4F}.Despegar-Debug|x86.ActiveCfg = Despegar-Debug|Any CPU
+		{4BD277E3-3251-4CF8-8EE5-9EF410362D4F}.Despegar-Debug|x86.Build.0 = Despegar-Debug|Any CPU
 		{4BD277E3-3251-4CF8-8EE5-9EF410362D4F}.Despegar-Release|Any CPU.ActiveCfg = Despegar-Release|Any CPU
 		{4BD277E3-3251-4CF8-8EE5-9EF410362D4F}.Despegar-Release|Any CPU.Build.0 = Despegar-Release|Any CPU
 		{4BD277E3-3251-4CF8-8EE5-9EF410362D4F}.Despegar-Release|ARM.ActiveCfg = Despegar-Release|Any CPU
@@ -99,6 +100,7 @@ Global
 		{3C3CDCA2-E9FC-4207-B71E-22A1C423D5F8}.Despegar-Debug|Any CPU.Build.0 = Despegar-Debug|Any CPU
 		{3C3CDCA2-E9FC-4207-B71E-22A1C423D5F8}.Despegar-Debug|ARM.ActiveCfg = Despegar-Debug|Any CPU
 		{3C3CDCA2-E9FC-4207-B71E-22A1C423D5F8}.Despegar-Debug|x86.ActiveCfg = Despegar-Debug|Any CPU
+		{3C3CDCA2-E9FC-4207-B71E-22A1C423D5F8}.Despegar-Debug|x86.Build.0 = Despegar-Debug|Any CPU
 		{3C3CDCA2-E9FC-4207-B71E-22A1C423D5F8}.Despegar-Release|Any CPU.ActiveCfg = Despegar-Release|Any CPU
 		{3C3CDCA2-E9FC-4207-B71E-22A1C423D5F8}.Despegar-Release|Any CPU.Build.0 = Despegar-Release|Any CPU
 		{3C3CDCA2-E9FC-4207-B71E-22A1C423D5F8}.Despegar-Release|ARM.ActiveCfg = Despegar-Release|Any CPU
@@ -115,6 +117,7 @@ Global
 		{B4B6D17F-4416-4920-A500-4E9A88AD2D80}.Despegar-Debug|Any CPU.Build.0 = Despegar-Debug|Any CPU
 		{B4B6D17F-4416-4920-A500-4E9A88AD2D80}.Despegar-Debug|ARM.ActiveCfg = Despegar-Debug|Any CPU
 		{B4B6D17F-4416-4920-A500-4E9A88AD2D80}.Despegar-Debug|x86.ActiveCfg = Despegar-Debug|Any CPU
+		{B4B6D17F-4416-4920-A500-4E9A88AD2D80}.Despegar-Debug|x86.Build.0 = Despegar-Debug|Any CPU
 		{B4B6D17F-4416-4920-A500-4E9A88AD2D80}.Despegar-Release|Any CPU.ActiveCfg = Despegar-Release|Any CPU
 		{B4B6D17F-4416-4920-A500-4E9A88AD2D80}.Despegar-Release|Any CPU.Build.0 = Despegar-Release|Any CPU
 		{B4B6D17F-4416-4920-A500-4E9A88AD2D80}.Despegar-Release|ARM.ActiveCfg = Despegar-Release|Any CPU
@@ -131,6 +134,7 @@ Global
 		{54C368E1-6A4B-46BD-BA1F-F04B97C45E83}.Despegar-Debug|Any CPU.Build.0 = Despegar-Debug|Any CPU
 		{54C368E1-6A4B-46BD-BA1F-F04B97C45E83}.Despegar-Debug|ARM.ActiveCfg = Despegar-Debug|Any CPU
 		{54C368E1-6A4B-46BD-BA1F-F04B97C45E83}.Despegar-Debug|x86.ActiveCfg = Despegar-Debug|Any CPU
+		{54C368E1-6A4B-46BD-BA1F-F04B97C45E83}.Despegar-Debug|x86.Build.0 = Despegar-Debug|Any CPU
 		{54C368E1-6A4B-46BD-BA1F-F04B97C45E83}.Despegar-Release|Any CPU.ActiveCfg = Despegar-Release|Any CPU
 		{54C368E1-6A4B-46BD-BA1F-F04B97C45E83}.Despegar-Release|Any CPU.Build.0 = Despegar-Release|Any CPU
 		{54C368E1-6A4B-46BD-BA1F-F04B97C45E83}.Despegar-Release|ARM.ActiveCfg = Despegar-Release|Any CPU
@@ -147,6 +151,7 @@ Global
 		{C4B34083-7E2A-461B-B525-4C238314655A}.Despegar-Debug|Any CPU.Build.0 = Despegar-Debug|Any CPU
 		{C4B34083-7E2A-461B-B525-4C238314655A}.Despegar-Debug|ARM.ActiveCfg = Despegar-Debug|Any CPU
 		{C4B34083-7E2A-461B-B525-4C238314655A}.Despegar-Debug|x86.ActiveCfg = Despegar-Debug|Any CPU
+		{C4B34083-7E2A-461B-B525-4C238314655A}.Despegar-Debug|x86.Build.0 = Despegar-Debug|Any CPU
 		{C4B34083-7E2A-461B-B525-4C238314655A}.Despegar-Release|Any CPU.ActiveCfg = Despegar-Release|Any CPU
 		{C4B34083-7E2A-461B-B525-4C238314655A}.Despegar-Release|Any CPU.Build.0 = Despegar-Release|Any CPU
 		{C4B34083-7E2A-461B-B525-4C238314655A}.Despegar-Release|ARM.ActiveCfg = Despegar-Release|Any CPU
@@ -163,6 +168,7 @@ Global
 		{9359897F-8DF6-4787-80DB-B68ED851088E}.Despegar-Debug|Any CPU.Build.0 = Despegar-Debug|Any CPU
 		{9359897F-8DF6-4787-80DB-B68ED851088E}.Despegar-Debug|ARM.ActiveCfg = Despegar-Debug|Any CPU
 		{9359897F-8DF6-4787-80DB-B68ED851088E}.Despegar-Debug|x86.ActiveCfg = Despegar-Debug|Any CPU
+		{9359897F-8DF6-4787-80DB-B68ED851088E}.Despegar-Debug|x86.Build.0 = Despegar-Debug|Any CPU
 		{9359897F-8DF6-4787-80DB-B68ED851088E}.Despegar-Release|Any CPU.ActiveCfg = Despegar-Release|Any CPU
 		{9359897F-8DF6-4787-80DB-B68ED851088E}.Despegar-Release|Any CPU.Build.0 = Despegar-Release|Any CPU
 		{9359897F-8DF6-4787-80DB-B68ED851088E}.Despegar-Release|ARM.ActiveCfg = Despegar-Release|Any CPU
@@ -179,6 +185,7 @@ Global
 		{0C50151E-91DE-45C5-BB01-B03EC44D7735}.Despegar-Debug|Any CPU.Build.0 = Despegar-Debug|Any CPU
 		{0C50151E-91DE-45C5-BB01-B03EC44D7735}.Despegar-Debug|ARM.ActiveCfg = Despegar-Debug|Any CPU
 		{0C50151E-91DE-45C5-BB01-B03EC44D7735}.Despegar-Debug|x86.ActiveCfg = Despegar-Debug|Any CPU
+		{0C50151E-91DE-45C5-BB01-B03EC44D7735}.Despegar-Debug|x86.Build.0 = Despegar-Debug|Any CPU
 		{0C50151E-91DE-45C5-BB01-B03EC44D7735}.Despegar-Release|Any CPU.ActiveCfg = Despegar-Release|Any CPU
 		{0C50151E-91DE-45C5-BB01-B03EC44D7735}.Despegar-Release|Any CPU.Build.0 = Despegar-Release|Any CPU
 		{0C50151E-91DE-45C5-BB01-B03EC44D7735}.Despegar-Release|ARM.ActiveCfg = Despegar-Release|Any CPU

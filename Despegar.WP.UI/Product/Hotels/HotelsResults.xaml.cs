@@ -14,6 +14,7 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Phone.UI.Input;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -42,6 +43,7 @@ namespace Despegar.WP.UI.Product.Hotels
             { 
                 ViewModel = new HotelsResultsViewModel(Navigator.Instance, GlobalConfiguration.CoreContext.GetHotelService(), BugTracker.Instance) { CrossParameters = e.Parameter as HotelsCrossParameters };
                 ViewModel.PropertyChanged += Checkloading;
+                HardwareButtons.BackPressed += HardwareButtons_BackPressed;
                 this.DataContext = ViewModel;
                 await ViewModel.Search();
             }
@@ -49,6 +51,12 @@ namespace Despegar.WP.UI.Product.Hotels
             if (ViewModel.CitiesAvailability.SearchStatus == SearchStates.SearchAgain)
                 await ViewModel.SearchAgaing();
 
+        }
+
+        private void HardwareButtons_BackPressed(object sender, BackPressedEventArgs e)
+        {
+            e.Handled = true;
+            Navigator.Instance.GoBack();
         }
         
         private void ReSearchTapped(object sender, TappedRoutedEventArgs e)
@@ -69,6 +77,15 @@ namespace Despegar.WP.UI.Product.Hotels
                     loadingPopup.Show();
                 else
                     loadingPopup.Hide();
+            }
+        }
+
+        private void HotelSelected(object sender, TappedRoutedEventArgs e)
+        {
+            if(ViewModel != null)
+            {
+                ViewModel.CrossParameters.IdSelectedHotel = ((HotelItem)((ListView)sender).SelectedItem).id.ToString();
+                ViewModel.GoToDetails();
             }
         }
 
