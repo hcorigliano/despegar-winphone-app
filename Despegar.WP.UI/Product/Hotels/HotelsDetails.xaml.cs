@@ -31,21 +31,20 @@ namespace Despegar.WP.UI.Product.Hotels
     public sealed partial class HotelsDetails : Page
     {
         public HotelsDetailsViewModel ViewModel { get; set; }
+
         public HotelsDetails()
         {
             this.InitializeComponent();
-
-            hotelDetailViewModel = new HotelsDetailsViewModel(null, null, null);
-            this.DataContext = hotelDetailViewModel;
         }
 
         protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
             HardwareButtons.BackPressed += HardwareButtons_BackPressed;
             if(ViewModel == null)
-        {
+            {
                 ViewModel = new HotelsDetailsViewModel(Navigator.Instance, GlobalConfiguration.CoreContext.GetHotelService(), BugTracker.Instance) { CrossParameters = e.Parameter as HotelsCrossParameters };
                 await ViewModel.Init();
+                this.DataContext = ViewModel;
             }
             
         }
