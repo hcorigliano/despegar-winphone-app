@@ -12,13 +12,12 @@
     d:DesignWidth="600">
 
     <Grid>
-       
+
         <Maps:MapControl x:Name="mainMap" LandmarksVisible="True" ZoomLevel="12">
             <Maps:MapItemsControl ItemsSource="{Binding Locations}">
                 <Maps:MapItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <StackPanel>
-                            <TextBlock Text="{Binding Title}" Foreground="Black" FontWeight="Bold" ></TextBlock>
+                        <StackPanel Orientation="Horizontal">
                             <Image Height="25"
                                       Source="ms-appx:///Assets/maps/mappin.png"
                                       Maps:MapControl.Location="{Binding Geopoint}"
@@ -26,6 +25,11 @@
                                       Tapped="Image_Tapped"
                                       >
                             </Image>
+
+                            <Grid  Style="{StaticResource MapsTextForeground}">
+                                <TextBlock Height="25" Text="{Binding Title}" Style="{StaticResource SegoeLight20}" ></TextBlock>
+                            </Grid>
+                            
                         </StackPanel>
                     </DataTemplate>
                 </Maps:MapItemsControl.ItemTemplate>

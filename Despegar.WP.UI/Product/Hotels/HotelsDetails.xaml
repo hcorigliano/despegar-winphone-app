@@ -43,9 +43,6 @@
 
             <PivotItem Style="{StaticResource PivotItemBase}" x:Uid="Hotel_Details_Galery_Pivot">
                 <Grid>
-                    <!--<Maps1:CustomMapControl Grid.Row="1" >
-                </Maps1:CustomMapControl>-->
-
                     <PhotoGallery:PhotoGalleryControl DataContext="{Binding HotelDetail.hotel.pictures}" ></PhotoGallery:PhotoGalleryControl>
                 </Grid>
             </PivotItem>
@@ -55,7 +52,10 @@
             </PivotItem>
 
             <PivotItem Style="{StaticResource PivotItemBase}" x:Uid="Hotel_Details_Description_Pivot">
-
+                <Grid>
+                    <Maps1:CustomMapControl Grid.Row="1" >
+                </Maps1:CustomMapControl>
+                </Grid>
             </PivotItem>
 
         </Pivot>
