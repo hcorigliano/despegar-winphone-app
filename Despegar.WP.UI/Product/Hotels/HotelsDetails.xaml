@@ -7,25 +7,71 @@
     xmlns:local="using:Despegar.WP.UI.Product.Hotels"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:dev="using:Despegar.WP.UI.Developer.Controls"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    Style="{StaticResource BasePage}">
 
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition>
-            </ColumnDefinition>
-        </Grid.ColumnDefinitions>
+    <Grid Style="{StaticResource MainContainerGrid}">
+
+        <Grid.ChildrenTransitions>
+            <TransitionCollection>
+                <EntranceThemeTransition/>
+            </TransitionCollection>
+        </Grid.ChildrenTransitions>
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="200"></RowDefinition>
-            <RowDefinition ></RowDefinition>
+            <RowDefinition Height="{StaticResource Block1p}"/>
+            <RowDefinition Height="{StaticResource Square}"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        
-        <!--<Maps1:CustomMapControl Grid.Row="1" >
-        </Maps1:CustomMapControl>-->
+        <!-- Dev -->
+        <!--<dev:UserControlDesignGrid />-->
 
-        <PhotoGallery:PhotoGalleryControl Grid.Row="1" DataContext="{Binding HotelDetail.hotel.pictures}" ></PhotoGallery:PhotoGalleryControl>
+        <!-- Title Panel -->
+        <Image Grid.Row="0" Style="{StaticResource TopLogo}" />
+        <TextBlock Grid.Row="1" x:Uid="Page_Checkout" Style="{StaticResource PageHeaderSmall}" Text="COMPRAR VUELO" />
+
+        <Pivot Grid.Row="2" x:Name="MainPivot"  Style="{StaticResource PivotBaseMain}">
+            <PivotItem Style="{StaticResource PivotItemBase}" x:Uid="Hotel_Details_Hotel_Pivot">
+
+            </PivotItem>
+
+            <PivotItem Style="{StaticResource PivotItemBase}" x:Uid="Hotel_Details_Room_Pivot">
+
+            </PivotItem>
+
+            <PivotItem Style="{StaticResource PivotItemBase}" x:Uid="Hotel_Details_Galery_Pivot">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition>
+                        </ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="200"></RowDefinition>
+                        <RowDefinition ></RowDefinition>
+                    </Grid.RowDefinitions>
+
+
+                    <!--<Maps1:CustomMapControl Grid.Row="1" >
+                </Maps1:CustomMapControl>-->
+
+                    <PhotoGallery:PhotoGalleryControl Grid.Row="1" DataContext="{Binding HotelDetail.hotel.pictures}" ></PhotoGallery:PhotoGalleryControl>
+                </Grid>
+            </PivotItem>
+
+            <PivotItem Style="{StaticResource PivotItemBase}" x:Uid="Hotel_Details_comments_Pivot">
+
+            </PivotItem>
+
+            <PivotItem Style="{StaticResource PivotItemBase}" x:Uid="Hotel_Details_Description_Pivot">
+
+            </PivotItem>
+
+        </Pivot>
+
+
 
     </Grid>
 </Page>
