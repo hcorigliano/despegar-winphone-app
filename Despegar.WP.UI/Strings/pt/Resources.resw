@@ -975,7 +975,7 @@ A reserva não foi gerado e não cobra nenhuma taxa para a transação.</value>
   </data>
   <data name="AppBarButton_Next.Label" xml:space="preserve">
     <value>Seguiente</value>
-    </data>
+  </data>
   <data name="Page_Hotels_Checkout_PayAtDestination.Content" xml:space="preserve">
     <value>Pagamento diretamente ao hotel</value>
   </data>
@@ -984,5 +984,20 @@ A reserva não foi gerado e não cobra nenhuma taxa para a transação.</value>
   </data>
   <data name="Page_Order_Title" xml:space="preserve">
     <value>Ordem</value>
+  </data>
+  <data name="Hotel_Details_comments_Pivot.Header" xml:space="preserve">
+    <value>detalhe</value>
+  </data>
+  <data name="Hotel_Details_Description_Pivot.Header" xml:space="preserve">
+    <value>descrição</value>
+  </data>
+  <data name="Hotel_Details_Galery_Pivot.Header" xml:space="preserve">
+    <value>galeria</value>
+  </data>
+  <data name="Hotel_Details_Hotel_Pivot.Header" xml:space="preserve">
+    <value>hotel</value>
+  </data>
+  <data name="Hotel_Details_Room_Pivot.Header" xml:space="preserve">
+    <value>quartos</value>
   </data>
 </root>
