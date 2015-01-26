@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Despegar.Core.Log;
+using Despegar.WP.UI.Model.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -23,11 +25,12 @@ namespace Despegar.WP.UI.Controls.PhotoGallery
         //TODO create property to set the size of picture
         static string URLCONTENT = "http://staticontent.com/media/pictures/{0}/118x118";
         public PhotoGalleryViewModel photoGalleryViewModel { get; set; }
-
+        public INavigator Navigator { get; set; }
+        public IBugTracker t { get; set; }
         public PhotoGalleryControl()
         {    
             this.InitializeComponent();
-            photoGalleryViewModel = new PhotoGalleryViewModel();
+            photoGalleryViewModel = new PhotoGalleryViewModel( Navigator , t );
         }
 
         private void VariableSizedWrapGrid_DataContextChanged(FrameworkElement sender, DataContextChangedEventArgs args)
@@ -80,8 +83,10 @@ namespace Despegar.WP.UI.Controls.PhotoGallery
 
             photoGalleryViewModel.SelectedPicture = image.Tag as string;
              
-            var f = Window.Current.Content as Frame;
-            f.Navigate(typeof(PhotoPresenter), photoGalleryViewModel);
+            //var f = Window.Current.Content as Frame;
+
+            Navigator.GoTo(ViewModelPages.PhotoPresenter, photoGalleryViewModel);
+            //f.Navigate(typeof(PhotoPresenter), photoGalleryViewModel);
         }
     }
 }
