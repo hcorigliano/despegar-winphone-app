@@ -12,9 +12,11 @@ using Despegar.WP.UI.Model.ViewModel.Classes.Flights;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.ApplicationModel.Resources;
 
 namespace Despegar.WP.UI.Model.ViewModel.Hotels
 {
@@ -152,17 +154,18 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
                 // Set POST data
                 if (selectedCard != null)
                 {
-                    var payments = CoreBookingFields.form.checkout_method.First().Value.payment;
+                    PaymentForm payments = CoreBookingFields.form.checkout_method.FirstItem.payment;
                     payments.installment.bank_code.CoreValue = selectedCard.card.bank;
-                    payments.installment.quantity.CoreValue = selectedCard.installments.quantity.ToString();
+                    //payments.installment.quantity.CoreValue = selectedCard.installments.quantity.ToString();
                     payments.installment.card_code.CoreValue = selectedCard.card.code;
                     payments.installment.card_code.CoreValue = selectedCard.card.company;
                     payments.installment.card_type.CoreValue = selectedCard.card.type;
-                    payments.installment.complete_card_code.CoreValue = selectedCard.card.code;
+                    //payments.installment.complete_card_code.CoreValue = selectedCard.card.code;
 
                     if (creditCardsValidations != null)
                     {
-                        ValidationCreditcard validation = creditCardsValidations.data.FirstOrDefault(x => x.bankCode == (selectedCard.card.bank == "" ? "*" : selectedCard.card.bank) && x.cardCode == selectedCard.card.company);
+                        ValidationCreditcard validation = creditCardsValidations
+                            .data.FirstOrDefault(x => x.bankCode == (String.IsNullOrWhiteSpace(selectedCard.card.bank) ? "*" : selectedCard.card.bank) && x.cardCode == selectedCard.card.company);
 
                         Validation valNumber = new Validation();
                         valNumber.error_code = "NUMBER";
@@ -191,6 +194,49 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
         public async Task<List<CitiesFields>> GetCities(string countryCode, string search, string cityresult)
         {
             return await configurationService.AutoCompleteCities(countryCode, search, cityresult);
+        }
+
+        /// <summary>
+        /// Validates the reference code against the service and sets the Validation errors or succcess
+        /// </summary>
+        public async void ValidateVoucher()
+        {
+            this.Tracker.LeaveBreadcrumb("Hotels view model validate voucher init");
+
+            IsLoading = true;
+            ResourceLoader loader = new ResourceLoader();
+            Voucher field = CoreBookingFields.form.Voucher;
+
+            field.IsApplied = false;
+
+            var pricing = CoreBookingFields.items.FirstOrDefault().Value.price;  // TODO: Find out better about the items in th
+
+            CouponParameter parameter = new CouponParameter()
+            {
+                Beneficiary = CoreBookingFields.form.contact.email != null ? CoreBookingFields.form.contact.email.CoreValue : "",
+                TotalAmount = pricing.total.ToString(),
+                CurrencyCode = pricing.currency.code,
+                Product = "hotel",
+                Quotation = String.Format(CultureInfo.InvariantCulture, "{0:0.#################}", pricing.currency.ratio),
+                ReferenceCode = field.CoreValue,
+            };
+
+            VoucherResult = await couponsService.Validity(parameter);
+
+            if (!VoucherResult.Error.HasValue)
+                field.IsApplied = true; // Voucher OK!
+            else
+            {
+                // Notify Coupon Error
+                field.IsApplied = false;
+                OnViewModelError("VOUCHER_VALIDITY_ERROR", VoucherResult.Error.ToString());
+                VoucherResult = null;
+            }
+
+            field.Validate();
+            IsLoading = false;
+
+            this.Tracker.LeaveBreadcrumb("Flight checkout view model validate voucher complete");
         }
 
         /// <summary>
@@ -263,9 +309,9 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
             HotelsBookingFieldsRequest bookRequest = new HotelsBookingFieldsRequest();
 
             // TODO
-            bookRequest.token = "fe9d4ef2-e6b9-4943-9827-5c7c9ce6e2c5";
+            bookRequest.token = "c66602c8-09b5-4c11-92f7-9713cc4e1552";
             bookRequest.hotel_id = "298331";
-            bookRequest.room_choices = new List<string>() { "11" };
+            bookRequest.room_choices = new List<string>() { "3" };
             bookRequest.mobile_identifier = deviceID;
 
             CoreBookingFields = await hotelService.GetBookingFields(bookRequest);
@@ -282,6 +328,7 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
         {
             States = await commonServices.GetStates(countryCode);
         }        
+
 
     }
 }

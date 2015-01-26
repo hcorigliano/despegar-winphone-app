@@ -13,7 +13,10 @@ namespace Despegar.Core.Business.Hotels.BookingFields
         public CheckoutMethod checkout_method { get; set; }
         public AdditionalData additional_data { get; set; }
          
+
         // Custom
-        public InvoiceArg Invoice { get { return checkout_method.FirstOrDefault().Value.payment.invoice; } }
+        public Voucher Voucher { get { return checkout_method.FirstItem.vouchers != null ? checkout_method.FirstItem.vouchers.FirstOrDefault() : null; } } // TODO: only one voucher? Why a list?
+        public CardField CardInfo { get { return checkout_method.FirstItem.payment.card; } }
+        public InvoiceArg Invoice { get { return checkout_method.FirstItem.payment.invoice; } }
     }
 }

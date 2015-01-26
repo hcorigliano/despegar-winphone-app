@@ -10,6 +10,11 @@ namespace Despegar.Core.Business.Hotels.BookingFields
     {
         public bool required { get; set; }
         public PaymentForm payment { get; set; }
-        public List<RegularField> vouchers { get; set; }
+        public List<Voucher> vouchers { get; set; }
+
+        public CheckoutMethodKey() 
+        {
+            //vouchers = new List<RegularField>() { new Voucher() };
+        }
     }
 }

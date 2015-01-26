@@ -9,8 +9,10 @@ namespace Despegar.Core.Business.Common.Checkout
     {
         public string data_type { get; set; }
         public bool required { get; set; }
+
         public RegularField quantity { get; set; }
         public RegularField complete_card_code { get; set; }
+
         public RegularField card_type { get; set; }
         public RegularField bank_code { get; set; }
         public RegularField card_code { get; set; }
