@@ -53,6 +53,11 @@ namespace Despegar.WP.UI.Product.Hotels
 
         }
 
+        //protected override void OnNavigatedFrom(NavigationEventArgs e)
+        //{
+        //    HardwareButtons.BackPressed -= HardwareButtons_BackPressed;
+        //}
+
         private void HardwareButtons_BackPressed(object sender, BackPressedEventArgs e)
         {
             e.Handled = true;
