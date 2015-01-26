@@ -1,4 +1,5 @@
 ﻿using Despegar.Core.Business.Flight.BookingFields;
+using Despegar.Core.Business.Hotels.BookingFields;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -54,19 +55,13 @@ namespace Despegar.WP.UI.Common.Converter
         {
             var loader = new Windows.ApplicationModel.Resources.ResourceLoader();
             PaymentDetail paymentDetails = (PaymentDetail)value;
-            switch (paymentDetails.installments.quantity)
-            {
-                case 1:
-                    return "1 " + loader.GetString("Common_Pay_Of") + "$" + paymentDetails.installments.first.ToString();
-                case 6:
-                    return "1 " + loader.GetString("Common_Pay_Of") + "$" + paymentDetails.installments.first.ToString() + " + 5 " + loader.GetString("Common_Pays_Of") + "$" + paymentDetails.installments.others.ToString();
-                case 12:
-                    return "1 " + loader.GetString("Common_Pay_Of") + "$" + paymentDetails.installments.first.ToString() + " + 11 " + loader.GetString("Common_Pays_Of") + "$" + paymentDetails.installments.others.ToString();
-                case 24:
-                    return "1 " + loader.GetString("Common_Pay_Of") + "$" + paymentDetails.installments.first.ToString() + " + 23 " + loader.GetString("Common_Pays_Of") + "$" + paymentDetails.installments.others.ToString();
-            }
 
-            return "";
+            string text = "1 " + loader.GetString("Common_Pay_Of") + "$" + paymentDetails.installments.first.ToString();
+
+            if (paymentDetails.installments.quantity > 1)           
+                text += " + " + (paymentDetails.installments.quantity - 1) + " " + loader.GetString("Common_Pays_Of") + "$" + paymentDetails.installments.others.ToString();
+            
+            return text;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)
@@ -74,4 +69,34 @@ namespace Despegar.WP.UI.Common.Converter
             return null;
         }
     }
+
+    public class CardListConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, string language)
+        {
+            List<HotelPayment> cards = value as List<HotelPayment>;
+            bool isPayAtDestination = false;
+
+            if(cards != null)
+               isPayAtDestination = cards.Any(z => z.type=="at_destination");
+
+            if (isPayAtDestination) 
+            {
+                // Add PayAtDestination "card"
+                var newList = new List<HotelPayment>();
+                newList.Add(new HotelPayment() { card = new Despegar.Core.Business.Hotels.BookingFields.Card() { code = "EFECTIVO" } });
+                newList.AddRange(cards);
+                
+                return newList;
+            }
+
+            // Not Hotels, or not PayAtDestination
+            return value;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, string language)
+        {
+            return null;
+        }
+    }    
 }

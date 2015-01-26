@@ -42,7 +42,7 @@
                 <TextBlock TextWrapping="Wrap" Style="{StaticResource Thanks_Continue_Explain}" x:Uid="Flight_Thanks_Continue_Explain" Text="Su pago está siendo procesado. Una vez que el pago se procese exitosamente recibirá un e-mail con la información de compra."   />
 
                 <TextBlock Style="{StaticResource Thanks_Booking_Detail_Blue}" x:Uid="Common_Booking_Detail" Text="Detalle de reserva" />
-                <StackPanel xmlns:src="using:Despegar.WP.UI.Product.Flights.Checkout.Buy.Controls">
+                <StackPanel xmlns:src="using:Despegar.WP.UI.Product.Flights.Checkout.Controls">
                     <src:BuyDetailsControl DataContext="{Binding PriceDetail}" />
                 </StackPanel>
 

@@ -86,8 +86,6 @@
     <Compile Include="ViewModel\Classes\Flights\FlightsCrossParameter.cs" />
     <Compile Include="ViewModel\Classes\Flights\FlightSearchNavigationData.cs" />
     <Compile Include="ViewModel\Classes\Flights\BindableItem.cs" />
-    <Compile Include="Classes\Flights\Checkout\PaymentsFormated.cs" />
-    <Compile Include="Classes\Flights\Checkout\PriceFormated.cs" />
     <Compile Include="ViewModel\Classes\Flights\ChildrenAgeOption.cs" />
     <Compile Include="ViewModel\Classes\Flights\EditMultiplesNavigationData.cs" />
     <Compile Include="ViewModel\Classes\Flights\RouteInbound.cs" />

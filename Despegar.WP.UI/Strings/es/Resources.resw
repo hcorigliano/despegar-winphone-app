@@ -988,4 +988,7 @@ La reserva no ha sido generada y no se le cobrará ningún cargo por la transacc
   <data name="Page_Order_Title" xml:space="preserve">
     <value>Orden</value>
   </data>
+  <data name="Page_Hotels_Checkout_PayAtDestination.Content" xml:space="preserve">
+    <value>Pago en destino</value>
+  </data>
 </root>

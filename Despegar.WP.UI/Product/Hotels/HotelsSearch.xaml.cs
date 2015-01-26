@@ -1,19 +1,16 @@
 ﻿using Despegar.WP.UI.BugSense;
 using Despegar.WP.UI.Common;
+using Despegar.WP.UI.Controls;
 using Despegar.WP.UI.Model;
+using Despegar.WP.UI.Model.ViewModel;
 using Despegar.WP.UI.Model.ViewModel.Hotels;
+using System.ComponentModel;
 using Windows.Phone.UI.Input;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
-using System.ComponentModel;
-using Despegar.WP.UI.Model.ViewModel;
-using Despegar.WP.UI.Controls;
 
 namespace Despegar.WP.UI.Product.Hotels
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
     public sealed partial class HotelsSearch : Page
     {
         public HotelsSearchViewModel ViewModel { get; set; }
