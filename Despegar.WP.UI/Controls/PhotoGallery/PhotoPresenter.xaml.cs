@@ -53,6 +53,8 @@ namespace Despegar.WP.UI.Controls.PhotoGallery
         {
             e.Handled = true;
             HardwareButtons.BackPressed -= HardwareButtons_BackPressed;
+            photoGallery.GoBack();
+            
         }
 
     }

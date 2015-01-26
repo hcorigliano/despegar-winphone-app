@@ -43,21 +43,10 @@
 
             <PivotItem Style="{StaticResource PivotItemBase}" x:Uid="Hotel_Details_Galery_Pivot">
                 <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition>
-                        </ColumnDefinition>
-                    </Grid.ColumnDefinitions>
-
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="200"></RowDefinition>
-                        <RowDefinition ></RowDefinition>
-                    </Grid.RowDefinitions>
-
-
                     <!--<Maps1:CustomMapControl Grid.Row="1" >
                 </Maps1:CustomMapControl>-->
 
-                    <PhotoGallery:PhotoGalleryControl Grid.Row="1" DataContext="{Binding HotelDetail.hotel.pictures}" ></PhotoGallery:PhotoGalleryControl>
+                    <PhotoGallery:PhotoGalleryControl DataContext="{Binding HotelDetail.hotel.pictures}" ></PhotoGallery:PhotoGalleryControl>
                 </Grid>
             </PivotItem>
 

@@ -1,4 +1,5 @@
 ﻿using Despegar.Core.Log;
+using Despegar.WP.UI.Controls.PhotoGallery;
 using Despegar.WP.UI.Model.Interfaces;
 using Despegar.WP.UI.Product.Flights;
 using Despegar.WP.UI.Product.Hotels;
@@ -64,6 +65,9 @@ namespace Despegar.WP.UI.Common
                     break;
                 case ViewModelPages.HotelsResults:
                     view = typeof(HotelsResults); // TODO uncomment
+                    break;
+                case ViewModelPages.PhotoPresenter:
+                    view = typeof(PhotoPresenter);
                     break;
                 // Add More pages-viewmodel mappings down here
             }

@@ -52,6 +52,9 @@ namespace Despegar.WP.UI.Controls.PhotoGallery
         }
         public string SelectedPicture { get; set; }
 
-
+        public void GoBack()
+        {
+            Navigator.GoBack();
+        }
     }
 }
