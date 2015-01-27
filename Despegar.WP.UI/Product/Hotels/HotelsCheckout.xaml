@@ -53,7 +53,7 @@
 
              <!--Invoice Arg--> 
             <PivotItem x:Name="Pivot_INVOICE"  x:Uid="Hotels_Checkout_Invoice_Arg" Style="{StaticResource PivotItemBase}" xmlns:src="using:Despegar.WP.UI.Product.Hotels.Checkout">
-                <src:InvoiceArgentina  />
+                <src:InvoiceArgentina />
             </PivotItem>
 
             <!--Buy-->

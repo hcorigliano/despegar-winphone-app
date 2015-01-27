@@ -31,7 +31,7 @@
         
 		<!-- Title Panel -->
         <Image Grid.Row="0" Style="{StaticResource TopLogo}" />
-        <TextBlock Grid.Row="1" x:Uid="Page_Detail_TitleDetail" Style="{StaticResource PageHeaderSmall}" Text="DETALLE" />
+        <TextBlock Grid.Row="1" x:Uid="Page_Detail_TitleDetail" Style="{StaticResource PageHeaderSmall}"  />
 
         <!-- Content -->
         <Pivot Grid.Row="2" Style="{StaticResource PivotBaseMain}" x:Name="MainPivot">
