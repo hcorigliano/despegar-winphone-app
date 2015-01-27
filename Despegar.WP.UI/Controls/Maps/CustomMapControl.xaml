@@ -18,7 +18,7 @@
                 <Maps:MapItemsControl.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
-                            <Image Height="25"
+                            <Image Height="{StaticResource dBlock2}"
                                       Source="ms-appx:///Assets/maps/mappin.png"
                                       Maps:MapControl.Location="{Binding Geopoint}"
                                       Maps:MapControl.NormalizedAnchorPoint="{Binding Anchor}"
@@ -26,8 +26,11 @@
                                       >
                             </Image>
 
-                            <Grid  Style="{StaticResource MapsTextForeground}">
-                                <TextBlock Height="25" Text="{Binding Title}" Style="{StaticResource SegoeLight20}" ></TextBlock>
+                            <Grid  Height="{StaticResource dBlock2}" Width="{StaticResource dBlock6p}" Style="{StaticResource MapsTextForeground}">
+                                <TextBlock Style="{StaticResource SegoeLight20}" TextWrapping="Wrap" >
+                                    <Run Text="{Binding Title}" FontSize="20"> </Run>
+                                    <Run Text="{Binding Address}" FontSize="15"></Run>
+                                </TextBlock>
                             </Grid>
                             
                         </StackPanel>

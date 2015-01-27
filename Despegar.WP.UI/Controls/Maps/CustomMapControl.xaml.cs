@@ -45,7 +45,7 @@ namespace Despegar.WP.UI.Controls.Maps
             
             mapViewModel = new CustomMapViewModel();
 
-            mapViewModel.Locations.Add(new CustomPinPoint() { Latitude = -34.6653 , Longitude=-58.7275 , Title="Hotel 1"});
+            //mapViewModel.Locations.Add(new CustomPinPoint() { Latitude = -34.6653 , Longitude=-58.7275 , Title="Hotel 1", Address="calle falsa 123, republica de merlo ......."});
 
             //mapViewModel.Locations.Add(new CustomPinPoint() { Latitude = -34.6650, Longitude = -58.7270, Title = "Hotel 2" });
 
