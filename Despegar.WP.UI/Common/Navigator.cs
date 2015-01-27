@@ -54,19 +54,16 @@ namespace Despegar.WP.UI.Common
                     view = typeof(FlightCheckout);
                     break;
                 case ViewModelPages.FlightsThanks:
-                    view = typeof(FlightThanks); 
+                    view = typeof(FlightThanks); // TODO uncomment
                     break;
                 case ViewModelPages.HotelsDetails:
-                    view = typeof(HotelsDetails); 
+                    view = typeof(HotelsDetails); // TODO uncomment
                     break;
                 case ViewModelPages.HotelsSearch:
-                    view = typeof(HotelsSearch);
+                    view = typeof(HotelsSearch); // TODO uncomment
                     break;
                 case ViewModelPages.HotelsResults:
-                    view = typeof(HotelsResults); 
-                    break;
-                case ViewModelPages.HotelsCheckout:
-                    view = typeof(HotelsCheckout); 
+                    view = typeof(HotelsResults); // TODO uncomment
                     break;
                 // Add More pages-viewmodel mappings down here
             }
