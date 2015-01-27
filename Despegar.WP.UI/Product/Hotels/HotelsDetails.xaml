@@ -68,7 +68,7 @@
 
             <PivotItem Style="{StaticResource PivotItemBase}" x:Uid="Hotel_Details_Description_Pivot">
                 <Grid>
-                    <Maps1:CustomMapControl >
+                    <Maps1:CustomMapControl DataContext="{Binding CustomMap}" >
                 </Maps1:CustomMapControl>
                 </Grid>
             </PivotItem>

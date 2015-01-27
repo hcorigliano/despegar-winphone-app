@@ -2,11 +2,13 @@
 using Despegar.Core.IService;
 using Despegar.Core.Log;
 using Despegar.WP.UI.Model.Interfaces;
+using Despegar.WP.UI.Model.ViewModel.Controls.Maps;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
 
 namespace Despegar.WP.UI.Model.ViewModel.Hotels
 {
@@ -36,9 +38,24 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
         {
             this.navigator = navigator;
             this.hotelService = hotelService;
-
         }
 
+        private CustomMapViewModel _customMap;
+
+        public CustomMapViewModel CustomMap 
+        {
+            get {
+                    if (_customMap == null) _customMap = new CustomMapViewModel();
+                    
+                    if (hotelDetail!=null && hotelDetail.hotel.geo_location!=null)
+                    {
+                        Classes.CustomPinPoint pinpoint = new Classes.CustomPinPoint() { Latitude = hotelDetail.hotel.geo_location.latitude, Longitude = hotelDetail.hotel.geo_location.longitude, Title=hotelDetail.hotel.name, Address = hotelDetail.hotel.address};
+                        _customMap.Locations.Add(pinpoint);
+                    }
+
+                    return _customMap; 
+                }
+        }
 
         public async Task Init()
         {

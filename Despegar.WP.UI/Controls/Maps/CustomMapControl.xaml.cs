@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Despegar.WP.UI.Model.ViewModel.Classes;
+using Despegar.WP.UI.Model.ViewModel.Controls.Maps;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;

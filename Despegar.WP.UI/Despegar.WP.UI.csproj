@@ -164,8 +164,6 @@
     <Compile Include="Controls\Loading.xaml.cs">
       <DependentUpon>Loading.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Maps\CustomMapViewModel.cs" />
-    <Compile Include="Controls\Maps\CustomPinPoint.cs" />
     <Compile Include="Controls\PhotoGallery\PhotoGalleryControl.xaml.cs">
       <DependentUpon>PhotoGalleryControl.xaml</DependentUpon>
     </Compile>
