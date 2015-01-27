@@ -74,6 +74,11 @@ namespace Despegar.LegacyCore.Connector
                .Append(legacyManager.GetString("_version_none"))
                .Append(legacyManager.GetString("api_" + service));
 
+            if (!url.ToString().Contains("?"))
+                url.Append("?");
+
+            url.Append("&channel=WindowsTest1234");
+
             HttpRequestMessage message = new HttpRequestMessage(HttpMethod.Get, url.ToString());
             message.Headers.Add("X-ApiKey", api_key);
             message.Headers.Add("X-UOW", this.x_uow);
@@ -88,6 +93,11 @@ namespace Despegar.LegacyCore.Connector
                .Append(legacyManager.GetString("_base_api"))
                .Append(legacyManager.GetString("_version_none"))
                .Append(legacyManager.GetString("api_" + service));
+
+            if (!url.ToString().Contains("?"))
+                  url.Append("?");
+             
+            url.Append("&channel=WindowsTest1234");
 
             HttpRequestMessage message = new HttpRequestMessage(HttpMethod.Post, url.ToString());
             message.Content = new StringContent(data);
@@ -105,6 +115,11 @@ namespace Despegar.LegacyCore.Connector
                .Append(legacyManager.GetString("_base_api"))
                .Append(legacyManager.GetString("_version_v1"))
                .Append(legacyManager.GetString("api_" + service));
+               
+                 if (!url.ToString().Contains("?"))
+                url.Append("?");
+
+            url.Append("&channel=WindowsTest1234");
 
             HttpRequestMessage message = new HttpRequestMessage(HttpMethod.Post, url.ToString());
             message.Content = new StringContent(data);
