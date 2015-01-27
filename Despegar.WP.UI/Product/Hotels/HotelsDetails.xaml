@@ -48,7 +48,7 @@
                         <Button Content="Comprar" Style="{StaticResource ButtonBottomRed}"  Command="{Binding BuySuggestRoomCommand}" />
 
                     </Grid>
-
+                </Grid>
 
             </PivotItem>
 
