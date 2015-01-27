@@ -13,26 +13,29 @@
 
     <Grid>
 
-        <Maps:MapControl x:Name="mainMap" LandmarksVisible="True" ZoomLevel="12">
+        <Maps:MapControl x:Name="mainMap" LandmarksVisible="True" ZoomLevel="12" DataContextChanged="mainMap_DataContextChanged">
             <Maps:MapItemsControl ItemsSource="{Binding Locations}">
                 <Maps:MapItemsControl.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
-                            <Image Height="{StaticResource dBlock2}"
-                                      Source="ms-appx:///Assets/maps/mappin.png"
-                                      Maps:MapControl.Location="{Binding Geopoint}"
-                                      Maps:MapControl.NormalizedAnchorPoint="{Binding Anchor}"
+                            <Grid Height="{StaticResource dBlock2}" Width="{StaticResource dBlock2}" Style="{StaticResource IconBlue}">
+                                <StackPanel>
+                                    <Image 
+                                      Source="ms-appx:///Assets/Icon/App/pin-medium-white.png"
                                       Tapped="Image_Tapped"
+                                        Maps:MapControl.Location="{Binding Geopoint}"
+                                        Maps:MapControl.NormalizedAnchorPoint="{Binding Anchor}"
                                       >
-                            </Image>
-
+                                    </Image>
+                                </StackPanel>
+                            </Grid>
                             <Grid  Height="{StaticResource dBlock2}" Width="{StaticResource dBlock6p}" Style="{StaticResource MapsTextForeground}">
                                 <TextBlock Style="{StaticResource SegoeLight20}" TextWrapping="Wrap" >
                                     <Run Text="{Binding Title}" FontSize="20"> </Run>
                                     <Run Text="{Binding Address}" FontSize="15"></Run>
                                 </TextBlock>
                             </Grid>
-                            
+
                         </StackPanel>
                     </DataTemplate>
                 </Maps:MapItemsControl.ItemTemplate>
