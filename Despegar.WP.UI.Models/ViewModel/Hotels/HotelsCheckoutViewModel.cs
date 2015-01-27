@@ -193,6 +193,7 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
         // Public because it is used from the InvoiceArg control
         public async Task<List<CitiesFields>> GetCities(string countryCode, string search, string cityresult)
         {
+            //todo
             return await configurationService.AutoCompleteCities(countryCode, search, cityresult);
         }
 
@@ -327,6 +328,7 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
 
         private async Task LoadCountries()
         {
+
             Countries = (await configurationService.GetCountries()).countries;
         }
 
