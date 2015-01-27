@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/2010/manifest" xmlns:m2="http://schemas.microsoft.com/appx/2013/manifest" xmlns:m3="http://schemas.microsoft.com/appx/2014/manifest" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest">
-  <Identity Name="Decolar.com.Despegar.com" Publisher="CN=536A5CFD-569D-4780-BE39-567482872E9C" Version="3.1.0.0" />
-  <mp:PhoneIdentity PhoneProductId="ad8a6321-c1e7-42b3-849d-1cc12cf7d053" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
+  <Identity Name="043C53DD.Decolar.com" Publisher="CN=80470F60-23BA-44D2-B832-C8B8BC4E43F9" Version="3.1.0.0" />
+  <mp:PhoneIdentity PhoneProductId="a5e6d5d2-c40e-46ea-be9e-8cceb4069a4e" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
-    <DisplayName>Despegar.com</DisplayName>
-    <PublisherDisplayName>Despegar.com</PublisherDisplayName>
+    <DisplayName>Decolar.com</DisplayName>
+    <PublisherDisplayName>Decolar.com</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
   <Prerequisites>
@@ -16,7 +16,7 @@
   </Resources>
   <Applications>
     <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="Despegar.WP.UI.App">
-      <m3:VisualElements DisplayName="Despegar.com" Square150x150Logo="Assets\Logo.png" Square44x44Logo="Assets\SmallLogo.png" Description="Despegar.com" ForegroundText="light" BackgroundColor="#013D93" ToastCapable="true">
+      <m3:VisualElements DisplayName="Decolar.com" Square150x150Logo="Assets\Logo.png" Square44x44Logo="Assets\SmallLogo.png" Description="Decolar.com" ForegroundText="light" BackgroundColor="#013D93" ToastCapable="true">
         <m3:LockScreen Notification="badge" BadgeLogo="Assets\Icon\App\Badge.png" />
         <m3:DefaultTile Wide310x150Logo="Assets\WideLogo.png" Square71x71Logo="Assets\Square71x71Logo.png">
         </m3:DefaultTile>

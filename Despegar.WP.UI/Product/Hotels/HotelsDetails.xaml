@@ -34,6 +34,21 @@
 
         <Pivot Grid.Row="2" x:Name="MainPivot"  Style="{StaticResource PivotBaseMain}">
             <PivotItem Style="{StaticResource PivotItemBase}" x:Uid="Hotel_Details_Hotel_Pivot">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Row="1" VerticalAlignment="Bottom"  >
+                        <Grid>
+                            
+                        </Grid>
+                        <!--x-->
+                        <Button Content="Comprar" Style="{StaticResource ButtonBottomRed}"  Command="{Binding BuySuggestRoomCommand}" />
+
+                    </Grid>
+
 
             </PivotItem>
 
@@ -43,8 +58,19 @@
 
             <PivotItem Style="{StaticResource PivotItemBase}" x:Uid="Hotel_Details_Galery_Pivot">
                 <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition>
+                        </ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="200"></RowDefinition>
+                        <RowDefinition ></RowDefinition>
+                    </Grid.RowDefinitions>
+
+
                     <!--<Maps1:CustomMapControl Grid.Row="1" >
-                </Maps1:CustomMapControl>-->
+                    </Maps1:CustomMapControl>-->
 
                     <PhotoGallery:PhotoGalleryControl DataContext="{Binding HotelDetail.hotel.pictures}" ></PhotoGallery:PhotoGalleryControl>
                 </Grid>

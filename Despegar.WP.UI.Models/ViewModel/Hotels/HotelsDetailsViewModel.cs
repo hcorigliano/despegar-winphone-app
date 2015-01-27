@@ -42,6 +42,7 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
 
         public async Task Init()
         {
+            //
             HotelDetail = await hotelService.GetHotelsDetail(CrossParameters.IdSelectedHotel, CrossParameters.SearchParameters.Checkin, CrossParameters.SearchParameters.Checkout, CrossParameters.SearchParameters.distribution);
         }
     }

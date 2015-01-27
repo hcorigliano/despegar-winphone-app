@@ -42,11 +42,11 @@ namespace Despegar.WP.UI.Product.Hotels
             HardwareButtons.BackPressed += HardwareButtons_BackPressed;
             if(ViewModel == null)
             {
+                
                 ViewModel = new HotelsDetailsViewModel(Navigator.Instance, GlobalConfiguration.CoreContext.GetHotelService(), BugTracker.Instance) { CrossParameters = e.Parameter as HotelsCrossParameters };
                 await ViewModel.Init();
                 this.DataContext = ViewModel;
             }
-            
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
