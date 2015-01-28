@@ -77,7 +77,7 @@ namespace Despegar.WP.UI.Controls.Maps
             if (custompinpoint == null) return;
 
             mainMap.Center = new Windows.Devices.Geolocation.Geopoint(new Windows.Devices.Geolocation.BasicGeoposition() { Latitude = custompinpoint.Latitude, Longitude = custompinpoint.Longitude });
-            mainMap.ZoomLevel = 17;
+            mainMap.ZoomLevel = 17.5;
 
         }
 
@@ -97,7 +97,7 @@ namespace Despegar.WP.UI.Controls.Maps
                 {
                     CustomPinPoint pinpoint = elements.FirstOrDefault();
                     mainMap.Center = new Windows.Devices.Geolocation.Geopoint(new Windows.Devices.Geolocation.BasicGeoposition() { Latitude = pinpoint.Latitude, Longitude = pinpoint.Longitude });
-                    mainMap.ZoomLevel = 17;
+                    mainMap.ZoomLevel = 17.5;
                 }
                 
                 if (elements.Count()>1)

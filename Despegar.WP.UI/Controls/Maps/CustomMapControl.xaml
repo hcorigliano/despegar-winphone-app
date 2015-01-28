@@ -18,21 +18,32 @@
                 <Maps:MapItemsControl.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
-                            <Grid Height="{StaticResource dBlock2}" Width="{StaticResource dBlock2}" Style="{StaticResource IconBlue}">
+                            <Grid Height="{StaticResource dBlock2p}" Width="{StaticResource dBlock2}" >
                                 <StackPanel>
+                                    <Grid Style="{StaticResource IconBlue}" Height="{StaticResource dBlock2}" Width="{StaticResource dBlock2}">
+                                        <Image 
+                                        Height="{StaticResource dBlock2}"
+                                        Source="ms-appx:///Assets/Icon/App/pin-medium-white.png"
+                                        Tapped="Image_Tapped"
+                                         Width="{StaticResource dBlock2}"
+                                            >
+                                        </Image>
+                                    </Grid>
                                     <Image 
-                                      Source="ms-appx:///Assets/Icon/App/pin-medium-white.png"
-                                      Tapped="Image_Tapped"
+                                      Source="ms-appx:///Assets/Icon/App/tooltip-arrow-blue.png"
                                         Maps:MapControl.Location="{Binding Geopoint}"
                                         Maps:MapControl.NormalizedAnchorPoint="{Binding Anchor}"
+                                        Height="{StaticResource dOffset}"
+                                        Width="{StaticResource dBlock2}"
                                       >
                                     </Image>
                                 </StackPanel>
                             </Grid>
                             <Grid  Height="{StaticResource dBlock2}" Width="{StaticResource dBlock6p}" Style="{StaticResource MapsTextForeground}">
-                                <TextBlock Style="{StaticResource SegoeLight20}" TextWrapping="Wrap" >
-                                    <Run Text="{Binding Title}" FontSize="20"> </Run>
-                                    <Run Text="{Binding Address}" FontSize="15"></Run>
+                                <TextBlock Style="{StaticResource SegoeRegular13}" TextWrapping="Wrap" >
+                                    <Run Text="{Binding Title}"> </Run>
+                                    <Run Text=", "></Run>
+                                    <Run Text="{Binding Address}"></Run>
                                 </TextBlock>
                             </Grid>
 
