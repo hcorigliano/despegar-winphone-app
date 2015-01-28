@@ -6,6 +6,7 @@ using Windows.Storage;
 using System;
 using System.Threading.Tasks;
 using Despegar.Core.Business.Configuration;
+using System.Linq;
 
 
 namespace Despegar.WP.UI.Model
@@ -61,6 +62,41 @@ namespace Despegar.WP.UI.Model
         public static void ChangeSite(string siteCode) 
         {
             CoreContext.SetSite(siteCode);       
+        }
+
+        private static Product GetProductParameterFromConfiguration(string producto)
+        {
+            Configuration conf = GlobalConfiguration.CoreContext.GetConfiguration();
+            string site = GlobalConfiguration.Site;
+
+            var site2return = conf.sites.Where(s => s.code == site).FirstOrDefault();
+            if (site2return == null)
+                return null;
+
+            var _s = site2return.products.Where(p => p.name == producto).FirstOrDefault();
+            if (_s == null)
+                return null;
+
+            return _s;
+        }
+
+        public static int GetEmissionAnticipationDayForFlights()
+        {
+            return GetProductParameterFromConfiguration("flights").emission_anticipation_days;
+        }
+
+        public static int GetLastAvailableHoursForFlights()
+        {
+            int last;
+            try
+            {
+                last = Convert.ToInt32(GetProductParameterFromConfiguration("flights").last_available_hour);
+            }
+            catch (Exception)
+            {
+                last = 0;
+            }
+            return last;
         }
 
         public static async Task LoadUPA(IBugTracker bugtracker)

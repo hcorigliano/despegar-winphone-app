@@ -130,8 +130,6 @@ namespace Despegar.Core.Service
             mapiConnector.ConfigureSiteAndLanguage(site, GetLanguage());
             apiv1Connector.Configure(x_client, uow, site);
 
-            
-
             Logger.LogCore("Site Changed.");
         }
 

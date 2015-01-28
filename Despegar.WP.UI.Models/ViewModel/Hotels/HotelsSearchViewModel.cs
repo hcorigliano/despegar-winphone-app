@@ -69,6 +69,16 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
             }
         }
 
+        private string BuildDistributionString()
+        {
+            string distribution = String.Empty;
+
+            foreach (PassengersForRooms room in this.RoomsViewModel.RoomsDetailList)
+            {
+                
+            }
+            return distribution;
+        }
 
         public ICommand SearchCommand
         {
@@ -97,6 +107,8 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
 
         private async void SearchHotels()
         {
+            
+            
             HotelsCrossParameters hotelCrossParameters = new HotelsCrossParameters();
             hotelCrossParameters.SearchParameters.distribution = "2";
             hotelCrossParameters.SearchParameters.Checkin = "2015-03-01";
