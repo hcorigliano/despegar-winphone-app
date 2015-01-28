@@ -1,4 +1,5 @@
 ﻿using Despegar.Core.Log;
+using Despegar.WP.UI.Controls.PhotoGallery;
 using Despegar.WP.UI.Model.Interfaces;
 using Despegar.WP.UI.Product.Flights;
 using Despegar.WP.UI.Product.Hotels;
@@ -54,19 +55,19 @@ namespace Despegar.WP.UI.Common
                     view = typeof(FlightCheckout);
                     break;
                 case ViewModelPages.FlightsThanks:
-                    view = typeof(FlightThanks); 
+                    view = typeof(FlightThanks); // TODO uncomment
                     break;
                 case ViewModelPages.HotelsDetails:
-                    view = typeof(HotelsDetails); 
+                    view = typeof(HotelsDetails); // TODO uncomment
                     break;
                 case ViewModelPages.HotelsSearch:
-                    view = typeof(HotelsSearch);
+                    view = typeof(HotelsSearch); // TODO uncomment
                     break;
                 case ViewModelPages.HotelsResults:
-                    view = typeof(HotelsResults); 
+                    view = typeof(HotelsResults); // TODO uncomment
                     break;
-                case ViewModelPages.HotelsCheckout:
-                    view = typeof(HotelsCheckout); 
+                case ViewModelPages.PhotoPresenter:
+                    view = typeof(PhotoPresenter);
                     break;
                 // Add More pages-viewmodel mappings down here
             }

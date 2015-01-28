@@ -44,8 +44,8 @@ namespace Despegar.WP.UI.Product.Hotels
             {
                 
                 ViewModel = new HotelsDetailsViewModel(Navigator.Instance, GlobalConfiguration.CoreContext.GetHotelService(), BugTracker.Instance) { CrossParameters = e.Parameter as HotelsCrossParameters };
-                this.DataContext = ViewModel;
                 await ViewModel.Init();
+                this.DataContext = ViewModel;
             }
         }
 

@@ -164,8 +164,6 @@
     <Compile Include="Controls\Loading.xaml.cs">
       <DependentUpon>Loading.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Maps\CustomMapViewModel.cs" />
-    <Compile Include="Controls\Maps\CustomPinPoint.cs" />
     <Compile Include="Controls\PhotoGallery\PhotoGalleryControl.xaml.cs">
       <DependentUpon>PhotoGalleryControl.xaml</DependentUpon>
     </Compile>
@@ -789,6 +787,12 @@
     <Content Include="Assets\country\ZM.png" />
     <Content Include="Assets\country\ZW.png" />
     <Content Include="Assets\Icon\App\phone-small-white.scale-100.png" />
+    <Content Include="Assets\Icon\App\pin-medium-white.scale-100.png" />
+    <Content Include="Assets\Icon\App\pin-medium-white.scale-140.png" />
+    <Content Include="Assets\Icon\App\pin-medium-white.scale-240.png" />
+    <Content Include="Assets\Icon\App\tooltip-arrow-blue.scale-100.png" />
+    <Content Include="Assets\Icon\App\tooltip-arrow-blue.scale-140.png" />
+    <Content Include="Assets\Icon\App\tooltip-arrow-blue.scale-240.png" />
     <Content Include="Assets\maps\mappin.png" />
     <Content Include="Assets\Icon\App\calendar-temp.png" />
     <Content Include="Assets\Icon\App\compass-small-white.scale-100.png" />

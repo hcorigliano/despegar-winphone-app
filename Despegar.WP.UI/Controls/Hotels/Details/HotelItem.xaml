@@ -93,7 +93,7 @@
                 </Grid>
 
                 <!--PAYMENT DESCRIPTION-->
-                <TextBlock Grid.Row="3" Text="{Binding payment_description}" Style="{StaticResource SegoeRegular13}"  TextWrapping="Wrap" VerticalAlignment="Center"/>
+                <TextBlock Height="{StaticResource dBlock2p}" Grid.Row="3" Text="{Binding payment_description}" Style="{StaticResource SegoeRegular13}"  TextWrapping="Wrap" VerticalAlignment="Center"/>
 
             </Grid>
 

@@ -1118,6 +1118,15 @@
         <Setter Property="Height" Value="{StaticResource dBlock1p}" />
         <Setter Property="VerticalAlignment" Value="Center" />
     </Style>
+    
+    <!-- Maps -->
+   
+    <Style x:Key="MapsTextForeground" TargetType="Grid" BasedOn="{StaticResource IconBase}">
+        <Setter Property="Background"  Value="{StaticResource Blue60Brush}" />
+        <!--<Setter Property="Width"  Value="{StaticResource dBlock2}" />
+        <Setter Property="Height" Value="{StaticResource dBlock2}" />-->
+    </Style>
+
     <!--Hotels Details-->
 
     <Style x:Key="HotelDetailLink" TargetType="Button">

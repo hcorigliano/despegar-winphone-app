@@ -1,21 +1,20 @@
-﻿using Despegar.Core.Business.Hotels.BookingFields;
-using Despegar.Core.Business.Hotels.HotelDetails;
+﻿using Despegar.Core.Business.Hotels.HotelDetails;
 using Despegar.Core.IService;
 using Despegar.Core.Log;
 using Despegar.WP.UI.Model.Interfaces;
-using Despegar.WP.UI.Models.Classes;
+using Despegar.WP.UI.Model.ViewModel.Controls.Maps;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Input;
+
 
 namespace Despegar.WP.UI.Model.ViewModel.Hotels
 {
     public class HotelsDetailsViewModel : ViewModelBase
     {
-        public INavigator Navigator { get; set; }
+        public INavigator navigator { get; set; }
         public IHotelService hotelService { get; set; }
         public HotelsCrossParameters CrossParameters { get; set; }
 
@@ -38,31 +37,25 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
         public HotelsDetailsViewModel(INavigator navigator, IHotelService hotelService, IBugTracker t)
             : base(t)
         {
-            this.Navigator = navigator;
+            this.navigator = navigator;
             this.hotelService = hotelService;
-
         }
 
-        public ICommand BuySuggestRoomCommand
-        {
-            get
-            {
-                return new RelayCommand(() => BuySuggestRoom());
-            }
-        }
+        private CustomMapViewModel _customMap;
 
-        private void BuySuggestRoom()
+        public CustomMapViewModel CustomMap 
         {
-            if (CrossParameters != null && hotelDetail != null)
-            {
-                CrossParameters.BookRequest = new HotelsBookingFieldsRequest();
-                CrossParameters.BookRequest.token = HotelDetail.token;
-                CrossParameters.BookRequest.hotel_id = hotelDetail.id;
-                CrossParameters.BookRequest.room_choices = new List<string>() { hotelDetail.suggested_room_choice };
-                CrossParameters.BookRequest.mobile_identifier = GlobalConfiguration.UPAId;
+            get {
+                    if (_customMap == null) _customMap = new CustomMapViewModel();
+                    
+                    if (hotelDetail!=null && hotelDetail.hotel.geo_location!=null)
+                    {
+                        Classes.CustomPinPoint pinpoint = new Classes.CustomPinPoint() { Latitude = hotelDetail.hotel.geo_location.latitude, Longitude = hotelDetail.hotel.geo_location.longitude, Title=hotelDetail.hotel.name, Address = hotelDetail.hotel.address};
+                        _customMap.Locations.Add(pinpoint);
+                    }
 
-                Navigator.GoTo(ViewModelPages.HotelsCheckout, CrossParameters);
-            }
+                    return _customMap; 
+                }
         }
 
         public async Task Init()
