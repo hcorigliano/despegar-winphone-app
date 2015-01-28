@@ -142,9 +142,17 @@
         <Setter Property="CharacterSpacing" Value="40" />
         <Setter Property="FontWeight" Value="SemiBold" />
     </Style>
+    <Style x:Key="SegoeSemilight15" TargetType="TextBlock" BasedOn="{StaticResource BaseText}">
+        <Setter Property="FontFamily" Value="Segoe UI SemiLight" />
+        <Setter Property="FontSize" Value="15" />
+    </Style>
     <Style x:Key="SegoeSemilight17" TargetType="TextBlock" BasedOn="{StaticResource BaseText}">
         <Setter Property="FontFamily" Value="Segoe UI SemiLight" />
         <Setter Property="FontSize" Value="17" />
+    </Style>
+    <Style x:Key="SegoeSemilight20" TargetType="TextBlock" BasedOn="{StaticResource BaseText}">
+        <Setter Property="FontFamily" Value="Segoe UI SemiLight" />
+        <Setter Property="FontSize" Value="20" />
     </Style>
     <Style x:Key="SegoeSemilight24" TargetType="TextBlock" BasedOn="{StaticResource BaseText}">
         <Setter Property="FontFamily" Value="Segoe UI SemiLight" />

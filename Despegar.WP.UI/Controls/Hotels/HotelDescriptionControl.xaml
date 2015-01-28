@@ -1,0 +1,44 @@
+﻿<UserControl
+    x:Class="Despegar.WP.UI.Controls.Hotels.HotelDescriptionControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Despegar.WP.UI.Controls.Hotels"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:Maps1="using:Despegar.WP.UI.Controls.Maps"
+    mc:Ignorable="d"
+    d:DesignHeight="500"
+    d:DesignWidth="400">
+    
+    <ScrollViewer>
+    <Grid DataContext="{Binding}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="{StaticResource Block1p}"></RowDefinition>
+            <RowDefinition Height="{StaticResource Block2p}" ></RowDefinition>
+            <RowDefinition Height="{StaticResource Block6}"></RowDefinition>
+            <RowDefinition Height="{StaticResource Block1p}"></RowDefinition>
+            <RowDefinition Height="{StaticResource Offset}"></RowDefinition>
+            <RowDefinition Height="{StaticResource Block1p}"></RowDefinition>
+            <RowDefinition Height="{StaticResource Block2}"></RowDefinition>
+            <RowDefinition ></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0" Text="Location" x:Uid="Page_HotelDescription_Location" Style="{StaticResource SegoeSemilight20}"></TextBlock>
+        <StackPanel Grid.Row="1">
+            <TextBlock Text="{Binding HotelDetail.hotel.address}" Style="{StaticResource SegoeSemilight17}"></TextBlock>
+            <TextBlock Style="{StaticResource SegoeSemilight15}">
+                <Run Text="{Binding HotelDetail.hotel.city.name}" ></Run>
+                <Run Text=", "></Run>
+                <Run Text="{Binding HotelDetail.hotel.city.country.name}"></Run>
+            </TextBlock>
+        </StackPanel>
+        
+        <Maps1:CustomMapControl Grid.Row="2"  DataContext="{Binding CustomMap}" >
+        </Maps1:CustomMapControl>
+
+        <TextBlock Grid.Row="5" Text="Amenitie" x:Uid="Page_HotelDescription_Amenities" Style="{StaticResource SegoeSemilight20}"></TextBlock>
+
+        <TextBlock Grid.Row="7" Style="{StaticResource SegoeSemilight15}" Text="{Binding HotelDetail.hotel.description}" TextWrapping="WrapWholeWords" ></TextBlock>
+    </Grid>
+    </ScrollViewer>
+</UserControl>

@@ -1,4 +1,4 @@
-﻿<Page xmlns:Maps1="using:Despegar.WP.UI.Controls.Maps"
+﻿<Page xmlns:Hotels="using:Despegar.WP.UI.Controls.Hotels"  xmlns:Maps1="using:Despegar.WP.UI.Controls.Maps"
       xmlns:PhotoGallery="using:Despegar.WP.UI.Controls.PhotoGallery"  
       xmlns:Maps="using:Windows.UI.Xaml.Controls.Maps" 
     x:Class="Despegar.WP.UI.Product.Hotels.HotelsDetails"
@@ -172,10 +172,11 @@
             </PivotItem>
 
             <PivotItem Style="{StaticResource PivotItemBase}" x:Uid="Hotel_Details_Description_Pivot">
+             
                 <Grid>
-                    <Maps1:CustomMapControl DataContext="{Binding CustomMap}" >
-                </Maps1:CustomMapControl>
+                    <Hotels:HotelDescriptionControl DataContext="{Binding}" />
                 </Grid>
+                
             </PivotItem>
 
         </Pivot>

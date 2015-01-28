@@ -53,7 +53,6 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
                 }
         }
 
-        public ICollection<string> ImagesTestList { get; set; }
         #endregion
 
         public HotelsDetailsViewModel(INavigator navigator, IHotelService hotelService, IBugTracker t)
