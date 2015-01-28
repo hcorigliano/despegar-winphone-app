@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Despegar.Core.Business.Hotels.BookingFields;
 using Despegar.Core.Business.Hotels.HotelDetails;
+using Despegar.Core.Business.Hotels;
 
 namespace Despegar.Core.Service
 {

@@ -114,7 +114,6 @@
     <Compile Include="Hotels\BookingFields\Installments.cs" />
     <Compile Include="Hotels\BookingFields\ItemsKey.cs" />
     <Compile Include="Hotels\BookingFields\BookingFields.cs" />
-    <Compile Include="Hotels\BookingFields\HotelsBookingFieldsRequest.cs" />
     <Compile Include="Hotels\BookingFields\Fees.cs" />
     <Compile Include="Hotels\BookingFields\Form.cs" />
     <Compile Include="Hotels\BookingFields\ItemPrice.cs" />
@@ -157,6 +156,7 @@
     <Compile Include="Hotels\HotelDetails\HotelDatails.cs" />
     <Compile Include="Hotels\HotelsAutocomplete\HotelAutocomplete.cs" />
     <Compile Include="Hotels\HotelsAutocomplete\HotelsAutocomplete.cs" />
+    <Compile Include="Hotels\HotelsBookingFieldsRequest.cs" />
     <Compile Include="Hotels\HotelsExtraData.cs" />
     <Compile Include="Hotels\SearchBox\HotelSearchModel.cs" />
     <Compile Include="Hotels\InstallmentFormatted.cs" />

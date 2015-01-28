@@ -10,6 +10,7 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
     public class HotelsCrossParameters
     {
         public HotelsSearchParameters SearchParameters { get; set; }
+        public HotelsBookingFieldsRequest BookRequest { get; set; }
         public HotelsExtraData HotelsExtraData { get; set; }
         public string IdSelectedHotel { get; set; }
 

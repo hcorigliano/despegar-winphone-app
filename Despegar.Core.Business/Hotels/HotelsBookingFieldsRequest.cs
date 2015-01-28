@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Despegar.Core.Business.Hotels.BookingFields
+namespace Despegar.Core.Business.Hotels
 {
     public class HotelsBookingFieldsRequest
     {

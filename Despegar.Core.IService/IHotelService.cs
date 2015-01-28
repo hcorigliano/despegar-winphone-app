@@ -1,4 +1,5 @@
-﻿using Despegar.Core.Business.Hotels.BookingFields;
+﻿using Despegar.Core.Business.Hotels;
+using Despegar.Core.Business.Hotels.BookingFields;
 using Despegar.Core.Business.Hotels.CitiesAvailability;
 using Despegar.Core.Business.Hotels.HotelDetails;
 using Despegar.Core.Business.Hotels.HotelsAutocomplete;
