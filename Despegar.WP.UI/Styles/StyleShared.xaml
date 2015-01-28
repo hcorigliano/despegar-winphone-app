@@ -1118,6 +1118,20 @@
         <Setter Property="Height" Value="{StaticResource dBlock1p}" />
         <Setter Property="VerticalAlignment" Value="Center" />
     </Style>
+    <!--Hotels Details-->
+
+    <Style x:Key="HotelDetailLink" TargetType="Button">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderBrush" Value="Transparent" />
+    </Style>
+
+    <Style x:Key="DetailDetailLinkText" TargetType="TextBlock" BasedOn="{StaticResource SegoeSemilight17}">
+        <Setter Property="Height" Value="{StaticResource dBlock1p}" />
+        <Setter Property="Foreground" Value="{StaticResource Blue80 }" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
+    </Style>
+    
     <!-- ================== ThemeResources Overrides ================= -->
     <ResourceDictionary.ThemeDictionaries>
         <ResourceDictionary x:Key="Default">

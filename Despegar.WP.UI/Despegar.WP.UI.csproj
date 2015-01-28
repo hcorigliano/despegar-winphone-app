@@ -396,7 +396,7 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\Hotels\QuantityRoomsControl.xaml">
-    <SubType>Designer</SubType>
+      <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\PhotoGallery\PhotoGalleryControl.xaml">
@@ -404,7 +404,7 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\Hotels\SearchHotelControl.xaml">
-    <SubType>Designer</SubType>
+      <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\PhotoGallery\PhotoPresenter.xaml">
@@ -788,6 +788,7 @@
     <Content Include="Assets\country\ZA.png" />
     <Content Include="Assets\country\ZM.png" />
     <Content Include="Assets\country\ZW.png" />
+    <Content Include="Assets\Icon\App\phone-small-white.scale-100.png" />
     <Content Include="Assets\maps\mappin.png" />
     <Content Include="Assets\Icon\App\calendar-temp.png" />
     <Content Include="Assets\Icon\App\compass-small-white.scale-100.png" />

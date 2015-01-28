@@ -112,8 +112,13 @@
             <Grid Height="{StaticResource dBlock1}" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left" Visibility="{Binding price.discount_percentage , Converter={StaticResource NullToVisibilityConverter} }">
 
                 <Grid  Width="50" Height="{StaticResource dBlock1}" Background="#FF50BB30" VerticalAlignment="Top" HorizontalAlignment="Left">
-                    <Image  Source="{Binding Binding price.promo_type , Converter={StaticResource TypeDiscountImageConverter}}" VerticalAlignment="Center"/>
-                    <TextBlock Style="{StaticResource SegoeSemibold15}" VerticalAlignment="Center">
+                    <!--<Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>-->
+
+                    <!--<Image Grid.Column="0"  Source="{Binding Binding price.promo_type , Converter={StaticResource TypeDiscountImageConverter}}"  VerticalAlignment="Center" HorizontalAlignment="Left" /> --><!--Source="/Assets/Icon/App/phone-small-white.scale-100.png"-->
+                    <TextBlock Style="{StaticResource SegoeSemibold15}" VerticalAlignment="Center" >
                         <Run Text="%"/>
                         <Run Text="{Binding price.discount_percentage}" />
                     </TextBlock>

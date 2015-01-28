@@ -157,6 +157,7 @@
     <Compile Include="Hotels\HotelDetails\HotelDatails.cs" />
     <Compile Include="Hotels\HotelsAutocomplete\HotelAutocomplete.cs" />
     <Compile Include="Hotels\HotelsAutocomplete\HotelsAutocomplete.cs" />
+    <Compile Include="Hotels\HotelsExtraData.cs" />
     <Compile Include="Hotels\SearchBox\HotelSearchModel.cs" />
     <Compile Include="Hotels\InstallmentFormatted.cs" />
     <Compile Include="Hotels\SearchDetails.cs" />

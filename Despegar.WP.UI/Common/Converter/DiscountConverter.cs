@@ -31,7 +31,7 @@ namespace Despegar.WP.UI.Common.Converter
         public object Convert(object value, Type targetType, object parameter, string language)
         {
             if (value != null && (string)value == "MOBILE") 
-                return "assets\\PhoneDisccountLogo.png";
+                return "/Assets/Icon/App/phone-small-white.scale-100.png";
             return "";
 
         }

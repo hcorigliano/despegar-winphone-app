@@ -35,7 +35,8 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
         }
         public ICollection<string> ImagesTestList { get; set; }
 
-        public HotelsDetailsViewModel(INavigator navigator, IHotelService hotelService, IBugTracker t): base(t)
+        public HotelsDetailsViewModel(INavigator navigator, IHotelService hotelService, IBugTracker t)
+            : base(t)
         {
             this.Navigator = navigator;
             this.hotelService = hotelService;
@@ -66,7 +67,6 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
 
         public async Task Init()
         {
-            //
             HotelDetail = await hotelService.GetHotelsDetail(CrossParameters.IdSelectedHotel, CrossParameters.SearchParameters.Checkin, CrossParameters.SearchParameters.Checkout, CrossParameters.SearchParameters.distribution);
         }
     }

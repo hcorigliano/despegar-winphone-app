@@ -12,11 +12,13 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
     {
         public HotelsSearchParameters SearchParameters { get; set; }
         public HotelsBookingFieldsRequest BookRequest  { get; set; }
+        public HotelsExtraData HotelsExtraData { get; set; }
         public string IdSelectedHotel { get; set; }
 
         public HotelsCrossParameters()
         {
             this.SearchParameters = new HotelsSearchParameters();
+            this.HotelsExtraData = new HotelsExtraData();
         }
     }
 }

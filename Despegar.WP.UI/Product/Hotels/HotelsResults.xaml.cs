@@ -90,6 +90,7 @@ namespace Despegar.WP.UI.Product.Hotels
             if(ViewModel != null)
             {
                 ViewModel.CrossParameters.IdSelectedHotel = ((HotelItem)((ListView)sender).SelectedItem).id.ToString();
+                ViewModel.CrossParameters.HotelsExtraData.Distance  = ((HotelItem)((ListView)sender).SelectedItem).distance;
                 ViewModel.GoToDetails();
             }
         }

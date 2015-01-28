@@ -102,7 +102,7 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
             hotelCrossParameters.SearchParameters.Checkin = "2015-03-01";
             hotelCrossParameters.SearchParameters.Checkout = "2015-03-05";
             hotelCrossParameters.SearchParameters.currency = "ars";
-            hotelCrossParameters.SearchParameters.destinationNumber = 4451; //982
+            hotelCrossParameters.SearchParameters.destinationNumber = 982; //982 4451
 
             //int child = hotelCrossParameters.SearchParameters.Childs ;
             Navigator.GoTo(ViewModelPages.HotelsResults, hotelCrossParameters);

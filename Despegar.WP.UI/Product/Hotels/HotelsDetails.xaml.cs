@@ -60,6 +60,16 @@ namespace Despegar.WP.UI.Product.Hotels
             Navigator.Instance.GoBack();
         }
 
+        private void GoToDetailsPivot(object sender, RoutedEventArgs e)
+        {
+            //Not implemented (Yet)
+        }
+
+        private void GoToCommentsPivot(object sender, RoutedEventArgs e)
+        {
+
+        }
+
        
     }
 }
