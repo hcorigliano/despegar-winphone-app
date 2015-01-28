@@ -15,8 +15,12 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using Windows.UI.Xaml.Shapes;
-using Despegar.WP.UI.Model.ViewModel.Hotels;
 using Despegar.Core.Business.Hotels.CitiesAvailability;
+using Windows.Phone.UI.Input;
+using Despegar.WP.UI.Common;
+using Despegar.WP.UI.Model;
+using Despegar.WP.UI.BugSense;
+using Despegar.WP.UI.Model.ViewModel.Hotels;
 
 
 namespace Despegar.WP.UI.Product.Hotels
@@ -26,37 +30,45 @@ namespace Despegar.WP.UI.Product.Hotels
     /// </summary>
     public sealed partial class HotelsDetails : Page
     {
-        public HotelsDetailsViewModel hotelDetailViewModel { get; set; }
+        public HotelsDetailsViewModel ViewModel { get; set; }
+
         public HotelsDetails()
         {
             this.InitializeComponent();
         }
 
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
-            
+            HardwareButtons.BackPressed += HardwareButtons_BackPressed;
+            if(ViewModel == null)
+            {
+                
+                ViewModel = new HotelsDetailsViewModel(Navigator.Instance, GlobalConfiguration.CoreContext.GetHotelService(), BugTracker.Instance) { CrossParameters = e.Parameter as HotelsCrossParameters };
+                await ViewModel.Init();
+                this.DataContext = ViewModel;
+            }
         }
 
-        //private  void HotelMap_Tapped(object sender, TappedRoutedEventArgs e)
-        //{
-        //    HotelMap.Center = new Windows.Devices.Geolocation.Geopoint(new Windows.Devices.Geolocation.BasicGeoposition() { Latitude = -34.6653, Longitude = -58.7275 });
-        //    HotelMap.ZoomLevel = 12;
-        //    HotelMap.LandmarksVisible = true;
-
-        //    //var pushpin = CreatePushPin();
-        //    //HotelMap.Children.Add(pushpin);
-
-        //    var location = new Windows.Devices.Geolocation.Geopoint(new Windows.Devices.Geolocation.BasicGeoposition() { Latitude = -34.6653, Longitude = -58.7275 });
-
-        //    MapIcon mapicon = new MapIcon();
-        //    mapicon.Location = location;
-        //    mapicon.NormalizedAnchorPoint = new Point(0.5, 1.0);
-        //    mapicon.Title = "Ehh Merlo loco";
-
-        //    HotelMap.MapElements.Add(mapicon);
-        //    //await HotelMap.TrySetViewAsync(location, 15D, 0, 0, Windows.UI.Xaml.Controls.Maps.MapAnimationKind.Bow);
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            HardwareButtons.BackPressed -= HardwareButtons_BackPressed;
+        }
             
-        //}
+        private void HardwareButtons_BackPressed(object sender, BackPressedEventArgs e)
+        {
+            e.Handled = true;
+            Navigator.Instance.GoBack();
+        }
+
+        private void GoToDetailsPivot(object sender, RoutedEventArgs e)
+        {
+            //Not implemented (Yet)
+        }
+
+        private void GoToCommentsPivot(object sender, RoutedEventArgs e)
+        {
+
+        }
 
        
     }

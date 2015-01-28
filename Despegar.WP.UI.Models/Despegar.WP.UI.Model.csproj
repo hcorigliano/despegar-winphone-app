@@ -83,11 +83,10 @@
     <Compile Include="Common\IIncrementalSource.cs" />
     <Compile Include="Common\IncrementalLoadingCollection.cs" />
     <Compile Include="Common\ViewModelErrorArgs.cs" />
+    <Compile Include="ViewModel\Classes\CustomPinPoint.cs" />
     <Compile Include="ViewModel\Classes\Flights\FlightsCrossParameter.cs" />
     <Compile Include="ViewModel\Classes\Flights\FlightSearchNavigationData.cs" />
     <Compile Include="ViewModel\Classes\Flights\BindableItem.cs" />
-    <Compile Include="Classes\Flights\Checkout\PaymentsFormated.cs" />
-    <Compile Include="Classes\Flights\Checkout\PriceFormated.cs" />
     <Compile Include="ViewModel\Classes\Flights\ChildrenAgeOption.cs" />
     <Compile Include="ViewModel\Classes\Flights\EditMultiplesNavigationData.cs" />
     <Compile Include="ViewModel\Classes\Flights\RouteInbound.cs" />
@@ -96,6 +95,7 @@
     <Compile Include="ViewModel\Classes\Minor.cs" />
     <Compile Include="Interfaces\INavigator.cs" />
     <Compile Include="ViewModel\Classes\Results\BindableItemsLoadingCollection.cs" />
+    <Compile Include="ViewModel\Controls\CustomMapViewModel.cs" />
     <Compile Include="ViewModel\CountrySelectionViewModel.cs" />
     <Compile Include="ViewModel\Flights\FlightThanksViewModel.cs" />
     <Compile Include="ViewModel\Flights\MultipleEditionViewModel.cs" />

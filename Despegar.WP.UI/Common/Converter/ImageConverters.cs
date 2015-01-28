@@ -1,4 +1,5 @@
-﻿using Despegar.Core.Business.Hotels.CitiesAvailability;
+﻿using Despegar.Core.Business.Hotels;
+using Despegar.Core.Business.Hotels.CitiesAvailability;
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -10,6 +10,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Despegar.Core.Business.Hotels.BookingFields;
+using Despegar.Core.Business.Hotels.HotelDetails;
+using Despegar.Core.Business.Hotels;
 
 namespace Despegar.Core.Service
 {
@@ -36,6 +38,14 @@ namespace Despegar.Core.Service
             IConnector connector = context.GetServiceConnector(ServiceKey.HotelsAutocomplete);
 
             return await connector.GetAsync<CitiesAvailability>(serviceUrl);            
+        }
+
+        public async Task<HotelDatails> GetHotelsDetail(string idHotel, string checkin, string checkout, string distribution)
+        {
+            string serviceUrl = String.Format(ServiceURL.GetServiceURL(ServiceKey.HotelsGetDetails), idHotel, checkin, checkout, distribution);
+            IConnector connector = context.GetServiceConnector(ServiceKey.HotelsGetDetails);
+
+            return await connector.GetAsync<HotelDatails>(serviceUrl);
         }
 
         //public async Task<CitiesAvailability> GetNearHotelsAvailability(double latitude, double longitude, string checkin, string checkout, string distribution, string currency, int offset , int limit , string sort , string order)

@@ -43,14 +43,10 @@ namespace Despegar.Core.Business.Hotels.SearchBox
         //    {
         //        daysToAdd = DateTime.Today.AddDays(EmissionAnticipationDay);
         //    }
-
         //    this.DepartureDate = daysToAdd;
         //    this.DestinationDate = daysToAdd;
 
         //    DateBoundary = daysToAdd;
         //}
-
-
-        
     }
 }

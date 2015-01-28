@@ -226,5 +226,10 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
 
         }
 
+        public void GoToDetails()
+        {
+            Navigator.GoTo(ViewModelPages.HotelsDetails, CrossParameters);
+        }
+
     }
 }
