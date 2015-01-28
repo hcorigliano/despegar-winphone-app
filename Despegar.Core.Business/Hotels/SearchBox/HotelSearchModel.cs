@@ -29,8 +29,26 @@ namespace Despegar.Core.Business.Hotels.SearchBox
             
             }
         }
-                    
 
+        //public void UpdateSearchDays()
+        //{
+        //    DateTime daysToAdd;
+        //    DateTime daysToCompare = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, LastAvailableHours, 0, 0);
+
+        //    if (DateTime.Compare(DateTime.Now, daysToCompare) > 0)
+        //    {
+        //        daysToAdd = DateTime.Today.AddDays(EmissionAnticipationDay + 1);
+        //    }
+        //    else
+        //    {
+        //        daysToAdd = DateTime.Today.AddDays(EmissionAnticipationDay);
+        //    }
+
+        //    this.DepartureDate = daysToAdd;
+        //    this.DestinationDate = daysToAdd;
+
+        //    DateBoundary = daysToAdd;
+        //}
 
 
         

@@ -121,6 +121,7 @@
     <Compile Include="ViewModel\Hotels\HotelsDetailsViewModel.cs" />
     <Compile Include="ViewModel\Hotels\HotelsResultsViewModel.cs" />
     <Compile Include="ViewModel\Hotels\HotelsSearchViewModel.cs" />
+    <Compile Include="ViewModel\Hotels\PassengersForRooms.cs" />
     <Compile Include="ViewModel\Hotels\RoomsViewModel.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
   </ItemGroup>
