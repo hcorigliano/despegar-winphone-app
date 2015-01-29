@@ -24,15 +24,19 @@
             </ItemsControl.ItemsPanel>
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <Border Height="{StaticResource dBlock2}" Width="{StaticResource dBlock2}" >
-                        <Image Source="{Binding id, Converter={StaticResource stringFormatConverter}, ConverterParameter='/assets/icon/app/{0}-small-white.scale-100.png' }"></Image>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="{StaticResource Block2}"></ColumnDefinition>
+                            <ColumnDefinition Width="{StaticResource Offset}"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Image Height="{StaticResource dBlock2}" Width="{StaticResource dBlock2}" Source="{Binding id, Converter={StaticResource stringFormatConverter}, ConverterParameter='/assets/icon/app/{0}-small-white.scale-100.png' }"></Image>
                         
                         <!--<Image  Source="ms-appx:///Assets/Icon/App/wifi-small-white.png" Margin="{StaticResource Square_Offset}" >
                             
                         </Image>-->
                         <!--<Image Grid.Column="1" Source="/Assets/Icon/App/parking-small-white.scale-100.png" Visibility="{Binding hotel.amenities ,Converter={StaticResource AmenitiesVisibiliryConverter} ,ConverterParameter='PARKING'}" VerticalAlignment="Center"/>-->
                         <!--<Image Grid.Column="0" Source="{Binding airline.code, Converter={StaticResource stringFormatConverter}, ConverterParameter='/Assets/Icon/Airlines/ag_{0}logo@2x.png'}" Style="{StaticResource FlightDetailAirlineImage}" ImageFailed="Image_ImageFailed"  />-->
-                    </Border>
+                    </Grid>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>

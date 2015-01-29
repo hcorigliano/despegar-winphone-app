@@ -23,5 +23,11 @@ namespace Despegar.WP.UI.Controls.Hotels
         {
             this.InitializeComponent();
         }
+
+        private void TextBlock_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            //TODO 
+
+        }
     }
 }
