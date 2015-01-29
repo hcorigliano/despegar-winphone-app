@@ -43,10 +43,10 @@
             <!--HOTEL NAME AND DESCRIPTION GRID-->
             <Grid Margin="{StaticResource Left_Offset}" Grid.Column="1">
                 <Grid.RowDefinitions>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
+                    <RowDefinition Height="{StaticResource Block1p}"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
                 </Grid.RowDefinitions>
 
                 <!--NAME-->

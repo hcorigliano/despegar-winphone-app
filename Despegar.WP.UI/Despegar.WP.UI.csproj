@@ -116,6 +116,7 @@
     <Compile Include="Common\Converter\CheckoutConverters.cs" />
     <Compile Include="Common\Converter\PluralOrSingularResourceConverter.cs" />
     <Compile Include="Common\Converter\RatingToColorConverter.cs" />
+    <Compile Include="Common\Converter\StringCommaParseConverter.cs" />
     <Compile Include="Common\Converter\StyleColorResultConverter.cs" />
     <Compile Include="Common\Converter\StyleConverter.cs" />
     <Compile Include="Common\Converter\VisibilityConverter.cs" />
@@ -324,6 +325,9 @@
     <Compile Include="Product\Hotels\Checkout\Rooms.xaml.cs">
       <DependentUpon>Rooms.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Product\Hotels\Details\HotelPivot.xaml.cs">
+      <DependentUpon>HotelPivot.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Product\Hotels\HotelsCheckout.xaml.cs">
       <DependentUpon>HotelsCheckout.xaml</DependentUpon>
     </Compile>
@@ -522,6 +526,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Product\Hotels\Checkout\Rooms.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Product\Hotels\Details\HotelPivot.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -786,6 +794,7 @@
     <Content Include="Assets\country\ZA.png" />
     <Content Include="Assets\country\ZM.png" />
     <Content Include="Assets\country\ZW.png" />
+    <Content Include="Assets\Icon\App\handup-medium-white.scale-100.png" />
     <Content Include="Assets\Icon\App\phone-small-white.scale-100.png" />
     <Content Include="Assets\Icon\App\pin-medium-white.scale-100.png" />
     <Content Include="Assets\Icon\App\pin-medium-white.scale-140.png" />
@@ -793,6 +802,7 @@
     <Content Include="Assets\Icon\App\tooltip-arrow-blue.scale-100.png" />
     <Content Include="Assets\Icon\App\tooltip-arrow-blue.scale-140.png" />
     <Content Include="Assets\Icon\App\tooltip-arrow-blue.scale-240.png" />
+    <Content Include="Assets\Icon\App\wallet-medium-white.scale-100.png" />
     <Content Include="Assets\maps\mappin.png" />
     <Content Include="Assets\Icon\App\calendar-temp.png" />
     <Content Include="Assets\Icon\App\compass-small-white.scale-100.png" />
@@ -1405,6 +1415,7 @@
     <Folder Include="Assets\es\" />
     <Folder Include="Assets\pt\" />
     <Folder Include="Product\Hotels\Checkout\Controls\" />
+    <Folder Include="Product\Hotels\Details\Controls\" />
     <Folder Include="Strings\en\" />
   </ItemGroup>
   <ItemGroup>
