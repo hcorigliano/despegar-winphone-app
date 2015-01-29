@@ -39,12 +39,9 @@
             <TextBlock Grid.Row="5" Text="Amenitie" x:Uid="Page_HotelDescription_Amenities" Style="{StaticResource SegoeSemilight20}"></TextBlock>
             <StackPanel Grid.Row="6" Orientation="Horizontal">
                 <local:AmenitiesControl DataContext="{Binding AmenitiesShortList}" />
-                <TextBlock Style="{StaticResource SegoeSemilight17}" HorizontalAlignment="Center" VerticalAlignment="Center" Tapped="TextBlock_Tapped">
-                    <Run Text=" "></Run>
-                    <Run Foreground="{StaticResource Blue20Brush}" Text="See all"></Run>
+                <TextBlock  Style="{StaticResource SegoeSemilight17}" x:Uid="Page_HotelsDescription_Seeall" HorizontalAlignment="Center" VerticalAlignment="Center" Tapped="TextBlock_Tapped" Foreground="{StaticResource Blue20Brush}">
                 </TextBlock>
             </StackPanel>
-            
             <TextBlock Grid.Row="7" Style="{StaticResource SegoeSemilight15}" Text="{Binding HotelDetail.hotel.description}" TextWrapping="WrapWholeWords" ></TextBlock>
 
         </Grid>

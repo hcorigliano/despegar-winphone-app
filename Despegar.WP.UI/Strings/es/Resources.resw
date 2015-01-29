@@ -1027,4 +1027,10 @@ La reserva no ha sido generada y no se le cobrará ningún cargo por la transacc
   <data name="Hotels_Detail_Points.Text" xml:space="preserve">
     <value>Puntos</value>
   </data>
+  <data name="Page_HotelsDescription_Seeall.Text" xml:space="preserve">
+    <value>Ver Todos</value>
+  </data>
+  <data name="Page_HotelsAmenities_Title.Text" xml:space="preserve">
+    <value>Comodidades</value>
+  </data>
 </root>

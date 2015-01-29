@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Despegar.WP.UI.Common;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -34,11 +35,12 @@ namespace Despegar.WP.UI.Product.Hotels
         /// This parameter is typically used to configure the page.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            this.DataContext = e.Parameter;
         }
 
         private void AppBarButton_Click(object sender, RoutedEventArgs e)
         {
-
+            Navigator.Instance.GoBack();
         }
     }
 }

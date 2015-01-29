@@ -7,7 +7,10 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     xmlns:conv="using:Despegar.WP.UI.Common.Converter"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    
+    >
+    
 
     <Page.BottomAppBar>
         <CommandBar>
@@ -19,14 +22,14 @@
         <conv:StringConverter x:Key="stringFormatConverter" />
         
         <DataTemplate x:Key="HotelDisplayTemplate">
-            <Grid>
+            <Grid Height="{StaticResource dBlock2p}">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition Width="{StaticResource Block2}"></ColumnDefinition>
+                    <ColumnDefinition Width="{StaticResource Offset}"></ColumnDefinition>
                     <ColumnDefinition></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <Image Height="{StaticResource dBlock2}" Width="{StaticResource dBlock2}" Source="{Binding id, Converter={StaticResource stringFormatConverter}, ConverterParameter='/assets/icon/amenities/amn_{0}.png' }"></Image>
-                <TextBlock Grid.Column="1" >
-                    <Run Text=" "></Run>
+                <TextBlock Grid.Column="2" Style="{StaticResource SegoeLight20}" VerticalAlignment="Center" TextWrapping="WrapWholeWords" >
                     <Run Text="{Binding description}"></Run>
                  </TextBlock>
             </Grid>
@@ -42,7 +45,7 @@
 
         <!-- Title Panel -->
         <Image Grid.Row="0" Style="{StaticResource TopLogo}" />
-        <TextBlock Grid.Row="1" x:Uid="Page_Filters_Title" Style="{StaticResource PageHeaderSmall}"  FontFamily="Segoe WP Semibold" />
+        <TextBlock Grid.Row="1" x:Uid="Page_HotelsAmenities_Title" Style="{StaticResource PageHeaderSmall}"  FontFamily="Segoe WP Semibold" />
 
         <ListView Grid.Row="2" ItemTemplate="{StaticResource HotelDisplayTemplate}" DataContext="{Binding}"  ItemsSource="{Binding}"  >
         </ListView>
