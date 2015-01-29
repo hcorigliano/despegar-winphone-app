@@ -1002,8 +1002,23 @@ A reserva não foi gerado e não cobra nenhuma taxa para a transação.</value>
   </data>
   <data name="Page_HotelDescription_Amenities.Text" xml:space="preserve">
     <value>Instalações e descrição</value>
+    </data>
+  <data name="Common_Located.Text" xml:space="preserve">
+    <value>Localizado a</value>
   </data>
   <data name="Page_HotelDescription_Location.Text" xml:space="preserve">
     <value>Localização</value>
+    </data>
+  <data name="Hotels_Details_Fare_Details.Text" xml:space="preserve">
+    <value>Preço por quarto por noite </value>
+  </data>
+  <data name="Hotels_Details_View_Comments.Text" xml:space="preserve">
+    <value>Ver todos os comentários</value>
+  </data>
+  <data name="Hotels_Details_View_Map.Text" xml:space="preserve">
+    <value>Ver mapa</value>
+  </data>
+  <data name="Hotels_Detail_Points.Text" xml:space="preserve">
+    <value>Score</value>
   </data>
 </root>

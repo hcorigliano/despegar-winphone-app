@@ -34,6 +34,8 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
             {
                 hotelDetail = value;
                 OnPropertyChanged();
+                OnPropertyChanged("SuggestRoomPriceBase");
+                OnPropertyChanged("SuggestRoomPriceBest");
             }
         }
 
@@ -72,6 +74,51 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
             }
         }
 
+        private int? suggestRoomPriceBase { get; set; }
+        public int? SuggestRoomPriceBase
+        {
+            get
+            {
+                return suggestRoomPriceBase;
+            }
+
+            set
+            {
+                suggestRoomPriceBase = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private int? suggestRoomPriceBest { get; set; }
+        public int? SuggestRoomPriceBest
+        {
+            get
+            {
+                return suggestRoomPriceBest;
+            }
+
+            set
+            {
+                suggestRoomPriceBest = value;
+                OnPropertyChanged();
+            }
+        }
+
+
+        private int goToPivot { get; set; }
+        public int GoToPivot
+        {
+            get
+            {
+                return goToPivot; 
+            }
+            set
+            {
+                goToPivot = value;
+                OnPropertyChanged();
+            }
+        }
+
         #endregion
 
         public HotelsDetailsViewModel(INavigator navigator, IHotelService hotelService, IBugTracker t)
@@ -106,6 +153,23 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
         public async Task Init()
         {
             HotelDetail = await hotelService.GetHotelsDetail(CrossParameters.IdSelectedHotel, CrossParameters.SearchParameters.Checkin, CrossParameters.SearchParameters.Checkout, CrossParameters.SearchParameters.distribution);
+
+            foreach (Roompack roomPack in hotelDetail.roompacks)
+            {
+                foreach (RoomAvailability room in roomPack.room_availabilities)
+                {
+                    if (room.choices.Contains(hotelDetail.suggested_room_choice))
+                    {
+                        SuggestRoomPriceBest = room.price.best;
+
+                        if (SuggestRoomPriceBest != room.price.@base)
+                            SuggestRoomPriceBase = room.price.@base;
+                        else
+                            SuggestRoomPriceBase = null;
+                    }
+                }
+            }
         }
+
     }
 }

@@ -1006,10 +1006,25 @@ La reserva no ha sido generada y no se le cobrará ningún cargo por la transacc
   <data name="Hotel_Details_Room_Pivot.Header" xml:space="preserve">
     <value>habitaciones</value>
   </data>
+  <data name="Common_Located.Text" xml:space="preserve">
+    <value>Ubicado a</value>
+  </data>
   <data name="Page_HotelDescription_Amenities.Text" xml:space="preserve">
     <value>Comodidades y descripción</value>
   </data>
+  <data name="Hotels_Details_Fare_Details.Text" xml:space="preserve">
+    <value>Tarifa por habitacion por noche</value>
+  </data>
   <data name="Page_HotelDescription_Location.Text" xml:space="preserve">
     <value>Ubicación</value>
+  </data>
+  <data name="Hotels_Details_View_Comments.Text" xml:space="preserve">
+    <value>Ver todos los comentarios</value>
+  </data>
+  <data name="Hotels_Details_View_Map.Text" xml:space="preserve">
+    <value>Ver mapa</value>
+  </data>
+  <data name="Hotels_Detail_Points.Text" xml:space="preserve">
+    <value>Puntos</value>
   </data>
 </root>

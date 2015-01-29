@@ -30,7 +30,7 @@ namespace Despegar.WP.UI.Product.Hotels
     {
         private ModalPopup loadingPopup = new ModalPopup(new Loading());
 
-        public HotelsResultsViewModel ViewModel { get; set; } 
+        public HotelsResultsViewModel ViewModel { get; set; }
 
         public HotelsResults()
         {
@@ -39,11 +39,11 @@ namespace Despegar.WP.UI.Product.Hotels
 
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
-            if(ViewModel == null)
-            { 
+            HardwareButtons.BackPressed += HardwareButtons_BackPressed;
+            if (ViewModel == null)
+            {
                 ViewModel = new HotelsResultsViewModel(Navigator.Instance, GlobalConfiguration.CoreContext.GetHotelService(), BugTracker.Instance) { CrossParameters = e.Parameter as HotelsCrossParameters };
                 ViewModel.PropertyChanged += Checkloading;
-                HardwareButtons.BackPressed += HardwareButtons_BackPressed;
                 this.DataContext = ViewModel;
                 await ViewModel.Search();
             }
@@ -53,17 +53,17 @@ namespace Despegar.WP.UI.Product.Hotels
 
         }
 
-        //protected override void OnNavigatedFrom(NavigationEventArgs e)
-        //{
-        //    HardwareButtons.BackPressed -= HardwareButtons_BackPressed;
-        //}
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            HardwareButtons.BackPressed -= HardwareButtons_BackPressed;
+        }
 
         private void HardwareButtons_BackPressed(object sender, BackPressedEventArgs e)
         {
             e.Handled = true;
             Navigator.Instance.GoBack();
         }
-        
+
         private void ReSearchTapped(object sender, TappedRoutedEventArgs e)
         {
             ViewModel.Navigator.GoBack();
@@ -87,10 +87,10 @@ namespace Despegar.WP.UI.Product.Hotels
 
         private void HotelSelected(object sender, TappedRoutedEventArgs e)
         {
-            if(ViewModel != null)
+            if (ViewModel != null)
             {
                 ViewModel.CrossParameters.IdSelectedHotel = ((HotelItem)((ListView)sender).SelectedItem).id.ToString();
-                ViewModel.CrossParameters.HotelsExtraData.Distance  = ((HotelItem)((ListView)sender).SelectedItem).distance;
+                ViewModel.CrossParameters.HotelsExtraData.Distance = ((HotelItem)((ListView)sender).SelectedItem).distance;
                 ViewModel.GoToDetails();
             }
         }
