@@ -85,7 +85,6 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
             }
         }
 
-        public ICollection<string> ImagesTestList { get; set; }
 
         private int goToPivot { get; set; }
         public int GoToPivot

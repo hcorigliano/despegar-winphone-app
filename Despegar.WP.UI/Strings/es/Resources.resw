@@ -1009,8 +1009,14 @@ La reserva no ha sido generada y no se le cobrará ningún cargo por la transacc
   <data name="Common_Located.Text" xml:space="preserve">
     <value>Ubicado a</value>
   </data>
+  <data name="Page_HotelDescription_Amenities.Text" xml:space="preserve">
+    <value>Comodidades y descripción</value>
+  </data>
   <data name="Hotels_Details_Fare_Details.Text" xml:space="preserve">
     <value>Tarifa por habitacion por noche</value>
+  </data>
+  <data name="Page_HotelDescription_Location.Text" xml:space="preserve">
+    <value>Ubicación</value>
   </data>
   <data name="Hotels_Details_View_Comments.Text" xml:space="preserve">
     <value>Ver todos los comentarios</value>
