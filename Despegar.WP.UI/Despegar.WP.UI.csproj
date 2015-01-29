@@ -128,6 +128,9 @@
     <Compile Include="Controls\Alert.xaml.cs">
       <DependentUpon>Alert.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Hotels\AmenitiesControl.xaml.cs">
+      <DependentUpon>AmenitiesControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Hotels\HotelDescriptionControl.xaml.cs">
       <DependentUpon>HotelDescriptionControl.xaml</DependentUpon>
     </Compile>
@@ -345,6 +348,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Strings\AppResources.cs" />
     <Page Include="Controls\Alert.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Hotels\AmenitiesControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
