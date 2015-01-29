@@ -29,7 +29,7 @@
                             <ColumnDefinition Width="{StaticResource Block2}"></ColumnDefinition>
                             <ColumnDefinition Width="{StaticResource Offset}"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
-                        <Image Height="{StaticResource dBlock2}" Width="{StaticResource dBlock2}" Source="{Binding id, Converter={StaticResource stringFormatConverter}, ConverterParameter='/assets/icon/app/{0}-small-white.scale-100.png' }"></Image>
+                        <Image Height="{StaticResource dBlock2}" Width="{StaticResource dBlock2}" Source="{Binding id, Converter={StaticResource stringFormatConverter}, ConverterParameter='/assets/icon/amenities/amn_{0}.png' }"></Image>
                         
                         <!--<Image  Source="ms-appx:///Assets/Icon/App/wifi-small-white.png" Margin="{StaticResource Square_Offset}" >
                             

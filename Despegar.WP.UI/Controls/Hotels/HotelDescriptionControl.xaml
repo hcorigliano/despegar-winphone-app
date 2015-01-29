@@ -19,7 +19,7 @@
                 <RowDefinition Height="{StaticResource Block1p}"></RowDefinition>
                 <RowDefinition Height="{StaticResource Offset}"></RowDefinition>
                 <RowDefinition Height="{StaticResource Block1p}"></RowDefinition>
-                <RowDefinition Height="{StaticResource Block2}"></RowDefinition>
+                <RowDefinition Height="{StaticResource Block2p}"></RowDefinition>
                 <RowDefinition ></RowDefinition>
             </Grid.RowDefinitions>
 
