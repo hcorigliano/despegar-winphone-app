@@ -3,6 +3,7 @@ using Despegar.Core.Business.Hotels.BookingFields;
 using Despegar.Core.Business.Hotels.CitiesAvailability;
 using Despegar.Core.Business.Hotels.HotelDetails;
 using Despegar.Core.Business.Hotels.HotelsAutocomplete;
+using Despegar.Core.Business.Hotels.UserReviews;
 using System.Threading.Tasks;
 
 namespace Despegar.Core.IService
@@ -14,5 +15,6 @@ namespace Despegar.Core.IService
         //Task<CitiesAvailability> GetNearHotelsAvailability(double latitude, double longitude, string checkin, string checkout, string distribution, string currency, int offset, int limit, string sort, string order); //http://backoffice.despegar.com/v3/mapi-hotels/docs/method/-City-availability
         Task<HotelDatails> GetHotelsDetail(string idHotel, string checkin, string checkout, string distribution);
         Task<HotelsBookingFields> GetBookingFields(HotelsBookingFieldsRequest bookingFieldPost);
+        Task<HotelUserReviews> GetHotelUserReviews(string hotelId, int limit, int offset, string language);
     }
 }

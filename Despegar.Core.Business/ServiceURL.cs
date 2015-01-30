@@ -4,6 +4,7 @@ namespace Despegar.Core.Business
 {
     public enum ServiceKey
     {
+        HotelUserReview,
         HotelsAvailability,
         HotelsAutocomplete,
         HotelsGetDetails,
@@ -37,6 +38,7 @@ namespace Despegar.Core.Business
             {ServiceKey.HotelsGetDetails , "mapi-hotels/availability/{0}?checkin_date={1}&checkout_date={2}&distribution={3}"},
             {ServiceKey.HotelsBookingFields,"mapi-hotels/bookings?"},
             {ServiceKey.HotelsBookingCompletePost,"mobile.despegar.com/v3/mapi-hotels/bookings/{0}/forms/{1}"},
+            {ServiceKey.HotelUserReview,"mobile.despegar.com/v3/mapi-hotels/bookings/{0}/forms/{1}"},
 
             {ServiceKey.FlightsAirlines, "mapi-flights/airlines?description={0}" },
             {ServiceKey.FlightsCitiesAutocomplete, "mapi-cross/autocomplete/flights?search={0}" },

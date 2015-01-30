@@ -1027,4 +1027,10 @@ La reserva no ha sido generada y no se le cobrará ningún cargo por la transacc
   <data name="Hotels_Detail_Points.Text" xml:space="preserve">
     <value>Puntos</value>
   </data>
+  <data name="Common_Accept_Label.Label" xml:space="preserve">
+    <value>Aceptar</value>
+  </data>
+  <data name="Common_Cancel_Label.Label" xml:space="preserve">
+    <value>Cancelar</value>
+  </data>
 </root>

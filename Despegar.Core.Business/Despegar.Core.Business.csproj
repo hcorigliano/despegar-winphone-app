@@ -136,7 +136,7 @@
     <Compile Include="Hotels\CitiesAvailability\IdCodeAndName.cs" />
     <Compile Include="Hotels\CitiesAvailability\MaxAndMin.cs" />
     <Compile Include="Hotels\CitiesAvailability\NearbyCity.cs" />
-    <Compile Include="Hotels\CitiesAvailability\Paging.cs" />
+    <Compile Include="Hotels\Paging.cs" />
     <Compile Include="Hotels\CitiesAvailability\Price.cs" />
     <Compile Include="Hotels\CitiesAvailability\SearchedCity.cs" />
     <Compile Include="Hotels\CitiesAvailability\Sorting.cs" />
@@ -161,6 +161,14 @@
     <Compile Include="Hotels\SearchBox\HotelSearchModel.cs" />
     <Compile Include="Hotels\InstallmentFormatted.cs" />
     <Compile Include="Hotels\SearchDetails.cs" />
+    <Compile Include="Hotels\UserReviews\Averageable.cs" />
+    <Compile Include="Hotels\UserReviews\Description.cs" />
+    <Compile Include="Hotels\UserReviews\Item.cs" />
+    <Compile Include="Hotels\UserReviews\MultiLanguageStrings.cs" />
+    <Compile Include="Hotels\UserReviews\Qualifications.cs" />
+    <Compile Include="Hotels\UserReviews\User.cs" />
+    <Compile Include="Hotels\UserReviews\HotelUserReviews.cs" />
+    <Compile Include="Hotels\UserReviews\Utility.cs" />
     <Compile Include="Mock.cs" />
     <Compile Include="Common\Checkout\Address.cs" />
     <Compile Include="Flight\BookingFields\Birthdate.cs" />

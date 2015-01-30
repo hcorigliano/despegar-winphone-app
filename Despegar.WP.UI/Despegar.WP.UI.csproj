@@ -328,8 +328,14 @@
     <Compile Include="Product\Hotels\Checkout\Rooms.xaml.cs">
       <DependentUpon>Rooms.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Product\Hotels\Details\Controls\UserReviewItem.xaml.cs">
+      <DependentUpon>UserReviewItem.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Product\Hotels\Details\HotelPivot.xaml.cs">
       <DependentUpon>HotelPivot.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Product\Hotels\Details\UserReviews.xaml.cs">
+      <DependentUpon>UserReviews.xaml</DependentUpon>
     </Compile>
     <Compile Include="Product\Hotels\HotelsCheckout.xaml.cs">
       <DependentUpon>HotelsCheckout.xaml</DependentUpon>
@@ -536,7 +542,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Product\Hotels\Details\Controls\UserReviewItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Product\Hotels\Details\HotelPivot.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Product\Hotels\Details\UserReviews.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -1422,7 +1436,6 @@
     <Folder Include="Assets\es\" />
     <Folder Include="Assets\pt\" />
     <Folder Include="Product\Hotels\Checkout\Controls\" />
-    <Folder Include="Product\Hotels\Details\Controls\" />
     <Folder Include="Strings\en\" />
   </ItemGroup>
   <ItemGroup>
