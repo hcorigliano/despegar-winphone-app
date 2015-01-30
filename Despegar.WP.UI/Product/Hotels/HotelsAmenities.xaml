@@ -14,7 +14,7 @@
 
     <Page.BottomAppBar>
         <CommandBar>
-            <AppBarButton Icon="Accept" Click="AppBarButton_Click" />
+            <AppBarButton Icon="Accept" x:Uid="GenericAcceptAppBar" Click="AppBarButton_Click" />
         </CommandBar>
     </Page.BottomAppBar>
     

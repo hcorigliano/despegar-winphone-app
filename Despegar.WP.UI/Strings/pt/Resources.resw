@@ -1027,4 +1027,10 @@ A reserva não foi gerado e não cobra nenhuma taxa para a transação.</value>
   <data name="Page_HotelsAmenities_Title.Text" xml:space="preserve">
     <value>Amenidades</value>
   </data>
+  <data name="GenericAcceptAppBar.Label" xml:space="preserve">
+    <value>Aceitar</value>
+  </data>
+  <data name="GenericCancelAppBar.Label" xml:space="preserve">
+    <value>Cancelar</value>
+  </data>
 </root>
