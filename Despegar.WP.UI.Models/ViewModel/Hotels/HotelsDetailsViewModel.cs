@@ -1,4 +1,5 @@
 ﻿using Despegar.Core.Business.Hotels;
+using Despegar.Core.Business.Hotels.CustomUserReviews;
 using Despegar.Core.Business.Hotels.HotelDetails;
 using Despegar.Core.Business.Hotels.UserReviews;
 using Despegar.Core.IService;
@@ -23,16 +24,18 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
         public IHotelService hotelService { get; set; }
         public HotelsCrossParameters CrossParameters { get; set; }
 
-        private HotelUserReviews hotelReviews { get; set; }
-        public HotelUserReviews HotelReviews
+        public HotelUserReviews HotelReviews { get; set;}
+
+        private List<CustomReviewsItem> customReviews { get; set; }
+        public List<CustomReviewsItem> CustomReviews
         {
             get
             {
-                return hotelReviews;
+                return customReviews;
             }
             set
             {
-                hotelReviews = value;
+                customReviews = value;
                 OnPropertyChanged();
             }
         }
@@ -150,6 +153,7 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
         {
             HotelDetail = await hotelService.GetHotelsDetail(CrossParameters.IdSelectedHotel, CrossParameters.SearchParameters.Checkin, CrossParameters.SearchParameters.Checkout, CrossParameters.SearchParameters.distribution);
             HotelReviews = await hotelService.GetHotelUserReviews(CrossParameters.IdSelectedHotel, 10, 0, "es");
+            FormatReviews("es");
 
             //Gets suggest room price
             foreach (Roompack roomPack in hotelDetail.roompacks)
@@ -168,6 +172,39 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
                 }
             }
         }
+
+        private void FormatReviews(string p)
+        {
+            CustomReviews = new List<CustomReviewsItem>();
+            foreach(Item item in HotelReviews.items)
+            {
+                CustomReviewsItem customItem = new CustomReviewsItem();
+                if(p == "es")
+                {
+                    if (item.descriptions[0].bad != null)
+                        customItem.bad = item.descriptions[0].bad.es;
+                    if (item.descriptions[0].good != null)
+                        customItem.good = item.descriptions[0].good.es;
+                    if (item.descriptions[0].description != null)
+                        customItem.description = item.descriptions[0].description.es;
+                }
+                if (p == "pt")
+                {
+                    if (item.descriptions[0].bad != null)
+                        customItem.bad = item.descriptions[0].bad.pt;
+                    if (item.descriptions[0].good != null)
+                        customItem.good = item.descriptions[0].good.pt;
+                    if (item.descriptions[0].description != null)
+                        customItem.description = item.descriptions[0].description.pt;
+                }
+                customItem.country = "BusarPais";
+                customItem.name = item.user.first_name + item.user.last_name;
+                customItem.rating = item.qualifications.overall_rating.ToString("N2");
+                CustomReviews.Add(customItem);
+            }
+        }
+
+
 
     }
 }

@@ -136,6 +136,8 @@
     <Compile Include="Hotels\CitiesAvailability\IdCodeAndName.cs" />
     <Compile Include="Hotels\CitiesAvailability\MaxAndMin.cs" />
     <Compile Include="Hotels\CitiesAvailability\NearbyCity.cs" />
+    <Compile Include="Hotels\CustomUserReviews\CustomReviewsItem.cs" />
+    <Compile Include="Hotels\CustomUserReviews\CustomUserReviews.cs" />
     <Compile Include="Hotels\Paging.cs" />
     <Compile Include="Hotels\CitiesAvailability\Price.cs" />
     <Compile Include="Hotels\CitiesAvailability\SearchedCity.cs" />

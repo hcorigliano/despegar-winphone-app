@@ -47,6 +47,18 @@
             </Grid>
 
         </Grid>
+
+        <ItemsControl ItemsSource="{Binding CustomReviews}" xmlns:src="using:Despegar.WP.UI.Product.Hotels.Details.Controls" >
+            <ItemsControl.ItemTemplate>
+                <DataTemplate >
+                    <src:UserReviewItem DataContext="{Binding}"/>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+
+        <!--<List xmlns:src="using:Despegar.WP.UI.Product.Hotels.Details.Controls">
+            <src:UserReviewItem DataContext="{Binding}"/>
+        </List>-->
         
         
         

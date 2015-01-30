@@ -13,6 +13,7 @@
     <UserControl.Resources>
         <conv:StringToN1Converter x:Name="StringToN1Converter" />
         <conv:RatingToColorConverter x:Name="RatingToColorConverter"/>
+        <conv:NullToVisibilityConverter x:Name="NullToVisibilityConverter"/>
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -26,20 +27,19 @@
                 <ColumnDefinition Width="{StaticResource Block1p}"/>
                 <ColumnDefinition Width="auto"/>
             </Grid.ColumnDefinitions>
-            <Grid Grid.Column="0" Height="{StaticResource dBlock1p}"  Background="{Binding HotelDetail.hotel.rating , Converter={StaticResource RatingToColorConverter}}" VerticalAlignment="Top" />
+            <Grid Grid.Column="0" Height="{StaticResource dBlock1p}"  Background="{Binding CustomReviews.rating , Converter={StaticResource RatingToColorConverter}}" VerticalAlignment="Top" />
 
             <Grid Grid.Column="1">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="auto"/>
                 </Grid.RowDefinitions>
-                <TextBlock Grid.Row="0">
-                    <Run Text="{Binding user.first_name}" />
-                    <Run Text="{Binding user.last_name}" />
-                </TextBlock>
+                <TextBlock Grid.Row="0" Text="{Binding CustomReviews.name}"/>
+                    
                 <TextBlock Grid.Row="1">
-                    <Run Text="{Binding qualifications.overall_rating}"/>
-                    <Run Text="{Binding user.city_id}"/>
+                    <Run Text="{Binding CustomReviews.rating}"/>
+                    <Run Text="- DesdeX"/>
+                    <Run Text="{Binding CustomReviews.country}"/>
                 </TextBlock>
             </Grid>
         </Grid>
@@ -47,7 +47,19 @@
         <!--Text Grid-->
 
         <Grid Grid.Row="1">
-            <TextBlock Text="{Binding descriptions}"/>
+            <StackPanel>
+                <TextBlock Text="{Binding CustomReviewsItem.description}" Visibility="{Binding  CustomReviewsItem.description , Converter={StaticResource NullToVisibilityConverter}}"/>
+
+                <StackPanel Visibility="{Binding  CustomReviewsItem.description , Converter={StaticResource NullToVisibilityConverter}}">
+                    <TextBlock Text="Lo BuenoX"/>
+                    <TextBlock Text="{Binding CustomReviewsItem.good}" />
+                </StackPanel>
+
+                <StackPanel Visibility="{Binding  CustomReviewsItem.description , Converter={StaticResource NullToVisibilityConverter}}">
+                    <TextBlock Text="MaloX"/>
+                    <TextBlock Text="{Binding CustomReviewsItem.bad}" />
+                </StackPanel>
+            </StackPanel>
         </Grid>
         
     </Grid>
