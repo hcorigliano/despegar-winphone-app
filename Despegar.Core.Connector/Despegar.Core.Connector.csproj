@@ -57,6 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Apiv1Connector.cs" />
+    <Compile Include="Apiv3Connector.cs" />
     <Compile Include="ConnectorBase.cs" />
     <Compile Include="IConnector.cs" />
     <Compile Include="MapiConnector.cs" />

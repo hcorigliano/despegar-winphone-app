@@ -334,8 +334,8 @@
     <Compile Include="Product\Hotels\Details\HotelPivot.xaml.cs">
       <DependentUpon>HotelPivot.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Product\Hotels\Details\UserReviews.xaml.cs">
-      <DependentUpon>UserReviews.xaml</DependentUpon>
+    <Compile Include="Product\Hotels\Details\UserReviewsPivot.xaml.cs">
+      <DependentUpon>UserReviewsPivot.xaml</DependentUpon>
     </Compile>
     <Compile Include="Product\Hotels\HotelsCheckout.xaml.cs">
       <DependentUpon>HotelsCheckout.xaml</DependentUpon>
@@ -550,7 +550,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Product\Hotels\Details\UserReviews.xaml">
+    <Page Include="Product\Hotels\Details\UserReviewsPivot.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

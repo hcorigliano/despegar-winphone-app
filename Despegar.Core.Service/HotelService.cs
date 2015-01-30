@@ -78,8 +78,8 @@ namespace Despegar.Core.Service
         public async Task<HotelUserReviews> GetHotelUserReviews(string hotelId, int limit, int offset, string language)
         {
             //NOT IMPLEMENTED YET (this use api v3 connector and this is not implemented)
-            string serviceUrl = String.Format(ServiceURL.GetServiceURL(ServiceKey.HotelsAvailability), hotelId,  limit,  offset,  language);
-            IConnector connector = context.GetServiceConnector(ServiceKey.HotelsAutocomplete);
+            string serviceUrl = String.Format(ServiceURL.GetServiceURL(ServiceKey.HotelUserReview), hotelId, limit, offset, language);
+            IConnector connector = context.GetServiceConnector(ServiceKey.HotelUserReview);
 
             return await connector.GetAsync<HotelUserReviews>(serviceUrl);
         }

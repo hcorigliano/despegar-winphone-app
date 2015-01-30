@@ -5,11 +5,50 @@
     xmlns:local="using:Despegar.WP.UI.Product.Hotels.Details.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:conv="using:Despegar.WP.UI.Common.Converter"
     mc:Ignorable="d"
     d:DesignHeight="300"
     d:DesignWidth="400">
-    
-    <Grid>
 
+    <UserControl.Resources>
+        <conv:StringToN1Converter x:Name="StringToN1Converter" />
+        <conv:RatingToColorConverter x:Name="RatingToColorConverter"/>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        
+        <!--Header Grid-->
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="{StaticResource Block1p}"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0" Height="{StaticResource dBlock1p}"  Background="{Binding HotelDetail.hotel.rating , Converter={StaticResource RatingToColorConverter}}" VerticalAlignment="Top" />
+
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Row="0">
+                    <Run Text="{Binding user.first_name}" />
+                    <Run Text="{Binding user.last_name}" />
+                </TextBlock>
+                <TextBlock Grid.Row="1">
+                    <Run Text="{Binding qualifications.overall_rating}"/>
+                    <Run Text="{Binding user.city_id}"/>
+                </TextBlock>
+            </Grid>
+        </Grid>
+        
+        <!--Text Grid-->
+
+        <Grid Grid.Row="1">
+            <TextBlock Text="{Binding descriptions}"/>
+        </Grid>
+        
     </Grid>
 </UserControl>

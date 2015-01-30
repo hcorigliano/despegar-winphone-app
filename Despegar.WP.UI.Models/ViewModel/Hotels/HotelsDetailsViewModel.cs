@@ -1,5 +1,6 @@
 ﻿using Despegar.Core.Business.Hotels;
 using Despegar.Core.Business.Hotels.HotelDetails;
+using Despegar.Core.Business.Hotels.UserReviews;
 using Despegar.Core.IService;
 using Despegar.Core.Log;
 using Despegar.WP.UI.Model.Interfaces;
@@ -21,6 +22,20 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
         public INavigator Navigator { get; set; }
         public IHotelService hotelService { get; set; }
         public HotelsCrossParameters CrossParameters { get; set; }
+
+        private HotelUserReviews hotelReviews { get; set; }
+        public HotelUserReviews HotelReviews
+        {
+            get
+            {
+                return hotelReviews;
+            }
+            set
+            {
+                hotelReviews = value;
+                OnPropertyChanged();
+            }
+        }
 
         private HotelDatails hotelDetail { get; set; }
         public HotelDatails HotelDetail
@@ -134,7 +149,9 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
         public async Task Init()
         {
             HotelDetail = await hotelService.GetHotelsDetail(CrossParameters.IdSelectedHotel, CrossParameters.SearchParameters.Checkin, CrossParameters.SearchParameters.Checkout, CrossParameters.SearchParameters.distribution);
+            HotelReviews = await hotelService.GetHotelUserReviews(CrossParameters.IdSelectedHotel, 10, 0, "es");
 
+            //Gets suggest room price
             foreach (Roompack roomPack in hotelDetail.roompacks)
             {
                 foreach (RoomAvailability room in roomPack.room_availabilities)
