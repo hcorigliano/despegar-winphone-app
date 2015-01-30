@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Despegar.WP.UI.Common;
+using Despegar.WP.UI.Model.Interfaces;
+using Despegar.WP.UI.Model.ViewModel.Hotels;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -22,6 +25,17 @@ namespace Despegar.WP.UI.Controls.Hotels
         public HotelDescriptionControl()
         {
             this.InitializeComponent();
+        }
+
+        private void TextBlock_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+
+            HotelsDetailsViewModel model = this.DataContext as HotelsDetailsViewModel;
+
+            if (model != null)
+            {
+                Navigator.Instance.GoTo(ViewModelPages.HotelsAmenities, model.HotelDetail.hotel.amenities);
+            }
         }
     }
 }

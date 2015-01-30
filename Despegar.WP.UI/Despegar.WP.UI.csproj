@@ -129,6 +129,9 @@
     <Compile Include="Controls\Alert.xaml.cs">
       <DependentUpon>Alert.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Hotels\AmenitiesControl.xaml.cs">
+      <DependentUpon>AmenitiesControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Hotels\HotelDescriptionControl.xaml.cs">
       <DependentUpon>HotelDescriptionControl.xaml</DependentUpon>
     </Compile>
@@ -337,6 +340,9 @@
     <Compile Include="Product\Hotels\Details\UserReviewsPivot.xaml.cs">
       <DependentUpon>UserReviewsPivot.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Product\Hotels\HotelsAmenities.xaml.cs">
+      <DependentUpon>HotelsAmenities.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Product\Hotels\HotelsCheckout.xaml.cs">
       <DependentUpon>HotelsCheckout.xaml</DependentUpon>
     </Compile>
@@ -355,6 +361,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Strings\AppResources.cs" />
     <Page Include="Controls\Alert.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Hotels\AmenitiesControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -551,6 +561,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Product\Hotels\Details\UserReviewsPivot.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Product\Hotels\HotelsAmenities.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -815,6 +829,210 @@
     <Content Include="Assets\country\ZA.png" />
     <Content Include="Assets\country\ZM.png" />
     <Content Include="Assets\country\ZW.png" />
+    <Content Include="Assets\Icon\Amenities\amn_acl.png" />
+    <Content Include="Assets\Icon\Amenities\amn_aduon.png" />
+    <Content Include="Assets\Icon\Amenities\amn_ael.png" />
+    <Content Include="Assets\Icon\Amenities\amn_agca.png" />
+    <Content Include="Assets\Icon\Amenities\amn_air.png" />
+    <Content Include="Assets\Icon\Amenities\amn_airtran.png" />
+    <Content Include="Assets\Icon\Amenities\amn_aki.png" />
+    <Content Include="Assets\Icon\Amenities\amn_allinclusive.png" />
+    <Content Include="Assets\Icon\Amenities\amn_arro.png" />
+    <Content Include="Assets\Icon\Amenities\amn_artacciones.png" />
+    <Content Include="Assets\Icon\Amenities\amn_asad.png" />
+    <Content Include="Assets\Icon\Amenities\amn_babysit.png" />
+    <Content Include="Assets\Icon\Amenities\amn_bac.png" />
+    <Content Include="Assets\Icon\Amenities\amn_bag.png" />
+    <Content Include="Assets\Icon\Amenities\amn_bal.png" />
+    <Content Include="Assets\Icon\Amenities\amn_ban.png" />
+    <Content Include="Assets\Icon\Amenities\amn_bar.png" />
+    <Content Include="Assets\Icon\Amenities\amn_barrom.png" />
+    <Content Include="Assets\Icon\Amenities\amn_basquet.png" />
+    <Content Include="Assets\Icon\Amenities\amn_beach.png" />
+    <Content Include="Assets\Icon\Amenities\amn_beasal.png" />
+    <Content Include="Assets\Icon\Amenities\amn_bebida.png" />
+    <Content Include="Assets\Icon\Amenities\amn_beer.png" />
+    <Content Include="Assets\Icon\Amenities\amn_birthday.png" />
+    <Content Include="Assets\Icon\Amenities\amn_boat.png" />
+    <Content Include="Assets\Icon\Amenities\amn_breakfst.png" />
+    <Content Include="Assets\Icon\Amenities\amn_breexch.png" />
+    <Content Include="Assets\Icon\Amenities\amn_bsnsc.png" />
+    <Content Include="Assets\Icon\Amenities\amn_bus.png" />
+    <Content Include="Assets\Icon\Amenities\amn_cake.png" />
+    <Content Include="Assets\Icon\Amenities\amn_cama.png" />
+    <Content Include="Assets\Icon\Amenities\amn_canch.png" />
+    <Content Include="Assets\Icon\Amenities\amn_car.png" />
+    <Content Include="Assets\Icon\Amenities\amn_cas.png" />
+    <Content Include="Assets\Icon\Amenities\amn_cbt.png" />
+    <Content Include="Assets\Icon\Amenities\amn_cdr.png" />
+    <Content Include="Assets\Icon\Amenities\amn_champ.png" />
+    <Content Include="Assets\Icon\Amenities\amn_ciga.png" />
+    <Content Include="Assets\Icon\Amenities\amn_cof.png" />
+    <Content Include="Assets\Icon\Amenities\amn_cra.png" />
+    <Content Include="Assets\Icon\Amenities\amn_croom.png" />
+    <Content Include="Assets\Icon\Amenities\amn_csport.png" />
+    <Content Include="Assets\Icon\Amenities\amn_dance.png" />
+    <Content Include="Assets\Icon\Amenities\amn_ddi.png" />
+    <Content Include="Assets\Icon\Amenities\amn_default.png" />
+    <Content Include="Assets\Icon\Amenities\amn_desayuno.png" />
+    <Content Include="Assets\Icon\Amenities\amn_dgo.png" />
+    <Content Include="Assets\Icon\Amenities\amn_dis.png" />
+    <Content Include="Assets\Icon\Amenities\amn_disc.png" />
+    <Content Include="Assets\Icon\Amenities\amn_doorm.png" />
+    <Content Include="Assets\Icon\Amenities\amn_drclse.png" />
+    <Content Include="Assets\Icon\Amenities\amn_drink.png" />
+    <Content Include="Assets\Icon\Amenities\amn_drr.png" />
+    <Content Include="Assets\Icon\Amenities\amn_dryclean.png" />
+    <Content Include="Assets\Icon\Amenities\amn_dryer.png" />
+    <Content Include="Assets\Icon\Amenities\amn_dsk.png" />
+    <Content Include="Assets\Icon\Amenities\amn_duc.png" />
+    <Content Include="Assets\Icon\Amenities\amn_dvd.png" />
+    <Content Include="Assets\Icon\Amenities\amn_eke.png" />
+    <Content Include="Assets\Icon\Amenities\amn_elb.png" />
+    <Content Include="Assets\Icon\Amenities\amn_elev.png" />
+    <Content Include="Assets\Icon\Amenities\amn_eve.png" />
+    <Content Include="Assets\Icon\Amenities\amn_event.png" />
+    <Content Include="Assets\Icon\Amenities\amn_exc.png" />
+    <Content Include="Assets\Icon\Amenities\amn_excursiones.png" />
+    <Content Include="Assets\Icon\Amenities\amn_fami.png" />
+    <Content Include="Assets\Icon\Amenities\amn_fan.png" />
+    <Content Include="Assets\Icon\Amenities\amn_fax.png" />
+    <Content Include="Assets\Icon\Amenities\amn_fog.png" />
+    <Content Include="Assets\Icon\Amenities\amn_food.png" />
+    <Content Include="Assets\Icon\Amenities\amn_fpl.png" />
+    <Content Include="Assets\Icon\Amenities\amn_freepark.png" />
+    <Content Include="Assets\Icon\Amenities\amn_freetime.png" />
+    <Content Include="Assets\Icon\Amenities\amn_freg.png" />
+    <Content Include="Assets\Icon\Amenities\amn_freshair.png" />
+    <Content Include="Assets\Icon\Amenities\amn_fri.png" />
+    <Content Include="Assets\Icon\Amenities\amn_futsal.png" />
+    <Content Include="Assets\Icon\Amenities\amn_games.png" />
+    <Content Include="Assets\Icon\Amenities\amn_gard.png" />
+    <Content Include="Assets\Icon\Amenities\amn_gim.png" />
+    <Content Include="Assets\Icon\Amenities\amn_golf.png" />
+    <Content Include="Assets\Icon\Amenities\amn_hairroom.png" />
+    <Content Include="Assets\Icon\Amenities\amn_health.png" />
+    <Content Include="Assets\Icon\Amenities\amn_hid.png" />
+    <Content Include="Assets\Icon\Amenities\amn_hot.png" />
+    <Content Include="Assets\Icon\Amenities\amn_ingrah.png" />
+    <Content Include="Assets\Icon\Amenities\amn_inswpose.png" />
+    <Content Include="Assets\Icon\Amenities\amn_intc.png" />
+    <Content Include="Assets\Icon\Amenities\amn_interc.png" />
+    <Content Include="Assets\Icon\Amenities\amn_intpuarexch.png" />
+    <Content Include="Assets\Icon\Amenities\amn_intrnt.png" />
+    <Content Include="Assets\Icon\Amenities\amn_intrroom.png" />
+    <Content Include="Assets\Icon\Amenities\amn_intuparexch.png" />
+    <Content Include="Assets\Icon\Amenities\amn_inv.png" />
+    <Content Include="Assets\Icon\Amenities\amn_ipo.png" />
+    <Content Include="Assets\Icon\Amenities\amn_iro.png" />
+    <Content Include="Assets\Icon\Amenities\amn_irontable.png" />
+    <Content Include="Assets\Icon\Amenities\amn_isv.png" />
+    <Content Include="Assets\Icon\Amenities\amn_jacz.png" />
+    <Content Include="Assets\Icon\Amenities\amn_jczhtl.png" />
+    <Content Include="Assets\Icon\Amenities\amn_kac.png" />
+    <Content Include="Assets\Icon\Amenities\amn_key.png" />
+    <Content Include="Assets\Icon\Amenities\amn_kit.png" />
+    <Content Include="Assets\Icon\Amenities\amn_lasesu.png" />
+    <Content Include="Assets\Icon\Amenities\amn_laundry.png" />
+    <Content Include="Assets\Icon\Amenities\amn_lcd.png" />
+    <Content Include="Assets\Icon\Amenities\amn_lib.png" />
+    <Content Include="Assets\Icon\Amenities\amn_lock.png" />
+    <Content Include="Assets\Icon\Amenities\amn_lugadco.png" />
+    <Content Include="Assets\Icon\Amenities\amn_lugfr.png" />
+    <Content Include="Assets\Icon\Amenities\amn_mapcel.png" />
+    <Content Include="Assets\Icon\Amenities\amn_massage.png" />
+    <Content Include="Assets\Icon\Amenities\amn_mediapension.png" />
+    <Content Include="Assets\Icon\Amenities\amn_meetroom.png" />
+    <Content Include="Assets\Icon\Amenities\amn_mesa.png" />
+    <Content Include="Assets\Icon\Amenities\amn_mfl.png" />
+    <Content Include="Assets\Icon\Amenities\amn_micr.png" />
+    <Content Include="Assets\Icon\Amenities\amn_mosq.png" />
+    <Content Include="Assets\Icon\Amenities\amn_nurs.png" />
+    <Content Include="Assets\Icon\Amenities\amn_ouswpose.png" />
+    <Content Include="Assets\Icon\Amenities\amn_pareexch.png" />
+    <Content Include="Assets\Icon\Amenities\amn_parefr.png" />
+    <Content Include="Assets\Icon\Amenities\amn_parkadco.png" />
+    <Content Include="Assets\Icon\Amenities\amn_parking.png" />
+    <Content Include="Assets\Icon\Amenities\amn_pealac.png" />
+    <Content Include="Assets\Icon\Amenities\amn_pensioncompleta.png" />
+    <Content Include="Assets\Icon\Amenities\amn_pet.png" />
+    <Content Include="Assets\Icon\Amenities\amn_photo.png" />
+    <Content Include="Assets\Icon\Amenities\amn_piano.png" />
+    <Content Include="Assets\Icon\Amenities\amn_pisc.png" />
+    <Content Include="Assets\Icon\Amenities\amn_pisccli.png" />
+    <Content Include="Assets\Icon\Amenities\amn_piscinf.png" />
+    <Content Include="Assets\Icon\Amenities\amn_pisdesc.png" />
+    <Content Include="Assets\Icon\Amenities\amn_pistpo.png" />
+    <Content Include="Assets\Icon\Amenities\amn_pistsc.png" />
+    <Content Include="Assets\Icon\Amenities\amn_pre.png" />
+    <Content Include="Assets\Icon\Amenities\amn_pribear.png" />
+    <Content Include="Assets\Icon\Amenities\amn_r24.png" />
+    <Content Include="Assets\Icon\Amenities\amn_rad.png" />
+    <Content Include="Assets\Icon\Amenities\amn_rar.png" />
+    <Content Include="Assets\Icon\Amenities\amn_recep.png" />
+    <Content Include="Assets\Icon\Amenities\amn_resto.png" />
+    <Content Include="Assets\Icon\Amenities\amn_roomsvc.png" />
+    <Content Include="Assets\Icon\Amenities\amn_saljue.png" />
+    <Content Include="Assets\Icon\Amenities\amn_sau.png" />
+    <Content Include="Assets\Icon\Amenities\amn_saun.png" />
+    <Content Include="Assets\Icon\Amenities\amn_sbc.png" />
+    <Content Include="Assets\Icon\Amenities\amn_sec24.png" />
+    <Content Include="Assets\Icon\Amenities\amn_secrty.png" />
+    <Content Include="Assets\Icon\Amenities\amn_sectni.png" />
+    <Content Include="Assets\Icon\Amenities\amn_secure.png" />
+    <Content Include="Assets\Icon\Amenities\amn_sercam.png" />
+    <Content Include="Assets\Icon\Amenities\amn_serguar.png" />
+    <Content Include="Assets\Icon\Amenities\amn_sernin.png" />
+    <Content Include="Assets\Icon\Amenities\amn_servcon.png" />
+    <Content Include="Assets\Icon\Amenities\amn_sfc.png" />
+    <Content Include="Assets\Icon\Amenities\amn_shop.png" />
+    <Content Include="Assets\Icon\Amenities\amn_show.png" />
+    <Content Include="Assets\Icon\Amenities\amn_sillapl.png" />
+    <Content Include="Assets\Icon\Amenities\amn_ski.png" />
+    <Content Include="Assets\Icon\Amenities\amn_skis.png" />
+    <Content Include="Assets\Icon\Amenities\amn_sli.png" />
+    <Content Include="Assets\Icon\Amenities\amn_smpealac.png" />
+    <Content Include="Assets\Icon\Amenities\amn_smpealfr.png" />
+    <Content Include="Assets\Icon\Amenities\amn_soc.png" />
+    <Content Include="Assets\Icon\Amenities\amn_soda.png" />
+    <Content Include="Assets\Icon\Amenities\amn_sof.png" />
+    <Content Include="Assets\Icon\Amenities\amn_sol.png" />
+    <Content Include="Assets\Icon\Amenities\amn_sombr.png" />
+    <Content Include="Assets\Icon\Amenities\amn_sou.png" />
+    <Content Include="Assets\Icon\Amenities\amn_spa.png" />
+    <Content Include="Assets\Icon\Amenities\amn_store.png" />
+    <Content Include="Assets\Icon\Amenities\amn_stv.png" />
+    <Content Include="Assets\Icon\Amenities\amn_swim.png" />
+    <Content Include="Assets\Icon\Amenities\amn_tcs.png" />
+    <Content Include="Assets\Icon\Amenities\amn_telev.png" />
+    <Content Include="Assets\Icon\Amenities\amn_tenis.png" />
+    <Content Include="Assets\Icon\Amenities\amn_ter.png" />
+    <Content Include="Assets\Icon\Amenities\amn_toalpl.png" />
+    <Content Include="Assets\Icon\Amenities\amn_toapl.png" />
+    <Content Include="Assets\Icon\Amenities\amn_toasab.png" />
+    <Content Include="Assets\Icon\Amenities\amn_toile.png" />
+    <Content Include="Assets\Icon\Amenities\amn_tour.png" />
+    <Content Include="Assets\Icon\Amenities\amn_tramsfree.png" />
+    <Content Include="Assets\Icon\Amenities\amn_transair.png" />
+    <Content Include="Assets\Icon\Amenities\amn_transer.png" />
+    <Content Include="Assets\Icon\Amenities\amn_transf.png" />
+    <Content Include="Assets\Icon\Amenities\amn_transfree.png" />
+    <Content Include="Assets\Icon\Amenities\amn_tv.png" />
+    <Content Include="Assets\Icon\Amenities\amn_tvinroom.png" />
+    <Content Include="Assets\Icon\Amenities\amn_tvroom.png" />
+    <Content Include="Assets\Icon\Amenities\amn_valetprk.png" />
+    <Content Include="Assets\Icon\Amenities\amn_vcmail.png" />
+    <Content Include="Assets\Icon\Amenities\amn_vgm.png" />
+    <Content Include="Assets\Icon\Amenities\amn_vid.png" />
+    <Content Include="Assets\Icon\Amenities\amn_wakeup.png" />
+    <Content Include="Assets\Icon\Amenities\amn_water.png" />
+    <Content Include="Assets\Icon\Amenities\amn_wcl.png" />
+    <Content Include="Assets\Icon\Amenities\amn_wfl.png" />
+    <Content Include="Assets\Icon\Amenities\amn_wifi.png" />
+    <Content Include="Assets\Icon\Amenities\amn_wifiroom.png" />
+    <Content Include="Assets\Icon\Amenities\amn_wine.png" />
+    <Content Include="Assets\Icon\Amenities\amn_wma.png" />
+    <Content Include="Assets\Icon\Amenities\amn_yar.png" />
     <Content Include="Assets\Icon\App\handup-medium-white.scale-100.png" />
     <Content Include="Assets\Icon\App\phone-small-white.scale-100.png" />
     <Content Include="Assets\Icon\App\pin-medium-white.scale-100.png" />

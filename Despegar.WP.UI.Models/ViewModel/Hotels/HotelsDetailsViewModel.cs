@@ -73,6 +73,25 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
                 }
         }
 
+        private List<Amenity> _amenitiesShortList;
+        public List<Amenity> AmenitiesShortList
+        {
+            get
+            {
+                if (_amenitiesShortList == null) _amenitiesShortList = new List<Amenity>();
+
+                if (hotelDetail == null || hotelDetail.hotel == null) return null;
+
+                if(hotelDetail.hotel.amenities!=null)
+                {
+                    int maxToTake = (hotelDetail.hotel.amenities.Count()<5)? hotelDetail.hotel.amenities.Count(): 4;
+                    var firstFourElements = hotelDetail.hotel.amenities.Take(maxToTake);
+                    _amenitiesShortList.AddRange(firstFourElements);
+                }
+                return _amenitiesShortList;
+            }
+        }
+
         private int? suggestRoomPriceBase { get; set; }
         public int? SuggestRoomPriceBase
         {

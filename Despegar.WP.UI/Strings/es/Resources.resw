@@ -1030,7 +1030,19 @@ La reserva no ha sido generada y no se le cobrará ningún cargo por la transacc
   <data name="Common_Accept_Label.Label" xml:space="preserve">
     <value>Aceptar</value>
   </data>
+  <data name="Page_HotelsDescription_Seeall.Text" xml:space="preserve">
+    <value>Ver Todos</value>
+  </data>
   <data name="Common_Cancel_Label.Label" xml:space="preserve">
+    <value>Cancelar</value>
+  </data>
+  <data name="Page_HotelsAmenities_Title.Text" xml:space="preserve">
+    <value>Comodidades</value>
+  </data>
+  <data name="GenericAcceptAppBar.Label" xml:space="preserve">
+    <value>Aceptar</value>
+  </data>
+  <data name="GenericCancelAppBar.Label" xml:space="preserve">
     <value>Cancelar</value>
   </data>
 </root>

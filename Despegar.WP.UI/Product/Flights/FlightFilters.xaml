@@ -39,8 +39,8 @@
 
     <Page.BottomAppBar>
         <CommandBar>
-            <AppBarButton Icon="Accept" Label="Aceptar" Click="AppBarButton_Click" />
-            <AppBarButton Icon="Cancel" Label="Cancelar" Name="AppBarCancelButton" Click="AppBarCancelButton_Click" />
+            <AppBarButton x:Uid="GenericAcceptAppBar" Icon="Accept" Label="Aceptar" Click="AppBarButton_Click" />
+            <AppBarButton x:Uid="GenericCancelAppBar" Icon="Cancel" Label="Cancelar" Name="AppBarCancelButton" Click="AppBarCancelButton_Click" />
         </CommandBar>
     </Page.BottomAppBar>
 
