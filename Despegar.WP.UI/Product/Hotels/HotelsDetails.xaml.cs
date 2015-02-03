@@ -21,6 +21,8 @@ using Despegar.WP.UI.Common;
 using Despegar.WP.UI.Model;
 using Despegar.WP.UI.BugSense;
 using Despegar.WP.UI.Model.ViewModel.Hotels;
+using Despegar.WP.UI.Model.ViewModel;
+using Despegar.WP.UI.Controls;
 
 
 namespace Despegar.WP.UI.Product.Hotels
@@ -31,6 +33,7 @@ namespace Despegar.WP.UI.Product.Hotels
     public sealed partial class HotelsDetails : Page
     {
         public HotelsDetailsViewModel ViewModel { get; set; }
+        private ModalPopup loadingPopup = new ModalPopup(new Loading());
 
         public HotelsDetails()
         {
@@ -40,13 +43,28 @@ namespace Despegar.WP.UI.Product.Hotels
         protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
             HardwareButtons.BackPressed += HardwareButtons_BackPressed;
+
             if(ViewModel == null)
             {
-                
                 ViewModel = new HotelsDetailsViewModel(Navigator.Instance, GlobalConfiguration.CoreContext.GetHotelService(), BugTracker.Instance) { CrossParameters = e.Parameter as HotelsCrossParameters };
                 await ViewModel.Init();
                 this.DataContext = ViewModel;
             }
+
+            ViewModel.PropertyChanged += Property_Changed;
+        }
+
+        private void Property_Changed(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "IsLoading")
+            {
+                if ((sender as ViewModelBase).IsLoading)
+                    loadingPopup.Show();
+                else
+                    loadingPopup.Hide();
+            }
+            if (e.PropertyName == "GoToPivot")
+                MainPivot.SelectedIndex = ViewModel.GoToPivot;
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)

@@ -1000,4 +1000,43 @@ A reserva não foi gerado e não cobra nenhuma taxa para a transação.</value>
   <data name="Hotel_Details_Room_Pivot.Header" xml:space="preserve">
     <value>quartos</value>
   </data>
+  <data name="Page_HotelDescription_Amenities.Text" xml:space="preserve">
+    <value>Amenidades e descrição</value>
+  </data>
+  <data name="Common_Located.Text" xml:space="preserve">
+    <value>Localizado a</value>
+  </data>
+  <data name="Page_HotelDescription_Location.Text" xml:space="preserve">
+    <value>Localização</value>
+  </data>
+  <data name="Hotels_Details_Fare_Details.Text" xml:space="preserve">
+    <value>Preço por quarto por noite </value>
+  </data>
+  <data name="Hotels_Details_View_Comments.Text" xml:space="preserve">
+    <value>Ver todos os comentários</value>
+  </data>
+  <data name="Hotels_Details_View_Map.Text" xml:space="preserve">
+    <value>Ver mapa</value>
+  </data>
+  <data name="Hotels_Detail_Points.Text" xml:space="preserve">
+    <value>Score</value>
+  </data>
+  <data name="Page_HotelsDescription_Seeall.Text" xml:space="preserve">
+    <value>Ver Todos</value>
+  </data>
+  <data name="Page_HotelsAmenities_Title.Text" xml:space="preserve">
+    <value>Amenidades</value>
+  </data>
+  <data name="GenericAcceptAppBar.Label" xml:space="preserve">
+    <value>Aceitar</value>
+  </data>
+  <data name="GenericCancelAppBar.Label" xml:space="preserve">
+    <value>Cancelar</value>
+  </data>
+  <data name="Common_Accept_Label.Label" xml:space="preserve">
+    <value>Aceitar</value>
+  </data>
+  <data name="Common_Cancelar_Label.Label" xml:space="preserve">
+    <value>Cancelar</value>
+  </data>
 </root>

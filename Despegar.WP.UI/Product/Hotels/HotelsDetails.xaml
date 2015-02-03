@@ -1,4 +1,4 @@
-﻿<Page xmlns:Maps1="using:Despegar.WP.UI.Controls.Maps"
+﻿<Page xmlns:Hotels="using:Despegar.WP.UI.Controls.Hotels"  xmlns:Maps1="using:Despegar.WP.UI.Controls.Maps"
       xmlns:PhotoGallery="using:Despegar.WP.UI.Controls.PhotoGallery"  
       xmlns:Maps="using:Windows.UI.Xaml.Controls.Maps" 
     x:Class="Despegar.WP.UI.Product.Hotels.HotelsDetails"
@@ -8,7 +8,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:dev="using:Despegar.WP.UI.Developer.Controls"
-      xmlns:conv="using:Despegar.WP.UI.Common.Converter"
+    xmlns:conv="using:Despegar.WP.UI.Common.Converter"
     mc:Ignorable="d"
     Style="{StaticResource BasePage}">
 
@@ -17,6 +17,7 @@
         <conv:NullToVisibilityConverter x:Name="NullToVisibilityConverter"/>
         <conv:StringToN1Converter x:Name="StringToN1Converter" />
         <conv:RatingToColorConverter x:Name="RatingToColorConverter"/>
+        <conv:StringCommaParseConverter x:Name="StringCommaParseConverter"/>
     </Page.Resources>
 
     <Grid Style="{StaticResource MainContainerGrid}">
@@ -41,120 +42,8 @@
         <TextBlock Grid.Row="1" x:Uid="Page_Checkout" Style="{StaticResource PageHeaderSmall}" Text="COMPRAR VUELO" />
 
         <Pivot Grid.Row="2" x:Name="MainPivot"  Style="{StaticResource PivotBaseMain}">
-            <PivotItem Style="{StaticResource PivotItemBase}" x:Uid="Hotel_Details_Hotel_Pivot">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition MinHeight="{StaticResource dBlock10p}"/>
-                        <RowDefinition/>
-                    </Grid.RowDefinitions>
-
-                    <!--Top Grid-->
-                    <Grid Grid.Row="0" VerticalAlignment="Top" >
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="{StaticResource Block4}"/>
-                            <RowDefinition MinHeight="{StaticResource dBlock2}"/>
-                            <RowDefinition Height="{StaticResource Block1}"/>
-                            <RowDefinition Height="{StaticResource Block2p}"/>
-                            <RowDefinition Height="{StaticResource Block2p}"/>
-                        </Grid.RowDefinitions>
-                        
-                        <Image Margin="{StaticResource Top_Offset}" Grid.Row="0" Height="{StaticResource dBlock4}" Width="{StaticResource dBlock12p}"  Source="{Binding HotelDetail.hotel.main_picture , Converter={StaticResource StringFormatConverter}, ConverterParameter='http://staticontent.com/media/pictures/{0}/364x118' }"/>
-                        
-                        <TextBlock Grid.Row="1" Text="{Binding HotelDetail.hotel.name}" Style="{StaticResource SegoeLight28}" TextTrimming="CharacterEllipsis" VerticalAlignment="Top"/>
-                        
-                        <TextBlock Grid.Row="2" Visibility="{Binding CrossParameters.HotelsExtraData.Distance ,Converter={StaticResource NullToVisibilityConverter}}" Style="{StaticResource SegoeSemilight17}">
-                            <Run Text="ubicado a"/>
-                            <Run Text="{Binding CrossParameters.HotelsExtraData.Distance}"/>
-                            <Run Text="m"/>
-                        </TextBlock>
-
-                        <!--Point Grid-->
-                        <Grid Grid.Row="3">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition  Width="{StaticResource Block2}"/>
-                                <ColumnDefinition/>
-                            </Grid.ColumnDefinitions>
-                            <Grid Grid.Column="0" Width="{StaticResource dBlock2}" Height="{StaticResource dBlock2}" Background="Blue">
-                                <Image Source="/Assets/Icon/App/star-small-yellow.scale-100.png" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                            </Grid>
-                            <Grid Grid.Column="1" Margin="{StaticResource Left_Offset}" >
-                                <Grid.RowDefinitions>
-                                    <RowDefinition />
-                                    <RowDefinition/>
-                                </Grid.RowDefinitions>
-                                <TextBlock Grid.Row="0" Text="{Binding HotelDetail.hotel.address}" Style="{StaticResource SegoeSemilight24}" />
-
-                                <Grid Grid.Row="1">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="Auto"/>
-                                        <ColumnDefinition Width="Auto"/>
-                                    </Grid.ColumnDefinitions>
-                                    <TextBlock Grid.Column="0" Style="{StaticResource SegoeSemilight17}">
-                                        <Run Text="{Binding HotelDetail.hotel.city.name}"/>
-                                        <Run Text="-"/>
-                                        <Run Text="{Binding HotelDetail.hotel.city.country.name}"/>
-                                    </TextBlock>
-
-                                    <Button Grid.Column="1" Click="GoToDetailsPivot" Style="{StaticResource HotelDetailLink}" HorizontalAlignment="Right">
-                                        <TextBlock  x:Uid="Hotels_Details_View_Map" Style="{StaticResource DetailDetailLinkText}"  Text="Ver Mapa"></TextBlock>
-                                    </Button>
-
-                                </Grid>
-                            </Grid>
-
-                        </Grid>
-
-                        <!--Fingger Grid-->
-                        <Grid Grid.Row="4">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition  Width="{StaticResource Block2}"/>
-                                <ColumnDefinition/>
-                            </Grid.ColumnDefinitions>
-                            <Grid Grid.Column="0" Width="{StaticResource dBlock2}" Height="{StaticResource dBlock2}" Background="{Binding HotelDetail.hotel.rating , Converter={StaticResource RatingToColorConverter}}">
-                                <Image Source="/Assets/Icon/App/star-small-yellow.scale-100.png" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                            </Grid>
-                            <Grid Grid.Column="1" Margin="{StaticResource Left_Offset}" >
-                                <Grid.RowDefinitions>
-                                    <RowDefinition />
-                                    <RowDefinition/>
-                                </Grid.RowDefinitions>
-                                <TextBlock Grid.Row="0" Style="{StaticResource SegoeSemilight24}">
-                                    <Run Text="{Binding HotelDetail.hotel.rating , Converter={StaticResource StringToN1Converter}}" /> 
-                                    <Run Text="Puntos" x:Uid="Hotels_Detail_Points" />
-                                </TextBlock>
-
-                                <Button Grid.Row="1" Click="GoToCommentsPivot" Style="{StaticResource HotelDetailLink}"  HorizontalAlignment="Left" >
-                                    <TextBlock  x:Uid="Hotels_Details_View_Map" Style="{StaticResource DetailDetailLinkText}"  Text="Ver todos los comentarios"></TextBlock>
-                                </Button>
-
-                            </Grid>
-
-                        </Grid>
-
-
-                    </Grid>
-
-                    <!--Botton Grid-->
-                    <Grid Grid.Row="1" VerticalAlignment="Bottom"  >
-                        <Grid>
-                            <!--<Grid.RowDefinitions>
-                                <RowDefinition Height="1*"/>
-                                <RowDefinition Height="1*"/>
-                            </Grid.RowDefinitions>
-
-                            <TextBlock Grid.Row="0" Grid.Column="1"  Style="{StaticResource SegoeRegular17}"  HorizontalAlignment="Right" VerticalAlignment="Center" Grid.RowSpan="2" >
-                                <Run Text="$"/>
-                                <Run Text="{Binding HotelDetail.hotel.price.base}"/>
-                            </TextBlock>
-                            <Border BorderThickness="0,0,0,1" BorderBrush="#FF949494" />-->
-                        </Grid>
-
-                        <!--x-->
-                        <Button Content="Comprar" Style="{StaticResource ButtonBottomRed}"  Command="{Binding BuySuggestRoomCommand}" />
-
-                    </Grid>
-                </Grid>
-
+            <PivotItem Style="{StaticResource PivotItemBase}" x:Uid="Hotel_Details_Hotel_Pivot" xmlns:src="using:Despegar.WP.UI.Product.Hotels.Details">
+                <src:HotelPivot DataContext="{Binding}"/>
             </PivotItem>
 
             <PivotItem Style="{StaticResource PivotItemBase}" x:Uid="Hotel_Details_Room_Pivot">
@@ -167,15 +56,16 @@
                 </Grid>
             </PivotItem>
 
-            <PivotItem Style="{StaticResource PivotItemBase}" x:Uid="Hotel_Details_comments_Pivot">
-
+            <PivotItem Style="{StaticResource PivotItemBase}" x:Uid="Hotel_Details_comments_Pivot" xmlns:src="using:Despegar.WP.UI.Product.Hotels.Details">
+                <src:UserReviews DataContext="{Binding}"/>
             </PivotItem>
 
             <PivotItem Style="{StaticResource PivotItemBase}" x:Uid="Hotel_Details_Description_Pivot">
+             
                 <Grid>
-                    <Maps1:CustomMapControl DataContext="{Binding CustomMap}" >
-                </Maps1:CustomMapControl>
+                    <Hotels:HotelDescriptionControl DataContext="{Binding}" />
                 </Grid>
+                
             </PivotItem>
 
         </Pivot>

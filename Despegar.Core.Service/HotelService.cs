@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using Despegar.Core.Business.Hotels.BookingFields;
 using Despegar.Core.Business.Hotels.HotelDetails;
 using Despegar.Core.Business.Hotels;
+using Despegar.Core.Business.Hotels.UserReviews;
 
 namespace Despegar.Core.Service
 {
@@ -72,6 +73,15 @@ namespace Despegar.Core.Service
             }
 
             return result;
+        }
+
+        public async Task<HotelUserReviews> GetHotelUserReviews(string hotelId, int limit, int offset, string language)
+        {
+            //NOT IMPLEMENTED YET (this use api v3 connector and this is not implemented)
+            string serviceUrl = String.Format(ServiceURL.GetServiceURL(ServiceKey.HotelUserReview), hotelId, limit, offset, language);
+            IConnector connector = context.GetServiceConnector(ServiceKey.HotelUserReview);
+
+            return await connector.GetAsync<HotelUserReviews>(serviceUrl);
         }
 
         //public async Task<BookingCompletePostResponse> CompleteBooking(object bookingCompletePost, string id)

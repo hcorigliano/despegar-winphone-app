@@ -13,17 +13,7 @@
 
         <DataTemplate x:Key="FlightFilterTemplate">
             <Grid>
-                <!--<RadioButton GroupName="FlightSortByGroup" Content="{Binding label}" HorizontalAlignment="Left" VerticalAlignment="Top" IsChecked="{Binding selected ,Mode=TwoWay}"/>-->
-
-
-                <!--<TextBlock Text="{Binding label}"></TextBlock>-->
-                <!--<ItemsControl ItemsSource="{Binding values ,Mode=TwoWay}" DataContext="{Binding}" >
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>-->
                 <CheckBox Margin="{StaticResource Left_Offset}" Content="{Binding label}" IsChecked="{Binding selected,Mode=TwoWay}" />
-                <!--</DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>-->
             </Grid>
         </DataTemplate>
 
@@ -40,8 +30,8 @@
 
     <Page.BottomAppBar>
         <CommandBar>
-            <AppBarButton Icon="Accept" Label="Aceptar" Click="AppBarButton_Click" />
-            <AppBarButton Icon="Cancel" Label="Cancelar" Name="AppBarCancelButton" Click="AppBarCancelButton_Click" />
+            <AppBarButton Icon="Accept" x:Uid="Common_Accept_Label" Label="Aceptar" Click="AppBarButton_Click" />
+            <AppBarButton Icon="Cancel" x:Uid="Common_Cancel_Label" Label="Cancelar" Name="AppBarCancelButton" Click="AppBarCancelButton_Click" />
         </CommandBar>
     </Page.BottomAppBar>
 
