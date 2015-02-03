@@ -1045,4 +1045,7 @@ La reserva no ha sido generada y no se le cobrará ningún cargo por la transacc
   <data name="GenericCancelAppBar.Label" xml:space="preserve">
     <value>Cancelar</value>
   </data>
+  <data name="Hotels_Search_ERROR_SEARCH_INVALID_TITLE" xml:space="preserve">
+    <value>Busqueda de Hoteles</value>
+  </data>
 </root>

@@ -36,14 +36,14 @@ namespace Despegar.WP.UI.Product.Hotels
 
             switch (e.ErrorCode)
             {
-                case "SEARCH_FAILED":
-                    dialog = new MessageDialog(manager.GetString("Flights_Search_ERROR_SEARCH_FAILED"), manager.GetString("Flights_Search_ERROR_SEARCH_FAILED_TITLE"));
-                    await dialog.ShowSafelyAsync();
-                    break;
-                case "SEARCH_INVALID":
-                    dialog = new MessageDialog(manager.GetString("Flights_Search_ERROR_SEARCH_INVALID"), manager.GetString("Flights_Search_ERROR_SEARCH_INVALID_TITLE"));
-                    await dialog.ShowSafelyAsync();
-                    break;
+                //case "SEARCH_FAILED":
+                //    dialog = new MessageDialog(manager.GetString("Flights_Search_ERROR_SEARCH_FAILED"), manager.GetString("Flights_Search_ERROR_SEARCH_FAILED_TITLE"));
+                //    await dialog.ShowSafelyAsync();
+                //    break;
+                //case "SEARCH_INVALID":
+                //    dialog = new MessageDialog(manager.GetString("Flights_Search_ERROR_SEARCH_INVALID"), manager.GetString("Flights_Search_ERROR_SEARCH_INVALID_TITLE"));
+                //    await dialog.ShowSafelyAsync();
+                //    break;
                 case "SEARCH_INVALID_WITH_MESSAGE":
                     CustomError message = e.Parameter as CustomError;
                     if (message == null) break;
@@ -56,7 +56,7 @@ namespace Despegar.WP.UI.Product.Hotels
                         msg = string.Format(msgunformated, message.Date);
                     }
 
-                    dialog = new MessageDialog(msg, manager.GetString("Flights_Search_ERROR_SEARCH_INVALID_TITLE"));
+                    dialog = new MessageDialog(msg, manager.GetString("Hotels_Search_ERROR_SEARCH_INVALID_TITLE"));
                     await dialog.ShowSafelyAsync();
                     break;
             }
@@ -67,6 +67,7 @@ namespace Despegar.WP.UI.Product.Hotels
         {
             ViewModel = new HotelsSearchViewModel(Navigator.Instance, GlobalConfiguration.CoreContext.GetHotelService(), BugTracker.Instance);
             ViewModel.PropertyChanged += Checkloading;
+            ViewModel.ViewModelError += ErrorHandler;
             HardwareButtons.BackPressed += HardwareButtons_BackPressed;
             this.DataContext = ViewModel;
         }
