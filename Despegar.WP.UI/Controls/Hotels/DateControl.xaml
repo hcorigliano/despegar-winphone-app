@@ -19,12 +19,12 @@
         <!--<dev:UserControlDesignGrid />-->
         
         <StackPanel Grid.Column="0" >
-            <TextBlock  Style="{StaticResource BaseTextLabel}" x:Uid="Flights_Search_Departure" Text="Partida" />
+            <TextBlock  Style="{StaticResource BaseTextLabel}" x:Uid="Flights_Search_Departure" Text="Entrada" />
             <DatePicker Style="{StaticResource DatePickerBase}" x:Name="departure" Date="{Binding FromDate, Mode=TwoWay}" />
         </StackPanel>
 
         <StackPanel Grid.Column="2">
-            <TextBlock Style="{StaticResource BaseTextLabel}"   x:Uid="Flights_Search_Return"  Text="Regreso" />
+            <TextBlock Style="{StaticResource BaseTextLabel}"   x:Uid="Flights_Search_Return"  Text="Salida" />
             <DatePicker Style="{StaticResource DatePickerBase}" x:Name="ToDateControl" Date="{Binding ToDate, Mode=TwoWay}" />
         </StackPanel>
     </Grid>

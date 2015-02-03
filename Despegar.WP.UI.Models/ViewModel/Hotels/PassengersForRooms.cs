@@ -1,6 +1,7 @@
 ﻿using Despegar.Core.Business;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,7 +12,7 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
     {
         public int Index { get; set; }
         public int IndexZeroBased { get { return Index - 1; } }
-
+        public ObservableCollection<HotelsMinorsAge> MinorsAge { get; set; }
         private int generalAdults;
         public int GeneralAdults
         {
@@ -33,6 +34,25 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
             get { return generalMinors; }
             set
             {
+                if (generalMinors != value)
+                {
+                    if (MinorsAge.Count < value)
+                    {
+                        for (int i = MinorsAge.Count; i < value; i++)
+                        {
+                            MinorsAge.Add(new HotelsMinorsAge { SelectedAge = 0, Index = i + 1 });
+                        }
+                    }
+                    else
+                    {
+                        for (int i = MinorsAge.Count - 1; i >= value; i--)
+                        {
+                            MinorsAge.RemoveAt(i);
+                        }
+                    } 
+                }
+
+
                 generalMinors = value;
                 OnPropertyChanged();
                 OnPropertyChanged("AdultOptions");
@@ -79,6 +99,7 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
 
         public PassengersForRooms()
         {
+            MinorsAge = new ObservableCollection<HotelsMinorsAge>();
             this.GeneralAdults = 1;
             this.GeneralMinors = 0;
         }

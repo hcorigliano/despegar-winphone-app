@@ -23,11 +23,11 @@ namespace Despegar.WP.UI.Controls.Hotels
 {
     public sealed partial class SearchHotelControl : UserControl
     {
-        public static readonly DependencyProperty SelectedDestinationCodeProperty = DependencyProperty.Register("SelectedDestinationCode", typeof(string), typeof(SearchHotelControl), null);
-
+        public static readonly DependencyProperty SelectedDestinationCodeProperty = DependencyProperty.Register("SelectedDestinationCode", typeof(int), typeof(SearchHotelControl), null);
         public static readonly DependencyProperty SelectedDestinationTextProperty = DependencyProperty.Register("SelectedDestinationText", typeof(string), typeof(SearchHotelControl), null);
-
         public static readonly DependencyProperty InitialDestinationTextProperty = DependencyProperty.Register("InitialDestinationText", typeof(string), typeof(SearchHotelControl), null);
+        public static readonly DependencyProperty SelectedDestinationTypeProperty = DependencyProperty.Register("SelectedDestinationType", typeof(string), typeof(SearchHotelControl), null);
+
 
         #region ** BoilerPlate Code **
         public event PropertyChangedEventHandler PropertyChanged;
@@ -39,11 +39,20 @@ namespace Despegar.WP.UI.Controls.Hotels
         }
         #endregion
 
+        // Bindable Property from XAML
+        public string SelectedDestinationType
+        {
+            get { return (string)GetValue(SelectedDestinationTypeProperty); }
+            set
+            {
+                SetValueAndNotify(SelectedDestinationTypeProperty, value);
+            }
+        }
 
         // Bindable Property from XAML
-        public string SelectedDestinationCode
+        public int SelectedDestinationCode
         {
-            get { return (string)GetValue(SelectedDestinationCodeProperty); }
+            get { return (int)GetValue(SelectedDestinationCodeProperty); }
             set
             {
                 SetValueAndNotify(SelectedDestinationCodeProperty, value);
@@ -101,7 +110,18 @@ namespace Despegar.WP.UI.Controls.Hotels
 
        private async void SuggestionChosen(AutoSuggestBox sender, AutoSuggestBoxSuggestionChosenEventArgs args)
        {
+           var selected = (HotelAutocomplete)args.SelectedItem;
+           if (selected != null)
+           {
+               SelectedDestinationCode = selected.id;
+               SelectedDestinationText = selected.name;
+               SelectedDestinationType = selected.type;
+           }
 
+           sender.ItemsSource = null;
+           List<HotelAutocomplete> source = new List<HotelAutocomplete>();
+           source.Add(selected);
+           sender.ItemsSource = source;
        }
 
        private void Focus_Lost(object sender, RoutedEventArgs e)
@@ -119,21 +139,25 @@ namespace Despegar.WP.UI.Controls.Hotels
                if (city != null)
                {
                     control.Text = city.name;
-                    SelectedDestinationCode = city.code;
+                    SelectedDestinationCode = city.id;
                     SelectedDestinationText = city.name;
+                    SelectedDestinationType = city.type;
+
                }
                else
                {
                     control.Text = "";
-                    SelectedDestinationCode = "";
+                    SelectedDestinationCode = 0;
                     SelectedDestinationText = "";
+                    SelectedDestinationType = "";
                }
            }
            else
            {
                 control.Text = ""; 
-                SelectedDestinationCode = "";
-                SelectedDestinationText = "";    
+                SelectedDestinationCode = 0;
+                SelectedDestinationText = "";
+                SelectedDestinationType = "";
            }
        }
 

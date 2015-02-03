@@ -99,6 +99,25 @@ namespace Despegar.WP.UI.Model
             return last;
         }
 
+        public static int GetEmissionAnticipationDayForHotels()
+        {
+            return GetProductParameterFromConfiguration("hotels").emission_anticipation_days;
+        }
+
+        public static int GetLastAvailableHoursForHotels()
+        {
+            int last;
+            try
+            {
+                last = Convert.ToInt32(GetProductParameterFromConfiguration("hotels").last_available_hour);
+            }
+            catch (Exception)
+            {
+                last = 0;
+            }
+            return last;
+        }
+
         public static async Task LoadUPA(IBugTracker bugtracker)
         {            
             var roamingSettings = ApplicationData.Current.RoamingSettings;

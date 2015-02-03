@@ -1,11 +1,15 @@
-﻿using Despegar.WP.UI.BugSense;
+﻿using Despegar.Core.Business.CustomErrors;
+using Despegar.WP.UI.BugSense;
 using Despegar.WP.UI.Common;
 using Despegar.WP.UI.Controls;
 using Despegar.WP.UI.Model;
+using Despegar.WP.UI.Model.Common;
 using Despegar.WP.UI.Model.ViewModel;
 using Despegar.WP.UI.Model.ViewModel.Hotels;
 using System.ComponentModel;
+using Windows.ApplicationModel.Resources;
 using Windows.Phone.UI.Input;
+using Windows.UI.Popups;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 
@@ -20,19 +24,51 @@ namespace Despegar.WP.UI.Product.Hotels
         public HotelsSearch()
         {
             this.InitializeComponent();
+        }
+
+        # region ** ERROR HANDLING **
+        private async void ErrorHandler(object sender, ViewModelErrorArgs e)
+        {
+            BugTracker.Instance.LeaveBreadcrumb("Flight search Error Raised: " + e.ErrorCode);
+
+            ResourceLoader manager = new ResourceLoader();
+            MessageDialog dialog;
+
+            switch (e.ErrorCode)
+            {
+                case "SEARCH_FAILED":
+                    dialog = new MessageDialog(manager.GetString("Flights_Search_ERROR_SEARCH_FAILED"), manager.GetString("Flights_Search_ERROR_SEARCH_FAILED_TITLE"));
+                    await dialog.ShowSafelyAsync();
+                    break;
+                case "SEARCH_INVALID":
+                    dialog = new MessageDialog(manager.GetString("Flights_Search_ERROR_SEARCH_INVALID"), manager.GetString("Flights_Search_ERROR_SEARCH_INVALID_TITLE"));
+                    await dialog.ShowSafelyAsync();
+                    break;
+                case "SEARCH_INVALID_WITH_MESSAGE":
+                    CustomError message = e.Parameter as CustomError;
+                    if (message == null) break;
+
+                    string msg = manager.GetString(message.Code);
+
+                    if (message.HasDates)
+                    {
+                        string msgunformated = msg;
+                        msg = string.Format(msgunformated, message.Date);
+                    }
+
+                    dialog = new MessageDialog(msg, manager.GetString("Flights_Search_ERROR_SEARCH_INVALID_TITLE"));
+                    await dialog.ShowSafelyAsync();
+                    break;
+            }
+        }
+        #endregion
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
             ViewModel = new HotelsSearchViewModel(Navigator.Instance, GlobalConfiguration.CoreContext.GetHotelService(), BugTracker.Instance);
             ViewModel.PropertyChanged += Checkloading;
             HardwareButtons.BackPressed += HardwareButtons_BackPressed;
             this.DataContext = ViewModel;
-        }
-
-        /// <summary>
-        /// Invoked when this page is about to be displayed in a Frame.
-        /// </summary>
-        /// <param name="e">Event data that describes how this page was reached.
-        /// This parameter is typically used to configure the page.</param>
-        protected override void OnNavigatedTo(NavigationEventArgs e)
-        {
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)

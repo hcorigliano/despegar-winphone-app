@@ -36,19 +36,25 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
                         }
                     }
                 }
-
                 roomsSelectedOption = value;
             }
         }
 
-
-        public RoomsViewModel(IBugTracker t) : base(t)
+        public int Adults
         {
-            RoomsDetailList = new ObservableCollection<PassengersForRooms>();
-            this.Rooms = 1;
-            this.RoomsSelectedOption = 1;
+            get
+            {
+                return RoomsDetailList.Sum(x => x.GeneralAdults);
+            }
         }
 
+        public int Minors
+        {
+            get
+            {
+                return RoomsDetailList.Sum(x => x.GeneralMinors);
+            }
+        }
 
         public IEnumerable<int> RoomOptions
         {
@@ -57,6 +63,13 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
                 IEnumerable<int> options = Enumerable.Range(1, 4);
                 return options;
             }
+        }
+
+        public RoomsViewModel(IBugTracker t) : base(t)
+        {
+            RoomsDetailList = new ObservableCollection<PassengersForRooms>();
+            this.Rooms = 1;
+            this.RoomsSelectedOption = 1;
         }
 
     }

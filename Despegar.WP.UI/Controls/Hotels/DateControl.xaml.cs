@@ -53,6 +53,7 @@ namespace Despegar.WP.UI.Controls.Hotels
 
             this.ToDateControl.MinYear = DateTimeOffset.Now;
             this.ToDateControl.MaxYear = DateTimeOffset.Now.AddYears(1);
+
         }        
     }
 }

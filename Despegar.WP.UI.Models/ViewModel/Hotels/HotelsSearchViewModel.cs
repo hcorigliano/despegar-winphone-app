@@ -27,17 +27,24 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
             this.hotelService = hotelService;
             this.coreSearchModel = new HotelSearchModel();
             this.RoomsViewModel = new RoomsViewModel(t);
+            this.coreSearchModel.EmissionAnticipationDay = GlobalConfiguration.GetEmissionAnticipationDayForHotels();
+            this.coreSearchModel.LastAvailableHours = GlobalConfiguration.GetLastAvailableHoursForHotels();
+            this.DestinationType = string.Empty;
+            coreSearchModel.UpdateSearchDays();
         }
 
-        public string Destination
+        public int DestinationCode
         {
-            get { return coreSearchModel.DestinationHotel; }
+            get { return coreSearchModel.DestinationCode; }
             set
             {
-                coreSearchModel.DestinationHotel = value;
+                coreSearchModel.DestinationCode = value;
                 OnPropertyChanged();
             }
         }
+
+
+        public string DestinationType{get;set;}
 
         public string DestinationText
         {
@@ -75,9 +82,14 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
 
             foreach (PassengersForRooms room in this.RoomsViewModel.RoomsDetailList)
             {
-                
+                distribution += room.GeneralAdults.ToString();
+                foreach (HotelsMinorsAge minor in room.MinorsAge)
+                {
+                    distribution += "-" + minor.SelectedAge.ToString();
+                }
+                distribution += "!";
             }
-            return distribution;
+            return distribution.Remove(distribution.Length - 1);
         }
 
         public ICommand SearchCommand
@@ -105,22 +117,42 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
             }
         }
 
-        private async void SearchHotels()
+        private void SearchHotels()
         {
-            
-            
-            HotelsCrossParameters hotelCrossParameters = new HotelsCrossParameters();
-            hotelCrossParameters.SearchParameters.distribution = "2";
-            hotelCrossParameters.SearchParameters.Checkin = "2015-03-01";
-            hotelCrossParameters.SearchParameters.Checkout = "2015-03-05";
-            hotelCrossParameters.SearchParameters.currency = "ars";
-            hotelCrossParameters.SearchParameters.destinationNumber = 982; //982 4451
 
-            //int child = hotelCrossParameters.SearchParameters.Childs ;
-            Navigator.GoTo(ViewModelPages.HotelsResults, hotelCrossParameters);
+            UpdatePassengers();
 
-            //CitiesAvailability cities = await hotelService.GetHotelsAvailability("2015-03-01", "2015-03-05", 982, "2", "ars", 0, 30, "",""); //982 , "2015-03-01" , "2015-03-05" , "2" , "ars" , 0 , 30 , "" , "" );
-            //cities.searchDetails =  new HotelsSearchParameters();
+            if (coreSearchModel.IsValid)
+            {
+               // IsLoading = true;
+                Tracker.LeaveBreadcrumb("Flight search performed");
+
+                HotelsCrossParameters hotelCrossParameters = new HotelsCrossParameters();
+                hotelCrossParameters.SearchParameters.distribution = BuildDistributionString();
+                hotelCrossParameters.SearchParameters.Checkin = coreSearchModel.DepartureDate.Date.ToString("yyyy-MM-dd");
+                hotelCrossParameters.SearchParameters.Checkout = coreSearchModel.DestinationDate.Date.ToString("yyyy-MM-dd");
+                hotelCrossParameters.SearchParameters.destinationNumber = coreSearchModel.DestinationCode;
+
+                if (this.DestinationType == "city")
+                {
+                    Navigator.GoTo(ViewModelPages.HotelsResults, hotelCrossParameters);
+                }
+                else
+                {
+                    Navigator.GoTo(ViewModelPages.HotelsDetails, hotelCrossParameters);
+                }
+            }
+            else
+            {
+                OnViewModelError("SEARCH_INVALID_WITH_MESSAGE", coreSearchModel.SearchErrors);
+            }
+        }
+
+
+        private void UpdatePassengers()
+        {
+            coreSearchModel.AdultsInFlights = RoomsViewModel.Adults;
+            coreSearchModel.ChildrenInFlights = RoomsViewModel.Minors;
         }
 
         private string _Checkin;
@@ -133,6 +165,8 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
                 OnPropertyChanged();
             }
         }
+
+
 
     }
 }

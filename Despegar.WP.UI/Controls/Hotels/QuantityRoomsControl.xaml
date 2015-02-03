@@ -30,6 +30,7 @@
                         <Grid.RowDefinitions>
                             <RowDefinition MinHeight="{StaticResource dBlock1}"/>
                             <RowDefinition MinHeight="{StaticResource dBlock3p}" />
+                            <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="1*" />
@@ -52,6 +53,28 @@
                             <TextBlock Style="{StaticResource BaseTextLabel}" x:Uid="Flights_Search_Children" Text="Menores" />
                             <ComboBox  Style="{StaticResource ComboBoxBase}" ItemsSource="{Binding ChildrenOptions, Mode=TwoWay}" SelectedItem="{Binding GeneralMinors, Mode=TwoWay}"  />
                         </StackPanel>
+
+                        <!-- Children Controls -->
+                        <ItemsControl Grid.Row="2"  Grid.ColumnSpan="3" ItemsSource="{Binding MinorsAge}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition MinHeight="{StaticResource dBlock3}"/>
+                                        </Grid.RowDefinitions>
+
+                                        <StackPanel Grid.Row="{Binding IndexZeroBased}">
+                                            <TextBlock Style="{StaticResource BaseTextLabel}" >
+                                                <Run  x:Uid="Flights_Search_ChildrenAge" Text="Edad del menor" />
+                                                <Run  Text="{Binding Index}"/>
+                                            </TextBlock>
+                                            <ComboBox  Style="{StaticResource ComboBoxBase}" ItemsSource="{Binding AgeOptions}" SelectedItem="{Binding SelectedAge, Mode=TwoWay}"   />
+                                        </StackPanel>
+                                    </Grid>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+
                     </Grid>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
