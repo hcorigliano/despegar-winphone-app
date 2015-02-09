@@ -189,7 +189,7 @@ namespace Despegar.WP.UI.Controls.Flights
             }
 
             UnFocus();
-        }
+        }        
 
         private static void UnFocus()
         {
@@ -199,11 +199,7 @@ namespace Despegar.WP.UI.Controls.Flights
         private void Focus_Lost(object sender, RoutedEventArgs e)
         {
             // Force pick city when focus lost
-            UpdateTextbox((AutoSuggestBox)sender);
-        }
-        
-        private void UpdateTextbox(AutoSuggestBox control)
-        {
+            AutoSuggestBox control = sender as AutoSuggestBox;
             bool selectionEmpty = false;
 
             if (control.Name == "DestinyInput")
@@ -225,7 +221,7 @@ namespace Despegar.WP.UI.Controls.Flights
             //}
 
             if (selectionEmpty)
-                Clear(control);                                
+                Clear(control);  
         }
 
         /// <summary>
@@ -247,29 +243,14 @@ namespace Despegar.WP.UI.Controls.Flights
             }
         }
 
-        /// <summary>
-        /// Initially sets the Ui values of the Autosuggest boxes, Used for DEV TOOLS
-        /// </summary>        
-        public void UpdateAirportBoxes(string originCode, string originText, string destinationCode, string destinationText)
-        {
-            OriginInput.ItemsSource = new List<CityAutocomplete>() { new CityAutocomplete() { code = originCode, name = originText } };
-            DestinyInput.ItemsSource = new List<CityAutocomplete>() { new CityAutocomplete() { code = destinationCode, name = destinationText } };
-
-            OriginInput.Text = originText;
-            DestinyInput.Text = destinationText;
-
-            UpdateTextbox(OriginInput);
-            UpdateTextbox(DestinyInput);
-        }
-
-        public void UpdateAirportBoxesOrigin(string originCode, string originText)
+        public async void UpdateAirportBoxesOrigin(string originCode, string originText)
         {           
-            SetCity(OriginInput, new CityAutocomplete() { code = originCode, name = originText });
+            await SetCity(OriginInput, new CityAutocomplete() { code = originCode, name = originText });
         }
 
-        public void UpdateAirportBoxesDestiny( string destinationCode, string destinationText)
+        public async void UpdateAirportBoxesDestiny(string destinationCode, string destinationText)
         {
-            SetCity(DestinyInput, new CityAutocomplete() { code = destinationCode, name = destinationText });
+           await SetCity(DestinyInput, new CityAutocomplete() { code = destinationCode, name = destinationText });
         }
 
         private void OriginInput_KeyUp(object sender, Windows.UI.Xaml.Input.KeyRoutedEventArgs e)

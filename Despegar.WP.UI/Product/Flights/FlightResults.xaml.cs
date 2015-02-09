@@ -1,25 +1,18 @@
-﻿using Despegar.Core.Neo.Business.Flight;
+﻿using Despegar.Core.Neo.Business;
+using Despegar.Core.Neo.Business.Enums;
 using Despegar.Core.Neo.Business.Flight.Itineraries;
-using Despegar.Core.Neo.Business.Flight.SearchBox;
+using Despegar.Core.Neo.InversionOfControl;
 using Despegar.WP.UI.Common;
-using Despegar.WP.UI.Model;
-using Despegar.WP.UI.Model.Classes;
+using Despegar.WP.UI.Model.Classes.Flights;
 using Despegar.WP.UI.Model.ViewModel.Flights;
 using System;
+using System.Collections.Generic;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
-using System.Collections.Generic;
-using Despegar.WP.UI.Model.ViewModel.Classes.Flights;
-using Despegar.WP.UI.Model.Classes.Flights;
 using Windows.UI.Xaml.Media.Imaging;
-using Despegar.WP.UI.BugSense;
-using Despegar.Core.Neo.Business.Flight.SearchBox;
-using Despegar.Core.Neo.InversionOfControl;
-using Despegar.Core.Neo.Business;
-using Despegar.Core.Neo.Business.Enums;
+using Windows.UI.Xaml.Navigation;
 
 namespace Despegar.WP.UI.Product.Flights
 {
@@ -39,6 +32,16 @@ namespace Despegar.WP.UI.Product.Flights
 #endif
         }
 
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            if (e.NavigationMode == NavigationMode.New)
+            {
+                ViewModel = IoC.Resolve<FlightResultsViewModel>();
+                ViewModel.OnNavigated(e.Parameter);
+                this.DataContext = ViewModel;                
+            }
+        }
+
         protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
         {
             if (e.Parameter != null)
@@ -49,15 +52,7 @@ namespace Despegar.WP.UI.Product.Flights
             }
         }
 
-        protected override void OnNavigatedTo(NavigationEventArgs e)
-        {
-            ViewModel = IoC.Resolve<FlightResultsViewModel>();
-            ViewModel.OnNavigated(e.Parameter);
-            this.DataContext = ViewModel;
-            this.miniboxSearch.DataContext = ViewModel.FlightSearchModel;            
-        }
-
-        public T FindDescendant<T>(DependencyObject obj) where T : DependencyObject
+        private T FindDescendant<T>(DependencyObject obj) where T : DependencyObject
         {
             // Check if this object is the specified type
             if (obj is T)
@@ -185,27 +180,14 @@ namespace Despegar.WP.UI.Product.Flights
 
         private Visibility SetVisualEffect(Visibility visibility)
         {
-            switch (visibility)
-            {
-                case Visibility.Collapsed:
-                    return Visibility.Visible;
-                case Visibility.Visible:
-                    return Visibility.Collapsed;
-            }
-            return visibility;
+            return visibility == Visibility.Collapsed ? Visibility.Visible : Visibility.Collapsed;
         }
 
         private void miniboxSearch_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            ViewModel.BugTracker.LeaveBreadcrumb("Flight Result Minibox Hit");
-            ViewModel.Navigator.GoBack();
+            ViewModel.MiniboxSearch();
         }
-
-        private void appBarFilter_Click(object sender, RoutedEventArgs e)
-        {
-            ViewModel.Navigator.GoTo(Model.Interfaces.ViewModelPages.FlightsFilters, null);
-        }
-
+        
         private void Image_ImageFailed(object sender, ExceptionRoutedEventArgs e)
         {
             ((Image)sender).Source = new BitmapImage(new Uri("ms-appx:/Assets/Icon/Airlines/ag_default@2x.png", UriKind.Absolute));

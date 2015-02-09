@@ -7,9 +7,11 @@ using Despegar.WP.UI.Model.Classes;
 using Despegar.WP.UI.Model.Classes.Flights;
 using Despegar.WP.UI.Model.Interfaces;
 using Despegar.WP.UI.Model.ViewModel.Classes.Flights;
+using Despegar.WP.UI.Models.Classes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows.Input;
 
 
 namespace Despegar.WP.UI.Model.ViewModel.Flights
@@ -210,6 +212,30 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
 
             FlightSearchModel.TotalFlights = Itineraries.total;
         }
-        
+
+        /// <summary>
+        /// Hace Rebúsqueda
+        /// </summary>
+        public void MiniboxSearch()
+        {
+            BugTracker.LeaveBreadcrumb("Flight Result Minibox Hit");
+            Navigator.GoBack();
+        }
+
+        public ICommand NavigateToFiltersCommand
+        {
+          get
+          {
+              return new RelayCommand(() => { Navigator.GoTo(Model.Interfaces.ViewModelPages.FlightsFilters, Facets); });
+          }
+        }
+
+        public ICommand NavigateToOrderByCommand
+        {
+            get
+            {
+                return new RelayCommand(() => { Navigator.GoTo(Model.Interfaces.ViewModelPages.FlightsOrderBy, Sorting); });
+            }
+        }
     }
 }

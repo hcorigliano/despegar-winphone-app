@@ -125,8 +125,8 @@ namespace Despegar.WP.UI.Developer
                     // Update UI
                     var pivotItem = page.FindVisualChildren<PivotItem>(page).Skip(1).First();
                     var userControl = pivotItem.FindName("OneWaySearchAirportControl") as SearchAirport;
-                    userControl.UpdateAirportBoxes("EZE", "Aeropuerto Buenos Aires Ministro ¨Pistarini Ezeiza, Buenos Aires, Argentina", "MIA", "Miami, Florida, Estados Unidos");
-                
+                    userControl.UpdateAirportBoxesOrigin("EZE", "Aeropuerto Buenos Aires Ministro ¨Pistarini Ezeiza, Buenos Aires, Argentina");
+                    userControl.UpdateAirportBoxesDestiny("MIA", "Miami, Florida, Estados Unidos");
                 });
             }
         }
@@ -150,7 +150,8 @@ namespace Despegar.WP.UI.Developer
                 // Update UI
                 var pivotItem = page.FindVisualChildren<PivotItem>(page).First();
                 var userControl = page.FindVisualChildren<SearchAirport>(pivotItem).First();
-                userControl.UpdateAirportBoxes("EZE", "Aeropuerto Buenos Aires Ministro ¨Pistarini Ezeiza, Buenos Aires, Argentina","MIA" ,"Miami, Florida, Estados Unidos");
+                userControl.UpdateAirportBoxesOrigin("EZE", "Aeropuerto Buenos Aires Ministro ¨Pistarini Ezeiza, Buenos Aires, Argentina");
+                userControl.UpdateAirportBoxesDestiny("MIA", "Miami, Florida, Estados Unidos");
 
             }); }
         }
