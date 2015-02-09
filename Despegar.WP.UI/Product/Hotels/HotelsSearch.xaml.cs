@@ -12,6 +12,15 @@ using Windows.Phone.UI.Input;
 using Windows.UI.Popups;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
+using Windows.Devices.Geolocation;
+using System.Threading;
+using System.Threading.Tasks;
+
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+
 
 namespace Despegar.WP.UI.Product.Hotels
 {
@@ -104,6 +113,11 @@ namespace Despegar.WP.UI.Product.Hotels
                 else
                     loadingPopup.Hide();
             }
+        }
+
+        private void Grid_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
+        {
+            ViewModel.GetPositionCommand.Execute(null);
         }
 
 

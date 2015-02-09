@@ -157,7 +157,14 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
         public async Task Search()
         {
             IsLoading = true;
-            CitiesAvailability = await hotelService.GetHotelsAvailability(CrossParameters.SearchParameters.Checkin, CrossParameters.SearchParameters.Checkout, CrossParameters.SearchParameters.destinationNumber, CrossParameters.SearchParameters.distribution, CrossParameters.SearchParameters.currency, CrossParameters.SearchParameters.offset, CrossParameters.SearchParameters.offset + 30, CrossParameters.SearchParameters.extraParameters);
+            if (CrossParameters.SearchParameters.latitude == 0)
+            {
+                CitiesAvailability = await hotelService.GetHotelsAvailability(CrossParameters.SearchParameters.Checkin, CrossParameters.SearchParameters.Checkout, CrossParameters.SearchParameters.destinationNumber, CrossParameters.SearchParameters.distribution, CrossParameters.SearchParameters.currency, CrossParameters.SearchParameters.offset, CrossParameters.SearchParameters.offset + 30, CrossParameters.SearchParameters.extraParameters);
+            }
+            else
+            {
+                CitiesAvailability = await hotelService.GetHotelsAvailabilityByGeo(CrossParameters.SearchParameters.Checkin, CrossParameters.SearchParameters.Checkout, CrossParameters.SearchParameters.distribution, CrossParameters.SearchParameters.latitude, CrossParameters.SearchParameters.longitude);
+            }
             //RefreshIcons();
             IsLoading = false;
         }

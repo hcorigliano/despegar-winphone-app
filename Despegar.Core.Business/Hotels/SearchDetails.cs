@@ -74,5 +74,8 @@ namespace Despegar.Core.Business.Hotels
         public int limit { get; set; }
         public string order { get; set; }
         public string extraParameters { get; set; }
+        public double latitude { get; set; }
+        public double longitude { get; set; }
+
     }
 }

@@ -84,6 +84,15 @@ namespace Despegar.WP.UI.Controls.Hotels
         {
             this.InitializeComponent();
             (this.Content as FrameworkElement).DataContext = this;
+            
+            HotelAutocomplete GeoItem = new HotelAutocomplete();
+            GeoItem.name = "+ Cerca de mi ubicacion actual";
+            GeoItem.id = 0;
+            GeoItem.type = "geo";
+            this.DestinyInput.ItemsSource = null;
+            List<HotelAutocomplete> source = new List<HotelAutocomplete>();
+            source.Add(GeoItem);
+            this.DestinyInput.ItemsSource = source;
         }
 
         private async void HotelsTextBlock_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
@@ -92,7 +101,15 @@ namespace Despegar.WP.UI.Controls.Hotels
             {
                 try
                 {
-                    sender.ItemsSource = await GetHotelsAutocomplete(sender.Text);
+                    sender.ItemsSource = null;
+                    HotelAutocomplete GeoItem = new HotelAutocomplete();
+                    GeoItem.name = "+ Cerca de mi ubicacion actual";
+                    GeoItem.id = 0;
+                    GeoItem.type = "geo";
+                    List<HotelAutocomplete> source = new List<HotelAutocomplete>();
+                    source.Add(GeoItem);
+                    source.AddRange(await GetHotelsAutocomplete(sender.Text));
+                    sender.ItemsSource = source;
                 }
                 catch (Exception)
                 {
