@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Net.Http;
 using System.Threading.Tasks;
-using Despegar.Core.Log;
+using Despegar.Core.Neo.Log;
 
 
-namespace Despegar.Core.Connector
+namespace Despegar.Core.Neo.Connector
 {
     public class Apiv1Connector : ConnectorBase
     {

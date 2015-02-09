@@ -105,7 +105,7 @@
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"></RowDefinition>
                             <RowDefinition Height="Auto"></RowDefinition>
-                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="*"></RowDefinition>
                         </Grid.RowDefinitions>
 
                         <!-- DEV -->
@@ -176,64 +176,11 @@
                                     <Setter Property="HorizontalContentAlignment" Value="Stretch" />
                                 </Style>
                             </ListView.ItemContainerStyle>
-                            
-                            <!--<ListViewItem>                                
-                                <Grid>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="{StaticResource Block1p}" />
-                                        <RowDefinition Height="{StaticResource Block2p}" />
-                                    </Grid.RowDefinitions>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition  />
-                                        <ColumnDefinition  Width="{StaticResource TwoColumnMiddleSpacing}" />
-                                        <ColumnDefinition  />
-                                    </Grid.ColumnDefinitions>
-
-                                    <TextBlock Grid.Row="0" Grid.ColumnSpan="2" Style="{StaticResource FlightSegmentTitle}" >
-                                           <Run x:Uid="Page_Flight_Serch_Section" Text="Tramo" />
-                                           <Run Text=" 1" />
-                                    </TextBlock>
-
-                                    <Grid Grid.Row="1" Grid.Column="0" >
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="{StaticResource Block1p}" />
-                                            <ColumnDefinition Width="*" />
-                                        </Grid.ColumnDefinitions>
-                                        
-                                        <Grid Grid.Column="0" Style="{StaticResource IconGreen}">
-                                            <Image  Style="{StaticResource FlightAirportIcon}"/>
-                                        </Grid>
-
-                                        
-                                        <TextBlock Grid.Column="1" Style="{StaticResource FlightSegmentAirports}" FontSize="22" Margin="5,3,0,0">
-                                                 <Run Text="BUE"/>
-                                                 <Run Text=" - " />                                                 
-                                                 <Run Text="CSS" />
-                                        </TextBlock>
-                                    </Grid>
-
-                                    <Grid Grid.Row="1" Grid.Column="2" >
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="{StaticResource Block1p}" />
-                                            <ColumnDefinition Width="*" />
-                                        </Grid.ColumnDefinitions>
-
-                                        <Grid Grid.Column="0" Style="{StaticResource IconGreen}">
-                                            <Image  Style="{StaticResource CalendarIcon}"/>
-                                        </Grid>
-
-                                        <TextBlock Grid.Column="1" Text="16 NOV 2014"  Style="{StaticResource FlightSegmentAirports}" FontSize="22" Margin="5,3,0,0"/>
-                                    </Grid>
-
-                                    
-                                </Grid>
-                            </ListViewItem>-->
-                            
                         </ListView>
 
                         <src:QuantityPassagersControl  Grid.Row="1" DataContext="{Binding PassengersViewModel}"   Adults="{Binding Adults, Mode=TwoWay}" Children="{Binding Children, Mode=TwoWay}"  Infants="{Binding Infants, Mode=TwoWay}"   />
 
-                        <Button  x:Uid="Flights_Search_SearchButton" Grid.Row="2" Command="{Binding SearchCommand}"  Style="{StaticResource ButtonBottom}" Content="Buscar vuelos"/>
+                        <Button VerticalAlignment="Bottom" Grid.Row="2" x:Uid="Flights_Search_SearchButton"  Command="{Binding SearchCommand}"  Style="{StaticResource ButtonBottom}" Content="Buscar vuelos"/>
                     </Grid>
                 </ScrollViewer>
             </PivotItem>

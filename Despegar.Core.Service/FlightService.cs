@@ -1,17 +1,17 @@
-﻿using Despegar.Core.Business;
-using Despegar.Core.Business.CreditCard;
-using Despegar.Core.Business.Flight.BookingCompletePostResponse;
-using Despegar.Core.Business.Flight.BookingFields;
-using Despegar.Core.Business.Flight.CitiesAutocomplete;
-using Despegar.Core.Business.Flight.Itineraries;
-using Despegar.Core.Business.Flight.SearchBox;
-using Despegar.Core.Connector;
-using Despegar.Core.Exceptions;
-using Despegar.Core.IService;
+﻿using Despegar.Core.Neo.Business;
+using Despegar.Core.Neo.Business.CreditCard;
+using Despegar.Core.Neo.Business.Flight.BookingCompletePostResponse;
+using Despegar.Core.Neo.Business.Flight.BookingFields;
+using Despegar.Core.Neo.Business.Flight.CitiesAutocomplete;
+using Despegar.Core.Neo.Business.Flight.Itineraries;
+using Despegar.Core.Neo.Business.Flight.SearchBox;
+using Despegar.Core.Neo.Connector;
+using Despegar.Core.Neo.Exceptions;
+using Despegar.Core.Neo.IService;
 using System;
 using System.Threading.Tasks;
 
-namespace Despegar.Core.Service
+namespace Despegar.Core.Neo.Service
 {
     public class FlightService : IFlightService
     {

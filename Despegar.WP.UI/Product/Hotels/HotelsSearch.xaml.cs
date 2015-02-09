@@ -29,7 +29,7 @@ namespace Despegar.WP.UI.Product.Hotels
         # region ** ERROR HANDLING **
         private async void ErrorHandler(object sender, ViewModelErrorArgs e)
         {
-            BugTracker.Instance.LeaveBreadcrumb("Flight search Error Raised: " + e.ErrorCode);
+            SplunkMintBugTracker.Instance.LeaveBreadcrumb("Flight search Error Raised: " + e.ErrorCode);
 
             ResourceLoader manager = new ResourceLoader();
             MessageDialog dialog;
@@ -65,7 +65,7 @@ namespace Despegar.WP.UI.Product.Hotels
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            ViewModel = new HotelsSearchViewModel(Navigator.Instance, GlobalConfiguration.CoreContext.GetHotelService(), BugTracker.Instance);
+            ViewModel = new HotelsSearchViewModel(Navigator.Instance, GlobalConfiguration.CoreContext.GetHotelService(), SplunkMintBugTracker.Instance);
             ViewModel.PropertyChanged += Checkloading;
             ViewModel.ViewModelError += ErrorHandler;
             HardwareButtons.BackPressed += HardwareButtons_BackPressed;
@@ -79,7 +79,7 @@ namespace Despegar.WP.UI.Product.Hotels
 
         void HardwareButtons_BackPressed(object sender, BackPressedEventArgs e)
         {
-            BugTracker.Instance.LeaveBreadcrumb("Flight Search View - Back button pressed");
+            SplunkMintBugTracker.Instance.LeaveBreadcrumb("Flight Search View - Back button pressed");
 
             if (ViewModel != null)
             {

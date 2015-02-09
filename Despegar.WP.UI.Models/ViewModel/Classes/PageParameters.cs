@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace Despegar.WP.UI.Model.Classes
 {
-    public class PageParameters
+    public class FlightsResultNavigationData
     {
         public object SearchModel { get; set; }
         public object Itineraries { get; set; }
 
-        public PageParameters()
+        public FlightsResultNavigationData()
         {
 
         }

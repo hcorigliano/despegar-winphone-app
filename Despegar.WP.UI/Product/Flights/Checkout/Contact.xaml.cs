@@ -1,4 +1,4 @@
-﻿using Despegar.Core.Business.Flight.BookingFields;
+﻿using Despegar.Core.Neo.Business.Flight.BookingFields;
 using System;
 using System.Collections.Generic;
 using System.Dynamic;

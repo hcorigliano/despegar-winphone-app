@@ -1,6 +1,6 @@
 ﻿using Despegar.WP.UI.Common;
 using Despegar.WP.UI.Model.Interfaces;
-using Despegar.WP.UI.Model.ViewModel.Hotels;
+//using Despegar.WP.UI.Model.ViewModel.Hotels;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -16,7 +16,6 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
-// The User Control item template is documented at http://go.microsoft.com/fwlink/?LinkId=234236
 
 namespace Despegar.WP.UI.Controls.Hotels
 {

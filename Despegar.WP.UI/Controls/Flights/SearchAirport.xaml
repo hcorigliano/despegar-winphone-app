@@ -20,12 +20,12 @@
         
         <StackPanel Grid.Row="0">
             <TextBlock x:Uid="Flights_Search_Origin"  Style="{StaticResource BaseTextLabel}" Text="Origen" x:Name="OriginTextBlock" />
-            <AutoSuggestBox  TextBoxStyle="{StaticResource InputBase}" Style="{StaticResource AutosuggestBoxBase}" Text="{Binding InitialOriginText}" x:Name="OriginInput" LostFocus="Focus_Lost" SuggestionChosen="SuggestionChosen"  TextMemberPath="name" TextChanged="FlightsTextBlock_TextChanged"  />
+            <AutoSuggestBox  TextBoxStyle="{StaticResource InputBase}" Style="{StaticResource AutosuggestBoxBase}" Text="{Binding InitialOriginText}" x:Name="OriginInput" LostFocus="Focus_Lost" SuggestionChosen="SuggestionChosen"  TextMemberPath="name" TextChanged="FlightsTextBlock_TextChanged"  KeyUp="OriginInput_KeyUp" />
         </StackPanel>
 
         <StackPanel Grid.Row="2">
             <TextBlock x:Uid="Flights_Search_Destination" Style="{StaticResource BaseTextLabel}" Text="Destino" />
-            <AutoSuggestBox  TextBoxStyle="{StaticResource InputBase}" Style="{StaticResource AutosuggestBoxBase}" Text="{Binding InitialDestinationText}" x:Name="DestinyInput"  LostFocus="Focus_Lost" SuggestionChosen="SuggestionChosen" TextMemberPath="name"  TextChanged="FlightsTextBlock_TextChanged" />
+            <AutoSuggestBox  TextBoxStyle="{StaticResource InputBase}" Style="{StaticResource AutosuggestBoxBase}" Text="{Binding InitialDestinationText}" x:Name="DestinyInput"  LostFocus="Focus_Lost" SuggestionChosen="SuggestionChosen" TextMemberPath="name"  TextChanged="FlightsTextBlock_TextChanged"  KeyUp="DestinationInput_KeyUp"/>
         </StackPanel>
     </Grid>
 

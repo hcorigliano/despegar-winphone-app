@@ -52,7 +52,7 @@ namespace Despegar.WP.UI.Product.Hotels
         
         protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
-            BugTracker.Instance.LeaveBreadcrumb("Hotel checkout start");
+            SplunkMintBugTracker.Instance.LeaveBreadcrumb("Hotel checkout start");
             HotelsCrossParameters crossParams = e.Parameter as HotelsCrossParameters;
 
             // Initialize Checkout
@@ -62,7 +62,7 @@ namespace Despegar.WP.UI.Product.Hotels
                 GlobalConfiguration.CoreContext.GetCommonService(),
                 GlobalConfiguration.CoreContext.GetConfigurationService(),
                 GlobalConfiguration.CoreContext.GetCouponsService(),
-                BugTracker.Instance,
+                SplunkMintBugTracker.Instance,
                 crossParams
               );
 
@@ -79,7 +79,7 @@ namespace Despegar.WP.UI.Product.Hotels
 
             this.DataContext = ViewModel;
 
-            BugTracker.Instance.LeaveBreadcrumb("Hotels checkout ready");
+            SplunkMintBugTracker.Instance.LeaveBreadcrumb("Hotels checkout ready");
         }
 
         /// <summary>
@@ -96,7 +96,7 @@ namespace Despegar.WP.UI.Product.Hotels
         # region ** ERROR HANDLING **
         private async void ErrorHandler(object sender, ViewModelErrorArgs e)
         {
-            BugTracker.Instance.LeaveBreadcrumb("Hotels checkout Error raised - " + e.ErrorCode);
+            SplunkMintBugTracker.Instance.LeaveBreadcrumb("Hotels checkout Error raised - " + e.ErrorCode);
 
             ResourceLoader manager = new ResourceLoader();
             MessageDialog dialog;

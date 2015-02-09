@@ -1,12 +1,12 @@
-﻿using Despegar.Core.Business.Hotels;
-using Despegar.Core.Business.Hotels.BookingFields;
-using Despegar.Core.Business.Hotels.CitiesAvailability;
-using Despegar.Core.Business.Hotels.HotelDetails;
-using Despegar.Core.Business.Hotels.HotelsAutocomplete;
-using Despegar.Core.Business.Hotels.UserReviews;
+﻿using Despegar.Core.Neo.Business.Hotels;
+using Despegar.Core.Neo.Business.Hotels.BookingFields;
+using Despegar.Core.Neo.Business.Hotels.CitiesAvailability;
+using Despegar.Core.Neo.Business.Hotels.HotelDetails;
+using Despegar.Core.Neo.Business.Hotels.HotelsAutocomplete;
+using Despegar.Core.Neo.Business.Hotels.UserReviews;
 using System.Threading.Tasks;
 
-namespace Despegar.Core.IService
+namespace Despegar.Core.Neo.IService
 {
     public interface IHotelService
     {

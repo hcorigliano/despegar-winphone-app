@@ -1,8 +1,8 @@
-﻿using Despegar.Core.Business;
-using Despegar.Core.Business.Configuration;
-using Despegar.Core.Log;
+﻿using Despegar.Core.Neo.Business;
+using Despegar.Core.Neo.Business.Configuration;
+using Despegar.Core.Neo.Log;
 
-namespace Despegar.Core.IService
+namespace Despegar.Core.Neo.IService
 {
     /// <summary>
     /// CoreContext contract.

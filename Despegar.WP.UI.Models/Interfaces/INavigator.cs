@@ -9,7 +9,8 @@ namespace Despegar.WP.UI.Model.Interfaces
 
     public enum ViewModelPages
     {
-        Home, CountrySelecton, FlightsSearch, FlightsResults, FlightsDetails, FlightsCheckout, FlightsThanks, FlightsMultiplEdit, LegacyBrowser, HotelsDetails, HotelsSearch, HotelsResults, HotelsCheckout, PhotoPresenter, HotelsAmenities
+        Home, CountrySelecton, FlightsSearch, FlightsResults, FlightsDetails, FlightsCheckout, FlightsThanks, FlightsMultiplEdit, FlightsFilters,LegacyBrowser, HotelsDetails, HotelsSearch, HotelsResults, HotelsCheckout, PhotoPresenter, HotelsAmenities,
+        
     }
 
     public interface INavigator
@@ -17,6 +18,6 @@ namespace Despegar.WP.UI.Model.Interfaces
        void GoTo(ViewModelPages page, object data);
        void ClearStack();
        void RemoveBackEntry();
-       void GoBack();        
+       void GoBack();
     }
 }

@@ -1,5 +1,4 @@
-﻿using Despegar.Core.Log;
-using Despegar.WP.UI.BugSense;
+﻿using Despegar.WP.UI.BugSense;
 using Despegar.WP.UI.Common;
 using Despegar.WP.UI.Model.Interfaces;
 using System;
@@ -18,32 +17,23 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
-// The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
 
 namespace Despegar.WP.UI.Controls.PhotoGallery
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
     public sealed partial class PhotoPresenter : Page
     {
-        private PhotoGalleryViewModel photoGallery;
+        private PhotoGalleryViewModel ViewModel;
 
         public PhotoPresenter()
         {
             this.InitializeComponent();
 
-            photoGallery = new PhotoGalleryViewModel(Navigator.Instance, BugTracker.Instance);
-            this.DataContext = photoGallery;
+            ViewModel = new PhotoGalleryViewModel(Navigator.Instance, SplunkMintBugTracker.Instance);
+            this.DataContext = ViewModel;
 
             HardwareButtons.BackPressed += HardwareButtons_BackPressed;
         }
 
-        /// <summary>
-        /// Invoked when this page is about to be displayed in a Frame.
-        /// </summary>
-        /// <param name="e">Event data that describes how this page was reached.
-        /// This parameter is typically used to configure the page.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             this.DataContext = e.Parameter as PhotoGalleryViewModel;
@@ -53,8 +43,7 @@ namespace Despegar.WP.UI.Controls.PhotoGallery
         {
             e.Handled = true;
             HardwareButtons.BackPressed -= HardwareButtons_BackPressed;
-            photoGallery.GoBack();
-            
+            ViewModel.GoBack();
         }
 
     }

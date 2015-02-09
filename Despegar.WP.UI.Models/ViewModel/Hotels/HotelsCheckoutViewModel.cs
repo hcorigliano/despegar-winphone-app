@@ -7,6 +7,11 @@ using Despegar.Core.Business.Hotels;
 using Despegar.Core.Business.Hotels.BookingFields;
 using Despegar.Core.IService;
 using Despegar.Core.Log;
+using Despegar.Core.Neo.Business.Common.Checkout;
+using Despegar.Core.Neo.Business.Common.State;
+using Despegar.Core.Neo.Business.Configuration;
+using Despegar.Core.Neo.Business.Coupons;
+using Despegar.Core.Neo.Business.Hotels.BookingFields;
 using Despegar.WP.UI.Model.Interfaces;
 using Despegar.WP.UI.Model.ViewModel.Classes.Flights;
 using System;
@@ -35,7 +40,7 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
         #region ** Public Interface **
         public HotelsBookingFields CoreBookingFields { get; set; }
         public List<CountryFields> Countries { get; set; }
-        public List<Despegar.Core.Business.Common.State.State> States { get; set; }
+        public List<State> States { get; set; }
         public bool InvoiceRequired
         {
             get

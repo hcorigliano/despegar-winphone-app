@@ -1,11 +1,8 @@
-﻿using Despegar.Core.Log;
+﻿using Despegar.Core.Neo.Contract.Log;
 using Despegar.WP.UI.Model.Interfaces;
 using Despegar.WP.UI.Model.ViewModel;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Windows.UI.Xaml.Media.Imaging;
 
 namespace Despegar.WP.UI.Controls.PhotoGallery
@@ -18,12 +15,9 @@ namespace Despegar.WP.UI.Controls.PhotoGallery
         private INavigator Navigator;
         private IBugTracker t;
 
-        public PhotoGalleryViewModel(INavigator Navigator, IBugTracker t) : base (t)
+        public PhotoGalleryViewModel(INavigator navigator, IBugTracker t)
+            : base(navigator, t)
         {
-            
-            // TODO: Complete member initialization
-            this.Navigator = Navigator;
-            this.t = t;
         }
 
         public ICollection<BitmapImage> ImageList

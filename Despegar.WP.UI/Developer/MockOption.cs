@@ -1,4 +1,5 @@
-﻿using Despegar.Core.Business;
+﻿using Despegar.Core.Neo.API;
+using Despegar.Core.Neo.Business;
 using Despegar.WP.UI.Model;
 using Despegar.WP.UI.Model.Classes;
 using System;

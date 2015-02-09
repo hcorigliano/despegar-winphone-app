@@ -1,4 +1,4 @@
-﻿using Despegar.Core.Business;
+﻿using Despegar.Core.Neo.Business;
 using Despegar.WP.UI.Model.Classes;
 using Despegar.WP.UI.Model.Classes.Flights;
 using System.Collections.Generic;

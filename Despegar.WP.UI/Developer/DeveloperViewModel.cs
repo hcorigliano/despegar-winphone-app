@@ -1,5 +1,7 @@
-﻿using Despegar.Core.Business;
-using Despegar.Core.Log;
+﻿using Despegar.Core.Neo.Business;
+using Despegar.Core.Neo.Log;
+using Despegar.Core.Neo.API;
+using Despegar.Core.Neo.Business;
 using Despegar.WP.UI.Common;
 using Despegar.WP.UI.Controls;
 using Despegar.WP.UI.Controls.Flights;
@@ -21,7 +23,7 @@ using Windows.UI.Xaml.Controls;
 
 namespace Despegar.WP.UI.Developer
 {
-    public class DeveloperViewModel : ViewModelBase
+    public class DeveloperViewModel : Bindable
     {
         public Rect Viewport { get { return Window.Current.Bounds; } }
 
@@ -75,7 +77,7 @@ namespace Despegar.WP.UI.Developer
         }
         #endregion
 
-        public DeveloperViewModel() : base(null)
+        public DeveloperViewModel()
         {
             // Load Mocks list
             var mocks = Mock.AllMocks
@@ -96,7 +98,7 @@ namespace Despegar.WP.UI.Developer
 
         private async void ShowInvalidMessage()
         {
-            Logger.Log("[Developer Tools]: Can't use this functionality in this page. Go to the correct page.");
+            //Logger.Log("[Developer Tools]: Can't use this functionality in this page. Go to the correct page.");
             var msg = new MessageDialog("Not available for current View.");
             await msg.ShowSafelyAsync();
         }
@@ -181,23 +183,23 @@ namespace Despegar.WP.UI.Developer
                     userControl.UpdateAirportBoxes("EZE", "Aeropuerto Buenos Aires Ministro ¨Pistarini Ezeiza, Buenos Aires, Argentina", "MIA", "Miami, Florida, Estados Unidos");
                     */
 
-                    Core.Business.Flight.SearchBox.FlightMultipleSegment fms1 = new Core.Business.Flight.SearchBox.FlightMultipleSegment();
+                    Core.Neo.Business.Flight.SearchBox.FlightMultipleSegment fms1 = new Core.Neo.Business.Flight.SearchBox.FlightMultipleSegment();
                     fms1.DepartureDate = new System.DateTimeOffset(2015, 1, 21, 0, 0, 0, TimeSpan.FromDays(0));
                     fms1.AirportOrigin = "EZE";
                     fms1.AirportDestination = "LIM";
 
 
-                    Core.Business.Flight.SearchBox.FlightMultipleSegment fms2 = new Core.Business.Flight.SearchBox.FlightMultipleSegment();
+                    Core.Neo.Business.Flight.SearchBox.FlightMultipleSegment fms2 = new Core.Neo.Business.Flight.SearchBox.FlightMultipleSegment();
                     fms2.DepartureDate = new System.DateTimeOffset(2015, 2, 21, 0, 0, 0, TimeSpan.FromDays(0));
                     fms2.AirportOrigin = "LIM";
                     fms2.AirportDestination = "SAO";
 
-                    Core.Business.Flight.SearchBox.FlightMultipleSegment fms3 = new Core.Business.Flight.SearchBox.FlightMultipleSegment();
+                    Core.Neo.Business.Flight.SearchBox.FlightMultipleSegment fms3 = new Core.Neo.Business.Flight.SearchBox.FlightMultipleSegment();
                     fms3.DepartureDate = new System.DateTimeOffset(2015, 3, 21, 0, 0, 0, TimeSpan.FromDays(0));
                     fms3.AirportOrigin = "SAO";
                     fms3.AirportDestination = "EZE";
 
-                    List<Core.Business.Flight.SearchBox.FlightMultipleSegment> segmentList = new List<Core.Business.Flight.SearchBox.FlightMultipleSegment>();
+                    List<Core.Neo.Business.Flight.SearchBox.FlightMultipleSegment> segmentList = new List<Core.Neo.Business.Flight.SearchBox.FlightMultipleSegment>();
                     segmentList.Add(fms1);
                     segmentList.Add(fms2);
                     segmentList.Add(fms3);

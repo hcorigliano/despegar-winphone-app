@@ -1,10 +1,5 @@
-﻿using Despegar.Core.Business.Flight.Itineraries;
+﻿using Despegar.Core.Neo.Business.Flight.Itineraries;
 using Despegar.WP.UI.Model.ViewModel.Classes.Flights;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Despegar.WP.UI.Model.Classes.Flights
 {
@@ -14,7 +9,7 @@ namespace Despegar.WP.UI.Model.Classes.Flights
         public RouteInbound inbound { get; set; }
         public int price { get; set; }
 
-        public RoutesItems( Route inboundItem , Route outboundItem , int price )
+        public RoutesItems(Route inboundItem , Route outboundItem , int price )
         {
             inbound = new RouteInbound(inboundItem);
             outbound = new RouteOutbound(outboundItem);

@@ -83,21 +83,9 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
-    <ProjectReference Include="..\Despegar.Core.Business\Despegar.Core.Business.csproj">
-      <Project>{c4b34083-7e2a-461b-b525-4c238314655a}</Project>
-      <Name>Despegar.Core.Business</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Despegar.Core.IService\Despegar.Core.IService.csproj">
-      <Project>{3c3cdca2-e9fc-4207-b71e-22a1c423d5f8}</Project>
-      <Name>Despegar.Core.IService</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Despegar.Core.Log\Despegar.Core.Log.csproj">
-      <Project>{0c50151e-91de-45c5-bb01-b03ec44d7735}</Project>
-      <Name>Despegar.Core.Log</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Despegar.Core.Service\Despegar.Core.Service.csproj">
-      <Project>{b4b6d17f-4416-4920-a500-4e9a88ad2d80}</Project>
-      <Name>Despegar.Core.Service</Name>
+    <ProjectReference Include="..\Despegar.Core.Neo\Despegar.Core.Neo.csproj">
+      <Project>{de72dbfd-6794-40ba-8615-276d4ae7cfe3}</Project>
+      <Name>Despegar.Core.Neo</Name>
     </ProjectReference>
     <ProjectReference Include="..\Despegar.WP.UI.Models\Despegar.WP.UI.Model.csproj">
       <Project>{4bd277e3-3251-4cf8-8ee5-9ef410362d4f}</Project>
@@ -129,12 +117,6 @@
     <Compile Include="Controls\Alert.xaml.cs">
       <DependentUpon>Alert.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Hotels\AmenitiesControl.xaml.cs">
-      <DependentUpon>AmenitiesControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\Hotels\HotelDescriptionControl.xaml.cs">
-      <DependentUpon>HotelDescriptionControl.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Controls\Maps\CustomMapControl.xaml.cs">
       <DependentUpon>CustomMapControl.xaml</DependentUpon>
     </Compile>
@@ -153,30 +135,8 @@
     <Compile Include="Controls\Flights\SearchCloseAirport.xaml.cs">
       <DependentUpon>SearchCloseAirport.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Hotels\DateControl.xaml.cs">
-      <DependentUpon>DateControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\Hotels\Details\HotelItem.xaml.cs">
-      <DependentUpon>HotelItem.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\Hotels\Details\MiniBoxSearch.xaml.cs">
-      <DependentUpon>MiniBoxSearch.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\Hotels\QuantityRoomsControl.xaml.cs">
-      <DependentUpon>QuantityRoomsControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\Hotels\SearchHotelControl.xaml.cs">
-      <DependentUpon>SearchHotelControl.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Controls\Loading.xaml.cs">
       <DependentUpon>Loading.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\PhotoGallery\PhotoGalleryControl.xaml.cs">
-      <DependentUpon>PhotoGalleryControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\PhotoGallery\PhotoGalleryViewModel.cs" />
-    <Compile Include="Controls\PhotoGallery\PhotoPresenter.xaml.cs">
-      <DependentUpon>PhotoPresenter.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\SafeMessageDialog.cs" />
     <Compile Include="Developer\Controls\DesingUnit.xaml.cs">
@@ -186,6 +146,7 @@
       <DependentUpon>MeasureControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Developer\MeasureTool.cs" />
+    <Compile Include="InversionOfControl\WindowsPhoneModule.cs" />
     <Compile Include="Product\Flights\Checkout\Controls\NationalitySelection.xaml.cs">
       <DependentUpon>NationalitySelection.xaml</DependentUpon>
     </Compile>
@@ -313,62 +274,9 @@
     <Compile Include="Product\Flights\FlightThanks.xaml.cs">
       <DependentUpon>FlightThanks.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Product\Hotels\Checkout\Buy.xaml.cs">
-      <DependentUpon>Buy.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Product\Hotels\Checkout\CardData.xaml.cs">
-      <DependentUpon>CardData.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Product\Hotels\Checkout\Contact.xaml.cs">
-      <DependentUpon>Contact.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Product\Hotels\Checkout\InvoiceArgentina.xaml.cs">
-      <DependentUpon>InvoiceArgentina.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Product\Hotels\Checkout\Payments.xaml.cs">
-      <DependentUpon>Payments.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Product\Hotels\Checkout\Rooms.xaml.cs">
-      <DependentUpon>Rooms.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Product\Hotels\Details\Controls\UserReviewItem.xaml.cs">
-      <DependentUpon>UserReviewItem.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Product\Hotels\Details\HotelPivot.xaml.cs">
-      <DependentUpon>HotelPivot.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Product\Hotels\Details\UserReviewsPivot.xaml.cs">
-      <DependentUpon>UserReviewsPivot.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Product\Hotels\HotelsAmenities.xaml.cs">
-      <DependentUpon>HotelsAmenities.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Product\Hotels\HotelsCheckout.xaml.cs">
-      <DependentUpon>HotelsCheckout.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Product\Hotels\HotelsDetails.xaml.cs">
-      <DependentUpon>HotelsDetails.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Product\Hotels\HotelsFilters.xaml.cs">
-      <DependentUpon>HotelsFilters.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Product\Hotels\HotelsResults.xaml.cs">
-      <DependentUpon>HotelsResults.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Product\Hotels\HotelsSearch.xaml.cs">
-      <DependentUpon>HotelsSearch.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Strings\AppResources.cs" />
     <Page Include="Controls\Alert.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\Hotels\AmenitiesControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\Hotels\HotelDescriptionControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -405,34 +313,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Controls\Flights\SearchCloseAirport.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\Hotels\DateControl.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Controls\Hotels\Details\HotelItem.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\Hotels\Details\MiniBoxSearch.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\Hotels\QuantityRoomsControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\PhotoGallery\PhotoGalleryControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\Hotels\SearchHotelControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\PhotoGallery\PhotoPresenter.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -525,54 +405,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Product\Flights\FlightSortBy.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Product\Hotels\Checkout\Buy.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Product\Hotels\Checkout\CardData.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Product\Hotels\Checkout\Contact.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Product\Hotels\Checkout\InvoiceArgentina.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Product\Hotels\Checkout\Payments.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Product\Hotels\Checkout\Rooms.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Product\Hotels\Details\Controls\UserReviewItem.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Product\Hotels\Details\HotelPivot.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Product\Hotels\Details\UserReviewsPivot.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Product\Hotels\HotelsAmenities.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Product\Hotels\HotelsCheckout.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Product\Hotels\HotelsDetails.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -1631,18 +1463,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Product\Hotels\HotelsFilters.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Product\Hotels\HotelsResults.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Product\Hotels\HotelsSearch.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Styles\StyleShared.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -1653,8 +1473,6 @@
     <Folder Include="Assets\en\" />
     <Folder Include="Assets\es\" />
     <Folder Include="Assets\pt\" />
-    <Folder Include="Product\Hotels\Checkout\Controls\" />
-    <Folder Include="Product\Hotels\Details\Controls\" />
     <Folder Include="Strings\en\" />
   </ItemGroup>
   <ItemGroup>
@@ -1667,6 +1485,9 @@
     </SDKReference>
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="Autofac">
+      <HintPath>..\packages\Autofac.3.5.2\lib\portable-net4+sl5+netcore45+wpa81+wp8+MonoAndroid1+MonoTouch1\Autofac.dll</HintPath>
+    </Reference>
     <Reference Include="BugSense-WP8.1">
       <HintPath>..\packages\BugSense.WP81.3.6.6.0\lib\wpa81\BugSense-WP8.1.dll</HintPath>
     </Reference>

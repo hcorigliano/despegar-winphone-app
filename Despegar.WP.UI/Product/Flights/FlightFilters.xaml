@@ -8,7 +8,7 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
     <Page.Resources>
-        <CollectionViewSource x:Name="FiltersCollection" IsSourceGrouped="true" Source="{Binding}" ItemsPath="values" />
+        <CollectionViewSource x:Name="FiltersCollection" IsSourceGrouped="true" Source="{Binding Facets}" ItemsPath="values" />
 
         <DataTemplate x:Key="FlightFilterTemplate">
             <Grid>
@@ -27,13 +27,13 @@
         </DataTemplate>
 
         <DataTemplate x:Key="FlightHeaderFilterTemplate">
-            
+
             <StackPanel Width="Auto">
-                
+
                 <TextBlock Style="{StaticResource SegoeLight24}" Text="{Binding label}"></TextBlock>
                 <Rectangle Height="1" Fill="White" Width="Auto" Stretch="Fill" ></Rectangle>
             </StackPanel>
-            
+
         </DataTemplate>
     </Page.Resources>
 
@@ -52,10 +52,11 @@
         </Grid.RowDefinitions>
 
         <!-- Title Panel -->
-        <Image Grid.Row="0" Style="{StaticResource TopLogo}" /><!--Text="Filter"-->
+        <Image Grid.Row="0" Style="{StaticResource TopLogo}" />
+        <!--Text="Filter"-->
         <TextBlock Grid.Row="1" x:Uid="Page_Filters_Title" Style="{StaticResource PageHeaderSmall}"  FontFamily="Segoe WP Semibold" />
 
-        <ListView Grid.Row="2" ItemTemplate="{StaticResource FlightFilterTemplate}" DataContext="{Binding Mode=TwoWay}"  ItemsSource="{Binding Source={StaticResource FiltersCollection}}" IsItemClickEnabled="True">
+        <ListView Grid.Row="2" ItemTemplate="{StaticResource FlightFilterTemplate}" DataContext="{Binding Facets, Mode=TwoWay}"  ItemsSource="{Binding Source={StaticResource FiltersCollection}}" IsItemClickEnabled="True">
             <ListView.GroupStyle>
                 <GroupStyle HidesIfEmpty="True" HeaderTemplate="{StaticResource FlightHeaderFilterTemplate}"/>
             </ListView.GroupStyle>

@@ -1,6 +1,6 @@
-﻿using Despegar.Core.Business.Flight.BookingCompletePostResponse;
-using Despegar.Core.Business.Flight.BookingFields;
-using Despegar.Core.Business.Flight.Itineraries;
+﻿using Despegar.Core.Neo.Business.Flight.BookingCompletePostResponse;
+using Despegar.Core.Neo.Business.Flight.BookingFields;
+using Despegar.Core.Neo.Business.Flight.Itineraries;
 using Despegar.WP.UI.Model.Classes.Flights;
 using System.Collections.Generic;
 

@@ -46,7 +46,7 @@ namespace Despegar.WP.UI.Product.Hotels
 
             if(ViewModel == null)
             {
-                ViewModel = new HotelsDetailsViewModel(Navigator.Instance, GlobalConfiguration.CoreContext.GetHotelService(), BugTracker.Instance) { CrossParameters = e.Parameter as HotelsCrossParameters };
+                ViewModel = new HotelsDetailsViewModel(Navigator.Instance, GlobalConfiguration.CoreContext.GetHotelService(), SplunkMintBugTracker.Instance) { CrossParameters = e.Parameter as HotelsCrossParameters };
                 await ViewModel.Init();
                 this.DataContext = ViewModel;
             }

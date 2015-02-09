@@ -30,7 +30,7 @@ namespace Despegar.WP.UI.Controls.PhotoGallery
         public PhotoGalleryControl()
         {    
             this.InitializeComponent();
-            photoGalleryViewModel = new PhotoGalleryViewModel( Navigator.Instance , BugTracker.Instance );
+            photoGalleryViewModel = new PhotoGalleryViewModel( Navigator.Instance , SplunkMintBugTracker.Instance );
         }
 
         private void VariableSizedWrapGrid_DataContextChanged(FrameworkElement sender, DataContextChangedEventArgs args)

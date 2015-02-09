@@ -35,7 +35,7 @@
         <Image Grid.Row="0" Style="{StaticResource TopLogo}" />
         <TextBlock Grid.Row="1" Style="{StaticResource PageHeaderSmall}" x:Uid="Page_Order_Title" Text="Order" FontFamily="Segoe WP Semibold" />
         
-    <ListView Grid.Row="2" Name="lvSelection" DataContext="{Binding Mode=TwoWay}" ItemTemplate="{StaticResource FlightSortByDateTemplate}" ItemsSource="{Binding values}" IsItemClickEnabled="True">
+    <ListView Grid.Row="2" Name="lvSelection" DataContext="{Binding OrderOptions, Mode=TwoWay}" ItemTemplate="{StaticResource FlightSortByDateTemplate}" ItemsSource="{Binding OrderOptions.values}" IsItemClickEnabled="True">
     </ListView>
     </Grid>
 </Page>
