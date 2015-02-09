@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Despegar.Core.Neo.Business.Flight.Itineraries
 {
-    public class Value3
+    public class SortingOption
     {
         public string value { get; set; }
         public string label { get; set; }

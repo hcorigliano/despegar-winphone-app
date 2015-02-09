@@ -85,7 +85,6 @@
     <Compile Include="Business\Enums\BookingStatusEnum.cs" />
     <Compile Include="Business\Enums\FlightSearchChildEnum.cs" />
     <Compile Include="Business\Enums\FlightSearchPagesEnum.cs" />
-    <Compile Include="Business\Enums\SearchStates.cs" />
     <Compile Include="Business\Flight\BookingCompletePostResponse\Answers.cs" />
     <Compile Include="Business\Flight\BookingCompletePostResponse\BookingCompletePostResponse.cs" />
     <Compile Include="Business\Flight\BookingCompletePostResponse\FreeTextDescription.cs" />

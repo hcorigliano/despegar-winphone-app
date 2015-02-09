@@ -1,9 +1,0 @@
-C:\FUENTES\WPApp\Despegar.Core.Neo\bin\Debug\Despegar.Core.Neo.dll
-C:\FUENTES\WPApp\Despegar.Core.Neo\bin\Debug\Despegar.Core.Neo.pdb
-C:\FUENTES\WPApp\Despegar.Core.Neo\bin\Debug\Autofac.dll
-C:\FUENTES\WPApp\Despegar.Core.Neo\bin\Debug\Newtonsoft.Json.dll
-C:\FUENTES\WPApp\Despegar.Core.Neo\bin\Debug\Autofac.xml
-C:\FUENTES\WPApp\Despegar.Core.Neo\bin\Debug\Newtonsoft.Json.xml
-C:\FUENTES\WPApp\Despegar.Core.Neo\obj\Debug\Despegar.Core.Neo.dll
-C:\FUENTES\WPApp\Despegar.Core.Neo\obj\Debug\Despegar.Core.Neo.pdb
-C:\FUENTES\WPApp\Despegar.Core.Neo\obj\Debug\Despegar.Core.Neo.csprojResolveAssemblyReference.cache

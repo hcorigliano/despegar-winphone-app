@@ -98,6 +98,7 @@
     <Compile Include="Common\ViewModelErrorArgs.cs" />
     <Compile Include="InversionOfControl\ViewModelModule.cs" />
     <Compile Include="ViewModel\Classes\CustomPinPoint.cs" />
+    <Compile Include="ViewModel\Classes\Flights\FlightFiltersNavigationData.cs" />
     <Compile Include="ViewModel\Classes\Flights\FlightsCrossParameter.cs" />
     <Compile Include="ViewModel\Classes\Flights\FlightSearchNavigationData.cs" />
     <Compile Include="ViewModel\Classes\Flights\BindableItem.cs" />

@@ -161,9 +161,8 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
             coreSearchModel.UpdateSearchDays();
         }
 
-        private async void Search()
+        private void Search()
         {
-            coreSearchModel.SearchStatus = SearchStates.FirstSearch;
             UpdatePassengers();
 
             if (coreSearchModel.IsValid)
@@ -180,34 +179,11 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
 
                 BugTracker.LeaveBreadcrumb("Flight search performed");
                 BugTracker.SetExtraData("LastFlightAirports", airports);
-                BugTracker.SetExtraData("LastFlightExtra", extra);                
+                BugTracker.SetExtraData("LastFlightExtra", extra);
 
-                try
-                {
-                    FlightsItineraries intineraries = await flightService.GetItineraries(coreSearchModel);
+                Navigator.GoTo(ViewModelPages.FlightsResults, new FlightsResultNavigationData() { SearchModel = coreSearchModel , FiltersApplied = false});
 
-                    if (intineraries.items.Count != 0)
-                    {
-                        var pageParameters = new FlightsResultNavigationData();
-                        pageParameters.Itineraries = intineraries;
-                        pageParameters.SearchModel = coreSearchModel;
-
-                        Navigator.GoTo(ViewModelPages.FlightsResults, pageParameters);
-                    }
-                    else
-                    {
-                        var msg = new MessageDialog("Lo sentimos, no hemos encontrado ningún resultado para su búsqueda.Por favor, inténtelo nuevamente modificando alguno de los criterios de búsqueda. ");
-                        await msg.ShowAsync();
-                    }
-                }
-                catch (Exception)
-                {
-                    OnViewModelError("SEARCH_FAILED");
-                }
-                finally
-                {
-                    IsLoading = false;
-                }
+                IsLoading = false;                
             }
             else
             {

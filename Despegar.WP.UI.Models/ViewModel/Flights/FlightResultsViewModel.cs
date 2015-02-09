@@ -11,6 +11,7 @@ using Despegar.WP.UI.Models.Classes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Input;
 
 
@@ -19,7 +20,7 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
     public class FlightResultsViewModel : ViewModelBase
     {
         private IMAPIFlights flightService;
-        private Paging _paging;
+        private Paging paging;
 
         private FlightsItineraries itineraries;
         public FlightsItineraries Itineraries
@@ -28,18 +29,6 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
             set
             {
                 itineraries = value;
-                //TODO initialize all variables needed for this page.
-                if (value == null) 
-                    return;
-
-                //this.cheapest_price = value.cheapest_price;
-                this.Currencies = value.currencies;
-                
-                FillItems(value.items);
-
-                this.Facets = value.facets;
-                this.Sorting = value.sorting;
-                this.Paging = value.paging;
             }
         }
         
@@ -48,17 +37,8 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
 
         public FlightsCrossParameter FlightCrossParameters { get; set; }
         public FlightSearchModel FlightSearchModel { get; set; }
-
-        private Currencies _currencies;
-        public Currencies Currencies {
-            get { return _currencies; }
-            set { 
-                _currencies = value;
-                OnPropertyChanged();
-            }
-        }
         
-        //This items represents flights inbounds and outbounds
+        // This items represents flights inbounds and outbounds
         private List<BindableItem> _items;
         public List<BindableItem> Items {
             get { return _items; }
@@ -68,68 +48,43 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
             }
         }
 
-        private List<Facet> _facets;
+        private List<Facet> facets;
         public List<Facet> Facets 
         {
             get
             {
-                return _facets;
+                return facets;
             }
             set 
             {
-                  _facets = value;
+                  facets = value;
                   OnPropertyChanged();
             }
         }
 
-        private Sorting _sorting;
+        private Sorting sorting;
         public Sorting Sorting {
-            get { return _sorting; }
+            get { return sorting; }
             set
             {
-                _sorting = value;
+                sorting = value;
                 OnPropertyChanged();
             } 
         }
+        
 
-        public List<Facet> SelectedFacets
-        {
-            get
-            {
-                var facetList = this._facets.Where(f => f.values.Any(fv => fv.selected == true));
-                return facetList.ToList();
-            }
-        }
-
-        public Value3 SelectedSorting
-        {
-            get
-            {
-                var selectedSortingList = this._sorting.values.FirstOrDefault(sr => sr.selected == true);
-                return selectedSortingList;
-            }
-        }
-
-        public Paging Paging{
-            get { return _paging; }
-            set
-            {
-                _paging = value;
-                OnPropertyChanged();
-            }
-        }
-
+        // TODO: se usa???
         public string SelectedCurrency
         {
             get
             {
-                if (this.Currencies == null) return String.Empty;
+                if (this.Itineraries.currencies == null) 
+                      return String.Empty;
 
-                var _cur = this.Currencies.values.Where(x => x.selected == true).FirstOrDefault();
+                var _cur = this.Itineraries.currencies.values.FirstOrDefault(x => x.selected == true);
 
                 if (_cur == null)
                     return String.Empty;
-
 
                 return ((Value)_cur).label;
             }
@@ -137,80 +92,79 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
 
         public FlightResultsViewModel(INavigator navigator, IMAPIFlights flightService, IBugTracker t) : base(navigator, t)
         {
-            this.Navigator = navigator;
-            this.flightService = flightService;           
+            this.flightService = flightService;
+            Items = new List<BindableItem>();
+            FlightCrossParameters = new FlightsCrossParameter();
         }
-        
-        private void FillItems(List<Item> itemList)
-        {
-            if (Items == null)            
-                Items = new List<BindableItem>();
 
-            if (itemList != null)
+        public ICommand NavigateToFiltersCommand
+        {
+            get
             {
-                //Items.AddRange((itemList.Select(il => new BindableItem(il))).ToList());
-                var list = (itemList.Select(il => new BindableItem(il))).ToList();
-                //var bList = new IncrementalLoadingCollection<BindableItemsLoadingCollection, BindableItem>();
-                this.Items = list;
-                //base.NotifyPropertyChanged("Items");
+                return new RelayCommand(() => { Navigator.GoTo(Model.Interfaces.ViewModelPages.FlightsFilters, new FlightFiltersNavigationData() { SearchModel = FlightSearchModel }); });
             }
         }
 
-        //public void FillRoutedTemplate(Item item)
-        //{
-        //    var _item = Items.FirstOrDefault(i=> item.id.Equals(i.id));
-        //    if (_item != null)
-        //    {
-        //        _item.LinkFlightRoutes();
-        //    }
-        //}
-       
-        public void Clear()
+        public ICommand NavigateToOrderByCommand
         {
-            //this.cheapest_price = value.cheapest_price;
-            this.Currencies = null;
-
-            if (this.Items!=null) 
-                this.Items.Clear();
-
-            if (this.Items!=null)
-                this.Facets.Clear();
-
-            this.Sorting = null;
-            this.Paging = null;
+            get
+            {
+                return new RelayCommand(() => { Navigator.GoTo(Model.Interfaces.ViewModelPages.FlightsOrderBy, new FlightFiltersNavigationData() { SearchModel = FlightSearchModel }); });
+            }
         }
 
-        public async override void OnNavigated(object navigationParams)
+        public override void OnNavigated(object navigationParams)
         {
             BugTracker.LeaveBreadcrumb("Flight Results View");
             FlightsResultNavigationData pageParameters = navigationParams as FlightsResultNavigationData;
 
-            // DO SEARCH
-            Itineraries = pageParameters.Itineraries as FlightsItineraries;
-
+            // Obtain Search parameters
             FlightSearchModel = pageParameters.SearchModel as FlightSearchModel;
-            FlightSearchModel.FacetsSearch = SelectedFacets;
-            FlightSearchModel.SortingValuesSearch = SelectedSorting;
-            FlightSearchModel.SortingCriteriaSearch = Sorting.criteria;
 
-            if (FlightSearchModel.SearchStatus == SearchStates.SearchAgain)
+            // Remover la pantall de filtros/order del navigation stack
+            if (pageParameters.FiltersApplied)
             {
-                // Filtro / Ordenamiento aplicado
-                BugTracker.LeaveBreadcrumb("Flights Minibox search View");
+                Navigator.RemoveBackEntry(); // Filters page
+                Navigator.RemoveBackEntry(); // Old results page
+            }
+        }
 
-                try
+        public async Task LoadResults()
+        {
+            BugTracker.LeaveBreadcrumb("FlightsResults Load Results");
+            IsLoading = true;
+            try
+            {
+                Itineraries = await flightService.GetItineraries(FlightSearchModel);
+
+                if (Itineraries.items.Count == 0)
                 {
-                    Itineraries = await flightService.GetItineraries(FlightSearchModel);
+                    OnViewModelError("LOAD_RESULTS_NO_ITEMS");
+                    return;
                 }
-                catch (Exception)
-                {
-                    // Will not filter the results, but it will keep the last list status
-                }
-                
-                FlightSearchModel.SearchStatus = SearchStates.FirstSearch;
+
+                FlightSearchModel.Facets = Itineraries.facets;
+                FlightSearchModel.Sorting = Itineraries.sorting;
+
+                //if (rebusqueda) 
+                //{
+                //FlightSearchModel.SortingValuesSearch = SelectedSorting;
+                //FlightSearchModel.SortingCriteriaSearch = Sorting.criteria;  
+                //this.cheapest_price = value.cheapest_price;
+               //}
+             
+               //FlightSearchModel.TotalFlights = Itineraries.total;
+
+                if (Itineraries.items != null)
+                    this.Items = (Itineraries.items.Select(il => new BindableItem(il))).ToList();
+            }
+            catch (Exception)
+            {
+                // Will not filter the results, but it will keep the last list status
+                OnViewModelError("LOAD_RESULTS_FAILED");
             }
 
-            FlightSearchModel.TotalFlights = Itineraries.total;
+            IsLoading = false;
         }
 
         /// <summary>
@@ -220,22 +174,7 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
         {
             BugTracker.LeaveBreadcrumb("Flight Result Minibox Hit");
             Navigator.GoBack();
-        }
-
-        public ICommand NavigateToFiltersCommand
-        {
-          get
-          {
-              return new RelayCommand(() => { Navigator.GoTo(Model.Interfaces.ViewModelPages.FlightsFilters, Facets); });
-          }
-        }
-
-        public ICommand NavigateToOrderByCommand
-        {
-            get
-            {
-                return new RelayCommand(() => { Navigator.GoTo(Model.Interfaces.ViewModelPages.FlightsOrderBy, Sorting); });
-            }
-        }
+        } 
+        
     }
 }

@@ -3,21 +3,31 @@ using Despegar.Core.Neo.Business.Enums;
 using Despegar.Core.Neo.Business.Flight.Itineraries;
 using Despegar.Core.Neo.InversionOfControl;
 using Despegar.WP.UI.Common;
+using Despegar.WP.UI.Model.Classes;
 using Despegar.WP.UI.Model.Classes.Flights;
+using Despegar.WP.UI.Model.Common;
 using Despegar.WP.UI.Model.ViewModel.Flights;
 using System;
 using System.Collections.Generic;
+using Windows.ApplicationModel.Resources;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
+using Despegar.WP.UI.Controls;
+using System.Net.NetworkInformation;
+using System.ComponentModel;
+using Despegar.WP.UI.Model.ViewModel;
+using Windows.Phone.UI.Input;
 
 namespace Despegar.WP.UI.Product.Flights
 {
     public sealed partial class FlightResults : Page
     {
+        private ModalPopup loadingPopup = new ModalPopup(new Loading());
         private FlightResultsViewModel ViewModel;        
 
         public FlightResults()
@@ -32,24 +42,79 @@ namespace Despegar.WP.UI.Product.Flights
 #endif
         }
 
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        # region ** ERROR HANDLING **
+        private async void ErrorHandler(object sender, ViewModelErrorArgs e)
         {
+            ResourceLoader manager = new ResourceLoader();
+            MessageDialog dialog;
+
+            switch (e.ErrorCode)
+            {
+                case "LOAD_RESULTS_NO_ITEMS":
+                    dialog = new MessageDialog("Lo sentimos, no hemos encontrado ningún resultado para su búsqueda.Por favor, inténtelo nuevamente modificando alguno de los criterios de búsqueda. ");
+                    await dialog.ShowSafelyAsync();
+                    break;
+                case "LOAD_RESULTS_FAILED":
+                    if (NetworkInterface.GetIsNetworkAvailable())
+                    {
+                        dialog = new MessageDialog(manager.GetString("Flights_Search_ERROR_SEARCH_FAILED"), manager.GetString("Flights_Search_ERROR_SEARCH_FAILED_TITLE"));
+                    } else {
+                        // Internet error
+                        dialog = new MessageDialog(manager.GetString("Generic_ERROR_SEARCH_FAILED_NO_INTERNET"), manager.GetString("Generic_ERROR_SEARCH_FAILED_NO_INTERNET_TITLE"));
+                    }
+
+                    await dialog.ShowSafelyAsync();
+                    break;   
+            }
+
+            // Return to SearchBox
+            ViewModel.Navigator.GoBack();
+        }
+        #endregion
+
+        protected async override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            HardwareButtons.BackPressed += HardwareButtons_BackPressed;
+            var param = e.Parameter as FlightsResultNavigationData;
+            BottomAppBar.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
+
             if (e.NavigationMode == NavigationMode.New)
             {
+                // First Search
                 ViewModel = IoC.Resolve<FlightResultsViewModel>();
+                ViewModel.ViewModelError += ErrorHandler;
+                ViewModel.PropertyChanged += Checkloading;
                 ViewModel.OnNavigated(e.Parameter);
-                this.DataContext = ViewModel;                
+                await ViewModel.LoadResults();
+                
+                this.DataContext = ViewModel;
             }
+
+            // not working
+            BottomAppBar.Visibility = Windows.UI.Xaml.Visibility.Visible;
         }
 
-        protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
-            if (e.Parameter != null)
+            HardwareButtons.BackPressed -= HardwareButtons_BackPressed;
+        }
+
+        void HardwareButtons_BackPressed(object sender, BackPressedEventArgs e)
+        {
+            if (ViewModel != null)
             {
-                // TODO: Improve
-                if (e.Parameter.GetType() == typeof(List<Facet>) || e.Parameter.GetType() == typeof(Sorting))
-                    ViewModel.FlightSearchModel.SearchStatus = SearchStates.SearchAgain;
+                if (ViewModel.IsLoading)
+                {
+                    e.Handled = true;
+                }
+                else
+                {
+                    ViewModel.BugTracker.LeaveBreadcrumb("Flight search Results - Back button pressed");
+                    ViewModel.Navigator.GoBack();                    
+                }
             }
+
+            e.Handled = true;
         }
 
         private T FindDescendant<T>(DependencyObject obj) where T : DependencyObject
@@ -120,32 +185,13 @@ namespace Despegar.WP.UI.Product.Flights
 
                 ViewModel.Navigator.GoTo(Model.Interfaces.ViewModelPages.FlightsDetails, ViewModel.FlightCrossParameters);                
             }
-        }
 
-        private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            ListBoxItem currentSelectedListBoxItem;
-            if (lbFlights.SelectedIndex == -1)
-                return;
-
-            currentSelectedListBoxItem = this.lbFlights.ContainerFromIndex(lbFlights.SelectedIndex) as ListBoxItem;
-
-            if (currentSelectedListBoxItem == null)
-                return;
-
-            // Iterate whole listbox tree and search for this items
-            ItemsControl itemsControl = FindDescendant<ItemsControl>(currentSelectedListBoxItem);
-
-            if (itemsControl == null)
-                return;
-
-            itemsControl.Visibility = SetVisualEffect(itemsControl.Visibility);
+            e.Handled = true;
         }
 
         private void ListBox_Tapped(object sender, TappedRoutedEventArgs e)
         {
             ListView listview = sender as ListView;
-            ListViewItem listviewitem;
             int index = 0;
 
             if (listview == null)
@@ -153,13 +199,13 @@ namespace Despegar.WP.UI.Product.Flights
 
             index = listview.SelectedIndex;
 
-            if (index == -1) return;
+            if (index == -1) 
+                return;
 
-            listviewitem = listview.ContainerFromIndex(index) as ListViewItem;
+            ListViewItem listviewitem = listview.ContainerFromIndex(index) as ListViewItem;
             if (listviewitem == null)
                 return;
 
-            //ItemsControl itemsControl = FindDescendant<ItemsControl>(listboxitem);
             ItemsControl itemsControl = FindChildControl<ItemsControl>(listviewitem, "RoutesItemControl") as ItemsControl;
 
             if (itemsControl == null)
@@ -173,7 +219,10 @@ namespace Despegar.WP.UI.Product.Flights
             {
                 ViewModel.FlightCrossParameters.MultipleRoutes = list.RoutesCustom;
             }
-            else { ViewModel.FlightCrossParameters.MultipleRoutes = null; }
+            else 
+            {
+                ViewModel.FlightCrossParameters.MultipleRoutes = null; 
+            }
 
             itemsControl.Visibility = SetVisualEffect(itemsControl.Visibility);
         }
@@ -191,6 +240,17 @@ namespace Despegar.WP.UI.Product.Flights
         private void Image_ImageFailed(object sender, ExceptionRoutedEventArgs e)
         {
             ((Image)sender).Source = new BitmapImage(new Uri("ms-appx:/Assets/Icon/Airlines/ag_default@2x.png", UriKind.Absolute));
+        }
+
+        private void Checkloading(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "IsLoading")
+            {
+                if ((sender as ViewModelBase).IsLoading)
+                    loadingPopup.Show();
+                else
+                    loadingPopup.Hide();
+            }
         }
     }
 }

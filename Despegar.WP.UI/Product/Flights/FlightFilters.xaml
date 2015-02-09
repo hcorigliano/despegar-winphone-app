@@ -8,7 +8,7 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
     <Page.Resources>
-        <CollectionViewSource x:Name="FiltersCollection" IsSourceGrouped="true" Source="{Binding Facets}" ItemsPath="values" />
+        <CollectionViewSource x:Name="FiltersCollection" IsSourceGrouped="true" Source="{Binding EditableFacets}" ItemsPath="values" />
 
         <DataTemplate x:Key="FlightFilterTemplate">
             <Grid>
@@ -39,8 +39,8 @@
 
     <Page.BottomAppBar>
         <CommandBar>
-            <AppBarButton x:Uid="GenericAcceptAppBar" Icon="Accept" Label="Aceptar" Click="AppBarButton_Click" />
-            <AppBarButton x:Uid="GenericCancelAppBar" Icon="Cancel" Label="Cancelar" Name="AppBarCancelButton" Click="AppBarCancelButton_Click" />
+            <AppBarButton x:Uid="GenericAcceptAppBar" Icon="Accept" Label="Aceptar" Command="{Binding ApplyFilterCommand}" />
+            <AppBarButton x:Uid="GenericCancelAppBar" Icon="Cancel" Label="Cancelar" Command="{Binding CancelCommand}" />
         </CommandBar>
     </Page.BottomAppBar>
 
@@ -56,7 +56,7 @@
         <!--Text="Filter"-->
         <TextBlock Grid.Row="1" x:Uid="Page_Filters_Title" Style="{StaticResource PageHeaderSmall}"  FontFamily="Segoe WP Semibold" />
 
-        <ListView Grid.Row="2" ItemTemplate="{StaticResource FlightFilterTemplate}" DataContext="{Binding Facets, Mode=TwoWay}"  ItemsSource="{Binding Source={StaticResource FiltersCollection}}" IsItemClickEnabled="True">
+        <ListView Grid.Row="2" ItemTemplate="{StaticResource FlightFilterTemplate}" DataContext="{Binding EditableFacets, Mode=TwoWay}"  ItemsSource="{Binding Source={StaticResource FiltersCollection}}" IsItemClickEnabled="True">
             <ListView.GroupStyle>
                 <GroupStyle HidesIfEmpty="True" HeaderTemplate="{StaticResource FlightHeaderFilterTemplate}"/>
             </ListView.GroupStyle>

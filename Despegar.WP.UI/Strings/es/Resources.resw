@@ -726,10 +726,10 @@
   <data name="Flights_Checkout_ERROR_FORM_ERROR_TITLE" xml:space="preserve">
     <value>Formulario de Compra</value>
   </data>
-  <data name="Flights_Search_ERROR_SEARCH_FAILED" xml:space="preserve">
+  <data name="Generic_ERROR_SEARCH_FAILED_NO_INTERNET" xml:space="preserve">
     <value>Por favor, revise su conexión a Internet y vuelva a intentarlo.</value>
   </data>
-  <data name="Flights_Search_ERROR_SEARCH_FAILED_TITLE" xml:space="preserve">
+  <data name="Generic_ERROR_SEARCH_FAILED_NO_INTERNET_TITLE" xml:space="preserve">
     <value>Error de conexión</value>
   </data>
   <data name="Flights_Search_ERROR_SEARCH_INVALID" xml:space="preserve">
@@ -1047,5 +1047,11 @@ La reserva no ha sido generada y no se le cobrará ningún cargo por la transacc
   </data>
   <data name="Hotels_Search_ERROR_SEARCH_INVALID_TITLE" xml:space="preserve">
     <value>Busqueda de Hoteles</value>
+  </data>
+  <data name="Flights_Search_ERROR_SEARCH_FAILED" xml:space="preserve">
+    <value>Lo sentimos, la búsqueda no pudo realizarse. Por favor, intente de nuevo.</value>
+  </data>
+  <data name="Flights_Search_ERROR_SEARCH_FAILED_TITLE" xml:space="preserve">
+    <value>Error</value>
   </data>
 </root>

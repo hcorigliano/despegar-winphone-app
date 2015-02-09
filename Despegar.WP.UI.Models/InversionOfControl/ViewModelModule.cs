@@ -22,6 +22,7 @@ namespace Despegar.WP.UI.Model.InversionOfControl
             builder.RegisterType<MultipleEditionViewModel>();
             builder.RegisterType<FlightResultsViewModel>();
             builder.RegisterType<FlightFiltersViewModel>();
+            builder.RegisterType<FlightOrderByViewModel>();
             builder.RegisterType<FlightDetailsViewModel>();
             builder.RegisterType<FlightsCheckoutViewModel>();
             builder.RegisterType<FlightThanksViewModel>();

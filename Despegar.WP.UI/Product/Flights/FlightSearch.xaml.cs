@@ -35,15 +35,7 @@ namespace Despegar.WP.UI.Product.Flights
             MessageDialog dialog;
 
             switch(e.ErrorCode) 
-            {
-                case "SEARCH_FAILED":
-                    dialog = new MessageDialog(manager.GetString("Flights_Search_ERROR_SEARCH_FAILED"), manager.GetString("Flights_Search_ERROR_SEARCH_FAILED_TITLE"));
-                    await dialog.ShowSafelyAsync();
-                    break;
-                case "SEARCH_INVALID":
-                    dialog = new MessageDialog(manager.GetString("Flights_Search_ERROR_SEARCH_INVALID"), manager.GetString("Flights_Search_ERROR_SEARCH_INVALID_TITLE"));
-                    await dialog.ShowSafelyAsync();
-                    break;
+            {               
                 case "SEARCH_INVALID_WITH_MESSAGE":
                     CustomError message = e.Parameter as CustomError;
                     if (message == null) break;

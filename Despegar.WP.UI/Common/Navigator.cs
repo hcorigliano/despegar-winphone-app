@@ -50,6 +50,9 @@ namespace Despegar.WP.UI.Common
                 case ViewModelPages.FlightsFilters:
                     view = typeof(FlightFilters);
                     break;
+                case ViewModelPages.FlightsOrderBy:
+                    view = typeof(FlightSortBy);
+                    break;
                 case ViewModelPages.FlightsDetails:
                     view = typeof(FlightDetail);
                     break;

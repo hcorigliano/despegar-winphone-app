@@ -9,12 +9,6 @@ namespace Despegar.WP.UI.Model.Classes
     public class FlightsResultNavigationData
     {
         public object SearchModel { get; set; }
-        public object Itineraries { get; set; }
-
-        public FlightsResultNavigationData()
-        {
-
-        }
-        
+        public bool FiltersApplied { get; set; }
     }
 }

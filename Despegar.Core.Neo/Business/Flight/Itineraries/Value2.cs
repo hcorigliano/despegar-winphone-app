@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Despegar.Core.Neo.Business.Flight.Itineraries
 {
-    public class Value2
+    public class FacetValue
     {
         public string value { get; set; }
         public string label { get; set; }

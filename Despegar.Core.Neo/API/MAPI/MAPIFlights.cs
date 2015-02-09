@@ -1,5 +1,6 @@
 ﻿using Despegar.Core.Neo.API;
 using Despegar.Core.Neo.API.MAPI;
+using Despegar.Core.Neo.Business.Enums;
 using Despegar.Core.Neo.Business.Flight.BookingCompletePostResponse;
 using Despegar.Core.Neo.Business.Flight.BookingFields;
 using Despegar.Core.Neo.Business.Flight.CitiesAutocomplete;
@@ -11,6 +12,7 @@ using Despegar.Core.Neo.Contract.API;
 using Despegar.Core.Neo.Contract.Connector;
 using Despegar.Core.Neo.Exceptions;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Despegar.Core.Neo.API.MAPI
@@ -28,7 +30,7 @@ namespace Despegar.Core.Neo.API.MAPI
         
         public async Task<FlightsItineraries> GetItineraries(FlightSearchModel searchModel)
         {
-            FlightsItineraries result = await connector.GetAsync<FlightsItineraries>(searchModel.GetQueryUrl(), ServiceKey.FlightItineraries);
+            FlightsItineraries result = await connector.GetAsync<FlightsItineraries>(GetItinerariesQueryUrl(searchModel), ServiceKey.FlightItineraries);
 
             // Add Indexes
             if (result.items != null) 
@@ -90,7 +92,7 @@ namespace Despegar.Core.Neo.API.MAPI
 
             return result;
         }
-                
+
         public async Task<CitiesAutocomplete> GetCitiesAutocomplete(string cityString)
         {
             string serviceUrl = ServiceURL.GetServiceURL(ServiceKey.FlightsCitiesAutocomplete, cityString);
@@ -129,6 +131,34 @@ namespace Despegar.Core.Neo.API.MAPI
             serviceUrl = serviceUrl.Replace(',', '.');
 
             return await connector.GetAsync<CitiesAutocomplete>(serviceUrl, ServiceKey.FlightsNearCities);
+        }
+
+        /// <summary>
+        /// Builds the flights query string for the service
+        /// </summary>
+        /// <returns></returns>
+        private string GetItinerariesQueryUrl(FlightSearchModel searchModel)
+        {
+            string serviceUrl = String.Empty;
+
+            switch (searchModel.PageMode)
+            {
+                case FlightSearchPages.RoundTrip:
+                    serviceUrl = ServiceURL.GetServiceURL(ServiceKey.FlightItineraries, searchModel.OriginFlight, searchModel.DestinationFlight, searchModel.DepartureDate.ToString("yyyy-MM-dd"), searchModel.AdultsInFlights, searchModel.DestinationDate.ToString("yyyy-MM-dd"), searchModel.ChildrenInFlights, searchModel.InfantsInFlights, searchModel.Offset, searchModel.LimitResult, searchModel.SelectedSortingOption.value, searchModel.SelectedSortingOption.type, "", String.Empty, searchModel.FormattedFacetsCodes);
+                    break;
+                case FlightSearchPages.OneWay:
+                    serviceUrl = ServiceURL.GetServiceURL(ServiceKey.FlightItineraries, searchModel.OriginFlight, searchModel.DestinationFlight, searchModel.DepartureDate.ToString("yyyy-MM-dd"), searchModel.AdultsInFlights, "", searchModel.ChildrenInFlights, searchModel.InfantsInFlights, searchModel.Offset, searchModel.LimitResult, searchModel.SelectedSortingOption.value, searchModel.SelectedSortingOption.type, "", String.Empty, searchModel.FormattedFacetsCodes);
+                    break;
+                case FlightSearchPages.Multiple:
+                    string vectorizedDates = String.Join(",", searchModel.MultipleSegments.Select(x => x.DepartureDate.Date.ToString("yyyy-MM-dd")));
+                    string vectorizedOrigins = String.Join(",", searchModel.MultipleSegments.Select(x => x.AirportOrigin));
+                    string vectorizedDestinations = String.Join(",", searchModel.MultipleSegments.Select(x => x.AirportDestination));
+
+                    serviceUrl = ServiceURL.GetServiceURL(ServiceKey.FlightItineraries, vectorizedOrigins, vectorizedDestinations, vectorizedDates, searchModel.AdultsInFlights, "", searchModel.ChildrenInFlights, searchModel.InfantsInFlights, searchModel.Offset, searchModel.LimitResult, searchModel.SelectedSortingOption.value, searchModel.SelectedSortingOption.type, "", String.Empty, searchModel.FormattedFacetsCodes);
+                    break;
+            }
+
+            return serviceUrl;
         }
     }
 }

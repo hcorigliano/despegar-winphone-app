@@ -1,5 +1,6 @@
 ﻿using Despegar.Core.Neo.InversionOfControl;
 using Despegar.WP.UI.Model.ViewModel.Flights;
+using Windows.Phone.UI.Input;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
@@ -18,20 +19,22 @@ namespace Despegar.WP.UI.Product.Flights
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            HardwareButtons.BackPressed += HardwareButtons_BackPressed;
             ViewModel = IoC.Resolve<FlightOrderByViewModel>();
             ViewModel.OnNavigated(e.Parameter);
             this.DataContext = ViewModel;
         }
 
-        private void AppBarButton_Click(object sender, RoutedEventArgs e)
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
-            ViewModel.Navigator.GoBack();
+            HardwareButtons.BackPressed -= HardwareButtons_BackPressed;
         }
 
-        private void AppBarCancelButton_Click(object sender, RoutedEventArgs e)
+        void HardwareButtons_BackPressed(object sender, BackPressedEventArgs e)
         {
-            //TODO Restore first state
+            ViewModel.BugTracker.LeaveBreadcrumb("Flight search orderby - Back button pressed");
             ViewModel.Navigator.GoBack();
+            e.Handled = true;
         }
 
     }

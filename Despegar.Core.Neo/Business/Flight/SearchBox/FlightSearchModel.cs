@@ -29,12 +29,33 @@ namespace Despegar.Core.Neo.Business.Flight.SearchBox
         public int Offset { get; set; }
         public List<FlightMultipleSegment> MultipleSegments { get; set; }
 
-        public List<Facet> FacetsSearch { get; set; }
-        private Value3 OldValue { get; set; }
-        public bool HasNewSortingSearch { get; set; }
-        public string SortingCriteriaSearch { get; set; }
-        public SearchStates SearchStatus { get; set; }
-        public int TotalFlights { get; set; }
+        /// <summary>
+        /// Loaded after calling GetItineraries
+        /// </summary>
+        public List<Facet> Facets { get; set; }
+
+        /// <summary>
+        /// Loaded after calling GetItineraries
+        /// </summary>
+        public Sorting Sorting { get; set; }
+
+        private SortingOption selectedSortingOption;
+        public SortingOption SelectedSortingOption
+        {
+            get
+            {
+                var nullValue = new SortingOption { label = String.Empty, type = String.Empty, value = String.Empty };
+
+                if (Sorting != null)
+                {
+                    var item = Sorting.values.FirstOrDefault(x => x.selected);
+                    return item != null ? item : nullValue;
+                }
+
+                return nullValue;
+            }           
+        }
+
         public int TotalPassangers 
         {
             get
@@ -95,33 +116,25 @@ namespace Despegar.Core.Neo.Business.Flight.SearchBox
             return IsValid;
         }
 
-        /// <summary>
-        /// Builds the flights query string for the service
-        /// </summary>
-        /// <returns></returns>
-        public string GetQueryUrl()
+     
+        public void UpdateSearchDays()
         {
-            // TODO: improve this
-            string serviceUrl = String.Empty;
+            DateTime daysToAdd;
+            DateTime daysToCompare = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, LastAvailableHours, 0, 0);
 
-            switch (this.PageMode)
+            if (DateTime.Compare(DateTime.Now, daysToCompare) > 0)
             {
-                case FlightSearchPages.RoundTrip:
-                    serviceUrl = ServiceURL.GetServiceURL(ServiceKey.FlightItineraries, this.OriginFlight, this.DestinationFlight, this.DepartureDate.ToString("yyyy-MM-dd"), this.AdultsInFlights, this.DestinationDate.ToString("yyyy-MM-dd"), this.ChildrenInFlights, this.InfantsInFlights, this.Offset, this.LimitResult, this.SortingValuesSearch.value, this.SortingValuesSearch.type, "" , String.Empty,this.FacetsCodes);
-                    break;
-                case FlightSearchPages.OneWay:
-                    serviceUrl = ServiceURL.GetServiceURL(ServiceKey.FlightItineraries, this.OriginFlight, this.DestinationFlight, this.DepartureDate.ToString("yyyy-MM-dd"), this.AdultsInFlights, "", this.ChildrenInFlights, this.InfantsInFlights, this.Offset, this.LimitResult, this.SortingValuesSearch.value, this.SortingValuesSearch.type, "", String.Empty,this.FacetsCodes);
-                    break;
-                case FlightSearchPages.Multiple:
-                    string vectorizedDates =   String.Join(",", MultipleSegments.Select(x => x.DepartureDate.Date.ToString("yyyy-MM-dd") ));
-                    string vectorizedOrigins = String.Join(",", MultipleSegments.Select(x => x.AirportOrigin));
-                    string vectorizedDestinations = String.Join(",", MultipleSegments.Select(x => x.AirportDestination));
-
-                    serviceUrl = ServiceURL.GetServiceURL(ServiceKey.FlightItineraries, vectorizedOrigins, vectorizedDestinations, vectorizedDates, this.AdultsInFlights, "", this.ChildrenInFlights, this.InfantsInFlights, this.Offset, this.LimitResult, this.SortingValuesSearch.value, this.SortingValuesSearch.type, "", String.Empty ,this.FacetsCodes);
-                    break;
+                daysToAdd = DateTime.Today.AddDays(EmissionAnticipationDay + 1);
+            }
+            else
+            {
+                daysToAdd = DateTime.Today.AddDays(EmissionAnticipationDay);
             }
 
-            return serviceUrl;
+            this.DepartureDate = daysToAdd;
+            this.DestinationDate = daysToAdd;
+
+            DateBoundary = daysToAdd;
         }
 
         // TODO, Use Errors List!!
@@ -243,20 +256,20 @@ namespace Despegar.Core.Neo.Business.Flight.SearchBox
             return true;
         }
 
-
-        public string FacetsCodes
+        /// <summary>
+        /// Converts the selected Facets into querystring paramaters for MAPI
+        /// </summary>
+        public string FormattedFacetsCodes
         {
             get
             {
                 List<String> facetListNames = new List<string>();
-                if (FacetsSearch == null) return String.Empty;
+                if (Facets == null) 
+                    return String.Empty;
 
-                foreach (Facet facet in FacetsSearch)
+                foreach (Facet facet in Facets)
                 {
-                    var elements = facet.values.Where(x => x.selected == true);
-
-                    var response = (from value in elements
-                                    select value.value);
+                    var response = facet.values.Where(x => x.selected == true).Select(x => x.value).ToList();
 
                     if (response != null)
                     {
@@ -265,45 +278,12 @@ namespace Despegar.Core.Neo.Business.Flight.SearchBox
                     }
                 }
 
-                if (facetListNames.Count == 0) return String.Empty;
+                if (facetListNames.Count == 0) 
+                    return String.Empty;
 
                 return String.Join("&", facetListNames);
             }
         }
 
-        public Value3 SortingValuesSearch
-        {
-            get
-            {
-                if (OldValue == null) return new Value3 { label = String.Empty, type = String.Empty, value = String.Empty };
-                return OldValue;
-            }
-            set
-            {
-                HasNewSortingSearch = !(value.label == SortingValuesSearch.label);
-                OldValue = value;
-            }
-        }
-
-
-        public void UpdateSearchDays()
-        {
-            DateTime daysToAdd;
-            DateTime daysToCompare = new DateTime(DateTime.Now.Year,DateTime.Now.Month,DateTime.Now.Day,LastAvailableHours,0,0);
-
-            if (DateTime.Compare(DateTime.Now, daysToCompare) > 0)
-            {
-                daysToAdd = DateTime.Today.AddDays(EmissionAnticipationDay + 1);
-            }
-            else
-            {
-                daysToAdd = DateTime.Today.AddDays(EmissionAnticipationDay);
-            }
-
-            this.DepartureDate = daysToAdd;
-            this.DestinationDate = daysToAdd;
-
-            DateBoundary = daysToAdd;
-        }
     }
 }

@@ -13,12 +13,13 @@
     x:Name="page"
     x:Class="Despegar.WP.UI.Product.Flights.FlightResults"
     mc:Ignorable="d"
+    NavigationCacheMode="Required"
     Style="{StaticResource BasePage}" 
     xmlns:dev="using:Despegar.WP.UI.Developer.Controls"
 	xmlns:conv="using:Despegar.WP.UI.Common.Converter"
     >
     <Page.BottomAppBar>
-        <CommandBar ClosedDisplayMode="Minimal">
+        <CommandBar ClosedDisplayMode="Compact">
             <AppBarButton x:Name="appBarFilter" Icon="Filter" x:Uid="AppBarButton_Filters" Command="{Binding NavigateToFiltersCommand}" />
             <AppBarButton x:Name="appBarSortBy" Icon="Sort" x:Uid="AppBarButton_OrderBy" Command="{Binding NavigateToOrderByCommand}" />
         </CommandBar>        
