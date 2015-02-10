@@ -1,16 +1,12 @@
-﻿using Despegar.Core.Log;
-using System;
+﻿using Despegar.Core.Neo.Business;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Despegar.WP.UI.Model.ViewModel.Hotels
 {
-    public class RoomsViewModel : ViewModelBase
+    public class RoomsViewModel : Bindable
     {
-
         public ObservableCollection<PassengersForRooms> RoomsDetailList { get; set; }
         public int Rooms { get; set; }
         private int roomsSelectedOption;
@@ -65,7 +61,7 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
             }
         }
 
-        public RoomsViewModel(IBugTracker t) : base(t)
+        public RoomsViewModel()
         {
             RoomsDetailList = new ObservableCollection<PassengersForRooms>();
             this.Rooms = 1;
