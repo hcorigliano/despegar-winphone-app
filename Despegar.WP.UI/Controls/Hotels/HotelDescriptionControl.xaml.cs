@@ -1,6 +1,6 @@
 ﻿using Despegar.WP.UI.Common;
 using Despegar.WP.UI.Model.Interfaces;
-//using Despegar.WP.UI.Model.ViewModel.Hotels;
+using Despegar.WP.UI.Model.ViewModel.Hotels;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -33,6 +33,7 @@ namespace Despegar.WP.UI.Controls.Hotels
 
             if (model != null)
             {
+                // TODO: refactor
                 Navigator.Instance.GoTo(ViewModelPages.HotelsAmenities, model.HotelDetail.hotel.amenities);
             }
         }

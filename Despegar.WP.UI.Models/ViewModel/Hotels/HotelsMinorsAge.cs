@@ -1,4 +1,4 @@
-﻿using Despegar.Core.Business;
+﻿using Despegar.Core.Neo.Business;
 using System;
 using System.Collections.Generic;
 using System.Linq;

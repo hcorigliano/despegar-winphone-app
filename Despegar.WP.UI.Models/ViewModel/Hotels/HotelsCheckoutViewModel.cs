@@ -1,25 +1,18 @@
-﻿using Despegar.Core.Business.Common.Checkout;
-using Despegar.Core.Business.Configuration;
-using Despegar.Core.Business.Coupons;
-using Despegar.Core.Business.CreditCard;
-using Despegar.Core.Business.Flight.BookingFields;
-using Despegar.Core.Business.Hotels;
-using Despegar.Core.Business.Hotels.BookingFields;
-using Despegar.Core.IService;
-using Despegar.Core.Log;
-using Despegar.Core.Neo.Business.Common.Checkout;
+﻿using Despegar.Core.Neo.Business.Common.Checkout;
 using Despegar.Core.Neo.Business.Common.State;
 using Despegar.Core.Neo.Business.Configuration;
 using Despegar.Core.Neo.Business.Coupons;
+using Despegar.Core.Neo.Business.CreditCard;
+using Despegar.Core.Neo.Business.Hotels;
 using Despegar.Core.Neo.Business.Hotels.BookingFields;
+using Despegar.Core.Neo.Contract.API;
+using Despegar.Core.Neo.Contract.Log;
 using Despegar.WP.UI.Model.Interfaces;
-using Despegar.WP.UI.Model.ViewModel.Classes.Flights;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Resources;
 
@@ -28,11 +21,11 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
     public class HotelsCheckoutViewModel : ViewModelBase
     {
         #region ** Private **
-        private INavigator navigator;
-        public IHotelService hotelService;
-        private IConfigurationService configurationService;
-        private ICommonServices commonServices;
-        private ICouponsService couponsService;
+        private ICoreLogger logger;
+        private IAPIv1 apiV1service; 
+        private IMAPIHotels hotelService;
+        private IMAPICross commonServices;
+        private IMAPICoupons couponsService;
         private ValidationCreditcards creditCardsValidations;
         private HotelsCrossParameters crossParams;
         #endregion
@@ -67,27 +60,25 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
         public CouponResponse VoucherResult { get { return voucherResult; } set { voucherResult = value; OnPropertyChanged(); } }
 
         public Voucher Voucher { get; set; }
-        public INavigator Navigator { get { return navigator; } }
 
         public bool IsTermsAndConditionsAccepted { get; set; }        
         public event EventHandler ShowRiskReview;
         public event EventHandler HideRiskReview;
         #endregion        
 
-        public HotelsCheckoutViewModel(INavigator navigator, IHotelService hotelService, ICommonServices commonService, IConfigurationService configurationService, ICouponsService couponsService, IBugTracker t, HotelsCrossParameters crossParams)
-            : base(t)
+        public HotelsCheckoutViewModel(INavigator navigator, IMAPIHotels hotelService, IMAPICross commonService, IMAPICoupons couponsService, IAPIv1 apiV1service, ICoreLogger logger, IBugTracker t)
+            : base(navigator,t)
         {
-            this.navigator = navigator;
+            this.logger = logger;
             this.hotelService = hotelService;
-            this.configurationService = configurationService;
+            this.apiV1service = apiV1service;
             this.commonServices = commonService;
             this.couponsService = couponsService;
-            this.crossParams = crossParams;
         }
 
         public async Task Init()
         {
-            this.Tracker.LeaveBreadcrumb("Hotel checkout view model init");
+            BugTracker.LeaveBreadcrumb("Hotel checkout view model init");
             IsLoading = true;
 
             string currentCountry = GlobalConfiguration.Site;
@@ -108,12 +99,13 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
 
                 //Get validations for credit cards
                 GetCreditCardsValidations();
-                this.Tracker.LeaveBreadcrumb("Flight checkout view model init complete");
+                BugTracker.LeaveBreadcrumb("Flight checkout view model init complete");
             }
             catch (Exception e)
             {
-                Logger.Log("[App:HotelsCheckout] Exception " + e.Message);
+                logger.Log("[App:HotelsCheckout] Exception " + e.Message);
                 IsLoading = false;
+
                 OnViewModelError("CHECKOUT_INIT_FAILED");
             }
 
@@ -199,7 +191,7 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
         public async Task<List<CitiesFields>> GetCities(string countryCode, string search, string cityresult)
         {
             //todo
-            return await configurationService.AutoCompleteCities(countryCode, search, cityresult);
+            return await commonServices.AutoCompleteCities(countryCode, search, cityresult);
         }
 
         /// <summary>
@@ -207,7 +199,7 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
         /// </summary>
         public async void ValidateVoucher()
         {
-            this.Tracker.LeaveBreadcrumb("Hotels view model validate voucher init");
+            BugTracker.LeaveBreadcrumb("Hotels view model validate voucher init");
 
             IsLoading = true;
             ResourceLoader loader = new ResourceLoader();
@@ -242,7 +234,7 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
             field.Validate();
             IsLoading = false;
 
-            this.Tracker.LeaveBreadcrumb("Flight checkout view model validate voucher complete");
+            BugTracker.LeaveBreadcrumb("Flight checkout view model validate voucher complete");
         }
 
         /// <summary>
@@ -289,12 +281,12 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
         {
             try
             {
-                this.Tracker.LeaveBreadcrumb("Hotel checkout view model get credit cards validations");
-                creditCardsValidations = await commonServices.GetCreditCardValidations();
+                BugTracker.LeaveBreadcrumb("Hotel checkout view model get credit cards validations");
+                creditCardsValidations = await apiV1service.GetCreditCardValidations();
             }
             catch (Exception e)
             {
-                Logger.Log("[App:FlightsCheckout] Exception " + e.Message);
+                logger.Log("[App:FlightsCheckout] Exception " + e.Message);
                 IsLoading = false;
                 OnViewModelError("CHECKOUT_INIT_FAILED");
             }
@@ -310,7 +302,7 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
 
         private async Task GetBookingFields(string deviceID)
         {
-            this.Tracker.LeaveBreadcrumb("Hotels checkout view model get booking fields init");
+            BugTracker.LeaveBreadcrumb("Hotels Checkout ViewModel get booking fields init");
 
             HotelsBookingFieldsRequest bookRequest = new HotelsBookingFieldsRequest();
 
@@ -319,7 +311,8 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
                 CoreBookingFields = await hotelService.GetBookingFields(crossParams.BookRequest);
             }
             else
-            {// TODO
+            {
+                // TODO
                 bookRequest.token = "c66602c8-09b5-4c11-92f7-9713cc4e1552";
                 bookRequest.hotel_id = "298331";
                 bookRequest.room_choices = new List<string>() { "3" };
@@ -328,20 +321,25 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
                 CoreBookingFields = await hotelService.GetBookingFields(bookRequest);
             }
 
-            this.Tracker.LeaveBreadcrumb("Hotels checkout view model get booking fields complete");
+            BugTracker.LeaveBreadcrumb("Hotels CheckoutVviewModel get booking fields complete");
         }
 
         private async Task LoadCountries()
         {
 
-            Countries = (await configurationService.GetCountries()).countries;
+            Countries = (await commonServices.GetCountries()).countries;
         }
 
         private async Task LoadStates(string countryCode)
         {
             States = await commonServices.GetStates(countryCode);
-        }        
+        }
 
 
+        public override void OnNavigated(object navigationParams)
+        {
+            BugTracker.LeaveBreadcrumb("Hotel checkout start");
+            HotelsCrossParameters crossParams = navigationParams as HotelsCrossParameters;
+        }
     }
 }

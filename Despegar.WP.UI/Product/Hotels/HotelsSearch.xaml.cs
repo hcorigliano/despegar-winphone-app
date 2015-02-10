@@ -1,8 +1,6 @@
 ﻿using Despegar.Core.Neo.Business.CustomErrors;
-using Despegar.WP.UI.BugSense;
-using Despegar.WP.UI.Common;
+using Despegar.Core.Neo.InversionOfControl;
 using Despegar.WP.UI.Controls;
-using Despegar.WP.UI.Model;
 using Despegar.WP.UI.Model.Common;
 using Despegar.WP.UI.Model.ViewModel;
 using Despegar.WP.UI.Model.ViewModel.Hotels;
@@ -11,17 +9,8 @@ using Windows.ApplicationModel.Resources;
 using Windows.Phone.UI.Input;
 using Windows.UI.Popups;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Navigation;
-using Windows.Devices.Geolocation;
-using System.Threading;
-using System.Threading.Tasks;
-
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 using Windows.UI.Xaml.Input;
-using Despegar.Core.Neo.InversionOfControl;
+using Windows.UI.Xaml.Navigation;
 
 
 namespace Despegar.WP.UI.Product.Hotels

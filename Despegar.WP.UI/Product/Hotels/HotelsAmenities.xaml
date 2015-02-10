@@ -7,10 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     xmlns:conv="using:Despegar.WP.UI.Common.Converter"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
-    
-    >
-    
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Page.BottomAppBar>
         <CommandBar>
@@ -50,5 +47,4 @@
         <ListView Grid.Row="2" ItemTemplate="{StaticResource HotelDisplayTemplate}" DataContext="{Binding}"  ItemsSource="{Binding}"  >
         </ListView>
     </Grid>
-</Page>
-    
+</Page>   

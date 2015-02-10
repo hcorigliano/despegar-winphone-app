@@ -202,7 +202,7 @@
     <Compile Include="Business\Hotels\InstallmentFormatted.cs" />
     <Compile Include="Business\Hotels\Paging.cs" />
     <Compile Include="Business\Hotels\SearchBox\HotelSearchModel.cs" />
-    <Compile Include="Business\Hotels\SearchDetails.cs" />
+    <Compile Include="Business\Hotels\HotelsSearchParameters.cs" />
     <Compile Include="Business\Hotels\UserReviews\Averageable.cs" />
     <Compile Include="Business\Hotels\UserReviews\Description.cs" />
     <Compile Include="Business\Hotels\UserReviews\HotelUserReviews.cs" />
