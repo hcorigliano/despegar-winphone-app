@@ -1,0 +1,259 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <MinimumVisualStudioVersion>11.0</MinimumVisualStudioVersion>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{DE72DBFD-6794-40BA-8615-276D4AE7CFE3}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Despegar.Core.Neo</RootNamespace>
+    <AssemblyName>Despegar.Core.Neo</AssemblyName>
+    <DefaultLanguage>en-US</DefaultLanguage>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <TargetFrameworkProfile>Profile111</TargetFrameworkProfile>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="API\V1\APIv1.cs" />
+    <Compile Include="API\MAPI\MAPICross.cs" />
+    <Compile Include="API\V3\APIv3.cs" />
+    <Compile Include="Contract\API\IAPIv1.cs" />
+    <Compile Include="Contract\API\IAPIv3.cs" />
+    <Compile Include="Contract\API\IMAPICross.cs" />
+    <Compile Include="Contract\Connector\IApiv1Connector.cs" />
+    <Compile Include="Contract\Connector\IApiv3Connector.cs" />
+    <Compile Include="Contract\Connector\IUPAConnector.cs" />
+    <Compile Include="Contract\ICoreContext.cs" />
+    <Compile Include="Contract\API\IMAPICoupons.cs" />
+    <Compile Include="Contract\API\IMAPIHotels.cs" />
+    <Compile Include="Contract\API\IUPAService.cs" />
+    <Compile Include="CoreContext.cs" />
+    <Compile Include="API\MAPI\MAPICoupons.cs" />
+    <Compile Include="API\MAPI\MAPIHotels.cs" />
+    <Compile Include="API\MAPI\MAPIFlights.cs" />
+    <Compile Include="API\UPA\UPAService.cs" />
+    <Compile Include="Business\Bindable.cs" />
+    <Compile Include="Business\BusinessModelBase.cs" />
+    <Compile Include="Business\Common\Checkout\Address.cs" />
+    <Compile Include="Business\Common\Checkout\CardField.cs" />
+    <Compile Include="Business\Common\Checkout\EmailConfirmField.cs" />
+    <Compile Include="Business\Common\Checkout\Expiration.cs" />
+    <Compile Include="Business\Common\Checkout\Installment.cs" />
+    <Compile Include="Business\Common\Checkout\InvoiceArg.cs" />
+    <Compile Include="Business\Common\Checkout\Option.cs" />
+    <Compile Include="Business\Common\Checkout\OwnerDocument.cs" />
+    <Compile Include="Business\Common\Checkout\Phone.cs" />
+    <Compile Include="Business\Common\Checkout\RegularField.cs" />
+    <Compile Include="Business\Common\Checkout\RegularOptionsField.cs" />
+    <Compile Include="Business\Common\Checkout\Validation.cs" />
+    <Compile Include="Business\Common\Checkout\Voucher.cs" />
+    <Compile Include="Business\Common\CustomErrors\CustomError.cs" />
+    <Compile Include="Business\Common\State\State.cs" />
+    <Compile Include="Business\Configuration\CitiesFields.cs" />
+    <Compile Include="Business\Configuration\Configuration.cs" />
+    <Compile Include="Business\Configuration\Contact.cs" />
+    <Compile Include="Business\Configuration\Countries.cs" />
+    <Compile Include="Business\Configuration\CountryFields.cs" />
+    <Compile Include="Business\Configuration\Domain.cs" />
+    <Compile Include="Business\Configuration\Product.cs" />
+    <Compile Include="Business\Configuration\Site.cs" />
+    <Compile Include="Business\Configuration\UpaField.cs" />
+    <Compile Include="Business\Configuration\UpdateFields.cs" />
+    <Compile Include="Business\Coupons\CouponParameter.cs" />
+    <Compile Include="Business\Coupons\CouponResponse.cs" />
+    <Compile Include="Business\CreditCard\ValidationCreditcards.cs" />
+    <Compile Include="Business\Enums\BookingStatusEnum.cs" />
+    <Compile Include="Business\Enums\FlightSearchChildEnum.cs" />
+    <Compile Include="Business\Enums\FlightSearchPagesEnum.cs" />
+    <Compile Include="Business\Flight\BookingCompletePostResponse\Answers.cs" />
+    <Compile Include="Business\Flight\BookingCompletePostResponse\BookingCompletePostResponse.cs" />
+    <Compile Include="Business\Flight\BookingCompletePostResponse\FreeTextDescription.cs" />
+    <Compile Include="Business\Flight\BookingCompletePostResponse\RiskQuestion.cs" />
+    <Compile Include="Business\Flight\BookingCompletePost\Address.cs" />
+    <Compile Include="Business\Flight\BookingCompletePost\BookingCompletePost.cs" />
+    <Compile Include="Business\Flight\BookingCompletePost\Card.cs" />
+    <Compile Include="Business\Flight\BookingCompletePost\Comment.cs" />
+    <Compile Include="Business\Flight\BookingCompletePost\Contact.cs" />
+    <Compile Include="Business\Flight\BookingCompletePost\Document.cs" />
+    <Compile Include="Business\Flight\BookingCompletePost\ExternalDebit.cs" />
+    <Compile Include="Business\Flight\BookingCompletePost\Form.cs" />
+    <Compile Include="Business\Flight\BookingCompletePost\Installment.cs" />
+    <Compile Include="Business\Flight\BookingCompletePost\Invoice.cs" />
+    <Compile Include="Business\Flight\BookingCompletePost\OfflinePayment.cs" />
+    <Compile Include="Business\Flight\BookingCompletePost\Passenger.cs" />
+    <Compile Include="Business\Flight\BookingCompletePost\Payment.cs" />
+    <Compile Include="Business\Flight\BookingCompletePost\Phone.cs" />
+    <Compile Include="Business\Flight\BookingCompletePost\RiskAnswer.cs" />
+    <Compile Include="Business\Flight\BookingCompletePost\TypeAndNumber.cs" />
+    <Compile Include="Business\Flight\BookingFields\Birthdate.cs" />
+    <Compile Include="Business\Flight\BookingFields\Card.cs" />
+    <Compile Include="Business\Flight\BookingFields\Comment.cs" />
+    <Compile Include="Business\Flight\BookingFields\Contact.cs" />
+    <Compile Include="Business\Flight\BookingFields\Currency.cs" />
+    <Compile Include="Business\Flight\BookingFields\Document.cs" />
+    <Compile Include="Business\Flight\BookingFields\FlightBookingFields.cs" />
+    <Compile Include="Business\Flight\BookingFields\FlightsBookingFieldRequest.cs" />
+    <Compile Include="Business\Flight\BookingFields\Form.cs" />
+    <Compile Include="Business\Flight\BookingFields\Installments.cs" />
+    <Compile Include="Business\Flight\BookingFields\Passenger.cs" />
+    <Compile Include="Business\Flight\BookingFields\Payment.cs" />
+    <Compile Include="Business\Flight\BookingFields\PaymentDetail.cs" />
+    <Compile Include="Business\Flight\BookingFields\Payments.cs" />
+    <Compile Include="Business\Flight\BookingFields\Price.cs" />
+    <Compile Include="Business\Flight\BookingFields\PriceFormated.cs" />
+    <Compile Include="Business\Flight\CitiesAutocomplete\CitiesAutocomplete.cs" />
+    <Compile Include="Business\Flight\CitiesAutocomplete\City.cs" />
+    <Compile Include="Business\Flight\CitiesAutocomplete\CityAutocomplete.cs" />
+    <Compile Include="Business\Flight\CitiesAutocomplete\GeoLocation.cs" />
+    <Compile Include="Business\Flight\InstallmentFormatted.cs" />
+    <Compile Include="Business\Flight\Itineraries\Airline.cs" />
+    <Compile Include="Business\Flight\Itineraries\Airport.cs" />
+    <Compile Include="Business\Flight\Itineraries\CheapestPrice.cs" />
+    <Compile Include="Business\Flight\Itineraries\Currencies.cs" />
+    <Compile Include="Business\Flight\Itineraries\Currency.cs" />
+    <Compile Include="Business\Flight\Itineraries\Facet.cs" />
+    <Compile Include="Business\Flight\Itineraries\FlightsItineraries.cs" />
+    <Compile Include="Business\Flight\Itineraries\Item.cs" />
+    <Compile Include="Business\Flight\Itineraries\OperatedBy.cs" />
+    <Compile Include="Business\Flight\Itineraries\Paging.cs" />
+    <Compile Include="Business\Flight\Itineraries\Route.cs" />
+    <Compile Include="Business\Flight\Itineraries\Segment.cs" />
+    <Compile Include="Business\Flight\Itineraries\Sorting.cs" />
+    <Compile Include="Business\Flight\Itineraries\Value.cs" />
+    <Compile Include="Business\Flight\Itineraries\Value2.cs" />
+    <Compile Include="Business\Flight\Itineraries\Value3.cs" />
+    <Compile Include="Business\Flight\SearchBox\FlightMultipleSegment.cs" />
+    <Compile Include="Business\Flight\SearchBox\FlightSearchModel.cs" />
+    <Compile Include="Business\Forms\BookingFormBuilder.cs" />
+    <Compile Include="Business\Hotels\Amenity.cs" />
+    <Compile Include="Business\Hotels\BookingFields\AdditionalData.cs" />
+    <Compile Include="Business\Hotels\BookingFields\BookingFields.cs" />
+    <Compile Include="Business\Hotels\BookingFields\Card.cs" />
+    <Compile Include="Business\Hotels\BookingFields\CheckoutMethod.cs" />
+    <Compile Include="Business\Hotels\BookingFields\CheckoutMethodKey.cs" />
+    <Compile Include="Business\Hotels\BookingFields\Contact.cs" />
+    <Compile Include="Business\Hotels\BookingFields\Currency.cs" />
+    <Compile Include="Business\Hotels\BookingFields\Fees.cs" />
+    <Compile Include="Business\Hotels\BookingFields\Form.cs" />
+    <Compile Include="Business\Hotels\BookingFields\HotelPayment.cs" />
+    <Compile Include="Business\Hotels\BookingFields\Installments.cs" />
+    <Compile Include="Business\Hotels\BookingFields\ItemPrice.cs" />
+    <Compile Include="Business\Hotels\BookingFields\Items.cs" />
+    <Compile Include="Business\Hotels\BookingFields\ItemsKey.cs" />
+    <Compile Include="Business\Hotels\BookingFields\Nightly.cs" />
+    <Compile Include="Business\Hotels\BookingFields\Passenger.cs" />
+    <Compile Include="Business\Hotels\BookingFields\PaymentForm.cs" />
+    <Compile Include="Business\Hotels\BookingFields\PaymentOptions.cs" />
+    <Compile Include="Business\Hotels\BookingFields\PriceDestination.cs" />
+    <Compile Include="Business\Hotels\CitiesAvailability\CitiesAvailability.cs" />
+    <Compile Include="Business\Hotels\CitiesAvailability\Currencies.cs" />
+    <Compile Include="Business\Hotels\CitiesAvailability\Extra.cs" />
+    <Compile Include="Business\Hotels\CitiesAvailability\Facet.cs" />
+    <Compile Include="Business\Hotels\CitiesAvailability\Hotel.cs" />
+    <Compile Include="Business\Hotels\CitiesAvailability\HotelItem.cs" />
+    <Compile Include="Business\Hotels\CitiesAvailability\IdCodeAndName.cs" />
+    <Compile Include="Business\Hotels\CitiesAvailability\MaxAndMin.cs" />
+    <Compile Include="Business\Hotels\CitiesAvailability\NearbyCity.cs" />
+    <Compile Include="Business\Hotels\CitiesAvailability\Price.cs" />
+    <Compile Include="Business\Hotels\CitiesAvailability\SearchedCity.cs" />
+    <Compile Include="Business\Hotels\CitiesAvailability\Sorting.cs" />
+    <Compile Include="Business\Hotels\CitiesAvailability\Value.cs" />
+    <Compile Include="Business\Hotels\City.cs" />
+    <Compile Include="Business\Hotels\Currency.cs" />
+    <Compile Include="Business\Hotels\CustomUserReviews\CustomReviewsItem.cs" />
+    <Compile Include="Business\Hotels\CustomUserReviews\CustomUserReviews.cs" />
+    <Compile Include="Business\Hotels\GeoLocation.cs" />
+    <Compile Include="Business\Hotels\HotelDetails\BedOption.cs" />
+    <Compile Include="Business\Hotels\HotelDetails\CancellationPolicy.cs" />
+    <Compile Include="Business\Hotels\HotelDetails\CheckoutConditions.cs" />
+    <Compile Include="Business\Hotels\HotelDetails\Hotel.cs" />
+    <Compile Include="Business\Hotels\HotelDetails\HotelDatails.cs" />
+    <Compile Include="Business\Hotels\HotelDetails\Layout.cs" />
+    <Compile Include="Business\Hotels\HotelDetails\MealPlan.cs" />
+    <Compile Include="Business\Hotels\HotelDetails\Price.cs" />
+    <Compile Include="Business\Hotels\HotelDetails\Room.cs" />
+    <Compile Include="Business\Hotels\HotelDetails\RoomAvailability.cs" />
+    <Compile Include="Business\Hotels\HotelDetails\Roompack.cs" />
+    <Compile Include="Business\Hotels\HotelDetails\Time.cs" />
+    <Compile Include="Business\Hotels\HotelsAutocomplete\HotelAutocomplete.cs" />
+    <Compile Include="Business\Hotels\HotelsAutocomplete\HotelsAutocomplete.cs" />
+    <Compile Include="Business\Hotels\HotelsBookingFieldsRequest.cs" />
+    <Compile Include="Business\Hotels\HotelsExtraData.cs" />
+    <Compile Include="Business\Hotels\InstallmentFormatted.cs" />
+    <Compile Include="Business\Hotels\Paging.cs" />
+    <Compile Include="Business\Hotels\SearchBox\HotelSearchModel.cs" />
+    <Compile Include="Business\Hotels\HotelsSearchParameters.cs" />
+    <Compile Include="Business\Hotels\UserReviews\Averageable.cs" />
+    <Compile Include="Business\Hotels\UserReviews\Description.cs" />
+    <Compile Include="Business\Hotels\UserReviews\HotelUserReviews.cs" />
+    <Compile Include="Business\Hotels\UserReviews\Item.cs" />
+    <Compile Include="Business\Hotels\UserReviews\MultiLanguageStrings.cs" />
+    <Compile Include="Business\Hotels\UserReviews\Qualifications.cs" />
+    <Compile Include="Business\Hotels\UserReviews\User.cs" />
+    <Compile Include="Business\Hotels\UserReviews\Utility.cs" />
+    <Compile Include="API\Mock.cs" />
+    <Compile Include="API\ServiceURL.cs" />
+    <Compile Include="Connector\Apiv1Connector.cs" />
+    <Compile Include="Connector\Apiv3Connector.cs" />
+    <Compile Include="Connector\ConnectorBase.cs" />
+    <Compile Include="Connector\MapiConnector.cs" />
+    <Compile Include="Connector\UPAConnector.cs" />
+    <Compile Include="Contract\Connector\IConnector.cs" />
+    <Compile Include="Contract\Connector\IMapiConnector.cs" />
+    <Compile Include="Contract\Log\ICoreLogger.cs" />
+    <Compile Include="Contract\API\IMAPIFlights.cs" />
+    <Compile Include="Exception\APIErrorException.cs" />
+    <Compile Include="Exception\EmptyWebResponseException.cs" />
+    <Compile Include="Exception\HTTPStatusErrorException.cs" />
+    <Compile Include="Exception\JsonSerializerException.cs" />
+    <Compile Include="Exception\MAPIError.cs" />
+    <Compile Include="Exception\WebConnectivityException.cs" />
+    <Compile Include="InversionOfControl\CoreModule.cs" />
+    <Compile Include="InversionOfControl\IoC.cs" />
+    <Compile Include="InversionOfControl\CoreBasicModule.cs" />
+    <Compile Include="Contract\Log\IBugTracker.cs" />
+    <Compile Include="Log\CoreLogger.cs" />
+    <Compile Include="Log\EmptyBugTracker.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Autofac">
+      <HintPath>..\packages\Autofac.3.5.2\lib\portable-net4+sl5+netcore45+wpa81+wp8+MonoAndroid1+MonoTouch1\Autofac.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.7\lib\portable-net45+wp80+win8+wpa81+aspnetcore50\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

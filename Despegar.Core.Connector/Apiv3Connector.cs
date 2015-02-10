@@ -1,4 +1,4 @@
-﻿using Despegar.Core.Log;
+﻿using Despegar.Core.Neo.Log;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,7 +6,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Despegar.Core.Connector
+namespace Despegar.Core.Neo.Connector
 {
     public class Apiv3Connector : ConnectorBase
     {

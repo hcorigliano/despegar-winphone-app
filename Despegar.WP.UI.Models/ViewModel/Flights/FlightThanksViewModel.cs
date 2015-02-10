@@ -1,4 +1,4 @@
-﻿using Despegar.Core.Log;
+﻿using Despegar.Core.Neo.Contract.Log;
 using Despegar.WP.UI.Model.Interfaces;
 using Despegar.WP.UI.Model.ViewModel.Classes;
 using Despegar.WP.UI.Model.ViewModel.Classes.Flights;
@@ -9,12 +9,18 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
 {
     public class FlightThanksViewModel : ViewModelBase
     {
-        private INavigator navigator;
         public FlightsCrossParameter flightCrossParameters { get; set; }
 
-        public FlightThanksViewModel(INavigator nav, IBugTracker t) : base(t) 
+        public FlightThanksViewModel(INavigator nav, IBugTracker t)
+            : base(nav,t) 
         {
-            this.navigator = nav;
+        }
+
+        public override void OnNavigated(object navigationParams)
+        {
+             BugTracker.LeaveBreadcrumb("Flight Thanks View");
+             BugTracker.LogEvent("Flight Purchase " + GlobalConfiguration.Site);
+             this.flightCrossParameters = navigationParams as FlightsCrossParameter;
         }
 
         public ICommand NavigateToHomeCommand
@@ -27,8 +33,8 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
 
         private void NavigateToHome()
         {
-            navigator.GoTo(ViewModelPages.Home, new HomeParameters() { ClearStack = true });            
+            Navigator.GoTo(ViewModelPages.Home, new HomeParameters() { ClearStack = true });            
         }
-       
+        
     }
 }

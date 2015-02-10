@@ -1,4 +1,4 @@
-﻿using Despegar.Core.Log;
+﻿using Despegar.Core.Neo.Log;
 using Despegar.WP.UI.Controls.PhotoGallery;
 using Despegar.WP.UI.Model.Interfaces;
 using Despegar.WP.UI.Product.Flights;
@@ -48,6 +48,12 @@ namespace Despegar.WP.UI.Common
                 case ViewModelPages.FlightsResults:
                     view = typeof(FlightResults);
                     break;
+                case ViewModelPages.FlightsFilters:
+                    view = typeof(FlightFilters);
+                    break;
+                case ViewModelPages.FlightsOrderBy:
+                    view = typeof(FlightSortBy);
+                    break;
                 case ViewModelPages.FlightsDetails:
                     view = typeof(FlightDetail);
                     break;
@@ -58,7 +64,7 @@ namespace Despegar.WP.UI.Common
                     view = typeof(FlightThanks);
                     break;
                 case ViewModelPages.HotelsDetails:
-                    view = typeof(HotelsDetails); 
+                    view = typeof(HotelsDetails);
                     break;
                 case ViewModelPages.HotelsSearch:
                     view = typeof(HotelsSearch);
@@ -77,8 +83,6 @@ namespace Despegar.WP.UI.Common
                     break;
                 // Add More pages-viewmodel mappings down here
             }
-
-            Logger.Log("[Navigation] Navigated to page " + page.ToString());
 
             Frame rootFrame = Window.Current.Content as Frame;
 

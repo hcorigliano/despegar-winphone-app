@@ -1,17 +1,17 @@
-﻿using Despegar.Core.Business;
-using Despegar.Core.Connector;
-using Despegar.Core.IService;
-using Despegar.Core.Log;
+﻿using Despegar.Core.Neo.Business;
+using Despegar.Core.Neo.Connector;
+using Despegar.Core.Neo.IService;
+using Despegar.Core.Neo.Log;
 using System.Linq;
 using System;
 using System.Collections.Generic;
 using Windows.Storage;
-using Despegar.Core.Business.Configuration;
+using Despegar.Core.Neo.Business.Configuration;
 
-namespace Despegar.Core.Service
+namespace Despegar.Core.Neo.Service
 {
     /// <summary>
-    /// Core class for the Despegar.Core
+    /// Core class for the Despegar.Core.Neo
     /// It is the main object that the "library" exposes to user code.
     /// There should only exists one CoreContext object in memory for a given application.
     /// </summary>

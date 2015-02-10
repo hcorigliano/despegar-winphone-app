@@ -1,4 +1,4 @@
-﻿using Despegar.Core.Business.Flight.CitiesAutocomplete;
+﻿using Despegar.Core.Neo.Business.Flight.CitiesAutocomplete;
 using Despegar.WP.UI.Common;
 using System;
 using System.Collections.Generic;

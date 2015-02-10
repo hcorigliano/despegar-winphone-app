@@ -1,4 +1,4 @@
-﻿using Despegar.Core.Business.Hotels;
+﻿using Despegar.Core.Neo.Business.Hotels;
 using Despegar.WP.UI.Model.ViewModel.Hotels;
 using System;
 using System.Collections.Generic;

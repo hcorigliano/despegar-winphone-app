@@ -1,5 +1,6 @@
-﻿using Despegar.Core.Business;
-using Despegar.Core.Business.Hotels.CitiesAvailability;
+﻿using Despegar.Core.Neo.Business;
+using Despegar.Core.Neo.Business.Hotels.CitiesAvailability;
+using Despegar.Core.Neo.InversionOfControl;
 using Despegar.WP.UI.BugSense;
 using Despegar.WP.UI.Common;
 using Despegar.WP.UI.Controls;
@@ -25,12 +26,10 @@ using Windows.UI.Xaml.Navigation;
 
 namespace Despegar.WP.UI.Product.Hotels
 {
-
     public sealed partial class HotelsResults : Page
     {
         private ModalPopup loadingPopup = new ModalPopup(new Loading());
-
-        public HotelsResultsViewModel ViewModel { get; set; }
+        private HotelsResultsViewModel ViewModel { get; set; }
 
         public HotelsResults()
         {
@@ -40,17 +39,18 @@ namespace Despegar.WP.UI.Product.Hotels
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
             HardwareButtons.BackPressed += HardwareButtons_BackPressed;
-            if (ViewModel == null)
+            if (e.NavigationMode == NavigationMode.New)
             {
-                ViewModel = new HotelsResultsViewModel(Navigator.Instance, GlobalConfiguration.CoreContext.GetHotelService(), BugTracker.Instance) { CrossParameters = e.Parameter as HotelsCrossParameters };
-                ViewModel.PropertyChanged += Checkloading;
-                this.DataContext = ViewModel;
-                await ViewModel.Search();
+                
+                    ViewModel = IoC.Resolve<HotelsResultsViewModel>();
+                    ViewModel.PropertyChanged += Checkloading;
+                    ViewModel.OnNavigated(e.Parameter);
+                    await ViewModel.Search();
+                    this.DataContext = ViewModel;                   
+                
+                //if (ViewModel.CitiesAvailability.SearchStatus == SearchStates.SearchAgain)
+                //    await ViewModel.SearchAgaing();
             }
-
-            if (ViewModel.CitiesAvailability.SearchStatus == SearchStates.SearchAgain)
-                await ViewModel.SearchAgaing();
-
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
@@ -61,7 +61,7 @@ namespace Despegar.WP.UI.Product.Hotels
         private void HardwareButtons_BackPressed(object sender, BackPressedEventArgs e)
         {
             e.Handled = true;
-            Navigator.Instance.GoBack();
+            ViewModel.Navigator.GoBack();
         }
 
         private void ReSearchTapped(object sender, TappedRoutedEventArgs e)
@@ -71,7 +71,7 @@ namespace Despegar.WP.UI.Product.Hotels
 
         private void FilterOrSortClick(object sender, RoutedEventArgs e)
         {
-            ViewModel.CitiesAvailability.SearchStatus = SearchStates.SearchAgain;
+            //ViewModel.CitiesAvailability.SearchStatus = SearchStates.SearchAgain;
         }
 
         private void Checkloading(object sender, System.ComponentModel.PropertyChangedEventArgs e)

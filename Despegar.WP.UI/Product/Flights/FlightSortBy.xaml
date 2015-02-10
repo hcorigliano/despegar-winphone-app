@@ -8,21 +8,21 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
+    <Page.BottomAppBar>
+        <CommandBar>
+            <AppBarButton x:Uid="GenericAcceptAppBar" Icon="Accept" Label="Aceptar" Command="{Binding ApplyFilterCommand}"/>
+            <AppBarButton x:Uid="GenericCancelAppBar" Icon="Cancel" Label="Cancelar" Command="{Binding CancelCommand}" />
+        </CommandBar>
+    </Page.BottomAppBar>
 
     <Page.Resources>
         <DataTemplate x:Key="FlightSortByDateTemplate">
             <Grid>
                 <RadioButton GroupName="FlightSortByGroup" Content="{Binding label}" HorizontalAlignment="Left" VerticalAlignment="Top" IsChecked="{Binding selected ,Mode=TwoWay}"/>
-                <!--Style="{StaticResource SegoeLight24}"-->
 			</Grid>
         </DataTemplate>
     </Page.Resources>
-    <Page.BottomAppBar>
-        <CommandBar>
-            <AppBarButton x:Uid="GenericAcceptAppBar" Icon="Accept" Label="Aceptar" Click="AppBarButton_Click"/>
-            <AppBarButton x:Uid="GenericCancelAppBar" Icon="Cancel" Label="Cancelar" Click="AppBarCancelButton_Click" Name="AppBarCancelButton" />
-        </CommandBar>
-    </Page.BottomAppBar>
+    
 
     <Grid Style="{StaticResource MainContainerGrid}">
         <Grid.RowDefinitions>
@@ -34,8 +34,11 @@
         <!-- Title Panel -->
         <Image Grid.Row="0" Style="{StaticResource TopLogo}" />
         <TextBlock Grid.Row="1" Style="{StaticResource PageHeaderSmall}" x:Uid="Page_Order_Title" Text="Order" FontFamily="Segoe WP Semibold" />
-        
-    <ListView Grid.Row="2" Name="lvSelection" DataContext="{Binding Mode=TwoWay}" ItemTemplate="{StaticResource FlightSortByDateTemplate}" ItemsSource="{Binding values}" IsItemClickEnabled="True">
-    </ListView>
+
+        <ListView Grid.Row="2"
+                  ItemTemplate="{StaticResource FlightSortByDateTemplate}"
+                  ItemsSource="{Binding EditableSortingOptions.values}" 
+                  IsItemClickEnabled="True" />
+
     </Grid>
 </Page>

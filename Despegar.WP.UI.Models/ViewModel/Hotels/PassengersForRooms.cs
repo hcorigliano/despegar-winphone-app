@@ -1,4 +1,4 @@
-﻿using Despegar.Core.Business;
+﻿using Despegar.Core.Neo.Business;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -23,8 +23,6 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
                 OnPropertyChanged();
                 OnPropertyChanged("ChildrenOptions");
                 OnPropertyChanged("GeneralMinors");
-
-
             }
         }
 

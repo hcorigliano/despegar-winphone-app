@@ -1,33 +1,57 @@
-using Despegar.Core.Business.Configuration;
-using Despegar.Core.IService;
+using Despegar.Core.Neo.Business.Configuration;
+using Despegar.Core.Neo.Contract.API;
+using Despegar.Core.Neo.Contract.Log;
 using Despegar.WP.UI.Model.Interfaces;
 using Despegar.WP.UI.Model.ViewModel;
+using Despegar.WP.UI.Model.ViewModel.Classes;
 using Despegar.WP.UI.Models.Classes;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using System.Linq;
-using Despegar.WP.UI.Model.ViewModel.Classes;
-using Despegar.Core.Log;
 
 namespace Despegar.WP.UI.Model
 {
     public class HomeViewModel : ViewModelBase
     {
-        private IConfigurationService configurationService;
-        private INavigator Navigator;
+        private IMAPICross mapiService;
 
-        public HomeViewModel(INavigator navigator, IConfigurationService configuracion, HomeParameters parameters, IBugTracker t) : base(t)
+        public HomeViewModel(INavigator navigator, IMAPICross mapiService, IBugTracker t) : base(navigator, t)
         {
             this.Navigator = navigator;
-            this.configurationService = configuracion;
+            this.mapiService = mapiService;           
+        }
+
+        public override void OnNavigated(object navigationParams)
+        {
+            this.BugTracker.LeaveBreadcrumb("Home View");
+            HomeParameters parameters = navigationParams as HomeParameters;
 
             if (parameters != null)
             {
                 if (parameters.ClearStack)
-                    navigator.ClearStack();
+                     Navigator.ClearStack();
+             }
+        }
+
+        public async Task<bool> ValidateAppVersion(string appVersion)
+        {            
+            BugTracker.LeaveBreadcrumb("Validate App Version");   
+
+            try
+            {
+                UpdateFields data = await mapiService.CheckUpdate(appVersion, "8.1", "X", "X");
+
+                BugTracker.LeaveBreadcrumb("Update Service call succesful");
+
+                return data.force_update;
             }
+            catch (Exception)
+            {
+                OnViewModelError("VALIDATE_APP_ERROR");
+                return false;
+            }            
         }
 
         public async Task<List<Product>> GetProducts(string country)
@@ -38,7 +62,7 @@ namespace Despegar.WP.UI.Model
 
             try
             {
-                configuration = await configurationService.GetConfigurations();
+                configuration = await mapiService.GetConfigurations();
             }
             catch (Exception)
             {
@@ -61,15 +85,7 @@ namespace Despegar.WP.UI.Model
                 IsLoading = false;
                 return null;
             }
-        }
-
-        public ICommand NavigateToHotelsLegacy
-        {
-            get
-            {
-                return new RelayCommand(() => { return; }); 
-            }
-        }
+        }        
 
         public ICommand NavigateToHotels
         {
@@ -93,6 +109,6 @@ namespace Despegar.WP.UI.Model
             {
                 return new RelayCommand(() => Navigator.GoTo(ViewModelPages.CountrySelecton, null));
             }
-        }           
+        }
     }
 }

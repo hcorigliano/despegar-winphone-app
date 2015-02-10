@@ -1,5 +1,5 @@
-﻿using Despegar.Core.Business.Flight.BookingFields;
-using Despegar.Core.Business.Hotels.BookingFields;
+﻿using Despegar.Core.Neo.Business.Flight.BookingFields;
+using Despegar.Core.Neo.Business.Hotels.BookingFields;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -84,7 +84,7 @@ namespace Despegar.WP.UI.Common.Converter
             {
                 // Add PayAtDestination "card"
                 var newList = new List<HotelPayment>();
-                newList.Add(new HotelPayment() { card = new Despegar.Core.Business.Hotels.BookingFields.Card() { code = "EFECTIVO" } });
+                newList.Add(new HotelPayment() { card = new Despegar.Core.Neo.Business.Hotels.BookingFields.Card() { code = "EFECTIVO" } });
                 newList.AddRange(cards);
                 
                 return newList;

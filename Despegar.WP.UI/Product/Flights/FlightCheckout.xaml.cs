@@ -1,11 +1,9 @@
-﻿using Despegar.Core.Business.Configuration;
-using Despegar.WP.UI.BugSense;
-using Despegar.WP.UI.Common;
+﻿using Despegar.Core.Neo.Business.Configuration;
+using Despegar.Core.Neo.InversionOfControl;
 using Despegar.WP.UI.Controls;
 using Despegar.WP.UI.Model;
 using Despegar.WP.UI.Model.Common;
 using Despegar.WP.UI.Model.ViewModel;
-using Despegar.WP.UI.Model.ViewModel.Classes.Flights;
 using Despegar.WP.UI.Model.ViewModel.Flights;
 using Despegar.WP.UI.Product.Flights.Checkout;
 using System;
@@ -21,7 +19,6 @@ namespace Despegar.WP.UI.Product.Flights
 {
     public sealed partial class FlightCheckout : Page
     {
-        private NavigationHelper navigationHelper;
         private FlightsCheckoutViewModel ViewModel;
         private ModalPopup loadingPopup = new ModalPopup(new Loading());
         private ModalPopup riskPopup; 
@@ -29,11 +26,6 @@ namespace Despegar.WP.UI.Product.Flights
         public FlightCheckout()
         {
             this.InitializeComponent();
-            this.navigationHelper = new NavigationHelper(this);
-            this.navigationHelper.LoadState += this.NavigationHelper_LoadState;
-
-            HardwareButtons.BackPressed += HardwareButtons_BackPressed;
-
             #if !DEBUG
                 GoogleAnalyticContainer ga = new GoogleAnalyticContainer();
                 ga.Tracker = GoogleAnalytics.EasyTracker.GetTracker();
@@ -41,54 +33,29 @@ namespace Despegar.WP.UI.Product.Flights
             #endif
         }
 
-        /// <summary>
-        /// Gets the <see cref="NavigationHelper"/> associated with this <see cref="Page"/>.
-        /// </summary>
-        public NavigationHelper NavigationHelper
+        protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
-            get { return this.navigationHelper; }
+            if (e.NavigationMode == NavigationMode.New)
+            {
+                HardwareButtons.BackPressed += HardwareButtons_BackPressed;
+
+                ViewModel = IoC.Resolve<FlightsCheckoutViewModel>();
+                ViewModel.OnNavigated(e.Parameter); // Init Checkout 
+                ViewModel.PropertyChanged += Checkloading;
+                ViewModel.ShowRiskReview += this.ShowRisk;
+                ViewModel.HideRiskReview += this.HideRisk;
+                ViewModel.ViewModelError += ErrorHandler;
+                await ViewModel.Init();
+                this.DataContext = ViewModel;
+
+                // Set Defaults values and Country specifics
+                ConfigureFields();
+            }
         }
 
-        /// <summary>
-        /// Populates the page with content passed during navigation.  Any saved state is also
-        /// provided when recreating a page from a prior session.
-        /// </summary>
-        /// <param name="sender">
-        /// The source of the event; typically <see cref="NavigationHelper"/>
-        /// </param>
-        /// <param name="e">Event data that provides both the navigation parameter passed to
-        /// <see cref="Frame.Navigate(Type, Object)"/> when this page was initially requested and
-        /// a dictionary of state preserved by this page during an earlier
-        /// session.  The state will be null the first time a page is visited.</param>
-        private async void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
-            BugTracker.Instance.LeaveBreadcrumb("Flight checkout start");
-            FlightsCrossParameter flightsCrossParameters = e.NavigationParameter as FlightsCrossParameter;
-
-            // Initialize Checkout
-            ViewModel = new FlightsCheckoutViewModel(
-                Navigator.Instance, 
-                GlobalConfiguration.CoreContext.GetFlightService(),
-                GlobalConfiguration.CoreContext.GetCommonService(), 
-                GlobalConfiguration.CoreContext.GetConfigurationService(), 
-                GlobalConfiguration.CoreContext.GetCouponsService(),
-                flightsCrossParameters, 
-                BugTracker.Instance);
-
-            ViewModel.PropertyChanged += Checkloading;
-            ViewModel.ShowRiskReview += this.ShowRisk;
-            ViewModel.HideRiskReview += this.HideRisk;            
-            ViewModel.ViewModelError += ErrorHandler;
-
-            // Init Checkout
-            await ViewModel.Init();
-
-            // Set Defaults values and Country specifics
-            ConfigureFields();
-
-            this.DataContext = ViewModel;
-
-            BugTracker.Instance.LeaveBreadcrumb("Flight checkout ready");
+            HardwareButtons.BackPressed -= HardwareButtons_BackPressed;
         }
 
         private void ShowRisk(Object sender, EventArgs e )
@@ -105,7 +72,7 @@ namespace Despegar.WP.UI.Product.Flights
         # region ** ERROR HANDLING **
         private async void ErrorHandler(object sender, ViewModelErrorArgs e)
         {
-            BugTracker.Instance.LeaveBreadcrumb("Flight checkout Error raised - " + e.ErrorCode);
+            ViewModel.BugTracker.LeaveBreadcrumb("Flight checkout Error raised - " + e.ErrorCode);
 
             ResourceLoader manager = new ResourceLoader();
             MessageDialog dialog;
@@ -129,8 +96,8 @@ namespace Despegar.WP.UI.Product.Flights
                     string phrase = manager.GetString("Flights_Checkout_Card_Data_Card_ERROR_OP_BOOKING_FAILED");
                     dialog = new MessageDialog(String.Format(phrase,ticketid), manager.GetString("Flights_Checkout_ERROR_FORM_ERROR_TITLE"));
                     await dialog.ShowSafelyAsync();
-                    this.navigationHelper.GoBack();
-                    this.navigationHelper.GoBack();
+                    ViewModel.Navigator.GoBack();
+                    ViewModel.Navigator.GoBack();
                     break;   
                case "COMPLETE_BOOKING_CONECTION_FAILED":
                     dialog = new MessageDialog(manager.GetString("Flights_Search_ERROR_SEARCH_FAILED"), manager.GetString("Flights_Checkout_ERROR_FORM_ERROR_TITLE"));
@@ -139,7 +106,7 @@ namespace Despegar.WP.UI.Product.Flights
                case "CHECKOUT_INIT_FAILED":
                     dialog = new MessageDialog(manager.GetString("Flights_Search_ERROR_SEARCH_FAILED"), manager.GetString("Flights_Checkout_ERROR_FORM_ERROR_TITLE"));
                     await dialog.ShowSafelyAsync();
-                    this.navigationHelper.GoBack();
+                    ViewModel.Navigator.GoBack();
                     break;
                case "ONLINE_PAYMENT_ERROR_NEW_CREDIT_CARD":
                     dialog = new MessageDialog(manager.GetString("Flights_Checkout_Card_Data_Card_ERROR_NEW_CREDIT_CARD"), manager.GetString("Flights_Checkout_ERROR_FORM_ERROR_TITLE"));
@@ -165,8 +132,9 @@ namespace Despegar.WP.UI.Product.Flights
                 case "COMPLETE_BOOKING_BOOKING_FAILED":
                     dialog = new MessageDialog(manager.GetString("Flights_Search_ERROR_BOOKING_FAILED"), manager.GetString("Flights_Checkout_ERROR_FORM_ERROR_TITLE"));
                     await dialog.ShowSafelyAsync();
-                    this.navigationHelper.GoBack();
-                    this.navigationHelper.GoBack();
+                    // Go back to Results
+                    ViewModel.Navigator.RemoveBackEntry();
+                    ViewModel.Navigator.GoBack();
                     break;
                 case "VOUCHER_VALIDITY_ERROR":
                     dialog = new MessageDialog(manager.GetString("Voucher_ERROR_" + (string)e.Parameter), manager.GetString("Voucher_ERROR_TITLE"));
@@ -184,7 +152,6 @@ namespace Despegar.WP.UI.Product.Flights
         {
             try
             {
-                // TODO: Refactor GLOVAL COnfig to return the current Configuration, and not query it here.
                 Configuration conf = GlobalConfiguration.CoreContext.GetConfiguration();
 
                 if (conf == null) return String.Empty;
@@ -195,7 +162,6 @@ namespace Despegar.WP.UI.Product.Flights
             } 
             catch(Exception )
             {
-                //BugTracker.Instance.LogException(e);
                 //TODO add logs
                 return String.Empty;
             }
@@ -232,48 +198,19 @@ namespace Despegar.WP.UI.Product.Flights
 
         void HardwareButtons_BackPressed(object sender, BackPressedEventArgs e)
         {
-            if (ViewModel != null)
+            e.Handled = true;
+
+            if (ViewModel.IsLoading)
+                return;
+
+            if (ViewModel.NationalityIsOpen)
             {
-                if (ViewModel.IsLoading )
-                {
-                    e.Handled = true;
-                }
-                if (ViewModel.NationalityIsOpen)
-                {
-                    e.Handled = true;
-                    ViewModel.NationalityIsOpen = false;
-                }
+                ViewModel.NationalityIsOpen = false;
+                return;
             }
+
+            ViewModel.Navigator.GoBack();
         }
 
-        #region NavigationHelper registration
-
-        /// <summary>
-        /// The methods provided in this section are simply used to allow
-        /// NavigationHelper to respond to the page's navigation methods.
-        /// <para>
-        /// Page specific logic should be placed in event handlers for the  
-        /// <see cref="NavigationHelper.LoadState"/>
-        /// and <see cref="NavigationHelper.SaveState"/>.
-        /// The navigation parameter is available in the LoadState method 
-        /// in addition to page state preserved during an earlier session.
-        /// </para>
-        /// </summary>
-        /// <param name="e">Provides data for navigation methods and event
-        /// handlers that cannot cancel the navigation request.</param>
-        protected override void OnNavigatedTo(NavigationEventArgs e)
-        {
-            HardwareButtons.BackPressed += HardwareButtons_BackPressed;
-            this.navigationHelper.OnNavigatedTo(e);
-        }
-
-        protected override void OnNavigatedFrom(NavigationEventArgs e)
-        {
-            HardwareButtons.BackPressed -= HardwareButtons_BackPressed;
-            this.navigationHelper.OnNavigatedFrom(e);
-        }
-
-        #endregion
-     
     }
 }

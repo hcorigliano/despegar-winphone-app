@@ -1,22 +1,16 @@
-﻿using Despegar.Core.Business.Enums;
-using Despegar.Core.Log;
-using Despegar.WP.UI.Model.Classes;
+﻿using Despegar.Core.Neo.Business;
+using Despegar.Core.Neo.Business.Enums;
 using Despegar.WP.UI.Model.Classes.Flights;
 using Despegar.WP.UI.Models.Controls.Classes;
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using Windows.ApplicationModel.Resources;
 
 namespace Despegar.WP.UI.Model.ViewModel.Flights
 {
     
-    public class PassengersViewModel : ViewModelBase
+    public class PassengersViewModel : Bindable
     {
         public ObservableCollection<Minor> MinorsList { get; set; }
 
@@ -96,7 +90,7 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
             }
         }
 
-        public PassengersViewModel(IBugTracker t) : base(t)
+        public PassengersViewModel()
         {
             this.GeneralAdults = 1;
             this.GeneralMinors = 0;
