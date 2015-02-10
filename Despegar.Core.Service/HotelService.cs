@@ -41,6 +41,14 @@ namespace Despegar.Core.Neo.Service
             return await connector.GetAsync<CitiesAvailability>(serviceUrl);            
         }
 
+        public async Task<CitiesAvailability> GetHotelsAvailabilityByGeo(string checkin, string checkout, string distribution, double latitud, double longitud)
+        {
+            string serviceUrl = String.Format(ServiceURL.GetServiceURL(ServiceKey.HotelsAvailabilityByGeo), checkin, checkout, distribution, latitud.ToString().Replace(",","."), longitud.ToString().Replace(",","."));
+            IConnector connector = context.GetServiceConnector(ServiceKey.HotelsAvailabilityByGeo);
+
+            return await connector.GetAsync<CitiesAvailability>(serviceUrl);
+        }
+
         public async Task<HotelDatails> GetHotelsDetail(string idHotel, string checkin, string checkout, string distribution)
         {
             string serviceUrl = String.Format(ServiceURL.GetServiceURL(ServiceKey.HotelsGetDetails), idHotel, checkin, checkout, distribution);

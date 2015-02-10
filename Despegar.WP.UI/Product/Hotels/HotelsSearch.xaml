@@ -43,7 +43,8 @@
                     <RowDefinition />
                 </Grid.RowDefinitions>
 
-                <Grid Grid.Row="0">
+
+                <Grid Grid.Row="0" Tapped="Grid_Tapped" Background="Transparent">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="Auto"/>
@@ -59,10 +60,12 @@
                             <RowDefinition/>
                         </Grid.RowDefinitions>
 
-                        <TextBlock  Grid.Row="0" x:Uid="Page_HotelsSearch_Promo_Title" Style="{StaticResource SegoeLight24}" Text="Hotel para hoy" />
+                        <TextBlock  Grid.Row="0" x:Uid="Page_HotelsSearch_Promo_Title" Style="{StaticResource SegoeLight24}" Text="Hoteles para hoy" />
                         <TextBlock  Grid.Row="1" x:Uid="Page_HotelsSearch_Promo_SubTitle" Style="{StaticResource SegoeRegular17}" Text="Hotel cercano para esta noche" />
                     </Grid>
                 </Grid>
+
+                
 
                 <src:SearchHotelControl Grid.Row="1"   
                                         SelectedDestinationCode="{Binding DestinationCode, Mode=TwoWay}"  

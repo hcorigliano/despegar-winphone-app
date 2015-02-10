@@ -11,6 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Windows.Devices.Geolocation;
 
 namespace Despegar.WP.UI.Model.ViewModel.Hotels
 {
@@ -20,6 +21,8 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
         public IHotelService hotelService { get; set; }
         private HotelSearchModel coreSearchModel;
         public RoomsViewModel RoomsViewModel { get; set; }
+        private Geolocator geolocator = null;
+
 
         public HotelsSearchViewModel(INavigator navigator, IHotelService hotelService, IBugTracker t) : base(t)
         {
@@ -30,6 +33,7 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
             this.coreSearchModel.EmissionAnticipationDay = GlobalConfiguration.GetEmissionAnticipationDayForHotels();
             this.coreSearchModel.LastAvailableHours = GlobalConfiguration.GetLastAvailableHoursForHotels();
             this.DestinationType = string.Empty;
+            this.geolocator = new Geolocator();
             coreSearchModel.UpdateSearchDays();
         }
 
@@ -100,6 +104,14 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
             }
         }
 
+        public ICommand GetPositionCommand
+        {
+            get
+            {
+                return new RelayCommand(() => GetPosition());
+            }
+        }
+
         /// <summary>
         /// Returns the available options for Adults passengers
         /// </summary>
@@ -117,7 +129,36 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
             }
         }
 
-        private void SearchHotels()
+        private async void GetPosition()
+        {
+            try
+            {
+                Geoposition pos = await geolocator.GetGeopositionAsync();
+
+                HotelsCrossParameters hotelCrossParameters = new HotelsCrossParameters();
+                hotelCrossParameters.SearchParameters.distribution = "2";
+                hotelCrossParameters.SearchParameters.Checkin = DateTime.Now.ToString("yyyy-MM-dd");
+                hotelCrossParameters.SearchParameters.Checkout = DateTime.Now.AddDays(1).ToString("yyyy-MM-dd");
+                hotelCrossParameters.SearchParameters.latitude = pos.Coordinate.Point.Position.Latitude;
+                hotelCrossParameters.SearchParameters.longitude = pos.Coordinate.Point.Position.Longitude;
+
+                Navigator.GoTo(ViewModelPages.HotelsResults, hotelCrossParameters);
+
+
+            }
+            catch (System.UnauthorizedAccessException)
+            {
+                
+                throw;
+            }
+            catch (TaskCanceledException)
+            {
+
+            }
+
+        }
+
+        private async void SearchHotels()
         {
 
             UpdatePassengers();
@@ -125,15 +166,26 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
             if (coreSearchModel.IsValid)
             {
                // IsLoading = true;
-                Tracker.LeaveBreadcrumb("Flight search performed");
+                Tracker.LeaveBreadcrumb("Hotel search performed");
 
                 HotelsCrossParameters hotelCrossParameters = new HotelsCrossParameters();
                 hotelCrossParameters.SearchParameters.distribution = BuildDistributionString();
                 hotelCrossParameters.SearchParameters.Checkin = coreSearchModel.DepartureDate.Date.ToString("yyyy-MM-dd");
                 hotelCrossParameters.SearchParameters.Checkout = coreSearchModel.DestinationDate.Date.ToString("yyyy-MM-dd");
-                hotelCrossParameters.SearchParameters.destinationNumber = coreSearchModel.DestinationCode;
+               
+                if (coreSearchModel.DestinationCode != 0)
+                {
+                    hotelCrossParameters.SearchParameters.destinationNumber = coreSearchModel.DestinationCode;
+                }
+                else
+                {
+                    Geoposition pos = await geolocator.GetGeopositionAsync();
+                    hotelCrossParameters.SearchParameters.latitude = pos.Coordinate.Point.Position.Latitude;
+                    hotelCrossParameters.SearchParameters.longitude = pos.Coordinate.Point.Position.Longitude;
+                }
 
-                if (this.DestinationType == "city")
+
+                if (this.DestinationType == "city" || this.DestinationType == "geo" )
                 {
                     Navigator.GoTo(ViewModelPages.HotelsResults, hotelCrossParameters);
                 }

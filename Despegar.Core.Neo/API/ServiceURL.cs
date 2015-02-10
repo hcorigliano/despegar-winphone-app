@@ -7,6 +7,7 @@ namespace Despegar.Core.Neo.API
     {
         HotelUserReview,
         HotelsAvailability,
+        HotelsAvailabilityByGeo,
         HotelsAutocomplete,
         HotelsGetDetails,
         HotelsBookingFields,
@@ -32,6 +33,7 @@ namespace Despegar.Core.Neo.API
         private static readonly Dictionary<ServiceKey, string> serviceURLRepo = new Dictionary<ServiceKey, string>
         {
             {ServiceKey.HotelsAvailability, "mapi-hotels/availability?checkin_date={0}&checkout_date={1}&destination={2}&distribution={3}&currency_code={4}&offset={5}&limit={6}&{7}" },
+            {ServiceKey.HotelsAvailabilityByGeo, "mapi-hotels/availability?checkin_date={0}&checkout_date={1}&distribution={2}&latitude={3}&longitude={4}" },
             {ServiceKey.HotelsAutocomplete, "mapi-cross/autocomplete/hotels?search={0}" },
             //{ServiceKey.HotelsAutocomplete, "mapi-cross/autocomplete/hotels?search={0}" },
             {ServiceKey.HotelsGetDetails , "mapi-hotels/availability/{0}?checkin_date={1}&checkout_date={2}&distribution={3}"},
