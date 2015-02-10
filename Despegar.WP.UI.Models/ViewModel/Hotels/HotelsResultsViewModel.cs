@@ -165,6 +165,7 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
             {
                 CitiesAvailability = await hotelService.GetHotelsAvailabilityByGeo(CrossParameters.SearchParameters.Checkin, CrossParameters.SearchParameters.Checkout, CrossParameters.SearchParameters.distribution, CrossParameters.SearchParameters.latitude, CrossParameters.SearchParameters.longitude);
             }
+
             //RefreshIcons();
             IsLoading = false;
         }

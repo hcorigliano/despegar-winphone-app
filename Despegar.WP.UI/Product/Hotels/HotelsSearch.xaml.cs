@@ -1,4 +1,4 @@
-﻿using Despegar.Core.Business.CustomErrors;
+﻿using Despegar.Core.Neo.Business.CustomErrors;
 using Despegar.WP.UI.BugSense;
 using Despegar.WP.UI.Common;
 using Despegar.WP.UI.Controls;
@@ -20,6 +20,8 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Windows.UI.Xaml.Input;
+using Despegar.Core.Neo.InversionOfControl;
 
 
 namespace Despegar.WP.UI.Product.Hotels
@@ -29,7 +31,6 @@ namespace Despegar.WP.UI.Product.Hotels
         public HotelsSearchViewModel ViewModel { get; set; }
         private ModalPopup loadingPopup = new ModalPopup(new Loading());
 
-
         public HotelsSearch()
         {
             this.InitializeComponent();
@@ -38,21 +39,13 @@ namespace Despegar.WP.UI.Product.Hotels
         # region ** ERROR HANDLING **
         private async void ErrorHandler(object sender, ViewModelErrorArgs e)
         {
-            SplunkMintBugTracker.Instance.LeaveBreadcrumb("Flight search Error Raised: " + e.ErrorCode);
+            ViewModel.BugTracker.LeaveBreadcrumb("Flight search Error Raised: " + e.ErrorCode);
 
             ResourceLoader manager = new ResourceLoader();
             MessageDialog dialog;
 
             switch (e.ErrorCode)
             {
-                //case "SEARCH_FAILED":
-                //    dialog = new MessageDialog(manager.GetString("Flights_Search_ERROR_SEARCH_FAILED"), manager.GetString("Flights_Search_ERROR_SEARCH_FAILED_TITLE"));
-                //    await dialog.ShowSafelyAsync();
-                //    break;
-                //case "SEARCH_INVALID":
-                //    dialog = new MessageDialog(manager.GetString("Flights_Search_ERROR_SEARCH_INVALID"), manager.GetString("Flights_Search_ERROR_SEARCH_INVALID_TITLE"));
-                //    await dialog.ShowSafelyAsync();
-                //    break;
                 case "SEARCH_INVALID_WITH_MESSAGE":
                     CustomError message = e.Parameter as CustomError;
                     if (message == null) break;
@@ -74,10 +67,11 @@ namespace Despegar.WP.UI.Product.Hotels
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            ViewModel = new HotelsSearchViewModel(Navigator.Instance, GlobalConfiguration.CoreContext.GetHotelService(), SplunkMintBugTracker.Instance);
+            HardwareButtons.BackPressed += HardwareButtons_BackPressed;
+            ViewModel = IoC.Resolve<HotelsSearchViewModel>();
             ViewModel.PropertyChanged += Checkloading;
             ViewModel.ViewModelError += ErrorHandler;
-            HardwareButtons.BackPressed += HardwareButtons_BackPressed;
+            ViewModel.OnNavigated(null);           
             this.DataContext = ViewModel;
         }
 
@@ -88,7 +82,7 @@ namespace Despegar.WP.UI.Product.Hotels
 
         void HardwareButtons_BackPressed(object sender, BackPressedEventArgs e)
         {
-            SplunkMintBugTracker.Instance.LeaveBreadcrumb("Flight Search View - Back button pressed");
+            ViewModel.BugTracker.LeaveBreadcrumb("Flight Search View - Back button pressed");
 
             if (ViewModel != null)
             {
@@ -115,11 +109,9 @@ namespace Despegar.WP.UI.Product.Hotels
             }
         }
 
-        private void Grid_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
+        private void Grid_Tapped(object sender, TappedRoutedEventArgs e)
         {
             ViewModel.GetPositionCommand.Execute(null);
         }
-
-
     }
 }

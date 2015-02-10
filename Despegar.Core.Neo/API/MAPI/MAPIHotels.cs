@@ -46,14 +46,12 @@ namespace Despegar.Core.Neo.API.MAPI
             return await connector.GetAsync<HotelDatails>(serviceUrl, ServiceKey.HotelsGetDetails);
         }
 
-        //public async Task<CitiesAvailability> GetNearHotelsAvailability(double latitude, double longitude, string checkin, string checkout, string distribution, string currency, int offset , int limit , string sort , string order)
-        //{
-        //    string serviceUrl = String.Format(ServiceURL.GetServiceURL(ServiceKey.HotelsAvailability), latitude, longitude, checkin, checkout, distribution, currency, offset , limit , sort , order);
-        //    IConnector connector = context.GetServiceConnector(ServiceKey.HotelsAutocomplete);
+        public async Task<CitiesAvailability> GetHotelsAvailabilityByGeo(string checkin, string checkout, string distribution, double latitud, double longitud)
+        {
+            string serviceUrl = ServiceURL.GetServiceURL(ServiceKey.HotelsAvailabilityByGeo, checkin, checkout, distribution, latitud.ToString().Replace(",", "."), longitud.ToString().Replace(",", "."));
 
-        //    return await connector.GetAsync<CitiesAvailability>(serviceUrl);
-            
-        //}
+            return await connector.GetAsync<CitiesAvailability>(serviceUrl, ServiceKey.HotelsAvailabilityByGeo);
+        }
 
         public async Task<HotelsBookingFields> GetBookingFields(HotelsBookingFieldsRequest bookingFieldPost)
         {            
