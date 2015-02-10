@@ -191,6 +191,8 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
                 }
                 else
                 {
+                    //The user searched directly for a hotel
+                    hotelCrossParameters.IdSelectedHotel = coreSearchModel.DestinationCode.ToString();
                     Navigator.GoTo(ViewModelPages.HotelsDetails, hotelCrossParameters);
                 }
             }
