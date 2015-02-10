@@ -1054,4 +1054,7 @@ La reserva no ha sido generada y no se le cobrará ningún cargo por la transacc
   <data name="Flights_Search_ERROR_SEARCH_FAILED_TITLE" xml:space="preserve">
     <value>Error</value>
   </data>
+  <data name="Flight_results_ERROR_NO_ITEMS" xml:space="preserve">
+    <value>Desculpe, foi encontrado nenhum resultado para sua pesquisa. Por favor, tente novamente, alterando qualquer um dos critérios.</value>
+  </data>
 </root>

@@ -51,7 +51,7 @@ namespace Despegar.WP.UI.Product.Flights
             switch (e.ErrorCode)
             {
                 case "LOAD_RESULTS_NO_ITEMS":
-                    dialog = new MessageDialog("Lo sentimos, no hemos encontrado ningún resultado para su búsqueda.Por favor, inténtelo nuevamente modificando alguno de los criterios de búsqueda. ");
+                    dialog = new MessageDialog(manager.GetString("Flight_results_ERROR_NO_ITEMS"), "Error");
                     await dialog.ShowSafelyAsync();
                     break;
                 case "LOAD_RESULTS_FAILED":

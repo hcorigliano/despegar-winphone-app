@@ -10,6 +10,7 @@
     xmlns:dev="using:Despegar.WP.UI.Developer.Controls"
     xmlns:conv="using:Despegar.WP.UI.Common.Converter"
     mc:Ignorable="d"
+    
     Style="{StaticResource BasePage}">
     
     <UserControl.Resources>
@@ -55,7 +56,6 @@
                 </ScrollViewer>
             </PivotItem>
 
-
             <PivotItem x:Name="ReturnPivot" x:Uid="Page_Flight_Detail_Return" Header="vuelta" Style="{StaticResource PivotItemBase}" DataContext="{Binding FlightsCrossParameters.Inbound}">
                 <ScrollViewer>
                     <src:FlightsSegmentReturn DataContext="{Binding}"/>
@@ -63,7 +63,7 @@
             </PivotItem>
             
         </Pivot>
-        
+
         <!-- Footer -->
         <Button x:Uid="Buy_Button" Grid.Row="3"  Content="Comprar"  Style="{StaticResource ButtonBottomRed}" Command="{Binding BuyCommand}"/>
         <!--TODO : USAR RESOURCES-->

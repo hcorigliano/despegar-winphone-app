@@ -58,6 +58,9 @@ namespace Despegar.Core.Neo.API
 
         public static string GetServiceURL(ServiceKey key, params object[] values)
         {
+            if (values == null)
+                return serviceURLRepo[key];
+
             return String.Format(serviceURLRepo[key], values);
         }
     }

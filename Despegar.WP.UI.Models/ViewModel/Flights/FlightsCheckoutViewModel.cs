@@ -29,12 +29,11 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
     {
         #region ** Private **
         private ICoreLogger logger;
-        private INavigator navigator;
         private IMAPIFlights flightService;
         private IMAPICross mapiCross;
         private IAPIv1 apiv1Service;
         private IMAPICoupons couponsService;
-        private FlightsCrossParameter flightCrossParameters;
+        private FlightsCrossParameter FlightCrossParameters;
         private ValidationCreditcards creditCardsValidations;
         #endregion
 
@@ -56,9 +55,9 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
         {
             get
             {
-                if(flightCrossParameters.BookingResponse != null)
+                if(FlightCrossParameters.BookingResponse != null)
                 {
-                    return flightCrossParameters.BookingResponse.risk_questions.Where(x => x.free_text == "True").ToList();
+                    return FlightCrossParameters.BookingResponse.risk_questions.Where(x => x.free_text == "True").ToList();
                 }
                 else
                 {
@@ -71,9 +70,9 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
         {
             get
             {
-                if(flightCrossParameters.BookingResponse != null)
+                if(FlightCrossParameters.BookingResponse != null)
                 {
-                    return flightCrossParameters.BookingResponse.risk_questions.Where(x => x.free_text == "False").ToList();
+                    return FlightCrossParameters.BookingResponse.risk_questions.Where(x => x.free_text == "False").ToList();
                 }
                 else
                 {
@@ -347,17 +346,17 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
 
             FlightsBookingFieldRequest book = new FlightsBookingFieldRequest();
 
-            if (flightCrossParameters.Inbound.choice != -1)
-                book.inbound_choice = flightCrossParameters.Inbound.choice; //-1
+            if (FlightCrossParameters.Inbound.choice != -1)
+                book.inbound_choice = FlightCrossParameters.Inbound.choice; //-1
             else
                 book.inbound_choice = null;
             
-            if (flightCrossParameters.Outbound.choice != 0) //TODO: Verificar por que es 0 en multiples
-                book.outbound_choice = flightCrossParameters.Outbound.choice;
+            if (FlightCrossParameters.Outbound.choice != 0) //TODO: Verificar por que es 0 en multiples
+                book.outbound_choice = FlightCrossParameters.Outbound.choice;
             else
                 book.outbound_choice = null;
 
-            book.itinerary_id = flightCrossParameters.FlightId;
+            book.itinerary_id = FlightCrossParameters.FlightId;
             book.mobile_identifier = deviceID;
 
             CoreBookingFields = await flightService.GetBookingFields(book);
@@ -546,20 +545,20 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
                     bookingData = await BookingFormBuilder.BuildFlightsForm(this.CoreBookingFields);
 
                     // Buy
-                    flightCrossParameters.PriceDetail = PriceDetailsFormatted;
-                    flightCrossParameters.BookingResponse = await flightService.CompleteBooking(bookingData, CoreBookingFields.id);
+                    FlightCrossParameters.PriceDetail = PriceDetailsFormatted;
+                    FlightCrossParameters.BookingResponse = await flightService.CompleteBooking(bookingData, CoreBookingFields.id);
 
-                    if (flightCrossParameters.BookingResponse.Error != null) 
+                    if (FlightCrossParameters.BookingResponse.Error != null) 
                     {
-                        BugTracker.LeaveBreadcrumb("Flight checkout MAPI booking error response code: " + flightCrossParameters.BookingResponse.Error.code.ToString());
+                        BugTracker.LeaveBreadcrumb("Flight checkout MAPI booking error response code: " + FlightCrossParameters.BookingResponse.Error.code.ToString());
                         // API Error ocurred, Check CODE and inform the user
-                        OnViewModelError("API_ERROR", flightCrossParameters.BookingResponse.Error.code);
+                        OnViewModelError("API_ERROR", FlightCrossParameters.BookingResponse.Error.code);
                         this.IsLoading = false;
                         return;
                     }
 
                     // Booking processed, check the status of Booking request
-                    AnalizeBookingStatus(flightCrossParameters.BookingResponse.booking_status);
+                    AnalizeBookingStatus(FlightCrossParameters.BookingResponse.booking_status);
                 }
                 catch (HTTPStatusErrorException )
                 {
@@ -627,7 +626,7 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
 
         private bool ValidateAnswers()
         {
-            foreach (RiskQuestion question in flightCrossParameters.BookingResponse.risk_questions)
+            foreach (RiskQuestion question in FlightCrossParameters.BookingResponse.risk_questions)
             {
                 if (question.risk_answer.text == null || question.risk_answer.text == "")
                 {
@@ -649,12 +648,12 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
             {
                 case BookingStatusEnum.checkout_successful:
 
-                    navigator.GoTo(ViewModelPages.FlightsThanks, flightCrossParameters);
+                    Navigator.GoTo(ViewModelPages.FlightsThanks, FlightCrossParameters);
                     break;
 
                 case BookingStatusEnum.booking_failed:
 
-                    OnViewModelError("BOOKING_FAILED", flightCrossParameters.BookingResponse.checkout_id);
+                    OnViewModelError("BOOKING_FAILED", FlightCrossParameters.BookingResponse.checkout_id);
                     break;
 
                 case BookingStatusEnum.fix_credit_card:
@@ -708,26 +707,29 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
 
             field.IsApplied = false;
 
-            CouponParameter parameter = new CouponParameter()
+            if (!String.IsNullOrWhiteSpace(field.CoreValue))
             {
-                Beneficiary = CoreBookingFields.form.contact.email != null ? CoreBookingFields.form.contact.email.CoreValue : "",
-                TotalAmount = CoreBookingFields.price.total.ToString(),
-                CurrencyCode = CoreBookingFields.price.currency.code,
-                Product = "flight",
-                Quotation = String.Format(CultureInfo.InvariantCulture, "{0:0.#################}", CoreBookingFields.price.currency.ratio),
-                ReferenceCode = field.CoreValue,
-            };
+                CouponParameter parameter = new CouponParameter()
+                {
+                    Beneficiary = CoreBookingFields.form.contact.email != null ? CoreBookingFields.form.contact.email.CoreValue : "",
+                    TotalAmount = CoreBookingFields.price.total.ToString(),
+                    CurrencyCode = CoreBookingFields.price.currency.code,
+                    Product = "flight",
+                    Quotation = String.Format(CultureInfo.InvariantCulture, "{0:0.#################}", CoreBookingFields.price.currency.ratio),
+                    ReferenceCode = field.CoreValue,
+                };
 
-            VoucherResult = await couponsService.Validity(parameter);
+                VoucherResult = await couponsService.Validity(parameter);
 
-            if (!VoucherResult.Error.HasValue)
-                field.IsApplied = true; // Voucher OK!
-            else
-            {
-                // Notify Coupon Error
-                field.IsApplied = false;
-                OnViewModelError("VOUCHER_VALIDITY_ERROR", VoucherResult.Error.ToString());
-                VoucherResult = null;
+                if (!VoucherResult.Error.HasValue)
+                    field.IsApplied = true; // Voucher OK!
+                else
+                {
+                    // Notify Coupon Error
+                    field.IsApplied = false;
+                    OnViewModelError("VOUCHER_VALIDITY_ERROR", VoucherResult.Error.ToString());
+                    VoucherResult = null;
+                }                
             }
 
             field.Validate();
@@ -736,10 +738,10 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
             BugTracker.LeaveBreadcrumb("Flight checkout view model validate voucher complete");
         }
 
-        public async override void OnNavigated(object navigationParams)
+        public override void OnNavigated(object navigationParams)
         {
             BugTracker.LeaveBreadcrumb("Flight checkout start");
-            FlightsCrossParameter flightsCrossParameters = navigationParams as FlightsCrossParameter;            
+            FlightCrossParameters = navigationParams as FlightsCrossParameter;            
         }
     }
 }

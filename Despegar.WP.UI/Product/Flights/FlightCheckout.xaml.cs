@@ -26,9 +26,6 @@ namespace Despegar.WP.UI.Product.Flights
         public FlightCheckout()
         {
             this.InitializeComponent();
-
-            HardwareButtons.BackPressed += HardwareButtons_BackPressed;
-
             #if !DEBUG
                 GoogleAnalyticContainer ga = new GoogleAnalyticContainer();
                 ga.Tracker = GoogleAnalytics.EasyTracker.GetTracker();
@@ -38,18 +35,27 @@ namespace Despegar.WP.UI.Product.Flights
 
         protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
-            ViewModel = IoC.Resolve<FlightsCheckoutViewModel>();
-            ViewModel.OnNavigated(e.Parameter); // Init Checkout 
-            ViewModel.PropertyChanged += Checkloading;
-            ViewModel.ShowRiskReview += this.ShowRisk;
-            ViewModel.HideRiskReview += this.HideRisk;
-            ViewModel.ViewModelError += ErrorHandler;
-            await ViewModel.Init();
-            this.DataContext = ViewModel;            
-            await ViewModel.Init();
+            if (e.NavigationMode == NavigationMode.New)
+            {
+                HardwareButtons.BackPressed += HardwareButtons_BackPressed;
 
-            // Set Defaults values and Country specifics
-            ConfigureFields();
+                ViewModel = IoC.Resolve<FlightsCheckoutViewModel>();
+                ViewModel.OnNavigated(e.Parameter); // Init Checkout 
+                ViewModel.PropertyChanged += Checkloading;
+                ViewModel.ShowRiskReview += this.ShowRisk;
+                ViewModel.HideRiskReview += this.HideRisk;
+                ViewModel.ViewModelError += ErrorHandler;
+                await ViewModel.Init();
+                this.DataContext = ViewModel;
+
+                // Set Defaults values and Country specifics
+                ConfigureFields();
+            }
+        }
+
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            HardwareButtons.BackPressed -= HardwareButtons_BackPressed;
         }
 
         private void ShowRisk(Object sender, EventArgs e )
@@ -126,7 +132,8 @@ namespace Despegar.WP.UI.Product.Flights
                 case "COMPLETE_BOOKING_BOOKING_FAILED":
                     dialog = new MessageDialog(manager.GetString("Flights_Search_ERROR_BOOKING_FAILED"), manager.GetString("Flights_Checkout_ERROR_FORM_ERROR_TITLE"));
                     await dialog.ShowSafelyAsync();
-                    ViewModel.Navigator.GoBack();
+                    // Go back to Results
+                    ViewModel.Navigator.RemoveBackEntry();
                     ViewModel.Navigator.GoBack();
                     break;
                 case "VOUCHER_VALIDITY_ERROR":
@@ -189,17 +196,20 @@ namespace Despegar.WP.UI.Product.Flights
             }
         }
 
-        private void HardwareButtons_BackPressed(object sender, BackPressedEventArgs e)
+        void HardwareButtons_BackPressed(object sender, BackPressedEventArgs e)
         {
-            if (ViewModel.IsLoading )
-            {
-                e.Handled = true;
-            }
+            e.Handled = true;
+
+            if (ViewModel.IsLoading)
+                return;
+
             if (ViewModel.NationalityIsOpen)
             {
-                e.Handled = true;
                 ViewModel.NationalityIsOpen = false;
+                return;
             }
+
+            ViewModel.Navigator.GoBack();
         }
 
     }

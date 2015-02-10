@@ -26,8 +26,8 @@ namespace Despegar.WP.UI.Product.Flights
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             HardwareButtons.BackPressed += HardwareButtons_BackPressed;
-            if (e.NavigationMode == NavigationMode.New) 
-            {
+            if (e.NavigationMode == NavigationMode.New || e.NavigationMode == NavigationMode.Back) 
+            {             
                 ViewModel = IoC.Resolve<FlightDetailsViewModel>();
                 ViewModel.OnNavigated(e.Parameter);
                 this.DataContext = ViewModel;
