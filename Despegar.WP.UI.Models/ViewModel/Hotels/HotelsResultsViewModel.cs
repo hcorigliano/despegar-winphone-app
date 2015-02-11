@@ -1,8 +1,10 @@
 ﻿using Despegar.Core.Neo.Business.Hotels.CitiesAvailability;
 using Despegar.Core.Neo.Contract.API;
 using Despegar.Core.Neo.Contract.Log;
+using Despegar.Core.Neo.Exceptions;
 using Despegar.WP.UI.Model.Interfaces;
 using Despegar.WP.UI.Models.Classes;
+using System;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
@@ -146,13 +148,21 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
         public async Task Search()
         {
             IsLoading = true;
-            if (CrossParameters.SearchModel.latitude == 0)
+
+            try
             {
-                CitiesAvailability = await hotelService.GetHotelsAvailability(CrossParameters.SearchModel.Checkin, CrossParameters.SearchModel.Checkout, CrossParameters.SearchModel.destinationNumber, CrossParameters.SearchModel.distribution, CrossParameters.SearchModel.currency, CrossParameters.SearchModel.offset, CrossParameters.SearchModel.offset + 30, CrossParameters.SearchModel.extraParameters);
+                if (CrossParameters.SearchModel.latitude == 0)
+                    CitiesAvailability = await hotelService.GetHotelsAvailability(CrossParameters.SearchModel.Checkin, CrossParameters.SearchModel.Checkout, CrossParameters.SearchModel.destinationNumber, CrossParameters.SearchModel.distribution, CrossParameters.SearchModel.currency, CrossParameters.SearchModel.offset, CrossParameters.SearchModel.offset + 30, CrossParameters.SearchModel.extraParameters);
+                else
+                    CitiesAvailability = await hotelService.GetHotelsAvailabilityByGeo(CrossParameters.SearchModel.Checkin, CrossParameters.SearchModel.Checkout, CrossParameters.SearchModel.distribution, CrossParameters.SearchModel.latitude, CrossParameters.SearchModel.longitude);
             }
-            else
+            catch (APIErrorException e)
             {
-                CitiesAvailability = await hotelService.GetHotelsAvailabilityByGeo(CrossParameters.SearchModel.Checkin, CrossParameters.SearchModel.Checkout, CrossParameters.SearchModel.distribution, CrossParameters.SearchModel.latitude, CrossParameters.SearchModel.longitude);
+                // Custom error?
+                OnViewModelError("SEARCH_ERROR", e.ErrorData.code);
+            }
+            catch (Exception ) {
+                OnViewModelError("UNKNOWN_ERROR");
             }
 
             //RefreshIcons();

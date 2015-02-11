@@ -1057,4 +1057,13 @@ La reserva no ha sido generada y no se le cobrará ningún cargo por la transacc
   <data name="Flight_results_ERROR_NO_ITEMS" xml:space="preserve">
     <value>Desculpe, foi encontrado nenhum resultado para sua pesquisa. Por favor, tente novamente, alterando qualquer um dos critérios.</value>
   </data>
+  <data name="Hotels_Search_ERROR" xml:space="preserve">
+    <value>Lo sentimos, la búsqueda no pudo realizarse. Por favor vuelva a intentar.</value>
+  </data>
+  <data name="Hotels_Search_ERROR_UNKNOWN" xml:space="preserve">
+    <value>Lo sentimos, la búsqueda no pudo realizarse. Por favor vuelva a intentar.</value>
+  </data>
+  <data name="Hotels_Search_ERROR_CHECKIN_INVALID" xml:space="preserve">
+    <value>La fecha de llegada es inválida. Por favor ingrese otra fecha y vuelva a intentar.</value>
+  </data>
 </root>
