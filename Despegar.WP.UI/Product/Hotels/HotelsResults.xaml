@@ -13,10 +13,10 @@
 
     <Page.BottomAppBar>
         <CommandBar>
-            <AppBarButton x:Name="appBarPreviousPage" x:Uid="AppBarButton_Previous" IsEnabled="{Binding BackButtonIsTapEnable}" Command="{Binding ShowPreviousPageCommand}"  Background="Black" Icon="Back"/>
+            <AppBarButton x:Name="appBarPreviousPage" x:Uid="AppBarButton_Previous" IsEnabled="{Binding PreviousPageIsTapEnable}" Command="{Binding ShowPreviousPageCommand}"  Background="Black" Icon="Back"/>
             <AppBarButton x:Name="appBarFilter" Icon="Filter" x:Uid="AppBarButton_Filters"  Click="FilterOrSortClick" IsEnabled="{Binding FilterButtonIsTapEnable}"/>
             <AppBarButton x:Name="appBarSortBy" Icon="Sort" x:Uid="AppBarButton_OrderBy"  Click="FilterOrSortClick" IsEnabled="{Binding OrderButtonIsTapEnable}"/>
-            <AppBarButton x:Name="appBarNextPage" x:Uid="AppBarButton_Next" IsEnabled="{Binding ForwardButtonIsTapEnable}" Command="{Binding ShowNextPageCommand}" Background="Black" Icon="Forward"/>
+            <AppBarButton x:Name="appBarNextPage" x:Uid="AppBarButton_Next" IsEnabled="{Binding NextPageIsTapEnable}" Command="{Binding ShowNextPageCommand}" Background="Black" Icon="Forward"/>
         </CommandBar>
     </Page.BottomAppBar>
 

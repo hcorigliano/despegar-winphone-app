@@ -115,18 +115,7 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
         {
             if (e.PropertyName == "IsLoading")
             {
-                if ((sender as ViewModelBase).IsLoading)
-                {
-                    FilterButtonIsTapEnable = false;
-                    OrderButtonIsTapEnable = false;
-                    RefreshIcons();
-                }
-                else
-                {
-                    FilterButtonIsTapEnable = true;
-                    OrderButtonIsTapEnable = true;
-                    RefreshIcons();
-                }
+                RefreshIcons();
             }
         }
 
@@ -134,7 +123,10 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
         {
             if (!IsLoading)
             {
+                FilterButtonIsTapEnable = true;
+                OrderButtonIsTapEnable = true;
                 PreviousPageIsTapEnable = CrossParameters.SearchModel.offset != 0;
+
                 if (CitiesAvailability != null)
                     NextPageButtonIsTapEnable = (CitiesAvailability.paging.offset + ITEMS_FOR_EACH_PAGE) < CitiesAvailability.paging.total;
             }
@@ -142,6 +134,8 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
             {
                 PreviousPageIsTapEnable = false;
                 NextPageButtonIsTapEnable = false;
+                FilterButtonIsTapEnable = false;
+                OrderButtonIsTapEnable = false;
             }
         }
 
