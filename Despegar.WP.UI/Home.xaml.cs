@@ -10,6 +10,7 @@ using System.ComponentModel;
 using System.Threading.Tasks;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Resources;
+using Windows.Phone.UI.Input;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -51,6 +52,7 @@ namespace Despegar.WP.UI
 
         protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
+            HardwareButtons.BackPressed += HardwareButtons_BackPressed;
             ViewModel = IoC.Resolve<HomeViewModel>();
             ViewModel.PropertyChanged += Checkloading;
             ViewModel.OnNavigated(e.Parameter);
@@ -63,6 +65,17 @@ namespace Despegar.WP.UI
                 await ValidateUpdate();
                 versionChecked = true;
             }
+        }
+
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            HardwareButtons.BackPressed -= HardwareButtons_BackPressed;
+        }
+
+        private void HardwareButtons_BackPressed(object sender, BackPressedEventArgs e)
+        {
+            e.Handled = true;
+            ViewModel.Navigator.GoBack();
         }
 
         private void Checkloading(object sender, PropertyChangedEventArgs e)

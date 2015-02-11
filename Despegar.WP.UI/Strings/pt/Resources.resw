@@ -1060,4 +1060,10 @@ A reserva não foi gerado e não cobra nenhuma taxa para a transação.</value>
   <data name="Hotels_Search_ERROR_CHECKIN_INVALID" xml:space="preserve">
     <value>A data de chegada é inválido. Por favor, indique outra data e tente novamente.</value>
   </data>
+  <data name="Hotels_Search_ERROR_SEARCH_NO_RESULTS" xml:space="preserve">
+    <value>Nenhum resultado para a sua pesquisa.</value>
+  </data>
+  <data name="Hotels_Search_UNKNOWN_ERROR" xml:space="preserve">
+    <value>Houve um erro. Por favor, tente novamente a sua pesquisa.</value>
+  </data>
 </root>

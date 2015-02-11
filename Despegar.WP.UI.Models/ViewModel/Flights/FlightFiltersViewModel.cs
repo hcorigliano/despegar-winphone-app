@@ -26,11 +26,11 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
         public override void OnNavigated(object navigationParams)
         {
             BugTracker.LeaveBreadcrumb("Flight search Filter View");
-            var param = navigationParams as FlightFiltersNavigationData;
+            var param = navigationParams as GenericFilterNavigationData;
 
             // make a copy in order to cancelation
-            this.EditableFacets = param.SearchModel.Facets.Select(x => Facet.Copy(x)).ToList();
-            this.SearchModel = param.SearchModel;            
+            this.EditableFacets = ((FlightSearchModel)param.SearchModel).Facets.Select(x => Facet.Copy(x)).ToList();
+            this.SearchModel = (FlightSearchModel)param.SearchModel;            
         }
 
         public ICommand ApplyFilterCommand
@@ -40,7 +40,7 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
                 return new RelayCommand(() => 
                 {
                     SearchModel.Facets = EditableFacets;  // Apply the filters                    
-                    Navigator.GoTo(ViewModelPages.FlightsResults, new FlightsResultNavigationData() { SearchModel = SearchModel, FiltersApplied = true });
+                    Navigator.GoTo(ViewModelPages.FlightsResults, new GenericFilterNavigationData() { SearchModel = SearchModel, FiltersApplied = true });
                 });
             }
         }

@@ -101,7 +101,7 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
         {
             get
             {
-                return new RelayCommand(() => { Navigator.GoTo(Model.Interfaces.ViewModelPages.FlightsFilters, new FlightFiltersNavigationData() { SearchModel = FlightSearchModel }); });
+                return new RelayCommand(() => { Navigator.GoTo(Model.Interfaces.ViewModelPages.FlightsFilters, new GenericFilterNavigationData() { SearchModel = FlightSearchModel }); });
             }
         }
 
@@ -109,14 +109,14 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
         {
             get
             {
-                return new RelayCommand(() => { Navigator.GoTo(Model.Interfaces.ViewModelPages.FlightsOrderBy, new FlightFiltersNavigationData() { SearchModel = FlightSearchModel }); });
+                return new RelayCommand(() => { Navigator.GoTo(Model.Interfaces.ViewModelPages.FlightsOrderBy, new GenericFilterNavigationData() { SearchModel = FlightSearchModel }); });
             }
         }
 
         public override void OnNavigated(object navigationParams)
         {
             BugTracker.LeaveBreadcrumb("Flight Results View");
-            FlightsResultNavigationData pageParameters = navigationParams as FlightsResultNavigationData;
+            GenericFilterNavigationData pageParameters = navigationParams as GenericFilterNavigationData;
 
             // Obtain Search parameters
             FlightSearchModel = pageParameters.SearchModel as FlightSearchModel;

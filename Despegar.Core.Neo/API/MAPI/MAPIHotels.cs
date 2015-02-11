@@ -4,6 +4,7 @@ using Despegar.Core.Neo.Business.Hotels.BookingFields;
 using Despegar.Core.Neo.Business.Hotels.CitiesAvailability;
 using Despegar.Core.Neo.Business.Hotels.HotelDetails;
 using Despegar.Core.Neo.Business.Hotels.HotelsAutocomplete;
+using Despegar.Core.Neo.Business.Hotels.SearchBox;
 using Despegar.Core.Neo.Business.Hotels.UserReviews;
 using Despegar.Core.Neo.Connector;
 using Despegar.Core.Neo.Contract;
@@ -32,11 +33,23 @@ namespace Despegar.Core.Neo.API.MAPI
             return await connector.GetAsync<HotelsAutocomplete>(serviceUrl, ServiceKey.HotelsAutocomplete);
         }
 
-        public async Task<CitiesAvailability> GetHotelsAvailability(string checkin, string checkout, int destinationNumber, string distribution, string currency, int offset, int limit, string extraParameters)
+        public async Task<CitiesAvailability> GetHotelsAvailability(HotelSearchModel model)
         {
-            string serviceUrl = ServiceURL.GetServiceURL(ServiceKey.HotelsAvailability, checkin, checkout, destinationNumber, distribution, currency, offset, limit, extraParameters);
+            string serviceUrl;
+            if (model.DestinationCode == 0)
+            {
+                serviceUrl = ServiceURL.GetServiceURL(ServiceKey.HotelsAvailabilityByGeo, model.DepartureDateFormatted, model.DestinationDateFormatted,
+                              model.DistributionString, model.Latitude.ToString().Replace(",","."), model.Longitude.ToString().Replace(",","."));
 
-            return await connector.GetAsync<CitiesAvailability>(serviceUrl, ServiceKey.HotelsAvailability);            
+                return await connector.GetAsync<CitiesAvailability>(serviceUrl, ServiceKey.HotelsAvailabilityByGeo);       
+            }
+            else
+            {
+                serviceUrl = ServiceURL.GetServiceURL(ServiceKey.HotelsAvailability, model.DepartureDateFormatted, model.DestinationDateFormatted,
+                   model.DestinationCode, model.DistributionString, model.Currency, model.Offset + 30, model.Limit, model.ExtraParameters);
+
+                return await connector.GetAsync<CitiesAvailability>(serviceUrl, ServiceKey.HotelsAvailability);   
+            }
         }
 
         public async Task<HotelDatails> GetHotelsDetail(string idHotel, string checkin, string checkout, string distribution)

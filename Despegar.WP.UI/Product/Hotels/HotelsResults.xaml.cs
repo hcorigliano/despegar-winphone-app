@@ -59,11 +59,15 @@ namespace Despegar.WP.UI.Product.Hotels
                             dialog = new MessageDialog(manager.GetString("Hotels_Search_ERROR_CHECKIN_INVALID"), "Error");
                             break;
                         default:
-                            dialog = new MessageDialog(manager.GetString("Hotels_Search_ERROR"), "Error");lt:
+                            dialog = new MessageDialog(manager.GetString("Hotels_Search_ERROR"), "Error");
                             break;
                     }
                     
                     await dialog.ShowSafelyAsync();                   
+                    break;
+                case "SEARCH_NO_RESULTS":
+                    dialog = new MessageDialog(manager.GetString("Hotels_Search_ERROR_SEARCH_NO_RESULTS"), "Error");
+                    await dialog.ShowSafelyAsync();    
                     break;
                 case "UNKNOWN_ERROR":
                     dialog = new MessageDialog(manager.GetString("Hotels_Search_UNKNOWN_ERROR"), "Error");
@@ -107,11 +111,6 @@ namespace Despegar.WP.UI.Product.Hotels
         private void ReSearchTapped(object sender, TappedRoutedEventArgs e)
         {
             ViewModel.Navigator.GoBack();
-        }
-
-        private void FilterOrSortClick(object sender, RoutedEventArgs e)
-        {
-            //ViewModel.CitiesAvailability.SearchStatus = SearchStates.SearchAgain;
         }
 
         private void Checkloading(object sender, System.ComponentModel.PropertyChangedEventArgs e)

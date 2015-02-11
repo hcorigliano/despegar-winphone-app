@@ -1,4 +1,5 @@
 ﻿using Despegar.Core.Neo.Business.Hotels.CitiesAvailability;
+using Despegar.Core.Neo.Business.Hotels.SearchBox;
 using Despegar.Core.Neo.Contract.API;
 using Despegar.Core.Neo.Contract.Log;
 using Despegar.Core.Neo.Exceptions;
@@ -87,19 +88,12 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
                 OnPropertyChanged();
             }
         }
-        #endregion
-
-        public HotelsResultsViewModel(INavigator navigator, IMAPIHotels hotelService, IBugTracker t)
-            : base(navigator, t)
-        {
-            this.hotelService = hotelService;
-        }
 
         public ICommand ShowNextPageCommand
         {
             get
             {
-                return new RelayCommand(async  () => await ShowNextPage());
+                return new RelayCommand(async () => await ShowNextPage());
             }
         }
 
@@ -110,6 +104,31 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
                 return new RelayCommand(async () => await ShowPreviousPage());
             }
         }
+
+        public ICommand FilterCommand
+        {
+            get
+            {
+                return new RelayCommand(() => Navigator.GoTo(ViewModelPages.HotelsFilter, CrossParameters));
+            }
+        }
+
+        public ICommand OrderByCommand
+        {
+            get
+            {
+                return new RelayCommand(() => Navigator.GoTo(ViewModelPages.HotelsOrderBy, CrossParameters));
+            }
+        }
+
+        #endregion
+
+        public HotelsResultsViewModel(INavigator navigator, IMAPIHotels hotelService, IBugTracker t)
+            : base(navigator, t)
+        {
+            this.hotelService = hotelService;
+        }
+
 
         private void LockUnlockAppBar(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
@@ -125,7 +144,7 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
             {
                 FilterButtonIsTapEnable = true;
                 OrderButtonIsTapEnable = true;
-                PreviousPageIsTapEnable = CrossParameters.SearchModel.offset != 0;
+                PreviousPageIsTapEnable = CrossParameters.SearchModel.Offset != 0;
 
                 if (CitiesAvailability != null)
                     NextPageButtonIsTapEnable = (CitiesAvailability.paging.offset + ITEMS_FOR_EACH_PAGE) < CitiesAvailability.paging.total;
@@ -140,15 +159,17 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
         }
 
         public async Task Search()
-        {
+        {            
             IsLoading = true;
+
+            var model = CrossParameters.SearchModel;
 
             try
             {
-                if (CrossParameters.SearchModel.latitude == 0)
-                    CitiesAvailability = await hotelService.GetHotelsAvailability(CrossParameters.SearchModel.Checkin, CrossParameters.SearchModel.Checkout, CrossParameters.SearchModel.destinationNumber, CrossParameters.SearchModel.distribution, CrossParameters.SearchModel.currency, CrossParameters.SearchModel.offset, CrossParameters.SearchModel.offset + 30, CrossParameters.SearchModel.extraParameters);
-                else
-                    CitiesAvailability = await hotelService.GetHotelsAvailabilityByGeo(CrossParameters.SearchModel.Checkin, CrossParameters.SearchModel.Checkout, CrossParameters.SearchModel.distribution, CrossParameters.SearchModel.latitude, CrossParameters.SearchModel.longitude);
+               CitiesAvailability = await hotelService.GetHotelsAvailability(model);
+
+                if (CitiesAvailability.items.Count == 0)
+                    OnViewModelError("SEARCH_NO_RESULTS");
             }
             catch (APIErrorException e)
             {
@@ -158,8 +179,7 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
             catch (Exception ) {
                 OnViewModelError("UNKNOWN_ERROR");
             }
-
-            //RefreshIcons();
+            
             IsLoading = false;
         }
 
@@ -167,64 +187,65 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
         {
             if (!IsLoading)
             {
-                CrossParameters.SearchModel.offset += ITEMS_FOR_EACH_PAGE;
+                CrossParameters.SearchModel.Offset += ITEMS_FOR_EACH_PAGE;
                 await Search();
             }
         }
 
         public async Task ShowPreviousPage()
         {
-            if(!IsLoading && CrossParameters.SearchModel.offset != 0)
+            if(!IsLoading && CrossParameters.SearchModel.Offset != 0)
             {
-                CrossParameters.SearchModel.offset -= ITEMS_FOR_EACH_PAGE;
+                CrossParameters.SearchModel.Offset -= ITEMS_FOR_EACH_PAGE;
                 await Search();
             }
         }
 
-        public async Task SearchAgain()
-        {
-            CrossParameters.SearchModel.extraParameters = "";
+        //public async Task SearchAgain()
+        //{
+        //    HotelSearchModel model = CrossParameters.SearchModel;
+        //    model.extraParameters = "";
 
-            foreach (Facet facet in CitiesAvailability.facets)
-            {
-                string valueString = "";
+        //    foreach (Facet facet in CitiesAvailability.facets)
+        //    {
+        //        string valueString = "";
 
-                if (facet.values != null)
-                {
-                    valueString = "";
-                    foreach (Value value in facet.values)
-                    {
-                        if (value.selected)
-                        {
-                            if (valueString == "")
-                                valueString += value.value;
-                            else
-                                valueString += "," + value.value;
-                        }
-                    }
+        //        if (facet.values != null)
+        //        {
+        //            valueString = "";
+        //            foreach (Value value in facet.values)
+        //            {
+        //                if (value.selected)
+        //                {
+        //                    if (valueString == "")
+        //                        valueString += value.value;
+        //                    else
+        //                        valueString += "," + value.value;
+        //                }
+        //            }
 
-                    if (valueString != "")
-                    {
-                        CrossParameters.SearchModel.extraParameters += facet.criteria + "=" + valueString + "&";
-                    }
-                }
-            }
+        //            if (valueString != "")
+        //            {
+        //                CrossParameters.SearchModel.extraParameters += facet.criteria + "=" + valueString + "&";
+        //            }
+        //        }
+        //    }
 
-            foreach (Value value in CitiesAvailability.sorting.values)
-            {
-                if (value.selected)
-                    CrossParameters.SearchModel.extraParameters += "order_by=" + value.value;
-            }
+        //    foreach (Value value in CitiesAvailability.sorting.values)
+        //    {
+        //        if (value.selected)
+        //            CrossParameters.SearchModel.extraParameters += "order_by=" + value.value;
+        //    }
 
 
-            if (CrossParameters.SearchModel.extraParameters != "")
-            {
-                CrossParameters.SearchModel.offset = 0;
-                await Search();
-            }
+        //    if (CrossParameters.SearchModel.extraParameters != "")
+        //    {
+        //        CrossParameters.SearchModel.offset = 0;
+        //        await Search();
+        //    }
 
-            //CitiesAvailability.SearchStatus = SearchStates.FirstSearch; 
-        }
+        //    //CitiesAvailability.SearchStatus = SearchStates.FirstSearch; 
+        //}
 
         public void GoToDetails()
         {

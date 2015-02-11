@@ -1,4 +1,5 @@
 ﻿using Despegar.Core.Neo.Business.Hotels;
+using Despegar.Core.Neo.Business.Hotels.SearchBox;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,14 +10,13 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
 {
     public class HotelsCrossParameters
     {
-        public HotelsSearchParameters SearchModel { get; set; }
+        public HotelSearchModel SearchModel { get; set; }
         public HotelsBookingFieldsRequest BookRequest { get; set; }
         public HotelsExtraData HotelsExtraData { get; set; }
         public string IdSelectedHotel { get; set; }
 
         public HotelsCrossParameters()
         {
-            this.SearchModel = new HotelsSearchParameters();
             this.HotelsExtraData = new HotelsExtraData();
         }
     }

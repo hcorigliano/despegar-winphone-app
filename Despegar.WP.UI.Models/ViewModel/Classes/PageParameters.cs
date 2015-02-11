@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Despegar.WP.UI.Model.Classes
 {
-    public class FlightsResultNavigationData
+    public class GenericFilterNavigationData
     {
         public object SearchModel { get; set; }
         public bool FiltersApplied { get; set; }

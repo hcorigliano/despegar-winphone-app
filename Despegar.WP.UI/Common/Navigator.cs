@@ -39,6 +39,7 @@ namespace Despegar.WP.UI.Common
                 case ViewModelPages.CountrySelecton:
                     view = typeof(CountrySelection);
                     break;                
+                 // FLIGHTS
                 case ViewModelPages.FlightsSearch:
                     view = typeof(FlightSearch);
                     break;
@@ -63,24 +64,33 @@ namespace Despegar.WP.UI.Common
                 case ViewModelPages.FlightsThanks:
                     view = typeof(FlightThanks);
                     break;
-                case ViewModelPages.HotelsDetails:
-                    view = typeof(HotelsDetails);
-                    break;
+                // HOTELS
                 case ViewModelPages.HotelsSearch:
                     view = typeof(HotelsSearch);
                     break;
                 case ViewModelPages.HotelsResults:
                     view = typeof(HotelsResults);
                     break;
-                case ViewModelPages.PhotoPresenter:
-                    view = typeof(PhotoPresenter);
+                case ViewModelPages.HotelsDetails:
+                    view = typeof(HotelsDetails);
                     break;
-                case ViewModelPages.HotelsCheckout:
-                    view = typeof(HotelsCheckout);
+                case ViewModelPages.HotelsFilter:
+                    view = typeof(HotelsFilters);
+                    break;
+                case ViewModelPages.HotelsOrderBy:
+                    view = typeof(HotelsSortBy);
                     break;
                 case ViewModelPages.HotelsAmenities:
                     view = typeof(HotelsAmenities);
+                    break;                   
+                case ViewModelPages.HotelsCheckout:
+                    view = typeof(HotelsCheckout);
                     break;
+                case ViewModelPages.PhotoPresenter:
+                    view = typeof(PhotoPresenter);
+                    break;
+                // PACKAGES
+                // CARS
                 // Add More pages-viewmodel mappings down here
             }
 

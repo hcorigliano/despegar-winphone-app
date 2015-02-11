@@ -30,6 +30,8 @@ namespace Despegar.WP.UI.Model.InversionOfControl
             // Hotels
             builder.RegisterType<HotelsSearchViewModel>();
             builder.RegisterType<HotelsResultsViewModel>();
+            builder.RegisterType<HotelsFiltersViewModel>();
+            //builder.RegisterType<HotelsOrderByViewModel>();
             builder.RegisterType<HotelsDetailsViewModel>();
             builder.RegisterType<HotelsCheckoutViewModel>();
             builder.RegisterType<HotelsThanksViewModel>();            

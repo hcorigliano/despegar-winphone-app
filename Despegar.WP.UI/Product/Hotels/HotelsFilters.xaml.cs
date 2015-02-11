@@ -1,23 +1,17 @@
-﻿using Despegar.WP.UI.Common;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
+﻿using Despegar.Core.Neo.InversionOfControl;
+using Despegar.WP.UI.Common;
+using Despegar.WP.UI.Model.ViewModel.Hotels;
+using Windows.Phone.UI.Input;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
 namespace Despegar.WP.UI.Product.Hotels
 {
     public sealed partial class HotelsFilters : Page
     {
+        public HotelsFiltersViewModel ViewModel { get; set; }
+
         public HotelsFilters()
         {
             this.InitializeComponent();
@@ -25,7 +19,17 @@ namespace Despegar.WP.UI.Product.Hotels
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            this.DataContext = e.Parameter;
+            HardwareButtons.BackPressed += HardwareButtons_BackPressed;
+            ViewModel = IoC.Resolve<HotelsFiltersViewModel>();
+            ViewModel.OnNavigated(e.Parameter);
+            this.DataContext = ViewModel;
+        }
+
+        void HardwareButtons_BackPressed(object sender, BackPressedEventArgs e)
+        {
+            ViewModel.BugTracker.LeaveBreadcrumb("Hotels search filters - Back button pressed");
+            ViewModel.Navigator.GoBack();
+            e.Handled = true;
         }
 
         private void AppBarButton_Click(object sender, RoutedEventArgs e)

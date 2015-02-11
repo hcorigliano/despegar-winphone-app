@@ -75,7 +75,7 @@ namespace Despegar.WP.UI.Product.Flights
         protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
             HardwareButtons.BackPressed += HardwareButtons_BackPressed;
-            var param = e.Parameter as FlightsResultNavigationData;
+            var param = e.Parameter as GenericFilterNavigationData;
             BottomAppBar.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
 
             if (e.NavigationMode == NavigationMode.New)

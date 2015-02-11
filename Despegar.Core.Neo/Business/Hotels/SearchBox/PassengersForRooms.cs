@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Despegar.WP.UI.Model.ViewModel.Hotels
+namespace Despegar.Core.Neo.Business.Hotels.SearchBox
 {
     public class PassengersForRooms : Bindable
     {
@@ -72,7 +72,7 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
                 for (int i = 1; i <= 4 - GeneralMinors; i++)
                     options.Add(i);
 
-                return options;
+                return Enumerable.Range(1, 4 - GeneralMinors);
             }
         }
 
@@ -82,16 +82,8 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
         public IEnumerable<int> ChildrenOptions
         {
             get
-            {
-                List<int> options = new List<int>();
-
-                // 0 is the Minimum Child count, and 1 adult is always present
-                for (int i = 0; i <= 4 - GeneralAdults; i++)
-                {
-                    options.Add(i);
-                }
-
-                return options;
+            {                
+                return Enumerable.Range(0, 5 - GeneralAdults);
             }
         }
 

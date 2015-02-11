@@ -5,6 +5,7 @@ using Despegar.WP.UI.Model.Interfaces;
 using Despegar.WP.UI.Models.Classes;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Windows.Devices.Geolocation;
@@ -15,11 +16,9 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
     {
         public IMAPIHotels hotelService { get; set; }
         private HotelSearchModel coreSearchModel;
-        public RoomsViewModel RoomsViewModel { get; set; }
         private Geolocator geolocator = null;
 
         public string DestinationType { get; set; }
-
         public int DestinationCode
         {
             get { return coreSearchModel.DestinationCode; }
@@ -29,7 +28,6 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
                 OnPropertyChanged();
             }
         }
-
         public string DestinationText
         {
             get { return coreSearchModel.DestinationHotelText; }
@@ -39,25 +37,43 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
                 OnPropertyChanged();
             }
         }
-
-        public DateTimeOffset FromDate
+        public DateTimeOffset CheckinDate
         {
-            get { return coreSearchModel.DepartureDate; }
+            get { return coreSearchModel.CheckinDate; }
             set
             {
-                coreSearchModel.DepartureDate = value;
-                OnPropertyChanged();
-        }
-        }
-
-        public DateTimeOffset ToDate
-        {
-            get { return coreSearchModel.DestinationDate; }
-            set
-            {
-                coreSearchModel.DestinationDate = value;
+                coreSearchModel.CheckinDate = value;
                 OnPropertyChanged();
             }
+        }
+        public DateTimeOffset CheckoutDate
+        {
+            get { return coreSearchModel.CheckoutDate; }
+            set
+            {
+                coreSearchModel.CheckoutDate = value;
+                OnPropertyChanged();
+            }
+        }
+
+        /// <summary>
+        /// Rooms & Passengers
+        /// </summary>
+        public IEnumerable<int> RoomQuantityOptions
+        {
+            get
+            {
+                return coreSearchModel.RoomQuantityOptions;
+            }
+        }
+        public int SelectedRoomsQuantityOption 
+        {
+            get { return coreSearchModel.SelectedRoomsQuantityOption; }
+            set { coreSearchModel.SelectedRoomsQuantityOption = value; }
+        }
+        public ObservableCollection<PassengersForRooms> Rooms
+        {
+            get { return coreSearchModel.Rooms; }           
         }
 
         public ICommand SearchCommand
@@ -75,40 +91,11 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
                 return new RelayCommand(() => SearchTodayHotels());
             }
         }
-
-        private string checkin;
-        public string Checkin
-        {
-            get { return checkin; }
-            set
-            {
-                checkin = value;
-                OnPropertyChanged();
-            }
-        }
-
-        /// <summary>
-        /// Returns the available options for Adults passengers
-        /// </summary>
-        public IEnumerable<int> RoomOptions
-        {
-            get
-            {
-                List<int> options = new List<int>();
-
-                // 1 is the Minimum Adult count
-                for (int i = 1; i <= 8; i++)
-                    options.Add(i);
-
-                return options;
-            }
-        }
-
+        
         public HotelsSearchViewModel(INavigator navigator,  IBugTracker t, IMAPIHotels hotelService ) : base(navigator,t)
         {
             this.hotelService = hotelService;
             this.coreSearchModel = new HotelSearchModel();
-            this.RoomsViewModel = new RoomsViewModel(); // what
             this.geolocator = new Geolocator();  // Dependency?
 
             this.coreSearchModel.EmissionAnticipationDay = GlobalConfiguration.GetEmissionAnticipationDayForHotels();
@@ -117,83 +104,58 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
             coreSearchModel.UpdateSearchDays();
         }
 
-        private string BuildDistributionString()
-        {
-            string distribution = String.Empty;
-
-            foreach (PassengersForRooms room in this.RoomsViewModel.RoomsDetailList)
-            {
-                distribution += room.GeneralAdults.ToString();
-                foreach (HotelsMinorsAge minor in room.MinorsAge)
-                {
-                    distribution += "-" + minor.SelectedAge.ToString();
-                }
-                distribution += "!";
-            }
-            return distribution.Remove(distribution.Length - 1);
-        }
-
         private async void SearchTodayHotels()
         {
-            IsLoading = true;
-            try
-            {               
-                Geoposition pos = await geolocator.GetGeopositionAsync();
+            coreSearchModel.Adults = 2;
+            coreSearchModel.Children = 0;
+            coreSearchModel.CheckinDate = DateTime.Now;
+            coreSearchModel.CheckoutDate = DateTime.Now.AddDays(1);
+            coreSearchModel.DestinationCode = 0; // TODO: mejorar a algo como IsGeoSearch = true
 
-                HotelsCrossParameters hotelCrossParameters = new HotelsCrossParameters();
-                hotelCrossParameters.SearchModel.distribution = "2";
-                hotelCrossParameters.SearchModel.Checkin = DateTime.Now.ToString("yyyy-MM-dd");
-                hotelCrossParameters.SearchModel.Checkout = DateTime.Now.AddDays(1).ToString("yyyy-MM-dd");
-                hotelCrossParameters.SearchModel.latitude = pos.Coordinate.Point.Position.Latitude;
-                hotelCrossParameters.SearchModel.longitude = pos.Coordinate.Point.Position.Longitude;
-
-                Navigator.GoTo(ViewModelPages.HotelsResults, hotelCrossParameters);
-            }
-            catch (System.UnauthorizedAccessException)
-            {            
-                // TODO: Pedirle que active el gps?
-                throw;
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-
-            IsLoading = false;
+            await SearchHotels();
         }
 
-        private async void SearchHotels()
+        private async Task SearchHotels()
         {
-            UpdatePassengers();
-
             if (coreSearchModel.IsValid)
             {
                // IsLoading = true;
                 BugTracker.LeaveBreadcrumb("Hotel search performed");
 
                 HotelsCrossParameters hotelCrossParameters = new HotelsCrossParameters();
-                hotelCrossParameters.SearchModel.distribution = BuildDistributionString();
-                hotelCrossParameters.SearchModel.Checkin = coreSearchModel.DepartureDate.Date.ToString("yyyy-MM-dd");
-                hotelCrossParameters.SearchModel.Checkout = coreSearchModel.DestinationDate.Date.ToString("yyyy-MM-dd");
+                hotelCrossParameters.SearchModel = this.coreSearchModel;
                
-                if (coreSearchModel.DestinationCode != 0)
+                if (coreSearchModel.DestinationCode == 0)                
                 {
-                    hotelCrossParameters.SearchModel.destinationNumber = coreSearchModel.DestinationCode;
-                }
-                else
-                {
-                    Geoposition pos = await geolocator.GetGeopositionAsync();
-                    hotelCrossParameters.SearchModel.latitude = pos.Coordinate.Point.Position.Latitude;
-                    hotelCrossParameters.SearchModel.longitude = pos.Coordinate.Point.Position.Longitude;
+                    // Geolocation  search
+                    this.DestinationType = "geo";
+
+                    // TODO: Test this better
+                    try 
+                    { 
+                        Geoposition pos = await geolocator.GetGeopositionAsync();
+                        coreSearchModel.Latitude = pos.Coordinate.Point.Position.Latitude;
+                        coreSearchModel.Longitude = pos.Coordinate.Point.Position.Longitude;
+                    }
+                    catch (System.UnauthorizedAccessException)
+                    {
+                        // TODO: Pedirle que active el gps?
+                        throw;
+                    }
+                    catch (Exception)
+                    {
+                        throw;
+                    }
                 }
 
-                if (this.DestinationType == "city" || this.DestinationType == "geo" )
+                if (this.DestinationType == "city" || this.DestinationType == "geo")
                 {
+                    // Location search
                     Navigator.GoTo(ViewModelPages.HotelsResults, hotelCrossParameters);
                 }
                 else
                 {
-                    //The user searched directly for a hotel
+                    // The user searched directly for a specific hotel
                     hotelCrossParameters.IdSelectedHotel = coreSearchModel.DestinationCode.ToString();
                     Navigator.GoTo(ViewModelPages.HotelsDetails, hotelCrossParameters);
                 }
@@ -202,12 +164,6 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
             {
                 OnViewModelError("SEARCH_INVALID_WITH_MESSAGE", coreSearchModel.SearchErrors);
             }
-        }
-
-        private void UpdatePassengers()
-        {
-            coreSearchModel.AdultsInFlights = RoomsViewModel.Adults;
-            coreSearchModel.ChildrenInFlights = RoomsViewModel.Minors;
         }
 
         public override void OnNavigated(object navigationParams)

@@ -24,7 +24,7 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
                 OnPropertyChanged();
                 OnPropertyChanged("ChildrenOptions");
                 OnPropertyChanged("GeneralMinors");
-                OnPropertyChanged("Adults");
+                OnPropertyChanged("TotalAdults");
             }
         }
 
@@ -57,7 +57,7 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
                     OnPropertyChanged("AdultOptions");
                     OnPropertyChanged("GeneralAdults");
 
-                    OnPropertyChanged("Adults");
+                    OnPropertyChanged("TotalAdults");
                     OnPropertyChanged("Children");
                     OnPropertyChanged("Infants");
 

@@ -5,12 +5,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Despegar.WP.UI.Model.ViewModel.Hotels
+namespace Despegar.Core.Neo.Business.Hotels.SearchBox
 {
     public class HotelsMinorsAge : Bindable
     {
         public int Index { get; set; }
         public int IndexZeroBased { get { return Index - 1; } }
+
         private int selectedAge;
         public int SelectedAge
         {
@@ -24,8 +25,7 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
         {
             get
             {
-                IEnumerable<int> options = Enumerable.Range(0, 17);
-                return options;
+                return Enumerable.Range(0, 17);
             }
         }
 

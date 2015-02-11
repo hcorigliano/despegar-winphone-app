@@ -175,13 +175,13 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
                 string extra = String.Format("{0} to {1}, [Passengers]: {2}",
                     coreSearchModel.DepartureDate.ToString("yyyy-MM-dd"),
                     coreSearchModel.DestinationDate != null ? coreSearchModel.DestinationDate.ToString("yyyy-MM-dd") : "-",
-                    "Adults " + coreSearchModel.AdultsInFlights + " Child: " + coreSearchModel.ChildrenInFlights);
+                    "TotalAdults " + coreSearchModel.AdultsInFlights + " Child: " + coreSearchModel.ChildrenInFlights);
 
                 BugTracker.LeaveBreadcrumb("Flight search performed");
                 BugTracker.SetExtraData("LastFlightAirports", airports);
                 BugTracker.SetExtraData("LastFlightExtra", extra);
 
-                Navigator.GoTo(ViewModelPages.FlightsResults, new FlightsResultNavigationData() { SearchModel = coreSearchModel , FiltersApplied = false});
+                Navigator.GoTo(ViewModelPages.FlightsResults, new GenericFilterNavigationData() { SearchModel = coreSearchModel , FiltersApplied = false});
 
                 IsLoading = false;                
             }
@@ -210,7 +210,7 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
 
             // Notify Changes
             OnPropertyChanged("MultipleSegments");
-            OnPropertyChanged("FromDate");
+            OnPropertyChanged("CheckinDate");
             OnPropertyChanged("To");
             OnPropertyChanged("Origin");
             OnPropertyChanged("Destination");

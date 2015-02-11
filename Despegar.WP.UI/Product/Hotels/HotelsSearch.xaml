@@ -70,17 +70,15 @@
                 <src:SearchHotelControl Grid.Row="1"   
                                         SelectedDestinationCode="{Binding DestinationCode, Mode=TwoWay}"  
                                         SelectedDestinationText="{Binding DestinationText, Mode=TwoWay}" 
-                                        SelectedDestinationType ="{Binding DestinationType, Mode=TwoWay}"/>
+                                        SelectedDestinationType ="{Binding DestinationType, Mode=TwoWay}" />
 
-                <src:DateControl Grid.Row="2"  FromDate="{Binding FromDate, Mode=TwoWay}" ToDate="{Binding ToDate, Mode=TwoWay}" />
+                <src:DateControl Grid.Row="2"  FromDate="{Binding CheckinDate, Mode=TwoWay}" ToDate="{Binding CheckoutDate, Mode=TwoWay}" />
 
-                <src:QuantityRoomsControl  Grid.Row="3" DataContext="{Binding RoomsViewModel}"   Rooms="{Binding Rooms, Mode=TwoWay}" />
-
+                <src:QuantityRoomsControl  Grid.Row="3" DataContext="{Binding }"  />
 
                 <Button Grid.Row="4" x:Uid="Hotels_Search_SearchButton" Command="{Binding SearchCommand}"   Style="{StaticResource ButtonBottom}" Content="Buscar hoteles"/>
 
             </Grid>
-
 
         </ScrollViewer>
     </Grid>

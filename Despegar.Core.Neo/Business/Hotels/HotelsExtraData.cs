@@ -8,6 +8,6 @@ namespace Despegar.Core.Neo.Business.Hotels
 {
     public class HotelsExtraData
     {
-        public int? Distance { get; set; }
+        public decimal? Distance { get; set; }
     }
 }

@@ -57,10 +57,10 @@ namespace Despegar.WP.UI.Product.Flights
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            HardwareButtons.BackPressed += HardwareButtons_BackPressed;
+
             if (e.NavigationMode == NavigationMode.New)
             {
-                HardwareButtons.BackPressed += HardwareButtons_BackPressed;
-
                 ViewModel = IoC.Resolve<FlightSearchViewModel>();
                 ViewModel.ViewModelError += ErrorHandler;
                 ViewModel.PropertyChanged += Checkloading;

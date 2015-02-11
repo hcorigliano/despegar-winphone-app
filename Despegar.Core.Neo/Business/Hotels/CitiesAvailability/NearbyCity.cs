@@ -11,6 +11,6 @@ namespace Despegar.Core.Neo.Business.Hotels.CitiesAvailability
         public string code { get; set; }
         public string name { get; set; }
         public IdCodeAndName country { get; set; }
-        public string distance { get; set; }
+        public double distance { get; set; }
     }
 }
