@@ -207,11 +207,6 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
             }
         }
         
-        public void GoToDetails()
-        {
-            // Selected hotel is..????
-        }
-
         public override void OnNavigated(object navigationParams)
         {
             BugTracker.LeaveBreadcrumb("Hotels Results View");
