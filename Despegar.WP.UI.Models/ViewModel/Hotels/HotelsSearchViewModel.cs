@@ -1,8 +1,9 @@
 ﻿using Despegar.Core.Neo.Business.Hotels.SearchBox;
 using Despegar.Core.Neo.Contract.API;
 using Despegar.Core.Neo.Contract.Log;
+using Despegar.WP.UI.Model.Classes;
 using Despegar.WP.UI.Model.Interfaces;
-using Despegar.WP.UI.Models.Classes;
+using Despegar.WP.UI.Model.ViewModel.Classes;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -17,6 +18,7 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
         public IMAPIHotels hotelService { get; set; }
         private HotelSearchModel coreSearchModel;
         private Geolocator geolocator = null;
+        private const int RESULTS_PAGE_SIZE = 30;
 
         public string DestinationType { get; set; }
         public int DestinationCode
@@ -96,6 +98,7 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
         {
             this.hotelService = hotelService;
             this.coreSearchModel = new HotelSearchModel();
+            this.coreSearchModel.Limit = RESULTS_PAGE_SIZE;
             this.geolocator = new Geolocator();  // Dependency?
 
             this.coreSearchModel.EmissionAnticipationDay = GlobalConfiguration.GetEmissionAnticipationDayForHotels();
@@ -105,12 +108,14 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
         }
 
         private async void SearchTodayHotels()
-        {
-            coreSearchModel.Adults = 2;
-            coreSearchModel.Children = 0;
+        {            
             coreSearchModel.CheckinDate = DateTime.Now;
             coreSearchModel.CheckoutDate = DateTime.Now.AddDays(1);
-            coreSearchModel.DestinationCode = 0; // TODO: mejorar a algo como IsGeoSearch = true
+            coreSearchModel.SelectedRoomsQuantityOption = 1;
+            coreSearchModel.DestinationCode = -1; // TODO: mejorar a algo como IsGeoSearch = true
+
+            coreSearchModel.Rooms[0].GeneralAdults = 1;
+            coreSearchModel.Rooms[0].GeneralMinors = 0;            
 
             await SearchHotels();
         }
@@ -120,19 +125,17 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
             if (coreSearchModel.IsValid)
             {
                // IsLoading = true;
-                BugTracker.LeaveBreadcrumb("Hotel search performed");
-
-                HotelsCrossParameters hotelCrossParameters = new HotelsCrossParameters();
-                hotelCrossParameters.SearchModel = this.coreSearchModel;
+                BugTracker.LeaveBreadcrumb("Hotel search performed");                
                
-                if (coreSearchModel.DestinationCode == 0)                
+                if (coreSearchModel.DestinationCode == -1)                
                 {
                     // Geolocation  search
                     this.DestinationType = "geo";
 
                     // TODO: Test this better
                     try 
-                    { 
+                    {
+                        IsLoading = true;
                         Geoposition pos = await geolocator.GetGeopositionAsync();
                         coreSearchModel.Latitude = pos.Coordinate.Point.Position.Latitude;
                         coreSearchModel.Longitude = pos.Coordinate.Point.Position.Longitude;
@@ -146,16 +149,20 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
                     {
                         throw;
                     }
+
+                    IsLoading = false;
                 }
 
                 if (this.DestinationType == "city" || this.DestinationType == "geo")
                 {
                     // Location search
-                    Navigator.GoTo(ViewModelPages.HotelsResults, hotelCrossParameters);
+                    Navigator.GoTo(ViewModelPages.HotelsResults, new GenericResultNavigationData() { SearchModel = coreSearchModel, FiltersApplied = false });
                 }
                 else
                 {
                     // The user searched directly for a specific hotel
+                    HotelsCrossParameters hotelCrossParameters = new HotelsCrossParameters();
+                    hotelCrossParameters.SearchModel = this.coreSearchModel;
                     hotelCrossParameters.IdSelectedHotel = coreSearchModel.DestinationCode.ToString();
                     Navigator.GoTo(ViewModelPages.HotelsDetails, hotelCrossParameters);
                 }

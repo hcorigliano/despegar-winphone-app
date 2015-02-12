@@ -36,17 +36,18 @@ namespace Despegar.Core.Neo.API.MAPI
         public async Task<CitiesAvailability> GetHotelsAvailability(HotelSearchModel model)
         {
             string serviceUrl;
-            if (model.DestinationCode == 0)
+            if (model.DestinationCode == -1)
             {
                 serviceUrl = ServiceURL.GetServiceURL(ServiceKey.HotelsAvailabilityByGeo, model.DepartureDateFormatted, model.DestinationDateFormatted,
-                              model.DistributionString, model.Latitude.ToString().Replace(",","."), model.Longitude.ToString().Replace(",","."));
+                              model.DistributionString, model.Latitude.ToString().Replace(",","."), model.Longitude.ToString().Replace(",","."),
+                              model.Offset, model.Limit);
 
                 return await connector.GetAsync<CitiesAvailability>(serviceUrl, ServiceKey.HotelsAvailabilityByGeo);       
             }
             else
             {
                 serviceUrl = ServiceURL.GetServiceURL(ServiceKey.HotelsAvailability, model.DepartureDateFormatted, model.DestinationDateFormatted,
-                   model.DestinationCode, model.DistributionString, model.Currency, model.Offset + 30, model.Limit, model.ExtraParameters);
+                   model.DestinationCode, model.DistributionString, model.Currency, model.Offset, model.Limit, model.ExtraParameters);
 
                 return await connector.GetAsync<CitiesAvailability>(serviceUrl, ServiceKey.HotelsAvailability);   
             }

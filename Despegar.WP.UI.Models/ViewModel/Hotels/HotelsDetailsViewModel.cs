@@ -5,8 +5,8 @@ using Despegar.Core.Neo.Business.Hotels.UserReviews;
 using Despegar.Core.Neo.Contract.API;
 using Despegar.Core.Neo.Contract.Log;
 using Despegar.WP.UI.Model.Interfaces;
+using Despegar.WP.UI.Model.ViewModel.Classes;
 using Despegar.WP.UI.Model.ViewModel.Controls.Maps;
-using Despegar.WP.UI.Models.Classes;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -159,8 +159,8 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
             IsLoading = true;
 
             HotelDetail = await hotelService.GetHotelsDetail(CrossParameters.IdSelectedHotel, CrossParameters.SearchModel.DepartureDateFormatted, CrossParameters.SearchModel.DestinationDateFormatted, CrossParameters.SearchModel.DistributionString);
-            HotelReviews = await hotelService.GetHotelUserReviews(CrossParameters.IdSelectedHotel, 10, 0, "es");
-            FormatReviews("es");
+            //HotelReviews = await hotelService.GetHotelUserReviews(CrossParameters.IdSelectedHotel, 10, 0, "es");
+            //FormatReviews("es");
 
             // Get suggest room price
             foreach (Roompack roomPack in hotelDetail.roompacks)

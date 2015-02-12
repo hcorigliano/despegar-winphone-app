@@ -3,10 +3,10 @@ using Despegar.Core.Neo.Business.Hotels.SearchBox;
 using Despegar.Core.Neo.Contract.Log;
 using Despegar.WP.UI.Model.Classes;
 using Despegar.WP.UI.Model.Interfaces;
-using Despegar.WP.UI.Models.Classes;
 using System.Collections.Generic;
 using System.Windows.Input;
 using System.Linq;
+using Despegar.WP.UI.Model.ViewModel.Classes;
 
 namespace Despegar.WP.UI.Model.ViewModel.Hotels
 {
@@ -22,8 +22,8 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
 
         public override void OnNavigated(object navigationParams)
         {
-            BugTracker.LeaveBreadcrumb("Flight search Filter View");
-            var param = navigationParams as GenericFilterNavigationData;
+            BugTracker.LeaveBreadcrumb("Hotels search Filter View");
+            var param = navigationParams as GenericResultNavigationData;
 
             // make a copy in order to cancelation
             this.SearchModel = (HotelSearchModel)param.SearchModel;  
@@ -37,8 +37,8 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
             {
                 return new RelayCommand(() =>
                 {
-                    //SearchModel.Facets = EditableFacets;  // Apply the filters                    
-                    Navigator.GoTo(ViewModelPages.FlightsResults, new GenericFilterNavigationData() { SearchModel = SearchModel, FiltersApplied = true });
+                    SearchModel.Facets = EditableFacets;  // Apply the filters                    
+                    Navigator.GoTo(ViewModelPages.HotelsResults, new GenericResultNavigationData() { SearchModel = SearchModel, FiltersApplied = true });
                 });
             }
         }

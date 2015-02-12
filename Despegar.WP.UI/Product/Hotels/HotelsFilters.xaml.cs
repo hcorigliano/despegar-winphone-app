@@ -25,21 +25,17 @@ namespace Despegar.WP.UI.Product.Hotels
             this.DataContext = ViewModel;
         }
 
-        void HardwareButtons_BackPressed(object sender, BackPressedEventArgs e)
+
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            HardwareButtons.BackPressed -= HardwareButtons_BackPressed;
+        }
+
+        private void HardwareButtons_BackPressed(object sender, BackPressedEventArgs e)
         {
             ViewModel.BugTracker.LeaveBreadcrumb("Hotels search filters - Back button pressed");
             ViewModel.Navigator.GoBack();
             e.Handled = true;
-        }
-
-        private void AppBarButton_Click(object sender, RoutedEventArgs e)
-        {
-            Navigator.Instance.GoBack();
-        }
-
-        private void AppBarCancelButton_Click(object sender, RoutedEventArgs e)
-        {
-            Navigator.Instance.GoBack();
-        }
+        }       
     }
 }

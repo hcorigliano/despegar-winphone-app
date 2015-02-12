@@ -126,7 +126,7 @@
     <Compile Include="Controls\Hotels\Details\HotelItem.xaml.cs">
       <DependentUpon>HotelItem.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Hotels\Details\MiniBoxSearch.xaml.cs">
+    <Compile Include="Controls\Hotels\MiniBoxSearch.xaml.cs">
       <DependentUpon>MiniBoxSearch.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\Hotels\HotelDescriptionControl.xaml.cs">
@@ -370,7 +370,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Controls\Hotels\Details\MiniBoxSearch.xaml">
+    <Page Include="Controls\Hotels\MiniBoxSearch.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

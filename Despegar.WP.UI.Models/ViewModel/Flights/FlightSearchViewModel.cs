@@ -7,7 +7,7 @@ using Despegar.Core.Neo.Contract.Log;
 using Despegar.WP.UI.Model.Classes;
 using Despegar.WP.UI.Model.Classes.Flights;
 using Despegar.WP.UI.Model.Interfaces;
-using Despegar.WP.UI.Models.Classes;
+using Despegar.WP.UI.Model.ViewModel.Classes;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -181,7 +181,7 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
                 BugTracker.SetExtraData("LastFlightAirports", airports);
                 BugTracker.SetExtraData("LastFlightExtra", extra);
 
-                Navigator.GoTo(ViewModelPages.FlightsResults, new GenericFilterNavigationData() { SearchModel = coreSearchModel , FiltersApplied = false});
+                Navigator.GoTo(ViewModelPages.FlightsResults, new GenericResultNavigationData() { SearchModel = coreSearchModel , FiltersApplied = false});
 
                 IsLoading = false;                
             }

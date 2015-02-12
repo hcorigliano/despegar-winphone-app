@@ -15,7 +15,7 @@ namespace Despegar.WP.UI.Controls.Flights
 {
     public sealed partial class QuantityPassagersControl : UserControl
     {
-        public static readonly DependencyProperty AdultsProperty = DependencyProperty.Register("TotalAdults", typeof(int), typeof(QuantityPassagersControl), new PropertyMetadata(null));
+        public static readonly DependencyProperty AdultsProperty = DependencyProperty.Register("Adults", typeof(int), typeof(QuantityPassagersControl), new PropertyMetadata(null));
         public static readonly DependencyProperty ChildrenProperty = DependencyProperty.Register("Children", typeof(int), typeof(QuantityPassagersControl), new PropertyMetadata(null));
         public static readonly DependencyProperty InfantsProperty = DependencyProperty.Register("Infants", typeof(int), typeof(QuantityPassagersControl), new PropertyMetadata(null));
 

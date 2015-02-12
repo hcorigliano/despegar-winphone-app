@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Despegar.WP.UI.Model.Classes
+namespace Despegar.WP.UI.Model.ViewModel.Classes
 {
-    public class GenericFilterNavigationData
+    public class GenericResultNavigationData
     {
         public object SearchModel { get; set; }
         public bool FiltersApplied { get; set; }

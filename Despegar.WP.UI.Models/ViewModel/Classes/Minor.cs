@@ -3,7 +3,7 @@ using Despegar.WP.UI.Model.Classes;
 using Despegar.WP.UI.Model.Classes.Flights;
 using System.Collections.Generic;
 
-namespace Despegar.WP.UI.Models.Controls.Classes
+namespace Despegar.WP.UI.Model.ViewModel.Classes
 {
     public class Minor : Bindable
     {

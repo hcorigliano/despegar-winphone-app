@@ -1,13 +1,8 @@
 ﻿using Despegar.Core.Neo.Contract.Log;
 using Despegar.WP.UI.Model.Interfaces;
 using Despegar.WP.UI.Model.ViewModel;
+using Despegar.WP.UI.Model.ViewModel.Classes;
 using Despegar.WP.UI.Model.ViewModel.Classes.Flights;
-using Despegar.WP.UI.Models.Classes;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace Despegar.WP.UI.Model

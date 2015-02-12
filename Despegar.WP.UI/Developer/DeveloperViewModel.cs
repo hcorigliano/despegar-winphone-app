@@ -8,7 +8,6 @@ using Despegar.WP.UI.Controls.Flights;
 using Despegar.WP.UI.Model;
 using Despegar.WP.UI.Model.ViewModel;
 using Despegar.WP.UI.Model.ViewModel.Flights;
-using Despegar.WP.UI.Models.Classes;
 using Despegar.WP.UI.Product.Flights;
 using System;
 using System.Collections.Generic;
@@ -20,6 +19,7 @@ using Windows.UI;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Despegar.WP.UI.Model.ViewModel.Classes;
 
 namespace Despegar.WP.UI.Developer
 {

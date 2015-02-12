@@ -1,30 +1,14 @@
-﻿using Despegar.Core.Neo.Business;
-using Despegar.Core.Neo.Business.Hotels.CitiesAvailability;
+﻿using Despegar.Core.Neo.Business.Hotels.CitiesAvailability;
 using Despegar.Core.Neo.InversionOfControl;
-using Despegar.WP.UI.BugSense;
-using Despegar.WP.UI.Common;
 using Despegar.WP.UI.Controls;
-using Despegar.WP.UI.Model;
 using Despegar.WP.UI.Model.Common;
 using Despegar.WP.UI.Model.ViewModel;
 using Despegar.WP.UI.Model.ViewModel.Hotels;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using System.Threading.Tasks;
 using Windows.ApplicationModel.Resources;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.Phone.UI.Input;
 using Windows.UI.Popups;
-using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
 namespace Despegar.WP.UI.Product.Hotels
@@ -83,18 +67,17 @@ namespace Despegar.WP.UI.Product.Hotels
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
             HardwareButtons.BackPressed += HardwareButtons_BackPressed;
+            BottomAppBar.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
             if (e.NavigationMode == NavigationMode.New)
             {                
                     ViewModel = IoC.Resolve<HotelsResultsViewModel>();
                     ViewModel.PropertyChanged += Checkloading;
-                    ViewModel.OnNavigated(e.Parameter);
                     ViewModel.ViewModelError += ErrorHandler;
-                    await ViewModel.Search();
-                    this.DataContext = ViewModel;                   
-                
-                //if (ViewModel.CitiesAvailability.SearchStatus == SearchStates.SearchAgain)
-                //    await ViewModel.SearchAgaing();
+                    ViewModel.OnNavigated(e.Parameter);                    
+                    await ViewModel.LoadResults();
+                    this.DataContext = ViewModel;                               
             }
+            BottomAppBar.Visibility = Windows.UI.Xaml.Visibility.Visible;
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
@@ -105,7 +88,10 @@ namespace Despegar.WP.UI.Product.Hotels
         private void HardwareButtons_BackPressed(object sender, BackPressedEventArgs e)
         {
             e.Handled = true;
-            ViewModel.Navigator.GoBack();
+            if (!ViewModel.IsLoading)
+            {                
+                ViewModel.Navigator.GoBack();
+            }
         }
 
         private void ReSearchTapped(object sender, TappedRoutedEventArgs e)
@@ -127,10 +113,8 @@ namespace Despegar.WP.UI.Product.Hotels
         private void HotelSelected(object sender, TappedRoutedEventArgs e)
         {
             if (ViewModel != null)
-            {
-                ViewModel.CrossParameters.IdSelectedHotel = ((HotelItem)((ListView)sender).SelectedItem).id.ToString();
-                ViewModel.CrossParameters.HotelsExtraData.Distance = ((HotelItem)((ListView)sender).SelectedItem).distance;
-                ViewModel.GoToDetails();
+            {                
+                ViewModel.GoToDetails(((HotelItem)((ListView)sender).SelectedItem));
             }
         }
 

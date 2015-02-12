@@ -21,16 +21,7 @@
     </Page.BottomAppBar>
 
 
-    <Grid x:Name="LayoutRoot" Style="{StaticResource MainContainerGrid}" >
-
-        <Interactivity:Interaction.Behaviors>
-            <Core:EventTriggerBehavior SourceObject="{Binding ElementName=appBarFilter}" EventName="Click">
-                <Core:NavigateToPageAction TargetPage="Despegar.WP.UI.Product.Hotels.HotelsFilters" Parameter="{Binding CitiesAvailability.facets ,Mode=TwoWay}"/>
-            </Core:EventTriggerBehavior>
-            <Core:EventTriggerBehavior SourceObject="{Binding ElementName=appBarSortBy}" EventName="Click">
-                <Core:NavigateToPageAction TargetPage="Despegar.WP.UI.Product.Flights.FlightSortBy" Parameter="{Binding CitiesAvailability.sorting, Mode=TwoWay}"/>
-            </Core:EventTriggerBehavior>
-        </Interactivity:Interaction.Behaviors>
+    <Grid x:Name="LayoutRoot" Style="{StaticResource MainContainerGrid}" >        
 
         <!-- Dev -->
         <!--<dev:UserControlDesignGrid  />-->
@@ -58,8 +49,8 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <StackPanel xmlns:src="using:Despegar.WP.UI.Controls.Hotels.Details" Grid.Row="0"  >
-                <src:MiniBoxSearch DataContext="{Binding CrossParameters.SearchParameters}"  Tapped="ReSearchTapped"/>
+            <StackPanel xmlns:src="using:Despegar.WP.UI.Controls.Hotels" Grid.Row="0"  >
+                <src:MiniBoxSearch DataContext="{Binding SearchModel}"  Tapped="ReSearchTapped"/>
             </StackPanel>
 
             <TextBlock  Grid.Row="1" Text="Tarifa por persona por noche" Style="{StaticResource SegoeRegular17}" VerticalAlignment="Center"/>

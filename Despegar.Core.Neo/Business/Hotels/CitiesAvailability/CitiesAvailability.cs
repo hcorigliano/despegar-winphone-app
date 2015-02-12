@@ -14,6 +14,5 @@ namespace Despegar.Core.Neo.Business.Hotels.CitiesAvailability
         public List<HotelItem> items { get; set; }
         public List<Facet> facets { get; set; }
         public Currencies currencies { get; set; }
-        public HotelsSearchParameters searchDetails { get; set; }
     }
 }

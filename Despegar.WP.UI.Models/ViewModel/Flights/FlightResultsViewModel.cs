@@ -6,8 +6,8 @@ using Despegar.Core.Neo.Contract.Log;
 using Despegar.WP.UI.Model.Classes;
 using Despegar.WP.UI.Model.Classes.Flights;
 using Despegar.WP.UI.Model.Interfaces;
+using Despegar.WP.UI.Model.ViewModel.Classes;
 using Despegar.WP.UI.Model.ViewModel.Classes.Flights;
-using Despegar.WP.UI.Models.Classes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,7 +20,6 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
     public class FlightResultsViewModel : ViewModelBase
     {
         private IMAPIFlights flightService;
-        private Paging paging;
 
         private FlightsItineraries itineraries;
         public FlightsItineraries Itineraries
@@ -101,7 +100,7 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
         {
             get
             {
-                return new RelayCommand(() => { Navigator.GoTo(Model.Interfaces.ViewModelPages.FlightsFilters, new GenericFilterNavigationData() { SearchModel = FlightSearchModel }); });
+                return new RelayCommand(() => { Navigator.GoTo(Model.Interfaces.ViewModelPages.FlightsFilters, new GenericResultNavigationData() { SearchModel = FlightSearchModel }); });
             }
         }
 
@@ -109,14 +108,14 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
         {
             get
             {
-                return new RelayCommand(() => { Navigator.GoTo(Model.Interfaces.ViewModelPages.FlightsOrderBy, new GenericFilterNavigationData() { SearchModel = FlightSearchModel }); });
+                return new RelayCommand(() => { Navigator.GoTo(Model.Interfaces.ViewModelPages.FlightsOrderBy, new GenericResultNavigationData() { SearchModel = FlightSearchModel }); });
             }
         }
 
         public override void OnNavigated(object navigationParams)
         {
             BugTracker.LeaveBreadcrumb("Flight Results View");
-            GenericFilterNavigationData pageParameters = navigationParams as GenericFilterNavigationData;
+            GenericResultNavigationData pageParameters = navigationParams as GenericResultNavigationData;
 
             // Obtain Search parameters
             FlightSearchModel = pageParameters.SearchModel as FlightSearchModel;
@@ -146,14 +145,6 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
                 FlightSearchModel.Facets = Itineraries.facets;
                 FlightSearchModel.Sorting = Itineraries.sorting;
 
-                //if (rebusqueda) 
-                //{
-                //FlightSearchModel.SortingValuesSearch = SelectedSorting;
-                //FlightSearchModel.SortingCriteriaSearch = Sorting.criteria;  
-                //this.cheapest_price = value.cheapest_price;
-               //}
-             
-               //FlightSearchModel.TotalFlights = Itineraries.total;
 
                 if (Itineraries.items != null)
                     this.Items = (Itineraries.items.Select(il => new BindableItem(il))).ToList();

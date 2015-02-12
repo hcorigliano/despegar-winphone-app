@@ -1,5 +1,5 @@
 ﻿<Page
-    x:Class="Despegar.WP.UI.Product.Hotels.HotelsSortBy"
+     x:Class="Despegar.WP.UI.Product.Hotels.HotelsSortBy"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:Despegar.WP.UI.Product.Hotels"
@@ -8,7 +8,37 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid>
+    <Page.BottomAppBar>
+        <CommandBar>
+            <AppBarButton x:Uid="GenericAcceptAppBar" Icon="Accept" Label="Aceptar" Command="{Binding ApplyFilterCommand}"/>
+            <AppBarButton x:Uid="GenericCancelAppBar" Icon="Cancel" Label="Cancelar" Command="{Binding CancelCommand}" />
+        </CommandBar>
+    </Page.BottomAppBar>
+
+    <Page.Resources>
+        <DataTemplate x:Key="SortByDateTemplate">
+            <Grid>
+                <RadioButton GroupName="SortByGroup" Content="{Binding label}" HorizontalAlignment="Left" VerticalAlignment="Top" IsChecked="{Binding selected ,Mode=TwoWay}"/>
+            </Grid>
+        </DataTemplate>
+    </Page.Resources>
+
+
+    <Grid Style="{StaticResource MainContainerGrid}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="{StaticResource Block1p}"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <!-- Title Panel -->
+        <Image Grid.Row="0" Style="{StaticResource TopLogo}" />
+        <TextBlock Grid.Row="1" Style="{StaticResource PageHeaderSmall}" x:Uid="Page_Order_Title" Text="Order" FontFamily="Segoe WP Semibold" />
+
+        <ListView Grid.Row="2"
+                  ItemTemplate="{StaticResource SortByDateTemplate}"
+                  ItemsSource="{Binding EditableSortingOptions.values}" 
+                  IsItemClickEnabled="True" />
 
     </Grid>
 </Page>

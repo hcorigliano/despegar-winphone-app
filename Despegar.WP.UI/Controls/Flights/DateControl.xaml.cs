@@ -9,8 +9,8 @@ namespace Despegar.WP.UI.Controls.Flights
 {   
     public sealed partial class DateControl : UserControl
     {
-        public static readonly DependencyProperty FromDateProperty = DependencyProperty.Register("CheckinDate", typeof(DateTimeOffset), typeof(DateControl), new PropertyMetadata(null));
-        public static readonly DependencyProperty ToDateProperty = DependencyProperty.Register("CheckoutDate", typeof(DateTimeOffset), typeof(DateControl), new PropertyMetadata(null));
+        public static readonly DependencyProperty FromDateProperty = DependencyProperty.Register("FromDate", typeof(DateTimeOffset), typeof(DateControl), new PropertyMetadata(null));
+        public static readonly DependencyProperty ToDateProperty = DependencyProperty.Register("ToDate", typeof(DateTimeOffset), typeof(DateControl), new PropertyMetadata(null));
 
         #region ** BoilerPlate Code **
         public event PropertyChangedEventHandler PropertyChanged;

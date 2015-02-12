@@ -83,7 +83,7 @@ namespace Despegar.WP.UI.Product.Hotels
 
         void HardwareButtons_BackPressed(object sender, BackPressedEventArgs e)
         {
-            ViewModel.BugTracker.LeaveBreadcrumb("Flight Search View - Back button pressed");
+            ViewModel.BugTracker.LeaveBreadcrumb("Flight LoadResults View - Back button pressed");
 
             if (ViewModel != null)
             {

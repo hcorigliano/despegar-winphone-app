@@ -13,9 +13,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
-// The User Control item template is documented at http://go.microsoft.com/fwlink/?LinkId=234236
-
-namespace Despegar.WP.UI.Controls.Hotels.Details
+namespace Despegar.WP.UI.Controls.Hotels
 {
     public sealed partial class MiniBoxSearch : UserControl
     {

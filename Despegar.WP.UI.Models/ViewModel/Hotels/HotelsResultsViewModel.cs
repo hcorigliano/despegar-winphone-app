@@ -3,8 +3,9 @@ using Despegar.Core.Neo.Business.Hotels.SearchBox;
 using Despegar.Core.Neo.Contract.API;
 using Despegar.Core.Neo.Contract.Log;
 using Despegar.Core.Neo.Exceptions;
+using Despegar.WP.UI.Model.Classes;
 using Despegar.WP.UI.Model.Interfaces;
-using Despegar.WP.UI.Models.Classes;
+using Despegar.WP.UI.Model.ViewModel.Classes;
 using System;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -17,7 +18,7 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
 
         #region  *** Public Interface ***
         public const int ITEMS_FOR_EACH_PAGE = 30;
-        public HotelsCrossParameters CrossParameters { get; set; }
+        public HotelSearchModel SearchModel { get; set; }
 
         private CitiesAvailability citiesAvailability { get; set; }
         public CitiesAvailability CitiesAvailability
@@ -109,7 +110,7 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
         {
             get
             {
-                return new RelayCommand(() => Navigator.GoTo(ViewModelPages.HotelsFilter, CrossParameters));
+                return new RelayCommand(() => Navigator.GoTo(ViewModelPages.HotelsFilter, new GenericResultNavigationData(){ SearchModel = SearchModel } ));
             }
         }
 
@@ -117,7 +118,7 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
         {
             get
             {
-                return new RelayCommand(() => Navigator.GoTo(ViewModelPages.HotelsOrderBy, CrossParameters));
+                return new RelayCommand(() => Navigator.GoTo(ViewModelPages.HotelsOrderBy, new GenericResultNavigationData() { SearchModel = SearchModel }));
             }
         }
 
@@ -140,36 +141,41 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
 
         private void RefreshIcons()
         {
-            if (!IsLoading)
-            {
-                FilterButtonIsTapEnable = true;
-                OrderButtonIsTapEnable = true;
-                PreviousPageIsTapEnable = CrossParameters.SearchModel.Offset != 0;
-
-                if (CitiesAvailability != null)
-                    NextPageButtonIsTapEnable = (CitiesAvailability.paging.offset + ITEMS_FOR_EACH_PAGE) < CitiesAvailability.paging.total;
-            }
-            else
+            if (IsLoading)
             {
                 PreviousPageIsTapEnable = false;
                 NextPageButtonIsTapEnable = false;
                 FilterButtonIsTapEnable = false;
-                OrderButtonIsTapEnable = false;
+                OrderButtonIsTapEnable = false;               
+            }
+            else
+            {
+                FilterButtonIsTapEnable = SearchModel.Facets.Count > 0;
+                OrderButtonIsTapEnable = true;
+                PreviousPageIsTapEnable = SearchModel.Offset != 0;
+
+                if (CitiesAvailability != null)
+                    NextPageButtonIsTapEnable = (CitiesAvailability.paging.offset + ITEMS_FOR_EACH_PAGE) < CitiesAvailability.paging.total;
+                else
+                    NextPageButtonIsTapEnable = false;
             }
         }
 
-        public async Task Search()
+        public async Task LoadResults()
         {            
-            IsLoading = true;
-
-            var model = CrossParameters.SearchModel;
-
+            IsLoading = true;          
+          
             try
             {
-               CitiesAvailability = await hotelService.GetHotelsAvailability(model);
+               CitiesAvailability = await hotelService.GetHotelsAvailability(SearchModel);
 
-                if (CitiesAvailability.items.Count == 0)
-                    OnViewModelError("SEARCH_NO_RESULTS");
+               if (CitiesAvailability.items.Count == 0)
+                   OnViewModelError("SEARCH_NO_RESULTS");
+               else {
+                   // Set filering
+                   SearchModel.Facets = CitiesAvailability.facets;
+                   SearchModel.Sortings = CitiesAvailability.sorting;
+               }
             }
             catch (APIErrorException e)
             {
@@ -187,75 +193,55 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
         {
             if (!IsLoading)
             {
-                CrossParameters.SearchModel.Offset += ITEMS_FOR_EACH_PAGE;
-                await Search();
+                SearchModel.Offset += ITEMS_FOR_EACH_PAGE;
+                await LoadResults();
             }
         }
 
         public async Task ShowPreviousPage()
         {
-            if(!IsLoading && CrossParameters.SearchModel.Offset != 0)
+            if(!IsLoading && SearchModel.Offset != 0)
             {
-                CrossParameters.SearchModel.Offset -= ITEMS_FOR_EACH_PAGE;
-                await Search();
+                SearchModel.Offset -= ITEMS_FOR_EACH_PAGE;
+                await LoadResults();
             }
         }
-
-        //public async Task SearchAgain()
-        //{
-        //    HotelSearchModel model = CrossParameters.SearchModel;
-        //    model.extraParameters = "";
-
-        //    foreach (Facet facet in CitiesAvailability.facets)
-        //    {
-        //        string valueString = "";
-
-        //        if (facet.values != null)
-        //        {
-        //            valueString = "";
-        //            foreach (Value value in facet.values)
-        //            {
-        //                if (value.selected)
-        //                {
-        //                    if (valueString == "")
-        //                        valueString += value.value;
-        //                    else
-        //                        valueString += "," + value.value;
-        //                }
-        //            }
-
-        //            if (valueString != "")
-        //            {
-        //                CrossParameters.SearchModel.extraParameters += facet.criteria + "=" + valueString + "&";
-        //            }
-        //        }
-        //    }
-
-        //    foreach (Value value in CitiesAvailability.sorting.values)
-        //    {
-        //        if (value.selected)
-        //            CrossParameters.SearchModel.extraParameters += "order_by=" + value.value;
-        //    }
-
-
-        //    if (CrossParameters.SearchModel.extraParameters != "")
-        //    {
-        //        CrossParameters.SearchModel.offset = 0;
-        //        await Search();
-        //    }
-
-        //    //CitiesAvailability.SearchStatus = SearchStates.FirstSearch; 
-        //}
-
+        
         public void GoToDetails()
         {
-            Navigator.GoTo(ViewModelPages.HotelsDetails, CrossParameters);
+            // Selected hotel is..????
         }
 
         public override void OnNavigated(object navigationParams)
         {
-            CrossParameters = navigationParams as HotelsCrossParameters;
+            BugTracker.LeaveBreadcrumb("Hotels Results View");
+            GenericResultNavigationData pageParameters = navigationParams as GenericResultNavigationData;
             PropertyChanged += LockUnlockAppBar;
+
+            // Reset paging (a new Search has been performed)
+            SearchModel = (HotelSearchModel)pageParameters.SearchModel;
+            SearchModel.Offset = 0;
+
+            // Remover la pantall de filtros/order del navigation stack
+            if (pageParameters.FiltersApplied)
+            {
+                Navigator.RemoveBackEntry(); // Filters page
+                Navigator.RemoveBackEntry(); // Old results page
+            }
+        }
+
+
+
+        public void GoToDetails(HotelItem hotelItem)
+        {
+            var param = new HotelsCrossParameters() 
+            {   SearchModel = this.SearchModel, 
+                IdSelectedHotel = hotelItem.id
+            };
+            param.HotelsExtraData.Distance = hotelItem.distance;
+
+            Navigator.GoTo(ViewModelPages.HotelsDetails, param);
+
         }
     }
 }

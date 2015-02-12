@@ -1,15 +1,17 @@
-﻿using Despegar.Core.Neo.Business;
-using Despegar.Core.Neo.Business.Enums;
-using Despegar.Core.Neo.Business.Flight.Itineraries;
+﻿using Despegar.Core.Neo.Business.Enums;
 using Despegar.Core.Neo.InversionOfControl;
 using Despegar.WP.UI.Common;
-using Despegar.WP.UI.Model.Classes;
+using Despegar.WP.UI.Controls;
 using Despegar.WP.UI.Model.Classes.Flights;
 using Despegar.WP.UI.Model.Common;
+using Despegar.WP.UI.Model.ViewModel;
+using Despegar.WP.UI.Model.ViewModel.Classes;
 using Despegar.WP.UI.Model.ViewModel.Flights;
 using System;
-using System.Collections.Generic;
+using System.ComponentModel;
+using System.Net.NetworkInformation;
 using Windows.ApplicationModel.Resources;
+using Windows.Phone.UI.Input;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -17,11 +19,6 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
-using Despegar.WP.UI.Controls;
-using System.Net.NetworkInformation;
-using System.ComponentModel;
-using Despegar.WP.UI.Model.ViewModel;
-using Windows.Phone.UI.Input;
 
 namespace Despegar.WP.UI.Product.Flights
 {
@@ -75,7 +72,7 @@ namespace Despegar.WP.UI.Product.Flights
         protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
             HardwareButtons.BackPressed += HardwareButtons_BackPressed;
-            var param = e.Parameter as GenericFilterNavigationData;
+            var param = e.Parameter as GenericResultNavigationData;
             BottomAppBar.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
 
             if (e.NavigationMode == NavigationMode.New)

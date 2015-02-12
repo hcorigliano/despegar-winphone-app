@@ -1,10 +1,9 @@
-﻿using Despegar.Core.Neo.Business.Flight.Itineraries;
-using Despegar.Core.Neo.Business.Flight.SearchBox;
+﻿using Despegar.Core.Neo.Business.Hotels.CitiesAvailability;
+using Despegar.Core.Neo.Business.Hotels.SearchBox;
 using Despegar.Core.Neo.Contract.Log;
 using Despegar.WP.UI.Model.Classes;
 using Despegar.WP.UI.Model.Interfaces;
 using Despegar.WP.UI.Model.ViewModel.Classes;
-using Despegar.WP.UI.Model.ViewModel.Classes.Flights;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,27 +11,27 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace Despegar.WP.UI.Model.ViewModel.Flights
+namespace Despegar.WP.UI.Model.ViewModel.Hotels
 {
-    public class FlightOrderByViewModel : ViewModelBase
+    public class HotelsSortByViewModel : ViewModelBase
     {
-        public FlightSearchModel SearchModel { get; set; }
+        public HotelSearchModel SearchModel { get; set; }
         public Sorting EditableSortingOptions { get; set; }
 
-        public FlightOrderByViewModel(INavigator nav, IBugTracker t)
+        public HotelsSortByViewModel(INavigator nav, IBugTracker t)
             : base(nav, t)
         {                
         }
 
         public override void OnNavigated(object navigationParams)
         {
-            BugTracker.LeaveBreadcrumb("Flight search Sort By View");
+            BugTracker.LeaveBreadcrumb("Hotels search Sort By View");
 
             var param = navigationParams as GenericResultNavigationData;
 
             // make a copy in order to support cancelation
-            this.SearchModel = (FlightSearchModel)param.SearchModel;   
-            this.EditableSortingOptions = Sorting.Copy(SearchModel.Sorting);
+            this.SearchModel = (HotelSearchModel)param.SearchModel;
+            this.EditableSortingOptions = Sorting.Copy(SearchModel.Sortings);
         }
 
         public ICommand ApplyFilterCommand
@@ -41,9 +40,8 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
             {
                 return new RelayCommand(() =>
                 {
-                    SearchModel.Sorting = EditableSortingOptions;  // Apply the filters                    
-
-                    Navigator.GoTo(ViewModelPages.FlightsResults, new GenericResultNavigationData() { SearchModel = SearchModel, FiltersApplied = true });
+                    SearchModel.Sortings = EditableSortingOptions;  // Apply the filters                    
+                    Navigator.GoTo(ViewModelPages.HotelsResults, new GenericResultNavigationData() { SearchModel = SearchModel, FiltersApplied = true });
                 });
             }
         }

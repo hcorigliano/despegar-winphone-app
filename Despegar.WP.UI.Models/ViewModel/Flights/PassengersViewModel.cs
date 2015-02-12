@@ -1,7 +1,7 @@
 ﻿using Despegar.Core.Neo.Business;
 using Despegar.Core.Neo.Business.Enums;
 using Despegar.WP.UI.Model.Classes.Flights;
-using Despegar.WP.UI.Models.Controls.Classes;
+using Despegar.WP.UI.Model.ViewModel.Classes;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;

@@ -2,7 +2,7 @@
 using Despegar.Core.Neo.Contract.Log;
 using Despegar.WP.UI.Model.Classes.Flights;
 using Despegar.WP.UI.Model.Interfaces;
-using Despegar.WP.UI.Models.Classes;
+using Despegar.WP.UI.Model.ViewModel.Classes;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Input;

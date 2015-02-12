@@ -16,18 +16,59 @@ namespace Despegar.Core.Neo.Business.Hotels.SearchBox
         public string Currency { get; set; }
         public int Offset { get; set; }
         public int Limit { get; set; }
-        public string Order { get; set; }
-        public string ExtraParameters { get; set; }
+        public string Order { get; set; }       
         public int DestinationCode { get; set; }
         public string DestinationHotelText { get; set; }
-        public int Adults { get; set; }
-        public int Children { get; set; }
         public DateTimeOffset CheckinDate { get; set; }
         public DateTimeOffset CheckoutDate { get; set; }
         public int EmissionAnticipationDay { get; set; }
         public int LastAvailableHours { get; set; }
         private DateTime DateBoundary { get; set; }
         public CustomError SearchErrors { get; set; }
+
+        // Filters formatting
+        public string ExtraParameters
+        {
+            get
+            {
+                string extraParameters = String.Empty;
+
+                // Facets
+                foreach (Facet facet in Facets)
+                {
+                    if (facet.values != null)
+                    {
+                        string valueString = "";
+
+                        foreach (Value value in facet.values)
+                        {
+                            if (value.selected)
+                            {
+                                if (valueString == "")
+                                    valueString += value.value;
+                                else
+                                    valueString += "," + value.value;
+                            }
+                        }
+
+                        if (valueString != String.Empty)
+                            extraParameters += facet.criteria + "=" + valueString + "&";
+                    }
+                }
+
+                // Sortings
+                if (Sortings.values != null) 
+                { 
+                    foreach (Value value in Sortings.values)
+                    {
+                        if (value.selected)
+                            extraParameters += "order_by=" + value.value;
+                    }
+                }
+
+                return extraParameters;
+            }
+        }
 
         // Rooms and Passengers Model
         public ObservableCollection<PassengersForRooms> Rooms { get; set; }
@@ -64,7 +105,6 @@ namespace Despegar.Core.Neo.Business.Hotels.SearchBox
             }
         }
 
-
         public int TotalAdults
         {
             get
@@ -81,64 +121,19 @@ namespace Despegar.Core.Neo.Business.Hotels.SearchBox
             }
         }
 
-        /// <summary>
-        /// Distrbution data
-        /// </summary>
-        //public int RoomsFromDistribution
-        //{
-        //    get
-        //    {
-        //        if (this.DistributionString != null)
-        //            return (DistributionString.Split('!')).Count();
-        //        else return 1;
-        //    }
-        //}
-        //public int Nights
-        //{
-        //    get
-        //    {
-        //        if (CheckinDate != null && CheckoutDate != null)
-        //        {
-        //            DateTime checkinDateTime = DateTime.ParseExact(DepartureDateFormatted, "yyyy-MM-dd", CultureInfo.InvariantCulture, DateTimeStyles.None);
-        //            DateTime checkoutDateTime = DateTime.ParseExact(DepartureDateFormatted, "yyyy-MM-dd", CultureInfo.InvariantCulture, DateTimeStyles.None);
-        //            return (checkoutDateTime - checkinDateTime).Days;
-        //        }
+        public int Nights
+        {
+            get
+            {
+                if (CheckinDate != null && CheckoutDate != null)
+                {
+                    return (CheckoutDate - CheckinDate).Days;
+                }
 
-        //        return 0;
-        //    }
-        //}
-        //public int Adults
-        //{
-        //    get
-        //    {
-        //        int count = 0;
-        //        if (this.DistributionString != null)
-        //        {
-        //            string[] Ad = DistributionString.Split('!');
-
-        //            foreach (string str in Ad)                    
-        //                count += Convert.ToInt32((str.Split('-'))[0]);                    
-        //        }
-
-        //        return count;
-        //    }
-        //}
-        //public int? Childs
-        //{
-        //    get
-        //    {
-        //        int? count = 0;
-        //        if (this.DistributionString != null)
-        //        {
-        //            string[] Ad = DistributionString.Split('!');
-        //            foreach (string str in Ad)                   
-        //               count += (str.Split('-')).Count() - 1;
-                    
-        //        }
-        //        return (count == 0) ? null : count;
-        //    }
-        //}
-
+                return 0;
+            }
+        }
+               
         /// <summary>
         /// Geo Data
         /// </summary>
@@ -149,6 +144,7 @@ namespace Despegar.Core.Neo.Business.Hotels.SearchBox
         /// Selected facets
         /// </summary>
         public List<Facet> Facets { get; set; }
+        public Sorting Sortings { get; set; }
 
         public string DistributionString 
         { 
@@ -187,17 +183,17 @@ namespace Despegar.Core.Neo.Business.Hotels.SearchBox
         }
 
         public HotelSearchModel()
-        {
-            this.Adults = 1;
-            this.Children = 0;
+        {            
             this.DestinationCode = 0;
             this.DestinationHotelText = string.Empty;
 
             this.CheckinDate = DateTime.Today.AddDays(EmissionAnticipationDay);
             this.CheckoutDate = DateTime.Today.AddDays(EmissionAnticipationDay);
             this.Facets = new List<Facet>();
+            this.Sortings = new Sorting();
             this.Rooms = new ObservableCollection<PassengersForRooms>();
             this.SelectedRoomsQuantityOption = 1;
+            this.Rooms[0].GeneralAdults = 1;
         }
 
         public override bool Validate()
@@ -209,19 +205,21 @@ namespace Despegar.Core.Neo.Business.Hotels.SearchBox
         { 
             get
             {
-                if (String.IsNullOrEmpty(DestinationHotelText) && this.DestinationCode != 0)
+                if (String.IsNullOrEmpty(DestinationHotelText) && this.DestinationCode != -1)
                 {
                     // No origin
                     SearchErrors = new CustomError("Debe que seleccionar origen.", "FLIGHT_SEARCH_NO_ORIGIN_ERROR_MESSAGE", "CommonValidations");
                     return false;
                 }
 
-                if (Adults <= 0)
+                // TODO:  No deberia ser que por cada habitacion haya un adulto? 
+                if (TotalAdults <= 0)
                 {
                     SearchErrors = new CustomError("Tiene que haber al menos un adulto.", "FLIGHT_SEARCH_MIN_ADULTS_ERROR_MESSAGE", "CommonValidations");
                     // Adult obligatory
                     return false;
                 }
+
                 if (CheckoutDate <= CheckinDate)
                 {
                     SearchErrors = new CustomError("fecha partida menor a llegada.", "FLIGHT_SEARCH_DESTINATIONDATE_SMALLER_THAN_DEPARTURE_ERROR_MESSAGE", "isValid");
@@ -266,5 +264,7 @@ namespace Despegar.Core.Neo.Business.Hotels.SearchBox
             DateBoundary = daysToAdd;
         }
 
+
+        
     }
 }
