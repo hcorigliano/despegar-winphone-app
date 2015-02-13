@@ -29,6 +29,8 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
         {
             navigator.GoTo(ViewModelPages.Home, new HomeParameters() { ClearStack = true });            
         }
-       
+
+
+        public bool IsETicketed { get; set; }
     }
 }

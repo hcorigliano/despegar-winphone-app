@@ -920,4 +920,7 @@ recomendamos que busque otro vuelo.</value>
   <data name="payment_failed_title" xml:space="preserve">
     <value>Ha alcanzado el máximo de intentos posible</value>
   </data>
+  <data name="Flight_Thanks_Continue_Explain_Emitted.Text" xml:space="preserve">
+    <value>Su pago ha sido procesado correctamente. En breve recibirá un email con el ticket electrónico</value>
+  </data>
 </root>

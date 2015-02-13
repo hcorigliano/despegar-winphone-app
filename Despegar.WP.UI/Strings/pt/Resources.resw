@@ -924,4 +924,7 @@ Isso pode ter sido causado por dados incorretos, limite de compra insuficiente o
   <data name="payment_failed_title" xml:space="preserve">
     <value>Você alcançou o limite máximo de tentativas.</value>
   </data>
+  <data name="Flight_Thanks_Continue_Explain_Emitted.Text" xml:space="preserve">
+    <value>u pagado ha sido procesada correctamente. En un breve correo electrónico con recibira el billete electrónico</value>
+  </data>
 </root>

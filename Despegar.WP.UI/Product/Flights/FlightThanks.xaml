@@ -7,9 +7,15 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:src="using:Despegar.WP.UI.Controls.Flights.Detail"
     xmlns:dev="using:Despegar.WP.UI.Developer.Controls"
+    xmlns:conv="using:Despegar.WP.UI.Common.Converter"
     mc:Ignorable="d"
     Style="{StaticResource BasePage}">
 
+    
+    <Page.Resources>
+        <conv:VisibilityConverter x:Key="visibilityConverter" TrueValue="Visible" FalseValue="Collapsed"  />
+        <conv:VisibilityConverter x:Key="invertedConverter" TrueValue="Collapsed" FalseValue="Visible"  />
+    </Page.Resources>
     <Grid x:Name="LayoutRoot" Style="{StaticResource MainContainerGrid}" >
 
         <!-- Dev -->
@@ -34,13 +40,31 @@
 
         <ScrollViewer Grid.Row="2" DataContext="{Binding FlightParameters}">
             <StackPanel>
-                <TextBlock Grid.Row="1" x:Uid="Flight_Thanks" Style="{StaticResource Thanks_PageHeader}" Text="gracias totales" />
+                <TextBlock Grid.Row="1" x:Uid="Flight_Thanks" Style="{StaticResource Thanks_PageHeader}" Text="Gracias totales" />
                 <!--<TextBlock Text="¡Muchas gracias por su solicitud de compra!" />-->
                 <TextBlock  Style="{StaticResource Thanks_Request_Is }" x:Uid="Flight_Thanks_Request_Is" Text="Su número de solicitud de compra es:"  />
                 <TextBlock Style="{StaticResource Thanks_Request }" Text="{Binding BookingResponse.checkout_id}"/>
-                <TextBlock Style="{StaticResource Thanks_How_Continue}" x:Uid="Flight_Thanks_How_Continue" Text="¿Cómo continúa el proceso de compra?" />
-                <TextBlock TextWrapping="Wrap" Style="{StaticResource Thanks_Continue_Explain}" x:Uid="Flight_Thanks_Continue_Explain" Text="Su pago está siendo procesado. Una vez que el pago se procese exitosamente recibirá un e-mail con la información de compra."   />
+                
+                
+                
+                <TextBlock Style="{StaticResource Thanks_How_Continue}" 
+                           x:Uid="Flight_Thanks_How_Continue" Text="¿Cómo continúa el proceso de compra?" 
+                           />
+                
+                
+                <TextBlock TextWrapping="Wrap" Style="{StaticResource Thanks_Continue_Explain}" 
+                           x:Uid="Flight_Thanks_Continue_Explain" 
+                           Text="Su pago está siendo procesado. Una vez que el pago se procese exitosamente recibirá un e-mail con la información de compra."  
+                           Visibility="{Binding IsETicketed, Converter={StaticResource invertedConverter}}" />
 
+                <!-- Emitted -->
+                <TextBlock TextWrapping="Wrap" Style="{StaticResource Thanks_Continue_Explain}" 
+                           x:Uid="Flight_Thanks_Continue_Explain_Emitted" 
+                           Text="Ha sido emitido per no cobrado"
+                           Visibility="{Binding IsETicketed, Converter={StaticResource visibilityConverter}}"
+                           />
+                
+                
                 <TextBlock Style="{StaticResource Thanks_Booking_Detail_Blue}" x:Uid="Common_Booking_Detail" Text="Detalle de reserva" />
                 <StackPanel xmlns:src="using:Despegar.WP.UI.Product.Flights.Checkout.Buy.Controls">
                     <src:BuyDetailsControl DataContext="{Binding PriceDetail}" />

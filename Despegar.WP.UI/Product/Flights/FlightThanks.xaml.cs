@@ -39,6 +39,8 @@ namespace Despegar.WP.UI.Product.Flights
             ViewModel = new FlightThanksViewModel(Navigator.Instance, BugTracker.Instance);
             ViewModel.FlightParameters = crossParameters;
 
+            ViewModel.IsETicketed = crossParameters.BookingResponse.eticket_token != null; // emiitted?
+
             DataContext = ViewModel;
             if (ViewModel.FlightParameters.Inbound.choice == -1)
             {
