@@ -15,10 +15,14 @@ namespace Despegar.Core.Business
         StatesArg,
         FlightBookingResponseCreditCardNumberError,
         ConfigurationErroneus,
-        ForceUpdateErroneus
+        ForceUpdateErroneus,
+        PurchaseCanceled,
+        MaxRetry,
+        NewCredit,
+        FixCredit
     }
 
-    /// <summary>
+    /// <summary>,
     /// Mocks repository
     /// </summary>
     public class Mock
@@ -36,6 +40,12 @@ namespace Despegar.Core.Business
             new Mock() {ServiceID = ServiceKey.BookingCompletePost, MockID = MockKey.FlightBookingResponseCreditCardNumberError, Content="{\"code\":1099, \"message\":\"Invalid booking_form Internal code 1099. Metric name = Custom/book\",\"causes\":  [\"The request was invalid: payment.card.number.value: INVALID_CARD_NUMBER\"],\"tracking\": \"Brand:Despegar Platform:Phone AppVersion:3.0.0.0\"}"},
             new Mock() {ServiceID = ServiceKey.Configuration, MockID = MockKey.ConfigurationErroneus, Content="asfnaf!#@aifasiobrasl"},
             new Mock() {ServiceID = ServiceKey.Update, MockID = MockKey.ForceUpdateErroneus, Content="asfnaf!#@aifasiobrasl"},
+
+            new Mock() {ServiceID = ServiceKey.BookingCompletePost, MockID = MockKey.PurchaseCanceled, Content="{\"id\":\"d8ed0191-ad4f-11e4-bc1f-fa163e41ea4c\",\"eticket\":null,\"pnr\":\"PASSOC\",\"checkout_id\":2141016770,\"checkoutSuccess\":false,\"booking_status\":\"canceled\"}"},
+            new Mock() {ServiceID = ServiceKey.BookingCompletePost, MockID = MockKey.MaxRetry, Content="{\"id\":\"2ca4628f-2c94-11e4-a078-fa163e0cab2a\",\"pnr\":\"2FK9HL\",\"checkout_id\":31844578,\"booking_status\":\"payment_failed\"}"},
+            new Mock() {ServiceID = ServiceKey.BookingCompletePost, MockID = MockKey.NewCredit, Content="{\"next_step_url\":\"/bookings/2ca4628f-2c94-11e4-a078-fa163e0cab2a/form-description?section=payment\",\"id\":\"2ca4628f-2c94-11e4-a078-fa163e0cab2a\",\"booking_status\":\"new_credit_card\"}"},
+            new Mock() {ServiceID = ServiceKey.BookingCompletePost, MockID = MockKey.FixCredit, Content="{\"next_step_url\":\"/bookings/2ca4628f-2c94-11e4-a078-fa163e0cab2a/form-description?section=payment\",\"id\":\"2ca4628f-2c94-11e4-a078-fa163e0cab2a\",\"booking_status\":\"fix_credit_card\"}"},            
+            
         };
 
         public static Mock GetMock(MockKey key)

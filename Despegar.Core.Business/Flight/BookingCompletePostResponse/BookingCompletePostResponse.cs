@@ -14,6 +14,7 @@ namespace Despegar.Core.Business.Flight.BookingCompletePostResponse
         public string checkout_id { get; set; }
         public string booking_status { get; set; }
         public List<RiskQuestion> risk_questions { get; set; }
+        public string eticket_token { get; set; }
 
         public MAPIError Error { get; set; }
     }

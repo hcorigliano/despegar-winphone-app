@@ -45,6 +45,9 @@ namespace Despegar.WP.UI.Model.ViewModel
                     temp.sites.Remove(site);
             #endif
 
+            
+           
+
             Configurations = temp;
         }
 

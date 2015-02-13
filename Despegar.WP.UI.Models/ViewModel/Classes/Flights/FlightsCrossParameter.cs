@@ -19,6 +19,5 @@ namespace Despegar.WP.UI.Model.ViewModel.Classes.Flights
         public PriceFormated PriceDetail { get; set; }
         public int price { get; set; }
         public List<RoutesItems> MultipleRoutes { get; set; }
-        
     }
 }

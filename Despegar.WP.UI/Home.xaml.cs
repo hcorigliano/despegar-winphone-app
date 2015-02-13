@@ -91,7 +91,6 @@ namespace Despegar.WP.UI
                 Flights.Visibility = Visibility.Visible;
             else
                 Flights.Visibility = Visibility.Collapsed;
-
         }
     
         public static string GetAppVersion()

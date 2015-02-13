@@ -255,6 +255,11 @@ namespace Despegar.WP.UI.Model.ViewModel
                 OnViewModelError("CHECKOUT_INIT_FAILED");
             }
 
+#if DEBUG
+            // Fill Test data
+            FillBookingFields(CoreBookingFields);
+#endif
+
             IsLoading = false;
         }
 
@@ -591,6 +596,8 @@ namespace Despegar.WP.UI.Model.ViewModel
             {
                 BookingStatusEnum _status = (BookingStatusEnum)Enum.Parse(typeof(BookingStatusEnum), status);
 
+                current_status = _status;
+
                 return _status;
             }
             catch (Exception e)
@@ -618,17 +625,31 @@ namespace Despegar.WP.UI.Model.ViewModel
             {
                 bookingFields.form.passengers[0].birthdate.CoreValue = "1988-11-27";
             }
-            bookingFields.form.passengers[0].document.number.CoreValue = "12123123";
-            bookingFields.form.passengers[0].document.type.CoreValue = "LOCAL";
+            if (bookingFields.form.passengers[0].document != null)
+            {
+                bookingFields.form.passengers[0].document.number.CoreValue = "12123123";
+                bookingFields.form.passengers[0].document.type.CoreValue = "LOCAL";
+            }
             bookingFields.form.passengers[0].first_name.CoreValue = "Test";
             bookingFields.form.passengers[0].last_name.CoreValue = "Booking";
             bookingFields.form.passengers[0].gender.CoreValue = "MALE";
-            bookingFields.form.passengers[0].nationality.CoreValue = "AR";
+            if (bookingFields.form.passengers[0].nationality != null)
+            {
+                bookingFields.form.passengers[0].nationality.CoreValue = "AR";
+            }
             bookingFields.form.payment.card.expiration.CoreValue = "2015-11";
             bookingFields.form.payment.card.number.CoreValue = "4242424242424242";
-            bookingFields.form.payment.card.owner_document.number.CoreValue = "12123123";
-            bookingFields.form.payment.card.owner_document.type.CoreValue = "LOCAL";
-            bookingFields.form.payment.card.owner_gender.CoreValue = "MALE";
+
+            if (bookingFields.form.payment.card.owner_document != null)
+            {
+                bookingFields.form.payment.card.owner_document.number.CoreValue = "12123123";
+                bookingFields.form.payment.card.owner_document.type.CoreValue = "LOCAL";
+            }
+
+            if (bookingFields.form.payment.card.owner_gender != null)
+            {
+              bookingFields.form.payment.card.owner_gender.CoreValue = "MALE";
+            }
             bookingFields.form.payment.card.owner_name.CoreValue = "Test Booking";
             bookingFields.form.payment.card.security_code.CoreValue = "123";
             bookingFields.form.payment.installment.card_code.CoreValue = "VI";
@@ -656,10 +677,7 @@ namespace Despegar.WP.UI.Model.ViewModel
         private async void ValidateAndBuy()
         {
             this.Tracker.LeaveBreadcrumb("Flight checkout view model validate and buy init");
-#if DEBUG
-            // Fill Test data
-            FillBookingFields(CoreBookingFields);
-#endif
+
 
             if (!IsTermsAndConditionsAccepted)
             {
@@ -683,6 +701,12 @@ namespace Despegar.WP.UI.Model.ViewModel
                     dynamic bookingData = null;
 
                     bookingData = await DynamicFlightBookingFieldsToPost.ToDynamic(this.CoreBookingFields);
+
+                    // new field
+                    if (current_status != null)
+                    {
+                        bookingData.form.booking_status = current_status.ToString();
+                    }
 
                     // Buy
                     CrossParameters.PriceDetail = PriceDetailsFormatted;
@@ -779,7 +803,6 @@ namespace Despegar.WP.UI.Model.ViewModel
         }
         
 
-
         /// <summary>
         /// Validates the booking status
         /// </summary>
@@ -801,12 +824,18 @@ namespace Despegar.WP.UI.Model.ViewModel
                     OnViewModelError("BOOKING_FAILED", CrossParameters.BookingResponse.checkout_id);
                     break;
 
+                case BookingStatusEnum.canceled:
+                    // El vuelos se cancela y no puede comprar. Enviar a la resbusqueda de vuelos
+                    OnViewModelError("BOOKING_CANCELED");
+                    break;
+
                 case BookingStatusEnum.fix_credit_card:
 
                     OnViewModelError("ONLINE_PAYMENT_ERROR_FIX_CREDIT_CARD", "CARD");
                     break;
 
                 case BookingStatusEnum.new_credit_card:
+                    // TENER EN CUENTA EL BOOKING STATUS!!
 
                     //this.selectedCard.card = new Card();
                     //this.selectedCard.hasError = true;
@@ -820,6 +849,9 @@ namespace Despegar.WP.UI.Model.ViewModel
                     break;
 
                 case BookingStatusEnum.payment_failed:
+                    // Se acabaron los reintentos mostrar mensaje de error  e ir para atras
+                    OnViewModelError("PAYMENT_FAILED");
+                    break;
                 case BookingStatusEnum.risk_evaluation_failed:
 
                     OnViewModelError("ONLINE_PAYMENT_FAILED", "CARD");
@@ -885,5 +917,7 @@ namespace Despegar.WP.UI.Model.ViewModel
 
         }
 
+
+        public BookingStatusEnum? current_status { get; set; }
     }
 }

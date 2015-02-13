@@ -77,7 +77,7 @@ namespace Despegar.LegacyCore.Connector
             if (!url.ToString().Contains("?"))
                 url.Append("?");
 
-            url.Append("&channel=WindowsTest1234");
+            url.Append("&channel=windows8-phone-app");
 
             HttpRequestMessage message = new HttpRequestMessage(HttpMethod.Get, url.ToString());
             message.Headers.Add("X-ApiKey", api_key);
@@ -97,7 +97,7 @@ namespace Despegar.LegacyCore.Connector
             if (!url.ToString().Contains("?"))
                   url.Append("?");
              
-            url.Append("&channel=WindowsTest1234");
+            url.Append("&channel=windows8-phone-app");
 
             HttpRequestMessage message = new HttpRequestMessage(HttpMethod.Post, url.ToString());
             message.Content = new StringContent(data);
@@ -119,7 +119,7 @@ namespace Despegar.LegacyCore.Connector
                  if (!url.ToString().Contains("?"))
                 url.Append("?");
 
-            url.Append("&channel=WindowsTest1234");
+            url.Append("&channel=windows8-phone-app");
 
             HttpRequestMessage message = new HttpRequestMessage(HttpMethod.Post, url.ToString());
             message.Content = new StringContent(data);

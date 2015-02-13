@@ -170,28 +170,37 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
         {
             Configuration conf = GlobalConfiguration.CoreContext.GetConfiguration();
             string site = GlobalConfiguration.Site;
+            
 
-            var site2return = conf.sites.Where(s => s.code == site).FirstOrDefault();
-            if (site2return == null)
-                return;
-
-            var _s = site2return.products.Where(p => p.name == "flights").FirstOrDefault();
-            if (_s == null)
-                return;
-
-            model.EmissionAnticipationDay = _s.emission_anticipation_days;
-            int last = 0;
-
-            try
+            if (site == "BR" || site == "MX") 
             {
-                last = Convert.ToInt32(_s.last_available_hour);
-            }
-            catch (Exception )
-            {
-                last = 0;
+                model.EmissionAnticipationDay = 0;
+                model.LastAvailableHours = 19;
+            } else {
+                var site2return = conf.sites.Where(s => s.code == site).FirstOrDefault();
+                if (site2return == null)
+                    return;
+
+                var _s = site2return.products.Where(p => p.name == "flights").FirstOrDefault();
+                if (_s == null)
+                    return;
+
+                model.EmissionAnticipationDay = _s.emission_anticipation_days;
+                int last = 0;
+
+                try
+                {
+                    last = Convert.ToInt32(_s.last_available_hour);
+                }
+                catch (Exception)
+                {
+                    last = 0;
+                }
+
+                model.LastAvailableHours = last;
             }
 
-            model.LastAvailableHours = last;
+
         }
 
         private async void Search()
