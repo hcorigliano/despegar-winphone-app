@@ -23,7 +23,7 @@ namespace Despegar.WP.UI.Developer
                 else
                     GlobalConfiguration.CoreContext.DisableMock(this.MockKey);
 
-                OnPropertyChanged("Enabled");
+                OnPropertyChanged("IsEnabled");
             }
         }
     }

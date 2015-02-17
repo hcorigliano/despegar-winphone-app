@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Despegar.Core.Business.Flight.BookingFields
 {
-    public class Contact
+    public class Contact : Bindable
     {
         // MAPI Fields
         public string data_type { get; set; }
@@ -17,6 +17,10 @@ namespace Despegar.Core.Business.Flight.BookingFields
 
         // Custom
         public RegularField emailConfirmation { get; set; }
-        public Phone Phone { get { return phones.FirstOrDefault(); } }     
+        public Phone Phone { get { return phones.FirstOrDefault(); } }
+
+
+        private bool c;
+        public bool IsEnabled { get { return c; } set { c = value; OnPropertyChanged(); } }
     }
 }

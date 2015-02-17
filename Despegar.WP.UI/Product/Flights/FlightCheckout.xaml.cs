@@ -154,21 +154,27 @@ namespace Despegar.WP.UI.Product.Flights
                     await dialog.ShowSafelyAsync();
                     this.navigationHelper.GoBack();
                     break;
+
+                    // New CC
                case "ONLINE_PAYMENT_ERROR_NEW_CREDIT_CARD":
                     dialog = new MessageDialog(manager.GetString("new_creditcard"), manager.GetString("new_creditcard_title"));
                     await dialog.ShowSafelyAsync();
 
                     // Go to Pivot with errors
                     pageID = (string)e.Parameter;
-                    MainPivot.SelectedIndex = GetSectionIndex(pageID);
+                    MainPivot.SelectedIndex = GetSectionIndex(pageID);                    
+                    FreezeFields();
                     break;
-
+                    // Fix CC
                case "ONLINE_PAYMENT_ERROR_FIX_CREDIT_CARD":
                     dialog = new MessageDialog(manager.GetString("fix_creditcard"), manager.GetString("fix_creditcard_title"));
                         await dialog.ShowSafelyAsync();
                         pageID = (string)e.Parameter;
                         MainPivot.SelectedIndex = GetSectionIndex(pageID);                    
+                    // FREEZE FIELD
+                    FreezeFields();
                     break;
+
                case "ONLINE_PAYMENT_FAILED":              
                         //string ticketid = e.Parameter as string;
                         //ticketid = (ticketid != null) ? ticketid : String.Empty;
@@ -193,8 +199,10 @@ namespace Despegar.WP.UI.Product.Flights
                     await dialog.ShowSafelyAsync();                    
                     break;
                 case "BOOKING_CANCELED":
+                    BugTracker.Instance.LogEvent("FLIGHT BOOKING CANCELED");
                     dialog = new MessageDialog(manager.GetString("canceled"), manager.GetString("canceled_title"));
                     await dialog.ShowSafelyAsync();
+
                     this.navigationHelper.GoBack();
                     this.navigationHelper.GoBack();
                     break;
@@ -204,6 +212,11 @@ namespace Despegar.WP.UI.Product.Flights
                     break;
                     // TODO: CHECKOUT SESSION EXPIRED -> Handle that error
             }
+        }
+
+        private void FreezeFields()
+        {
+            ViewModel.Freeze();
         }
 
         private string GetContactPhone()
@@ -219,7 +232,7 @@ namespace Despegar.WP.UI.Product.Flights
 
                 return phone;
             } 
-            catch(Exception e)
+            catch(Exception )
             {
                 //BugTracker.Instance.LogException(e);
                 //TODO add logs

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Despegar.Core.Business.Flight.BookingFields
 {
-    public class Passenger
+    public class Passenger : Bindable
     {
         public bool required { get; set; }
         public string data_type { get; set; }
@@ -17,5 +17,8 @@ namespace Despegar.Core.Business.Flight.BookingFields
         public RegularField last_name { get; set; }
         public Birthdate birthdate { get; set; }
         public int full_name_max_length { get; set; }
+
+        private bool c;
+        public bool IsEnabled { get { return c;} set{c =value; OnPropertyChanged();} }
     }
 }

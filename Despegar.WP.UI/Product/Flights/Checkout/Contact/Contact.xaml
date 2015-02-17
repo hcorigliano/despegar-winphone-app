@@ -17,13 +17,13 @@
       
     <ScrollViewer Grid.Row="0">
         <StackPanel DataContext="{Binding CoreBookingFields.form.contact}">
-            <controls:Field InputType="Email" x:Uid="Flights_Checkout_Contact_email" Value="{Binding email.CoreValue, Mode=TwoWay}" Visibility="{Binding email.required, Converter={StaticResource VisibilityConverter}, FallbackValue=Collapsed}" />
+            <controls:Field IsEnabled="{Binding IsEnabled}" InputType="Email" x:Uid="Flights_Checkout_Contact_email" Value="{Binding email.CoreValue, Mode=TwoWay}" Visibility="{Binding email.required, Converter={StaticResource VisibilityConverter}, FallbackValue=Collapsed}" />
             <controls:ValidationError ErrorPrefix="Flights_Checkout_Contact_email" ErrorCode="{Binding email.CurrentError}" Visibility="{Binding Phone.country_code.required, Converter={StaticResource VisibilityConverter}, FallbackValue=Collapsed}" />
 
-            <controls:Field InputType="Email" x:Uid="Flights_Checkout_Contact_email_Confirmation" Value="{Binding emailConfirmation.CoreValue, Mode=TwoWay}" Visibility="{Binding emailConfirmation.required, Converter={StaticResource VisibilityConverter}, FallbackValue=Collapsed}" />
+            <controls:Field IsEnabled="{Binding IsEnabled}" InputType="Email" x:Uid="Flights_Checkout_Contact_email_Confirmation" Value="{Binding emailConfirmation.CoreValue, Mode=TwoWay}" Visibility="{Binding emailConfirmation.required, Converter={StaticResource VisibilityConverter}, FallbackValue=Collapsed}" />
             <controls:ValidationError ErrorPrefix="Flights_Checkout_Contact_email_Confirmation" ErrorCode="{Binding emailConfirmation.CurrentError}" Visibility="{Binding emailConfirmation.required, Converter={StaticResource VisibilityConverter}, FallbackValue=Collapsed}" />
 
-            <controls:FieldCombo x:Uid="Flights_Checkout_Contact_Phone" ItemsSource="{Binding Phone.type.options}"  Value="{Binding Phone.type.SelectedOption, Mode=TwoWay}" Visibility="{Binding Phone.type.required, Converter={StaticResource VisibilityConverter}, FallbackValue=Collapsed}" DisplayTextPath="description" CodePath="value"/>
+            <controls:FieldCombo IsEnabled="{Binding IsEnabled}" x:Uid="Flights_Checkout_Contact_Phone" ItemsSource="{Binding Phone.type.options}"  Value="{Binding Phone.type.SelectedOption, Mode=TwoWay}" Visibility="{Binding Phone.type.required, Converter={StaticResource VisibilityConverter}, FallbackValue=Collapsed}" DisplayTextPath="description" CodePath="value"/>
 
             <Grid>
                 <Grid.RowDefinitions>
@@ -38,9 +38,9 @@
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
 
-                <controls:Field InputType="Numeric" Grid.Column="0" Grid.Row="0" x:Uid="Flights_Checkout_Contact_Country_Code" Value="{Binding Phone.country_code.CoreValue, Mode=TwoWay}" Visibility="{Binding Phone.country_code.required, Converter={StaticResource VisibilityConverter}, FallbackValue=Collapsed}"  />
-                <controls:Field InputType="Numeric" Grid.Column="2" Grid.Row="0" x:Uid="Flights_Checkout_Contact_Area_Code" Value="{Binding Phone.area_code.CoreValue, Mode=TwoWay}" Visibility="{Binding Phone.area_code.required,Converter={StaticResource VisibilityConverter}, FallbackValue=Collapsed}" />
-                <controls:Field InputType="Numeric" Grid.Column="4" Grid.Row="0" x:Uid="Flights_Checkout_Contact_Number" Value="{Binding Phone.number.CoreValue, Mode=TwoWay}" Visibility="{Binding Phone.number.required, Converter={StaticResource VisibilityConverter}, FallbackValue=Collapsed}"/>
+                <controls:Field IsEnabled="{Binding IsEnabled}" InputType="Numeric" Grid.Column="0" Grid.Row="0" x:Uid="Flights_Checkout_Contact_Country_Code" Value="{Binding Phone.country_code.CoreValue, Mode=TwoWay}" Visibility="{Binding Phone.country_code.required, Converter={StaticResource VisibilityConverter}, FallbackValue=Collapsed}"  />
+                <controls:Field IsEnabled="{Binding IsEnabled}" InputType="Numeric" Grid.Column="2" Grid.Row="0" x:Uid="Flights_Checkout_Contact_Area_Code" Value="{Binding Phone.area_code.CoreValue, Mode=TwoWay}" Visibility="{Binding Phone.area_code.required,Converter={StaticResource VisibilityConverter}, FallbackValue=Collapsed}" />
+                <controls:Field IsEnabled="{Binding IsEnabled}" InputType="Numeric" Grid.Column="4" Grid.Row="0" x:Uid="Flights_Checkout_Contact_Number" Value="{Binding Phone.number.CoreValue, Mode=TwoWay}" Visibility="{Binding Phone.number.required, Converter={StaticResource VisibilityConverter}, FallbackValue=Collapsed}"/>
 
                 <StackPanel Grid.ColumnSpan="5" Grid.Row="1">
                     <!--- TODO: Check Stacking invisible items -->

@@ -245,6 +245,12 @@ namespace Despegar.WP.UI.Model.ViewModel
 
                 //Get validations for credit cards
                 GetCreditCardsValidations();
+                 // Contact
+                CoreBookingFields.form.contact.IsEnabled = true;
+                // Passengers
+                foreach (var item in CoreBookingFields.form.passengers)
+                    item.IsEnabled = true;
+
                 this.Tracker.LeaveBreadcrumb("Flight checkout view model init complete");
             }
             catch (Exception e)
@@ -917,7 +923,17 @@ namespace Despegar.WP.UI.Model.ViewModel
 
         }
 
+        public void Freeze()
+        {
+            // Contact
+            CoreBookingFields.form.contact.IsEnabled = false;
+            // Passengers
+            foreach (var item in CoreBookingFields.form.passengers)            
+                item.IsEnabled = false;                      
+        }
 
         public BookingStatusEnum? current_status { get; set; }
+
+        
     }
 }

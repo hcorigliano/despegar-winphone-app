@@ -91,5 +91,6 @@ namespace Despegar.Core.Business.Flight.BookingFields
             this.CoreValue = value != null ? value : String.Empty;
         }
 
+
     }
 }

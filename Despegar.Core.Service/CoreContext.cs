@@ -67,7 +67,7 @@ namespace Despegar.Core.Service
                 appliedMocks.Add(Mock.GetMock(mockKey));
             }
 
-            Logger.LogCore(String.Format("Enabled mock '{0}'", mockKey.ToString()));
+            Logger.LogCore(String.Format("IsEnableded mock '{0}'", mockKey.ToString()));
         }
 
         /// <summary>
