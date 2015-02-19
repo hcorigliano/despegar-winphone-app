@@ -20,6 +20,7 @@
         <conv:AmenitiesVisibiliryConverter x:Name="AmenitiesVisibiliryConverter"/>
         <conv:StringToN1Converter x:Name="StringToN1Converter" />
         <conv:RatingToColorConverter x:Name="RatingToColorConverter"/>
+        <conv:AnyToIntConverter x:Name="AnyToIntConverter"/>
     </UserControl.Resources>
 
     <Grid x:Name="MainGrid" Margin="{StaticResource Bottom_Block1p}">
@@ -44,7 +45,7 @@
             <Grid Margin="{StaticResource Left_Offset}" Grid.Column="1">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="{StaticResource Block1p}"/>
-                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="{StaticResource Block1p}"/>
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="auto"/>
                 </Grid.RowDefinitions>
@@ -55,13 +56,13 @@
                 <!--STARS GRID AND DISTANCE-->
                 <Grid Grid.Row="1">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
 
                     <Image Grid.Column="0" Source="/Assets/Icon/App/star-small-yellow.scale-100.png" Visibility="{Binding hotel.stars , Converter={StaticResource StarsVisibilityConverter} ,ConverterParameter=1 }" VerticalAlignment="Center"/>
@@ -70,10 +71,10 @@
                     <Image Grid.Column="3" Source="/Assets/Icon/App/star-small-yellow.scale-100.png" Visibility="{Binding hotel.stars , Converter={StaticResource StarsVisibilityConverter} ,ConverterParameter=4 }" VerticalAlignment="Center"/>
                     <Image Grid.Column="4" Source="/Assets/Icon/App/star-small-yellow.scale-100.png" Visibility="{Binding hotel.stars , Converter={StaticResource StarsVisibilityConverter} ,ConverterParameter=5 }" VerticalAlignment="Center"/>
 
-                    <Image Grid.Column="5" Source="/assets/Icon/App/walkingman-small-white.scale-100.png" Visibility="{Binding distance ,Converter={StaticResource NullToVisibilityConverter}}" VerticalAlignment="Center"/>
-                    <TextBlock Grid.Column="6" Visibility="{Binding distance ,Converter={StaticResource NullToVisibilityConverter}}" VerticalAlignment="Center">
-                        <Run Text="{Binding distance}"/>
-                        <Run Text=" m" />
+                    <Image Margin="0,0,0,0" Grid.Column="5" Source="/assets/Icon/App/walkingman-small-white.scale-100.png" Visibility="{Binding distance ,Converter={StaticResource NullToVisibilityConverter}}" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+                    <TextBlock Margin="0,0,0,0" Grid.Column="6" Visibility="{Binding distance ,Converter={StaticResource NullToVisibilityConverter}}" VerticalAlignment="Center" HorizontalAlignment="Right">
+                        <Run Text="{Binding distance, Converter={StaticResource AnyToIntConverter}}"/>
+                        <Run Text="m" />
                     </TextBlock>
                 </Grid>
 
@@ -105,20 +106,15 @@
                 <RowDefinition Height="{StaticResource Block1}"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
+                <ColumnDefinition Width="{StaticResource Block8p}"/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
 
             <Grid Height="{StaticResource dBlock1}" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left" Visibility="{Binding price.discount_percentage , Converter={StaticResource NullToVisibilityConverter} }">
 
                 <Grid  Width="50" Height="{StaticResource dBlock1}" Background="#FF50BB30" VerticalAlignment="Top" HorizontalAlignment="Left">
-                    <!--<Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>-->
 
-                    <!--<Image Grid.Column="0"  Source="{Binding Binding price.promo_type , Converter={StaticResource TypeDiscountImageConverter}}"  VerticalAlignment="Center" HorizontalAlignment="Left" /> --><!--Source="/Assets/Icon/App/phone-small-white.scale-100.png"-->
-                    <TextBlock Style="{StaticResource SegoeSemibold15}" VerticalAlignment="Center" >
+                    <TextBlock Margin="4,0,0,0" Style="{StaticResource SegoeSemibold15}" VerticalAlignment="Center" >
                         <Run Text="%"/>
                         <Run Text="{Binding price.discount_percentage}" />
                     </TextBlock>
@@ -142,8 +138,11 @@
 
             </Grid>
 
-            <Grid Grid.Row="1" Background="#FF50BB30" Width="180" Height="{StaticResource dBlock1}"  Grid.Column="0" HorizontalAlignment="Left"  Visibility="{Binding price.promo_type , Converter={StaticResource DiscountVisibilityConverter} }">
-                <TextBlock Text="{Binding price.promo_type,  Converter={StaticResource TypeDiscountTextConverter}}" Style="{StaticResource SegoeRegular15}" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+            <Grid Grid.Row="1" Background="#FF50BB30" Width="225" Height="{StaticResource dBlock1}"  Grid.Column="0" HorizontalAlignment="Left"  Visibility="{Binding price.promo_type , Converter={StaticResource DiscountVisibilityConverter} }">
+                <StackPanel Orientation="Horizontal">
+                    <Image  Source="/Assets/Icon/App/phone-small-white.scale-100.png" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                    <TextBlock Text="{Binding price.promo_type,  Converter={StaticResource TypeDiscountTextConverter}}" Style="{StaticResource SegoeRegular15}" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                </StackPanel>
             </Grid>
 
             <TextBlock Grid.Row="1" Grid.Column="1" Style="{StaticResource SegoeLight24}" HorizontalAlignment="Right"  VerticalAlignment="Center">

@@ -143,12 +143,6 @@
     <Compile Include="ViewModel\ViewModelBase.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Despegar.Core.Neo\Despegar.Core.Neo.csproj">
-      <Project>{de72dbfd-6794-40ba-8615-276d4ae7cfe3}</Project>
-      <Name>Despegar.Core.Neo</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Reference Include="Autofac">
       <HintPath>..\packages\Autofac.3.5.2\lib\portable-net4+sl5+netcore45+wpa81+wp8+MonoAndroid1+MonoTouch1\Autofac.dll</HintPath>
     </Reference>
@@ -156,7 +150,12 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Despegar.Core.Neo\Despegar.Core.Neo.csproj">
+      <Project>{de72dbfd-6794-40ba-8615-276d4ae7cfe3}</Project>
+      <Name>Despegar.Core.Neo</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

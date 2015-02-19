@@ -76,6 +76,7 @@
     <GridLength x:Key="Block6p">177.6</GridLength>
     <GridLength x:Key="Block7p">207.2</GridLength>
     <x:Double x:Key="dBlock7p">207.2</x:Double>
+    <GridLength x:Key="Block8p">236.8</GridLength>
     <x:Double x:Key="dBlock9p">276</x:Double>
     <x:Double x:Key="dBlock10p">305.6</x:Double>
     <x:Double x:Key="dBlock12p">364.8</x:Double>
