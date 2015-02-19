@@ -39,3 +39,5 @@
 *.orig
 *.appxupload
 *.user
+/Despegar.WP.UI.PushNotificationHelper/bin/**
+/Despegar.WP.UI.PushNotificationHelper/obj/**
