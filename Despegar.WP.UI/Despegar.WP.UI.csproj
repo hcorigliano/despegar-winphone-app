@@ -358,6 +358,9 @@
     <Compile Include="Product\Hotels\HotelsSearch.xaml.cs">
       <DependentUpon>HotelsSearch.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Product\Hotels\HotelThanks.xaml.cs">
+      <DependentUpon>HotelThanks.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Strings\AppResources.cs" />
     <Page Include="Controls\Alert.xaml">
@@ -1643,6 +1646,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Product\Hotels\HotelThanks.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Styles\StyleShared.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -1654,7 +1661,6 @@
     <Folder Include="Assets\es\" />
     <Folder Include="Assets\pt\" />
     <Folder Include="Product\Hotels\Checkout\Controls\" />
-    <Folder Include="Product\Hotels\Details\Controls\" />
     <Folder Include="Strings\en\" />
   </ItemGroup>
   <ItemGroup>

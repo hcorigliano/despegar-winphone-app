@@ -45,7 +45,7 @@ namespace Despegar.Core.Business.Hotels.SearchBox
                 if (String.IsNullOrEmpty(DestinationHotelText))
                 {
                     // No origin
-                    SearchErrors = new CustomError("Debe que seleccionar origen.", "FLIGHT_SEARCH_NO_ORIGIN_ERROR_MESSAGE", "CommonValidations");
+                    SearchErrors = new CustomError("Debe que seleccionar destino.", "FLIGHT_SEARCH_NO_ORIGIN_ERROR_MESSAGE", "CommonValidations");
                     return false;
                 }
 

@@ -12,5 +12,18 @@ namespace Despegar.Core.Business.Hotels.BookingFields
         public ItemPrice price { get; set; }
         public PriceDestination price_destination { get; set; }
         public PaymentOptions payment { get; set; }  
+
+        public bool isPaymentAtDestination
+        { 
+            get 
+            {
+                if (payment.at_destination.Count() == 0)
+                    return false;
+
+                return true;
+            } 
+        
+        }
+
     }
 }
