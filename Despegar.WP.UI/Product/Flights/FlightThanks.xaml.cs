@@ -1,10 +1,5 @@
-﻿using Despegar.WP.UI.BugSense;
-using Despegar.WP.UI.Common;
-using Despegar.WP.UI.Model;
-using Despegar.WP.UI.Model.Interfaces;
-using Despegar.WP.UI.Model.ViewModel.Classes.Flights;
+﻿using Despegar.Core.Neo.InversionOfControl;
 using Despegar.WP.UI.Model.ViewModel.Flights;
-using System;
 using Windows.Phone.UI.Input;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -24,22 +19,16 @@ namespace Despegar.WP.UI.Product.Flights
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            BugTracker.Instance.LeaveBreadcrumb("Flight Thanks View");
-            BugTracker.Instance.LogEvent("Flight Purchase " + GlobalConfiguration.Site);
-
             HardwareButtons.BackPressed += HardwareButtons_BackPressed;            
 #if !DEBUG
                 GoogleAnalyticContainer ga = new GoogleAnalyticContainer();
                 ga.Tracker = GoogleAnalytics.EasyTracker.GetTracker();
                 ga.SendView("FlightThanks");
 #endif
+            ViewModel = Despegar.Core.Neo.InversionOfControl.IoC.Resolve<FlightThanksViewModel>();
+            ViewModel.OnNavigated(e.Parameter);
+            this.DataContext = ViewModel;
 
-            FlightsCrossParameter flightsCrossParameters = e.Parameter as FlightsCrossParameter;
-
-            ViewModel = new FlightThanksViewModel(Navigator.Instance, BugTracker.Instance);
-            ViewModel.flightCrossParameters = flightsCrossParameters;
-
-            DataContext = ViewModel;
             if (ViewModel.flightCrossParameters.Inbound.choice == -1)
             {
                 FlightsSegmentReturnTextBlock.Visibility = Visibility.Collapsed;

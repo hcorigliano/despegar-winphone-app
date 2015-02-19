@@ -1,4 +1,4 @@
-﻿using Despegar.Core.Business.Flight.SearchBox;
+﻿using Despegar.Core.Neo.Business.Flight.SearchBox;
 using Despegar.WP.UI.Model.ViewModel.Flights;
 using System;
 using System.Collections.Generic;

@@ -94,18 +94,11 @@
   <ItemGroup>
     <Compile Include="Apiv1Connector.cs" />
     <Compile Include="Apiv3Connector.cs" />
-    <Compile Include="ConnectorBase.cs" />
-    <Compile Include="IConnector.cs" />
-    <Compile Include="MapiConnector.cs" />
     <Compile Include="MockConnector.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UPAConnector.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Despegar.Core.Exceptions\Despegar.Core.Exceptions.csproj">
-      <Project>{9359897f-8df6-4787-80db-b68ed851088e}</Project>
-      <Name>Despegar.Core.Exceptions</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Despegar.Core.Log\Despegar.Core.Log.csproj">
       <Project>{0c50151e-91de-45c5-bb01-b03ec44d7735}</Project>
       <Name>Despegar.Core.Log</Name>

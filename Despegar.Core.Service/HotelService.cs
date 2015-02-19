@@ -1,20 +1,20 @@
-﻿using Despegar.Core.Business;
-using Despegar.Core.Business.Hotels.CitiesAvailability;
-using Despegar.Core.Business.Hotels.HotelsAutocomplete;
-using Despegar.Core.Connector;
-using Despegar.Core.Exceptions;
-using Despegar.Core.IService;
+﻿using Despegar.Core.Neo.Business;
+using Despegar.Core.Neo.Business.Hotels.CitiesAvailability;
+using Despegar.Core.Neo.Business.Hotels.HotelsAutocomplete;
+using Despegar.Core.Neo.Connector;
+using Despegar.Core.Neo.Exceptions;
+using Despegar.Core.Neo.IService;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Despegar.Core.Business.Hotels.BookingFields;
-using Despegar.Core.Business.Hotels.HotelDetails;
-using Despegar.Core.Business.Hotels;
-using Despegar.Core.Business.Hotels.UserReviews;
+using Despegar.Core.Neo.Business.Hotels.BookingFields;
+using Despegar.Core.Neo.Business.Hotels.HotelDetails;
+using Despegar.Core.Neo.Business.Hotels;
+using Despegar.Core.Neo.Business.Hotels.UserReviews;
 
-namespace Despegar.Core.Service
+namespace Despegar.Core.Neo.Service
 {
     public class HotelService : IHotelService
     {

@@ -9,6 +9,8 @@
 # Ignore directories
 /packages/**
 
+
+/Despegar.Core.Neo/obj/**
 /Despegar.LegacyCore/obj/**
 /Despegar.Core.Business/obj/**
 /Despegar.Core.Connector/obj/**
@@ -20,7 +22,7 @@
 /Despegar.WP.UI/obj/**
 /Despegar.WP.UI.Models/obj/**
 
-
+/Despegar.Core.Neo/bin/**
 /Despegar.LegacyCore/bin/**
 /Despegar.Core.Business/bin/**
 /Despegar.Core.Connector/bin/**
@@ -37,3 +39,5 @@
 *.orig
 *.appxupload
 *.user
+/Despegar.WP.UI.PushNotificationHelper/bin/**
+/Despegar.WP.UI.PushNotificationHelper/obj/**

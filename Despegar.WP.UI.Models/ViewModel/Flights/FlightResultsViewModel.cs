@@ -1,61 +1,43 @@
-﻿using Despegar.Core.Business.Flight.Itineraries;
-using Despegar.Core.IService;
-using Despegar.Core.Log;
+﻿using Despegar.Core.Neo.Business;
+using Despegar.Core.Neo.Business.Flight.Itineraries;
+using Despegar.Core.Neo.Business.Flight.SearchBox;
+using Despegar.Core.Neo.Contract.API;
+using Despegar.Core.Neo.Contract.Log;
+using Despegar.WP.UI.Model.Classes;
 using Despegar.WP.UI.Model.Classes.Flights;
-using Despegar.WP.UI.Model.Common;
 using Despegar.WP.UI.Model.Interfaces;
-using Despegar.WP.UI.Model.ViewModel;
-using Despegar.WP.UI.Model.ViewModel.Classes.Results;
+using Despegar.WP.UI.Model.ViewModel.Classes;
+using Despegar.WP.UI.Model.ViewModel.Classes.Flights;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using Windows.UI.Xaml.Controls;
+using System.Windows.Input;
 
 
 namespace Despegar.WP.UI.Model.ViewModel.Flights
 {
     public class FlightResultsViewModel : ViewModelBase
     {
-        private Paging _paging;
+        private IMAPIFlights flightService;
 
-        private INavigator Navigator { get; set; }
-        public IFlightService flightService;
-
+        private FlightsItineraries itineraries;
         public FlightsItineraries Itineraries
-        {            
+        {
+            get { return itineraries; }
             set
             {
-                //TODO initialize all variables needed for this page.
-                if (value == null) return;
-
-                //this.cheapest_price = value.cheapest_price;
-                this.Currencies = value.currencies;
-                
-                FillItems(value.items);
-
-                this.Facets = value.facets;
-                
-                this.Sorting = value.sorting;
-                this.Paging = value.paging;
+                itineraries = value;
             }
         }
         
         //TODO: create the correct class for cheapest_price
         //public IObservable<object> cheapest_price { get; set; }
 
-        private Currencies _currencies;
-        public Currencies Currencies {
-            get { return _currencies; }
-            set { 
-                _currencies = value;
-                OnPropertyChanged();
-            }
-        }
+        public FlightsCrossParameter FlightCrossParameters { get; set; }
+        public FlightSearchModel FlightSearchModel { get; set; }
         
-        //This items represents flights inbounds and outbounds
+        // This items represents flights inbounds and outbounds
         private List<BindableItem> _items;
         public List<BindableItem> Items {
             get { return _items; }
@@ -65,114 +47,125 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
             }
         }
 
-        private List<Facet> _facets { get; set; }
-        public List<Facet> Facets {
-            get {
-                return _facets;
-                }
-            set {
-                _facets = value;
-                OnPropertyChanged();
-                }
+        private List<Facet> facets;
+        public List<Facet> Facets 
+        {
+            get
+            {
+                return facets;
+            }
+            set 
+            {
+                  facets = value;
+                  OnPropertyChanged();
+            }
         }
 
-        private Sorting _sorting;
+        private Sorting sorting;
         public Sorting Sorting {
-            get { return _sorting; } 
-            set{
-                _sorting = value;
+            get { return sorting; }
+            set
+            {
+                sorting = value;
                 OnPropertyChanged();
-                } 
-        }
-
-        public List<Facet> SelectedFacets
-        {
-            get
-            {
-                var facetList = this._facets.Where(f => f.values.Any(fv => fv.selected == true));
-                return facetList.ToList();
-            }
-        }
-
-        public Value3 SelectedSorting
-        {
-            get
-            {
-                var selectedSortingList = this._sorting.values.FirstOrDefault(sr => sr.selected == true);
-                return selectedSortingList;
-            }
-        }
-
-        public Paging Paging{
-            get { return _paging; }
-            set {   _paging = value;
-            OnPropertyChanged();   
-            }
-        }
-
-        public FlightResultsViewModel(INavigator navigator, IFlightService flightService, IBugTracker t) :  base(t)
-        {
-            this.Navigator = navigator;
-            this.flightService = flightService;           
+            } 
         }
         
-        private void FillItems(List<Item> itemList)
-        {
-            if (Items == null)
-            {
-                Items = new List<BindableItem>();
-            }
 
-            if (itemList != null)
-            {
-                //Items.AddRange((itemList.Select(il => new BindableItem(il))).ToList());
-                var list = (itemList.Select(il => new BindableItem(il))).ToList();
-                //var bList = new IncrementalLoadingCollection<BindableItemsLoadingCollection, BindableItem>();
-                this.Items = list;
-                //base.NotifyPropertyChanged("Items");
-            }
-        }
-
-        public void FillRoutedTemplate(Item item)
-        {
-            var _item = Items.FirstOrDefault(i=> item.id.Equals(i.id));
-            if (_item != null)
-            {
-                _item.LinkFlightRoutes();
-            }
-        }
-       
+        // TODO: se usa???
         public string SelectedCurrency
         {
             get
             {
-                if (this.Currencies == null) return String.Empty;
+                if (this.Itineraries.currencies == null) 
+                      return String.Empty;
 
-                var _cur = this.Currencies.values.Where(x => x.selected == true).FirstOrDefault();
+                var _cur = this.Itineraries.currencies.values.FirstOrDefault(x => x.selected == true);
 
                 if (_cur == null)
                     return String.Empty;
-
 
                 return ((Value)_cur).label;
             }
         }
 
-        public void Clear()
+        public FlightResultsViewModel(INavigator navigator, IMAPIFlights flightService, IBugTracker t) : base(navigator, t)
         {
-           
-            //this.cheapest_price = value.cheapest_price;
-            this.Currencies = null;
-
-            if (this.Items!=null) 
-                this.Items.Clear();
-
-            if (this.Items!=null)
-                this.Facets.Clear();
-
-            this.Sorting = null;
-            this.Paging = null;
+            this.flightService = flightService;
+            Items = new List<BindableItem>();
+            FlightCrossParameters = new FlightsCrossParameter();
         }
 
+        public ICommand NavigateToFiltersCommand
+        {
+            get
+            {
+                return new RelayCommand(() => { Navigator.GoTo(Model.Interfaces.ViewModelPages.FlightsFilters, new GenericResultNavigationData() { SearchModel = FlightSearchModel }); });
+            }
+        }
+
+        public ICommand NavigateToOrderByCommand
+        {
+            get
+            {
+                return new RelayCommand(() => { Navigator.GoTo(Model.Interfaces.ViewModelPages.FlightsOrderBy, new GenericResultNavigationData() { SearchModel = FlightSearchModel }); });
+            }
+        }
+
+        public override void OnNavigated(object navigationParams)
+        {
+            BugTracker.LeaveBreadcrumb("Flight Results View");
+            GenericResultNavigationData pageParameters = navigationParams as GenericResultNavigationData;
+
+            // Obtain Search parameters
+            FlightSearchModel = pageParameters.SearchModel as FlightSearchModel;
+
+            // Remover la pantall de filtros/order del navigation stack
+            if (pageParameters.FiltersApplied)
+            {
+                Navigator.RemoveBackEntry(); // Filters page
+                Navigator.RemoveBackEntry(); // Old results page
+            }
+        }
+
+        public async Task LoadResults()
+        {
+            BugTracker.LeaveBreadcrumb("FlightsResults Load Results");
+            IsLoading = true;
+            try
+            {
+                Itineraries = await flightService.GetItineraries(FlightSearchModel);
+
+                if (Itineraries.items.Count == 0)
+                {
+                    OnViewModelError("LOAD_RESULTS_NO_ITEMS");
+                    return;
+                }
+
+                FlightSearchModel.Facets = Itineraries.facets;
+                FlightSearchModel.Sorting = Itineraries.sorting;
+
+
+                if (Itineraries.items != null)
+                    this.Items = (Itineraries.items.Select(il => new BindableItem(il))).ToList();
+            }
+            catch (Exception)
+            {
+                // Will not filter the results, but it will keep the last list status
+                OnViewModelError("LOAD_RESULTS_FAILED");
+            }
+
+            IsLoading = false;
+        }
+
+        /// <summary>
+        /// Hace Rebúsqueda
+        /// </summary>
+        public void MiniboxSearch()
+        {
+            BugTracker.LeaveBreadcrumb("Flight Result Minibox Hit");
+            Navigator.GoBack();
+        } 
+        
     }
 }

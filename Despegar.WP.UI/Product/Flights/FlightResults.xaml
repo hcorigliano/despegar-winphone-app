@@ -13,15 +13,21 @@
     x:Name="page"
     x:Class="Despegar.WP.UI.Product.Flights.FlightResults"
     mc:Ignorable="d"
+    NavigationCacheMode="Required"
     Style="{StaticResource BasePage}" 
     xmlns:dev="using:Despegar.WP.UI.Developer.Controls"
 	xmlns:conv="using:Despegar.WP.UI.Common.Converter"
     >
+    <Page.BottomAppBar>
+        <CommandBar ClosedDisplayMode="Compact">
+            <AppBarButton x:Name="appBarFilter" Icon="Filter" x:Uid="AppBarButton_Filters" Command="{Binding NavigateToFiltersCommand}" />
+            <AppBarButton x:Name="appBarSortBy" Icon="Sort" x:Uid="AppBarButton_OrderBy" Command="{Binding NavigateToOrderByCommand}" />
+        </CommandBar>        
+    </Page.BottomAppBar>
 
     <Page.Resources>
         <conv:TextHeaderConverter x:Key="TextHeaderConverter"/>
         <conv:StringConverter x:Key="stringFormatConverter"  />
-        <!--<CollectionViewSource x:Name="cvsFlights" IsSourceGrouped="True" Source="{Binding Items}" ItemsPath="{Binding RoutesCustom}"/>-->
         <conv:CurrencyConverter x:Name="CurrencyConverter" ></conv:CurrencyConverter>
         <CollectionViewSource x:Name="cvsFlights" Source="{Binding Items}" IsSourceGrouped="False" ItemsPath="{Binding Items.RoutesCustom}"/>
 
@@ -87,7 +93,6 @@
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
 
-
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="{StaticResource Block1p}"/>
@@ -123,38 +128,16 @@
             </Grid>
         </DataTemplate>
 
+    </Page.Resources>       
 
-    </Page.Resources>
-    <Page.Background>
-        <ImageBrush AlignmentX="Left" AlignmentY="Top" ImageSource="ms-appx:/Assets/WindowsPhone_Background_480x800.png" Stretch="UniformToFill"/>
-    </Page.Background>
-    <Page.BottomAppBar>
-        <CommandBar ClosedDisplayMode="Minimal">
-            <AppBarButton x:Name="appBarFilter" Icon="Filter" x:Uid="AppBarButton_Filters" >
-            </AppBarButton>
-            <AppBarButton x:Name="appBarSortBy" Icon="Sort" x:Uid="AppBarButton_OrderBy" >
-            </AppBarButton>
-        </CommandBar>
-    </Page.BottomAppBar>
-
-    <Grid x:Name="LayoutRoot" Style="{StaticResource MainContainerGrid}" >
+    <Grid Style="{StaticResource MainContainerGrid}" >
         <!--<dev:UserControlDesignGrid />-->
-
-        <Interactivity:Interaction.Behaviors>
-            <Core:EventTriggerBehavior SourceObject="{Binding ElementName=appBarFilter}" EventName="Click">
-                <Core:NavigateToPageAction TargetPage="Despegar.WP.UI.Product.Flights.FlightFilters" Parameter="{Binding Facets ,Mode=TwoWay}"/>
-            </Core:EventTriggerBehavior>
-            <Core:EventTriggerBehavior SourceObject="{Binding ElementName=appBarSortBy}" EventName="Click">
-                <Core:NavigateToPageAction Parameter="{Binding Sorting, Mode=TwoWay}" TargetPage="Despegar.WP.UI.Product.Flights.FlightSortBy"/>
-            </Core:EventTriggerBehavior>
-        </Interactivity:Interaction.Behaviors>
-
-
         <Grid.ChildrenTransitions>
             <TransitionCollection>
                 <EntranceThemeTransition/>
             </TransitionCollection>
         </Grid.ChildrenTransitions>
+        
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="{StaticResource Block1p}"/>
@@ -175,7 +158,7 @@
 
             <TextBlock Grid.Row="2" Text="{Binding DataContext, Converter={StaticResource TextHeaderConverter}, ElementName=miniboxSearch}" Style="{StaticResource PageHeader}" ></TextBlock>
 
-            <Controls:SearchMiniBoxControl Grid.Row="3" Tapped="miniboxSearch_Tapped" x:Name="miniboxSearch" Height="Auto" Margin="{StaticResource Top_Offset}"/>
+            <Controls:SearchMiniBoxControl DataContext="{Binding FlightSearchModel}" Grid.Row="3" Tapped="miniboxSearch_Tapped" x:Name="miniboxSearch" Height="Auto" Margin="{StaticResource Top_Offset}"/>
 
         </Grid>
 

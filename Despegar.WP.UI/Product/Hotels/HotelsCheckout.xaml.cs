@@ -1,4 +1,5 @@
-﻿using Despegar.WP.UI.BugSense;
+﻿using Despegar.Core.Neo.InversionOfControl;
+using Despegar.WP.UI.BugSense;
 using Despegar.WP.UI.Common;
 using Despegar.WP.UI.Controls;
 using Despegar.WP.UI.Model;
@@ -28,12 +29,9 @@ using Windows.UI.Xaml.Navigation;
 
 namespace Despegar.WP.UI.Product.Hotels
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
     public sealed partial class HotelsCheckout : Page
     {
-        private HotelsCheckoutViewModel ViewModel;
+        private HotelsCheckoutViewModel ViewModel { get; set; }
         private ModalPopup loadingPopup = new ModalPopup(new Loading());
         private ModalPopup riskPopup;
 
@@ -41,7 +39,7 @@ namespace Despegar.WP.UI.Product.Hotels
         {
             this.InitializeComponent();
 
-            HardwareButtons.BackPressed += HardwareButtons_BackPressed;
+            
 
 #if !DEBUG
                 GoogleAnalyticContainer ga = new GoogleAnalyticContainer();
@@ -52,34 +50,27 @@ namespace Despegar.WP.UI.Product.Hotels
         
         protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
-            BugTracker.Instance.LeaveBreadcrumb("Hotel checkout start");
-            HotelsCrossParameters crossParams = e.Parameter as HotelsCrossParameters;
+            HardwareButtons.BackPressed += HardwareButtons_BackPressed;            
 
             // Initialize Checkout
-            ViewModel = new HotelsCheckoutViewModel(
-                Navigator.Instance,
-                GlobalConfiguration.CoreContext.GetHotelService(),
-                GlobalConfiguration.CoreContext.GetCommonService(),
-                GlobalConfiguration.CoreContext.GetConfigurationService(),
-                GlobalConfiguration.CoreContext.GetCouponsService(),
-                BugTracker.Instance,
-                crossParams
-              );
-
+            ViewModel = IoC.Resolve<HotelsCheckoutViewModel>();        
             ViewModel.PropertyChanged += Checkloading;
             ViewModel.ShowRiskReview += this.ShowRisk;
             ViewModel.HideRiskReview += this.HideRisk;
             ViewModel.ViewModelError += ErrorHandler;
-
+            ViewModel.OnNavigated(e.Parameter);
             // Init Checkout
             await ViewModel.Init();
-
             // Set Defaults values and Country specifics
             ConfigureFields();
-
             this.DataContext = ViewModel;
 
-            BugTracker.Instance.LeaveBreadcrumb("Hotels checkout ready");
+            ViewModel.BugTracker.LeaveBreadcrumb("Hotels checkout ready");
+        }
+
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            HardwareButtons.BackPressed -= HardwareButtons_BackPressed;
         }
 
         /// <summary>
@@ -96,7 +87,7 @@ namespace Despegar.WP.UI.Product.Hotels
         # region ** ERROR HANDLING **
         private async void ErrorHandler(object sender, ViewModelErrorArgs e)
         {
-            BugTracker.Instance.LeaveBreadcrumb("Hotels checkout Error raised - " + e.ErrorCode);
+            ViewModel.BugTracker.LeaveBreadcrumb("Hotels checkout Error raised - " + e.ErrorCode);
 
             ResourceLoader manager = new ResourceLoader();
             MessageDialog dialog;
@@ -184,6 +175,7 @@ namespace Despegar.WP.UI.Product.Hotels
             }
         }
         #endregion
+
         private void Checkloading(object sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == "IsLoading")
@@ -208,15 +200,12 @@ namespace Despegar.WP.UI.Product.Hotels
 
         private void HardwareButtons_BackPressed(object sender, BackPressedEventArgs e)
         {
-            if (ViewModel != null)
-            {
-                e.Handled = true;
+            e.Handled = true;
 
+            if (ViewModel != null)
+            {              
                 if (ViewModel.IsLoading)
-                {
-                    e.Handled = true;
                     return;
-                }               
 
                 ViewModel.Navigator.GoBack();
             }

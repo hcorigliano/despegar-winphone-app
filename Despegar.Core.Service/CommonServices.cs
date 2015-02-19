@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Despegar.Core.Connector;
-using Despegar.Core.IService;
-using Despegar.Core.Business.Common.State;
-using Despegar.Core.Business;
-using Despegar.Core.Business.CreditCard;
+using Despegar.Core.Neo.Connector;
+using Despegar.Core.Neo.IService;
+using Despegar.Core.Neo.Business.Common.State;
+using Despegar.Core.Neo.Business;
+using Despegar.Core.Neo.Business.CreditCard;
 
-namespace Despegar.Core.Service
+namespace Despegar.Core.Neo.Service
 {
     public class CommonServices : ICommonServices
     {

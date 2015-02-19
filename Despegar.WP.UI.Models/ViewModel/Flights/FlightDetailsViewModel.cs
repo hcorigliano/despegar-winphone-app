@@ -1,37 +1,28 @@
-﻿using Despegar.Core.Business.Flight.Itineraries;
-using Despegar.Core.Log;
+﻿using Despegar.Core.Neo.Contract.Log;
 using Despegar.WP.UI.Model.Interfaces;
 using Despegar.WP.UI.Model.ViewModel;
+using Despegar.WP.UI.Model.ViewModel.Classes;
 using Despegar.WP.UI.Model.ViewModel.Classes.Flights;
-using Despegar.WP.UI.Models.Classes;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace Despegar.WP.UI.Model
 {
     public class FlightDetailsViewModel : ViewModelBase
     {
-        private INavigator navigator;
-        public FlightsCrossParameter flightsCrossParameters { get; set; } 
+        public FlightsCrossParameter FlightsCrossParameters { get; set; } 
 
         /// <summary>
         /// Inbound + Outbound Initialization
         /// </summary>
         /// <param name="outBound"></param>
         /// <param name="route2"></param>
-        public FlightDetailsViewModel(INavigator navigator, FlightsCrossParameter parameters, IBugTracker t) : base(t) //Route outBound, Route inBound)
-        {
-            this.navigator = navigator;
-            flightsCrossParameters = parameters;
+        public FlightDetailsViewModel(INavigator navigator, IBugTracker t) : base(navigator,t)
+        {            
         }
 
         public bool IsTwoWaySearch
         {
-            get { return this.flightsCrossParameters.Inbound.segments != null; }
+            get { return this.FlightsCrossParameters.Inbound.segments != null; }
         }
 
         public ICommand BuyCommand
@@ -41,7 +32,7 @@ namespace Despegar.WP.UI.Model
                 return new RelayCommand(() =>
                 {
                     // Todo send product data
-                    navigator.GoTo(ViewModelPages.FlightsCheckout, flightsCrossParameters);
+                    Navigator.GoTo(ViewModelPages.FlightsCheckout, FlightsCrossParameters);
                 });
             }
         }
@@ -52,8 +43,20 @@ namespace Despegar.WP.UI.Model
             {
                 return new RelayCommand(() =>
                 {
-                    navigator.GoBack();
+                    Navigator.GoBack();
                 });
+            }
+        }
+
+        public override void OnNavigated(object navigationParams)
+        {
+            BugTracker.LeaveBreadcrumb("Flight Detail View");
+            FlightsCrossParameter routes = navigationParams as FlightsCrossParameter;
+
+            if (routes != null)
+            {
+                // Multiples are inserted as an Outbound collection of Routes
+                FlightsCrossParameters = routes;
             }
         }
     }

@@ -16,6 +16,9 @@ using BugSense;
 using BugSense.Model;
 using BugSense.Core.Model;
 using Despegar.WP.UI.BugSense;
+using Despegar.WP.UI.InversionOfControl;
+using Despegar.Core.Neo.InversionOfControl;
+using System.Collections.Generic;
 
 // The Blank Application template is documented at http://go.microsoft.com/fwlink/?LinkId=391641
 
@@ -113,15 +116,12 @@ namespace Despegar.WP.UI
                 // Initialize Core
                 try
                 {
-                    BugTracker.Instance.LeaveBreadcrumb("App Started");
-                    await GlobalConfiguration.InitCore(BugTracker.Instance);
-                    BugTracker.Instance.LeaveBreadcrumb("Core Initialized");
+                    await GlobalConfiguration.InitCore(new List<CoreModule>() { new WindowsPhoneModule(false) });
                 }
                 catch (Exception)
                 {
-                   // BugTracker.Instance.LogException(ex);
                     NotifyAndClose();
-                }                
+                }
                
                 // Check persist information
                 var roamingSettings = ApplicationData.Current.RoamingSettings;
@@ -149,10 +149,8 @@ namespace Despegar.WP.UI
                  }
             }
 
-            BugTracker.Instance.LeaveBreadcrumb("App Launched");
-
             // Ensure the current window is active
-            Window.Current.Activate();            
+            Window.Current.Activate();                    
         }
 
         /// <summary>

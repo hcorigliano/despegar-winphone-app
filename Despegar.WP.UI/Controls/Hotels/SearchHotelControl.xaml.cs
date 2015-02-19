@@ -1,22 +1,14 @@
-﻿using Despegar.Core.Business.Hotels.HotelsAutocomplete;
-using Despegar.WP.UI.Model;
+﻿using Despegar.Core.Neo.Business.Hotels.HotelsAutocomplete;
+using Despegar.Core.Neo.Contract.API;
+using Despegar.Core.Neo.InversionOfControl;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
 
 
 namespace Despegar.WP.UI.Controls.Hotels
@@ -28,6 +20,7 @@ namespace Despegar.WP.UI.Controls.Hotels
         public static readonly DependencyProperty InitialDestinationTextProperty = DependencyProperty.Register("InitialDestinationText", typeof(string), typeof(SearchHotelControl), null);
         public static readonly DependencyProperty SelectedDestinationTypeProperty = DependencyProperty.Register("SelectedDestinationType", typeof(string), typeof(SearchHotelControl), null);
 
+        private IMAPIHotels hotelService;
 
         #region ** BoilerPlate Code **
         public event PropertyChangedEventHandler PropertyChanged;
@@ -83,19 +76,22 @@ namespace Despegar.WP.UI.Controls.Hotels
         public SearchHotelControl()
         {
             this.InitializeComponent();
+            this.hotelService = IoC.Resolve<IMAPIHotels>();
+
             (this.Content as FrameworkElement).DataContext = this;
+
+            HotelAutocomplete GeoItem = new HotelAutocomplete() 
+            { 
+                    name = "+ Cerca de mi ubicacion actual",
+                    id = 0,
+                    type = "geo"
+            };
             
-            HotelAutocomplete GeoItem = new HotelAutocomplete();
-            GeoItem.name = "+ Cerca de mi ubicacion actual";
-            GeoItem.id = 0;
-            GeoItem.type = "geo";
-            this.DestinyInput.ItemsSource = null;
-            List<HotelAutocomplete> source = new List<HotelAutocomplete>();
-            source.Add(GeoItem);
-            this.DestinyInput.ItemsSource = source;
+            this.DestinyInput.ItemsSource = null;            
+            this.DestinyInput.ItemsSource = new List<HotelAutocomplete>() { GeoItem  };
         }
 
-        private async void HotelsTextBlock_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
+       private async void HotelsTextBlock_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
         {
             if (args.Reason == AutoSuggestionBoxTextChangeReason.UserInput && sender.Text != "" && sender.Text.Length >= 3)
             {
@@ -118,14 +114,12 @@ namespace Despegar.WP.UI.Controls.Hotels
             }
         }
 
-
        public async Task<HotelsAutocomplete> GetHotelsAutocomplete(string hotelString)
        {
-           var hotelService = GlobalConfiguration.CoreContext.GetHotelService();
            return await hotelService.GetHotelsAutocomplete(hotelString);
        }
 
-       private async void SuggestionChosen(AutoSuggestBox sender, AutoSuggestBoxSuggestionChosenEventArgs args)
+       private void SuggestionChosen(AutoSuggestBox sender, AutoSuggestBoxSuggestionChosenEventArgs args)
        {
            var selected = (HotelAutocomplete)args.SelectedItem;
            if (selected != null)
@@ -159,7 +153,6 @@ namespace Despegar.WP.UI.Controls.Hotels
                     SelectedDestinationCode = city.id;
                     SelectedDestinationText = city.name;
                     SelectedDestinationType = city.type;
-
                }
                else
                {
@@ -177,7 +170,6 @@ namespace Despegar.WP.UI.Controls.Hotels
                 SelectedDestinationType = "";
            }
        }
-
 
     }
 }

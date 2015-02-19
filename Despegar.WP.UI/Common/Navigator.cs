@@ -1,4 +1,4 @@
-﻿using Despegar.Core.Log;
+﻿using Despegar.Core.Neo.Log;
 using Despegar.WP.UI.Controls.PhotoGallery;
 using Despegar.WP.UI.Model.Interfaces;
 using Despegar.WP.UI.Product.Flights;
@@ -39,6 +39,7 @@ namespace Despegar.WP.UI.Common
                 case ViewModelPages.CountrySelecton:
                     view = typeof(CountrySelection);
                     break;                
+                 // FLIGHTS
                 case ViewModelPages.FlightsSearch:
                     view = typeof(FlightSearch);
                     break;
@@ -47,6 +48,12 @@ namespace Despegar.WP.UI.Common
                     break;
                 case ViewModelPages.FlightsResults:
                     view = typeof(FlightResults);
+                    break;
+                case ViewModelPages.FlightsFilters:
+                    view = typeof(FlightFilters);
+                    break;
+                case ViewModelPages.FlightsOrderBy:
+                    view = typeof(FlightSortBy);
                     break;
                 case ViewModelPages.FlightsDetails:
                     view = typeof(FlightDetail);
@@ -57,28 +64,35 @@ namespace Despegar.WP.UI.Common
                 case ViewModelPages.FlightsThanks:
                     view = typeof(FlightThanks);
                     break;
-                case ViewModelPages.HotelsDetails:
-                    view = typeof(HotelsDetails); 
-                    break;
+                // HOTELS
                 case ViewModelPages.HotelsSearch:
                     view = typeof(HotelsSearch);
                     break;
                 case ViewModelPages.HotelsResults:
                     view = typeof(HotelsResults);
                     break;
-                case ViewModelPages.PhotoPresenter:
-                    view = typeof(PhotoPresenter);
+                case ViewModelPages.HotelsDetails:
+                    view = typeof(HotelsDetails);
                     break;
-                case ViewModelPages.HotelsCheckout:
-                    view = typeof(HotelsCheckout);
+                case ViewModelPages.HotelsFilter:
+                    view = typeof(HotelsFilters);
+                    break;
+                case ViewModelPages.HotelsOrderBy:
+                    view = typeof(HotelsSortBy);
                     break;
                 case ViewModelPages.HotelsAmenities:
                     view = typeof(HotelsAmenities);
+                    break;                   
+                case ViewModelPages.HotelsCheckout:
+                    view = typeof(HotelsCheckout);
                     break;
+                case ViewModelPages.PhotoPresenter:
+                    view = typeof(PhotoPresenter);
+                    break;
+                // PACKAGES
+                // CARS
                 // Add More pages-viewmodel mappings down here
             }
-
-            Logger.Log("[Navigation] Navigated to page " + page.ToString());
 
             Frame rootFrame = Window.Current.Content as Frame;
 

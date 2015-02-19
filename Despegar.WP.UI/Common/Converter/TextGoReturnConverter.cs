@@ -1,5 +1,5 @@
-﻿using Despegar.Core.Business.Enums;
-using Despegar.Core.Business.Flight.SearchBox;
+﻿using Despegar.Core.Neo.Business.Enums;
+using Despegar.Core.Neo.Business.Flight.SearchBox;
 using System;
 using System.Collections.Generic;
 using System.Linq;

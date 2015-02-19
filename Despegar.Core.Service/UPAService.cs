@@ -1,15 +1,15 @@
-﻿using Despegar.Core.Connector;
-using Despegar.Core.IService;
+﻿using Despegar.Core.Neo.Connector;
+using Despegar.Core.Neo.IService;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Despegar.Core.Business.Configuration;
-using Despegar.Core.Log;
+using Despegar.Core.Neo.Business.Configuration;
+using Despegar.Core.Neo.Log;
 
 
-namespace Despegar.Core.Service
+namespace Despegar.Core.Neo.Service
 {
     public class UPAService : IUPAService
     {

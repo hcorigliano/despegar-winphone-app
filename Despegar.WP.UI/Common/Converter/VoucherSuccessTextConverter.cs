@@ -1,4 +1,4 @@
-﻿using Despegar.Core.Business.Coupons;
+﻿using Despegar.Core.Neo.Business.Coupons;
 using System;
 using System.Collections.Generic;
 using System.Linq;

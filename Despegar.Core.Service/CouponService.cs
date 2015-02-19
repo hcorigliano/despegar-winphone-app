@@ -1,15 +1,15 @@
-﻿using Despegar.Core.Business;
-using Despegar.Core.Business.Coupons;
-using Despegar.Core.Connector;
-using Despegar.Core.Exceptions;
-using Despegar.Core.IService;
+﻿using Despegar.Core.Neo.Business;
+using Despegar.Core.Neo.Business.Coupons;
+using Despegar.Core.Neo.Connector;
+using Despegar.Core.Neo.Exceptions;
+using Despegar.Core.Neo.IService;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Despegar.Core.Service
+namespace Despegar.Core.Neo.Service
 {
     public class CouponService : ICouponsService
     {

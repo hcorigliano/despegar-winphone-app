@@ -10,6 +10,7 @@
     xmlns:dev="using:Despegar.WP.UI.Developer.Controls"
     xmlns:conv="using:Despegar.WP.UI.Common.Converter"
     mc:Ignorable="d"
+    NavigationCacheMode="Enabled"
     Style="{StaticResource BasePage}">
 
     <Page.Resources>

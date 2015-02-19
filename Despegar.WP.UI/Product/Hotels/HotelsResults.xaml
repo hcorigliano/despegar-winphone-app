@@ -13,24 +13,15 @@
 
     <Page.BottomAppBar>
         <CommandBar>
-            <AppBarButton x:Name="appBarPreviousPage" x:Uid="AppBarButton_Previous" IsEnabled="{Binding BackButtonIsTapEnable}" Command="{Binding ShowPreviousPageCommand}"  Background="Black" Icon="Back"/>
-            <AppBarButton x:Name="appBarFilter" Icon="Filter" x:Uid="AppBarButton_Filters"  Click="FilterOrSortClick" IsEnabled="{Binding FilterButtonIsTapEnable}"/>
-            <AppBarButton x:Name="appBarSortBy" Icon="Sort" x:Uid="AppBarButton_OrderBy"  Click="FilterOrSortClick" IsEnabled="{Binding OrderButtonIsTapEnable}"/>
-            <AppBarButton x:Name="appBarNextPage" x:Uid="AppBarButton_Next" IsEnabled="{Binding ForwardButtonIsTapEnable}" Command="{Binding ShowNextPageCommand}" Background="Black" Icon="Forward"/>
+            <AppBarButton x:Name="appBarPreviousPage" x:Uid="AppBarButton_Previous" IsEnabled="{Binding PreviousPageIsTapEnable}" Command="{Binding ShowPreviousPageCommand}"  Background="Black" Icon="Back"/>
+            <AppBarButton x:Name="appBarFilter"  x:Uid="AppBarButton_Filters"   IsEnabled="{Binding FilterButtonIsTapEnable}" Command="{Binding FilterCommand}" Background="Black" Icon="Filter" />
+            <AppBarButton x:Name="appBarSortBy" x:Uid="AppBarButton_OrderBy"   IsEnabled="{Binding OrderButtonIsTapEnable}" Command="{Binding OrderByCommand}" Background="Black" Icon="Sort" />
+            <AppBarButton x:Name="appBarNextPage" x:Uid="AppBarButton_Next"    IsEnabled="{Binding NextPageButtonIsTapEnable}" Command="{Binding ShowNextPageCommand}" Background="Black" Icon="Forward"/>
         </CommandBar>
     </Page.BottomAppBar>
 
 
-    <Grid x:Name="LayoutRoot" Style="{StaticResource MainContainerGrid}" >
-
-        <Interactivity:Interaction.Behaviors>
-            <Core:EventTriggerBehavior SourceObject="{Binding ElementName=appBarFilter}" EventName="Click">
-                <Core:NavigateToPageAction TargetPage="Despegar.WP.UI.Product.Hotels.HotelsFilters" Parameter="{Binding CitiesAvailability.facets ,Mode=TwoWay}"/>
-            </Core:EventTriggerBehavior>
-            <Core:EventTriggerBehavior SourceObject="{Binding ElementName=appBarSortBy}" EventName="Click">
-                <Core:NavigateToPageAction TargetPage="Despegar.WP.UI.Product.Flights.FlightSortBy" Parameter="{Binding CitiesAvailability.sorting, Mode=TwoWay}"/>
-            </Core:EventTriggerBehavior>
-        </Interactivity:Interaction.Behaviors>
+    <Grid x:Name="LayoutRoot" Style="{StaticResource MainContainerGrid}" >        
 
         <!-- Dev -->
         <!--<dev:UserControlDesignGrid  />-->
@@ -58,8 +49,8 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <StackPanel xmlns:src="using:Despegar.WP.UI.Controls.Hotels.Details" Grid.Row="0"  >
-                <src:MiniBoxSearch DataContext="{Binding CrossParameters.SearchParameters}"  Tapped="ReSearchTapped"/>
+            <StackPanel xmlns:src="using:Despegar.WP.UI.Controls.Hotels" Grid.Row="0"  >
+                <src:MiniBoxSearch DataContext="{Binding SearchModel}"  Tapped="ReSearchTapped"/>
             </StackPanel>
 
             <TextBlock  Grid.Row="1" Text="Tarifa por persona por noche" Style="{StaticResource SegoeRegular17}" VerticalAlignment="Center"/>

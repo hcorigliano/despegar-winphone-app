@@ -1,21 +1,16 @@
-﻿using Despegar.Core.Business.Configuration;
-using Despegar.Core.IService;
-using Despegar.Core.Log;
+﻿using Despegar.Core.Neo.Business.Configuration;
+using Despegar.Core.Neo.Contract.API;
+using Despegar.Core.Neo.Contract.Log;
 using Despegar.WP.UI.Model.Interfaces;
-using Despegar.WP.UI.Models.Classes;
-using System;
-using System.Collections.Generic;
+using Despegar.WP.UI.Model.ViewModel.Classes;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace Despegar.WP.UI.Model.ViewModel
 {
     public class CountrySelectionViewModel : ViewModelBase
     {
-        private IConfigurationService configurationService;
-        private INavigator Navigator { get; set; }
+        private IMAPICross mapiService;
         
         private Configuration configuration;
         public Configuration Configurations
@@ -28,18 +23,22 @@ namespace Despegar.WP.UI.Model.ViewModel
             }
         }
 
-        public CountrySelectionViewModel(INavigator navigator, IConfigurationService configService, IBugTracker t) : base(t) 
+        public CountrySelectionViewModel(INavigator navigator, IMAPICross mapiService, IBugTracker t) : base(navigator, t) 
         {
-            configuration = null;
             this.Navigator = navigator;
-            this.configurationService = configService;
+            this.mapiService = mapiService;
+        }
+
+        public override void OnNavigated(object navigationParams)
+        {
         }
 
         public async void LoadConfigurations() 
         {
-            Configuration temp = await configurationService.GetConfigurations();
+            Configuration temp = await mapiService.GetConfigurations();
 
-            #if !Decolar
+            // Remove Brasil in Despegar app
+            #if !DECOLAR
                 Site site = temp.sites.FirstOrDefault(x => x.code == "BR");
                 if(site != null)
                     temp.sites.Remove(site);
@@ -60,5 +59,6 @@ namespace Despegar.WP.UI.Model.ViewModel
         {
             GlobalConfiguration.CoreContext.SetSite(countrySelected.code);
         }
+
     }
 }
