@@ -1,19 +1,20 @@
-﻿using Despegar.Core.Business;
-using Despegar.Core.Business.Hotels.CitiesAvailability;
-using Despegar.Core.Business.Hotels.HotelsAutocomplete;
-using Despegar.Core.Connector;
-using Despegar.Core.Exceptions;
-using Despegar.Core.IService;
+﻿using Despegar.Core.Neo.Business;
+using Despegar.Core.Neo.Business.Hotels.CitiesAvailability;
+using Despegar.Core.Neo.Business.Hotels.HotelsAutocomplete;
+using Despegar.Core.Neo.Connector;
+using Despegar.Core.Neo.Exceptions;
+using Despegar.Core.Neo.IService;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Despegar.Core.Business.Hotels.BookingFields;
-using Despegar.Core.Business.Hotels.HotelDetails;
-using Despegar.Core.Business.Hotels;
+using Despegar.Core.Neo.Business.Hotels.BookingFields;
+using Despegar.Core.Neo.Business.Hotels.HotelDetails;
+using Despegar.Core.Neo.Business.Hotels;
+using Despegar.Core.Neo.Business.Hotels.UserReviews;
 
-namespace Despegar.Core.Service
+namespace Despegar.Core.Neo.Service
 {
     public class HotelService : IHotelService
     {
@@ -38,6 +39,14 @@ namespace Despegar.Core.Service
             IConnector connector = context.GetServiceConnector(ServiceKey.HotelsAutocomplete);
 
             return await connector.GetAsync<CitiesAvailability>(serviceUrl);            
+        }
+
+        public async Task<CitiesAvailability> GetHotelsAvailabilityByGeo(string checkin, string checkout, string distribution, double latitud, double longitud)
+        {
+            string serviceUrl = String.Format(ServiceURL.GetServiceURL(ServiceKey.HotelsAvailabilityByGeo), checkin, checkout, distribution, latitud.ToString().Replace(",","."), longitud.ToString().Replace(",","."));
+            IConnector connector = context.GetServiceConnector(ServiceKey.HotelsAvailabilityByGeo);
+
+            return await connector.GetAsync<CitiesAvailability>(serviceUrl);
         }
 
         public async Task<HotelDatails> GetHotelsDetail(string idHotel, string checkin, string checkout, string distribution)
@@ -72,6 +81,15 @@ namespace Despegar.Core.Service
             }
 
             return result;
+        }
+
+        public async Task<HotelUserReviews> GetHotelUserReviews(string hotelId, int limit, int offset, string language)
+        {
+            //NOT IMPLEMENTED YET (this use api v3 connector and this is not implemented)
+            string serviceUrl = String.Format(ServiceURL.GetServiceURL(ServiceKey.HotelUserReview), hotelId, limit, offset, language);
+            IConnector connector = context.GetServiceConnector(ServiceKey.HotelUserReview);
+
+            return await connector.GetAsync<HotelUserReviews>(serviceUrl);
         }
 
         //public async Task<BookingCompletePostResponse> CompleteBooking(object bookingCompletePost, string id)

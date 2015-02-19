@@ -15,7 +15,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using Windows.UI.Xaml.Shapes;
-using Despegar.Core.Business.Hotels.CitiesAvailability;
+using Despegar.Core.Neo.Business.Hotels.CitiesAvailability;
 using Windows.Phone.UI.Input;
 using Despegar.WP.UI.Common;
 using Despegar.WP.UI.Model;
@@ -23,16 +23,14 @@ using Despegar.WP.UI.BugSense;
 using Despegar.WP.UI.Model.ViewModel.Hotels;
 using Despegar.WP.UI.Model.ViewModel;
 using Despegar.WP.UI.Controls;
+using Despegar.Core.Neo.InversionOfControl;
 
 
 namespace Despegar.WP.UI.Product.Hotels
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
     public sealed partial class HotelsDetails : Page
     {
-        public HotelsDetailsViewModel ViewModel { get; set; }
+        private HotelsDetailsViewModel ViewModel { get; set; }
         private ModalPopup loadingPopup = new ModalPopup(new Loading());
 
         public HotelsDetails()
@@ -44,14 +42,36 @@ namespace Despegar.WP.UI.Product.Hotels
         {
             HardwareButtons.BackPressed += HardwareButtons_BackPressed;
 
-            if(ViewModel == null)
+            if(e.NavigationMode == NavigationMode.New || e.NavigationMode == NavigationMode.Back)
             {
-                ViewModel = new HotelsDetailsViewModel(Navigator.Instance, GlobalConfiguration.CoreContext.GetHotelService(), BugTracker.Instance) { CrossParameters = e.Parameter as HotelsCrossParameters };
+                ViewModel = IoC.Resolve<HotelsDetailsViewModel>();
+                ViewModel.PropertyChanged += Property_Changed;
+                ViewModel.OnNavigated(e.Parameter);
                 await ViewModel.Init();
                 this.DataContext = ViewModel;
-            }
+            }            
+        }
 
-            ViewModel.PropertyChanged += Property_Changed;
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            HardwareButtons.BackPressed -= HardwareButtons_BackPressed;
+        }
+            
+        private void HardwareButtons_BackPressed(object sender, BackPressedEventArgs e)
+        {
+            e.Handled = true;
+            ViewModel.Navigator.GoBack();
+        }
+
+        private void GoToDetailsPivot(object sender, RoutedEventArgs e)
+        {
+            //Not implemented (Yet)
+            throw new NotImplementedException();
+        }
+
+        private void GoToCommentsPivot(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
         }
 
         private void Property_Changed(object sender, System.ComponentModel.PropertyChangedEventArgs e)
@@ -63,31 +83,10 @@ namespace Despegar.WP.UI.Product.Hotels
                 else
                     loadingPopup.Hide();
             }
+
             if (e.PropertyName == "GoToPivot")
                 MainPivot.SelectedIndex = ViewModel.GoToPivot;
         }
 
-        protected override void OnNavigatedFrom(NavigationEventArgs e)
-        {
-            HardwareButtons.BackPressed -= HardwareButtons_BackPressed;
-        }
-            
-        private void HardwareButtons_BackPressed(object sender, BackPressedEventArgs e)
-        {
-            e.Handled = true;
-            Navigator.Instance.GoBack();
-        }
-
-        private void GoToDetailsPivot(object sender, RoutedEventArgs e)
-        {
-            //Not implemented (Yet)
-        }
-
-        private void GoToCommentsPivot(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-       
     }
 }

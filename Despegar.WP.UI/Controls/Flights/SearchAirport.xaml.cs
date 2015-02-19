@@ -1,4 +1,6 @@
-﻿using Despegar.Core.Business.Flight.CitiesAutocomplete;
+﻿using Despegar.Core.Neo.Business.Flight.CitiesAutocomplete;
+using Despegar.Core.Neo.Contract.API;
+using Despegar.Core.Neo.InversionOfControl;
 using Despegar.WP.UI.Common;
 using Despegar.WP.UI.Model;
 using Despegar.WP.UI.Model.ViewModel.Flights;
@@ -126,13 +128,13 @@ namespace Despegar.WP.UI.Controls.Flights
         /// <returns></returns>
         private async Task<CitiesAutocomplete> GetCitiesAutocomplete(string cityString)
         {
-            var flightService = GlobalConfiguration.CoreContext.GetFlightService();  // There is no need to test this control with Unit Tests, so we inject this dependency directly
+            var flightService = IoC.Resolve<IMAPIFlights>();  // There is no need to test this control with Unit Tests, so we inject this dependency directly
             return await flightService.GetCitiesAutocomplete(cityString);
         }
 
         private async Task<CitiesAutocomplete> GetNearCities(double latitude , double longitude)
         {
-            var flightService = GlobalConfiguration.CoreContext.GetFlightService();  // There is no need to test this control with Unit Tests, so we inject this dependency directly
+            var flightService = IoC.Resolve<IMAPIFlights>();  // There is no need to test this control with Unit Tests, so we inject this dependency directly
             return await flightService.GetNearCities(latitude,longitude);
         }
 
@@ -140,137 +142,132 @@ namespace Despegar.WP.UI.Controls.Flights
         {
             //  Saves ID city in InvoiceDefinition
             var selected = (CityAutocomplete)args.SelectedItem;
-            if (selected != null)
-            {
-                if (selected.type == "city" && !selected.has_airport)
-                {
-                    var data = await GetNearCities(selected.geo_location.latitude, selected.geo_location.longitude);
-                    if(data != null)
-                    {  
-                        SearchCloseAirport SearchAirport = new SearchCloseAirport(this, sender.Name, selected.name) { DataContext = data };
-                        ModalPopup popup = new ModalPopup(SearchAirport);
-                        popup.Show();
-                        //UpdateTextbox(sender);
-                        sender.IsSuggestionListOpen = false;
-                    }else
-                    {
-                        ResourceLoader manager = new ResourceLoader();
-                        MessageDialog dialog = new MessageDialog(manager.GetString("Flight_SearchAirport_Error"), "Error");
-                        await dialog.ShowSafelyAsync();
-                        sender.Text = "";
-                    }
-                }
-                else
-                {
-                    if (sender.Name == "DestinyInput")
-                    {
-
-                        SelectedDestinationCode = selected.code;
-                        SelectedDestinationText = selected.name;
-                    }
-                    else if (sender.Name == "OriginInput")
-                    {
-                        SelectedOriginCode = selected.code;
-                        SelectedOriginText = selected.name;
-                    }
-                    //For Fix Focus_Lost
-                    sender.ItemsSource = null;
-                    List<CityAutocomplete> source = new List<CityAutocomplete>();
-                    source.Add(selected);
-                    sender.ItemsSource = source;
-                }
-
-            }
+            if (selected != null)            
+                await SetCity(sender, selected);            
         }
 
-        private void Focus_Lost(object sender, RoutedEventArgs e)
+        private async Task SetCity(AutoSuggestBox sender, CityAutocomplete selected)
         {
-            UpdateTextbox((AutoSuggestBox)sender);
-        }
-        
-        private void UpdateTextbox(AutoSuggestBox control)
-        {         
-            // Force complete city when focus lost
-            if (control.Text.Length > 2 && control.ItemsSource != null)
+            if (selected.type == "city" && !selected.has_airport)
             {
-                List<CityAutocomplete> cities = (List<CityAutocomplete>)control.ItemsSource;
-                CityAutocomplete city = cities.FirstOrDefault();
-                if (city != null)
+                // No tiene aeropuerto, buscar un aeropuerto cercano
+                var data = await GetNearCities(selected.geo_location.latitude, selected.geo_location.longitude);
+                if (data != null)
                 {
-                    control.Text = city.name;
-                    if (control.Name == "DestinyInput")
-                    {
-                        SelectedDestinationCode = city.code;
-                        SelectedDestinationText = city.name;
-                    }
-                    else if (control.Name == "OriginInput")
-                    {
-                        SelectedOriginCode = city.code;
-                        SelectedOriginText = city.name;
-                    }
+                    SearchCloseAirport SearchAirport = new SearchCloseAirport(this, sender.Name, selected.name) { DataContext = data };
+                    ModalPopup popup = new ModalPopup(SearchAirport);
+                    popup.Show();
+                                        
+                    sender.IsSuggestionListOpen = false;                    
                 }
                 else
                 {
-                    control.Text = "";
-                    if (control.Name == "DestinyInput")
-                    {
-                        SelectedDestinationCode = "";
-                        SelectedDestinationText = "";
-                    }
-                    else if (control.Name == "OriginInput")
-                    {
-                        SelectedOriginCode = "";
-                        SelectedOriginText = "";
-                    }
+                    ResourceLoader manager = new ResourceLoader();
+                    MessageDialog dialog = new MessageDialog(manager.GetString("Flight_SearchAirport_Error"), "Error");
+                    await dialog.ShowSafelyAsync();
+                    sender.Text = "";
                 }
             }
             else
             {
-                control.Text = "";
-                if (control.Name == "DestinyInput")
+                sender.Text = selected.name;
+                if (sender.Name == "DestinyInput")
                 {
-                    SelectedDestinationCode = "";
-                    SelectedDestinationText = "";
+                    SelectedDestinationCode = selected.code;
+                    SelectedDestinationText = selected.name;
                 }
-                else if (control.Name == "OriginInput")
+                else if (sender.Name == "OriginInput")
                 {
-                    SelectedOriginCode = "";
-                    SelectedOriginText = "";
+                    SelectedOriginCode = selected.code;
+                    SelectedOriginText = selected.name;
                 }
+                //For Fix Focus_Lost
+                sender.ItemsSource = null;
+                List<CityAutocomplete> source = new List<CityAutocomplete>();
+                source.Add(selected);
+                sender.ItemsSource = source;
             }
+
+            UnFocus();
+        }        
+
+        private static void UnFocus()
+        {
+            ((Control)Window.Current.Content).Focus(Windows.UI.Xaml.FocusState.Programmatic); // loose textbox focus
+        }
+
+        private void Focus_Lost(object sender, RoutedEventArgs e)
+        {
+            // Force pick city when focus lost
+            AutoSuggestBox control = sender as AutoSuggestBox;
+            bool selectionEmpty = false;
+
+            if (control.Name == "DestinyInput")
+            {
+                selectionEmpty = SelectedDestinationCode == "";
+            }
+            else if (control.Name == "OriginInput")
+            {
+                selectionEmpty = SelectedOriginCode == "";
+            }
+
+            //if (selectionEmpty && control.Text.Length > 2)
+            //{
+            //CityAutocomplete city = ((List<CityAutocomplete>)control.ItemsSource).FirstOrDefault();
+
+            //if (city != null)                
+            //    await SetCity(control, city);                           
+            //
+            //}
+
+            if (selectionEmpty)
+                Clear(control);  
         }
 
         /// <summary>
-        /// Initially sets the Ui values of the Autosuggest boxes, Used for DEV TOOLS
-        /// </summary>        
-        public void UpdateAirportBoxes(string originCode, string originText, string destinationCode, string destinationText)
+        /// Sets city to none, clears the control
+        /// </summary>
+        /// <param name="control"></param>
+        private void Clear(AutoSuggestBox control)
         {
-            OriginInput.ItemsSource = new List<CityAutocomplete>() { new CityAutocomplete() { code = originCode, name = originText } };
-            DestinyInput.ItemsSource = new List<CityAutocomplete>() { new CityAutocomplete() { code = destinationCode, name = destinationText } };
-
-            OriginInput.Text = originText;
-            DestinyInput.Text = destinationText;
-
-            UpdateTextbox(OriginInput);
-            UpdateTextbox(DestinyInput);
+            control.Text = "";
+            if (control.Name == "DestinyInput")
+            {
+                SelectedDestinationCode = "";
+                SelectedDestinationText = "";
+            }
+            else if (control.Name == "OriginInput")
+            {
+                SelectedOriginCode = "";
+                SelectedOriginText = "";
+            }
         }
 
-        public void UpdateAirportBoxesOrigin(string originCode, string originText)
-        {
-            OriginInput.ItemsSource = new List<CityAutocomplete>() { new CityAutocomplete() { code = originCode, name = originText } };
-
-            OriginInput.Text = originText;
-
-            UpdateTextbox(OriginInput);
+        public async void UpdateAirportBoxesOrigin(string originCode, string originText)
+        {           
+            await SetCity(OriginInput, new CityAutocomplete() { code = originCode, name = originText });
         }
 
-        public void UpdateAirportBoxesDestiny( string destinationCode, string destinationText)
+        public async void UpdateAirportBoxesDestiny(string destinationCode, string destinationText)
         {
-            DestinyInput.ItemsSource = new List<CityAutocomplete>() { new CityAutocomplete() { code = destinationCode, name = destinationText } };
-
-            DestinyInput.Text = destinationText;
-
-            UpdateTextbox(DestinyInput);
+           await SetCity(DestinyInput, new CityAutocomplete() { code = destinationCode, name = destinationText });
         }
+
+        private void OriginInput_KeyUp(object sender, Windows.UI.Xaml.Input.KeyRoutedEventArgs e)
+        {
+            if (e.Key == Windows.System.VirtualKey.Back && SelectedOriginCode != "") 
+            {
+                Clear((AutoSuggestBox)sender);
+            }
+        }
+
+        private void DestinationInput_KeyUp(object sender, Windows.UI.Xaml.Input.KeyRoutedEventArgs e)
+        {
+            if (e.Key == Windows.System.VirtualKey.Back && SelectedDestinationCode != "")
+            {
+                Clear((AutoSuggestBox)sender);
+            }
+        }
+        
     }
 }

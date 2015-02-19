@@ -1,5 +1,5 @@
-﻿using Despegar.Core.Business.Flight;
-using Despegar.Core.Business.Flight.SearchBox;
+﻿using Despegar.Core.Neo.Business.Flight;
+using Despegar.Core.Neo.Business.Flight.SearchBox;
 using Windows.UI.Xaml.Controls;
 
 

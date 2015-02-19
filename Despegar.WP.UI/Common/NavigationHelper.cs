@@ -1,4 +1,4 @@
-﻿using Despegar.WP.UI.Models.Classes;
+﻿using Despegar.WP.UI.Model.ViewModel.Classes;
 using System;
 using System.Collections.Generic;
 using System.Linq;

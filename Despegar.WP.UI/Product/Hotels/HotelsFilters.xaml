@@ -9,39 +9,26 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
     
     <Page.Resources>
-        <CollectionViewSource x:Name="FiltersCollection" IsSourceGrouped="true" Source="{Binding}" ItemsPath="values" />
+        <CollectionViewSource x:Name="FiltersCollection" IsSourceGrouped="true" Source="{Binding EditableFacets}" ItemsPath="values" />
 
         <DataTemplate x:Key="FlightFilterTemplate">
             <Grid>
-                <!--<RadioButton GroupName="FlightSortByGroup" Content="{Binding label}" HorizontalAlignment="Left" VerticalAlignment="Top" IsChecked="{Binding selected ,Mode=TwoWay}"/>-->
-
-
-                <!--<TextBlock Text="{Binding label}"></TextBlock>-->
-                <!--<ItemsControl ItemsSource="{Binding values ,Mode=TwoWay}" DataContext="{Binding}" >
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>-->
                 <CheckBox Margin="{StaticResource Left_Offset}" Content="{Binding label}" IsChecked="{Binding selected,Mode=TwoWay}" />
-                <!--</DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>-->
             </Grid>
         </DataTemplate>
 
         <DataTemplate x:Key="FlightHeaderFilterTemplate">
-
             <StackPanel Width="Auto">
-
                 <TextBlock Style="{StaticResource SegoeLight24}" Text="{Binding label}"></TextBlock>
                 <Rectangle Height="1" Fill="White" Width="Auto" Stretch="Fill" ></Rectangle>
             </StackPanel>
-
         </DataTemplate>
     </Page.Resources>
 
     <Page.BottomAppBar>
         <CommandBar>
-            <AppBarButton x:Uid="GenericAcceptAppBar" Icon="Accept" Label="Aceptar" Click="AppBarButton_Click" />
-            <AppBarButton x:Uid="GenericCancelAppBar" Icon="Cancel" Label="Cancelar" Name="AppBarCancelButton" Click="AppBarCancelButton_Click" />
+            <AppBarButton Icon="Accept" x:Uid="Common_Accept_Label" Label="Aceptar"  Command="{Binding ApplyFilterCommand}" />
+            <AppBarButton Icon="Cancel" x:Uid="Common_Cancel_Label" Label="Cancelar" Command="{Binding CancelComand}" />
         </CommandBar>
     </Page.BottomAppBar>
 
@@ -56,7 +43,7 @@
         <Image Grid.Row="0" Style="{StaticResource TopLogo}" />
         <TextBlock Grid.Row="1" x:Uid="Page_Filters_Title" Style="{StaticResource PageHeaderSmall}"  FontFamily="Segoe WP Semibold" />
 
-        <ListView Grid.Row="2" ItemTemplate="{StaticResource FlightFilterTemplate}" DataContext="{Binding Mode=TwoWay}"  ItemsSource="{Binding Source={StaticResource FiltersCollection}}"  IsItemClickEnabled="True">
+        <ListView Grid.Row="2" ItemTemplate="{StaticResource FlightFilterTemplate}"  ItemsSource="{Binding Source={StaticResource FiltersCollection}}"  IsItemClickEnabled="True">
             <ListView.GroupStyle>
                 <GroupStyle HidesIfEmpty="True" HeaderTemplate="{StaticResource FlightHeaderFilterTemplate}"/>
             </ListView.GroupStyle>

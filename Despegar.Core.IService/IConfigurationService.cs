@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Despegar.Core.Business.Configuration;
+using Despegar.Core.Neo.Business.Configuration;
 
 
-namespace Despegar.Core.IService
+namespace Despegar.Core.Neo.IService
 {
     public interface IConfigurationService
     {

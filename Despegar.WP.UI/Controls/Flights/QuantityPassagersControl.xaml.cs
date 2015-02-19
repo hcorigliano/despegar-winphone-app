@@ -1,4 +1,4 @@
-﻿using Despegar.Core.Business.Enums;
+﻿using Despegar.Core.Neo.Business.Enums;
 using Despegar.WP.UI.Model.Classes.Flights;
 using System.Collections.Generic;
 using System.Linq;

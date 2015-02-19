@@ -1,20 +1,15 @@
-﻿using Despegar.Core.Log;
+﻿using Despegar.Core.Neo.Contract.Log;
 using Despegar.WP.UI.Model.Common;
 using Despegar.WP.UI.Model.Interfaces;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Despegar.WP.UI.Model.ViewModel
 {
     /// <summary>
     /// Provides the Base ViewModel for the Application
     /// </summary>
-    public class ViewModelBase : INotifyPropertyChanged
+    public abstract class ViewModelBase : INotifyPropertyChanged
     {
         /// <summary>
         /// Indicates whether the ViewModel is awaiting an operation to finish, so the View should display a Loading and block the user input.
@@ -27,15 +22,18 @@ namespace Despegar.WP.UI.Model.ViewModel
         }
 
         public delegate void ViewModelErrorHandler(object sender, ViewModelErrorArgs e);
-
         public event ViewModelErrorHandler ViewModelError;
         public event PropertyChangedEventHandler PropertyChanged;
-        public IBugTracker Tracker { get; set; }
+        public IBugTracker BugTracker { get; set; }
+        public INavigator Navigator { get; set; }
 
-        public ViewModelBase(IBugTracker tracker) 
+        public ViewModelBase(INavigator navigator, IBugTracker tracker) 
         {
-            this.Tracker = tracker;
+            this.Navigator = navigator;
+            this.BugTracker = tracker;
         }
+
+        public abstract void OnNavigated(object navigationParams);
 
         protected void OnViewModelError(string errorCode)
         {
@@ -45,6 +43,8 @@ namespace Despegar.WP.UI.Model.ViewModel
 
         protected void OnViewModelError(string errorCode, object parameter)
         {
+            BugTracker.LeaveBreadcrumb("ViewModel Error Raised: " + errorCode);
+
             if (ViewModelError != null)
                 ViewModelError(this, new ViewModelErrorArgs(errorCode, parameter));
         }

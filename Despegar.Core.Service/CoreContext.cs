@@ -1,17 +1,17 @@
-﻿using Despegar.Core.Business;
-using Despegar.Core.Connector;
-using Despegar.Core.IService;
-using Despegar.Core.Log;
+﻿using Despegar.Core.Neo.Business;
+using Despegar.Core.Neo.Connector;
+using Despegar.Core.Neo.IService;
+using Despegar.Core.Neo.Log;
 using System.Linq;
 using System;
 using System.Collections.Generic;
 using Windows.Storage;
-using Despegar.Core.Business.Configuration;
+using Despegar.Core.Neo.Business.Configuration;
 
-namespace Despegar.Core.Service
+namespace Despegar.Core.Neo.Service
 {
     /// <summary>
-    /// Core class for the Despegar.Core
+    /// Core class for the Despegar.Core.Neo
     /// It is the main object that the "library" exposes to user code.
     /// There should only exists one CoreContext object in memory for a given application.
     /// </summary>
@@ -28,6 +28,7 @@ namespace Despegar.Core.Service
         /// </summary>
         private List<Mock> appliedMocks = new List<Mock>();
         private List<ServiceKey> v1Services = new List<ServiceKey>() { ServiceKey.CreditCardValidation };
+        private List<ServiceKey> v3Services = new List<ServiceKey>() { ServiceKey.HotelUserReview };
         private string site;
         private string x_client;
         private string uow;
@@ -37,6 +38,7 @@ namespace Despegar.Core.Service
         // Connectors
         private MapiConnector mapiConnector;
         private Apiv1Connector apiv1Connector;
+        private Apiv3Connector apiv3Connector;
         
 
         #region ** Public Interface **
@@ -112,7 +114,11 @@ namespace Despegar.Core.Service
 
             if (apiv1Connector == null)
                 apiv1Connector = new Apiv1Connector(bugtracker);
-            
+
+            if (apiv3Connector == null)
+                apiv3Connector = new Apiv3Connector(bugtracker);
+            apiv3Connector.ConfigureClientAndUow(x_client, this.uow);
+
             Logger.LogCore("Core Initialized.");
         }
 
@@ -129,6 +135,7 @@ namespace Despegar.Core.Service
             this.site = siteCode;
             mapiConnector.ConfigureSiteAndLanguage(site, GetLanguage());
             apiv1Connector.Configure(x_client, uow, site);
+            apiv3Connector.ConfigureSiteAndLanguage(site, GetLanguage());
 
             Logger.LogCore("Site Changed.");
         }
@@ -190,6 +197,8 @@ namespace Despegar.Core.Service
 
             if (v1Services.Any(x => x == key))
                 return apiv1Connector;
+            if (v3Services.Any(x => x == key))
+                return apiv3Connector;
 
             return mapiConnector;
         }

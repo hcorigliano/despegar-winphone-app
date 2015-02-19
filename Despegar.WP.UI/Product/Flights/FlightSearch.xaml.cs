@@ -1,24 +1,19 @@
-﻿using Despegar.WP.UI.Common;
-using Despegar.WP.UI.Model;
+﻿using Despegar.Core.Neo.Business.CustomErrors;
+using Despegar.Core.Neo.Business.Enums;
+using Despegar.Core.Neo.InversionOfControl;
+using Despegar.WP.UI.Common;
+using Despegar.WP.UI.Controls;
+using Despegar.WP.UI.Model.Classes.Flights;
+using Despegar.WP.UI.Model.Common;
+using Despegar.WP.UI.Model.ViewModel;
 using Despegar.WP.UI.Model.ViewModel.Flights;
-using System;
+using System.ComponentModel;
+using Windows.ApplicationModel.Resources;
+using Windows.Phone.UI.Input;
+using Windows.UI.Popups;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
-using Windows.UI.Xaml;
-using Despegar.Core.Business.Flight.SearchBox;
-using Despegar.WP.UI.Model.Classes.Flights;
-using Despegar.Core.Business.Enums;
-using Despegar.WP.UI.Controls;
-using Windows.UI.Xaml.Data;
-using System.ComponentModel;
-using Despegar.WP.UI.Model.Common;
-using Windows.UI.Popups;
-using Despegar.WP.UI.Model.ViewModel;
-using Windows.Phone.UI.Input;
-using Windows.ApplicationModel.Resources;
-using Despegar.Core.Business.CustomErrors;
-using System.Collections.Generic;
-using Despegar.WP.UI.BugSense;
 
 namespace Despegar.WP.UI.Product.Flights
 {
@@ -31,33 +26,16 @@ namespace Despegar.WP.UI.Product.Flights
         {
             this.InitializeComponent();
             this.CheckDeveloperTools();
-
-            ViewModel = new FlightSearchViewModel(Navigator.Instance, GlobalConfiguration.CoreContext.GetFlightService(), BugTracker.Instance);
-            ViewModel.ViewModelError += ErrorHandler;
-            ViewModel.PropertyChanged += Checkloading;
-            HardwareButtons.BackPressed += HardwareButtons_BackPressed;
-
-            this.DataContext = ViewModel;            
         }
 
         # region ** ERROR HANDLING **
         private async void ErrorHandler(object sender, ViewModelErrorArgs e) 
         {
-            BugTracker.Instance.LeaveBreadcrumb("Flight search Error Raised: " + e.ErrorCode);
-
             ResourceLoader manager = new ResourceLoader();
             MessageDialog dialog;
 
             switch(e.ErrorCode) 
-            {
-                case "SEARCH_FAILED":
-                    dialog = new MessageDialog(manager.GetString("Flights_Search_ERROR_SEARCH_FAILED"), manager.GetString("Flights_Search_ERROR_SEARCH_FAILED_TITLE"));
-                    await dialog.ShowSafelyAsync();
-                    break;
-                case "SEARCH_INVALID":
-                    dialog = new MessageDialog(manager.GetString("Flights_Search_ERROR_SEARCH_INVALID"), manager.GetString("Flights_Search_ERROR_SEARCH_INVALID_TITLE"));
-                    await dialog.ShowSafelyAsync();
-                    break;
+            {               
                 case "SEARCH_INVALID_WITH_MESSAGE":
                     CustomError message = e.Parameter as CustomError;
                     if (message == null) break;
@@ -79,38 +57,35 @@ namespace Despegar.WP.UI.Product.Flights
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            BugTracker.Instance.LeaveBreadcrumb("Flight search View");
-
             HardwareButtons.BackPressed += HardwareButtons_BackPressed;
-                  
-            if (e.Parameter != null)
+
+            if (e.NavigationMode == NavigationMode.New)
             {
-                // Navigated from somewhere else
-                var parameters = e.Parameter as FlightSearchNavigationData;
-                ViewModel.InitializeWith(parameters.SearchModel, parameters.PassengerModel);
-
-                // Set Current Pivot Item
-                switch (parameters.SearchModel.PageMode)
-                {
-                    case FlightSearchPages.RoundTrip:
-                        MainPivotControl.SelectedIndex = 0;
-                        break;
-                    case FlightSearchPages.OneWay:
-                        MainPivotControl.SelectedIndex = 1;
-                        break;
-                    case FlightSearchPages.Multiple:
-                        MainPivotControl.SelectedIndex = 2;
-                        break;
-                }
-
-                // If it is coming from Multiples edit, remove the "Multiples edit" View from the stack
-                if (parameters.NavigatedFromMultiples && e.NavigationMode == NavigationMode.New)
-                {
-                    BugTracker.Instance.LeaveBreadcrumb("Flight search View - Back from Multiples Edit");
-                    ViewModel.Navigator.RemoveBackEntry();
-                }
-
+                ViewModel = IoC.Resolve<FlightSearchViewModel>();
+                ViewModel.ViewModelError += ErrorHandler;
+                ViewModel.PropertyChanged += Checkloading;
+                ViewModel.OnNavigated(e.Parameter);
                 this.DataContext = ViewModel;
+
+
+                if (e.Parameter != null)
+                {
+                    var parameters = e.Parameter as FlightSearchNavigationData;
+
+                    // Set Current Pivot Item
+                    switch (parameters.SearchModel.PageMode)
+                    {
+                        case FlightSearchPages.RoundTrip:
+                            MainPivotControl.SelectedIndex = 0;
+                            break;
+                        case FlightSearchPages.OneWay:
+                            MainPivotControl.SelectedIndex = 1;
+                            break;
+                        case FlightSearchPages.Multiple:
+                            MainPivotControl.SelectedIndex = 2;
+                            break;
+                    }
+                }
             }
         }
 
@@ -121,8 +96,6 @@ namespace Despegar.WP.UI.Product.Flights
 
         void HardwareButtons_BackPressed(object sender, BackPressedEventArgs e)
         {
-            BugTracker.Instance.LeaveBreadcrumb("Flight search View - Back button pressed");
-
             if (ViewModel != null)
             {
                 if (ViewModel.IsLoading)
@@ -131,6 +104,7 @@ namespace Despegar.WP.UI.Product.Flights
                 }
                 else
                 {
+                    ViewModel.BugTracker.LeaveBreadcrumb("Flight search View - Back button pressed");
                     ViewModel.Navigator.GoBack();
                     e.Handled = true;
                 }

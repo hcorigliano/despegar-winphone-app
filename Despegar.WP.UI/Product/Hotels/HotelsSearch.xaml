@@ -13,7 +13,7 @@
     xmlns:Interactivity="using:Microsoft.Xaml.Interactivity" 
     xmlns:Core="using:Microsoft.Xaml.Interactions.Core"
     xmlns:conv="using:Despegar.WP.UI.Common.Converter"
-
+    NavigationCacheMode="Required"
     mc:Ignorable="d"
     Style="{StaticResource BasePage}">
 
@@ -43,7 +43,8 @@
                     <RowDefinition />
                 </Grid.RowDefinitions>
 
-                <Grid Grid.Row="0">
+
+                <Grid Grid.Row="0" Tapped="Grid_Tapped" Background="Transparent">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="Auto"/>
@@ -59,24 +60,25 @@
                             <RowDefinition/>
                         </Grid.RowDefinitions>
 
-                        <TextBlock  Grid.Row="0" x:Uid="Page_HotelsSearch_Promo_Title" Style="{StaticResource SegoeLight24}" Text="Hotel para hoy" />
+                        <TextBlock  Grid.Row="0" x:Uid="Page_HotelsSearch_Promo_Title" Style="{StaticResource SegoeLight24}" Text="Hoteles para hoy" />
                         <TextBlock  Grid.Row="1" x:Uid="Page_HotelsSearch_Promo_SubTitle" Style="{StaticResource SegoeRegular17}" Text="Hotel cercano para esta noche" />
                     </Grid>
                 </Grid>
 
+                
+
                 <src:SearchHotelControl Grid.Row="1"   
-                                           SelectedDestinationCode="{Binding Destination, Mode=TwoWay}"  
-                                           SelectedDestinationText="{Binding DestinationText, Mode=TwoWay}" />
+                                        SelectedDestinationCode="{Binding DestinationCode, Mode=TwoWay}"  
+                                        SelectedDestinationText="{Binding DestinationText, Mode=TwoWay}" 
+                                        SelectedDestinationType ="{Binding DestinationType, Mode=TwoWay}" />
 
-                <src:DateControl Grid.Row="2"  FromDate="{Binding FromDate, Mode=TwoWay}" ToDate="{Binding ToDate, Mode=TwoWay}" />
+                <src:DateControl Grid.Row="2"  FromDate="{Binding CheckinDate, Mode=TwoWay}" ToDate="{Binding CheckoutDate, Mode=TwoWay}" />
 
-                <src:QuantityRoomsControl  Grid.Row="3" DataContext="{Binding RoomsViewModel}"   Rooms="{Binding Rooms, Mode=TwoWay}" />
-
+                <src:QuantityRoomsControl  Grid.Row="3" DataContext="{Binding }"  />
 
                 <Button Grid.Row="4" x:Uid="Hotels_Search_SearchButton" Command="{Binding SearchCommand}"   Style="{StaticResource ButtonBottom}" Content="Buscar hoteles"/>
 
             </Grid>
-
 
         </ScrollViewer>
     </Grid>

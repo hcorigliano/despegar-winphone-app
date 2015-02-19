@@ -16,7 +16,6 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
-// The User Control item template is documented at http://go.microsoft.com/fwlink/?LinkId=234236
 
 namespace Despegar.WP.UI.Controls.Hotels
 {
@@ -34,6 +33,7 @@ namespace Despegar.WP.UI.Controls.Hotels
 
             if (model != null)
             {
+                // TODO: refactor
                 Navigator.Instance.GoTo(ViewModelPages.HotelsAmenities, model.HotelDetail.hotel.amenities);
             }
         }

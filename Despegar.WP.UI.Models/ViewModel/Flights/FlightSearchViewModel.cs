@@ -1,17 +1,16 @@
-﻿using Despegar.Core.Business.Configuration;
-using Despegar.Core.Business.Enums;
-using Despegar.Core.Business.Flight.Itineraries;
-using Despegar.Core.Business.Flight.SearchBox;
-using Despegar.Core.IService;
-using Despegar.Core.Log;
+﻿using Despegar.Core.Neo.Business;
+using Despegar.Core.Neo.Business.Enums;
+using Despegar.Core.Neo.Business.Flight.Itineraries;
+using Despegar.Core.Neo.Business.Flight.SearchBox;
+using Despegar.Core.Neo.Contract.API;
+using Despegar.Core.Neo.Contract.Log;
 using Despegar.WP.UI.Model.Classes;
 using Despegar.WP.UI.Model.Classes.Flights;
 using Despegar.WP.UI.Model.Interfaces;
-using Despegar.WP.UI.Models.Classes;
+using Despegar.WP.UI.Model.ViewModel.Classes;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
 using System.Windows.Input;
 using Windows.UI.Popups;
 using Windows.UI.Xaml.Controls;
@@ -20,9 +19,8 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
 {
     public class FlightSearchViewModel : ViewModelBase
     {
-        public INavigator Navigator { get; set; }
+        private IMAPIFlights flightService { get; set; }
         public PassengersViewModel PassengersViewModel { get; set; }
-        private IFlightService flightService { get; set; }
         private FlightSearchModel coreSearchModel;
 
         #region ** Exposed Properties **
@@ -150,21 +148,21 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
 
         #endregion
 
-        public FlightSearchViewModel(INavigator navigator, IFlightService flightService, IBugTracker t) : base(t)
+        public FlightSearchViewModel(INavigator navigator, IBugTracker t, IMAPIFlights flightService) : base(navigator, t)
         {
-            this.Navigator = navigator;
             this.flightService = flightService;
+
             this.coreSearchModel = new FlightSearchModel();
-            this.PassengersViewModel = new PassengersViewModel(t);
+            this.PassengersViewModel = new PassengersViewModel();
+
             this.coreSearchModel.EmissionAnticipationDay = GlobalConfiguration.GetEmissionAnticipationDayForFlights();
             this.coreSearchModel.LastAvailableHours = GlobalConfiguration.GetLastAvailableHoursForFlights();
             
             coreSearchModel.UpdateSearchDays();
         }
 
-        private async void Search()
+        private void Search()
         {
-            coreSearchModel.SearchStatus = Core.Business.SearchStates.FirstSearch;
             UpdatePassengers();
 
             if (coreSearchModel.IsValid)
@@ -177,42 +175,15 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
                 string extra = String.Format("{0} to {1}, [Passengers]: {2}",
                     coreSearchModel.DepartureDate.ToString("yyyy-MM-dd"),
                     coreSearchModel.DestinationDate != null ? coreSearchModel.DestinationDate.ToString("yyyy-MM-dd") : "-",
-                    "Adults " + coreSearchModel.AdultsInFlights + " Child: " + coreSearchModel.ChildrenInFlights);
+                    "TotalAdults " + coreSearchModel.AdultsInFlights + " Child: " + coreSearchModel.ChildrenInFlights);
 
-                Tracker.LeaveBreadcrumb("Flight search performed");
-                Tracker.SetExtraData("LastFlightAirports", airports);
-                Tracker.SetExtraData("LastFlightExtra", extra);                
+                BugTracker.LeaveBreadcrumb("Flight search performed");
+                BugTracker.SetExtraData("LastFlightAirports", airports);
+                BugTracker.SetExtraData("LastFlightExtra", extra);
 
-                try
-                {
+                Navigator.GoTo(ViewModelPages.FlightsResults, new GenericResultNavigationData() { SearchModel = coreSearchModel , FiltersApplied = false});
 
-                    FlightsItineraries intineraries = await flightService.GetItineraries(coreSearchModel);
-
-                    if (intineraries.items.Count != 0)
-                    {
-                        var pageParameters = new PageParameters();
-                        pageParameters.Itineraries = intineraries;
-                        pageParameters.SearchModel = coreSearchModel;
-
-                        Navigator.GoTo(ViewModelPages.FlightsResults, pageParameters);
-
-                    }
-                    else
-                    {
-
-                        var msg = new MessageDialog("Lo sentimos, no hemos encontrado ningún resultado para su búsqueda.Por favor, inténtelo nuevamente modificando alguno de los criterios de búsqueda. ");
-                        await msg.ShowAsync();
-
-                    }
-                }
-                catch (Exception)
-                {
-                    OnViewModelError("SEARCH_FAILED");
-                }
-                finally
-                {
-                    IsLoading = false;
-                }
+                IsLoading = false;                
             }
             else
             {
@@ -239,7 +210,7 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
 
             // Notify Changes
             OnPropertyChanged("MultipleSegments");
-            OnPropertyChanged("FromDate");
+            OnPropertyChanged("CheckinDate");
             OnPropertyChanged("To");
             OnPropertyChanged("Origin");
             OnPropertyChanged("Destination");
@@ -248,6 +219,25 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
         public void SetSearchMode(FlightSearchPages mode)
         {
             coreSearchModel.PageMode = mode;
+        }
+
+        public override void OnNavigated(object navigationParams)
+        {
+            BugTracker.LeaveBreadcrumb("Flight search View");
+
+            if (navigationParams != null)
+            {
+                // Navigated from somewhere else
+                var parameters = navigationParams as FlightSearchNavigationData;
+                InitializeWith(parameters.SearchModel, parameters.PassengerModel);
+               
+                // If it is coming from Multiples edit, remove the "Multiples edit" View from the stack
+                if (parameters.NavigatedFromMultiples)
+                {
+                    BugTracker.LeaveBreadcrumb("Flight search View - Back from Multiples Edit");
+                    Navigator.RemoveBackEntry();
+                }
+            }
         }
     }
 }

@@ -51,6 +51,42 @@
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Despegar-Debug-Device|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Despegar-Debug-Device\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Decolar-Debug-Device|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Decolar-Debug-Device\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;DECOLAR;</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Despegar-Release-Emulator|AnyCPU'">
+    <OutputPath>bin\Despegar-Release-Emulator\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Decolar-Release-Emulator|AnyCPU'">
+    <OutputPath>bin\Decolar-Release-Emulator\</OutputPath>
+    <DefineConstants>TRACE;DECOLAR;</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
   <ItemGroup>
     <TargetPlatform Include="WindowsPhoneApp, Version=8.1" />
     <TargetPlatform Include="Windows, Version=8.1" />
@@ -136,7 +172,9 @@
     <Compile Include="Hotels\CitiesAvailability\IdCodeAndName.cs" />
     <Compile Include="Hotels\CitiesAvailability\MaxAndMin.cs" />
     <Compile Include="Hotels\CitiesAvailability\NearbyCity.cs" />
-    <Compile Include="Hotels\CitiesAvailability\Paging.cs" />
+    <Compile Include="Hotels\CustomUserReviews\CustomReviewsItem.cs" />
+    <Compile Include="Hotels\CustomUserReviews\CustomUserReviews.cs" />
+    <Compile Include="Hotels\Paging.cs" />
     <Compile Include="Hotels\CitiesAvailability\Price.cs" />
     <Compile Include="Hotels\CitiesAvailability\SearchedCity.cs" />
     <Compile Include="Hotels\CitiesAvailability\Sorting.cs" />
@@ -161,6 +199,14 @@
     <Compile Include="Hotels\SearchBox\HotelSearchModel.cs" />
     <Compile Include="Hotels\InstallmentFormatted.cs" />
     <Compile Include="Hotels\SearchDetails.cs" />
+    <Compile Include="Hotels\UserReviews\Averageable.cs" />
+    <Compile Include="Hotels\UserReviews\Description.cs" />
+    <Compile Include="Hotels\UserReviews\Item.cs" />
+    <Compile Include="Hotels\UserReviews\MultiLanguageStrings.cs" />
+    <Compile Include="Hotels\UserReviews\Qualifications.cs" />
+    <Compile Include="Hotels\UserReviews\User.cs" />
+    <Compile Include="Hotels\UserReviews\HotelUserReviews.cs" />
+    <Compile Include="Hotels\UserReviews\Utility.cs" />
     <Compile Include="Mock.cs" />
     <Compile Include="Common\Checkout\Address.cs" />
     <Compile Include="Flight\BookingFields\Birthdate.cs" />

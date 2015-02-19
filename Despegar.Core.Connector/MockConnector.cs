@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Despegar.Core.Connector
+namespace Despegar.Core.Neo.Connector
 {
     public class MockConnector : IConnector
     {

@@ -1,21 +1,16 @@
-﻿using Despegar.Core.Business.Flight.SearchBox;
-using Despegar.Core.Log;
+﻿using Despegar.Core.Neo.Business.Flight.SearchBox;
+using Despegar.Core.Neo.Contract.Log;
 using Despegar.WP.UI.Model.Classes.Flights;
 using Despegar.WP.UI.Model.Interfaces;
-using Despegar.WP.UI.Models.Classes;
-using System;
-using System.Collections.Generic;
+using Despegar.WP.UI.Model.ViewModel.Classes;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace Despegar.WP.UI.Model.ViewModel.Flights
 {
     public class MultipleEditionViewModel : ViewModelBase
     {
-        private INavigator navigator;
         public int SelectedNavigationIndex;
         public FlightSearchModel coreSearchModel;
         public PassengersViewModel passengerModel;
@@ -23,13 +18,14 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
         public ObservableCollection<FlightMultipleSegment> Segments { get; set; }
 
         public MultipleEditionViewModel(INavigator navigator, IBugTracker t)
-            : base(t) 
+            : base(navigator, t) 
         {
-            this.navigator = navigator;
         }
 
-        public void Initialize(EditMultiplesNavigationData navigationData)
-        { 
+        public override void OnNavigated(object navigationParams)
+        {
+            EditMultiplesNavigationData navigationData = navigationParams as EditMultiplesNavigationData;
+
             this.coreSearchModel = navigationData.SearchModel;
             this.SelectedNavigationIndex = navigationData.SelectedSegmentIndex;
             this.passengerModel = navigationData.PassengerModel;
@@ -49,14 +45,16 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
         {
             get
             {
-                return new RelayCommand(() => 
+                return new RelayCommand(() =>
                 {
                     // Apply User Changes
                     coreSearchModel.MultipleSegments.Clear();
                     coreSearchModel.MultipleSegments.AddRange(Segments);
 
-                    navigator.RemoveBackEntry(); // Remove the SearchBox page, go to new instance
-                    navigator.GoTo(ViewModelPages.FlightsSearch, new FlightSearchNavigationData() {NavigatedFromMultiples = true,  SearchModel = coreSearchModel, PassengerModel = passengerModel});
+                    Navigator.RemoveBackEntry(); // Remove the SearchBox page, go to new instance
+                    Navigator.GoTo(ViewModelPages.FlightsSearch, 
+                        new FlightSearchNavigationData() { NavigatedFromMultiples = true, SearchModel = coreSearchModel, PassengerModel = passengerModel });
+
                 });
             }
         }
@@ -65,8 +63,9 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
         {
             get
             {
-                return new RelayCommand(() => navigator.GoBack());
+                return new RelayCommand(() => Navigator.GoBack());
             }
-        }      
+        }
+       
     }
 }

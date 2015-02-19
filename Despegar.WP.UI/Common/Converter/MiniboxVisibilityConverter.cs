@@ -1,4 +1,4 @@
-﻿using Despegar.Core.Business.Enums;
+﻿using Despegar.Core.Neo.Business.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;

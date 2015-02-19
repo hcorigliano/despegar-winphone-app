@@ -1,4 +1,5 @@
-﻿echo == Compiling for DECOLAR ==
+﻿
+echo == Compiling for DECOLAR ==
 
 echo Copying manifest files
 copy "%~1Compilation\Decolar\Decolar.appxmanifestX" "%~1Package.appxmanifest"

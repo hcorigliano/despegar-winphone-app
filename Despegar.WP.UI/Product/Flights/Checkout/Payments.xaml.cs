@@ -1,6 +1,6 @@
-﻿using Despegar.Core.Business.Common.Checkout;
-using Despegar.Core.Business.Flight.BookingFields;
-using Despegar.Core.Business.Flights;
+﻿using Despegar.Core.Neo.Business.Common.Checkout;
+using Despegar.Core.Neo.Business.Flight.BookingFields;
+using Despegar.Core.Neo.Business.Flights;
 using Despegar.WP.UI.Model.ViewModel;
 using Despegar.WP.UI.Model.ViewModel.Flights;
 using System.Collections.Generic;

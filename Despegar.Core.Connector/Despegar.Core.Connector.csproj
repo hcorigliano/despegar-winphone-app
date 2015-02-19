@@ -51,24 +51,54 @@
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Despegar-Debug-Device|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Despegar-Debug-Device\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Decolar-Debug-Device|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Decolar-Debug-Device\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;DECOLAR;</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Despegar-Release-Emulator|AnyCPU'">
+    <OutputPath>bin\Despegar-Release-Emulator\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Decolar-Release-Emulator|AnyCPU'">
+    <OutputPath>bin\Decolar-Release-Emulator\</OutputPath>
+    <DefineConstants>TRACE;DECOLAR;</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
   <ItemGroup>
     <TargetPlatform Include="WindowsPhoneApp, Version=8.1" />
     <TargetPlatform Include="Windows, Version=8.1" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Apiv1Connector.cs" />
-    <Compile Include="ConnectorBase.cs" />
-    <Compile Include="IConnector.cs" />
-    <Compile Include="MapiConnector.cs" />
+    <Compile Include="Apiv3Connector.cs" />
     <Compile Include="MockConnector.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UPAConnector.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Despegar.Core.Exceptions\Despegar.Core.Exceptions.csproj">
-      <Project>{9359897f-8df6-4787-80db-b68ed851088e}</Project>
-      <Name>Despegar.Core.Exceptions</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Despegar.Core.Log\Despegar.Core.Log.csproj">
       <Project>{0c50151e-91de-45c5-bb01-b03ec44d7735}</Project>
       <Name>Despegar.Core.Log</Name>

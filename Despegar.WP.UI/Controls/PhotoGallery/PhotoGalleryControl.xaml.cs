@@ -1,24 +1,14 @@
-﻿using Despegar.Core.Log;
-using Despegar.WP.UI.BugSense;
+﻿using Despegar.Core.Neo.InversionOfControl;
 using Despegar.WP.UI.Common;
+using Despegar.WP.UI.Model.Controls;
 using Despegar.WP.UI.Model.Interfaces;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
-using Windows.UI.Xaml.Navigation;
-
-// The User Control item template is documented at http://go.microsoft.com/fwlink/?LinkId=234236
 
 namespace Despegar.WP.UI.Controls.PhotoGallery
 {
@@ -27,10 +17,11 @@ namespace Despegar.WP.UI.Controls.PhotoGallery
         //TODO create property to set the size of picture
         static string URLCONTENT = "http://staticontent.com/media/pictures/{0}/118x118";
         public PhotoGalleryViewModel photoGalleryViewModel;
+
         public PhotoGalleryControl()
         {    
             this.InitializeComponent();
-            photoGalleryViewModel = new PhotoGalleryViewModel( Navigator.Instance , BugTracker.Instance );
+            photoGalleryViewModel = IoC.Resolve<PhotoGalleryViewModel>();
         }
 
         private void VariableSizedWrapGrid_DataContextChanged(FrameworkElement sender, DataContextChangedEventArgs args)
@@ -78,7 +69,6 @@ namespace Despegar.WP.UI.Controls.PhotoGallery
 
         private void Image_Tapped(object sender, TappedRoutedEventArgs e)
         {
-
             Image image = sender as Image;
 
             photoGalleryViewModel.SelectedPicture = image.Tag as string;

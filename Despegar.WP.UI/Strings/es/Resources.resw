@@ -726,10 +726,10 @@
   <data name="Flights_Checkout_ERROR_FORM_ERROR_TITLE" xml:space="preserve">
     <value>Formulario de Compra</value>
   </data>
-  <data name="Flights_Search_ERROR_SEARCH_FAILED" xml:space="preserve">
+  <data name="Generic_ERROR_SEARCH_FAILED_NO_INTERNET" xml:space="preserve">
     <value>Por favor, revise su conexión a Internet y vuelva a intentarlo.</value>
   </data>
-  <data name="Flights_Search_ERROR_SEARCH_FAILED_TITLE" xml:space="preserve">
+  <data name="Generic_ERROR_SEARCH_FAILED_NO_INTERNET_TITLE" xml:space="preserve">
     <value>Error de conexión</value>
   </data>
   <data name="Flights_Search_ERROR_SEARCH_INVALID" xml:space="preserve">
@@ -1027,8 +1027,14 @@ La reserva no ha sido generada y no se le cobrará ningún cargo por la transacc
   <data name="Hotels_Detail_Points.Text" xml:space="preserve">
     <value>Puntos</value>
   </data>
+  <data name="Common_Accept_Label.Label" xml:space="preserve">
+    <value>Aceptar</value>
+  </data>
   <data name="Page_HotelsDescription_Seeall.Text" xml:space="preserve">
     <value>Ver Todos</value>
+  </data>
+  <data name="Common_Cancel_Label.Label" xml:space="preserve">
+    <value>Cancelar</value>
   </data>
   <data name="Page_HotelsAmenities_Title.Text" xml:space="preserve">
     <value>Comodidades</value>
@@ -1038,5 +1044,32 @@ La reserva no ha sido generada y no se le cobrará ningún cargo por la transacc
   </data>
   <data name="GenericCancelAppBar.Label" xml:space="preserve">
     <value>Cancelar</value>
+  </data>
+  <data name="Hotels_Search_ERROR_SEARCH_INVALID_TITLE" xml:space="preserve">
+    <value>Busqueda de Hoteles</value>
+  </data>
+  <data name="Flights_Search_ERROR_SEARCH_FAILED" xml:space="preserve">
+    <value>Lo sentimos, la búsqueda no pudo realizarse. Por favor, intente de nuevo.</value>
+  </data>
+  <data name="Flights_Search_ERROR_SEARCH_FAILED_TITLE" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="Flight_results_ERROR_NO_ITEMS" xml:space="preserve">
+    <value>Desculpe, foi encontrado nenhum resultado para sua pesquisa. Por favor, tente novamente, alterando qualquer um dos critérios.</value>
+  </data>
+  <data name="Hotels_Search_ERROR" xml:space="preserve">
+    <value>Lo sentimos, la búsqueda no pudo realizarse. Por favor vuelva a intentar.</value>
+  </data>
+  <data name="Hotels_Search_ERROR_UNKNOWN" xml:space="preserve">
+    <value>Lo sentimos, la búsqueda no pudo realizarse. Por favor vuelva a intentar.</value>
+  </data>
+  <data name="Hotels_Search_ERROR_CHECKIN_INVALID" xml:space="preserve">
+    <value>La fecha de llegada es inválida. Por favor ingrese otra fecha y vuelva a intentar.</value>
+  </data>
+  <data name="Hotels_Search_ERROR_SEARCH_NO_RESULTS" xml:space="preserve">
+    <value>No se encontraron resultados para la búsqueda.</value>
+  </data>
+  <data name="Hotels_Search_UNKNOWN_ERROR" xml:space="preserve">
+    <value>Hubo un error. Por favor, vuelva a intentar la búsqueda.</value>
   </data>
 </root>

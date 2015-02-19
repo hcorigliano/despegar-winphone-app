@@ -10,6 +10,7 @@
     xmlns:dev="using:Despegar.WP.UI.Developer.Controls"
     xmlns:conv="using:Despegar.WP.UI.Common.Converter"
     mc:Ignorable="d"
+    NavigationCacheMode="Enabled"
     Style="{StaticResource BasePage}">
 
     <Page.Resources>
@@ -56,8 +57,8 @@
                 </Grid>
             </PivotItem>
 
-            <PivotItem Style="{StaticResource PivotItemBase}" x:Uid="Hotel_Details_comments_Pivot">
-
+            <PivotItem Style="{StaticResource PivotItemBase}" x:Uid="Hotel_Details_comments_Pivot" xmlns:src="using:Despegar.WP.UI.Product.Hotels.Details">
+                <src:UserReviews DataContext="{Binding}"/>
             </PivotItem>
 
             <PivotItem Style="{StaticResource PivotItemBase}" x:Uid="Hotel_Details_Description_Pivot">

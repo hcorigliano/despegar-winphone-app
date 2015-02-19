@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace Despegar.WP.UI.Models.Classes
+namespace Despegar.WP.UI.Model.ViewModel.Classes
 {
     /// <summary>
     /// A command whose sole purpose is to relay its functionality 

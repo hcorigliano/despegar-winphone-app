@@ -1,29 +1,24 @@
-﻿using Despegar.Core.Business;
-using Despegar.Core.Business.Hotels.CitiesAvailability;
-using Despegar.Core.IService;
-using Despegar.Core.Log;
+﻿using Despegar.Core.Neo.Business.Hotels.CitiesAvailability;
+using Despegar.Core.Neo.Business.Hotels.SearchBox;
+using Despegar.Core.Neo.Contract.API;
+using Despegar.Core.Neo.Contract.Log;
+using Despegar.Core.Neo.Exceptions;
+using Despegar.WP.UI.Model.Classes;
 using Despegar.WP.UI.Model.Interfaces;
-using Despegar.WP.UI.Models.Classes;
+using Despegar.WP.UI.Model.ViewModel.Classes;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace Despegar.WP.UI.Model.ViewModel.Hotels
 {
-
     public class HotelsResultsViewModel : ViewModelBase
     {
-        #region private
-        private IHotelService hotelService { get; set; }
-        #endregion
+        private IMAPIHotels hotelService { get; set; }
 
-        #region public
-        public INavigator Navigator { get; set; }
+        #region  *** Public Interface ***
         public const int ITEMS_FOR_EACH_PAGE = 30;
-        public HotelsCrossParameters CrossParameters { get; set; }
+        public HotelSearchModel SearchModel { get; set; }
 
         private CitiesAvailability citiesAvailability { get; set; }
         public CitiesAvailability CitiesAvailability
@@ -36,32 +31,32 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
             }
         }
         
-        private bool backButtonIsTapEnable { get; set; }
-        public bool BackButtonIsTapEnable
+        private bool previousPageButtonIsTapEnable { get; set; }
+        public bool PreviousPageIsTapEnable
         {
             get
             {
-                return backButtonIsTapEnable;
+                return previousPageButtonIsTapEnable;
                 //return CrossParameters.SearchParameters.offset != 0;
 
             }
             set
             {
-                backButtonIsTapEnable =  value;
+                previousPageButtonIsTapEnable =  value;
                 OnPropertyChanged();
             }
         }
 
-        private bool forwardButtonIsTapEnable { get; set; }
-        public bool ForwardButtonIsTapEnable
+        private bool nextPageButtonIsTapEnable { get; set; }
+        public bool NextPageButtonIsTapEnable
         {
             get
             {
-                return forwardButtonIsTapEnable;
+                return nextPageButtonIsTapEnable;
             }
             set
             {
-                forwardButtonIsTapEnable = value;
+                nextPageButtonIsTapEnable = value;
                 OnPropertyChanged();
             }
         }
@@ -73,7 +68,6 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
             {
                 return filterButtonIsTapEnable;
                 //return CrossParameters.SearchParameters.offset != 0;
-
             }
             set
             {
@@ -95,20 +89,12 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
                 OnPropertyChanged();
             }
         }
-        #endregion
-
-        public HotelsResultsViewModel(INavigator navigator, IHotelService hotelService, IBugTracker t): base(t)
-        {
-            this.Navigator = navigator;
-            this.hotelService = hotelService;
-            PropertyChanged += LockUnlockAppBar;
-        }
 
         public ICommand ShowNextPageCommand
         {
             get
             {
-                return new RelayCommand(() => ShowNextPage());
+                return new RelayCommand(async () => await ShowNextPage());
             }
         }
 
@@ -116,49 +102,90 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
         {
             get
             {
-                return new RelayCommand(() => ShowPreviousPage());
+                return new RelayCommand(async () => await ShowPreviousPage());
             }
         }
+
+        public ICommand FilterCommand
+        {
+            get
+            {
+                return new RelayCommand(() => Navigator.GoTo(ViewModelPages.HotelsFilter, new GenericResultNavigationData(){ SearchModel = SearchModel } ));
+            }
+        }
+
+        public ICommand OrderByCommand
+        {
+            get
+            {
+                return new RelayCommand(() => Navigator.GoTo(ViewModelPages.HotelsOrderBy, new GenericResultNavigationData() { SearchModel = SearchModel }));
+            }
+        }
+
+        #endregion
+
+        public HotelsResultsViewModel(INavigator navigator, IMAPIHotels hotelService, IBugTracker t)
+            : base(navigator, t)
+        {
+            this.hotelService = hotelService;
+        }
+
 
         private void LockUnlockAppBar(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             if (e.PropertyName == "IsLoading")
             {
-                if ((sender as ViewModelBase).IsLoading)
-                {
-                    FilterButtonIsTapEnable = false;
-                    OrderButtonIsTapEnable = false;
-                    RefreshIcons();
-                }
-                else
-                {
-                    FilterButtonIsTapEnable = true;
-                    OrderButtonIsTapEnable = true;
-                    RefreshIcons();
-                }
+                RefreshIcons();
             }
         }
 
         private void RefreshIcons()
         {
-            if (!IsLoading)
+            if (IsLoading)
             {
-                BackButtonIsTapEnable = CrossParameters.SearchParameters.offset != 0;
-                if (CitiesAvailability != null)
-                    ForwardButtonIsTapEnable = (CitiesAvailability.paging.offset + ITEMS_FOR_EACH_PAGE) < CitiesAvailability.paging.total;
+                PreviousPageIsTapEnable = false;
+                NextPageButtonIsTapEnable = false;
+                FilterButtonIsTapEnable = false;
+                OrderButtonIsTapEnable = false;               
             }
             else
             {
-                BackButtonIsTapEnable = false;
-                ForwardButtonIsTapEnable = false;
+                FilterButtonIsTapEnable = SearchModel.Facets.Count > 0;
+                OrderButtonIsTapEnable = true;
+                PreviousPageIsTapEnable = SearchModel.Offset != 0;
+
+                if (CitiesAvailability != null)
+                    NextPageButtonIsTapEnable = (CitiesAvailability.paging.offset + ITEMS_FOR_EACH_PAGE) < CitiesAvailability.paging.total;
+                else
+                    NextPageButtonIsTapEnable = false;
             }
         }
 
-        public async Task Search()
-        {
-            IsLoading = true;
-            CitiesAvailability = await hotelService.GetHotelsAvailability(CrossParameters.SearchParameters.Checkin, CrossParameters.SearchParameters.Checkout, CrossParameters.SearchParameters.destinationNumber, CrossParameters.SearchParameters.distribution, CrossParameters.SearchParameters.currency, CrossParameters.SearchParameters.offset, CrossParameters.SearchParameters.offset + 30, CrossParameters.SearchParameters.extraParameters);
-            //RefreshIcons();
+        public async Task LoadResults()
+        {            
+            IsLoading = true;          
+          
+            try
+            {
+               CitiesAvailability = await hotelService.GetHotelsAvailability(SearchModel);
+
+               if (CitiesAvailability.items.Count == 0)
+                   OnViewModelError("SEARCH_NO_RESULTS");
+               else {
+                   // Set filering
+                   SearchModel.Facets = CitiesAvailability.facets;
+                   SearchModel.Sortings = CitiesAvailability.sorting;
+               }
+            }
+            catch (APIErrorException e)
+            {
+                // Custom error?
+                OnViewModelError("SEARCH_ERROR", e.ErrorData.code);
+            }
+            catch (Exception ) {
+                OnViewModelError("UNKNOWN_ERROR");
+            }
+            
             IsLoading = false;
         }
 
@@ -166,70 +193,50 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
         {
             if (!IsLoading)
             {
-                CrossParameters.SearchParameters.offset += ITEMS_FOR_EACH_PAGE;
-                await Search();
+                SearchModel.Offset += ITEMS_FOR_EACH_PAGE;
+                await LoadResults();
             }
         }
 
         public async Task ShowPreviousPage()
         {
-            if(!IsLoading && CrossParameters.SearchParameters.offset != 0)
+            if(!IsLoading && SearchModel.Offset != 0)
             {
-                CrossParameters.SearchParameters.offset -= ITEMS_FOR_EACH_PAGE;
-                await Search();
+                SearchModel.Offset -= ITEMS_FOR_EACH_PAGE;
+                await LoadResults();
             }
         }
-
-        public async Task SearchAgaing()
+        
+        public override void OnNavigated(object navigationParams)
         {
-            CrossParameters.SearchParameters.extraParameters = "";
+            BugTracker.LeaveBreadcrumb("Hotels Results View");
+            GenericResultNavigationData pageParameters = navigationParams as GenericResultNavigationData;
+            PropertyChanged += LockUnlockAppBar;
 
-            foreach (Facet facet in CitiesAvailability.facets)
+            // Reset paging (a new Search has been performed)
+            SearchModel = (HotelSearchModel)pageParameters.SearchModel;
+            SearchModel.Offset = 0;
+
+            // Remover la pantall de filtros/order del navigation stack
+            if (pageParameters.FiltersApplied)
             {
-                string valueString = "";
-
-                if (facet.values != null)
-                {
-                    valueString = "";
-                    foreach (Value value in facet.values)
-                    {
-                        if (value.selected)
-                        {
-                            if (valueString == "")
-                                valueString += value.value;
-                            else
-                                valueString += "," + value.value;
-                        }
-                    }
-
-                    if (valueString != "")
-                    {
-                        CrossParameters.SearchParameters.extraParameters += facet.criteria + "=" + valueString + "&";
-                    }
-                }
+                Navigator.RemoveBackEntry(); // Filters page
+                Navigator.RemoveBackEntry(); // Old results page
             }
-
-            foreach (Value value in CitiesAvailability.sorting.values)
-            {
-                if (value.selected)
-                    CrossParameters.SearchParameters.extraParameters += "order_by=" + value.value;
-            }
-
-
-            if (CrossParameters.SearchParameters.extraParameters != "")
-            {
-                CrossParameters.SearchParameters.offset = 0;
-                await Search();
-            }
-
-            CitiesAvailability.SearchStatus = SearchStates.FirstSearch; 
-
         }
 
-        public void GoToDetails()
+
+
+        public void GoToDetails(HotelItem hotelItem)
         {
-            Navigator.GoTo(ViewModelPages.HotelsDetails, CrossParameters);
-        }
+            var param = new HotelsCrossParameters() 
+            {   SearchModel = this.SearchModel, 
+                IdSelectedHotel = hotelItem.id
+            };
+            param.HotelsExtraData.Distance = hotelItem.distance;
 
+            Navigator.GoTo(ViewModelPages.HotelsDetails, param);
+
+        }
     }
 }

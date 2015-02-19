@@ -1,36 +1,16 @@
 ﻿using BugSense;
 using BugSense.Core.Model;
-using Despegar.WP.UI.Model;
+using Despegar.Core.Neo.Contract.Log;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Despegar.Core.Log;
 
 namespace Despegar.WP.UI.BugSense
 {
     /// <summary>
     /// Tracks crashes and leaves breadcrumbs
     /// </summary>
-    public class BugTracker : IBugTracker
-    {
-        private static IBugTracker instance;
-
-        public static IBugTracker Instance
-        {
-            get
-            {
-                if (instance == null)
-                {
-                    instance = new BugTracker();
-                    breadCrumbCounter = 0;
-                }
-
-                return instance;
-            }
-        }
-        private static int breadCrumbCounter;
+    public class SplunkMintBugTracker : IBugTracker
+    {        
+        private int breadCrumbCounter;
 
         public void LeaveBreadcrumb(string breadcrumb) 
         {
