@@ -41,7 +41,8 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
 
-            <Image Grid.Column="0"  Source="{Binding rooms[0].pictures[0] , Converter={StaticResource StringFormatConverter}, ConverterParameter='http://staticontent.com/media/pictures/{0}/79x79' }"/>
+            <!--<Image Grid.Column="0"   Source="{Binding rooms[0].pictures[0] , Converter={StaticResource StringFormatConverter}, ConverterParameter='http://staticontent.com/media/pictures/{0}/79x79' }"  Loaded=""/>-->
+            <Image Grid.Column="0"   Source="{Binding rooms[0].pictures[0] , Converter={StaticResource StringFormatConverter}, ConverterParameter='http://staticontent.com/media/pictures/{0}/79x79' }"  />
 
             <Grid Grid.Column="1" Margin="{StaticResource Left_Offset}" >
                 <Grid.RowDefinitions>
@@ -69,8 +70,16 @@
 
                     <!--Click="GoToCommentsPivot"-->
                     <Button Margin="{StaticResource Left_Offset}" Style="{StaticResource HotelDetailLink}"  HorizontalAlignment="Left" VerticalAlignment="Center" >
-                        <TextBlock  Style="{StaticResource DetailDetailLinkText}"  Text="Ver más" Margin="-12,0,0,0" VerticalAlignment="Center"></TextBlock>
+                        <!--<TextBlock  Style="{StaticResource DetailDetailLinkText}"  Text="Ver más" Margin="-12,0,0,0" VerticalAlignment="Center" Visibility="{Binding rooms[0].amenities[4].id , Converter={StaticResource NullToVisibilityConverter}}"></TextBlock>-->
+                        <TextBlock DataContext="{Binding rooms[0]}" Style="{StaticResource DetailDetailLinkText}" x:Uid="Page_HotelsDescription_Seeall" Margin="-12,0,0,0" Text="Ver másX" HorizontalAlignment="Center" VerticalAlignment="Center" Tapped="TextBlock_Tapped" Visibility="{Binding rooms[0].amenities , Converter={StaticResource NullToVisibilityConverter}}"/>
                     </Button>
+
+
+                    
+                    
+                    
+                    
+                    
                 </StackPanel>
                 
             </Grid>
@@ -78,6 +87,7 @@
         </Grid>
         
         <Button Grid.Row="2" Style="{StaticResource HotelDetailLink}"  HorizontalAlignment="Left" VerticalAlignment="Center" >
+            <!--<TextBlock Text="{Binding room_availabilities[0].}" />-->
             <TextBlock  Style="{StaticResource DetailDetailLinkText}"  Text="Ver la descripcion de la habitación" Margin="-12,0,0,0" VerticalAlignment="Center"></TextBlock>
         </Button>
 

@@ -1,4 +1,8 @@
-﻿using System;
+﻿using Despegar.Core.Neo.Business.Hotels.HotelDetails;
+using Despegar.WP.UI.Common;
+using Despegar.WP.UI.Model.Interfaces;
+using Despegar.WP.UI.Model.ViewModel.Hotels;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -22,6 +26,20 @@ namespace Despegar.WP.UI.Product.Hotels.Details.Controls
         public RoomItem()
         {
             this.InitializeComponent();
+        }
+
+        private void TextBlock_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            try
+            {
+                Room room = (Room)(((TextBlock)sender).DataContext);
+                Navigator.Instance.GoTo(ViewModelPages.HotelsAmenities, room.amenities);
+            }
+            catch
+            {
+                //Catch Error
+            }
+
         }
     }
 }
