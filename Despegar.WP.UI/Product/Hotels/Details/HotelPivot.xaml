@@ -40,7 +40,7 @@
             <TextBlock Margin="{StaticResource Top_Offset}" Grid.Row="1" Text="{Binding HotelDetail.hotel.name ,Converter={StaticResource StringCommaParseConverter}}" Style="{StaticResource SegoeLight28}" TextTrimming="CharacterEllipsis" VerticalAlignment="Top"/>
 
             <TextBlock Grid.Row="2" Visibility="{Binding HotelDistance , Converter={StaticResource VisibilityConverter}, FallbackValue=Collapsed}" Style="{StaticResource SegoeSemilight17}">
-                            <Run x:Uid="Common_Located" Text="ubicado a "/>
+                            <Run x:Uid="Common_Located" Text="ubicado a xx "/>
                             <Run Text="{Binding HotelDistance}"/>
                             <Run Text="m"/>
             </TextBlock>
