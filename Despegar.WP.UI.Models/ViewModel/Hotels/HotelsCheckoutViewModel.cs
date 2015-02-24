@@ -360,7 +360,7 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
         public override void OnNavigated(object navigationParams)
         {
             BugTracker.LeaveBreadcrumb("Hotel checkout start");
-            HotelsCrossParameters crossParams = navigationParams as HotelsCrossParameters;
+            crossParams = navigationParams as HotelsCrossParameters;
         }
     }
 }

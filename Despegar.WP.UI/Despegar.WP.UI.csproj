@@ -323,11 +323,17 @@
     <Compile Include="Product\Hotels\Checkout\Rooms.xaml.cs">
       <DependentUpon>Rooms.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Product\Hotels\Details\Controls\RoomItem.xaml.cs">
+      <DependentUpon>RoomItem.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Product\Hotels\Details\Controls\UserReviewItem.xaml.cs">
       <DependentUpon>UserReviewItem.xaml</DependentUpon>
     </Compile>
     <Compile Include="Product\Hotels\Details\HotelPivot.xaml.cs">
       <DependentUpon>HotelPivot.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Product\Hotels\Details\RoomPivot.xaml.cs">
+      <DependentUpon>RoomPivot.xaml</DependentUpon>
     </Compile>
     <Compile Include="Product\Hotels\Details\UserReviewsPivot.xaml.cs">
       <DependentUpon>UserReviewsPivot.xaml</DependentUpon>
@@ -987,6 +993,7 @@
     <Content Include="Assets\Icon\Amenities\amn_wine.png" />
     <Content Include="Assets\Icon\Amenities\amn_wma.png" />
     <Content Include="Assets\Icon\Amenities\amn_yar.png" />
+    <Content Include="Assets\Icon\App\bed-medium-white.scale-100.png" />
     <Content Include="Assets\Icon\App\handup-medium-white.scale-100.png" />
     <Content Include="Assets\Icon\App\phone-small-white.scale-100.png" />
     <Content Include="Assets\Icon\App\pin-medium-white.scale-100.png" />
@@ -995,6 +1002,7 @@
     <Content Include="Assets\Icon\App\tooltip-arrow-blue.scale-100.png" />
     <Content Include="Assets\Icon\App\tooltip-arrow-blue.scale-140.png" />
     <Content Include="Assets\Icon\App\tooltip-arrow-blue.scale-240.png" />
+    <Content Include="Assets\Icon\App\user-small-white.scale-100.png" />
     <Content Include="Assets\Icon\App\wallet-medium-white.scale-100.png" />
     <Content Include="Assets\Icon\CreditCard\AX.png" />
     <Content Include="Assets\Icon\CreditCard\AX_AME.png" />
@@ -1659,6 +1667,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Product\Hotels\Details\Controls\RoomItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Product\Hotels\Details\Controls\UserReviewItem.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -1666,6 +1678,10 @@
     <Page Include="Product\Hotels\Details\HotelPivot.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Product\Hotels\Details\RoomPivot.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Product\Hotels\Details\UserReviewsPivot.xaml">
       <Generator>MSBuild:Compile</Generator>

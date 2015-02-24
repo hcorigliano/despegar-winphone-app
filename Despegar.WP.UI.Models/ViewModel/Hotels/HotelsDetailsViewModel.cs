@@ -7,6 +7,7 @@ using Despegar.Core.Neo.Contract.Log;
 using Despegar.WP.UI.Model.Interfaces;
 using Despegar.WP.UI.Model.ViewModel.Classes;
 using Despegar.WP.UI.Model.ViewModel.Controls.Maps;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -141,6 +142,8 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
             }
         }
 
+        public int HotelDistance { get; set; }
+
         #endregion
 
         public HotelsDetailsViewModel(INavigator navigator, IMAPIHotels hotelService, IBugTracker t)
@@ -161,6 +164,9 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
             HotelDetail = await hotelService.GetHotelsDetail(CrossParameters.IdSelectedHotel, CrossParameters.SearchModel.DepartureDateFormatted, CrossParameters.SearchModel.DestinationDateFormatted, CrossParameters.SearchModel.DistributionString);
             //HotelReviews = await hotelService.GetHotelUserReviews(CrossParameters.IdSelectedHotel, 10, 0, "es");
             //FormatReviews("es");
+
+            HotelDistance = Convert.ToInt32(CrossParameters.HotelsExtraData.Distance);
+
 
             // Get suggest room price
             foreach (Roompack roomPack in hotelDetail.roompacks)
