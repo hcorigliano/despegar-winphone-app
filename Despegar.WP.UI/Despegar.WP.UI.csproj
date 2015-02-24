@@ -1571,6 +1571,7 @@
     <Content Include="Compilation\Despegar\despegarsplash-white.scale-100.png" />
     <Content Include="Compilation\Despegar\despegarsplash-white.scale-140.png" />
     <Content Include="Compilation\Despegar\despegarsplash-white.scale-240.png" />
+    <Content Include="mocks.xml" />
     <Content Include="StoreManifest.xml" />
   </ItemGroup>
   <ItemGroup>
