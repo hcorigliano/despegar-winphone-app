@@ -12,15 +12,16 @@
     <UserControl.Resources>
         <conv:StringConverter x:Name="StringFormatConverter"/>
         <conv:NullToVisibilityConverter x:Name="NullToVisibilityConverter"/>
+        <conv:VisibilityConverter x:Name="VisibilityConverter" TrueValue="Visible" FalseValue="Collapsed" />
     </UserControl.Resources>
 
 
-    <Grid>
+    <Grid HorizontalAlignment="Stretch">
         <Grid.RowDefinitions>
             <RowDefinition Height="{StaticResource Block3}"/> 
             <RowDefinition Height="{StaticResource Offset}"/>
 
-            <RowDefinition Height="{StaticResource Block1}"/>
+            <RowDefinition MinHeight="{StaticResource dBlock1}"/>
             <RowDefinition Height="{StaticResource Offset}"/>
 
             <RowDefinition MinHeight="{StaticResource dBlock2}"/>
@@ -33,6 +34,8 @@
             <RowDefinition Height="{StaticResource Offset}"/>
 
             <RowDefinition Height="{StaticResource Block2}"/>
+            
+            <RowDefinition Height="{StaticResource Block1p}"/>
         </Grid.RowDefinitions>
         
         <Grid Grid.Row="0">
@@ -68,31 +71,24 @@
                     <Image Margin="{StaticResource Left_Offset}" Height="{StaticResource dBlock1}" Width="{StaticResource dBlock1}" Source="{Binding rooms[0].amenities[2].id, Converter={StaticResource StringFormatConverter}, ConverterParameter='/assets/icon/amenities/amn_{0}.png' }"></Image>
                     <Image Margin="{StaticResource Left_Offset}" Height="{StaticResource dBlock1}" Width="{StaticResource dBlock1}" Source="{Binding rooms[0].amenities[3].id, Converter={StaticResource StringFormatConverter}, ConverterParameter='/assets/icon/amenities/amn_{0}.png' }"></Image>
 
-                    <!--Click="GoToCommentsPivot"-->
-                    <Button Margin="{StaticResource Left_Offset}" Style="{StaticResource HotelDetailLink}"  HorizontalAlignment="Left" VerticalAlignment="Center" >
-                        <!--<TextBlock  Style="{StaticResource DetailDetailLinkText}"  Text="Ver más" Margin="-12,0,0,0" VerticalAlignment="Center" Visibility="{Binding rooms[0].amenities[4].id , Converter={StaticResource NullToVisibilityConverter}}"></TextBlock>-->
-                        <TextBlock DataContext="{Binding rooms[0]}" Style="{StaticResource DetailDetailLinkText}" x:Uid="Page_HotelsDescription_Seeall" Margin="-12,0,0,0" Text="Ver másX" HorizontalAlignment="Center" VerticalAlignment="Center" Tapped="TextBlock_Tapped" Visibility="{Binding rooms[0].amenities , Converter={StaticResource NullToVisibilityConverter}}"/>
+                    <Button Margin="{StaticResource Left_Offset}" Style="{StaticResource HotelDetailLink}"  HorizontalAlignment="Left" VerticalAlignment="Center" Visibility="{Binding rooms[0].amenities[4].id , Converter={StaticResource NullToVisibilityConverter}, FallbackValue=Collapsed}">
+                        <TextBlock DataContext="{Binding }" Style="{StaticResource DetailDetailLinkText}" x:Uid="Page_HotelsDescription_Seeall" Margin="-12,0,0,0" Text="Ver másX" HorizontalAlignment="Center" VerticalAlignment="Center" Tapped="TextBlock_Tapped" Visibility="{Binding rooms[0].amenities[4].id , Converter={StaticResource NullToVisibilityConverter}, FallbackValue=Collapsed}"  />
                     </Button>
 
-
-                    
-                    
-                    
-                    
-                    
                 </StackPanel>
                 
             </Grid>
             
         </Grid>
-        
-        <Button Grid.Row="2" Style="{StaticResource HotelDetailLink}"  HorizontalAlignment="Left" VerticalAlignment="Center" >
-            <!--<TextBlock Text="{Binding room_availabilities[0].}" />-->
-            <TextBlock  Style="{StaticResource DetailDetailLinkText}"  Text="Ver la descripcion de la habitación" Margin="-12,0,0,0" VerticalAlignment="Center"></TextBlock>
-        </Button>
 
-        <!--<Button Grid.Row="2" Content="Ver la descripcion de la hasbitacion"/>-->
-        
+        <StackPanel Grid.Row="2" Visibility="{Binding rooms[0].information , Converter={StaticResource NullToVisibilityConverter}, FallbackValue=Collapsed}">
+            <Button  Style="{StaticResource HotelDetailLink}"  HorizontalAlignment="Left" VerticalAlignment="Center" Click="ChangeRoomInformationVisibility" >
+                <TextBlock  Style="{StaticResource DetailDetailLinkText}"  Text="Ver la descripcion de la habitación" Margin="-12,0,0,0" VerticalAlignment="Center"  ></TextBlock>
+            </Button>
+
+            <TextBlock x:Name="RoomInformationTextBlock" Text="{Binding rooms[0].information}" TextWrapping="Wrap" Visibility="Collapsed" />
+        </StackPanel>
+
         <Grid Grid.Row="4">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="{StaticResource Block2}"/>
@@ -102,11 +98,6 @@
             <Grid Width="{StaticResource dBlock2}" Height="{StaticResource dBlock2}" Grid.Column="0" Background="{StaticResource Blue40Brush}" VerticalAlignment="Top">
                 <Image Source="/Assets/Icon/App/bed-medium-white.scale-100.png"/>
             </Grid>
-
-            <!--<StackPanel Grid.Column="1">
-                <TextBlock Text="elija cama"/>
-                <ComboBox VerticalAlignment="Bottom"   Margin="{StaticResource Left_Offset}" Style="{StaticResource ComboBoxBase}" />
-            </StackPanel>-->
 
             <ComboBox Grid.Column="1" ItemsSource="{Binding rooms[0].bed_options }" DisplayMemberPath="description"  VerticalAlignment="Center" Margin="{StaticResource Left_Offset}" Style="{StaticResource ComboBoxBase}" />
 
@@ -122,7 +113,7 @@
                 <Run Text="- "/>
                 <Run Text="{Binding room_availabilities[0].cancellation_policy.penalty_short_description}"/>
             </TextBlock>
-            <TextBlock Style="{StaticResource SegoeRegular17}">
+            <TextBlock Style="{StaticResource SegoeRegular17}" Visibility="{Binding rooms[0].availability ,Converter={StaticResource VisibilityConverter}}">
                 <Run Text="- "/>
                 <Run Text="Quedan " />
                 <Run Text="{Binding rooms[0].availability}"/>
@@ -150,7 +141,7 @@
                 </Grid.RowDefinitions>
 
 
-                <Grid Visibility="{Binding room_availabilities[0].price.promo_type ,Converter={StaticResource NullToVisibilityConverter}}" >
+                <Grid Margin="0,-8,0,0" Visibility="{Binding room_availabilities[0].price.discount_percentage ,Converter={StaticResource NullToVisibilityConverter}}" >
                     <Grid.RowDefinitions>
                         <RowDefinition Height="1*"/>
                         <RowDefinition Height="1*"/>
@@ -169,12 +160,12 @@
                     <Border Grid.Row="0" Grid.Column="0" BorderThickness="0,0,0,2" BorderBrush="#FF949494" />
                 </Grid>
 
-                <TextBlock Margin="0,-4,0,0" VerticalAlignment="Center" Grid.Row="1" Style="{StaticResource SegoeLight24}">
+                <TextBlock Margin="0,-9,0,0" VerticalAlignment="Center" Grid.Row="1" Style="{StaticResource SegoeLight24}">
                                     <Run Text="$" /> 
                                     <Run Text="{Binding room_availabilities[0].price.best}" />
                 </TextBlock>
 
-                <TextBlock Margin="0,-4,0,0" VerticalAlignment="Center" Grid.Row="2"  x:Uid="Hotels_Details_Fare_Details" Text="Tarifa por habitacion por noche x"  Style="{StaticResource SegoeRegular15}" />
+                <TextBlock Margin="0,0,0,0" VerticalAlignment="Center" Grid.Row="2"  x:Uid="Hotels_Details_Fare_Details" Text="Tarifa por habitacion por noche x"  Style="{StaticResource SegoeRegular15}" />
 
             </Grid>
 

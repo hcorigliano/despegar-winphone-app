@@ -26,6 +26,7 @@ namespace Despegar.WP.UI.Product.Hotels.Details.Controls
         public RoomItem()
         {
             this.InitializeComponent();
+            //this.Width = Window.Current.Bounds.Width - 48;
         }
 
         private void TextBlock_Tapped(object sender, TappedRoutedEventArgs e)
@@ -40,6 +41,14 @@ namespace Despegar.WP.UI.Product.Hotels.Details.Controls
                 //Catch Error
             }
 
+        }
+
+        private void ChangeRoomInformationVisibility(object sender, RoutedEventArgs e)
+        {
+            if (RoomInformationTextBlock.Visibility == Visibility.Collapsed)
+                RoomInformationTextBlock.Visibility = Visibility.Visible;
+            else
+                RoomInformationTextBlock.Visibility = Visibility.Collapsed;
         }
     }
 }
