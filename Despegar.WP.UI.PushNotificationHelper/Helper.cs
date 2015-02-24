@@ -5,6 +5,7 @@
 //
 // Copyright (c) Microsoft Corporation. All rights reserved
 
+using Despegar.WP.UI.Model;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -24,8 +25,8 @@ namespace Despegar.WP.UI.PushNotificationHelper
 {
     public sealed class ChannelAndWebResponse
     {
-        public PushNotificationChannel Channel {get; set;}
-        public String WebResponse {get; set;}
+        public PushNotificationChannel Channel { get; set; }
+        public String WebResponse { get; set; }
     }
 
     [DataContract]
@@ -43,8 +44,18 @@ namespace Despegar.WP.UI.PushNotificationHelper
 
     public sealed class Notifier
     {
-        private const String APP_TILE_ID_KEY = "appTileIds";
-        private const String MAIN_APP_TILE_KEY = "mainAppTileKey";
+#if DECOLAR
+            private const String APP_TILE_ID_KEY = "DecolarTileIds";
+#else
+        private const String APP_TILE_ID_KEY = "DespegarTileIds";
+#endif
+
+#if DECOLAR
+            private const String MAIN_APP_TILE_KEY = "Decolar.com";
+#else
+        private const String MAIN_APP_TILE_KEY = "Despegar.com";
+#endif
+
         private const int DAYS_TO_RENEW = 15; // Renew if older than 15 days
         private Dictionary<String, UrlData> urls;
 
@@ -135,7 +146,7 @@ namespace Despegar.WP.UI.PushNotificationHelper
         private void SaveAppTileIds()
         {
             List<String> dataToStore;
-            
+
             lock (this.urls)
             {
                 dataToStore = new List<String>(this.urls.Count);
@@ -171,13 +182,16 @@ namespace Despegar.WP.UI.PushNotificationHelper
                     UrlData dataForUpload = keyValue.Value;
                     if (force || ((now - dataForUpload.Renewed) > daysToRenew))
                     {
+                        string upaid = GlobalConfiguration.UPAId;
+                        string brand = GlobalConfiguration.Brand;
+                        string language = GlobalConfiguration.Language;
                         if (keyValue.Key == MAIN_APP_TILE_KEY)
                         {
-                            renewalTasks.Add(OpenChannelAndUploadAsync(dataForUpload.Url).AsTask());
+                            renewalTasks.Add(OpenChannelAndUploadAsync(dataForUpload.Url, upaid, brand, language).AsTask());
                         }
                         else
                         {
-                            renewalTasks.Add(OpenChannelAndUploadAsync(dataForUpload.Url, keyValue.Key, dataForUpload.IsAppId).AsTask());
+                            renewalTasks.Add(OpenChannelAndUploadAsync(dataForUpload.Url, keyValue.Key, dataForUpload.IsAppId,upaid,brand,language).AsTask());
                         }
 
                     }
@@ -185,16 +199,16 @@ namespace Despegar.WP.UI.PushNotificationHelper
             }
             return Task.WhenAll(renewalTasks).AsAsyncAction();
         }
-       
+
         // Instead of using the async and await keywords, actual Tasks will be returned.
         // That way, components consuming these APIs can await the returned tasks
-        public IAsyncOperation<ChannelAndWebResponse> OpenChannelAndUploadAsync(String url)
+        public IAsyncOperation<ChannelAndWebResponse> OpenChannelAndUploadAsync(String url, string upaId, string brand, string countryId)
         {
             IAsyncOperation<PushNotificationChannel> channelOperation = PushNotificationChannelManager.CreatePushNotificationChannelForApplicationAsync();
-            return ExecuteChannelOperation(channelOperation, url, MAIN_APP_TILE_KEY, true);
+            return ExecuteChannelOperation(channelOperation, url, MAIN_APP_TILE_KEY, true,  upaId,  brand,  countryId);
         }
 
-        public IAsyncOperation<ChannelAndWebResponse> OpenChannelAndUploadAsync(String url, String inputItemId, bool isPrimaryTile)
+        public IAsyncOperation<ChannelAndWebResponse> OpenChannelAndUploadAsync(String url, String inputItemId, bool isPrimaryTile, string upaId, string brand, string countryId)
         {
             IAsyncOperation<PushNotificationChannel> channelOperation;
             if (isPrimaryTile)
@@ -206,10 +220,10 @@ namespace Despegar.WP.UI.PushNotificationHelper
                 channelOperation = PushNotificationChannelManager.CreatePushNotificationChannelForSecondaryTileAsync(inputItemId);
             }
 
-            return ExecuteChannelOperation(channelOperation, url, inputItemId, isPrimaryTile);
+            return ExecuteChannelOperation(channelOperation, url, inputItemId, isPrimaryTile, upaId, brand, countryId);
         }
 
-        private IAsyncOperation<ChannelAndWebResponse> ExecuteChannelOperation(IAsyncOperation<PushNotificationChannel> channelOperation, String url, String itemId, bool isPrimaryTile)
+        private IAsyncOperation<ChannelAndWebResponse> ExecuteChannelOperation(IAsyncOperation<PushNotificationChannel> channelOperation, String url, String itemId, bool isPrimaryTile, string upaId, string brand, string countryId)
         {
             return channelOperation.AsTask().ContinueWith<ChannelAndWebResponse>((Task<PushNotificationChannel> channelTask) =>
             {
@@ -218,14 +232,16 @@ namespace Despegar.WP.UI.PushNotificationHelper
 
                 // Upload the channel URI if the client hasn't recorded sending the same uri to the server
                 UrlData dataForItem = TryGetUrlData(itemId);
-                
+
                 if (dataForItem == null || newChannel.Uri != dataForItem.ChannelUri)
                 {
                     HttpWebRequest webRequest = (HttpWebRequest)HttpWebRequest.Create(url);
-                    webRequest.Method = "POST";
+                    webRequest.Method = "PUT";
                     webRequest.ContentType = "application/x-www-form-urlencoded";
-                    byte[] channelUriInBytes = Encoding.UTF8.GetBytes("ChannelUri=" + WebUtility.UrlEncode(newChannel.Uri) + "&ItemId=" + WebUtility.UrlEncode(itemId));
 
+                    //byte[] channelUriInBytes = Encoding.UTF8.GetBytes("ChannelUri=" + WebUtility.UrlEncode(newChannel.Uri) + "&ItemId=" + WebUtility.UrlEncode(itemId));
+
+                    byte[] channelUriInBytes = Encoding.UTF8.GetBytes("upa_id=" + WebUtility.UrlDecode(upaId) + "&token=" + WebUtility.UrlEncode(newChannel.Uri) + "&brand=" + WebUtility.UrlEncode(brand) + "&device_type=" + WebUtility.UrlEncode("wphone") + "&country_id=" + countryId);
                     Task<Stream> requestTask = webRequest.GetRequestStreamAsync();
                     using (Stream requestStream = requestTask.Result)
                     {
@@ -243,6 +259,7 @@ namespace Despegar.WP.UI.PushNotificationHelper
                 // If it fails, you may considered setting another AC task, trying again, etc.
                 // OpenChannelAndUploadAsync will throw an exception if upload fails
                 UpdateUrl(url, newChannel.Uri, itemId, isPrimaryTile);
+
                 return new ChannelAndWebResponse { Channel = newChannel, WebResponse = webResponse };
             }).AsAsyncOperation();
         }

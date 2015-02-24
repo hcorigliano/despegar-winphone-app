@@ -27,6 +27,14 @@ namespace Despegar.WP.UI.Model
             get { return upadId != null ? upadId : CoreContext.GetUOW(); }
             set { upadId = value; }
         }
+        public static Windows.Networking.PushNotifications.PushNotificationChannel Channel { get; set; }
+
+#if Decolar
+        public static string Brand = "decolar";
+#else
+        public static string Brand = "despegar";
+#endif
+        
 
         /// <summary>
         /// Initializes the CoreContext object and configures it

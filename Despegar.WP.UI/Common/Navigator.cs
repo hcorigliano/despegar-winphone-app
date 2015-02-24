@@ -94,7 +94,12 @@ namespace Despegar.WP.UI.Common
                 // Add More pages-viewmodel mappings down here
             }
 
-            Frame rootFrame = Window.Current.Content as Frame;
+            Frame rootFrame = null;
+
+            if (Window.Current != null)
+            {
+                rootFrame = Window.Current.Content as Frame;
+            }
 
             if (rootFrame != null)
             {

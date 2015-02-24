@@ -42,6 +42,7 @@
     <Compile Include="Contract\API\IAPIv1.cs" />
     <Compile Include="Contract\API\IAPIv3.cs" />
     <Compile Include="Contract\API\IMAPICross.cs" />
+    <Compile Include="Contract\API\IMAPINotifications.cs" />
     <Compile Include="Contract\Connector\IApiv1Connector.cs" />
     <Compile Include="Contract\Connector\IApiv3Connector.cs" />
     <Compile Include="Contract\Connector\IUPAConnector.cs" />
