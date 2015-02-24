@@ -44,7 +44,8 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
 
-            <!--<Image Grid.Column="0"   Source="{Binding rooms[0].pictures[0] , Converter={StaticResource StringFormatConverter}, ConverterParameter='http://staticontent.com/media/pictures/{0}/79x79' }"  Loaded=""/>-->
+            <!--<Image Grid.Column="0"   Source="/Assets/Icon/App/bed-medium-white.scale-100.png" />-->
+            <Grid Grid.Column="0"  Background="Gray"/>
             <Image Grid.Column="0"   Source="{Binding rooms[0].pictures[0] , Converter={StaticResource StringFormatConverter}, ConverterParameter='http://staticontent.com/media/pictures/{0}/79x79' }"  />
 
             <Grid Grid.Column="1" Margin="{StaticResource Left_Offset}" >

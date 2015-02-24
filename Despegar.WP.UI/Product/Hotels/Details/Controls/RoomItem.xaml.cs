@@ -26,7 +26,7 @@ namespace Despegar.WP.UI.Product.Hotels.Details.Controls
         public RoomItem()
         {
             this.InitializeComponent();
-            //this.Width = Window.Current.Bounds.Width - 48;
+            this.Width = Window.Current.Bounds.Width - 48;
         }
 
         private void TextBlock_Tapped(object sender, TappedRoutedEventArgs e)

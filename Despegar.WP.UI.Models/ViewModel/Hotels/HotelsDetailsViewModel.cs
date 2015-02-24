@@ -165,6 +165,15 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
             //HotelReviews = await hotelService.GetHotelUserReviews(CrossParameters.IdSelectedHotel, 10, 0, "es");
             //FormatReviews("es");
 
+            foreach (Roompack roompack in HotelDetail.roompacks)
+            {
+                if (roompack.rooms[0].pictures == null)
+                {
+                    roompack.rooms[0].pictures = new List<string>(); 
+                    roompack.rooms[0].pictures.Add(HotelDetail.hotel.main_picture); 
+                }
+            }
+
             HotelDistance = Convert.ToInt32(CrossParameters.HotelsExtraData.Distance);
 
 
