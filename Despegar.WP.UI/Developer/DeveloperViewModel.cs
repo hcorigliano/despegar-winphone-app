@@ -81,7 +81,7 @@ namespace Despegar.WP.UI.Developer
         {
             // Load Mocks list
             var mocks = Mock.AllMocks
-                .Select(x => new MockOption() { MockKey = x.MockID, ServiceKey = x.ServiceID, Name = x.MockID.ToString(), Enabled = GlobalConfiguration.CoreContext.IsMockEnabled(x.MockID) })
+                .Select(x => new MockOption() { Name = x.MockName, ServiceKey = x.ServiceID, Enabled = GlobalConfiguration.CoreContext.IsMockEnabled(x.MockName) })
                 .ToList();
 
             // Add "None" Option

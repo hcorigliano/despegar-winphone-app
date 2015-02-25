@@ -6,6 +6,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Phone.UI.Input;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -26,6 +27,18 @@ namespace Despegar.WP.UI.Product.Hotels
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             this.DataContext = e.Parameter;
+            HardwareButtons.BackPressed += BackButton_Click;
+        }
+
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            HardwareButtons.BackPressed -= BackButton_Click;
+        }
+
+        private void BackButton_Click(object sender, BackPressedEventArgs e)
+        {
+            e.Handled = true;
+            Navigator.Instance.GoBack();
         }
 
         private void AppBarButton_Click(object sender, RoutedEventArgs e)

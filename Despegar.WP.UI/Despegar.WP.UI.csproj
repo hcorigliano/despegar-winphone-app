@@ -95,6 +95,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="BugSense\BugTracker.cs" />
+    <Compile Include="Common\Converter\AnyToIntConverter.cs" />
     <Compile Include="Common\Converter\BooleanConverter.cs" />
     <Compile Include="Common\Converter\DateToLongString.cs" />
     <Compile Include="Common\Converter\DiscountConverter.cs" />
@@ -322,11 +323,17 @@
     <Compile Include="Product\Hotels\Checkout\Rooms.xaml.cs">
       <DependentUpon>Rooms.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Product\Hotels\Details\Controls\RoomItem.xaml.cs">
+      <DependentUpon>RoomItem.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Product\Hotels\Details\Controls\UserReviewItem.xaml.cs">
       <DependentUpon>UserReviewItem.xaml</DependentUpon>
     </Compile>
     <Compile Include="Product\Hotels\Details\HotelPivot.xaml.cs">
       <DependentUpon>HotelPivot.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Product\Hotels\Details\RoomPivot.xaml.cs">
+      <DependentUpon>RoomPivot.xaml</DependentUpon>
     </Compile>
     <Compile Include="Product\Hotels\Details\UserReviewsPivot.xaml.cs">
       <DependentUpon>UserReviewsPivot.xaml</DependentUpon>
@@ -351,7 +358,7 @@
     </Compile>
     <Compile Include="Product\Hotels\HotelThanks.xaml.cs">
       <DependentUpon>HotelThanks.xaml</DependentUpon>
-    </Compile>  
+    </Compile>
     <Compile Include="Product\Hotels\HotelsSortBy.xaml.cs">
       <DependentUpon>HotelsSortBy.xaml</DependentUpon>
     </Compile>
@@ -986,6 +993,7 @@
     <Content Include="Assets\Icon\Amenities\amn_wine.png" />
     <Content Include="Assets\Icon\Amenities\amn_wma.png" />
     <Content Include="Assets\Icon\Amenities\amn_yar.png" />
+    <Content Include="Assets\Icon\App\bed-medium-white.scale-100.png" />
     <Content Include="Assets\Icon\App\handup-medium-white.scale-100.png" />
     <Content Include="Assets\Icon\App\phone-small-white.scale-100.png" />
     <Content Include="Assets\Icon\App\pin-medium-white.scale-100.png" />
@@ -994,7 +1002,57 @@
     <Content Include="Assets\Icon\App\tooltip-arrow-blue.scale-100.png" />
     <Content Include="Assets\Icon\App\tooltip-arrow-blue.scale-140.png" />
     <Content Include="Assets\Icon\App\tooltip-arrow-blue.scale-240.png" />
+    <Content Include="Assets\Icon\App\user-small-white.scale-100.png" />
     <Content Include="Assets\Icon\App\wallet-medium-white.scale-100.png" />
+    <Content Include="Assets\Icon\CreditCard\AX.png" />
+    <Content Include="Assets\Icon\CreditCard\AX_AME.png" />
+    <Content Include="Assets\Icon\CreditCard\AX_CMT.png" />
+    <Content Include="Assets\Icon\CreditCard\AX_ITA.png" />
+    <Content Include="Assets\Icon\CreditCard\AX_ITU.png" />
+    <Content Include="Assets\Icon\CreditCard\AX_STR.png" />
+    <Content Include="Assets\Icon\CreditCard\CA.png" />
+    <Content Include="Assets\Icon\CreditCard\CA_BAJIO.png" />
+    <Content Include="Assets\Icon\CreditCard\CA_BAN.png" />
+    <Content Include="Assets\Icon\CreditCard\CA_BANRE.png" />
+    <Content Include="Assets\Icon\CreditCard\CA_BBVAB.png" />
+    <Content Include="Assets\Icon\CreditCard\CA_BBVAC.png" />
+    <Content Include="Assets\Icon\CreditCard\CA_BCHI.png" />
+    <Content Include="Assets\Icon\CreditCard\CA_BEST.png" />
+    <Content Include="Assets\Icon\CreditCard\CA_BLP.png" />
+    <Content Include="Assets\Icon\CreditCard\CA_BX.png" />
+    <Content Include="Assets\Icon\CreditCard\CA_CMT.png" />
+    <Content Include="Assets\Icon\CreditCard\CA_DAV.png" />
+    <Content Include="Assets\Icon\CreditCard\CA_FRN.png" />
+    <Content Include="Assets\Icon\CreditCard\CA_ITA.png" />
+    <Content Include="Assets\Icon\CreditCard\CA_ITM.png" />
+    <Content Include="Assets\Icon\CreditCard\CA_ITU.png" />
+    <Content Include="Assets\Icon\CreditCard\CA_RIO.png" />
+    <Content Include="Assets\Icon\CreditCard\CA_STR.png" />
+    <Content Include="Assets\Icon\CreditCard\CS.png" />
+    <Content Include="Assets\Icon\CreditCard\CS_CEN.png" />
+    <Content Include="Assets\Icon\CreditCard\DC.png" />
+    <Content Include="Assets\Icon\CreditCard\DC_DAV.png" />
+    <Content Include="Assets\Icon\CreditCard\MD.png" />
+    <Content Include="Assets\Icon\CreditCard\VD.png" />
+    <Content Include="Assets\Icon\CreditCard\VI.png" />
+    <Content Include="Assets\Icon\CreditCard\VI_AZTEC.png" />
+    <Content Include="Assets\Icon\CreditCard\VI_BBVA.png" />
+    <Content Include="Assets\Icon\CreditCard\VI_BCHI.png" />
+    <Content Include="Assets\Icon\CreditCard\VI_BEST.png" />
+    <Content Include="Assets\Icon\CreditCard\VI_BTDF.png" />
+    <Content Include="Assets\Icon\CreditCard\VI_BX.png" />
+    <Content Include="Assets\Icon\CreditCard\VI_CMT.png" />
+    <Content Include="Assets\Icon\CreditCard\VI_GLC.png" />
+    <Content Include="Assets\Icon\CreditCard\VI_GRL.png" />
+    <Content Include="Assets\Icon\CreditCard\VI_ITA.png" />
+    <Content Include="Assets\Icon\CreditCard\VI_ITU.png" />
+    <Content Include="Assets\Icon\CreditCard\VI_LOJ.png" />
+    <Content Include="Assets\Icon\CreditCard\VI_MAN%282%29.png" />
+    <Content Include="Assets\Icon\CreditCard\VI_MAN.png" />
+    <Content Include="Assets\Icon\CreditCard\VI_MCH.png" />
+    <Content Include="Assets\Icon\CreditCard\VI_MUT.png" />
+    <Content Include="Assets\Icon\CreditCard\VI_STR.png" />
+    <Content Include="Assets\Icon\CreditCard\VI_TUC.png" />
     <Content Include="Assets\maps\mappin.png" />
     <Content Include="Assets\Icon\App\calendar-temp.png" />
     <Content Include="Assets\Icon\App\compass-small-white.scale-100.png" />
@@ -1521,6 +1579,7 @@
     <Content Include="Compilation\Despegar\despegarsplash-white.scale-100.png" />
     <Content Include="Compilation\Despegar\despegarsplash-white.scale-140.png" />
     <Content Include="Compilation\Despegar\despegarsplash-white.scale-240.png" />
+    <Content Include="mocks.xml" />
     <Content Include="StoreManifest.xml" />
   </ItemGroup>
   <ItemGroup>
@@ -1608,6 +1667,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Product\Hotels\Details\Controls\RoomItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Product\Hotels\Details\Controls\UserReviewItem.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -1615,6 +1678,10 @@
     <Page Include="Product\Hotels\Details\HotelPivot.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Product\Hotels\Details\RoomPivot.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Product\Hotels\Details\UserReviewsPivot.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -1670,9 +1737,6 @@
   </ItemGroup>
   <ItemGroup>
     <SDKReference Include="BehaviorsXamlSDKManaged, Version=12.0" />
-    <SDKReference Include="Microsoft.VCLibs, Version=12.0">
-      <Name>Microsoft Visual C++ 2013 Runtime Package for Windows Phone</Name>
-    </SDKReference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Autofac">

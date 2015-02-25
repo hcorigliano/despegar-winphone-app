@@ -137,7 +137,7 @@ namespace Despegar.Core.Neo.Connector
                     }
                     catch (Exception ex) 
                     {
-                        e = new HTTPStatusErrorException(String.Format("[Core:Connector]: ServiceKey " + key.ToString() + ": HTTP Error code {0} ({1}) Message: {2}", (int)httpResponse.StatusCode, httpResponse.StatusCode.ToString(), response), ex);                        
+                        e = new HTTPStatusErrorException(String.Format("[Core:Connector]: Key " + key.ToString() + ": HTTP Error code {0} ({1}) Message: {2}", (int)httpResponse.StatusCode, httpResponse.StatusCode.ToString(), response), ex);                        
                     }
 
                     logger.LogException(e);
@@ -150,14 +150,14 @@ namespace Despegar.Core.Neo.Connector
             catch (HttpRequestException ex)
             {
                 // HTTP Client error
-                var e = new WebConnectivityException(String.Format("[Core:Connector]: ServiceKey " + key.ToString() + " Could not connect to Service URL ", httpMessage.RequestUri), ex);
+                var e = new WebConnectivityException(String.Format("[Core:Connector]: Key " + key.ToString() + " Could not connect to Service URL ", httpMessage.RequestUri), ex);
                 logger.LogException(e);
                 throw e;
             }
             catch (JsonException ex)
             {
                 // Deserializer JSON.NET Error
-                var e = new JsonSerializerException(String.Format("[Core:Connector]: ServiceKey " + key.ToString() + " Service call: {0}. Could not deserialize type '{1}' from service response data: {2}", httpMessage.RequestUri, typeof(T).FullName, response), ex);
+                var e = new JsonSerializerException(String.Format("[Core:Connector]: Key " + key.ToString() + " Service call: {0}. Could not deserialize type '{1}' from service response data: {2}", httpMessage.RequestUri, typeof(T).FullName, response), ex);
                 logger.LogException(e);
                 throw e;
             }
@@ -166,7 +166,7 @@ namespace Despegar.Core.Neo.Connector
                 if (customExceptionThrown)                 
                     throw ex;
 
-                var e = new Exception(String.Format("[Core:Connector]: ServiceKey " + key.ToString() + " Unknown Connector Error when calling Service URL {0}, Exception Message: {1}", httpMessage.RequestUri, ex.ToString()), ex);
+                var e = new Exception(String.Format("[Core:Connector]: Key " + key.ToString() + " Unknown Connector Error when calling Service URL {0}, Exception Message: {1}", httpMessage.RequestUri, ex.ToString()), ex);
                   logger.LogException(e);
                   throw e;
                 }

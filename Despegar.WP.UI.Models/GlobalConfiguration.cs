@@ -57,7 +57,7 @@ namespace Despegar.WP.UI.Model
 #endif
 
             // Enable Service Mocks
-            CoreContext.EnableMock(MockKey.CountriesDefault);
+            CoreContext.EnableMock("CountriesDefault");
 
             // Service Error testing mocks
             //CoreContext.EnableMock(MockKey.ForceUpdateErroneus);

@@ -13,16 +13,15 @@ namespace Despegar.WP.UI.Developer
     public class MockOption : Bindable
     {
         public ServiceKey ServiceKey { get; set; }
-        public MockKey MockKey { get; set; }
         public string Name { get; set; }
         public bool Enabled
         {
-            get { return GlobalConfiguration.CoreContext.IsMockEnabled(this.MockKey); }
+            get { return GlobalConfiguration.CoreContext.IsMockEnabled(this.Name); }
             set {
                 if (value)
-                    GlobalConfiguration.CoreContext.EnableMock(this.MockKey);                
+                    GlobalConfiguration.CoreContext.EnableMock(this.Name);                
                 else
-                    GlobalConfiguration.CoreContext.DisableMock(this.MockKey);
+                    GlobalConfiguration.CoreContext.DisableMock(this.Name);
 
                 OnPropertyChanged("Enabled");
             }

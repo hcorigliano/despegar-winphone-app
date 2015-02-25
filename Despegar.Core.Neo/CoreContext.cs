@@ -72,9 +72,9 @@ namespace Despegar.Core.Neo
         /// Enables a specified Mock
         /// </summary>        
         /// <param name="mockKey">The Mock Key</param>
-        public void EnableMock(MockKey mockKey)
+        public void EnableMock(string mockKey)
         {
-            if (!appliedMocks.Any(x => x.MockID == mockKey))
+            if (!appliedMocks.Any(x => x.MockName == mockKey))
             {
                 appliedMocks.Add(Mock.GetMock(mockKey));
             }
@@ -86,9 +86,9 @@ namespace Despegar.Core.Neo
        /// Disables a specific Mock
        /// </summary>
         /// <param name="mockKey"></param>
-        public void DisableMock(MockKey mockKey)
+        public void DisableMock(string mockKey)
         {
-            if (!appliedMocks.Any( x => x.MockID == mockKey))
+            if (!appliedMocks.Any( x => x.MockName == mockKey))
                 return;
 
             appliedMocks.Remove(Mock.GetMock(mockKey));
@@ -100,8 +100,9 @@ namespace Despegar.Core.Neo
         /// </summary>
         /// <param name="mockKey">The Mock Key</param>
         /// <returns>A boolean indicating the Mock status</returns>
-        public bool IsMockEnabled(MockKey mockKey) {
-            return appliedMocks.Any(x => x.MockID == mockKey);
+        public bool IsMockEnabled(string mockKey)
+        {
+            return appliedMocks.Any(x => x.MockName == mockKey);
         }
 
         /// <summary>
