@@ -115,7 +115,7 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
             coreSearchModel.DestinationCode = -1; // TODO: mejorar a algo como IsGeoSearch = true
 
             coreSearchModel.Rooms[0].GeneralAdults = 1;
-            coreSearchModel.Rooms[0].GeneralMinors = 0;            
+            coreSearchModel.Rooms[0].GeneralMinors = 0;
 
             await SearchHotels();
         }
