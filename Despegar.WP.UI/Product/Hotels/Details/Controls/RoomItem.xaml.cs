@@ -50,5 +50,29 @@ namespace Despegar.WP.UI.Product.Hotels.Details.Controls
             else
                 RoomInformationTextBlock.Visibility = Visibility.Collapsed;
         }
+
+        private void ShowMoreFaresClick(object sender, RoutedEventArgs e)
+        {
+            RoomAvailabilitieItem test = new RoomAvailabilitieItem();
+            test.DataContext = this.DataContext;
+
+            MoreFaresStackPanel.Children.Add(test);
+
+            ShowMoreFaresButton.Visibility = Visibility.Collapsed;
+            ShowLessFaresButton.Visibility = Visibility.Visible;
+        }
+
+        private void ShowLessFaresClick(object sender, RoutedEventArgs e)
+        {
+            object test = MoreFaresStackPanel.Children;
+
+            while (MoreFaresStackPanel.Children.Count() != 0)
+            {
+                MoreFaresStackPanel.Children.RemoveAt(0);
+            }
+
+            ShowMoreFaresButton.Visibility = Visibility.Visible;
+            ShowLessFaresButton.Visibility = Visibility.Collapsed;
+        }
     }
 }

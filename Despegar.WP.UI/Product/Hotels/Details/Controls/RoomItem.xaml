@@ -24,18 +24,11 @@
             <RowDefinition MinHeight="{StaticResource dBlock1}"/>
             <RowDefinition Height="{StaticResource Offset}"/>
 
-            <RowDefinition MinHeight="{StaticResource dBlock2}"/>
+            <RowDefinition/>
             <RowDefinition Height="{StaticResource Offset}"/>
 
-            <RowDefinition Height="{StaticResource Block3}"/>
-            <RowDefinition Height="{StaticResource Offset}"/>
+            <RowDefinition MinHeight="{StaticResource dBlock3}"/>
 
-            <RowDefinition Height="{StaticResource Block2}"/>
-            <RowDefinition Height="{StaticResource Offset}"/>
-
-            <RowDefinition Height="{StaticResource Block2}"/>
-            
-            <RowDefinition Height="{StaticResource Block1p}"/>
         </Grid.RowDefinitions>
         
         <Grid Grid.Row="0">
@@ -90,90 +83,28 @@
             <TextBlock x:Name="RoomInformationTextBlock" Text="{Binding rooms[0].information}" TextWrapping="Wrap" Visibility="Collapsed" />
         </StackPanel>
 
-        <Grid Grid.Row="4">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="{StaticResource Block2}"/>
-                <ColumnDefinition />
-            </Grid.ColumnDefinitions>
-
-            <Grid Width="{StaticResource dBlock2}" Height="{StaticResource dBlock2}" Grid.Column="0" Background="{StaticResource Blue40Brush}" VerticalAlignment="Top">
-                <Image Source="/Assets/Icon/App/bed-medium-white.scale-100.png"/>
-            </Grid>
-
-            <ComboBox Grid.Column="1" ItemsSource="{Binding rooms[0].bed_options }" DisplayMemberPath="description"  VerticalAlignment="Center" Margin="{StaticResource Left_Offset}" Style="{StaticResource ComboBoxBase}" />
-
-        </Grid>
-
-        <StackPanel Grid.Row="6">
-            <TextBlock Text="Condiciones" Style="{StaticResource SegoeSemilight20}"/>
-            <TextBlock Style="{StaticResource SegoeRegular17}">
-                <Run Text="- "/>
-                <Run Text="{Binding room_availabilities[0].meal_plan.description}"/>
-            </TextBlock>
-            <TextBlock Style="{StaticResource SegoeRegular17}">
-                <Run Text="- "/>
-                <Run Text="{Binding room_availabilities[0].cancellation_policy.penalty_short_description}"/>
-            </TextBlock>
-            <TextBlock Style="{StaticResource SegoeRegular17}" Visibility="{Binding rooms[0].availability ,Converter={StaticResource VisibilityConverter}}">
-                <Run Text="- "/>
-                <Run Text="Quedan " />
-                <Run Text="{Binding rooms[0].availability}"/>
-                <Run Text=" habitacion(es) disponible(s)"/>
-            </TextBlock>
+        <StackPanel Grid.Row="4" xmlns:src="using:Despegar.WP.UI.Product.Hotels.Details.Controls">
+            <src:RoomAvailabilitieItem DataContext="{Binding}" />
         </StackPanel>
 
 
-        <Grid Grid.Row="8">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
-            </Grid.ColumnDefinitions>
-
-            <Grid Grid.Column="0" Width="{StaticResource dBlock2}" Height="{StaticResource dBlock2}" Background="#FFF157" VerticalAlignment="Center">
-                <Image Source="/Assets/Icon/App/wallet-medium-white.scale-100.png" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-            </Grid>
-
-            <Grid Grid.Column="1" Margin="{StaticResource Left_Offset}">
-
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="24"/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                </Grid.RowDefinitions>
 
 
-                <Grid Margin="0,-8,0,0" Visibility="{Binding room_availabilities[0].price.discount_percentage ,Converter={StaticResource NullToVisibilityConverter}}" >
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="1*"/>
-                        <RowDefinition Height="1*"/>
-                    </Grid.RowDefinitions>
 
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="auto" />
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
 
-                    <TextBlock Grid.Row="0" Grid.Column="0"  Style="{StaticResource SegoeSemilight17}"  HorizontalAlignment="Left" VerticalAlignment="Center" Grid.RowSpan="2" >
-                                        <Run Text="$"/>
-                                        <Run Text="{Binding room_availabilities[0].price.base}"/>
-                                        <Run Text=" "/>
-                    </TextBlock>
-                    <Border Grid.Row="0" Grid.Column="0" BorderThickness="0,0,0,2" BorderBrush="#FF949494" />
-                </Grid>
+        <!--DESDE ACA , TIENE QUE MOSTRAR UN SRC RoomAvailabilitieItem CON LOS RoomAvailabilitie MENOS EL PRIMER ELEMENTO QUE LO MUESTRA ARRIBA-->
+        <StackPanel Grid.Row="6" xmlns:src="using:Despegar.WP.UI.Product.Hotels.Details.Controls" >
+            <StackPanel x:Name="MoreFaresStackPanel"/>
 
-                <TextBlock Margin="0,-9,0,0" VerticalAlignment="Center" Grid.Row="1" Style="{StaticResource SegoeLight24}">
-                                    <Run Text="$" /> 
-                                    <Run Text="{Binding room_availabilities[0].price.best}" />
-                </TextBlock>
+                <!--Visibility="{Binding rooms[0].amenities[4].id , Converter={StaticResource NullToVisibilityConverter}, FallbackValue=Collapsed}"-->
+            <Button x:Name="ShowMoreFaresButton" Margin="{StaticResource Left_Offset}" Style="{StaticResource HotelDetailLink}"  HorizontalAlignment="Left" VerticalAlignment="Center"  Click="ShowMoreFaresClick">
+                <TextBlock  Style="{StaticResource DetailDetailLinkText}" Margin="-12,0,0,0" Text="Ver másX" HorizontalAlignment="Center" VerticalAlignment="Center"  />
+            </Button>
 
-                <TextBlock Margin="0,0,0,0" VerticalAlignment="Center" Grid.Row="2"  x:Uid="Hotels_Details_Fare_Details" Text="Tarifa por habitacion por noche x"  Style="{StaticResource SegoeRegular15}" />
-
-            </Grid>
-
-        </Grid>
-
-        <!--Command="{Binding BuySuggestRoomCommand}"-->
-        <Button  Grid.Row="10" Grid.Column="1" Content="Comprar" Style="{StaticResource ButtonBottomRed}"  />
+            <Button x:Name="ShowLessFaresButton" Margin="{StaticResource Left_Offset}" Style="{StaticResource HotelDetailLink}"  HorizontalAlignment="Left" VerticalAlignment="Center"  Click="ShowLessFaresClick" Visibility="Collapsed">
+                <TextBlock  Style="{StaticResource DetailDetailLinkText}" Margin="-12,0,0,0" Text="Ver MenosX" HorizontalAlignment="Center" VerticalAlignment="Center" />
+            </Button>
+        </StackPanel>
 
 
     </Grid>
