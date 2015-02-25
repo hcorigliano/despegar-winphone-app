@@ -22,6 +22,8 @@ using System.Collections.Generic;
 
 using Windows.Networking.PushNotifications;
 using Windows.UI.Core;
+using Despegar.Core.Neo.Contract.API;
+using Despegar.Core.Neo.Business.Notifications;
 
 // The Blank Application template is documented at http://go.microsoft.com/fwlink/?LinkId=391641
 
@@ -33,6 +35,8 @@ namespace Despegar.WP.UI
     public sealed partial class App : Application
     {
         private TransitionCollection transitions;
+        private IMAPINotifications notifications;
+        private PushResponse registerResponse;
 
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
@@ -196,25 +200,35 @@ namespace Despegar.WP.UI
             try
             {
                 var channel = await PushNotificationChannelManager.CreatePushNotificationChannelForApplicationAsync();
-                if (Despegar.WP.UI.Model.GlobalConfiguration.Channel != null && channel.Uri != Despegar.WP.UI.Model.GlobalConfiguration.Channel.Uri)
+
+                PushRegistrationRequest pnr = new PushRegistrationRequest();
+                pnr.upa_id = Despegar.WP.UI.Model.GlobalConfiguration.UPAId;
+                pnr.token = channel.Uri;
+                pnr.social_id = String.Empty;
+                pnr.country_id = (Despegar.WP.UI.Model.GlobalConfiguration.Site == null) ? "es" : Despegar.WP.UI.Model.GlobalConfiguration.Site;
+                pnr.device_type = Despegar.WP.UI.Model.GlobalConfiguration.DeviceType;
+                pnr.brand = Despegar.WP.UI.Model.GlobalConfiguration.Brand;
+
+                this.notifications = IoC.Resolve<IMAPINotifications>();
+
+                if (Despegar.WP.UI.Model.GlobalConfiguration.Channel == null && channel != null)
                 {
-                    //TODO Send Put to cloud
-                    string upa = Despegar.WP.UI.Model.GlobalConfiguration.UPAId;
-                    
+                    registerResponse = await this.notifications.RegisterOnDespegarCloud(pnr);
                 }
+
+                if (Despegar.WP.UI.Model.GlobalConfiguration.Channel != null && channel != null && channel.Uri != Despegar.WP.UI.Model.GlobalConfiguration.Channel.Uri)
+                {
+                    
+                    registerResponse = await this.notifications.RegisterOnDespegarCloud(pnr);
+                }
+
+
                 Despegar.WP.UI.Model.GlobalConfiguration.Channel = channel;
 
             }
-            catch (FormatException ex)
+            catch (Exception ex)
             {
-                //rootPage.NotifyUser("Channel not uploaded. An exception occurred: {0}" + ex.Message, NotifyType.ErrorMessage);
-
-                //TODO
-            }
-            catch (AggregateException)
-            {
-                //rootPage.NotifyUser("Channel not uploaded. Multiple exceptions occurred while uploading channel.", NotifyType.ErrorMessage);
-                //TODO
+                BugSenseHandler.Instance.LogException(ex);
             }
         }
 

@@ -34,7 +34,8 @@ namespace Despegar.WP.UI.Model
 #else
         public static string Brand = "despegar";
 #endif
-        
+
+        public static string DeviceType = "wphone";
 
         /// <summary>
         /// Initializes the CoreContext object and configures it

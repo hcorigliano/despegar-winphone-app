@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Despegar.Core.Neo.Business.Notifications;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace Despegar.Core.Neo.Contract.API
 {
-    public class IMAPINotifications
+    public interface IMAPINotifications
     {
-        //Task<CitiesAutocomplete> GetCitiesAutocomplete(string cityString);
+        Task<PushResponse> RegisterOnDespegarCloud(PushRegistrationRequest putBody);
     }
 }

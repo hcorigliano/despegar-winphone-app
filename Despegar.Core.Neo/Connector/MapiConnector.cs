@@ -60,6 +60,19 @@ namespace Despegar.Core.Neo.Connector
         }
 
         /// <summary>
+        /// Overrides Base method 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="relativeServiceUrl"></param>
+        /// <param name="postData"></param>
+        /// <param name="key"></param>
+        /// <returns></returns>
+        public override async Task<T> PutAsync<T>(string relativeServiceUrl, object postData, ServiceKey key)
+        {
+            return await base.PutAsync<T>(relativeServiceUrl, postData, key);
+        }
+
+        /// <summary>
         /// Gets the Base URL for calling a MAPI service
         /// </summary>        
         /// <returns>The MAPI Base URL</returns>

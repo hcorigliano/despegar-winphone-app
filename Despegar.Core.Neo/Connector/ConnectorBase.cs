@@ -85,6 +85,38 @@ namespace Despegar.Core.Neo.Connector
         }
 
         /// <summary>
+        /// This is the method for sending put command.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="relativeServiceUrl"></param>
+        /// <param name="postData"></param>
+        /// <param name="key"></param>
+        /// <returns></returns>
+        public virtual async Task<T> PutAsync<T>(string relativeServiceUrl, object postData, ServiceKey key) where T : class
+        {
+            string data = String.Empty;
+            string url = GetBaseUrl() + relativeServiceUrl;
+
+            try
+            {
+                data = JsonConvert.SerializeObject(postData);
+            }
+            catch (JsonSerializationException ex)
+            {
+                var e = new JsonSerializerException(String.Format("[Connector]:Could not serialize object of type {0} to call Service: {1}", typeof(T).FullName, url), ex);
+                logger.LogException(e);
+                throw e;
+            }
+
+            HttpRequestMessage httpMessage = new HttpRequestMessage(HttpMethod.Put, url);
+            httpMessage.Content = new StringContent(data);
+            httpMessage.Content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+            SetCustomHeaders(httpMessage);
+
+            return await ProcessRequest<T>(httpMessage, key);
+        }
+
+        /// <summary>
         /// Launches the HTTP request and returns the JSON-deserialized response
         /// </summary>
         /// <returns>Deserialized JSON response object</returns>
