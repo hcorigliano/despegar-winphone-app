@@ -62,12 +62,19 @@ namespace Despegar.Core.Service
         /// <param name="mockKey">The Mock Key</param>
         public void EnableMock(MockKey mockKey)
         {
-            if (!appliedMocks.Any(x => x.MockID == mockKey))
+            if (mockKey == MockKey.Activate_CC_NEW_HEADERS)
             {
-                appliedMocks.Add(Mock.GetMock(mockKey));
+               this.mapiConnector.SetSpecialHeader = true;
             }
+            else
+            {
+                if (!appliedMocks.Any(x => x.MockID == mockKey))
+                {
+                    appliedMocks.Add(Mock.GetMock(mockKey));
+                }
 
-            Logger.LogCore(String.Format("IsEnableded mock '{0}'", mockKey.ToString()));
+                Logger.LogCore(String.Format("IsEnableded mock '{0}'", mockKey.ToString()));
+            }
         }
 
         /// <summary>
@@ -76,11 +83,18 @@ namespace Despegar.Core.Service
         /// <param name="mockKey"></param>
         public void DisableMock(MockKey mockKey)
         {
-            if (!appliedMocks.Any( x => x.MockID == mockKey))
-                return;
+            if (mockKey == MockKey.Activate_CC_NEW_HEADERS)
+            {
+                this.mapiConnector.SetSpecialHeader = false;
+            }
+            else 
+            {
+                if (!appliedMocks.Any( x => x.MockID == mockKey))
+                    return;
 
-            appliedMocks.Remove(Mock.GetMock(mockKey));
-            Logger.LogCore(String.Format("Disabled mock '{0}' ", mockKey.ToString()));
+                appliedMocks.Remove(Mock.GetMock(mockKey));
+                Logger.LogCore(String.Format("Disabled mock '{0}' ", mockKey.ToString()));
+            }
         }
 
         /// <summary>
