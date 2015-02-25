@@ -172,11 +172,11 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
             string site = GlobalConfiguration.Site;
             
 
-            if (site == "BR" || site == "MX") 
-            {
-                model.EmissionAnticipationDay = 0;
-                model.LastAvailableHours = 19;
-            } else {
+            //if (site == "BR" || site == "MX") 
+            //{
+            //    model.EmissionAnticipationDay = 0;
+            //    model.LastAvailableHours = 19;
+            //} else {
                 var site2return = conf.sites.Where(s => s.code == site).FirstOrDefault();
                 if (site2return == null)
                     return;
@@ -198,7 +198,7 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
                 }
 
                 model.LastAvailableHours = last;
-            }
+            //}
 
 
         }
