@@ -8,12 +8,14 @@ namespace Despegar.Core.Connector
 {
     public class MapiConnector : ConnectorBase
     {
-        private static readonly string DOMAIN = "https://mobile.despegar.com/v3/";
+        private static readonly string DOMAIN = "http://mobile.despegar.com/v3/";
         private static readonly string APIKEY_WINDOWS_PHONE = "24b56c96e09146298eca3093f6f990c9";
         private string XUoW;
         private string x_client;   // Example: "WindowsPhone8App";
         private string site;
         private string language;
+
+        public bool SetSpecialHeader { get; set; }
 
         public MapiConnector(IBugTracker bugtracker)
             : base(bugtracker)
@@ -70,7 +72,16 @@ namespace Despegar.Core.Connector
         {
             httpMessage.Headers.Add("X-ApiKey", APIKEY_WINDOWS_PHONE);
             httpMessage.Headers.Add("X-UOW", XUoW);
-            httpMessage.Headers.Add("X-Client", x_client);           
+            httpMessage.Headers.Add("X-Client", x_client);
+
+            if (SetSpecialHeader)
+            {
+                 httpMessage.Headers.Add("XDESP-TOTEM-MOCK-OSS-RESULT", "CHANNEL_REJECTED");  
+                 httpMessage.Headers.Add("XDESP-TOTEM-MOCK-OSS-FEE-RESULT", "CHANNEL_REJECTED");
+                 httpMessage.Headers.Add("XDESP-TOTEM-MOCK-MILES-SECOND-STATUS", "CONFIRMED");
+                 httpMessage.Headers.Add("XDESP-TOTEM-MOCK-MILES-STATUS", "CONFIRMED");
+                 httpMessage.Headers.Add("XDESP-TOTEM-MOCK-MILES-REQUEST", "SUCCEEDED");           
+            }
         }
     
         private string IncludeSiteAndLanguage(string relativeServiceUrl)
