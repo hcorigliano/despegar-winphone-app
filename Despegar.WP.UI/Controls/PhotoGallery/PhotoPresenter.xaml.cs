@@ -35,7 +35,9 @@ namespace Despegar.WP.UI.Controls.PhotoGallery
         {
             HardwareButtons.BackPressed += HardwareButtons_BackPressed;
             ViewModel = IoC.Resolve<PhotoGalleryViewModel>();
-            this.DataContext = ViewModel;            
+
+            //this.DataContext = ViewModel;
+            this.DataContext = e.Parameter as PhotoGalleryViewModel;
         }
 
         void HardwareButtons_BackPressed(object sender, BackPressedEventArgs e)

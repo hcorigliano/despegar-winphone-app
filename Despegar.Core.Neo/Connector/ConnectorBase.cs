@@ -85,6 +85,38 @@ namespace Despegar.Core.Neo.Connector
         }
 
         /// <summary>
+        /// This is the method for sending put command.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="relativeServiceUrl"></param>
+        /// <param name="postData"></param>
+        /// <param name="key"></param>
+        /// <returns></returns>
+        public virtual async Task<T> PutAsync<T>(string relativeServiceUrl, object postData, ServiceKey key) where T : class
+        {
+            string data = String.Empty;
+            string url = GetBaseUrl() + relativeServiceUrl;
+
+            try
+            {
+                data = JsonConvert.SerializeObject(postData);
+            }
+            catch (JsonSerializationException ex)
+            {
+                var e = new JsonSerializerException(String.Format("[Connector]:Could not serialize object of type {0} to call Service: {1}", typeof(T).FullName, url), ex);
+                logger.LogException(e);
+                throw e;
+            }
+
+            HttpRequestMessage httpMessage = new HttpRequestMessage(HttpMethod.Put, url);
+            httpMessage.Content = new StringContent(data);
+            httpMessage.Content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+            SetCustomHeaders(httpMessage);
+
+            return await ProcessRequest<T>(httpMessage, key);
+        }
+
+        /// <summary>
         /// Launches the HTTP request and returns the JSON-deserialized response
         /// </summary>
         /// <returns>Deserialized JSON response object</returns>
@@ -137,7 +169,7 @@ namespace Despegar.Core.Neo.Connector
                     }
                     catch (Exception ex) 
                     {
-                        e = new HTTPStatusErrorException(String.Format("[Core:Connector]: ServiceKey " + key.ToString() + ": HTTP Error code {0} ({1}) Message: {2}", (int)httpResponse.StatusCode, httpResponse.StatusCode.ToString(), response), ex);                        
+                        e = new HTTPStatusErrorException(String.Format("[Core:Connector]: Key " + key.ToString() + ": HTTP Error code {0} ({1}) Message: {2}", (int)httpResponse.StatusCode, httpResponse.StatusCode.ToString(), response), ex);                        
                     }
 
                     logger.LogException(e);
@@ -150,14 +182,14 @@ namespace Despegar.Core.Neo.Connector
             catch (HttpRequestException ex)
             {
                 // HTTP Client error
-                var e = new WebConnectivityException(String.Format("[Core:Connector]: ServiceKey " + key.ToString() + " Could not connect to Service URL ", httpMessage.RequestUri), ex);
+                var e = new WebConnectivityException(String.Format("[Core:Connector]: Key " + key.ToString() + " Could not connect to Service URL ", httpMessage.RequestUri), ex);
                 logger.LogException(e);
                 throw e;
             }
             catch (JsonException ex)
             {
                 // Deserializer JSON.NET Error
-                var e = new JsonSerializerException(String.Format("[Core:Connector]: ServiceKey " + key.ToString() + " Service call: {0}. Could not deserialize type '{1}' from service response data: {2}", httpMessage.RequestUri, typeof(T).FullName, response), ex);
+                var e = new JsonSerializerException(String.Format("[Core:Connector]: Key " + key.ToString() + " Service call: {0}. Could not deserialize type '{1}' from service response data: {2}", httpMessage.RequestUri, typeof(T).FullName, response), ex);
                 logger.LogException(e);
                 throw e;
             }
@@ -166,7 +198,7 @@ namespace Despegar.Core.Neo.Connector
                 if (customExceptionThrown)                 
                     throw ex;
 
-                var e = new Exception(String.Format("[Core:Connector]: ServiceKey " + key.ToString() + " Unknown Connector Error when calling Service URL {0}, Exception Message: {1}", httpMessage.RequestUri, ex.ToString()), ex);
+                var e = new Exception(String.Format("[Core:Connector]: Key " + key.ToString() + " Unknown Connector Error when calling Service URL {0}, Exception Message: {1}", httpMessage.RequestUri, ex.ToString()), ex);
                   logger.LogException(e);
                   throw e;
                 }

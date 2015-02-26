@@ -6,6 +6,8 @@ using Windows.Phone.UI.Input;
 using Windows.Storage;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
+using System;
+using Despegar.WP.UI.Model;
 
 namespace Despegar.WP.UI
 {
@@ -13,10 +15,15 @@ namespace Despegar.WP.UI
     {
         public CountrySelectionViewModel ViewModel { get; set; }
 
+        #region Notifications
+        
+        #endregion
+
         public CountrySelection()
         {
-            this.InitializeComponent();           
+            this.InitializeComponent();
             this.CheckDeveloperTools();
+
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -44,7 +51,7 @@ namespace Despegar.WP.UI
             roamingSettings.Values["countryCode"] = countrySelected.code;
             roamingSettings.Values["countryName"] = countrySelected.name; // not used?
             roamingSettings.Values["countryLanguage"] = countrySelected.language; // not used?
-                    
+
             ViewModel.ChangeCountry(countrySelected);
             ViewModel.NavigateToHome.Execute(null);
         }
@@ -54,5 +61,7 @@ namespace Despegar.WP.UI
             e.Handled = true;
             ViewModel.Navigator.GoBack();
         }
+
+       
     }
 }

@@ -67,7 +67,7 @@
 
                 
 
-                <src:SearchHotelControl Grid.Row="1"   
+                <src:SearchHotelControl Grid.Row="1" x:Name="DestinationControl"
                                         SelectedDestinationCode="{Binding DestinationCode, Mode=TwoWay}"  
                                         SelectedDestinationText="{Binding DestinationText, Mode=TwoWay}" 
                                         SelectedDestinationType ="{Binding DestinationType, Mode=TwoWay}" />

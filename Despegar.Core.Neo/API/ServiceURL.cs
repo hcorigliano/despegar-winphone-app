@@ -25,7 +25,8 @@ namespace Despegar.Core.Neo.API
         Countries,
         CouponsValidity,
         CreditCardValidation,
-        UpaRegister
+        UpaRegister,
+        RegisterOnDespegarCloud
     }
    
     public static class ServiceURL
@@ -55,7 +56,8 @@ namespace Despegar.Core.Neo.API
             {ServiceKey.Countries,"mapi-cross/apps/"},  // ???
             {ServiceKey.CouponsValidity,"mapi-coupons/{0}/validity?beneficiary={1}&total_amount={2}&currency={3}&quotation={4}&products={5}"},
             {ServiceKey.CreditCardValidation,"/booking/validation/creditcards"},
-            {ServiceKey.UpaRegister, "t"}
+            {ServiceKey.UpaRegister, "t"},
+            {ServiceKey.RegisterOnDespegarCloud,"push-notifications/users"}
         };
 
         public static string GetServiceURL(ServiceKey key, params object[] values)

@@ -43,6 +43,7 @@ namespace Despegar.Core.Neo.InversionOfControl
             builder.RegisterType<MAPIHotels>().As<IMAPIHotels>().SingleInstance();
             builder.RegisterType<MAPICross>().As<IMAPICross>().SingleInstance();
             builder.RegisterType<MAPICoupons>().As<IMAPICoupons>().SingleInstance();
+            builder.RegisterType<MAPINotifications>().As<IMAPINotifications>().SingleInstance();
             // Others APIs
             builder.RegisterType<APIv1>().As<IAPIv1>().SingleInstance();
             builder.RegisterType<APIv3>().As<IAPIv3>().SingleInstance();

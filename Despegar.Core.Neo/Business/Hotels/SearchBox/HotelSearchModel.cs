@@ -205,7 +205,7 @@ namespace Despegar.Core.Neo.Business.Hotels.SearchBox
         { 
             get
             {
-                if (String.IsNullOrEmpty(DestinationHotelText) && this.DestinationCode != -1)
+                if (String.IsNullOrEmpty(DestinationHotelText) && DestinationCode != -1)
                 {
                     // No origin
                     SearchErrors = new CustomError("Debe que seleccionar origen.", "FLIGHT_SEARCH_NO_ORIGIN_ERROR_MESSAGE", "CommonValidations");
