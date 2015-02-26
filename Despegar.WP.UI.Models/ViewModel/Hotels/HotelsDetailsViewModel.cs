@@ -128,6 +128,16 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
             }
         }
 
+        public ICommand BuySelectRoomCommand
+        {
+            get
+            {
+                return new RelayCommand(() => BuySelectedRoomCommand());
+            }
+        }
+
+        
+
         private int goToPivot { get; set; }
         public int GoToPivot
         {
@@ -165,14 +175,25 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
             //HotelReviews = await hotelService.GetHotelUserReviews(CrossParameters.IdSelectedHotel, 10, 0, "es");
             //FormatReviews("es");
 
+            
             foreach (Roompack roompack in HotelDetail.roompacks)
             {
                 if (roompack.rooms[0].pictures == null)
                 {
                     roompack.rooms[0].pictures = new List<string>(); 
                     roompack.rooms[0].pictures.Add(HotelDetail.hotel.main_picture); 
+                    
+                }
+                foreach(RoomAvailability room in roompack.room_availabilities)
+                {
+                    room.buySelectedRoom = this.BuySelectRoomCommand;
                 }
             }
+
+            //TEST
+            
+
+
 
             HotelDistance = Convert.ToInt32(CrossParameters.HotelsExtraData.Distance);
 
@@ -213,6 +234,37 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
             }
         }
 
+        private object BuySelectedRoomCommand()
+        {
+            //CUAL MIERDA ES EL CUARTO
+            RoomAvailability room =  HotelDetail.roompacks[0].room_availabilities.First(x => x.selectedRoom);
+
+            //CUal mierda es la cama 
+            BedOption bedOption = new BedOption();
+            foreach(Room roomBed in HotelDetail.roompacks[0].rooms)
+            {
+                bedOption = roomBed.bed_options.FirstOrDefault(x=>x.Selected);
+            }
+
+            CrossParameters.BedSelected = bedOption;
+
+            if (CrossParameters != null && hotelDetail != null)
+            {
+                CrossParameters.BookRequest = new HotelsBookingFieldsRequest()
+                {
+                    token = HotelDetail.token,
+                    hotel_id = hotelDetail.id,
+                    room_choices = room.choices,
+                    mobile_identifier = GlobalConfiguration.UPAId
+                };
+
+                Navigator.GoTo(ViewModelPages.HotelsCheckout, CrossParameters);
+            }
+
+            //TODO: Buy
+            int test = 1;
+            return null;
+        }
 
         private void FormatReviews(string p)
         {

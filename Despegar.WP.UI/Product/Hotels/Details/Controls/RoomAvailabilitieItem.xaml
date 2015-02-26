@@ -19,8 +19,7 @@
     <Grid HorizontalAlignment="Stretch">
         <Grid.RowDefinitions>
 
-            <RowDefinition MinHeight="{StaticResource dBlock2}"/>
-            <RowDefinition Height="{StaticResource Offset}"/>
+            
 
             <RowDefinition Height="{StaticResource Block3}"/>
             <RowDefinition Height="{StaticResource Offset}"/>
@@ -29,45 +28,31 @@
             <RowDefinition Height="{StaticResource Offset}"/>
 
             <RowDefinition Height="{StaticResource Block2}"/>
-            <RowDefinition Height="{StaticResource Offset}"/>
 
         </Grid.RowDefinitions>
 
 
-        <Grid Grid.Row="0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="{StaticResource Block2}"/>
-                <ColumnDefinition />
-            </Grid.ColumnDefinitions>
-
-            <Grid Width="{StaticResource dBlock2}" Height="{StaticResource dBlock2}" Grid.Column="0" Background="{StaticResource Blue40Brush}" VerticalAlignment="Top">
-                <Image Source="/Assets/Icon/App/bed-medium-white.scale-100.png"/>
-            </Grid>
-
-            <ComboBox Grid.Column="1" ItemsSource="{Binding rooms[0].bed_options }" DisplayMemberPath="description"  VerticalAlignment="Center" Margin="{StaticResource Left_Offset}" Style="{StaticResource ComboBoxBase}" />
-
-        </Grid>
-
-        <StackPanel Grid.Row="2">
+        
+        <StackPanel Grid.Row="0">
             <TextBlock Text="Condiciones" Style="{StaticResource SegoeSemilight20}"/>
             <TextBlock Style="{StaticResource SegoeRegular17}">
                 <Run Text="- "/>
-                <Run Text="{Binding room_availabilities[0].meal_plan.description}"/>
+                <Run Text="{Binding meal_plan.description}"/>
             </TextBlock>
             <TextBlock Style="{StaticResource SegoeRegular17}">
                 <Run Text="- "/>
-                <Run Text="{Binding room_availabilities[0].cancellation_policy.penalty_short_description}"/>
+                <Run Text="{Binding cancellation_policy.penalty_short_description}"/>
             </TextBlock>
-            <TextBlock Style="{StaticResource SegoeRegular17}" Visibility="{Binding room_availabilities[0].availability ,Converter={StaticResource VisibilityConverter}}">
+            <TextBlock Style="{StaticResource SegoeRegular17}" Visibility="{Binding price.availability ,Converter={StaticResource VisibilityConverter}}">
                 <Run Text="- "/>
                 <Run Text="Quedan " />
-                <Run Text="{Binding room_availabilities[0].price.availability}"/>
+                <Run Text="{Binding price.availability}"/>
                 <Run Text=" habitacion(es) disponible(s)"/>
             </TextBlock>
         </StackPanel>
 
 
-        <Grid Grid.Row="4">
+        <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
@@ -86,7 +71,7 @@
                 </Grid.RowDefinitions>
 
 
-                <Grid Margin="0,-8,0,0" Visibility="{Binding room_availabilities[0].price.discount_percentage ,Converter={StaticResource NullToVisibilityConverter}}" >
+                <Grid Margin="0,-8,0,0" Visibility="{Binding price.discount_percentage ,Converter={StaticResource NullToVisibilityConverter}}" >
                     <Grid.RowDefinitions>
                         <RowDefinition Height="1*"/>
                         <RowDefinition Height="1*"/>
@@ -99,7 +84,7 @@
 
                     <TextBlock Grid.Row="0" Grid.Column="0"  Style="{StaticResource SegoeSemilight17}"  HorizontalAlignment="Left" VerticalAlignment="Center" Grid.RowSpan="2" >
                                         <Run Text="$"/>
-                                        <Run Text="{Binding room_availabilities[0].price.base}"/>
+                                        <Run Text="{Binding price.base}"/>
                                         <Run Text=" "/>
                     </TextBlock>
                     <Border Grid.Row="0" Grid.Column="0" BorderThickness="0,0,0,2" BorderBrush="#FF949494" />
@@ -107,7 +92,7 @@
 
                 <TextBlock Margin="0,-9,0,0" VerticalAlignment="Center" Grid.Row="1" Style="{StaticResource SegoeLight24}">
                                     <Run Text="$" /> 
-                                    <Run Text="{Binding room_availabilities[0].price.best}" />
+                                    <Run Text="{Binding price.best}" />
                 </TextBlock>
 
                 <TextBlock Margin="0,0,0,0" VerticalAlignment="Center" Grid.Row="2"  x:Uid="Hotels_Details_Fare_Details" Text="Tarifa por habitacion por noche x"  Style="{StaticResource SegoeRegular15}" />
@@ -117,7 +102,7 @@
         </Grid>
 
         <!--Command="{Binding BuySuggestRoomCommand}"-->
-        <Button  Grid.Row="6" Grid.Column="1" Content="Comprar" Style="{StaticResource ButtonBottomRed}"  />
+        <Button  x:Name="buyButton" Grid.Row="4" Grid.Column="1" Content="Comprar" Style="{StaticResource ButtonBottomRed}" Command="{Binding buySelectedRoom}" Click="BuyButtonClick" />
 
         
 

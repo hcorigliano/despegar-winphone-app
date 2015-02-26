@@ -18,17 +18,23 @@ using Windows.UI.Xaml.Navigation;
 
 namespace Despegar.WP.UI.Product.Hotels.Details.Controls
 {
-    public sealed partial class RoomAvailabilitieItem : UserControl
+    public sealed partial class BedSelectionControl : UserControl
     {
-        public RoomAvailabilitieItem()
+        public BedSelectionControl()
         {
             this.InitializeComponent();
         }
 
-        private void BuyButtonClick(object sender, RoutedEventArgs e)
+        private void BedSelecionChanged(object sender, SelectionChangedEventArgs e)
         {
-            ((RoomAvailability)this.DataContext).selectedRoom = true;
-        }
+            ComboBox cb = (ComboBox)sender;
+            foreach (BedOption bed in cb.Items)
+            {
+                bed.Selected = false;
+            }
 
+            ((BedOption)cb.SelectedItem).Selected = true;
+            
+        }
     }
 }

@@ -18,19 +18,22 @@
 
     <Grid HorizontalAlignment="Stretch">
         <Grid.RowDefinitions>
-            <RowDefinition Height="{StaticResource Block3}"/> 
+            <RowDefinition Height="{StaticResource Block3}"/>
             <RowDefinition Height="{StaticResource Offset}"/>
 
             <RowDefinition MinHeight="{StaticResource dBlock1}"/>
             <RowDefinition Height="{StaticResource Offset}"/>
 
-            <RowDefinition/>
+            <RowDefinition MinHeight="0"/>
+            <RowDefinition Height="0"/><!-- Reparar -->
+
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="{StaticResource Offset}"/>
 
-            <RowDefinition MinHeight="{StaticResource dBlock3}"/>
+            <RowDefinition MinHeight="0"/>
 
         </Grid.RowDefinitions>
-        
+
         <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="{StaticResource Block3}"/>
@@ -47,9 +50,9 @@
                     <RowDefinition/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
-                
+
                 <TextBlock Grid.Row="0" Text="{Binding name}" Style="{StaticResource SegoeLight28}" TextWrapping="Wrap"/>
-                
+
                 <StackPanel Grid.Row="1" Orientation="Horizontal">
                     <Image Source="/Assets/Icon/App/user-small-white.scale-100.png"/>
                     <TextBlock Margin="{StaticResource Left_Offset}" Style="{StaticResource SegoeRegular17}" VerticalAlignment="Center" >
@@ -58,21 +61,21 @@
                         <Run Text=" personas"/>
                     </TextBlock>
                 </StackPanel>
-                
+
                 <StackPanel Grid.Row="2" Orientation="Horizontal">
                     <Image Height="{StaticResource dBlock1}" Width="{StaticResource dBlock1}" Source="{Binding rooms[0].amenities[0].id, Converter={StaticResource StringFormatConverter}, ConverterParameter='/assets/icon/amenities/amn_{0}.png' }"></Image>
                     <Image Margin="{StaticResource Left_Offset}" Height="{StaticResource dBlock1}" Width="{StaticResource dBlock1}" Source="{Binding rooms[0].amenities[1].id, Converter={StaticResource StringFormatConverter}, ConverterParameter='/assets/icon/amenities/amn_{0}.png' }"></Image>
                     <Image Margin="{StaticResource Left_Offset}" Height="{StaticResource dBlock1}" Width="{StaticResource dBlock1}" Source="{Binding rooms[0].amenities[2].id, Converter={StaticResource StringFormatConverter}, ConverterParameter='/assets/icon/amenities/amn_{0}.png' }"></Image>
                     <Image Margin="{StaticResource Left_Offset}" Height="{StaticResource dBlock1}" Width="{StaticResource dBlock1}" Source="{Binding rooms[0].amenities[3].id, Converter={StaticResource StringFormatConverter}, ConverterParameter='/assets/icon/amenities/amn_{0}.png' }"></Image>
 
-                    <Button Margin="{StaticResource Left_Offset}" Style="{StaticResource HotelDetailLink}"  HorizontalAlignment="Left" VerticalAlignment="Center" Visibility="{Binding rooms[0].amenities[4].id , Converter={StaticResource NullToVisibilityConverter}, FallbackValue=Collapsed}">
-                        <TextBlock DataContext="{Binding }" Style="{StaticResource DetailDetailLinkText}" x:Uid="Page_HotelsDescription_Seeall" Margin="-12,0,0,0" Text="Ver másX" HorizontalAlignment="Center" VerticalAlignment="Center" Tapped="TextBlock_Tapped" Visibility="{Binding rooms[0].amenities[4].id , Converter={StaticResource NullToVisibilityConverter}, FallbackValue=Collapsed}"  />
+                    <Button Margin="{StaticResource Left_Offset}" Style="{StaticResource HotelDetailLink}"  HorizontalAlignment="Left" VerticalAlignment="Center" Visibility="{Binding rooms[0].amenities[4].id , Converter={StaticResource NullToVisibilityConverter}, FallbackValue=Collapsed}" Click="ShowAllAmenities">
+                        <TextBlock DataContext="{Binding }" Style="{StaticResource DetailDetailLinkText}" x:Uid="Page_HotelsDescription_Seeall" Margin="-12,0,0,0" Text="Ver másX" HorizontalAlignment="Center" VerticalAlignment="Center"  />
                     </Button>
 
                 </StackPanel>
-                
+
             </Grid>
-            
+
         </Grid>
 
         <StackPanel Grid.Row="2" Visibility="{Binding rooms[0].information , Converter={StaticResource NullToVisibilityConverter}, FallbackValue=Collapsed}">
@@ -83,27 +86,30 @@
             <TextBlock x:Name="RoomInformationTextBlock" Text="{Binding rooms[0].information}" TextWrapping="Wrap" Visibility="Collapsed" />
         </StackPanel>
 
-        <StackPanel Grid.Row="4" xmlns:src="using:Despegar.WP.UI.Product.Hotels.Details.Controls">
-            <src:RoomAvailabilitieItem DataContext="{Binding}" />
+
+
+        <StackPanel Grid.Row="4" xmlns:src="using:Despegar.WP.UI.Product.Hotels.Details.Controls" Visibility="{Binding rooms[0].bed_options[0] , Converter={StaticResource NullToVisibilityConverter} , FallbackValue=collapsed}">
+            <src:BedSelectionControl DataContext="{Binding}" VerticalAlignment="Top"/>
+            <StackPanel Height="{StaticResource dOffset}"/>
         </StackPanel>
 
 
+        <StackPanel Grid.Row="6" xmlns:src="using:Despegar.WP.UI.Product.Hotels.Details.Controls">
+            <src:RoomAvailabilitieItem x:Name="RoomAvailabilitie" DataContext="{Binding room_availabilities[0]}" VerticalAlignment="Top" />
+        </StackPanel>
 
 
-
-
-        <!--DESDE ACA , TIENE QUE MOSTRAR UN SRC RoomAvailabilitieItem CON LOS RoomAvailabilitie MENOS EL PRIMER ELEMENTO QUE LO MUESTRA ARRIBA-->
-        <StackPanel Grid.Row="6" xmlns:src="using:Despegar.WP.UI.Product.Hotels.Details.Controls" >
+        <StackPanel Grid.Row="8" xmlns:src="using:Despegar.WP.UI.Product.Hotels.Details.Controls" >
             <StackPanel x:Name="MoreFaresStackPanel"/>
 
-                <!--Visibility="{Binding rooms[0].amenities[4].id , Converter={StaticResource NullToVisibilityConverter}, FallbackValue=Collapsed}"-->
-            <Button x:Name="ShowMoreFaresButton" Margin="{StaticResource Left_Offset}" Style="{StaticResource HotelDetailLink}"  HorizontalAlignment="Left" VerticalAlignment="Center"  Click="ShowMoreFaresClick">
-                <TextBlock  Style="{StaticResource DetailDetailLinkText}" Margin="-12,0,0,0" Text="Ver másX" HorizontalAlignment="Center" VerticalAlignment="Center"  />
+            <Button x:Name="ShowMoreFaresButton" Margin="{StaticResource Left_Offset}" Style="{StaticResource HotelDetailLink}"  HorizontalAlignment="Left" VerticalAlignment="Center"  Click="ShowMoreFaresClick" Visibility="{Binding room_availabilities[1] , Converter={StaticResource NullToVisibilityConverter}, FallbackValue=Collapsed}">
+                <TextBlock  Style="{StaticResource DetailDetailLinkText}" Margin="-12,-10,0,0" Text="Ver más tarifas" HorizontalAlignment="Center" VerticalAlignment="Center"  />
             </Button>
 
             <Button x:Name="ShowLessFaresButton" Margin="{StaticResource Left_Offset}" Style="{StaticResource HotelDetailLink}"  HorizontalAlignment="Left" VerticalAlignment="Center"  Click="ShowLessFaresClick" Visibility="Collapsed">
-                <TextBlock  Style="{StaticResource DetailDetailLinkText}" Margin="-12,0,0,0" Text="Ver MenosX" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                <TextBlock  Style="{StaticResource DetailDetailLinkText}" Margin="-12,-10,0,0" Text="Ver Menos" HorizontalAlignment="Center" VerticalAlignment="Center" />
             </Button>
+
         </StackPanel>
 
 

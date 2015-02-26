@@ -24,6 +24,7 @@ using Despegar.WP.UI.Model.ViewModel.Hotels;
 using Despegar.WP.UI.Model.ViewModel;
 using Despegar.WP.UI.Controls;
 using Despegar.Core.Neo.InversionOfControl;
+using Despegar.WP.UI.Product.Hotels.Details.Controls;
 
 
 namespace Despegar.WP.UI.Product.Hotels
@@ -36,6 +37,7 @@ namespace Despegar.WP.UI.Product.Hotels
         public HotelsDetails()
         {
             this.InitializeComponent();
+           
         }
 
         protected async override void OnNavigatedTo(NavigationEventArgs e)
@@ -49,8 +51,10 @@ namespace Despegar.WP.UI.Product.Hotels
                 ViewModel.OnNavigated(e.Parameter);
                 await ViewModel.Init();
                 this.DataContext = ViewModel;
-            }            
+            }
+
         }
+
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {

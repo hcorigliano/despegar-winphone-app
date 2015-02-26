@@ -10,5 +10,6 @@ namespace Despegar.Core.Neo.Business.Hotels.HotelDetails
         public string choice { get; set; }
         public string description { get; set; }
         public List<Layout> layout { get; set; }
+        public bool Selected { get; set; }
     }
 }

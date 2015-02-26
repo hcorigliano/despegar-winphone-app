@@ -23,25 +23,13 @@ namespace Despegar.WP.UI.Product.Hotels.Details.Controls
 {
     public sealed partial class RoomItem : UserControl
     {
+        public Button SelectedRoomButton;
         public RoomItem()
         {
             this.InitializeComponent();
             this.Width = Window.Current.Bounds.Width - 48;
         }
 
-        private void TextBlock_Tapped(object sender, TappedRoutedEventArgs e)
-        {
-            try
-            {
-                Room room = (Room)(((TextBlock)sender).DataContext);
-                Navigator.Instance.GoTo(ViewModelPages.HotelsAmenities, room.amenities);
-            }
-            catch
-            {
-                //Catch Error
-            }
-
-        }
 
         private void ChangeRoomInformationVisibility(object sender, RoutedEventArgs e)
         {
@@ -53,10 +41,16 @@ namespace Despegar.WP.UI.Product.Hotels.Details.Controls
 
         private void ShowMoreFaresClick(object sender, RoutedEventArgs e)
         {
-            RoomAvailabilitieItem test = new RoomAvailabilitieItem();
-            test.DataContext = this.DataContext;
+            Roompack roomPack = new Roompack();
+            roomPack = (Roompack)this.DataContext;
 
-            MoreFaresStackPanel.Children.Add(test);
+            roomPack.room_availabilities.RemoveAt(0);
+            foreach(RoomAvailability roomAvailability in roomPack.room_availabilities)
+            {
+                RoomAvailabilitieItem item = new RoomAvailabilitieItem();
+                item.DataContext = roomAvailability;
+                MoreFaresStackPanel.Children.Add(item);
+            }
 
             ShowMoreFaresButton.Visibility = Visibility.Collapsed;
             ShowLessFaresButton.Visibility = Visibility.Visible;
@@ -73,6 +67,19 @@ namespace Despegar.WP.UI.Product.Hotels.Details.Controls
 
             ShowMoreFaresButton.Visibility = Visibility.Visible;
             ShowLessFaresButton.Visibility = Visibility.Collapsed;
+        }
+
+        private void ShowAllAmenities(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                Roompack room = (Roompack)(((Button)sender).DataContext);
+                Navigator.Instance.GoTo(ViewModelPages.HotelsAmenities, room.rooms[0].amenities);
+            }
+            catch
+            {
+                //Catch Error
+            }
         }
     }
 }
