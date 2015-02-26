@@ -44,6 +44,7 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
                 return false;
             }
         }
+
         public bool IsFiscalNameRequired
         {
             get
@@ -54,6 +55,24 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
                 }
                 else { return false; }
             }
+        }
+
+        public string PaymentAlertMessage { get; set; }
+        public bool IsPaymentAlertRequired
+        { 
+            get
+            {
+                foreach (string choice in crossParams.BookRequest.room_choices)
+                {
+                    if (CoreBookingFields.items[choice].isPaymentAtDestination)
+                    {
+                        PaymentAlertMessage = CoreBookingFields.items[choice].price_destination.message;
+                        return true;
+                    }
+                }
+                return false;
+            }
+
         }
 
         private CouponResponse voucherResult;
@@ -74,6 +93,7 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
             this.apiV1service = apiV1service;
             this.commonServices = commonService;
             this.couponsService = couponsService;
+            this.PaymentAlertMessage = string.Empty;
         }
 
         public async Task Init()
@@ -324,6 +344,7 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
             BugTracker.LeaveBreadcrumb("Hotels CheckoutVviewModel get booking fields complete");
         }
 
+
         private async Task LoadCountries()
         {
 
@@ -339,7 +360,7 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
         public override void OnNavigated(object navigationParams)
         {
             BugTracker.LeaveBreadcrumb("Hotel checkout start");
-            HotelsCrossParameters crossParams = navigationParams as HotelsCrossParameters;
+            crossParams = navigationParams as HotelsCrossParameters;
         }
     }
 }

@@ -80,15 +80,15 @@ namespace Despegar.WP.UI.Controls.Hotels
 
             (this.Content as FrameworkElement).DataContext = this;
 
-            HotelAutocomplete GeoItem = new HotelAutocomplete() 
-            { 
-                    name = "+ Cerca de mi ubicacion actual",
-                    id = 0,
-                    type = "geo"
+            HotelAutocomplete GeoItem = new HotelAutocomplete()
+            {
+                name = "+ Cerca de mi ubicacion actual",
+                id = 0,
+                type = "geo"
             };
-            
-            this.DestinyInput.ItemsSource = null;            
-            this.DestinyInput.ItemsSource = new List<HotelAutocomplete>() { GeoItem  };
+
+            this.DestinyInput.ItemsSource = null;
+            this.DestinyInput.ItemsSource = new List<HotelAutocomplete>() { GeoItem };
         }
 
        private async void HotelsTextBlock_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
@@ -123,16 +123,26 @@ namespace Despegar.WP.UI.Controls.Hotels
        {
            var selected = (HotelAutocomplete)args.SelectedItem;
            if (selected != null)
-           {
-               SelectedDestinationCode = selected.id;
-               SelectedDestinationText = selected.name;
-               SelectedDestinationType = selected.type;
-           }
+               SetHotel(sender, selected);
+       }
 
+
+       private void SetHotel(AutoSuggestBox sender, HotelAutocomplete selected)
+       {
+           SelectedDestinationCode = selected.id;
+           SelectedDestinationText = selected.name;
+           SelectedDestinationType = selected.type;
+          
            sender.ItemsSource = null;
            List<HotelAutocomplete> source = new List<HotelAutocomplete>();
            source.Add(selected);
            sender.ItemsSource = source;
+           sender.Text = SelectedDestinationText;
+       }
+
+       public void UpdateHotelsDestiny(int destinationCode, string destinationText, string destinationType)
+       {
+           SetHotel(DestinyInput, new HotelAutocomplete() { id = destinationCode, name = destinationText, type = destinationType });
        }
 
        private void Focus_Lost(object sender, RoutedEventArgs e)

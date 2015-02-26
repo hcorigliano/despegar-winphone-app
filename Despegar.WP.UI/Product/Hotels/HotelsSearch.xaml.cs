@@ -69,11 +69,15 @@ namespace Despegar.WP.UI.Product.Hotels
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             HardwareButtons.BackPressed += HardwareButtons_BackPressed;
-            ViewModel = IoC.Resolve<HotelsSearchViewModel>();
-            ViewModel.PropertyChanged += Checkloading;
-            ViewModel.ViewModelError += ErrorHandler;
-            ViewModel.OnNavigated(null);           
-            this.DataContext = ViewModel;
+            if (e.NavigationMode == NavigationMode.New)
+            {
+                ViewModel = IoC.Resolve<HotelsSearchViewModel>();
+                ViewModel.PropertyChanged += Checkloading;
+                ViewModel.ViewModelError += ErrorHandler;
+                ViewModel.OnNavigated(null);
+                this.DataContext = ViewModel;
+            }
+
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
@@ -112,6 +116,7 @@ namespace Despegar.WP.UI.Product.Hotels
 
         private void Grid_Tapped(object sender, TappedRoutedEventArgs e)
         {
+            DestinationControl.UpdateHotelsDestiny(-1, "+ Cerca de mi ubicacion actual", "geo");
             ViewModel.GetPositionCommand.Execute(null);
         }
     }

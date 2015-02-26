@@ -22,20 +22,20 @@ namespace Despegar.Core.Neo.Contract
         /// Enables a specified Mock
         /// </summary>
         /// <param name="mockKey">The Mock Key</param>
-        void EnableMock(MockKey mockKey);
+        void EnableMock(string mockKey);
 
         /// <summary>
         /// Disables a specified Mock
         /// </summary>
         /// <param name="mockKey">The Mock Key</param>
-        void DisableMock(MockKey mockKey);
+        void DisableMock(string mockKey);
 
         /// <summary>
         /// Indicates whether a Mock is Enabled or not
         /// </summary>
         /// <param name="mockKey">The Mock Key</param>
         /// <returns>A boolean indicating the Mock status</returns>
-        bool IsMockEnabled(MockKey mockKey);
+        bool IsMockEnabled(string mockKey);
 
         /// <summary>
         /// Configures the Connection parameters for MAPI

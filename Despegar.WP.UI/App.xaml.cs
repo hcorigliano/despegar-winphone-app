@@ -19,6 +19,10 @@ using Despegar.WP.UI.BugSense;
 using Despegar.WP.UI.InversionOfControl;
 using Despegar.Core.Neo.InversionOfControl;
 using System.Collections.Generic;
+using System.IO;
+using System.Xml.Linq;
+using Despegar.Core.Neo;
+using Despegar.Core.Neo.API;
 
 using Windows.Networking.PushNotifications;
 using Windows.UI.Core;
@@ -124,6 +128,9 @@ namespace Despegar.WP.UI
                 // Initialize Core
                 try
                 {
+                    // Read and Load Mocks from XML file
+                    LoadMocks();
+
                     await GlobalConfiguration.InitCore(new List<CoreModule>() { new WindowsPhoneModule(false) });
                 }
                 catch (Exception)
@@ -162,8 +169,26 @@ namespace Despegar.WP.UI
                  }
             }
 
+            
+
             // Ensure the current window is active
             Window.Current.Activate();                    
+        }
+
+        private void LoadMocks()
+        {
+            string mocksPath = "mocks.xml";
+            XDocument loadedData = XDocument.Load(mocksPath);
+
+            foreach (XElement mock in loadedData.Descendants("Mock"))
+            {
+                Mock.AddMockToRepo(new Mock()
+                {
+                    MockName = mock.Attribute("name").Value,
+                    ServiceID = (ServiceKey)Enum.Parse(typeof(ServiceKey), mock.Attribute("serviceKey").Value),
+                    Content = mock.Value.Trim()
+                });
+            }
         }
 
         /// <summary>

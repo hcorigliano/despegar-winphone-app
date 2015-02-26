@@ -5,11 +5,16 @@
     xmlns:local="using:Despegar.WP.UI.Product.Hotels.Checkout"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:conv="using:Despegar.WP.UI.Common.Converter"
     mc:Ignorable="d"
     d:DesignHeight="300"
     d:DesignWidth="400">
-    
-    <Grid>
 
+    <UserControl.Resources>
+        <conv:VisibilityConverter x:Name="VisibilityConverter" TrueValue="Visible" FalseValue="Collapsed" />
+    </UserControl.Resources>
+
+    <Grid>
+        <Button Click="Button_Click" Content="Prueba" Visibility="{Binding  IsPaymentAlertRequired, Converter={StaticResource VisibilityConverter},FallbackValue=Collapsed}" />
     </Grid>
 </UserControl>
