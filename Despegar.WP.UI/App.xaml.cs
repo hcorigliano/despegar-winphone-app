@@ -199,7 +199,7 @@ namespace Despegar.WP.UI
         {
             try
             {
-                var channel = await PushNotificationChannelManager.CreatePushNotificationChannelForApplicationAsync();
+                var channel = await PushNotificationChannelManager.CreatePushNotificationChannelForApplicationAsync("App");
 
                 PushRegistrationRequest pnr = new PushRegistrationRequest();
                 pnr.upa_id = Despegar.WP.UI.Model.GlobalConfiguration.UPAId;

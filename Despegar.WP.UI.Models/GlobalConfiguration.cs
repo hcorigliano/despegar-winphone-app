@@ -27,7 +27,26 @@ namespace Despegar.WP.UI.Model
             get { return upadId != null ? upadId : CoreContext.GetUOW(); }
             set { upadId = value; }
         }
-        public static Windows.Networking.PushNotifications.PushNotificationChannel Channel { get; set; }
+        public static Windows.Networking.PushNotifications.PushNotificationChannel Channel {
+            get
+            {
+                var roamingSettings = ApplicationData.Current.RoamingSettings;
+
+                if (roamingSettings.Values["NotificationChannel"] == null)
+                {
+                    return null;
+                }
+                else
+                {
+                    return roamingSettings.Values["NotificationChannel"] as Windows.Networking.PushNotifications.PushNotificationChannel;
+                }
+            }
+
+            set {
+                var roamingSettings = ApplicationData.Current.RoamingSettings;
+                roamingSettings.Values["NotificationChannel"] = value;
+            }
+        }
 
 #if Decolar
         public static string Brand = "decolar";
