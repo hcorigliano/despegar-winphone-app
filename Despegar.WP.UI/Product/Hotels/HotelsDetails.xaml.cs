@@ -53,12 +53,25 @@ namespace Despegar.WP.UI.Product.Hotels
                 this.DataContext = ViewModel;
             }
 
+            if(ViewModel.RoomsQuantity > 1)
+            {
+                MainPivot.Items.Remove(RoomSelectionPivot);
+            }
+
         }
 
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
             HardwareButtons.BackPressed -= HardwareButtons_BackPressed;
+        }
+
+        protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
+        {
+            //Stop all of your timers 
+
+            base.OnNavigatingFrom(e);
+
         }
             
         private void HardwareButtons_BackPressed(object sender, BackPressedEventArgs e)
@@ -67,16 +80,16 @@ namespace Despegar.WP.UI.Product.Hotels
             ViewModel.Navigator.GoBack();
         }
 
-        private void GoToDetailsPivot(object sender, RoutedEventArgs e)
-        {
-            //Not implemented (Yet)
-            throw new NotImplementedException();
-        }
+        //private void GoToDetailsPivot(object sender, RoutedEventArgs e)
+        //{
+        //    //Not implemented (Yet)
+        //    throw new NotImplementedException();
+        //}
 
-        private void GoToCommentsPivot(object sender, RoutedEventArgs e)
-        {
-            throw new NotImplementedException();
-        }
+        //private void GoToCommentsPivot(object sender, RoutedEventArgs e)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
         private void Property_Changed(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {

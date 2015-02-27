@@ -31,6 +31,7 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
         #endregion
 
         #region ** Public Interface **
+        //public RoomsSelected
         public HotelsBookingFields CoreBookingFields { get; set; }
         public List<CountryFields> Countries { get; set; }
         public List<State> States { get; set; }

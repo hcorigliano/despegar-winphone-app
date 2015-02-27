@@ -22,6 +22,14 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
         private HotelsCrossParameters CrossParameters { get; set; }
 
         #region ** Public Interface **
+        public int RoomsQuantity
+        {
+            get
+            {
+                return CrossParameters.SearchModel.Rooms.Count();
+            }
+        }
+
         public HotelUserReviews HotelReviews { get; set;}
 
         private List<CustomReviewsItem> customReviews { get; set; }
@@ -234,12 +242,10 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
             }
         }
 
-        private object BuySelectedRoomCommand()
+        private void BuySelectedRoomCommand()
         {
-            //CUAL MIERDA ES EL CUARTO
             RoomAvailability room =  HotelDetail.roompacks[0].room_availabilities.First(x => x.selectedRoom);
 
-            //CUal mierda es la cama 
             BedOption bedOption = new BedOption();
             foreach(Room roomBed in HotelDetail.roompacks[0].rooms)
             {
@@ -261,9 +267,6 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
                 Navigator.GoTo(ViewModelPages.HotelsCheckout, CrossParameters);
             }
 
-            //TODO: Buy
-            int test = 1;
-            return null;
         }
 
         private void FormatReviews(string p)
