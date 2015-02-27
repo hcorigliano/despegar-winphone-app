@@ -24,6 +24,7 @@ using Despegar.Core.Business.Configuration;
 using Despegar.WP.UI.Common;
 using Despegar.WP.UI.Model.ViewModel;
 using Despegar.WP.UI.BugSense;
+using Windows.Phone.UI.Input;
 
 namespace Despegar.WP.UI
 {    
@@ -48,8 +49,20 @@ namespace Despegar.WP.UI
         {
             base.OnNavigatedTo(e);
             
-            ViewModel.LoadConfigurations(); 
+            ViewModel.LoadConfigurations();
+            HardwareButtons.BackPressed += HardwareButtons_BackPressed;
 
+        }
+
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            HardwareButtons.BackPressed -= HardwareButtons_BackPressed;
+        }
+
+        private void HardwareButtons_BackPressed(object sender, BackPressedEventArgs e)
+        {
+            e.Handled = true;
+            Navigator.Instance.GoBack();
         }
         
         private void ListView_ItemClick(object sender, ItemClickEventArgs e)

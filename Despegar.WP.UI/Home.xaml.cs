@@ -29,7 +29,7 @@ namespace Despegar.WP.UI
         private ModalPopup loadingPopup = new ModalPopup(new Loading());
         public List<Despegar.Core.Business.Configuration.Product> products;
         public Despegar.WP.UI.Model.HomeViewModel ViewModel { get; set; }
-        private bool versionChecked = false;
+        private bool versionChecked = false; 
 
         public Home()
         {
@@ -152,9 +152,12 @@ namespace Despegar.WP.UI
             ViewModel = new Despegar.WP.UI.Model.HomeViewModel(Navigator.Instance, GlobalConfiguration.CoreContext.GetConfigurationService(), parameter, BugTracker.Instance);
             ViewModel.PropertyChanged += Checkloading;
 
+            if(e.NavigationMode == NavigationMode.New)
+                await SetupMenuItems(GlobalConfiguration.Site);
+
+
             if (!versionChecked)
             {
-                await SetupMenuItems(GlobalConfiguration.Site);
                 await ValidateUpdate();
                 versionChecked = true;
             }
