@@ -5,6 +5,7 @@ using Despegar.WP.UI.Model.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Windows.ApplicationModel;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
@@ -19,52 +20,57 @@ namespace Despegar.WP.UI.Controls.PhotoGallery
         public PhotoGalleryViewModel photoGalleryViewModel;
 
         public PhotoGalleryControl()
-        {    
+        {
             this.InitializeComponent();
+
             photoGalleryViewModel = IoC.Resolve<PhotoGalleryViewModel>();
+
         }
 
         private void VariableSizedWrapGrid_DataContextChanged(FrameworkElement sender, DataContextChangedEventArgs args)
         {
-            if (args.NewValue != null)
-            {
-                List<string> keyList = new List<string>();
-
-                if (args.NewValue as List<string> != null)
+            //if (!DesignMode.DesignModeEnabled)
+            //{
+                if (args.NewValue != null)
                 {
-                    keyList.AddRange(args.NewValue as List<string>);
+                    List<string> keyList = new List<string>();
 
-                    foreach (string key in keyList)
+                    if (args.NewValue as List<string> != null)
                     {
+                        keyList.AddRange(args.NewValue as List<string>);
 
-                        string urlimage = String.Format(URLCONTENT, key);
-
-                        Uri imageURI = new Uri(urlimage, UriKind.Absolute);
-                        BitmapImage bmi = new BitmapImage();
-                        bmi.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
-                        bmi.UriSource = imageURI;
-
-                        Grid gridvariable = sender as Grid;
-                        var imagesItems = gridvariable.Children.Where(r => r.GetType() == typeof(Image));
-
-                        foreach (Image item in imagesItems)
+                        foreach (string key in keyList)
                         {
-                            if (item.Source == null)
+
+                            string urlimage = String.Format(URLCONTENT, key);
+
+                            Uri imageURI = new Uri(urlimage, UriKind.Absolute);
+                            BitmapImage bmi = new BitmapImage();
+                            bmi.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
+                            bmi.UriSource = imageURI;
+
+                            Grid gridvariable = sender as Grid;
+                            var imagesItems = gridvariable.Children.Where(r => r.GetType() == typeof(Image));
+
+                            foreach (Image item in imagesItems)
                             {
-                                item.Source = bmi;
-                                item.Tag = key;
-                                break;
+                                if (item.Source == null)
+                                {
+                                    item.Source = bmi;
+                                    item.Tag = key;
+                                    break;
+                                }
                             }
                         }
-                    }
 
-                   // if (photoGalleryViewModel.PictureListName == null)
-                   // {
-                    photoGalleryViewModel.PictureListName = new List<string>();
-                   // }
-                    photoGalleryViewModel.PictureListName.AddRange(keyList);
+                        // if (photoGalleryViewModel.PictureListName == null)
+                        // {
+                        photoGalleryViewModel.PictureListName = new List<string>();
+                        // }
+                        photoGalleryViewModel.PictureListName.AddRange(keyList);
+                    }
                 }
-            }
+            //}
         }
 
         private void Image_Tapped(object sender, TappedRoutedEventArgs e)
@@ -72,7 +78,7 @@ namespace Despegar.WP.UI.Controls.PhotoGallery
             Image image = sender as Image;
 
             photoGalleryViewModel.SelectedPicture = image.Tag as string;
-             
+
             //var f = Window.Current.Content as Frame;
 
 

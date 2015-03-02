@@ -23,5 +23,6 @@ namespace Despegar.WP.UI.Product.Hotels.Details
         {
             this.InitializeComponent();
         }
+
     }
 }
