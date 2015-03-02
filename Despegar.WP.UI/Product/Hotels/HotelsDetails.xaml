@@ -48,10 +48,10 @@
             </PivotItem>
 
             <PivotItem Style="{StaticResource PivotItemBase}" x:Uid="Hotel_Details_Room_Pivot" xmlns:src="using:Despegar.WP.UI.Product.Hotels.Details.Controls">
-                <ListView ItemsSource="{Binding HotelDetail.roompacks}" Margin="{StaticResource Top_Offset}">
+                <ListView x:Name="listView" ItemsSource="{Binding HotelDetail.roompacks}" Margin="{StaticResource Top_Offset}"> 
                     <ListView.ItemTemplate>
                         <DataTemplate>
-                            <src:RoomItem DataContext="{Binding}" />
+                            <src:RoomItem  x:Name="roomItem" DataContext="{Binding}" />
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>

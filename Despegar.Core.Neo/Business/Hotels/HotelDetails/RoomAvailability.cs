@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Windows.Input;
 
 namespace Despegar.Core.Neo.Business.Hotels.HotelDetails
 {
@@ -15,5 +16,10 @@ namespace Despegar.Core.Neo.Business.Hotels.HotelDetails
         public string payment_description { get; set; }
         public List<string> payment_types { get; set; }
         public List<string> choices { get; set; }
+
+
+
+        public bool selectedRoom { get; set; }
+        public ICommand buySelectedRoom { get; set; }
     }
 }
