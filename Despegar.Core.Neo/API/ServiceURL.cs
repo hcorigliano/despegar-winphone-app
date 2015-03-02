@@ -40,7 +40,7 @@ namespace Despegar.Core.Neo.API
             {ServiceKey.HotelsGetDetails , "mapi-hotels/availability/{0}?checkin_date={1}&checkout_date={2}&distribution={3}"},
             {ServiceKey.HotelsBookingFields,"mapi-hotels/bookings?"},
             {ServiceKey.HotelsBookingCompletePost,"mobile.despegar.com/v3/mapi-hotels/bookings/{0}/forms/{1}"},
-            {ServiceKey.HotelUserReview,"reviews?type=hotel&item_ids={0}&limit={1}&offset{2}&languages={3}&"},
+            {ServiceKey.HotelUserReview,"reviews?type=hotel&item_ids={0}&limit={1}&offset{2}&languages={3}"},
 
             {ServiceKey.FlightsAirlines, "mapi-flights/airlines?description={0}" },
             {ServiceKey.FlightsCitiesAutocomplete, "mapi-cross/autocomplete/flights?search={0}" },

@@ -161,9 +161,10 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
         {
             IsLoading = true;
 
-            HotelDetail = await hotelService.GetHotelsDetail(CrossParameters.IdSelectedHotel, CrossParameters.SearchModel.DepartureDateFormatted, CrossParameters.SearchModel.DestinationDateFormatted, CrossParameters.SearchModel.DistributionString);
-           // HotelReviews = await hotelService.GetHotelUserReviews(CrossParameters.IdSelectedHotel, 10, 0, "es");
-           // FormatReviews(GlobalConfiguration.Language);
+           HotelDetail = await hotelService.GetHotelsDetail(CrossParameters.IdSelectedHotel, CrossParameters.SearchModel.DepartureDateFormatted, CrossParameters.SearchModel.DestinationDateFormatted, CrossParameters.SearchModel.DistributionString);
+           
+           //HotelReviews = await hotelService.GetHotelUserReviews(CrossParameters.IdSelectedHotel, 10, 0, "es");
+          // FormatReviews(GlobalConfiguration.Language);
 
             HotelDistance = Convert.ToInt32(CrossParameters.HotelsExtraData.Distance);
 
