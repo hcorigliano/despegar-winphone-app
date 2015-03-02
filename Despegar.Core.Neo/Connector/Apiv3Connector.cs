@@ -57,5 +57,9 @@ namespace Despegar.Core.Neo.Connector
             return String.Format(relativeServiceUrl + "&site={0}&language={1}", site, language);
         }
 
+
+        protected override void PostProcessing(HttpResponseMessage httpResponse)
+        {
+        }
     }
 }

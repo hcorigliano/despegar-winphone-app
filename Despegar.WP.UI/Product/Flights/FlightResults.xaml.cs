@@ -221,6 +221,9 @@ namespace Despegar.WP.UI.Product.Flights
                 ViewModel.FlightCrossParameters.MultipleRoutes = null; 
             }
 
+            // UPA Tracking
+            ViewModel.FlightCrossParameters.UPA_SelectedItemIndex = index;
+
             itemsControl.Visibility = SetVisualEffect(itemsControl.Visibility);
         }
 

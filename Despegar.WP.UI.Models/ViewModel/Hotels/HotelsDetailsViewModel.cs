@@ -227,19 +227,20 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
                     token = HotelDetail.token,
                     hotel_id = hotelDetail.id,
                     room_choices = new List<string>() { hotelDetail.suggested_room_choice },
-                    mobile_identifier = GlobalConfiguration.UPAId
+                    mobile_identifier = GlobalConfiguration.UPAId,
+                    SelectedItemIndex = CrossParameters.UPA_SelectedItemIndex
                 };
 
                 Navigator.GoTo(ViewModelPages.HotelsCheckout, CrossParameters);
             }
         }
 
-        private object BuySelectedRoomCommand()
-        {
-            //CUAL MIERDA ES EL CUARTO
+        private void BuySelectedRoomCommand()
+        {            
+            // TODO: cual es el cuarto?
             RoomAvailability room =  HotelDetail.roompacks[0].room_availabilities.First(x => x.selectedRoom);
 
-            //CUal mierda es la cama 
+            // TODO: CUal  es la cama 
             BedOption bedOption = new BedOption();
             foreach(Room roomBed in HotelDetail.roompacks[0].rooms)
             {
@@ -255,15 +256,12 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
                     token = HotelDetail.token,
                     hotel_id = hotelDetail.id,
                     room_choices = room.choices,
-                    mobile_identifier = GlobalConfiguration.UPAId
+                    mobile_identifier = GlobalConfiguration.UPAId,  
+                    SelectedItemIndex = CrossParameters.UPA_SelectedItemIndex
                 };
 
                 Navigator.GoTo(ViewModelPages.HotelsCheckout, CrossParameters);
             }
-
-            //TODO: Buy
-            int test = 1;
-            return null;
         }
 
         private void FormatReviews(string p)

@@ -359,6 +359,9 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
             book.itinerary_id = FlightCrossParameters.FlightId;
             book.mobile_identifier = deviceID;
 
+            // UPA Tracking
+            book.SelectedItemIndex = FlightCrossParameters.UPA_SelectedItemIndex;
+
             CoreBookingFields = await flightService.GetBookingFields(book);
 
             BugTracker.LeaveBreadcrumb("Flight checkout view model get booking fields complete");

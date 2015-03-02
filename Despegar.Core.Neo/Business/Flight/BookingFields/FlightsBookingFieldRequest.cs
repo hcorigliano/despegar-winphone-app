@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,5 +13,9 @@ namespace Despegar.Core.Neo.Business.Flight.BookingFields
         public int ? outbound_choice { get; set; }
         public int ? inbound_choice { get; set; }
         public string mobile_identifier { get; set; }
+
+        // UPA parameter
+        [JsonIgnore]
+        public int SelectedItemIndex { get; set; }
     }
 }
