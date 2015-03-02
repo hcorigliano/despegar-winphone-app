@@ -176,9 +176,17 @@ namespace Despegar.WP.UI.Product.Flights
             if (button != null)
             {
                 // TODO: Encapsular esto
-                ViewModel.FlightCrossParameters.Inbound = ((RoutesItems)button.DataContext).inbound;
-                ViewModel.FlightCrossParameters.Outbound = ((RoutesItems)button.DataContext).outbound;
-                ViewModel.FlightCrossParameters.price = ((RoutesItems)button.DataContext).price;
+                var routeItem =  (RoutesItems)button.DataContext;
+
+                ViewModel.FlightCrossParameters.Inbound = routeItem.inbound;
+                ViewModel.FlightCrossParameters.Outbound = routeItem.outbound;
+                ViewModel.FlightCrossParameters.price = routeItem.price;
+
+
+                //ViewModel.Itineraries.items.IndexOf(routeItem);
+
+                // UPA Tracking
+                ViewModel.FlightCrossParameters.UPA_SelectedItemIndex = lbFlights.SelectedIndex;
 
                 ViewModel.Navigator.GoTo(Model.Interfaces.ViewModelPages.FlightsDetails, ViewModel.FlightCrossParameters);                
             }
@@ -221,15 +229,23 @@ namespace Despegar.WP.UI.Product.Flights
                 ViewModel.FlightCrossParameters.MultipleRoutes = null; 
             }
 
-            // UPA Tracking
-            ViewModel.FlightCrossParameters.UPA_SelectedItemIndex = index;
+            // Close all
+            int counter = 0;
+            foreach (var i in listview.Items)
+            {
+                ListViewItem container = (ListViewItem)listview.ContainerFromIndex(counter);
+                if (container != null)
+                {
+                    ItemsControl control = FindChildControl<ItemsControl>(container, "RoutesItemControl") as ItemsControl;
+                    if (control != null)                   
+                        control.Visibility = Windows.UI.Xaml.Visibility.Collapsed;                                            
+                }
 
-            itemsControl.Visibility = SetVisualEffect(itemsControl.Visibility);
-        }
-
-        private Visibility SetVisualEffect(Visibility visibility)
-        {
-            return visibility == Visibility.Collapsed ? Visibility.Visible : Visibility.Collapsed;
+                counter++;
+            }
+                
+            // Open selected
+            itemsControl.Visibility = itemsControl.Visibility == Visibility.Collapsed ? Visibility.Visible : Visibility.Collapsed;
         }
 
         private void miniboxSearch_Tapped(object sender, TappedRoutedEventArgs e)

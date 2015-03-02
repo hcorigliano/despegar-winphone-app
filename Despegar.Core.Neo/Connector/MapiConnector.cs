@@ -3,6 +3,7 @@ using Despegar.Core.Neo.Contract;
 using Despegar.Core.Neo.Contract.Connector;
 using Despegar.Core.Neo.Contract.Log;
 using System;
+using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -107,10 +108,15 @@ namespace Despegar.Core.Neo.Connector
 
         protected override void PostProcessing(HttpResponseMessage httpResponse)
         {
-            // Check if mapi cookie is presetn
+            // Check if mapi cookie is present
             if (httpResponse != null && httpResponse.Headers.Contains(MAPI_UPA_COOKIE_NAME))
             {
-                var a = httpResponse.Headers.GetValues(MAPI_UPA_COOKIE_NAME);                
+                var values = httpResponse.Headers.GetValues(MAPI_UPA_COOKIE_NAME).FirstOrDefault();
+                if (!String.IsNullOrWhiteSpace(values)) 
+                { 
+                   // Remember not to rewrite the MAPI COOKIE if it is empty.
+                    mapiUPACookie = values;
+                }
             }
         }
     }
