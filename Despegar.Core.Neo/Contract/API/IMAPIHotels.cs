@@ -15,6 +15,6 @@ namespace Despegar.Core.Neo.Contract.API
         Task<CitiesAvailability> GetHotelsAvailability(HotelSearchModel model);        
         Task<HotelDatails> GetHotelsDetail(string idHotel, string checkin, string checkout, string distribution);
         Task<HotelsBookingFields> GetBookingFields(HotelsBookingFieldsRequest bookingFieldPost);
-        Task<HotelUserReviews> GetHotelUserReviews(string hotelId, int limit, int offset, string language);
+        //Task<HotelUserReviews> GetHotelUserReviews(string hotelId, int limit, int offset, string language);
     }
 }

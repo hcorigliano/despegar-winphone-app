@@ -115,6 +115,7 @@ namespace Despegar.Core.Neo
             this.x_client = x_client;
             this.uow = uow;
             IoC.Resolve<IMapiConnector>().ConfigureClientAndUow(this.x_client, this.uow);
+            IoC.Resolve<IApiv3Connector>().ConfigureClientAndUow(this.x_client, this.uow);
             logger.Log("[Core]: Core Uow and X_Client configured.");
         }
 
