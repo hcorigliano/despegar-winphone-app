@@ -26,9 +26,6 @@ namespace Despegar.Core.Neo.API.MAPI
         {
             string serviceUrl = ServiceURL.GetServiceURL (ServiceKey.RegisterOnDespegarCloud, String.Empty);
 
-#if DEBUG
-            serviceUrl = serviceUrl.Replace("https://mobile.despegar.com/", "http://mobile.despegar.it/");
-#endif
             return await connector.PutAsync<PushResponse>(serviceUrl, putBody, ServiceKey.RegisterOnDespegarCloud);
         }
     }

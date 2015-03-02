@@ -1,4 +1,7 @@
-﻿using Despegar.Core.Neo.InversionOfControl;
+﻿using BugSense;
+using Despegar.Core.Neo.Business.Notifications;
+using Despegar.Core.Neo.Contract.API;
+using Despegar.Core.Neo.InversionOfControl;
 using Despegar.WP.UI.Common;
 using Despegar.WP.UI.Controls;
 using Despegar.WP.UI.Model;
@@ -10,6 +13,7 @@ using System.ComponentModel;
 using System.Threading.Tasks;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Resources;
+using Windows.Networking.PushNotifications;
 using Windows.Phone.UI.Input;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
@@ -24,6 +28,9 @@ namespace Despegar.WP.UI
         public List<Despegar.Core.Neo.Business.Configuration.Product> products;
         public HomeViewModel ViewModel { get; set; }
         private bool versionChecked = false;
+
+        private IMAPINotifications notifications;
+        private PushResponse registerResponse;
 
         public Home()
         {
@@ -48,6 +55,10 @@ namespace Despegar.WP.UI
             ga.Tracker = GoogleAnalytics.EasyTracker.GetTracker();
             ga.SendView("Home");
 #endif
+
+            //Notifications
+            InitializeNotification();
+
         }
 
         protected async override void OnNavigatedTo(NavigationEventArgs e)
@@ -174,6 +185,77 @@ namespace Despegar.WP.UI
                     break;
             }
         }
+
+
+        #region Notification
+        private async void InitializeNotification()
+        {
+            try
+            {
+                var channel = await PushNotificationChannelManager.CreatePushNotificationChannelForApplicationAsync("App");
+
+                PushRegistrationRequest pnr = new PushRegistrationRequest();
+                pnr.upa_id = Despegar.WP.UI.Model.GlobalConfiguration.UPAId;
+                pnr.token = channel.Uri;
+                pnr.social_id = String.Empty;
+                pnr.country_id = (Despegar.WP.UI.Model.GlobalConfiguration.Site == null) ? "es" : Despegar.WP.UI.Model.GlobalConfiguration.Site;
+                pnr.device_type = Despegar.WP.UI.Model.GlobalConfiguration.DeviceType;
+                pnr.brand = Despegar.WP.UI.Model.GlobalConfiguration.Brand;
+
+                this.notifications = IoC.Resolve<IMAPINotifications>();
+
+                if (Despegar.WP.UI.Model.GlobalConfiguration.Channel == null && channel != null)
+                {
+                    registerResponse = await this.notifications.RegisterOnDespegarCloud(pnr);
+                }
+
+                if (Despegar.WP.UI.Model.GlobalConfiguration.Channel != null && channel != null && channel.Uri != Despegar.WP.UI.Model.GlobalConfiguration.Channel.Uri)
+                {
+
+                    registerResponse = await this.notifications.RegisterOnDespegarCloud(pnr);
+                }
+
+
+                Despegar.WP.UI.Model.GlobalConfiguration.Channel = channel;
+
+            }
+            catch (Exception ex)
+            {
+                BugSenseHandler.Instance.LogException(ex);
+            }
+        }
+
+        void channel_PushNotificationReceived(PushNotificationChannel sender, PushNotificationReceivedEventArgs args)
+        {
+            //this.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+            //{
+            //    TextBlock notification = new TextBlock();
+            //    string result = args.NotificationType.ToString();
+            //    switch (args.NotificationType)
+            //    {
+            //        case PushNotificationType.Badge:
+            //            result += ": " + args.BadgeNotification.Content.GetXml();
+            //            break;
+            //        case PushNotificationType.Raw:
+            //            result += ": " + args.RawNotification.Content;
+            //            break;
+            //        case PushNotificationType.Tile:
+            //            result += ": " + args.TileNotification.Content.GetXml();
+            //            break;
+            //        case PushNotificationType.TileFlyout:
+            //            result += ": " + args.TileNotification.Content.GetXml();
+            //            break;
+            //        case PushNotificationType.Toast:
+            //            result += ": " + args.ToastNotification.Content.GetXml();
+            //            break;
+            //        default:
+            //            break;
+            //    }
+            //    notification.Text = result;
+            //});
+        }
+        #endregion
+
      
          # region ** ERROR HANDLING **
         private async void ErrorHandler(object sender, ViewModelErrorArgs e)
