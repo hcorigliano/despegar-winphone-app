@@ -294,7 +294,10 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
                         customItem.description = item.descriptions[0].description.pt;
                 }
                 customItem.country = "BusarPais";
-                customItem.name = item.user.first_name + item.user.last_name;
+                if (item.user != null)
+                {
+                    customItem.name = (String.IsNullOrEmpty(item.user.first_name) ? String.Empty : item.user.first_name) + " " + (String.IsNullOrEmpty(item.user.last_name) ? String.Empty : item.user.last_name);
+                }
                 customItem.rating = item.qualifications.overall_rating.ToString("N2");
                 CustomReviews.Add(customItem);
             }
