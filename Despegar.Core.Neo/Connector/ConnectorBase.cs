@@ -100,6 +100,10 @@ namespace Despegar.Core.Neo.Connector
             string data = String.Empty;
             string url = GetBaseUrl() + relativeServiceUrl;
 
+#if DEBUG
+            url = url.Replace("https://mobile.despegar.com/", "http://mobile.despegar.it/");
+#endif
+
             try
             {
                 data = JsonConvert.SerializeObject(postData);

@@ -19,6 +19,7 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
     public class HotelsDetailsViewModel : ViewModelBase
     {
         private IMAPIHotels hotelService { get; set; }
+        private IAPIv3 userReviewService { get; set; }
         private HotelsCrossParameters CrossParameters { get; set; }
 
         #region ** Public Interface **
@@ -156,10 +157,11 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
 
         #endregion
 
-        public HotelsDetailsViewModel(INavigator navigator, IMAPIHotels hotelService, IBugTracker t)
+        public HotelsDetailsViewModel(INavigator navigator, IMAPIHotels hotelService, IAPIv3 hotelReviews, IBugTracker t)
             : base(navigator, t)
         {
             this.hotelService = hotelService;
+            this.userReviewService = hotelReviews;
         }
 
         public override void OnNavigated(object navigationParams)
@@ -171,9 +173,10 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
         {
             IsLoading = true;
 
-            HotelDetail = await hotelService.GetHotelsDetail(CrossParameters.IdSelectedHotel, CrossParameters.SearchModel.DepartureDateFormatted, CrossParameters.SearchModel.DestinationDateFormatted, CrossParameters.SearchModel.DistributionString);
-            //HotelReviews = await hotelService.GetHotelUserReviews(CrossParameters.IdSelectedHotel, 10, 0, "es");
-            //FormatReviews("es");
+           HotelDetail = await hotelService.GetHotelsDetail(CrossParameters.IdSelectedHotel, CrossParameters.SearchModel.DepartureDateFormatted, CrossParameters.SearchModel.DestinationDateFormatted, CrossParameters.SearchModel.DistributionString);
+           
+           HotelReviews = await userReviewService.GetHotelUserReviews(CrossParameters.IdSelectedHotel, 10, 0, "es");
+           FormatReviews(GlobalConfiguration.Language);
 
             
             foreach (Roompack roompack in HotelDetail.roompacks)
@@ -270,7 +273,7 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
             foreach(Item item in HotelReviews.items)
             {
                 CustomReviewsItem customItem = new CustomReviewsItem();
-                if(p == "es")
+                if(p.ToLower().Equals("es"))
                 {
                     if (item.descriptions[0].bad != null)
                         customItem.bad = item.descriptions[0].bad.es;
@@ -279,7 +282,7 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
                     if (item.descriptions[0].description != null)
                         customItem.description = item.descriptions[0].description.es;
                 }
-                if (p == "pt")
+                if (p.ToLower().Equals("pt"))
                 {
                     if (item.descriptions[0].bad != null)
                         customItem.bad = item.descriptions[0].bad.pt;
@@ -289,7 +292,10 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
                         customItem.description = item.descriptions[0].description.pt;
                 }
                 customItem.country = "BusarPais";
-                customItem.name = item.user.first_name + item.user.last_name;
+                if (item.user != null)
+                {
+                    customItem.name = (String.IsNullOrEmpty(item.user.first_name) ? String.Empty : item.user.first_name) + " " + (String.IsNullOrEmpty(item.user.last_name) ? String.Empty : item.user.last_name);
+                }
                 customItem.rating = item.qualifications.overall_rating.ToString("N2");
                 CustomReviews.Add(customItem);
             }
