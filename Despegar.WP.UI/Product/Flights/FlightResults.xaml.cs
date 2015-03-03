@@ -229,6 +229,13 @@ namespace Despegar.WP.UI.Product.Flights
                 ViewModel.FlightCrossParameters.MultipleRoutes = null; 
             }
 
+
+            if (itemsControl.Visibility == Visibility.Visible) 
+            {
+                itemsControl.Visibility = Visibility.Collapsed;
+                return;
+            }
+
             // Close all
             int counter = 0;
             foreach (var i in listview.Items)
@@ -238,7 +245,7 @@ namespace Despegar.WP.UI.Product.Flights
                 {
                     ItemsControl control = FindChildControl<ItemsControl>(container, "RoutesItemControl") as ItemsControl;
                     if (control != null)                   
-                        control.Visibility = Windows.UI.Xaml.Visibility.Collapsed;                                            
+                        control.Visibility = Visibility.Collapsed;                                            
                 }
 
                 counter++;

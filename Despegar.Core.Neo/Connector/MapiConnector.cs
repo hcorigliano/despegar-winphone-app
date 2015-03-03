@@ -99,6 +99,8 @@ namespace Despegar.Core.Neo.Connector
             // TODO: What happens with new versions of MAPI???
             if (httpMessage.RequestUri.AbsoluteUri.Contains("https://mobile.despegar.com/v3/mapi-hotels/"))
                 httpMessage.Headers.Add("X-Version", "mapi-hotels-v3_1.1.0");
+
+            //httpMessage.Headers.Add("X-Version", "beta");  // Apuntar a BETA de MAPI
         }
     
         private string IncludeSiteAndLanguage(string relativeServiceUrl)
