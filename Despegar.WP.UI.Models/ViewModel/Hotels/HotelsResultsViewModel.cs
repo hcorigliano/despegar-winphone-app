@@ -225,20 +225,18 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
             }
         }
 
-
-
-        public void GoToDetails(HotelItem hotelItem)
+        public void GoToDetails(HotelItem hotelItem, int selectedIndex)
         {
-            var param = new HotelsCrossParameters() 
+            var param = new HotelsCrossParameters()
             {
                 SelectedHotel = hotelItem,
                 SearchModel = this.SearchModel, 
-                IdSelectedHotel = hotelItem.id
+                IdSelectedHotel = hotelItem.id,
+                UPA_SelectedItemIndex = selectedIndex,
             };
             param.HotelsExtraData.Distance = hotelItem.distance;
 
             Navigator.GoTo(ViewModelPages.HotelsDetails, param);
-
         }
     }
 }

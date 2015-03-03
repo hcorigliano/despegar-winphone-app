@@ -79,5 +79,9 @@ namespace Despegar.Core.Neo.Connector
             httpMessage.Headers.Add("X-UOW", XUoW);
             httpMessage.Headers.Add("X-Client", x_client);           
         }
+
+        protected override void PostProcessing(HttpResponseMessage httpResponse)
+        {
+        }
     }
 }

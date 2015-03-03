@@ -800,6 +800,7 @@
     <Content Include="Assets\Icon\Amenities\amn_ael.png" />
     <Content Include="Assets\Icon\Amenities\amn_agca.png" />
     <Content Include="Assets\Icon\Amenities\amn_air.png" />
+    <Content Include="Assets\Icon\Amenities\amn_airroom.png" />
     <Content Include="Assets\Icon\Amenities\amn_airtran.png" />
     <Content Include="Assets\Icon\Amenities\amn_aki.png" />
     <Content Include="Assets\Icon\Amenities\amn_allinclusive.png" />
@@ -880,6 +881,7 @@
     <Content Include="Assets\Icon\Amenities\amn_health.png" />
     <Content Include="Assets\Icon\Amenities\amn_hid.png" />
     <Content Include="Assets\Icon\Amenities\amn_hot.png" />
+    <Content Include="Assets\Icon\Amenities\amn_hotroom.png" />
     <Content Include="Assets\Icon\Amenities\amn_ingrah.png" />
     <Content Include="Assets\Icon\Amenities\amn_inswpose.png" />
     <Content Include="Assets\Icon\Amenities\amn_intc.png" />
@@ -999,14 +1001,8 @@
     <Content Include="Assets\Icon\Amenities\amn_wine.png" />
     <Content Include="Assets\Icon\Amenities\amn_wma.png" />
     <Content Include="Assets\Icon\Amenities\amn_yar.png" />
-    <Content Include="Assets\Icon\App\air-small-white.scale-100.png" />
-    <Content Include="Assets\Icon\App\air-small-white.scale-140.png" />
-    <Content Include="Assets\Icon\App\air-small-white.scale-240.png" />
     <Content Include="Assets\Icon\App\bed-medium-white.scale-100.png" />
     <Content Include="Assets\Icon\App\handup-medium-white.scale-100.png" />
-    <Content Include="Assets\Icon\App\hot-small-white.scale-100.png" />
-    <Content Include="Assets\Icon\App\hot-small-white.scale-140.png" />
-    <Content Include="Assets\Icon\App\hot-small-white.scale-240.png" />
     <Content Include="Assets\Icon\App\phone-small-white.scale-100.png" />
     <Content Include="Assets\Icon\App\pin-medium-white.scale-100.png" />
     <Content Include="Assets\Icon\App\pin-medium-white.scale-140.png" />

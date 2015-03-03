@@ -27,5 +27,9 @@ namespace Despegar.Core.Neo.Connector
         protected override void SetCustomHeaders(HttpRequestMessage message)
         {            
         }
+
+        protected override void PostProcessing(HttpResponseMessage httpResponse)
+        {
+        }
     }
 }

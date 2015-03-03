@@ -57,5 +57,24 @@ namespace Despegar.Core.Neo.Connector
             return String.Format(relativeServiceUrl + "&site={0}&language={1}", site, language);
         }
 
+
+        async Task<T> IConnector.GetAsync<T>(string url, API.ServiceKey key)
+        {
+            return await base.GetAsync<T>(url, key);
+        }
+
+        Task<T> IConnector.PostAsync<T>(string url, object data, API.ServiceKey key)
+        {
+            throw new NotImplementedException();
+        }
+
+        Task<T> IConnector.PutAsync<T>(string url, object data, API.ServiceKey key)
+        {
+            throw new NotImplementedException();
+        }
+        
+        protected override void PostProcessing(HttpResponseMessage httpResponse)
+        {
+        }
     }
 }
