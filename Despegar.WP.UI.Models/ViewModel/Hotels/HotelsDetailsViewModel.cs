@@ -201,13 +201,7 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
                 }
             }
 
-            //TEST
-            
-
-
-
             HotelDistance = Convert.ToInt32(CrossParameters.HotelsExtraData.Distance);
-
 
             // Get suggest room price
             foreach (Roompack roomPack in hotelDetail.roompacks)
@@ -216,6 +210,8 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
                 {
                     if (room.choices.Contains(hotelDetail.suggested_room_choice))
                     {
+                        hotelDetail.list_suggested_room_choice = room.choices;
+
                         SuggestRoomPriceBest = room.price.best;
 
                         if (SuggestRoomPriceBest != room.price.@base)
@@ -237,7 +233,7 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
                 {
                     token = HotelDetail.token,
                     hotel_id = hotelDetail.id,
-                    room_choices = new List<string>() { hotelDetail.suggested_room_choice },
+                    room_choices = hotelDetail.list_suggested_room_choice,
                     mobile_identifier = GlobalConfiguration.UPAId,
                     SelectedItemIndex = CrossParameters.UPA_SelectedItemIndex
                 };
