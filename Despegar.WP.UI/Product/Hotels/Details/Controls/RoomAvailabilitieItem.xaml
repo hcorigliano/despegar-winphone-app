@@ -34,7 +34,7 @@
 
         
         <StackPanel Grid.Row="0">
-            <TextBlock Text="Condiciones" Style="{StaticResource SegoeSemilight20}"/>
+            <TextBlock x:Uid="Common_Conditions" Text="CondicionesX" Style="{StaticResource SegoeSemilight20}"/>
             <TextBlock Style="{StaticResource SegoeRegular17}">
                 <Run Text="- "/>
                 <Run Text="{Binding meal_plan.description}"/>
@@ -45,9 +45,9 @@
             </TextBlock>
             <TextBlock Style="{StaticResource SegoeRegular17}" Visibility="{Binding price.availability ,Converter={StaticResource VisibilityConverter}}">
                 <Run Text="- "/>
-                <Run Text="Quedan " />
+                <Run x:Uid="Common_Left" Text="QuedanX " />
                 <Run Text="{Binding price.availability}"/>
-                <Run Text=" habitacion(es) disponible(s)"/>
+                <Run x:Uid="Hotel_Rooms_Availability" Text=" habitacion(es) disponible(s)X"/>
             </TextBlock>
         </StackPanel>
 

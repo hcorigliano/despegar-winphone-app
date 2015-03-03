@@ -20,7 +20,14 @@ namespace Despegar.WP.UI.Product.Flights
     public sealed partial class FlightSearch : Page
     {
         private ModalPopup loadingPopup = new ModalPopup(new Loading());
-        public FlightSearchViewModel ViewModel { get; set; }        
+        public FlightSearchViewModel ViewModel { get; set; }
+        private bool isPageCached
+        {
+            get
+            {
+                return ViewModel != null;
+            }
+        }
 
         public FlightSearch()
         {
@@ -59,7 +66,7 @@ namespace Despegar.WP.UI.Product.Flights
         {
             HardwareButtons.BackPressed += HardwareButtons_BackPressed;
 
-            if (e.NavigationMode == NavigationMode.New)
+            if (!isPageCached )
             {
                 ViewModel = IoC.Resolve<FlightSearchViewModel>();
                 ViewModel.ViewModelError += ErrorHandler;
@@ -87,9 +94,10 @@ namespace Despegar.WP.UI.Product.Flights
                     }
                 }
             }
+
         }
 
-        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
         {
             HardwareButtons.BackPressed -= HardwareButtons_BackPressed;
         }

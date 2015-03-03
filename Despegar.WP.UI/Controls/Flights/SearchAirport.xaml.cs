@@ -40,6 +40,7 @@ namespace Despegar.WP.UI.Controls.Flights
         }
         #endregion
 
+
         // Bindable Property from XAML
         public string SelectedOriginCode
         {

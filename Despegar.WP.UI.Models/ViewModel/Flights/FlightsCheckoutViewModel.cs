@@ -491,7 +491,8 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
             bookingFields.form.payment.card.number.CoreValue = "4242424242424245";
             bookingFields.form.payment.card.owner_document.number.CoreValue = "12123123";
             bookingFields.form.payment.card.owner_document.type.CoreValue = "LOCAL";
-            bookingFields.form.payment.card.owner_gender.CoreValue = "MALE";
+            if (bookingFields.form.payment.card.owner_gender != null)
+                bookingFields.form.payment.card.owner_gender.CoreValue = "MALE";
             bookingFields.form.payment.card.owner_name.CoreValue = "Test Booking";
             bookingFields.form.payment.card.security_code.CoreValue = "123";
             bookingFields.form.payment.installment.card_code.CoreValue = "VI";

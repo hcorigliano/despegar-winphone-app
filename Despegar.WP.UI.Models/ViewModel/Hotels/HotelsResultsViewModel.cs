@@ -230,7 +230,9 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
         public void GoToDetails(HotelItem hotelItem)
         {
             var param = new HotelsCrossParameters() 
-            {   SearchModel = this.SearchModel, 
+            {
+                SelectedHotel = hotelItem,
+                SearchModel = this.SearchModel, 
                 IdSelectedHotel = hotelItem.id
             };
             param.HotelsExtraData.Distance = hotelItem.distance;

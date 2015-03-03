@@ -124,7 +124,7 @@
     <Compile Include="Controls\Hotels\DateControl.xaml.cs">
       <DependentUpon>DateControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Hotels\Details\HotelItem.xaml.cs">
+    <Compile Include="Controls\Hotels\Results\HotelItem.xaml.cs">
       <DependentUpon>HotelItem.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\Hotels\MiniBoxSearch.xaml.cs">
@@ -382,7 +382,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Controls\Hotels\Details\HotelItem.xaml">
+    <Page Include="Controls\Hotels\Results\HotelItem.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -999,8 +999,14 @@
     <Content Include="Assets\Icon\Amenities\amn_wine.png" />
     <Content Include="Assets\Icon\Amenities\amn_wma.png" />
     <Content Include="Assets\Icon\Amenities\amn_yar.png" />
+    <Content Include="Assets\Icon\App\air-small-white.scale-100.png" />
+    <Content Include="Assets\Icon\App\air-small-white.scale-140.png" />
+    <Content Include="Assets\Icon\App\air-small-white.scale-240.png" />
     <Content Include="Assets\Icon\App\bed-medium-white.scale-100.png" />
     <Content Include="Assets\Icon\App\handup-medium-white.scale-100.png" />
+    <Content Include="Assets\Icon\App\hot-small-white.scale-100.png" />
+    <Content Include="Assets\Icon\App\hot-small-white.scale-140.png" />
+    <Content Include="Assets\Icon\App\hot-small-white.scale-240.png" />
     <Content Include="Assets\Icon\App\phone-small-white.scale-100.png" />
     <Content Include="Assets\Icon\App\pin-medium-white.scale-100.png" />
     <Content Include="Assets\Icon\App\pin-medium-white.scale-140.png" />

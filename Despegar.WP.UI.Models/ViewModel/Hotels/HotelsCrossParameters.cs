@@ -1,4 +1,5 @@
 ﻿using Despegar.Core.Neo.Business.Hotels;
+using Despegar.Core.Neo.Business.Hotels.CitiesAvailability;
 using Despegar.Core.Neo.Business.Hotels.HotelDetails;
 using Despegar.Core.Neo.Business.Hotels.SearchBox;
 using System;
@@ -16,6 +17,7 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
         public HotelsExtraData HotelsExtraData { get; set; }
         public string IdSelectedHotel { get; set; }
         public BedOption BedSelected { get; set; }
+        public HotelItem SelectedHotel { get; set; }
         public HotelsCrossParameters()
         {
             this.HotelsExtraData = new HotelsExtraData();

@@ -1072,4 +1072,25 @@ La reserva no ha sido generada y no se le cobrará ningún cargo por la transacc
   <data name="Hotels_Search_UNKNOWN_ERROR" xml:space="preserve">
     <value>Hubo un error. Por favor, vuelva a intentar la búsqueda.</value>
   </data>
+  <data name="Common_Conditions.Text" xml:space="preserve">
+    <value>Condiciones</value>
+  </data>
+  <data name="Common_Left.Text" xml:space="preserve">
+    <value>Quedan </value>
+  </data>
+  <data name="Common_Show_Less.Text" xml:space="preserve">
+    <value>Mostrar menos</value>
+  </data>
+  <data name="Common_Show_More_Fares.Text" xml:space="preserve">
+    <value>Ver más tarifas</value>
+  </data>
+  <data name="Hotel_Details_Show_Room_Description.Text" xml:space="preserve">
+    <value>Ver la descripcion de la habitación</value>
+  </data>
+  <data name="Hotel_Detail_People.Text" xml:space="preserve">
+    <value>Personas</value>
+  </data>
+  <data name="Hotel_Rooms_Availability.Text" xml:space="preserve">
+    <value>habitacion(es) disponible(s)</value>
+  </data>
 </root>

@@ -58,7 +58,7 @@
                     <TextBlock Margin="{StaticResource Left_Offset}" Style="{StaticResource SegoeRegular17}" VerticalAlignment="Center" >
                         <Run Text="Máx. "/>
                         <Run Text="{Binding rooms[0].max_capacity}"/>
-                        <Run Text=" personas"/>
+                        <Run x:Uid="Hotel_Detail_People" Text=" personasX"/>
                     </TextBlock>
                 </StackPanel>
 
@@ -78,12 +78,12 @@
 
         </Grid>
 
-        <StackPanel Grid.Row="2" Visibility="{Binding rooms[0].information , Converter={StaticResource NullToVisibilityConverter}, FallbackValue=Collapsed}">
+        <StackPanel Grid.Row="2" >
             <Button  Style="{StaticResource HotelDetailLink}"  HorizontalAlignment="Left" VerticalAlignment="Center" Click="ChangeRoomInformationVisibility" >
-                <TextBlock  Style="{StaticResource DetailDetailLinkText}"  Text="Ver la descripcion de la habitación" Margin="-12,0,0,0" VerticalAlignment="Center"  ></TextBlock>
+                <TextBlock  x:Uid="Hotel_Details_Show_Room_Description" Style="{StaticResource DetailDetailLinkText}"  Text="Ver la descripcion de la habitaciónX" Margin="-12,0,0,0" VerticalAlignment="Center"  ></TextBlock>
             </Button>
 
-            <TextBlock x:Name="RoomInformationTextBlock" Text="{Binding rooms[0].information}" TextWrapping="Wrap" Visibility="Collapsed" />
+            <TextBlock x:Name="RoomInformationTextBlock" Text="{Binding rooms[0].information}" Margin="0,-15,0,0" TextWrapping="Wrap" Visibility="Collapsed" />
         </StackPanel>
 
 
@@ -103,11 +103,11 @@
             <StackPanel x:Name="MoreFaresStackPanel"/>
 
             <Button x:Name="ShowMoreFaresButton" Margin="{StaticResource Left_Offset}" Style="{StaticResource HotelDetailLink}"  HorizontalAlignment="Left" VerticalAlignment="Center"  Click="ShowMoreFaresClick" Visibility="{Binding room_availabilities[1] , Converter={StaticResource NullToVisibilityConverter}, FallbackValue=Collapsed}">
-                <TextBlock  Style="{StaticResource DetailDetailLinkText}" Margin="-12,-10,0,0" Text="Ver más tarifas" HorizontalAlignment="Center" VerticalAlignment="Center"  />
+                <TextBlock x:Uid="Common_Show_More_Fares"  Style="{StaticResource DetailDetailLinkText}" Margin="-12,-10,0,0" Text="Ver más tarifasX" HorizontalAlignment="Center" VerticalAlignment="Center"  />
             </Button>
 
             <Button x:Name="ShowLessFaresButton" Margin="{StaticResource Left_Offset}" Style="{StaticResource HotelDetailLink}"  HorizontalAlignment="Left" VerticalAlignment="Center"  Click="ShowLessFaresClick" Visibility="Collapsed">
-                <TextBlock  Style="{StaticResource DetailDetailLinkText}" Margin="-12,-10,0,0" Text="Ver Menos" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                <TextBlock x:Uid="Common_Show_Less"  Style="{StaticResource DetailDetailLinkText}" Margin="-12,-10,0,0" Text="Ver MenosX" HorizontalAlignment="Center" VerticalAlignment="Center" />
             </Button>
 
         </StackPanel>
