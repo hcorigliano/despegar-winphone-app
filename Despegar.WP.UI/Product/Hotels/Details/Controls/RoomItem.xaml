@@ -83,7 +83,7 @@
                 <TextBlock  x:Uid="Hotel_Details_Show_Room_Description" Style="{StaticResource DetailDetailLinkText}"  Text="Ver la descripcion de la habitaciónX" Margin="-12,0,0,0" VerticalAlignment="Center"  ></TextBlock>
             </Button>
 
-            <TextBlock x:Name="RoomInformationTextBlock" Text="{Binding rooms[0].information}" Margin="0,-15,0,0" TextWrapping="Wrap" Visibility="Collapsed" />
+            <TextBlock x:Name="RoomInformationTextBlock" Text="{Binding rooms[0].information}" Margin="0,-15,0,10" TextWrapping="Wrap" Visibility="Collapsed" />
         </StackPanel>
 
 
