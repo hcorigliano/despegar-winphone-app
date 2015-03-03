@@ -1087,4 +1087,36 @@ A reserva não foi gerado e não cobra nenhuma taxa para a transação.</value>
   <data name="Hotel_Detail_People.Text" xml:space="preserve">
     <value>pessoas</value>
   </data>
+  <data name="Flight_Thanks_Continue_Explain_Emitted.Text" xml:space="preserve">
+    <value>U pagado ha sido procesada correctamente. En un breve correo electrónico con recibira el billete electrónico</value>
+  </data>
+  <data name="canceled" xml:space="preserve">
+    <value>Pela proximidade do voo, não foi possível emitir os bilhetes. Recomendamos que busque outro voo.</value>
+  </data>
+  <data name="canceled_title" xml:space="preserve">
+    <value>Infelizmente não foi possível emitir os bilhetes</value>
+  </data>
+  <data name="fix_creditcard" xml:space="preserve">
+    <value>Não foi possível processar seu pagamento.</value>
+  </data>
+  <data name="fix_creditcard_title" xml:space="preserve">
+    <value>Verifique os dados inseridos de seu cartão.</value>
+  </data>
+  <data name="new_creditcard" xml:space="preserve">
+    <value>Isso pode ter sido causado por limite de compra insuficiente ou falta de autorização para compras por internet.
+Nenhum valor foi debitado em seus cartões.
+Você pode:
+- Entrar em contato com a operadora de seu cartão para autorizar o débito
+- Inserir um novo cartão ou selecionar outra forma de pagamento</value>
+  </data>
+  <data name="new_creditcard_title" xml:space="preserve">
+    <value>Não foi possível processar seu pagamento.</value>
+  </data>
+  <data name="payment_failed" xml:space="preserve">
+    <value>Não foi possível processar seu pagamento.
+Isso pode ter sido causado por dados incorretos, limite de compra insuficiente ou falta de autorização para compras por internet. Nenhum valor foi debitado em seus cartões.</value>
+  </data>
+  <data name="payment_failed_title" xml:space="preserve">
+    <value>Você alcançou o limite máximo de tentativas.</value>
+  </data>
 </root>
