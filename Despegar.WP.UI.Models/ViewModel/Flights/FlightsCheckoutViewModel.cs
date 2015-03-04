@@ -675,7 +675,7 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
 
                     FreezeFields();
                     OnPropertyChanged("SelectedCard");
-                    OnViewModelError("ONLINE_PAYMENT_ERROR_NEW_CREDIT_CARD", "INSTALLMENT");
+                    OnViewModelError("ONLINE_PAYMENT_ERROR_NEW_CREDIT_CARD", "CARD");
                     break;
 
                 case BookingStatusEnum.canceled:
@@ -690,7 +690,7 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
                     break;
 
                 case BookingStatusEnum.risk_evaluation_failed:
-                    OnViewModelError("ONLINE_PAYMENT_FAILED", "CARD");
+                    OnViewModelError("RISK_PAYMENT_FAILED", "CARD");
                     break;
 
                 case BookingStatusEnum.risk_review:

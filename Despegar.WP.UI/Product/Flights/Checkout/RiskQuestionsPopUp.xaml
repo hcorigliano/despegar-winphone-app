@@ -6,7 +6,9 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:con="using:Despegar.WP.UI.Controls"
-    mc:Ignorable="d">
+    mc:Ignorable="d"
+    
+    >
 
     <UserControl.Resources>
         <Storyboard x:Name="ShowDialogAnimation">
@@ -24,59 +26,54 @@
             </DoubleAnimation>
         </Storyboard>
     </UserControl.Resources>
-    
-    <ScrollViewer>
-        <Grid x:Name="mainCanvas" Opacity="1"  Background="Black">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
 
-            <StackPanel Grid.Row="0" Margin="20,40,20,0">
+    <Grid x:Name="mainCanvas" Background="Black">
+     <ScrollViewer Margin="20,40,20,0"  >
+        <StackPanel>
 
-                <con:Alert x:Uid="Page_Checkout_RiskAlert_Title" />
+            <con:Alert x:Uid="Page_Checkout_RiskAlert_Title" />
 
-                <ItemsControl ItemsSource="{Binding FreeTextQuestions}">
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="20" />
-                                    <RowDefinition Height="40" />
-                                </Grid.RowDefinitions>
-                                <!-- Fields -->
-                                <TextBlock Style="{StaticResource BaseTextLabel}" Grid.Row="0" Text="{Binding title }" />
-                                <TextBox x:Name="respuesta"  Grid.Row="1" Style="{StaticResource CheckoutInputBase}" Text="{Binding risk_answer.text , Mode=TwoWay}"/>
-                            </Grid>
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
 
-                <ItemsControl ItemsSource="{Binding ChoiceQuestions}">
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="20" />
-                                    <RowDefinition Height="40" />
-                                </Grid.RowDefinitions>
-                                <!-- Fields -->
-                                <TextBlock Style="{StaticResource BaseTextLabel}" Grid.Row="0" Text="{Binding title }" />
-                                <ComboBox Grid.Row="1"  x:Name="fieldCombo"
+            <ItemsControl ItemsSource="{Binding FreeTextQuestions}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="20" />
+                                <RowDefinition Height="40" />
+                            </Grid.RowDefinitions>
+                            <!--Fields-->
+                            <TextBlock Style="{StaticResource BaseTextLabel}" Grid.Row="0" Text="{Binding title }" />
+                            <TextBox x:Name="respuesta"  Grid.Row="1" Style="{StaticResource CheckoutInputBase}" Text="{Binding risk_answer.text , Mode=TwoWay}"/>
+                        </Grid>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+
+            <ItemsControl ItemsSource="{Binding ChoiceQuestions}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="20" />
+                                <RowDefinition Height="40" />
+                            </Grid.RowDefinitions>
+                            <!--Fields-->
+                            <TextBlock Style="{StaticResource BaseTextLabel}" Grid.Row="0" Text="{Binding title }" />
+                            <ComboBox Grid.Row="1"  x:Name="fieldCombo"
                                             ItemsSource="{Binding answers}" 
                                             SelectedItem="{Binding SelectedChoice, Mode=TwoWay}"
                                             DisplayMemberPath="text"                   
                                             Style="{StaticResource ComboBoxBase}" />
-                            </Grid>
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
-            </StackPanel>
+                        </Grid>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
 
             <!-- Footer -->
-            <Button Margin="25,0,25,0" Grid.Row="1" Command="{Binding SendRiskAnswersCommand}"  Style="{StaticResource ButtonBottom}" Content="Enviar respuestas"/>
-
-        </Grid>
+            <Button  Command="{Binding SendRiskAnswersCommand}"  Style="{StaticResource ButtonBottom}" Content="Enviar respuestas" />
+        </StackPanel>
     </ScrollViewer>
-</UserControl>   
+  </Grid>
+
+</UserControl>
