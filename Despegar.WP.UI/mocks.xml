@@ -44,6 +44,61 @@
         ]]>
     </Mock>
   
+  <Mock serviceKey="FlightsBookingCompletePost" name="Booking_Failed">
+      <![CDATA[ 
+          {"id":"2ca4628f-2c94-11e4-a078-fa163e0cab2a","booking_status":"booking_failed"}
+        ]]>
+    </Mock>
+  
+   <Mock serviceKey="FlightsBookingCompletePost" name="New_Credit_Card">
+      <![CDATA[ 
+      {"next_step_url":"/bookings/2ca4628f-2c94-11e4-a078-fa163e0cab2a/form-description?section=payment","id":"2ca4628f-2c94-11e4-a078-fa163e0cab2a","booking_status":"new_credit_card"}
+        ]]>
+    </Mock>
+  
+   <Mock serviceKey="FlightsBookingCompletePost" name="Fix_Credit_Card">
+      <![CDATA[ 
+      {"next_step_url":"/bookings/2ca4628f-2c94-11e4-a078-fa163e0cab2a/form-description?section=payment","id":"2ca4628f-2c94-11e4-a078-fa163e0cab2a","booking_status":"fix_credit_card"}
+        ]]>
+    </Mock>
+  
+   <Mock serviceKey="FlightsBookingCompletePost" name="Flight_Canceled">
+      <![CDATA[ 
+      {"id":"d8ed0191-ad4f-11e4-bc1f-fa163e41ea4c","eticket":null,"pnr":"PASSOC","checkout_id":2141016770,"checkoutSuccess":false,"booking_status":"canceled"}
+        ]]>
+    </Mock>
+  
+     <Mock serviceKey="FlightsBookingCompletePost" name="Max_Retries_Reached">
+      <![CDATA[ 
+      {"id":"2ca4628f-2c94-11e4-a078-fa163e0cab2a","pnr":"2FK9HL","checkout_id":31844578,"booking_status":"payment_failed"}
+        ]]>
+    </Mock>
+  
+     <Mock serviceKey="FlightsBookingCompletePost" name="Success_Ticketed">
+      <![CDATA[ 
+      {"id":"d8ed0191-ad4f-11e4-bc1f-fa163e41ea4c","eticket":"asdasdasd","pnr":"PASSOC","checkout_id":2141016770,"booking_status":"checkout_successful"}
+        ]]>
+    </Mock>
+  
+  <Mock serviceKey="FlightsBookingCompletePost" name="Risk_Questions_Review">
+      <![CDATA[ 
+      {"booking_status":"risk_review","id":"b4f40fd3-386a-11e4-8739-fa163e5c1939","next_step_url":"/bookings/b4f40fd3-386a-11e4-8739-fa163e5c1939/form-description?section=risk-questions","risk_questions":[{"free_text":true,"free_text_description":{"answer_data_source":null,"answer_length":200,"answer_type":"STRING"},"id":"0","mandatory":false,"order":"0","title":"Dirección de entrega del resumen de la tarjeta"},{"answers":[{"id":"0","text":"Argentina"},{"id":"1","text":"Bolivia"},{"id":"2","text":"Brasil"},{"id":"3","text":"Chile"},{"id":"4","text":"Colombia"},{"id":"5","text":"Costa Rica"},{"id":"6","text":"Alemania"},{"id":"7","text":"República Dominicana"},{"id":"8","text":"Ecuador"},{"id":"9","text":"España"},{"id":"10","text":"Francia"},{"id":"11","text":"Guatemala"},{"id":"12","text":"Honduras"},{"id":"13","text":"Italia"},{"id":"14","text":"México"},{"id":"15","text":"Nicaragua"},{"id":"16","text":"Panamá"},{"id":"17","text":"Perú"},{"id":"18","text":"Puerto Rico"},{"id":"19","text":"Portugal"},{"id":"20","text":"El Salvador"},{"id":"21","text":"Estados Unidos"},{"id":"22","text":"Uruguay"},{"id":"23","text":"Venezuela"},{"id":"24","text":"Otro"}],"free_text":false,"id":"1","mandatory":true,"order":"1","title":"País"},{"free_text":true,"free_text_description":{"answer_data_source":null,"answer_length":200,"answer_type":"STRING"},"id":"2","mandatory":true,"order":"2","title":"Ciudad"},{"free_text":true,"free_text_description":{"answer_data_source":null,"answer_length":200,"answer_type":"STRING"},"id":"4","mandatory":true,"order":"3","title":"Región"},{"free_text":true,"free_text_description":{"answer_data_source":null,"answer_length":200,"answer_type":"STRING"},"id":"6","mandatory":true,"order":"4","title":"Calle"},{"free_text":true,"free_text_description":{"answer_data_source":null,"answer_length":200,"answer_type":"STRING"},"id":"7","mandatory":true,"order":"5","title":"Número exterior"},{"free_text":true,"free_text_description":{"answer_data_source":null,"answer_length":200,"answer_type":"STRING"},"id":"8","mandatory":false,"order":"6","title":"Piso"},{"free_text":true,"free_text_description":{"answer_data_source":null,"answer_length":200,"answer_type":"STRING"},"id":"8","mandatory":false,"order":"6","title":"Piso"},{"free_text":true,"free_text_description":{"answer_data_source":null,"answer_length":200,"answer_type":"STRING"},"id":"8","mandatory":false,"order":"6","title":"Piso"},{"free_text":true,"free_text_description":{"answer_data_source":null,"answer_length":200,"answer_type":"STRING"},"id":"8","mandatory":false,"order":"6","title":"Piso"},{"free_text":true,"free_text_description":{"answer_data_source":null,"answer_length":200,"answer_type":"STRING"},"id":"8","mandatory":false,"order":"6","title":"Piso"},{"free_text":true,"free_text_description":{"answer_data_source":null,"answer_length":200,"answer_type":"STRING"},"id":"8","mandatory":false,"order":"6","title":"Piso"},{"free_text":true,"free_text_description":{"answer_data_source":null,"answer_length":200,"answer_type":"STRING"},"id":"8","mandatory":false,"order":"6","title":"Piso"},{"free_text":true,"free_text_description":{"answer_data_source":null,"answer_length":200,"answer_type":"STRING"},"id":"8","mandatory":false,"order":"6","title":"Piso"},{"free_text":true,"free_text_description":{"answer_data_source":null,"answer_length":200,"answer_type":"STRING"},"id":"8","mandatory":false,"order":"6","title":"Piso"},{"free_text":true,"free_text_description":{"answer_data_source":null,"answer_length":200,"answer_type":"STRING"},"id":"9","mandatory":false,"order":"7","title":"Depto."}]}
+        ]]>
+    </Mock>
+  
+  <Mock serviceKey="FlightsBookingCompletePost" name="Risk_Questions_Rejected">
+      <![CDATA[ 
+           {"id":"b4f40fd3-386a-11e4-8739-fa163e5c1939","booking_status":"risk_evaluation_failed"}     
+        ]]>
+  </Mock>
+    
+  <Mock serviceKey="FlightsBookingCompletePost" name="Risk_Questions_Success">
+      <![CDATA[ 
+           {"id":"b4f40fd3-386a-11e4-8739-fa163e5c1939","pnr":"2FWNN4","checkout_id":31844746,"booking_status":"checkout_successful"}     
+        ]]>
+  </Mock>
+  
+  
   <!-- ********************* MAPI Hotels ***********************-->
 
   
