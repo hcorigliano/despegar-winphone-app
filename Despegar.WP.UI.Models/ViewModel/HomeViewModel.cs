@@ -44,7 +44,12 @@ namespace Despegar.WP.UI.Model
 
                 BugTracker.LeaveBreadcrumb("Update Service call succesful");
 
+#if DEBUG
+                return false; 
+#else
                 return data.force_update;
+#endif
+
             }
             catch (Exception)
             {

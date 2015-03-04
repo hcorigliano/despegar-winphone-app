@@ -27,7 +27,7 @@ namespace Despegar.WP.UI.Model
             get { return upadId != null ? upadId : CoreContext.GetUOW(); }
             set { upadId = value; }
         }
-        public static Windows.Networking.PushNotifications.PushNotificationChannel Channel {
+        public static string ChannelUri {
             get
             {
                 var roamingSettings = ApplicationData.Current.RoamingSettings;
@@ -38,7 +38,7 @@ namespace Despegar.WP.UI.Model
                 }
                 else
                 {
-                    return roamingSettings.Values["NotificationChannel"] as Windows.Networking.PushNotifications.PushNotificationChannel;
+                    return roamingSettings.Values["NotificationChannel"] as string;
                 }
             }
 

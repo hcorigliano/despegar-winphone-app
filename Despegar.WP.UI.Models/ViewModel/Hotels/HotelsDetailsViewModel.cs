@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Windows.ApplicationModel.Resources;
 
 
 namespace Despegar.WP.UI.Model.ViewModel.Hotels
@@ -175,7 +176,7 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
 
            HotelDetail = await hotelService.GetHotelsDetail(CrossParameters.IdSelectedHotel, CrossParameters.SearchModel.DepartureDateFormatted, CrossParameters.SearchModel.DestinationDateFormatted, CrossParameters.SearchModel.DistributionString);
            
-           HotelReviews = await userReviewService.GetHotelUserReviews(CrossParameters.IdSelectedHotel, 10, 0, "es");
+           HotelReviews = await userReviewService.GetHotelUserReviews(CrossParameters.IdSelectedHotel, 10, 0, "es","despegar");
            FormatReviews(GlobalConfiguration.Language);
 
             
@@ -296,9 +297,19 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
                 customItem.country = "BusarPais";
                 if (item.user != null)
                 {
-                    customItem.name = (String.IsNullOrEmpty(item.user.first_name) ? String.Empty : item.user.first_name) + " " + (String.IsNullOrEmpty(item.user.last_name) ? String.Empty : item.user.last_name);
+                    if (item.user.first_name == null && item.user.last_name == null)
+                    {
+                        ResourceLoader manager = new ResourceLoader();
+                        customItem.name = manager.GetString("Page_Hotels_Anonymous");
+                    }
+                    else
+                    {
+                        customItem.name = (String.IsNullOrEmpty(item.user.first_name) ? String.Empty : item.user.first_name) + " " + (String.IsNullOrEmpty(item.user.last_name) ? String.Empty : item.user.last_name);
+                    }
                 }
-                customItem.rating = item.qualifications.overall_rating.ToString("N2");
+
+                double tempRating = item.qualifications.overall_rating / 10;
+                customItem.rating = tempRating.ToString("N2");
                 CustomReviews.Add(customItem);
             }
         }
