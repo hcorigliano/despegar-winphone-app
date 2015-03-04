@@ -139,6 +139,7 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
                 if (Itineraries.items.Count == 0)
                 {
                     OnViewModelError("LOAD_RESULTS_NO_ITEMS");
+                    IsLoading = false;
                     return;
                 }
 

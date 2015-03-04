@@ -1066,4 +1066,25 @@ A reserva não foi gerado e não cobra nenhuma taxa para a transação.</value>
   <data name="Hotels_Search_UNKNOWN_ERROR" xml:space="preserve">
     <value>Houve um erro. Por favor, tente novamente a sua pesquisa.</value>
   </data>
+  <data name="Common_Conditions.Text" xml:space="preserve">
+    <value>Condições</value>
+  </data>
+  <data name="Common_Left.Text" xml:space="preserve">
+    <value>São </value>
+  </data>
+  <data name="Common_Show_Less.Text" xml:space="preserve">
+    <value>Mostrar menos</value>
+  </data>
+  <data name="Common_Show_More_Fares.Text" xml:space="preserve">
+    <value>Veja mais taxas</value>
+  </data>
+  <data name="habitacion(es) disponible(s)" xml:space="preserve">
+    <value>quarto(s) disponível</value>
+  </data>
+  <data name="Hotel_Details_Show_Room_Description.Text" xml:space="preserve">
+    <value>Veja a descrição do quarto</value>
+  </data>
+  <data name="Hotel_Detail_People.Text" xml:space="preserve">
+    <value>pessoas</value>
+  </data>
 </root>

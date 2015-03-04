@@ -71,6 +71,8 @@ namespace Despegar.Core.Neo.API.MAPI
         {            
             string serviceUrl = ServiceURL.GetServiceURL(ServiceKey.HotelsBookingFields);
 
+
+            connector.SetFlashHeader("X-UPAEXTRA-SELECTED-ITEM-INDEX", (bookingFieldPost.SelectedItemIndex + 1).ToString());
             var result = await connector.PostAsync<HotelsBookingFields>(serviceUrl, bookingFieldPost, ServiceKey.HotelsBookingFields);
 
             int i = 1;
@@ -83,13 +85,13 @@ namespace Despegar.Core.Neo.API.MAPI
             return result;
         }
 
-        public async Task<HotelUserReviews> GetHotelUserReviews(string hotelId, int limit, int offset, string language)
-        {
-            //NOT IMPLEMENTED YET (this use api v3 connector and this is not implemented)
-            string serviceUrl = ServiceURL.GetServiceURL(ServiceKey.HotelUserReview, hotelId, limit, offset, language);
+        //public async Task<HotelUserReviews> GetHotelUserReviews(string hotelId, int limit, int offset, string language)
+        //{
+        //    //NOT IMPLEMENTED YET (this use api v3 connector and this is not implemented)
+        //    string serviceUrl = ServiceURL.GetServiceURL(ServiceKey.HotelUserReview, hotelId, limit, offset, language);
 
-            return await connector.GetAsync<HotelUserReviews>(serviceUrl, ServiceKey.HotelUserReview);
-        }
+        //    return await connector.GetAsync<HotelUserReviews>(serviceUrl, ServiceKey.HotelUserReview);
+        //}
 
         //public async Task<BookingCompletePostResponse> CompleteBooking(object bookingCompletePost, string id)
         //{

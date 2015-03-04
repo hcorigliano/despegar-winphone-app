@@ -102,7 +102,9 @@ namespace Despegar.Core.Neo.API.MAPI
 
         public async Task<FlightBookingFields> GetBookingFields(FlightsBookingFieldRequest bookingFieldPost)
         {
-            string serviceUrl = ServiceURL.GetServiceURL(ServiceKey.FlightsBookingFields, null);            
+            string serviceUrl = ServiceURL.GetServiceURL(ServiceKey.FlightsBookingFields, null);
+
+            connector.SetFlashHeader("X-UPAEXTRA-SELECTED-ITEM-INDEX", (bookingFieldPost.SelectedItemIndex + 1).ToString());
 
             return await connector.PostAsync<FlightBookingFields>(serviceUrl, bookingFieldPost, ServiceKey.FlightsBookingFields);
         }

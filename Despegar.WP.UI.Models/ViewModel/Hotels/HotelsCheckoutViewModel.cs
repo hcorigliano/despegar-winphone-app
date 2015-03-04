@@ -31,6 +31,7 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
         #endregion
 
         #region ** Public Interface **
+        //public RoomsSelected
         public HotelsBookingFields CoreBookingFields { get; set; }
         public List<CountryFields> Countries { get; set; }
         public List<State> States { get; set; }
@@ -325,26 +326,21 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
         {
             BugTracker.LeaveBreadcrumb("Hotels Checkout ViewModel get booking fields init");
 
-            HotelsBookingFieldsRequest bookRequest = new HotelsBookingFieldsRequest();
 
+            //TODO: BORRAR EL IF y ESTA PARTE QUE ES HARDCODE
             if (crossParams.BookRequest != null)
             {
-                CoreBookingFields = await hotelService.GetBookingFields(crossParams.BookRequest);
-            }
-            else
-            {
-                // TODO
+                HotelsBookingFieldsRequest bookRequest = new HotelsBookingFieldsRequest();
                 bookRequest.token = "c66602c8-09b5-4c11-92f7-9713cc4e1552";
                 bookRequest.hotel_id = "298331";
                 bookRequest.room_choices = new List<string>() { "3" };
                 bookRequest.mobile_identifier = deviceID;
+            }            
 
-                CoreBookingFields = await hotelService.GetBookingFields(bookRequest);
-            }
+            CoreBookingFields = await hotelService.GetBookingFields(crossParams.BookRequest);
 
             BugTracker.LeaveBreadcrumb("Hotels CheckoutVviewModel get booking fields complete");
         }
-
 
         private async Task LoadCountries()
         {

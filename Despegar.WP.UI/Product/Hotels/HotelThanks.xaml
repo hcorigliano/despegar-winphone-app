@@ -5,7 +5,7 @@
     xmlns:local="using:Despegar.WP.UI.Product.Hotels"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:src="using:Despegar.WP.UI.Controls.Hotels.Details"
+    xmlns:src="using:Despegar.WP.UI.Controls.Hotels.Results"
     mc:Ignorable="d"
     Style="{StaticResource BasePage}">
 

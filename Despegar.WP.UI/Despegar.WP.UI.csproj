@@ -124,7 +124,7 @@
     <Compile Include="Controls\Hotels\DateControl.xaml.cs">
       <DependentUpon>DateControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Hotels\Details\HotelItem.xaml.cs">
+    <Compile Include="Controls\Hotels\Results\HotelItem.xaml.cs">
       <DependentUpon>HotelItem.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\Hotels\MiniBoxSearch.xaml.cs">
@@ -385,7 +385,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Controls\Hotels\Details\HotelItem.xaml">
+    <Page Include="Controls\Hotels\Results\HotelItem.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -803,6 +803,7 @@
     <Content Include="Assets\Icon\Amenities\amn_ael.png" />
     <Content Include="Assets\Icon\Amenities\amn_agca.png" />
     <Content Include="Assets\Icon\Amenities\amn_air.png" />
+    <Content Include="Assets\Icon\Amenities\amn_airroom.png" />
     <Content Include="Assets\Icon\Amenities\amn_airtran.png" />
     <Content Include="Assets\Icon\Amenities\amn_aki.png" />
     <Content Include="Assets\Icon\Amenities\amn_allinclusive.png" />
@@ -883,6 +884,7 @@
     <Content Include="Assets\Icon\Amenities\amn_health.png" />
     <Content Include="Assets\Icon\Amenities\amn_hid.png" />
     <Content Include="Assets\Icon\Amenities\amn_hot.png" />
+    <Content Include="Assets\Icon\Amenities\amn_hotroom.png" />
     <Content Include="Assets\Icon\Amenities\amn_ingrah.png" />
     <Content Include="Assets\Icon\Amenities\amn_inswpose.png" />
     <Content Include="Assets\Icon\Amenities\amn_intc.png" />

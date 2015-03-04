@@ -24,11 +24,6 @@ using System.Xml.Linq;
 using Despegar.Core.Neo;
 using Despegar.Core.Neo.API;
 
-using Windows.Networking.PushNotifications;
-using Windows.UI.Core;
-using Despegar.Core.Neo.Contract.API;
-using Despegar.Core.Neo.Business.Notifications;
-
 // The Blank Application template is documented at http://go.microsoft.com/fwlink/?LinkId=391641
 
 namespace Despegar.WP.UI
@@ -39,8 +34,6 @@ namespace Despegar.WP.UI
     public sealed partial class App : Application
     {
         private TransitionCollection transitions;
-        private IMAPINotifications notifications;
-        private PushResponse registerResponse;
 
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
@@ -145,12 +138,6 @@ namespace Despegar.WP.UI
                 // Decolar forced to BRASIL always
                  roamingSettings.Values["countryCode"] = "BR";
 #endif
-
-
-                //Notifications
-                InitializeNotification();
-
-
                 // Load Country/Site
                  if (roamingSettings.Values["countryCode"] == null)
                  {
@@ -217,76 +204,6 @@ namespace Despegar.WP.UI
             // TODO: Save application state and stop any background activity
             deferral.Complete();
         }
-
-
-        #region Notification
-        private async void InitializeNotification()
-        {
-            try
-            {
-                var channel = await PushNotificationChannelManager.CreatePushNotificationChannelForApplicationAsync("App");
-
-                PushRegistrationRequest pnr = new PushRegistrationRequest();
-                pnr.upa_id = Despegar.WP.UI.Model.GlobalConfiguration.UPAId;
-                pnr.token = channel.Uri;
-                pnr.social_id = String.Empty;
-                pnr.country_id = (Despegar.WP.UI.Model.GlobalConfiguration.Site == null) ? "es" : Despegar.WP.UI.Model.GlobalConfiguration.Site;
-                pnr.device_type = Despegar.WP.UI.Model.GlobalConfiguration.DeviceType;
-                pnr.brand = Despegar.WP.UI.Model.GlobalConfiguration.Brand;
-
-                this.notifications = IoC.Resolve<IMAPINotifications>();
-
-                if (Despegar.WP.UI.Model.GlobalConfiguration.Channel == null && channel != null)
-                {
-                    registerResponse = await this.notifications.RegisterOnDespegarCloud(pnr);
-                }
-
-                if (Despegar.WP.UI.Model.GlobalConfiguration.Channel != null && channel != null && channel.Uri != Despegar.WP.UI.Model.GlobalConfiguration.Channel.Uri)
-                {
-                    
-                    registerResponse = await this.notifications.RegisterOnDespegarCloud(pnr);
-                }
-
-
-                Despegar.WP.UI.Model.GlobalConfiguration.Channel = channel;
-
-            }
-            catch (Exception ex)
-            {
-                BugSenseHandler.Instance.LogException(ex);
-            }
-        }
-
-        void channel_PushNotificationReceived(PushNotificationChannel sender, PushNotificationReceivedEventArgs args)
-        {
-            //this.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
-            //{
-            //    TextBlock notification = new TextBlock();
-            //    string result = args.NotificationType.ToString();
-            //    switch (args.NotificationType)
-            //    {
-            //        case PushNotificationType.Badge:
-            //            result += ": " + args.BadgeNotification.Content.GetXml();
-            //            break;
-            //        case PushNotificationType.Raw:
-            //            result += ": " + args.RawNotification.Content;
-            //            break;
-            //        case PushNotificationType.Tile:
-            //            result += ": " + args.TileNotification.Content.GetXml();
-            //            break;
-            //        case PushNotificationType.TileFlyout:
-            //            result += ": " + args.TileNotification.Content.GetXml();
-            //            break;
-            //        case PushNotificationType.Toast:
-            //            result += ": " + args.ToastNotification.Content.GetXml();
-            //            break;
-            //        default:
-            //            break;
-            //    }
-            //    notification.Text = result;
-            //});
-        }
-        #endregion
 
     }
 }

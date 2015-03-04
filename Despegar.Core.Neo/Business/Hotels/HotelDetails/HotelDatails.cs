@@ -12,6 +12,7 @@ namespace Despegar.Core.Neo.Business.Hotels.HotelDetails
         public string token { get; set; }
         public Hotel hotel { get; set; }
         public string suggested_room_choice { get; set; }
+        public List<string> list_suggested_room_choice { get; set; }
         public List<Roompack> roompacks { get; set; }
     }
 }

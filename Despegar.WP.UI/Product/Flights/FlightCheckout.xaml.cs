@@ -53,9 +53,22 @@ namespace Despegar.WP.UI.Product.Flights
             }
         }
 
-        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
         {
+            base.OnNavigatingFrom(e);
+            if (e.NavigationMode == NavigationMode.Back)
+            {
+                ResetPageCache();
+            }
             HardwareButtons.BackPressed -= HardwareButtons_BackPressed;
+
+        }
+
+        private void ResetPageCache()
+        {
+            var cacheSize = ((Frame)Parent).CacheSize;
+            ((Frame)Parent).CacheSize = 0;
+            ((Frame)Parent).CacheSize = cacheSize;
         }
 
         private void ShowRisk(Object sender, EventArgs e )
