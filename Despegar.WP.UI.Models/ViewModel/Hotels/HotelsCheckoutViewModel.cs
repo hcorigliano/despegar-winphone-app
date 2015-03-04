@@ -45,6 +45,7 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
             }
         }
 
+        //public 
         public bool IsFiscalNameRequired
         {
             get

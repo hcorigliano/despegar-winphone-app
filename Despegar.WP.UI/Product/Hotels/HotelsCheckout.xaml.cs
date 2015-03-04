@@ -39,13 +39,11 @@ namespace Despegar.WP.UI.Product.Hotels
         {
             this.InitializeComponent();
 
-            
-
-#if !DEBUG
+            #if !DEBUG
                 GoogleAnalyticContainer ga = new GoogleAnalyticContainer();
                 ga.Tracker = GoogleAnalytics.EasyTracker.GetTracker();
                 ga.SendView("HotelsCheckout");
-#endif
+            #endif
         }
         
         protected async override void OnNavigatedTo(NavigationEventArgs e)

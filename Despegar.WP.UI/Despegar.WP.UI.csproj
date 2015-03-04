@@ -314,6 +314,9 @@
     <Compile Include="Product\Hotels\Checkout\Contact.xaml.cs">
       <DependentUpon>Contact.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Product\Hotels\Checkout\Controls\BuyDetailsControl.xaml.cs">
+      <DependentUpon>BuyDetailsControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Product\Hotels\Checkout\InvoiceArgentina.xaml.cs">
       <DependentUpon>InvoiceArgentina.xaml</DependentUpon>
     </Compile>
@@ -1662,6 +1665,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Product\Hotels\Checkout\Controls\BuyDetailsControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Product\Hotels\Checkout\InvoiceArgentina.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -1744,7 +1751,6 @@
     <Folder Include="Assets\en\" />
     <Folder Include="Assets\es\" />
     <Folder Include="Assets\pt\" />
-    <Folder Include="Product\Hotels\Checkout\Controls\" />
     <Folder Include="Strings\en\" />
   </ItemGroup>
   <ItemGroup>

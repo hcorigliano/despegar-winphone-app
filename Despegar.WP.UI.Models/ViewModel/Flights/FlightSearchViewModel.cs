@@ -92,7 +92,7 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
             {
                 coreSearchModel.DepartureDate = value;
 
-                if (coreSearchModel.PageMode == FlightSearchPages.RoundTrip)
+                if (coreSearchModel.PageMode == FlightSearchPages.RoundTrip && DateTimeOffset.Compare(FromDate, ToDate) > 0)
                     ToDate = value;
 
                 OnPropertyChanged();
