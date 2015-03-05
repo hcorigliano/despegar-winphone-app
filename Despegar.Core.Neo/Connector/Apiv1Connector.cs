@@ -8,6 +8,7 @@ using Despegar.Core.Neo.Log;
 using Despegar.Core.Neo.Contract;
 using Despegar.Core.Neo.Contract.Connector;
 using Despegar.Core.Neo.Contract.Log;
+using Despegar.Core.Neo.API;
 
 
 namespace Despegar.Core.Neo.Connector
@@ -73,7 +74,7 @@ namespace Despegar.Core.Neo.Connector
               .ToString();
         }
 
-        protected override void SetCustomHeaders(HttpRequestMessage httpMessage)
+        protected override void SetCustomHeaders(HttpRequestMessage httpMessage, ServiceKey key)
         {
             httpMessage.Headers.Add("X-ApiKey", this.currentAPIKey);
             httpMessage.Headers.Add("X-UOW", XUoW);

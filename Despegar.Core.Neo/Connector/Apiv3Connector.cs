@@ -1,4 +1,5 @@
-﻿using Despegar.Core.Neo.Contract;
+﻿using Despegar.Core.Neo.API;
+using Despegar.Core.Neo.Contract;
 using Despegar.Core.Neo.Contract.Connector;
 using Despegar.Core.Neo.Contract.Log;
 using Despegar.Core.Neo.Log;
@@ -38,7 +39,7 @@ namespace Despegar.Core.Neo.Connector
             this.language = language;
         }
 
-        protected override void SetCustomHeaders(HttpRequestMessage httpMessage)
+        protected override void SetCustomHeaders(HttpRequestMessage httpMessage, ServiceKey key)
         {
             httpMessage.Headers.Add("X-ApiKey", APIKEY_WINDOWS_PHONE);
             httpMessage.Headers.Add("X-UOW", XUoW);
