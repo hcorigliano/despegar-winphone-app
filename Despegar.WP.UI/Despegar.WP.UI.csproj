@@ -329,6 +329,12 @@
     <Compile Include="Product\Hotels\Details\Controls\RoomAvailabilitieItem.xaml.cs">
       <DependentUpon>RoomAvailabilitieItem.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Product\Hotels\Details\Controls\RoomConditionsControl.xaml.cs">
+      <DependentUpon>RoomConditionsControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Product\Hotels\Details\Controls\RoomInformationControl.xaml.cs">
+      <DependentUpon>RoomInformationControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Product\Hotels\Details\Controls\RoomItem.xaml.cs">
       <DependentUpon>RoomItem.xaml</DependentUpon>
     </Compile>
@@ -1681,6 +1687,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Product\Hotels\Details\Controls\RoomAvailabilitieItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Product\Hotels\Details\Controls\RoomConditionsControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Product\Hotels\Details\Controls\RoomInformationControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

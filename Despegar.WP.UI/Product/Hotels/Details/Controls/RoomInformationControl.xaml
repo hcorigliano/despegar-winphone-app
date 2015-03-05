@@ -1,0 +1,78 @@
+﻿<UserControl
+    x:Class="Despegar.WP.UI.Product.Hotels.Details.Controls.RoomInformationControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Despegar.WP.UI.Product.Hotels.Details.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:conv="using:Despegar.WP.UI.Common.Converter"
+    mc:Ignorable="d">
+
+    <UserControl.Resources>
+        <conv:StringConverter x:Name="StringFormatConverter"/>
+        <conv:NullToVisibilityConverter x:Name="NullToVisibilityConverter"/>
+    </UserControl.Resources>
+    
+    <Grid HorizontalAlignment="Stretch">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="{StaticResource Block3}"/>
+            <RowDefinition Height="{StaticResource Offset}"/>
+
+            <RowDefinition MinHeight="{StaticResource dBlock1}"/>
+
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="{StaticResource Block3}"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <!--<Image Grid.Column="0"   Source="/Assets/Icon/App/bed-medium-white.scale-100.png" />-->
+            <Grid Grid.Column="0"  Background="Gray"/>
+            <Image Grid.Column="0"   Source="{Binding rooms[0].pictures[0] , Converter={StaticResource StringFormatConverter}, ConverterParameter='http://staticontent.com/media/pictures/{0}/79x79' }"  />
+
+            <Grid Grid.Column="1" Margin="{StaticResource Left_Offset}" >
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Row="0" Text="{Binding name}" Style="{StaticResource SegoeLight28}" TextWrapping="Wrap"/>
+
+                <StackPanel Grid.Row="1" Orientation="Horizontal">
+                    <Image Source="/Assets/Icon/App/user-small-white.scale-100.png"/>
+                    <TextBlock Margin="{StaticResource Left_Offset}" Style="{StaticResource SegoeRegular17}" VerticalAlignment="Center" >
+                        <Run Text="Máx. "/>
+                        <Run Text="{Binding rooms[0].max_capacity}"/>
+                        <Run x:Uid="Hotel_Detail_People" Text=" personasX"/>
+                    </TextBlock>
+                </StackPanel>
+
+                <StackPanel Grid.Row="2" Orientation="Horizontal">
+                    <Image Height="{StaticResource dBlock1}" Width="{StaticResource dBlock1}" Source="{Binding rooms[0].amenities[0].id, Converter={StaticResource StringFormatConverter}, ConverterParameter='/assets/icon/amenities/amn_{0}.png' }"></Image>
+                    <Image Margin="{StaticResource Left_Offset}" Height="{StaticResource dBlock1}" Width="{StaticResource dBlock1}" Source="{Binding rooms[0].amenities[1].id, Converter={StaticResource StringFormatConverter}, ConverterParameter='/assets/icon/amenities/amn_{0}.png' }"></Image>
+                    <Image Margin="{StaticResource Left_Offset}" Height="{StaticResource dBlock1}" Width="{StaticResource dBlock1}" Source="{Binding rooms[0].amenities[2].id, Converter={StaticResource StringFormatConverter}, ConverterParameter='/assets/icon/amenities/amn_{0}.png' }"></Image>
+                    <Image Margin="{StaticResource Left_Offset}" Height="{StaticResource dBlock1}" Width="{StaticResource dBlock1}" Source="{Binding rooms[0].amenities[3].id, Converter={StaticResource StringFormatConverter}, ConverterParameter='/assets/icon/amenities/amn_{0}.png' }"></Image>
+
+                    <Button Margin="{StaticResource Left_Offset}" Style="{StaticResource HotelDetailLink}"  HorizontalAlignment="Left" VerticalAlignment="Center" Visibility="{Binding rooms[0].amenities[4].id , Converter={StaticResource NullToVisibilityConverter}, FallbackValue=Collapsed}" Click="ShowAllAmenities">
+                        <TextBlock DataContext="{Binding }" Style="{StaticResource DetailDetailLinkText}" x:Uid="Page_HotelsDescription_Seeall" Margin="-12,0,0,0" Text="Ver másX" HorizontalAlignment="Center" VerticalAlignment="Center"  />
+                    </Button>
+
+                </StackPanel>
+
+            </Grid>
+
+        </Grid>
+
+        <StackPanel Grid.Row="2" >
+            <Button  Style="{StaticResource HotelDetailLink}"  HorizontalAlignment="Left" VerticalAlignment="Center" Click="ChangeRoomInformationVisibility" >
+                <TextBlock  x:Uid="Hotel_Details_Show_Room_Description" Style="{StaticResource DetailDetailLinkText}"  Text="Ver la descripcion de la habitaciónX" Margin="-12,0,0,0" VerticalAlignment="Center"  ></TextBlock>
+            </Button>
+
+            <TextBlock x:Name="RoomInformationTextBlock" Text="{Binding rooms[0].information}" Margin="0,-15,0,10" TextWrapping="Wrap" Visibility="Collapsed" />
+        </StackPanel>
+
+    </Grid>
+</UserControl>

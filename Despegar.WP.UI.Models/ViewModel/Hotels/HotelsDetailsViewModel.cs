@@ -203,14 +203,17 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
 
             HotelDistance = Convert.ToInt32(CrossParameters.HotelsExtraData.Distance);
 
-            // Get suggest room price
+            // Get suggest room price and some more things
+
+            Roompack tempRoompack = new Roompack();
             foreach (Roompack roomPack in hotelDetail.roompacks)
             {
+                tempRoompack = roomPack;
                 foreach (RoomAvailability room in roomPack.room_availabilities)
                 {
                     if (room.choices.Contains(hotelDetail.suggested_room_choice))
                     {
-                        hotelDetail.list_suggested_room_choice = room.choices;
+                        hotelDetail.list_suggested_room_choice = room.choices; //Transforma el suggest en una lista completa la cual es necesaria para hacer el booking.
 
                         SuggestRoomPriceBest = room.price.best;
 
@@ -218,6 +221,10 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
                             SuggestRoomPriceBase = room.price.@base;
                         else
                             SuggestRoomPriceBase = null;
+
+                        CrossParameters.RoomPackSelected = tempRoompack; //Toma el roompack seleccionado.
+                        CrossParameters.BedSelected = tempRoompack.rooms[0].bed_options[0];
+                        break;
                     }
                 }
             }
@@ -243,16 +250,34 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
         }
 
         private void BuySelectedRoomCommand()
-        {            
-            RoomAvailability room =  HotelDetail.roompacks[0].room_availabilities.First(x => x.selectedRoom);
+        {      
+            RoomAvailability room  = new RoomAvailability();
 
-            BedOption bedOption = new BedOption();
-            foreach(Room roomBed in HotelDetail.roompacks[0].rooms)
+            //Refactor?
+            foreach(Roompack rp in HotelDetail.roompacks)
             {
-                bedOption = roomBed.bed_options.FirstOrDefault(x=>x.Selected);
-            }
+                foreach(RoomAvailability ra in rp.room_availabilities)
+                {
+                    if (ra.selectedRoom)
+                    {
+                        room = ra;
+                        ra.selectedRoom = false;
+                    }
+                }
 
-            CrossParameters.BedSelected = bedOption;
+                foreach (Room roomBed in rp.rooms)
+                {
+                    foreach (BedOption bo in roomBed.bed_options)
+                    {
+                        if(bo.Selected)
+                        {
+                            CrossParameters.BedSelected = bo;
+                            bo.Selected = false;
+                        }
+                    }
+                    //CrossParameters.BedSelected = roomBed.bed_options.FirstOrDefault(x => x.Selected);
+                }
+            }
 
             if (CrossParameters != null && hotelDetail != null)
             {
@@ -264,6 +289,8 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
                     mobile_identifier = GlobalConfiguration.UPAId,  
                     SelectedItemIndex = CrossParameters.UPA_SelectedItemIndex
                 };
+
+                CrossParameters.RoomPackSelected = HotelDetail.roompacks[0];  //En selected siempre es el primero, por que si fuera mas de uno entonces no se mostraria la seleccion de cuartos.
 
                 Navigator.GoTo(ViewModelPages.HotelsCheckout, CrossParameters);
             }

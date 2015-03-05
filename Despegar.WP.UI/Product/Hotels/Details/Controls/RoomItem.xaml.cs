@@ -31,14 +31,6 @@ namespace Despegar.WP.UI.Product.Hotels.Details.Controls
         }
 
 
-        private void ChangeRoomInformationVisibility(object sender, RoutedEventArgs e)
-        {
-            if (RoomInformationTextBlock.Visibility == Visibility.Collapsed)
-                RoomInformationTextBlock.Visibility = Visibility.Visible;
-            else
-                RoomInformationTextBlock.Visibility = Visibility.Collapsed;
-        }
-
         private void ShowMoreFaresClick(object sender, RoutedEventArgs e)
         {
             Roompack roomPack = new Roompack();
@@ -69,17 +61,6 @@ namespace Despegar.WP.UI.Product.Hotels.Details.Controls
             ShowLessFaresButton.Visibility = Visibility.Collapsed;
         }
 
-        private void ShowAllAmenities(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                Roompack room = (Roompack)(((Button)sender).DataContext);
-                Navigator.Instance.GoTo(ViewModelPages.HotelsAmenities, room.rooms[0].amenities);
-            }
-            catch
-            {
-                //Catch Error
-            }
-        }
+
     }
 }

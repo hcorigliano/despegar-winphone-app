@@ -18,6 +18,7 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
         public BedOption BedSelected { get; set; }
         public HotelItem SelectedHotel { get; set; }
         public HotelsBookingFieldsRequest BookRequest { get; set; }
+        public Roompack RoomPackSelected { get; set; }
 
         public HotelsCrossParameters()
         {
