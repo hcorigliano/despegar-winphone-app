@@ -83,7 +83,7 @@ namespace Despegar.WP.UI.Controls.Hotels
             HotelAutocomplete GeoItem = new HotelAutocomplete()
             {
                 name = "+ Cerca de mi ubicacion actual",
-                id = 0,
+                id = -1,
                 type = "geo"
             };
 
@@ -100,7 +100,7 @@ namespace Despegar.WP.UI.Controls.Hotels
                     sender.ItemsSource = null;
                     HotelAutocomplete GeoItem = new HotelAutocomplete();
                     GeoItem.name = "+ Cerca de mi ubicacion actual";
-                    GeoItem.id = 0;
+                    GeoItem.id = -1;
                     GeoItem.type = "geo";
                     List<HotelAutocomplete> source = new List<HotelAutocomplete>();
                     source.Add(GeoItem);
@@ -126,6 +126,13 @@ namespace Despegar.WP.UI.Controls.Hotels
                SetHotel(sender, selected);
        }
 
+       private void Clear(AutoSuggestBox control)
+       {
+            control.Text = "";
+            SelectedDestinationCode = 0;
+            SelectedDestinationText = "";
+
+       }
 
        private void SetHotel(AutoSuggestBox sender, HotelAutocomplete selected)
        {
@@ -143,6 +150,14 @@ namespace Despegar.WP.UI.Controls.Hotels
        public void UpdateHotelsDestiny(int destinationCode, string destinationText, string destinationType)
        {
            SetHotel(DestinyInput, new HotelAutocomplete() { id = destinationCode, name = destinationText, type = destinationType });
+       }
+
+       private void DestinationInput_KeyUp(object sender, Windows.UI.Xaml.Input.KeyRoutedEventArgs e)
+       {
+           if (e.Key == Windows.System.VirtualKey.Back && SelectedDestinationCode != 0)
+           {
+               Clear((AutoSuggestBox)sender);
+           }
        }
 
        private void Focus_Lost(object sender, RoutedEventArgs e)

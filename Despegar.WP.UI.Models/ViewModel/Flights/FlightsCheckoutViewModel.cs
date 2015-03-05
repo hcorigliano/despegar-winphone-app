@@ -661,8 +661,8 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
                     break;
 
                 case BookingStatusEnum.fix_credit_card:
-
                     this.CoreBookingFields.form.booking_status = "fix_credit_card";
+                    FreezeFields();
                     OnViewModelError("ONLINE_PAYMENT_ERROR_FIX_CREDIT_CARD", "CARD");
                     break;
 
@@ -673,25 +673,32 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
                     this.CoreBookingFields.form.payment.card.security_code.CoreValue = String.Empty;
                     this.CoreBookingFields.form.booking_status = "new_credit_card";
 
+                    FreezeFields();
                     OnPropertyChanged("SelectedCard");
-                    OnViewModelError("ONLINE_PAYMENT_ERROR_NEW_CREDIT_CARD", "INSTALLMENT");
+                    OnViewModelError("ONLINE_PAYMENT_ERROR_NEW_CREDIT_CARD", "CARD");
+                    break;
+
+                case BookingStatusEnum.canceled:
+                    // El vuelos se cancela y no puede comprar. Enviar a la resbusqueda de vuelos
+                    BugTracker.LogEvent("FLIGHT BOOKING CANCELED");
+                    OnViewModelError("BOOKING_CANCELED");
                     break;
 
                 case BookingStatusEnum.payment_failed:
-                case BookingStatusEnum.risk_evaluation_failed:
+                    // Se acabaron los reintentos mostrar mensaje de error e ir para atras
+                    OnViewModelError("PAYMENT_FAILED");
+                    break;
 
-                    OnViewModelError("ONLINE_PAYMENT_FAILED", "CARD");
+                case BookingStatusEnum.risk_evaluation_failed:
+                    OnViewModelError("RISK_PAYMENT_FAILED", "CARD");
                     break;
 
                 case BookingStatusEnum.risk_review:
-
                     EventHandler RiskHandler = ShowRiskReview;
-                    if (RiskHandler != null)
-                    {
+                    if (RiskHandler != null)                    
                         RiskHandler(this, null);
-                    }
+                    
                     break;
-
                 //case BookingStatusEnum.BookingCustomError:
                 default:
                     break;
@@ -740,6 +747,18 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
             IsLoading = false;
 
             BugTracker.LeaveBreadcrumb("Flight checkout view model validate voucher complete");
+        }
+
+        /// <summary>
+        /// Freezes Contact and Passenger Fields
+        /// </summary>
+        private void FreezeFields()
+        {
+            // Contact
+            CoreBookingFields.form.contact.IsFrozen = false;
+            // Passengers
+            foreach (var item in CoreBookingFields.form.passengers)
+                item.IsFrozen = false;
         }
 
         public override void OnNavigated(object navigationParams)

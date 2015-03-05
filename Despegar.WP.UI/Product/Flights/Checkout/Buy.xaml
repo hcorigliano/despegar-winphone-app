@@ -37,10 +37,7 @@
                     </Button>
                 </Grid>
             </StackPanel>
-
         </StackPanel>
-
-        
     </Grid>
 
 </UserControl>

@@ -45,6 +45,9 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
             set
             {
                 coreSearchModel.CheckinDate = value;
+                if (DateTimeOffset.Compare(CheckinDate, CheckoutDate) >= 0 )
+                    CheckoutDate = value.AddDays(1);
+                
                 OnPropertyChanged();
             }
         }

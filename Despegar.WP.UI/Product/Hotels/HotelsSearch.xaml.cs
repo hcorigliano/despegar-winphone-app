@@ -14,19 +14,7 @@ using Windows.UI.Xaml.Navigation;
 
 
 namespace Despegar.WP.UI.Product.Hotels
-{
-
-    // TODO LIST: ************************************************************************************************************
-    // TODO LIST: ************************************************************************************************************
-    // TODO LIST: ***************************************:D*********************************************************************
-    // TODO LIST: ****************************************s********************************************************************
-    // Manejo de errores. Averiguar cuales pueden venir. Ej: Checkin invalido, Checkout invalido, destino invalido?, etc
-    // Avisar sobre el uso de GPS. 
-    // Validar que las fechas de busqueda sean mayor a Hoy. Fijarse si se puede restringir esto. 
-    // Revisar la Configuration del pais para Hoteles y restringir la anticipación en las fechas
-    // Rebúsqueda, al volver atras no se estan manteniendo los valores del SearchModel. Me vuelve a pedir destino cuando ya esta escrito.
-    // Cambiar la condicion logica "DestinationType != 0" por algo mas legible como "isGeoSearch"  o algo que me diga que significa esa comparacion
-    // Lo mismo con el tema de DestinationType, buscar la forma de no hardcodear un string para identificar opciones. En estos casos mejor usar un Enum
+{    
     public sealed partial class HotelsSearch : Page
     {
         public HotelsSearchViewModel ViewModel { get; set; }
