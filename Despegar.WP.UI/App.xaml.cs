@@ -129,6 +129,7 @@ namespace Despegar.WP.UI
                 catch (Exception)
                 {
                     NotifyAndClose();
+                    return;
                 }
                
                 // Check persist information

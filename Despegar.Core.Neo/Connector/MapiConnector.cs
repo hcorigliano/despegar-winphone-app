@@ -15,11 +15,12 @@ namespace Despegar.Core.Neo.Connector
         private static readonly string DOMAIN = "https://mobile.despegar.com/v3/";
         private static readonly string APIKEY_WINDOWS_PHONE = "24b56c96e09146298eca3093f6f990c9";
         private static readonly string MAPI_UPA_COOKIE_NAME = "X-UPACOOKIE";
+        private static readonly ServiceKey[] cookieEnabledServices = new ServiceKey[] { ServiceKey.FlightItineraries, ServiceKey.FlightsBookingFields, ServiceKey.FlightsBookingCompletePost, ServiceKey.HotelsAvailability, ServiceKey.HotelsAvailabilityByGeo, ServiceKey.HotelsGetDetails, ServiceKey.HotelsBookingFields, ServiceKey.HotelsBookingCompletePost  };
         private string XUoW;
         private string x_client;   // Example: "WindowsPhone8App";
         private string site;
         private string language;
-        private string mapiUPACookie;
+        private string mapiUPACookie;        
        
         public MapiConnector(ICoreContext context, ICoreLogger logger, IBugTracker bugTracker)
             : base(context, logger, bugTracker)
@@ -86,21 +87,29 @@ namespace Despegar.Core.Neo.Connector
               .ToString();
         }
 
-        protected override void SetCustomHeaders(HttpRequestMessage httpMessage)
+        protected override void SetCustomHeaders(HttpRequestMessage httpMessage, ServiceKey key)
         {
+            // MAPI COOKIE
+            SetMAPICookie(httpMessage, key);
+            // MAPI Headers
             httpMessage.Headers.Add("X-ApiKey", APIKEY_WINDOWS_PHONE);
             httpMessage.Headers.Add("X-UOW", XUoW);
             httpMessage.Headers.Add("X-Client", x_client);           
 
-            // MAPI COOKIE
-            if (!String.IsNullOrEmpty(mapiUPACookie))
-               httpMessage.Headers.Add(MAPI_UPA_COOKIE_NAME, mapiUPACookie);
-
-            // TODO: What happens with new versions of MAPI???
+            // This makes MAPI point to Hoteles v3
             if (httpMessage.RequestUri.AbsoluteUri.Contains("https://mobile.despegar.com/v3/mapi-hotels/"))
                 httpMessage.Headers.Add("X-Version", "mapi-hotels-v3_1.1.0");
 
             //httpMessage.Headers.Add("X-Version", "beta");  // Apuntar a BETA de MAPI
+        }
+
+        private void SetMAPICookie(HttpRequestMessage httpMessage, ServiceKey key)
+        {
+            if (!String.IsNullOrEmpty(mapiUPACookie))
+            {
+                if (cookieEnabledServices.Contains(key))
+                   httpMessage.Headers.Add(MAPI_UPA_COOKIE_NAME, mapiUPACookie);
+            }
         }
     
         private string IncludeSiteAndLanguage(string relativeServiceUrl)

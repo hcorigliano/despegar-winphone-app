@@ -15,6 +15,7 @@ namespace Despegar.Core.Neo.Business.Enums
         new_credit_card,
         risk_review,
         BookingCustomError,
-        risk_evaluation_failed
+        risk_evaluation_failed,
+        canceled
     }
 }

@@ -15,6 +15,8 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
         {
         }
 
+        public bool IsETicketed { get { return flightCrossParameters.BookingResponse.eticket_token != null; } }
+
         public override void OnNavigated(object navigationParams)
         {
              BugTracker.LeaveBreadcrumb("Flight Thanks View");

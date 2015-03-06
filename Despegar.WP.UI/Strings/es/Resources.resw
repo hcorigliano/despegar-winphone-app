@@ -1096,4 +1096,31 @@ La reserva no ha sido generada y no se le cobrará ningún cargo por la transacc
   <data name="Hotel_Buy_Details_Fare_Per_Adult.text" xml:space="preserve">
     <value>Tarifas por habitacion por noche</value>
   </data>
+  <data name="Flight_Thanks_Continue_Explain_Emitted.Text" xml:space="preserve">
+    <value>Su pago ha sido procesado correctamente. En breve recibirá un email con el ticket electrónico</value>
+  </data>
+  <data name="canceled" xml:space="preserve">
+    <value>Debido a la cercanía del vuelo no logramos emitir los tickets por lo que le recomendamos que busque otro vuelo.</value>
+  </data>
+  <data name="canceled_title" xml:space="preserve">
+    <value>Lamentablemente no hemos podido emitir los tickets.</value>
+  </data>
+  <data name="fix_creditcard" xml:space="preserve">
+    <value>Verifique los datos ingresados de su tarjeta de crédito</value>
+  </data>
+  <data name="fix_creditcard_title" xml:space="preserve">
+    <value>Su pago no ha podido ser procesado</value>
+  </data>
+  <data name="new_creditcard" xml:space="preserve">
+    <value>Puede deberse a un limite de compra insuficiente o falta de autorización para comprar por internet en la tarjeta. No se han realizado cargos en sus tarjetas. Usted puede: -Comunicarse con la entidad emisora de su tarjeta para autorizar el pago. -Ingresar una nueva tarjeta o seleccionar otra forma de pago.</value>
+  </data>
+  <data name="new_creditcard_title" xml:space="preserve">
+    <value>Su pago no ha podido ser procesado</value>
+  </data>
+  <data name="payment_failed" xml:space="preserve">
+    <value>Su pago no ha podido ser procesado. Puede deberse al ingreso de datos erróneos de su tarjeta limite de compra insuficiente, o falta de autorización para comprar por internet. No se han registrado cargos en sus tarjetas.</value>
+  </data>
+  <data name="payment_failed_title" xml:space="preserve">
+    <value>Ha alcanzado el máximo de intentos posible</value>
+  </data>
 </root>

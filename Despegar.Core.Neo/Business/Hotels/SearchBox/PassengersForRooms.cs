@@ -69,10 +69,10 @@ namespace Despegar.Core.Neo.Business.Hotels.SearchBox
                 List<int> options = new List<int>();
 
                 // 1 is the Minimum Adult count
-                for (int i = 1; i <= 4 - GeneralMinors; i++)
+                for (int i = 1; i <= 8 - GeneralMinors; i++)
                     options.Add(i);
 
-                return Enumerable.Range(1, 4 - GeneralMinors);
+                return Enumerable.Range(1, 8 - GeneralMinors);
             }
         }
 
@@ -83,7 +83,7 @@ namespace Despegar.Core.Neo.Business.Hotels.SearchBox
         {
             get
             {                
-                return Enumerable.Range(0, 5 - GeneralAdults);
+                return Enumerable.Range(0, 9 - GeneralAdults);
             }
         }
 

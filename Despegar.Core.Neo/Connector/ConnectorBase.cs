@@ -52,7 +52,7 @@ namespace Despegar.Core.Neo.Connector
             string url = GetBaseUrl() + relativeServiceUrl;
 
             HttpRequestMessage httpMessage = new HttpRequestMessage(HttpMethod.Get, url);
-            SetCustomHeaders(httpMessage);
+            SetCustomHeaders(httpMessage, key);
 
             return await ProcessRequest<T>(httpMessage, key);            
         }
@@ -82,7 +82,7 @@ namespace Despegar.Core.Neo.Connector
             HttpRequestMessage httpMessage = new HttpRequestMessage(HttpMethod.Post, url);
             httpMessage.Content = new StringContent(data);
             httpMessage.Content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
-            SetCustomHeaders(httpMessage);
+            SetCustomHeaders(httpMessage, key);
 
             return await ProcessRequest<T>(httpMessage, key);
         }
@@ -118,7 +118,7 @@ namespace Despegar.Core.Neo.Connector
             HttpRequestMessage httpMessage = new HttpRequestMessage(HttpMethod.Put, url);
             httpMessage.Content = new StringContent(data);
             httpMessage.Content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
-            SetCustomHeaders(httpMessage);
+            SetCustomHeaders(httpMessage, key);
 
             return await ProcessRequest<T>(httpMessage, key);
         }
@@ -230,7 +230,7 @@ namespace Despegar.Core.Neo.Connector
         /// Template Method for adding custom HTTP Headers
         /// </summary>
         /// <param name="message"></param>
-        protected abstract void SetCustomHeaders(HttpRequestMessage message);
+        protected abstract void SetCustomHeaders(HttpRequestMessage message, ServiceKey key);
 
         private void SetCommonHeaders(HttpRequestMessage message)
         {

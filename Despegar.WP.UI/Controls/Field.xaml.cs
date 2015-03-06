@@ -20,12 +20,13 @@ using Windows.UI.Xaml.Navigation;
 namespace Despegar.WP.UI.Controls
 {
     public enum InputType
-    { 
+    {
         Numeric,  // [0-9]
         TextOnly,
         AlphaNumeric,
-        Email
+        Email,
         //NumberMath,  /  [0-9] plus , and .
+        AlphaNumericExtra
     }
 
     public sealed partial class Field : UserControl
@@ -58,6 +59,10 @@ namespace Despegar.WP.UI.Controls
                 case Despegar.WP.UI.Controls.InputType.AlphaNumeric:
                     scopeValue = InputScopeNameValue.AlphanumericFullWidth;
                     control.regex = new Regex(@"^[a-zA-Z0-9\s]*$");  
+                    break;
+                case Despegar.WP.UI.Controls.InputType.AlphaNumericExtra: // Extra chars
+                    scopeValue = InputScopeNameValue.AlphanumericFullWidth;
+                    control.regex = new Regex(@"^[a-zA-Z0-9_\s]*$");
                     break;
                 case Despegar.WP.UI.Controls.InputType.Email:
                    scopeValue = InputScopeNameValue.EmailSmtpAddress;

@@ -1,4 +1,5 @@
-﻿using Despegar.Core.Neo.Contract;
+﻿using Despegar.Core.Neo.API;
+using Despegar.Core.Neo.Contract;
 using Despegar.Core.Neo.Contract.Connector;
 using Despegar.Core.Neo.Contract.Log;
 using System.Net.Http;
@@ -24,7 +25,7 @@ namespace Despegar.Core.Neo.Connector
               .ToString();
         }
 
-        protected override void SetCustomHeaders(HttpRequestMessage message)
+        protected override void SetCustomHeaders(HttpRequestMessage message, ServiceKey key)
         {            
         }
 
