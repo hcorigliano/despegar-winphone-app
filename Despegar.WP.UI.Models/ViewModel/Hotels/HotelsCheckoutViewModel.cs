@@ -5,6 +5,7 @@ using Despegar.Core.Neo.Business.Coupons;
 using Despegar.Core.Neo.Business.CreditCard;
 using Despegar.Core.Neo.Business.Hotels;
 using Despegar.Core.Neo.Business.Hotels.BookingFields;
+using Despegar.Core.Neo.Business.Hotels.CitiesAvailability;
 using Despegar.Core.Neo.Contract.API;
 using Despegar.Core.Neo.Contract.Log;
 using Despegar.WP.UI.Model.Interfaces;
@@ -56,6 +57,21 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
                     return CoreBookingFields.form.Invoice.fiscal_status.required && CoreBookingFields.form.Invoice.fiscal_status.CoreValue != "FINAL";                                      
                 }
                 else { return false; }
+            }
+        }
+
+        public ItemPrice PaymentDetails {
+            get
+            {
+                return CoreBookingFields.items.FirstOrDefault().Value.price;
+            }
+        }
+
+        public HotelItem HotelDetails
+        {
+            get
+            {
+                return crossParams.SelectedHotel;
             }
         }
 

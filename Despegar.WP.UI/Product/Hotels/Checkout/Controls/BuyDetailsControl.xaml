@@ -37,9 +37,7 @@
 
         <!--PER PASSAGER-->
         <StackPanel Grid.Column="0"  Grid.Row="0" >
-            <StackPanel >
-                <TextBlock Width="{StaticResource dBlock7p}" Style="{StaticResource DetailCheckoutForeach}" x:Uid="Buy_Details_Fare_Per_Adult" Text="Tarifa por habitacion por noche" TextWrapping="Wrap"></TextBlock>
-            </StackPanel>
+            <TextBlock  Style="{StaticResource DetailCheckoutForeach}" x:Uid="Buy_Details_Fare_Per_Adult" Text="Tarifa por habitacion por noche" TextWrapping="Wrap" Height="Auto"/>
         </StackPanel>
 
         <!--DETAILS-->
@@ -64,7 +62,7 @@
         <StackPanel Margin="0,5,0,0"  Grid.Column="1"  Grid.Row="0" >
             <TextBlock Style="{StaticResource DetailCheckoutForeachPrice}" >
                 <Run Text="{Binding currency.mask}"></Run>
-                <Run Text="{Binding adult_base , Converter={StaticResource CurrencyConverter}}" ></Run>
+                <Run Text="{Binding nightly.best , Converter={StaticResource CurrencyConverter}}" ></Run>
             </TextBlock>
         </StackPanel>
 
@@ -72,12 +70,12 @@
         <StackPanel Grid.Column="1"  Grid.Row="2">
             <TextBlock Style="{StaticResource DetailCheckoutDetailPrice}" Grid.Row="3" >
                 <Run Text="{Binding currency.mask}"></Run>
-                <Run Text="{Binding adults_subtotal, Converter={StaticResource CurrencyConverter}}"></Run>
+                <Run Text="{Binding subtotal, Converter={StaticResource CurrencyConverter}}"></Run>
             </TextBlock>
 
             <TextBlock Style="{StaticResource DetailCheckoutDetailPrice}" Grid.Row="6" >
                 <Run Text="{Binding currency.mask}"></Run>
-                <Run Text="{Binding taxes, Converter={StaticResource CurrencyConverter}}"></Run>
+                <Run Text="{Binding totalCharges, Converter={StaticResource CurrencyConverter}}"></Run>
             </TextBlock>
             <TextBlock Style="{StaticResource DetailCheckoutDetailPrice}" Grid.Row="7"  Visibility="{Binding retention, Converter={StaticResource ZeroPriceToVisibilityConverter}}">
                 <Run Text="{Binding currency.mask}"></Run>
