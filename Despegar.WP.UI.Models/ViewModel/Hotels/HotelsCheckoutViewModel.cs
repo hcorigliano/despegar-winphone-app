@@ -273,33 +273,36 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
             InstallmentFormatted = new InstallmentFormatted();
 
             // TODO: More Items???
-            var item = CoreBookingFields.items.First().Value.payment;
-
-            // Pay at destination
-            if (item.at_destination != null)
+            //var item = CoreBookingFields.items.First().Value.payment;
+            foreach (var element in CoreBookingFields.items)
             {
-                foreach (HotelPayment payment in item.at_destination)
-                    InstallmentFormatted.AddPayAtDestinationInstallment(payment);
-            }
+                var item = element.Value.payment;
+                // Pay at destination
+                if (item.at_destination != null)
+                {
+                    foreach (HotelPayment payment in item.at_destination)
+                        InstallmentFormatted.AddPayAtDestinationInstallment(payment);
+                }
 
-            // Without interest
-            if (item.without_interest != null)
-            {
-                foreach (HotelPayment payment in item.without_interest)
-                    InstallmentFormatted.AddWithouInterestInstallment(payment);
-            }
+                // Without interest
+                if (item.without_interest != null)
+                {
+                    foreach (HotelPayment payment in item.without_interest)
+                        InstallmentFormatted.AddWithouInterestInstallment(payment);
+                }
 
-            // With Interest
-            if (item.with_interest != null)
-            {
-                foreach (HotelPayment payment in item.with_interest)
-                    InstallmentFormatted.AddWithInterestInstallment(payment);
-            }
+                // With Interest
+                if (item.with_interest != null)
+                {
+                    foreach (HotelPayment payment in item.with_interest)
+                        InstallmentFormatted.AddWithInterestInstallment(payment);
+                }
 
-            if (InstallmentFormatted.WithInterest.Count != 0)
-            {
-                var loader = new Windows.ApplicationModel.Resources.ResourceLoader();
-                InstallmentFormatted.ResourceLabel = loader.GetString("Common_Pay_Of");
+                if (InstallmentFormatted.WithInterest.Count != 0)
+                {
+                    var loader = new Windows.ApplicationModel.Resources.ResourceLoader();
+                    InstallmentFormatted.ResourceLabel = loader.GetString("Common_Pay_Of");
+                }
             }
         }
 

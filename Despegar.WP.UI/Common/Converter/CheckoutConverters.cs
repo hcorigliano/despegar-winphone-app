@@ -1,4 +1,5 @@
-﻿using Despegar.Core.Neo.Business.Flight.BookingFields;
+﻿using Despegar.Core.Neo.Business.Common.Checkout;
+using Despegar.Core.Neo.Business.Flight.BookingFields;
 using Despegar.Core.Neo.Business.Hotels.BookingFields;
 using System;
 using System.Collections.Generic;
@@ -13,34 +14,46 @@ namespace Despegar.WP.UI.Common.Converter
 {
     public class PaymentDetailsToLabelConverter : IValueConverter
     {
+        /// <summary>
+        /// Parameter is paymentdetails.interest
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="targetType"></param>
+        /// <param name="parameter"></param>
+        /// <param name="language"></param>
+        /// <returns></returns>
         public object Convert(object value, Type targetType, object parameter, string language)
         {
             var loader = new Windows.ApplicationModel.Resources.ResourceLoader();
-            PaymentDetail paymentDetails = (PaymentDetail)value;
+
+            PaymentInstallments installments = (PaymentInstallments)value;
 
             TextBlock text = new TextBlock();
 
-            if (paymentDetails.installments.quantity == 1)
+            if (installments.quantity == 1)
                 text.Inlines.Add(new Run() { Text = "1 " + loader.GetString("Common_Pay_With") });
             else 
             {
-                if (paymentDetails.interest == 1.0)
+                if (parameter != null)
                 {
-                    text.Inlines.Add(new Run() { Text =  paymentDetails.installments.quantity + " " + loader.GetString("Common_Payments") + " " });
+                    if ((double)parameter == 1.0)
+                    {
+                        text.Inlines.Add(new Run() { Text = installments.quantity + " " + loader.GetString("Common_Payments") + " " });
 
-                    var b = new Bold();
-                    b.Inlines.Add(new Run() { Text = loader.GetString("Common_Pays_Without_Interest") });
-                    text.Inlines.Add(b);
+                        var b = new Bold();
+                        b.Inlines.Add(new Run() { Text = loader.GetString("Common_Pays_Without_Interest") });
+                        text.Inlines.Add(b);
 
-                    text.Inlines.Add(new Run() { Text = " " + loader.GetString("Common_Payment_With") });
-                }
-                else 
-                {
-                    text.Inlines.Add(new Run() { Text =  paymentDetails.installments.quantity + " " + loader.GetString("Common_Pays_With") });
+                        text.Inlines.Add(new Run() { Text = " " + loader.GetString("Common_Payment_With") });
+                    }
+                    else
+                    {
+                        text.Inlines.Add(new Run() { Text = installments.quantity + " " + loader.GetString("Common_Pays_With") });
+                    }
                 }
             }           
 
-            return new ContentControl() { Content = text };;
+            return new ContentControl() { Content = text };
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)
@@ -54,12 +67,12 @@ namespace Despegar.WP.UI.Common.Converter
         public object Convert(object value, Type targetType, object parameter, string language)
         {
             var loader = new Windows.ApplicationModel.Resources.ResourceLoader();
-            PaymentDetail paymentDetails = (PaymentDetail)value;
+            PaymentInstallments installments = (PaymentInstallments)value;
 
-            string text = "1 " + loader.GetString("Common_Pay_Of") + "$" + paymentDetails.installments.first.ToString();
+            string text = "1 " + loader.GetString("Common_Pay_Of") + "$" + installments.first.ToString();
 
-            if (paymentDetails.installments.quantity > 1)           
-                text += " + " + (paymentDetails.installments.quantity - 1) + " " + loader.GetString("Common_Pays_Of") + "$" + paymentDetails.installments.others.ToString();
+            if (installments.quantity > 1)
+                text += " + " + (installments.quantity - 1) + " " + loader.GetString("Common_Pays_Of") + "$" + installments.others.ToString();
             
             return text;
         }
