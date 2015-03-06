@@ -3,17 +3,21 @@ using Despegar.Core.Neo.Business.Common.State;
 using Despegar.Core.Neo.Business.Configuration;
 using Despegar.Core.Neo.Business.Coupons;
 using Despegar.Core.Neo.Business.CreditCard;
+using Despegar.Core.Neo.Business.Forms;
 using Despegar.Core.Neo.Business.Hotels;
 using Despegar.Core.Neo.Business.Hotels.BookingFields;
 using Despegar.Core.Neo.Contract.API;
 using Despegar.Core.Neo.Contract.Log;
+using Despegar.Core.Neo.Exceptions;
 using Despegar.WP.UI.Model.Interfaces;
+using Despegar.WP.UI.Model.ViewModel.Classes;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using Windows.ApplicationModel.Resources;
 
 namespace Despegar.WP.UI.Model.ViewModel.Hotels
@@ -40,7 +44,8 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
             get
             {
                 if (GlobalConfiguration.Site == "AR")
-                    return CoreBookingFields != null ? CoreBookingFields.form.Invoice != null : false;
+                    return CoreBookingFields != null ? CoreBookingFields.form.Invoice != null 
+                        && !CoreBookingFields.form.Invoice.AllFieldsAreOptional : false;
 
                 return false;
             }
@@ -213,6 +218,14 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
             }
         }
 
+        public ICommand ValidateAndBuyCommand
+        {
+            get
+            {
+                return new RelayCommand(async () => await ValidateAndBuy());
+            }
+        }    
+
         // Public because it is used from the InvoiceArg control
         public async Task<List<CitiesFields>> GetCities(string countryCode, string search, string cityresult)
         {
@@ -306,6 +319,64 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
             }
         }
 
+        private async Task ValidateAndBuy()
+        {
+            BugTracker.LeaveBreadcrumb("Hotels checkout view model validate and buy init");
+
+            if (!IsTermsAndConditionsAccepted)
+            {
+                OnViewModelError("TERMS_AND_CONDITIONS_NOT_CHECKED");
+                BugTracker.LeaveBreadcrumb("Hotel checkout buy terms not accepted");
+                return;
+            }
+
+            string sectionID = "";
+
+            // Validation
+            if (!CoreBookingFields.IsValid(out sectionID))
+            {
+                BugTracker.LeaveBreadcrumb("Hotel checkout ViewModel invalid fields");
+                OnViewModelError("FORM_ERROR", sectionID); // TODO: Catch
+            }
+            else
+            {
+                try
+                {
+                    //this.IsLoading = true;
+                    //object bookingData = null;
+
+                    //bookingData = await BookingFormBuilder.BuildHotelsForm(this.CoreBookingFields);
+
+                    //// Buy
+                    //crossParams.PriceDetail = PriceDetailsFormatted;
+                    //crossParams.BookingResponse = await hotelService.CompleteBooking(bookingData, CoreBookingFields.id);
+
+                    //if (crossParams.BookingResponse.Error != null)
+                    //{
+                    //    BugTracker.LeaveBreadcrumb("Hotels checkout MAPI booking error response code: " + crossParams.BookingResponse.Error.code.ToString());
+                    //    // API Error ocurred, Check CODE and inform the user
+                    //    OnViewModelError("API_ERROR", crossParams.BookingResponse.Error.code);
+                    //    this.IsLoading = false;
+                    //    return;
+                    //}
+
+                    //// Booking processed, check the status of Booking request
+                    //AnalizeBookingStatus(crossParams.BookingResponse.booking_status);
+                }
+                catch (HTTPStatusErrorException)
+                {
+                    OnViewModelError("COMPLETE_BOOKING_CONECTION_FAILED");
+                }
+                catch (Exception)
+                {
+                    OnViewModelError("COMPLETE_BOOKING_BOOKING_FAILED");
+                }
+
+                BugTracker.LeaveBreadcrumb("Hotels checkout view model validate and buy complete");
+                this.IsLoading = false;
+            }
+        }
+
         private async void GetCreditCardsValidations()
         {
             try
@@ -333,6 +404,7 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
         {
             BugTracker.LeaveBreadcrumb("Hotels Checkout ViewModel get booking fields init");
             CoreBookingFields = await hotelService.GetBookingFields(crossParams.BookRequest);
+            CoreBookingFields.form.CountrySite = GlobalConfiguration.Site;
             BugTracker.LeaveBreadcrumb("Hotels Checkout ViewModel get booking fields complete");
         }
 

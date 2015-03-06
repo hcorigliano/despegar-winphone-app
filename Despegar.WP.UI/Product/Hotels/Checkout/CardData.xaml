@@ -71,7 +71,7 @@
                 <controls:Field InputType="Numeric" x:Uid="Flights_Checkout_Card_Data_Document" Value="{Binding owner_document.number.CoreValue, Mode=TwoWay}" Visibility="{Binding owner_document.number.required, Converter={StaticResource VisibilityConverter},  FallbackValue=Collapsed}" />
                 <controls:ValidationError ErrorPrefix="Flights_Checkout_Card_Data_Document" ErrorCode="{Binding owner_document.number.CurrentError}" Visibility="{Binding owner_document.number.required,  Converter={StaticResource VisibilityConverter},  FallbackValue=Collapsed}" />
                 <!-- Gender -->
-                <controls:FieldCombo x:Uid="Flights_Checkout_Card_Data_Gender" ItemsSource="{Binding owner_gender.options}"  Value="{Binding owner_gender.SelectedOption, Mode=TwoWay}" Visibility="{Binding owner_gender.required, Converter={StaticResource VisibilityConverter}, FallbackValue=Collapsed}" DisplayTextPath="description" CodePath="value" />
+                <controls:FieldCombo x:Uid="Flights_Checkout_Card_Data_Gender" ItemsSource="{Binding owner_gender.options}"  Value="{Binding owner_gender.SelectedOption, Mode=TwoWay}" Visibility="{Binding owner_gender.required, Converter={StaticResource VisibilityConverter}, FallbackValue=Collapsed}" DisplayTextPath="description" CodePath="value" />                
             </StackPanel>
 
             <!-- Coupons / Voucher -->

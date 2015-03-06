@@ -27,7 +27,7 @@
         </StackPanel>
 
         <StackPanel Grid.Row="1">
-            <StackPanel >
+            
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="40"/>
@@ -42,7 +42,7 @@
                         <TextBlock  x:Uid="Buy_Buy_conditions"  Style="{StaticResource DetailCheckoutTermsButton}" Text="condiciones de compra"></TextBlock>
                     </Button>
                 </Grid>
-            </StackPanel>
+                       
         </StackPanel>
     </Grid>
 </UserControl>
