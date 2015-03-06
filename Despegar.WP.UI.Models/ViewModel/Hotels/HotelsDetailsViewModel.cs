@@ -13,12 +13,14 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Windows.ApplicationModel.Resources;
+using Windows.Storage;
 
 
 namespace Despegar.WP.UI.Model.ViewModel.Hotels
 {
     public class HotelsDetailsViewModel : ViewModelBase
     {
+        private IMAPICross crossService { get; set; }
         private IMAPIHotels hotelService { get; set; }
         private IAPIv3 userReviewService { get; set; }
         private HotelsCrossParameters CrossParameters { get; set; }
@@ -158,11 +160,12 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
 
         #endregion
 
-        public HotelsDetailsViewModel(INavigator navigator, IMAPIHotels hotelService, IAPIv3 hotelReviews, IBugTracker t)
+        public HotelsDetailsViewModel(INavigator navigator, IMAPIHotels hotelService, IAPIv3 hotelReviews, IMAPICross crossService, IBugTracker t)
             : base(navigator, t)
         {
             this.hotelService = hotelService;
             this.userReviewService = hotelReviews;
+            this.crossService = crossService;
         }
 
         public override void OnNavigated(object navigationParams)
@@ -270,7 +273,7 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
             return null;
         }
 
-        private void FormatReviews(string p)
+        private  async void FormatReviews(string p)
         {
             CustomReviews = new List<CustomReviewsItem>();
             foreach(Item item in HotelReviews.items)
@@ -294,9 +297,18 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
                     if (item.descriptions[0].description != null)
                         customItem.description = item.descriptions[0].description.pt;
                 }
-                customItem.country = "BusarPais";
+
                 if (item.user != null)
                 {
+                    if (item.user.city_id > 0) { 
+                        //customItem.country = await this.GetCountry(item.user.city_id.ToString()); 
+                        customItem.country = String.Empty;
+                    }else
+                    {
+                        customItem.country = String.Empty;
+                    }
+                    
+
                     if (item.user.first_name == null && item.user.last_name == null)
                     {
                         ResourceLoader manager = new ResourceLoader();
@@ -312,6 +324,14 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
                 customItem.rating = tempRating.ToString("N2");
                 CustomReviews.Add(customItem);
             }
+        }
+
+        private async Task<string> GetCountry(string cityId)
+        {
+
+            Despegar.Core.Neo.Business.Configuration.City city = await crossService.GetCity(cityId);
+
+            return (city != null) ? city.country_name : String.Empty;
         }
 
     }

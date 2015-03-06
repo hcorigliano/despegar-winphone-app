@@ -62,5 +62,13 @@ namespace Despegar.Core.Neo.API.MAPI
 
             return await connector.GetAsync<List<CitiesFields>>(serviceUrl, ServiceKey.CitiesAutocomplete);
         }
+
+
+        public async Task<City> GetCity(string CityId)
+        {
+            string serviceUrl = ServiceURL.GetServiceURL(ServiceKey.City, CityId);
+
+            return await connector.GetAsync<City>(serviceUrl, ServiceKey.City);
+        }
     }
 }

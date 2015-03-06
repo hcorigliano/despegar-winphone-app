@@ -1075,4 +1075,10 @@ A reserva não foi gerado e não cobra nenhuma taxa para a transação.</value>
   <data name="Page_Hotels_Reviews_Good.Text" xml:space="preserve">
     <value>O melhor:</value>
   </data>
+  <data name="Page_Hotels_Reviews_CommentsCounts.Text" xml:space="preserve">
+    <value>Comentarios / Basado en los ultimos 6 meses</value>
+  </data>
+  <data name="Page_Hotels_Reviews_Comments_From.Text" xml:space="preserve">
+    <value>- Desde</value>
+  </data>
 </root>

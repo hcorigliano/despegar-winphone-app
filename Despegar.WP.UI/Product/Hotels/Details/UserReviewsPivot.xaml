@@ -42,9 +42,9 @@
                                     <Run Text="Puntos x" x:Uid="Hotels_Detail_Points" />
                     </TextBlock>
 
-                    <TextBlock Grid.Row="1" Style="{StaticResource SegoeSemilight17}" VerticalAlignment="Center" >
+                    <TextBlock Grid.Row="1" Style="{StaticResource SegoeSemilight15}" VerticalAlignment="Center" >
                     <Run Text="{Binding HotelDatails.hotel.reviews_qty}"/>
-                    <Run Text="Comentarios / Basado en los ultimos 6 meses"/>
+                    <Run x:Uid="Page_Hotels_Reviews_CommentsCounts" Text="Comenarios / en los ultimos 6 meses"/>
                     </TextBlock>
 
                 </Grid>

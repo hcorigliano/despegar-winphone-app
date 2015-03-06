@@ -1081,4 +1081,10 @@ La reserva no ha sido generada y no se le cobrará ningún cargo por la transacc
   <data name="Page_Hotels_Reviews_Good.Text" xml:space="preserve">
     <value>Lo Bueno</value>
   </data>
+  <data name="Page_Hotels_Reviews_CommentsCounts.Text" xml:space="preserve">
+    <value>Comentarios / Basado en los ultimos 6 meses</value>
+  </data>
+  <data name="Page_Hotels_Reviews_Comments_From.Text" xml:space="preserve">
+    <value>- Desde</value>
+  </data>
 </root>
