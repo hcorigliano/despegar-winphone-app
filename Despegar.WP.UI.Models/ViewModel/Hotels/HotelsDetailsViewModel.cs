@@ -2,6 +2,7 @@
 using Despegar.Core.Neo.Business.Hotels.CustomUserReviews;
 using Despegar.Core.Neo.Business.Hotels.HotelDetails;
 using Despegar.Core.Neo.Business.Hotels.UserReviews;
+using Despegar.Core.Neo.Business.Hotels.UserReviews.V1;
 using Despegar.Core.Neo.Contract.API;
 using Despegar.Core.Neo.Contract.Log;
 using Despegar.WP.UI.Model.Interfaces;
@@ -23,10 +24,12 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
         private IMAPICross crossService { get; set; }
         private IMAPIHotels hotelService { get; set; }
         private IAPIv3 userReviewService { get; set; }
+        private IAPIv1 userReviewServiceV1 { get; set; }
         private HotelsCrossParameters CrossParameters { get; set; }
 
         #region ** Public Interface **
         public HotelUserReviews HotelReviews { get; set;}
+        public HotelUserReviewsV1 HotelReviewsV1 { get; set; }
 
         private List<CustomReviewsItem> customReviews { get; set; }
         public List<CustomReviewsItem> CustomReviews
@@ -160,12 +163,14 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
 
         #endregion
 
-        public HotelsDetailsViewModel(INavigator navigator, IMAPIHotels hotelService, IAPIv3 hotelReviews, IMAPICross crossService, IBugTracker t)
+        public HotelsDetailsViewModel(INavigator navigator, IMAPIHotels hotelService, IAPIv3 hotelReviews, IAPIv1 hReviewV1 ,IMAPICross crossService, IBugTracker t)
             : base(navigator, t)
         {
             this.hotelService = hotelService;
             this.userReviewService = hotelReviews;
             this.crossService = crossService;
+            this.userReviewServiceV1 = hReviewV1;
+
         }
 
         public override void OnNavigated(object navigationParams)
@@ -179,8 +184,12 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
 
            HotelDetail = await hotelService.GetHotelsDetail(CrossParameters.IdSelectedHotel, CrossParameters.SearchModel.DepartureDateFormatted, CrossParameters.SearchModel.DestinationDateFormatted, CrossParameters.SearchModel.DistributionString);
            
-           HotelReviews = await userReviewService.GetHotelUserReviews(CrossParameters.IdSelectedHotel, 10, 0, "es","despegar");
-           FormatReviews(GlobalConfiguration.Language);
+           //HotelReviews = await userReviewService.GetHotelUserReviews(CrossParameters.IdSelectedHotel, 10, 0, "es","despegar");
+
+           HotelReviewsV1 = await userReviewServiceV1.GetHotelUserReviews(CrossParameters.IdSelectedHotel, 10, 0, "es", "despegar");
+           CompleteReviewsWithV1Response();
+
+           //FormatReviews(GlobalConfiguration.Language);
 
             
             foreach (Roompack roompack in HotelDetail.roompacks)
@@ -223,6 +232,29 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
             }
 
             IsLoading = false;
+        }
+
+        private void CompleteReviewsWithV1Response()
+        {
+            ResourceLoader manager = new ResourceLoader();
+            CustomReviews = new List<CustomReviewsItem>();
+
+            foreach (Review review in HotelReviewsV1.reviews)
+            {
+                CustomReviewsItem reviewItem = new CustomReviewsItem();
+
+                reviewItem.description = (review.comments.FirstOrDefault() != null) ? review.comments.FirstOrDefault().description : String.Empty;
+                reviewItem.bad = (review.comments.FirstOrDefault() != null) ? review.comments.FirstOrDefault().bad : String.Empty;
+                reviewItem.good = (review.comments.FirstOrDefault() != null) ? review.comments.FirstOrDefault().good : String.Empty;
+                reviewItem.name = (review.user != null) ? review.user.name : String.Empty;
+                    
+                reviewItem.name = (String.IsNullOrWhiteSpace(reviewItem.name)) ? manager.GetString("Page_Hotels_Anonymous") : reviewItem.name;
+
+                reviewItem.country = (review.user != null) ? review.user.country : String.Empty;
+                reviewItem.rating = (review.scores != null) ? (review.scores.avgRecommend/10).ToString() : "0";
+
+                customReviews.Add(reviewItem);
+            }
         }
 
         private void BuySuggestRoom()
@@ -301,8 +333,8 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
                 if (item.user != null)
                 {
                     if (item.user.city_id > 0) { 
-                        //customItem.country = await this.GetCountry(item.user.city_id.ToString()); 
-                        customItem.country = String.Empty;
+                        customItem.country = await this.GetCountry(item.user.city_id.ToString()); 
+                        //customItem.country = String.Empty;
                     }else
                     {
                         customItem.country = String.Empty;

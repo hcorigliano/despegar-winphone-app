@@ -1,5 +1,6 @@
 ﻿using Despegar.Core.Neo.Business.Common.State;
 using Despegar.Core.Neo.Business.CreditCard;
+using Despegar.Core.Neo.Business.Hotels.UserReviews.V1;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,5 +12,6 @@ namespace Despegar.Core.Neo.Contract.API
     public interface IAPIv1
     {
         Task<ValidationCreditcards> GetCreditCardValidations();
+        Task<HotelUserReviewsV1> GetHotelUserReviews(string hotelId, int limit, int offset, string language, string provider);
     }
 }

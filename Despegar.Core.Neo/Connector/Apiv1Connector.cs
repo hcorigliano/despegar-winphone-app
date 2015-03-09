@@ -14,7 +14,7 @@ namespace Despegar.Core.Neo.Connector
 {
     public class Apiv1Connector : ConnectorBase, IApiv1Connector
     {        
-        private static readonly string DOMAIN = "api.despegar.com/v1";
+        private static readonly string DOMAIN = "api.despegar.com/v1/";
         private string XUoW;
         private string x_client;
         private string site;
