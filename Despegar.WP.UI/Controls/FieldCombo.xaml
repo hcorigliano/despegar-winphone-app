@@ -22,7 +22,8 @@
                   SelectedItem="{Binding Value, Mode=TwoWay}"
                   SelectedValuePath="{Binding CodePath}" 
                   DisplayMemberPath="{Binding DisplayTextPath}"                   
-                  Style="{StaticResource ComboBoxBase}" />
+                  Style="{StaticResource ComboBoxBase}"                                   
+                  />
   
     </Grid>
 </UserControl>

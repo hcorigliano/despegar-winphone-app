@@ -1119,4 +1119,7 @@ Isso pode ter sido causado por dados incorretos, limite de compra insuficiente o
   <data name="payment_failed_title" xml:space="preserve">
     <value>Você alcançou o limite máximo de tentativas.</value>
   </data>
+  <data name="Flights_Checkout_Card_Data_Document_ERROR_INVALID_DOCUMENT_NUMBER" xml:space="preserve">
+    <value>Por favor, verifique o número introduzido</value>
+  </data>
 </root>

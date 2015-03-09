@@ -1096,7 +1096,7 @@ La reserva no ha sido generada y no se le cobrará ningún cargo por la transacc
   <data name="Flight_Thanks_Continue_Explain_Emitted.Text" xml:space="preserve">
     <value>Su pago ha sido procesado correctamente. En breve recibirá un email con el ticket electrónico</value>
   </data>
-    <data name="canceled" xml:space="preserve">
+  <data name="canceled" xml:space="preserve">
     <value>Debido a la cercanía del vuelo no logramos emitir los tickets por lo que le recomendamos que busque otro vuelo.</value>
   </data>
   <data name="canceled_title" xml:space="preserve">
@@ -1119,5 +1119,8 @@ La reserva no ha sido generada y no se le cobrará ningún cargo por la transacc
   </data>
   <data name="payment_failed_title" xml:space="preserve">
     <value>Ha alcanzado el máximo de intentos posible</value>
+  </data>
+  <data name="Flights_Checkout_Card_Data_Document_ERROR_INVALID_DOCUMENT_NUMBER" xml:space="preserve">
+    <value>Por favor, verifique el numero ingresado</value>
   </data>
 </root>

@@ -22,7 +22,7 @@
 
             <!-- Fiscal Status -->
             <StackPanel Visibility="{Binding fiscal_status.required, Converter={StaticResource VisibilityConverter}, FallbackValue=Collapsed}">
-                <controls:FieldCombo x:Uid="Flights_Checkout_Invoice_Arg_Fiscal_Status" ItemsSource="{Binding fiscal_status.options}"  Value="{Binding fiscal_status.SelectedOption, Mode=TwoWay}" CodePath="value" DisplayTextPath="description" />
+                <controls:FieldCombo x:Uid="Flights_Checkout_Invoice_Arg_Fiscal_Status"   Value="{Binding fiscal_status.SelectedOption, Mode=TwoWay}" CodePath="value" DisplayTextPath="description" ItemsSource="{Binding fiscal_status.options}" />
             </StackPanel>
             <!-- Razon Social -->
             <StackPanel Visibility="{Binding DataContext.IsFiscalNameRequired, ElementName=InvoiceArgControl, Converter={StaticResource VisibilityConverter}, FallbackValue=Collapsed}">
@@ -84,7 +84,7 @@
 
             <!-- State -->
             <StackPanel Visibility="{Binding address.state.required, Converter={StaticResource VisibilityConverter}, FallbackValue=Collapsed}">
-                <controls:FieldCombo x:Uid="Flights_Checkout_Invoice_Arg_State" ItemsSource="{Binding address.state.options}"  Value="{Binding address.state.SelectedOption, Mode=TwoWay}" CodePath="value" DisplayTextPath="description"  />
+                <controls:FieldCombo x:Uid="Flights_Checkout_Invoice_Arg_State"   Value="{Binding address.state.SelectedOption, Mode=TwoWay}" CodePath="value" DisplayTextPath="description"  ItemsSource="{Binding address.state.options}" />
                 <controls:ValidationError ErrorPrefix="Flights_Checkout_Invoice_Arg_State" ErrorCode="{Binding address.state.CurrentError}"  />
             </StackPanel>
 

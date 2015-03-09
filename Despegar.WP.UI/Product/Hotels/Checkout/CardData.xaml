@@ -26,7 +26,7 @@
             <!--<dev:UserControlDesignGrid />-->
 
             <!-- Card -->
-            <controls:FieldCombo x:Uid="Flights_Checkout_Card_Data_Card" ItemsSource="{Binding SelectedInstallment.Cards}" Value="{Binding SelectedCard, Mode=TwoWay}"  DisplayTextPath="card.description" CodePath="card.code" />
+            <controls:FieldCombo x:Uid="Flights_Checkout_Card_Data_Card"  Value="{Binding SelectedCard, Mode=TwoWay}"  DisplayTextPath="card.description" CodePath="card.code" ItemsSource="{Binding SelectedInstallment.Cards}" />
             <StackPanel DataContext="{Binding CoreBookingFields.form.CardInfo}">
                 <!-- Card Number -->
                 <controls:Field InputType="Numeric" x:Uid="Flights_Checkout_Card_Data_Number_Of_Card" Value="{Binding number.CoreValue, Mode=TwoWay}" Visibility="{Binding number.required, Converter={StaticResource VisibilityConverter}, FallbackValue=Collapsed}" />
@@ -66,12 +66,12 @@
                 <controls:Field InputType="TextOnly" x:Uid="Flights_Checkout_Card_Data_owner_name" Value="{Binding owner_name.CoreValue, Mode=TwoWay}" Visibility="{Binding owner_name.required,  Converter={StaticResource VisibilityConverter}, FallbackValue=Collapsed}" />
                 <controls:ValidationError ErrorPrefix="Flights_Checkout_Card_Data_owner_name" ErrorCode="{Binding owner_name.CurrentError}" Visibility="{Binding owner_name.required, Converter={StaticResource VisibilityConverter}, FallbackValue=Collapsed}" />
                 <!-- Document Type-->
-                <controls:FieldCombo x:Uid="Flights_Checkout_Card_Data_Type" ItemsSource="{Binding owner_document.type.options}"  Value="{Binding owner_document.type.SelectedOption, Mode=TwoWay}" Visibility="{Binding owner_document.type.required, Converter={StaticResource VisibilityConverter}, FallbackValue=Collapsed}" DisplayTextPath="description" CodePath="value" />
+                <controls:FieldCombo x:Uid="Flights_Checkout_Card_Data_Type"   Value="{Binding owner_document.type.SelectedOption, Mode=TwoWay}" Visibility="{Binding owner_document.type.required, Converter={StaticResource VisibilityConverter}, FallbackValue=Collapsed}" DisplayTextPath="description" CodePath="value" ItemsSource="{Binding owner_document.type.options}" />
                 <!-- Document -->
                 <controls:Field InputType="Numeric" x:Uid="Flights_Checkout_Card_Data_Document" Value="{Binding owner_document.number.CoreValue, Mode=TwoWay}" Visibility="{Binding owner_document.number.required, Converter={StaticResource VisibilityConverter},  FallbackValue=Collapsed}" />
                 <controls:ValidationError ErrorPrefix="Flights_Checkout_Card_Data_Document" ErrorCode="{Binding owner_document.number.CurrentError}" Visibility="{Binding owner_document.number.required,  Converter={StaticResource VisibilityConverter},  FallbackValue=Collapsed}" />
                 <!-- Gender -->
-                <controls:FieldCombo x:Uid="Flights_Checkout_Card_Data_Gender" ItemsSource="{Binding owner_gender.options}"  Value="{Binding owner_gender.SelectedOption, Mode=TwoWay}" Visibility="{Binding owner_gender.required, Converter={StaticResource VisibilityConverter}, FallbackValue=Collapsed}" DisplayTextPath="description" CodePath="value" />                
+                <controls:FieldCombo x:Uid="Flights_Checkout_Card_Data_Gender"   Value="{Binding owner_gender.SelectedOption, Mode=TwoWay}" Visibility="{Binding owner_gender.required, Converter={StaticResource VisibilityConverter}, FallbackValue=Collapsed}" DisplayTextPath="description" CodePath="value" ItemsSource="{Binding owner_gender.options}" />                
             </StackPanel>
 
             <!-- Coupons / Voucher -->

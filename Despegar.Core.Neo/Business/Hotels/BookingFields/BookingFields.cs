@@ -16,7 +16,7 @@ namespace Despegar.Core.Neo.Business.Hotels.BookingFields
         // NOTE FOR DEVS: Do NOT use && operator to include every condition in one IF. It won't trigger the validations of each field.      
         public bool IsValid(out string sectionID)
         {
-            bool passengerValid = true;
+            bool roomsValid = true;
             bool contactValid = true;
             bool cardValid = true;
             bool invoiceValid = true;
@@ -29,9 +29,9 @@ namespace Despegar.Core.Neo.Business.Hotels.BookingFields
             foreach (var passenger in form.passengers)
             {
                 if (passenger.first_name != null && !passenger.first_name.IsValid)
-                    passengerValid = false;
+                    roomsValid = false;
                 if (passenger.last_name != null && !passenger.last_name.IsValid)
-                    passengerValid = false;               
+                    roomsValid = false;               
             }
 
             // Contact
@@ -121,9 +121,9 @@ namespace Despegar.Core.Neo.Business.Hotels.BookingFields
             if (!form.Voucher.IsValid)
                 voucherValid = false;
 
-            if (!passengerValid)
+            if (!roomsValid)
             {
-                sectionID = "PASSENGERS";
+                sectionID = "ROOMS";
                 return false;
             }
             if (!contactValid)
