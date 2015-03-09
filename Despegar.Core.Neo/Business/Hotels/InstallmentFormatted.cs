@@ -18,6 +18,8 @@ namespace Despegar.Core.Neo.Business.Hotels
         public int InstallmentQuantity { get; set; }
         public List<HotelPayment> Cards { get; set; }
 
+        public bool CardsEmpty { get { return this.Cards.Count() == 0; } }
+
         public HotelPayment FirstCard { get { return Cards[0]; } }
 
         // For "WithInterest" payments
