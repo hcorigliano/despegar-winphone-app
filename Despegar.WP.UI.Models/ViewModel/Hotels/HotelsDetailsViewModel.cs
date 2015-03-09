@@ -11,6 +11,7 @@ using Despegar.WP.UI.Model.ViewModel.Classes;
 using Despegar.WP.UI.Model.ViewModel.Controls.Maps;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -32,8 +33,8 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
         public HotelUserReviews HotelReviews { get; set;}
         public HotelUserReviewsV1 HotelReviewsV1 { get; set; }
 
-        private List<CustomReviewsItem> customReviews { get; set; }
-        public List<CustomReviewsItem> CustomReviews
+        private ObservableCollection<CustomReviewsItem> customReviews { get; set; }
+        public ObservableCollection<CustomReviewsItem> CustomReviews
         {
             get
             {
@@ -238,7 +239,7 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
         private async void CompleteReviewsWithV1Response()
         {
             ResourceLoader manager = new ResourceLoader();
-            CustomReviews = new List<CustomReviewsItem>();
+            CustomReviews = new ObservableCollection<CustomReviewsItem>();
             Countries countries = await crossService.GetCountries();
 
             foreach (Review review in HotelReviewsV1.reviews)
@@ -313,7 +314,7 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
 
         private  async void FormatReviews(string p)
         {
-            CustomReviews = new List<CustomReviewsItem>();
+            CustomReviews = new ObservableCollection<CustomReviewsItem>();
             foreach(Item item in HotelReviews.items)
             {
                 CustomReviewsItem customItem = new CustomReviewsItem();
