@@ -13,7 +13,6 @@ namespace Despegar.Core.Neo.Business.Flight.BookingFields
         public Payments payments { get; set; }
         public Form form { get; set; }
 
-        // Custom
         // NOTE FOR DEVS: Do NOT use && operator to include every condition in one IF. It won't trigger the validations of each field.      
         public bool IsValid(out string sectionID)
         {

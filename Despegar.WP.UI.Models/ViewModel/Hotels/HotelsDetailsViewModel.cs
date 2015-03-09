@@ -223,11 +223,13 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
                             SuggestRoomPriceBase = null;
 
                         CrossParameters.RoomPackSelected = tempRoompack; //Toma el roompack seleccionado.
-                        if (tempRoompack.rooms[0].bed_options != null && tempRoompack.rooms[0].bed_options.Count() != 0)
+
+                        if (tempRoompack.rooms[0].bed_options != null && tempRoompack.rooms[0].bed_options.Count > 0)
                             CrossParameters.BedSelected = tempRoompack.rooms[0].bed_options[0];
-                        break;
+                        
+                        break;                        
                     }
-                }
+                }                
             }
 
             IsLoading = false;

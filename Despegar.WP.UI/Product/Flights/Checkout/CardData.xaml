@@ -87,7 +87,7 @@
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
 
-                <controls:Field InputType="AlphaNumeric" Grid.Column="0" Grid.Row="0" x:Uid="Flights_Checkout_Card_Data_Coupon"  Value="{Binding CoreBookingFields.form.Voucher.CoreValue, Mode=TwoWay}" LostFocus="Voucher_LostFocus" />
+                <controls:Field InputType="AlphaNumericExtra" Grid.Column="0" Grid.Row="0" x:Uid="Flights_Checkout_Card_Data_Coupon"  Value="{Binding CoreBookingFields.form.Voucher.CoreValue, Mode=TwoWay}" LostFocus="Voucher_LostFocus" />
 
                 <StackPanel Grid.ColumnSpan="3" Grid.Row="1">
                     <controls:ValidationError  ErrorPrefix="Checkout_Coupons" ErrorCode="{Binding CoreBookingFields.form.Voucher.CurrentError}"  />

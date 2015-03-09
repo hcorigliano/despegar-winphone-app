@@ -96,7 +96,7 @@ namespace Despegar.Core.Neo.Connector
             httpMessage.Headers.Add("X-UOW", XUoW);
             httpMessage.Headers.Add("X-Client", x_client);           
 
-            // TODO: What happens with new versions of MAPI???
+            // This makes MAPI point to Hoteles v3
             if (httpMessage.RequestUri.AbsoluteUri.Contains("https://mobile.despegar.com/v3/mapi-hotels/"))
                 httpMessage.Headers.Add("X-Version", "mapi-hotels-v3_1.1.0");
 
