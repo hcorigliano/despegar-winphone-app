@@ -1,4 +1,5 @@
-﻿using Despegar.Core.Neo.Business.Hotels;
+﻿using Despegar.Core.Neo.Business.Configuration;
+using Despegar.Core.Neo.Business.Hotels;
 using Despegar.Core.Neo.Business.Hotels.CustomUserReviews;
 using Despegar.Core.Neo.Business.Hotels.HotelDetails;
 using Despegar.Core.Neo.Business.Hotels.UserReviews;
@@ -234,10 +235,11 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
             IsLoading = false;
         }
 
-        private void CompleteReviewsWithV1Response()
+        private async void CompleteReviewsWithV1Response()
         {
             ResourceLoader manager = new ResourceLoader();
             CustomReviews = new List<CustomReviewsItem>();
+            Countries countries = await crossService.GetCountries();
 
             foreach (Review review in HotelReviewsV1.reviews)
             {
@@ -250,7 +252,11 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
                     
                 reviewItem.name = (String.IsNullOrWhiteSpace(reviewItem.name)) ? manager.GetString("Page_Hotels_Anonymous") : reviewItem.name;
 
-                reviewItem.country = (review.user != null) ? review.user.country : String.Empty;
+                reviewItem.countryCode = (review.user != null) ? review.user.country : String.Empty;
+
+                var country = countries.countries.Where(x => x.id == reviewItem.countryCode).FirstOrDefault();
+                reviewItem.country = (country != null)? country.name : String.Empty;
+
                 reviewItem.rating = (review.scores != null) ? (review.scores.avgRecommend/10).ToString() : "0";
 
                 customReviews.Add(reviewItem);
