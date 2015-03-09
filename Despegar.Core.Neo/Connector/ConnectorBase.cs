@@ -5,6 +5,7 @@ using Despegar.Core.Neo.Exceptions;
 using Despegar.Core.Neo.Log;
 using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -19,6 +20,7 @@ namespace Despegar.Core.Neo.Connector
         protected ICoreLogger logger;
         protected IBugTracker bugTracker;
         private HttpClient httpClient;
+        private Dictionary<string,string> flashHeaders;
 
         /// <summary>
         /// Initializes a new instance of Connector
@@ -36,6 +38,7 @@ namespace Despegar.Core.Neo.Connector
                 handler.AutomaticDecompression = DecompressionMethods.Deflate | DecompressionMethods.GZip;
 
             this.httpClient = new HttpClient(handler);
+            this.flashHeaders = new Dictionary<string, string>();
         }
 
         /// <summary>
@@ -49,7 +52,7 @@ namespace Despegar.Core.Neo.Connector
             string url = GetBaseUrl() + relativeServiceUrl;
 
             HttpRequestMessage httpMessage = new HttpRequestMessage(HttpMethod.Get, url);
-            SetCustomHeaders(httpMessage);
+            SetCustomHeaders(httpMessage, key);
 
             return await ProcessRequest<T>(httpMessage, key);            
         }
@@ -79,7 +82,7 @@ namespace Despegar.Core.Neo.Connector
             HttpRequestMessage httpMessage = new HttpRequestMessage(HttpMethod.Post, url);
             httpMessage.Content = new StringContent(data);
             httpMessage.Content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
-            SetCustomHeaders(httpMessage);
+            SetCustomHeaders(httpMessage, key);
 
             return await ProcessRequest<T>(httpMessage, key);
         }
@@ -115,7 +118,7 @@ namespace Despegar.Core.Neo.Connector
             HttpRequestMessage httpMessage = new HttpRequestMessage(HttpMethod.Put, url);
             httpMessage.Content = new StringContent(data);
             httpMessage.Content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
-            SetCustomHeaders(httpMessage);
+            SetCustomHeaders(httpMessage, key);
 
             return await ProcessRequest<T>(httpMessage, key);
         }
@@ -180,6 +183,9 @@ namespace Despegar.Core.Neo.Connector
                     throw e;
                 }
 
+                // Post Processing successful request (TEMPLATE Method)
+                PostProcessing(httpResponse);
+
                 // Deserialize JSON data to .NET object
                 return JsonConvert.DeserializeObject<T>(response);
             }
@@ -209,6 +215,12 @@ namespace Despegar.Core.Neo.Connector
           }
 
         /// <summary>
+        /// Custom connector processing after a successful request. i.e: Check for the MAPI cookie, read some special header, etc
+        /// </summary>
+        /// <param name="httpResponse"></param>
+        protected abstract void PostProcessing(HttpResponseMessage httpResponse);
+
+        /// <summary>
         /// Gets the Base Service URL. Example: "https://mobile.despegar.com"
         /// </summary>
         /// <returns></returns>
@@ -218,13 +230,25 @@ namespace Despegar.Core.Neo.Connector
         /// Template Method for adding custom HTTP Headers
         /// </summary>
         /// <param name="message"></param>
-        protected abstract void SetCustomHeaders(HttpRequestMessage message);
+        protected abstract void SetCustomHeaders(HttpRequestMessage message, ServiceKey key);
 
         private void SetCommonHeaders(HttpRequestMessage message)
         {
             message.Headers.Add("Accept-Encoding", "gzip, deflate");
             message.Headers.Add("Accept", "application/json");
             message.Headers.Add("Accept-Charset", "ISO-8859-1,utf-8");
+
+            // Apply Flash Headers
+            foreach (var item in flashHeaders)             
+                message.Headers.Add(item.Key, item.Value);            
+
+            // Reset flash headers
+            this.flashHeaders.Clear();
+        }
+
+        public void SetFlashHeader(string header, string content)
+        {
+            this.flashHeaders.Add(header, content);
         }
     }
 }

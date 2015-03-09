@@ -39,6 +39,7 @@
     <Compile Include="API\MAPI\MAPICross.cs" />
     <Compile Include="API\V3\APIv3.cs" />
     <Compile Include="Business\Configuration\City.cs" />
+    <Compile Include="Business\Common\Checkout\PaymentInstallments.cs" />
     <Compile Include="Business\Configuration\GeoLocation.cs" />
     <Compile Include="Business\Hotels\SearchBox\HotelsMinorsAge.cs" />
     <Compile Include="Business\Hotels\SearchBox\PassengersForRooms.cs" />

@@ -1,0 +1,36 @@
+﻿<UserControl
+    x:Class="Despegar.WP.UI.Product.Hotels.Details.Controls.RoomConditionsControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Despegar.WP.UI.Product.Hotels.Details.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:conv="using:Despegar.WP.UI.Common.Converter"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400">
+
+    <UserControl.Resources>
+        <conv:VisibilityConverter x:Name="VisibilityConverter" TrueValue="Visible" FalseValue="Collapsed" />
+    </UserControl.Resources>
+
+    <Grid>
+        <StackPanel Grid.Row="0">
+            <TextBlock x:Uid="Common_Conditions" Text="CondicionesX" Style="{StaticResource SegoeSemilight20}"/>
+            <TextBlock Style="{StaticResource SegoeRegular17}">
+                <Run Text="- "/>
+                <Run Text="{Binding meal_plan.description}"/>
+            </TextBlock>
+            <TextBlock Style="{StaticResource SegoeRegular17}">
+                <Run Text="- "/>
+                <Run Text="{Binding cancellation_policy.penalty_short_description}"/>
+            </TextBlock>
+            <TextBlock Style="{StaticResource SegoeRegular17}" Visibility="{Binding price.availability ,Converter={StaticResource VisibilityConverter}}">
+                <Run Text="- "/>
+                <Run x:Uid="Common_Left" Text="QuedanX " />
+                <Run Text="{Binding price.availability}"/>
+                <Run x:Uid="Hotel_Rooms_Availability" Text=" habitacion(es) disponible(s)X"/>
+            </TextBlock>
+        </StackPanel>
+    </Grid>
+</UserControl>

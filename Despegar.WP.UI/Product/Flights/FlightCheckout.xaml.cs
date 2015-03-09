@@ -53,9 +53,22 @@ namespace Despegar.WP.UI.Product.Flights
             }
         }
 
-        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
         {
+            base.OnNavigatingFrom(e);
+            if (e.NavigationMode == NavigationMode.Back)
+            {
+                ResetPageCache();
+            }
             HardwareButtons.BackPressed -= HardwareButtons_BackPressed;
+
+        }
+
+        private void ResetPageCache()
+        {
+            var cacheSize = ((Frame)Parent).CacheSize;
+            ((Frame)Parent).CacheSize = 0;
+            ((Frame)Parent).CacheSize = cacheSize;
         }
 
         private void ShowRisk(Object sender, EventArgs e )
@@ -96,7 +109,7 @@ namespace Despegar.WP.UI.Product.Flights
                     string phrase = manager.GetString("Flights_Checkout_Card_Data_Card_ERROR_OP_BOOKING_FAILED");
                     dialog = new MessageDialog(String.Format(phrase,ticketid), manager.GetString("Flights_Checkout_ERROR_FORM_ERROR_TITLE"));
                     await dialog.ShowSafelyAsync();
-                    ViewModel.Navigator.GoBack();
+                    ViewModel.Navigator.RemoveBackEntry();
                     ViewModel.Navigator.GoBack();
                     break;   
                case "COMPLETE_BOOKING_CONECTION_FAILED":
@@ -109,26 +122,37 @@ namespace Despegar.WP.UI.Product.Flights
                     ViewModel.Navigator.GoBack();
                     break;
                case "ONLINE_PAYMENT_ERROR_NEW_CREDIT_CARD":
-                    dialog = new MessageDialog(manager.GetString("Flights_Checkout_Card_Data_Card_ERROR_NEW_CREDIT_CARD"), manager.GetString("Flights_Checkout_ERROR_FORM_ERROR_TITLE"));
+                    // NEW CC
+                    dialog = new MessageDialog(manager.GetString("new_creditcard"), manager.GetString("new_creditcard_title"));
                     await dialog.ShowSafelyAsync();
                     pageID = (string)e.Parameter;
                     MainPivot.SelectedIndex = GetSectionIndex(pageID);
                     break;
                case "ONLINE_PAYMENT_ERROR_FIX_CREDIT_CARD":
-                    dialog = new MessageDialog(manager.GetString("Flights_Checkout_Card_Data_Card_ERROR_ONLINE_PAYMENT_ERROR_FIX_CREDIT_CARD"), manager.GetString("Flights_Checkout_ERROR_FORM_ERROR_TITLE"));
+                    // FIX CC
+                    dialog = new MessageDialog(manager.GetString("fix_creditcard"), manager.GetString("fix_creditcard_title"));
                     await dialog.ShowSafelyAsync();
                     pageID = (string)e.Parameter;
                     MainPivot.SelectedIndex = GetSectionIndex(pageID);                    
                     break;
-               case "ONLINE_PAYMENT_FAILED": {             
-                    //string ticketid = e.Parameter as string;
-                    //ticketid = (ticketid != null) ? ticketid : String.Empty;
+               case "BOOKING_CANCELED":
+                    dialog = new MessageDialog(manager.GetString("canceled"), manager.GetString("canceled_title"));
+                    await dialog.ShowSafelyAsync();
+                    ViewModel.Navigator.RemoveBackEntry();
+                    ViewModel.Navigator.GoBack();
+                    break;
+               case "PAYMENT_FAILED":
+                    dialog = new MessageDialog(manager.GetString("payment_failed"), manager.GetString("payment_failed_title"));
+                    await dialog.ShowSafelyAsync();
+                    ViewModel.Navigator.GoBack();
+                    break;
+               case "RISK_PAYMENT_FAILED":                               
                     string phone = GetContactPhone();
                     string phrase2 = manager.GetString("Flights_Checkout_Card_Data_Card_ERROR_OP_PAYMENT_FAILED");
                     dialog = new MessageDialog(String.Format(phrase2, phone), manager.GetString("Flights_Checkout_ERROR_FORM_ERROR_TITLE"));
                     await dialog.ShowSafelyAsync();
-                    break;                    
-                 }
+                    ViewModel.Navigator.GoBack();
+                    break;                                     
                 case "COMPLETE_BOOKING_BOOKING_FAILED":
                     dialog = new MessageDialog(manager.GetString("Flights_Search_ERROR_BOOKING_FAILED"), manager.GetString("Flights_Checkout_ERROR_FORM_ERROR_TITLE"));
                     await dialog.ShowSafelyAsync();
@@ -143,6 +167,7 @@ namespace Despegar.WP.UI.Product.Flights
                 case "API_ERROR":
                     dialog = new MessageDialog(manager.GetString("Flights_Checkout_ERROR_FORM_ERROR"), manager.GetString("Flights_Checkout_ERROR_FORM_ERROR_TITLE"));
                     await dialog.ShowSafelyAsync();
+                    ViewModel.Navigator.GoBack();
                     break;
                     // TODO: CHECKOUT SESSION EXPIRED -> Handle that error
             }

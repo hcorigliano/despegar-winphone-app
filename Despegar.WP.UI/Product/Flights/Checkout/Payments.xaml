@@ -32,7 +32,7 @@
                        <StackPanel>
                          <RadioButton Style="{StaticResource CheckoutPaymentRadioButton}" 
                                       DataContext="{Binding }"  
-                                      Content="{Binding FirstCard, Converter={StaticResource PaymentDetailsToLabelConverter}}" 
+                                      Content="{Binding FirstCard.installments, Converter={StaticResource PaymentDetailsToLabelConverter},ConverterParameter={Binding FirstCard.paymentDetails.interest}}" 
                                       Checked="OnRadioButton_Clicked"                                      
                                       x:Name="radioButton"
                                       GroupName="WithouInterest" />
@@ -40,7 +40,7 @@
                         <src2:Cards CardsSource="{Binding Cards}" Margin="-15,0,0,0" />
                         
                         <TextBlock Style="{StaticResource SegoeRegular15}" 
-                              Text="{Binding FirstCard, Converter={StaticResource PaymentDetailsToPaysConverter}}" 
+                              Text="{Binding FirstCard.installments, Converter={StaticResource PaymentDetailsToPaysConverter}}" 
                               Visibility="{Binding IsChecked, ElementName=radioButton, Converter={StaticResource VisibilityConverter} }" />
                            
                        </StackPanel>
@@ -64,14 +64,14 @@
                                             Checked="OnRadioButton_Clicked"
                                             GroupName="WithInteres" 
                                             Visibility="{Binding Converter={StaticResource NullVisibilityConverter}}"  
-                                            Content="{Binding FirstCard, Converter={StaticResource PaymentDetailsToLabelConverter}}" 
+                                            Content="{Binding FirstCard.installments, Converter={StaticResource PaymentDetailsToLabelConverter},ConverterParameter={Binding FirstCard.paymentDetails.interest}}" 
                                             x:Name="radioButton" />
 
 
                                 <src2:Cards CardsSource="{Binding Cards}" Margin="-15,0,0,0" />
 
                                 <StackPanel Visibility="{Binding IsChecked, ElementName=radioButton , Converter={StaticResource VisibilityConverter} }">
-                                    <TextBlock Style="{StaticResource SegoeRegular15}"  Text="{Binding FirstCard, Converter={StaticResource PaymentDetailsToPaysConverter}}"  />
+                                    <TextBlock Style="{StaticResource SegoeRegular15}"  Text="{Binding FirstCard.installments, Converter={StaticResource PaymentDetailsToPaysConverter}}"  />
 
                                     <!-- CFT -->
                                     <TextBlock DataContext="{Binding FirstCard}"  Style="{StaticResource SegoeRegular15}" Visibility="{Binding interest_by_bank, Converter={StaticResource VisibilityConverter}, ConverterParameter=Inverted}" >

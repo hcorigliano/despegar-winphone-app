@@ -124,7 +124,7 @@
     <Compile Include="Controls\Hotels\DateControl.xaml.cs">
       <DependentUpon>DateControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Hotels\Details\HotelItem.xaml.cs">
+    <Compile Include="Controls\Hotels\Results\HotelItem.xaml.cs">
       <DependentUpon>HotelItem.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\Hotels\MiniBoxSearch.xaml.cs">
@@ -314,6 +314,9 @@
     <Compile Include="Product\Hotels\Checkout\Contact.xaml.cs">
       <DependentUpon>Contact.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Product\Hotels\Checkout\Controls\BuyDetailsControl.xaml.cs">
+      <DependentUpon>BuyDetailsControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Product\Hotels\Checkout\InvoiceArgentina.xaml.cs">
       <DependentUpon>InvoiceArgentina.xaml</DependentUpon>
     </Compile>
@@ -328,6 +331,12 @@
     </Compile>
     <Compile Include="Product\Hotels\Details\Controls\RoomAvailabilitieItem.xaml.cs">
       <DependentUpon>RoomAvailabilitieItem.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Product\Hotels\Details\Controls\RoomConditionsControl.xaml.cs">
+      <DependentUpon>RoomConditionsControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Product\Hotels\Details\Controls\RoomInformationControl.xaml.cs">
+      <DependentUpon>RoomInformationControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Product\Hotels\Details\Controls\RoomItem.xaml.cs">
       <DependentUpon>RoomItem.xaml</DependentUpon>
@@ -382,7 +391,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Controls\Hotels\Details\HotelItem.xaml">
+    <Page Include="Controls\Hotels\Results\HotelItem.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -800,6 +809,7 @@
     <Content Include="Assets\Icon\Amenities\amn_ael.png" />
     <Content Include="Assets\Icon\Amenities\amn_agca.png" />
     <Content Include="Assets\Icon\Amenities\amn_air.png" />
+    <Content Include="Assets\Icon\Amenities\amn_airroom.png" />
     <Content Include="Assets\Icon\Amenities\amn_airtran.png" />
     <Content Include="Assets\Icon\Amenities\amn_aki.png" />
     <Content Include="Assets\Icon\Amenities\amn_allinclusive.png" />
@@ -880,6 +890,7 @@
     <Content Include="Assets\Icon\Amenities\amn_health.png" />
     <Content Include="Assets\Icon\Amenities\amn_hid.png" />
     <Content Include="Assets\Icon\Amenities\amn_hot.png" />
+    <Content Include="Assets\Icon\Amenities\amn_hotroom.png" />
     <Content Include="Assets\Icon\Amenities\amn_ingrah.png" />
     <Content Include="Assets\Icon\Amenities\amn_inswpose.png" />
     <Content Include="Assets\Icon\Amenities\amn_intc.png" />
@@ -1662,6 +1673,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Product\Hotels\Checkout\Controls\BuyDetailsControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Product\Hotels\Checkout\InvoiceArgentina.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -1679,6 +1694,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Product\Hotels\Details\Controls\RoomAvailabilitieItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Product\Hotels\Details\Controls\RoomConditionsControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Product\Hotels\Details\Controls\RoomInformationControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -1744,7 +1767,6 @@
     <Folder Include="Assets\en\" />
     <Folder Include="Assets\es\" />
     <Folder Include="Assets\pt\" />
-    <Folder Include="Product\Hotels\Checkout\Controls\" />
     <Folder Include="Strings\en\" />
   </ItemGroup>
   <ItemGroup>

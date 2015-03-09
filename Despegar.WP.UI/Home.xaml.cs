@@ -70,10 +70,14 @@ namespace Despegar.WP.UI
 
             this.DataContext = ViewModel;
 
+            if(e.NavigationMode == NavigationMode.New)
+                await SetupMenuItems(GlobalConfiguration.Site);
+
             if (!versionChecked)
             {
-                await SetupMenuItems(GlobalConfiguration.Site);
+#if !DEBUG
                 await ValidateUpdate();
+#endif
                 versionChecked = true;
             }
         }

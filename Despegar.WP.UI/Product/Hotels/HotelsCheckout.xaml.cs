@@ -39,13 +39,11 @@ namespace Despegar.WP.UI.Product.Hotels
         {
             this.InitializeComponent();
 
-            
-
-#if !DEBUG
+            #if !DEBUG
                 GoogleAnalyticContainer ga = new GoogleAnalyticContainer();
                 ga.Tracker = GoogleAnalytics.EasyTracker.GetTracker();
                 ga.SendView("HotelsCheckout");
-#endif
+            #endif
         }
         
         protected async override void OnNavigatedTo(NavigationEventArgs e)
@@ -95,14 +93,14 @@ namespace Despegar.WP.UI.Product.Hotels
 
             switch (e.ErrorCode)
             {
-                //case "FORM_ERROR":
-                //    dialog = new MessageDialog(manager.GetString("Flights_Checkout_ERROR_FORM_ERROR"), manager.GetString("Flights_Checkout_ERROR_FORM_ERROR_TITLE"));
-                //    await dialog.ShowSafelyAsync();
+                case "FORM_ERROR":
+                    dialog = new MessageDialog(manager.GetString("Flights_Checkout_ERROR_FORM_ERROR"), manager.GetString("Flights_Checkout_ERROR_FORM_ERROR_TITLE"));
+                    await dialog.ShowSafelyAsync();
 
-                //    // Go to Pivot with errors
-                //    string sectionID = (string)e.Parameter;
-                //    MainPivot.SelectedIndex = GetSectionIndex(sectionID);
-                //    break;
+                    // Go to Pivot with errors
+                    string sectionID = (string)e.Parameter;
+                    MainPivot.SelectedIndex = GetSectionIndex(sectionID);
+                    break;
                 //case "TERMS_AND_CONDITIONS_NOT_CHECKED":
                 //    dialog = new MessageDialog(manager.GetString("TermsAndConditions_ERROR"), manager.GetString("TermsAndConditions_ERROR_TITLE"));
                 //    await dialog.ShowSafelyAsync();
@@ -175,6 +173,12 @@ namespace Despegar.WP.UI.Product.Hotels
             }
         }
         #endregion
+
+        private int GetSectionIndex(string sectionID)
+        {
+            PivotItem errorPivot = this.FindName("Pivot_" + sectionID) as PivotItem;
+            return MainPivot.Items.IndexOf(errorPivot);
+        }
 
         private void Checkloading(object sender, PropertyChangedEventArgs e)
         {

@@ -71,6 +71,8 @@ namespace Despegar.Core.Neo.API.MAPI
         {            
             string serviceUrl = ServiceURL.GetServiceURL(ServiceKey.HotelsBookingFields);
 
+
+            connector.SetFlashHeader("X-UPAEXTRA-SELECTED-ITEM-INDEX", (bookingFieldPost.SelectedItemIndex + 1).ToString());
             var result = await connector.PostAsync<HotelsBookingFields>(serviceUrl, bookingFieldPost, ServiceKey.HotelsBookingFields);
 
             int i = 1;

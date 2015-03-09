@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,5 +14,9 @@ namespace Despegar.Core.Neo.Business.Hotels
         public List<string> room_choices { get; set; }
         public string thread_metrix_session_id { get; set; }
         public string mobile_identifier { get; set; }
+
+        // UPA
+        [JsonIgnore]
+        public int SelectedItemIndex { get; set; }
     }
 }

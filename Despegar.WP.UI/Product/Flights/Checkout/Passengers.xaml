@@ -14,6 +14,7 @@
     >
     <UserControl.Resources>
         <conv:VisibilityConverter x:Name="VisibilityConverter" TrueValue="Visible" FalseValue="Collapsed"/>
+        <conv:VisibilityConverter x:Name="InvertedVisibilityConverter" TrueValue="Collapsed" FalseValue="Visible" />
         <conv:TypeToTextConverter x:Name="TypeToTextConverter" />
         <conv:DateToStringConverter x:Name="DateToStringConverter" />
     </UserControl.Resources>
@@ -43,38 +44,38 @@
                         <StackPanel Grid.Row="1">
                             <!-- First Name -->
                             <StackPanel Visibility="{Binding first_name.required, Converter={StaticResource VisibilityConverter}, FallbackValue=Collapsed}">
-                                <controls:Field InputType="TextOnly" x:Uid="Flights_Checkout_Passenger_First_Name" Value="{Binding first_name.CoreValue, Mode=TwoWay}"  />
+                                <controls:Field IsEnabled="{Binding IsFrozen, Converter={StaticResource InvertedVisibilityConverter}}"  InputType="TextOnly" x:Uid="Flights_Checkout_Passenger_First_Name" Value="{Binding first_name.CoreValue, Mode=TwoWay}"  />
                                 <controls:ValidationError ErrorPrefix="Flights_Checkout_Passenger_First_Name" ErrorCode="{Binding first_name.CurrentError}" />
                             </StackPanel>
                             <!-- Last Name -->
                             <StackPanel Visibility="{Binding last_name.required, Converter={StaticResource VisibilityConverter}, FallbackValue=Collapsed}">
-                                <controls:Field InputType="TextOnly"  x:Uid="Flights_Checkout_Passenger_Last_Name" Value="{Binding last_name.CoreValue, Mode=TwoWay}" />
+                                <controls:Field IsEnabled="{Binding IsFrozen, Converter={StaticResource InvertedVisibilityConverter}}"  InputType="TextOnly"  x:Uid="Flights_Checkout_Passenger_Last_Name" Value="{Binding last_name.CoreValue, Mode=TwoWay}" />
                                 <controls:ValidationError ErrorPrefix="Flights_Checkout_Passenger_Last_Name" ErrorCode="{Binding last_name.CurrentError}" />
                             </StackPanel>
                             <!-- Nationality -->
                             <StackPanel Style="{StaticResource TextBoxInputContainer}" Visibility="{Binding nationality.required, FallbackValue=Collapsed, Converter={StaticResource VisibilityConverter}}">
                                 <TextBlock Style="{StaticResource BaseTextLabel}" x:Uid="Flights_Checkout_Passenger_Nationality" Text="Nacionalidad" />
-                                <src:NationalitySelection GotFocus="NationalitySelection_GotFocus" x:Name="NationalitySelection" ItemsSource="{Binding DataContext.Countries, ElementName=passengerControl , Mode=TwoWay}" SelectedItem="{Binding nationality.CoreValue , Mode=TwoWay}"  />
+                                <src:NationalitySelection IsEnabled="{Binding IsFrozen, Converter={StaticResource InvertedVisibilityConverter}}"  GotFocus="NationalitySelection_GotFocus" x:Name="NationalitySelection"  SelectedItem="{Binding nationality.CoreValue , Mode=TwoWay}" ItemsSource="{Binding DataContext.Countries, ElementName=passengerControl , Mode=TwoWay}" />
                                 <controls:ValidationError ErrorPrefix="Flights_Checkout_Passenger_Nationality" ErrorCode="{Binding nationality.CurrentError}" />
                             </StackPanel>
                             <!-- Nro Documento -->
                             <StackPanel Visibility="{Binding document.number.required, FallbackValue=Collapsed, Converter={StaticResource VisibilityConverter}}">
-                                <controls:Field InputType="Numeric"  x:Uid="Flights_Checkout_Passenger_Document_Number" Value="{Binding document.number.CoreValue, Mode=TwoWay}" />
+                                <controls:Field IsEnabled="{Binding IsFrozen, Converter={StaticResource InvertedVisibilityConverter}}"  InputType="Numeric"  x:Uid="Flights_Checkout_Passenger_Document_Number" Value="{Binding document.number.CoreValue, Mode=TwoWay}" />
                                 <controls:ValidationError ErrorPrefix="Flights_Checkout_Passenger_Document_Number" ErrorCode="{Binding document.number.CurrentError}" />
                             </StackPanel>
                             <!-- Document Type -->
                             <StackPanel Visibility="{Binding document.type.required, FallbackValue=Collapsed, Converter={StaticResource VisibilityConverter}}">
-                                <controls:FieldCombo x:Uid="Flights_Checkout_Passenger_Document_Type"  ItemsSource="{Binding document.type.options}"  Value="{Binding document.type.SelectedOption, Mode=TwoWay}" DisplayTextPath="description" CodePath="value" />
+                                <controls:FieldCombo IsEnabled="{Binding IsFrozen, Converter={StaticResource InvertedVisibilityConverter}}"  x:Uid="Flights_Checkout_Passenger_Document_Type"    Value="{Binding document.type.SelectedOption, Mode=TwoWay}" DisplayTextPath="description" CodePath="value" ItemsSource="{Binding document.type.options}" />
                             </StackPanel>
                             <!-- Birthday -->
                             <StackPanel Style="{StaticResource TextBoxInputContainer}" Visibility="{Binding birthdate.required, FallbackValue=Collapsed,Converter={StaticResource VisibilityConverter}}">
                                 <TextBlock  Style="{StaticResource BaseTextLabel}" x:Uid="Flights_Checkout_Passager_Birthdate" Text="Fecha de nacimiento" />
-                                <DatePicker Style="{StaticResource DatePickerBase}"  Date="{Binding birthdate.CoreValue, Mode=TwoWay, Converter={StaticResource DateToStringConverter}}" />
+                                <DatePicker IsEnabled="{Binding IsFrozen, Converter={StaticResource InvertedVisibilityConverter}}"  Style="{StaticResource DatePickerBase}"  Date="{Binding birthdate.CoreValue, Mode=TwoWay, Converter={StaticResource DateToStringConverter}}" />
                                 <controls:ValidationError ErrorPrefix="Flights_Checkout_Passager_Birthdate" ErrorCode="{Binding birthdate.CurrentError}" />
                             </StackPanel>
                             <!-- Gender -->
                             <StackPanel Visibility="{Binding gender.required, FallbackValue=Collapsed, Converter={StaticResource VisibilityConverter}}">
-                                <controls:FieldCombo x:Uid="Flights_Checkout_Passenger_Gender"  ItemsSource="{Binding gender.options}"  Value="{Binding gender.SelectedOption, Mode=TwoWay}" DisplayTextPath="description" CodePath="value" />
+                                <controls:FieldCombo IsEnabled="{Binding IsFrozen, Converter={StaticResource InvertedVisibilityConverter}}"  x:Uid="Flights_Checkout_Passenger_Gender"    Value="{Binding gender.SelectedOption, Mode=TwoWay}" DisplayTextPath="description" CodePath="value" ItemsSource="{Binding gender.options}" />
                             </StackPanel>          
                             
                         </StackPanel>

@@ -17,7 +17,7 @@
 
         <StackPanel Grid.Row="0">
             <TextBlock x:Uid="Hotels_Search_Destination" Style="{StaticResource BaseTextLabel}" Text="Destino" />
-            <AutoSuggestBox  TextBoxStyle="{StaticResource InputBase}" Style="{StaticResource AutosuggestBoxBase}" Text="{Binding InitialDestinationText}" x:Name="DestinyInput"  LostFocus="Focus_Lost" SuggestionChosen="SuggestionChosen" TextMemberPath="name"  TextChanged="HotelsTextBlock_TextChanged" />
+            <AutoSuggestBox  TextBoxStyle="{StaticResource InputBase}" Style="{StaticResource AutosuggestBoxBase}" Text="{Binding InitialDestinationText}" x:Name="DestinyInput"  LostFocus="Focus_Lost" SuggestionChosen="SuggestionChosen" TextMemberPath="name"  TextChanged="HotelsTextBlock_TextChanged" KeyUp="DestinationInput_KeyUp" />
         </StackPanel>
     </Grid>
 </UserControl>

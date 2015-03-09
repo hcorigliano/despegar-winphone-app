@@ -1,5 +1,7 @@
-﻿using Despegar.Core.Neo.Business.Flight.BookingFields;
+﻿using Despegar.Core.Neo.Business.Common.Checkout;
+using Despegar.Core.Neo.Business.Flight.BookingFields;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
@@ -20,8 +22,8 @@ namespace Despegar.WP.UI.Controls
 {
     public sealed partial class FieldCombo : UserControl
     {
-        public static readonly DependencyProperty ValueProperty = DependencyProperty.Register("Value", typeof(object), typeof(FieldCombo), new PropertyMetadata(null));       
-        public static readonly DependencyProperty ItemsSourceProperty = DependencyProperty.Register("ItemsSource", typeof(object), typeof(FieldCombo), new PropertyMetadata(null));
+        public static readonly DependencyProperty ValueProperty = DependencyProperty.Register("Value", typeof(object), typeof(FieldCombo), new PropertyMetadata(null));
+        public static readonly DependencyProperty ItemsSourceProperty = DependencyProperty.Register("ItemsSource", typeof(object), typeof(FieldCombo), new PropertyMetadata(null, Items_Changed));
         public static readonly DependencyProperty LabelProperty = DependencyProperty.Register("Label", typeof(string), typeof(FieldCombo), new PropertyMetadata(null));
         public static readonly DependencyProperty CodePathProperty = DependencyProperty.Register("CodePath", typeof(string), typeof(FieldCombo), new PropertyMetadata(null));
         public static readonly DependencyProperty DisplayTextPathProperty = DependencyProperty.Register("DisplayTextPath", typeof(string), typeof(FieldCombo), new PropertyMetadata(null));
@@ -91,5 +93,24 @@ namespace Despegar.WP.UI.Controls
             this.InitializeComponent();
             (this.Content as FrameworkElement).DataContext = this;
         }
+
+        /// <summary>
+        ///  Selects the first option of the items
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="args"></param>
+        private static void Items_Changed(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var control = ((FieldCombo)d);
+            IEnumerable<object> items = control.ItemsSource as IEnumerable<object>;
+            object firstItem = items.FirstOrDefault();
+
+            if (firstItem != null)
+            {
+                control.fieldCombo.ItemsSource = items;
+                control.fieldCombo.SelectedItem = firstItem;
+            }       
+        }
+
     }
 }
