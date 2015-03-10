@@ -196,7 +196,7 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
            
            //HotelReviews = await userReviewService.GetHotelUserReviews(CrossParameters.IdSelectedHotel, 10, 0, "es","despegar");
 
-           HotelReviewsV1 = await userReviewServiceV1.GetHotelUserReviews(CrossParameters.IdSelectedHotel, 10, 0, "es", "despegar");
+           HotelReviewsV1 = await userReviewServiceV1.GetHotelUserReviews(CrossParameters.IdSelectedHotel, true, 1, 10, true);
            CompleteReviewsWithV1Response();
 
            //FormatReviews(GlobalConfiguration.Language);
@@ -260,9 +260,14 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
             {
                 CustomReviewsItem reviewItem = new CustomReviewsItem();
 
-                reviewItem.description = (review.comments.FirstOrDefault() != null) ? review.comments.FirstOrDefault().description : String.Empty;
-                reviewItem.bad = (review.comments.FirstOrDefault() != null) ? review.comments.FirstOrDefault().bad : String.Empty;
-                reviewItem.good = (review.comments.FirstOrDefault() != null) ? review.comments.FirstOrDefault().good : String.Empty;
+                //reviewItem.description = (review.comments.FirstOrDefault() != null) ? review.comments.FirstOrDefault().description : String.Empty;
+                //reviewItem.bad = (review.comments.FirstOrDefault() != null) ? review.comments.FirstOrDefault().bad : String.Empty;
+                //reviewItem.good = (review.comments.FirstOrDefault() != null) ? review.comments.FirstOrDefault().good : String.Empty;
+
+                reviewItem.description = review.comments.description;
+                reviewItem.bad = review.comments.bad;
+                reviewItem.good = review.comments.good;
+
                 reviewItem.name = (review.user != null) ? review.user.name : String.Empty;
                     
                 reviewItem.name = (String.IsNullOrWhiteSpace(reviewItem.name)) ? manager.GetString("Page_Hotels_Anonymous") : reviewItem.name;
@@ -272,7 +277,9 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
                 var country = countries.countries.Where(x => x.id == reviewItem.countryCode).FirstOrDefault();
                 reviewItem.country = (country != null)? country.name : String.Empty;
 
-                reviewItem.rating = (review.scores != null) ? (review.scores.avgRecommend/10).ToString() : "0";
+                //reviewItem.rating = (review.scores != null) ? (review.scores.avgRecommend/10).ToString() : "0";
+
+                reviewItem.rating = (review.averageScore / 10).ToString("N2");
 
                 customReviews.Add(reviewItem);
             }

@@ -12,6 +12,6 @@ namespace Despegar.Core.Neo.Contract.API
     public interface IAPIv1
     {
         Task<ValidationCreditcards> GetCreditCardValidations();
-        Task<HotelUserReviewsV1> GetHotelUserReviews(string hotelId, int limit, int offset, string language, string provider);
+        Task<HotelUserReviewsV1> GetHotelUserReviews(string hotelId, bool cleanEmpty, int page, int pageSize, bool BringTotal);
     }
 }
