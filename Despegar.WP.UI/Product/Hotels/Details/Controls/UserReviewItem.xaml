@@ -15,52 +15,66 @@
         <conv:RatingToColorConverter x:Name="RatingToColorConverter"/>
         <conv:NullToVisibilityConverter x:Name="NullToVisibilityConverter"/>
     </UserControl.Resources>
+
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
+            <RowDefinition Height="{StaticResource Block2p}"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="{StaticResource Block1p}"/>
         </Grid.RowDefinitions>
-        
+
         <!--Header Grid-->
         <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="{StaticResource Block1p}"/>
                 <ColumnDefinition Width="auto"/>
             </Grid.ColumnDefinitions>
-            <Grid Grid.Column="0" Height="{StaticResource dBlock1p}"  Background="{Binding CustomReviews.rating , Converter={StaticResource RatingToColorConverter}}" VerticalAlignment="Top" />
+            <Grid Grid.Column="0" Height="{StaticResource dBlock1p}"  Background="{Binding rating , Converter={StaticResource RatingToColorConverter}}" VerticalAlignment="Top" Margin="0,6,0,0" />
 
-            <Grid Grid.Column="1">
+            <Grid Grid.Column ="1" Margin="{StaticResource Left_Offset}">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="auto"/>
                 </Grid.RowDefinitions>
-                <TextBlock Grid.Row="0" Text="{Binding CustomReviews.name}"/>
-                    
-                <TextBlock Grid.Row="1">
-                    <Run Text="{Binding CustomReviews.rating}"/>
-                    <Run Text="- DesdeX"/>
-                    <Run Text="{Binding CustomReviews.country}"/>
+                <TextBlock Grid.Row="0"  Style="{StaticResource SegoeSemilight28}" >
+                    <Run Text="{Binding name}"></Run>
+                </TextBlock>
+
+                <TextBlock Grid.Row="1" Style="{StaticResource SegoeSemilight17}">
+                    <Run Text="{Binding rating}"/>
+                    <Run x:Uid="Page_Hotels_Reviews_Comments_From"  Text="- DesdeX"/>
+                    <Run Text="{Binding country}"/>
                 </TextBlock>
             </Grid>
         </Grid>
-        
+
         <!--Text Grid-->
 
         <Grid Grid.Row="1">
             <StackPanel>
-                <TextBlock Text="{Binding CustomReviewsItem.description}" Visibility="{Binding  CustomReviewsItem.description , Converter={StaticResource NullToVisibilityConverter}}"/>
-
-                <StackPanel Visibility="{Binding  CustomReviewsItem.description , Converter={StaticResource NullToVisibilityConverter}}">
-                    <TextBlock Text="Lo BuenoX"/>
-                    <TextBlock Text="{Binding CustomReviewsItem.good}" />
-                </StackPanel>
-
-                <StackPanel Visibility="{Binding  CustomReviewsItem.description , Converter={StaticResource NullToVisibilityConverter}}">
-                    <TextBlock Text="MaloX"/>
-                    <TextBlock Text="{Binding CustomReviewsItem.bad}" />
-                </StackPanel>
+                <TextBlock Style="{StaticResource SegoeLight24}" Text="{Binding description}" Visibility="{Binding  description , Converter={StaticResource NullToVisibilityConverter}}"/>
+                <Grid  Visibility="{Binding good, Converter={StaticResource NullToVisibilityConverter}}" MinHeight="{StaticResource dBlock1p}">
+                	<Grid.ColumnDefinitions>
+                		<ColumnDefinition Width="Auto" />
+                		<ColumnDefinition/>
+                	</Grid.ColumnDefinitions>
+                	<TextBlock Style="{StaticResource SegoeLight24}" x:Uid="Page_Hotels_Reviews_Good" Text="Lo BuenoX" />
+                	<TextBlock Style="{StaticResource SegoeLight24}" TextWrapping="Wrap" Text="{Binding good}"  Grid.Column="1" Margin="{StaticResource Left_Offset}" />
+                </Grid>
+                <Grid Visibility="{Binding bad, Converter={StaticResource NullToVisibilityConverter}}" MinHeight="{StaticResource dBlock1p}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Style="{StaticResource SegoeLight24}" x:Uid="Page_Hotels_Reviews_Bad" Text="MaloX"/>
+                	<TextBlock Style="{StaticResource SegoeLight24}" Text="{Binding bad}" TextWrapping="Wrap" Margin="{StaticResource Left_Offset}" Grid.Column="1" />
+                </Grid>
             </StackPanel>
         </Grid>
         
+        <Grid Grid.Row="2">
+            
+        </Grid>
+
     </Grid>
 </UserControl>

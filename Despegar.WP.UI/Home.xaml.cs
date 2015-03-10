@@ -196,7 +196,7 @@ namespace Despegar.WP.UI
         {
             try
             {
-                var channel = await PushNotificationChannelManager.CreatePushNotificationChannelForApplicationAsync("App");
+                var channel = await PushNotificationChannelManager.CreatePushNotificationChannelForApplicationAsync();
 
                 PushRegistrationRequest pnr = new PushRegistrationRequest();
                 pnr.upa_id = Despegar.WP.UI.Model.GlobalConfiguration.UPAId;
@@ -208,19 +208,19 @@ namespace Despegar.WP.UI
 
                 this.notifications = IoC.Resolve<IMAPINotifications>();
 
-                if (Despegar.WP.UI.Model.GlobalConfiguration.Channel == null && channel != null)
+                if (Despegar.WP.UI.Model.GlobalConfiguration.ChannelUri == null && channel != null)
                 {
                     registerResponse = await this.notifications.RegisterOnDespegarCloud(pnr);
                 }
 
-                if (Despegar.WP.UI.Model.GlobalConfiguration.Channel != null && channel != null && channel.Uri != Despegar.WP.UI.Model.GlobalConfiguration.Channel.Uri)
+                if (Despegar.WP.UI.Model.GlobalConfiguration.ChannelUri != null && channel != null && channel.Uri != Despegar.WP.UI.Model.GlobalConfiguration.ChannelUri)
                 {
 
                     registerResponse = await this.notifications.RegisterOnDespegarCloud(pnr);
                 }
 
 
-                Despegar.WP.UI.Model.GlobalConfiguration.Channel = channel;
+                Despegar.WP.UI.Model.GlobalConfiguration.ChannelUri = channel.Uri;
 
             }
             catch (Exception ex)

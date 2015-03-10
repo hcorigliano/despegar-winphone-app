@@ -38,9 +38,17 @@
     <Compile Include="API\V1\APIv1.cs" />
     <Compile Include="API\MAPI\MAPICross.cs" />
     <Compile Include="API\V3\APIv3.cs" />
+    <Compile Include="Business\Configuration\City.cs" />
     <Compile Include="Business\Common\Checkout\PaymentInstallments.cs" />
+    <Compile Include="Business\Configuration\GeoLocation.cs" />
     <Compile Include="Business\Hotels\SearchBox\HotelsMinorsAge.cs" />
     <Compile Include="Business\Hotels\SearchBox\PassengersForRooms.cs" />
+    <Compile Include="Business\Hotels\UserReviews\V1\Comments.cs" />
+    <Compile Include="Business\Hotels\UserReviews\V1\HotelUserReviewsV1.cs" />
+    <Compile Include="Business\Hotels\UserReviews\V1\Meta.cs" />
+    <Compile Include="Business\Hotels\UserReviews\V1\Review.cs" />
+    <Compile Include="Business\Hotels\UserReviews\V1\Scores.cs" />
+    <Compile Include="Business\Hotels\UserReviews\V1\User.cs" />
     <Compile Include="Business\Notifications\Device.cs" />
     <Compile Include="Business\Notifications\PushRegistrationRequest.cs" />
     <Compile Include="Business\Notifications\PushResponse.cs" />
@@ -255,6 +263,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -15,5 +15,16 @@ namespace Despegar.Core.Neo.Business.Common.Checkout
         public RegularOptionsField fiscal_status { get; set; }
 
         public RegularField card_holder_name { get; set; }
+
+        public bool AllFieldsAreOptional
+        {
+            get
+            {
+                return fiscal_id.required == false &&
+                    fiscal_name.required == false &&
+                    fiscal_status.required == false &&
+                    address.required == false;
+            }
+        }        
     }
 }

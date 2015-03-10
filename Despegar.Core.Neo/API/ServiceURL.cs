@@ -5,6 +5,7 @@ namespace Despegar.Core.Neo.API
 {
     public enum ServiceKey
     {
+        HotelUserReviewV1,
         HotelUserReview,
         HotelsAvailability,
         HotelsAvailabilityByGeo,
@@ -26,7 +27,8 @@ namespace Despegar.Core.Neo.API
         CouponsValidity,
         CreditCardValidation,
         UpaRegister,
-        RegisterOnDespegarCloud
+        RegisterOnDespegarCloud,
+        City
     }
    
     public static class ServiceURL
@@ -40,7 +42,8 @@ namespace Despegar.Core.Neo.API
             {ServiceKey.HotelsGetDetails , "mapi-hotels/availability/{0}?checkin_date={1}&checkout_date={2}&distribution={3}"},
             {ServiceKey.HotelsBookingFields,"mapi-hotels/bookings?"},
             {ServiceKey.HotelsBookingCompletePost,"mobile.despegar.com/v3/mapi-hotels/bookings/{0}/forms/{1}"},
-            {ServiceKey.HotelUserReview,"reviews?type=hotel&item_ids={0}&limit={1}&offset{2}&languages={3}"},
+            {ServiceKey.HotelUserReview,"reviews?type=hotel&item_ids={0}&limit={1}&offset{2}&languages={3}&providers={4}"},
+            {ServiceKey.HotelUserReviewV1,"hotels/{0}/reviews?notempty={1}&page={2}&pagesize={3}&total={4}"},
 
             {ServiceKey.FlightsAirlines, "mapi-flights/airlines?description={0}" },
             {ServiceKey.FlightsCitiesAutocomplete, "mapi-cross/autocomplete/flights?search={0}" },
@@ -55,9 +58,10 @@ namespace Despegar.Core.Neo.API
             {ServiceKey.CitiesAutocomplete,"mapi-cross/autocomplete/{0}/{1}?administrative_division_id={2}&city_result=5"}, 
             {ServiceKey.Countries,"mapi-cross/apps/"},  // ???
             {ServiceKey.CouponsValidity,"mapi-coupons/{0}/validity?beneficiary={1}&total_amount={2}&currency={3}&quotation={4}&products={5}"},
-            {ServiceKey.CreditCardValidation,"/booking/validation/creditcards"},
+            {ServiceKey.CreditCardValidation,"booking/validation/creditcards"},
             {ServiceKey.UpaRegister, "t"},
-            {ServiceKey.RegisterOnDespegarCloud,"push-notifications/users"}
+            {ServiceKey.RegisterOnDespegarCloud,"push-notifications/users"},
+            {ServiceKey.City,"mapi-cross/cities/{0}?"}
         };
 
         public static string GetServiceURL(ServiceKey key, params object[] values)

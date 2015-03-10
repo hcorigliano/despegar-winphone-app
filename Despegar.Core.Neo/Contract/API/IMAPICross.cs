@@ -15,5 +15,6 @@ namespace Despegar.Core.Neo.Contract.API
         Task<List<State>> GetStates(string country);
         Task<List<CitiesFields>> AutoCompleteCities(string CountryCode, string Search, string CityResult);
         Task<Countries> GetCountries();
+        Task<City> GetCity(string CityId);
     }
 }
