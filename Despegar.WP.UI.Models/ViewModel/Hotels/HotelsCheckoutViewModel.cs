@@ -75,6 +75,30 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
             }
         }
 
+        public string CancelationPolicy
+        {
+            get
+            {
+                return crossParams.RoomPackSelected.room_availabilities[0].cancellation_policy.penalty_short_description;
+            }
+        }
+
+        public string MealPlan
+        {
+            get
+            {
+                return crossParams.RoomPackSelected.room_availabilities[0].meal_plan.description;
+            }
+        }
+
+        public string RoomName 
+        {
+            get 
+            {
+                return crossParams.RoomPackSelected.name;
+            }
+        }
+
         public string PaymentAlertMessage { get; set; }
         public bool IsPaymentAlertRequired
         { 

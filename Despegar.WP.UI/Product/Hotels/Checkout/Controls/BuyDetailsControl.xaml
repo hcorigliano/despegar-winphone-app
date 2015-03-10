@@ -22,8 +22,8 @@
 
     <Grid>
         <Grid.RowDefinitions >
-            <RowDefinition Height="{StaticResource Block3p}"></RowDefinition>
-            <RowDefinition Height="{StaticResource Block1p_And_Half}"></RowDefinition>
+            <RowDefinition Height="{StaticResource Block3p}" />
+            <RowDefinition Height="{StaticResource Block3p}" />
             <RowDefinition  Height="auto"></RowDefinition>
             <RowDefinition Height="{StaticResource Block1p_And_Half}"></RowDefinition>
             <RowDefinition  Height="auto"></RowDefinition>
@@ -40,8 +40,18 @@
             <TextBlock  Style="{StaticResource DetailCheckoutForeach}" x:Uid="Buy_Details_Fare_Per_Adult" Text="Tarifa por habitacion por noche" TextWrapping="Wrap" Height="Auto"/>
         </StackPanel>
 
-        <!--DETAILS-->
-        <StackPanel Grid.Column="0" Grid.Row="2">
+        <!--SERVICE DETAILS -->
+        <StackPanel Grid.ColumnSpan="2"  Grid.Row="1" >
+            <TextBlock  Style="{StaticResource DetailCheckoutForeach}" TextWrapping="WrapWholeWords">
+                <Run x:Uid="Hotels_Buy_Room_Details" Text="Habitacion "></Run>
+                <Run Text="{Binding RoomName}"></Run>
+            </TextBlock>
+            <TextBlock Style="{StaticResource DetailCheckoutDetail}" Text="{Binding MealPlan}" ></TextBlock>
+            <TextBlock Style="{StaticResource DetailCheckoutDetail}" Text="{Binding CancelationPolicy}" TextWrapping="Wrap" ></TextBlock>
+        </StackPanel>
+
+        <!--RATE DETAILS -->
+        <StackPanel Grid.Column="0" Grid.Row="2" DataContext="{Binding PaymentDetails}">
             <TextBlock Style="{StaticResource DetailCheckoutDetail}" >
                 <Run Text="{Binding adult_quantity}"></Run>
                 <Run  x:Uid="Buy_Details_Fare_Adult" Text="1 adulto"></Run>
@@ -59,7 +69,7 @@
 
 
         <!--PER PASSAGER-->
-        <StackPanel Margin="0,5,0,0"  Grid.Column="1"  Grid.Row="0" >
+        <StackPanel Margin="0,5,0,0"  Grid.Column="1"  Grid.Row="0" DataContext="{Binding PaymentDetails}"  >
             <TextBlock Style="{StaticResource DetailCheckoutForeachPrice}" >
                 <Run Text="{Binding currency.mask}"></Run>
                 <Run Text="{Binding nightly.best , Converter={StaticResource CurrencyConverter}}" ></Run>
@@ -67,7 +77,7 @@
         </StackPanel>
 
         <!--DETAILS-->
-        <StackPanel Grid.Column="1"  Grid.Row="2">
+        <StackPanel Grid.Column="1"  Grid.Row="2" DataContext="{Binding PaymentDetails}">
             <TextBlock Style="{StaticResource DetailCheckoutDetailPrice}" Grid.Row="3" >
                 <Run Text="{Binding currency.mask}"></Run>
                 <Run Text="{Binding subtotal, Converter={StaticResource CurrencyConverter}}"></Run>
@@ -84,7 +94,7 @@
         </StackPanel>
 
         <!--TOTAL-->
-        <TextBlock Style="{StaticResource DetailCheckoutTotalPrice}" Grid.Column="1"  Grid.Row="4" >
+        <TextBlock Style="{StaticResource DetailCheckoutTotalPrice}" Grid.Column="1"  Grid.Row="4" DataContext="{Binding PaymentDetails}" >
             <Run Text="{Binding currency.mask}"></Run>
             <Run Text="{Binding total, Converter={StaticResource CurrencyConverter}}"></Run>
         </TextBlock>

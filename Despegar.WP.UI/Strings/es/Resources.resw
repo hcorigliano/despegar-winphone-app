@@ -1123,4 +1123,7 @@ La reserva no ha sido generada y no se le cobrará ningún cargo por la transacc
   <data name="payment_failed_title" xml:space="preserve">
     <value>Ha alcanzado el máximo de intentos posible</value>
   </data>
+  <data name="Hotels_Buy_Room_Details.Text" xml:space="preserve">
+    <value>Habitacion</value>
+  </data>
 </root>

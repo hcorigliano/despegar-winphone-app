@@ -23,7 +23,7 @@
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="0">
-            <src:BuyDetailsControl DataContext="{Binding PaymentDetails}" />
+            <src:BuyDetailsControl  />
         </StackPanel>
 
         <StackPanel Grid.Row="1">

@@ -129,8 +129,17 @@ namespace Despegar.WP.UI.Common.Converter
     {
         public object Convert(object value, Type targetType, object parameter, string language)
         {
-            if ((double)value == 0.0) { return Visibility.Collapsed; }
-            return Visibility.Visible;
+            if (value.GetType() == typeof(double))
+            {
+                if ((double)value == 0.0) { return Visibility.Collapsed; }
+                return Visibility.Visible;
+            }
+            else
+            {
+                if ((decimal)value == 0) { return Visibility.Collapsed; }
+                return Visibility.Visible;    
+            }
+           
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)
