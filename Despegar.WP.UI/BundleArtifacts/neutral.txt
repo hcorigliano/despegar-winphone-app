@@ -1,5 +1,0 @@
-MainPackage=C:\Users\oscar.burgos\Desktop\windows-mobile\Despegar.WP.UI\bin\Release\Despegar.WP.UI_3.0.0.7_Bundle\Despegar.WP.UI_3.0.0.7_AnyCPU_Despegar-Release.appx
-SymbolPackage=C:\Users\oscar.burgos\Desktop\windows-mobile\Despegar.WP.UI\AppPackages\Despegar.WP.UI_3.0.0.7_Despegar-Release_Test\Despegar.WP.UI_3.0.0.7_AnyCPU_Despegar-Release.appxsym
-ResourcePack=C:\Users\oscar.burgos\Desktop\windows-mobile\Despegar.WP.UI\bin\Release\Despegar.WP.UI_3.0.0.7_Bundle\Despegar.WP.UI_3.0.0.7_language-pt.appx
-ResourcePack=C:\Users\oscar.burgos\Desktop\windows-mobile\Despegar.WP.UI\bin\Release\Despegar.WP.UI_3.0.0.7_Bundle\Despegar.WP.UI_3.0.0.7_scale-100.appx
-ResourcePack=C:\Users\oscar.burgos\Desktop\windows-mobile\Despegar.WP.UI\bin\Release\Despegar.WP.UI_3.0.0.7_Bundle\Despegar.WP.UI_3.0.0.7_scale-140.appx
