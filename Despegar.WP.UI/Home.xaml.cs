@@ -105,13 +105,25 @@ namespace Despegar.WP.UI
         private async Task ValidateUpdate()
         {
             bool error = false;
+            BugTracker.Instance.LeaveBreadcrumb("Validate App Version");
+            ResourceLoader manager = new ResourceLoader();
+
 #if DECOLAR
             string productID = "e544d4bb-be44-4db8-9882-268f0b5631a3";
 #else
             string productID = "f7d63cbc-dae6-4608-b695-31a1e095c4e7";
-#endif
-            BugTracker.Instance.LeaveBreadcrumb("Validate App Version");
-            ResourceLoader manager = new ResourceLoader();
+
+            // FORCE UPDATE TO DECOLAR (MIGRATE TO DESPEGAR)
+            if (Windows.System.UserProfile.GlobalizationPreferences.HomeGeographicRegion == "BR")
+            {
+                MessageDialog dialog = new MessageDialog("A app detectou que você está no Brasil, faça download de applicativo Decolar.com, por favor.", "Atualização necessária");
+                await dialog.ShowSafelyAsync();
+                await Windows.System.Launcher.LaunchUriAsync(new Uri("ms-windows-store:navigate?appid=e544d4bb-be44-4db8-9882-268f0b5631a3"));
+                //App.Current.Exit();}  // DO NOT CLOSE THE APP
+                return;
+            }
+#endif           
+            
             configurationService = GlobalConfiguration.CoreContext.GetConfigurationService();
 
             try
