@@ -15,6 +15,8 @@ namespace Despegar.Core.Neo.Business.Hotels
     /// </summary>
     public class InstallmentOption
     {
+        public bool SelectedInstallment { get; set; }
+
         public int InstallmentQuantity { get; set; }
         public List<HotelPayment> Cards { get; set; }
 
@@ -48,7 +50,7 @@ namespace Despegar.Core.Neo.Business.Hotels
                 {
                     string input = String.Join(" , ", WithInterest.Select(x => x.InstallmentQuantity.ToString()).Distinct());
                     StringBuilder sb = new StringBuilder(input);
-                    sb[input.LastIndexOf(',')] = 'o';
+                    sb[input.LastIndexOf(',')] = 'o'; //TODO: break here , Fixit
                     return sb.ToString() + " " + ResourceLabel;
                 } 
                 else 

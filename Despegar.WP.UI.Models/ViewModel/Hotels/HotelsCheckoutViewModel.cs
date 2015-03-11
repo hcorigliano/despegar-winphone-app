@@ -143,6 +143,9 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
         {            
         }
 
+        public ItemsKey ItemSelected { get; set; }
+        public CheckoutMethodKey CheckoutMethodSelected { get; set; }
+
         /// <summary>
         /// Selected "RadioButton" payment strategy
         /// </summary>
@@ -150,8 +153,20 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
         public InstallmentOption SelectedInstallment
         {
             get { return selectedInstallment; }
-            set
+            set 
             {
+                if(value.FirstCard.type.ToLower().Contains("at_destination"))
+                {
+                    ItemSelected = CoreBookingFields.items.FirstOrDefault(x => x.Value.isPaymentAtDestination).Value;
+                }
+                else
+                {
+                    ItemSelected = CoreBookingFields.items.FirstOrDefault(x => !x.Value.isPaymentAtDestination).Value;
+                }
+                CheckoutMethodSelected = CoreBookingFields.form.checkout_method.FirstOrDefault(x => x.Key == ItemSelected.checkout_method).Value;
+
+
+                value.SelectedInstallment = true;
                 selectedInstallment = value;
                 OnPropertyChanged();
 
@@ -184,11 +199,14 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
                 {
                     PaymentForm payments = CoreBookingFields.form.checkout_method.FirstItem.payment;
                     payments.installment.bank_code.CoreValue = selectedCard.card.bank;
-                    //payments.installment.quantity.CoreValue = selectedCard.installments.quantity.ToString();
+                    if (payments.installment.quantity == null)
+                        payments.installment.quantity = new RegularField();
                     payments.installment.card_code.CoreValue = selectedCard.card.code;
                     payments.installment.card_code.CoreValue = selectedCard.card.company;
                     payments.installment.card_type.CoreValue = selectedCard.card.type;
-                    //payments.installment.complete_card_code.CoreValue = selectedCard.card.code;
+                    if (payments.installment.complete_card_code == null)
+                        payments.installment.complete_card_code = new RegularField();
+                    payments.installment.complete_card_code.CoreValue = selectedCard.card.code;
 
                     if (creditCardsValidations != null)
                     {
@@ -295,7 +313,12 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
                 {
                     foreach (HotelPayment payment in item.at_destination)
                         InstallmentFormatted.AddPayAtDestinationInstallment(payment);
+                    //Pay_at_Destination_checkout_method = element.Value.checkout_method;
                 }
+                //else
+                //{
+                //    Pay_With_Card_checkout_method = element.Value.checkout_method;
+                //}
 
                 // Without interest
                 if (item.without_interest != null)
@@ -342,10 +365,10 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
             {
                 try
                 {
-                    //this.IsLoading = true;
-                    //object bookingData = null;
+                    this.IsLoading = true;
+                    object bookingData = null;
 
-                    //bookingData = await BookingFormBuilder.BuildHotelsForm(this.CoreBookingFields);
+                    bookingData = await BookingFormBuilder.BuildHotelsForm(this.CoreBookingFields);
 
                     //// Buy
                     //crossParams.PriceDetail = PriceDetailsFormatted;

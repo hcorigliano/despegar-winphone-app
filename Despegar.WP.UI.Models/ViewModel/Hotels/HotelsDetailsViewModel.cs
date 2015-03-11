@@ -239,6 +239,7 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
         {
             if (CrossParameters != null && hotelDetail != null)
             {
+                
                 CrossParameters.BookRequest = new HotelsBookingFieldsRequest()
                 {
                     token = HotelDetail.token,

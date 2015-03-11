@@ -25,6 +25,7 @@ using Despegar.WP.UI.Model.ViewModel;
 using Despegar.WP.UI.Controls;
 using Despegar.Core.Neo.InversionOfControl;
 using Despegar.WP.UI.Product.Hotels.Details.Controls;
+using Despegar.WP.UI.Product.Hotels.Details;
 
 
 namespace Despegar.WP.UI.Product.Hotels
