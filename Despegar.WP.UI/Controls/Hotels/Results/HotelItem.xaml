@@ -6,9 +6,8 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:conv="using:Despegar.WP.UI.Common.Converter"
-    mc:Ignorable="d"
-    d:DesignHeight="300"
-    d:DesignWidth="400">
+    mc:Ignorable="d" 
+>
 
     <UserControl.Resources>
         <conv:StringConverter x:Name="StringFormatConverter"/>
@@ -23,13 +22,9 @@
         <conv:AnyToIntConverter x:Name="AnyToIntConverter"/>
     </UserControl.Resources>
 
-    <Grid x:Name="MainGrid" Margin="{StaticResource Bottom_Block1p}">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="{StaticResource Block4}" />
-            <RowDefinition /> 
-        </Grid.RowDefinitions>
+    <Grid x:Name="MainGrid"  Height="{StaticResource dBlock4}">
+       
 
-        <Grid Grid.Row="0">
             <Grid.ColumnDefinitions >
                 <ColumnDefinition Width="{StaticResource Block4}"/>
                 <ColumnDefinition/>
@@ -98,59 +93,6 @@
 
             </Grid>
 
-        </Grid>
-
-        <Grid Grid.Row="1">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="{StaticResource Block1}"/>
-                <RowDefinition Height="{StaticResource Block1}"/>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="{StaticResource Block8p}"/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-
-            <Grid Height="{StaticResource dBlock1}" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left" Visibility="{Binding price.discount_percentage , Converter={StaticResource NullToVisibilityConverter} }">
-
-                <Grid  Width="50" Height="{StaticResource dBlock1}" Background="#FF50BB30" VerticalAlignment="Top" HorizontalAlignment="Left">
-
-                    <TextBlock Margin="4,0,0,0" Style="{StaticResource SegoeSemibold15}" VerticalAlignment="Center" >
-                        <Run Text="%"/>
-                        <Run Text="{Binding price.discount_percentage}" />
-                    </TextBlock>
-                    
-                </Grid>
-
-            </Grid>
-
-
-            <Grid  Grid.Row="0" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Top" Visibility="{Binding price.discount_percentage , Converter={StaticResource NullToVisibilityConverter}}">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="1*"/>
-                    <RowDefinition Height="1*"/>
-                </Grid.RowDefinitions>
-
-                <TextBlock Grid.Row="0" Grid.Column="1"  Style="{StaticResource SegoeRegular17}"  HorizontalAlignment="Right" VerticalAlignment="Center" Grid.RowSpan="2" >
-                    <Run Text="$"/>
-                    <Run Text="{Binding price.base}"/>
-                </TextBlock>
-                <Border BorderThickness="0,0,0,1" BorderBrush="#FF949494" />
-
-            </Grid>
-
-            <Grid Grid.Row="1" Background="#FF50BB30" Width="225" Height="{StaticResource dBlock1}"  Grid.Column="0" HorizontalAlignment="Left"  Visibility="{Binding price.promo_type , Converter={StaticResource DiscountVisibilityConverter} }">
-                <StackPanel Orientation="Horizontal">
-                    <Image  Source="/Assets/Icon/App/phone-small-white.scale-100.png" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-                    <TextBlock Text="{Binding price.promo_type,  Converter={StaticResource TypeDiscountTextConverter}}" Style="{StaticResource SegoeRegular15}" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-                </StackPanel>
-            </Grid>
-
-            <TextBlock Grid.Row="1" Grid.Column="1" Style="{StaticResource SegoeLight24}" HorizontalAlignment="Right"  VerticalAlignment="Center">
-                <Run Text="$"/>
-                <Run Text="{Binding price.best}" />
-            </TextBlock>
-
-        </Grid>
 
     </Grid>
 </UserControl>

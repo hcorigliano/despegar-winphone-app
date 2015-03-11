@@ -136,6 +136,9 @@
     <Compile Include="Controls\Hotels\QuantityRoomsControl.xaml.cs">
       <DependentUpon>QuantityRoomsControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Hotels\Results\HotelItemPriceAndDiscounts.xaml.cs">
+      <DependentUpon>HotelItemPriceAndDiscounts.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Hotels\SearchHotelControl.xaml.cs">
       <DependentUpon>SearchHotelControl.xaml</DependentUpon>
     </Compile>
@@ -406,6 +409,10 @@
     <Page Include="Controls\Hotels\QuantityRoomsControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\Hotels\Results\HotelItemPriceAndDiscounts.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\Hotels\SearchHotelControl.xaml">
       <Generator>MSBuild:Compile</Generator>
