@@ -46,7 +46,10 @@ namespace Despegar.Core.Neo.Business.Hotels
                 {
                     string input = String.Join(" , ", WithInterest.Select(x => x.InstallmentQuantity.ToString()).Distinct());
                     StringBuilder sb = new StringBuilder(input);
-                    sb[input.LastIndexOf(',')] = 'o';
+                    int index = input.LastIndexOf(',');
+                    if (index>0){
+                        sb[index] = 'o';
+                    }
                     return sb.ToString() + " " + ResourceLabel;
                 } 
                 else 
