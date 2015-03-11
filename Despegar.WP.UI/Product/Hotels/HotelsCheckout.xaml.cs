@@ -189,6 +189,27 @@ namespace Despegar.WP.UI.Product.Hotels
                 else
                     loadingPopup.Hide();
             }
+            if (e.PropertyName == "SelectedInstallment")
+            {
+                //Revisar si hay que mostrar invoice CheckoutMethodSelected ItemSelected.
+                if(ViewModel.CheckoutMethodSelected.payment.invoice != null)
+                {
+                    //AgregarInvoice
+                    PivotItem pvit = new PivotItem();
+                    pvit.Header = "test fiscal";
+                    pvit.Name = "Pivot_INVOICE";
+                    UserControl usc = new InvoiceArgentina();
+                    usc.DataContext = this.DataContext;
+                    pvit.Content = usc;
+
+                    MainPivot.Items.Insert(4, pvit);
+                }
+                else
+                {
+                    //Eliminar Invoice
+                    MainPivot.Items.Remove("Pivot_INVOICE");
+                }
+            }
         }
 
         private void ShowRisk(Object sender, EventArgs e)

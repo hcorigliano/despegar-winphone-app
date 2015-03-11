@@ -62,6 +62,90 @@ namespace Despegar.WP.UI.Common.Converter
         }
     }
 
+    public class FlightPaymentDetailsToLabelConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, string language)
+        {
+            var loader = new Windows.ApplicationModel.Resources.ResourceLoader();
+
+            PaymentDetail paymentDetail = (PaymentDetail)value;
+
+            TextBlock text = new TextBlock();
+
+            if (paymentDetail.installments.quantity == 1)
+                text.Inlines.Add(new Run() { Text = "1 " + loader.GetString("Common_Pay_With") });
+            else
+            {
+                if (paymentDetail.interest == 1.0)
+                {
+                    text.Inlines.Add(new Run() { Text = paymentDetail.installments.quantity + " " + loader.GetString("Common_Payments") + " " });
+
+                    var b = new Bold();
+                    b.Inlines.Add(new Run() { Text = loader.GetString("Common_Pays_Without_Interest") });
+                    text.Inlines.Add(b);
+
+                    text.Inlines.Add(new Run() { Text = " " + loader.GetString("Common_Payment_With") });
+                }
+                else
+                {
+                    text.Inlines.Add(new Run() { Text = paymentDetail.installments.quantity + " " + loader.GetString("Common_Pays_With") });
+                }
+            }
+
+            return new ContentControl() { Content = text };
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, string language)
+        {
+            return null;
+        }
+    }
+
+    public class HotelPaymentDetailsToLabelConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, string language)
+        {
+            var loader = new Windows.ApplicationModel.Resources.ResourceLoader();
+
+            HotelPayment paymentDetail = (HotelPayment)value;
+
+            TextBlock text = new TextBlock();
+
+            if (paymentDetail.installments.quantity == 1)
+                text.Inlines.Add(new Run() { Text = "1 " + loader.GetString("Common_Pay_With") });
+            else
+            {
+                if (paymentDetail.financial_cost == 0)
+                {
+                    text.Inlines.Add(new Run() { Text = paymentDetail.installments.quantity + " " + loader.GetString("Common_Payments") + " " });
+
+                    var b = new Bold();
+                    b.Inlines.Add(new Run() { Text = loader.GetString("Common_Pays_Without_Interest") });
+                    text.Inlines.Add(b);
+
+                    text.Inlines.Add(new Run() { Text = " " + loader.GetString("Common_Payment_With") });
+                }
+                else
+                {
+                    text.Inlines.Add(new Run() { Text = paymentDetail.installments.quantity + " " + loader.GetString("Common_Pays_With") });
+                }
+            }
+
+            return new ContentControl() { Content = text };
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, string language)
+        {
+            return null;
+        }
+    }
+
+
+
+
+
+
+
     public class PaymentDetailsToPaysConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, string language)
