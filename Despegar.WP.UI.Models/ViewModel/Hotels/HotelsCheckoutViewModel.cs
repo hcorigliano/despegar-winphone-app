@@ -32,11 +32,11 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
         private IMAPICross commonServices;
         private IMAPICoupons couponsService;
         private ValidationCreditcards creditCardsValidations;
-        private HotelsCrossParameters crossParams;
         #endregion
 
         #region ** Public Interface **
         //public RoomsSelected
+        public HotelsCrossParameters CrossParams { get; set; }
         public HotelsBookingFields CoreBookingFields { get; set; }
         public List<CountryFields> Countries { get; set; }
         public List<State> States { get; set; }
@@ -52,7 +52,6 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
             }
         }
 
-        //public 
         public bool IsFiscalNameRequired
         {
             get
@@ -76,7 +75,7 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
         {
             get
             {
-                return crossParams.SelectedHotel;
+                return CrossParams.SelectedHotel;
             }
         }
 
@@ -84,7 +83,7 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
         {
             get
             {
-                return crossParams.RoomPackSelected.room_availabilities[0].cancellation_policy.penalty_short_description;
+                return CrossParams.RoomPackSelected.room_availabilities[0].cancellation_policy.penalty_short_description;
             }
         }
 
@@ -92,7 +91,7 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
         {
             get
             {
-                return crossParams.RoomPackSelected.room_availabilities[0].meal_plan.description;
+                return CrossParams.RoomPackSelected.room_availabilities[0].meal_plan.description;
             }
         }
 
@@ -100,7 +99,7 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
         {
             get 
             {
-                return crossParams.RoomPackSelected.name;
+                return CrossParams.RoomPackSelected.name;
             }
         }
 
@@ -109,7 +108,7 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
         { 
             get
             {
-                foreach (string choice in crossParams.BookRequest.room_choices)
+                foreach (string choice in CrossParams.BookRequest.room_choices)
                 {
                     if (CoreBookingFields.items[choice].isPaymentAtDestination)
                     {
@@ -443,7 +442,7 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
         private async Task GetBookingFields(string deviceID)
         {
             BugTracker.LeaveBreadcrumb("Hotels Checkout ViewModel get booking fields init");
-            CoreBookingFields = await hotelService.GetBookingFields(crossParams.BookRequest);
+            CoreBookingFields = await hotelService.GetBookingFields(CrossParams.BookRequest);
             CoreBookingFields.form.CountrySite = GlobalConfiguration.Site;
             BugTracker.LeaveBreadcrumb("Hotels Checkout ViewModel get booking fields complete");
         }
@@ -461,7 +460,7 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
         public override void OnNavigated(object navigationParams)
         {
             BugTracker.LeaveBreadcrumb("Hotel checkout start");
-            crossParams = navigationParams as HotelsCrossParameters;
+            CrossParams = navigationParams as HotelsCrossParameters;
         }
     }
 }

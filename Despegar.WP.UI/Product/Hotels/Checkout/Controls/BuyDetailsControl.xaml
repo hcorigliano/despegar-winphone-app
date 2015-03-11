@@ -37,7 +37,7 @@
 
         <!--PER PASSAGER-->
         <StackPanel Grid.Column="0"  Grid.Row="0" >
-            <TextBlock  Style="{StaticResource DetailCheckoutForeach}" x:Uid="Buy_Details_Fare_Per_Adult" Text="Tarifa por habitacion por noche" TextWrapping="Wrap" Height="Auto"/>
+            <TextBlock  Style="{StaticResource DetailCheckoutForeach}" x:Uid="Hotels_Buy_Details_Fare_Per_Room" Text="Tarifa por habitacion por noche" TextWrapping="Wrap" Height="Auto"/>
         </StackPanel>
 
         <!--SERVICE DETAILS -->
