@@ -240,7 +240,7 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
                         CrossParameters.RoomPackSelected = tempRoompack; //Toma el roompack seleccionado.
 
                         if (tempRoompack.rooms[0].bed_options != null && tempRoompack.rooms[0].bed_options.Count > 0)
-                           CrossParameters.BedSelected = tempRoompack.rooms[0].bed_options[0];
+                            CrossParameters.BedSelected = tempRoompack.rooms[0].bed_options[0];
                         
                         break;                        
                     }
@@ -289,6 +289,7 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
         {
             if (CrossParameters != null && hotelDetail != null)
             {
+                
                 CrossParameters.BookRequest = new HotelsBookingFieldsRequest()
                 {
                     token = HotelDetail.token,

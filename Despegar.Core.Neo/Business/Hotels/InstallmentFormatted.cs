@@ -15,8 +15,12 @@ namespace Despegar.Core.Neo.Business.Hotels
     /// </summary>
     public class InstallmentOption
     {
+        public bool SelectedInstallment { get; set; }
+
         public int InstallmentQuantity { get; set; }
         public List<HotelPayment> Cards { get; set; }
+
+        public bool CardsEmpty { get { return this.Cards.Count() == 0; } }
 
         public HotelPayment FirstCard { get { return Cards[0]; } }
 

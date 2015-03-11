@@ -16,6 +16,7 @@
         <conv:ListToVisibilityConverter x:Name="ListToVisibilityConverter"/>
         <conv:VisibilityConverter x:Name="VisibilityConverter" TrueValue="Visible" FalseValue="Collapsed" />
         <conv:PaymentDetailsToLabelConverter x:Name="PaymentDetailsToLabelConverter"/>
+        <conv:HotelPaymentDetailsToLabelConverter x:Name="HotelPaymentDetailsToLabelConverter"/>
         <conv:PaymentDetailsToPaysConverter x:Name="PaymentDetailsToPaysConverter"/>
         <conv:NullToVisibilityConverter x:Name="NullVisibilityConverter"/>
         <conv:CurrencyConverter x:Name="CurrencyConverter"/>
@@ -25,24 +26,28 @@
         <StackPanel>
 
              <!--Pay At Destination-->
-            <RadioButton Style="{StaticResource CheckoutPaymentRadioButton}" 
-                                      x:Uid="Page_Hotels_Checkout_PayAtDestination"
-                                      DataContext="{Binding InstallmentFormatted.PayAtDestination}"  
-                                      Content="Pago en destino"                                       
-                                      x:Name="radioButton"
-                                      Checked="OnRadioButton_Clicked"
-                                      GroupName="MainRadios" />
+            <!--Buscar la forma para que no se dibuje cuando no hay pago en destino. Actualmente observa si el numero de tarjetas es igual a 0-->
+            <!--Y no funciona-->
+            <StackPanel Visibility="{Binding InstallmentFormatted.CardsEmpty, Converter={StaticResource VisibilityConverter} }">
+                <RadioButton Style="{StaticResource CheckoutPaymentRadioButton}" 
+                                          x:Uid="Page_Hotels_Checkout_PayAtDestination"
+                                          DataContext="{Binding InstallmentFormatted.PayAtDestination}"  
+                                          Content="Pago en destino"                                       
+                                          x:Name="radioButton"
+                                          Checked="OnRadioButton_Clicked"
+                                          GroupName="MainRadios" />
 
-            <src2:Cards CardsSource="{Binding InstallmentFormatted.PayAtDestination.Cards}" Margin="-15,0,0,0" />
-            
-             <!--Without Interest--> 
+                <src2:Cards CardsSource="{Binding InstallmentFormatted.PayAtDestination.Cards}" Margin="-15,0,0,0" />
+            </StackPanel>
+
+            <!--Without Interest--> 
             <ItemsControl ItemsSource="{Binding InstallmentFormatted.WithoutInterest}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <StackPanel>
                             <RadioButton Style="{StaticResource CheckoutPaymentRadioButton}" 
                                       DataContext="{Binding }"  
-                                      Content="{Binding FirstCard.installments, ConverterParameter={Binding FirstCard.financial_cost}, Converter={StaticResource PaymentDetailsToLabelConverter}}" 
+                                      Content="{Binding FirstCard, Converter={StaticResource HotelPaymentDetailsToLabelConverter}}" 
                                       Checked="OnRadioButton_Clicked"                                      
                                       x:Name="radioButton"
                                       GroupName="MainRadios" />
@@ -73,7 +78,7 @@
                                              Checked="OnRadioButton_Clicked"
                                              GroupName="WithInteres" 
                                              Visibility="{Binding  Converter={StaticResource NullVisibilityConverter}}"  
-                                             Content="{Binding FirstCard.installments, Converter={StaticResource PaymentDetailsToLabelConverter}, ConverterParameter={Binding first.financial_cost}}" 
+                                             Content="{Binding FirstCard, Converter={StaticResource HotelPaymentDetailsToLabelConverter}, ConverterParameter={Binding first.financial_cost}}" 
                                              x:Name="radioButton" />
                                 <!--FirstCard.installments-->
 

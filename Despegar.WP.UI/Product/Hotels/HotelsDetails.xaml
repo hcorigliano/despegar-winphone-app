@@ -60,6 +60,7 @@
             <PivotItem Style="{StaticResource PivotItemBase}" x:Uid="Hotel_Details_Galery_Pivot">
                 <Grid>
                     <PhotoGallery:PhotoGalleryControl DataContext="{Binding HotelDetail.hotel.pictures}" ></PhotoGallery:PhotoGalleryControl>
+                    
                 </Grid>
             </PivotItem>
 
@@ -76,8 +77,6 @@
             </PivotItem>
 
         </Pivot>
-
-
 
     </Grid>
 </Page>
