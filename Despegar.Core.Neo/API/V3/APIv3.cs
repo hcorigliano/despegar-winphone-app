@@ -17,9 +17,9 @@ namespace Despegar.Core.Neo.API.V3
             this.connector = connector;
         }
 
-        public async Task<HotelUserReviews> GetHotelUserReviews(string hotelId, int limit, int offset, string language)
+        public async Task<HotelUserReviews> GetHotelUserReviews(string hotelId, int limit, int offset, string language, string provider)
         {
-            string serviceUrl = ServiceURL.GetServiceURL(ServiceKey.HotelUserReview, hotelId, limit, offset, language);
+            string serviceUrl = ServiceURL.GetServiceURL(ServiceKey.HotelUserReview, hotelId, limit, offset, language,provider);
 
             return await connector.GetAsync<HotelUserReviews>(serviceUrl, ServiceKey.HotelUserReview);
         }

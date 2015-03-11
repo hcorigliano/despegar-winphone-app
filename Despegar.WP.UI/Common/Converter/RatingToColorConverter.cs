@@ -11,13 +11,25 @@ namespace Despegar.WP.UI.Common.Converter
     {
         public object Convert(object value, Type targetType, object parameter, string language)
         {
+            Double points;
+
+            try
+            {
+                Double.TryParse(value.ToString(), out points);
+            }
+            catch (Exception ex)
+            {
+                points = 0;
+            }
+
             if (value == null)
                 return "";
-            if ((double)value > 9)
+
+            if (points > 9.00)
                 return "#01B02F";
-            if ((double)value > 7)
+            if (points > 7.00)
                 return "#95C428";
-            if ((double)value > 5)
+            if (points > 5.00)
                 return "#FFC006";
             return "#FF7900";
             

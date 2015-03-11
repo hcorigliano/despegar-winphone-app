@@ -24,5 +24,12 @@ namespace Despegar.Core.Neo.Service
 
             return await connector.GetAsync<ValidationCreditcards>(serviceUrl, ServiceKey.CreditCardValidation);
         }
+
+
+        public async Task<Business.Hotels.UserReviews.V1.HotelUserReviewsV1> GetHotelUserReviews(string hotelId, bool cleanEmpty, int page, int pageSize, bool BringTotal)
+        {
+            string serviceUrl = ServiceURL.GetServiceURL(ServiceKey.HotelUserReviewV1, hotelId, cleanEmpty, page, pageSize, BringTotal);
+            return await connector.GetAsync<Business.Hotels.UserReviews.V1.HotelUserReviewsV1>(serviceUrl, ServiceKey.HotelUserReviewV1);
+        }
     }
 }
