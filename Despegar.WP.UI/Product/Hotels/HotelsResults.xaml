@@ -58,7 +58,10 @@
             <ListView Grid.Row="2" xmlns:src="using:Despegar.WP.UI.Controls.Hotels.Results" ItemsSource="{Binding CitiesAvailability.items}" Margin="{StaticResource Top_Offset}" Tapped="HotelSelected" >
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <src:HotelItem  DataContext="{Binding}"></src:HotelItem>
+                        <StackPanel Margin="{StaticResource Bottom_Block1p}">
+                            <src:HotelItem  DataContext="{Binding}" Margin="0,0,0,10"/>
+                            <src:HotelItemPriceAndDiscounts DataContext="{Binding}"/>
+                        </StackPanel>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
