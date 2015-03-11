@@ -3,6 +3,7 @@ using Despegar.Core.Neo.Business.Common.State;
 using Despegar.Core.Neo.Business.Configuration;
 using Despegar.Core.Neo.Business.Coupons;
 using Despegar.Core.Neo.Business.CreditCard;
+using Despegar.Core.Neo.Business.Enums;
 using Despegar.Core.Neo.Business.Forms;
 using Despegar.Core.Neo.Business.Hotels;
 using Despegar.Core.Neo.Business.Hotels.BookingFields;
@@ -372,7 +373,7 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
 
                     //// Buy
                     //crossParams.PriceDetail = PriceDetailsFormatted;
-                    //crossParams.BookingResponse = await hotelService.CompleteBooking(bookingData, CoreBookingFields.id);
+                    crossParams.BookingResponse = await hotelService.CompleteBooking(bookingData, CoreBookingFields.id);
 
                     //if (crossParams.BookingResponse.Error != null)
                     //{
@@ -397,6 +398,85 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
 
                 BugTracker.LeaveBreadcrumb("Hotels checkout view model validate and buy complete");
                 this.IsLoading = false;
+            }
+        }
+
+        /// <summary>
+        /// Validates the booking status
+        /// </summary>
+        
+        private void AnalizeBookingStatus(string status)
+        {
+            //BugTracker.LeaveBreadcrumb("Flight checkout view model booking status" + status);
+
+            //switch (GetStatus(status))
+            //{
+            //    case BookingStatusEnum.checkout_successful:
+
+            //        Navigator.GoTo(ViewModelPages.HotelsThanks, crossParams);
+            //        break;
+
+            //    case BookingStatusEnum.booking_failed:
+
+            //        OnViewModelError("BOOKING_FAILED", crossParams.BookingResponse.checkout_id);
+            //        break;
+
+            //    case BookingStatusEnum.fix_credit_card:
+            //        this.CoreBookingFields.form.booking_status = "fix_credit_card";
+            //        FreezeFields();
+            //        OnViewModelError("ONLINE_PAYMENT_ERROR_FIX_CREDIT_CARD", "CARD");
+            //        break;
+
+            //    case BookingStatusEnum.new_credit_card:
+
+            //        this.CoreBookingFields.form.payment.card.number.CoreValue = String.Empty;
+            //        this.CoreBookingFields.form.payment.card.expiration.CoreValue = String.Empty;
+            //        this.CoreBookingFields.form.payment.card.security_code.CoreValue = String.Empty;
+            //        this.CoreBookingFields.form.booking_status = "new_credit_card";
+
+            //        FreezeFields();
+            //        OnPropertyChanged("SelectedCard");
+            //        OnViewModelError("ONLINE_PAYMENT_ERROR_NEW_CREDIT_CARD", "CARD");
+            //        break;
+
+            //    case BookingStatusEnum.canceled:
+            //        // El vuelos se cancela y no puede comprar. Enviar a la resbusqueda de vuelos
+            //        BugTracker.LogEvent("FLIGHT BOOKING CANCELED");
+            //        OnViewModelError("BOOKING_CANCELED");
+            //        break;
+
+            //    case BookingStatusEnum.payment_failed:
+            //        // Se acabaron los reintentos mostrar mensaje de error e ir para atras
+            //        OnViewModelError("PAYMENT_FAILED");
+            //        break;
+
+            //    case BookingStatusEnum.risk_evaluation_failed:
+            //        OnViewModelError("RISK_PAYMENT_FAILED", "CARD");
+            //        break;
+
+            //    case BookingStatusEnum.risk_review:
+            //        EventHandler RiskHandler = ShowRiskReview;
+            //        if (RiskHandler != null)
+            //            RiskHandler(this, null);
+
+            //        break;
+            //    //case BookingStatusEnum.BookingCustomError:
+            //    default:
+            //        break;
+            //}
+        }
+
+        private BookingStatusEnum GetStatus(string status)
+        {
+            try
+            {
+                BookingStatusEnum _status = (BookingStatusEnum)Enum.Parse(typeof(BookingStatusEnum), status);
+
+                return _status;
+            }
+            catch (Exception)
+            {
+                return BookingStatusEnum.BookingCustomError;
             }
         }
 
