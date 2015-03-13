@@ -406,11 +406,16 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
                     this.IsLoading = true;
                     object bookingData = null;
 
-                    bookingData = await BookingFormBuilder.BuildHotelsForm(this.CoreBookingFields);
+                    //TODO : SACAR ESTO
+                    FillBookingFields();
+
+                    bookingData = await BookingFormBuilder.BuildHotelsForm(this.CoreBookingFields , this.CheckoutMethodSelected.payment.invoice);
 
                     //// Buy
                     //crossParams.PriceDetail = PriceDetailsFormatted;
-                    crossParams.BookingResponse = await hotelService.CompleteBooking(bookingData, CoreBookingFields.id);
+                    crossParams.BookingResponse = await hotelService.CompleteBooking(bookingData, CoreBookingFields.id , ItemSelected.item_id);
+
+                    int test = 1;
 
                     //if (crossParams.BookingResponse.Error != null)
                     //{
@@ -436,6 +441,29 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
                 BugTracker.LeaveBreadcrumb("Hotels checkout view model validate and buy complete");
                 this.IsLoading = false;
             }
+        }
+
+        private void FillBookingFields()
+        {
+            CoreBookingFields.form.passengers[0].first_name.CoreValue = "test";
+            CoreBookingFields.form.passengers[0].last_name.CoreValue = "booking";
+            CoreBookingFields.form.contact.email.CoreValue = "testhoteles@despegar.com";
+            CoreBookingFields.form.contact.emailConfirmation.CoreValue = "testhoteles@despegar.com";
+            CoreBookingFields.form.contact.Phone.area_code.CoreValue = "54";
+            CoreBookingFields.form.contact.Phone.country_code.CoreValue = "11";
+            CoreBookingFields.form.contact.Phone.number.CoreValue = "12341234";
+            CoreBookingFields.form.CardInfo.expiration.CoreValue = "2018-3";
+            CoreBookingFields.form.CardInfo.number.CoreValue = "4242424242424242";
+            CoreBookingFields.form.CardInfo.owner_document.number.CoreValue = "12123123";
+            CoreBookingFields.form.CardInfo.owner_gender.CoreValue = "MALE";
+            CoreBookingFields.form.CardInfo.owner_name.CoreValue = "test booking";
+            CoreBookingFields.form.CardInfo.security_code.CoreValue = "123";
+
+            this.CheckoutMethodSelected.payment.invoice.address.number.CoreValue = "123";
+            this.CheckoutMethodSelected.payment.invoice.address.postal_code.CoreValue = "1234";
+            this.CheckoutMethodSelected.payment.invoice.address.street.CoreValue = "falsa";
+            this.CheckoutMethodSelected.payment.invoice.fiscal_id.CoreValue = "2012123123";
+
         }
 
         /// <summary>

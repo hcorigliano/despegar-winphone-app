@@ -187,7 +187,7 @@ namespace Despegar.Core.Neo.Business.Forms
             });
         }
 
-        public static Task<object> BuildHotelsForm(HotelsBookingFields bookingFields)
+        public static Task<object> BuildHotelsForm(HotelsBookingFields bookingFields ,InvoiceArg invoiceFields )
         {
             return Task.Run(() =>
             {
@@ -246,40 +246,43 @@ namespace Despegar.Core.Neo.Business.Forms
                 payment.Add("installment", installment);
 
                 // Invoice Arg
-                if (bookingFields.form.CountrySite != null & bookingFields.form.CountrySite.ToLower().Contains("ar")) // Is only for Arg in mapi
+                if (bookingFields.form.CountrySite != null & bookingFields.form.CountrySite.ToLower().Contains("ar") && invoiceFields != null) // Is only for Arg in mapi
                 {
                     JObject invoice = new JObject();
                     JObject address = new JObject();
 
-                    if (bookingFields.form.Invoice.fiscal_id != null)
-                        invoice.Add("fiscal_id", bookingFields.form.Invoice.fiscal_id.CoreValue);
+                    if (invoiceFields.fiscal_id != null)
+                        invoice.Add("fiscal_id", invoiceFields.fiscal_id.CoreValue);
 
-                    if (bookingFields.form.Invoice.fiscal_status != null)
+                    if (invoiceFields.fiscal_status != null)
                     {
-                        invoice.Add("fiscal_status", bookingFields.form.Invoice.fiscal_status.CoreValue);
+                        invoice.Add("fiscal_status", invoiceFields.fiscal_status.CoreValue);
 
-                        if (bookingFields.form.Invoice.fiscal_status.CoreValue != "FINAL")
-                            invoice.Add("fiscal_name", bookingFields.form.Invoice.fiscal_name.CoreValue);
+                        if (invoiceFields.fiscal_status.CoreValue != "FINAL")
+                            invoice.Add("fiscal_name", invoiceFields.fiscal_name.CoreValue);
                     }
 
-                    if (bookingFields.form.Invoice.address.number != null)
-                        address.Add("number", bookingFields.form.Invoice.address.number.CoreValue);
-                    if (bookingFields.form.Invoice.address.floor != null)
-                        address.Add("floor", bookingFields.form.Invoice.address.floor.CoreValue);
-                    if (bookingFields.form.Invoice.address.department != null)
-                        address.Add("department", bookingFields.form.Invoice.address.department.CoreValue);
-                    if (bookingFields.form.Invoice.address.city_id != null)
-                        address.Add("city_id", bookingFields.form.Invoice.address.city_id.CoreValue);
-                    if (bookingFields.form.Invoice.address.city != null)
-                        address.Add("city", bookingFields.form.Invoice.address.city.CoreValue);
+                    if (invoiceFields.address.number != null)
+                        address.Add("number", invoiceFields.address.number.CoreValue);
+                    if (invoiceFields.address.floor != null)
+                        address.Add("floor", invoiceFields.address.floor.CoreValue);
+                    if (invoiceFields.address.department != null)
+                        address.Add("department", invoiceFields.address.department.CoreValue);
+                    if (invoiceFields.address.city_id != null)
+                        address.Add("city_id", invoiceFields.address.city_id.CoreValue);
+                    if (invoiceFields.address.city != null)
+                        address.Add("city", invoiceFields.address.city.CoreValue);
 
-                    address.Add("state", bookingFields.form.Invoice.address.state.CoreValue);
-                    address.Add("country", bookingFields.form.Invoice.address.country.CoreValue); //this is fill with the response of service
+                    if (invoiceFields.address.state != null)
+                        address.Add("state", invoiceFields.address.state.CoreValue);
 
-                    if (bookingFields.form.Invoice.address.postal_code != null)
-                        address.Add("postal_code", bookingFields.form.Invoice.address.postal_code.CoreValue);
-                    if (bookingFields.form.Invoice.address.street != null)
-                        address.Add("street", bookingFields.form.Invoice.address.street.CoreValue);
+                    if (invoiceFields.address.country != null)
+                        address.Add("country", invoiceFields.address.country.CoreValue); //this is fill with the response of service
+
+                    if (invoiceFields.address.postal_code != null)
+                        address.Add("postal_code", invoiceFields.address.postal_code.CoreValue);
+                    if (invoiceFields.address.street != null)
+                        address.Add("street", invoiceFields.address.street.CoreValue);
 
                     invoice.Add("address", address);
                     payment.Add("invoice", invoice);

@@ -65,9 +65,15 @@ namespace Despegar.WP.UI.Product.Hotels
             this.DataContext = ViewModel;
 
             if (ViewModel.InstallmentFormatted.PayAtDestination.Cards.Count() != 0)
+            {
                 ViewModel.InstallmentFormatted.PayAtDestination.IsChecked = true;
+                ViewModel.SelectedInstallment = ViewModel.InstallmentFormatted.PayAtDestination;
+            }
             else
+            {
                 ViewModel.InstallmentFormatted.WithoutInterest[0].IsChecked = true;
+                ViewModel.SelectedInstallment = ViewModel.InstallmentFormatted.WithoutInterest[0];
+            }
 
             ViewModel.BugTracker.LeaveBreadcrumb("Hotels checkout ready");
         }
