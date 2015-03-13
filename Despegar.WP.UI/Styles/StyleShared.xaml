@@ -122,11 +122,11 @@
         <Setter Property="FontWeight" Value="Normal" />
         <Setter Property="Opacity" Value="0.6" />
     </Style>
-    <Style x:Key="SegoeRegular17" TargetType="TextBlock" BasedOn="{StaticResource BaseText}">
+    <Style x:Key="SegoeRegular12_9" TargetType="TextBlock" BasedOn="{StaticResource BaseText}">
         <Setter Property="FontSize" Value="12.9" />
         <Setter Property="FontWeight" Value="Normal" />
         <Setter Property="Opacity" Value="0.6" />
-    </Style>
+    </Style> 
     <Style x:Key="SegoeRegular24" TargetType="TextBlock" BasedOn="{StaticResource BaseText}">
         <Setter Property="FontSize" Value="24" />
         <Setter Property="FontWeight" Value="Normal" />

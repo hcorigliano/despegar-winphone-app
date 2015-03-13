@@ -53,7 +53,7 @@
                 <src:MiniBoxSearch x:Name="Test" DataContext="{Binding SearchModel}"  Tapped="ReSearchTapped"/>
             </StackPanel>
 
-            <TextBlock  Grid.Row="1" Text="Tarifa por persona por noche" Style="{StaticResource SegoeRegular17}" VerticalAlignment="Center"/>
+            <TextBlock  Grid.Row="1" Text="Tarifa por persona por noche" Style="{StaticResource SegoeRegular12_9}" VerticalAlignment="Center"/>
 
             <ListView Grid.Row="2" xmlns:src="using:Despegar.WP.UI.Controls.Hotels.Results" ItemsSource="{Binding CitiesAvailability.items}" Margin="{StaticResource Top_Offset}" Tapped="HotelSelected" >
                 <ListView.ItemTemplate>

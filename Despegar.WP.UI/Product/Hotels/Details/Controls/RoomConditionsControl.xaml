@@ -17,15 +17,15 @@
     <Grid>
         <StackPanel Grid.Row="0">
             <TextBlock x:Uid="Common_Conditions" Text="CondicionesX" Style="{StaticResource SegoeSemilight20}"/>
-            <TextBlock Style="{StaticResource SegoeRegular17}">
+            <TextBlock Style="{StaticResource SegoeRegular12_9}">
                 <Run Text="- "/>
                 <Run Text="{Binding meal_plan.description}"/>
             </TextBlock>
-            <TextBlock Style="{StaticResource SegoeRegular17}">
+            <TextBlock Style="{StaticResource SegoeRegular12_9}">
                 <Run Text="- "/>
                 <Run Text="{Binding cancellation_policy.penalty_short_description}"/>
             </TextBlock>
-            <TextBlock Style="{StaticResource SegoeRegular17}" Visibility="{Binding price.availability ,Converter={StaticResource VisibilityConverter}}">
+            <TextBlock Style="{StaticResource SegoeRegular12_9}" Visibility="{Binding price.availability ,Converter={StaticResource VisibilityConverter}}">
                 <Run Text="- "/>
                 <Run x:Uid="Common_Left" Text="QuedanX " />
                 <Run Text="{Binding price.availability}"/>
