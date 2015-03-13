@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Despegar.WP.UI.Model.ViewModel.Hotels;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -13,7 +14,6 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
-// The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
 
 namespace Despegar.WP.UI.Product.Hotels
 {
@@ -22,6 +22,8 @@ namespace Despegar.WP.UI.Product.Hotels
     /// </summary>
     public sealed partial class HotelThanks : Page
     {
+        private HotelsCheckoutViewModel ViewModel { get { return DataContext as HotelsCheckoutViewModel; } }
+
         public HotelThanks()
         {
             this.InitializeComponent();

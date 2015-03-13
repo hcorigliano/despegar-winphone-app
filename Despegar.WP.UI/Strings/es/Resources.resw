@@ -1144,4 +1144,13 @@ La reserva no ha sido generada y no se le cobrará ningún cargo por la transacc
   <data name="Flights_Checkout_Card_Data_Document_ERROR_INVALID_DOCUMENT_NUMBER" xml:space="preserve">
     <value>Por favor, verifique el numero ingresado</value>
   </data>
+  <data name="Hotels_Buy_Details_Nights_Count.Text" xml:space="preserve">
+    <value>noches</value>
+  </data>
+  <data name="Hotels_Buy_Details_Rooms_Count.Text" xml:space="preserve">
+    <value>habitacion</value>
+  </data>
+  <data name="Hotels_Buy_Details_Title.Text" xml:space="preserve">
+    <value>Detalle de compra</value>
+  </data>
 </root>

@@ -6,6 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:src="using:Despegar.WP.UI.Controls.Hotels.Results"
+    xmlns:src2="using:Despegar.WP.UI.Product.Hotels.Details.Controls"
     mc:Ignorable="d"
     Style="{StaticResource BasePage}">
 
@@ -42,12 +43,18 @@
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="{StaticResource Block2p}" />
-                        <RowDefinition Height="{StaticResource Block6p}" />
+                        <RowDefinition Height="{StaticResource Block5p}" />
+                        <RowDefinition Height="{StaticResource Block1p}" />
+                        <RowDefinition Height="{StaticResource Block4p}" />
                         <RowDefinition Height="{StaticResource Block4p}" />
                     </Grid.RowDefinitions>
 
-                    <src:HotelItem Grid.Row="1" DataContext="{Binding}"></src:HotelItem>
+                    <src:HotelItem Grid.Row="1"  DataContext="{Binding CrossParams.SelectedHotel}"></src:HotelItem>
 
+                    <src2:RoomInformationControl Grid.Row="3" DataContext="{Binding CrossParams.RoomPackSelected}"/>
+                             
+                    <src2:RoomConditionsControl Grid.Row="4" DataContext="{Binding CrossParams.RoomPackSelected}"></src2:RoomConditionsControl>
+                
 
                 </Grid>
             </PivotItem>

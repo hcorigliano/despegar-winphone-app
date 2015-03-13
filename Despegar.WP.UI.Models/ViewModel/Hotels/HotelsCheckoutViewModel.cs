@@ -52,6 +52,8 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
             }
         }
 
+
+
         public bool IsFiscalNameRequired
         {
             get
@@ -100,6 +102,22 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
             get 
             {
                 return CrossParams.RoomPackSelected.name;
+            }
+        }
+
+        public string TotalRooms
+        {
+            get 
+            {
+                return CrossParams.SearchModel.Rooms.Count.ToString();
+            }
+        }
+
+        public string TotalNights
+        {
+            get 
+            {
+                return DateTimeOffset.Compare(CrossParams.SearchModel.CheckoutDate, CrossParams.SearchModel.CheckinDate).ToString();
             }
         }
 
