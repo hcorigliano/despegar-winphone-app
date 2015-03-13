@@ -25,6 +25,7 @@ namespace Despegar.WP.UI.Product.Hotels.Checkout
         public InvoiceArgentina()
         {
             this.InitializeComponent();
+            
         }
 
         private async void CityTexbox_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)

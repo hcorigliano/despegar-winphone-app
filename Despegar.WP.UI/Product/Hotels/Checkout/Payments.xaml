@@ -23,25 +23,24 @@
     </UserControl.Resources>
 
     <ScrollViewer>
-        <StackPanel>
+        <StackPanel x:Name="MainStackPanel">
 
              <!--Pay At Destination-->
-            <!--Buscar la forma para que no se dibuje cuando no hay pago en destino. Actualmente observa si el numero de tarjetas es igual a 0-->
-            <!--Y no funciona-->
-            <StackPanel Visibility="{Binding InstallmentFormatted.CardsEmpty, Converter={StaticResource VisibilityConverter} }">
-                <RadioButton Style="{StaticResource CheckoutPaymentRadioButton}" 
+            <StackPanel Visibility="{Binding InstallmentFormatted.PayAtDestination.HaveAnyCard, Converter={StaticResource VisibilityConverter} }" x:Name="Pay_Destination_StackPanel">
+                <RadioButton  Style="{StaticResource CheckoutPaymentRadioButton}" 
                                           x:Uid="Page_Hotels_Checkout_PayAtDestination"
                                           DataContext="{Binding InstallmentFormatted.PayAtDestination}"  
                                           Content="Pago en destino"                                       
                                           x:Name="radioButton"
                                           Checked="OnRadioButton_Clicked"
+                                          IsChecked="{Binding IsChecked}"
                                           GroupName="MainRadios" />
 
                 <src2:Cards CardsSource="{Binding InstallmentFormatted.PayAtDestination.Cards}" Margin="-15,0,0,0" />
             </StackPanel>
 
             <!--Without Interest--> 
-            <ItemsControl ItemsSource="{Binding InstallmentFormatted.WithoutInterest}">
+            <ItemsControl ItemsSource="{Binding InstallmentFormatted.WithoutInterest}" x:Name="WithoutInteresItemsControl">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <StackPanel>
@@ -50,6 +49,7 @@
                                       Content="{Binding FirstCard, Converter={StaticResource HotelPaymentDetailsToLabelConverter}}" 
                                       Checked="OnRadioButton_Clicked"                                      
                                       x:Name="radioButton"
+                                      IsChecked="{Binding IsChecked}"
                                       GroupName="MainRadios" />
 
                             <src2:Cards CardsSource="{Binding Cards}" Margin="-15,0,0,0" />
