@@ -2,6 +2,7 @@
 using Despegar.Core.Neo.Business.Hotels.CitiesAvailability;
 using Despegar.Core.Neo.Business.Hotels.HotelDetails;
 using Despegar.Core.Neo.Business.Hotels.SearchBox;
+using Despegar.Core.Neo.Business.Hotels.BookingCompletePostResponse;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,6 +20,7 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
         public HotelItem SelectedHotel { get; set; }
         public HotelsBookingFieldsRequest BookRequest { get; set; }
         public Roompack RoomPackSelected { get; set; }
+        public BookingCompletePostResponse BookingResponse { get; set; }
 
         public HotelsCrossParameters()
         {

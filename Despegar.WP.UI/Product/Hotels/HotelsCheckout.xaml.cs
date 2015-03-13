@@ -89,6 +89,12 @@ namespace Despegar.WP.UI.Product.Hotels
         }
 
         # region ** ERROR HANDLING **
+
+        /// <summary>
+        /// Error handler
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e">pareter with an error code</param>
         private async void ErrorHandler(object sender, ViewModelErrorArgs e)
         {
             ViewModel.BugTracker.LeaveBreadcrumb("Hotels checkout Error raised - " + e.ErrorCode);

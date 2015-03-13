@@ -1,5 +1,6 @@
 ﻿using Despegar.Core.Neo.API;
 using Despegar.Core.Neo.Business.Hotels;
+using Despegar.Core.Neo.Business.Hotels.BookingCompletePostResponse;
 using Despegar.Core.Neo.Business.Hotels.BookingFields;
 using Despegar.Core.Neo.Business.Hotels.CitiesAvailability;
 using Despegar.Core.Neo.Business.Hotels.HotelDetails;
@@ -10,6 +11,7 @@ using Despegar.Core.Neo.Connector;
 using Despegar.Core.Neo.Contract;
 using Despegar.Core.Neo.Contract.API;
 using Despegar.Core.Neo.Contract.Connector;
+using Despegar.Core.Neo.Exceptions;
 using System;
 using System.Threading.Tasks;
 
@@ -93,23 +95,22 @@ namespace Despegar.Core.Neo.API.MAPI
         //    return await connector.GetAsync<HotelUserReviews>(serviceUrl, ServiceKey.HotelUserReview);
         //}
 
-        //public async Task<BookingCompletePostResponse> CompleteBooking(object bookingCompletePost, string id)
-        //{
-        //    string serviceUrl = String.Format(ServiceURL.GetServiceURL(ServiceKey.HotelsBookingCompletePost), id);
-        //    IConnector connector = context.GetServiceConnector(ServiceKey.HotelsBookingCompletePost);
+        public async Task<BookingCompletePostResponse> CompleteBooking(object bookingData, string id)
+        {
+            string serviceUrl = String.Format(ServiceURL.GetServiceURL(ServiceKey.HotelsBookingCompletePost), id);
 
-        //    try
-        //    {
-        //        return await connector.PostAsync<BookingCompletePostResponse>(serviceUrl, bookingCompletePost);
-        //    }
-        //    catch (APIErrorException e)
-        //    {
-        //        return new BookingCompletePostResponse() { Error = e.ErrorData };
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        throw e; // redundants
-        //    }
-        //}
+            try
+            {
+                return await connector.PostAsync<BookingCompletePostResponse>(serviceUrl,bookingData, ServiceKey.HotelsBookingCompletePost);
+            }
+            catch (APIErrorException e)
+            {
+                return new BookingCompletePostResponse() { Error = e.ErrorData };
+            }
+            catch (Exception e)
+            {
+                throw e; // redundants
+            }
+        }
     }
 }
