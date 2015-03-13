@@ -1,4 +1,5 @@
 ﻿using Despegar.Core.Neo.Business.Hotels;
+using Despegar.Core.Neo.Business.Hotels.BookingCompletePostResponse;
 using Despegar.Core.Neo.Business.Hotels.BookingFields;
 using Despegar.Core.Neo.Business.Hotels.CitiesAvailability;
 using Despegar.Core.Neo.Business.Hotels.HotelDetails;
@@ -16,5 +17,7 @@ namespace Despegar.Core.Neo.Contract.API
         Task<HotelDatails> GetHotelsDetail(string idHotel, string checkin, string checkout, string distribution);
         Task<HotelsBookingFields> GetBookingFields(HotelsBookingFieldsRequest bookingFieldPost);
         //Task<HotelUserReviews> GetHotelUserReviews(string hotelId, int limit, int offset, string language);
+
+        Task<BookingCompletePostResponse> CompleteBooking(object bookingData, string id);
     }
 }
