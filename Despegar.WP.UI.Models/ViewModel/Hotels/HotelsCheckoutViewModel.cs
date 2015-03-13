@@ -467,7 +467,7 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
 
                     //// Buy
                     //crossParams.PriceDetail = PriceDetailsFormatted;
-                    crossParams.BookingResponse = await hotelService.CompleteBooking(bookingData, CoreBookingFields.id);
+                    CrossParams.BookingResponse = await hotelService.CompleteBooking(bookingData, CoreBookingFields.id);
 
                     //if (crossParams.BookingResponse.Error != null)
                     //{
