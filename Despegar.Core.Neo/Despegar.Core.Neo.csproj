@@ -41,6 +41,10 @@
     <Compile Include="Business\Configuration\City.cs" />
     <Compile Include="Business\Common\Checkout\PaymentInstallments.cs" />
     <Compile Include="Business\Configuration\GeoLocation.cs" />
+    <Compile Include="Business\Hotels\BookingCompletePostResponse\Answer.cs" />
+    <Compile Include="Business\Flight\BookingFields\LocationRequirements.cs" />
+    <Compile Include="Business\Hotels\BookingCompletePostResponse\BookingCompletePostResponse.cs" />
+    <Compile Include="Business\Hotels\BookingCompletePostResponse\RiskQuestion.cs" />
     <Compile Include="Business\Hotels\SearchBox\HotelsMinorsAge.cs" />
     <Compile Include="Business\Hotels\SearchBox\PassengersForRooms.cs" />
     <Compile Include="Business\Hotels\UserReviews\V1\Comments.cs" />

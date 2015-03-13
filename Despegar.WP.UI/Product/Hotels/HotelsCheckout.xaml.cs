@@ -7,7 +7,8 @@ using Despegar.WP.UI.Model.Common;
 using Despegar.WP.UI.Model.ViewModel;
 using Despegar.WP.UI.Model.ViewModel.Classes.Flights;
 using Despegar.WP.UI.Model.ViewModel.Hotels;
-using Despegar.WP.UI.Product.Flights.Checkout;
+using Despegar.WP.UI.Product.Hotels.Checkout;
+//using Despegar.WP.UI.Product.Flights.Checkout;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -39,19 +40,19 @@ namespace Despegar.WP.UI.Product.Hotels
         {
             this.InitializeComponent();
 
-            #if !DEBUG
+#if !DEBUG
                 GoogleAnalyticContainer ga = new GoogleAnalyticContainer();
                 ga.Tracker = GoogleAnalytics.EasyTracker.GetTracker();
                 ga.SendView("HotelsCheckout");
-            #endif
+#endif
         }
-        
+
         protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
-            HardwareButtons.BackPressed += HardwareButtons_BackPressed;            
+            HardwareButtons.BackPressed += HardwareButtons_BackPressed;
 
             // Initialize Checkout
-            ViewModel = IoC.Resolve<HotelsCheckoutViewModel>();        
+            ViewModel = IoC.Resolve<HotelsCheckoutViewModel>();
             ViewModel.PropertyChanged += Checkloading;
             ViewModel.ShowRiskReview += this.ShowRisk;
             ViewModel.HideRiskReview += this.HideRisk;
@@ -62,6 +63,11 @@ namespace Despegar.WP.UI.Product.Hotels
             // Set Defaults values and Country specifics
             ConfigureFields();
             this.DataContext = ViewModel;
+
+            if (ViewModel.InstallmentFormatted.PayAtDestination.Cards.Count() != 0)
+                ViewModel.InstallmentFormatted.PayAtDestination.IsChecked = true;
+            else
+                ViewModel.InstallmentFormatted.WithoutInterest[0].IsChecked = true;
 
             ViewModel.BugTracker.LeaveBreadcrumb("Hotels checkout ready");
         }
@@ -78,11 +84,17 @@ namespace Despegar.WP.UI.Product.Hotels
         {
             if (!ViewModel.InvoiceRequired)
             {
-                MainPivot.Items.RemoveAt(4);
+                //MainPivot.Items.RemoveAt(4);
             }
         }
 
         # region ** ERROR HANDLING **
+
+        /// <summary>
+        /// Error handler
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e">pareter with an error code</param>
         private async void ErrorHandler(object sender, ViewModelErrorArgs e)
         {
             ViewModel.BugTracker.LeaveBreadcrumb("Hotels checkout Error raised - " + e.ErrorCode);
@@ -191,30 +203,41 @@ namespace Despegar.WP.UI.Product.Hotels
             }
             if (e.PropertyName == "SelectedInstallment")
             {
-                //Revisar si hay que mostrar invoice CheckoutMethodSelected ItemSelected.
-                if(ViewModel.CheckoutMethodSelected.payment.invoice != null)
+                //Revisar si hay que mostrar invoice.
+                if (ViewModel.CheckoutMethodSelected.payment.invoice != null)
                 {
-                    //AgregarInvoice
-                    PivotItem pvit = new PivotItem();
-                    pvit.Header = "test fiscal";
-                    pvit.Name = "Pivot_INVOICE";
-                    UserControl usc = new InvoiceArgentina();
-                    usc.DataContext = this.DataContext;
-                    pvit.Content = usc;
+                    if (!MainPivot.Items.Any(x => ((PivotItem)x).Name == "Pivot_INVOICE"))
+                    {
 
-                    MainPivot.Items.Insert(4, pvit);
+                        //this is necesary
+                        Pivot_INSTALLMENT.Loaded += Insert_Invoice;
+                    }
                 }
                 else
                 {
-                    //Eliminar Invoice
-                    MainPivot.Items.Remove("Pivot_INVOICE");
+                    if (MainPivot.Items.Any(x => ((PivotItem)x).Name == "Pivot_INVOICE"))
+                    {
+                        //Eliminar Invoice
+                        MainPivot.Items.RemoveAt(4);
+                    }
                 }
             }
         }
 
+        private void Insert_Invoice(object sender, RoutedEventArgs e)
+        {
+            PivotItem pvit = new PivotItem();
+            pvit.Header = "factura fiscal";
+            pvit.Name = "Pivot_INVOICE";
+            UserControl usc = new InvoiceArgentina();
+            usc.DataContext = this.DataContext;
+            pvit.Content = usc;
+            MainPivot.Items.Insert(4, pvit);
+        }
+
         private void ShowRisk(Object sender, EventArgs e)
         {
-            riskPopup = new ModalPopup(new RiskQuestionsPopUp() { DataContext = ViewModel });
+            riskPopup = new ModalPopup(new Despegar.WP.UI.Product.Flights.Checkout.RiskQuestionsPopUp() { DataContext = ViewModel });
             riskPopup.Show();
         }
 
@@ -228,7 +251,7 @@ namespace Despegar.WP.UI.Product.Hotels
             e.Handled = true;
 
             if (ViewModel != null)
-            {              
+            {
                 if (ViewModel.IsLoading)
                     return;
 
