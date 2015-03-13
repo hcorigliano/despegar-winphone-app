@@ -117,7 +117,7 @@
                 </Grid>
                 <StackPanel Grid.Column="1"  HorizontalAlignment="Left" Height="Auto"  VerticalAlignment="Top" Margin="{StaticResource Left_Offset}" >
                     <TextBlock TextWrapping="Wrap" Text="{Binding airline.name}" Style="{StaticResource SegoeRegular15}" Foreground="#FF319FDA"  />
-                    <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding price}" VerticalAlignment="Top" Style="{StaticResource SegoeRegular17}" />
+                    <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding price}" VerticalAlignment="Top" Style="{StaticResource SegoeRegular12_9}" />
 
                     <StackPanel Height="24" VerticalAlignment="Top" Orientation="Horizontal">
                         <TextBlock TextWrapping="Wrap" Text="{Binding outbound.Count}" Style="{StaticResource SegoeRegular15}" Height="25" />

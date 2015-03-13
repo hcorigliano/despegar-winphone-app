@@ -43,7 +43,7 @@
 
                 <StackPanel Grid.Row="1" Orientation="Horizontal">
                     <Image Source="/Assets/Icon/App/user-small-white.scale-100.png"/>
-                    <TextBlock Margin="{StaticResource Left_Offset}" Style="{StaticResource SegoeRegular17}" VerticalAlignment="Center" >
+                    <TextBlock Margin="{StaticResource Left_Offset}" Style="{StaticResource SegoeRegular12_9}" VerticalAlignment="Center" >
                         <Run Text="Máx. "/>
                         <Run Text="{Binding rooms[0].max_capacity}"/>
                         <Run x:Uid="Hotel_Detail_People" Text=" personasX"/>
