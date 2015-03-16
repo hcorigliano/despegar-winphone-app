@@ -45,9 +45,7 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
             get
             {
                 if (GlobalConfiguration.Site == "AR")
-                    return CoreBookingFields != null ? CoreBookingFields.form.Invoice != null 
-                        && !CoreBookingFields.form.Invoice.AllFieldsAreOptional : false;
-
+                    return CoreBookingFields != null ? CoreBookingFields.form.Invoice != null : false;
                 return false;
             }
         }
@@ -59,7 +57,8 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
             {
                 if (InvoiceRequired)
                 {
-                    return CoreBookingFields.form.Invoice.fiscal_status.required && CoreBookingFields.form.Invoice.fiscal_status.CoreValue != "FINAL";                                      
+                    //return CoreBookingFields.form.Invoice.fiscal_status != null && CoreBookingFields.form.Invoice.fiscal_name != null  && CoreBookingFields.form.Invoice.fiscal_status.CoreValue != "FINAL";                                      
+                    return CheckoutMethodSelected.payment.invoice.fiscal_status != null && CheckoutMethodSelected.payment.invoice.fiscal_name != null && CoreBookingFields.form.Invoice.fiscal_status.CoreValue != "FINAL_CONSUMER";                                      
                 }
                 else { return false; }
             }
@@ -141,7 +140,45 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
         }
 
         private void ConfigureCountry(string currentCountry)
-        {            
+        {
+            BugTracker.LeaveBreadcrumb("Flight checkout view model configure country");
+
+            // Common
+
+            // Contact
+            if (CoreBookingFields.form.contact.Phone != null)
+                CoreBookingFields.form.contact.Phone.type.SetDefaultValue();
+
+            // Card data
+            //if (CoreBookingFields.form.payment.card.owner_document != null && CoreBookingFields.form.payment.card.owner_document.type != null)
+            //    CoreBookingFields.form.payment.card.owner_document.type.SetDefaultValue();
+            //if (CoreBookingFields.form.payment.card.owner_gender != null)
+            //    CoreBookingFields.form.payment.card.owner_gender.SetDefaultValue();       
+
+
+            switch (currentCountry)
+            {
+                case "AR":
+
+                    // Invoice Arg
+                    if (InvoiceRequired)
+                    {
+                        CheckoutMethodSelected.payment.invoice.fiscal_status.PropertyChanged += Fiscal_status_PropertyChanged;
+
+                        CheckoutMethodSelected.payment.invoice.fiscal_status.SetDefaultValue();
+                        CheckoutMethodSelected.payment.invoice.address.country.SetDefaultValue();
+
+                        // Turn State into a MultipleField
+                        CheckoutMethodSelected.payment.invoice.address.state.value = null;
+                        CheckoutMethodSelected.payment.invoice.address.state.options = States.Select(x => new Option() { value = x.id, description = x.name }).ToList();
+                        CheckoutMethodSelected.payment.invoice.address.state.SetDefaultValue();
+                    }
+
+                    CoreBookingFields.form.contact.phones[0].country_code.SetDefaultValue();
+                    CoreBookingFields.form.contact.phones[0].area_code.SetDefaultValue();
+                    break;
+            }
+            BugTracker.LeaveBreadcrumb("Flight checkout view model configure country complete");
         }
 
         public ItemsKey ItemSelected { get; set; }

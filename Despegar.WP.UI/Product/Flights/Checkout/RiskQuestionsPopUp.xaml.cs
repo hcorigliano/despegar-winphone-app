@@ -31,7 +31,6 @@ namespace Despegar.WP.UI.Product.Flights.Checkout
 
         public void Enter()
         {
-            var test = this.DataContext;
             HardwareButtons.BackPressed += HardwareButtons_BackPressed;
             ShowDialogAnimation.Begin();
         }

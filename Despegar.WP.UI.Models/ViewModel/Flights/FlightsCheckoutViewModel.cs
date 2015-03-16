@@ -162,7 +162,7 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
                     if (creditCardsValidations != null)
                     {
                         ValidationCreditcard validation = creditCardsValidations.data.FirstOrDefault(x => x.bankCode == (selectedCard.card.bank == "" ? "*" : selectedCard.card.bank) && x.cardCode == selectedCard.card.company);
-
+                        
                         Validation valNumber = new Validation();
                         valNumber.error_code = "NUMBER";
                         valNumber.regex = validation.numberRegex;
@@ -187,6 +187,23 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
         }
 
         public Voucher Voucher { get; set; }
+
+        public bool IsVisaAndVaccinesEnabled
+        {
+            get
+            {
+                return CoreBookingFields.location_requirement_message != null
+                && CoreBookingFields.location_requirement_message.messages.Count > 0;
+            }
+        }
+
+        public LocationRequirements VisaAndVaccinesItems
+        {
+            get
+            {
+                return CoreBookingFields.location_requirement_message;
+            }
+        }
 
         public ICommand SendRiskAnswersCommand
         {
@@ -363,6 +380,9 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
             book.SelectedItemIndex = FlightCrossParameters.UPA_SelectedItemIndex;
 
             CoreBookingFields = await flightService.GetBookingFields(book);
+
+            // For Thanks screen
+            FlightCrossParameters.VisaAndVaccines = CoreBookingFields.location_requirement_message;
 
             BugTracker.LeaveBreadcrumb("Flight checkout view model get booking fields complete");
         }

@@ -48,7 +48,7 @@
                 <RowDefinition Height="1*"/>
             </Grid.RowDefinitions>
 
-            <TextBlock Grid.Row="0" Grid.Column="1"  Style="{StaticResource SegoeRegular17}"  HorizontalAlignment="Right" VerticalAlignment="Center" Grid.RowSpan="2" >
+            <TextBlock Grid.Row="0" Grid.Column="1"  Style="{StaticResource SegoeRegular12_9}"  HorizontalAlignment="Right" VerticalAlignment="Center" Grid.RowSpan="2" >
                     <Run Text="$"/>
                     <Run Text="{Binding price.base}"/>
             </TextBlock>

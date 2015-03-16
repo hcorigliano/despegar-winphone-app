@@ -190,6 +190,9 @@
     <Compile Include="Product\Flights\Checkout\Controls\NationalitySelectionPopup.xaml.cs">
       <DependentUpon>NationalitySelectionPopup.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Product\Flights\Checkout\Controls\VisaAndVaccines.xaml.cs">
+      <DependentUpon>VisaAndVaccines.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Product\Flights\Checkout\RiskQuestionsPopUp.xaml.cs">
       <DependentUpon>RiskQuestionsPopUp.xaml</DependentUpon>
     </Compile>
@@ -507,6 +510,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Product\Flights\Checkout\Contact.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Product\Flights\Checkout\Controls\VisaAndVaccines.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -1603,7 +1610,6 @@
     <Content Include="Compilation\Despegar\despegarsplash-white.scale-100.png" />
     <Content Include="Compilation\Despegar\despegarsplash-white.scale-140.png" />
     <Content Include="Compilation\Despegar\despegarsplash-white.scale-240.png" />
-    <None Include="Package.StoreAssociation.xml" />
     <Content Include="mocks.xml" />
     <Content Include="StoreManifest.xml" />
   </ItemGroup>

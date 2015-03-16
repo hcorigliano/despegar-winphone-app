@@ -12,15 +12,18 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="70" />
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="70" />            
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="0">
             <src:BuyDetailsControl DataContext="{Binding PriceDetailsFormatted}" />
         </StackPanel>
 
-        <StackPanel Grid.Row="1">
+
+        <src:VisaAndVaccines Grid.Row="1" DataContext="{Binding }" Margin="0,8,0,0" />
+
+        <StackPanel Grid.Row="2">
             <StackPanel >
                 <Grid>
                     <Grid.ColumnDefinitions>

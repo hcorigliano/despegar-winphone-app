@@ -61,7 +61,7 @@
                         </Grid.RowDefinitions>
 
                         <TextBlock  Grid.Row="0" x:Uid="Page_HotelsSearch_Promo_Title" Style="{StaticResource SegoeLight24}" Text="Hoteles para hoy" />
-                        <TextBlock  Grid.Row="1" x:Uid="Page_HotelsSearch_Promo_SubTitle" Style="{StaticResource SegoeRegular17}" Text="Hotel cercano para esta noche" />
+                        <TextBlock  Grid.Row="1" x:Uid="Page_HotelsSearch_Promo_SubTitle" Style="{StaticResource SegoeRegular12_9}" Text="Hotel cercano para esta noche" />
                     </Grid>
                 </Grid>
 

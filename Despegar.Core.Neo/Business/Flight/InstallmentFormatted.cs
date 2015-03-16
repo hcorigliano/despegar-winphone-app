@@ -45,7 +45,8 @@ namespace Despegar.Core.Neo.Business.Flights
                 {
                     string input = String.Join(" , ", WithInterest.Select(x => x.InstallmentQuantity.ToString()).Distinct());
                     StringBuilder sb = new StringBuilder(input);
-                    sb[input.LastIndexOf(',')] = 'o';
+                    if (input.LastIndexOf(',') != -1)
+                        sb[input.LastIndexOf(',')] = 'o';
                     return sb.ToString() + " " + ResourceLabel;
                 } 
                 else 

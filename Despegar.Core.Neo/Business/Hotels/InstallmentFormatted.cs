@@ -2,6 +2,7 @@
 using Despegar.Core.Neo.Business.Hotels.BookingFields;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,12 +16,14 @@ namespace Despegar.Core.Neo.Business.Hotels
     /// </summary>
     public class InstallmentOption
     {
+        public bool IsChecked { get; set; }
+
         public bool SelectedInstallment { get; set; }
 
         public int InstallmentQuantity { get; set; }
         public List<HotelPayment> Cards { get; set; }
 
-        public bool CardsEmpty { get { return this.Cards.Count() == 0; } }
+        public bool HaveAnyCard { get { return this.Cards.Count() != 0; } }
 
         public HotelPayment FirstCard { get { return Cards[0]; } }
 
@@ -50,10 +53,8 @@ namespace Despegar.Core.Neo.Business.Hotels
                 {
                     string input = String.Join(" , ", WithInterest.Select(x => x.InstallmentQuantity.ToString()).Distinct());
                     StringBuilder sb = new StringBuilder(input);
-                    int index = input.LastIndexOf(',');
-                    if (index>0){
-                        sb[index] = 'o';
-                    }
+                    if (input.LastIndexOf(',') != -1)
+                        sb[input.LastIndexOf(',')] = 'o'; 
                     return sb.ToString() + " " + ResourceLabel;
                 } 
                 else 
