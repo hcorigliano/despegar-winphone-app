@@ -107,22 +107,22 @@ namespace Despegar.WP.UI.Product.Hotels
                     string sectionID = (string)e.Parameter;
                     MainPivot.SelectedIndex = GetSectionIndex(sectionID);
                     break;
-                //case "TERMS_AND_CONDITIONS_NOT_CHECKED":
-                //    dialog = new MessageDialog(manager.GetString("TermsAndConditions_ERROR"), manager.GetString("TermsAndConditions_ERROR_TITLE"));
-                //    await dialog.ShowSafelyAsync();
-                //    break;
+                case "TERMS_AND_CONDITIONS_NOT_CHECKED":
+                    dialog = new MessageDialog(manager.GetString("TermsAndConditions_ERROR"), manager.GetString("TermsAndConditions_ERROR_TITLE"));
+                    await dialog.ShowSafelyAsync();
+                    break;
 
-                //case "BOOKING_FAILED":
+                case "BOOKING_FAILED":
 
-                //    string ticketid = e.Parameter as string;
-                //    ticketid = (ticketid != null) ? ticketid : String.Empty;
-                //    string phrase = manager.GetString("Flights_Checkout_Card_Data_Card_ERROR_OP_BOOKING_FAILED");
+                    string ticketid = e.Parameter as string;
+                    ticketid = (ticketid != null) ? ticketid : String.Empty;
+                    string phrase = manager.GetString("Flights_Checkout_Card_Data_Card_ERROR_OP_BOOKING_FAILED");
 
-                //    dialog = new MessageDialog(String.Format(phrase, ticketid), manager.GetString("Flights_Checkout_ERROR_FORM_ERROR_TITLE"));
-                //    await dialog.ShowSafelyAsync();
-                //    this.navigationHelper.GoBack();
-                //    this.navigationHelper.GoBack();
-                //    break;
+                    dialog = new MessageDialog(String.Format(phrase, ticketid), manager.GetString("Flights_Checkout_ERROR_FORM_ERROR_TITLE"));
+                    await dialog.ShowSafelyAsync();
+                    //this.navigationHelper.GoBack();
+                    //this.navigationHelper.GoBack();
+                    break;
 
 
                 //case "COMPLETE_BOOKING_CONECTION_FAILED":

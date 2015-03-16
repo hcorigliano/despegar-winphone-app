@@ -16,5 +16,7 @@ namespace Despegar.Core.Neo.Business.Hotels.BookingFields
         // Custom
         public RegularField emailConfirmation { get; set; }
         public Phone Phone { get { return phones.FirstOrDefault(); } }
+
+        public bool IsFrozen { get; set; }
     }
 }

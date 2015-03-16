@@ -20,5 +20,7 @@ namespace Despegar.Core.Neo.Business.Hotels.BookingFields
         public InvoiceArg Invoice { get { return checkout_method.FirstItem.payment.invoice; } }
         public Installment CurrentInstallment { get { return checkout_method.FirstItem.payment.installment; } }    
         public string CountrySite { get; set; }
+
+        public string booking_status { get; set; }
     }
 }
