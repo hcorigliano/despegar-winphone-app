@@ -95,13 +95,15 @@ namespace Despegar.Core.Neo.API.MAPI
         //    return await connector.GetAsync<HotelUserReviews>(serviceUrl, ServiceKey.HotelUserReview);
         //}
 
-        public async Task<BookingCompletePostResponse> CompleteBooking(object bookingData, string id)
+        public async Task<BookingCompletePostResponse> CompleteBooking(object bookingData, string id, string item_id)
         {
-            string serviceUrl = String.Format(ServiceURL.GetServiceURL(ServiceKey.HotelsBookingCompletePost), id);
+            //string serviceUrl = String.Format(ServiceURL.GetServiceURL(ServiceKey.HotelsBookingCompletePost , id,item_id), id);
+            string serviceUrl = ServiceURL.GetServiceURL(ServiceKey.HotelsBookingCompletePost, id, item_id);
+
 
             try
             {
-                return await connector.PostAsync<BookingCompletePostResponse>(serviceUrl,bookingData, ServiceKey.HotelsBookingCompletePost);
+                return await connector.PatchAsync<BookingCompletePostResponse>(serviceUrl, bookingData, ServiceKey.HotelsBookingCompletePost);
             }
             catch (APIErrorException e)
             {

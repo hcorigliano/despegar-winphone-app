@@ -87,6 +87,33 @@ namespace Despegar.Core.Neo.Connector
             return await ProcessRequest<T>(httpMessage, key);
         }
 
+
+
+        public virtual async Task<T> PatchAsync<T>(string relativeServiceUrl, object postData, ServiceKey key) where T : class
+        {
+            string data = String.Empty;
+            string url = GetBaseUrl() + relativeServiceUrl;
+            try
+            {
+                data = JsonConvert.SerializeObject(postData);
+            }
+            catch (JsonSerializationException ex)
+            {
+                var e = new JsonSerializerException(String.Format("[Connector]:Could not serialize object of type {0} to call Service: {1}", typeof(T).FullName, url), ex);
+                logger.LogException(e);
+                throw e;
+            }
+
+            HttpMethod method = new HttpMethod("PATCH");
+            HttpRequestMessage httpMessage = new HttpRequestMessage(method, url);
+            httpMessage.Content = new StringContent(data);
+            httpMessage.Content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+            SetCustomHeaders(httpMessage, key);
+
+            return await ProcessRequest<T>(httpMessage, key);
+        }
+
+
         /// <summary>
         /// This is the method for sending put command.
         /// </summary>
