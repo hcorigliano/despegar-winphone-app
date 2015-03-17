@@ -118,7 +118,7 @@ namespace Despegar.Core.Neo.Business.Hotels.BookingFields
             }
 
             // Voucher
-            if (!form.Voucher.IsValid)
+            if (form.Voucher != null && !form.Voucher.IsValid)
                 voucherValid = false;
 
             if (!roomsValid)

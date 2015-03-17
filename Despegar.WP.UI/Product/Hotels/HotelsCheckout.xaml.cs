@@ -75,6 +75,10 @@ namespace Despegar.WP.UI.Product.Hotels
                 ViewModel.SelectedInstallment = ViewModel.InstallmentFormatted.WithoutInterest[0];
             }
 
+#if DEBUG
+            ViewModel.FillBookingFields();
+#endif 
+
             ViewModel.BugTracker.LeaveBreadcrumb("Hotels checkout ready");
         }
 
