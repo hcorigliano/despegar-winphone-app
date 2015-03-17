@@ -21,17 +21,8 @@
         </StackPanel>
 
 
-        <StackPanel Grid.Row="1" Visibility="{Binding IsVisaAndVaccinesEnabled}">
-            <TextBlock Text="{Binding VisaAndVaccinesItems.title}" Style="{StaticResource SegoeRegular15}" />
-            <TextBlock Text="{Binding VisaAndVaccinesItems.description}" Style="{StaticResource SegoeRegular15}"  />
+        <src:VisaAndVaccines Grid.Row="1" DataContext="{Binding }" Margin="0,8,0,0" />
 
-          <ItemsControl ItemsSource="{Binding VisaAndVaccinesItems.messages}">
-                <DataTemplate>
-                   <TextBlock Text="{Binding VisaAndVaccinesItems.description}" Style="{StaticResource SegoeRegular13}" />
-                </DataTemplate>
-            </ItemsControl>
-        </StackPanel>
-        
         <StackPanel Grid.Row="2">
             <StackPanel >
                 <Grid>

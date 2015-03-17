@@ -41,7 +41,7 @@ namespace Despegar.Core.Neo.API
             //{ServiceKey.HotelsAutocomplete, "mapi-cross/autocomplete/hotels?search={0}" },
             {ServiceKey.HotelsGetDetails , "mapi-hotels/availability/{0}?checkin_date={1}&checkout_date={2}&distribution={3}"},
             {ServiceKey.HotelsBookingFields,"mapi-hotels/bookings?"},
-            {ServiceKey.HotelsBookingCompletePost,"mobile.despegar.com/v3/mapi-hotels/bookings/{0}/forms/{1}"},
+            {ServiceKey.HotelsBookingCompletePost,"mapi-hotels/bookings/{0}/forms/{1}?"},
             {ServiceKey.HotelUserReview,"reviews?type=hotel&item_ids={0}&limit={1}&offset{2}&languages={3}&providers={4}"},
             {ServiceKey.HotelUserReviewV1,"hotels/{0}/reviews?notempty={1}&page={2}&pagesize={3}&total={4}"},
 

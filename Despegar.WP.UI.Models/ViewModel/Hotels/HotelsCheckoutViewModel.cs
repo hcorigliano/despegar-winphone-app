@@ -449,6 +449,11 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
 
         private async Task ValidateAndBuy()
         {
+            #if DEBUG
+                    //TODO : SACAR ESTO
+                    FillBookingFields();
+            #endif  
+
             BugTracker.LeaveBreadcrumb("Hotels checkout view model validate and buy init");
 
             if (!IsTermsAndConditionsAccepted)
@@ -461,35 +466,35 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
             string sectionID = "";
 
             // Validation
-            if (!CoreBookingFields.IsValid(out sectionID))
-            {
-                BugTracker.LeaveBreadcrumb("Hotel checkout ViewModel invalid fields");
-                OnViewModelError("FORM_ERROR", sectionID); // TODO: Catch
-            }
-            else
-            {
+            //if (!CoreBookingFields.IsValid(out sectionID))
+            //{
+            //    BugTracker.LeaveBreadcrumb("Hotel checkout ViewModel invalid fields");
+            //    OnViewModelError("FORM_ERROR", sectionID); // TODO: Catch
+            //}
+            //else
+            //{
                 try
                 {
                     this.IsLoading = true;
                     object bookingData = null;
 
-                    bookingData = await BookingFormBuilder.BuildHotelsForm(this.CoreBookingFields);
+                    bookingData = await BookingFormBuilder.BuildHotelsForm(this.CoreBookingFields, this.CheckoutMethodSelected.payment.invoice, SelectedCard, false);
 
                     //// Buy
                     //crossParams.PriceDetail = PriceDetailsFormatted;
-                    CrossParams.BookingResponse = await hotelService.CompleteBooking(bookingData, CoreBookingFields.id);
+                    crossParams.BookingResponse = await hotelService.CompleteBooking(bookingData, CoreBookingFields.id , ItemSelected.item_id );
 
-                    //if (crossParams.BookingResponse.Error != null)
-                    //{
-                    //    BugTracker.LeaveBreadcrumb("Hotels checkout MAPI booking error response code: " + crossParams.BookingResponse.Error.code.ToString());
-                    //    // API Error ocurred, Check CODE and inform the user
-                    //    OnViewModelError("API_ERROR", crossParams.BookingResponse.Error.code);
-                    //    this.IsLoading = false;
-                    //    return;
-                    //}
+                    if (crossParams.BookingResponse.Error != null)
+                    {
+                        BugTracker.LeaveBreadcrumb("Hotels checkout MAPI booking error response code: " + crossParams.BookingResponse.Error.code.ToString());
+                        // API Error ocurred, Check CODE and inform the user
+                        OnViewModelError("API_ERROR", crossParams.BookingResponse.Error.code);
+                        this.IsLoading = false;
+                        return;
+                    }
 
                     //// Booking processed, check the status of Booking request
-                    //AnalizeBookingStatus(crossParams.BookingResponse.booking_status);
+                    AnalizeBookingStatus(crossParams.BookingResponse.booking_status);
                 }
                 catch (HTTPStatusErrorException)
                 {
@@ -502,7 +507,36 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
 
                 BugTracker.LeaveBreadcrumb("Hotels checkout view model validate and buy complete");
                 this.IsLoading = false;
+            //}
+        }
+
+        private void FillBookingFields()
+        {
+            CoreBookingFields.form.passengers[0].first_name.CoreValue = "test";
+            CoreBookingFields.form.passengers[0].last_name.CoreValue = "booking";
+            CoreBookingFields.form.contact.email.CoreValue = "testhoteles@despegar.com";
+            CoreBookingFields.form.contact.emailConfirmation.CoreValue = "testhoteles@despegar.com";
+            CoreBookingFields.form.contact.Phone.area_code.CoreValue = "54";
+            CoreBookingFields.form.contact.Phone.country_code.CoreValue = "11";
+            CoreBookingFields.form.contact.Phone.number.CoreValue = "12341234";
+            CoreBookingFields.form.CardInfo.expiration.CoreValue = "2018-3";
+            CoreBookingFields.form.CardInfo.number.CoreValue = "4242424242424242";
+            CoreBookingFields.form.CardInfo.owner_document.number.CoreValue = "12123123";
+            CoreBookingFields.form.CardInfo.owner_document.type.CoreValue = "LOCAL";
+            if (CoreBookingFields.form.CardInfo.owner_gender != null)
+                CoreBookingFields.form.CardInfo.owner_gender.CoreValue = "MALE";
+            CoreBookingFields.form.CardInfo.owner_name.CoreValue = "test booking";
+            CoreBookingFields.form.CardInfo.security_code.CoreValue = "123";
+
+            if (CheckoutMethodSelected.payment.invoice != null)
+            {
+                this.CheckoutMethodSelected.payment.invoice.address.number.CoreValue = "123";
+                this.CheckoutMethodSelected.payment.invoice.address.postal_code.CoreValue = "1234";
+                this.CheckoutMethodSelected.payment.invoice.address.street.CoreValue = "falsa";
+                this.CheckoutMethodSelected.payment.invoice.fiscal_id.CoreValue = "2012123123";
+                this.CheckoutMethodSelected.payment.invoice.fiscal_status.CoreValue = "FINAL_CONSUMER";
             }
+
         }
 
         /// <summary>
@@ -511,19 +545,19 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
         
         private void AnalizeBookingStatus(string status)
         {
-            //BugTracker.LeaveBreadcrumb("Flight checkout view model booking status" + status);
+            BugTracker.LeaveBreadcrumb("Flight checkout view model booking status" + status);
 
-            //switch (GetStatus(status))
-            //{
-            //    case BookingStatusEnum.checkout_successful:
+            switch (GetStatus(status))
+            {
+                case BookingStatusEnum.SUCCESS:
 
-            //        Navigator.GoTo(ViewModelPages.HotelsThanks, crossParams);
-            //        break;
+                    Navigator.GoTo(ViewModelPages.HotelsThanks, crossParams);
+                    break;
 
-            //    case BookingStatusEnum.booking_failed:
+                case BookingStatusEnum.booking_failed:
 
-            //        OnViewModelError("BOOKING_FAILED", crossParams.BookingResponse.checkout_id);
-            //        break;
+                    OnViewModelError("BOOKING_FAILED", crossParams.BookingResponse.checkout_id);
+                    break;
 
             //    case BookingStatusEnum.fix_credit_card:
             //        this.CoreBookingFields.form.booking_status = "fix_credit_card";
@@ -567,7 +601,7 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
             //    //case BookingStatusEnum.BookingCustomError:
             //    default:
             //        break;
-            //}
+            }
         }
 
         private BookingStatusEnum GetStatus(string status)

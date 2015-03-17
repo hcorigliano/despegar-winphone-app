@@ -18,6 +18,6 @@ namespace Despegar.Core.Neo.Contract.API
         Task<HotelsBookingFields> GetBookingFields(HotelsBookingFieldsRequest bookingFieldPost);
         //Task<HotelUserReviews> GetHotelUserReviews(string hotelId, int limit, int offset, string language);
 
-        Task<BookingCompletePostResponse> CompleteBooking(object bookingData, string id);
+        Task<BookingCompletePostResponse> CompleteBooking(object bookingData, string id, string item_id);
     }
 }

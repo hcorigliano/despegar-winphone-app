@@ -381,6 +381,9 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
 
             CoreBookingFields = await flightService.GetBookingFields(book);
 
+            // For Thanks screen
+            FlightCrossParameters.VisaAndVaccines = CoreBookingFields.location_requirement_message;
+
             BugTracker.LeaveBreadcrumb("Flight checkout view model get booking fields complete");
         }
 
