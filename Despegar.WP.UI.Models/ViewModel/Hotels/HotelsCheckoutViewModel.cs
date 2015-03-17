@@ -399,13 +399,13 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
             string sectionID = "";
 
             // Validation
-            if (!CoreBookingFields.IsValid(out sectionID))
-            {
-                BugTracker.LeaveBreadcrumb("Hotel checkout ViewModel invalid fields");
-                OnViewModelError("FORM_ERROR", sectionID); // TODO: Catch
-            }
-            else
-            {
+            //if (!CoreBookingFields.IsValid(out sectionID))
+            //{
+            //    BugTracker.LeaveBreadcrumb("Hotel checkout ViewModel invalid fields");
+            //    OnViewModelError("FORM_ERROR", sectionID); // TODO: Catch
+            //}
+            //else
+            //{
                 try
                 {
                     this.IsLoading = true;
@@ -440,7 +440,7 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
 
                 BugTracker.LeaveBreadcrumb("Hotels checkout view model validate and buy complete");
                 this.IsLoading = false;
-            }
+            //}
         }
 
         private void FillBookingFields()
