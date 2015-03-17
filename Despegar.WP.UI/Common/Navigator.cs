@@ -89,7 +89,10 @@ namespace Despegar.WP.UI.Common
                 case ViewModelPages.PhotoPresenter:
                     view = typeof(PhotoPresenter);
                     break;
-                // PACKAGES
+                case ViewModelPages.HotelsThanks:
+                    view = typeof(HotelThanks);
+                    break;
+                // PACKAGESHotelsThanks
                 // CARS
                 // Add More pages-viewmodel mappings down here
             }

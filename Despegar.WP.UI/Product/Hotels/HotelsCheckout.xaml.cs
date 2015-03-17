@@ -156,13 +156,13 @@ namespace Despegar.WP.UI.Product.Hotels
                 //    MainPivot.SelectedIndex = GetSectionIndex(pageID);
                 //    break;
 
-                //case "ONLINE_PAYMENT_ERROR_FIX_CREDIT_CARD":
+                case "ONLINE_PAYMENT_ERROR_FIX_CREDIT_CARD":
 
-                //    dialog = new MessageDialog(manager.GetString("Flights_Checkout_Card_Data_Card_ERROR_ONLINE_PAYMENT_ERROR_FIX_CREDIT_CARD"), manager.GetString("Flights_Checkout_ERROR_FORM_ERROR_TITLE"));
-                //    await dialog.ShowSafelyAsync();
-                //    pageID = (string)e.Parameter;
-                //    MainPivot.SelectedIndex = GetSectionIndex(pageID);
-                //    break;
+                    dialog = new MessageDialog(manager.GetString("Flights_Checkout_Card_Data_Card_ERROR_ONLINE_PAYMENT_ERROR_FIX_CREDIT_CARD"), manager.GetString("Flights_Checkout_ERROR_FORM_ERROR_TITLE"));
+                    await dialog.ShowSafelyAsync();
+                    pageID = (string)e.Parameter;
+                    MainPivot.SelectedIndex = GetSectionIndex(pageID);
+                    break;
                 //case "ONLINE_PAYMENT_FAILED":
                 //    {
                 //        //string ticketid = e.Parameter as string;
@@ -183,10 +183,10 @@ namespace Despegar.WP.UI.Product.Hotels
                 //    dialog = new MessageDialog(manager.GetString("Voucher_ERROR_" + (string)e.Parameter), manager.GetString("Voucher_ERROR_TITLE"));
                 //    await dialog.ShowSafelyAsync();
                 //    break;
-                //case "API_ERROR":
-                //    dialog = new MessageDialog(manager.GetString("Flights_Checkout_ERROR_FORM_ERROR"), manager.GetString("Flights_Checkout_ERROR_FORM_ERROR_TITLE"));
-                //    await dialog.ShowSafelyAsync();
-                //    break;
+                case "API_ERROR":
+                    dialog = new MessageDialog(manager.GetString("Flights_Checkout_ERROR_FORM_ERROR"), manager.GetString("Flights_Checkout_ERROR_FORM_ERROR_TITLE"));
+                    await dialog.ShowSafelyAsync();
+                    break;
                 // TODO: CHECKOUT SESSION EXPIRED -> Handle that error
             }
         }
