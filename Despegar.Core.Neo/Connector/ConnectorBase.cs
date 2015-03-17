@@ -93,7 +93,6 @@ namespace Despegar.Core.Neo.Connector
         {
             string data = String.Empty;
             string url = GetBaseUrl() + relativeServiceUrl;
-
             try
             {
                 data = JsonConvert.SerializeObject(postData);
@@ -105,7 +104,8 @@ namespace Despegar.Core.Neo.Connector
                 throw e;
             }
 
-            HttpRequestMessage httpMessage = new HttpRequestMessage(HttpMethod.Post, url);
+            HttpMethod method = new HttpMethod("PATCH");
+            HttpRequestMessage httpMessage = new HttpRequestMessage(method, url);
             httpMessage.Content = new StringContent(data);
             httpMessage.Content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
             SetCustomHeaders(httpMessage, key);

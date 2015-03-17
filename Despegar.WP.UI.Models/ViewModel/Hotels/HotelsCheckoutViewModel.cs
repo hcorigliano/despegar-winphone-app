@@ -409,11 +409,11 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
                     //TODO : SACAR ESTO
                     FillBookingFields();
 
-                    bookingData = await BookingFormBuilder.BuildHotelsForm(this.CoreBookingFields , this.CheckoutMethodSelected.payment.invoice);
+                    bookingData = await BookingFormBuilder.BuildHotelsForm(this.CoreBookingFields, this.CheckoutMethodSelected.payment.invoice, SelectedCard);
 
                     //// Buy
                     //crossParams.PriceDetail = PriceDetailsFormatted;
-                    crossParams.BookingResponse = await hotelService.CompleteBooking(bookingData, CoreBookingFields.id , ItemSelected.item_id);
+                    crossParams.BookingResponse = await hotelService.CompleteBooking(bookingData, CoreBookingFields.id , ItemSelected.item_id );
 
                     int test = 1;
 
@@ -455,14 +455,20 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
             CoreBookingFields.form.CardInfo.expiration.CoreValue = "2018-3";
             CoreBookingFields.form.CardInfo.number.CoreValue = "4242424242424242";
             CoreBookingFields.form.CardInfo.owner_document.number.CoreValue = "12123123";
-            CoreBookingFields.form.CardInfo.owner_gender.CoreValue = "MALE";
+            CoreBookingFields.form.CardInfo.owner_document.type.CoreValue = "LOCAL";
+            if (CoreBookingFields.form.CardInfo.owner_gender != null)
+                CoreBookingFields.form.CardInfo.owner_gender.CoreValue = "MALE";
             CoreBookingFields.form.CardInfo.owner_name.CoreValue = "test booking";
             CoreBookingFields.form.CardInfo.security_code.CoreValue = "123";
 
-            this.CheckoutMethodSelected.payment.invoice.address.number.CoreValue = "123";
-            this.CheckoutMethodSelected.payment.invoice.address.postal_code.CoreValue = "1234";
-            this.CheckoutMethodSelected.payment.invoice.address.street.CoreValue = "falsa";
-            this.CheckoutMethodSelected.payment.invoice.fiscal_id.CoreValue = "2012123123";
+            if (CheckoutMethodSelected.payment.invoice != null)
+            {
+                this.CheckoutMethodSelected.payment.invoice.address.number.CoreValue = "123";
+                this.CheckoutMethodSelected.payment.invoice.address.postal_code.CoreValue = "1234";
+                this.CheckoutMethodSelected.payment.invoice.address.street.CoreValue = "falsa";
+                this.CheckoutMethodSelected.payment.invoice.fiscal_id.CoreValue = "2012123123";
+                this.CheckoutMethodSelected.payment.invoice.fiscal_status.CoreValue = "FINAL_CONSUMER";
+            }
 
         }
 

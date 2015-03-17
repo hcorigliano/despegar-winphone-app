@@ -103,7 +103,7 @@ namespace Despegar.Core.Neo.API.MAPI
 
             try
             {
-                return await connector.PostAsync<BookingCompletePostResponse>(serviceUrl,bookingData, ServiceKey.HotelsBookingCompletePost);
+                return await connector.PatchAsync<BookingCompletePostResponse>(serviceUrl, bookingData, ServiceKey.HotelsBookingCompletePost);
             }
             catch (APIErrorException e)
             {

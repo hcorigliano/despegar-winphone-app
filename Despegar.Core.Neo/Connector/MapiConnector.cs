@@ -63,6 +63,18 @@ namespace Despegar.Core.Neo.Connector
             return await base.PostAsync<T>(IncludeSiteAndLanguage(relativeServiceUrl), postData, key);
         }
 
+
+        /// <summary>
+        /// Overrides Base method to include Site and Language parameters for MAPI
+        /// </summary>
+        /// <typeparam name="T">Expected result type</typeparam>
+        /// <param name="relativeServiceUrl">Service Resource URL</param>
+        /// <returns></returns>
+        public override async Task<T> PatchAsync<T>(string relativeServiceUrl, object postData, ServiceKey key)
+        {
+            return await base.PatchAsync<T>(IncludeSiteAndLanguage(relativeServiceUrl), postData, key);
+        }
+
         /// <summary>
         /// Overrides Base method 
         /// </summary>

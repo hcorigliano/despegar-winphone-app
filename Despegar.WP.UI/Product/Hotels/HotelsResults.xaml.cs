@@ -75,7 +75,8 @@ namespace Despegar.WP.UI.Product.Hotels
                     ViewModel.ViewModelError += ErrorHandler;
                     ViewModel.OnNavigated(e.Parameter);                    
                     await ViewModel.LoadResults();
-                    this.DataContext = ViewModel;                               
+                    this.DataContext = ViewModel;
+                    //((HotelsResultsViewModel)this.DataContext).SearchModel.NotifyPropertiesChanged();        
             }
             BottomAppBar.Visibility = Windows.UI.Xaml.Visibility.Visible;
         }

@@ -47,7 +47,7 @@ namespace Despegar.Core.Neo.Business.Forms
             JObject result = new JObject();
             result.Add("first_name", passenger.first_name.CoreValue);
             result.Add("last_name", passenger.last_name.CoreValue);
-            result.Add("room_reference", passenger.last_name.CoreValue);
+            //result.Add("room_reference", passenger.last_name.CoreValue); //Is necesary?
 
             return result;
         }
@@ -187,7 +187,7 @@ namespace Despegar.Core.Neo.Business.Forms
             });
         }
 
-        public static Task<object> BuildHotelsForm(HotelsBookingFields bookingFields ,InvoiceArg invoiceFields )
+        public static Task<object> BuildHotelsForm(HotelsBookingFields bookingFields, InvoiceArg invoiceFields, HotelPayment selectedCard)
         {
             return Task.Run(() =>
             {
@@ -238,7 +238,9 @@ namespace Despegar.Core.Neo.Business.Forms
                 JObject installment = new JObject();
                 installment.Add("card_type", bookingFields.form.CurrentInstallment.card_type.CoreValue);
                 installment.Add("card_code", bookingFields.form.CurrentInstallment.card_code.CoreValue);
-                installment.Add("quantity", Convert.ToInt32(bookingFields.form.CurrentInstallment.quantity.CoreValue));
+
+                if (Convert.ToInt32(bookingFields.form.CurrentInstallment.quantity.CoreValue)!= 0)
+                    installment.Add("quantity", Convert.ToInt32(bookingFields.form.CurrentInstallment.quantity.CoreValue));
 
                 if (bookingFields.form.CurrentInstallment.complete_card_code != null && bookingFields.form.CurrentInstallment.complete_card_code.CoreValue != null)
                     installment.Add("complete_card_code", bookingFields.form.CurrentInstallment.complete_card_code.CoreValue);
@@ -304,6 +306,8 @@ namespace Despegar.Core.Neo.Business.Forms
                 form.Add("payment", payment);
 
                 result.Add("form", form);
+                result.Add("payment_method", selectedCard.id);
+                result.Add("validate_duplicated_checkouts", true);
 
                 return result as object;
 
