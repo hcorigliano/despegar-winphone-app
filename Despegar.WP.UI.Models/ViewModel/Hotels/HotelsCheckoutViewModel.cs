@@ -383,8 +383,7 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
         private async Task ValidateAndBuy()
         {
             #if DEBUG
-                    //TODO : SACAR ESTO
-                    FillBookingFields();
+                    //FillBookingFields();
             #endif  
 
             BugTracker.LeaveBreadcrumb("Hotels checkout view model validate and buy init");
@@ -399,13 +398,13 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
             string sectionID = "";
 
             // Validation
-            //if (!CoreBookingFields.IsValid(out sectionID))
-            //{
-            //    BugTracker.LeaveBreadcrumb("Hotel checkout ViewModel invalid fields");
-            //    OnViewModelError("FORM_ERROR", sectionID); // TODO: Catch
-            //}
-            //else
-            //{
+            if (!CoreBookingFields.IsValid(out sectionID))
+            {
+                BugTracker.LeaveBreadcrumb("Hotel checkout ViewModel invalid fields");
+                OnViewModelError("FORM_ERROR", sectionID); // TODO: Catch
+            }
+            else
+            {
                 try
                 {
                     this.IsLoading = true;
@@ -440,10 +439,10 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
 
                 BugTracker.LeaveBreadcrumb("Hotels checkout view model validate and buy complete");
                 this.IsLoading = false;
-            //}
+            }
         }
 
-        private void FillBookingFields()
+        public void FillBookingFields()
         {
             CoreBookingFields.form.passengers[0].first_name.CoreValue = "test";
             CoreBookingFields.form.passengers[0].last_name.CoreValue = "booking";
@@ -469,6 +468,8 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
                 this.CheckoutMethodSelected.payment.invoice.fiscal_id.CoreValue = "23121231239";
                 this.CheckoutMethodSelected.payment.invoice.fiscal_status.CoreValue = "FINAL_CONSUMER";
             }
+
+            //OnPropertyChanged();
 
         }
 
