@@ -106,7 +106,7 @@ namespace Despegar.WP.UI.Product.Hotels
             switch (e.ErrorCode)
             {
                 case "FORM_ERROR":
-                    dialog = new MessageDialog(manager.GetString("Flights_Checkout_ERROR_FORM_ERROR"), manager.GetString("Flights_Checkout_ERROR_FORM_ERROR_TITLE"));
+                    dialog = new MessageDialog(manager.GetString("Hotels_Checkout_ERROR_FORM_ERROR"), manager.GetString("Hotels_Checkout_ERROR_FORM_ERROR_TITLE"));
                     await dialog.ShowSafelyAsync();
 
                     // Go to Pivot with errors
@@ -126,8 +126,8 @@ namespace Despegar.WP.UI.Product.Hotels
 
                     dialog = new MessageDialog(String.Format(phrase, ticketid), manager.GetString("Flights_Checkout_ERROR_FORM_ERROR_TITLE"));
                     await dialog.ShowSafelyAsync();
-                    //this.navigationHelper.GoBack();
-                    //this.navigationHelper.GoBack();
+                    ViewModel.Navigator.GoBack();
+
                     break;
 
 
@@ -136,11 +136,11 @@ namespace Despegar.WP.UI.Product.Hotels
                 //    await dialog.ShowSafelyAsync();
                 //    break;
 
-                //case "CHECKOUT_INIT_FAILED":
-                //    dialog = new MessageDialog(manager.GetString("Flights_Search_ERROR_SEARCH_FAILED"), manager.GetString("Flights_Checkout_ERROR_FORM_ERROR_TITLE"));
-                //    await dialog.ShowSafelyAsync();
-                //    this.navigationHelper.GoBack();
-                //    break;
+                case "CHECKOUT_INIT_FAILED":
+                    dialog = new MessageDialog(manager.GetString("Hotels_Search_ERROR_SEARCH_FAILED"), manager.GetString("Hotels_Checkout_ERROR_FORM_ERROR_TITLE"));
+                    await dialog.ShowSafelyAsync();
+                    ViewModel.Navigator.GoBack();
+                    break;
                 //case "ONLINE_PAYMENT_ERROR_NEW_CREDIT_CARD":
                 //    dialog = new MessageDialog(manager.GetString("Flights_Checkout_Card_Data_Card_ERROR_NEW_CREDIT_CARD"), manager.GetString("Flights_Checkout_ERROR_FORM_ERROR_TITLE"));
                 //    await dialog.ShowSafelyAsync();
@@ -167,12 +167,12 @@ namespace Despegar.WP.UI.Product.Hotels
                 //        await dialog.ShowSafelyAsync();
                 //        break;
                 //    }
-                //case "COMPLETE_BOOKING_BOOKING_FAILED":
-                //    dialog = new MessageDialog(manager.GetString("Flights_Search_ERROR_BOOKING_FAILED"), manager.GetString("Flights_Checkout_ERROR_FORM_ERROR_TITLE"));
-                //    await dialog.ShowSafelyAsync();
-                //    this.navigationHelper.GoBack();
-                //    this.navigationHelper.GoBack();
-                //    break;
+                case "COMPLETE_BOOKING_BOOKING_FAILED":
+                    dialog = new MessageDialog(manager.GetString("Hotels_Search_ERROR_SEARCH_FAILED"), manager.GetString("Hotels_Checkout_ERROR_FORM_ERROR_TITLE"));
+                    await dialog.ShowSafelyAsync();
+                    ViewModel.Navigator.GoBack();
+                    //ViewModel.Navigator.GoBack();
+                    break;
                 //case "VOUCHER_VALIDITY_ERROR":
                 //    dialog = new MessageDialog(manager.GetString("Voucher_ERROR_" + (string)e.Parameter), manager.GetString("Voucher_ERROR_TITLE"));
                 //    await dialog.ShowSafelyAsync();

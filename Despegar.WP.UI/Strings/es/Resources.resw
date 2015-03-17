@@ -1074,31 +1074,31 @@ La reserva no ha sido generada y no se le cobrará ningún cargo por la transacc
   </data>
   <data name="Page_Hotels_Anonymous" xml:space="preserve">
     <value>Anónimo</value>
-    </data>
+  </data>
   <data name="Common_Conditions.Text" xml:space="preserve">
     <value>Condiciones</value>
   </data>
   <data name="Page_Hotels_Reviews_Bad.Text" xml:space="preserve">
     <value>Lo Malo</value>
-    </data>
+  </data>
   <data name="Common_Left.Text" xml:space="preserve">
     <value>Quedan </value>
   </data>
   <data name="Page_Hotels_Reviews_Good.Text" xml:space="preserve">
     <value>Lo Bueno</value>
-    </data>
+  </data>
   <data name="Common_Show_Less.Text" xml:space="preserve">
     <value>Mostrar menos</value>
   </data>
   <data name="Page_Hotels_Reviews_CommentsCounts.Text" xml:space="preserve">
     <value>Comentarios / Basado en los ultimos 6 meses</value>
-    </data>
+  </data>
   <data name="Common_Show_More_Fares.Text" xml:space="preserve">
     <value>Ver más tarifas</value>
   </data>
   <data name="Page_Hotels_Reviews_Comments_From.Text" xml:space="preserve">
     <value>- Desde</value>
-    </data>
+  </data>
   <data name="Hotel_Details_Show_Room_Description.Text" xml:space="preserve">
     <value>Ver la descripcion de la habitación</value>
   </data>
@@ -1137,5 +1137,11 @@ La reserva no ha sido generada y no se le cobrará ningún cargo por la transacc
   </data>
   <data name="Flights_Checkout_Card_Data_Document_ERROR_INVALID_DOCUMENT_NUMBER" xml:space="preserve">
     <value>Por favor, verifique el numero ingresado</value>
+  </data>
+  <data name="Hotels_Checkout_ERROR_FORM_ERROR" xml:space="preserve">
+    <value>Por favor, verifique los datos ingresos y revise los campos marcados.</value>
+  </data>
+  <data name="Hotels_Checkout_ERROR_FORM_ERROR_TITLE" xml:space="preserve">
+    <value>Formulário de Compra</value>
   </data>
 </root>
