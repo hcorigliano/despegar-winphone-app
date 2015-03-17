@@ -1,4 +1,5 @@
-﻿using Despegar.Core.Neo.Business.Common.Checkout;
+﻿using Despegar.Core.Business.Flight.BookingFields;
+using Despegar.Core.Neo.Business.Common.Checkout;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +15,7 @@ namespace Despegar.Core.Neo.Business.Flight.BookingFields
         public CardField card { get; set; }
         public InvoiceArg invoice { get; set; }
         public string data_type { get; set; }
+        public BillingAddress billing_address { get; set; }
 
         // Custom
         public List<int> YearRange 
@@ -33,6 +35,7 @@ namespace Despegar.Core.Neo.Business.Flight.BookingFields
                 return list;
             }
         }
+
         public List<int> Months
         {
             get

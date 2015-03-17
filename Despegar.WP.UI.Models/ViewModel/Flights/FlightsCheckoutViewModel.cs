@@ -93,6 +93,14 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
             } 
         }
 
+        public bool BillingAddressRequired
+        {
+            get
+            {
+                return CoreBookingFields.form.payment.billing_address != null;
+            }
+        }
+
         public bool IsTermsAndConditionsAccepted { get; set; }
         public bool NationalityIsOpen { get; set; }
         private CouponResponse voucherResult;
@@ -786,5 +794,7 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
             BugTracker.LeaveBreadcrumb("Flight checkout start");
             FlightCrossParameters = navigationParams as FlightsCrossParameter;            
         }
+
+        
     }
 }

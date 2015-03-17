@@ -1068,31 +1068,31 @@ A reserva não foi gerado e não cobra nenhuma taxa para a transação.</value>
   </data>
   <data name="Page_Hotels_Anonymous" xml:space="preserve">
     <value>Anônimo</value>
-    </data>
+  </data>
   <data name="Common_Conditions.Text" xml:space="preserve">
     <value>Condições</value>
   </data>
   <data name="Page_Hotels_Reviews_Bad.Text" xml:space="preserve">
     <value>O pior:</value>
-    </data>
+  </data>
   <data name="Common_Left.Text" xml:space="preserve">
     <value>São </value>
   </data>
   <data name="Page_Hotels_Reviews_Good.Text" xml:space="preserve">
     <value>O melhor:</value>
-    </data>
+  </data>
   <data name="Common_Show_Less.Text" xml:space="preserve">
     <value>Mostrar menos</value>
   </data>
   <data name="Page_Hotels_Reviews_CommentsCounts.Text" xml:space="preserve">
     <value>Comentarios / Basado en los ultimos 6 meses</value>
-    </data>
+  </data>
   <data name="Common_Show_More_Fares.Text" xml:space="preserve">
     <value>Veja mais taxas</value>
   </data>
   <data name="Page_Hotels_Reviews_Comments_From.Text" xml:space="preserve">
     <value>- Desde</value>
-    </data>
+  </data>
   <data name="habitacion(es) disponible(s)" xml:space="preserve">
     <value>quarto(s) disponível</value>
   </data>
@@ -1136,5 +1136,8 @@ Isso pode ter sido causado por dados incorretos, limite de compra insuficiente o
   </data>
   <data name="Flights_Checkout_Card_Data_Document_ERROR_INVALID_DOCUMENT_NUMBER" xml:space="preserve">
     <value>Por favor, verifique o número introduzido</value>
+  </data>
+  <data name="Flight_Checkout_Billing_Address" xml:space="preserve">
+    <value>endereço</value>
   </data>
 </root>

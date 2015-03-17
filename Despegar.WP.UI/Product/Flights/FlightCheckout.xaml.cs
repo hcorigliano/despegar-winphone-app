@@ -206,7 +206,12 @@ namespace Despegar.WP.UI.Product.Flights
         {
             if (!ViewModel.InvoiceRequired)
             {
-                MainPivot.Items.RemoveAt(4);
+                MainPivot.Items.Remove(MainPivot.FindName("Pivot_INVOICE"));
+            }
+
+            if (!ViewModel.BillingAddressRequired)
+            {
+                MainPivot.Items.Remove(MainPivot.FindName("Pivot_BILLING_ADDRESS"));
             }
         }
 

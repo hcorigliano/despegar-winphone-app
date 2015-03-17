@@ -56,6 +56,11 @@
             <PivotItem x:Name="Pivot_INVOICE"  x:Uid="Flight_Checkout_Invoice_Arg" Style="{StaticResource PivotItemBase}" xmlns:src="using:Despegar.WP.UI.Product.Flights.Checkout">
                 <src:InvoiceArgentina  />
             </PivotItem>
+            
+            <!-- Billing Address-->
+            <PivotItem x:Name="Pivot_BILLING_ADDRESS"  x:Uid="Flight_Checkout_Billing_Address" Style="{StaticResource PivotItemBase}" xmlns:src="using:Despegar.WP.UI.Product.Flights.Checkout">
+                <src:BillingAddress  />
+            </PivotItem>
 
             <!--Buy-->
             <PivotItem  x:Uid="Flight_Checkout_Buy"  Style="{StaticResource PivotItemBase}" xmlns:src="using:Despegar.WP.UI.Product.Flights.Checkout">
