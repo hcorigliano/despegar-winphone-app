@@ -238,7 +238,17 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
             BugTracker.LeaveBreadcrumb("Flight checkout view model configure country complete");
         }
 
-        public ItemsKey ItemSelected { get; set; }
+        private ItemsKey itemSelected;
+        public ItemsKey ItemSelected 
+        {
+            get { return itemSelected; }
+            set
+            { 
+                itemSelected = value;
+                OnPropertyChanged();
+            }
+        }
+
         public CheckoutMethodKey CheckoutMethodSelected { get; set; }
 
         /// <summary>

@@ -278,6 +278,13 @@
         <Setter Property="Height" Value="16" />
         <Setter Property="Background"  Value="{StaticResource Red20Brush}" />
     </Style>
+    <Style x:Key="IconButtonRedSmall" TargetType="Button">
+        <Setter Property="Width"  Value="16" />
+        <Setter Property="Height" Value="16" />
+        <Setter Property="Background"  Value="{StaticResource Red20Brush}" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
+        <Setter Property="VerticalAlignment" Value="Top" />
+    </Style>
     <Style x:Key="IcoLightnBlueSmall" TargetType="Grid" BasedOn="{StaticResource IconBase}">
         <Setter Property="Width"  Value="16" />
         <Setter Property="Height" Value="16" />
