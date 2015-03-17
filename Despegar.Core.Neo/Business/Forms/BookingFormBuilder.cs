@@ -187,7 +187,7 @@ namespace Despegar.Core.Neo.Business.Forms
             });
         }
 
-        public static Task<object> BuildHotelsForm(HotelsBookingFields bookingFields, InvoiceArg invoiceFields, HotelPayment selectedCard)
+        public static Task<object> BuildHotelsForm(HotelsBookingFields bookingFields, InvoiceArg invoiceFields, HotelPayment selectedCard, bool validateDuplicateCheckouts)
         {
             return Task.Run(() =>
             {
@@ -307,7 +307,7 @@ namespace Despegar.Core.Neo.Business.Forms
 
                 result.Add("form", form);
                 result.Add("payment_method", selectedCard.id);
-                result.Add("validate_duplicated_checkouts", true);
+                result.Add("validate_duplicated_checkouts", validateDuplicateCheckouts);
 
                 return result as object;
 
