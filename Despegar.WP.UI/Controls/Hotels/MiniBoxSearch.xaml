@@ -38,19 +38,19 @@
                 <Run Text="{Binding Nights , Converter={StaticResource PluralOrSingularResourceConverter} ,ConverterParameter='Night'}"/>
             </TextBlock>
             <StackPanel Orientation="Horizontal"  Grid.Row="1" >
-                <TextBlock Style="{StaticResource SegoeRegular17}" VerticalAlignment="Center">
+                <TextBlock Style="{StaticResource SegoeRegular12_9}" VerticalAlignment="Center">
                     <Run Text="{Binding TotalAdults}"/>
                     <Run Text="{Binding TotalAdults , Converter={StaticResource PluralOrSingularResourceConverter} ,ConverterParameter='Adult'}"/>
                     <Run Text=" "/>
                 </TextBlock>
 
-                <TextBlock Margin="10,0,0,0" Style="{StaticResource SegoeRegular17}" VerticalAlignment="Center" Visibility="{Binding TotalMinors , Converter={StaticResource VisibilityConverter}, FallbackValue=Collapsed}">
+                <TextBlock Margin="10,0,0,0" Style="{StaticResource SegoeRegular12_9}" VerticalAlignment="Center" Visibility="{Binding TotalMinors , Converter={StaticResource VisibilityConverter}, FallbackValue=Collapsed}">
                     <Run Text="{Binding TotalMinors}"/>
                     <Run Text="{Binding TotalMinors , Converter={StaticResource PluralOrSingularResourceConverter} ,ConverterParameter='Child'}"/>
                     <Run Text=" "/>
                 </TextBlock>
 
-                <TextBlock  Margin="10,0,0,0"  Style="{StaticResource SegoeRegular17}" VerticalAlignment="Center">
+                <TextBlock  Margin="10,0,0,0"  Style="{StaticResource SegoeRegular12_9}" VerticalAlignment="Center">
                     <Run Text="{Binding DepartureDateFormatted}"/>
                     <Run Text=" al "/>
                     <Run Text="{Binding DestinationDateFormatted}"/>
