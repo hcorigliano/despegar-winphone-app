@@ -1149,4 +1149,17 @@ Isso pode ter sido causado por dados incorretos, limite de compra insuficiente o
   <data name="Hotels_Search_ERROR_SEARCH_FAILED_TITLE" xml:space="preserve">
     <value>Error</value>
   </data>
+  <data name="Hotels_Checkout_Card_Data_Card_ERROR_NEW_CREDIT_CARD" xml:space="preserve">
+    <value>Desculpe, não foi possível processar o pagamento com o cartão inserido. Por favor insira um novo cartão e tente novamente.</value>
+  </data>
+  <data name="Hotels_Checkout_Card_Data_Card_ERROR_ONLINE_PAYMENT_ERROR_FIX_CREDIT_CARD" xml:space="preserve">
+    <value>Desculpe, encontrou-se um erro no seu cartão de crédito. Por favor, verifique os dados inseridos e tente novamente.</value>
+  </data>
+  <data name="Hotels_Checkout_Card_Data_Card_ERROR_OP_BOOKING_FAILED" xml:space="preserve">
+    <value>"Desculpe, o seu pedido de compra No. {0} não pode ser processado devido à indisponibilidade do voo.
+A reserva não foi gerado e não cobra nenhuma taxa para a transação."</value>
+  </data>
+  <data name="Hotels_Checkout_Card_Data_Card_ERROR_OP_PAYMENT_FAILED" xml:space="preserve">
+    <value>Desculpe, não foi possível processar o pagamento. Se desejar efetuar o pagamento com transferência bancária, por favor ligue para {0}.</value>
+  </data>
 </root>
