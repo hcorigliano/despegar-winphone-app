@@ -1153,4 +1153,10 @@ La reserva no ha sido generada y no se le cobrará ningún cargo por la transacc
   <data name="Hotels_Buy_Details_Title.Text" xml:space="preserve">
     <value>Detalle de compra</value>
   </data>
+  <data name="Page_Hotel_Thanks_Detalle" xml:space="preserve">
+    <value>detalle</value>
+  </data>
+  <data name="Page_Hotel_Thanks_Resumen" xml:space="preserve">
+    <value>resumen</value>
+  </data>
 </root>

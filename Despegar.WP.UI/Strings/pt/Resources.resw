@@ -1152,4 +1152,10 @@ Isso pode ter sido causado por dados incorretos, limite de compra insuficiente o
   <data name="Hotels_Buy_Details_Title.Text" xml:space="preserve">
     <value>Detalhe de Compra</value>
   </data>
+  <data name="Page_Hotel_Thanks_Detalle" xml:space="preserve">
+    <value>detalhe</value>
+  </data>
+  <data name="Page_Hotel_Thanks_Resumen" xml:space="preserve">
+    <value>sumário</value>
+  </data>
 </root>

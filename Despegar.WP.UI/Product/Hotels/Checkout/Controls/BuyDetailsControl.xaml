@@ -95,7 +95,6 @@
             </TextBlock>
         </StackPanel>
 
-        <!--TOTAL  falta meter el signo dek mensaqje de pago en destino binbdiado a itemselected-->
         <Grid Grid.Row="4" Grid.ColumnSpan="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="{StaticResource Block7p}" />
@@ -114,14 +113,6 @@
                 &#xE171;
                 </TextBlock>
             </Grid>
-
-            <!--<Button   Grid.Column="0" Click="Button_Click"  VerticalAlignment="Center" HorizontalAlignment="Center" BorderThickness="0">
-                <Button.Content>
-                    <TextBlock  Style="{StaticResource CheckkoutValidationGlyph}">
-                        &#xE171;
-                    </TextBlock>
-                </Button.Content>
-            </Button>-->
 
         </Grid>
 

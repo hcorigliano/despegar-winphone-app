@@ -482,19 +482,19 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
 
                     //// Buy
                     //crossParams.PriceDetail = PriceDetailsFormatted;
-                    crossParams.BookingResponse = await hotelService.CompleteBooking(bookingData, CoreBookingFields.id , ItemSelected.item_id );
+                    CrossParams.BookingResponse = await hotelService.CompleteBooking(bookingData, CoreBookingFields.id , ItemSelected.item_id );
 
-                    if (crossParams.BookingResponse.Error != null)
+                    if (CrossParams.BookingResponse.Error != null)
                     {
-                        BugTracker.LeaveBreadcrumb("Hotels checkout MAPI booking error response code: " + crossParams.BookingResponse.Error.code.ToString());
+                        BugTracker.LeaveBreadcrumb("Hotels checkout MAPI booking error response code: " + CrossParams.BookingResponse.Error.code.ToString());
                         // API Error ocurred, Check CODE and inform the user
-                        OnViewModelError("API_ERROR", crossParams.BookingResponse.Error.code);
+                        OnViewModelError("API_ERROR", CrossParams.BookingResponse.Error.code);
                         this.IsLoading = false;
                         return;
                     }
 
                     //// Booking processed, check the status of Booking request
-                    AnalizeBookingStatus(crossParams.BookingResponse.booking_status);
+                    AnalizeBookingStatus(CrossParams.BookingResponse.booking_status);
                 }
                 catch (HTTPStatusErrorException)
                 {
@@ -533,7 +533,7 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
                 this.CheckoutMethodSelected.payment.invoice.address.number.CoreValue = "123";
                 this.CheckoutMethodSelected.payment.invoice.address.postal_code.CoreValue = "1234";
                 this.CheckoutMethodSelected.payment.invoice.address.street.CoreValue = "falsa";
-                this.CheckoutMethodSelected.payment.invoice.fiscal_id.CoreValue = "2012123123";
+                this.CheckoutMethodSelected.payment.invoice.fiscal_id.CoreValue = "20121231239";
                 this.CheckoutMethodSelected.payment.invoice.fiscal_status.CoreValue = "FINAL_CONSUMER";
             }
 
@@ -545,18 +545,18 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
         
         private void AnalizeBookingStatus(string status)
         {
-            BugTracker.LeaveBreadcrumb("Flight checkout view model booking status" + status);
+            BugTracker.LeaveBreadcrumb("Hotels checkout view model booking status" + status);
 
             switch (GetStatus(status))
             {
                 case BookingStatusEnum.SUCCESS:
 
-                    Navigator.GoTo(ViewModelPages.HotelsThanks, crossParams);
+                    Navigator.GoTo(ViewModelPages.HotelsThanks, CrossParams);
                     break;
 
                 case BookingStatusEnum.booking_failed:
 
-                    OnViewModelError("BOOKING_FAILED", crossParams.BookingResponse.checkout_id);
+                    OnViewModelError("BOOKING_FAILED",CrossParams.BookingResponse.checkout_id);
                     break;
 
             //    case BookingStatusEnum.fix_credit_card:

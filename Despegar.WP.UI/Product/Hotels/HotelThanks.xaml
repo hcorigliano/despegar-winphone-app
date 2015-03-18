@@ -27,7 +27,7 @@
         <TextBlock Grid.Row="1" x:Uid="Page_Checkout" Style="{StaticResource PageHeaderSmall}" Text="SOLICITUD DE COMPRA" />
 
         <Pivot Grid.Row="2" x:Name="MainPivot"  Style="{StaticResource PivotBaseMain}">
-            <PivotItem x:Uid="Page_Hotel_Thanks_Resumen" Header="resumen de compra" Style="{StaticResource PivotItemBase}" DataContext="" >
+            <PivotItem x:Uid="Page_Hotel_Thanks_Resumen" Header="resumen" Style="{StaticResource PivotItemBase}" >
                 <StackPanel>
                     <TextBlock x:Uid="Flight_Thanks" Style="{StaticResource Thanks_PageHeader}" Text="gracias totales" />
                     <TextBlock Style="{StaticResource Thanks_Request_Is }" x:Uid="Flight_Thanks_Request_Is" Text="Su número de solicitud de compra es:"  />
@@ -39,7 +39,7 @@
                 </StackPanel>
             </PivotItem>
 
-            <PivotItem x:Uid="Page_Hotel_Thanks_Detalle" Header="detalle de compra" Style="{StaticResource PivotItemBase}" DataContext="" >
+            <PivotItem x:Uid="Page_Hotel_Thanks_Detalle" Header="detalle" Style="{StaticResource PivotItemBase}">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="{StaticResource Block2p}" />
