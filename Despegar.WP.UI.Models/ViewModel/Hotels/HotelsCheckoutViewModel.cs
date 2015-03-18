@@ -178,6 +178,9 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
                 FormatInstallments();
                 //PriceDetailsFormatted = FormatPrice();
 
+                SelectTheFirstInstallment();
+
+
                 // Set Known Default Values && Adapt Checkout to the country
                 ConfigureCountry(currentCountry);
 
@@ -194,6 +197,20 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
             }
 
             IsLoading = false;
+        }
+
+        private void SelectTheFirstInstallment()
+        {
+            if (this.InstallmentFormatted.PayAtDestination.Cards.Count() != 0)
+            {
+                InstallmentFormatted.PayAtDestination.IsChecked = true;
+                SelectedInstallment = InstallmentFormatted.PayAtDestination;
+            }
+            else
+            {
+                InstallmentFormatted.WithoutInterest[0].IsChecked = true;
+                SelectedInstallment = InstallmentFormatted.WithoutInterest[0];
+            }
         }
 
         private void ConfigureCountry(string currentCountry)
@@ -223,12 +240,16 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
                         CheckoutMethodSelected.payment.invoice.fiscal_status.PropertyChanged += Fiscal_status_PropertyChanged;
 
                         CheckoutMethodSelected.payment.invoice.fiscal_status.SetDefaultValue();
-                        CheckoutMethodSelected.payment.invoice.address.country.SetDefaultValue();
+                        if (CheckoutMethodSelected.payment.invoice.address.country != null)
+                            CheckoutMethodSelected.payment.invoice.address.country.SetDefaultValue();
 
                         // Turn State into a MultipleField
-                        CheckoutMethodSelected.payment.invoice.address.state.value = null;
-                        CheckoutMethodSelected.payment.invoice.address.state.options = States.Select(x => new Option() { value = x.id, description = x.name }).ToList();
-                        CheckoutMethodSelected.payment.invoice.address.state.SetDefaultValue();
+                        if (CheckoutMethodSelected.payment.invoice.address.state != null)
+                        {
+                            CheckoutMethodSelected.payment.invoice.address.state.value = null;
+                            CheckoutMethodSelected.payment.invoice.address.state.options = States.Select(x => new Option() { value = x.id, description = x.name }).ToList();
+                            CheckoutMethodSelected.payment.invoice.address.state.SetDefaultValue();
+                        }
                     }
 
                     CoreBookingFields.form.contact.phones[0].country_code.SetDefaultValue();
@@ -450,8 +471,7 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
         private async Task ValidateAndBuy()
         {
             #if DEBUG
-                    //TODO : SACAR ESTO
-                    FillBookingFields();
+                    //FillBookingFields();
             #endif  
 
             BugTracker.LeaveBreadcrumb("Hotels checkout view model validate and buy init");
@@ -466,13 +486,13 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
             string sectionID = "";
 
             // Validation
-            //if (!CoreBookingFields.IsValid(out sectionID))
-            //{
-            //    BugTracker.LeaveBreadcrumb("Hotel checkout ViewModel invalid fields");
-            //    OnViewModelError("FORM_ERROR", sectionID); // TODO: Catch
-            //}
-            //else
-            //{
+            if (!CoreBookingFields.IsValid(out sectionID))
+            {
+                BugTracker.LeaveBreadcrumb("Hotel checkout ViewModel invalid fields");
+                OnViewModelError("FORM_ERROR", sectionID); // TODO: Catch
+            }
+            else
+            {
                 try
                 {
                     this.IsLoading = true;
@@ -496,21 +516,21 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
                     //// Booking processed, check the status of Booking request
                     AnalizeBookingStatus(CrossParams.BookingResponse.booking_status);
                 }
-                catch (HTTPStatusErrorException)
+                catch (HTTPStatusErrorException e)
                 {
                     OnViewModelError("COMPLETE_BOOKING_CONECTION_FAILED");
                 }
-                catch (Exception)
+                catch (Exception e)
                 {
                     OnViewModelError("COMPLETE_BOOKING_BOOKING_FAILED");
                 }
 
                 BugTracker.LeaveBreadcrumb("Hotels checkout view model validate and buy complete");
                 this.IsLoading = false;
-            //}
+            }
         }
 
-        private void FillBookingFields()
+        public void FillBookingFields()
         {
             CoreBookingFields.form.passengers[0].first_name.CoreValue = "test";
             CoreBookingFields.form.passengers[0].last_name.CoreValue = "booking";
@@ -533,9 +553,11 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
                 this.CheckoutMethodSelected.payment.invoice.address.number.CoreValue = "123";
                 this.CheckoutMethodSelected.payment.invoice.address.postal_code.CoreValue = "1234";
                 this.CheckoutMethodSelected.payment.invoice.address.street.CoreValue = "falsa";
-                this.CheckoutMethodSelected.payment.invoice.fiscal_id.CoreValue = "20121231239";
+                this.CheckoutMethodSelected.payment.invoice.fiscal_id.CoreValue = "23121231239";
                 this.CheckoutMethodSelected.payment.invoice.fiscal_status.CoreValue = "FINAL_CONSUMER";
             }
+
+            //OnPropertyChanged();
 
         }
 
@@ -549,72 +571,80 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
 
             switch (GetStatus(status))
             {
-                case BookingStatusEnum.SUCCESS:
+                case HotelBookingStatusEnum.SUCCESS:
 
                     Navigator.GoTo(ViewModelPages.HotelsThanks, CrossParams);
                     break;
 
-                case BookingStatusEnum.booking_failed:
+                case HotelBookingStatusEnum.BOOKING_ERROR:
 
                     OnViewModelError("BOOKING_FAILED",CrossParams.BookingResponse.checkout_id);
                     break;
 
-            //    case BookingStatusEnum.fix_credit_card:
-            //        this.CoreBookingFields.form.booking_status = "fix_credit_card";
-            //        FreezeFields();
-            //        OnViewModelError("ONLINE_PAYMENT_ERROR_FIX_CREDIT_CARD", "CARD");
-            //        break;
+                case HotelBookingStatusEnum.FIX_CREDIT_CARD:
+                    this.CoreBookingFields.form.booking_status = "FIX_CREDIT_CARD";
+                    FreezeFields();
+                    OnViewModelError("ONLINE_PAYMENT_ERROR_FIX_CREDIT_CARD", "CARD");
+                    break;
 
-            //    case BookingStatusEnum.new_credit_card:
+                case HotelBookingStatusEnum.NEW_CREDIT_CARD:
 
-            //        this.CoreBookingFields.form.payment.card.number.CoreValue = String.Empty;
-            //        this.CoreBookingFields.form.payment.card.expiration.CoreValue = String.Empty;
-            //        this.CoreBookingFields.form.payment.card.security_code.CoreValue = String.Empty;
-            //        this.CoreBookingFields.form.booking_status = "new_credit_card";
+                    this.CheckoutMethodSelected.payment.card.number.CoreValue = String.Empty;
+                    this.CheckoutMethodSelected.payment.card.expiration.CoreValue = String.Empty;
+                    this.CheckoutMethodSelected.payment.card.security_code.CoreValue = String.Empty;
+                    this.CoreBookingFields.form.booking_status = "NEW_CREDIT_CARD";
 
-            //        FreezeFields();
-            //        OnPropertyChanged("SelectedCard");
-            //        OnViewModelError("ONLINE_PAYMENT_ERROR_NEW_CREDIT_CARD", "CARD");
-            //        break;
+                    FreezeFields();
+                    OnPropertyChanged("SelectedCard");
+                    OnViewModelError("ONLINE_PAYMENT_ERROR_NEW_CREDIT_CARD", "CARD");
+                    break;
 
-            //    case BookingStatusEnum.canceled:
-            //        // El vuelos se cancela y no puede comprar. Enviar a la resbusqueda de vuelos
-            //        BugTracker.LogEvent("FLIGHT BOOKING CANCELED");
-            //        OnViewModelError("BOOKING_CANCELED");
-            //        break;
+                //case HotelBookingStatusEnum.:
+                //    // Se acabaron los reintentos mostrar mensaje de error e ir para atras
+                //    OnViewModelError("PAYMENT_FAILED");
+                //    break;
 
-            //    case BookingStatusEnum.payment_failed:
-            //        // Se acabaron los reintentos mostrar mensaje de error e ir para atras
-            //        OnViewModelError("PAYMENT_FAILED");
-            //        break;
+                case HotelBookingStatusEnum.RISK_REJECTED:
+                    OnViewModelError("RISK_PAYMENT_FAILED", "CARD");
+                    break;
 
-            //    case BookingStatusEnum.risk_evaluation_failed:
-            //        OnViewModelError("RISK_PAYMENT_FAILED", "CARD");
-            //        break;
+                case HotelBookingStatusEnum.RISK_QUESTIONS:
+                    EventHandler RiskHandler = ShowRiskReview;
+                    if (RiskHandler != null)
+                        RiskHandler(this, null);
 
-            //    case BookingStatusEnum.risk_review:
-            //        EventHandler RiskHandler = ShowRiskReview;
-            //        if (RiskHandler != null)
-            //            RiskHandler(this, null);
-
-            //        break;
-            //    //case BookingStatusEnum.BookingCustomError:
-            //    default:
-            //        break;
+                    break;
+                //enable for booking 
+                //case HotelBookingStatusEnum.validate_duplicated_checkouts:
+                //    break;
+                default:
+                    break;
             }
         }
 
-        private BookingStatusEnum GetStatus(string status)
+        /// <summary>
+        /// Freezes Contact and Passenger Fields
+        /// </summary>
+        private void FreezeFields()
+        {
+            // Contact
+            CoreBookingFields.form.contact.IsFrozen = false;
+            // Passengers
+            foreach (var item in CoreBookingFields.form.passengers)
+                item.IsFrozen = false;
+        }
+
+        private HotelBookingStatusEnum GetStatus(string status)
         {
             try
             {
-                BookingStatusEnum _status = (BookingStatusEnum)Enum.Parse(typeof(BookingStatusEnum), status);
+                HotelBookingStatusEnum _status = (HotelBookingStatusEnum)Enum.Parse(typeof(HotelBookingStatusEnum), status);
 
                 return _status;
             }
             catch (Exception)
             {
-                return BookingStatusEnum.BookingCustomError;
+                return HotelBookingStatusEnum.BookingCustomError;
             }
         }
 

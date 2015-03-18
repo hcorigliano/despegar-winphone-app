@@ -64,16 +64,9 @@ namespace Despegar.WP.UI.Product.Hotels
             ConfigureFields();
             this.DataContext = ViewModel;
 
-            if (ViewModel.InstallmentFormatted.PayAtDestination.Cards.Count() != 0)
-            {
-                ViewModel.InstallmentFormatted.PayAtDestination.IsChecked = true;
-                ViewModel.SelectedInstallment = ViewModel.InstallmentFormatted.PayAtDestination;
-            }
-            else
-            {
-                ViewModel.InstallmentFormatted.WithoutInterest[0].IsChecked = true;
-                ViewModel.SelectedInstallment = ViewModel.InstallmentFormatted.WithoutInterest[0];
-            }
+#if DEBUG
+            ViewModel.FillBookingFields();
+#endif 
 
             ViewModel.BugTracker.LeaveBreadcrumb("Hotels checkout ready");
         }
@@ -112,57 +105,57 @@ namespace Despegar.WP.UI.Product.Hotels
             switch (e.ErrorCode)
             {
                 case "FORM_ERROR":
-                    dialog = new MessageDialog(manager.GetString("Flights_Checkout_ERROR_FORM_ERROR"), manager.GetString("Flights_Checkout_ERROR_FORM_ERROR_TITLE"));
+                    dialog = new MessageDialog(manager.GetString("Hotels_Checkout_ERROR_FORM_ERROR"), manager.GetString("Hotels_Checkout_ERROR_FORM_ERROR_TITLE"));
                     await dialog.ShowSafelyAsync();
 
                     // Go to Pivot with errors
                     string sectionID = (string)e.Parameter;
                     MainPivot.SelectedIndex = GetSectionIndex(sectionID);
                     break;
-                //case "TERMS_AND_CONDITIONS_NOT_CHECKED":
-                //    dialog = new MessageDialog(manager.GetString("TermsAndConditions_ERROR"), manager.GetString("TermsAndConditions_ERROR_TITLE"));
-                //    await dialog.ShowSafelyAsync();
-                //    break;
+                case "TERMS_AND_CONDITIONS_NOT_CHECKED":
+                    dialog = new MessageDialog(manager.GetString("TermsAndConditions_ERROR"), manager.GetString("TermsAndConditions_ERROR_TITLE"));
+                    await dialog.ShowSafelyAsync();
+                    break;
 
-                //case "BOOKING_FAILED":
+                case "BOOKING_FAILED":
 
-                //    string ticketid = e.Parameter as string;
-                //    ticketid = (ticketid != null) ? ticketid : String.Empty;
-                //    string phrase = manager.GetString("Flights_Checkout_Card_Data_Card_ERROR_OP_BOOKING_FAILED");
+                    string ticketid = e.Parameter as string;
+                    ticketid = (ticketid != null) ? ticketid : String.Empty;
+                    string phrase = manager.GetString("Hotels_Checkout_Card_Data_Card_ERROR_OP_BOOKING_FAILED");
 
-                //    dialog = new MessageDialog(String.Format(phrase, ticketid), manager.GetString("Flights_Checkout_ERROR_FORM_ERROR_TITLE"));
-                //    await dialog.ShowSafelyAsync();
-                //    this.navigationHelper.GoBack();
-                //    this.navigationHelper.GoBack();
-                //    break;
+                    dialog = new MessageDialog(String.Format(phrase, ticketid), manager.GetString("Hotels_Checkout_ERROR_FORM_ERROR_TITLE"));
+                    await dialog.ShowSafelyAsync();
+                    ViewModel.Navigator.GoBack();
+
+                    break;
 
 
-                //case "COMPLETE_BOOKING_CONECTION_FAILED":
-                //    dialog = new MessageDialog(manager.GetString("Flights_Search_ERROR_SEARCH_FAILED"), manager.GetString("Flights_Checkout_ERROR_FORM_ERROR_TITLE"));
-                //    await dialog.ShowSafelyAsync();
-                //    break;
+                case "COMPLETE_BOOKING_CONECTION_FAILED":
+                    dialog = new MessageDialog(manager.GetString("Hotels_Search_ERROR_SEARCH_FAILED"), manager.GetString("Hotels_Checkout_ERROR_FORM_ERROR_TITLE"));
+                    await dialog.ShowSafelyAsync();
+                    break;
 
-                //case "CHECKOUT_INIT_FAILED":
-                //    dialog = new MessageDialog(manager.GetString("Flights_Search_ERROR_SEARCH_FAILED"), manager.GetString("Flights_Checkout_ERROR_FORM_ERROR_TITLE"));
-                //    await dialog.ShowSafelyAsync();
-                //    this.navigationHelper.GoBack();
-                //    break;
-                //case "ONLINE_PAYMENT_ERROR_NEW_CREDIT_CARD":
-                //    dialog = new MessageDialog(manager.GetString("Flights_Checkout_Card_Data_Card_ERROR_NEW_CREDIT_CARD"), manager.GetString("Flights_Checkout_ERROR_FORM_ERROR_TITLE"));
-                //    await dialog.ShowSafelyAsync();
+                case "CHECKOUT_INIT_FAILED":
+                    dialog = new MessageDialog(manager.GetString("Hotels_Search_ERROR_SEARCH_FAILED"), manager.GetString("Hotels_Checkout_ERROR_FORM_ERROR_TITLE"));
+                    await dialog.ShowSafelyAsync();
+                    ViewModel.Navigator.GoBack();
+                    break;
+                case "ONLINE_PAYMENT_ERROR_NEW_CREDIT_CARD":
+                    dialog = new MessageDialog(manager.GetString("Hotels_Checkout_Card_Data_Card_ERROR_NEW_CREDIT_CARD"), manager.GetString("Hotels_Checkout_ERROR_FORM_ERROR_TITLE"));
+                    await dialog.ShowSafelyAsync();
 
-                //    // Go to Pivot with errors
-                //    pageID = (string)e.Parameter;
-                //    MainPivot.SelectedIndex = GetSectionIndex(pageID);
-                //    break;
+                    // Go to Pivot with errors
+                    pageID = (string)e.Parameter;
+                    MainPivot.SelectedIndex = GetSectionIndex(pageID);
+                    break;
 
-                //case "ONLINE_PAYMENT_ERROR_FIX_CREDIT_CARD":
+                case "ONLINE_PAYMENT_ERROR_FIX_CREDIT_CARD":
 
-                //    dialog = new MessageDialog(manager.GetString("Flights_Checkout_Card_Data_Card_ERROR_ONLINE_PAYMENT_ERROR_FIX_CREDIT_CARD"), manager.GetString("Flights_Checkout_ERROR_FORM_ERROR_TITLE"));
-                //    await dialog.ShowSafelyAsync();
-                //    pageID = (string)e.Parameter;
-                //    MainPivot.SelectedIndex = GetSectionIndex(pageID);
-                //    break;
+                    dialog = new MessageDialog(manager.GetString("Hotels_Checkout_Card_Data_Card_ERROR_ONLINE_PAYMENT_ERROR_FIX_CREDIT_CARD"), manager.GetString("Hotels_Checkout_ERROR_FORM_ERROR_TITLE"));
+                    await dialog.ShowSafelyAsync();
+                    pageID = (string)e.Parameter;
+                    MainPivot.SelectedIndex = GetSectionIndex(pageID);
+                    break;
                 //case "ONLINE_PAYMENT_FAILED":
                 //    {
                 //        //string ticketid = e.Parameter as string;
@@ -173,20 +166,20 @@ namespace Despegar.WP.UI.Product.Hotels
                 //        await dialog.ShowSafelyAsync();
                 //        break;
                 //    }
-                //case "COMPLETE_BOOKING_BOOKING_FAILED":
-                //    dialog = new MessageDialog(manager.GetString("Flights_Search_ERROR_BOOKING_FAILED"), manager.GetString("Flights_Checkout_ERROR_FORM_ERROR_TITLE"));
-                //    await dialog.ShowSafelyAsync();
-                //    this.navigationHelper.GoBack();
-                //    this.navigationHelper.GoBack();
-                //    break;
+                case "COMPLETE_BOOKING_BOOKING_FAILED":
+                    dialog = new MessageDialog(manager.GetString("Hotels_Search_ERROR_SEARCH_FAILED"), manager.GetString("Hotels_Checkout_ERROR_FORM_ERROR_TITLE"));
+                    await dialog.ShowSafelyAsync();
+                    ViewModel.Navigator.GoBack();
+                    //ViewModel.Navigator.GoBack();
+                    break;
                 //case "VOUCHER_VALIDITY_ERROR":
                 //    dialog = new MessageDialog(manager.GetString("Voucher_ERROR_" + (string)e.Parameter), manager.GetString("Voucher_ERROR_TITLE"));
                 //    await dialog.ShowSafelyAsync();
                 //    break;
-                //case "API_ERROR":
-                //    dialog = new MessageDialog(manager.GetString("Flights_Checkout_ERROR_FORM_ERROR"), manager.GetString("Flights_Checkout_ERROR_FORM_ERROR_TITLE"));
-                //    await dialog.ShowSafelyAsync();
-                //    break;
+                case "API_ERROR":
+                    dialog = new MessageDialog(manager.GetString("Hotels_Checkout_ERROR_FORM_ERROR"), manager.GetString("Hotels_Checkout_ERROR_FORM_ERROR_TITLE"));
+                    await dialog.ShowSafelyAsync();
+                    break;
                 // TODO: CHECKOUT SESSION EXPIRED -> Handle that error
             }
         }
@@ -238,7 +231,9 @@ namespace Despegar.WP.UI.Product.Hotels
             UserControl usc = new InvoiceArgentina();
             usc.DataContext = this.DataContext;
             pvit.Content = usc;
+            pvit.Margin = new Thickness(0, 3, 0, 0); //<Setter Property="Margin" Value="0,3,0,0" />
             MainPivot.Items.Insert(4, pvit);
+            //pvit.Style = StaticResource //PivotItemBase
         }
 
         private void ShowRisk(Object sender, EventArgs e)

@@ -1,4 +1,5 @@
 ﻿using Despegar.Core.Neo.InversionOfControl;
+using Despegar.WP.UI.Common;
 using Despegar.WP.UI.Model.ViewModel.Flights;
 using Windows.Phone.UI.Input;
 using Windows.UI.Xaml;

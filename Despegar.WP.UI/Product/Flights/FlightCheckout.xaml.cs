@@ -1,5 +1,6 @@
 ﻿using Despegar.Core.Neo.Business.Configuration;
 using Despegar.Core.Neo.InversionOfControl;
+using Despegar.WP.UI.Common;
 using Despegar.WP.UI.Controls;
 using Despegar.WP.UI.Model;
 using Despegar.WP.UI.Model.Common;
