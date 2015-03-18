@@ -621,7 +621,7 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
                     FlightCrossParameters.PriceDetail = PriceDetailsFormatted;
                     FlightCrossParameters.BookingResponse = await flightService.CompleteBooking(bookingData, CoreBookingFields.id);
 
-                    if (FlightCrossParameters.BookingResponse.Error != null) 
+                    if (FlightCrossParameters.BookingResponse.Error != null)
                     {
                         BugTracker.LeaveBreadcrumb("Flight checkout MAPI booking error response code: " + FlightCrossParameters.BookingResponse.Error.code.ToString());
                         // API Error ocurred, Check CODE and inform the user
@@ -632,14 +632,14 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
 
                     // Booking processed, check the status of Booking request
                     AnalizeBookingStatus(FlightCrossParameters.BookingResponse.booking_status);
-                }
-                catch (HTTPStatusErrorException )
+                }            
+                catch (HTTPStatusErrorException)
                 {
                     OnViewModelError("COMPLETE_BOOKING_CONECTION_FAILED");
                 }
-                catch (Exception )
+                catch (Exception)
                 {
-                    OnViewModelError("COMPLETE_BOOKING_BOOKING_FAILED"); 
+                    OnViewModelError("COMPLETE_BOOKING_BOOKING_FAILED");
                 }
 
                 BugTracker.LeaveBreadcrumb("Flight checkout view model validate and buy complete");

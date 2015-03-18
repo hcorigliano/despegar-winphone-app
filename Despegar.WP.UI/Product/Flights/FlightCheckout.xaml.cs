@@ -166,8 +166,34 @@ namespace Despegar.WP.UI.Product.Flights
                     await dialog.ShowSafelyAsync();                    
                     break;
                 case "API_ERROR":
+                    int code = (int)e.Parameter;
+                    var formErrors = new int[]
+                    {
+                        1007,  // INVALID_DOCUMENT_NUMBER
+                        1008,  // INVALID_PASSENGER_LAST_NAME_LENGTH
+                        1009,  // INVALID_PASSENGER_FIRST_NAME_LENGTH
+                        1011,  // INVALID_NATIONALITY
+                        1013  // INVALID_BIRTHDAY                        
+                    };
+
+                    if (formErrors.Any(x => x == code))
+                    {
+                        dialog = new MessageDialog(manager.GetString("Flights_Checkout_ERROR_FORM_ERROR"), manager.GetString("Flights_Checkout_ERROR_FORM_ERROR_TITLE"));
+                        await dialog.ShowSafelyAsync();
+                        return;
+                    }
+
+                    if (code == 1010)
+                    {
+                        // Expired Session
+                        dialog = new MessageDialog(manager.GetString("Flights_Checkout_ERROR_SESSION_EXPIRED"), String.Empty));
+                        ViewModel.Navigator.GoBack();
+                        ViewModel.Navigator.GoBack();
+                        await dialog.ShowSafelyAsync();
+                        return;
+                    }
+
                     dialog = new MessageDialog(manager.GetString("Flights_Checkout_ERROR_FORM_ERROR"), manager.GetString("Flights_Checkout_ERROR_FORM_ERROR_TITLE"));
-                    await dialog.ShowSafelyAsync();
                     ViewModel.Navigator.GoBack();
                     break;
                     // TODO: CHECKOUT SESSION EXPIRED -> Handle that error

@@ -59,9 +59,9 @@
                 <controls:Field InputType="AlphaNumeric" x:Uid="Checkout_BillingAddress_Department" Grid.Column="4" Grid.Row="0"  Value="{Binding department.CoreValue, Mode=TwoWay}"  />
 
                 <StackPanel Grid.ColumnSpan="5" Grid.Row="1">
-                    <controls:ValidationError ErrorPrefix="Checkout_BillingAddress_Number" ErrorCode="{Binding number.number.CurrentError}"  />
-                    <controls:ValidationError ErrorPrefix="Checkout_BillingAddress_Floor"  ErrorCode="{Binding floor.floor.CurrentError}"  />
-                    <controls:ValidationError ErrorPrefix="Checkout_BillingAddress_Department"  ErrorCode="{Binding department.department.CurrentError}"  />
+                    <controls:ValidationError ErrorPrefix="Checkout_BillingAddress_Number" ErrorCode="{Binding number.CurrentError}"  />
+                    <controls:ValidationError ErrorPrefix="Checkout_BillingAddress_Floor"  ErrorCode="{Binding floor.CurrentError}"  />
+                    <controls:ValidationError ErrorPrefix="Checkout_BillingAddress_Department"  ErrorCode="{Binding department.CurrentError}"  />
                 </StackPanel>
             </Grid>
         </StackPanel>
