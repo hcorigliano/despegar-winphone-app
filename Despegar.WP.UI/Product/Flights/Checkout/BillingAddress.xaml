@@ -15,8 +15,55 @@
     </UserControl.Resources>
 
     <ScrollViewer>
-        <StackPanel>
+        <StackPanel DataContext="{Binding CoreBookingFields.form.payment.billing_address}">
+            <TextBlock x:Uid="Checkout_BillingAdrees_Title" Text="Dirección de entrega de la factura" Style="{StaticResource SegoeLight22}" TextWrapping="Wrap" />
+            <!-- Country -->
+            <!-- Itemsource property esta puesta antes de Value a propósito para que no se setee el valor automaticamente, sino que el ViewModel elige el Pais actual por default -->
+            <controls:FieldCombo x:Uid="Checkout_BillingAddress_Country" ItemsSource="{Binding country.options}" Value="{Binding country.SelectedOption, Mode=TwoWay}" CodePath="value" DisplayTextPath="description"  />
+            <!-- State -->
+            <controls:FieldCombo x:Uid="Checkout_BillingAddress_State" Value="{Binding state.SelectedOption, Mode=TwoWay}" CodePath="value" DisplayTextPath="description" ItemsSource="{Binding state.options}" />
+            <!-- City -->
+            <StackPanel>
+                <controls:Field InputType="AlphaNumeric"  x:Uid="Checkout_BillingAddress_City" Value="{Binding city.CoreValue, Mode=TwoWay}"  />
+                <controls:ValidationError ErrorPrefix="Checkout_BillingAddress_City" ErrorCode="{Binding city.CurrentError}" />
+            </StackPanel>
+            <!-- Postal Code / CEP -->
+            <StackPanel>
+                <controls:Field InputType="AlphaNumeric"  x:Uid="Checkout_BillingAddress_PostalCode" Value="{Binding postal_code.CoreValue, Mode=TwoWay}"  />
+                <controls:ValidationError ErrorPrefix="Checkout_BillingAddress_PostalCode" ErrorCode="{Binding postal_code.CurrentError}" />
+            </StackPanel>
+            <!-- Street -->
+            <StackPanel>
+                <controls:Field InputType="AlphaNumeric"  x:Uid="Checkout_BillingAddress_Street" Value="{Binding street.CoreValue, Mode=TwoWay}"  />
+                <controls:ValidationError ErrorPrefix="Checkout_BillingAddress_Street" ErrorCode="{Binding street.CurrentError}" />
+            </StackPanel>
+            
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition MinHeight="{StaticResource dBlock1p}" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="{StaticResource Block6}"/>
+                    <ColumnDefinition Width="{StaticResource Offset}"/>
+                    <ColumnDefinition Width="{StaticResource Block3}"/>
+                    <ColumnDefinition Width="{StaticResource Offset}"/>
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
 
+                <!-- Number -->
+                <controls:Field InputType="AlphaNumeric"  x:Uid="Checkout_BillingAddress_Number" Grid.Column="0" Grid.Row="0"  Value="{Binding number.CoreValue, Mode=TwoWay}"  />
+                <!-- Floor -->
+                <controls:Field InputType="AlphaNumeric" x:Uid="Checkout_BillingAddress_Floor" Grid.Column="2" Grid.Row="0"  Value="{Binding floor.CoreValue, Mode=TwoWay}"  />
+                <!-- Dept -->
+                <controls:Field InputType="AlphaNumeric" x:Uid="Checkout_BillingAddress_Department" Grid.Column="4" Grid.Row="0"  Value="{Binding department.CoreValue, Mode=TwoWay}"  />
+
+                <StackPanel Grid.ColumnSpan="5" Grid.Row="1">
+                    <controls:ValidationError ErrorPrefix="Checkout_BillingAddress_Number" ErrorCode="{Binding number.number.CurrentError}"  />
+                    <controls:ValidationError ErrorPrefix="Checkout_BillingAddress_Floor"  ErrorCode="{Binding floor.floor.CurrentError}"  />
+                    <controls:ValidationError ErrorPrefix="Checkout_BillingAddress_Department"  ErrorCode="{Binding department.department.CurrentError}"  />
+                </StackPanel>
+            </Grid>
         </StackPanel>
     </ScrollViewer>
 

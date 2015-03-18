@@ -10,8 +10,8 @@ namespace Despegar.Core.Business.Flight.BookingFields
     {
         public bool required { get; set; }
 
-        public RegularField country { get; set; }
-        public RegularField state { get; set; }
+        public RegularOptionsField country { get; set; }
+        public RegularOptionsField state { get; set; }
         public RegularField city { get; set; }
         public RegularField street { get; set; }
         public RegularField floor { get; set; }

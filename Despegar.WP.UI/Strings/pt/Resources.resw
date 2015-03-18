@@ -1137,7 +1137,34 @@ Isso pode ter sido causado por dados incorretos, limite de compra insuficiente o
   <data name="Flights_Checkout_Card_Data_Document_ERROR_INVALID_DOCUMENT_NUMBER" xml:space="preserve">
     <value>Por favor, verifique o número introduzido</value>
   </data>
-  <data name="Flight_Checkout_Billing_Address" xml:space="preserve">
+  <data name="Flight_Checkout_Billing_Address.Header" xml:space="preserve">
     <value>endereço</value>
+  </data>
+  <data name="Checkout_BillingAddress_City.Label" xml:space="preserve">
+    <value>Cidade</value>
+  </data>
+  <data name="Checkout_BillingAddress_Country.Label" xml:space="preserve">
+    <value>País</value>
+  </data>
+  <data name="Checkout_BillingAddress_Department.Label" xml:space="preserve">
+    <value>Apto</value>
+  </data>
+  <data name="Checkout_BillingAddress_Floor.Label" xml:space="preserve">
+    <value>Andar</value>
+  </data>
+  <data name="Checkout_BillingAddress_Number.Label" xml:space="preserve">
+    <value>Número</value>
+  </data>
+  <data name="Checkout_BillingAddress_PostalCode.Label" xml:space="preserve">
+    <value>CEP</value>
+  </data>
+  <data name="Checkout_BillingAddress_State.Label" xml:space="preserve">
+    <value>Estado</value>
+  </data>
+  <data name="Checkout_BillingAddress_Street.Label" xml:space="preserve">
+    <value>endereço</value>
+  </data>
+  <data name="Checkout_BillingAdrees_Title.Text" xml:space="preserve">
+    <value>Endereço de entrega da fatura</value>
   </data>
 </root>
