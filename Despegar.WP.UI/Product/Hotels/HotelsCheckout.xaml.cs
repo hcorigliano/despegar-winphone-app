@@ -141,10 +141,10 @@ namespace Despegar.WP.UI.Product.Hotels
                     break;
 
 
-                //case "COMPLETE_BOOKING_CONECTION_FAILED":
-                //    dialog = new MessageDialog(manager.GetString("Flights_Search_ERROR_SEARCH_FAILED"), manager.GetString("Flights_Checkout_ERROR_FORM_ERROR_TITLE"));
-                //    await dialog.ShowSafelyAsync();
-                //    break;
+                case "COMPLETE_BOOKING_CONECTION_FAILED":
+                    dialog = new MessageDialog(manager.GetString("Hotels_Search_ERROR_SEARCH_FAILED"), manager.GetString("Hotels_Checkout_ERROR_FORM_ERROR_TITLE"));
+                    await dialog.ShowSafelyAsync();
+                    break;
 
                 case "CHECKOUT_INIT_FAILED":
                     dialog = new MessageDialog(manager.GetString("Hotels_Search_ERROR_SEARCH_FAILED"), manager.GetString("Hotels_Checkout_ERROR_FORM_ERROR_TITLE"));
