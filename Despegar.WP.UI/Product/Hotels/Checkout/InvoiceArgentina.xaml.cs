@@ -25,7 +25,7 @@ namespace Despegar.WP.UI.Product.Hotels.Checkout
         public InvoiceArgentina()
         {
             this.InitializeComponent();
-            this.Width = Window.Current.Bounds.Width;
+            //this.Width = Window.Current.Bounds.Width;
         }
 
         private async void CityTexbox_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)

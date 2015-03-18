@@ -121,6 +121,9 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
                 FormatInstallments();
                 //PriceDetailsFormatted = FormatPrice();
 
+                SelectTheFirstInstallment();
+
+
                 // Set Known Default Values && Adapt Checkout to the country
                 ConfigureCountry(currentCountry);
 
@@ -137,6 +140,20 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
             }
 
             IsLoading = false;
+        }
+
+        private void SelectTheFirstInstallment()
+        {
+            if (this.InstallmentFormatted.PayAtDestination.Cards.Count() != 0)
+            {
+                InstallmentFormatted.PayAtDestination.IsChecked = true;
+                SelectedInstallment = InstallmentFormatted.PayAtDestination;
+            }
+            else
+            {
+                InstallmentFormatted.WithoutInterest[0].IsChecked = true;
+                SelectedInstallment = InstallmentFormatted.WithoutInterest[0];
+            }
         }
 
         private void ConfigureCountry(string currentCountry)
@@ -166,12 +183,16 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
                         CheckoutMethodSelected.payment.invoice.fiscal_status.PropertyChanged += Fiscal_status_PropertyChanged;
 
                         CheckoutMethodSelected.payment.invoice.fiscal_status.SetDefaultValue();
-                        CheckoutMethodSelected.payment.invoice.address.country.SetDefaultValue();
+                        if (CheckoutMethodSelected.payment.invoice.address.country != null)
+                            CheckoutMethodSelected.payment.invoice.address.country.SetDefaultValue();
 
                         // Turn State into a MultipleField
-                        CheckoutMethodSelected.payment.invoice.address.state.value = null;
-                        CheckoutMethodSelected.payment.invoice.address.state.options = States.Select(x => new Option() { value = x.id, description = x.name }).ToList();
-                        CheckoutMethodSelected.payment.invoice.address.state.SetDefaultValue();
+                        if (CheckoutMethodSelected.payment.invoice.address.state != null)
+                        {
+                            CheckoutMethodSelected.payment.invoice.address.state.value = null;
+                            CheckoutMethodSelected.payment.invoice.address.state.options = States.Select(x => new Option() { value = x.id, description = x.name }).ToList();
+                            CheckoutMethodSelected.payment.invoice.address.state.SetDefaultValue();
+                        }
                     }
 
                     CoreBookingFields.form.contact.phones[0].country_code.SetDefaultValue();
