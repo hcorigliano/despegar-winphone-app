@@ -1167,4 +1167,28 @@ Isso pode ter sido causado por dados incorretos, limite de compra insuficiente o
   <data name="Checkout_BillingAdrees_Title.Text" xml:space="preserve">
     <value>Endereço de entrega da fatura</value>
   </data>
+  <data name="Checkout_BillingAddress_City_ERROR_REQUIRED" xml:space="preserve">
+    <value>O campo não é válido</value>
+  </data>
+  <data name="Checkout_BillingAddress_Country_ERROR_REQUIRED" xml:space="preserve">
+    <value>O campo não é válido</value>
+  </data>
+  <data name="Checkout_BillingAddress_Department_ERROR_REQUIRED" xml:space="preserve">
+    <value>O campo não é válido</value>
+  </data>
+  <data name="Checkout_BillingAddress_Floor_ERROR_REQUIRED" xml:space="preserve">
+    <value>O campo não é válido</value>
+  </data>
+  <data name="Checkout_BillingAddress_Number_ERROR_REQUIRED" xml:space="preserve">
+    <value>O campo não é válido</value>
+  </data>
+  <data name="Checkout_BillingAddress_PostalCode_ERROR_REQUIRED" xml:space="preserve">
+    <value>O campo não é válido</value>
+  </data>
+  <data name="Checkout_BillingAddress_State_ERROR_REQUIRED" xml:space="preserve">
+    <value>O campo não é válido</value>
+  </data>
+  <data name="Checkout_BillingAddress_Street_ERROR_REQUIRED" xml:space="preserve">
+    <value>O campo não é válido</value>
+  </data>
 </root>

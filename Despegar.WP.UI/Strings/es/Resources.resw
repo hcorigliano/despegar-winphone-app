@@ -1168,4 +1168,28 @@ La reserva no ha sido generada y no se le cobrará ningún cargo por la transacc
   <data name="Checkout_BillingAdrees_Title.Text" xml:space="preserve">
     <value>Dirección de entrega de la factura</value>
   </data>
+  <data name="Checkout_BillingAddress_City_ERROR_REQUIRED" xml:space="preserve">
+    <value>Campo requerido</value>
+  </data>
+  <data name="Checkout_BillingAddress_Country_ERROR_REQUIRED" xml:space="preserve">
+    <value>Campo requerido</value>
+  </data>
+  <data name="Checkout_BillingAddress_Department_ERROR_REQUIRED" xml:space="preserve">
+    <value>Campo requerido</value>
+  </data>
+  <data name="Checkout_BillingAddress_Floor_ERROR_REQUIRED" xml:space="preserve">
+    <value>Campo requerido</value>
+  </data>
+  <data name="Checkout_BillingAddress_Number_ERROR_REQUIRED" xml:space="preserve">
+    <value>Campo requerido</value>
+  </data>
+  <data name="Checkout_BillingAddress_PostalCode_ERROR_REQUIRED" xml:space="preserve">
+    <value>Campo requerido</value>
+  </data>
+  <data name="Checkout_BillingAddress_State_ERROR_REQUIRED" xml:space="preserve">
+    <value>Campo requerido</value>
+  </data>
+  <data name="Checkout_BillingAddress_Street_ERROR_REQUIRED" xml:space="preserve">
+    <value>Campo requerido</value>
+  </data>
 </root>
