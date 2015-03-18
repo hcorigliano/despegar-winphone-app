@@ -18,7 +18,19 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
 
         #region  *** Public Interface ***
         public const int ITEMS_FOR_EACH_PAGE = 30;
-        public HotelSearchModel SearchModel { get; set; }
+
+        private HotelSearchModel searchModel { get; set; }
+        public HotelSearchModel SearchModel { 
+            get
+            {
+                return searchModel;
+            }
+            set
+            {
+                searchModel = value;
+                OnPropertyChanged();
+            }
+        }
 
         private CitiesAvailability citiesAvailability { get; set; }
         public CitiesAvailability CitiesAvailability
@@ -185,7 +197,9 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
             catch (Exception ) {
                 OnViewModelError("UNKNOWN_ERROR");
             }
-            
+
+            searchModel.NotifyPropertiesChanged();
+
             IsLoading = false;
         }
 

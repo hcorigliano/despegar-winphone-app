@@ -264,7 +264,15 @@ namespace Despegar.Core.Neo.Business.Hotels.SearchBox
             DateBoundary = daysToAdd;
         }
 
-
+        public void NotifyPropertiesChanged()
+        {
+            OnPropertyChanged("DepartureDateFormatted");
+            OnPropertyChanged("DestinationDateFormatted");
+            OnPropertyChanged("Nights");
+            OnPropertyChanged("SelectedRoomsQuantityOption");
+            OnPropertyChanged("TotalAdults");
+            OnPropertyChanged("TotalMinors");
+        }
         
     }
 }

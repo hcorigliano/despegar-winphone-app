@@ -36,6 +36,8 @@ namespace Despegar.Core.Neo.Business.Common.Checkout
        
         public override void Validate()
         {
+            CurrentError = null;
+            Errors.Clear();
             if (this.required && this.SelectedOption == null)
             {
                 Errors.Add("REQUIRED");
