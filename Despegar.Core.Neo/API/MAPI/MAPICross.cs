@@ -5,6 +5,7 @@ using Despegar.Core.Neo.Contract.API;
 using Despegar.Core.Neo.Contract.Connector;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Linq;
 
 namespace Despegar.Core.Neo.API.MAPI
 {
@@ -33,7 +34,8 @@ namespace Despegar.Core.Neo.API.MAPI
         {
             string serviceUrl = ServiceURL.GetServiceURL(ServiceKey.States, country);
 
-            return await connector.GetAsync<List<State>>(serviceUrl, ServiceKey.States);
+            var states =  await connector.GetAsync<List<State>>(serviceUrl, ServiceKey.States);
+            return states.OrderBy(x => x.name).ToList();            
         }
 
         /// <summary>
@@ -50,7 +52,9 @@ namespace Despegar.Core.Neo.API.MAPI
         {
             string serviceUrl = ServiceURL.GetServiceURL(ServiceKey.Countries);
 
-            return await connector.GetAsync<Countries>(serviceUrl, ServiceKey.Countries);
+            var countries = await connector.GetAsync<Countries>(serviceUrl, ServiceKey.Countries);
+            countries.countries = countries.countries.OrderBy(x => x.name).ToList();
+            return countries;
         }
 
         /// <summary>

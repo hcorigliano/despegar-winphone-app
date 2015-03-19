@@ -64,17 +64,6 @@ namespace Despegar.WP.UI.Product.Hotels
             ConfigureFields();
             this.DataContext = ViewModel;
 
-            if (ViewModel.InstallmentFormatted.PayAtDestination.Cards.Count() != 0)
-            {
-                ViewModel.InstallmentFormatted.PayAtDestination.IsChecked = true;
-                ViewModel.SelectedInstallment = ViewModel.InstallmentFormatted.PayAtDestination;
-            }
-            else
-            {
-                ViewModel.InstallmentFormatted.WithoutInterest[0].IsChecked = true;
-                ViewModel.SelectedInstallment = ViewModel.InstallmentFormatted.WithoutInterest[0];
-            }
-
 #if DEBUG
             ViewModel.FillBookingFields();
 #endif 
@@ -92,9 +81,9 @@ namespace Despegar.WP.UI.Product.Hotels
         /// </summary>
         private void ConfigureFields()
         {
-            if (!ViewModel.InvoiceRequired)
+            if (ViewModel.SelectedCard.card == null && ViewModel.CoreBookingFields.form.CardInfo == null && ViewModel.CoreBookingFields.form.Voucher == null)
             {
-                //MainPivot.Items.RemoveAt(4);
+                MainPivot.Items.RemoveAt(3);
             }
         }
 
@@ -236,7 +225,7 @@ namespace Despegar.WP.UI.Product.Hotels
             if (e.PropertyName == "SelectedInstallment")
             {
                 //Revisar si hay que mostrar invoice.
-                if (ViewModel.CheckoutMethodSelected.payment.invoice != null)
+                if (ViewModel.CheckoutMethodSelected.payment != null && ViewModel.CheckoutMethodSelected.payment.invoice != null)
                 {
                     if (!MainPivot.Items.Any(x => ((PivotItem)x).Name == "Pivot_INVOICE"))
                     {
@@ -264,7 +253,9 @@ namespace Despegar.WP.UI.Product.Hotels
             UserControl usc = new InvoiceArgentina();
             usc.DataContext = this.DataContext;
             pvit.Content = usc;
+            pvit.Margin = new Thickness(0, 3, 0, 0); //<Setter Property="Margin" Value="0,3,0,0" />
             MainPivot.Items.Insert(4, pvit);
+            //pvit.Style = StaticResource //PivotItemBase
         }
 
         private void ShowRisk(Object sender, EventArgs e)

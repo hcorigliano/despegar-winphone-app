@@ -23,6 +23,7 @@ namespace Despegar.Core.Neo.Business.Flight.BookingFields
             bool invoiceValid = true;
             bool installmentValid = true;
             bool voucherValid = true;
+            bool billingAddressValid = true;
 
             sectionID = String.Empty;
 
@@ -130,6 +131,27 @@ namespace Despegar.Core.Neo.Business.Flight.BookingFields
                     invoiceValid = false; 
             }
 
+            // Billing Address
+            if (form.payment.billing_address != null)
+            {
+                if (form.payment.billing_address.city != null && !form.payment.billing_address.city.IsValid)
+                    billingAddressValid = false;
+                if (form.payment.billing_address.state != null && !form.payment.billing_address.state.IsValid)
+                    billingAddressValid = false;
+                if (form.payment.billing_address.country != null && !form.payment.billing_address.country.IsValid)
+                    billingAddressValid = false;
+                if (form.payment.billing_address.number != null && !form.payment.billing_address.number.IsValid)
+                    billingAddressValid = false;
+                if (form.payment.billing_address.floor != null && !form.payment.billing_address.floor.IsValid)
+                    billingAddressValid = false;
+                if (form.payment.billing_address.department != null && !form.payment.billing_address.department.IsValid)
+                    billingAddressValid = false;
+                if (form.payment.billing_address.postal_code != null && !form.payment.billing_address.postal_code.IsValid)
+                    billingAddressValid = false;
+                if (form.payment.billing_address.street != null && !form.payment.billing_address.street.IsValid)
+                    billingAddressValid = false;
+            }
+
             // Voucher
             if (!form.Voucher.IsValid)
                 voucherValid = false;
@@ -157,6 +179,11 @@ namespace Despegar.Core.Neo.Business.Flight.BookingFields
             if (!installmentValid)
             {
                 sectionID = "INSTALLMENT";
+                return false;
+            }
+            if (!billingAddressValid)
+            {
+                sectionID = "BILLING_ADDRESS";
                 return false;
             }
 

@@ -38,7 +38,7 @@ namespace Despegar.Core.Neo.Connector
         public void ConfigureSiteAndLanguage(string site, string language)
         {
             this.site = site;
-            this.language = language;
+            this.language = language.ToLowerInvariant();;
         }
 
         /// <summary>

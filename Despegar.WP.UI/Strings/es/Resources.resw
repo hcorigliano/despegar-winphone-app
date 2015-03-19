@@ -1138,17 +1138,35 @@ La reserva no ha sido generada y no se le cobrará ningún cargo por la transacc
   <data name="Flights_Checkout_Card_Data_Document_ERROR_INVALID_DOCUMENT_NUMBER" xml:space="preserve">
     <value>Por favor, verifique el numero ingresado</value>
   </data>
+  <data name="Flight_Checkout_Billing_Address.Header" xml:space="preserve">
+    <value>dirección</value>
+  </data>
   <data name="Hotels_Checkout_ERROR_FORM_ERROR" xml:space="preserve">
     <value>Por favor, verifique los datos ingresos y revise los campos marcados.</value>
+  </data>
+  <data name="Checkout_BillingAddress_City.Label" xml:space="preserve">
+    <value>Ciudad</value>
   </data>
   <data name="Hotels_Checkout_ERROR_FORM_ERROR_TITLE" xml:space="preserve">
     <value>Formulário de Compra</value>
   </data>
+  <data name="Checkout_BillingAddress_Country.Label" xml:space="preserve">
+    <value>País</value>
+  </data>
   <data name="Hotels_Checkout_Card_Data_Card_ERROR_NEW_CREDIT_CARD" xml:space="preserve">
     <value>Lo sentimos, no hemos podido procesar el pago con la tarjeta ingresada. Por favor, ingrese una nueva tarjeta e intente nuevamente.</value>
   </data>
+  <data name="Checkout_BillingAddress_Department.Label" xml:space="preserve">
+    <value>Depto</value>
+  </data>
   <data name="Hotels_Checkout_Card_Data_Card_ERROR_ONLINE_PAYMENT_ERROR_FIX_CREDIT_CARD" xml:space="preserve">
     <value>Lo sentimos, hemos encontrado un error en los datos de su tarjeta. Por favor, revise los datos ingresados e intente nuevamente.</value>
+  </data>
+  <data name="Checkout_BillingAddress_Floor.Label" xml:space="preserve">
+    <value>Piso</value>
+  </data>
+  <data name="Checkout_BillingAddress_Number.Label" xml:space="preserve">
+    <value>Número</value>
   </data>
   <data name="Hotels_Checkout_Card_Data_Card_ERROR_OP_BOOKING_FAILED" xml:space="preserve">
     <value>Lo sentimos, su solicitud de compra N° {0} no puede ser procesada por falta de disponibilidad del vuelo.
@@ -1156,6 +1174,45 @@ La reserva no ha sido generada y no se le cobrará ningún cargo por la transacc
   </data>
   <data name="Hotels_Checkout_Card_Data_Card_ERROR_OP_PAYMENT_FAILED" xml:space="preserve">
     <value>Lo sentimos, no hemos podido procesar su pago. Si desea realizar un pago mediante transferencia bancaria, por favor comuníquese con {0}.</value>
+  </data>
+  <data name="Checkout_BillingAddress_PostalCode.Label" xml:space="preserve">
+    <value>Código postal</value>
+  </data>
+  <data name="Checkout_BillingAddress_State.Label" xml:space="preserve">
+    <value>Estado</value>
+  </data>
+  <data name="Checkout_BillingAddress_Street.Label" xml:space="preserve">
+    <value>Calle</value>
+  </data>
+  <data name="Checkout_BillingAdrees_Title.Text" xml:space="preserve">
+    <value>Dirección de entrega de la factura</value>
+  </data>
+  <data name="Checkout_BillingAddress_City_ERROR_REQUIRED" xml:space="preserve">
+    <value>Campo requerido</value>
+  </data>
+  <data name="Checkout_BillingAddress_Country_ERROR_REQUIRED" xml:space="preserve">
+    <value>Campo requerido</value>
+  </data>
+  <data name="Checkout_BillingAddress_Department_ERROR_REQUIRED" xml:space="preserve">
+    <value>Campo requerido</value>
+  </data>
+  <data name="Checkout_BillingAddress_Floor_ERROR_REQUIRED" xml:space="preserve">
+    <value>Campo requerido</value>
+  </data>
+  <data name="Checkout_BillingAddress_Number_ERROR_REQUIRED" xml:space="preserve">
+    <value>Campo requerido</value>
+  </data>
+  <data name="Checkout_BillingAddress_PostalCode_ERROR_REQUIRED" xml:space="preserve">
+    <value>Campo requerido</value>
+  </data>
+  <data name="Checkout_BillingAddress_State_ERROR_REQUIRED" xml:space="preserve">
+    <value>Campo requerido</value>
+  </data>
+  <data name="Checkout_BillingAddress_Street_ERROR_REQUIRED" xml:space="preserve">
+    <value>Campo requerido</value>
+  </data>
+  <data name="Flights_Checkout_ERROR_SESSION_EXPIRED" xml:space="preserve">
+    <value>El ticket de este vuelo expiró, por favor seleccione otro vuelo.</value>
   </data>
   <data name="Generic_Cancel" xml:space="preserve">
     <value>Cancelar</value>

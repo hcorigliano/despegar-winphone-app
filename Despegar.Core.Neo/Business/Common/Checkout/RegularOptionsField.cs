@@ -8,7 +8,16 @@ namespace Despegar.Core.Neo.Business.Common.Checkout
 {
     public class RegularOptionsField : RegularField
     {
-        public List<Option> options { get; set; }
+        private List<Option> _options { get; set; }
+        public List<Option> options 
+        {
+            get { return _options; }
+            set
+            {
+                _options = value;
+                OnPropertyChanged();
+            }
+        }
 
         private Option selectedOption;
         public Option SelectedOption
