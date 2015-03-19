@@ -171,7 +171,7 @@ namespace Despegar.WP.UI.Product.Hotels
                     dialog = new MessageDialog(manager.GetString("Hotels_Search_ERROR_SEARCH_FAILED"), manager.GetString("Hotels_Checkout_ERROR_FORM_ERROR_TITLE"));
                     await dialog.ShowSafelyAsync();
                     ViewModel.Navigator.GoBack();
-                    //ViewModel.Navigator.GoBack();
+                    ViewModel.Navigator.GoBack();
                     break;
                 //case "VOUCHER_VALIDITY_ERROR":
                 //    dialog = new MessageDialog(manager.GetString("Voucher_ERROR_" + (string)e.Parameter), manager.GetString("Voucher_ERROR_TITLE"));
@@ -181,9 +181,31 @@ namespace Despegar.WP.UI.Product.Hotels
                     dialog = new MessageDialog(manager.GetString("Hotels_Checkout_ERROR_FORM_ERROR"), manager.GetString("Hotels_Checkout_ERROR_FORM_ERROR_TITLE"));
                     await dialog.ShowSafelyAsync();
                     break;
+
+                case "DUPLICATED_BOOKING":
+                    dialog = new MessageDialog(manager.GetString("Hotels_Duplicated_Booking_Message"), manager.GetString("Hotels_Duplicated_Booking_Title"));
+                    string iAgreeText = manager.GetString("Generic_Continuar");
+                    string cancelText = manager.GetString("Generic_Cancel");
+
+                    dialog.Commands.Add(new UICommand(iAgreeText, new UICommandInvokedHandler(this.CommandInvokedHandler)));
+                    dialog.Commands.Add(new UICommand(cancelText, new UICommandInvokedHandler(this.CommandCancelHandler)));
+
+                    await dialog.ShowSafelyAsync();
+                    break;
                 // TODO: CHECKOUT SESSION EXPIRED -> Handle that error
             }
         }
+
+        private void CommandInvokedHandler(IUICommand command)
+        {
+            ViewModel.ValidateAndBuyNoCheckDuplicates.Execute(false);
+        }
+
+        private void CommandCancelHandler(IUICommand command)
+        {
+            ViewModel.Navigator.GoBack();
+        }
+
         #endregion
 
         private int GetSectionIndex(string sectionID)

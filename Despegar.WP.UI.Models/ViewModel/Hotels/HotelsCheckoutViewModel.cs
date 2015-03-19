@@ -192,7 +192,15 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
             {
                 return new RelayCommand(async () => await ValidateAndBuy());
             }
-        }    
+        }
+   
+        public ICommand ValidateAndBuyNoCheckDuplicates
+        {
+            get
+            {
+                return new RelayCommand(async () => await ValidateAndBuy(false));
+            }
+        }
 
 
         #endregion        
@@ -411,7 +419,7 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
             }
         }
 
-        private async Task ValidateAndBuy()
+        private async Task ValidateAndBuy(bool checkDuplicated = true)
         { 
             BugTracker.LeaveBreadcrumb("Hotels checkout view model validate and buy init");
 
@@ -445,8 +453,18 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
                     if (crossParams.BookingResponse.Error != null)
                     {
                         BugTracker.LeaveBreadcrumb("Hotels checkout MAPI booking error response code: " + crossParams.BookingResponse.Error.code.ToString());
-                        // API Error ocurred, Check CODE and inform the user
-                        OnViewModelError("API_ERROR", crossParams.BookingResponse.Error.code);
+
+                        switch (crossParams.BookingResponse.Error.code)
+                        {
+                            case 2366:
+                                OnViewModelError("DUPLICATED_BOOKING", crossParams.BookingResponse.Error);
+                                break;
+                            default:
+                                // API Error ocurred, Check CODE and inform the user
+                                OnViewModelError("API_ERROR", crossParams.BookingResponse.Error.code);
+                                break;
+                        }
+
                         this.IsLoading = false;
                         return;
                     }
