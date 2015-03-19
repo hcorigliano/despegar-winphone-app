@@ -85,9 +85,12 @@ namespace Despegar.WP.UI.Product.Hotels
 
         private void ResetPageCache()
         {
-            var cacheSize = ((Frame)Parent).CacheSize;
-            ((Frame)Parent).CacheSize = 0;
-            ((Frame)Parent).CacheSize = cacheSize;
+            if (Parent != null)
+            {
+                var cacheSize = ((Frame)Parent).CacheSize;
+                ((Frame)Parent).CacheSize = 0;
+                ((Frame)Parent).CacheSize = cacheSize;
+            }
         }
 
         private void Property_Changed(object sender, System.ComponentModel.PropertyChangedEventArgs e)
