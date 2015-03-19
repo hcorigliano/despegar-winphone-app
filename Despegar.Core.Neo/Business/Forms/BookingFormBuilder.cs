@@ -319,6 +319,34 @@ namespace Despegar.Core.Neo.Business.Forms
                     payment.Add("invoice", invoice);
                 }
 
+                // Billing Address
+                //if (bookingFields.form.CurrentInstallment..billing_address != null)
+                //{
+                //    var billingAddress = new JObject();
+
+                //    if (bookingFields.form.payment.billing_address.country != null)
+                //        billingAddress.Add("country", bookingFields.form.payment.billing_address.country.CoreValue);
+                //    if (bookingFields.form.payment.billing_address.state != null)
+                //        billingAddress.Add("state", bookingFields.form.payment.billing_address.state.CoreValue);
+
+                //    //if (bookingFields.form.payment.billing_address.city_id != null)
+                //    //    billingAddress.Add("city_id", bookingFields.form.payment.billing_address.city_id.CoreValue);
+                //    if (bookingFields.form.payment.billing_address.city != null)
+                //        billingAddress.Add("city", bookingFields.form.payment.billing_address.city.CoreValue);
+                //    if (bookingFields.form.payment.billing_address.number != null)
+                //        billingAddress.Add("number", bookingFields.form.payment.billing_address.number.CoreValue);
+                //    if (bookingFields.form.payment.billing_address.floor != null)
+                //        billingAddress.Add("floor", bookingFields.form.payment.billing_address.floor.CoreValue);
+                //    if (bookingFields.form.payment.billing_address.department != null)
+                //        billingAddress.Add("department", bookingFields.form.payment.billing_address.department.CoreValue);
+                //    if (bookingFields.form.payment.billing_address.postal_code != null)
+                //        billingAddress.Add("postal_code", bookingFields.form.payment.billing_address.postal_code.CoreValue);
+                //    if (bookingFields.form.payment.billing_address.street != null)
+                //        billingAddress.Add("street", bookingFields.form.payment.billing_address.street.CoreValue);
+
+                //    payment.Add("billing_address", billingAddress);
+                //}
+
                 // Voucher
                 if (bookingFields.form.Voucher != null)
                 {

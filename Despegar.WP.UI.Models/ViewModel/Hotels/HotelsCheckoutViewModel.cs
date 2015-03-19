@@ -29,7 +29,7 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
         private ICoreLogger logger;
         private IAPIv1 apiV1service; 
         private IMAPIHotels hotelService;
-        private IMAPICross commonServices;
+        private IMAPICross mapiCross;
         private IMAPICoupons couponsService;
         private ValidationCreditcards creditCardsValidations;
         private HotelsCrossParameters crossParams;
@@ -50,7 +50,6 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
             }
         }
 
-        //public 
         public bool IsFiscalNameRequired
         {
             get
@@ -61,6 +60,17 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
                     return CheckoutMethodSelected.payment.invoice.fiscal_status != null && CheckoutMethodSelected.payment.invoice.fiscal_name != null && CoreBookingFields.form.Invoice.fiscal_status.CoreValue != "FINAL_CONSUMER";                                      
                 }
                 else { return false; }
+            }
+        }
+
+        public bool BillingAddressRequired
+        {
+            get
+            {
+                if (CoreBookingFields != null)
+                    return CoreBookingFields.form.BillingAddress != null;
+                else
+                    return false;
             }
         }
 
@@ -98,7 +108,7 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
             this.logger = logger;
             this.hotelService = hotelService;
             this.apiV1service = apiV1service;
-            this.commonServices = commonService;
+            this.mapiCross = commonService;
             this.couponsService = couponsService;
             this.PaymentAlertMessage = string.Empty;
         }
@@ -117,12 +127,12 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
                 await LoadCountries();
                 await LoadStates(currentCountry);
 
+                ConfigureBillingAddress();
+
                 // Format Price details / Installments
-                FormatInstallments();
-                //PriceDetailsFormatted = FormatPrice();
+                FormatInstallments();                
 
                 SelectTheFirstInstallment();
-
 
                 // Set Known Default Values && Adapt Checkout to the country
                 ConfigureCountry(currentCountry);
@@ -130,17 +140,46 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
                 //Get validations for credit cards
                 GetCreditCardsValidations();
                 BugTracker.LeaveBreadcrumb("Hotels checkout view model init complete");
+
+#if DEBUG
+                //FillBookingFields();
+#endif  
             }
             catch (Exception e)
             {
                 logger.Log("[App:HotelsCheckout] Exception " + e.Message);
                 IsLoading = false;
-
                 OnViewModelError("CHECKOUT_INIT_FAILED");
             }
 
             IsLoading = false;
         }
+
+        private void ConfigureBillingAddress()
+        {
+            //if (BillingAddressRequired)
+            //{
+            //    CoreBookingFields.form.payment.billing_address.country.PropertyChanged += BillingAddressCountry_Changed;
+            //    CoreBookingFields.form.payment.billing_address.country.options = Countries.Select(x => new Option() { value = x.id, description = x.name }).ToList();
+
+            //    // Set selected country based on Site
+            //    var currentOption = CoreBookingFields.form.payment.billing_address.country.options.FirstOrDefault(x => x.value.ToUpperInvariant() == GlobalConfiguration.Site.ToUpperInvariant());
+            //    if (currentOption != null)
+            //    {
+            //        CoreBookingFields.form.payment.billing_address.country.SelectedOption = currentOption;
+            //    }
+            //}
+        }
+
+        //private async void BillingAddressCountry_Changed(object sender, PropertyChangedEventArgs e)
+        //{
+        //    //if (e.PropertyName == "SelectedOption")
+        //    //{
+        //    //    // Load States for selected Country    
+        //    //    var states = await mapiCross.GetStates(CoreBookingFields.form.payment.billing_address.country.CoreValue);
+        //    //    CoreBookingFields.form.payment.billing_address.state.options = states.Select(x => new Option() { value = x.id, description = x.name }).ToList();
+        //    //}
+        //}
 
         private void SelectTheFirstInstallment()
         {
@@ -307,7 +346,7 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
         public async Task<List<CitiesFields>> GetCities(string countryCode, string search, string cityresult)
         {
             //todo
-            return await commonServices.AutoCompleteCities(countryCode, search, cityresult);
+            return await mapiCross.AutoCompleteCities(countryCode, search, cityresult);
         }
 
         /// <summary>
@@ -402,11 +441,7 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
         }
 
         private async Task ValidateAndBuy()
-        {
-            #if DEBUG
-                    //FillBookingFields();
-            #endif  
-
+        {           
             BugTracker.LeaveBreadcrumb("Hotels checkout view model validate and buy init");
 
             if (!IsTermsAndConditionsAccepted)
@@ -489,9 +524,6 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
                 this.CheckoutMethodSelected.payment.invoice.fiscal_id.CoreValue = "23121231239";
                 this.CheckoutMethodSelected.payment.invoice.fiscal_status.CoreValue = "FINAL_CONSUMER";
             }
-
-            //OnPropertyChanged();
-
         }
 
         /// <summary>
@@ -614,12 +646,12 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
 
         private async Task LoadCountries()
         {
-            Countries = (await commonServices.GetCountries()).countries;
+            Countries = (await mapiCross.GetCountries()).countries;
         }
 
         private async Task LoadStates(string countryCode)
         {
-            States = await commonServices.GetStates(countryCode);
+            States = await mapiCross.GetStates(countryCode);
         }
 
         public override void OnNavigated(object navigationParams)

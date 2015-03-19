@@ -186,7 +186,7 @@ namespace Despegar.WP.UI.Product.Flights
                     if (code == 1010)
                     {
                         // Expired Session
-                        dialog = new MessageDialog(manager.GetString("Flights_Checkout_ERROR_SESSION_EXPIRED"), String.Empty));
+                        dialog = new MessageDialog(manager.GetString("Flights_Checkout_ERROR_SESSION_EXPIRED"), String.Empty);
                         ViewModel.Navigator.GoBack();
                         ViewModel.Navigator.GoBack();
                         await dialog.ShowSafelyAsync();
