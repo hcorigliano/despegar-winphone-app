@@ -35,6 +35,7 @@ namespace Despegar.WP.UI.Product.Hotels
         private HotelsCheckoutViewModel ViewModel { get; set; }
         private ModalPopup loadingPopup = new ModalPopup(new Loading());
         private ModalPopup riskPopup;
+        private bool pivotInstallmentIsLoaded { get; set; }
 
         public HotelsCheckout()
         {
@@ -83,8 +84,6 @@ namespace Despegar.WP.UI.Product.Hotels
         {
             if (ViewModel.SelectedCard.card == null && ViewModel.CoreBookingFields.form.CardInfo == null && ViewModel.CoreBookingFields.form.Voucher == null)
             {
-                //var test = MainPivot.IndexFromContainer(MainPivot.FindName("Pivot_INSTALLMENT"));
-
                 MainPivot.Items.Remove(MainPivot.FindName("Pivot_CARD"));
             }
         }
@@ -204,14 +203,17 @@ namespace Despegar.WP.UI.Product.Hotels
             }
             if (e.PropertyName == "SelectedInstallment")
             {
-                //Revisar si hay que mostrar invoice.
+                //Checks for invoice
                 if (ViewModel.CoreBookingFields.CheckoutMethodSelected.payment != null && ViewModel.CoreBookingFields.CheckoutMethodSelected.payment.invoice != null)
                 {
                     if (!MainPivot.Items.Any(x => ((PivotItem)x).Name == "Pivot_INVOICE"))
                     {
 
-                        //this is necesary
-                        Pivot_INSTALLMENT.Loaded += Insert_Invoice;
+                        //Add Invoice. The subscription is necessary 
+                        if (!pivotInstallmentIsLoaded)
+                            Pivot_INSTALLMENT.Loaded += Insert_Invoice;
+                        else
+                            Insert_Invoice(null, null);
                     }
                 }
                 else
@@ -227,19 +229,19 @@ namespace Despegar.WP.UI.Product.Hotels
 
         private void Insert_Invoice(object sender, RoutedEventArgs e)
         {
-            PivotItem pvit = new PivotItem();
-            pvit.Header = "factura fiscal";
-            pvit.Name = "Pivot_INVOICE";
+            PivotItem pivotItem = new PivotItem();
+            pivotItem.Header = "factura fiscal";
+            pivotItem.Name = "Pivot_INVOICE";
             UserControl usc = new InvoiceArgentina();
             usc.DataContext = this.DataContext;
-            pvit.Content = usc;
-            pvit.Margin = new Thickness(0, 3, 0, 0); //<Setter Property="Margin" Value="0,3,0,0" />
+            pivotItem.Content = usc;
+            pivotItem.Margin = new Thickness(0, 3, 0, 0); 
             
-           // MainPivot.IndexFromContainer
-            //int test = (MainPivot.IndexFromContainer(MainPivot.FindName("Hotels_Checkout_Card_Data")) + 1 ;
-                //Hotels_Checkout_Card_Data
-            MainPivot.Items.Insert(4, pvit);
-            //pvit.Style = StaticResource //PivotItemBase
+            int index = FindIndexWithPivotItemName(MainPivot, "Pivot_CARD");
+            MainPivot.Items.Insert(index + 1, pivotItem);
+
+            pivotInstallmentIsLoaded = true;
+            Pivot_INSTALLMENT.Loaded -= Insert_Invoice;
         }
 
         private void ShowRisk(Object sender, EventArgs e)
@@ -264,6 +266,18 @@ namespace Despegar.WP.UI.Product.Hotels
 
                 ViewModel.Navigator.GoBack();
             }
+        }
+
+        private int FindIndexWithPivotItemName(Pivot mainPivot ,string name)
+        {
+            int i = 0;
+            foreach(PivotItem pivotItem in mainPivot.Items)
+            {
+                if (pivotItem.Name == name)
+                    return i;
+                i++;
+            }
+            return -1;
         }
     }
 }

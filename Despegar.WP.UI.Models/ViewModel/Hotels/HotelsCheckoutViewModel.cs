@@ -26,6 +26,7 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
     public class HotelsCheckoutViewModel : ViewModelBase
     {
         #region ** Private **
+        private bool VALIDATE_DUPLICATE_CHECKOUT = false;
         private ICoreLogger logger;
         private IAPIv1 apiV1service; 
         private IMAPIHotels hotelService;
@@ -57,7 +58,6 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
             {
                 if (InvoiceRequired)
                 {
-                    //return CoreBookingFields.form.Invoice.fiscal_status != null && CoreBookingFields.form.Invoice.fiscal_name != null  && CoreBookingFields.form.Invoice.fiscal_status.CoreValue != "FINAL";                                      
                     return CoreBookingFields.CheckoutMethodSelected.payment.invoice.fiscal_status != null && CoreBookingFields.CheckoutMethodSelected.payment.invoice.fiscal_name != null && CoreBookingFields.form.Invoice.fiscal_status.CoreValue != "FINAL_CONSUMER";                                      
                 }
                 else { return false; }
@@ -92,7 +92,6 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
         public event EventHandler HideRiskReview;
 
         public ItemsKey ItemSelected { get; set; }
-        //public CheckoutMethodKey CheckoutMethodSelected { get; set; }
 
         /// <summary>
         /// Selected "RadioButton" payment strategy
@@ -293,8 +292,6 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
                     var checkout = CoreBookingFields.form.checkout_method.FirstOrDefault(x => x.Value.payment.invoice != null);
                     if (checkout.Value != null)
                     {
-                        //CoreBookingFields.items.FirstOrDefault(x => x.Value.payment.
-
                         checkout.Value.payment.invoice.fiscal_status.PropertyChanged += Fiscal_status_PropertyChanged;
 
                         checkout.Value.payment.invoice.fiscal_status.SetDefaultValue();
@@ -320,7 +317,6 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
         // Public because it is used from the InvoiceArg control
         public async Task<List<CitiesFields>> GetCities(string countryCode, string search, string cityresult)
         {
-            //todo
             return await commonServices.AutoCompleteCities(countryCode, search, cityresult);
         }
 
@@ -432,7 +428,7 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
             if (!CoreBookingFields.IsValid(out sectionID))
             {
                 BugTracker.LeaveBreadcrumb("Hotel checkout ViewModel invalid fields");
-                OnViewModelError("FORM_ERROR", sectionID); // TODO: Catch
+                OnViewModelError("FORM_ERROR", sectionID); 
             }
             else
             {
@@ -441,10 +437,9 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
                     this.IsLoading = true;
                     object bookingData = null;
 
-                    bookingData = await BookingFormBuilder.BuildHotelsForm(this.CoreBookingFields, this.CoreBookingFields.CheckoutMethodSelected.payment != null ? this.CoreBookingFields.CheckoutMethodSelected.payment.invoice : null, SelectedCard, false);
+                    bookingData = await BookingFormBuilder.BuildHotelsForm(this.CoreBookingFields, SelectedCard, VALIDATE_DUPLICATE_CHECKOUT);
 
                     //// Buy
-                    //crossParams.PriceDetail = PriceDetailsFormatted;
                     crossParams.BookingResponse = await hotelService.CompleteBooking(bookingData, CoreBookingFields.id , ItemSelected.item_id );
 
                     if (crossParams.BookingResponse.Error != null)

@@ -216,8 +216,12 @@ namespace Despegar.Core.Neo.Business.Forms
             });
         }
 
-        public static Task<object> BuildHotelsForm(HotelsBookingFields bookingFields, InvoiceArg invoiceFields, HotelPayment selectedCard, bool validateDuplicateCheckouts)
+        public static Task<object> BuildHotelsForm(HotelsBookingFields bookingFields, HotelPayment selectedCard, bool validateDuplicateCheckouts)
         {
+            InvoiceArg invoiceFields = null; 
+            if(bookingFields.CheckoutMethodSelected != null && bookingFields.CheckoutMethodSelected.payment != null)
+                invoiceFields = bookingFields.CheckoutMethodSelected.payment.invoice;
+            
             return Task.Run(() =>
             {
                 JObject result = new JObject();
@@ -288,6 +292,8 @@ namespace Despegar.Core.Neo.Business.Forms
                     payment.Add("installment", installment);
                 }
 
+                //invoiceFields 
+                
                 // Invoice Arg
                 if (bookingFields.form.CountrySite != null & bookingFields.form.CountrySite.ToLower().Contains("ar") && invoiceFields != null) // Is only for Arg in mapi
                 {

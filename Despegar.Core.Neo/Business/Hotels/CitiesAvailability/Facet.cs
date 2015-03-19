@@ -26,9 +26,25 @@ namespace Despegar.Core.Neo.Business.Hotels.CitiesAvailability
                 type = original.type,
                 unit = original.unit,
                 selected = original.selected,
-                value = new MaxAndMin() { max = original.value.max, min = original.value.min },
-                values = original.values.Select(x => new Value() { count = x.count, label = x.label, selected = x.selected, value = x.value}).ToList()
+                value = DefineMaxAndMin(original),
+                values = DefineValues(original)
             };
+        }
+
+        private static List<Value> DefineValues(Facet original)
+        {
+            try
+            {
+                return original.values.Select(x => new Value() { count = x.count, label = x.label, selected = x.selected, value = x.value }).ToList();
+            }
+            catch { return null; }
+        }
+
+        private static MaxAndMin DefineMaxAndMin(Facet original)
+        {
+            if (original.value != null)
+                return new MaxAndMin() { max = original.value.max, min = original.value.min };
+            return null;
         }
     }
 }
