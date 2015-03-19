@@ -81,9 +81,9 @@ namespace Despegar.WP.UI.Product.Hotels
         /// </summary>
         private void ConfigureFields()
         {
-            if (!ViewModel.InvoiceRequired)
+            if (ViewModel.SelectedCard.card == null && ViewModel.CoreBookingFields.form.CardInfo == null && ViewModel.CoreBookingFields.form.Voucher == null)
             {
-                //MainPivot.Items.RemoveAt(4);
+                MainPivot.Items.RemoveAt(3);
             }
         }
 
@@ -203,7 +203,7 @@ namespace Despegar.WP.UI.Product.Hotels
             if (e.PropertyName == "SelectedInstallment")
             {
                 //Revisar si hay que mostrar invoice.
-                if (ViewModel.CheckoutMethodSelected.payment.invoice != null)
+                if (ViewModel.CheckoutMethodSelected.payment != null && ViewModel.CheckoutMethodSelected.payment.invoice != null)
                 {
                     if (!MainPivot.Items.Any(x => ((PivotItem)x).Name == "Pivot_INVOICE"))
                     {

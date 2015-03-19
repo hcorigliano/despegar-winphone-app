@@ -23,17 +23,21 @@ namespace Despegar.Core.Neo.Business.Common.Checkout
         {
             get
             {
-                string temp = this.expiration.from;
-                int fromDate = Convert.ToInt32((temp.Split(new Char[] { '-' }))[0]);
-                temp = this.expiration.to;
-                int toDate = Convert.ToInt32((temp.Split(new Char[] { '-' }))[0]);
+                if (this.expiration != null)
+                {
+                    string temp = this.expiration.from;
+                    int fromDate = Convert.ToInt32((temp.Split(new Char[] { '-' }))[0]);
+                    temp = this.expiration.to;
+                    int toDate = Convert.ToInt32((temp.Split(new Char[] { '-' }))[0]);
 
-                List<int> list = new List<int>();
-                for (int i = fromDate; i <= toDate; i++)
-                    list.Add(i);
+                    List<int> list = new List<int>();
+                    for (int i = fromDate; i <= toDate; i++)
+                        list.Add(i);
 
 
-                return list;
+                    return list;
+                }
+                return null;
             }
         }
 

@@ -26,13 +26,13 @@
             <!--<dev:UserControlDesignGrid />-->
 
             <!-- Card -->
-            <controls:FieldCombo x:Uid="Flights_Checkout_Card_Data_Card"  Value="{Binding SelectedCard, Mode=TwoWay}"  DisplayTextPath="card.description" CodePath="card.code" ItemsSource="{Binding SelectedInstallment.Cards}" />
+            <controls:FieldCombo Visibility="{Binding SelectedCard.card, Converter={StaticResource NullVisibilityConverter}}" x:Uid="Flights_Checkout_Card_Data_Card"  Value="{Binding SelectedCard, Mode=TwoWay}"  DisplayTextPath="card.description" CodePath="card.code" ItemsSource="{Binding SelectedInstallment.Cards}" />
             <StackPanel DataContext="{Binding CoreBookingFields.form.CardInfo}">
                 <!-- Card Number -->
                 <controls:Field InputType="Numeric" x:Uid="Flights_Checkout_Card_Data_Number_Of_Card" Value="{Binding number.CoreValue, Mode=TwoWay}" Visibility="{Binding number.required, Converter={StaticResource VisibilityConverter}, FallbackValue=Collapsed}" />
                 <controls:ValidationError ErrorPrefix="Flights_Checkout_Card_Data_Number_Of_Card" ErrorCode="{Binding number.CurrentError}" Visibility="{Binding number.required, Converter={StaticResource VisibilityConverter}, FallbackValue=Collapsed}" />
                 <!-- Expiration Date -->
-                <StackPanel Style="{StaticResource TextBoxInputContainer}">
+                <StackPanel Visibility="{Binding expiration , Converter={StaticResource NullVisibilityConverter},FallbackValue=collapsed}" Style="{StaticResource TextBoxInputContainer}">
                     <TextBlock Style="{StaticResource BaseTextLabel}" x:Uid="Card_Data_Expiration" Text="Vencimiento" />
 
                     <Grid>
