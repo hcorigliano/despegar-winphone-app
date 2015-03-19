@@ -83,7 +83,9 @@ namespace Despegar.WP.UI.Product.Hotels
         {
             if (ViewModel.SelectedCard.card == null && ViewModel.CoreBookingFields.form.CardInfo == null && ViewModel.CoreBookingFields.form.Voucher == null)
             {
-                MainPivot.Items.RemoveAt(3);
+                //var test = MainPivot.IndexFromContainer(MainPivot.FindName("Pivot_INSTALLMENT"));
+
+                MainPivot.Items.Remove(MainPivot.FindName("Pivot_CARD"));
             }
         }
 
@@ -203,7 +205,7 @@ namespace Despegar.WP.UI.Product.Hotels
             if (e.PropertyName == "SelectedInstallment")
             {
                 //Revisar si hay que mostrar invoice.
-                if (ViewModel.CheckoutMethodSelected.payment != null && ViewModel.CheckoutMethodSelected.payment.invoice != null)
+                if (ViewModel.CoreBookingFields.CheckoutMethodSelected.payment != null && ViewModel.CoreBookingFields.CheckoutMethodSelected.payment.invoice != null)
                 {
                     if (!MainPivot.Items.Any(x => ((PivotItem)x).Name == "Pivot_INVOICE"))
                     {
@@ -217,7 +219,7 @@ namespace Despegar.WP.UI.Product.Hotels
                     if (MainPivot.Items.Any(x => ((PivotItem)x).Name == "Pivot_INVOICE"))
                     {
                         //Eliminar Invoice
-                        MainPivot.Items.RemoveAt(4);
+                        MainPivot.Items.Remove(MainPivot.FindName("Pivot_INVOICE"));
                     }
                 }
             }
@@ -232,6 +234,10 @@ namespace Despegar.WP.UI.Product.Hotels
             usc.DataContext = this.DataContext;
             pvit.Content = usc;
             pvit.Margin = new Thickness(0, 3, 0, 0); //<Setter Property="Margin" Value="0,3,0,0" />
+            
+           // MainPivot.IndexFromContainer
+            //int test = (MainPivot.IndexFromContainer(MainPivot.FindName("Hotels_Checkout_Card_Data")) + 1 ;
+                //Hotels_Checkout_Card_Data
             MainPivot.Items.Insert(4, pvit);
             //pvit.Style = StaticResource //PivotItemBase
         }
