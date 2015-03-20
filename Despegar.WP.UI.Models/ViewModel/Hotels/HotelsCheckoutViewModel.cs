@@ -536,6 +536,8 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
 
         public void FillBookingFields()
         {
+            if (CoreBookingFields == null) return;
+
             CoreBookingFields.form.passengers[0].first_name.CoreValue = "test";
             CoreBookingFields.form.passengers[0].last_name.CoreValue = "booking";
             CoreBookingFields.form.contact.email.CoreValue = "testhoteles@despegar.com";
