@@ -219,8 +219,8 @@ namespace Despegar.Core.Neo.Business.Forms
         public static Task<object> BuildHotelsForm(HotelsBookingFields bookingFields, HotelPayment selectedCard, bool validateDuplicateCheckouts)
         {
             InvoiceArg invoiceFields = null; 
-            if(bookingFields.CheckoutMethodSelected != null && bookingFields.CheckoutMethodSelected.payment != null)
-                invoiceFields = bookingFields.CheckoutMethodSelected.payment.invoice;
+            if(bookingFields.form.CheckoutMethodSelected != null && bookingFields.form.CheckoutMethodSelected.payment != null)
+                invoiceFields = bookingFields.form.CheckoutMethodSelected.payment.invoice;
             
             return Task.Run(() =>
             {

@@ -14,13 +14,15 @@ namespace Despegar.Core.Neo.Business.Hotels.BookingFields
         public AdditionalData additional_data { get; set; }         
 
         // Custom
-        // TODO: ADAPT TO NOT GET THE FIRST ITEM, BUT THE CORRECT ITEM dependening on PayAtDestination or OnlineCreditCard
-        public Voucher Voucher { get { return checkout_method.FirstItem.vouchers != null ? checkout_method.FirstItem.vouchers.FirstOrDefault() : null; } } // TODO: only one voucher? Why a list?
-        public CardField CardInfo { get { return checkout_method.FirstItem.payment != null ? checkout_method.FirstItem.payment.card : null; } }
-        public InvoiceArg Invoice { get { return checkout_method.FirstItem.payment != null ? checkout_method.FirstItem.payment.invoice : null; } }
-        public Installment CurrentInstallment { get { return checkout_method.FirstItem.payment != null ? checkout_method.FirstItem.payment.installment : null; } }    
+        public Voucher Voucher { get { return CheckoutMethodSelected.vouchers != null ? CheckoutMethodSelected.vouchers.FirstOrDefault() : null; } } // TODO: only one voucher? Why a list?
+        public CardField CardInfo { get { return CheckoutMethodSelected.payment != null ? CheckoutMethodSelected.payment.card : null; } }
+        public InvoiceArg Invoice { get { return CheckoutMethodSelected.payment != null ? CheckoutMethodSelected.payment.invoice : null; } }
+        public Installment CurrentInstallment { get { return CheckoutMethodSelected.payment != null ? CheckoutMethodSelected.payment.installment : null; } }    
+
         public string CountrySite { get; set; }
 
         public string booking_status { get; set; }
+
+        public CheckoutMethodKey CheckoutMethodSelected { get; set; }
     }
 }
