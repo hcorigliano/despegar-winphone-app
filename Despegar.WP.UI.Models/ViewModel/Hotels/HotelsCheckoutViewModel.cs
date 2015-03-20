@@ -58,7 +58,7 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
             {
                 if (InvoiceRequired)
                 {
-                    return CoreBookingFields.CheckoutMethodSelected.payment.invoice.fiscal_status != null && CoreBookingFields.CheckoutMethodSelected.payment.invoice.fiscal_name != null && CoreBookingFields.form.Invoice.fiscal_status.CoreValue != "FINAL_CONSUMER";                                      
+                    return CoreBookingFields.form.CheckoutMethodSelected.payment.invoice.fiscal_status != null && CoreBookingFields.form.CheckoutMethodSelected.payment.invoice.fiscal_name != null && CoreBookingFields.form.Invoice.fiscal_status.CoreValue != "FINAL_CONSUMER";                                      
                 }
                 else { return false; }
             }
@@ -121,7 +121,7 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
                 {
                     ItemSelected = CoreBookingFields.items.FirstOrDefault(x => !x.Value.isPaymentAtDestination).Value;
                 }
-                CoreBookingFields.CheckoutMethodSelected = CoreBookingFields.form.checkout_method.FirstOrDefault(x => x.Key == ItemSelected.checkout_method).Value;
+                CoreBookingFields.form.CheckoutMethodSelected = CoreBookingFields.form.checkout_method.FirstOrDefault(x => x.Key == ItemSelected.checkout_method).Value;
 
 
                 value.SelectedInstallment = true;
@@ -157,7 +157,7 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
                 // Set POST data
                 if (selectedCard != null)
                 {
-                    PaymentForm payments = CoreBookingFields.form.checkout_method.FirstItem.payment;
+                    PaymentForm payments = CoreBookingFields.form.CheckoutMethodSelected.payment; 
                     if (payments != null && payments.installment.quantity == null)
                         payments.installment.quantity = new RegularField();
                     if (selectedCard.card != null)
@@ -558,13 +558,13 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
                     CoreBookingFields.form.CardInfo.security_code.CoreValue = "123";
             }
 
-            if (CoreBookingFields.CheckoutMethodSelected.payment != null && CoreBookingFields.CheckoutMethodSelected.payment.invoice != null)
+            if (CoreBookingFields.form.CheckoutMethodSelected.payment != null && CoreBookingFields.form.CheckoutMethodSelected.payment.invoice != null)
             {
-                this.CoreBookingFields.CheckoutMethodSelected.payment.invoice.address.number.CoreValue = "123";
-                this.CoreBookingFields.CheckoutMethodSelected.payment.invoice.address.postal_code.CoreValue = "1234";
-                this.CoreBookingFields.CheckoutMethodSelected.payment.invoice.address.street.CoreValue = "falsa";
-                this.CoreBookingFields.CheckoutMethodSelected.payment.invoice.fiscal_id.CoreValue = "23121231239";
-                this.CoreBookingFields.CheckoutMethodSelected.payment.invoice.fiscal_status.CoreValue = "FINAL_CONSUMER";
+                this.CoreBookingFields.form.CheckoutMethodSelected.payment.invoice.address.number.CoreValue = "123";
+                this.CoreBookingFields.form.CheckoutMethodSelected.payment.invoice.address.postal_code.CoreValue = "1234";
+                this.CoreBookingFields.form.CheckoutMethodSelected.payment.invoice.address.street.CoreValue = "falsa";
+                this.CoreBookingFields.form.CheckoutMethodSelected.payment.invoice.fiscal_id.CoreValue = "23121231239";
+                this.CoreBookingFields.form.CheckoutMethodSelected.payment.invoice.fiscal_status.CoreValue = "FINAL_CONSUMER";
             }
         }
 
@@ -596,9 +596,9 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
 
                 case HotelBookingStatusEnum.NEW_CREDIT_CARD:
 
-                    this.CoreBookingFields.CheckoutMethodSelected.payment.card.number.CoreValue = String.Empty;
-                    this.CoreBookingFields.CheckoutMethodSelected.payment.card.expiration.CoreValue = String.Empty;
-                    this.CoreBookingFields.CheckoutMethodSelected.payment.card.security_code.CoreValue = String.Empty;
+                    this.CoreBookingFields.form.CheckoutMethodSelected.payment.card.number.CoreValue = String.Empty;
+                    this.CoreBookingFields.form.CheckoutMethodSelected.payment.card.expiration.CoreValue = String.Empty;
+                    this.CoreBookingFields.form.CheckoutMethodSelected.payment.card.security_code.CoreValue = String.Empty;
                     this.CoreBookingFields.form.booking_status = "NEW_CREDIT_CARD";
 
                     FreezeFields();

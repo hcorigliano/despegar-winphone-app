@@ -227,7 +227,7 @@ namespace Despegar.WP.UI.Product.Hotels
             if (e.PropertyName == "SelectedInstallment")
             {
                 //Checks for invoice
-                if (ViewModel.CoreBookingFields.CheckoutMethodSelected.payment != null && ViewModel.CoreBookingFields.CheckoutMethodSelected.payment.invoice != null)
+                if (ViewModel.CoreBookingFields.form.CheckoutMethodSelected.payment != null && ViewModel.CoreBookingFields.form.CheckoutMethodSelected.payment.invoice != null)
                 {
                     if (!MainPivot.Items.Any(x => ((PivotItem)x).Name == "Pivot_INVOICE"))
                     {
