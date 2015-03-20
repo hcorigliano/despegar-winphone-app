@@ -52,7 +52,10 @@
                 <src:CardData />
             </PivotItem>
 
-            <!--Invoice Arg--> 
+            <!--Invoice Arg-->
+            <PivotItem x:Name="Pivot_INVOICE" x:Uid="Hotels_Checkout_Invoice" Style="{StaticResource PivotItemBase}">
+                <src:InvoiceArgentina/>
+            </PivotItem>
             <!-- Dynamically added -->
             
             <!--Billing Address-->

@@ -240,67 +240,97 @@ namespace Despegar.WP.UI.Product.Hotels
                             Insert_Invoice(null, null);
                     }
                 }
-                else
+                else if (MainPivot.Items.Any(x => ((PivotItem)x).Name == "Pivot_INVOICE"))
                 {
-                    if (MainPivot.Items.Any(x => ((PivotItem)x).Name == "Pivot_INVOICE"))
-                    {
-                        //Eliminar Invoice
-                        MainPivot.Items.Remove(MainPivot.FindName("Pivot_INVOICE"));
-                    }
+                    //Eliminar Invoice
+                    MainPivot.Items.Remove(MainPivot.FindName("Pivot_INVOICE"));
                 }
 
-                // Check Credi Card
-                if (ViewModel.SelectedCard.card == null && ViewModel.CoreBookingFields.form.CardInfo == null && ViewModel.CoreBookingFields.form.Voucher == null)
+
+                //Check billingAddress
+                if (ViewModel.CoreBookingFields.form.BillingAddress != null)
+                {
+                    if (!MainPivot.Items.Any(x => ((PivotItem)x).Name == "Pivot_BILLING_ADDRESS"))
+                    {
+                        //Add billingAddress
+                        if (!pivotInstallmentIsLoaded)
+                            Pivot_INSTALLMENT.Loaded += Insert_Billing_Address;
+                        else
+                            Insert_Billing_Address(null, null);
+                    }
+                }
+                else if (MainPivot.Items.Any(x => ((PivotItem)x).Name == "Pivot_BILLING_ADDRESS"))
+                {
+                    //Eliminar billingAddress
+                    MainPivot.Items.Remove(MainPivot.FindName("Pivot_BILLING_ADDRESS"));
+                }
+
+
+                //Check CardData
+                if (ViewModel.CoreBookingFields.form.CardInfo != null)
                 {
                     if (!MainPivot.Items.Any(x => ((PivotItem)x).Name == "Pivot_CARD"))
                     {
+                        //Add CardData
                         if (!pivotInstallmentIsLoaded)
-                            Pivot_INSTALLMENT.Loaded += Insert_CardData;
+                            Pivot_INSTALLMENT.Loaded += Insert_Card_Info;
                         else
-                            Insert_CardData(null, null);
+                            Insert_Card_Info(null, null);
                     }
-                    else
-                    {
-                        if (MainPivot.Items.Any(x => ((PivotItem)x).Name == "Pivot_CARD"))
-                        {
-                            // Eliminar CardData
-                            MainPivot.Items.Remove(MainPivot.FindName("Pivot_CARD"));
-                        }
-                    }
-
-
-                    MainPivot.Items.Remove(MainPivot.FindName("Pivot_CARD"));
                 }
-
-                if (!ViewModel.BillingAddressRequired)
-                { 
-
-                }                
+                else if (MainPivot.Items.Any(x => ((PivotItem)x).Name == "Pivot_CARD"))
+                {
+                    //Eliminar CardData
+                    MainPivot.Items.Remove(MainPivot.FindName("Pivot_CARD"));
+                }           
 
             }
         }
 
-        private void Insert_CardData(object sender, RoutedEventArgs e)
+        private void Insert_Card_Info(object sender, RoutedEventArgs e)
         {
-            // Add XUID, do not Harcode strings
             PivotItem pivotItem = new PivotItem();
-            pivotItem.Header = "factura fiscal";
-            pivotItem.Name = "Pivot_INVOICE";
-            UserControl usc = new InvoiceArgentina();
+            pivotItem.Header = "card Data"; //Agregar a resource
+            pivotItem.Name = "Pivot_CARD";
+            UserControl usc = new CardData();
             usc.DataContext = this.DataContext;
             pivotItem.Content = usc;
             pivotItem.Margin = new Thickness(0, 3, 0, 0);
 
-            int index = FindIndexWithPivotItemName(MainPivot, "Pivot_CARD");
+            int index = FindIndexWithPivotItemName(MainPivot, "Pivot_INSTALLMENT");
+
             MainPivot.Items.Insert(index + 1, pivotItem);
 
             pivotInstallmentIsLoaded = true;
-            Pivot_INSTALLMENT.Loaded -= Insert_Invoice;
+            Pivot_INSTALLMENT.Loaded -= Insert_Card_Info;
+        }
+
+        private void Insert_Billing_Address(object sender, RoutedEventArgs e)
+        {
+            // Add XUID, do not Harcode strings UPDATE: XUID its only for XAML we must add new resource
+            PivotItem pivotItem = new PivotItem();
+            pivotItem.Header = "billing Address"; //Agregar a resource
+            pivotItem.Name = "Pivot_BILLING_ADDRESS";
+            UserControl usc = new BillingAddress();
+            usc.DataContext = this.DataContext;
+            pivotItem.Content = usc;
+            pivotItem.Margin = new Thickness(0, 3, 0, 0);
+
+
+            int index = FindIndexWithPivotItemName(MainPivot, "Pivot_INVOICE");
+            if (index == -1)
+                index = FindIndexWithPivotItemName(MainPivot, "Pivot_CARD");
+
+
+            MainPivot.Items.Insert(index + 1, pivotItem);
+
+            pivotInstallmentIsLoaded = true;
+            Pivot_INSTALLMENT.Loaded -= Insert_Billing_Address;
         }
 
         private void Insert_Invoice(object sender, RoutedEventArgs e)
         {
-            // Add XUID, do not Harcode strings
+            // Add XUID, do not Harcode strings UPDATE: invoice is only for arg. however we must add new resource.
             PivotItem pivotItem = new PivotItem();
             pivotItem.Header = "factura fiscal";
             pivotItem.Name = "Pivot_INVOICE";

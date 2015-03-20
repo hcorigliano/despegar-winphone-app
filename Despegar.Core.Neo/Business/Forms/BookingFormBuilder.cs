@@ -338,7 +338,7 @@ namespace Despegar.Core.Neo.Business.Forms
                 }
 
                 // Billing Address
-                var billing = bookingFields.CheckoutMethodSelected.payment.billing_address;
+                var billing = bookingFields.form.CheckoutMethodSelected.payment.billing_address;
                 if (billing != null)
                 {
                     var billingAddress = new JObject();
