@@ -55,6 +55,7 @@ namespace Despegar.WP.UI.Product.Hotels
             // Initialize Checkout
             ViewModel = IoC.Resolve<HotelsCheckoutViewModel>();
             ViewModel.PropertyChanged += Checkloading;
+            ViewModel.PropertyChanged += CheckSections;
             ViewModel.ShowRiskReview += this.ShowRisk;
             ViewModel.HideRiskReview += this.HideRisk;
             ViewModel.ViewModelError += ErrorHandler;
@@ -81,12 +82,7 @@ namespace Despegar.WP.UI.Product.Hotels
         /// View Adaptations based on selected country
         /// </summary>
         private void ConfigureFields()
-        {
-            // TODO: Make a better condition, this could delete necessary pivot item
-            if (ViewModel.SelectedCard.card == null && ViewModel.CoreBookingFields.form.CardInfo == null && ViewModel.CoreBookingFields.form.Voucher == null)
-            {
-                MainPivot.Items.Remove(MainPivot.FindName("Pivot_CARD"));
-            }
+        {           
         }
 
         # region ** ERROR HANDLING **
@@ -223,15 +219,20 @@ namespace Despegar.WP.UI.Product.Hotels
                     loadingPopup.Show();
                 else
                     loadingPopup.Hide();
-            }
+            }            
+        }
+
+        private void CheckSections(object sender, PropertyChangedEventArgs e)
+        {
             if (e.PropertyName == "SelectedInstallment")
             {
-                //Checks for invoice
-                if (ViewModel.CoreBookingFields.form.CheckoutMethodSelected.payment != null && ViewModel.CoreBookingFields.form.CheckoutMethodSelected.payment.invoice != null)
+                var currentMethod = ViewModel.CoreBookingFields.form.CheckoutMethodSelected;
+
+                // Checks for invoice
+                if (ViewModel.CoreBookingFields.form.Invoice != null)
                 {
                     if (!MainPivot.Items.Any(x => ((PivotItem)x).Name == "Pivot_INVOICE"))
                     {
-
                         //Add Invoice. The subscription is necessary 
                         if (!pivotInstallmentIsLoaded)
                             Pivot_INSTALLMENT.Loaded += Insert_Invoice;
@@ -247,7 +248,54 @@ namespace Despegar.WP.UI.Product.Hotels
                         MainPivot.Items.Remove(MainPivot.FindName("Pivot_INVOICE"));
                     }
                 }
+
+                // Check Credi Card
+                if (ViewModel.SelectedCard.card == null && ViewModel.CoreBookingFields.form.CardInfo == null && ViewModel.CoreBookingFields.form.Voucher == null)
+                {
+                    if (!MainPivot.Items.Any(x => ((PivotItem)x).Name == "Pivot_CARD"))
+                    {
+                        if (!pivotInstallmentIsLoaded)
+                            Pivot_INSTALLMENT.Loaded += Insert_CardData;
+                        else
+                            Insert_CardData(null, null);
+                    }
+                    else
+                    {
+                        if (MainPivot.Items.Any(x => ((PivotItem)x).Name == "Pivot_CARD"))
+                        {
+                            // Eliminar CardData
+                            MainPivot.Items.Remove(MainPivot.FindName("Pivot_CARD"));
+                        }
+                    }
+
+
+                    MainPivot.Items.Remove(MainPivot.FindName("Pivot_CARD"));
+                }
+
+                if (!ViewModel.BillingAddressRequired)
+                { 
+
+                }                
+
             }
+        }
+
+        private void Insert_CardData(object sender, RoutedEventArgs e)
+        {
+            // Add XUID, do not Harcode strings
+            PivotItem pivotItem = new PivotItem();
+            pivotItem.Header = "factura fiscal";
+            pivotItem.Name = "Pivot_INVOICE";
+            UserControl usc = new InvoiceArgentina();
+            usc.DataContext = this.DataContext;
+            pivotItem.Content = usc;
+            pivotItem.Margin = new Thickness(0, 3, 0, 0);
+
+            int index = FindIndexWithPivotItemName(MainPivot, "Pivot_CARD");
+            MainPivot.Items.Insert(index + 1, pivotItem);
+
+            pivotInstallmentIsLoaded = true;
+            Pivot_INSTALLMENT.Loaded -= Insert_Invoice;
         }
 
         private void Insert_Invoice(object sender, RoutedEventArgs e)

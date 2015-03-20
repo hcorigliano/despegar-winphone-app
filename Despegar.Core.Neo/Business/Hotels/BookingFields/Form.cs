@@ -21,7 +21,7 @@ namespace Despegar.Core.Neo.Business.Hotels.BookingFields
         public InvoiceArg Invoice { get { return CheckoutMethodSelected.payment != null ? CheckoutMethodSelected.payment.invoice : null; } }
         public Installment CurrentInstallment { get { return CheckoutMethodSelected.payment != null ? CheckoutMethodSelected.payment.installment : null; } }    
 
-        public BillingAddress BillingAddress { get { return checkout_method.FirstItem.payment.billing_address; } }
+        public BillingAddress BillingAddress { get { return CheckoutMethodSelected.payment != null  ? CheckoutMethodSelected.payment.billing_address : null; } }
         public string CountrySite { get; set; }
 
         public string booking_status { get; set; }
