@@ -14,7 +14,7 @@
     </UserControl.Resources>
 
     <ScrollViewer>
-        <StackPanel DataContext="{Binding CoreBookingFields.checkout_method.payment.billing_address }">
+        <StackPanel DataContext="{Binding CoreBookingFields.CheckoutMethodSelected.payment.billing_address }">
             <TextBlock x:Uid="Checkout_BillingAdrees_Title" Text="Dirección de entrega de la factura" Style="{StaticResource SegoeLight22}" TextWrapping="Wrap" />
             <!-- Country -->
             <!-- Itemsource property esta puesta antes de Value a propósito para que no se setee el valor automaticamente, sino que el ViewModel elige el Pais actual por default -->

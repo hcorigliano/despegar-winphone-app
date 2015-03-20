@@ -82,6 +82,7 @@ namespace Despegar.WP.UI.Product.Hotels
         /// </summary>
         private void ConfigureFields()
         {
+            // TODO: Make a better condition, this could delete necessary pivot item
             if (ViewModel.SelectedCard.card == null && ViewModel.CoreBookingFields.form.CardInfo == null && ViewModel.CoreBookingFields.form.Voucher == null)
             {
                 MainPivot.Items.Remove(MainPivot.FindName("Pivot_CARD"));
@@ -251,6 +252,7 @@ namespace Despegar.WP.UI.Product.Hotels
 
         private void Insert_Invoice(object sender, RoutedEventArgs e)
         {
+            // Add XUID, do not Harcode strings
             PivotItem pivotItem = new PivotItem();
             pivotItem.Header = "factura fiscal";
             pivotItem.Name = "Pivot_INVOICE";

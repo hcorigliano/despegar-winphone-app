@@ -1,4 +1,5 @@
-﻿using Despegar.Core.Neo.Business.Common.Checkout;
+﻿using Despegar.Core.Business.Hotels.BookingFields;
+using Despegar.Core.Neo.Business.Common.Checkout;
 using Despegar.Core.Neo.Business.Common.State;
 using Despegar.Core.Neo.Business.Configuration;
 using Despegar.Core.Neo.Business.Coupons;
@@ -125,7 +126,9 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
 
                 value.SelectedInstallment = true;
                 selectedInstallment = value;
+
                 OnPropertyChanged();
+                OnPropertyChanged("BillingAddressRequired");
 
                 // Select first by default
                 SelectedCard = value.FirstCard;
@@ -212,7 +215,6 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
             }
         }
 
-
         #endregion        
 
         public HotelsCheckoutViewModel(INavigator navigator, IMAPIHotels hotelService, IMAPICross commonService, IMAPICoupons couponsService, IAPIv1 apiV1service, ICoreLogger logger, IBugTracker t)
@@ -270,29 +272,30 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
 
         private void ConfigureBillingAddress()
         {
-            //if (BillingAddressRequired)
-            //{
-            //    CoreBookingFields.form.payment.billing_address.country.PropertyChanged += BillingAddressCountry_Changed;
-            //    CoreBookingFields.form.payment.billing_address.country.options = Countries.Select(x => new Option() { value = x.id, description = x.name }).ToList();
+            BillingAddress billingAddress = CoreBookingFields.CheckoutMethodSelected.payment.billing_address;
+            if (BillingAddressRequired)
+            {
+                billingAddress.country.PropertyChanged += BillingAddressCountry_Changed;
+                billingAddress.country.options = Countries.Select(x => new Option() { value = x.id, description = x.name }).ToList();
 
-            //    // Set selected country based on Site
-            //    var currentOption = CoreBookingFields.form.payment.billing_address.country.options.FirstOrDefault(x => x.value.ToUpperInvariant() == GlobalConfiguration.Site.ToUpperInvariant());
-            //    if (currentOption != null)
-            //    {
-            //        CoreBookingFields.form.payment.billing_address.country.SelectedOption = currentOption;
-            //    }
-            //}
+                // Set selected country based on Site
+                var currentOption = billingAddress.country.options.FirstOrDefault(x => x.value.ToUpperInvariant() == GlobalConfiguration.Site.ToUpperInvariant());
+                if (currentOption != null)
+                {
+                    billingAddress.country.SelectedOption = currentOption;
+                }
+            }
         }
 
-        //private async void BillingAddressCountry_Changed(object sender, PropertyChangedEventArgs e)
-        //{
-        //    //if (e.PropertyName == "SelectedOption")
-        //    //{
-        //    //    // Load States for selected Country    
-        //    //    var states = await mapiCross.GetStates(CoreBookingFields.form.payment.billing_address.country.CoreValue);
-        //    //    CoreBookingFields.form.payment.billing_address.state.options = states.Select(x => new Option() { value = x.id, description = x.name }).ToList();
-        //    //}
-        //}
+        private async void BillingAddressCountry_Changed(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "SelectedOption")
+            {
+                // Load States for selected Country    
+                var states = await mapiCross.GetStates(CoreBookingFields.CheckoutMethodSelected.payment.billing_address.country.CoreValue);
+                CoreBookingFields.CheckoutMethodSelected.payment.billing_address.state.options = states.Select(x => new Option() { value = x.id, description = x.name }).ToList();
+            }
+        }
 
         private void SelectTheFirstInstallment()
         {

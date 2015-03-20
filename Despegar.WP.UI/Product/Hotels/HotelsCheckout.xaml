@@ -49,7 +49,7 @@
             
             <!--Card Data Pivot-->
             <PivotItem x:Name="Pivot_CARD"  x:Uid="Hotels_Checkout_Card_Data" Style="{StaticResource PivotItemBase}" >
-                <src:BillingAddress />
+                <src:CardData />
             </PivotItem>
 
             <!--Invoice Arg--> 
@@ -57,7 +57,7 @@
             
             <!--Billing Address-->
             <PivotItem x:Name="Pivot_BILLING_ADDRESS"  x:Uid="Flight_Checkout_Billing_Address" Style="{StaticResource PivotItemBase}" >
-                <src:CardData />
+                <src:BillingAddress />
             </PivotItem>
             
             <!--Buy-->
