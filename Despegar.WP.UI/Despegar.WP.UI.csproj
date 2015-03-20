@@ -124,6 +124,9 @@
     <Compile Include="Controls\Hotels\AmenitiesControl.xaml.cs">
       <DependentUpon>AmenitiesControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Hotels\ConfirmationBox.xaml.cs">
+      <DependentUpon>ConfirmationBox.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Hotels\DateControl.xaml.cs">
       <DependentUpon>DateControl.xaml</DependentUpon>
     </Compile>
@@ -402,6 +405,10 @@
     <Page Include="Controls\Hotels\AmenitiesControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\Hotels\ConfirmationBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\Hotels\DateControl.xaml">
       <Generator>MSBuild:Compile</Generator>

@@ -13,6 +13,8 @@ namespace Despegar.Core.Neo.Business.Hotels.BookingFields
         public Form form { get; set; }
         public Fees fees { get; set; }
 
+        public CheckoutMethodKey CheckoutMethodSelected { get; set; }
+
         // NOTE FOR DEVS: Do NOT use && operator to include every condition in one IF. It won't trigger the validations of each field.      
         public bool IsValid(out string sectionID)
         {

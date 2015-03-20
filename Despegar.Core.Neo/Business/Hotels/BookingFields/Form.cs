@@ -18,10 +18,10 @@ namespace Despegar.Core.Neo.Business.Hotels.BookingFields
         // TODO: ADAPT TO NOT GET THE FIRST ITEM, BUT THE CORRECT ITEM dependening on PayAtDestination or OnlineCreditCard
         // TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO
         public Voucher Voucher { get { return checkout_method.FirstItem.vouchers != null ? checkout_method.FirstItem.vouchers.FirstOrDefault() : null; } } // TODO: only one voucher? Why a list?
-        public CardField CardInfo { get { return checkout_method.FirstItem.payment.card; } }
-        public InvoiceArg Invoice { get { return checkout_method.FirstItem.payment.invoice; } }
+        public CardField CardInfo { get { return checkout_method.FirstItem.payment != null ? checkout_method.FirstItem.payment.card : null; } }
+        public InvoiceArg Invoice { get { return checkout_method.FirstItem.payment != null ? checkout_method.FirstItem.payment.invoice : null; } }
         public BillingAddress BillingAddress { get { return checkout_method.FirstItem.payment.billing_address; } }
-        public Installment CurrentInstallment { get { return checkout_method.FirstItem.payment.installment; } }    
+        public Installment CurrentInstallment { get { return checkout_method.FirstItem.payment != null ? checkout_method.FirstItem.payment.installment : null; } }    
         public string CountrySite { get; set; }
 
         public string booking_status { get; set; }

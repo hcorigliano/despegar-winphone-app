@@ -216,8 +216,12 @@ namespace Despegar.Core.Neo.Business.Forms
             });
         }
 
-        public static Task<object> BuildHotelsForm(HotelsBookingFields bookingFields, InvoiceArg invoiceFields, HotelPayment selectedCard, bool validateDuplicateCheckouts)
+        public static Task<object> BuildHotelsForm(HotelsBookingFields bookingFields, HotelPayment selectedCard, bool validateDuplicateCheckouts)
         {
+            InvoiceArg invoiceFields = null; 
+            if(bookingFields.CheckoutMethodSelected != null && bookingFields.CheckoutMethodSelected.payment != null)
+                invoiceFields = bookingFields.CheckoutMethodSelected.payment.invoice;
+            
             return Task.Run(() =>
             {
                 JObject result = new JObject();
@@ -240,42 +244,56 @@ namespace Despegar.Core.Neo.Business.Forms
                 contact.Add("email", bookingFields.form.contact.email.CoreValue);
 
                 // Payment
-                JObject card = new JObject();
-                card.Add("security_code", bookingFields.form.CardInfo.security_code.CoreValue);
-                card.Add("expiration", bookingFields.form.CardInfo.expiration.CoreValue);
-                card.Add("number", bookingFields.form.CardInfo.number.CoreValue);
-                card.Add("owner_name", bookingFields.form.CardInfo.owner_name.CoreValue);
-
-                if (bookingFields.form.CardInfo.owner_gender != null)
-                    card.Add("owner_gender", bookingFields.form.CardInfo.owner_gender.CoreValue);
-
-                if (bookingFields.form.CardInfo.owner_document != null)
+                if (bookingFields.form.CardInfo != null)
                 {
-                    JObject owner_document = new JObject();
+                    JObject card = new JObject();
+                    if (bookingFields.form.CardInfo.security_code != null)
+                        card.Add("security_code", bookingFields.form.CardInfo.security_code.CoreValue);
+                    if (bookingFields.form.CardInfo.expiration != null)
+                        card.Add("expiration", bookingFields.form.CardInfo.expiration.CoreValue);
+                    if (bookingFields.form.CardInfo.number != null)
+                        card.Add("number", bookingFields.form.CardInfo.number.CoreValue);
+                    if (bookingFields.form.CardInfo.owner_name != null)
+                        card.Add("owner_name", bookingFields.form.CardInfo.owner_name.CoreValue);
 
-                    if (bookingFields.form.CardInfo.owner_document.type != null)
-                        owner_document.Add("type", bookingFields.form.CardInfo.owner_document.type.CoreValue);
-                    if (bookingFields.form.CardInfo.owner_document.number != null)
-                        owner_document.Add("number", bookingFields.form.CardInfo.owner_document.number.CoreValue);
+                    if (bookingFields.form.CardInfo.owner_gender != null)
+                        card.Add("owner_gender", bookingFields.form.CardInfo.owner_gender.CoreValue);
 
-                    card.Add("owner_document", owner_document);
+                    if (bookingFields.form.CardInfo.owner_document != null)
+                    {
+                        JObject owner_document = new JObject();
+
+                        if (bookingFields.form.CardInfo.owner_document.type != null)
+                            owner_document.Add("type", bookingFields.form.CardInfo.owner_document.type.CoreValue);
+                        if (bookingFields.form.CardInfo.owner_document.number != null)
+                            owner_document.Add("number", bookingFields.form.CardInfo.owner_document.number.CoreValue);
+
+                        card.Add("owner_document", owner_document);
+                    }
+
+                    payment.Add("card", card);
                 }
 
-                payment.Add("card", card);
-
                 // Installment
-                JObject installment = new JObject();
-                installment.Add("card_type", bookingFields.form.CurrentInstallment.card_type.CoreValue);
-                installment.Add("card_code", bookingFields.form.CurrentInstallment.card_code.CoreValue);
+                if (bookingFields.form.CurrentInstallment != null)
+                {
+                    JObject installment = new JObject();
+                    if (bookingFields.form.CurrentInstallment.card_type != null)
+                        installment.Add("card_type", bookingFields.form.CurrentInstallment.card_type.CoreValue);
+                    if (bookingFields.form.CurrentInstallment.card_code != null)
+                        installment.Add("card_code", bookingFields.form.CurrentInstallment.card_code.CoreValue);
 
-                if (Convert.ToInt32(bookingFields.form.CurrentInstallment.quantity.CoreValue)!= 0)
-                    installment.Add("quantity", Convert.ToInt32(bookingFields.form.CurrentInstallment.quantity.CoreValue));
+                    if (Convert.ToInt32(bookingFields.form.CurrentInstallment.quantity.CoreValue) != 0)
+                        installment.Add("quantity", Convert.ToInt32(bookingFields.form.CurrentInstallment.quantity.CoreValue));
 
-                if (bookingFields.form.CurrentInstallment.complete_card_code != null && bookingFields.form.CurrentInstallment.complete_card_code.CoreValue != null)
-                    installment.Add("complete_card_code", bookingFields.form.CurrentInstallment.complete_card_code.CoreValue);
+                    if (bookingFields.form.CurrentInstallment.complete_card_code != null && bookingFields.form.CurrentInstallment.complete_card_code.CoreValue != null)
+                        installment.Add("complete_card_code", bookingFields.form.CurrentInstallment.complete_card_code.CoreValue);
 
-                payment.Add("installment", installment);
+                    payment.Add("installment", installment);
+                }
 
+                //invoiceFields 
+                
                 // Invoice Arg
                 if (bookingFields.form.CountrySite != null & bookingFields.form.CountrySite.ToLower().Contains("ar") && invoiceFields != null) // Is only for Arg in mapi
                 {

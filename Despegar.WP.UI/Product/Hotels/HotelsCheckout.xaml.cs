@@ -35,6 +35,7 @@ namespace Despegar.WP.UI.Product.Hotels
         private HotelsCheckoutViewModel ViewModel { get; set; }
         private ModalPopup loadingPopup = new ModalPopup(new Loading());
         private ModalPopup riskPopup;
+        private bool pivotInstallmentIsLoaded { get; set; }
 
         public HotelsCheckout()
         {
@@ -81,9 +82,9 @@ namespace Despegar.WP.UI.Product.Hotels
         /// </summary>
         private void ConfigureFields()
         {
-            if (!ViewModel.InvoiceRequired)
+            if (ViewModel.SelectedCard.card == null && ViewModel.CoreBookingFields.form.CardInfo == null && ViewModel.CoreBookingFields.form.Voucher == null)
             {
-                //MainPivot.Items.RemoveAt(4);
+                MainPivot.Items.Remove(MainPivot.FindName("Pivot_CARD"));
             }
         }
 
@@ -170,7 +171,7 @@ namespace Despegar.WP.UI.Product.Hotels
                     dialog = new MessageDialog(manager.GetString("Hotels_Search_ERROR_SEARCH_FAILED"), manager.GetString("Hotels_Checkout_ERROR_FORM_ERROR_TITLE"));
                     await dialog.ShowSafelyAsync();
                     ViewModel.Navigator.GoBack();
-                    //ViewModel.Navigator.GoBack();
+                    ViewModel.Navigator.GoBack();
                     break;
                 //case "VOUCHER_VALIDITY_ERROR":
                 //    dialog = new MessageDialog(manager.GetString("Voucher_ERROR_" + (string)e.Parameter), manager.GetString("Voucher_ERROR_TITLE"));
@@ -180,9 +181,31 @@ namespace Despegar.WP.UI.Product.Hotels
                     dialog = new MessageDialog(manager.GetString("Hotels_Checkout_ERROR_FORM_ERROR"), manager.GetString("Hotels_Checkout_ERROR_FORM_ERROR_TITLE"));
                     await dialog.ShowSafelyAsync();
                     break;
+
+                case "DUPLICATED_BOOKING":
+                    dialog = new MessageDialog(manager.GetString("Hotels_Duplicated_Booking_Message"), manager.GetString("Hotels_Duplicated_Booking_Title"));
+                    string iAgreeText = manager.GetString("Generic_Continuar");
+                    string cancelText = manager.GetString("Generic_Cancel");
+
+                    dialog.Commands.Add(new UICommand(iAgreeText, new UICommandInvokedHandler(this.CommandInvokedHandler)));
+                    dialog.Commands.Add(new UICommand(cancelText, new UICommandInvokedHandler(this.CommandCancelHandler)));
+
+                    await dialog.ShowSafelyAsync();
+                    break;
                 // TODO: CHECKOUT SESSION EXPIRED -> Handle that error
             }
         }
+
+        private void CommandInvokedHandler(IUICommand command)
+        {
+            ViewModel.ValidateAndBuyNoCheckDuplicates.Execute(false);
+        }
+
+        private void CommandCancelHandler(IUICommand command)
+        {
+            ViewModel.Navigator.GoBack();
+        }
+
         #endregion
 
         private int GetSectionIndex(string sectionID)
@@ -202,14 +225,17 @@ namespace Despegar.WP.UI.Product.Hotels
             }
             if (e.PropertyName == "SelectedInstallment")
             {
-                //Revisar si hay que mostrar invoice.
-                if (ViewModel.CheckoutMethodSelected.payment.invoice != null)
+                //Checks for invoice
+                if (ViewModel.CoreBookingFields.CheckoutMethodSelected.payment != null && ViewModel.CoreBookingFields.CheckoutMethodSelected.payment.invoice != null)
                 {
                     if (!MainPivot.Items.Any(x => ((PivotItem)x).Name == "Pivot_INVOICE"))
                     {
 
-                        //this is necesary
-                        Pivot_INSTALLMENT.Loaded += Insert_Invoice;
+                        //Add Invoice. The subscription is necessary 
+                        if (!pivotInstallmentIsLoaded)
+                            Pivot_INSTALLMENT.Loaded += Insert_Invoice;
+                        else
+                            Insert_Invoice(null, null);
                     }
                 }
                 else
@@ -217,7 +243,7 @@ namespace Despegar.WP.UI.Product.Hotels
                     if (MainPivot.Items.Any(x => ((PivotItem)x).Name == "Pivot_INVOICE"))
                     {
                         //Eliminar Invoice
-                        MainPivot.Items.RemoveAt(4);
+                        MainPivot.Items.Remove(MainPivot.FindName("Pivot_INVOICE"));
                     }
                 }
             }
@@ -225,15 +251,19 @@ namespace Despegar.WP.UI.Product.Hotels
 
         private void Insert_Invoice(object sender, RoutedEventArgs e)
         {
-            PivotItem pvit = new PivotItem();
-            pvit.Header = "factura fiscal";
-            pvit.Name = "Pivot_INVOICE";
+            PivotItem pivotItem = new PivotItem();
+            pivotItem.Header = "factura fiscal";
+            pivotItem.Name = "Pivot_INVOICE";
             UserControl usc = new InvoiceArgentina();
             usc.DataContext = this.DataContext;
-            pvit.Content = usc;
-            pvit.Margin = new Thickness(0, 3, 0, 0); //<Setter Property="Margin" Value="0,3,0,0" />
-            MainPivot.Items.Insert(4, pvit);
-            //pvit.Style = StaticResource //PivotItemBase
+            pivotItem.Content = usc;
+            pivotItem.Margin = new Thickness(0, 3, 0, 0); 
+            
+            int index = FindIndexWithPivotItemName(MainPivot, "Pivot_CARD");
+            MainPivot.Items.Insert(index + 1, pivotItem);
+
+            pivotInstallmentIsLoaded = true;
+            Pivot_INSTALLMENT.Loaded -= Insert_Invoice;
         }
 
         private void ShowRisk(Object sender, EventArgs e)
@@ -258,6 +288,18 @@ namespace Despegar.WP.UI.Product.Hotels
 
                 ViewModel.Navigator.GoBack();
             }
+        }
+
+        private int FindIndexWithPivotItemName(Pivot mainPivot ,string name)
+        {
+            int i = 0;
+            foreach(PivotItem pivotItem in mainPivot.Items)
+            {
+                if (pivotItem.Name == name)
+                    return i;
+                i++;
+            }
+            return -1;
         }
     }
 }

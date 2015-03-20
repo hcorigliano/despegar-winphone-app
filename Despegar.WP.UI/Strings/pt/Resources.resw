@@ -1219,4 +1219,16 @@ A reserva não foi gerado e não cobra nenhuma taxa para a transação."</value>
   <data name="Flights_Checkout_ERROR_SESSION_EXPIRED" xml:space="preserve">
     <value>O bilhete desse vôo expirou, por favor, escolha outro vôo.</value>
   </data>
+  <data name="Generic_Cancel" xml:space="preserve">
+    <value>Cancelar</value>
+  </data>
+  <data name="Generic_Continuar" xml:space="preserve">
+    <value>Continuar</value>
+  </data>
+  <data name="Hotels_Duplicated_Booking_Message" xml:space="preserve">
+    <value>A reserva que vôce esta fazendo é igual a outra ¿Vai continuar?</value>
+  </data>
+  <data name="Hotels_Duplicated_Booking_Title" xml:space="preserve">
+    <value>Reserva</value>
+  </data>
 </root>
