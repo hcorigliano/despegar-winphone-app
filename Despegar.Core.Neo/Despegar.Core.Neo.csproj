@@ -43,9 +43,11 @@
     <Compile Include="Business\Configuration\GeoLocation.cs" />
     <Compile Include="Business\Flight\BookingFields\BillingAddress.cs" />
     <Compile Include="Business\Enums\HotelBookingStatusEnum.cs" />
-    <Compile Include="Business\Hotels\BookingCompletePostResponse\Answer.cs" />
     <Compile Include="Business\Flight\BookingFields\LocationRequirements.cs" />
+    <Compile Include="Business\Hotels\BookingCompletePostResponse\Answers.cs" />
     <Compile Include="Business\Hotels\BookingCompletePostResponse\BookingCompletePostResponse.cs" />
+    <Compile Include="Business\Hotels\BookingCompletePostResponse\FreeTextDescription.cs" />
+    <Compile Include="Business\Hotels\BookingCompletePostResponse\RiskAnswer.cs" />
     <Compile Include="Business\Hotels\BookingCompletePostResponse\RiskQuestion.cs" />
     <Compile Include="Business\Hotels\BookingFields\BillingAddress.cs" />
     <Compile Include="Business\Hotels\SearchBox\HotelsMinorsAge.cs" />

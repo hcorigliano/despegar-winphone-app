@@ -1,4 +1,5 @@
-﻿using Despegar.Core.Neo.InversionOfControl;
+﻿using Despegar.Core.Neo.Business.Configuration;
+using Despegar.Core.Neo.InversionOfControl;
 using Despegar.WP.UI.BugSense;
 using Despegar.WP.UI.Common;
 using Despegar.WP.UI.Controls;
@@ -83,6 +84,11 @@ namespace Despegar.WP.UI.Product.Hotels
         /// </summary>
         private void ConfigureFields()
         {           
+            if (ViewModel.SelectedCard==null || ViewModel.CoreBookingFields == null)
+            {
+                return;
+            }
+
         }
 
         # region ** ERROR HANDLING **
@@ -189,7 +195,34 @@ namespace Despegar.WP.UI.Product.Hotels
 
                     await dialog.ShowSafelyAsync();
                     break;
+
+                case "RISK_PAYMENT_FAILED":
+                    string phone = GetContactPhone();
+                    string phrase2 = manager.GetString("Flights_Checkout_Card_Data_Card_ERROR_OP_PAYMENT_FAILED");
+                    dialog = new MessageDialog(String.Format(phrase2, phone), manager.GetString("Flights_Checkout_ERROR_FORM_ERROR_TITLE"));
+                    await dialog.ShowSafelyAsync();
+                    ViewModel.Navigator.GoBack();
+                    break;     
                 // TODO: CHECKOUT SESSION EXPIRED -> Handle that error
+            }
+        }
+
+        private string GetContactPhone()
+        {
+            try
+            {
+                Configuration conf = GlobalConfiguration.CoreContext.GetConfiguration();
+
+                if (conf == null) return String.Empty;
+                string countrySelected = GlobalConfiguration.Site;
+                string phone = (conf.sites.FirstOrDefault(si => si.code == countrySelected) as Site).contact.phone;
+
+                return phone;
+            }
+            catch (Exception)
+            {
+                //TODO add logs
+                return String.Empty;
             }
         }
 
