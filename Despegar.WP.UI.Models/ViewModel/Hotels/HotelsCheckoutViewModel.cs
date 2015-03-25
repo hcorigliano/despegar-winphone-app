@@ -7,6 +7,7 @@ using Despegar.Core.Neo.Business.CreditCard;
 using Despegar.Core.Neo.Business.Enums;
 using Despegar.Core.Neo.Business.Forms;
 using Despegar.Core.Neo.Business.Hotels;
+using Despegar.Core.Neo.Business.Hotels.BookingCompletePostResponse;
 using Despegar.Core.Neo.Business.Hotels.BookingFields;
 using Despegar.Core.Neo.Contract.API;
 using Despegar.Core.Neo.Contract.Log;
@@ -16,11 +17,13 @@ using Despegar.WP.UI.Model.ViewModel.Classes;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Dynamic;
 using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Windows.ApplicationModel.Resources;
+using Windows.UI.Popups;
 
 namespace Despegar.WP.UI.Model.ViewModel.Hotels
 {
@@ -214,6 +217,45 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
                 return new RelayCommand(async () => await ValidateAndBuy(false));
             }
         }
+
+        public List<Despegar.Core.Neo.Business.Hotels.BookingCompletePostResponse.RiskQuestion> FreeTextQuestions
+        {
+            get
+            {
+                if (crossParams.BookingResponse != null)
+                {
+                    return crossParams.BookingResponse.risk_questions.Where(x => x.free_text.ToLower() == "true").ToList();
+                }
+                else
+                {
+                    return null;
+                }
+            }
+        }
+
+        public List<Despegar.Core.Neo.Business.Hotels.BookingCompletePostResponse.RiskQuestion> ChoiceQuestions
+        {
+            get
+            {
+                if (crossParams.BookingResponse != null)
+                {
+                    return crossParams.BookingResponse.risk_questions.Where(x => x.free_text.ToLower() == "false").ToList();
+                }
+                else
+                {
+                    return null;
+                }
+            }
+        }
+
+        public ICommand SendRiskAnswersCommand
+        {
+            get
+            {
+                return new RelayCommand(() => SendRiskAnswers());
+            }
+        }
+
 
         #endregion        
 
@@ -490,6 +532,7 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
                     bookingData = await BookingFormBuilder.BuildHotelsForm(this.CoreBookingFields, SelectedCard, VALIDATE_DUPLICATE_CHECKOUT);
 
                     //// Buy
+                    
                     crossParams.BookingResponse = await hotelService.CompleteBooking(bookingData, CoreBookingFields.id , ItemSelected.item_id );
 
                     if (crossParams.BookingResponse.Error != null)
@@ -530,6 +573,8 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
 
         public void FillBookingFields()
         {
+            if (CoreBookingFields == null) return;
+
             CoreBookingFields.form.passengers[0].first_name.CoreValue = "test";
             CoreBookingFields.form.passengers[0].last_name.CoreValue = "booking";
             CoreBookingFields.form.contact.email.CoreValue = "testhoteles@despegar.com";
@@ -606,24 +651,17 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
                     OnViewModelError("ONLINE_PAYMENT_ERROR_NEW_CREDIT_CARD", "CARD");
                     break;
 
-                //case HotelBookingStatusEnum.:
-                //    // Se acabaron los reintentos mostrar mensaje de error e ir para atras
-                //    OnViewModelError("PAYMENT_FAILED");
-                //    break;
-
+                case HotelBookingStatusEnum.risk_evaluation_failed:
                 case HotelBookingStatusEnum.RISK_REJECTED:
                     OnViewModelError("RISK_PAYMENT_FAILED", "CARD");
                     break;
 
+                case HotelBookingStatusEnum.risk_review:
                 case HotelBookingStatusEnum.RISK_QUESTIONS:
                     EventHandler RiskHandler = ShowRiskReview;
                     if (RiskHandler != null)
                         RiskHandler(this, null);
-
                     break;
-                //enable for booking 
-                //case HotelBookingStatusEnum.validate_duplicated_checkouts:
-                //    break;
                 default:
                     break;
             }
@@ -700,6 +738,88 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
         {
             BugTracker.LeaveBreadcrumb("Hotel checkout start");
             crossParams = navigationParams as HotelsCrossParameters;
+        }
+
+
+        private async void SendRiskAnswers()
+        {
+            BugTracker.LeaveBreadcrumb("Flight checkout view model Risk init");
+            ResourceLoader manager = new ResourceLoader();
+
+            if (ValidateAnswers())
+            {
+                this.IsLoading = true;
+                List<Despegar.Core.Neo.Business.Hotels.BookingCompletePostResponse.RiskAnswer> answers = new List<Despegar.Core.Neo.Business.Hotels.BookingCompletePostResponse.RiskAnswer>();
+                BookingCompletePostResponse BookingResponse = new BookingCompletePostResponse();
+
+                foreach (RiskQuestion question in FreeTextQuestions)
+                {
+                    question.risk_answer.question_id = question.id;
+                    answers.Add(question.risk_answer);
+                }
+
+                foreach (RiskQuestion question in ChoiceQuestions)
+                {
+                    question.risk_answer.question_id = question.id;
+                    question.risk_answer.answer_id = question.risk_answer.answer_id;
+                    answers.Add(question.risk_answer);
+                }
+
+                dynamic result = new ExpandoObject();
+                result.form = new ExpandoObject();
+                result.form.risk_questions = answers;
+                result.form.booking_status = "risk_review";
+
+                BookingResponse = await hotelService.CompleteBooking(result, CoreBookingFields.id,ItemSelected.item_id);
+                this.IsLoading = false;
+
+                EventHandler AnswerHandler = HideRiskReview;
+                if (AnswerHandler != null)
+                {
+                    AnswerHandler(this, null);
+                }
+
+                if (BookingResponse.Error != null)
+                {
+                    BugTracker.LeaveBreadcrumb("Hotels checkout MAPI booking error response code: " + BookingResponse.Error.code.ToString());
+
+                    switch (BookingResponse.Error.code)
+                    {
+                        case 2366:
+                            OnViewModelError("DUPLICATED_BOOKING", BookingResponse.Error);
+                            break;
+                        default:
+                            // API Error ocurred, Check CODE and inform the user
+                            OnViewModelError("API_ERROR", BookingResponse.Error.code);
+                            break;
+                    }
+
+                    this.IsLoading = false;
+                    return;
+                }
+
+                AnalizeBookingStatus(BookingResponse.booking_status);
+
+            }
+            else
+            {
+                var msg = new MessageDialog(manager.GetString("Flight_Checkout_Risk_Error"));
+                await msg.ShowAsync();
+            }
+            BugTracker.LeaveBreadcrumb("Hotel checkout view model Risk complete");
+
+        }
+        private bool ValidateAnswers()
+        {
+            foreach (RiskQuestion question in crossParams.BookingResponse.risk_questions)
+            {
+                if (question.risk_answer.text == null || question.risk_answer.text == "")
+                {
+                    return false;
+                }
+            }
+
+            return true;
         }
     }
 }
