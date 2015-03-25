@@ -118,8 +118,14 @@
     <Compile Include="Controls\Alert.xaml.cs">
       <DependentUpon>Alert.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Product\Flights\Checkout\BillingAddress.xaml.cs">
+      <DependentUpon>BillingAddress.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Hotels\AmenitiesControl.xaml.cs">
       <DependentUpon>AmenitiesControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Hotels\ConfirmationBox.xaml.cs">
+      <DependentUpon>ConfirmationBox.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\Hotels\DateControl.xaml.cs">
       <DependentUpon>DateControl.xaml</DependentUpon>
@@ -311,6 +317,9 @@
     <Compile Include="Product\Flights\FlightThanks.xaml.cs">
       <DependentUpon>FlightThanks.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Product\Hotels\Checkout\BillingAddress.xaml.cs">
+      <DependentUpon>BillingAddress.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Product\Hotels\Checkout\Buy.xaml.cs">
       <DependentUpon>Buy.xaml</DependentUpon>
     </Compile>
@@ -389,9 +398,17 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Product\Flights\Checkout\BillingAddress.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\Hotels\AmenitiesControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\Hotels\ConfirmationBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\Hotels\DateControl.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -1674,6 +1691,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Product\Hotels\Checkout\BillingAddress.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Product\Hotels\Checkout\Buy.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -1850,7 +1871,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Decolar-Debug|ARM'">
     <DebugSymbols>true</DebugSymbols>
     <OutputPath>bin\ARM\Decolar-Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_PHONE_APP</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;NETFX_CORE;WINDOWS_PHONE_APP;DECOLAR;</DefineConstants>
     <NoWarn>;2008</NoWarn>
     <NoStdLib>true</NoStdLib>
     <DebugType>full</DebugType>
@@ -1863,7 +1884,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Decolar-Debug|x86'">
     <DebugSymbols>true</DebugSymbols>
     <OutputPath>bin\x86\Decolar-Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_PHONE_APP</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;NETFX_CORE;WINDOWS_PHONE_APP;DECOLAR;</DefineConstants>
     <NoWarn>;2008</NoWarn>
     <NoStdLib>true</NoStdLib>
     <DebugType>full</DebugType>
@@ -1887,7 +1908,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Decolar-Release|ARM'">
     <OutputPath>bin\ARM\Decolar-Release\</OutputPath>
-    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_PHONE_APP</DefineConstants>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_PHONE_APP;DECOLAR;</DefineConstants>
     <Optimize>true</Optimize>
     <NoWarn>;2008</NoWarn>
     <NoStdLib>true</NoStdLib>
@@ -1900,7 +1921,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Decolar-Release|x86'">
     <OutputPath>bin\x86\Decolar-Release\</OutputPath>
-    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_PHONE_APP</DefineConstants>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_PHONE_APP;DECOLAR;</DefineConstants>
     <Optimize>true</Optimize>
     <NoWarn>;2008</NoWarn>
     <NoStdLib>true</NoStdLib>
@@ -1964,7 +1985,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Decolar-Debug-Device|ARM'">
     <DebugSymbols>true</DebugSymbols>
     <OutputPath>bin\ARM\Decolar-Debug-Device\</OutputPath>
-    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_PHONE_APP</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;NETFX_CORE;WINDOWS_PHONE_APP;DECOLAR;</DefineConstants>
     <NoWarn>;2008</NoWarn>
     <NoStdLib>true</NoStdLib>
     <DebugType>full</DebugType>
@@ -1977,7 +1998,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Decolar-Debug-Device|x86'">
     <DebugSymbols>true</DebugSymbols>
     <OutputPath>bin\x86\Decolar-Debug-Device\</OutputPath>
-    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_PHONE_APP</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;NETFX_CORE;WINDOWS_PHONE_APP;DECOLAR;</DefineConstants>
     <NoWarn>;2008</NoWarn>
     <NoStdLib>true</NoStdLib>
     <DebugType>full</DebugType>
@@ -2039,7 +2060,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Decolar-Release-Emulator|ARM'">
     <OutputPath>bin\ARM\Decolar-Release-Emulator\</OutputPath>
-    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_PHONE_APP</DefineConstants>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_PHONE_APP;DECOLAR;</DefineConstants>
     <Optimize>true</Optimize>
     <NoWarn>;2008</NoWarn>
     <NoStdLib>true</NoStdLib>
@@ -2052,7 +2073,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Decolar-Release-Emulator|x86'">
     <OutputPath>bin\x86\Decolar-Release-Emulator\</OutputPath>
-    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_PHONE_APP</DefineConstants>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_PHONE_APP;DECOLAR;</DefineConstants>
     <Optimize>true</Optimize>
     <NoWarn>;2008</NoWarn>
     <NoStdLib>true</NoStdLib>

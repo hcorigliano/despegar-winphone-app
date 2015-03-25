@@ -1,4 +1,5 @@
-﻿using Despegar.Core.Neo.Business.Common.Checkout;
+﻿using Despegar.Core.Business.Hotels.BookingFields;
+using Despegar.Core.Neo.Business.Common.Checkout;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,6 @@ namespace Despegar.Core.Neo.Business.Hotels.BookingFields
         public CardField card { get; set; }
         public InvoiceArg invoice { get; set; }
         public Installment installment { get; set; }
-        //public object billingAddress { get; set; }  not used anymore
+        public BillingAddress billing_address { get; set; }
     }
 }

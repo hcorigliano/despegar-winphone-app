@@ -1,4 +1,5 @@
-﻿using Despegar.Core.Neo.Business.Common.Checkout;
+﻿using Despegar.Core.Business.Hotels.BookingFields;
+using Despegar.Core.Neo.Business.Common.Checkout;
 using Despegar.Core.Neo.Business.Common.State;
 using Despegar.Core.Neo.Business.Configuration;
 using Despegar.Core.Neo.Business.Coupons;
@@ -6,6 +7,7 @@ using Despegar.Core.Neo.Business.CreditCard;
 using Despegar.Core.Neo.Business.Enums;
 using Despegar.Core.Neo.Business.Forms;
 using Despegar.Core.Neo.Business.Hotels;
+using Despegar.Core.Neo.Business.Hotels.BookingCompletePostResponse;
 using Despegar.Core.Neo.Business.Hotels.BookingFields;
 using Despegar.Core.Neo.Business.Hotels.CitiesAvailability;
 using Despegar.Core.Neo.Contract.API;
@@ -16,21 +18,24 @@ using Despegar.WP.UI.Model.ViewModel.Classes;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Dynamic;
 using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Windows.ApplicationModel.Resources;
+using Windows.UI.Popups;
 
 namespace Despegar.WP.UI.Model.ViewModel.Hotels
 {
     public class HotelsCheckoutViewModel : ViewModelBase
     {
         #region ** Private **
+        private bool VALIDATE_DUPLICATE_CHECKOUT = false;
         private ICoreLogger logger;
         private IAPIv1 apiV1service; 
         private IMAPIHotels hotelService;
-        private IMAPICross commonServices;
+        private IMAPICross mapiCross;
         private IMAPICoupons couponsService;
         private ValidationCreditcards creditCardsValidations;
         #endregion
@@ -59,10 +64,20 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
             {
                 if (InvoiceRequired)
                 {
-                    //return CoreBookingFields.form.Invoice.fiscal_status != null && CoreBookingFields.form.Invoice.fiscal_name != null  && CoreBookingFields.form.Invoice.fiscal_status.CoreValue != "FINAL";                                      
-                    return CheckoutMethodSelected.payment.invoice.fiscal_status != null && CheckoutMethodSelected.payment.invoice.fiscal_name != null && CoreBookingFields.form.Invoice.fiscal_status.CoreValue != "FINAL_CONSUMER";                                      
+                    return CoreBookingFields.form.CheckoutMethodSelected.payment.invoice.fiscal_status != null && CoreBookingFields.form.CheckoutMethodSelected.payment.invoice.fiscal_name != null && CoreBookingFields.form.Invoice.fiscal_status.CoreValue != "FINAL_CONSUMER";                                      
                 }
                 else { return false; }
+            }
+        }
+
+        public bool BillingAddressRequired
+        {
+            get
+            {
+                if (CoreBookingFields != null)
+                    return CoreBookingFields.form.BillingAddress != null;
+                else
+                    return false;
             }
         }
 
@@ -155,130 +170,8 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
         public bool IsTermsAndConditionsAccepted { get; set; }        
         public event EventHandler ShowRiskReview;
         public event EventHandler HideRiskReview;
-        #endregion        
 
-        public HotelsCheckoutViewModel(INavigator navigator, IMAPIHotels hotelService, IMAPICross commonService, IMAPICoupons couponsService, IAPIv1 apiV1service, ICoreLogger logger, IBugTracker t)
-            : base(navigator,t)
-        {
-            this.logger = logger;
-            this.hotelService = hotelService;
-            this.apiV1service = apiV1service;
-            this.commonServices = commonService;
-            this.couponsService = couponsService;
-            this.PaymentAlertMessage = string.Empty;
-        }
-
-        public async Task Init()
-        {
-            BugTracker.LeaveBreadcrumb("Hotel checkout view model init");
-            IsLoading = true;
-
-            string currentCountry = GlobalConfiguration.Site;
-            string deviceId = GlobalConfiguration.UPAId;
-
-            try
-            {
-                await GetBookingFields(deviceId);
-                await LoadCountries();
-                await LoadStates(currentCountry);
-
-                // Format Price details / Installments
-                FormatInstallments();
-                //PriceDetailsFormatted = FormatPrice();
-
-                SelectTheFirstInstallment();
-
-
-                // Set Known Default Values && Adapt Checkout to the country
-                ConfigureCountry(currentCountry);
-
-                //Get validations for credit cards
-                GetCreditCardsValidations();
-                BugTracker.LeaveBreadcrumb("Hotels checkout view model init complete");
-            }
-            catch (Exception e)
-            {
-                logger.Log("[App:HotelsCheckout] Exception " + e.Message);
-                IsLoading = false;
-
-                OnViewModelError("CHECKOUT_INIT_FAILED");
-            }
-
-            IsLoading = false;
-        }
-
-        private void SelectTheFirstInstallment()
-        {
-            if (this.InstallmentFormatted.PayAtDestination.Cards.Count() != 0)
-            {
-                InstallmentFormatted.PayAtDestination.IsChecked = true;
-                SelectedInstallment = InstallmentFormatted.PayAtDestination;
-            }
-            else
-            {
-                InstallmentFormatted.WithoutInterest[0].IsChecked = true;
-                SelectedInstallment = InstallmentFormatted.WithoutInterest[0];
-            }
-        }
-
-        private void ConfigureCountry(string currentCountry)
-        {
-            BugTracker.LeaveBreadcrumb("Flight checkout view model configure country");
-
-            // Common
-
-            // Contact
-            if (CoreBookingFields.form.contact.Phone != null)
-                CoreBookingFields.form.contact.Phone.type.SetDefaultValue();
-
-            // Card data
-            //if (CoreBookingFields.form.payment.card.owner_document != null && CoreBookingFields.form.payment.card.owner_document.type != null)
-            //    CoreBookingFields.form.payment.card.owner_document.type.SetDefaultValue();
-            //if (CoreBookingFields.form.payment.card.owner_gender != null)
-            //    CoreBookingFields.form.payment.card.owner_gender.SetDefaultValue();       
-
-
-            switch (currentCountry)
-            {
-                case "AR":
-
-                    // Invoice Arg
-                    if (InvoiceRequired)
-                    {
-                        CheckoutMethodSelected.payment.invoice.fiscal_status.PropertyChanged += Fiscal_status_PropertyChanged;
-
-                        CheckoutMethodSelected.payment.invoice.fiscal_status.SetDefaultValue();
-                        if (CheckoutMethodSelected.payment.invoice.address.country != null)
-                            CheckoutMethodSelected.payment.invoice.address.country.SetDefaultValue();
-
-                        // Turn State into a MultipleField
-                        if (CheckoutMethodSelected.payment.invoice.address.state != null)
-                        {
-                            CheckoutMethodSelected.payment.invoice.address.state.value = null;
-                            CheckoutMethodSelected.payment.invoice.address.state.options = States.Select(x => new Option() { value = x.id, description = x.name }).ToList();
-                            CheckoutMethodSelected.payment.invoice.address.state.SetDefaultValue();
-                        }
-                    }
-
-                    CoreBookingFields.form.contact.phones[0].country_code.SetDefaultValue();
-                    CoreBookingFields.form.contact.phones[0].area_code.SetDefaultValue();
-                    break;
-            }
-            BugTracker.LeaveBreadcrumb("Flight checkout view model configure country complete");
-        }
-
-        private ItemsKey itemSelected;
-        public ItemsKey ItemSelected 
-        {
-            get { return itemSelected; }
-            set
-            { 
-                itemSelected = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public CheckoutMethodKey CheckoutMethodSelected { get; set; }
+        public ItemsKey ItemSelected { get; set; }
 
         /// <summary>
         /// Selected "RadioButton" payment strategy
@@ -287,9 +180,9 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
         public InstallmentOption SelectedInstallment
         {
             get { return selectedInstallment; }
-            set 
+            set
             {
-                if(value.FirstCard.type.ToLower().Contains("at_destination"))
+                if (value.FirstCard.type.ToLower().Contains("at_destination"))
                 {
                     ItemSelected = CoreBookingFields.items.FirstOrDefault(x => x.Value.isPaymentAtDestination).Value;
                 }
@@ -297,12 +190,14 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
                 {
                     ItemSelected = CoreBookingFields.items.FirstOrDefault(x => !x.Value.isPaymentAtDestination).Value;
                 }
-                CheckoutMethodSelected = CoreBookingFields.form.checkout_method.FirstOrDefault(x => x.Key == ItemSelected.checkout_method).Value;
+                CoreBookingFields.form.CheckoutMethodSelected = CoreBookingFields.form.checkout_method.FirstOrDefault(x => x.Key == ItemSelected.checkout_method).Value;
 
 
                 value.SelectedInstallment = true;
                 selectedInstallment = value;
+
                 OnPropertyChanged();
+                OnPropertyChanged("BillingAddressRequired");
 
                 // Select first by default
                 SelectedCard = value.FirstCard;
@@ -331,21 +226,24 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
                 // Set POST data
                 if (selectedCard != null)
                 {
-                    PaymentForm payments = CoreBookingFields.form.checkout_method.FirstItem.payment;
-                    payments.installment.bank_code.CoreValue = selectedCard.card.bank;
-                    if (payments.installment.quantity == null)
+                    PaymentForm payments = CoreBookingFields.form.CheckoutMethodSelected.payment; 
+                    if (payments != null && payments.installment.quantity == null)
                         payments.installment.quantity = new RegularField();
-                    payments.installment.card_code.CoreValue = selectedCard.card.code;
-                    payments.installment.card_code.CoreValue = selectedCard.card.company;
-                    payments.installment.card_type.CoreValue = selectedCard.card.type;
-                    if (payments.installment.complete_card_code == null)
-                        payments.installment.complete_card_code = new RegularField();
-                    payments.installment.complete_card_code.CoreValue = selectedCard.card.code;
-
-                    if (creditCardsValidations != null)
+                    if (selectedCard.card != null)
                     {
-                        ValidationCreditcard validation = creditCardsValidations
-                            .data.FirstOrDefault(x => x.bankCode == (String.IsNullOrWhiteSpace(selectedCard.card.bank) ? "*" : selectedCard.card.bank) && x.cardCode == selectedCard.card.company);
+                        payments.installment.bank_code.CoreValue = selectedCard.card.bank;
+                        payments.installment.card_code.CoreValue = selectedCard.card.code;
+                        payments.installment.card_code.CoreValue = selectedCard.card.company;
+                        payments.installment.card_type.CoreValue = selectedCard.card.type;
+                        if (payments.installment.complete_card_code == null)
+                            payments.installment.complete_card_code = new RegularField();
+                        payments.installment.complete_card_code.CoreValue = selectedCard.card.code;
+                    }
+
+                    if (creditCardsValidations != null && selectedCard.card != null)
+                    {
+                            ValidationCreditcard validation = creditCardsValidations
+                                .data.FirstOrDefault(x => x.bankCode == (String.IsNullOrWhiteSpace(selectedCard.card.bank) ? "*" : selectedCard.card.bank) && x.cardCode == selectedCard.card.company);
 
                         Validation valNumber = new Validation();
                         valNumber.error_code = "NUMBER";
@@ -376,13 +274,219 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
             {
                 return new RelayCommand(async () => await ValidateAndBuy());
             }
-        }    
+        }
+   
+        public ICommand ValidateAndBuyNoCheckDuplicates
+        {
+            get
+            {
+                return new RelayCommand(async () => await ValidateAndBuy(false));
+            }
+        }
+
+        public List<Despegar.Core.Neo.Business.Hotels.BookingCompletePostResponse.RiskQuestion> FreeTextQuestions
+        {
+            get
+            {
+                if (crossParams.BookingResponse != null)
+                {
+                    return crossParams.BookingResponse.risk_questions.Where(x => x.free_text.ToLower() == "true").ToList();
+                }
+                else
+                {
+                    return null;
+                }
+            }
+        }
+
+        public List<Despegar.Core.Neo.Business.Hotels.BookingCompletePostResponse.RiskQuestion> ChoiceQuestions
+        {
+            get
+            {
+                if (crossParams.BookingResponse != null)
+                {
+                    return crossParams.BookingResponse.risk_questions.Where(x => x.free_text.ToLower() == "false").ToList();
+                }
+                else
+                {
+                    return null;
+                }
+            }
+        }
+
+        public ICommand SendRiskAnswersCommand
+        {
+            get
+            {
+                return new RelayCommand(() => SendRiskAnswers());
+            }
+        }
+
+
+        #endregion        
+
+        public HotelsCheckoutViewModel(INavigator navigator, IMAPIHotels hotelService, IMAPICross commonService, IMAPICoupons couponsService, IAPIv1 apiV1service, ICoreLogger logger, IBugTracker t)
+            : base(navigator,t)
+        {
+            this.logger = logger;
+            this.hotelService = hotelService;
+            this.apiV1service = apiV1service;
+            this.mapiCross = commonService;
+            this.couponsService = couponsService;
+            this.PaymentAlertMessage = string.Empty;
+        }
+
+        public async Task Init()
+        {
+            BugTracker.LeaveBreadcrumb("Hotel checkout view model init");
+            IsLoading = true;
+
+            string currentCountry = GlobalConfiguration.Site;
+            string deviceId = GlobalConfiguration.UPAId;
+
+            try
+            {
+                await GetBookingFields(deviceId);
+                await LoadCountries();
+                await LoadStates(currentCountry);
+
+                // Format Price details / Installments
+                FormatInstallments();                
+
+                SelectTheFirstInstallment();
+
+                ConfigureBillingAddress();
+
+                // Set Known Default Values && Adapt Checkout to the country
+                ConfigureCountry(currentCountry);
+
+                //Get validations for credit cards
+                GetCreditCardsValidations();
+                BugTracker.LeaveBreadcrumb("Hotels checkout view model init complete");
+
+#if DEBUG
+                //FillBookingFields();
+#endif  
+            }
+            catch (Exception e)
+            {
+                logger.Log("[App:HotelsCheckout] Exception " + e.Message);
+                IsLoading = false;
+                OnViewModelError("CHECKOUT_INIT_FAILED");
+            }
+
+            IsLoading = false;
+        }
+
+        private void ConfigureBillingAddress()
+        {
+            if (BillingAddressRequired)
+            {
+                BillingAddress billingAddress = CoreBookingFields.form.BillingAddress;
+                billingAddress.country.PropertyChanged += BillingAddressCountry_Changed;
+                billingAddress.country.options = Countries.Select(x => new Option() { value = x.id, description = x.name }).ToList();
+
+                // Set selected country based on Site
+                var currentOption = billingAddress.country.options.FirstOrDefault(x => x.value.ToUpperInvariant() == GlobalConfiguration.Site.ToUpperInvariant());
+                if (currentOption != null)
+                {
+                    billingAddress.country.SelectedOption = currentOption;
+                }
+            }
+        }
+
+        private async void BillingAddressCountry_Changed(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "SelectedOption")
+            {
+                // Load States for selected Country    
+                var states = await mapiCross.GetStates(CoreBookingFields.form.CheckoutMethodSelected.payment.billing_address.country.CoreValue);
+                CoreBookingFields.form.CheckoutMethodSelected.payment.billing_address.state.options = states.Select(x => new Option() { value = x.id, description = x.name }).ToList();
+            }
+        }
+
+        private void SelectTheFirstInstallment()
+        {
+            if (this.InstallmentFormatted.PayAtDestination.Cards.Count() != 0)
+            {
+                InstallmentFormatted.PayAtDestination.IsChecked = true;
+                SelectedInstallment = InstallmentFormatted.PayAtDestination;
+            }
+            else if (this.InstallmentFormatted.WithoutInterest != null)
+            {
+                InstallmentFormatted.WithoutInterest[0].IsChecked = true;
+                SelectedInstallment = InstallmentFormatted.WithoutInterest[0];
+            }
+            else
+            {
+                InstallmentFormatted.WithInterest[0].IsChecked = true;
+                SelectedInstallment = InstallmentFormatted.WithoutInterest[0];
+            }
+        }
+
+        private void ConfigureCountry(string currentCountry)
+        {
+            BugTracker.LeaveBreadcrumb("Flight checkout view model configure country");
+
+            // Common
+
+            // Contact
+            if (CoreBookingFields.form.contact.Phone != null)
+                CoreBookingFields.form.contact.Phone.type.SetDefaultValue();
+
+            // Card data
+            //if (CoreBookingFields.form.payment.card.owner_document != null && CoreBookingFields.form.payment.card.owner_document.type != null)
+            //    CoreBookingFields.form.payment.card.owner_document.type.SetDefaultValue();
+            //if (CoreBookingFields.form.payment.card.owner_gender != null)
+            //    CoreBookingFields.form.payment.card.owner_gender.SetDefaultValue();       
+
+
+            switch (currentCountry)
+            {
+                case "AR":
+
+                    // Invoice Arg
+                    //var checkout = null;
+                    var checkout = CoreBookingFields.form.checkout_method.FirstOrDefault(x => x.Value.payment.invoice != null);
+                    if (checkout.Value != null)
+                    {
+                        checkout.Value.payment.invoice.fiscal_status.PropertyChanged += Fiscal_status_PropertyChanged;
+
+                        checkout.Value.payment.invoice.fiscal_status.SetDefaultValue();
+                        if (checkout.Value.payment.invoice.address.country != null)
+                            checkout.Value.payment.invoice.address.country.SetDefaultValue();
+
+                        // Turn State into a MultipleField
+                        if (checkout.Value.payment.invoice.address.state != null)
+                        {
+                            checkout.Value.payment.invoice.address.state.value = null;
+                            checkout.Value.payment.invoice.address.state.options = States.Select(x => new Option() { value = x.id, description = x.name }).ToList();
+                            checkout.Value.payment.invoice.address.state.SetDefaultValue();
+                        }
+                    }
+
+                    CoreBookingFields.form.contact.phones[0].country_code.SetDefaultValue();
+                    CoreBookingFields.form.contact.phones[0].area_code.SetDefaultValue();
+                    break;
+            }
+            BugTracker.LeaveBreadcrumb("Flight checkout view model configure country complete");
+        }
+
+        private ItemsKey itemSelected;
+        public ItemsKey ItemSelected 
+        {
+            get { return itemSelected; }
+            set
+            { 
+                itemSelected = value;
+                OnPropertyChanged();
+            }
+        }
 
         // Public because it is used from the InvoiceArg control
         public async Task<List<CitiesFields>> GetCities(string countryCode, string search, string cityresult)
         {
-            //todo
-            return await commonServices.AutoCompleteCities(countryCode, search, cityresult);
+            return await mapiCross.AutoCompleteCities(countryCode, search, cityresult);
         }
 
         /// <summary>
@@ -476,12 +580,8 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
             }
         }
 
-        private async Task ValidateAndBuy()
+        private async Task ValidateAndBuy(bool checkDuplicated = true)
         {
-            #if DEBUG
-                    //FillBookingFields();
-            #endif  
-
             BugTracker.LeaveBreadcrumb("Hotels checkout view model validate and buy init");
 
             if (!IsTermsAndConditionsAccepted)
@@ -497,7 +597,7 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
             if (!CoreBookingFields.IsValid(out sectionID))
             {
                 BugTracker.LeaveBreadcrumb("Hotel checkout ViewModel invalid fields");
-                OnViewModelError("FORM_ERROR", sectionID); // TODO: Catch
+                OnViewModelError("FORM_ERROR", sectionID); 
             }
             else
             {
@@ -506,17 +606,27 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
                     this.IsLoading = true;
                     object bookingData = null;
 
-                    bookingData = await BookingFormBuilder.BuildHotelsForm(this.CoreBookingFields, this.CheckoutMethodSelected.payment.invoice, SelectedCard, false);
+                    bookingData = await BookingFormBuilder.BuildHotelsForm(this.CoreBookingFields, SelectedCard, VALIDATE_DUPLICATE_CHECKOUT);
 
                     //// Buy
-                    //crossParams.PriceDetail = PriceDetailsFormatted;
+                    
                     CrossParams.BookingResponse = await hotelService.CompleteBooking(bookingData, CoreBookingFields.id , ItemSelected.item_id );
 
                     if (CrossParams.BookingResponse.Error != null)
                     {
                         BugTracker.LeaveBreadcrumb("Hotels checkout MAPI booking error response code: " + CrossParams.BookingResponse.Error.code.ToString());
-                        // API Error ocurred, Check CODE and inform the user
+
+                        switch (crossParams.BookingResponse.Error.code)
+                        {
+                            case 2366:
+                                OnViewModelError("DUPLICATED_BOOKING", crossParams.BookingResponse.Error);
+                                break;
+                            default:
+                                // API Error ocurred, Check CODE and inform the user
                         OnViewModelError("API_ERROR", CrossParams.BookingResponse.Error.code);
+                                break;
+                        }
+
                         this.IsLoading = false;
                         return;
                     }
@@ -540,6 +650,8 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
 
         public void FillBookingFields()
         {
+            if (CoreBookingFields == null) return;
+
             CoreBookingFields.form.passengers[0].first_name.CoreValue = "test";
             CoreBookingFields.form.passengers[0].last_name.CoreValue = "booking";
             CoreBookingFields.form.contact.email.CoreValue = "testhoteles@despegar.com";
@@ -547,26 +659,35 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
             CoreBookingFields.form.contact.Phone.area_code.CoreValue = "54";
             CoreBookingFields.form.contact.Phone.country_code.CoreValue = "11";
             CoreBookingFields.form.contact.Phone.number.CoreValue = "12341234";
-            CoreBookingFields.form.CardInfo.expiration.CoreValue = "2018-3";
-            CoreBookingFields.form.CardInfo.number.CoreValue = "4242424242424242";
-            CoreBookingFields.form.CardInfo.owner_document.number.CoreValue = "12123123";
-            CoreBookingFields.form.CardInfo.owner_document.type.CoreValue = "LOCAL";
-            if (CoreBookingFields.form.CardInfo.owner_gender != null)
-                CoreBookingFields.form.CardInfo.owner_gender.CoreValue = "MALE";
-            CoreBookingFields.form.CardInfo.owner_name.CoreValue = "test booking";
-            CoreBookingFields.form.CardInfo.security_code.CoreValue = "123";
-
-            if (CheckoutMethodSelected.payment.invoice != null)
+            if (CoreBookingFields.form.CardInfo != null)
             {
-                this.CheckoutMethodSelected.payment.invoice.address.number.CoreValue = "123";
-                this.CheckoutMethodSelected.payment.invoice.address.postal_code.CoreValue = "1234";
-                this.CheckoutMethodSelected.payment.invoice.address.street.CoreValue = "falsa";
-                this.CheckoutMethodSelected.payment.invoice.fiscal_id.CoreValue = "23121231239";
-                this.CheckoutMethodSelected.payment.invoice.fiscal_status.CoreValue = "FINAL_CONSUMER";
+                if (CoreBookingFields.form.CardInfo.expiration != null)
+                    CoreBookingFields.form.CardInfo.expiration.CoreValue = "2018-3";
+                if (CoreBookingFields.form.CardInfo.number != null)
+                    CoreBookingFields.form.CardInfo.number.CoreValue = "4242424242424242";
+                if (CoreBookingFields.form.CardInfo.owner_document != null)
+                {
+                    if (CoreBookingFields.form.CardInfo.owner_document.number != null)
+                        CoreBookingFields.form.CardInfo.owner_document.number.CoreValue = "12123123";
+                    if (CoreBookingFields.form.CardInfo.owner_document.type != null)
+                        CoreBookingFields.form.CardInfo.owner_document.type.CoreValue = "LOCAL";
+                }
+                if (CoreBookingFields.form.CardInfo.owner_gender != null)
+                    CoreBookingFields.form.CardInfo.owner_gender.CoreValue = "MALE";
+                if (CoreBookingFields.form.CardInfo.owner_name != null)
+                    CoreBookingFields.form.CardInfo.owner_name.CoreValue = "test booking";
+                if (CoreBookingFields.form.CardInfo.security_code != null)
+                    CoreBookingFields.form.CardInfo.security_code.CoreValue = "123";
             }
 
-            //OnPropertyChanged();
-
+            if (CoreBookingFields.form.CheckoutMethodSelected.payment != null && CoreBookingFields.form.CheckoutMethodSelected.payment.invoice != null)
+            {
+                this.CoreBookingFields.form.CheckoutMethodSelected.payment.invoice.address.number.CoreValue = "123";
+                this.CoreBookingFields.form.CheckoutMethodSelected.payment.invoice.address.postal_code.CoreValue = "1234";
+                this.CoreBookingFields.form.CheckoutMethodSelected.payment.invoice.address.street.CoreValue = "falsa";
+                this.CoreBookingFields.form.CheckoutMethodSelected.payment.invoice.fiscal_id.CoreValue = "23121231239";
+                this.CoreBookingFields.form.CheckoutMethodSelected.payment.invoice.fiscal_status.CoreValue = "FINAL_CONSUMER";
+            }
         }
 
         /// <summary>
@@ -597,9 +718,9 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
 
                 case HotelBookingStatusEnum.NEW_CREDIT_CARD:
 
-                    this.CheckoutMethodSelected.payment.card.number.CoreValue = String.Empty;
-                    this.CheckoutMethodSelected.payment.card.expiration.CoreValue = String.Empty;
-                    this.CheckoutMethodSelected.payment.card.security_code.CoreValue = String.Empty;
+                    this.CoreBookingFields.form.CheckoutMethodSelected.payment.card.number.CoreValue = String.Empty;
+                    this.CoreBookingFields.form.CheckoutMethodSelected.payment.card.expiration.CoreValue = String.Empty;
+                    this.CoreBookingFields.form.CheckoutMethodSelected.payment.card.security_code.CoreValue = String.Empty;
                     this.CoreBookingFields.form.booking_status = "NEW_CREDIT_CARD";
 
                     FreezeFields();
@@ -607,24 +728,17 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
                     OnViewModelError("ONLINE_PAYMENT_ERROR_NEW_CREDIT_CARD", "CARD");
                     break;
 
-                //case HotelBookingStatusEnum.:
-                //    // Se acabaron los reintentos mostrar mensaje de error e ir para atras
-                //    OnViewModelError("PAYMENT_FAILED");
-                //    break;
-
+                case HotelBookingStatusEnum.risk_evaluation_failed:
                 case HotelBookingStatusEnum.RISK_REJECTED:
                     OnViewModelError("RISK_PAYMENT_FAILED", "CARD");
                     break;
 
+                case HotelBookingStatusEnum.risk_review:
                 case HotelBookingStatusEnum.RISK_QUESTIONS:
                     EventHandler RiskHandler = ShowRiskReview;
                     if (RiskHandler != null)
                         RiskHandler(this, null);
-
                     break;
-                //enable for booking 
-                //case HotelBookingStatusEnum.validate_duplicated_checkouts:
-                //    break;
                 default:
                     break;
             }
@@ -689,18 +803,100 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
 
         private async Task LoadCountries()
         {
-            Countries = (await commonServices.GetCountries()).countries;
+            Countries = (await mapiCross.GetCountries()).countries;
         }
 
         private async Task LoadStates(string countryCode)
         {
-            States = await commonServices.GetStates(countryCode);
+            States = await mapiCross.GetStates(countryCode);
         }
 
         public override void OnNavigated(object navigationParams)
         {
             BugTracker.LeaveBreadcrumb("Hotel checkout start");
             CrossParams = navigationParams as HotelsCrossParameters;
+        }
+
+
+        private async void SendRiskAnswers()
+        {
+            BugTracker.LeaveBreadcrumb("Flight checkout view model Risk init");
+            ResourceLoader manager = new ResourceLoader();
+
+            if (ValidateAnswers())
+            {
+                this.IsLoading = true;
+                List<Despegar.Core.Neo.Business.Hotels.BookingCompletePostResponse.RiskAnswer> answers = new List<Despegar.Core.Neo.Business.Hotels.BookingCompletePostResponse.RiskAnswer>();
+                BookingCompletePostResponse BookingResponse = new BookingCompletePostResponse();
+
+                foreach (RiskQuestion question in FreeTextQuestions)
+                {
+                    question.risk_answer.question_id = question.id;
+                    answers.Add(question.risk_answer);
+                }
+
+                foreach (RiskQuestion question in ChoiceQuestions)
+                {
+                    question.risk_answer.question_id = question.id;
+                    question.risk_answer.answer_id = question.risk_answer.answer_id;
+                    answers.Add(question.risk_answer);
+                }
+
+                dynamic result = new ExpandoObject();
+                result.form = new ExpandoObject();
+                result.form.risk_questions = answers;
+                result.form.booking_status = "risk_review";
+
+                BookingResponse = await hotelService.CompleteBooking(result, CoreBookingFields.id,ItemSelected.item_id);
+                this.IsLoading = false;
+
+                EventHandler AnswerHandler = HideRiskReview;
+                if (AnswerHandler != null)
+                {
+                    AnswerHandler(this, null);
+                }
+
+                if (BookingResponse.Error != null)
+                {
+                    BugTracker.LeaveBreadcrumb("Hotels checkout MAPI booking error response code: " + BookingResponse.Error.code.ToString());
+
+                    switch (BookingResponse.Error.code)
+                    {
+                        case 2366:
+                            OnViewModelError("DUPLICATED_BOOKING", BookingResponse.Error);
+                            break;
+                        default:
+                            // API Error ocurred, Check CODE and inform the user
+                            OnViewModelError("API_ERROR", BookingResponse.Error.code);
+                            break;
+                    }
+
+                    this.IsLoading = false;
+                    return;
+                }
+
+                AnalizeBookingStatus(BookingResponse.booking_status);
+
+            }
+            else
+            {
+                var msg = new MessageDialog(manager.GetString("Flight_Checkout_Risk_Error"));
+                await msg.ShowAsync();
+            }
+            BugTracker.LeaveBreadcrumb("Hotel checkout view model Risk complete");
+
+        }
+        private bool ValidateAnswers()
+        {
+            foreach (RiskQuestion question in crossParams.BookingResponse.risk_questions)
+            {
+                if (question.risk_answer.text == null || question.risk_answer.text == "")
+                {
+                    return false;
+                }
+            }
+
+            return true;
         }
     }
 }

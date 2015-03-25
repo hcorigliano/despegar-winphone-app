@@ -15,6 +15,7 @@ using Despegar.WP.UI.Model.ViewModel.Classes;
 using Despegar.WP.UI.Model.ViewModel.Classes.Flights;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Dynamic;
 using System.Globalization;
 using System.Linq;
@@ -91,6 +92,17 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
                 }
                 else { return false; }
             } 
+        }
+
+        public bool BillingAddressRequired
+        {
+            get
+            {
+                if (CoreBookingFields != null)
+                    return CoreBookingFields.form.payment.billing_address != null;
+                else 
+                    return false;
+            }
         }
 
         public bool IsTermsAndConditionsAccepted { get; set; }
@@ -249,6 +261,8 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
                 await LoadCountries();
                 await LoadStates(currentCountry);
 
+                ConfigureBillingAddress();
+
                 // Format Price details / Installments
                 FormatInstallments();
                 PriceDetailsFormatted = FormatPrice();
@@ -275,6 +289,33 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
             IsLoading = false;
 
             BugTracker.LeaveBreadcrumb("Flight checkout ready");
+        }
+
+
+        private void ConfigureBillingAddress()
+        {
+            if (BillingAddressRequired)
+            {
+                CoreBookingFields.form.payment.billing_address.country.PropertyChanged += BillingAddressCountry_Changed;
+                CoreBookingFields.form.payment.billing_address.country.options = Countries.Select(x => new Option() { value = x.id, description = x.name }).ToList();                
+
+                // Set selected country based on Site
+                var currentOption = CoreBookingFields.form.payment.billing_address.country.options.FirstOrDefault(x => x.value.ToUpperInvariant() == GlobalConfiguration.Site.ToUpperInvariant());
+                if (currentOption != null)
+                {
+                    CoreBookingFields.form.payment.billing_address.country.SelectedOption = currentOption;
+                }
+            }
+        }
+
+        private async void BillingAddressCountry_Changed(object sender, PropertyChangedEventArgs e)
+        {            
+            if (e.PropertyName == "SelectedOption")
+            {
+                // Load States for selected Country    
+                var states = await mapiCross.GetStates(CoreBookingFields.form.payment.billing_address.country.CoreValue);
+                CoreBookingFields.form.payment.billing_address.state.options = states.Select(x => new Option() { value = x.id, description = x.name }).ToList();
+            }
         }
 
         private async void GetCreditCardsValidations()
@@ -349,7 +390,7 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
 
         #region ** Private Misc ** 
 
-        private void Fiscal_status_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        private void Fiscal_status_PropertyChanged(object sender,PropertyChangedEventArgs e)
         {
             if (e.PropertyName == "CoreValue")
             {
@@ -359,9 +400,10 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
 
         private async Task GetBookingFields(string deviceID)
         {
+
+            FlightsBookingFieldRequest book = new FlightsBookingFieldRequest();    
             BugTracker.LeaveBreadcrumb("Flight checkout view model get booking fields init" );
 
-            FlightsBookingFieldRequest book = new FlightsBookingFieldRequest();
 
             if (FlightCrossParameters.Inbound.choice != -1)
                 book.inbound_choice = FlightCrossParameters.Inbound.choice; //-1
@@ -504,12 +546,19 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
             {
                 bookingFields.form.passengers[0].birthdate.CoreValue = "1988-11-27";
             }
-            bookingFields.form.passengers[0].document.number.CoreValue = "12123123";
-            bookingFields.form.passengers[0].document.type.CoreValue = "LOCAL";
+
+            if (bookingFields.form.passengers[0].document != null)
+            {
+                bookingFields.form.passengers[0].document.number.CoreValue = "12123123";
+                bookingFields.form.passengers[0].document.type.CoreValue = "LOCAL";
+            }
+
             bookingFields.form.passengers[0].first_name.CoreValue = "Test";
             bookingFields.form.passengers[0].last_name.CoreValue = "Booking";
             bookingFields.form.passengers[0].gender.CoreValue = "MALE";
-            bookingFields.form.passengers[0].nationality.CoreValue = "AR";
+            if (bookingFields.form.passengers[0].nationality != null)
+              bookingFields.form.passengers[0].nationality.CoreValue = "AR";
+
             bookingFields.form.payment.card.expiration.CoreValue = "2015-11";
             bookingFields.form.payment.card.number.CoreValue = "4242424242424245";
             bookingFields.form.payment.card.owner_document.number.CoreValue = "12123123";
@@ -572,7 +621,7 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
                     FlightCrossParameters.PriceDetail = PriceDetailsFormatted;
                     FlightCrossParameters.BookingResponse = await flightService.CompleteBooking(bookingData, CoreBookingFields.id);
 
-                    if (FlightCrossParameters.BookingResponse.Error != null) 
+                    if (FlightCrossParameters.BookingResponse.Error != null)
                     {
                         BugTracker.LeaveBreadcrumb("Flight checkout MAPI booking error response code: " + FlightCrossParameters.BookingResponse.Error.code.ToString());
                         // API Error ocurred, Check CODE and inform the user
@@ -583,14 +632,14 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
 
                     // Booking processed, check the status of Booking request
                     AnalizeBookingStatus(FlightCrossParameters.BookingResponse.booking_status);
-                }
-                catch (HTTPStatusErrorException )
+                }            
+                catch (HTTPStatusErrorException)
                 {
                     OnViewModelError("COMPLETE_BOOKING_CONECTION_FAILED");
                 }
-                catch (Exception )
+                catch (Exception)
                 {
-                    OnViewModelError("COMPLETE_BOOKING_BOOKING_FAILED"); 
+                    OnViewModelError("COMPLETE_BOOKING_BOOKING_FAILED");
                 }
 
                 BugTracker.LeaveBreadcrumb("Flight checkout view model validate and buy complete");
@@ -786,5 +835,7 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
             BugTracker.LeaveBreadcrumb("Flight checkout start");
             FlightCrossParameters = navigationParams as FlightsCrossParameter;            
         }
+
+        
     }
 }

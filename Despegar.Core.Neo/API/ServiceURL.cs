@@ -36,7 +36,7 @@ namespace Despegar.Core.Neo.API
         private static readonly Dictionary<ServiceKey, string> serviceURLRepo = new Dictionary<ServiceKey, string>
         {
             {ServiceKey.HotelsAvailability, "mapi-hotels/availability?checkin_date={0}&checkout_date={1}&destination={2}&distribution={3}&currency_code={4}&offset={5}&limit={6}&{7}" },
-            {ServiceKey.HotelsAvailabilityByGeo, "mapi-hotels/availability?checkin_date={0}&checkout_date={1}&distribution={2}&latitude={3}&longitude={4}&offset={5}&limit={6}" },
+            {ServiceKey.HotelsAvailabilityByGeo, "mapi-hotels/availability?checkin_date={0}&checkout_date={1}&distribution={2}&latitude={3}&longitude={4}&offset={5}&limit={6}&{7}" },
             {ServiceKey.HotelsAutocomplete, "mapi-cross/autocomplete/hotels?search={0}" },
             //{ServiceKey.HotelsAutocomplete, "mapi-cross/autocomplete/hotels?search={0}" },
             {ServiceKey.HotelsGetDetails , "mapi-hotels/availability/{0}?checkin_date={1}&checkout_date={2}&distribution={3}"},
@@ -47,7 +47,7 @@ namespace Despegar.Core.Neo.API
 
             {ServiceKey.FlightsAirlines, "mapi-flights/airlines?description={0}" },
             {ServiceKey.FlightsCitiesAutocomplete, "mapi-cross/autocomplete/flights?search={0}" },
-            {ServiceKey.FlightItineraries,"mapi-flights/itineraries?from={0}&to={1}&departure_date={2}&adults={3}&return_date={4}&children={5}&infants={6}&offset={7}&limit={8}&order_by={9}&order_type={10}&currency_code={11}&filter={12}&{13}"},
+            {ServiceKey.FlightItineraries,"mapi-flights/itineraries?from={0}&to={1}&departure_date={2}&adults={3}&return_date={4}&children={5}&infants={6}&offset={7}&limit={8}&order_by={9}&order_type={10}&currency_code={11}&filter={12}"},
             {ServiceKey.FlightsBookingFields,"mapi-flights/bookings?"},
             {ServiceKey.FlightsNearCities,"mapi-cross/airports/close?latitude={0:R}&longitude={1:R}&limit=5&distance=1000"},
 

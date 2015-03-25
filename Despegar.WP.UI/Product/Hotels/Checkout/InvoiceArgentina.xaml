@@ -18,7 +18,7 @@
 
     <ScrollViewer>
         <!--CheckoutMethodSelected.payment.invoice-->
-        <StackPanel DataContext="{Binding CheckoutMethodSelected.payment.invoice}">
+        <StackPanel DataContext="{Binding CoreBookingFields.form.CheckoutMethodSelected.payment.invoice}">
             <!-- Dev -->
             <!--<dev:UserControlDesignGrid />-->
 

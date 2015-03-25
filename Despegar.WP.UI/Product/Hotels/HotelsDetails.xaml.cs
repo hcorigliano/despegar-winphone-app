@@ -59,22 +59,16 @@ namespace Despegar.WP.UI.Product.Hotels
                 MainPivot.Items.Remove(RoomSelectionPivot);
             }
 
-        }
+        }        
 
-        protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
-            base.OnNavigatingFrom(e);
+            HardwareButtons.BackPressed -= HardwareButtons_BackPressed;
+
             if (e.NavigationMode == NavigationMode.Back)
             {
                 ResetPageCache();
             }
-        }
-
-        protected override void OnNavigatedFrom(NavigationEventArgs e)
-        {
-            
-
-            HardwareButtons.BackPressed -= HardwareButtons_BackPressed;
         }
             
         private void HardwareButtons_BackPressed(object sender, BackPressedEventArgs e)
@@ -85,9 +79,12 @@ namespace Despegar.WP.UI.Product.Hotels
 
         private void ResetPageCache()
         {
-            var cacheSize = ((Frame)Parent).CacheSize;
-            ((Frame)Parent).CacheSize = 0;
-            ((Frame)Parent).CacheSize = cacheSize;
+            if (Parent != null)
+            {
+                var cacheSize = ((Frame)Parent).CacheSize;
+                ((Frame)Parent).CacheSize = 0;
+                ((Frame)Parent).CacheSize = cacheSize;
+            }
         }
 
         private void Property_Changed(object sender, System.ComponentModel.PropertyChangedEventArgs e)

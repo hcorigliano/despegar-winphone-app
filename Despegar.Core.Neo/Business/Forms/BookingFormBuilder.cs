@@ -163,6 +163,34 @@ namespace Despegar.Core.Neo.Business.Forms
                     payment.Add("invoice", invoice);
                 }
 
+                // Billing Address
+                if (bookingFields.form.payment.billing_address != null) 
+                {
+                    var billingAddress = new JObject();
+
+                    if (bookingFields.form.payment.billing_address.country != null)
+                        billingAddress.Add("country", bookingFields.form.payment.billing_address.country.CoreValue);
+                    if (bookingFields.form.payment.billing_address.state != null)
+                        billingAddress.Add("state", bookingFields.form.payment.billing_address.state.CoreValue);
+
+                    //if (bookingFields.form.payment.billing_address.city_id != null)
+                    //    billingAddress.Add("city_id", bookingFields.form.payment.billing_address.city_id.CoreValue);
+                    if (bookingFields.form.payment.billing_address.city != null)
+                        billingAddress.Add("city", bookingFields.form.payment.billing_address.city.CoreValue);
+                    if (bookingFields.form.payment.billing_address.number != null)
+                        billingAddress.Add("number", bookingFields.form.payment.billing_address.number.CoreValue);
+                    if (bookingFields.form.payment.billing_address.floor != null)
+                        billingAddress.Add("floor", bookingFields.form.payment.billing_address.floor.CoreValue);
+                    if (bookingFields.form.payment.billing_address.department != null)
+                        billingAddress.Add("department", bookingFields.form.payment.billing_address.department.CoreValue);
+                    if (bookingFields.form.payment.billing_address.postal_code != null)
+                        billingAddress.Add("postal_code", bookingFields.form.payment.billing_address.postal_code.CoreValue);
+                    if (bookingFields.form.payment.billing_address.street != null)
+                        billingAddress.Add("street", bookingFields.form.payment.billing_address.street.CoreValue);
+
+                    payment.Add("billing_address", billingAddress);
+                }
+
                 // Voucher
                 if (bookingFields.form.Voucher != null)
                 {
@@ -180,6 +208,7 @@ namespace Despegar.Core.Neo.Business.Forms
                 form.Add("contact", contact);
                 form.Add("payment", payment);
 
+
                 result.Add("form", form);
 
                 return result as object;
@@ -187,8 +216,12 @@ namespace Despegar.Core.Neo.Business.Forms
             });
         }
 
-        public static Task<object> BuildHotelsForm(HotelsBookingFields bookingFields, InvoiceArg invoiceFields, HotelPayment selectedCard, bool validateDuplicateCheckouts)
+        public static Task<object> BuildHotelsForm(HotelsBookingFields bookingFields, HotelPayment selectedCard, bool validateDuplicateCheckouts)
         {
+            InvoiceArg invoiceFields = null; 
+            if(bookingFields.form.CheckoutMethodSelected != null && bookingFields.form.CheckoutMethodSelected.payment != null)
+                invoiceFields = bookingFields.form.CheckoutMethodSelected.payment.invoice;
+            
             return Task.Run(() =>
             {
                 JObject result = new JObject();
@@ -211,42 +244,56 @@ namespace Despegar.Core.Neo.Business.Forms
                 contact.Add("email", bookingFields.form.contact.email.CoreValue);
 
                 // Payment
-                JObject card = new JObject();
-                card.Add("security_code", bookingFields.form.CardInfo.security_code.CoreValue);
-                card.Add("expiration", bookingFields.form.CardInfo.expiration.CoreValue);
-                card.Add("number", bookingFields.form.CardInfo.number.CoreValue);
-                card.Add("owner_name", bookingFields.form.CardInfo.owner_name.CoreValue);
-
-                if (bookingFields.form.CardInfo.owner_gender != null)
-                    card.Add("owner_gender", bookingFields.form.CardInfo.owner_gender.CoreValue);
-
-                if (bookingFields.form.CardInfo.owner_document != null)
+                if (bookingFields.form.CardInfo != null)
                 {
-                    JObject owner_document = new JObject();
+                    JObject card = new JObject();
+                    if (bookingFields.form.CardInfo.security_code != null)
+                        card.Add("security_code", bookingFields.form.CardInfo.security_code.CoreValue);
+                    if (bookingFields.form.CardInfo.expiration != null)
+                        card.Add("expiration", bookingFields.form.CardInfo.expiration.CoreValue);
+                    if (bookingFields.form.CardInfo.number != null)
+                        card.Add("number", bookingFields.form.CardInfo.number.CoreValue);
+                    if (bookingFields.form.CardInfo.owner_name != null)
+                        card.Add("owner_name", bookingFields.form.CardInfo.owner_name.CoreValue);
 
-                    if (bookingFields.form.CardInfo.owner_document.type != null)
-                        owner_document.Add("type", bookingFields.form.CardInfo.owner_document.type.CoreValue);
-                    if (bookingFields.form.CardInfo.owner_document.number != null)
-                        owner_document.Add("number", bookingFields.form.CardInfo.owner_document.number.CoreValue);
+                    if (bookingFields.form.CardInfo.owner_gender != null)
+                        card.Add("owner_gender", bookingFields.form.CardInfo.owner_gender.CoreValue);
 
-                    card.Add("owner_document", owner_document);
+                    if (bookingFields.form.CardInfo.owner_document != null)
+                    {
+                        JObject owner_document = new JObject();
+
+                        if (bookingFields.form.CardInfo.owner_document.type != null)
+                            owner_document.Add("type", bookingFields.form.CardInfo.owner_document.type.CoreValue);
+                        if (bookingFields.form.CardInfo.owner_document.number != null)
+                            owner_document.Add("number", bookingFields.form.CardInfo.owner_document.number.CoreValue);
+
+                        card.Add("owner_document", owner_document);
+                    }
+
+                    payment.Add("card", card);
                 }
 
-                payment.Add("card", card);
-
                 // Installment
-                JObject installment = new JObject();
-                installment.Add("card_type", bookingFields.form.CurrentInstallment.card_type.CoreValue);
-                installment.Add("card_code", bookingFields.form.CurrentInstallment.card_code.CoreValue);
+                if (bookingFields.form.CurrentInstallment != null)
+                {
+                    JObject installment = new JObject();
+                    if (bookingFields.form.CurrentInstallment.card_type != null)
+                        installment.Add("card_type", bookingFields.form.CurrentInstallment.card_type.CoreValue);
+                    if (bookingFields.form.CurrentInstallment.card_code != null)
+                        installment.Add("card_code", bookingFields.form.CurrentInstallment.card_code.CoreValue);
 
-                if (Convert.ToInt32(bookingFields.form.CurrentInstallment.quantity.CoreValue)!= 0)
-                    installment.Add("quantity", Convert.ToInt32(bookingFields.form.CurrentInstallment.quantity.CoreValue));
+                    if (Convert.ToInt32(bookingFields.form.CurrentInstallment.quantity.CoreValue) != 0)
+                        installment.Add("quantity", Convert.ToInt32(bookingFields.form.CurrentInstallment.quantity.CoreValue));
 
-                if (bookingFields.form.CurrentInstallment.complete_card_code != null && bookingFields.form.CurrentInstallment.complete_card_code.CoreValue != null)
-                    installment.Add("complete_card_code", bookingFields.form.CurrentInstallment.complete_card_code.CoreValue);
+                    if (bookingFields.form.CurrentInstallment.complete_card_code != null && bookingFields.form.CurrentInstallment.complete_card_code.CoreValue != null)
+                        installment.Add("complete_card_code", bookingFields.form.CurrentInstallment.complete_card_code.CoreValue);
 
-                payment.Add("installment", installment);
+                    payment.Add("installment", installment);
+                }
 
+                // InvoiceFields 
+                
                 // Invoice Arg
                 if (bookingFields.form.CountrySite != null & bookingFields.form.CountrySite.ToLower().Contains("ar") && invoiceFields != null) // Is only for Arg in mapi
                 {
@@ -288,6 +335,35 @@ namespace Despegar.Core.Neo.Business.Forms
 
                     invoice.Add("address", address);
                     payment.Add("invoice", invoice);
+                }
+
+                // Billing Address
+                var billing = bookingFields.form.CheckoutMethodSelected.payment.billing_address;
+                if (billing != null)
+                {
+                    var billingAddress = new JObject();
+
+                    if (billing.country != null)
+                        billingAddress.Add("country", billing.country.CoreValue);
+                    if (billing.state != null)
+                        billingAddress.Add("state", billing.state.CoreValue);
+
+                    //if (billing.city_id != null)
+                    //    billingAddress.Add("city_id", billing.city_id.CoreValue);
+                    if (billing.city != null)
+                        billingAddress.Add("city", billing.city.CoreValue);
+                    if (billing.number != null)
+                        billingAddress.Add("number", billing.number.CoreValue);
+                    if (billing.floor != null)
+                        billingAddress.Add("floor", billing.floor.CoreValue);
+                    if (billing.department != null)
+                        billingAddress.Add("department", billing.department.CoreValue);
+                    if (billing.postal_code != null)
+                        billingAddress.Add("postal_code", billing.postal_code.CoreValue);
+                    if (billing.street != null)
+                        billingAddress.Add("street", billing.street.CoreValue);
+
+                    payment.Add("billing_address", billingAddress);
                 }
 
                 // Voucher
