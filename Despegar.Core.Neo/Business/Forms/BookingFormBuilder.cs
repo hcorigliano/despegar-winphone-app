@@ -317,16 +317,17 @@ namespace Despegar.Core.Neo.Business.Forms
                         address.Add("floor", invoiceFields.address.floor.CoreValue);
                     if (invoiceFields.address.department != null)
                         address.Add("department", invoiceFields.address.department.CoreValue);
-                    if (invoiceFields.address.city_id != null)
-                        address.Add("city_id", invoiceFields.address.city_id.CoreValue);
-                    if (invoiceFields.address.city != null)
-                        address.Add("city", invoiceFields.address.city.CoreValue);
 
-                    if (invoiceFields.address.state != null)
-                        address.Add("state", invoiceFields.address.state.CoreValue);
 
-                    if (invoiceFields.address.country != null)
-                        address.Add("country", invoiceFields.address.country.CoreValue); //this is fill with the response of service
+                    if (invoiceFields.fiscal_status.CoreValue != "FINAL_CONSUMER")
+                    {
+                        if (invoiceFields.address.city_id != null)
+                            address.Add("city_id", invoiceFields.address.city_id.CoreValue);
+                        if (invoiceFields.address.state_id != null)
+                            address.Add("state_id", invoiceFields.address.state_id.CoreValue);
+                        //if (invoiceFields.address.country != null)
+                        //    address.Add("country", invoiceFields.address.country.CoreValue); //this is fill with the response of service
+                    }
 
                     if (invoiceFields.address.postal_code != null)
                         address.Add("postal_code", invoiceFields.address.postal_code.CoreValue);

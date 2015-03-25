@@ -291,6 +291,8 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
 
                 ConfigureBillingAddress();
 
+                ConfigureInvoice();
+
                 // Set Known Default Values && Adapt Checkout to the country
                 ConfigureCountry(currentCountry);
 
@@ -310,6 +312,20 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
             }
 
             IsLoading = false;
+        }
+
+        private async void ConfigureInvoice()
+        {
+            CheckoutMethodKey checkout = CoreBookingFields.form.checkout_method.FirstOrDefault(x => x.Value.payment.invoice != null).Value;
+            if (checkout != null)
+            {
+                InvoiceArg invoice = checkout.payment.invoice;
+
+
+                var states = await mapiCross.GetStates("AR");
+                invoice.address.state_id.options = states.Select(x => new Option() { value = x.id, description = x.name }).ToList();
+
+            }
         }
 
         private void ConfigureBillingAddress()
@@ -335,7 +351,7 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
             {
                 // Load States for selected Country    
                 var states = await mapiCross.GetStates(CoreBookingFields.form.CheckoutMethodSelected.payment.billing_address.country.CoreValue);
-                CoreBookingFields.form.CheckoutMethodSelected.payment.billing_address.state.options = states.Select(x => new Option() { value = x.id, description = x.name }).ToList();
+                CoreBookingFields.form.BillingAddress.state.options = states.Select(x => new Option() { value = x.id, description = x.name }).ToList();
             }
         }
 
