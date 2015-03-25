@@ -290,7 +290,10 @@ namespace Despegar.WP.UI.Product.Hotels
         private void Insert_Card_Info(object sender, RoutedEventArgs e)
         {
             PivotItem pivotItem = new PivotItem();
-            pivotItem.Header = "card Data"; //Agregar a resource
+
+            var loader = new Windows.ApplicationModel.Resources.ResourceLoader();
+
+            pivotItem.Header = loader.GetString("Hotels_Checkout_Card_Data_Header"); //Agregar a resource
             pivotItem.Name = "Pivot_CARD";
             UserControl usc = new CardData();
             usc.DataContext = this.DataContext;
@@ -307,9 +310,11 @@ namespace Despegar.WP.UI.Product.Hotels
 
         private void Insert_Billing_Address(object sender, RoutedEventArgs e)
         {
-            // Add XUID, do not Harcode strings UPDATE: XUID its only for XAML we must add new resource
             PivotItem pivotItem = new PivotItem();
-            pivotItem.Header = "billing Address"; //Agregar a resource
+
+            var loader = new Windows.ApplicationModel.Resources.ResourceLoader();
+
+            pivotItem.Header = loader.GetString("Flight_Checkout_Billing_Address_Header"); //Agregar a resource
             pivotItem.Name = "Pivot_BILLING_ADDRESS";
             UserControl usc = new BillingAddress();
             usc.DataContext = this.DataContext;
@@ -330,7 +335,7 @@ namespace Despegar.WP.UI.Product.Hotels
 
         private void Insert_Invoice(object sender, RoutedEventArgs e)
         {
-            // Add XUID, do not Harcode strings UPDATE: invoice is only for arg. however we must add new resource.
+            // Add XUID, do not Harcode strings UPDATE: invoice is only for arg. & XUID its only for xaml , however we must add new resource.
             PivotItem pivotItem = new PivotItem();
             pivotItem.Header = "factura fiscal";
             pivotItem.Name = "Pivot_INVOICE";
