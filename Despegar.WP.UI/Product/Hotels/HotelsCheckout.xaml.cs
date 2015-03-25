@@ -247,6 +247,23 @@ namespace Despegar.WP.UI.Product.Hotels
             riskPopup.Hide();
         }
 
+        private async void AcceptConditions_Click(object sender, RoutedEventArgs e)
+        {
+            string uriToLaunch = @"https://secure.despegar.com.ar/book/flights/checkout/conditions/wp";
+            var uri = new Uri(uriToLaunch);
+            var success = await Windows.System.Launcher.LaunchUriAsync(uri);
+
+            if (success)
+            {
+                // URI launched
+            }
+            else
+            {
+                // URI launch failed
+            }
+
+        }
+
         private void HardwareButtons_BackPressed(object sender, BackPressedEventArgs e)
         {
             e.Handled = true;

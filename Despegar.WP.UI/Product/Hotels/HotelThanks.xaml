@@ -31,7 +31,7 @@
                 <StackPanel>
                     <TextBlock x:Uid="Flight_Thanks" Style="{StaticResource Thanks_PageHeader}" Text="gracias totales" />
                     <TextBlock Style="{StaticResource Thanks_Request_Is }" x:Uid="Flight_Thanks_Request_Is" Text="Su número de solicitud de compra es:"  />
-                    <TextBlock Style="{StaticResource Thanks_Request }" Text="{Binding BookingResponse.checkout_id}"/>
+                    <TextBlock Style="{StaticResource Thanks_Request }" Text="{Binding CrossParams.BookingResponse.checkout_id}"/>
                     <TextBlock Style="{StaticResource Thanks_How_Continue}" x:Uid="Flight_Thanks_How_Continue" Text="¿Cómo continúa el proceso de compra?" />
                     <TextBlock TextWrapping="Wrap" Style="{StaticResource Thanks_Continue_Explain}" x:Uid="Flight_Thanks_Continue_Explain" Text="Su pago está siendo procesado. Una vez que el pago se procese exitosamente recibirá un e-mail con la información de compra."   />
                     <TextBlock Style="{StaticResource Thanks_Booking_Detail_Blue}" x:Uid="Common_Booking_Detail" Text="Detalle de reserva" />
@@ -42,18 +42,22 @@
             <PivotItem x:Uid="Page_Hotel_Thanks_Detalle" Header="detalle" Style="{StaticResource PivotItemBase}">
                 <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="{StaticResource Block2p}" />
+                        <RowDefinition Height="{StaticResource Block2}" />
                         <RowDefinition Height="{StaticResource Block5p}" />
                         <RowDefinition Height="{StaticResource Block1p}" />
                         <RowDefinition Height="{StaticResource Block4p}" />
                         <RowDefinition Height="{StaticResource Block4p}" />
                     </Grid.RowDefinitions>
 
+                    <TextBlock Grid.Row="0" Style="{StaticResource DetailCheckoutForeach}" x:Uid="Common_Booking_Detail" Text="Detalle de hotel" />
+
                     <src:HotelItem Grid.Row="1"  DataContext="{Binding CrossParams.SelectedHotel}"></src:HotelItem>
+
+                    <TextBlock Grid.Row="2" Style="{StaticResource Thanks_Booking_Detail_Blue}" x:Uid="Common_Booking_Detail" Text="Detalle de habitacion" />
 
                     <src2:RoomInformationControl Grid.Row="3" DataContext="{Binding CrossParams.RoomPackSelected}"/>
                              
-                    <src2:RoomConditionsControl Grid.Row="4" DataContext="{Binding CrossParams.RoomPackSelected}"></src2:RoomConditionsControl>
+                    <src2:RoomConditionsControl Grid.Row="4" ></src2:RoomConditionsControl>
                 
 
                 </Grid>

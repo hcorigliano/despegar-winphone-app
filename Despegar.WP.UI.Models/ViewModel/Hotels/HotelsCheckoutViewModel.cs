@@ -105,6 +105,14 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
             }
         }
 
+        public int Avaliability
+        {
+            get
+            {
+                return CrossParams.RoomPackSelected.room_availabilities[0].price.availability;
+            }
+        }
+
         public string TotalRooms
         {
             get 

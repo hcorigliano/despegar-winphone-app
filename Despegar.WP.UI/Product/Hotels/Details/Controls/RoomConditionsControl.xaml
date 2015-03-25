@@ -19,16 +19,16 @@
             <TextBlock x:Uid="Common_Conditions" Text="CondicionesX" Style="{StaticResource SegoeSemilight20}"/>
             <TextBlock Style="{StaticResource SegoeRegular12_9}">
                 <Run Text="- "/>
-                <Run Text="{Binding meal_plan.description}"/>
+                <Run Text="{Binding MealPlan}"/>
             </TextBlock>
             <TextBlock Style="{StaticResource SegoeRegular12_9}">
                 <Run Text="- "/>
-                <Run Text="{Binding cancellation_policy.penalty_short_description}"/>
+                <Run Text="{Binding CancelationPolicy}"/>
             </TextBlock>
-            <TextBlock Style="{StaticResource SegoeRegular12_9}" Visibility="{Binding price.availability ,Converter={StaticResource VisibilityConverter}}">
+            <TextBlock Style="{StaticResource SegoeRegular12_9}" Visibility="{Binding Avaliability ,Converter={StaticResource VisibilityConverter}}">
                 <Run Text="- "/>
                 <Run x:Uid="Common_Left" Text="QuedanX " />
-                <Run Text="{Binding price.availability}"/>
+                <Run Text="{Binding Avaliability}"/>
                 <Run x:Uid="Hotel_Rooms_Availability" Text=" habitacion(es) disponible(s)X"/>
             </TextBlock>
         </StackPanel>

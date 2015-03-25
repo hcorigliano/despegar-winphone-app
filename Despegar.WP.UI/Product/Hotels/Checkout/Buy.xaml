@@ -8,7 +8,7 @@
     xmlns:conv="using:Despegar.WP.UI.Common.Converter"
     xmlns:src="using:Despegar.WP.UI.Product.Hotels.Checkout.Controls"
     mc:Ignorable="d"
-    d:DesignHeight="300"
+    d:DesignHeight="800"
     d:DesignWidth="400">
 
     <UserControl.Resources>
@@ -20,8 +20,6 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
-                <RowDefinition Height="70" />
-                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
             <StackPanel Grid.Row="0">
@@ -30,27 +28,10 @@
 
             <StackPanel Grid.Row="1" xmlns:src="using:Despegar.WP.UI.Controls.Hotels.Results" Margin="{StaticResource Top_Offset}" >
                 <TextBlock  Style="{StaticResource DetailCheckoutForeach}" x:Uid="Hotels_Buy_Details_Title" Text="Detalle"  Height="Auto"/>
+                <StackPanel Height="20"></StackPanel>
                 <src:HotelItem  DataContext="{Binding CrossParams.SelectedHotel}"></src:HotelItem>
             </StackPanel>
 
-            <StackPanel Grid.Row="2">
-            
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="40"/>
-                            <ColumnDefinition Width="auto" />
-                            <ColumnDefinition Width="auto"/>
-                        </Grid.ColumnDefinitions>
-
-                        <CheckBox Grid.Column="0" Style="{StaticResource CheckboxBase}" x:Name="AcceptConditionsCheckBox" IsChecked="{Binding IsTermsAndConditionsAccepted, Mode=TwoWay}"/>
-
-                        <TextBlock  Grid.Column="1"  x:Uid="Buy_Acept_Conditions" Style="{StaticResource DetailCheckoutTerms}" Text="Lei y acepto las"/>
-                        <Button Grid.Column="2" Click="AcceptConditions_Click"  Style="{StaticResource AcceptTermsAndConditionsButton}">
-                            <TextBlock  x:Uid="Buy_Buy_conditions"  Style="{StaticResource DetailCheckoutTermsButton}" Text="condiciones de compra"></TextBlock>
-                        </Button>
-                    </Grid>
-                       
-            </StackPanel>
         </Grid>
     </ScrollViewer>
 </UserControl>

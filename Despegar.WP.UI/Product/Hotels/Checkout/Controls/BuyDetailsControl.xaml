@@ -25,9 +25,9 @@
         <Grid.RowDefinitions >
             <RowDefinition Height="{StaticResource Block3p}" />
             <RowDefinition Height="{StaticResource Block3p}" />
-            <RowDefinition  Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition Height="{StaticResource Block1p_And_Half}"></RowDefinition>
-            <RowDefinition  Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
@@ -61,7 +61,7 @@
             </TextBlock>
 
             <TextBlock Style="{StaticResource DetailCheckoutDetail}" x:Uid="Buy_Details_Taxes" Text="impuestos y tasas"></TextBlock>
-            <TextBlock Style="{StaticResource DetailCheckoutDetail}" x:Uid="Buy_Details_AFIP" Text="Res. 3550/13 AFIP" Visibility="{Binding retention, Converter={StaticResource ZeroPriceToVisibilityConverter}}"></TextBlock>
+            <TextBlock Style="{StaticResource DetailCheckoutDetail}" x:Uid="Buy_Details_AFIP" Text="Res. 3550/13 AFIP" Visibility="{Binding PaymentDetails.retention, Converter={StaticResource ZeroPriceToVisibilityConverter}}"></TextBlock>
             <TextBlock Style="{StaticResource DetailCheckoutDetail}" x:Uid="Buy_Details_FinancialCost" Text="Costo financiero" Visibility="{Binding SelectedCard.financial_cost, Converter={StaticResource ZeroPriceToVisibilityConverter}}"></TextBlock>
         </StackPanel>
 
@@ -75,22 +75,21 @@
         </StackPanel>
 
         <!--DETAILS-->
-        <StackPanel Grid.Column="1"  Grid.Row="2" DataContext="{Binding PaymentDetails}">
+        <StackPanel Grid.Column="1"  Grid.Row="2" >
             <TextBlock Style="{StaticResource DetailCheckoutDetailPrice}" >
-                <Run Text="{Binding currency.mask}"></Run>
-                <Run Text="{Binding subtotal, Converter={StaticResource CurrencyConverter}}"></Run>
+                <Run Text="{Binding PaymentDetails.currency.mask}"></Run>
+                <Run Text="{Binding PaymentDetails.subtotal, Converter={StaticResource CurrencyConverter}}"></Run>
             </TextBlock>
-
             <TextBlock Style="{StaticResource DetailCheckoutDetailPrice}" >
-                <Run Text="{Binding currency.mask}"></Run>
-                <Run Text="{Binding totalCharges, Converter={StaticResource CurrencyConverter}}"></Run>
+                <Run Text="{Binding PaymentDetails.currency.mask}"></Run>
+                <Run Text="{Binding PaymentDetails.totalCharges, Converter={StaticResource CurrencyConverter}}"></Run>
             </TextBlock>
-            <TextBlock Style="{StaticResource DetailCheckoutDetailPrice}" Visibility="{Binding retention, Converter={StaticResource ZeroPriceToVisibilityConverter}}">
-                <Run Text="{Binding currency.mask}"></Run>
-                <Run Text="{Binding retention, Converter={StaticResource CurrencyConverter}}"></Run>
+            <TextBlock Style="{StaticResource DetailCheckoutDetailPrice}" Visibility="{Binding PaymentDetails.retention, Converter={StaticResource ZeroPriceToVisibilityConverter}}">
+                <Run Text="{Binding PaymentDetails.currency.mask}"></Run>
+                <Run Text="{Binding PaymentDetails.retention, Converter={StaticResource CurrencyConverter}}"></Run>
             </TextBlock>
             <TextBlock Style="{StaticResource DetailCheckoutDetailPrice}" Visibility="{Binding  SelectedCard.financial_cost, Converter={StaticResource ZeroPriceToVisibilityConverter}}">
-                <Run Text="{Binding currency.mask}"></Run>
+                <Run Text="{Binding PaymentDetails.currency.mask}"></Run>
                 <Run Text="{Binding SelectedCard.financial_cost, Converter={StaticResource CurrencyConverter}}"></Run>
             </TextBlock>
         </StackPanel>
