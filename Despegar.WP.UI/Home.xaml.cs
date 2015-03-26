@@ -202,7 +202,7 @@ namespace Despegar.WP.UI
                 pnr.upa_id = Despegar.WP.UI.Model.GlobalConfiguration.UPAId;
                 pnr.token = channel.Uri;
                 pnr.social_id = String.Empty;
-                pnr.country_id = (Despegar.WP.UI.Model.GlobalConfiguration.Site == null) ? "es" : Despegar.WP.UI.Model.GlobalConfiguration.Site;
+                pnr.country_id = (Despegar.WP.UI.Model.GlobalConfiguration.Site == null) ? "es" : Despegar.WP.UI.Model.GlobalConfiguration.Site.ToLower();
                 pnr.device_type = Despegar.WP.UI.Model.GlobalConfiguration.DeviceType;
                 pnr.brand = Despegar.WP.UI.Model.GlobalConfiguration.Brand;
 
