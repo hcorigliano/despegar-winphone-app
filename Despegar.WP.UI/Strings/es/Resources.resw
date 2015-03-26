@@ -1241,4 +1241,7 @@ La reserva no ha sido generada y no se le cobrará ningún cargo por la transacc
   <data name="Hotels_Checkout_Card_Data_Header" xml:space="preserve">
     <value>tarjeta</value>
   </data>
+  <data name="Hotels_Search_ERROR_MAX_DAYS_LIMIT" xml:space="preserve">
+    <value>La reserva máxima es de 30 días. Por favor, ingrese fechas distintas.</value>
+  </data>
 </root>
