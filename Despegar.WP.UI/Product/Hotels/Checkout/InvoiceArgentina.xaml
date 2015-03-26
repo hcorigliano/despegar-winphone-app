@@ -37,9 +37,8 @@
                 <controls:ValidationError ErrorPrefix="Flights_Checkout_Invoice_Arg_fiscal_id" ErrorCode="{Binding fiscal_id.CurrentError}" />
             </StackPanel>
 
-            <StackPanel Visibility="{Binding DataContext.IsFiscalNameRequired , ElementName=InvoiceArgControl, Converter={StaticResource VisibilityConverter}}">
                 <!-- State -->
-                <controls:FieldCombo x:Uid="Checkout_BillingAddress_State" Value="{Binding address.state_id.SelectedOption, Mode=TwoWay}" CodePath="value" DisplayTextPath="description" ItemsSource="{Binding address.state_id.options}"  />
+            <controls:FieldCombo x:Uid="Flights_Checkout_Invoice_Arg_State" Value="{Binding address.state_id.SelectedOption, Mode=TwoWay}" CodePath="value" DisplayTextPath="description" ItemsSource="{Binding address.state_id.options}"  />
 
 
                 <!-- City -->
@@ -47,7 +46,6 @@
                 <TextBlock Style="{StaticResource BaseTextLabel}" x:Uid="Flights_Checkout_Invoice_Arg_City" Text="Ciudad" />
                 <AutoSuggestBox TextBoxStyle="{StaticResource InputBase}" Style="{StaticResource AutosuggestBoxBase}" TextChanged="CityTexbox_TextChanged" SuggestionChosen="SuggestionChosen" TextMemberPath="full_name" KeyDown="AutoSuggestBox_KeyDown" />
                 <controls:ValidationError ErrorPrefix="Flights_Checkout_Invoice_Arg_City" ErrorCode="{Binding address.city_id.CurrentError}"  />
-            </StackPanel>
 
 
             <!-- Street -->
