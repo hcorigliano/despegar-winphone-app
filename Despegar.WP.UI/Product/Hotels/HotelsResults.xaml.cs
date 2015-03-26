@@ -34,9 +34,7 @@ namespace Despegar.WP.UI.Product.Hotels
             switch (e.ErrorCode)
             {
                 case "SEARCH_ERROR":
-                    int errorID = (int)e.Parameter;
-                    // TODO: find out which are the distinct errors
-
+                    int errorID = (int)e.Parameter;                    
                     switch (errorID) 
                     { 
                         case 2380:
