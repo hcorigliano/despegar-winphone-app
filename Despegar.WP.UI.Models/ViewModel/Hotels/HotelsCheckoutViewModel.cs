@@ -112,19 +112,19 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
             }
         }
 
+        //public int Avaliability
+        //{
+        //    get
+        //    {
+        //        return CrossParams.RoomPackSelected.room_availabilities[0].price.availability;
+        //    }
+        //}
+
         public string RoomName 
         {
             get 
             {
                 return CrossParams.RoomPackSelected.name;
-            }
-        }
-
-        public int Avaliability
-        {
-            get
-            {
-                return CrossParams.RoomPackSelected.room_availabilities[0].price.availability;
             }
         }
 
@@ -170,8 +170,6 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
         public bool IsTermsAndConditionsAccepted { get; set; }        
         public event EventHandler ShowRiskReview;
         public event EventHandler HideRiskReview;
-
-        public ItemsKey ItemSelected { get; set; }
 
         /// <summary>
         /// Selected "RadioButton" payment strategy
@@ -288,9 +286,9 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
         {
             get
             {
-                if (crossParams.BookingResponse != null)
+                if (CrossParams.BookingResponse != null)
                 {
-                    return crossParams.BookingResponse.risk_questions.Where(x => x.free_text.ToLower() == "true").ToList();
+                    return CrossParams.BookingResponse.risk_questions.Where(x => x.free_text.ToLower() == "true").ToList();
                 }
                 else
                 {
@@ -303,9 +301,9 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
         {
             get
             {
-                if (crossParams.BookingResponse != null)
+                if (CrossParams.BookingResponse != null)
                 {
-                    return crossParams.BookingResponse.risk_questions.Where(x => x.free_text.ToLower() == "false").ToList();
+                    return CrossParams.BookingResponse.risk_questions.Where(x => x.free_text.ToLower() == "false").ToList();
                 }
                 else
                 {
@@ -616,10 +614,10 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
                     {
                         BugTracker.LeaveBreadcrumb("Hotels checkout MAPI booking error response code: " + CrossParams.BookingResponse.Error.code.ToString());
 
-                        switch (crossParams.BookingResponse.Error.code)
+                        switch (CrossParams.BookingResponse.Error.code)
                         {
                             case 2366:
-                                OnViewModelError("DUPLICATED_BOOKING", crossParams.BookingResponse.Error);
+                                OnViewModelError("DUPLICATED_BOOKING", CrossParams.BookingResponse.Error);
                                 break;
                             default:
                                 // API Error ocurred, Check CODE and inform the user
@@ -888,7 +886,7 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
         }
         private bool ValidateAnswers()
         {
-            foreach (RiskQuestion question in crossParams.BookingResponse.risk_questions)
+            foreach (RiskQuestion question in CrossParams.BookingResponse.risk_questions)
             {
                 if (question.risk_answer.text == null || question.risk_answer.text == "")
                 {

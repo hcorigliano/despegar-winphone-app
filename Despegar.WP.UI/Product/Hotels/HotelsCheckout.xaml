@@ -59,7 +59,7 @@
             <!-- Dynamically added -->
             
             <!--Billing Address-->
-            <PivotItem x:Name="Pivot_BILLING_ADDRESS"  x:Uid="Flight_Checkout_Billing_Address" Style="{StaticResource PivotItemBase}" >
+            <PivotItem x:Name="Pivot_BILLING_ADDRESS"  x:Uid="Hotels_Checkout_Billing_Address" Style="{StaticResource PivotItemBase}" >
                 <src:BillingAddress />
             </PivotItem>
             

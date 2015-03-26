@@ -1146,7 +1146,7 @@ La reserva no ha sido generada y no se le cobrará ningún cargo por la transacc
   </data>
   <data name="Hotels_Buy_Details_Nights_Count.Text" xml:space="preserve">
     <value>noches</value>
-  </data>     
+  </data>
   <data name="Flight_Checkout_Billing_Address.Header" xml:space="preserve">
     <value>dirección</value>
   </data>
@@ -1164,7 +1164,7 @@ La reserva no ha sido generada y no se le cobrará ningún cargo por la transacc
   </data>
   <data name="Hotels_Buy_Details_Title.Text" xml:space="preserve">
     <value>Detalle de compra</value>
-   </data>
+  </data>
   <data name="Checkout_BillingAddress_Country.Label" xml:space="preserve">
     <value>País</value>
   </data>
@@ -1182,7 +1182,7 @@ La reserva no ha sido generada y no se le cobrará ningún cargo por la transacc
   </data>
   <data name="Page_Hotel_Thanks_Resumen" xml:space="preserve">
     <value>resumen</value>
-   </data>
+  </data>
   <data name="Checkout_BillingAddress_Floor.Label" xml:space="preserve">
     <value>Piso</value>
   </data>
@@ -1252,5 +1252,17 @@ La reserva no ha sido generada y no se le cobrará ningún cargo por la transacc
   </data>
   <data name="Hotels_Search_ERROR_SEARCH_FAILED_TITLE" xml:space="preserve">
     <value>Error</value>
+  </data>
+  <data name="Hotels_Checkout_Billing_Address.Header" xml:space="preserve">
+    <value>direccion</value>
+  </data>
+  <data name="Hotel_Page_Checkout.Text" xml:space="preserve">
+    <value>COMPRAR HOTEL</value>
+  </data>
+  <data name="Hotel_Thanks_Booking_Detail.Text" xml:space="preserve">
+    <value>Detalle del hotel</value>
+  </data>
+  <data name="Hotel_Thanks_Room_Detail.Text" xml:space="preserve">
+    <value>Detalle de la habitacion</value>
   </data>
 </root>

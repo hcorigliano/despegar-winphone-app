@@ -1145,7 +1145,7 @@ Isso pode ter sido causado por dados incorretos, limite de compra insuficiente o
   </data>
   <data name="Hotels_Buy_Details_Nights_Count.Text" xml:space="preserve">
     <value>noites</value>
-   </data>
+  </data>
   <data name="Flight_Checkout_Billing_Address.Header" xml:space="preserve">
     <value>endereço</value>
   </data>
@@ -1154,7 +1154,7 @@ Isso pode ter sido causado por dados incorretos, limite de compra insuficiente o
   </data>
   <data name="Hotels_Buy_Details_Rooms_Count.Text" xml:space="preserve">
     <value>quarto</value>
-   </data>
+  </data>
   <data name="Checkout_BillingAddress_City.Label" xml:space="preserve">
     <value>Cidade</value>
   </data>
@@ -1163,7 +1163,7 @@ Isso pode ter sido causado por dados incorretos, limite de compra insuficiente o
   </data>
   <data name="Hotels_Buy_Details_Title.Text" xml:space="preserve">
     <value>Detalhe de Compra</value>
-   </data>
+  </data>
   <data name="Checkout_BillingAddress_Country.Label" xml:space="preserve">
     <value>País</value>
   </data>
@@ -1172,7 +1172,7 @@ Isso pode ter sido causado por dados incorretos, limite de compra insuficiente o
   </data>
   <data name="Page_Hotel_Thanks_Detalle" xml:space="preserve">
     <value>detalhe</value>
-   </data>
+  </data>
   <data name="Checkout_BillingAddress_Department.Label" xml:space="preserve">
     <value>Apto</value>
   </data>
@@ -1251,5 +1251,17 @@ A reserva não foi gerado e não cobra nenhuma taxa para a transação."</value>
   </data>
   <data name="Hotels_Duplicated_Booking_Title" xml:space="preserve">
     <value>Reserva</value>
+  </data>
+  <data name="Hotels_Checkout_Billing_Address.Header" xml:space="preserve">
+    <value>endereço</value>
+  </data>
+  <data name="Hotel_Page_Checkout.Text" xml:space="preserve">
+    <value>COMPRAR HOTEL</value>
+  </data>
+  <data name="Hotel_Thanks_Booking_Detail.Text" xml:space="preserve">
+    <value>Detalhes do hotel</value>
+  </data>
+  <data name="Hotel_Thanks_Room_Detail.Text" xml:space="preserve">
+    <value>Detalhes do quarto</value>
   </data>
 </root>
