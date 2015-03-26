@@ -125,10 +125,15 @@ namespace Despegar.Core.Neo
         {
             logger.Log("[Core]: Changing Site...");
 
+            string lang = "es";
+
+            if (site == "br")
+                lang = "pt";
+
             this.site = siteCode;
-            IoC.Resolve<IMapiConnector>().ConfigureSiteAndLanguage(site, GetLanguage());
+            IoC.Resolve<IMapiConnector>().ConfigureSiteAndLanguage(site, lang);
             IoC.Resolve<IApiv1Connector>().Configure(x_client, uow, site);
-            IoC.Resolve<IApiv3Connector>().ConfigureSiteAndLanguage(site, GetLanguage());
+            IoC.Resolve<IApiv3Connector>().ConfigureSiteAndLanguage(site, lang);
 
             logger.Log("[Core]: Site Changed.");
         }
