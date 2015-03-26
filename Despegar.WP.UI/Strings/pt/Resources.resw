@@ -1093,7 +1093,7 @@ A reserva não foi gerado e não cobra nenhuma taxa para a transação.</value>
   <data name="Page_Hotels_Reviews_Comments_From.Text" xml:space="preserve">
     <value>- Desde</value>
   </data>
-  <data name="habitacion(es) disponible(s)" xml:space="preserve">
+  <data name="Hotel_Rooms_Availability.Text" xml:space="preserve">
     <value>quarto(s) disponível</value>
   </data>
   <data name="Hotel_Details_Show_Room_Description.Text" xml:space="preserve">
@@ -1253,13 +1253,22 @@ A reserva não foi gerado e não cobra nenhuma taxa para a transação."</value>
     <value>Reserva</value>
   </data>
   <data name="Hotels_Checkout_Billing_Address.Header" xml:space="preserve">
+   <value>endereço</value>
+  </data>
+  <data name="Flight_Checkout_Billing_Address_Header" xml:space="preserve">
     <value>endereço</value>
   </data>
   <data name="Hotel_Page_Checkout.Text" xml:space="preserve">
     <value>COMPRAR HOTEL</value>
   </data>
+  <data name="Hotels_Checkout_Card_Data_Header" xml:space="preserve">
+    <value>cartão</value>
+  </data>
   <data name="Hotel_Thanks_Booking_Detail.Text" xml:space="preserve">
     <value>Detalhes do hotel</value>
+  </data>
+  <data name="Hotels_Search_ERROR_MAX_DAYS_LIMIT" xml:space="preserve">
+    <value>A reserva máxima é de 30 dias. Por favor, insira nova data.</value>
   </data>
   <data name="Hotel_Thanks_Room_Detail.Text" xml:space="preserve">
     <value>Detalhes do quarto</value>

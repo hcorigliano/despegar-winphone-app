@@ -10,6 +10,7 @@ namespace Despegar.Core.Neo.Business.Common.Checkout
         public bool required { get; set; }
         public RegularField country { get; set; }
         public RegularOptionsField state { get; set; }
+        public RegularOptionsField state_id { get; set; }
         public RegularField city { get; set; }
         public RegularField street { get; set; }
         public RegularField number { get; set; }

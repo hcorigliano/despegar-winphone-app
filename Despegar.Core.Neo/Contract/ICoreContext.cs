@@ -14,7 +14,7 @@ namespace Despegar.Core.Neo.Contract
     {
         string GetSite();
 
-        string GetLanguage();
+        string GetLanguage(bool isDecolar);
 
         string GetUOW();
 

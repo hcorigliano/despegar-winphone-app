@@ -1096,6 +1096,9 @@ La reserva no ha sido generada y no se le cobrará ningún cargo por la transacc
   <data name="Common_Show_More_Fares.Text" xml:space="preserve">
     <value>Ver más tarifas</value>
   </data>
+  <data name="Common_Cancelar_Label.Label" xml:space="preserve">
+    <value>Cancelar</value>
+  </data>
   <data name="Page_Hotels_Reviews_Comments_From.Text" xml:space="preserve">
     <value>- Desde</value>
   </data>
@@ -1256,11 +1259,20 @@ La reserva no ha sido generada y no se le cobrará ningún cargo por la transacc
   <data name="Hotels_Checkout_Billing_Address.Header" xml:space="preserve">
     <value>direccion</value>
   </data>
+  <data name="Flight_Checkout_Billing_Address_Header" xml:space="preserve">
+    <value>dirección</value>
+  </data>
   <data name="Hotel_Page_Checkout.Text" xml:space="preserve">
     <value>COMPRAR HOTEL</value>
   </data>
+  <data name="Hotels_Checkout_Card_Data_Header" xml:space="preserve">
+    <value>tarjeta</value>
+  </data>
   <data name="Hotel_Thanks_Booking_Detail.Text" xml:space="preserve">
     <value>Detalle del hotel</value>
+  </data>
+  <data name="Hotels_Search_ERROR_MAX_DAYS_LIMIT" xml:space="preserve">
+    <value>La reserva máxima es de 30 días. Por favor, ingrese fechas distintas.</value>
   </data>
   <data name="Hotel_Thanks_Room_Detail.Text" xml:space="preserve">
     <value>Detalle de la habitacion</value>

@@ -307,26 +307,27 @@ namespace Despegar.Core.Neo.Business.Forms
                     {
                         invoice.Add("fiscal_status", invoiceFields.fiscal_status.CoreValue);
 
-                        if (invoiceFields.fiscal_status.CoreValue != "FINAL")
+                        if (invoiceFields.fiscal_status.CoreValue != "FINAL_CONSUMER")
                             invoice.Add("fiscal_name", invoiceFields.fiscal_name.CoreValue);
                     }
 
                     if (invoiceFields.address.number != null)
                         address.Add("number", invoiceFields.address.number.CoreValue);
-                    if (invoiceFields.address.floor != null)
+                    if (invoiceFields.address.floor != null && invoiceFields.address.floor.CoreValue != null)
                         address.Add("floor", invoiceFields.address.floor.CoreValue);
-                    if (invoiceFields.address.department != null)
+                    if (invoiceFields.address.department != null && invoiceFields.address.department.CoreValue != null)
                         address.Add("department", invoiceFields.address.department.CoreValue);
-                    if (invoiceFields.address.city_id != null)
-                        address.Add("city_id", invoiceFields.address.city_id.CoreValue);
-                    if (invoiceFields.address.city != null)
-                        address.Add("city", invoiceFields.address.city.CoreValue);
 
-                    if (invoiceFields.address.state != null)
-                        address.Add("state", invoiceFields.address.state.CoreValue);
 
-                    if (invoiceFields.address.country != null)
-                        address.Add("country", invoiceFields.address.country.CoreValue); //this is fill with the response of service
+                    //if (invoiceFields.fiscal_status.CoreValue != "FINAL_CONSUMER")
+                    //{
+                        if (invoiceFields.address.city_id != null)
+                            address.Add("city_id", invoiceFields.address.city_id.CoreValue);
+                        if (invoiceFields.address.state_id != null)
+                            address.Add("state_id", invoiceFields.address.state_id.CoreValue);
+                        //if (invoiceFields.address.country != null)
+                        //    address.Add("country", invoiceFields.address.country.CoreValue); //this is fill with the response of service
+                    //}
 
                     if (invoiceFields.address.postal_code != null)
                         address.Add("postal_code", invoiceFields.address.postal_code.CoreValue);

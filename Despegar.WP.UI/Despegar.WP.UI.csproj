@@ -393,7 +393,6 @@
       <DependentUpon>HotelsSortBy.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Strings\AppResources.cs" />
     <Page Include="Controls\Alert.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
