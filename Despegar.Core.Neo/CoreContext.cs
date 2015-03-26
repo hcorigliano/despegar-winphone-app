@@ -48,13 +48,9 @@ namespace Despegar.Core.Neo
             return site;
         }
 
-        public string GetLanguage() 
-        { 
-#if DECOLAR
-            return "PT";
-#endif
-
-            return "ES"; 
+        public string GetLanguage(bool isDecolar)
+        {
+            return isDecolar ? "pt" : "es";            
         }
 
         public string GetUOW()
@@ -129,10 +125,15 @@ namespace Despegar.Core.Neo
         {
             logger.Log("[Core]: Changing Site...");
 
+            string lang = "es";
+
+            if (siteCode.ToLowerInvariant() == "br")
+                lang = "pt";
+
             this.site = siteCode;
-            IoC.Resolve<IMapiConnector>().ConfigureSiteAndLanguage(site, GetLanguage());
+            IoC.Resolve<IMapiConnector>().ConfigureSiteAndLanguage(site, lang);
             IoC.Resolve<IApiv1Connector>().Configure(x_client, uow, site);
-            IoC.Resolve<IApiv3Connector>().ConfigureSiteAndLanguage(site, GetLanguage());
+            IoC.Resolve<IApiv3Connector>().ConfigureSiteAndLanguage(site, lang);
 
             logger.Log("[Core]: Site Changed.");
         }

@@ -6,6 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:conv="using:Despegar.WP.UI.Common.Converter"
+    xmlns:dev="using:Despegar.WP.UI.Developer.Controls"
     mc:Ignorable="d" 
 >
 
@@ -23,7 +24,6 @@
     </UserControl.Resources>
 
     <Grid x:Name="MainGrid"  Height="{StaticResource dBlock4}">
-       
 
             <Grid.ColumnDefinitions >
                 <ColumnDefinition Width="{StaticResource Block4}"/>

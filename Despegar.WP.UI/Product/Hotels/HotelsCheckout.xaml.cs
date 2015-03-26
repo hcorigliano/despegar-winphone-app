@@ -36,6 +36,7 @@ namespace Despegar.WP.UI.Product.Hotels
         private HotelsCheckoutViewModel ViewModel { get; set; }
         private ModalPopup loadingPopup = new ModalPopup(new Loading());
         private ModalPopup riskPopup;
+        private bool pivotInstallmentIsLoaded { get; set; }
 
         public HotelsCheckout()
         {
@@ -55,6 +56,7 @@ namespace Despegar.WP.UI.Product.Hotels
             // Initialize Checkout
             ViewModel = IoC.Resolve<HotelsCheckoutViewModel>();
             ViewModel.PropertyChanged += Checkloading;
+            ViewModel.PropertyChanged += CheckSections;
             ViewModel.ShowRiskReview += this.ShowRisk;
             ViewModel.HideRiskReview += this.HideRisk;
             ViewModel.ViewModelError += ErrorHandler;
@@ -81,18 +83,12 @@ namespace Despegar.WP.UI.Product.Hotels
         /// View Adaptations based on selected country
         /// </summary>
         private void ConfigureFields()
-        {
+        {           
             if (ViewModel.SelectedCard==null || ViewModel.CoreBookingFields == null)
             {
                 return;
             }
 
-            if (ViewModel.SelectedCard.card == null && ViewModel.CoreBookingFields.form.CardInfo == null && ViewModel.CoreBookingFields.form.Voucher == null)
-            {
-                //var test = MainPivot.IndexFromContainer(MainPivot.FindName("Pivot_INSTALLMENT"));
-
-                MainPivot.Items.Remove(MainPivot.FindName("Pivot_CARD"));
-            }
         }
 
         # region ** ERROR HANDLING **
@@ -256,45 +252,136 @@ namespace Despegar.WP.UI.Product.Hotels
                     loadingPopup.Show();
                 else
                     loadingPopup.Hide();
-            }
+            }            
+        }
+
+        private void CheckSections(object sender, PropertyChangedEventArgs e)
+        {
             if (e.PropertyName == "SelectedInstallment")
             {
-                //Revisar si hay que mostrar invoice.
-                if (ViewModel.CoreBookingFields.CheckoutMethodSelected.payment != null && ViewModel.CoreBookingFields.CheckoutMethodSelected.payment.invoice != null)
+                var currentMethod = ViewModel.CoreBookingFields.form.CheckoutMethodSelected;
+
+                // Checks for invoice
+                if (ViewModel.CoreBookingFields.form.Invoice != null)
                 {
                     if (!MainPivot.Items.Any(x => ((PivotItem)x).Name == "Pivot_INVOICE"))
                     {
-
-                        //this is necesary
-                        Pivot_INSTALLMENT.Loaded += Insert_Invoice;
+                        //Add Invoice. The subscription is necessary 
+                        if (!pivotInstallmentIsLoaded)
+                            Pivot_INSTALLMENT.Loaded += Insert_Invoice;
+                        else
+                            Insert_Invoice(null, null);
                     }
                 }
-                else
+                else if (MainPivot.Items.Any(x => ((PivotItem)x).Name == "Pivot_INVOICE"))
                 {
-                    if (MainPivot.Items.Any(x => ((PivotItem)x).Name == "Pivot_INVOICE"))
+                    //Eliminar Invoice
+                    MainPivot.Items.Remove(MainPivot.FindName("Pivot_INVOICE"));
+                }
+
+
+                //Check billingAddress
+                if (ViewModel.CoreBookingFields.form.BillingAddress != null)
+                {
+                    if (!MainPivot.Items.Any(x => ((PivotItem)x).Name == "Pivot_BILLING_ADDRESS"))
                     {
-                        //Eliminar Invoice
-                        MainPivot.Items.Remove(MainPivot.FindName("Pivot_INVOICE"));
+                        //Add billingAddress
+                        if (!pivotInstallmentIsLoaded)
+                            Pivot_INSTALLMENT.Loaded += Insert_Billing_Address;
+                        else
+                            Insert_Billing_Address(null, null);
                     }
                 }
+                else if (MainPivot.Items.Any(x => ((PivotItem)x).Name == "Pivot_BILLING_ADDRESS"))
+                {
+                    //Eliminar billingAddress
+                    MainPivot.Items.Remove(MainPivot.FindName("Pivot_BILLING_ADDRESS"));
+                }
+
+
+                //Check CardData
+                if (ViewModel.CoreBookingFields.form.CardInfo != null)
+                {
+                    if (!MainPivot.Items.Any(x => ((PivotItem)x).Name == "Pivot_CARD"))
+                    {
+                        //Add CardData
+                        if (!pivotInstallmentIsLoaded)
+                            Pivot_INSTALLMENT.Loaded += Insert_Card_Info;
+                        else
+                            Insert_Card_Info(null, null);
+                    }
+                }
+                else if (MainPivot.Items.Any(x => ((PivotItem)x).Name == "Pivot_CARD"))
+                {
+                    //Eliminar CardData
+                    MainPivot.Items.Remove(MainPivot.FindName("Pivot_CARD"));
+                }           
+
             }
+        }
+
+        private void Insert_Card_Info(object sender, RoutedEventArgs e)
+        {
+            PivotItem pivotItem = new PivotItem();
+
+            var loader = new Windows.ApplicationModel.Resources.ResourceLoader();
+
+            pivotItem.Header = loader.GetString("Hotels_Checkout_Card_Data_Header"); //Agregar a resource
+            pivotItem.Name = "Pivot_CARD";
+            UserControl usc = new CardData();
+            usc.DataContext = this.DataContext;
+            pivotItem.Content = usc;
+            pivotItem.Margin = new Thickness(0, 3, 0, 0);
+
+            int index = FindIndexWithPivotItemName(MainPivot, "Pivot_INSTALLMENT");
+
+            MainPivot.Items.Insert(index + 1, pivotItem);
+
+            pivotInstallmentIsLoaded = true;
+            Pivot_INSTALLMENT.Loaded -= Insert_Card_Info;
+        }
+
+        private void Insert_Billing_Address(object sender, RoutedEventArgs e)
+        {
+            PivotItem pivotItem = new PivotItem();
+
+            var loader = new Windows.ApplicationModel.Resources.ResourceLoader();
+
+            pivotItem.Header = loader.GetString("Flight_Checkout_Billing_Address_Header"); //Agregar a resource
+            pivotItem.Name = "Pivot_BILLING_ADDRESS";
+            UserControl usc = new BillingAddress();
+            usc.DataContext = this.DataContext;
+            pivotItem.Content = usc;
+            pivotItem.Margin = new Thickness(0, 3, 0, 0);
+
+
+            int index = FindIndexWithPivotItemName(MainPivot, "Pivot_INVOICE");
+            if (index == -1)
+                index = FindIndexWithPivotItemName(MainPivot, "Pivot_CARD");
+
+
+            MainPivot.Items.Insert(index + 1, pivotItem);
+
+            pivotInstallmentIsLoaded = true;
+            Pivot_INSTALLMENT.Loaded -= Insert_Billing_Address;
         }
 
         private void Insert_Invoice(object sender, RoutedEventArgs e)
         {
-            PivotItem pvit = new PivotItem();
-            pvit.Header = "factura fiscal";
-            pvit.Name = "Pivot_INVOICE";
+            // Add XUID, do not Harcode strings UPDATE: invoice is only for arg. & XUID its only for xaml , however we must add new resource.
+            PivotItem pivotItem = new PivotItem();
+            pivotItem.Header = "factura fiscal";
+            pivotItem.Name = "Pivot_INVOICE";
             UserControl usc = new InvoiceArgentina();
             usc.DataContext = this.DataContext;
-            pvit.Content = usc;
-            pvit.Margin = new Thickness(0, 3, 0, 0); //<Setter Property="Margin" Value="0,3,0,0" />
+            pivotItem.Content = usc;
+            pivotItem.Margin = new Thickness(0, 3, 0, 0); 
             
-           // MainPivot.IndexFromContainer
-            //int test = (MainPivot.IndexFromContainer(MainPivot.FindName("Hotels_Checkout_Card_Data")) + 1 ;
-                //Hotels_Checkout_Card_Data
-            MainPivot.Items.Insert(4, pvit);
-            //pvit.Style = StaticResource //PivotItemBase
+            int index = FindIndexWithPivotItemName(MainPivot, "Pivot_CARD");
+            MainPivot.Items.Insert(index + 1, pivotItem);
+
+            pivotInstallmentIsLoaded = true;
+            Pivot_INSTALLMENT.Loaded -= Insert_Invoice;
         }
 
         private void ShowRisk(Object sender, EventArgs e)
@@ -308,6 +395,23 @@ namespace Despegar.WP.UI.Product.Hotels
             riskPopup.Hide();
         }
 
+        private async void AcceptConditions_Click(object sender, RoutedEventArgs e)
+        {
+            string uriToLaunch = @"https://secure.despegar.com.ar/book/flights/checkout/conditions/wp";
+            var uri = new Uri(uriToLaunch);
+            var success = await Windows.System.Launcher.LaunchUriAsync(uri);
+
+            if (success)
+            {
+                // URI launched
+            }
+            else
+            {
+                // URI launch failed
+            }
+
+        }
+
         private void HardwareButtons_BackPressed(object sender, BackPressedEventArgs e)
         {
             e.Handled = true;
@@ -319,6 +423,18 @@ namespace Despegar.WP.UI.Product.Hotels
 
                 ViewModel.Navigator.GoBack();
             }
+        }
+
+        private int FindIndexWithPivotItemName(Pivot mainPivot ,string name)
+        {
+            int i = 0;
+            foreach(PivotItem pivotItem in mainPivot.Items)
+            {
+                if (pivotItem.Name == name)
+                    return i;
+                i++;
+            }
+            return -1;
         }
     }
 }

@@ -35,7 +35,7 @@ namespace Despegar.WP.UI.Product.Hotels.Checkout
                 try
                 {
                     ViewModel.CoreBookingFields.form.Invoice.address.city_id.CoreValue = null;
-                    string stateId = ViewModel.CoreBookingFields.form.Invoice.address.state.CoreValue;
+                    string stateId = ViewModel.CoreBookingFields.form.Invoice.address.state_id.CoreValue;
                     sender.ItemsSource = (IEnumerable)(await ViewModel.GetCities("AR", sender.Text, stateId));
                 }
                 catch (Exception)

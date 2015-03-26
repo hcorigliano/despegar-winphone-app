@@ -63,8 +63,8 @@
     <GridLength x:Key="Block3p">88.8</GridLength>
     <x:Double x:Key="dBlock3">79.2</x:Double>
     <x:Double x:Key="dBlock3p">88.8</x:Double>
-    <GridLength x:Key="Block4">118.4</GridLength>
-    <x:Double x:Key="dBlock4">118.4</x:Double>
+    <GridLength x:Key="Block4">108.8</GridLength>
+    <x:Double x:Key="dBlock4">108.8</x:Double>
     <GridLength x:Key="Block4p">138.4</GridLength>
     <GridLength x:Key="Block5">138.4</GridLength>
     <GridLength x:Key="Block5p">148</GridLength>
@@ -152,6 +152,11 @@
         <Setter Property="FontFamily" Value="Segoe UI SemiLight" />
         <Setter Property="FontSize" Value="17" />
     </Style>
+    <Style x:Key="SegoeSemilight17alpha" TargetType="TextBlock" BasedOn="{StaticResource BaseText}">
+        <Setter Property="FontFamily" Value="Segoe UI SemiLight" />
+        <Setter Property="FontSize" Value="17" />
+        <Setter Property="Opacity" Value="0.6" />
+    </Style>
     <Style x:Key="SegoeSemilight20" TargetType="TextBlock" BasedOn="{StaticResource BaseText}">
         <Setter Property="FontFamily" Value="Segoe UI SemiLight" />
         <Setter Property="FontSize" Value="20" />
@@ -159,6 +164,18 @@
     <Style x:Key="SegoeSemilight24" TargetType="TextBlock" BasedOn="{StaticResource BaseText}">
         <Setter Property="FontFamily" Value="Segoe UI SemiLight" />
         <Setter Property="FontSize" Value="24" />
+    </Style>
+    <Style x:Key="SegoeSemilight24alphaBlue" TargetType="TextBlock" BasedOn="{StaticResource BaseText}">
+        <Setter Property="FontFamily" Value="Segoe UI SemiLight" />
+        <Setter Property="FontSize" Value="24" />
+        <Setter Property="Opacity" Value="0.6" />
+        <Setter Property="Foreground" Value="{StaticResource Blue80}" />
+    </Style>
+    <Style x:Key="SegoeSemilight24alphaYellow" TargetType="TextBlock" BasedOn="{StaticResource BaseText}">
+        <Setter Property="FontFamily" Value="Segoe UI SemiLight" />
+        <Setter Property="FontSize" Value="24" />
+        <Setter Property="Opacity" Value="0.6" />
+        <Setter Property="Foreground" Value="{StaticResource Yellow20}" />
     </Style>
     <Style x:Key="SegoeSemilight28" TargetType="TextBlock" BasedOn="{StaticResource BaseText}">
         <Setter Property="FontFamily" Value="Segoe UI SemiLight" />
@@ -277,6 +294,13 @@
         <Setter Property="Width"  Value="16" />
         <Setter Property="Height" Value="16" />
         <Setter Property="Background"  Value="{StaticResource Red20Brush}" />
+    </Style>
+    <Style x:Key="IconButtonRedSmall" TargetType="Button">
+        <Setter Property="Width"  Value="16" />
+        <Setter Property="Height" Value="16" />
+        <Setter Property="Background"  Value="{StaticResource Red20Brush}" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
+        <Setter Property="VerticalAlignment" Value="Top" />
     </Style>
     <Style x:Key="IcoLightnBlueSmall" TargetType="Grid" BasedOn="{StaticResource IconBase}">
         <Setter Property="Width"  Value="16" />

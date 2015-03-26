@@ -14,14 +14,14 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
 
-namespace Despegar.WP.UI.Controls.Hotels.Results
+namespace Despegar.WP.UI.Product.Hotels.Checkout
 {
-    public sealed partial class HotelItem : UserControl
+ 
+    public sealed partial class BillingAddress : UserControl
     {
-        public HotelItem()
+        public BillingAddress()
         {
             this.InitializeComponent();
-            MainGrid.Width = Window.Current.Bounds.Width - 50;
-        }
+        }     
     }
 }

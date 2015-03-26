@@ -9,24 +9,25 @@
     xmlns:dic="using:Despegar.WP.UI.Strings"
     xmlns:dev="using:Despegar.WP.UI.Developer.Controls"
     mc:Ignorable="d"
-    d:DesignHeight="300"
+    d:DesignHeight="700"
     d:DesignWidth="400">
 
     <UserControl.Resources>
         <conv:NullToVisibilityConverter x:Name="NullToVisibilityConverter" ></conv:NullToVisibilityConverter>
         <conv:CurrencyConverter x:Name="CurrencyConverter" ></conv:CurrencyConverter>
         <conv:ZeroPriceToVisibilityConverter x:Name="ZeroPriceToVisibilityConverter" ></conv:ZeroPriceToVisibilityConverter>
+        <conv:FalseToVisibilityConverter x:Name="FalseToVisibilityConverter" ></conv:FalseToVisibilityConverter>
     </UserControl.Resources>
     
 
 
     <Grid>
         <Grid.RowDefinitions >
-            <RowDefinition Height="{StaticResource Block3p}"></RowDefinition>
+            <RowDefinition Height="{StaticResource Block2p}" />
+            <RowDefinition MinHeight="{StaticResource dBlock2p}" />
+            <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition Height="{StaticResource Block1p_And_Half}"></RowDefinition>
-            <RowDefinition  Height="auto"></RowDefinition>
-            <RowDefinition Height="{StaticResource Block1p_And_Half}"></RowDefinition>
-            <RowDefinition  Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
@@ -37,59 +38,82 @@
 
         <!--PER PASSAGER-->
         <StackPanel Grid.Column="0"  Grid.Row="0" >
-            <StackPanel >
-                <TextBlock Width="{StaticResource dBlock7p}" Style="{StaticResource DetailCheckoutForeach}" x:Uid="Buy_Details_Fare_Per_Adult" Text="Tarifa por habitacion por noche" TextWrapping="Wrap"></TextBlock>
-            </StackPanel>
+            <TextBlock  Style="{StaticResource SegoeSemilight17alpha}" x:Uid="Hotels_Buy_Details_Fare_Per_Room" Text="Tarifa por habitacion por noche" TextWrapping="Wrap" Height="Auto"/>
         </StackPanel>
 
-        <!--DETAILS-->
+        <!--SERVICE DETAILS -->
+        <StackPanel Grid.ColumnSpan="2"  Grid.Row="1" >
+            <TextBlock  Style="{StaticResource SegoeSemilight24alphaBlue}" TextWrapping="Wrap">
+                <Run x:Uid="Hotels_Buy_Room_Details" Text="Habitacion "></Run>
+                <Run Text="{Binding RoomName}"></Run>
+            </TextBlock>     
+        </StackPanel>
+
+        <!--RATE DETAILS -->
         <StackPanel Grid.Column="0" Grid.Row="2">
-            <TextBlock Style="{StaticResource DetailCheckoutDetail}" >
-                <Run Text="{Binding adult_quantity}"></Run>
-                <Run  x:Uid="Buy_Details_Fare_Adult" Text="1 adulto"></Run>
+            <TextBlock Style="{StaticResource SegoeSemilight17alpha}" Text="{Binding MealPlan}" Height="{StaticResource dBlock1p}" ></TextBlock>
+            <TextBlock Style="{StaticResource SegoeSemilight17alpha}" Text="{Binding CancelationPolicy}" TextWrapping="Wrap" Height="{StaticResource dBlock1p}"></TextBlock>
+            <TextBlock Style="{StaticResource SegoeSemilight17alpha}" Height="{StaticResource dBlock1p}" >
+                <Run Text="{Binding TotalNights}"></Run>
+                <Run  x:Uid="Hotels_Buy_Details_Nights_Count" Text="1 noche - "></Run>
+                <Run Text="{Binding TotalRooms}"></Run>
+                <Run  x:Uid="Hotels_Buy_Details_Rooms_Count" Text="1 habitacion"></Run>
             </TextBlock>
 
-            <TextBlock Style="{StaticResource DetailCheckoutDetail}" x:Uid="Buy_Details_Taxes" Text="impuestos y tasas"></TextBlock>
-            <TextBlock Style="{StaticResource DetailCheckoutDetail}" x:Uid="Buy_Details_AFIP" Text="Res. 3550/13 AFIP" Visibility="{Binding retention, Converter={StaticResource ZeroPriceToVisibilityConverter}}"></TextBlock>
+            <TextBlock Style="{StaticResource SegoeSemilight17alpha}" Height="{StaticResource dBlock1p}" x:Uid="Buy_Details_Taxes" Text="impuestos y tasas"></TextBlock>
+            <TextBlock Style="{StaticResource SegoeSemilight17alpha}" Height="{StaticResource dBlock1p}" x:Uid="Buy_Details_AFIP" Text="Res. 3550/13 AFIP" Visibility="{Binding PaymentDetails.retention, Converter={StaticResource ZeroPriceToVisibilityConverter}}"></TextBlock>
+            <TextBlock Style="{StaticResource SegoeSemilight17alpha}" Height="{StaticResource dBlock1p}" x:Uid="Buy_Details_FinancialCost" Text="Costo financiero" Visibility="{Binding SelectedCard.financial_cost, Converter={StaticResource ZeroPriceToVisibilityConverter}}"></TextBlock>
         </StackPanel>
-
-        <!--TOTAL-->
-        <TextBlock Style="{StaticResource DetailCheckoutTotal}" Grid.Column="0" Grid.Row="4" x:Uid="Buy_Details_total" Text="TOTAL"></TextBlock>
-
-
-
 
 
         <!--PER PASSAGER-->
-        <StackPanel Margin="0,5,0,0"  Grid.Column="1"  Grid.Row="0" >
-            <TextBlock Style="{StaticResource DetailCheckoutForeachPrice}" >
+        <StackPanel Margin="0,5,0,0"  Grid.Column="1"  Grid.Row="0" DataContext="{Binding PaymentDetails}"  >
+            <TextBlock Style="{StaticResource SegoeSemilight17alpha}" >
                 <Run Text="{Binding currency.mask}"></Run>
-                <Run Text="{Binding adult_base , Converter={StaticResource CurrencyConverter}}" ></Run>
+                <Run Text="{Binding nightly.best , Converter={StaticResource CurrencyConverter}}" ></Run>
             </TextBlock>
         </StackPanel>
 
         <!--DETAILS-->
-        <StackPanel Grid.Column="1"  Grid.Row="2">
-            <TextBlock Style="{StaticResource DetailCheckoutDetailPrice}" Grid.Row="3" >
-                <Run Text="{Binding currency.mask}"></Run>
-                <Run Text="{Binding adults_subtotal, Converter={StaticResource CurrencyConverter}}"></Run>
+        <StackPanel Grid.Column="1"  Grid.Row="2" Margin="0,59,0,0" >
+            <TextBlock Style="{StaticResource SegoeSemilight17alpha}" Height="{StaticResource dBlock1p}" >
+                <Run Text="{Binding PaymentDetails.currency.mask}"></Run>
+                <Run Text="{Binding PaymentDetails.subtotal, Converter={StaticResource CurrencyConverter}}"></Run>
             </TextBlock>
-
-            <TextBlock Style="{StaticResource DetailCheckoutDetailPrice}" Grid.Row="6" >
-                <Run Text="{Binding currency.mask}"></Run>
-                <Run Text="{Binding taxes, Converter={StaticResource CurrencyConverter}}"></Run>
+            <TextBlock Style="{StaticResource SegoeSemilight17alpha}" Height="{StaticResource dBlock1p}" >
+                <Run Text="{Binding PaymentDetails.currency.mask}"></Run>
+                <Run Text="{Binding PaymentDetails.totalCharges, Converter={StaticResource CurrencyConverter}}"></Run>
             </TextBlock>
-            <TextBlock Style="{StaticResource DetailCheckoutDetailPrice}" Grid.Row="7"  Visibility="{Binding retention, Converter={StaticResource ZeroPriceToVisibilityConverter}}">
-                <Run Text="{Binding currency.mask}"></Run>
-                <Run Text="{Binding retention, Converter={StaticResource CurrencyConverter}}"></Run>
+            <TextBlock Style="{StaticResource SegoeSemilight17alpha}" Height="{StaticResource dBlock1p}" Visibility="{Binding PaymentDetails.retention, Converter={StaticResource ZeroPriceToVisibilityConverter}}">
+                <Run Text="{Binding PaymentDetails.currency.mask}"></Run>
+                <Run Text="{Binding PaymentDetails.retention, Converter={StaticResource CurrencyConverter}}"></Run>
+            </TextBlock>
+            <TextBlock Style="{StaticResource SegoeSemilight17alpha}" Height="{StaticResource dBlock1p}" Visibility="{Binding  SelectedCard.financial_cost, Converter={StaticResource ZeroPriceToVisibilityConverter}}">
+                <Run Text="{Binding PaymentDetails.currency.mask}"></Run>
+                <Run Text="{Binding SelectedCard.financial_cost, Converter={StaticResource CurrencyConverter}}"></Run>
             </TextBlock>
         </StackPanel>
 
-        <!--TOTAL-->
-        <TextBlock Style="{StaticResource DetailCheckoutTotalPrice}" Grid.Column="1"  Grid.Row="4" >
-            <Run Text="{Binding currency.mask}"></Run>
-            <Run Text="{Binding total, Converter={StaticResource CurrencyConverter}}"></Run>
-        </TextBlock>
+        <Grid Grid.Row="4" Grid.ColumnSpan="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="{StaticResource Block7p}" />
+                <ColumnDefinition Width="{StaticResource Block3p}" />
+                <ColumnDefinition Width="{StaticResource Square}" />
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Style="{StaticResource SegoeSemilight24alphaYellow}" Grid.Column="0"  x:Uid="Buy_Details_total" Text="TOTAL"></TextBlock>
+            <TextBlock Style="{StaticResource SegoeLight24}" Grid.Column="1"  DataContext="{Binding PaymentDetails}" >
+                <Run Text="{Binding currency.mask}"></Run>
+                <Run Text="{Binding total, Converter={StaticResource CurrencyConverter}}"></Run>
+            </TextBlock>
+
+            <Grid Grid.Column="2"  Style="{StaticResource IconLightBlue}" Tapped="Grid_Tapped" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="{Binding ItemSelected.isPaymentAtDestination, Converter={StaticResource FalseToVisibilityConverter}}" >
+                <TextBlock  Style="{StaticResource CheckkoutValidationGlyph}">
+                &#xE171;
+                </TextBlock>
+            </Grid>
+
+        </Grid>
 
     </Grid>
 </UserControl>

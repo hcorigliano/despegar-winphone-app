@@ -317,6 +317,9 @@
     <Compile Include="Product\Flights\FlightThanks.xaml.cs">
       <DependentUpon>FlightThanks.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Product\Hotels\Checkout\BillingAddress.xaml.cs">
+      <DependentUpon>BillingAddress.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Product\Hotels\Checkout\Buy.xaml.cs">
       <DependentUpon>Buy.xaml</DependentUpon>
     </Compile>
@@ -390,7 +393,6 @@
       <DependentUpon>HotelsSortBy.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Strings\AppResources.cs" />
     <Page Include="Controls\Alert.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -1687,6 +1689,10 @@
     <Page Include="Product\Flights\FlightThanks.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Product\Hotels\Checkout\BillingAddress.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Product\Hotels\Checkout\Buy.xaml">
       <Generator>MSBuild:Compile</Generator>

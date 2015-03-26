@@ -1,19 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
-using Windows.UI.Xaml;
+﻿using Despegar.WP.UI.Model.ViewModel.Hotels;
+using Windows.Phone.UI.Input;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Despegar.WP.UI.Model.ViewModel.Classes;
+using Despegar.WP.UI.Model.Interfaces;
+using Despegar.WP.UI.Common;
 
-// The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
 
 namespace Despegar.WP.UI.Product.Hotels
 {
@@ -22,9 +14,12 @@ namespace Despegar.WP.UI.Product.Hotels
     /// </summary>
     public sealed partial class HotelThanks : Page
     {
+        private HotelsCheckoutViewModel ViewModel;
+
         public HotelThanks()
         {
             this.InitializeComponent();
+
         }
 
         /// <summary>
@@ -34,6 +29,21 @@ namespace Despegar.WP.UI.Product.Hotels
         /// This parameter is typically used to configure the page.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            HardwareButtons.BackPressed += HardwareButtons_BackPressed;
+            ViewModel = Despegar.Core.Neo.InversionOfControl.IoC.Resolve<HotelsCheckoutViewModel>();
+            ViewModel.OnNavigated(e.Parameter);
+            this.DataContext = ViewModel;
+        }
+
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            HardwareButtons.BackPressed -= HardwareButtons_BackPressed;
+        }
+
+        private void HardwareButtons_BackPressed(object sender, BackPressedEventArgs e)
+        {
+            e.Handled = true;
+            ViewModel.Navigator.GoTo(ViewModelPages.Home, new HomeParameters() { ClearStack = true });
         }
     }
 }

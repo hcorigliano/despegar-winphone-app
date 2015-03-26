@@ -16,6 +16,12 @@ namespace Despegar.Core.Neo.Business.Hotels.BookingFields
         public Nightly nightly { get; set; }
         public decimal tax_at_destination { get; set; }
         public string promo_type { get; set; }                           
-        public decimal discount_percentage { get; set; }        
+        public decimal discount_percentage { get; set; }       
+ 
+        public decimal totalCharges
+        {
+            get { return taxes + charges; }
+        }
+
     }
 }

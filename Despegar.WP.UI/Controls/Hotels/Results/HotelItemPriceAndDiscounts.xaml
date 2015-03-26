@@ -53,9 +53,9 @@
                     <Run Text="{Binding price.base}"/>
             </TextBlock>
             <Border BorderThickness="0,0,0,1" BorderBrush="#FF949494" />
-
         </Grid>
 
+        <!-- Mobile Only Discount -->
         <Grid Grid.Row="1" Background="#FF50BB30" Width="225" Height="{StaticResource dBlock1}"  Grid.Column="0" HorizontalAlignment="Left"  Visibility="{Binding price.promo_type , Converter={StaticResource DiscountVisibilityConverter} }">
             <StackPanel Orientation="Horizontal">
                 <Image  Source="/Assets/Icon/App/phone-small-white.scale-100.png" VerticalAlignment="Center" HorizontalAlignment="Left"/>
@@ -63,6 +63,7 @@
             </StackPanel>
         </Grid>
 
+        <!--  -->
         <TextBlock Grid.Row="1" Grid.Column="1" Style="{StaticResource SegoeLight24}" HorizontalAlignment="Right"  VerticalAlignment="Center">
                 <Run Text="$"/>
                 <Run Text="{Binding price.best}" />

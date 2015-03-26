@@ -34,13 +34,14 @@ namespace Despegar.WP.UI.Product.Hotels
             switch (e.ErrorCode)
             {
                 case "SEARCH_ERROR":
-                    int errorID = (int)e.Parameter;
-                    // TODO: find out which are the distinct errors
-
+                    int errorID = (int)e.Parameter;                    
                     switch (errorID) 
                     { 
                         case 2380:
                             dialog = new MessageDialog(manager.GetString("Hotels_Search_ERROR_CHECKIN_INVALID"), "Error");
+                            break;
+                        case 2399:
+                            dialog = new MessageDialog(manager.GetString("Hotels_Search_ERROR_MAX_DAYS_LIMIT"), "Error");
                             break;
                         default:
                             dialog = new MessageDialog(manager.GetString("Hotels_Search_ERROR"), "Error");

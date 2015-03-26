@@ -1,26 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
+﻿using Despegar.WP.UI.Model.ViewModel.Hotels;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
+using Despegar.WP.UI.Controls;
 
 
 namespace Despegar.WP.UI.Product.Hotels.Checkout.Controls
 {
     public sealed partial class BuyDetailsControl : UserControl
     {
+        private HotelsCheckoutViewModel ViewModel { get { return DataContext as HotelsCheckoutViewModel; } }
+
         public BuyDetailsControl()
         {
             this.InitializeComponent();
+        }
+
+
+        private async void Grid_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
+        {
+            MessageDialog dialog = new MessageDialog(ViewModel.ItemSelected.price_destination.message);
+            await dialog.ShowSafelyAsync();
         }
     }
 }

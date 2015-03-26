@@ -42,7 +42,7 @@ namespace Despegar.Core.Neo.API.MAPI
             {
                 serviceUrl = ServiceURL.GetServiceURL(ServiceKey.HotelsAvailabilityByGeo, model.DepartureDateFormatted, model.DestinationDateFormatted,
                               model.DistributionString, model.Latitude.ToString().Replace(",","."), model.Longitude.ToString().Replace(",","."),
-                              model.Offset, model.Limit);
+                              model.Offset, model.Limit, model.ExtraParameters);
 
                 return await connector.GetAsync<CitiesAvailability>(serviceUrl, ServiceKey.HotelsAvailabilityByGeo);       
             }

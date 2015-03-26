@@ -216,8 +216,12 @@ namespace Despegar.Core.Neo.Business.Forms
             });
         }
 
-        public static Task<object> BuildHotelsForm(HotelsBookingFields bookingFields, InvoiceArg invoiceFields, HotelPayment selectedCard, bool validateDuplicateCheckouts)
+        public static Task<object> BuildHotelsForm(HotelsBookingFields bookingFields, HotelPayment selectedCard, bool validateDuplicateCheckouts)
         {
+            InvoiceArg invoiceFields = null; 
+            if(bookingFields.form.CheckoutMethodSelected != null && bookingFields.form.CheckoutMethodSelected.payment != null)
+                invoiceFields = bookingFields.form.CheckoutMethodSelected.payment.invoice;
+            
             return Task.Run(() =>
             {
                 JObject result = new JObject();
@@ -288,6 +292,8 @@ namespace Despegar.Core.Neo.Business.Forms
                     payment.Add("installment", installment);
                 }
 
+                // InvoiceFields 
+                
                 // Invoice Arg
                 if (bookingFields.form.CountrySite != null & bookingFields.form.CountrySite.ToLower().Contains("ar") && invoiceFields != null) // Is only for Arg in mapi
                 {
@@ -301,26 +307,27 @@ namespace Despegar.Core.Neo.Business.Forms
                     {
                         invoice.Add("fiscal_status", invoiceFields.fiscal_status.CoreValue);
 
-                        if (invoiceFields.fiscal_status.CoreValue != "FINAL")
+                        if (invoiceFields.fiscal_status.CoreValue != "FINAL_CONSUMER")
                             invoice.Add("fiscal_name", invoiceFields.fiscal_name.CoreValue);
                     }
 
                     if (invoiceFields.address.number != null)
                         address.Add("number", invoiceFields.address.number.CoreValue);
-                    if (invoiceFields.address.floor != null)
+                    if (invoiceFields.address.floor != null && invoiceFields.address.floor.CoreValue != null)
                         address.Add("floor", invoiceFields.address.floor.CoreValue);
-                    if (invoiceFields.address.department != null)
+                    if (invoiceFields.address.department != null && invoiceFields.address.department.CoreValue != null)
                         address.Add("department", invoiceFields.address.department.CoreValue);
-                    if (invoiceFields.address.city_id != null)
-                        address.Add("city_id", invoiceFields.address.city_id.CoreValue);
-                    if (invoiceFields.address.city != null)
-                        address.Add("city", invoiceFields.address.city.CoreValue);
 
-                    if (invoiceFields.address.state != null)
-                        address.Add("state", invoiceFields.address.state.CoreValue);
 
-                    if (invoiceFields.address.country != null)
-                        address.Add("country", invoiceFields.address.country.CoreValue); //this is fill with the response of service
+                    //if (invoiceFields.fiscal_status.CoreValue != "FINAL_CONSUMER")
+                    //{
+                        if (invoiceFields.address.city_id != null)
+                            address.Add("city_id", invoiceFields.address.city_id.CoreValue);
+                        if (invoiceFields.address.state_id != null)
+                            address.Add("state_id", invoiceFields.address.state_id.CoreValue);
+                        //if (invoiceFields.address.country != null)
+                        //    address.Add("country", invoiceFields.address.country.CoreValue); //this is fill with the response of service
+                    //}
 
                     if (invoiceFields.address.postal_code != null)
                         address.Add("postal_code", invoiceFields.address.postal_code.CoreValue);
@@ -329,6 +336,35 @@ namespace Despegar.Core.Neo.Business.Forms
 
                     invoice.Add("address", address);
                     payment.Add("invoice", invoice);
+                }
+
+                // Billing Address
+                var billing = bookingFields.form.CheckoutMethodSelected.payment.billing_address;
+                if (billing != null)
+                {
+                    var billingAddress = new JObject();
+
+                    if (billing.country != null)
+                        billingAddress.Add("country", billing.country.CoreValue);
+                    if (billing.state != null)
+                        billingAddress.Add("state", billing.state.CoreValue);
+
+                    //if (billing.city_id != null)
+                    //    billingAddress.Add("city_id", billing.city_id.CoreValue);
+                    if (billing.city != null)
+                        billingAddress.Add("city", billing.city.CoreValue);
+                    if (billing.number != null)
+                        billingAddress.Add("number", billing.number.CoreValue);
+                    if (billing.floor != null)
+                        billingAddress.Add("floor", billing.floor.CoreValue);
+                    if (billing.department != null)
+                        billingAddress.Add("department", billing.department.CoreValue);
+                    if (billing.postal_code != null)
+                        billingAddress.Add("postal_code", billing.postal_code.CoreValue);
+                    if (billing.street != null)
+                        billingAddress.Add("street", billing.street.CoreValue);
+
+                    payment.Add("billing_address", billingAddress);
                 }
 
                 // Voucher
