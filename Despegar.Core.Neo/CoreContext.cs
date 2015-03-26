@@ -48,13 +48,9 @@ namespace Despegar.Core.Neo
             return site;
         }
 
-        public string GetLanguage() 
-        { 
-#if DECOLAR
-            return "PT";
-#endif
-
-            return "ES"; 
+        public string GetLanguage(bool isDecolar)
+        {
+            return isDecolar ? "pt" : "es";            
         }
 
         public string GetUOW()
