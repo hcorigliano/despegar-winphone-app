@@ -127,7 +127,7 @@ namespace Despegar.Core.Neo
 
             string lang = "es";
 
-            if (site == "br")
+            if (site.ToLowerInvariant() == "br")
                 lang = "pt";
 
             this.site = siteCode;
