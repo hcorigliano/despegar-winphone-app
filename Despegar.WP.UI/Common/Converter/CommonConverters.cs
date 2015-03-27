@@ -196,6 +196,10 @@ namespace Despegar.WP.UI.Common.Converter
                 {
                     return ((double)value).ToString("N0");
                 }
+                if (type == typeof(decimal))
+                {
+                    return ((decimal)value).ToString("N0");
+                }
                 return value;
                
             }
