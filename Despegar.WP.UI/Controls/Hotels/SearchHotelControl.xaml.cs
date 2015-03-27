@@ -77,12 +77,15 @@ namespace Despegar.WP.UI.Controls.Hotels
         {
             this.InitializeComponent();
             this.hotelService = IoC.Resolve<IMAPIHotels>();
+            
+            var loader = new Windows.ApplicationModel.Resources.ResourceLoader();
 
             (this.Content as FrameworkElement).DataContext = this;
 
             HotelAutocomplete GeoItem = new HotelAutocomplete()
             {
-                name = "+ Cerca de mi ubicacion actual",
+
+                name = loader.GetString("Common_Near_My_Location"),//"+ Cerca de mi ubicacion actual",
                 id = -1,
                 type = "geo"
             };
@@ -97,9 +100,12 @@ namespace Despegar.WP.UI.Controls.Hotels
             {
                 try
                 {
+                    var loader = new Windows.ApplicationModel.Resources.ResourceLoader();
+
+
                     sender.ItemsSource = null;
                     HotelAutocomplete GeoItem = new HotelAutocomplete();
-                    GeoItem.name = "+ Cerca de mi ubicacion actual";
+                    GeoItem.name = loader.GetString("Common_Near_My_Location");
                     GeoItem.id = -1;
                     GeoItem.type = "geo";
                     List<HotelAutocomplete> source = new List<HotelAutocomplete>();

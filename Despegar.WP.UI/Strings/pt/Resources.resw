@@ -166,7 +166,7 @@
     <value>Escalas</value>
   </data>
   <data name="Flight_Departure.Text" xml:space="preserve">
-    <value>Partida</value>
+    <value>Saída</value>
   </data>
   <data name="Home_Settings.Label" xml:space="preserve">
     <value>Config</value>
@@ -303,37 +303,37 @@
   <data name="Generic_Multiple" xml:space="preserve">
     <value>múltiple</value>
   </data>
-  <data name="Flights_Search_Departure" xml:space="preserve">
-    <value>saída</value>
+  <data name="Flights_Search_Departure.Text" xml:space="preserve">
+    <value>Saída</value>
   </data>
   <data name="Generic_Return" xml:space="preserve">
     <value>Retorno</value>
   </data>
-  <data name="Flights_Search_Destination" xml:space="preserve">
-    <value>destino</value>
+  <data name="Flights_Search_Destination.Text" xml:space="preserve">
+    <value>Destino</value>
   </data>
   <data name="Page_Flight_Details_Return.Text" xml:space="preserve">
     <value>retorno</value>
   </data>
-  <data name="Flights_Search_Origin" xml:space="preserve">
+  <data name="Flights_Search_Origin.Text" xml:space="preserve">
     <value>Origem</value>
   </data>
   <data name="AppBarButton_Filters.Label" xml:space="preserve">
     <value>Flters</value>
   </data>
-  <data name="Flights_Search_Return" xml:space="preserve">
-    <value>Retorno</value>
+  <data name="Flights_Search_Return.Text" xml:space="preserve">
+    <value>Volta</value>
   </data>
   <data name="AppBarButton_OrderBy.Label" xml:space="preserve">
     <value>Ordenar</value>
   </data>
-  <data name="Flights_Search_Adults" xml:space="preserve">
+  <data name="Flights_Search_Adults.Text" xml:space="preserve">
     <value>adultos</value>
   </data>
-  <data name="Flights_Search_Children" xml:space="preserve">
+  <data name="Flights_Search_Children.Text" xml:space="preserve">
     <value>crianças</value>
   </data>
-  <data name="Flights_Search_ChildrenAge" xml:space="preserve">
+  <data name="Flights_Search_ChildrenAge.Text" xml:space="preserve">
     <value>Idade da criança</value>
   </data>
   <data name="Page_CountrySelection_configuration.Text" xml:space="preserve">
@@ -940,19 +940,19 @@ A reserva não foi gerado e não cobra nenhuma taxa para a transação.</value>
   <data name="Hotels_Checkout_Rooms.Header" xml:space="preserve">
     <value>quartos</value>
   </data>
-  <data name="Page_HotelsSearch_Promo_SubTitle" xml:space="preserve">
-    <value>hoteís</value>
+  <data name="Page_HotelsSearch_Promo_SubTitle.Text" xml:space="preserve">
+    <value>Hotel próximo para esta noite</value>
   </data>
   <data name="Flights_Checkout_Contact_Area_Code_ERROR_INVALID_PHONE_AREA_CODE" xml:space="preserve">
     <value>Por favor, verifique o código de área entrou</value>
   </data>
-  <data name="Page_HotelsSearch_Promo_Title" xml:space="preserve">
-    <value>hoteís</value>
+  <data name="Page_HotelsSearch_Promo_Title.Text" xml:space="preserve">
+    <value>Hotel para hoje</value>
   </data>
   <data name="Flights_Checkout_Contact_Area_Code_ERROR_NOT_NUMERIC" xml:space="preserve">
     <value>Por favor, verifique o código do país entrou</value>
   </data>
-  <data name="Page_HotelsSearch_Title" xml:space="preserve">
+  <data name="Page_HotelsSearch_Title.Text" xml:space="preserve">
     <value>hoteís</value>
   </data>
   <data name="Flights_Checkout_Contact_Number_ERROR_INVALID_LENGTH" xml:space="preserve">
@@ -1253,7 +1253,7 @@ A reserva não foi gerado e não cobra nenhuma taxa para a transação."</value>
     <value>Reserva</value>
   </data>
   <data name="Hotels_Checkout_Billing_Address.Header" xml:space="preserve">
-   <value>endereço</value>
+    <value>endereço</value>
   </data>
   <data name="Flight_Checkout_Billing_Address_Header" xml:space="preserve">
     <value>endereço</value>
@@ -1272,5 +1272,23 @@ A reserva não foi gerado e não cobra nenhuma taxa para a transação."</value>
   </data>
   <data name="Hotel_Thanks_Room_Detail.Text" xml:space="preserve">
     <value>Detalhes do quarto</value>
+  </data>
+  <data name="Hotels_Search_SearchButton.Content" xml:space="preserve">
+    <value>Procurar hoteís</value>
+  </data>
+  <data name="Common_Near_My_Location" xml:space="preserve">
+    <value>próximo da minha localização actual</value>
+  </data>
+  <data name="Common_pessoa_por_noite.Text" xml:space="preserve">
+    <value>Tarifa por quarto por noite</value>
+  </data>
+  <data name="Hotels_Search_Destination.Text" xml:space="preserve">
+    <value>Destino</value>
+  </data>
+  <data name="Hotels_Search_RoomDetail.Text" xml:space="preserve">
+    <value>Quarto</value>
+  </data>
+  <data name="Hotels_Search_Rooms.Text" xml:space="preserve">
+    <value>Quartos</value>
   </data>
 </root>

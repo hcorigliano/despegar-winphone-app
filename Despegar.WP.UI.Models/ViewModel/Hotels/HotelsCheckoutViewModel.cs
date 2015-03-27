@@ -277,8 +277,26 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
             }
         }
 
-        public string SpecialAlertTitle { get { return CoreBookingFields.fees.title; } }
-        public List<string> SpecialAlertMessages { get { return CoreBookingFields.fees.messages; } }
+        public string SpecialAlertTitle
+        {
+            get 
+            {                
+                if (CoreBookingFields.fees != null) 
+                   return CoreBookingFields.fees.title;
+
+                return String.Empty;
+            }
+        }
+        public List<string> SpecialAlertMessages
+        {
+            get
+            {
+                if (CoreBookingFields.fees != null)
+                    return CoreBookingFields.fees.messages;
+
+                return null;
+            }
+        }
 
         public ICommand ValidateAndBuyCommand
         {
@@ -394,7 +412,8 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
 
         private async void ConfigureInvoice()
         {
-            CheckoutMethodKey checkout = CoreBookingFields.form.checkout_method.FirstOrDefault(x => x.Value.payment.invoice != null).Value;
+            var test = CoreBookingFields;
+            CheckoutMethodKey checkout = CoreBookingFields.form.checkout_method.FirstOrDefault(x => x.Value.payment != null && x.Value.payment.invoice != null).Value;
             if (checkout != null)
             {
                 InvoiceArg invoice = checkout.payment.invoice;
