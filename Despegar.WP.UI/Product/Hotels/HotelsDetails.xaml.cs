@@ -58,7 +58,6 @@ namespace Despegar.WP.UI.Product.Hotels
             {
                 MainPivot.Items.Remove(RoomSelectionPivot);
             }
-
         }        
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)

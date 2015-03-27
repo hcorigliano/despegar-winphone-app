@@ -190,8 +190,9 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
     
         public async Task Init()
         {
-            IsLoading = true;
-
+           IsLoading = true;
+           try 
+           {
            HotelDetail = await hotelService.GetHotelsDetail(CrossParameters.IdSelectedHotel, CrossParameters.SearchModel.DepartureDateFormatted, CrossParameters.SearchModel.DestinationDateFormatted, CrossParameters.SearchModel.DistributionString);
            
            //HotelReviews = await userReviewService.GetHotelUserReviews(CrossParameters.IdSelectedHotel, 10, 0, "es","despegar");
@@ -200,7 +201,6 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
            CompleteReviewsWithV1Response();
 
            //FormatReviews(GlobalConfiguration.Language);
-
             
             foreach (Roompack roompack in HotelDetail.roompacks)
             {
@@ -246,6 +246,11 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
                     }
                 }                
             }
+           } 
+           catch(Exception) 
+           {
+               OnViewModelError("INIT_FAILED");
+           }
 
             IsLoading = false;
         }

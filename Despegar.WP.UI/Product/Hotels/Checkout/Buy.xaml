@@ -30,6 +30,20 @@
                 <TextBlock  Style="{StaticResource DetailCheckoutForeach}" x:Uid="Hotels_Buy_Details_Title" Text="Detalle"  Height="Auto"/>
                 <StackPanel Height="20"></StackPanel>
                 <src:HotelItem  DataContext="{Binding CrossParams.SelectedHotel}"></src:HotelItem>
+
+                <StackPanel Visibility="{Binding ShowSpecialAlert, Converter={StaticResource VisibilityConverter}}">
+                    <TextBlock Style="{StaticResource SegoeLight20}" Text="Adicionales de Hotel (no incluidos en la tarifa)"  />
+                    <ItemsControl ItemsSource="{Binding SpecialAlertMessages}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Style="{StaticResource SegoeRegular15}">
+                                    <Run Text="-" />
+                                    <Run Text="{Binding }" />
+                                </TextBlock>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                </ItemsControl>
+               </StackPanel>
             </StackPanel>
 
         </Grid>
