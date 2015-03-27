@@ -24,7 +24,7 @@
         </StackPanel>
 
         <StackPanel Grid.Column="2">
-            <TextBlock Style="{StaticResource BaseTextLabel}"   x:Uid="Flights_Search_Return"  Text="Salida" />
+            <TextBlock Style="{StaticResource BaseTextLabel}"   x:Uid="Flights_Search_Destination"  Text="Salida" />
             <DatePicker Style="{StaticResource DatePickerBase}" x:Name="ToDateControl" Date="{Binding ToDate, Mode=TwoWay}" />
         </StackPanel>
     </Grid>

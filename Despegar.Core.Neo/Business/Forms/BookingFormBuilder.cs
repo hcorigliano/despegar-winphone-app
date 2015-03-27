@@ -1,4 +1,5 @@
-﻿using Despegar.Core.Neo.Business.Common.Checkout;
+﻿using Despegar.Core.Business.Hotels.BookingFields;
+using Despegar.Core.Neo.Business.Common.Checkout;
 using Despegar.Core.Neo.Business.Flight.BookingFields;
 using Despegar.Core.Neo.Business.Hotels.BookingFields;
 using Newtonsoft.Json.Linq;
@@ -339,7 +340,10 @@ namespace Despegar.Core.Neo.Business.Forms
                 }
 
                 // Billing Address
-                var billing = bookingFields.form.CheckoutMethodSelected.payment.billing_address;
+                BillingAddress billing = new BillingAddress();
+                if(bookingFields.form.CheckoutMethodSelected.payment != null)
+                    billing = bookingFields.form.CheckoutMethodSelected.payment.billing_address;
+                
                 if (billing != null)
                 {
                     var billingAddress = new JObject();
