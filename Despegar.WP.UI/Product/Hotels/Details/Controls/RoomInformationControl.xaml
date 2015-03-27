@@ -67,7 +67,7 @@
         </Grid>
 
         <StackPanel Grid.Row="2" >
-            <Button  Style="{StaticResource HotelDetailLink}"  HorizontalAlignment="Left" VerticalAlignment="Center" Click="ChangeRoomInformationVisibility" >
+            <Button  Style="{StaticResource HotelDetailLink}"  HorizontalAlignment="Left" VerticalAlignment="Center" Click="ChangeRoomInformationVisibility" Visibility="{Binding rooms[0].information , Converter={StaticResource NullToVisibilityConverter}, FallbackValue=Collapsed}">
                 <TextBlock  x:Uid="Hotel_Details_Show_Room_Description" Style="{StaticResource DetailDetailLinkText}"  Text="Ver la descripcion de la habitaciónX" Margin="-12,0,0,0" VerticalAlignment="Center"  ></TextBlock>
             </Button>
 
