@@ -74,7 +74,10 @@ namespace Despegar.WP.UI.Product.Hotels
         private void HardwareButtons_BackPressed(object sender, BackPressedEventArgs e)
         {
             e.Handled = true;
-            ViewModel.Navigator.GoBack();
+            if (!ViewModel.IsLoading)
+            {
+                ViewModel.Navigator.GoBack();
+            }
         }
 
         private void ResetPageCache()
