@@ -16,7 +16,7 @@
     </UserControl.Resources>
 
     <ScrollViewer>
-        <Grid >
+        <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="{StaticResource Block2}"/>
                 <RowDefinition Height="{StaticResource Offset}"/>
@@ -58,13 +58,6 @@
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
-
-            <!--<List xmlns:src="using:Despegar.WP.UI.Product.Hotels.Details.Controls">
-            <src:UserReviewItem DataContext="{Binding}"/>
-        </List>-->
-
-
-
         </Grid>
     </ScrollViewer>
 </UserControl>

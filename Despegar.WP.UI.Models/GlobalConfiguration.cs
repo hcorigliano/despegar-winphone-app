@@ -59,7 +59,7 @@ namespace Despegar.WP.UI.Model
             }
         }
 
-#if Decolar
+#if DECOLAR
         public static string Brand = "decolar";
 #else
         public static string Brand = "despegar";

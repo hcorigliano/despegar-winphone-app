@@ -266,6 +266,38 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
             }
         }
 
+        public bool ShowSpecialAlert
+        {
+            get
+            {
+                if (CoreBookingFields.fees != null)
+                    return CoreBookingFields.fees.messages != null && CoreBookingFields.fees.messages.Count > 0;
+
+                return false;
+            }
+        }
+
+        public string SpecialAlertTitle
+        {
+            get 
+            {                
+                if (CoreBookingFields.fees != null) 
+                   return CoreBookingFields.fees.title;
+
+                return String.Empty;
+            }
+        }
+        public List<string> SpecialAlertMessages
+        {
+            get
+            {
+                if (CoreBookingFields.fees != null)
+                    return CoreBookingFields.fees.messages;
+
+                return null;
+            }
+        }
+
         public ICommand ValidateAndBuyCommand
         {
             get

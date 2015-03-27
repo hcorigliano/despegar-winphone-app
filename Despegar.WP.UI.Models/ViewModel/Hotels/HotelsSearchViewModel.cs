@@ -111,9 +111,11 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
         }
 
         private async void SearchTodayHotels()
-        {            
-            coreSearchModel.CheckinDate = DateTime.Now;
-            coreSearchModel.CheckoutDate = DateTime.Now.AddDays(1);
+        {
+            CheckinDate = DateTime.Now;
+            CheckoutDate = DateTime.Now.AddDays(1);
+            coreSearchModel.CheckinDate = CheckinDate;
+            coreSearchModel.CheckoutDate = CheckoutDate;
             coreSearchModel.SelectedRoomsQuantityOption = 1;
             coreSearchModel.DestinationCode = -1; // TODO: mejorar a algo como IsGeoSearch = true
 
