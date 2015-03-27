@@ -968,6 +968,7 @@
     <Content Include="Assets\Icon\Amenities\amn_pisc.png" />
     <Content Include="Assets\Icon\Amenities\amn_pisccli.png" />
     <Content Include="Assets\Icon\Amenities\amn_piscinf.png" />
+    <Content Include="Assets\Icon\Amenities\amn_PISCN.png" />
     <Content Include="Assets\Icon\Amenities\amn_pisdesc.png" />
     <Content Include="Assets\Icon\Amenities\amn_pistpo.png" />
     <Content Include="Assets\Icon\Amenities\amn_pistsc.png" />
@@ -990,6 +991,7 @@
     <Content Include="Assets\Icon\Amenities\amn_sercam.png" />
     <Content Include="Assets\Icon\Amenities\amn_serguar.png" />
     <Content Include="Assets\Icon\Amenities\amn_sernin.png" />
+    <Content Include="Assets\Icon\Amenities\amn_sercon.png" />
     <Content Include="Assets\Icon\Amenities\amn_servcon.png" />
     <Content Include="Assets\Icon\Amenities\amn_sfc.png" />
     <Content Include="Assets\Icon\Amenities\amn_shop.png" />
