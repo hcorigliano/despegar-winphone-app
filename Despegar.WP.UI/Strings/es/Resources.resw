@@ -748,7 +748,7 @@
     <value>Por favor, fechas está fuera de rango</value>
   </data>
   <data name="Flights_Checkout_Card_Expiration_ERROR_REQUIRED" xml:space="preserve">
-    <value>Por favor, ingrese la fecha de expiación de la tarjeta</value>
+    <value>Por favor, ingrese la fecha de expiración de la tarjeta</value>
   </data>
   <data name="Flights_Checkout_Invoice_Arg_City_ERROR_REQUIRED" xml:space="preserve">
     <value>Por favor, ingrese una ciudad</value>
@@ -1013,7 +1013,7 @@ La reserva no ha sido generada y no se le cobrará ningún cargo por la transacc
     <value>Comodidades y descripción</value>
   </data>
   <data name="Hotels_Details_Fare_Details.Text" xml:space="preserve">
-    <value>Tarifa por habitacion por noche</value>
+    <value>Tarifa por habitación por noche</value>
   </data>
   <data name="Page_HotelDescription_Location.Text" xml:space="preserve">
     <value>Ubicación</value>
@@ -1112,7 +1112,7 @@ La reserva no ha sido generada y no se le cobrará ningún cargo por la transacc
     <value>habitacion(es) disponible(s)</value>
   </data>
   <data name="Hotels_Buy_Details_Fare_Per_Room.Text" xml:space="preserve">
-    <value>Tarifas por habitacion por noche</value>
+    <value>Tarifas por habitación por noche</value>
   </data>
   <data name="Flight_Thanks_Continue_Explain_Emitted.Text" xml:space="preserve">
     <value>Su pago ha sido procesado correctamente. En breve recibirá un email con el ticket electrónico</value>
@@ -1142,7 +1142,7 @@ La reserva no ha sido generada y no se le cobrará ningún cargo por la transacc
     <value>Ha alcanzado el máximo de intentos posible</value>
   </data>
   <data name="Hotels_Buy_Room_Details.Text" xml:space="preserve">
-    <value>Habitacion</value>
+    <value>Habitación</value>
   </data>
   <data name="Flights_Checkout_Card_Data_Document_ERROR_INVALID_DOCUMENT_NUMBER" xml:space="preserve">
     <value>Por favor, verifique el numero ingresado</value>
@@ -1157,13 +1157,13 @@ La reserva no ha sido generada y no se le cobrará ningún cargo por la transacc
     <value>Por favor, verifique los datos ingresos y revise los campos marcados.</value>
   </data>
   <data name="Hotels_Buy_Details_Rooms_Count.Text" xml:space="preserve">
-    <value>habitacion</value>
+    <value>habitación</value>
   </data>
   <data name="Checkout_BillingAddress_City.Label" xml:space="preserve">
     <value>Ciudad</value>
   </data>
   <data name="Hotels_Checkout_ERROR_FORM_ERROR_TITLE" xml:space="preserve">
-    <value>Formulário de Compra</value>
+    <value>Formulario de Compra</value>
   </data>
   <data name="Hotels_Buy_Details_Title.Text" xml:space="preserve">
     <value>Detalle de compra</value>
@@ -1275,7 +1275,7 @@ La reserva no ha sido generada y no se le cobrará ningún cargo por la transacc
     <value>La reserva máxima es de 30 días. Por favor, ingrese fechas distintas.</value>
   </data>
   <data name="Hotel_Thanks_Room_Detail.Text" xml:space="preserve">
-    <value>Detalle de la habitacion</value>
+    <value>Detalle de la habitación</value>
   </data>
   <data name="Hotels_Search_SearchButton.Content" xml:space="preserve">
     <value>Buscar hoteles</value>
@@ -1290,9 +1290,12 @@ La reserva no ha sido generada y no se le cobrará ningún cargo por la transacc
     <value>Destino</value>
   </data>
   <data name="Hotels_Search_RoomDetail.Text" xml:space="preserve">
-    <value>Habitacion</value>
+    <value>Habitación</value>
   </data>
   <data name="Hotels_Search_Rooms.Text" xml:space="preserve">
     <value>Habitaciones</value>
+  </data>
+  <data name="Hotels_Search_ERROR_NO_AVAILABILITY" xml:space="preserve">
+    <value>No hay disponibilidad para el hotel seleccionado.</value>
   </data>
 </root>

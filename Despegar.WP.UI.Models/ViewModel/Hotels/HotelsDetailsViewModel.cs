@@ -220,31 +220,38 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
 
             // Get suggest room price and some more things
 
-            Roompack tempRoompack = new Roompack();
-            foreach (Roompack roomPack in hotelDetail.roompacks)
+            if (hotelDetail.roompacks.Count > 0)
             {
-                tempRoompack = roomPack;
-                foreach (RoomAvailability room in roomPack.room_availabilities)
+                Roompack tempRoompack = new Roompack();
+                foreach (Roompack roomPack in hotelDetail.roompacks)
                 {
-                    if (room.choices.Contains(hotelDetail.suggested_room_choice))
+                    tempRoompack = roomPack;
+                    foreach (RoomAvailability room in roomPack.room_availabilities)
                     {
-                        hotelDetail.list_suggested_room_choice = room.choices; //Transforma el suggest en una lista completa la cual es necesaria para hacer el booking.
+                        if (room.choices.Contains(hotelDetail.suggested_room_choice))
+                        {
+                            hotelDetail.list_suggested_room_choice = room.choices; //Transforma el suggest en una lista completa la cual es necesaria para hacer el booking.
 
-                        SuggestRoomPriceBest = room.price.best;
+                            SuggestRoomPriceBest = room.price.best;
 
-                        if (SuggestRoomPriceBest != room.price.@base)
-                            SuggestRoomPriceBase = room.price.@base;
-                        else
-                            SuggestRoomPriceBase = null;
+                            if (SuggestRoomPriceBest != room.price.@base)
+                                SuggestRoomPriceBase = room.price.@base;
+                            else
+                                SuggestRoomPriceBase = null;
 
-                        CrossParameters.RoomPackSelected = tempRoompack; //Toma el roompack seleccionado.
+                            CrossParameters.RoomPackSelected = tempRoompack; //Toma el roompack seleccionado.
 
-                        if (tempRoompack.rooms[0].bed_options != null && tempRoompack.rooms[0].bed_options.Count > 0)
-                            CrossParameters.BedSelected = tempRoompack.rooms[0].bed_options[0];
-                        
-                        break;                        
+                            if (tempRoompack.rooms[0].bed_options != null && tempRoompack.rooms[0].bed_options.Count > 0)
+                                CrossParameters.BedSelected = tempRoompack.rooms[0].bed_options[0];
+
+                            break;
+                        }
                     }
-                }                
+                }
+            }
+            else 
+            { 
+                OnViewModelError("NO_AVAILABILITY");
             }
            } 
            catch(Exception) 

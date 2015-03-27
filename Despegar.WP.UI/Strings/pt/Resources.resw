@@ -1291,4 +1291,7 @@ A reserva não foi gerado e não cobra nenhuma taxa para a transação."</value>
   <data name="Hotels_Search_Rooms.Text" xml:space="preserve">
     <value>Quartos</value>
   </data>
+  <data name="Hotels_Search_ERROR_NO_AVAILABILITY" xml:space="preserve">
+    <value>Não há disponibilidade para o hotel escolhido.</value>
+  </data>
 </root>

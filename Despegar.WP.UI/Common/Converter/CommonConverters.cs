@@ -56,14 +56,12 @@ namespace Despegar.WP.UI.Common.Converter
         }
     }
 
-
     public class NullToVisibilityConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, string language)
-        {
-            String theValue = value as String;
+        {           
+            if (value == null) { return Visibility.Collapsed; }
 
-            if (theValue == null || String.IsNullOrEmpty(theValue)) { return Visibility.Collapsed; }
             return Visibility.Visible;
         }
 
@@ -195,10 +193,6 @@ namespace Despegar.WP.UI.Common.Converter
                 if (type == typeof(double))
                 {
                     return ((double)value).ToString("N0");
-                }
-                if (type == typeof(decimal))
-                {
-                    return ((decimal)value).ToString("N0");
                 }
                 return value;
                

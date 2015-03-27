@@ -26,6 +26,9 @@ using Despegar.WP.UI.Controls;
 using Despegar.Core.Neo.InversionOfControl;
 using Despegar.WP.UI.Product.Hotels.Details.Controls;
 using Despegar.WP.UI.Product.Hotels.Details;
+using Despegar.WP.UI.Model.Common;
+using Windows.ApplicationModel.Resources;
+using Windows.UI.Popups;
 
 
 namespace Despegar.WP.UI.Product.Hotels
@@ -37,9 +40,33 @@ namespace Despegar.WP.UI.Product.Hotels
 
         public HotelsDetails()
         {
-            this.InitializeComponent();
-           
+            this.InitializeComponent();           
         }
+
+        # region ** ERROR HANDLING **
+        private async void ErrorHandler(object sender, ViewModelErrorArgs e)
+        {
+            ViewModel.BugTracker.LeaveBreadcrumb("Hotels details Error raised - " + e.ErrorCode);
+
+            ResourceLoader manager = new ResourceLoader();
+            MessageDialog dialog;
+
+            switch (e.ErrorCode)
+            {
+                case "NO_AVAILABILITY":
+                    dialog = new MessageDialog(manager.GetString("Hotels_Search_ERROR_NO_AVAILABILITY"), "Error");
+                    await dialog.ShowSafelyAsync();
+                    break;             
+                case "UNKNOWN_ERROR":
+                    dialog = new MessageDialog(manager.GetString("Hotels_Search_UNKNOWN_ERROR"), "Error");
+                    await dialog.ShowSafelyAsync();
+                    break;
+            }
+            
+            // Back to search box
+            ViewModel.Navigator.GoBack();
+        }
+        #endregion
 
         protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
