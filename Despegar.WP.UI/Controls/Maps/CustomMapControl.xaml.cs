@@ -35,9 +35,7 @@ namespace Despegar.WP.UI.Controls.Maps
             //AjES8G-jtTGtkPzU7SY2cW6xa_Rp6HOvgzd0JVehbeKpMQyG2DN0X__wqB_NhGaH
 
             mainMap.MapServiceToken = "AjES8G-jtTGtkPzU7SY2cW6xa_Rp6HOvgzd0JVehbeKpMQyG2DN0X__wqB_NhGaH";
-#endif
-
-#if RELEASE
+#else
             //prod despegar.com
             //Ao5ktWI7RMpfZRyvcpOXEN-sgd05y8FzZG4I5GrrFRIb8GJ-zy4uvveWWHc8GlCs
 
