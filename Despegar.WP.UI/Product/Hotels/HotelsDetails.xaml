@@ -40,7 +40,7 @@
 
         <!-- Title Panel -->
         <Image Grid.Row="0" Style="{StaticResource TopLogo}" />
-        <TextBlock Grid.Row="1" x:Uid="Page_Checkout" Style="{StaticResource PageHeaderSmall}" Text="COMPRAR VUELO" />
+        <TextBlock Grid.Row="1" x:Uid="Hotel_Page_Checkout" Style="{StaticResource PageHeaderSmall}" Text="COMPRAR HOTEL" />
 
         <Pivot Grid.Row="2" x:Name="MainPivot"  Style="{StaticResource PivotBaseMain}">
             <PivotItem Style="{StaticResource PivotItemBase}" x:Uid="Hotel_Details_Hotel_Pivot" xmlns:src="using:Despegar.WP.UI.Product.Hotels.Details">
