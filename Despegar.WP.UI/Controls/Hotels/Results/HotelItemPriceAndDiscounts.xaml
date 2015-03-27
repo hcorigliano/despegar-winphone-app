@@ -15,6 +15,7 @@
         <conv:DiscountVisibilityConverter x:Name="DiscountVisibilityConverter"/>
         <conv:TypeDiscountTextConverter x:Name="TypeDiscountTextConverter" />
         <conv:TypeDiscountImageConverter x:Name="TypeDiscountImageConverter"/>
+        <conv:CurrencyConverter x:Name="CurrencyConverter" ></conv:CurrencyConverter>
     </UserControl.Resources>
 
 
@@ -50,7 +51,7 @@
 
             <TextBlock Grid.Row="0" Grid.Column="1"  Style="{StaticResource SegoeRegular12_9}"  HorizontalAlignment="Right" VerticalAlignment="Center" Grid.RowSpan="2" >
                     <Run Text="$"/>
-                    <Run Text="{Binding price.base}"/>
+                    <Run Text="{Binding price.base, Converter={StaticResource CurrencyConverter}}"/>
             </TextBlock>
             <Border BorderThickness="0,0,0,1" BorderBrush="#FF949494" />
         </Grid>
@@ -66,7 +67,7 @@
         <!--  -->
         <TextBlock Grid.Row="1" Grid.Column="1" Style="{StaticResource SegoeLight24}" HorizontalAlignment="Right"  VerticalAlignment="Center">
                 <Run Text="$"/>
-                <Run Text="{Binding price.best}" />
+                <Run Text="{Binding price.best, Converter={StaticResource CurrencyConverter}}" />
         </TextBlock>
 
     </Grid>

@@ -13,6 +13,7 @@
         <conv:StringConverter x:Name="StringFormatConverter"/>
         <conv:NullToVisibilityConverter x:Name="NullToVisibilityConverter"/>
         <conv:VisibilityConverter x:Name="VisibilityConverter" TrueValue="Visible" FalseValue="Collapsed" />
+        <conv:CurrencyConverter x:Name="CurrencyConverter" ></conv:CurrencyConverter>
     </UserControl.Resources>
 
 
@@ -67,7 +68,7 @@
 
                     <TextBlock Grid.Row="0" Grid.Column="0"  Style="{StaticResource SegoeSemilight17}"  HorizontalAlignment="Left" VerticalAlignment="Center" Grid.RowSpan="2" >
                                         <Run Text="$"/>
-                                        <Run Text="{Binding price.base}"/>
+                                        <Run Text="{Binding price.base, Converter={StaticResource CurrencyConverter}}"/>
                                         <Run Text=" "/>
                     </TextBlock>
                     <Border Grid.Row="0" Grid.Column="0" BorderThickness="0,0,0,2" BorderBrush="#FF949494" />
@@ -75,7 +76,7 @@
 
                 <TextBlock Margin="0,-9,0,0" VerticalAlignment="Center" Grid.Row="1" Style="{StaticResource SegoeLight24}">
                                     <Run Text="$" /> 
-                                    <Run Text="{Binding price.best}" />
+                                    <Run Text="{Binding price.best, Converter={StaticResource CurrencyConverter}}" />
                 </TextBlock>
 
                 <TextBlock Margin="0,0,0,0" VerticalAlignment="Center" Grid.Row="2"  x:Uid="Hotels_Details_Fare_Details" Text="Tarifa por habitacion por noche x"  Style="{StaticResource SegoeRegular15}" />
