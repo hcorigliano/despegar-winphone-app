@@ -38,7 +38,7 @@
                         
                         <StackPanel Grid.Row="0" Grid.Column="0">
                             <TextBlock Style="{StaticResource SegoeSemilight28}" >
-                                <Run  x:Uid="Hotels_Search_RoomDetail" Text="Habitacion" />
+                                <Run  x:Uid="Hotels_Search_RoomDetail" Text="HabitacionX" />
                                 <Run  Text="{Binding Index}"/>
                             </TextBlock>
                         </StackPanel>

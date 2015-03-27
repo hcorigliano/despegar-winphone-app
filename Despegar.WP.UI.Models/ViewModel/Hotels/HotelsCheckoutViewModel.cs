@@ -380,7 +380,8 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
 
         private async void ConfigureInvoice()
         {
-            CheckoutMethodKey checkout = CoreBookingFields.form.checkout_method.FirstOrDefault(x => x.Value.payment.invoice != null).Value;
+            var test = CoreBookingFields;
+            CheckoutMethodKey checkout = CoreBookingFields.form.checkout_method.FirstOrDefault(x => x.Value.payment != null && x.Value.payment.invoice != null).Value;
             if (checkout != null)
             {
                 InvoiceArg invoice = checkout.payment.invoice;

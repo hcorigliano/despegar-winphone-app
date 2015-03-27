@@ -107,7 +107,7 @@
                 <Run Text="{Binding total, Converter={StaticResource CurrencyConverter}}"></Run>
             </TextBlock>
 
-            <Grid Grid.Column="2"  Style="{StaticResource IconLightBlue}" Tapped="Grid_Tapped" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="{Binding ItemSelected.isPaymentAtDestination, Converter={StaticResource FalseToVisibilityConverter}}" >
+            <Grid Grid.Column="2"  Style="{StaticResource IconLightBlue}" Tapped="Grid_Tapped" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="{Binding ItemSelected.price_destination, Converter={StaticResource NullToVisibilityConverter}}" >
                 <TextBlock  Style="{StaticResource CheckkoutValidationGlyph}">
                 &#xE171;
                 </TextBlock>

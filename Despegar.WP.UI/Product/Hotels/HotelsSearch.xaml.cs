@@ -123,7 +123,9 @@ namespace Despegar.WP.UI.Product.Hotels
 
         private void Grid_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            DestinationControl.UpdateHotelsDestiny(-1, "+ Cerca de mi ubicacion actual", "geo");
+            var loader = new Windows.ApplicationModel.Resources.ResourceLoader();
+
+            DestinationControl.UpdateHotelsDestiny(-1, loader.GetString("Common_Near_My_Location"), "geo");
             ViewModel.GetPositionCommand.Execute(null);
         }
     }
