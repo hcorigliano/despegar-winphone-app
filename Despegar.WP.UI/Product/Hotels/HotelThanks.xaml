@@ -43,8 +43,8 @@
                         <RowDefinition Height="{StaticResource Block1p}" />
                         <RowDefinition Height="{StaticResource Block5p}" />
                         <RowDefinition Height="{StaticResource Block2p}" />
-                        <RowDefinition Height="{StaticResource Block4p}" />
-                        <RowDefinition Height="{StaticResource Block4p}" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
 
                     <TextBlock Grid.Row="0" Style="{StaticResource Thanks_Booking_Detail_Blue}" x:Uid="Hotel_Thanks_Booking_Detail" Text="Detalle de hotel" />
