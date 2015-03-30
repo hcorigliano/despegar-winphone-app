@@ -31,7 +31,7 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
     public class HotelsCheckoutViewModel : ViewModelBase
     {
         #region ** Private **
-        private bool VALIDATE_DUPLICATE_CHECKOUT = false;
+        private bool VALIDATE_DUPLICATE_CHECKOUT = true;
         private ICoreLogger logger;
         private IAPIv1 apiV1service; 
         private IMAPIHotels hotelService;
