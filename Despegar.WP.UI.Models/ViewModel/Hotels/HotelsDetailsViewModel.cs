@@ -6,6 +6,7 @@ using Despegar.Core.Neo.Business.Hotels.UserReviews;
 using Despegar.Core.Neo.Business.Hotels.UserReviews.V1;
 using Despegar.Core.Neo.Contract.API;
 using Despegar.Core.Neo.Contract.Log;
+using Despegar.Core.Neo.Exceptions;
 using Despegar.WP.UI.Model.Interfaces;
 using Despegar.WP.UI.Model.ViewModel.Classes;
 using Despegar.WP.UI.Model.ViewModel.Controls.Maps;
@@ -253,7 +254,12 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
             { 
                 OnViewModelError("NO_AVAILABILITY");
             }
-           } 
+           }
+           catch (APIErrorException e)
+           {
+               // Custom error?
+               OnViewModelError("SEARCH_ERROR", e.ErrorData.code);
+           }
            catch(Exception) 
            {
                OnViewModelError("INIT_FAILED");

@@ -18,7 +18,7 @@
         <conv:ZeroPriceToVisibilityConverter x:Name="ZeroPriceToVisibilityConverter" ></conv:ZeroPriceToVisibilityConverter>
         <conv:FalseToVisibilityConverter x:Name="FalseToVisibilityConverter" ></conv:FalseToVisibilityConverter>
     </UserControl.Resources>
-    
+
 
 
     <Grid>
@@ -46,7 +46,7 @@
             <TextBlock  Style="{StaticResource SegoeSemilight24alphaBlue}" TextWrapping="Wrap">
                 <Run x:Uid="Hotels_Buy_Room_Details" Text="Habitacion "></Run>
                 <Run Text="{Binding RoomName}"></Run>
-            </TextBlock>     
+            </TextBlock>
         </StackPanel>
 
         <!--RATE DETAILS -->
@@ -80,6 +80,10 @@
                 <Run Text="{Binding PaymentDetails.currency.mask}"></Run>
                 <Run Text="{Binding PaymentDetails.subtotal, Converter={StaticResource CurrencyConverter}}"></Run>
             </TextBlock>
+            <TextBlock Style="{StaticResource SegoeSemilight17alpha}" Height="{StaticResource dBlock1p}" Visibility="{Binding SelectedCard.financial_cost, Converter={StaticResource ZeroPriceToVisibilityConverter}}" Margin="0,0,-0.5,0">
+            	<Run Text="{Binding PaymentDetails.currency.mask}"/>
+            	<Run Text="{Binding SelectedCard.financial_cost, Converter={StaticResource CurrencyConverter}}"/>
+            </TextBlock>
             <TextBlock Style="{StaticResource SegoeSemilight17alpha}" Height="{StaticResource dBlock1p}" >
                 <Run Text="{Binding PaymentDetails.currency.mask}"></Run>
                 <Run Text="{Binding PaymentDetails.totalCharges, Converter={StaticResource CurrencyConverter}}"></Run>
@@ -88,32 +92,26 @@
                 <Run Text="{Binding PaymentDetails.currency.mask}"></Run>
                 <Run Text="{Binding PaymentDetails.retention, Converter={StaticResource CurrencyConverter}}"></Run>
             </TextBlock>
-            <TextBlock Style="{StaticResource SegoeSemilight17alpha}" Height="{StaticResource dBlock1p}" Visibility="{Binding  SelectedCard.financial_cost, Converter={StaticResource ZeroPriceToVisibilityConverter}}">
-                <Run Text="{Binding PaymentDetails.currency.mask}"></Run>
-                <Run Text="{Binding SelectedCard.financial_cost, Converter={StaticResource CurrencyConverter}}"></Run>
-            </TextBlock>
         </StackPanel>
 
-        <Grid Grid.Row="4" Grid.ColumnSpan="2">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="{StaticResource Block7p}" />
-                <ColumnDefinition Width="{StaticResource Block3p}" />
-                <ColumnDefinition Width="{StaticResource Square}" />
-            </Grid.ColumnDefinitions>
 
-            <TextBlock Style="{StaticResource SegoeSemilight24alphaYellow}" Grid.Column="0"  x:Uid="Buy_Details_total" Text="TOTAL"></TextBlock>
-            <TextBlock Style="{StaticResource SegoeLight24}" Grid.Column="1"  DataContext="{Binding PaymentDetails}" >
+        <TextBlock Style="{StaticResource SegoeSemilight24alphaYellow}"  Grid.Row="4" Grid.Column="0"  x:Uid="Buy_Details_total" Text="TOTAL"></TextBlock>
+
+
+
+        <StackPanel Orientation="Horizontal" Grid.Column="1"  Grid.Row="4">
+            <TextBlock Style="{StaticResource SegoeLight24}"  DataContext="{Binding PaymentDetails}" Margin="0,0,10,0">
                 <Run Text="{Binding currency.mask}"></Run>
                 <Run Text="{Binding total, Converter={StaticResource CurrencyConverter}}"></Run>
             </TextBlock>
 
-            <Grid Grid.Column="2"  Style="{StaticResource IconLightBlue}" Tapped="Grid_Tapped" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="{Binding ItemSelected.price_destination, Converter={StaticResource NullToVisibilityConverter}}" >
+            <Grid  Style="{StaticResource IconLightBlue}" Tapped="Grid_Tapped" Visibility="{Binding ItemSelected.price_destination, Converter={StaticResource NullToVisibilityConverter}}" >
                 <TextBlock  Style="{StaticResource CheckkoutValidationGlyph}">
-                &#xE171;
+                    &#xE171;
                 </TextBlock>
             </Grid>
+      </StackPanel>
 
-        </Grid>
 
     </Grid>
 </UserControl>
