@@ -23,7 +23,7 @@
             <RowDefinition Height="{StaticResource Block3}"/>
             <RowDefinition Height="{StaticResource Offset}"/>
 
-            <RowDefinition Height="{StaticResource Block2}"/>
+            <RowDefinition Height="{StaticResource Block2p}"/>
             <RowDefinition Height="{StaticResource Offset}"/>
 
             <RowDefinition Height="{StaticResource Block2}"/>
