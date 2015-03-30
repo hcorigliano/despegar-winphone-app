@@ -406,19 +406,10 @@ namespace Despegar.WP.UI.Product.Hotels
 
         private async void AcceptConditions_Click(object sender, RoutedEventArgs e)
         {
-            string uriToLaunch = @"https://secure.despegar.com.ar/book/flights/checkout/conditions/wp";
-            var uri = new Uri(uriToLaunch);
-            var success = await Windows.System.Launcher.LaunchUriAsync(uri);
+            string uriToLaunch = String.Format("https://secure.despegar.com.{0}/book/hotels/checkout/conditions/wp", GlobalConfiguration.Site.ToLowerInvariant());
 
-            if (success)
-            {
-                // URI launched
-            }
-            else
-            {
-                // URI launch failed
-            }
-
+            if (GlobalConfiguration.Site.ToLowerInvariant() == "br")
+                uriToLaunch = "https://secure.decolar.com/book/hotels/checkout/conditions/wp";
         }
 
         private void HardwareButtons_BackPressed(object sender, BackPressedEventArgs e)
