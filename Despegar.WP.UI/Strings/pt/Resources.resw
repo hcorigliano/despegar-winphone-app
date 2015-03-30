@@ -304,7 +304,7 @@
     <value>múltiple</value>
   </data>
   <data name="Flights_Search_Departure.Text" xml:space="preserve">
-    <value>Saída</value>
+    <value>Ida</value>
   </data>
   <data name="Generic_Return" xml:space="preserve">
     <value>Retorno</value>
@@ -1296,5 +1296,11 @@ A reserva não foi gerado e não cobra nenhuma taxa para a transação."</value>
   </data>
   <data name="Hotel_Gps_Error" xml:space="preserve">
     <value>Ative o gps no seu computador para usar este recurso.</value>
+  </data>
+  <data name="Hotel_Search_Checkin.Text" xml:space="preserve">
+    <value>Entrada</value>
+  </data>
+  <data name="Hotel_Search_Checkout.Text" xml:space="preserve">
+    <value>Saída</value>
   </data>
 </root>

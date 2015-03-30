@@ -1300,4 +1300,10 @@ La reserva no ha sido generada y no se le cobrará ningún cargo por la transacc
   <data name="Hotel_Gps_Error" xml:space="preserve">
     <value>Por favor habilite el gps de su equipo para utilizar esta funcion.</value>
   </data>
+  <data name="Hotel_Search_Checkin.Text" xml:space="preserve">
+    <value>Entrada</value>
+  </data>
+  <data name="Hotel_Search_Checkout.Text" xml:space="preserve">
+    <value>Salida</value>
+  </data>
 </root>
