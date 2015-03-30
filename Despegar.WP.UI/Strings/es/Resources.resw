@@ -1148,7 +1148,7 @@ La reserva no ha sido generada y no se le cobrará ningún cargo por la transacc
     <value>Por favor, verifique el numero ingresado</value>
   </data>
   <data name="Hotels_Buy_Details_Nights_Count.Text" xml:space="preserve">
-    <value>noches</value>
+    <value>noche(s)</value>
   </data>
   <data name="Flight_Checkout_Billing_Address.Header" xml:space="preserve">
     <value>dirección</value>
@@ -1157,7 +1157,7 @@ La reserva no ha sido generada y no se le cobrará ningún cargo por la transacc
     <value>Por favor, verifique los datos ingresos y revise los campos marcados.</value>
   </data>
   <data name="Hotels_Buy_Details_Rooms_Count.Text" xml:space="preserve">
-    <value>habitación</value>
+    <value>habitación(es)</value>
   </data>
   <data name="Checkout_BillingAddress_City.Label" xml:space="preserve">
     <value>Ciudad</value>

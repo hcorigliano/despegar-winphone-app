@@ -1144,7 +1144,7 @@ Isso pode ter sido causado por dados incorretos, limite de compra insuficiente o
     <value>Por favor, verifique o número introduzido</value>
   </data>
   <data name="Hotels_Buy_Details_Nights_Count.Text" xml:space="preserve">
-    <value>noites</value>
+    <value>noite(s)</value>
   </data>
   <data name="Flight_Checkout_Billing_Address.Header" xml:space="preserve">
     <value>endereço</value>

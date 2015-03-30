@@ -622,7 +622,7 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
                 if (InstallmentFormatted.WithInterest.Count != 0)
                 {
                     var loader = new Windows.ApplicationModel.Resources.ResourceLoader();
-                    InstallmentFormatted.ResourceLabel = loader.GetString("Common_Pay_Of");
+                    InstallmentFormatted.ResourceLabel = loader.GetString("Common_Pays_Of");
                 }
             }
         }
