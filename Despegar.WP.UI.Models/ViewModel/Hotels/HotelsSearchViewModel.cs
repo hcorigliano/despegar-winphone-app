@@ -1,4 +1,5 @@
-﻿using Despegar.Core.Neo.Business.Hotels.SearchBox;
+﻿using Despegar.Core.Neo.Business.Hotels.CitiesAvailability;
+using Despegar.Core.Neo.Business.Hotels.SearchBox;
 using Despegar.Core.Neo.Contract.API;
 using Despegar.Core.Neo.Contract.Log;
 using Despegar.WP.UI.Model.Classes;
@@ -146,6 +147,10 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
                // IsLoading = true;
                 BugTracker.LeaveBreadcrumb("Hotel search performed");                
                
+                //Reset facet and sorting
+                coreSearchModel.Facets = new List<Facet>();
+                coreSearchModel.Sortings = new Sorting();
+
                 if (coreSearchModel.DestinationCode == -1)                
                 {
                   

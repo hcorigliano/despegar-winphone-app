@@ -28,7 +28,7 @@
     <Page.BottomAppBar>
         <CommandBar>
             <AppBarButton Icon="Accept" x:Uid="Common_Accept_Label" Label="Aceptar"  Command="{Binding ApplyFilterCommand}" />
-            <AppBarButton Icon="Cancel" x:Uid="Common_Cancel_Label" Label="Cancelar" Command="{Binding CancelComand}" />
+            <AppBarButton Icon="Cancel" x:Uid="Common_Cancel_Label" Label="Cancelar" Command="{Binding CancelCommand}" />
         </CommandBar>
     </Page.BottomAppBar>
 
