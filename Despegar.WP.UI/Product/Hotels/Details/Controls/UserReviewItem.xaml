@@ -53,7 +53,7 @@
 
         <Grid Grid.Row="1">
             <StackPanel>
-                <TextBlock Style="{StaticResource SegoeLight24}" Text="{Binding description}" Visibility="{Binding  description , Converter={StaticResource NullToVisibilityConverter}}"/>
+                <TextBlock Style="{StaticResource SegoeLight20}" Text="{Binding description}" Visibility="{Binding  description , Converter={StaticResource NullToVisibilityConverter}}"/>
                 <Grid>
                 	<Grid.ColumnDefinitions>
                 		<ColumnDefinition Width="130" />
