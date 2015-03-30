@@ -268,7 +268,10 @@ namespace Despegar.WP.UI.Product.Hotels
                     {
                         //Add Invoice. The subscription is necessary 
                         if (!pivotInstallmentIsLoaded)
+                        {
+                            Pivot_INSTALLMENT.Loaded -= Insert_Invoice;
                             Pivot_INSTALLMENT.Loaded += Insert_Invoice;
+                        }
                         else
                             Insert_Invoice(null, null);
                     }
@@ -287,7 +290,10 @@ namespace Despegar.WP.UI.Product.Hotels
                     {
                         //Add billingAddress
                         if (!pivotInstallmentIsLoaded)
+                        {
+                            Pivot_INSTALLMENT.Loaded -= Insert_Billing_Address;
                             Pivot_INSTALLMENT.Loaded += Insert_Billing_Address;
+                        }
                         else
                             Insert_Billing_Address(null, null);
                     }
@@ -306,7 +312,10 @@ namespace Despegar.WP.UI.Product.Hotels
                     {
                         //Add CardData
                         if (!pivotInstallmentIsLoaded)
+                        {
+                            Pivot_INSTALLMENT.Loaded -= Insert_Card_Info;
                             Pivot_INSTALLMENT.Loaded += Insert_Card_Info;
+                        }
                         else
                             Insert_Card_Info(null, null);
                     }
