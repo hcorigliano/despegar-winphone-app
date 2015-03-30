@@ -1049,7 +1049,7 @@ A reserva não foi gerado e não cobra nenhuma taxa para a transação.</value>
     <value>Error</value>
   </data>
   <data name="Flight_results_ERROR_NO_ITEMS" xml:space="preserve">
-    <value>Lo sentimos, no hemos encontrado ningún resultado para su búsqueda. Por favor, inténtelo nuevamente modificando alguno de los criterios de búsqueda.</value>
+    <value>Desculpe, foi encontrado nenhum resultado para sua pesquisa. Por favor, tente novamente, alterando qualquer um dos critérios.</value>
   </data>
   <data name="Hotels_Search_ERROR" xml:space="preserve">
     <value>Desculpe, a pesquisa não pôde ser realizada. Por favor, tente novamente</value>
@@ -1201,7 +1201,7 @@ Isso pode ter sido causado por dados incorretos, limite de compra insuficiente o
     <value>Estado</value>
   </data>
   <data name="Hotels_Checkout_Card_Data_Card_ERROR_OP_BOOKING_FAILED" xml:space="preserve">
-    <value>"Desculpe, o seu pedido de compra No. {0} não pode ser processado devido à indisponibilidade do voo.
+    <value>"Desculpe, o seu pedido de compra No. {0} não pode ser processado devido à indisponibilidade de quartos.
 A reserva não foi gerado e não cobra nenhuma taxa para a transação."</value>
   </data>
   <data name="Hotels_Checkout_Card_Data_Card_ERROR_OP_PAYMENT_FAILED" xml:space="preserve">
