@@ -410,6 +410,9 @@ namespace Despegar.WP.UI.Product.Hotels
 
             if (GlobalConfiguration.Site.ToLowerInvariant() == "br")
                 uriToLaunch = "https://secure.decolar.com/book/hotels/checkout/conditions/wp";
+
+            var uri = new Uri(uriToLaunch);
+            var success = await Windows.System.Launcher.LaunchUriAsync(uri);     
         }
 
         private void HardwareButtons_BackPressed(object sender, BackPressedEventArgs e)
