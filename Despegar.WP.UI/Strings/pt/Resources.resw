@@ -920,7 +920,7 @@ A reserva não foi gerado e não cobra nenhuma taxa para a transação.</value>
     <value>Taxa para dispositivos móveis</value>
   </data>
   <data name="Page_Hotels_Checkout.Text" xml:space="preserve">
-    <value>VOOS DE COMPRA</value>
+    <value>COMPRAR HOTEL</value>
   </data>
   <data name="Hotels_Checkout_Buy.Header" xml:space="preserve">
     <value>detalhe</value>
