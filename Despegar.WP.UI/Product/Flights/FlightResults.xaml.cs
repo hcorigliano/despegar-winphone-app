@@ -82,6 +82,7 @@ namespace Despegar.WP.UI.Product.Flights
                 ViewModel.ViewModelError += ErrorHandler;
                 ViewModel.PropertyChanged += Checkloading;
                 ViewModel.OnNavigated(e.Parameter);
+                ViewModel.ResetPagination();
                 await ViewModel.LoadResults();
                 
                 this.DataContext = ViewModel;
