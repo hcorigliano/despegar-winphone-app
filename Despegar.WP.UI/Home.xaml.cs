@@ -63,7 +63,6 @@ namespace Despegar.WP.UI
 
         protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
-            HardwareButtons.BackPressed += HardwareButtons_BackPressed;
             ViewModel = IoC.Resolve<HomeViewModel>();
             ViewModel.PropertyChanged += Checkloading;
             ViewModel.OnNavigated(e.Parameter);
@@ -84,14 +83,7 @@ namespace Despegar.WP.UI
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
-            HardwareButtons.BackPressed -= HardwareButtons_BackPressed;
-        }
-
-        private void HardwareButtons_BackPressed(object sender, BackPressedEventArgs e)
-        {
-            e.Handled = true;
-            ViewModel.Navigator.GoBack();
-        }
+        }        
 
         private void Checkloading(object sender, PropertyChangedEventArgs e)
         {

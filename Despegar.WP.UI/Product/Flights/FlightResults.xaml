@@ -20,8 +20,10 @@
     >
     <Page.BottomAppBar>
         <CommandBar ClosedDisplayMode="Compact">
-            <AppBarButton x:Name="appBarFilter" Icon="Filter" x:Uid="AppBarButton_Filters" Command="{Binding NavigateToFiltersCommand}" />
-            <AppBarButton x:Name="appBarSortBy" Icon="Sort" x:Uid="AppBarButton_OrderBy" Command="{Binding NavigateToOrderByCommand}" />
+            <AppBarButton x:Name="appBarPreviousPage" x:Uid="AppBarButton_Previous" IsEnabled="{Binding PreviousPageIsTapEnable}" Command="{Binding ShowPreviousPageCommand}"  Background="Black" Icon="Back"/>
+            <AppBarButton x:Name="appBarFilter" Icon="Filter" x:Uid="AppBarButton_Filters" IsEnabled="{Binding FilterButtonIsTapEnable}" Command="{Binding NavigateToFiltersCommand}" />
+            <AppBarButton x:Name="appBarSortBy" Icon="Sort" x:Uid="AppBarButton_OrderBy" IsEnabled="{Binding OrderButtonIsTapEnable}" Command="{Binding NavigateToOrderByCommand}" />
+            <AppBarButton x:Name="appBarNextPage" x:Uid="AppBarButton_Next"    IsEnabled="{Binding NextPageButtonIsTapEnable}" Command="{Binding ShowNextPageCommand}" Background="Black" Icon="Forward"/>
         </CommandBar>        
     </Page.BottomAppBar>
 

@@ -1193,8 +1193,7 @@ La reserva no ha sido generada y no se le cobrará ningún cargo por la transacc
     <value>Número</value>
   </data>
   <data name="Hotels_Checkout_Card_Data_Card_ERROR_OP_BOOKING_FAILED" xml:space="preserve">
-    <value>Lo sentimos, su solicitud de compra N° {0} no puede ser procesada por falta de disponibilidad del vuelo.
-           La reserva no ha sido generada y no se le cobrará ningún cargo por la transacción.</value>
+    <value>Lo sentimos, su solicitud de compra N° {0} no puede ser procesada por falta de disponibilidad del hotel. La reserva no ha sido generada y no se le cobrará ningún cargo por la transacción.</value>
   </data>
   <data name="Hotels_Checkout_Card_Data_Card_ERROR_OP_PAYMENT_FAILED" xml:space="preserve">
     <value>Lo sentimos, no hemos podido procesar su pago. Si desea realizar un pago mediante transferencia bancaria, por favor comuníquese con {0}.</value>
@@ -1297,6 +1296,15 @@ La reserva no ha sido generada y no se le cobrará ningún cargo por la transacc
   </data>
   <data name="Hotels_Search_ERROR_NO_AVAILABILITY" xml:space="preserve">
     <value>No hay disponibilidad para el hotel seleccionado.</value>
+  </data>
+  <data name="Hotel_Gps_Error" xml:space="preserve">
+    <value>Por favor habilite el gps de su equipo para utilizar esta funcion.</value>
+  </data>
+  <data name="Hotel_Search_Checkin.Text" xml:space="preserve">
+    <value>Entrada</value>
+  </data>
+  <data name="Hotel_Search_Checkout.Text" xml:space="preserve">
+    <value>Salida</value>
   </data>
   <data name="HOTEL_SEARCH_CHECKOUT_DATE_SMALLER_THAN_CHECKIN_ERROR_MESSAGE" xml:space="preserve">
     <value>La fecha de salida tiene que ser mayor a la de entrada.</value>

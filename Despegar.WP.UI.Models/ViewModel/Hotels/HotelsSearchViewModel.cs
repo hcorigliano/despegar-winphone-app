@@ -10,7 +10,10 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Windows.ApplicationModel.Resources;
 using Windows.Devices.Geolocation;
+using Windows.UI.Popups;
+
 
 namespace Despegar.WP.UI.Model.ViewModel.Hotels
 {
@@ -113,17 +116,28 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
 
         private async void SearchTodayHotels()
         {
-            CheckinDate = DateTime.Now;
-            CheckoutDate = DateTime.Now.AddDays(1);
-            coreSearchModel.CheckinDate = CheckinDate;
-            coreSearchModel.CheckoutDate = CheckoutDate;
-            coreSearchModel.SelectedRoomsQuantityOption = 1;
-            coreSearchModel.DestinationCode = -1; // TODO: mejorar a algo como IsGeoSearch = true
+            if (geolocator.LocationStatus != PositionStatus.Disabled)
+            {
+                CheckinDate = DateTime.Now;
+                CheckoutDate = DateTime.Now.AddDays(1);
+                coreSearchModel.CheckinDate = CheckinDate;
+                coreSearchModel.CheckoutDate = CheckoutDate;
+                coreSearchModel.SelectedRoomsQuantityOption = 1;
+                coreSearchModel.DestinationCode = -1; // TODO: mejorar a algo como IsGeoSearch = true
 
-            coreSearchModel.Rooms[0].GeneralAdults = 1;
-            coreSearchModel.Rooms[0].GeneralMinors = 0;
+                coreSearchModel.Rooms[0].GeneralAdults = 1;
+                coreSearchModel.Rooms[0].GeneralMinors = 0;
 
-            await SearchHotels();
+                await SearchHotels();
+            }
+            else
+            {
+                ResourceLoader manager = new ResourceLoader();
+                MessageDialog dialog = new MessageDialog(manager.GetString("Hotel_Gps_Error"), "Error");
+                await dialog.ShowAsync();
+                return;
+            }
+
         }
 
         private async Task SearchHotels()
@@ -139,11 +153,12 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
 
                 if (coreSearchModel.DestinationCode == -1)                
                 {
+                  
                     // Geolocation  search
                     this.DestinationType = "geo";
 
                     // TODO: Test this better
-                    try 
+                    try
                     {
                         IsLoading = true;
                         Geoposition pos = await geolocator.GetGeopositionAsync();
@@ -153,6 +168,7 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
                     catch (System.UnauthorizedAccessException)
                     {
                         // TODO: Pedirle que active el gps?
+
                         throw;
                     }
                     catch (Exception)
@@ -160,7 +176,8 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
                         throw;
                     }
 
-                    IsLoading = false;
+                    IsLoading = false;    
+
                 }
 
                 if (this.DestinationType == "city" || this.DestinationType == "geo")

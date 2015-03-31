@@ -268,7 +268,10 @@ namespace Despegar.WP.UI.Product.Hotels
                     {
                         //Add Invoice. The subscription is necessary 
                         if (!pivotInstallmentIsLoaded)
+                        {
+                            Pivot_INSTALLMENT.Loaded -= Insert_Invoice;
                             Pivot_INSTALLMENT.Loaded += Insert_Invoice;
+                        }
                         else
                             Insert_Invoice(null, null);
                     }
@@ -287,7 +290,10 @@ namespace Despegar.WP.UI.Product.Hotels
                     {
                         //Add billingAddress
                         if (!pivotInstallmentIsLoaded)
+                        {
+                            Pivot_INSTALLMENT.Loaded -= Insert_Billing_Address;
                             Pivot_INSTALLMENT.Loaded += Insert_Billing_Address;
+                        }
                         else
                             Insert_Billing_Address(null, null);
                     }
@@ -306,7 +312,10 @@ namespace Despegar.WP.UI.Product.Hotels
                     {
                         //Add CardData
                         if (!pivotInstallmentIsLoaded)
+                        {
+                            Pivot_INSTALLMENT.Loaded -= Insert_Card_Info;
                             Pivot_INSTALLMENT.Loaded += Insert_Card_Info;
+                        }
                         else
                             Insert_Card_Info(null, null);
                     }
@@ -397,19 +406,13 @@ namespace Despegar.WP.UI.Product.Hotels
 
         private async void AcceptConditions_Click(object sender, RoutedEventArgs e)
         {
-            string uriToLaunch = @"https://secure.despegar.com.ar/book/flights/checkout/conditions/wp";
+            string uriToLaunch = String.Format("https://secure.despegar.com.{0}/book/hotels/checkout/conditions/wp", GlobalConfiguration.Site.ToLowerInvariant());
+
+            if (GlobalConfiguration.Site.ToLowerInvariant() == "br")
+                uriToLaunch = "https://secure.decolar.com/book/hotels/checkout/conditions/wp";
+
             var uri = new Uri(uriToLaunch);
-            var success = await Windows.System.Launcher.LaunchUriAsync(uri);
-
-            if (success)
-            {
-                // URI launched
-            }
-            else
-            {
-                // URI launch failed
-            }
-
+            var success = await Windows.System.Launcher.LaunchUriAsync(uri);     
         }
 
         private void HardwareButtons_BackPressed(object sender, BackPressedEventArgs e)
