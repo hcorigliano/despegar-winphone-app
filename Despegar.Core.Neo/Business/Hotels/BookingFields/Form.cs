@@ -16,7 +16,6 @@ namespace Despegar.Core.Neo.Business.Hotels.BookingFields
 
         // Custom
         public Voucher Voucher { get { return CheckoutMethodSelected.vouchers != null ? CheckoutMethodSelected.vouchers.FirstOrDefault() : null; } } // TODO: only one voucher? Why a list?
-        // TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO
         public CardField CardInfo { get { return CheckoutMethodSelected.payment != null ? CheckoutMethodSelected.payment.card : null; } }
         public InvoiceArg Invoice { get { return CheckoutMethodSelected.payment != null ? CheckoutMethodSelected.payment.invoice : null; } }
         public Installment CurrentInstallment { get { return CheckoutMethodSelected.payment != null ? CheckoutMethodSelected.payment.installment : null; } }    
