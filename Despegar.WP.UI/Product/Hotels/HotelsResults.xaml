@@ -49,9 +49,9 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <StackPanel xmlns:src="using:Despegar.WP.UI.Controls.Hotels" Grid.Row="0"  >
-                <src:MiniBoxSearch x:Name="Test" DataContext="{Binding SearchModel}"  Tapped="ReSearchTapped"/>
-            </StackPanel>
+            <Grid xmlns:src="using:Despegar.WP.UI.Controls.Hotels" Grid.Row="0" Tapped="ReSearchTapped" Background="Transparent"  >
+                <src:MiniBoxSearch x:Name="Test" DataContext="{Binding SearchModel}"  />
+            </Grid>
 
             <TextBlock x:Uid="Common_pessoa_por_noite"  Grid.Row="1" Text="Tarifa por persona por nocheX" Style="{StaticResource SegoeRegular12_9}" VerticalAlignment="Center"/>
 

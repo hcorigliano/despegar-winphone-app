@@ -160,7 +160,9 @@
 
             <TextBlock Grid.Row="2" Text="{Binding DataContext, Converter={StaticResource TextHeaderConverter}, ElementName=miniboxSearch}" Style="{StaticResource PageHeader}" ></TextBlock>
 
-            <Controls:SearchMiniBoxControl DataContext="{Binding FlightSearchModel}" Grid.Row="3" Tapped="miniboxSearch_Tapped" x:Name="miniboxSearch" Height="Auto" Margin="{StaticResource Top_Offset}"/>
+            <Grid  Grid.Row="3" Tapped="miniboxSearch_Tapped" Height="Auto"  Background="Transparent">
+                <Controls:SearchMiniBoxControl DataContext="{Binding FlightSearchModel}" x:Name="miniboxSearch" Height="Auto"  Margin="{StaticResource Top_Offset}" />
+            </Grid>
 
         </Grid>
 
