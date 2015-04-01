@@ -19,6 +19,120 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
 {
     public class FlightResultsViewModel : ViewModelBase
     {
+        public const int ITEMS_FOR_EACH_PAGE = 15;
+
+        #region #Control Buttons#
+
+        private bool previousPageButtonIsTapEnable { get; set; }
+        public bool PreviousPageIsTapEnable
+        {
+            get
+            {
+                return previousPageButtonIsTapEnable;
+
+            }
+            set
+            {
+                previousPageButtonIsTapEnable = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private bool nextPageButtonIsTapEnable { get; set; }
+        public bool NextPageButtonIsTapEnable
+        {
+            get
+            {
+                return nextPageButtonIsTapEnable;
+            }
+            set
+            {
+                nextPageButtonIsTapEnable = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private bool filterButtonIsTapEnable { get; set; }
+        public bool FilterButtonIsTapEnable
+        {
+            get
+            {
+                return filterButtonIsTapEnable;
+            }
+            set
+            {
+                filterButtonIsTapEnable = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private bool orderButtonIsTapEnable { get; set; }
+        public bool OrderButtonIsTapEnable
+        {
+            get
+            {
+                return orderButtonIsTapEnable;
+            }
+            set
+            {
+                orderButtonIsTapEnable = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public ICommand ShowNextPageCommand
+        {
+            get
+            {
+                return new RelayCommand(async () => await ShowNextPage());
+            }
+        }
+
+        public ICommand ShowPreviousPageCommand
+        {
+            get
+            {
+                return new RelayCommand(async () => await ShowPreviousPage());
+            }
+        }
+
+        public async Task ShowNextPage()
+        {
+            if (!IsLoading)
+            {
+                FlightSearchModel.Offset += ITEMS_FOR_EACH_PAGE;
+                await LoadResults();
+            }
+        }
+
+        public async Task ShowPreviousPage()
+        {
+            if (!IsLoading && FlightSearchModel.Offset != 0)
+            {
+                FlightSearchModel.Offset -= ITEMS_FOR_EACH_PAGE;
+                await LoadResults();
+            }
+        }
+
+
+        public ICommand NavigateToFiltersCommand
+        {
+            get
+            {
+                return new RelayCommand(() => { Navigator.GoTo(Model.Interfaces.ViewModelPages.FlightsFilters, new GenericResultNavigationData() { SearchModel = FlightSearchModel }); });
+            }
+        }
+
+        public ICommand NavigateToOrderByCommand
+        {
+            get
+            {
+                return new RelayCommand(() => { Navigator.GoTo(Model.Interfaces.ViewModelPages.FlightsOrderBy, new GenericResultNavigationData() { SearchModel = FlightSearchModel }); });
+            }
+        }
+
+#endregion
+
         private IMAPIFlights flightService;
 
         private FlightsItineraries itineraries;
@@ -96,22 +210,6 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
             FlightCrossParameters = new FlightsCrossParameter();
         }
 
-        public ICommand NavigateToFiltersCommand
-        {
-            get
-            {
-                return new RelayCommand(() => { Navigator.GoTo(Model.Interfaces.ViewModelPages.FlightsFilters, new GenericResultNavigationData() { SearchModel = FlightSearchModel }); });
-            }
-        }
-
-        public ICommand NavigateToOrderByCommand
-        {
-            get
-            {
-                return new RelayCommand(() => { Navigator.GoTo(Model.Interfaces.ViewModelPages.FlightsOrderBy, new GenericResultNavigationData() { SearchModel = FlightSearchModel }); });
-            }
-        }
-
         public override void OnNavigated(object navigationParams)
         {
             BugTracker.LeaveBreadcrumb("Flight Results View");
@@ -132,6 +230,12 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
         {
             BugTracker.LeaveBreadcrumb("FlightsResults Load Results");
             IsLoading = true;
+
+            DisableButtons();
+
+            PreviousPageIsTapEnable = false;
+            NextPageButtonIsTapEnable = false;
+
             try
             {
                 Itineraries = await flightService.GetItineraries(FlightSearchModel);
@@ -156,7 +260,29 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
                 OnViewModelError("LOAD_RESULTS_FAILED");
             }
 
+            EnableButtons();
+
             IsLoading = false;
+        }
+
+        private void DisableButtons()
+        {
+            PreviousPageIsTapEnable = false;
+            NextPageButtonIsTapEnable = false;
+            OrderButtonIsTapEnable = false;
+            FilterButtonIsTapEnable = false;
+        }
+
+        private void EnableButtons()
+        {
+            FilterButtonIsTapEnable = FlightSearchModel.Facets.Count > 0;
+            OrderButtonIsTapEnable = true;
+            PreviousPageIsTapEnable = FlightSearchModel.Offset != 0;
+
+            if (Itineraries != null)
+                NextPageButtonIsTapEnable = (Itineraries.paging.offset + ITEMS_FOR_EACH_PAGE) < Itineraries.paging.total;
+            else
+                NextPageButtonIsTapEnable = false;
         }
 
         /// <summary>
@@ -166,7 +292,11 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
         {
             BugTracker.LeaveBreadcrumb("Flight Result Minibox Hit");
             Navigator.GoBack();
-        } 
-        
+        }
+
+        public void ResetPagination()
+        {
+            FlightSearchModel.Offset = 0;
+        }
     }
 }

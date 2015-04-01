@@ -208,35 +208,27 @@ namespace Despegar.Core.Neo.Business.Hotels.SearchBox
                 if (String.IsNullOrEmpty(DestinationHotelText) && DestinationCode != -1)
                 {
                     // No origin
-                    SearchErrors = new CustomError("Debe que seleccionar origen.", "FLIGHT_SEARCH_NO_ORIGIN_ERROR_MESSAGE", "CommonValidations");
-                    return false;
-                }
-
-                // TODO:  No deberia ser que por cada habitacion haya un adulto? 
-                if (TotalAdults <= 0)
-                {
-                    SearchErrors = new CustomError("Tiene que haber al menos un adulto.", "FLIGHT_SEARCH_MIN_ADULTS_ERROR_MESSAGE", "CommonValidations");
-                    // Adult obligatory
+                    SearchErrors = new CustomError(String.Empty, "HOTEL_SEARCH_NO_DESTINATION_ERROR_MESSAGE", "CommonValidations");
                     return false;
                 }
 
                 if (CheckoutDate <= CheckinDate)
                 {
-                    SearchErrors = new CustomError("fecha partida menor a llegada.", "FLIGHT_SEARCH_DESTINATIONDATE_SMALLER_THAN_DEPARTURE_ERROR_MESSAGE", "isValid");
+                    SearchErrors = new CustomError(String.Empty, "HOTEL_SEARCH_CHECKOUT_DATE_SMALLER_THAN_CHECKIN_ERROR_MESSAGE", "isValid");
                     return false;
                 }
 
                 if (CheckinDate < DateBoundary)
                 {
                     // Cannot fly in the past.
-                    SearchErrors = new CustomError(string.Empty, "FLIGHT_SEARCH_DEPARTUREDATE_SMALLER_THAN_ERROR_MESSAGE", "isValid", true, DateBoundary.ToString("dd-MM-yyyy"));
+                    SearchErrors = new CustomError(String.Empty, "HOTEL_SEARCH_CHECKOUT_SMALLER_THAN_CI_ERROR_MESSAGE", "isValid", true, DateBoundary.ToString("dd-MM-yyyy"));
                     return false;
                 }
 
                 if (CheckoutDate < DateBoundary)
                 {
                     // Cannot fly in the past.
-                    SearchErrors = new CustomError(string.Empty, "FLIGHT_SEARCH_DEPARTUREDATE_SMALLER_THAN_ERROR_MESSAGE", "isValid", true, DateBoundary.ToString("dd-MM-yyyy"));
+                    SearchErrors = new CustomError(String.Empty, "HOTEL_SEARCH_CHECKOUT_SMALLER_THAN_CI_ERROR_MESSAGE", "isValid", true, DateBoundary.ToString("dd-MM-yyyy"));
                     return false;
                 }
 

@@ -13,6 +13,7 @@ namespace Despegar.Core.Neo.Business.Flight.SearchBox
 {
     public class FlightSearchModel : BusinessModelBase
     {
+        public const int ITEMS_FOR_EACH_PAGE = 15;
         public const int MAX_MULTIPLE_SEGMENTS = 6;
         public const int MIN_MULTIPLE_SEGMENTS = 2;
         public FlightSearchPages PageMode { get; set; }
@@ -93,7 +94,7 @@ namespace Despegar.Core.Neo.Business.Flight.SearchBox
             AddMultipleSegment();
 
             // TODO these values are going to be handle next interation
-            this.LimitResult = 200;
+            this.LimitResult = ITEMS_FOR_EACH_PAGE;
             this.Offset = 0;
 
             //this.SearchErrors = new List<CustomError>();
