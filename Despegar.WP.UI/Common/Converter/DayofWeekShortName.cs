@@ -31,7 +31,6 @@ namespace Despegar.WP.UI.Common.Converter
             }
             catch (Exception)
             {
-                //TODO add log
                 return String.Empty;
             }
 
