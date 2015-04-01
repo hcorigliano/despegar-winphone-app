@@ -173,7 +173,8 @@ namespace Despegar.WP.UI.Product.Flights
                         1008,  // INVALID_PASSENGER_LAST_NAME_LENGTH
                         1009,  // INVALID_PASSENGER_FIRST_NAME_LENGTH
                         1011,  // INVALID_NATIONALITY
-                        1013  // INVALID_BIRTHDAY                        
+                        1013,  // INVALID_BIRTHDAY       
+                        1099
                     };
 
                     if (formErrors.Any(x => x == code))

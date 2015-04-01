@@ -32,6 +32,7 @@
                          <RadioButton Style="{StaticResource CheckoutPaymentRadioButton}" 
                                       DataContext="{Binding }"  
                                       Content="{Binding FirstCard, Converter={StaticResource FlightPaymentDetailsToLabelConverter}}" 
+                                      IsChecked="{Binding IsChecked}"
                                       Checked="OnRadioButton_Clicked"                                      
                                       x:Name="radioButton"
                                       GroupName="WithouInterest" />
@@ -51,6 +52,7 @@
             <!-- With Interest -->
             <RadioButton Visibility="{Binding InstallmentFormatted.WithInterest, Converter={StaticResource ListToVisibilityConverter}}" 
                          Content="{Binding InstallmentFormatted.GrupLabelText}" 
+                         IsChecked="{Binding IsChecked}"
                          GroupName="WithouInterest"
                          x:Name="radioButtonWithInterest"  />
              
@@ -61,6 +63,7 @@
                             <StackPanel>
                                 <RadioButton Style="{StaticResource CheckoutPaymentRadioButton}" 
                                             Checked="OnRadioButton_Clicked"
+                                             IsChecked="{Binding IsChecked}"
                                             GroupName="WithInteres" 
                                             Visibility="{Binding Converter={StaticResource NullVisibilityConverter}}"  
                                             Content="{Binding FirstCard, Converter={StaticResource FlightPaymentDetailsToLabelConverter}}" 

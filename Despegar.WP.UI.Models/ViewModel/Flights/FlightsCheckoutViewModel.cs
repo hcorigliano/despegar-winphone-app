@@ -265,6 +265,9 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
 
                 // Format Price details / Installments
                 FormatInstallments();
+
+                SelectTheFirstInstallment();
+
                 PriceDetailsFormatted = FormatPrice();
 
                 // Set Known Default Values && Adapt Checkout to the country
@@ -289,6 +292,20 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
             IsLoading = false;
 
             BugTracker.LeaveBreadcrumb("Flight checkout ready");
+        }
+
+        private void SelectTheFirstInstallment()
+        {
+            if (this.InstallmentFormatted.WithoutInterest != null)
+            {
+                InstallmentFormatted.WithoutInterest[0].IsChecked = true;
+                SelectedInstallment = InstallmentFormatted.WithoutInterest[0];
+            }
+            else
+            {
+                InstallmentFormatted.WithInterest[0].IsChecked = true;
+                SelectedInstallment = InstallmentFormatted.WithoutInterest[0];
+            }
         }
 
 

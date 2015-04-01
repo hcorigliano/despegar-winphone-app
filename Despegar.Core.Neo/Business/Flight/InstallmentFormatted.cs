@@ -14,6 +14,8 @@ namespace Despegar.Core.Neo.Business.Flights
     /// </summary>
     public class InstallmentOption
     {
+        public bool IsChecked { get; set; }
+
         public int InstallmentQuantity { get; set; }
         public List<PaymentDetail> Cards { get; set; }
 
