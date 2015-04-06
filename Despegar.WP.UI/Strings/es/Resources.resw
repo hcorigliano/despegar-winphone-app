@@ -1055,7 +1055,7 @@ La reserva no ha sido generada y no se le cobrará ningún cargo por la transacc
     <value>Error</value>
   </data>
   <data name="Flight_results_ERROR_NO_ITEMS" xml:space="preserve">
-    <value>Desculpe, foi encontrado nenhum resultado para sua pesquisa. Por favor, tente novamente, alterando qualquer um dos critérios.</value>
+    <value>Disculpe, no se ha encontrado ningun reesultado para su busqueda. Por favor, intente nuevamente, alterando cualquiera de los criterios.</value>
   </data>
   <data name="Hotels_Search_ERROR" xml:space="preserve">
     <value>Lo sentimos, la búsqueda no pudo realizarse. Por favor vuelva a intentar.</value>
