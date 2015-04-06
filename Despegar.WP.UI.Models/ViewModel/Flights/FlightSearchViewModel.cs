@@ -239,5 +239,10 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
                 }
             }
         }
+
+        public void RefreshViewModel()
+        {
+            OnPropertyChanged("MultipleSegments");
+        }
     }
 }

@@ -93,6 +93,11 @@ namespace Despegar.WP.UI.Product.Flights
                     }
                 }
             }
+            else
+            {
+                if (ViewModel != null)
+                    ViewModel.RefreshViewModel();
+            }
 
         }
 
