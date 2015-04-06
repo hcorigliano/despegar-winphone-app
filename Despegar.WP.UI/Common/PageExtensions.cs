@@ -9,28 +9,7 @@ namespace Despegar.WP.UI.Common
 {
     public static class PageExtensions
     {
-        #region ** DEV TOOLS EXTENSIONS **
-        public static void CheckDeveloperTools(this Page page)
-        {
-           #if DEBUG
-            CommandBar bar = page.BottomAppBar as CommandBar;
-
-            if (bar != null) 
-            {
-                var btn = new AppBarButton() { Label = "Developer", Icon = new SymbolIcon(Symbol.Important) };
-                btn.Click += DevToolsButton_Click;
-                bar.PrimaryCommands.Add(btn);
-            }
-          #endif
-        }
-
-        private static void DevToolsButton_Click(object sender, RoutedEventArgs e)
-        {
-            ModalPopup popup = new ModalPopup(new DevTools());
-            popup.Show();
-        }
-        #endregion
-
+       
         // Dependecy Object Extension
         public static IEnumerable<T> FindVisualChildren<T>(this Page page, DependencyObject depObj) where T : DependencyObject
         {

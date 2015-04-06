@@ -118,6 +118,9 @@
     <Compile Include="Controls\Alert.xaml.cs">
       <DependentUpon>Alert.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\TopLogo.xaml.cs">
+      <DependentUpon>TopLogo.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Product\Flights\Checkout\BillingAddress.xaml.cs">
       <DependentUpon>BillingAddress.xaml</DependentUpon>
     </Compile>
@@ -394,6 +397,10 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Page Include="Controls\Alert.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\TopLogo.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

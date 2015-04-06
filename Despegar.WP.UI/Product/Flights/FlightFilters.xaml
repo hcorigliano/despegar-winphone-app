@@ -1,5 +1,6 @@
 ﻿<Page
     x:Class="Despegar.WP.UI.Product.Flights.FlightFilters"
+    xmlns:cont="using:Despegar.WP.UI.Controls"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:Despegar.WP.UI.Product.Flights"
@@ -52,7 +53,7 @@
         </Grid.RowDefinitions>
 
         <!-- Title Panel -->
-        <Image Grid.Row="0" Style="{StaticResource TopLogo}" />
+        <cont:TopLogo Grid.Row="0"  />
         <!--Text="Filter"-->
         <TextBlock Grid.Row="1" x:Uid="Page_Filters_Title" Style="{StaticResource PageHeaderSmall}"  FontFamily="Segoe WP Semibold" />
 

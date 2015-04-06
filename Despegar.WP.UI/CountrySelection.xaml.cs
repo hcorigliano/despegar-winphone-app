@@ -21,9 +21,7 @@ namespace Despegar.WP.UI
 
         public CountrySelection()
         {
-            this.InitializeComponent();
-            this.CheckDeveloperTools();
-
+            this.InitializeComponent();          
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)

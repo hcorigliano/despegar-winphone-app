@@ -36,17 +36,11 @@ namespace Despegar.WP.UI
         {
             this.InitializeComponent();   
 
-            // Developer Tools
-            this.CheckDeveloperTools();  
-
 #if DECOLAR
             // Remove Country Selection from BAR for DECOLAR
-            CommandBar bar = BottomAppBar as CommandBar;
-            bar.PrimaryCommands.RemoveAt(0);           
-
-    #if !DEBUG
-            this.BottomAppBar = null;
-    #endif
+            //CommandBar bar = BottomAppBar as CommandBar;
+            //bar.PrimaryCommands.RemoveAt(0);               
+            this.BottomAppBar = null;    
 #endif
          
             //Google Analytics
@@ -58,7 +52,6 @@ namespace Despegar.WP.UI
 
             //Notifications
             InitializeNotification();
-
         }
 
         protected async override void OnNavigatedTo(NavigationEventArgs e)
@@ -267,7 +260,7 @@ namespace Despegar.WP.UI
                 break;
             }
         }
-        #endregion
+        #endregion        
    
     }
 }

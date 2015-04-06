@@ -1,12 +1,10 @@
-﻿using Despegar.Core.Neo.Business;
-using Despegar.Core.Neo.Log;
-using Despegar.Core.Neo.API;
+﻿using Despegar.Core.Neo.API;
 using Despegar.Core.Neo.Business;
 using Despegar.WP.UI.Common;
 using Despegar.WP.UI.Controls;
 using Despegar.WP.UI.Controls.Flights;
 using Despegar.WP.UI.Model;
-using Despegar.WP.UI.Model.ViewModel;
+using Despegar.WP.UI.Model.ViewModel.Classes;
 using Despegar.WP.UI.Model.ViewModel.Flights;
 using Despegar.WP.UI.Product.Flights;
 using System;
@@ -19,7 +17,6 @@ using Windows.UI;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Despegar.WP.UI.Model.ViewModel.Classes;
 
 namespace Despegar.WP.UI.Developer
 {
