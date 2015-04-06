@@ -29,6 +29,7 @@ namespace Despegar.Core.Neo.Business.Flight.SearchBox
         public int LimitResult { get; set; }
         public int Offset { get; set; }
         public List<FlightMultipleSegment> MultipleSegments { get; set; }
+        public int TotalFlights { get; set; }
 
         /// <summary>
         /// Loaded after calling GetItineraries
@@ -284,6 +285,18 @@ namespace Despegar.Core.Neo.Business.Flight.SearchBox
 
                 return String.Join("&", facetListNames);
             }
+        }
+
+        public void PropertyChangedMiniBox()
+        {
+            OnPropertyChanged("DepartureDate");
+            OnPropertyChanged("DestinationDate");
+            OnPropertyChanged("OriginFlight");
+            OnPropertyChanged("DestinationFlight");
+            OnPropertyChanged("TotalPassangers");
+            OnPropertyChanged("TotalFlights");
+            
+
         }
 
     }

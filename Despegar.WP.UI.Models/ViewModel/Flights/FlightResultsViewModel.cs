@@ -249,6 +249,7 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
 
                 FlightSearchModel.Facets = Itineraries.facets;
                 FlightSearchModel.Sorting = Itineraries.sorting;
+                FlightSearchModel.TotalFlights = itineraries.total;
 
 
                 if (Itineraries.items != null)
@@ -275,14 +276,22 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
 
         private void EnableButtons()
         {
-            FilterButtonIsTapEnable = FlightSearchModel.Facets.Count > 0;
-            OrderButtonIsTapEnable = true;
-            PreviousPageIsTapEnable = FlightSearchModel.Offset != 0;
+            if (FlightSearchModel != null)
+            {
+                if (FlightSearchModel.Facets != null)
+                    FilterButtonIsTapEnable = FlightSearchModel.Facets.Count > 0;
+                else
+                    FilterButtonIsTapEnable = false;
 
-            if (Itineraries != null)
-                NextPageButtonIsTapEnable = (Itineraries.paging.offset + ITEMS_FOR_EACH_PAGE) < Itineraries.paging.total;
-            else
-                NextPageButtonIsTapEnable = false;
+                OrderButtonIsTapEnable = true;
+
+                PreviousPageIsTapEnable = FlightSearchModel.Offset != 0;
+
+                if (Itineraries != null && Itineraries.paging != null)
+                    NextPageButtonIsTapEnable = (Itineraries.paging.offset + ITEMS_FOR_EACH_PAGE) < Itineraries.paging.total;
+                else
+                    NextPageButtonIsTapEnable = false;
+            }
         }
 
         /// <summary>
@@ -297,6 +306,11 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
         public void ResetPagination()
         {
             FlightSearchModel.Offset = 0;
+        }
+
+        public void RefreshMiniBox()
+        {
+            FlightSearchModel.PropertyChangedMiniBox();
         }
     }
 }

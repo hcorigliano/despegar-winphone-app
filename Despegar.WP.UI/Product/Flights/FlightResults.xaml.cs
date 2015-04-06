@@ -84,6 +84,7 @@ namespace Despegar.WP.UI.Product.Flights
                 ViewModel.OnNavigated(e.Parameter);
                 ViewModel.ResetPagination();
                 await ViewModel.LoadResults();
+                ViewModel.RefreshMiniBox();
                 
                 this.DataContext = ViewModel;
             }

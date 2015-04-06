@@ -162,11 +162,15 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
             }
             else
             {
-                FilterButtonIsTapEnable = SearchModel.Facets.Count > 0;
+                if (SearchModel.Facets != null)
+                    FilterButtonIsTapEnable = SearchModel.Facets.Count > 0;
+                else
+                    FilterButtonIsTapEnable = false;
+
                 OrderButtonIsTapEnable = true;
                 PreviousPageIsTapEnable = SearchModel.Offset != 0;
 
-                if (CitiesAvailability != null)
+                if (CitiesAvailability != null && CitiesAvailability.paging != null)
                     NextPageButtonIsTapEnable = (CitiesAvailability.paging.offset + ITEMS_FOR_EACH_PAGE) < CitiesAvailability.paging.total;
                 else
                     NextPageButtonIsTapEnable = false;
