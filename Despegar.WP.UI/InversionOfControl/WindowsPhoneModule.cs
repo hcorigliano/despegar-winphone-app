@@ -1,5 +1,7 @@
 ﻿using Autofac;
+using Despegar.Core.Neo.Contract.Log;
 using Despegar.Core.Neo.InversionOfControl;
+using Despegar.WP.UI.BugSense;
 using Despegar.WP.UI.Common;
 using Despegar.WP.UI.Model.Interfaces;
 using System;
@@ -19,6 +21,7 @@ namespace Despegar.WP.UI.InversionOfControl
         protected override void Load(ContainerBuilder builder) 
         { 
             builder.RegisterType<Navigator>().As<INavigator>().SingleInstance();
+            builder.RegisterType<SplunkMintBugTracker>().As<IBugTracker>().SingleInstance();
         }
 
     }
