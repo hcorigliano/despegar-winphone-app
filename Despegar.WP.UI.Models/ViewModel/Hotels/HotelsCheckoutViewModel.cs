@@ -31,7 +31,6 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
     public class HotelsCheckoutViewModel : ViewModelBase
     {
         #region ** Private **
-        private bool VALIDATE_DUPLICATE_CHECKOUT = true;
         private ICoreLogger logger;
         private IAPIv1 apiV1service; 
         private IMAPIHotels hotelService;
@@ -653,7 +652,7 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
                     this.IsLoading = true;
                     object bookingData = null;
 
-                    bookingData = await BookingFormBuilder.BuildHotelsForm(this.CoreBookingFields, SelectedCard, VALIDATE_DUPLICATE_CHECKOUT);
+                    bookingData = await BookingFormBuilder.BuildHotelsForm(this.CoreBookingFields, SelectedCard, checkDuplicated);
 
                     //// Buy
                     

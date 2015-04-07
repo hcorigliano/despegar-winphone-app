@@ -174,13 +174,20 @@ namespace Despegar.WP.UI.Product.Flights
                         1008,  // INVALID_PASSENGER_LAST_NAME_LENGTH
                         1009,  // INVALID_PASSENGER_FIRST_NAME_LENGTH
                         1011,  // INVALID_NATIONALITY
-                        1013,  // INVALID_BIRTHDAY       
-                        1099
+                        1013  // INVALID_BIRTHDAY       
+                        
                     };
 
                     if (formErrors.Any(x => x == code))
                     {
                         dialog = new MessageDialog(manager.GetString("Flights_Checkout_ERROR_FORM_ERROR"), manager.GetString("Flights_Checkout_ERROR_FORM_ERROR_TITLE"));
+                        await dialog.ShowSafelyAsync();
+                        return;
+                    }
+
+                    if (code == 1099)
+                    {
+                        dialog = new MessageDialog(manager.GetString("ERROR_INVALID_FISCAL_ID"), manager.GetString("Flights_Checkout_ERROR_FORM_ERROR_TITLE"));
                         await dialog.ShowSafelyAsync();
                         return;
                     }
