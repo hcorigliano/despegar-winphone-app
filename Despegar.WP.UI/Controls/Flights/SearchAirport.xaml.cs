@@ -152,7 +152,15 @@ namespace Despegar.WP.UI.Controls.Flights
             if (selected.type == "city" && !selected.has_airport)
             {
                 // No tiene aeropuerto, buscar un aeropuerto cercano
-                var data = await GetNearCities(selected.geo_location.latitude, selected.geo_location.longitude);
+                CitiesAutocomplete data = null;
+                try
+                {
+                    data = await GetNearCities(selected.geo_location.latitude, selected.geo_location.longitude);
+                }
+                catch
+                {
+                    //Do nothing
+                }
                 if (data != null)
                 {
                     SearchCloseAirport SearchAirport = new SearchCloseAirport(this, sender.Name, selected.name) { DataContext = data };
