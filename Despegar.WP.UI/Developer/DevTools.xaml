@@ -18,7 +18,7 @@
             </DoubleAnimation>-->
             <DoubleAnimation Duration="0:0:1" From="500" To="0" Storyboard.TargetProperty="(Canvas.Left)" Storyboard.TargetName="mainCanvas" d:IsOptimized="True">
                 <DoubleAnimation.EasingFunction>
-                    <ExponentialEase EasingMode="EaseIn" />
+                    <CubicEase EasingMode="EaseOut" />
                 </DoubleAnimation.EasingFunction>
             </DoubleAnimation>
         </Storyboard>
@@ -30,10 +30,20 @@
             </DoubleAnimation>-->
             <DoubleAnimation Duration="0:0:1" To="-450" From="0" Storyboard.TargetProperty="(Canvas.Left)" Storyboard.TargetName="mainCanvas" d:IsOptimized="True">
                 <DoubleAnimation.EasingFunction>
-                    <ExponentialEase EasingMode="EaseOut" />
+                    <CubicEase EasingMode="EaseInOut" />
                 </DoubleAnimation.EasingFunction>
             </DoubleAnimation>
         </Storyboard>
+        
+        <Style x:Key="ToggleStyle" TargetType="ToggleSwitch">
+            <Setter Property="HeaderTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                         <TextBlock FontSize="28" Text="{Binding}" Foreground="#FF75B675" />
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>            
+        </Style>
     </UserControl.Resources>
 
     <Canvas>
@@ -89,10 +99,31 @@
                     </Pivot.Resources>
                     <Pivot.HeaderTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding}" FontSize="54" />
+                            <TextBlock Text="{Binding}" FontSize="50" />
                         </DataTemplate>
                     </Pivot.HeaderTemplate>
 
+                        <PivotItem Header="form automation">
+                            <ScrollViewer>
+                                <StackPanel>
+                                    <StackPanel>
+                                        <TextBlock Text="Flights"/>
+                                        <Rectangle Width="800" />
+                                        <Button Content="Ida y Vuelta - MIA"  Command="{Binding FillFlightsTwoWaySearchBox_MIAMI}" Style="{StaticResource btnStlye}"   />
+                                        <Button Content="Ida - MIA" Command="{Binding FillFlightsOneWaySearchBox_MIAMI}" Style="{StaticResource btnStlye}"  />
+                                        <Button Content="Multiples - 3 Tramos"  Style="{StaticResource btnStlye}" Command="{Binding FillFlightsMultipleSearchBox}"  />
+                                        <Button Content="Fill Checkout Form" Style="{StaticResource btnStlye}"  />
+                                    </StackPanel>
+
+                                    <StackPanel Margin="0,10,0,0">
+                                        <TextBlock Text="Hotels" />
+                                        <Rectangle Width="800" />
+                                        <Button Content="Fill Checkout Flights" Style="{StaticResource btnStlye}"   />
+                                    </StackPanel>
+                                </StackPanel>
+                            </ScrollViewer>
+                        </PivotItem>
+                    
                         <PivotItem Header="service mocks">
                             <ListView ItemsSource="{Binding Source={StaticResource mocksCvs}}" MaxHeight="440">
                                 <ListView.GroupStyle>
@@ -126,71 +157,57 @@
                             </ListView>
                         </PivotItem>
 
-                        <PivotItem Header="form automation">
-                        <PivotItem.Resources>
-                          
-                        </PivotItem.Resources>
-                        <ScrollViewer Height="283" >
-                            <StackPanel>
-                                <StackPanel>
-                                    <TextBlock Text="Flights"/>
-                                    <Rectangle />
-                                    <Button Content="SearchBox Ida y Vuelta - MIA"  Command="{Binding FillFlightsTwoWaySearchBox_MIAMI}" Style="{StaticResource btnStlye}"   />
-                                    <Button Content="SearchBox Ida - MIA" Command="{Binding FillFlightsOneWaySearchBox_MIAMI}" Style="{StaticResource btnStlye}"  />
-
-                                    <Button Content="SearchBox Multiples - 3 Tramos"  Style="{StaticResource btnStlye}" Command="{Binding FillFlightsMultipleSearchBox}"  />
-                                </StackPanel>
-                                
-                                <StackPanel Margin="0,10,0,0">
-                                    <TextBlock Text="Hotels" />
-                                    <Rectangle />
-                                    <Button Content="Fill Checkout Hotel" Style="{StaticResource btnStlye}"  />
-                                    <Button Content="Fill Checkout Flights" Style="{StaticResource btnStlye}"   />
-                                </StackPanel>                                
-                            </StackPanel>
-                        </ScrollViewer>
-                    </PivotItem>
-
                         <PivotItem Header="tools">
                         <ScrollViewer>
                             <StackPanel>
-                                <TextBlock FontSize="28">Design Grid</TextBlock>
-                                <CheckBox Content="Enabled" IsChecked="{Binding DesignGridEnabled, Mode=TwoWay}" />
 
-                                <Grid>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition />
-                                        <RowDefinition />
-                                    </Grid.RowDefinitions>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="1*" />
-                                        <ColumnDefinition Width="2*"/>
-                                    </Grid.ColumnDefinitions>
+                                    <ToggleSwitch Header="Ambiente RC" IsOn="{Binding RCEnvironmentEnabled, Mode=TwoWay}" Style="{StaticResource ToggleStyle}" />
 
-                                    <TextBlock Grid.Row="0" Grid.Column="0" Margin="0,8,15,0" FontSize="18" VerticalAlignment="Center" >Opacity</TextBlock>
-                                    <ComboBox x:Name="OpacityPicker"  Grid.Row="0" Grid.Column="1" HorizontalContentAlignment="Right" VerticalAlignment="Top" ItemsSource="{Binding OpacityOptions}" SelectedItem="{Binding Opacity, Mode=TwoWay}"  HorizontalAlignment="Right" Width="180" Margin="0,0,9.667,0" Foreground="White" />
+                                    <ToggleSwitch Header="Measure Tool" IsOn="{Binding MeasureToolEnabled, Mode=TwoWay}" Style="{StaticResource ToggleStyle}" />
 
-                                    <TextBlock Grid.Row="1" Grid.Column="0" Margin="0,8,15,0" FontSize="18" VerticalAlignment="Center">Color</TextBlock>
-                                    <controls:ColorPicker x:Name="ColourPicker" Grid.Row="1" Grid.Column="1" VerticalAlignment="Top"  HorizontalAlignment="Right" SelectedColor="{Binding DesignGridColor, Mode=TwoWay}" Height="55"  Width="180" Margin="0,0,10,0"  />
-                                </Grid>
+                                    <ToggleSwitch Header="Design Grid" IsOn="{Binding DesignGridEnabled, Mode=TwoWay}" Style="{StaticResource ToggleStyle}" />
 
-                                
-                                <TextBlock FontSize="28" Margin="0,8,0,0">Measure Tool</TextBlock>
-                                <CheckBox Content="Enabled" IsChecked="{Binding MeasureToolEnabled, Mode=TwoWay}" />
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition />
+                                            <RowDefinition />
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="1*" />
+                                            <ColumnDefinition Width="2*"/>
+                                        </Grid.ColumnDefinitions>
 
-                            </StackPanel>
+                                        <TextBlock Grid.Row="0" Grid.Column="0" Margin="0,8,15,0" FontSize="18" VerticalAlignment="Center" >Opacity</TextBlock>
+                                        <ComboBox x:Name="OpacityPicker"  Grid.Row="0" Grid.Column="1" HorizontalContentAlignment="Right" VerticalAlignment="Top" ItemsSource="{Binding OpacityOptions}" SelectedItem="{Binding Opacity, Mode=TwoWay}"  HorizontalAlignment="Right" Width="180" Margin="0,0,9.667,0" Foreground="White" />
+
+                                        <TextBlock Grid.Row="1" Grid.Column="0" Margin="0,8,15,0" FontSize="18" VerticalAlignment="Center">Color</TextBlock>
+                                        <controls:ColorPicker x:Name="ColourPicker" Grid.Row="1" Grid.Column="1" VerticalAlignment="Top"  HorizontalAlignment="Right" SelectedColor="{Binding DesignGridColor, Mode=TwoWay}" Height="55"  Width="180" Margin="0,0,10,0"  />
+                                    </Grid>
+
+                                </StackPanel>
                         </ScrollViewer>
                     </PivotItem>
 
-                </Pivot>
+                        <PivotItem Header="tracer">
+                            <ScrollViewer>
+                                <StackPanel>
+                                  <!--<ItemsControl>-->
+                                    
+                                    
+                                </StackPanel>
+                            </ScrollViewer>
+                        </PivotItem>
+
+
+                    </Pivot>
             </StackPanel>
 
             <!-- Close Dialog Button -->
             <StackPanel Grid.Row="3">
-                    <Button VerticalAlignment="Bottom" Content="Close"
+                    <Button VerticalAlignment="Bottom" Content="D O N E"
                             HorizontalAlignment="Stretch" Margin="7,0"
                             Click="Button_Click" 
-                            Background="Black" BorderBrush="WhiteSmoke" />
+                            BorderBrush="SkyBlue" />
             </StackPanel>
 
         </Grid>

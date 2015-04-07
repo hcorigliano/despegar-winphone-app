@@ -29,6 +29,16 @@ namespace Despegar.WP.UI.Developer
         #endregion
 
         #region ** Other Tools **
+        public bool RCEnvironmentEnabled
+        {
+            get { return GlobalConfiguration.RCEnvironmentEnabled; }
+            set
+            {
+                OnPropertyChanged();
+                GlobalConfiguration.RCEnvironmentEnabled = value;
+            }
+        }
+
         public bool DesignGridEnabled { 
             get { return MetroGridHelper.IsVisible; }
             set

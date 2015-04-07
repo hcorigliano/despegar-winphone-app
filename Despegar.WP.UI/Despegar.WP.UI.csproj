@@ -114,7 +114,6 @@
     <Compile Include="Common\Converter\VoucherSuccessTextConverter.cs" />
     <Compile Include="Common\IPopupContent.cs" />
     <Compile Include="Common\Navigator.cs" />
-    <Compile Include="Common\OldPagesManager.cs" />
     <Compile Include="Controls\Alert.xaml.cs">
       <DependentUpon>Alert.xaml</DependentUpon>
     </Compile>

@@ -58,6 +58,7 @@ namespace Despegar.WP.UI.Model
                 roamingSettings.Values["NotificationChannel"] = value;
             }
         }
+        public static bool RCEnvironmentEnabled { get; set; }
 
 #if DECOLAR
         public static string Brand = "decolar";
@@ -178,7 +179,6 @@ namespace Despegar.WP.UI.Model
                 UPAId = roamingSettings.Values["UPA"].ToString();
             }
 
-        }
-
+        }        
     }
 }
