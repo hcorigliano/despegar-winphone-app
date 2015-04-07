@@ -14,7 +14,6 @@ namespace Despegar.WP.UI.Developer
         {
             this.InitializeComponent();
             
-
             // Load State
             ViewModel = new DeveloperViewModel();
             this.DataContext = ViewModel;

@@ -11,47 +11,62 @@
     <UserControl.Resources>
         <CollectionViewSource x:Name="mocksCvs" IsSourceGrouped="True" Source="{Binding MockGroups}" />
         <Storyboard x:Name="ShowDialogAnimation">
-            <DoubleAnimation Duration="0:0:.5" To="1" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="mainCanvas" d:IsOptimized="True">
+            <!--<DoubleAnimation Duration="0:0:1.5" To="1" From="0" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="mainCanvas" d:IsOptimized="True">
                 <DoubleAnimation.EasingFunction>
                     <QuadraticEase EasingMode="EaseIn" />
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>-->
+            <DoubleAnimation Duration="0:0:1" From="500" To="0" Storyboard.TargetProperty="(Canvas.Left)" Storyboard.TargetName="mainCanvas" d:IsOptimized="True">
+                <DoubleAnimation.EasingFunction>
+                    <ExponentialEase EasingMode="EaseIn" />
                 </DoubleAnimation.EasingFunction>
             </DoubleAnimation>
         </Storyboard>
         <Storyboard x:Name="HideDialogAnimation">
-            <DoubleAnimation Duration="0:0:.5" To="0" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="mainCanvas" d:IsOptimized="True">
+            <!--<DoubleAnimation Duration="0:0:1" From="1" To="0" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="mainCanvas" d:IsOptimized="True">
                 <DoubleAnimation.EasingFunction>
                     <QuadraticEase EasingMode="EaseOut" />
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>-->
+            <DoubleAnimation Duration="0:0:1" To="-450" From="0" Storyboard.TargetProperty="(Canvas.Left)" Storyboard.TargetName="mainCanvas" d:IsOptimized="True">
+                <DoubleAnimation.EasingFunction>
+                    <ExponentialEase EasingMode="EaseOut" />
                 </DoubleAnimation.EasingFunction>
             </DoubleAnimation>
         </Storyboard>
     </UserControl.Resources>
 
-    <Grid Width="{Binding Viewport.Width}" Height="{Binding Viewport.Height}" Opacity="1" x:Name="mainCanvas">
-        <Grid.RowDefinitions>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
-        <Grid.Background>
-            <SolidColorBrush Color="Black" Opacity="0.4"/>
-        </Grid.Background>
+    <Canvas>
+        <Grid Width="{Binding Viewport.Width}" Height="{Binding Viewport.Height}" Opacity="1" x:Name="mainCanvas" Canvas.Left="0" Canvas.Top="0">
+            <Grid.Background>
+              <SolidColorBrush Color="Black" Opacity=".6" />
+           </Grid.Background>
 
-        <Grid Height="500" Width="350" Background="#FF091423" HorizontalAlignment="Center" VerticalAlignment="Center" >
-            <Grid.RowDefinitions>
-                <RowDefinition Height="50"/>
-                <RowDefinition Height="390"/>
-                <RowDefinition Height="60" />
-            </Grid.RowDefinitions>
+          <Grid x:Name="theGrid">
+                <Grid.Background>
+                    <SolidColorBrush Color="#FF091423"  />
+                </Grid.Background>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="24"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition  />
+                    <RowDefinition Height="60" />
+                    <RowDefinition Height="20" />
+                </Grid.RowDefinitions>
 
-            <StackPanel Grid.Row="0">
-                <StackPanel.Background>
-                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                        <GradientStop Color="#FF3C6EA0"/>
-                        <GradientStop Color="#FF112649" Offset="1"/>
-                    </LinearGradientBrush>
-                </StackPanel.Background>
-                <TextBlock  Text="Developer Tools" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="22" Padding="0,15" FontFamily="Segoe UI Semilight" />
+                <StackPanel Grid.Row="1" x:Name="theTopPanel">
+                   <StackPanel.Background>
+                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <GradientStop x:Name="GradientStop1" Color="#FF05124B"/>
+                            <GradientStop x:Name="GradientStop2" Color="#FF03081D" Offset="1"/>
+                     </LinearGradientBrush>
+                  </StackPanel.Background>
+                    
+                <TextBlock  Text="Top Secret Settings" HorizontalAlignment="Center" VerticalAlignment="Center"
+                            Foreground="White" FontSize="19" Padding="0,1" FontFamily="Segoe UI Semilight" />
             </StackPanel>
 
-            <StackPanel Grid.Row="1">
+            <StackPanel Grid.Row="2">
                 <!-- Content -->
                 <Pivot>
                     <Pivot.Resources>                                                 
@@ -74,11 +89,44 @@
                     </Pivot.Resources>
                     <Pivot.HeaderTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding}" FontSize="28" />
+                            <TextBlock Text="{Binding}" FontSize="54" />
                         </DataTemplate>
                     </Pivot.HeaderTemplate>
 
-                    <PivotItem Header="Form Automation">
+                        <PivotItem Header="service mocks">
+                            <ListView ItemsSource="{Binding Source={StaticResource mocksCvs}}" MaxHeight="440">
+                                <ListView.GroupStyle>
+                                    <GroupStyle HidesIfEmpty="True">
+                                        <GroupStyle.HeaderTemplate>
+                                            <!-- HEADERS -->
+                                            <DataTemplate>
+                                                <StackPanel>
+                                                    <TextBlock Text='{Binding Key}' FontSize="16" Foreground="White"/>
+                                                    <Rectangle Width="380" Fill="#BBB" Height="1" Margin="5,10,5,0" />
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </GroupStyle.HeaderTemplate>
+                                    </GroupStyle>
+                                </ListView.GroupStyle>
+
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Margin="20,0,0,0">
+                                            <!-- Mock Enabled / Disabled-->
+                                            <RadioButton Foreground="White"  
+                                                         GroupName="{Binding ServiceKey}"                                                           
+                                                         Opacity="0.6"
+                                                         Content="{Binding Name}" 
+                                                         IsChecked="{Binding Enabled, Mode=TwoWay}" 
+                                                         />
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+
+                            </ListView>
+                        </PivotItem>
+
+                        <PivotItem Header="form automation">
                         <PivotItem.Resources>
                           
                         </PivotItem.Resources>
@@ -103,8 +151,7 @@
                         </ScrollViewer>
                     </PivotItem>
 
-
-                    <PivotItem Header="Other tools">
+                        <PivotItem Header="tools">
                         <ScrollViewer>
                             <StackPanel>
                                 <TextBlock FontSize="28">Design Grid</TextBlock>
@@ -135,44 +182,19 @@
                         </ScrollViewer>
                     </PivotItem>
 
-                    <PivotItem Header="Service Mocks">
-                        <ListView ItemsSource="{Binding Source={StaticResource mocksCvs}}" MaxHeight="300">
-                            <ListView.GroupStyle>
-                                <GroupStyle HidesIfEmpty="True">
-                                    <GroupStyle.HeaderTemplate>
-                                        <!-- HEADERS -->
-                                        <DataTemplate>
-                                            <StackPanel>
-                                                <TextBlock Text='{Binding Key}' FontSize="20" Foreground="White"/>
-                                                <Rectangle Width="380" Fill="#BBB" Height="1" Margin="10,10,10,0" />
-                                            </StackPanel>
-                                        </DataTemplate>
-                                    </GroupStyle.HeaderTemplate>
-                                </GroupStyle>
-                            </ListView.GroupStyle>
-
-                            <ListView.ItemTemplate>
-                                <DataTemplate>
-                                    <StackPanel Margin="20,0,0,0">
-                                        <!-- Mock Enabled / Disabled-->
-                                        <RadioButton Foreground="White"  GroupName="{Binding ServiceKey}"   Content="{Binding Name}" IsChecked="{Binding Enabled, Mode=TwoWay}" />
-                                    </StackPanel>
-                                </DataTemplate>
-                            </ListView.ItemTemplate>
-
-                        </ListView>
-                    </PivotItem>
-
                 </Pivot>
             </StackPanel>
 
             <!-- Close Dialog Button -->
-            <StackPanel Grid.Row="2">
-                <Button Content="Close" HorizontalAlignment="Stretch" Margin="7,0" Click="Button_Click" Background="#FF0D2042" BorderBrush="#FF9AEABB">
-                </Button>
+            <StackPanel Grid.Row="3">
+                    <Button VerticalAlignment="Bottom" Content="Close"
+                            HorizontalAlignment="Stretch" Margin="7,0"
+                            Click="Button_Click" 
+                            Background="Black" BorderBrush="WhiteSmoke" />
             </StackPanel>
 
         </Grid>
     </Grid>
 
+    </Canvas>
 </UserControl>

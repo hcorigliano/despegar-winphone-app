@@ -87,8 +87,9 @@ namespace Despegar.WP.UI.Developer
                 mocks.Add(new MockNoneOption() { ServiceKey = key });
             }
 
-            MockGroups = mocks
-                .GroupBy(x => x.ServiceKey)
+            MockGroups = mocks                
+                .GroupBy(x => x.ServiceKey)               
+                .Where(g => g.Count() > 1)
                 .OrderBy(g => g.Key)
                 .ToList();                        
         }
