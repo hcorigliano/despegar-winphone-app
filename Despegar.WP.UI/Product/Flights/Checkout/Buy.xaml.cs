@@ -29,26 +29,5 @@ namespace Despegar.WP.UI.Product.Flights.Checkout
             this.InitializeComponent();
         }
 
-        private void OnButtonClicked(object sender, RoutedEventArgs e)
-        {
-            bool chkToc = (AcceptConditionsCheckBox.IsChecked!=null) ? AcceptConditionsCheckBox.IsChecked.Value : false;
-            if (OnUserControlButtonClicked != null & chkToc)
-                OnUserControlButtonClicked(this, e);
-            else
-            {
-                // TODO : Show messagge Error : Isn't checked TOC
-            }
-        }
-
-        private async void AcceptConditions_Click(object sender, RoutedEventArgs e)
-        {
-            string uriToLaunch = String.Format("https://secure.despegar.com.{0}/book/flights/checkout/conditions/wp", GlobalConfiguration.Site.ToLowerInvariant());
-
-            if (GlobalConfiguration.Site.ToLowerInvariant() == "br")             
-                uriToLaunch = "https://secure.decolar.com/book/flights/checkout/conditions/wp";            
-
-            var uri = new Uri(uriToLaunch);
-            var success = await Windows.System.Launcher.LaunchUriAsync(uri);     
-        }
     }
 }

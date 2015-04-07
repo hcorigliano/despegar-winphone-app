@@ -32,7 +32,7 @@
         <TextBlock Grid.Row="1" x:Uid="Page_Checkout" Style="{StaticResource PageHeaderSmall}" Text="COMPRAR VUELO" />
 
         <Pivot Grid.Row="2" x:Name="MainPivot"  Style="{StaticResource PivotBaseMain}">
-            
+
             <!-- Passengers -->
             <PivotItem x:Name="Pivot_PASSENGERS" x:Uid="Flight_Checkout_Passagers" Style="{StaticResource PivotItemBase}" >
                 <src:Passengers  x:Name="PassengerControl"  />
@@ -45,11 +45,11 @@
 
             <!--Payments Pivot-->
             <PivotItem x:Name="Pivot_INSTALLMENT"  x:Uid="Flight_Checkout_Payments" Style="{StaticResource PivotItemBase}" >
-               <src:Payments  />
+                <src:Payments  />
             </PivotItem>
 
             <!--Card Data Pivot-->
-            <PivotItem x:Name="Pivot_CARD"  x:Uid="Flight_Checkout_Card_Data" Style="{StaticResource PivotItemBase}" >              
+            <PivotItem x:Name="Pivot_CARD"  x:Uid="Flight_Checkout_Card_Data" Style="{StaticResource PivotItemBase}" >
                 <src:CardData />
             </PivotItem>
 
@@ -57,7 +57,7 @@
             <PivotItem x:Name="Pivot_INVOICE"  x:Uid="Flight_Checkout_Invoice_Arg" Style="{StaticResource PivotItemBase}" >
                 <src:InvoiceArgentina  />
             </PivotItem>
-            
+
             <!-- Billing Address-->
             <PivotItem x:Name="Pivot_BILLING_ADDRESS"  x:Uid="Flight_Checkout_Billing_Address" Style="{StaticResource PivotItemBase}" >
                 <src:BillingAddress  />
@@ -67,9 +67,27 @@
             <PivotItem  x:Uid="Flight_Checkout_Buy"  Style="{StaticResource PivotItemBase}" >
                 <StackPanel >
                     <src:Buy x:Name="Buycontrol" Height="426"/>
+
+                    <StackPanel Height="70" >
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="40"/>
+                                <ColumnDefinition Width="auto" />
+                                <ColumnDefinition Width="auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <CheckBox Grid.Column="0" Style="{StaticResource CheckboxBase}" x:Name="AcceptConditionsCheckBox" IsChecked="{Binding IsTermsAndConditionsAccepted, Mode=TwoWay}"/>
+
+                            <TextBlock  Grid.Column="1"  x:Uid="Buy_Acept_Conditions" Style="{StaticResource DetailCheckoutTerms}" Text="Lei y acepto las"/>
+                            <Button Grid.Column="2" Click="AcceptConditions_Click"  Style="{StaticResource AcceptTermsAndConditionsButton}">
+                                <TextBlock  x:Uid="Buy_Buy_conditions"  Style="{StaticResource DetailCheckoutTermsButton}" Text="condiciones de compra"></TextBlock>
+                            </Button>
+                        </Grid>
+                    </StackPanel>
+
                     <Button x:Uid="Buy_Button" Style="{StaticResource ButtonBottomRed}" Command="{Binding ValidateAndBuyCommand}" VerticalAlignment="Bottom" />
                 </StackPanel>
-                
+
             </PivotItem>
 
         </Pivot>
