@@ -65,35 +65,10 @@
 
             <!--Buy-->
             <PivotItem  x:Uid="Flight_Checkout_Buy"  Style="{StaticResource PivotItemBase}" >
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="70"/>
-                        <RowDefinition Height="{StaticResource Block2}"/>
-                    </Grid.RowDefinitions>
-
-                    <!--Height="426"-->
+               
                     <src:Buy x:Name="Buycontrol" Grid.Row="0" Height="Auto"/>
 
-                    <StackPanel Grid.Row ="1" >
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="40"/>
-                                <ColumnDefinition Width="auto" />
-                                <ColumnDefinition Width="auto"/>
-                            </Grid.ColumnDefinitions>
-
-                            <CheckBox Grid.Column="0" Style="{StaticResource CheckboxBase}" x:Name="AcceptConditionsCheckBox" IsChecked="{Binding IsTermsAndConditionsAccepted, Mode=TwoWay}"/>
-
-                            <TextBlock  Grid.Column="1"  x:Uid="Buy_Acept_Conditions" Style="{StaticResource DetailCheckoutTerms}" Text="Lei y acepto las"/>
-                            <Button Grid.Column="2" Click="AcceptConditions_Click"  Style="{StaticResource AcceptTermsAndConditionsButton}">
-                                <TextBlock  x:Uid="Buy_Buy_conditions"  Style="{StaticResource DetailCheckoutTermsButton}" Text="condiciones de compra"></TextBlock>
-                            </Button>
-                        </Grid>
-                    </StackPanel>
-
-                    <Button x:Uid="Buy_Button" Style="{StaticResource ButtonBottomRed}" Command="{Binding ValidateAndBuyCommand}" VerticalAlignment="Bottom" Grid.Row="2" />
-                </Grid>
+                    
 
             </PivotItem>
 

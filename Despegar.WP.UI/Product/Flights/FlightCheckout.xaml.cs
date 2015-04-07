@@ -283,16 +283,7 @@ namespace Despegar.WP.UI.Product.Flights
         //    }
         //}
 
-        private async void AcceptConditions_Click(object sender, RoutedEventArgs e)
-        {
-            string uriToLaunch = String.Format("https://secure.despegar.com.{0}/book/flights/checkout/conditions/wp", GlobalConfiguration.Site.ToLowerInvariant());
-
-            if (GlobalConfiguration.Site.ToLowerInvariant() == "br")
-                uriToLaunch = "https://secure.decolar.com/book/flights/checkout/conditions/wp";
-
-            var uri = new Uri(uriToLaunch);
-            var success = await Windows.System.Launcher.LaunchUriAsync(uri);
-        }
+       
 
     }
 }
