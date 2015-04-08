@@ -54,6 +54,7 @@
             <Setter Property="FontSize"  Value="10" />
         </Style>
         <conv:DateToShortTimeConverter  x:Key="DateToShortTimeConverter" />
+        <conv:NullToVisibilityConverter x:Key="NullToVisibilityConverter" />        
     </UserControl.Resources>
 
     <Canvas>
@@ -213,7 +214,7 @@
                                             <ColumnDefinition Width="42" />
                                             <ColumnDefinition Width="65" />
                                             <ColumnDefinition Width="165" />
-                                            <ColumnDefinition Width="40" />
+                                            <ColumnDefinition Width="38" />
                                             <ColumnDefinition Width="38" />
                                         </Grid.ColumnDefinitions>
 
@@ -230,7 +231,7 @@
                                     </Border>
 
                                         <Border BorderBrush="Gray" BorderThickness="1" Grid.Row="0" Grid.Column="3">
-                                            <TextBlock  Text="Status" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="12" />
+                                            <TextBlock  Text="Error" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="12" />
                                     </Border>
 
                                         <Border BorderBrush="Gray" BorderThickness="1" Grid.Row="0" Grid.Column="4">
@@ -246,7 +247,7 @@
                                                                 <ColumnDefinition Width="42" />
                                                                 <ColumnDefinition Width="65" />
                                                                 <ColumnDefinition Width="165" />
-                                                                <ColumnDefinition Width="40" />
+                                                                <ColumnDefinition Width="38" />
                                                                 <ColumnDefinition Width="38" />
                                                             </Grid.ColumnDefinitions>
 
@@ -260,7 +261,10 @@
                                                                 <TextBlock  Text="{Binding URL}" Style="{StaticResource LogText}"  />
                                                             </Border>
                                                             <Border BorderBrush="Gray" BorderThickness="1" Grid.Column="3">
-                                                                <TextBlock  Text="{Binding StatusCode}" Style="{StaticResource LogText}"  />
+                                                                <TextBlock Tapped="TextBlockException_Tapped" FontFamily="Segoe UI Symbol" Foreground="LightGray" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="12"
+                                                                  Visibility="{Binding Exception, Converter={StaticResource NullToVisibilityConverter}}"> 
+                                                                &#xE11D;
+                                                                </TextBlock>
                                                             </Border>
                                                             <Border BorderBrush="Gray" BorderThickness="1"  Grid.Column="4">
                                                                 <TextBlock Tapped="TextBlock_Tapped" FontFamily="Segoe UI Symbol" Foreground="LightGray" HorizontalAlignment="Center" VerticalAlignment="Center"> 
@@ -273,7 +277,38 @@
                                             </ItemsControl>
 
 
-                                            
+
+                                            <!--<Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="42" />
+                                                    <ColumnDefinition Width="65" />
+                                                    <ColumnDefinition Width="165" />
+                                                    <ColumnDefinition Width="38" />
+                                                    <ColumnDefinition Width="38" />
+                                                </Grid.ColumnDefinitions>
+
+                                                <Border BorderBrush="Gray" BorderThickness="1" Grid.Column="0">
+                                                    <TextBlock Text="{Binding Time, Converter={StaticResource DateToShortTimeConverter}}" Style="{StaticResource LogText}" />
+                                                </Border>
+                                                <Border BorderBrush="Gray" BorderThickness="1"  Grid.Column="1">
+                                                    <TextBlock Text="{Binding ServiceKey}" Style="{StaticResource LogText}"  />
+                                                </Border>
+                                                <Border BorderBrush="Gray" BorderThickness="1"  Grid.Column="2">
+                                                    <TextBlock  Text="{Binding URL}" Style="{StaticResource LogText}"  />
+                                                </Border>
+                                                <Border BorderBrush="Gray" BorderThickness="1" Grid.Column="3">
+                                                        <TextBlock Tapped="TextBlockException_Tapped" FontFamily="Segoe UI Symbol" Foreground="LightGray" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="12"
+                                                                  Visibility="{Binding Exception, Converter={StaticResource NullToVisibilityConverter}}"> 
+                                                                &#xE11D;
+                                                        </TextBlock>                                                        
+                                                </Border>
+                                                <Border BorderBrush="Gray" BorderThickness="1"  Grid.Column="4">
+                                                    <TextBlock Tapped="TextBlock_Tapped" FontFamily="Segoe UI Symbol" Foreground="LightGray" HorizontalAlignment="Center" VerticalAlignment="Center"> 
+                                                            &#xE12E;
+                                                    </TextBlock>
+                                                </Border>
+                                            </Grid>-->
+
                                         </StackPanel>
                                 </Grid>
 

@@ -172,16 +172,21 @@ namespace Despegar.Core.Neo.Connector
                     // Simulate network latency
                     await Task.Delay(MOCKED_RESPONSE_WAITING_TIME);
                     requestSuccess = true;
+#if DEBUG
+                    // Log API Call
+                    context.APICallsLog.Add(new APICall() { Time = DateTime.Now, Response = response, ServiceKey = key.ToString(), Exception = null, URL = httpMessage.RequestUri.ToString() });
+#endif
                 } else {
                    httpResponse = await httpClient.SendAsync(httpMessage);
                    response = await httpResponse.Content.ReadAsStringAsync();
                    requestSuccess = httpResponse.IsSuccessStatusCode;
+
+#if DEBUG
+                   // Log API Call
+                   context.APICallsLog.Add(new APICall() { Time = DateTime.Now, Response = response, ServiceKey = key.ToString(), Exception = null, URL = httpMessage.RequestUri.ToString() });
+#endif
                 }
 
-                // Log API Call
-#if DEBUG
-                context.APICallsLog.Add(new APICall() { Time = DateTime.Now, Response = response, ServiceKey = key.ToString(), StatusCode = httpResponse.StatusCode.ToString(), URL = httpMessage.RequestUri.ToString()});
-#endif
 
                 // Check HTTP Error Codes
                 if (!requestSuccess)
@@ -209,6 +214,11 @@ namespace Despegar.Core.Neo.Connector
                     }
 
                     logger.LogException(e);
+                    
+#if DEBUG
+                    // Log API Call
+                    context.APICallsLog.Add(new APICall() { Time = DateTime.Now, Response = response, ServiceKey = key.ToString(), Exception = e.Message, URL = httpMessage.RequestUri.ToString() });
+#endif
                     throw e;
                 }
 
@@ -225,7 +235,8 @@ namespace Despegar.Core.Neo.Connector
                 logger.LogException(e);
 
 #if DEBUG
-                context.APICallsLog.Add(new APICall() { Time = DateTime.Now, Response = "[Exception]" + ex.Message, ServiceKey = key.ToString(), StatusCode = httpResponse.StatusCode.ToString(), URL = httpMessage.RequestUri.ToString() });
+                // Log API Call
+                context.APICallsLog.Add(new APICall() { Time = DateTime.Now, Response = response, ServiceKey = key.ToString(), Exception = e.Message, URL = httpMessage.RequestUri.ToString() });
 #endif
 
                 throw e;
@@ -236,8 +247,9 @@ namespace Despegar.Core.Neo.Connector
                 var e = new JsonSerializerException(String.Format("[Core:Connector]: Key " + key.ToString() + " Service call: {0}. Could not deserialize type '{1}' from service response data: {2}", httpMessage.RequestUri, typeof(T).FullName, response), ex);
                 logger.LogException(e);
 
-                #if DEBUG
-                context.APICallsLog.Add(new APICall() { Time = DateTime.Now, Response = "[Exception]" + ex.Message, ServiceKey = key.ToString(), StatusCode = httpResponse.StatusCode.ToString(), URL = httpMessage.RequestUri.ToString() });
+#if DEBUG
+                // Log API Call
+                context.APICallsLog.Add(new APICall() { Time = DateTime.Now, Response = response, ServiceKey = key.ToString(), Exception = e.Message, URL = httpMessage.RequestUri.ToString() });
 #endif
 
                 throw e;
@@ -249,9 +261,9 @@ namespace Despegar.Core.Neo.Connector
 
                    var e = new Exception(String.Format("[Core:Connector]: Key " + key.ToString() + " Unknown Connector Error when calling Service URL {0}, Exception Message: {1}", httpMessage.RequestUri, ex.ToString()), ex);
                   logger.LogException(e);
-
 #if DEBUG
-                  context.APICallsLog.Add(new APICall() { Time = DateTime.Now, Response = "[Exception]" + ex.Message, ServiceKey = key.ToString(), StatusCode = httpResponse.StatusCode.ToString(), URL = httpMessage.RequestUri.ToString() });
+                  // Log API Call
+                  context.APICallsLog.Add(new APICall() { Time = DateTime.Now, Response = response, ServiceKey = key.ToString(), Exception = e.Message, URL = httpMessage.RequestUri.ToString() });
 #endif
                   throw e;
                 }

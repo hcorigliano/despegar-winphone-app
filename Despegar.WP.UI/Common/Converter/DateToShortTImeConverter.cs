@@ -15,7 +15,7 @@ namespace Despegar.WP.UI.Common.Converter
                 return String.Empty;
 
             DateTime date = (DateTime)value;
-            return date.ToString("HH:MM:ss");
+            return date.ToString("HH:mm:ss");
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)

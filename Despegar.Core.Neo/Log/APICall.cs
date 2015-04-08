@@ -7,7 +7,7 @@ namespace Despegar.Core.Neo.Log
         public DateTime Time { get; set; }
         public string ServiceKey { get; set; }
         public string URL { get; set; }
-        public string StatusCode { get; set; }
+        public string Exception { get; set; }
         public string Response { get; set; }
     }
 }

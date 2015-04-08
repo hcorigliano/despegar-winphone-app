@@ -58,5 +58,12 @@ namespace Despegar.WP.UI.Developer
             var dialog = new MessageDialog(data.Response, "Server Response");
             await dialog.ShowSafelyAsync();
         }
+
+        private async void TextBlockException_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
+        {
+            var data = ((FrameworkElement)sender).DataContext as APICall;
+            var dialog = new MessageDialog(data.Exception, "Exception");
+            await dialog.ShowSafelyAsync();
+        }
     }
 }
