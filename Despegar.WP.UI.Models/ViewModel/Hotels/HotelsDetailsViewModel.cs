@@ -39,7 +39,7 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
             }
         }
 
-        public HotelUserReviews HotelReviews { get; set;}
+        public HotelUserReviews HotelReviews { get; set; }
         public HotelUserReviewsV1 HotelReviewsV1 { get; set; }
 
         private ObservableCollection<CustomReviewsItem> customReviews { get; set; }
@@ -74,19 +74,20 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
         }
 
         private CustomMapViewModel _customMap;
-        public CustomMapViewModel CustomMap 
+        public CustomMapViewModel CustomMap
         {
-            get {
-                    if (_customMap == null) _customMap = new CustomMapViewModel();
-                    
-                    if (hotelDetail!=null && hotelDetail.hotel.geo_location!=null)
-                    {
-                        Classes.CustomPinPoint pinpoint = new Classes.CustomPinPoint() { Latitude = hotelDetail.hotel.geo_location.latitude, Longitude = hotelDetail.hotel.geo_location.longitude, Title=hotelDetail.hotel.name, Address = hotelDetail.hotel.address};
-                        _customMap.Locations.Add(pinpoint);
-                    }
+            get
+            {
+                if (_customMap == null) _customMap = new CustomMapViewModel();
 
-                    return _customMap; 
+                if (hotelDetail != null && hotelDetail.hotel.geo_location != null)
+                {
+                    Classes.CustomPinPoint pinpoint = new Classes.CustomPinPoint() { Latitude = hotelDetail.hotel.geo_location.latitude, Longitude = hotelDetail.hotel.geo_location.longitude, Title = hotelDetail.hotel.name, Address = hotelDetail.hotel.address };
+                    _customMap.Locations.Add(pinpoint);
                 }
+
+                return _customMap;
+            }
         }
 
         private List<Amenity> _amenitiesShortList;
@@ -98,9 +99,9 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
 
                 if (hotelDetail == null || hotelDetail.hotel == null) return null;
 
-                if(hotelDetail.hotel.amenities!=null)
+                if (hotelDetail.hotel.amenities != null)
                 {
-                    int maxToTake = (hotelDetail.hotel.amenities.Count()<5)? hotelDetail.hotel.amenities.Count(): 4;
+                    int maxToTake = (hotelDetail.hotel.amenities.Count() < 5) ? hotelDetail.hotel.amenities.Count() : 4;
                     var firstFourElements = hotelDetail.hotel.amenities.Take(maxToTake);
                     _amenitiesShortList.AddRange(firstFourElements);
                 }
@@ -154,14 +155,14 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
             }
         }
 
-        
+
 
         private int goToPivot { get; set; }
         public int GoToPivot
         {
             get
             {
-                return goToPivot; 
+                return goToPivot;
             }
             set
             {
@@ -174,7 +175,7 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
 
         #endregion
 
-        public HotelsDetailsViewModel(INavigator navigator, IMAPIHotels hotelService, IAPIv3 hotelReviews, IAPIv1 hReviewV1 ,IMAPICross crossService, IBugTracker t)
+        public HotelsDetailsViewModel(INavigator navigator, IMAPIHotels hotelService, IAPIv3 hotelReviews, IAPIv1 hReviewV1, IMAPICross crossService, IBugTracker t)
             : base(navigator, t)
         {
             this.hotelService = hotelService;
@@ -188,82 +189,82 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
         {
             CrossParameters = navigationParams as HotelsCrossParameters;
         }
-    
+
         public async Task Init()
         {
-           IsLoading = true;
-           try 
-           {
-           HotelDetail = await hotelService.GetHotelsDetail(CrossParameters.IdSelectedHotel, CrossParameters.SearchModel.DepartureDateFormatted, CrossParameters.SearchModel.DestinationDateFormatted, CrossParameters.SearchModel.DistributionString);
-           
-           //HotelReviews = await userReviewService.GetHotelUserReviews(CrossParameters.IdSelectedHotel, 10, 0, "es","despegar");
-
-           HotelReviewsV1 = await userReviewServiceV1.GetHotelUserReviews(CrossParameters.IdSelectedHotel, true, 1, 10, true);
-           CompleteReviewsWithV1Response();
-
-           //FormatReviews(GlobalConfiguration.Language);
-            
-            foreach (Roompack roompack in HotelDetail.roompacks)
+            IsLoading = true;
+            try
             {
-                if (roompack.rooms[0].pictures == null)
-                {
-                    roompack.rooms[0].pictures = new List<string>(); 
-                    roompack.rooms[0].pictures.Add(HotelDetail.hotel.main_picture); 
-                    
-                }
-                foreach(RoomAvailability room in roompack.room_availabilities)
-                {
-                    room.buySelectedRoom = this.BuySelectRoomCommand;
-                }
-            }
+                HotelDetail = await hotelService.GetHotelsDetail(CrossParameters.IdSelectedHotel, CrossParameters.SearchModel.DepartureDateFormatted, CrossParameters.SearchModel.DestinationDateFormatted, CrossParameters.SearchModel.DistributionString);
 
-            HotelDistance = Convert.ToInt32(CrossParameters.HotelsExtraData.Distance);
+                //HotelReviews = await userReviewService.GetHotelUserReviews(CrossParameters.IdSelectedHotel, 10, 0, "es","despegar");
 
-            // Get suggest room price and some more things
+                HotelReviewsV1 = await userReviewServiceV1.GetHotelUserReviews(CrossParameters.IdSelectedHotel, true, 1, 10, true);
+                CompleteReviewsWithV1Response();
 
-            if (hotelDetail.roompacks.Count > 0)
-            {
-                Roompack tempRoompack = new Roompack();
-                foreach (Roompack roomPack in hotelDetail.roompacks)
+                //FormatReviews(GlobalConfiguration.Language);
+
+                foreach (Roompack roompack in HotelDetail.roompacks)
                 {
-                    tempRoompack = roomPack;
-                    foreach (RoomAvailability room in roomPack.room_availabilities)
+                    if (roompack.rooms[0].pictures == null)
                     {
-                        if (room.choices.Contains(hotelDetail.suggested_room_choice))
+                        roompack.rooms[0].pictures = new List<string>();
+                        roompack.rooms[0].pictures.Add(HotelDetail.hotel.main_picture);
+
+                    }
+                    foreach (RoomAvailability room in roompack.room_availabilities)
+                    {
+                        room.buySelectedRoom = this.BuySelectRoomCommand;
+                    }
+                }
+
+                HotelDistance = Convert.ToInt32(CrossParameters.HotelsExtraData.Distance);
+
+                // Get suggest room price and some more things
+
+                if (hotelDetail.roompacks.Count > 0)
+                {
+                    Roompack tempRoompack = new Roompack();
+                    foreach (Roompack roomPack in hotelDetail.roompacks)
+                    {
+                        tempRoompack = roomPack;
+                        foreach (RoomAvailability room in roomPack.room_availabilities)
                         {
-                            hotelDetail.list_suggested_room_choice = room.choices; //Transforma el suggest en una lista completa la cual es necesaria para hacer el booking.
+                            if (room.choices.Contains(hotelDetail.suggested_room_choice))
+                            {
+                                hotelDetail.list_suggested_room_choice = room.choices; //Transforma el suggest en una lista completa la cual es necesaria para hacer el booking.
 
-                            SuggestRoomPriceBest = room.price.best;
+                                SuggestRoomPriceBest = room.price.best;
 
-                            if (SuggestRoomPriceBest != room.price.@base)
-                                SuggestRoomPriceBase = room.price.@base;
-                            else
-                                SuggestRoomPriceBase = null;
+                                if (SuggestRoomPriceBest != room.price.@base)
+                                    SuggestRoomPriceBase = room.price.@base;
+                                else
+                                    SuggestRoomPriceBase = null;
 
-                            CrossParameters.RoomPackSelected = tempRoompack; //Toma el roompack seleccionado.
+                                CrossParameters.RoomPackSelected = tempRoompack; //Toma el roompack seleccionado.
 
-                            if (tempRoompack.rooms[0].bed_options != null && tempRoompack.rooms[0].bed_options.Count > 0)
-                                CrossParameters.BedSelected = tempRoompack.rooms[0].bed_options[0];
+                                if (tempRoompack.rooms[0].bed_options != null && tempRoompack.rooms[0].bed_options.Count > 0)
+                                    CrossParameters.BedSelected = tempRoompack.rooms[0].bed_options[0];
 
-                            break;
+                                break;
+                            }
                         }
                     }
                 }
+                else
+                {
+                    OnViewModelError("NO_AVAILABILITY");
+                }
             }
-            else 
-            { 
-                OnViewModelError("NO_AVAILABILITY");
+            catch (APIErrorException e)
+            {
+                // Custom error?
+                OnViewModelError("SEARCH_ERROR", e.ErrorData.code);
             }
-           }
-           catch (APIErrorException e)
-           {
-               // Custom error?
-               OnViewModelError("SEARCH_ERROR", e.ErrorData.code);
-           }
-           catch(Exception) 
-           {
-               OnViewModelError("INIT_FAILED");
-           }
+            catch (Exception)
+            {
+                OnViewModelError("INIT_FAILED");
+            }
 
             IsLoading = false;
         }
@@ -272,34 +273,45 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
         {
             ResourceLoader manager = new ResourceLoader();
             CustomReviews = new ObservableCollection<CustomReviewsItem>();
-            Countries countries = await crossService.GetCountries();
-
-            foreach (Review review in HotelReviewsV1.reviews)
+            try
             {
-                CustomReviewsItem reviewItem = new CustomReviewsItem();
+                Countries countries = await crossService.GetCountries();
 
-                //reviewItem.description = (review.comments.FirstOrDefault() != null) ? review.comments.FirstOrDefault().description : String.Empty;
-                //reviewItem.bad = (review.comments.FirstOrDefault() != null) ? review.comments.FirstOrDefault().bad : String.Empty;
-                //reviewItem.good = (review.comments.FirstOrDefault() != null) ? review.comments.FirstOrDefault().good : String.Empty;
 
-                reviewItem.description = review.comments.description;
-                reviewItem.bad = review.comments.bad;
-                reviewItem.good = review.comments.good;
+                foreach (Review review in HotelReviewsV1.reviews)
+                {
+                    CustomReviewsItem reviewItem = new CustomReviewsItem();
 
-                reviewItem.name = (review.user != null) ? review.user.name : String.Empty;
-                    
-                reviewItem.name = (String.IsNullOrWhiteSpace(reviewItem.name)) ? manager.GetString("Page_Hotels_Anonymous") : reviewItem.name;
+                    //reviewItem.description = (review.comments.FirstOrDefault() != null) ? review.comments.FirstOrDefault().description : String.Empty;
+                    //reviewItem.bad = (review.comments.FirstOrDefault() != null) ? review.comments.FirstOrDefault().bad : String.Empty;
+                    //reviewItem.good = (review.comments.FirstOrDefault() != null) ? review.comments.FirstOrDefault().good : String.Empty;
 
-                reviewItem.countryCode = (review.user != null) ? review.user.country : String.Empty;
+                    reviewItem.description = review.comments.description;
+                    reviewItem.bad = review.comments.bad;
+                    reviewItem.good = review.comments.good;
 
-                var country = countries.countries.Where(x => x.id == reviewItem.countryCode).FirstOrDefault();
-                reviewItem.country = (country != null)? country.name : String.Empty;
+                    reviewItem.name = (review.user != null) ? review.user.name : String.Empty;
 
-                //reviewItem.rating = (review.scores != null) ? (review.scores.avgRecommend/10).ToString() : "0";
+                    reviewItem.name = (String.IsNullOrWhiteSpace(reviewItem.name)) ? manager.GetString("Page_Hotels_Anonymous") : reviewItem.name;
 
-                reviewItem.rating = (review.averageScore / 10).ToString("N2");
+                    reviewItem.countryCode = (review.user != null) ? review.user.country : String.Empty;
 
-                customReviews.Add(reviewItem);
+                    if (countries != null)
+                    {
+                        var country = countries.countries.Where(x => x.id == reviewItem.countryCode).FirstOrDefault();
+                        reviewItem.country = (country != null) ? country.name : String.Empty;
+                    }
+
+                    //reviewItem.rating = (review.scores != null) ? (review.scores.avgRecommend/10).ToString() : "0";
+
+                    reviewItem.rating = (review.averageScore / 10).ToString("N2");
+
+                    customReviews.Add(reviewItem);
+                }
+            }
+            catch
+            {
+                //Do Nothing
             }
         }
 
@@ -307,7 +319,7 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
         {
             if (CrossParameters != null && hotelDetail != null)
             {
-                
+
                 CrossParameters.BookRequest = new HotelsBookingFieldsRequest()
                 {
                     token = HotelDetail.token,
@@ -322,13 +334,13 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
         }
 
         private void BuySelectedRoomCommand()
-        {      
-            RoomAvailability room  = new RoomAvailability();
+        {
+            RoomAvailability room = new RoomAvailability();
 
             //Refactor?
-            foreach(Roompack rp in HotelDetail.roompacks)
+            foreach (Roompack rp in HotelDetail.roompacks)
             {
-                foreach(RoomAvailability ra in rp.room_availabilities)
+                foreach (RoomAvailability ra in rp.room_availabilities)
                 {
                     if (ra.selectedRoom)
                     {
@@ -341,7 +353,7 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
                 {
                     foreach (BedOption bo in roomBed.bed_options)
                     {
-                        if(bo.Selected)
+                        if (bo.Selected)
                         {
                             CrossParameters.BedSelected = bo;
                             bo.Selected = false;
@@ -358,7 +370,7 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
                     token = HotelDetail.token,
                     hotel_id = hotelDetail.id,
                     room_choices = room.choices,
-                    mobile_identifier = GlobalConfiguration.UPAId,  
+                    mobile_identifier = GlobalConfiguration.UPAId,
                     SelectedItemIndex = CrossParameters.UPA_SelectedItemIndex
                 };
 
@@ -368,13 +380,13 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
             }
         }
 
-        private  async void FormatReviews(string p)
+        private async void FormatReviews(string p)
         {
             CustomReviews = new ObservableCollection<CustomReviewsItem>();
-            foreach(Item item in HotelReviews.items)
+            foreach (Item item in HotelReviews.items)
             {
                 CustomReviewsItem customItem = new CustomReviewsItem();
-                if(p.ToLower().Equals("es"))
+                if (p.ToLower().Equals("es"))
                 {
                     if (item.descriptions[0].bad != null)
                         customItem.bad = item.descriptions[0].bad.es;
@@ -395,14 +407,16 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
 
                 if (item.user != null)
                 {
-                    if (item.user.city_id > 0) { 
-                        customItem.country = await this.GetCountry(item.user.city_id.ToString()); 
+                    if (item.user.city_id > 0)
+                    {
+                        customItem.country = await this.GetCountry(item.user.city_id.ToString());
                         //customItem.country = String.Empty;
-                    }else
+                    }
+                    else
                     {
                         customItem.country = String.Empty;
                     }
-                    
+
 
                     if (item.user.first_name == null && item.user.last_name == null)
                     {

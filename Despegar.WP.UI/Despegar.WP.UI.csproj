@@ -1048,6 +1048,7 @@
     <Content Include="Assets\Icon\App\pin-medium-white.scale-100.png" />
     <Content Include="Assets\Icon\App\pin-medium-white.scale-140.png" />
     <Content Include="Assets\Icon\App\pin-medium-white.scale-240.png" />
+    <Content Include="Assets\Icon\App\starborder-small-yellow.scale-100.png" />
     <Content Include="Assets\Icon\App\tooltip-arrow-blue.scale-100.png" />
     <Content Include="Assets\Icon\App\tooltip-arrow-blue.scale-140.png" />
     <Content Include="Assets\Icon\App\tooltip-arrow-blue.scale-240.png" />
