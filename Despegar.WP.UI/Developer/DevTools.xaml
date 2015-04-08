@@ -72,7 +72,7 @@
                     <RowDefinition Height="30"/>
                     <RowDefinition  />
                     <RowDefinition Height="60" />
-                    <RowDefinition Height="20" />
+                    <RowDefinition Height="40" />
                 </Grid.RowDefinitions>
 
                 <StackPanel Grid.Row="1" x:Name="theTopPanel">
@@ -172,11 +172,11 @@
                         <ScrollViewer>
                             <StackPanel>
 
-                                    <ToggleSwitch Header="Ambiente RC" IsOn="{Binding RCEnvironmentEnabled, Mode=TwoWay}" Style="{StaticResource ToggleStyle}" />
+                                    <ToggleSwitch Header="Ambiente RC" OnContent="On" OffContent="Off" IsOn="{Binding RCEnvironmentEnabled, Mode=TwoWay}" Style="{StaticResource ToggleStyle}" />
 
-                                    <ToggleSwitch Header="Measure Tool" IsOn="{Binding MeasureToolEnabled, Mode=TwoWay}" Style="{StaticResource ToggleStyle}" />
+                                    <ToggleSwitch Header="Measure Tool" OnContent="On" OffContent="Off" IsOn="{Binding MeasureToolEnabled, Mode=TwoWay}" Style="{StaticResource ToggleStyle}" />
 
-                                    <ToggleSwitch Header="Design Grid" IsOn="{Binding DesignGridEnabled, Mode=TwoWay}" Style="{StaticResource ToggleStyle}" />
+                                    <ToggleSwitch Header="Design Grid" OnContent="On" OffContent="Off" IsOn="{Binding DesignGridEnabled, Mode=TwoWay}" Style="{StaticResource ToggleStyle}" />
 
                                     <Grid>
                                         <Grid.RowDefinitions>
