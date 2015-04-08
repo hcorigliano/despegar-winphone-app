@@ -1,8 +1,12 @@
 ﻿using Despegar.WP.UI.Common;
 using System.Windows;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
+using Despegar.WP.UI.Common;
+using Despegar.WP.UI.Controls;
+using Despegar.Core.Neo.Log;
 
 namespace Despegar.WP.UI.Developer
 {
@@ -46,6 +50,13 @@ namespace Despegar.WP.UI.Developer
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             Leave();
+        }
+
+        private async void TextBlock_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
+        {
+            var data = ((FrameworkElement)sender).DataContext as APICall;
+            var dialog = new MessageDialog(data.Response, "Server Response");
+            await dialog.ShowSafelyAsync();
         }
     }
 }

@@ -27,6 +27,7 @@
             <RowDefinition Height="{StaticResource Block1p}"/>
             <RowDefinition Height="{StaticResource Block2p}"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="14"/>
         </Grid.RowDefinitions>
 
         <!-- DEV -->
@@ -110,5 +111,6 @@
             </ListViewItem>
         </ListView>
 
+        <TextBlock x:Name="VersionTxt" Text="v1.0.0.2"  Grid.Row="3" Style="{StaticResource SegoeRegular15}" FontSize="11" VerticalAlignment="Center" HorizontalAlignment="Right" />
     </Grid>
 </Page>

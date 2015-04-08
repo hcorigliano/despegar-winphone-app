@@ -5,7 +5,8 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"    
     xmlns:controls="using:Despegar.WP.UI.Developer.Controls"
-    mc:Ignorable="d"
+    xmlns:conv="using:Despegar.WP.UI.Common.Converter"
+    mc:Ignorable="d"    
     RequestedTheme="Dark" 
     >
     <UserControl.Resources>
@@ -44,6 +45,15 @@
                 </Setter.Value>
             </Setter>            
         </Style>
+
+
+        <Style x:Key="LogText" TargetType="TextBlock">
+            <Setter Property="VerticalAlignment"  Value="Center" />
+            <Setter Property="HorizontalAlignment"  Value="Center" />
+            <Setter Property="TextWrapping"  Value="Wrap" />
+            <Setter Property="FontSize"  Value="10" />
+        </Style>
+        <conv:DateToShortTimeConverter  x:Key="DateToShortTimeConverter" />
     </UserControl.Resources>
 
     <Canvas>
@@ -189,15 +199,144 @@
                     </PivotItem>
 
                         <PivotItem Header="tracer">
-                            <ScrollViewer>
+                            <ScrollViewer MaxHeight="400">
                                 <StackPanel>
-                                  <!--<ItemsControl>-->
+
+                                 <TextBlock Text="API calls" FontSize="28" />
                                     
+                                 <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="30" />
+                                        <RowDefinition  />
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="42" />
+                                            <ColumnDefinition Width="65" />
+                                            <ColumnDefinition Width="165" />
+                                            <ColumnDefinition Width="40" />
+                                            <ColumnDefinition Width="38" />
+                                        </Grid.ColumnDefinitions>
+
+                                    <Border BorderBrush="Gray" BorderThickness="1" Grid.Row="0" Grid.Column="0">
+                                            <TextBlock  Text="Time" VerticalAlignment="Center" HorizontalAlignment="Center"  FontSize="12" />
+                                    </Border>
+
+                                        <Border BorderBrush="Gray" BorderThickness="1" Grid.Row="0" Grid.Column="1">
+                                            <TextBlock Text="ServiceKey" VerticalAlignment="Center" HorizontalAlignment="Center"  FontSize="12" />
+                                    </Border>
+
+                                        <Border BorderBrush="Gray" BorderThickness="1" Grid.Row="0" Grid.Column="2">
+                                            <TextBlock  Text="URL" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="12" />
+                                    </Border>
+
+                                        <Border BorderBrush="Gray" BorderThickness="1" Grid.Row="0" Grid.Column="3">
+                                            <TextBlock  Text="Status" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="12" />
+                                    </Border>
+
+                                        <Border BorderBrush="Gray" BorderThickness="1" Grid.Row="0" Grid.Column="4">
+                                            <TextBlock  Text="Details" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="12" />
+                                    </Border>
+
+                                        <StackPanel Grid.Row="1" Grid.ColumnSpan="5">
+                                            <ItemsControl ItemsSource="{Binding APICalls}">
+                                                <ItemsControl.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <Grid>
+                                                            <Grid.ColumnDefinitions>
+                                                                <ColumnDefinition Width="42" />
+                                                                <ColumnDefinition Width="65" />
+                                                                <ColumnDefinition Width="165" />
+                                                                <ColumnDefinition Width="40" />
+                                                                <ColumnDefinition Width="38" />
+                                                            </Grid.ColumnDefinitions>
+
+                                                            <Border BorderBrush="Gray" BorderThickness="1" Grid.Column="0">
+                                                                <TextBlock Text="{Binding Time, Converter={StaticResource DateToShortTimeConverter}}" Style="{StaticResource LogText}" />
+                                                            </Border>
+                                                            <Border BorderBrush="Gray" BorderThickness="1"  Grid.Column="1">
+                                                                <TextBlock Text="{Binding ServiceKey}" Style="{StaticResource LogText}"  />
+                                                            </Border>
+                                                            <Border BorderBrush="Gray" BorderThickness="1"  Grid.Column="2">
+                                                                <TextBlock  Text="{Binding URL}" Style="{StaticResource LogText}"  />
+                                                            </Border>
+                                                            <Border BorderBrush="Gray" BorderThickness="1" Grid.Column="3">
+                                                                <TextBlock  Text="{Binding StatusCode}" Style="{StaticResource LogText}"  />
+                                                            </Border>
+                                                            <Border BorderBrush="Gray" BorderThickness="1"  Grid.Column="4">
+                                                                <TextBlock Tapped="TextBlock_Tapped" FontFamily="Segoe UI Symbol" Foreground="LightGray" HorizontalAlignment="Center" VerticalAlignment="Center"> 
+                                                            &#xE12E;
+                                                                </TextBlock>
+                                                            </Border>
+                                                        </Grid>
+                                                    </DataTemplate>
+                                                </ItemsControl.ItemTemplate>
+                                            </ItemsControl>
+
+
+                                            
+                                        </StackPanel>
+                                </Grid>
+
                                     
+                                    <!-- Breadcrumbs -->
+                                    <TextBlock Text="Breadcrumbs" Margin="0,30,0,0" FontSize="28"/>
+
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="30" />
+                                            <RowDefinition  />
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="2*" />
+                                            <ColumnDefinition Width="2*" />
+                                            <ColumnDefinition Width="8*" />
+                                        </Grid.ColumnDefinitions>
+
+                                        <Border BorderBrush="Gray" BorderThickness="1" Grid.Row="0" Grid.Column="0">
+                                            <TextBlock Text="Id" Style="{StaticResource LogText}" />
+                                        </Border>
+
+                                        <Border BorderBrush="Gray" BorderThickness="1" Grid.Row="0" Grid.Column="1">
+                                            <TextBlock Text="Time" Style="{StaticResource LogText}" />
+                                        </Border>
+
+                                        <Border BorderBrush="Gray" BorderThickness="1" Grid.Row="0" Grid.Column="3">
+                                            <TextBlock  Text="Content" Style="{StaticResource LogText}" />
+                                        </Border>
+
+                                        <StackPanel Grid.Row="1" Grid.ColumnSpan="3">
+                                            <ItemsControl ItemsSource="{Binding Breadcrumbs}">
+                                                <ItemsControl.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <Grid>
+                                                            <Grid.ColumnDefinitions>
+                                                                <ColumnDefinition Width="2*" />
+                                                                <ColumnDefinition Width="2*" />
+                                                                <ColumnDefinition Width="8*" />
+                                                            </Grid.ColumnDefinitions>
+
+                                                            <Border BorderBrush="Gray" BorderThickness="1" Grid.Row="0" Grid.Column="0">
+                                                                <TextBlock Text="{Binding ID}" Style="{StaticResource LogText}" />
+                                                                </Border>
+
+                                                            <Border BorderBrush="Gray" BorderThickness="1" Grid.Row="0" Grid.Column="1">
+                                                                <TextBlock Text="{Binding Time,Converter={StaticResource DateToShortTimeConverter}}" Style="{StaticResource LogText}" />
+                                                                </Border>
+
+                                                            <Border BorderBrush="Gray" BorderThickness="1" Grid.Row="0" Grid.Column="3">
+                                                                <TextBlock  Text="{Binding Content}" Style="{StaticResource LogText}" />
+                                                                </Border>
+                                                        </Grid>
+                                                    </DataTemplate>
+                                                </ItemsControl.ItemTemplate>
+                                            </ItemsControl>
+                                        </StackPanel>
+                                    </Grid>
+
+
                                 </StackPanel>
                             </ScrollViewer>
                         </PivotItem>
-
 
                     </Pivot>
             </StackPanel>

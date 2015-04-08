@@ -3,6 +3,7 @@ using Despegar.Core.Neo.Business;
 using Despegar.Core.Neo.Business.Configuration;
 using Despegar.Core.Neo.Connector;
 using Despegar.Core.Neo.Log;
+using System.Collections.Generic;
 
 namespace Despegar.Core.Neo.Contract
 {
@@ -70,5 +71,10 @@ namespace Despegar.Core.Neo.Contract
         /// <param name="key"></param>
         /// <returns></returns>
         string GetMockedResponse(ServiceKey key);
+
+        /// <summary>
+        /// API Calls log
+        /// </summary>
+        List<APICall> APICallsLog { get; set; }
     }
 }

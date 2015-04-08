@@ -1,9 +1,11 @@
 ﻿using Despegar.Core.Neo.API;
 using Despegar.Core.Neo.Business;
+using Despegar.Core.Neo.Log;
 using Despegar.WP.UI.Common;
 using Despegar.WP.UI.Controls;
 using Despegar.WP.UI.Controls.Flights;
 using Despegar.WP.UI.Model;
+using Despegar.WP.UI.Model.Common;
 using Despegar.WP.UI.Model.ViewModel.Classes;
 using Despegar.WP.UI.Model.ViewModel.Flights;
 using Despegar.WP.UI.Product.Flights;
@@ -23,6 +25,8 @@ namespace Despegar.WP.UI.Developer
     public class DeveloperViewModel : Bindable
     {
         public Rect Viewport { get { return Window.Current.Bounds; } }
+        public List<Breadcrumb> Breadcrumbs { get { return GlobalConfiguration.Bredcrumbs.OrderByDescending(x => x.Time).ToList(); } }
+        public List<APICall> APICalls { get { return GlobalConfiguration.APICalls.OrderByDescending(x => x.Time).ToList(); } }
 
         #region ** Service Mocks **
         public List<IGrouping<ServiceKey, MockOption>> MockGroups { get; set; }

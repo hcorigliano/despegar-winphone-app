@@ -1,6 +1,8 @@
 ﻿using BugSense;
 using BugSense.Core.Model;
 using Despegar.Core.Neo.Contract.Log;
+using Despegar.WP.UI.Model;
+using Despegar.WP.UI.Model.Common;
 using System;
 
 namespace Despegar.WP.UI.BugSense
@@ -14,7 +16,12 @@ namespace Despegar.WP.UI.BugSense
 
         public void LeaveBreadcrumb(string breadcrumb) 
         {
-            BugSenseHandler.Instance.LeaveBreadCrumb("[" + breadCrumbCounter + "] " + breadcrumb);
+            string content = "[" + breadCrumbCounter + "] " + breadcrumb;
+            BugSenseHandler.Instance.LeaveBreadCrumb(content);
+
+#if DEBUG
+            GlobalConfiguration.Bredcrumbs.Add(new Breadcrumb() { ID = breadCrumbCounter.ToString(), Time = DateTime.Now, Content = content});
+#endif
             breadCrumbCounter++;
         }
 

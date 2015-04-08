@@ -93,6 +93,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ClientDeviceInfo.cs" />
+    <Compile Include="Common\Breadcrumb.cs" />
     <Compile Include="Common\IIncrementalSource.cs" />
     <Compile Include="Common\IncrementalLoadingCollection.cs" />
     <Compile Include="Common\ViewModelErrorArgs.cs" />

@@ -28,9 +28,8 @@ namespace Despegar.WP.UI
         public List<Despegar.Core.Neo.Business.Configuration.Product> products;
         public HomeViewModel ViewModel { get; set; }
         private bool versionChecked = false;
-
         private IMAPINotifications notifications;
-        private PushResponse registerResponse;
+        private PushResponse registerResponse;        
 
         public Home()
         {
@@ -61,6 +60,8 @@ namespace Despegar.WP.UI
             ViewModel.OnNavigated(e.Parameter);
 
             this.DataContext = ViewModel;
+
+            this.VersionTxt.Text = "v" + GetAppVersion();
 
             if(e.NavigationMode == NavigationMode.New)
                 await SetupMenuItems(GlobalConfiguration.Site);

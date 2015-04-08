@@ -39,7 +39,7 @@ namespace Despegar.Core.Neo
         {
             this.bugtracker = bugTracker;
             this.logger = logger;
-
+            APICallsLog = new List<APICall>();
             logger.Log("[Core]: Core context created.");
         }
 
@@ -58,6 +58,11 @@ namespace Despegar.Core.Neo
             //return Despegar.WP.UI.Model. ClientDeviceInfoGetUOW();
             return uow;
         }
+
+        /// <summary>
+        /// Contains a log of called API URLs
+        /// </summary>
+        public List<APICall> APICallsLog { get; set; }     
 
         public Configuration GetConfiguration()
         {
@@ -162,5 +167,6 @@ namespace Despegar.Core.Neo
         }
 
         #endregion
+        
     }
 }

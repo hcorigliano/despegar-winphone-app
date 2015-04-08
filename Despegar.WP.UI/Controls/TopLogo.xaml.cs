@@ -31,7 +31,7 @@ namespace Despegar.WP.UI.Controls
         private void TopLogo_Tapped(object sender, TappedRoutedEventArgs e)
         {
 #if DEBUG
-            if (instance == null)
+            //if (instance == null)    // Recreate it everytime beacuse the data needs to be updated
                 instance = new ModalPopup(new DevTools());
 
             instance.Show();

@@ -98,6 +98,7 @@
     <Compile Include="Common\Converter\AnyToIntConverter.cs" />
     <Compile Include="Common\Converter\BooleanConverter.cs" />
     <Compile Include="Common\Converter\DateToLongString.cs" />
+    <Compile Include="Common\Converter\DateToShortTimeConverter.cs" />
     <Compile Include="Common\Converter\DiscountConverter.cs" />
     <Compile Include="Common\Converter\ImageConverters.cs" />
     <Compile Include="Common\Converter\ImageGoReturnConverter.cs" />
