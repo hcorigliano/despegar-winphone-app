@@ -65,5 +65,19 @@ namespace Despegar.WP.UI.Developer
             var dialog = new MessageDialog(data.Exception, "Exception");
             await dialog.ShowSafelyAsync();
         }
+
+        private async void TextBlockPayload_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
+        {
+            var data = ((FrameworkElement)sender).DataContext as APICall;
+            var dialog = new MessageDialog(data.Payload, "Payload");
+            await dialog.ShowSafelyAsync();
+        }
+
+        private async void TextBlockHeaders_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
+        {
+            var data = ((FrameworkElement)sender).DataContext as APICall;
+            var dialog = new MessageDialog(data.Headers, "Request Headers");
+            await dialog.ShowSafelyAsync();
+        }
     }
 }

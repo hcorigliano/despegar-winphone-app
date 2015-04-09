@@ -267,9 +267,17 @@
                                                                 </TextBlock>
                                                             </Border>
                                                             <Border BorderBrush="Gray" BorderThickness="1"  Grid.Column="4">
-                                                                <TextBlock Tapped="TextBlock_Tapped" FontFamily="Segoe UI Symbol" Foreground="LightGray" HorizontalAlignment="Center" VerticalAlignment="Center"> 
-                                                            &#xE12E;
-                                                                </TextBlock>
+                                                                <StackPanel>
+                                                                    <TextBlock Margin="5" Tapped="TextBlock_Tapped" FontFamily="Segoe UI Symbol" Foreground="LightGray" HorizontalAlignment="Center" VerticalAlignment="Center"> 
+                                                                &#xE12E;
+                                                                    </TextBlock>
+                                                                    <TextBlock Margin="5" Tapped="TextBlockHeaders_Tapped" Visibility="{Binding Headers, Converter={StaticResource NullToVisibilityConverter}}" FontFamily="Segoe UI Symbol" Foreground="LightGray" HorizontalAlignment="Center" VerticalAlignment="Center"> 
+                                                                &#xE1CB;
+                                                                    </TextBlock>
+                                                                    <TextBlock Margin="5" Tapped="TextBlockPayload_Tapped" Visibility="{Binding Payload, Converter={StaticResource NullToVisibilityConverter}}" FontFamily="Segoe UI Symbol" Foreground="LightGray" HorizontalAlignment="Center" VerticalAlignment="Center"> 
+                                                               &#xE119;
+                                                                    </TextBlock>
+                                                                </StackPanel>
                                                             </Border>
                                                         </Grid>
                                                     </DataTemplate>
@@ -277,7 +285,7 @@
                                             </ItemsControl>
 
 
-
+                                <!--Example Row (for XAML DESINGER ONLY)-->
                                             <!--<Grid>
                                                 <Grid.ColumnDefinitions>
                                                     <ColumnDefinition Width="42" />
@@ -303,9 +311,17 @@
                                                         </TextBlock>                                                        
                                                 </Border>
                                                 <Border BorderBrush="Gray" BorderThickness="1"  Grid.Column="4">
-                                                    <TextBlock Tapped="TextBlock_Tapped" FontFamily="Segoe UI Symbol" Foreground="LightGray" HorizontalAlignment="Center" VerticalAlignment="Center"> 
-                                                            &#xE12E;
-                                                    </TextBlock>
+                                                    <StackPanel>
+                                                        <TextBlock Margin="5" Tapped="TextBlock_Tapped" FontFamily="Segoe UI Symbol" Foreground="LightGray" HorizontalAlignment="Center" VerticalAlignment="Center"> 
+                                                                &#xE12E;
+                                                        </TextBlock>
+                                                        <TextBlock Margin="5" Tapped="TextBlockHeaders_Tapped" Visibility="{Binding Headers, Converter={StaticResource NullToVisibilityConverter}}" FontFamily="Segoe UI Symbol" Foreground="LightGray" HorizontalAlignment="Center" VerticalAlignment="Center"> 
+                                                                &#xE1CB;
+                                                        </TextBlock>
+                                                        <TextBlock Margin="5" Tapped="TextBlockPayload_Tapped" Visibility="{Binding Payload, Converter={StaticResource NullToVisibilityConverter}}" FontFamily="Segoe UI Symbol" Foreground="LightGray" HorizontalAlignment="Center" VerticalAlignment="Center"> 
+                                                            &#xE119;
+                                                        </TextBlock>
+                                                    </StackPanel>
                                                 </Border>
                                             </Grid>-->
 
