@@ -158,6 +158,7 @@ namespace Despegar.Core.Neo.Connector
             bool customExceptionThrown = false;
             bool requestSuccess = false;
             HttpResponseMessage httpResponse = null;
+            string payload = httpMessage.Content != null ? await httpMessage.Content.ReadAsStringAsync() : null;
 
             try
             {
@@ -174,19 +175,17 @@ namespace Despegar.Core.Neo.Connector
                     requestSuccess = true;
 #if DEBUG
                     // Log API Call
-                    context.APICallsLog.Add(new APICall() { Time = DateTime.Now, Response = response, ServiceKey = key.ToString(), Exception = null, URL = httpMessage.RequestUri.ToString() });
+                    context.APICallsLog.Add(new APICall() { Time = DateTime.Now, Response = response, ServiceKey = key.ToString(), Exception = null, URL = httpMessage.RequestUri.ToString(), Payload = payload, Headers = httpMessage.Headers.ToString() });
 #endif
                 } else {
                    httpResponse = await httpClient.SendAsync(httpMessage);
                    response = await httpResponse.Content.ReadAsStringAsync();
                    requestSuccess = httpResponse.IsSuccessStatusCode;
-
 #if DEBUG
                    // Log API Call
-                   context.APICallsLog.Add(new APICall() { Time = DateTime.Now, Response = response, ServiceKey = key.ToString(), Exception = null, URL = httpMessage.RequestUri.ToString() });
+                   context.APICallsLog.Add(new APICall() { Time = DateTime.Now, Response = response, ServiceKey = key.ToString(), Exception = null, URL = httpMessage.RequestUri.ToString(), Payload = payload, Headers = httpMessage.Headers.ToString() });
 #endif
                 }
-
 
                 // Check HTTP Error Codes
                 if (!requestSuccess)
@@ -217,7 +216,7 @@ namespace Despegar.Core.Neo.Connector
                     
 #if DEBUG
                     // Log API Call
-                    context.APICallsLog.Add(new APICall() { Time = DateTime.Now, Response = response, ServiceKey = key.ToString(), Exception = e.Message, URL = httpMessage.RequestUri.ToString() });
+                    context.APICallsLog.Add(new APICall() { Time = DateTime.Now, Response = response, ServiceKey = key.ToString(), Exception = e.Message, URL = httpMessage.RequestUri.ToString(), Payload = payload, Headers = httpMessage.Headers.ToString() });
 #endif
                     throw e;
                 }
@@ -236,7 +235,7 @@ namespace Despegar.Core.Neo.Connector
 
 #if DEBUG
                 // Log API Call
-                context.APICallsLog.Add(new APICall() { Time = DateTime.Now, Response = response, ServiceKey = key.ToString(), Exception = e.Message, URL = httpMessage.RequestUri.ToString() });
+                context.APICallsLog.Add(new APICall() { Time = DateTime.Now, Response = response, ServiceKey = key.ToString(), Exception = e.Message, URL = httpMessage.RequestUri.ToString(),  Payload = payload, Headers = httpMessage.Headers.ToString() });
 #endif
 
                 throw e;
@@ -249,7 +248,7 @@ namespace Despegar.Core.Neo.Connector
 
 #if DEBUG
                 // Log API Call
-                context.APICallsLog.Add(new APICall() { Time = DateTime.Now, Response = response, ServiceKey = key.ToString(), Exception = e.Message, URL = httpMessage.RequestUri.ToString() });
+                context.APICallsLog.Add(new APICall() { Time = DateTime.Now, Response = response, ServiceKey = key.ToString(), Exception = e.Message, URL = httpMessage.RequestUri.ToString(), Payload = payload, Headers = httpMessage.Headers.ToString() });
 #endif
 
                 throw e;
@@ -263,7 +262,7 @@ namespace Despegar.Core.Neo.Connector
                   logger.LogException(e);
 #if DEBUG
                   // Log API Call
-                  context.APICallsLog.Add(new APICall() { Time = DateTime.Now, Response = response, ServiceKey = key.ToString(), Exception = e.Message, URL = httpMessage.RequestUri.ToString() });
+                  context.APICallsLog.Add(new APICall() { Time = DateTime.Now, Response = response, ServiceKey = key.ToString(), Exception = e.Message, URL = httpMessage.RequestUri.ToString(), Payload = payload, Headers = httpMessage.Headers.ToString() });
 #endif
                   throw e;
                 }
