@@ -642,7 +642,8 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
                     {
                         BugTracker.LeaveBreadcrumb("Flight checkout MAPI booking error response code: " + FlightCrossParameters.BookingResponse.Error.code.ToString());
                         // API Error ocurred, Check CODE and inform the user
-                        OnViewModelError("API_ERROR", FlightCrossParameters.BookingResponse.Error.code);
+                        AnalizeBookingError(FlightCrossParameters.BookingResponse.Error);
+                        //OnViewModelError("API_ERROR", FlightCrossParameters.BookingResponse.Error.code);
                         this.IsLoading = false;
                         return;
                     }
@@ -662,6 +663,22 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
                 BugTracker.LeaveBreadcrumb("Flight checkout view model validate and buy complete");
                 this.IsLoading = false;
             }
+        }
+
+        private void AnalizeBookingError(MAPIError mAPIError)
+        {
+            if (mAPIError.code == 1099)
+            {
+                if(mAPIError.causes != null && mAPIError.causes.Count() != 0)
+                {
+                    if (mAPIError.causes[0].Contains("DUPLICATED_DOCUMENT_NUMBERS"))
+                        OnViewModelError("DUPLICATED_DOCUMENT_NUMBERS", mAPIError.code);
+                    if (mAPIError.causes[0].Contains("InvalidFiscalId"))
+                        OnViewModelError("INVALID_FISCAL_ID", mAPIError.code);
+                }
+            }
+            else
+                OnViewModelError("API_ERROR", mAPIError.code);
         }
 
         private async void SendRiskAnswers()
