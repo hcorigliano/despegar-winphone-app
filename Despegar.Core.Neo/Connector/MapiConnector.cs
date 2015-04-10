@@ -13,6 +13,7 @@ namespace Despegar.Core.Neo.Connector
     public class MapiConnector : ConnectorBase, IMapiConnector
     {
         private static readonly string DOMAIN = "https://mobile.despegar.com/v3/";
+        private static readonly string RC_DOMAIN = "https://mobile.despegar.it/v3/";
         private static readonly string APIKEY_WINDOWS_PHONE = "24b56c96e09146298eca3093f6f990c9";
         private static readonly string MAPI_UPA_COOKIE_NAME = "X-UPACOOKIE";
         private static readonly ServiceKey[] cookieEnabledServices = new ServiceKey[] { ServiceKey.FlightItineraries, ServiceKey.FlightsBookingFields, ServiceKey.FlightsBookingCompletePost, ServiceKey.HotelsAvailability, ServiceKey.HotelsAvailabilityByGeo, ServiceKey.HotelsGetDetails, ServiceKey.HotelsBookingFields, ServiceKey.HotelsBookingCompletePost  };
@@ -110,9 +111,21 @@ namespace Despegar.Core.Neo.Connector
 
             // This makes MAPI point to Hoteles v3
             if (httpMessage.RequestUri.AbsoluteUri.Contains("https://mobile.despegar.com/v3/mapi-hotels/"))
-                httpMessage.Headers.Add("X-Version", "mapi-hotels-v3_1.1.0");
+            {
+                if (context.BetaModeEnabled)
+                    httpMessage.Headers.Add("X-Version", "v3-beta");
+                else 
+                    httpMessage.Headers.Add("X-Version", "mapi-hotels-v3_1.1.0"); // ALWAYSm because it points to v3
+            }
+            else 
+            { 
+                // Other products          
+               if (context.RCModeEnabled)
+                   httpMessage.Headers.Add("X-Version", "mapi-hotels-v3_1.1.0");
+            }
 
-            //httpMessage.Headers.Add("X-Version", "beta");  // Apuntar a BETA de MAPI
+            if (this.context.BetaModeEnabled)
+               httpMessage.Headers.Add("X-Version", "beta");  // Apuntar a BETA de MAPI de todos los productos excepto Hoteles que es especial (ver arriba)
         }
 
         private void SetMAPICookie(HttpRequestMessage httpMessage, ServiceKey key)
