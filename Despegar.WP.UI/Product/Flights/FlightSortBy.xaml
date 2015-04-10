@@ -1,4 +1,5 @@
 ﻿<Page
+    xmlns:cont="using:Despegar.WP.UI.Controls"
     x:Class="Despegar.WP.UI.Product.Flights.FlightSortBy"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -32,7 +33,7 @@
         </Grid.RowDefinitions>
 
         <!-- Title Panel -->
-        <Image Grid.Row="0" Style="{StaticResource TopLogo}" />
+        <cont:TopLogo Grid.Row="0"  />
         <TextBlock Grid.Row="1" Style="{StaticResource PageHeaderSmall}" x:Uid="Page_Order_Title" Text="Order" FontFamily="Segoe WP Semibold" />
 
         <ListView Grid.Row="2"

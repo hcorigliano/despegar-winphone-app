@@ -13,8 +13,7 @@ namespace Despegar.WP.UI.Product.Flights
 
         public FlightDetail()
         {
-            this.InitializeComponent();            
-            this.CheckDeveloperTools();
+            this.InitializeComponent();                        
 
             #if !DEBUG
                 GoogleAnalyticContainer ga = new GoogleAnalyticContainer();

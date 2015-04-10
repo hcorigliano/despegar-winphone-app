@@ -10,6 +10,8 @@ using System.Threading.Tasks;
 using Windows.Storage;
 using Despegar.Core.Neo.InversionOfControl;
 using Despegar.WP.UI.Model.InversionOfControl;
+using Despegar.Core.Neo.Log;
+using Despegar.WP.UI.Model.Common;
 
 namespace Despegar.WP.UI.Model
 {
@@ -58,6 +60,11 @@ namespace Despegar.WP.UI.Model
                 roamingSettings.Values["NotificationChannel"] = value;
             }
         }
+        public static bool RCEnvironmentEnabled { get; set; }
+
+        // Debug Only        
+        public static List<Breadcrumb> Bredcrumbs = new List<Breadcrumb>();
+        public static List<APICall> APICalls { get { return CoreContext.APICallsLog; } }
 
 #if DECOLAR
         public static string Brand = "decolar";
@@ -178,7 +185,6 @@ namespace Despegar.WP.UI.Model
                 UPAId = roamingSettings.Values["UPA"].ToString();
             }
 
-        }
-
+        }        
     }
 }

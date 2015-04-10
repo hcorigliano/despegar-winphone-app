@@ -1,12 +1,12 @@
-﻿using Despegar.Core.Neo.Business;
-using Despegar.Core.Neo.Log;
-using Despegar.Core.Neo.API;
+﻿using Despegar.Core.Neo.API;
 using Despegar.Core.Neo.Business;
+using Despegar.Core.Neo.Log;
 using Despegar.WP.UI.Common;
 using Despegar.WP.UI.Controls;
 using Despegar.WP.UI.Controls.Flights;
 using Despegar.WP.UI.Model;
-using Despegar.WP.UI.Model.ViewModel;
+using Despegar.WP.UI.Model.Common;
+using Despegar.WP.UI.Model.ViewModel.Classes;
 using Despegar.WP.UI.Model.ViewModel.Flights;
 using Despegar.WP.UI.Product.Flights;
 using System;
@@ -19,19 +19,30 @@ using Windows.UI;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Despegar.WP.UI.Model.ViewModel.Classes;
 
 namespace Despegar.WP.UI.Developer
 {
     public class DeveloperViewModel : Bindable
     {
         public Rect Viewport { get { return Window.Current.Bounds; } }
+        public List<Breadcrumb> Breadcrumbs { get { return GlobalConfiguration.Bredcrumbs.OrderByDescending(x => x.Time).ToList(); } }
+        public List<APICall> APICalls { get { return GlobalConfiguration.APICalls.OrderByDescending(x => x.Time).ToList(); } }
 
         #region ** Service Mocks **
         public List<IGrouping<ServiceKey, MockOption>> MockGroups { get; set; }
         #endregion
 
         #region ** Other Tools **
+        public bool RCEnvironmentEnabled
+        {
+            get { return GlobalConfiguration.RCEnvironmentEnabled; }
+            set
+            {
+                OnPropertyChanged();
+                GlobalConfiguration.RCEnvironmentEnabled = value;
+            }
+        }
+
         public bool DesignGridEnabled { 
             get { return MetroGridHelper.IsVisible; }
             set
@@ -90,8 +101,9 @@ namespace Despegar.WP.UI.Developer
                 mocks.Add(new MockNoneOption() { ServiceKey = key });
             }
 
-            MockGroups = mocks
-                .GroupBy(x => x.ServiceKey)
+            MockGroups = mocks                
+                .GroupBy(x => x.ServiceKey)               
+                .Where(g => g.Count() > 1)
                 .OrderBy(g => g.Key)
                 .ToList();                        
         }

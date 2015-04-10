@@ -8,6 +8,7 @@
     xmlns:sample="using:Despegar.WP.UI.SampleData"
     xmlns:conv="using:Despegar.WP.UI.Common.Converter"
     xmlns:dev="using:Despegar.WP.UI.Developer.Controls"
+    xmlns:cont="using:Despegar.WP.UI.Controls"
     mc:Ignorable="d"    
     Style="{StaticResource BasePage}">
     
@@ -38,7 +39,7 @@
          <!--<dev:UserControlDesignGrid />--> 
         
         <!-- Title Panel -->
-        <Image Grid.Row="0" Style="{StaticResource TopLogo}" />
+        <cont:TopLogo Grid.Row="0"  />
         <TextBlock Grid.Row="1" x:Uid="Page_CountrySelection_configuration" Style="{StaticResource PageHeaderSmall}" Text="CONFIGURACION" />
         <TextBlock Grid.Row="2" x:Uid="Page_CountrySelection_selection" Style="{StaticResource PageHeader}" Text="seleccion de pais" />
         

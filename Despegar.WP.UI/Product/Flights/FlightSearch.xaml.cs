@@ -31,8 +31,7 @@ namespace Despegar.WP.UI.Product.Flights
 
         public FlightSearch()
         {
-            this.InitializeComponent();
-            this.CheckDeveloperTools();
+            this.InitializeComponent();            
         }
 
         # region ** ERROR HANDLING **
