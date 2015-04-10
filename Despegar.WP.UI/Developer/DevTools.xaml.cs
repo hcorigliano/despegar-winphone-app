@@ -1,8 +1,12 @@
 ﻿using Despegar.WP.UI.Common;
 using System.Windows;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
+using Despegar.WP.UI.Common;
+using Despegar.WP.UI.Controls;
+using Despegar.Core.Neo.Log;
 
 namespace Despegar.WP.UI.Developer
 {
@@ -14,7 +18,6 @@ namespace Despegar.WP.UI.Developer
         {
             this.InitializeComponent();
             
-
             // Load State
             ViewModel = new DeveloperViewModel();
             this.DataContext = ViewModel;
@@ -47,6 +50,34 @@ namespace Despegar.WP.UI.Developer
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             Leave();
+        }
+
+        private async void TextBlock_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
+        {
+            var data = ((FrameworkElement)sender).DataContext as APICall;
+            var dialog = new MessageDialog(data.Response, "Server Response");
+            await dialog.ShowSafelyAsync();
+        }
+
+        private async void TextBlockException_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
+        {
+            var data = ((FrameworkElement)sender).DataContext as APICall;
+            var dialog = new MessageDialog(data.Exception, "Exception");
+            await dialog.ShowSafelyAsync();
+        }
+
+        private async void TextBlockPayload_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
+        {
+            var data = ((FrameworkElement)sender).DataContext as APICall;
+            var dialog = new MessageDialog(data.Payload, "Payload");
+            await dialog.ShowSafelyAsync();
+        }
+
+        private async void TextBlockHeaders_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
+        {
+            var data = ((FrameworkElement)sender).DataContext as APICall;
+            var dialog = new MessageDialog(data.Headers, "Request Headers");
+            await dialog.ShowSafelyAsync();
         }
     }
 }

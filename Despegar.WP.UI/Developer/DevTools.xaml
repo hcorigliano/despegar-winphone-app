@@ -5,53 +5,89 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"    
     xmlns:controls="using:Despegar.WP.UI.Developer.Controls"
-    mc:Ignorable="d"
+    xmlns:conv="using:Despegar.WP.UI.Common.Converter"
+    mc:Ignorable="d"    
     RequestedTheme="Dark" 
     >
     <UserControl.Resources>
         <CollectionViewSource x:Name="mocksCvs" IsSourceGrouped="True" Source="{Binding MockGroups}" />
         <Storyboard x:Name="ShowDialogAnimation">
-            <DoubleAnimation Duration="0:0:.5" To="1" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="mainCanvas" d:IsOptimized="True">
+            <!--<DoubleAnimation Duration="0:0:1.5" To="1" From="0" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="mainCanvas" d:IsOptimized="True">
                 <DoubleAnimation.EasingFunction>
                     <QuadraticEase EasingMode="EaseIn" />
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>-->
+            <DoubleAnimation Duration="0:0:1" From="500" To="0" Storyboard.TargetProperty="(Canvas.Left)" Storyboard.TargetName="mainCanvas" d:IsOptimized="True">
+                <DoubleAnimation.EasingFunction>
+                    <CubicEase EasingMode="EaseOut" />
                 </DoubleAnimation.EasingFunction>
             </DoubleAnimation>
         </Storyboard>
         <Storyboard x:Name="HideDialogAnimation">
-            <DoubleAnimation Duration="0:0:.5" To="0" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="mainCanvas" d:IsOptimized="True">
+            <!--<DoubleAnimation Duration="0:0:1" From="1" To="0" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="mainCanvas" d:IsOptimized="True">
                 <DoubleAnimation.EasingFunction>
                     <QuadraticEase EasingMode="EaseOut" />
                 </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>-->
+            <DoubleAnimation Duration="0:0:1" To="-450" From="0" Storyboard.TargetProperty="(Canvas.Left)" Storyboard.TargetName="mainCanvas" d:IsOptimized="True">
+                <DoubleAnimation.EasingFunction>
+                    <CubicEase EasingMode="EaseInOut" />
+                </DoubleAnimation.EasingFunction>
             </DoubleAnimation>
         </Storyboard>
+        
+        <Style x:Key="ToggleStyle" TargetType="ToggleSwitch">
+            <Setter Property="HeaderTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                         <TextBlock FontSize="28" Text="{Binding}" Foreground="#FF75B675" />
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>            
+        </Style>
+
+
+        <Style x:Key="LogText" TargetType="TextBlock">
+            <Setter Property="VerticalAlignment"  Value="Center" />
+            <Setter Property="HorizontalAlignment"  Value="Center" />
+            <Setter Property="TextWrapping"  Value="Wrap" />
+            <Setter Property="FontSize"  Value="10" />
+        </Style>
+        <conv:DateToShortTimeConverter  x:Key="DateToShortTimeConverter" />
+        <conv:NullToVisibilityConverter x:Key="NullToVisibilityConverter" />        
     </UserControl.Resources>
 
-    <Grid Width="{Binding Viewport.Width}" Height="{Binding Viewport.Height}" Opacity="1" x:Name="mainCanvas">
-        <Grid.RowDefinitions>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
-        <Grid.Background>
-            <SolidColorBrush Color="Black" Opacity="0.4"/>
-        </Grid.Background>
+    <Canvas>
+        <Grid Width="{Binding Viewport.Width}" Height="{Binding Viewport.Height}" Opacity="1" x:Name="mainCanvas" Canvas.Left="0" Canvas.Top="0">
+            <Grid.Background>
+              <SolidColorBrush Color="Black" Opacity=".6" />
+           </Grid.Background>
 
-        <Grid Height="500" Width="350" Background="#FF091423" HorizontalAlignment="Center" VerticalAlignment="Center" >
-            <Grid.RowDefinitions>
-                <RowDefinition Height="50"/>
-                <RowDefinition Height="390"/>
-                <RowDefinition Height="60" />
-            </Grid.RowDefinitions>
+          <Grid x:Name="theGrid">
+                <Grid.Background>
+                    <SolidColorBrush Color="#FF091423"  />
+                </Grid.Background>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="24"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition  />
+                    <RowDefinition Height="60" />
+                    <RowDefinition Height="40" />
+                </Grid.RowDefinitions>
 
-            <StackPanel Grid.Row="0">
-                <StackPanel.Background>
-                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                        <GradientStop Color="#FF3C6EA0"/>
-                        <GradientStop Color="#FF112649" Offset="1"/>
-                    </LinearGradientBrush>
-                </StackPanel.Background>
-                <TextBlock  Text="Developer Tools" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="22" Padding="0,15" FontFamily="Segoe UI Semilight" />
+                <StackPanel Grid.Row="1" x:Name="theTopPanel">
+                   <StackPanel.Background>
+                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <GradientStop x:Name="GradientStop1" Color="#FF05124B"/>
+                            <GradientStop x:Name="GradientStop2" Color="#FF03081D" Offset="1"/>
+                     </LinearGradientBrush>
+                  </StackPanel.Background>
+                    
+                <TextBlock  Text="Top Secret Settings" HorizontalAlignment="Center" VerticalAlignment="Center"
+                            Foreground="White" FontSize="19" Padding="0,1" FontFamily="Segoe UI Semilight" />
             </StackPanel>
 
-            <StackPanel Grid.Row="1">
+            <StackPanel Grid.Row="2">
                 <!-- Content -->
                 <Pivot>
                     <Pivot.Resources>                                                 
@@ -74,105 +110,298 @@
                     </Pivot.Resources>
                     <Pivot.HeaderTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding}" FontSize="28" />
+                            <TextBlock Text="{Binding}" FontSize="50" />
                         </DataTemplate>
                     </Pivot.HeaderTemplate>
 
-                    <PivotItem Header="Form Automation">
-                        <PivotItem.Resources>
-                          
-                        </PivotItem.Resources>
-                        <ScrollViewer Height="283" >
-                            <StackPanel>
+                        <PivotItem Header="form automation">
+                            <ScrollViewer>
                                 <StackPanel>
-                                    <TextBlock Text="Flights"/>
-                                    <Rectangle />
-                                    <Button Content="SearchBox Ida y Vuelta - MIA"  Command="{Binding FillFlightsTwoWaySearchBox_MIAMI}" Style="{StaticResource btnStlye}"   />
-                                    <Button Content="SearchBox Ida - MIA" Command="{Binding FillFlightsOneWaySearchBox_MIAMI}" Style="{StaticResource btnStlye}"  />
+                                    <StackPanel>
+                                        <TextBlock Text="Flights"/>
+                                        <Rectangle Width="800" />
+                                        <Button Content="Ida y Vuelta - MIA"  Command="{Binding FillFlightsTwoWaySearchBox_MIAMI}" Style="{StaticResource btnStlye}"   />
+                                        <Button Content="Ida - MIA" Command="{Binding FillFlightsOneWaySearchBox_MIAMI}" Style="{StaticResource btnStlye}"  />
+                                        <Button Content="Multiples - 3 Tramos"  Style="{StaticResource btnStlye}" Command="{Binding FillFlightsMultipleSearchBox}"  />
+                                        <Button Content="Fill Checkout Form" Style="{StaticResource btnStlye}"  />
+                                    </StackPanel>
 
-                                    <Button Content="SearchBox Multiples - 3 Tramos"  Style="{StaticResource btnStlye}" Command="{Binding FillFlightsMultipleSearchBox}"  />
+                                    <StackPanel Margin="0,10,0,0">
+                                        <TextBlock Text="Hotels" />
+                                        <Rectangle Width="800" />
+                                        <Button Content="Fill Checkout Flights" Style="{StaticResource btnStlye}"   />
+                                    </StackPanel>
                                 </StackPanel>
-                                
-                                <StackPanel Margin="0,10,0,0">
-                                    <TextBlock Text="Hotels" />
-                                    <Rectangle />
-                                    <Button Content="Fill Checkout Hotel" Style="{StaticResource btnStlye}"  />
-                                    <Button Content="Fill Checkout Flights" Style="{StaticResource btnStlye}"   />
-                                </StackPanel>                                
-                            </StackPanel>
-                        </ScrollViewer>
-                    </PivotItem>
+                            </ScrollViewer>
+                        </PivotItem>
+                    
+                        <PivotItem Header="service mocks">
+                            <ListView ItemsSource="{Binding Source={StaticResource mocksCvs}}" MaxHeight="440">
+                                <ListView.GroupStyle>
+                                    <GroupStyle HidesIfEmpty="True">
+                                        <GroupStyle.HeaderTemplate>
+                                            <!-- HEADERS -->
+                                            <DataTemplate>
+                                                <StackPanel>
+                                                    <TextBlock Text='{Binding Key}' FontSize="16" Foreground="White"/>
+                                                    <Rectangle Width="380" Fill="#BBB" Height="1" Margin="5,10,5,0" />
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </GroupStyle.HeaderTemplate>
+                                    </GroupStyle>
+                                </ListView.GroupStyle>
 
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Margin="20,0,0,0">
+                                            <!-- Mock Enabled / Disabled-->
+                                            <RadioButton Foreground="White"  
+                                                         GroupName="{Binding ServiceKey}"                                                           
+                                                         Opacity="0.6"
+                                                         Content="{Binding Name}" 
+                                                         IsChecked="{Binding Enabled, Mode=TwoWay}" 
+                                                         />
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
 
-                    <PivotItem Header="Other tools">
+                            </ListView>
+                        </PivotItem>
+
+                        <PivotItem Header="tools">
                         <ScrollViewer>
                             <StackPanel>
-                                <TextBlock FontSize="28">Design Grid</TextBlock>
-                                <CheckBox Content="Enabled" IsChecked="{Binding DesignGridEnabled, Mode=TwoWay}" />
 
-                                <Grid>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition />
-                                        <RowDefinition />
-                                    </Grid.RowDefinitions>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="1*" />
-                                        <ColumnDefinition Width="2*"/>
-                                    </Grid.ColumnDefinitions>
+                                    <ToggleSwitch Header="Ambiente RC" OnContent="On" OffContent="Off" IsOn="{Binding RCEnvironmentEnabled, Mode=TwoWay}" Style="{StaticResource ToggleStyle}" />
 
-                                    <TextBlock Grid.Row="0" Grid.Column="0" Margin="0,8,15,0" FontSize="18" VerticalAlignment="Center" >Opacity</TextBlock>
-                                    <ComboBox x:Name="OpacityPicker"  Grid.Row="0" Grid.Column="1" HorizontalContentAlignment="Right" VerticalAlignment="Top" ItemsSource="{Binding OpacityOptions}" SelectedItem="{Binding Opacity, Mode=TwoWay}"  HorizontalAlignment="Right" Width="180" Margin="0,0,9.667,0" Foreground="White" />
+                                    <ToggleSwitch Header="Measure Tool" OnContent="On" OffContent="Off" IsOn="{Binding MeasureToolEnabled, Mode=TwoWay}" Style="{StaticResource ToggleStyle}" />
 
-                                    <TextBlock Grid.Row="1" Grid.Column="0" Margin="0,8,15,0" FontSize="18" VerticalAlignment="Center">Color</TextBlock>
-                                    <controls:ColorPicker x:Name="ColourPicker" Grid.Row="1" Grid.Column="1" VerticalAlignment="Top"  HorizontalAlignment="Right" SelectedColor="{Binding DesignGridColor, Mode=TwoWay}" Height="55"  Width="180" Margin="0,0,10,0"  />
-                                </Grid>
+                                    <ToggleSwitch Header="Design Grid" OnContent="On" OffContent="Off" IsOn="{Binding DesignGridEnabled, Mode=TwoWay}" Style="{StaticResource ToggleStyle}" />
 
-                                
-                                <TextBlock FontSize="28" Margin="0,8,0,0">Measure Tool</TextBlock>
-                                <CheckBox Content="Enabled" IsChecked="{Binding MeasureToolEnabled, Mode=TwoWay}" />
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition />
+                                            <RowDefinition />
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="1*" />
+                                            <ColumnDefinition Width="2*"/>
+                                        </Grid.ColumnDefinitions>
 
-                            </StackPanel>
+                                        <TextBlock Grid.Row="0" Grid.Column="0" Margin="0,8,15,0" FontSize="18" VerticalAlignment="Center" >Opacity</TextBlock>
+                                        <ComboBox x:Name="OpacityPicker"  Grid.Row="0" Grid.Column="1" HorizontalContentAlignment="Right" VerticalAlignment="Top" ItemsSource="{Binding OpacityOptions}" SelectedItem="{Binding Opacity, Mode=TwoWay}"  HorizontalAlignment="Right" Width="180" Margin="0,0,9.667,0" Foreground="White" />
+
+                                        <TextBlock Grid.Row="1" Grid.Column="0" Margin="0,8,15,0" FontSize="18" VerticalAlignment="Center">Color</TextBlock>
+                                        <controls:ColorPicker x:Name="ColourPicker" Grid.Row="1" Grid.Column="1" VerticalAlignment="Top"  HorizontalAlignment="Right" SelectedColor="{Binding DesignGridColor, Mode=TwoWay}" Height="55"  Width="180" Margin="0,0,10,0"  />
+                                    </Grid>
+
+                                </StackPanel>
                         </ScrollViewer>
                     </PivotItem>
 
-                    <PivotItem Header="Service Mocks">
-                        <ListView ItemsSource="{Binding Source={StaticResource mocksCvs}}" MaxHeight="300">
-                            <ListView.GroupStyle>
-                                <GroupStyle HidesIfEmpty="True">
-                                    <GroupStyle.HeaderTemplate>
-                                        <!-- HEADERS -->
-                                        <DataTemplate>
-                                            <StackPanel>
-                                                <TextBlock Text='{Binding Key}' FontSize="20" Foreground="White"/>
-                                                <Rectangle Width="380" Fill="#BBB" Height="1" Margin="10,10,10,0" />
-                                            </StackPanel>
-                                        </DataTemplate>
-                                    </GroupStyle.HeaderTemplate>
-                                </GroupStyle>
-                            </ListView.GroupStyle>
+                        <PivotItem Header="tracer">
+                            <ScrollViewer MaxHeight="400">
+                                <StackPanel>
 
-                            <ListView.ItemTemplate>
-                                <DataTemplate>
-                                    <StackPanel Margin="20,0,0,0">
-                                        <!-- Mock Enabled / Disabled-->
-                                        <RadioButton Foreground="White"  GroupName="{Binding ServiceKey}"   Content="{Binding Name}" IsChecked="{Binding Enabled, Mode=TwoWay}" />
-                                    </StackPanel>
-                                </DataTemplate>
-                            </ListView.ItemTemplate>
+                                 <TextBlock Text="API calls" FontSize="28" />
+                                    
+                                 <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="30" />
+                                        <RowDefinition  />
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="42" />
+                                            <ColumnDefinition Width="65" />
+                                            <ColumnDefinition Width="165" />
+                                            <ColumnDefinition Width="38" />
+                                            <ColumnDefinition Width="38" />
+                                        </Grid.ColumnDefinitions>
 
-                        </ListView>
-                    </PivotItem>
+                                    <Border BorderBrush="Gray" BorderThickness="1" Grid.Row="0" Grid.Column="0">
+                                            <TextBlock  Text="Time" VerticalAlignment="Center" HorizontalAlignment="Center"  FontSize="12" />
+                                    </Border>
 
-                </Pivot>
+                                        <Border BorderBrush="Gray" BorderThickness="1" Grid.Row="0" Grid.Column="1">
+                                            <TextBlock Text="ServiceKey" VerticalAlignment="Center" HorizontalAlignment="Center"  FontSize="12" />
+                                    </Border>
+
+                                        <Border BorderBrush="Gray" BorderThickness="1" Grid.Row="0" Grid.Column="2">
+                                            <TextBlock  Text="URL" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="12" />
+                                    </Border>
+
+                                        <Border BorderBrush="Gray" BorderThickness="1" Grid.Row="0" Grid.Column="3">
+                                            <TextBlock  Text="Error" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="12" />
+                                    </Border>
+
+                                        <Border BorderBrush="Gray" BorderThickness="1" Grid.Row="0" Grid.Column="4">
+                                            <TextBlock  Text="Details" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="12" />
+                                    </Border>
+
+                                        <StackPanel Grid.Row="1" Grid.ColumnSpan="5">
+                                            <ItemsControl ItemsSource="{Binding APICalls}">
+                                                <ItemsControl.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <Grid>
+                                                            <Grid.ColumnDefinitions>
+                                                                <ColumnDefinition Width="42" />
+                                                                <ColumnDefinition Width="65" />
+                                                                <ColumnDefinition Width="165" />
+                                                                <ColumnDefinition Width="38" />
+                                                                <ColumnDefinition Width="38" />
+                                                            </Grid.ColumnDefinitions>
+
+                                                            <Border BorderBrush="Gray" BorderThickness="1" Grid.Column="0">
+                                                                <TextBlock Text="{Binding Time, Converter={StaticResource DateToShortTimeConverter}}" Style="{StaticResource LogText}" />
+                                                            </Border>
+                                                            <Border BorderBrush="Gray" BorderThickness="1"  Grid.Column="1">
+                                                                <TextBlock Text="{Binding ServiceKey}" Style="{StaticResource LogText}"  />
+                                                            </Border>
+                                                            <Border BorderBrush="Gray" BorderThickness="1"  Grid.Column="2">
+                                                                <TextBlock  Text="{Binding URL}" Style="{StaticResource LogText}"  />
+                                                            </Border>
+                                                            <Border BorderBrush="Gray" BorderThickness="1" Grid.Column="3">
+                                                                <TextBlock Tapped="TextBlockException_Tapped" FontFamily="Segoe UI Symbol" Foreground="LightGray" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="12"
+                                                                  Visibility="{Binding Exception, Converter={StaticResource NullToVisibilityConverter}}"> 
+                                                                &#xE11D;
+                                                                </TextBlock>
+                                                            </Border>
+                                                            <Border BorderBrush="Gray" BorderThickness="1"  Grid.Column="4">
+                                                                <StackPanel>
+                                                                    <TextBlock Margin="5" Tapped="TextBlock_Tapped" FontFamily="Segoe UI Symbol" Foreground="LightGray" HorizontalAlignment="Center" VerticalAlignment="Center"> 
+                                                                &#xE12E;
+                                                                    </TextBlock>
+                                                                    <TextBlock Margin="5" Tapped="TextBlockHeaders_Tapped" Visibility="{Binding Headers, Converter={StaticResource NullToVisibilityConverter}}" FontFamily="Segoe UI Symbol" Foreground="LightGray" HorizontalAlignment="Center" VerticalAlignment="Center"> 
+                                                                &#xE1CB;
+                                                                    </TextBlock>
+                                                                    <TextBlock Margin="5" Tapped="TextBlockPayload_Tapped" Visibility="{Binding Payload, Converter={StaticResource NullToVisibilityConverter}}" FontFamily="Segoe UI Symbol" Foreground="LightGray" HorizontalAlignment="Center" VerticalAlignment="Center"> 
+                                                               &#xE119;
+                                                                    </TextBlock>
+                                                                </StackPanel>
+                                                            </Border>
+                                                        </Grid>
+                                                    </DataTemplate>
+                                                </ItemsControl.ItemTemplate>
+                                            </ItemsControl>
+
+
+                                <!--Example Row (for XAML DESINGER ONLY)-->
+                                            <!--<Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="42" />
+                                                    <ColumnDefinition Width="65" />
+                                                    <ColumnDefinition Width="165" />
+                                                    <ColumnDefinition Width="38" />
+                                                    <ColumnDefinition Width="38" />
+                                                </Grid.ColumnDefinitions>
+
+                                                <Border BorderBrush="Gray" BorderThickness="1" Grid.Column="0">
+                                                    <TextBlock Text="{Binding Time, Converter={StaticResource DateToShortTimeConverter}}" Style="{StaticResource LogText}" />
+                                                </Border>
+                                                <Border BorderBrush="Gray" BorderThickness="1"  Grid.Column="1">
+                                                    <TextBlock Text="{Binding ServiceKey}" Style="{StaticResource LogText}"  />
+                                                </Border>
+                                                <Border BorderBrush="Gray" BorderThickness="1"  Grid.Column="2">
+                                                    <TextBlock  Text="{Binding URL}" Style="{StaticResource LogText}"  />
+                                                </Border>
+                                                <Border BorderBrush="Gray" BorderThickness="1" Grid.Column="3">
+                                                        <TextBlock Tapped="TextBlockException_Tapped" FontFamily="Segoe UI Symbol" Foreground="LightGray" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="12"
+                                                                  Visibility="{Binding Exception, Converter={StaticResource NullToVisibilityConverter}}"> 
+                                                                &#xE11D;
+                                                        </TextBlock>                                                        
+                                                </Border>
+                                                <Border BorderBrush="Gray" BorderThickness="1"  Grid.Column="4">
+                                                    <StackPanel>
+                                                        <TextBlock Margin="5" Tapped="TextBlock_Tapped" FontFamily="Segoe UI Symbol" Foreground="LightGray" HorizontalAlignment="Center" VerticalAlignment="Center"> 
+                                                                &#xE12E;
+                                                        </TextBlock>
+                                                        <TextBlock Margin="5" Tapped="TextBlockHeaders_Tapped" Visibility="{Binding Headers, Converter={StaticResource NullToVisibilityConverter}}" FontFamily="Segoe UI Symbol" Foreground="LightGray" HorizontalAlignment="Center" VerticalAlignment="Center"> 
+                                                                &#xE1CB;
+                                                        </TextBlock>
+                                                        <TextBlock Margin="5" Tapped="TextBlockPayload_Tapped" Visibility="{Binding Payload, Converter={StaticResource NullToVisibilityConverter}}" FontFamily="Segoe UI Symbol" Foreground="LightGray" HorizontalAlignment="Center" VerticalAlignment="Center"> 
+                                                            &#xE119;
+                                                        </TextBlock>
+                                                    </StackPanel>
+                                                </Border>
+                                            </Grid>-->
+
+                                        </StackPanel>
+                                </Grid>
+
+                                    
+                                    <!-- Breadcrumbs -->
+                                    <TextBlock Text="Breadcrumbs" Margin="0,30,0,0" FontSize="28"/>
+
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="30" />
+                                            <RowDefinition  />
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="2*" />
+                                            <ColumnDefinition Width="2*" />
+                                            <ColumnDefinition Width="8*" />
+                                        </Grid.ColumnDefinitions>
+
+                                        <Border BorderBrush="Gray" BorderThickness="1" Grid.Row="0" Grid.Column="0">
+                                            <TextBlock Text="Id" Style="{StaticResource LogText}" />
+                                        </Border>
+
+                                        <Border BorderBrush="Gray" BorderThickness="1" Grid.Row="0" Grid.Column="1">
+                                            <TextBlock Text="Time" Style="{StaticResource LogText}" />
+                                        </Border>
+
+                                        <Border BorderBrush="Gray" BorderThickness="1" Grid.Row="0" Grid.Column="3">
+                                            <TextBlock  Text="Content" Style="{StaticResource LogText}" />
+                                        </Border>
+
+                                        <StackPanel Grid.Row="1" Grid.ColumnSpan="3">
+                                            <ItemsControl ItemsSource="{Binding Breadcrumbs}">
+                                                <ItemsControl.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <Grid>
+                                                            <Grid.ColumnDefinitions>
+                                                                <ColumnDefinition Width="2*" />
+                                                                <ColumnDefinition Width="2*" />
+                                                                <ColumnDefinition Width="8*" />
+                                                            </Grid.ColumnDefinitions>
+
+                                                            <Border BorderBrush="Gray" BorderThickness="1" Grid.Row="0" Grid.Column="0">
+                                                                <TextBlock Text="{Binding ID}" Style="{StaticResource LogText}" />
+                                                                </Border>
+
+                                                            <Border BorderBrush="Gray" BorderThickness="1" Grid.Row="0" Grid.Column="1">
+                                                                <TextBlock Text="{Binding Time,Converter={StaticResource DateToShortTimeConverter}}" Style="{StaticResource LogText}" />
+                                                                </Border>
+
+                                                            <Border BorderBrush="Gray" BorderThickness="1" Grid.Row="0" Grid.Column="3">
+                                                                <TextBlock  Text="{Binding Content}" Style="{StaticResource LogText}" />
+                                                                </Border>
+                                                        </Grid>
+                                                    </DataTemplate>
+                                                </ItemsControl.ItemTemplate>
+                                            </ItemsControl>
+                                        </StackPanel>
+                                    </Grid>
+
+
+                                </StackPanel>
+                            </ScrollViewer>
+                        </PivotItem>
+
+                    </Pivot>
             </StackPanel>
 
             <!-- Close Dialog Button -->
-            <StackPanel Grid.Row="2">
-                <Button Content="Close" HorizontalAlignment="Stretch" Margin="7,0" Click="Button_Click" Background="#FF0D2042" BorderBrush="#FF9AEABB">
-                </Button>
+            <StackPanel Grid.Row="3">
+                    <Button VerticalAlignment="Bottom" Content="D O N E"
+                            HorizontalAlignment="Stretch" Margin="7,0"
+                            Click="Button_Click" 
+                            BorderBrush="SkyBlue" />
             </StackPanel>
 
         </Grid>
     </Grid>
 
+    </Canvas>
 </UserControl>

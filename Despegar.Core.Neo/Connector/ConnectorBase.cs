@@ -87,8 +87,6 @@ namespace Despegar.Core.Neo.Connector
             return await ProcessRequest<T>(httpMessage, key);
         }
 
-
-
         public virtual async Task<T> PatchAsync<T>(string relativeServiceUrl, object postData, ServiceKey key) where T : class
         {
             string data = String.Empty;
@@ -112,7 +110,6 @@ namespace Despegar.Core.Neo.Connector
 
             return await ProcessRequest<T>(httpMessage, key);
         }
-
 
         /// <summary>
         /// This is the method for sending put command.
@@ -161,6 +158,7 @@ namespace Despegar.Core.Neo.Connector
             bool customExceptionThrown = false;
             bool requestSuccess = false;
             HttpResponseMessage httpResponse = null;
+            string payload = httpMessage.Content != null ? await httpMessage.Content.ReadAsStringAsync() : null;
 
             try
             {
@@ -175,10 +173,18 @@ namespace Despegar.Core.Neo.Connector
                     // Simulate network latency
                     await Task.Delay(MOCKED_RESPONSE_WAITING_TIME);
                     requestSuccess = true;
+#if DEBUG
+                    // Log API Call
+                    context.APICallsLog.Add(new APICall() { Time = DateTime.Now, Response = response, ServiceKey = key.ToString(), Exception = null, URL = httpMessage.RequestUri.ToString(), Payload = payload, Headers = httpMessage.Headers.ToString() });
+#endif
                 } else {
                    httpResponse = await httpClient.SendAsync(httpMessage);
                    response = await httpResponse.Content.ReadAsStringAsync();
                    requestSuccess = httpResponse.IsSuccessStatusCode;
+#if DEBUG
+                   // Log API Call
+                   context.APICallsLog.Add(new APICall() { Time = DateTime.Now, Response = response, ServiceKey = key.ToString(), Exception = null, URL = httpMessage.RequestUri.ToString(), Payload = payload, Headers = httpMessage.Headers.ToString() });
+#endif
                 }
 
                 // Check HTTP Error Codes
@@ -207,6 +213,11 @@ namespace Despegar.Core.Neo.Connector
                     }
 
                     logger.LogException(e);
+                    
+#if DEBUG
+                    // Log API Call
+                    context.APICallsLog.Add(new APICall() { Time = DateTime.Now, Response = response, ServiceKey = key.ToString(), Exception = e.Message, URL = httpMessage.RequestUri.ToString(), Payload = payload, Headers = httpMessage.Headers.ToString() });
+#endif
                     throw e;
                 }
 
@@ -221,6 +232,12 @@ namespace Despegar.Core.Neo.Connector
                 // HTTP Client error
                 var e = new WebConnectivityException(String.Format("[Core:Connector]: Key " + key.ToString() + " Could not connect to Service URL ", httpMessage.RequestUri), ex);
                 logger.LogException(e);
+
+#if DEBUG
+                // Log API Call
+                context.APICallsLog.Add(new APICall() { Time = DateTime.Now, Response = response, ServiceKey = key.ToString(), Exception = e.Message, URL = httpMessage.RequestUri.ToString(),  Payload = payload, Headers = httpMessage.Headers.ToString() });
+#endif
+
                 throw e;
             }
             catch (JsonException ex)
@@ -228,6 +245,12 @@ namespace Despegar.Core.Neo.Connector
                 // Deserializer JSON.NET Error
                 var e = new JsonSerializerException(String.Format("[Core:Connector]: Key " + key.ToString() + " Service call: {0}. Could not deserialize type '{1}' from service response data: {2}", httpMessage.RequestUri, typeof(T).FullName, response), ex);
                 logger.LogException(e);
+
+#if DEBUG
+                // Log API Call
+                context.APICallsLog.Add(new APICall() { Time = DateTime.Now, Response = response, ServiceKey = key.ToString(), Exception = e.Message, URL = httpMessage.RequestUri.ToString(), Payload = payload, Headers = httpMessage.Headers.ToString() });
+#endif
+
                 throw e;
             }
             catch (Exception ex) 
@@ -235,8 +258,12 @@ namespace Despegar.Core.Neo.Connector
                 if (customExceptionThrown)                 
                     throw ex;
 
-                var e = new Exception(String.Format("[Core:Connector]: Key " + key.ToString() + " Unknown Connector Error when calling Service URL {0}, Exception Message: {1}", httpMessage.RequestUri, ex.ToString()), ex);
+                   var e = new Exception(String.Format("[Core:Connector]: Key " + key.ToString() + " Unknown Connector Error when calling Service URL {0}, Exception Message: {1}", httpMessage.RequestUri, ex.ToString()), ex);
                   logger.LogException(e);
+#if DEBUG
+                  // Log API Call
+                  context.APICallsLog.Add(new APICall() { Time = DateTime.Now, Response = response, ServiceKey = key.ToString(), Exception = e.Message, URL = httpMessage.RequestUri.ToString(), Payload = payload, Headers = httpMessage.Headers.ToString() });
+#endif
                   throw e;
                 }
           }

@@ -138,7 +138,13 @@ namespace Despegar.Core.Neo.Connector
                 if (!String.IsNullOrWhiteSpace(values)) 
                 { 
                    // Remember not to rewrite the MAPI COOKIE if it is empty.
-                    mapiUPACookie = values;
+                    //MAXPOWER
+                    mapiUPACookie = values.Replace("Ã¡", "á")
+                                           .Replace("Ã©", "é")
+                                           .Replace("Ã­", "í")
+                                           .Replace("Ã³", "ó")
+                                           .Replace("Ãº", "ú")
+                                           .Replace("Ã±", "ñ");
                 }
             }
         }

@@ -7,6 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     xmlns:src="using:Despegar.WP.UI.Product.Hotels.Checkout"
+    xmlns:cont="using:Despegar.WP.UI.Controls"
     Style="{StaticResource BasePage}">
 
     <Grid Style="{StaticResource MainContainerGrid}">
@@ -27,7 +28,7 @@
         <!--<dev:UserControlDesignGrid />-->
 
         <!-- Title Panel -->
-        <Image Grid.Row="0" Style="{StaticResource TopLogo}" />
+        <cont:TopLogo Grid.Row="0"  />
         <TextBlock Grid.Row="1" x:Uid="Page_Hotels_Checkout" Style="{StaticResource PageHeaderSmall}" Text="COMPRAR HOTEL" />
 
         <Pivot Grid.Row="2" x:Name="MainPivot"  Style="{StaticResource PivotBaseMain}">

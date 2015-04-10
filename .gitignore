@@ -41,7 +41,6 @@
 *.user
 /Despegar.WP.UI.PushNotificationHelper/bin/**
 /Despegar.WP.UI.PushNotificationHelper/obj/**
-Despegar.WP.UI/AppPackages/Despegar.WP.UI_3.1.0.1_Despegar-Release_Test/Despegar.WP.UI_3.1.0.1_ARM_Despegar-Release.appxsym
-Despegar.WP.UI/AppPackages/Despegar.WP.UI_3.1.0.1_Despegar-Release_Test/Despegar.WP.UI_3.1.0.1_arm_Despegar-Release.appxbundle
+/Despegar.WP.UI/AppPackages/**
 Despegar.WP.UI/BundleArtifacts/arm.txt
 Despegar.WP.UI/Package.StoreAssociation.xml
