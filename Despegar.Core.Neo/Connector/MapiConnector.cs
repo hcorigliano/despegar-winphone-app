@@ -138,6 +138,7 @@ namespace Despegar.Core.Neo.Connector
                 if (!String.IsNullOrWhiteSpace(values)) 
                 { 
                    // Remember not to rewrite the MAPI COOKIE if it is empty.
+                    //MAXPOWER
                     mapiUPACookie = values.Replace("Ã¡", "á")
                                            .Replace("Ã©", "é")
                                            .Replace("Ã­", "í")
