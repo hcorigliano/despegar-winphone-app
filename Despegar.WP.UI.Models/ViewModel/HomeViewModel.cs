@@ -15,16 +15,21 @@ namespace Despegar.WP.UI.Model
     public class HomeViewModel : ViewModelBase
     {
         private IMAPICross mapiService;
+        private IGoogleAnalytics analyticsService;
 
-        public HomeViewModel(INavigator navigator, IMAPICross mapiService, IBugTracker t) : base(navigator, t)
+
+        public HomeViewModel(INavigator navigator, IMAPICross mapiService, IBugTracker t, IGoogleAnalytics analyticsService) : base(navigator, t)
         {
             this.Navigator = navigator;
-            this.mapiService = mapiService;           
+            this.mapiService = mapiService;
+            this.analyticsService = analyticsService;
         }
 
         public override void OnNavigated(object navigationParams)
         {
             this.BugTracker.LeaveBreadcrumb("Home View");
+            analyticsService.SendView("HotelsHome");
+
             HomeParameters parameters = navigationParams as HomeParameters;
 
             if (parameters != null)

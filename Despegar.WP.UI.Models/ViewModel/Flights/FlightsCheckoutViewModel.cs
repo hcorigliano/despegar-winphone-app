@@ -34,6 +34,8 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
         private IMAPICross mapiCross;
         private IAPIv1 apiv1Service;
         private IMAPICoupons couponsService;
+        private IGoogleAnalytics analyticsService;
+
         private FlightsCrossParameter FlightCrossParameters;
         private ValidationCreditcards creditCardsValidations;
         #endregion
@@ -234,7 +236,7 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
         }    
         #endregion
 
-        public FlightsCheckoutViewModel(INavigator navigator, ICoreLogger logger, IAPIv1 apiv1Service, IMAPIFlights flightServices, IMAPICross mapiCross, IMAPICoupons couponService, IBugTracker t)
+        public FlightsCheckoutViewModel(INavigator navigator, ICoreLogger logger, IAPIv1 apiv1Service, IMAPIFlights flightServices, IMAPICross mapiCross, IMAPICoupons couponService, IBugTracker t, IGoogleAnalytics analyticsService )
             : base(navigator, t)
         {
             this.logger = logger;
@@ -242,6 +244,7 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
             this.couponsService = couponService;
             this.mapiCross = mapiCross;
             this.apiv1Service = apiv1Service;
+            this.analyticsService = analyticsService;
         }
         
         /// <summary>
@@ -867,7 +870,9 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
         public override void OnNavigated(object navigationParams)
         {
             BugTracker.LeaveBreadcrumb("Flight checkout start");
-            FlightCrossParameters = navigationParams as FlightsCrossParameter;            
+            FlightCrossParameters = navigationParams as FlightsCrossParameter;
+            analyticsService.SendView("FlightsCheckout");
+
         }
 
         

@@ -15,12 +15,6 @@ namespace Despegar.WP.UI.Product.Flights
         {
             this.InitializeComponent();            
             this.CheckDeveloperTools();
-
-            #if !DEBUG
-                GoogleAnalyticContainer ga = new GoogleAnalyticContainer();
-                ga.Tracker = GoogleAnalytics.EasyTracker.GetTracker();
-                ga.SendView("FlightDetail");
-            #endif
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
