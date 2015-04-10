@@ -6,6 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
+    xmlns:cont="using:Despegar.WP.UI.Controls"
     xmlns:conv="using:Despegar.WP.UI.Common.Converter"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
@@ -41,7 +42,7 @@
         </Grid.RowDefinitions>
 
         <!-- Title Panel -->
-        <Image Grid.Row="0" Style="{StaticResource TopLogo}" />
+        <cont:TopLogo Grid.Row="0"  />
         <TextBlock Grid.Row="1" x:Uid="Page_HotelsAmenities_Title" Style="{StaticResource PageHeaderSmall}"  FontFamily="Segoe WP Semibold" />
 
         <ListView Grid.Row="2" ItemTemplate="{StaticResource HotelDisplayTemplate}" DataContext="{Binding}"  ItemsSource="{Binding}"  >

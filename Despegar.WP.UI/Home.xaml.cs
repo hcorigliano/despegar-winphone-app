@@ -28,25 +28,18 @@ namespace Despegar.WP.UI
         public List<Despegar.Core.Neo.Business.Configuration.Product> products;
         public HomeViewModel ViewModel { get; set; }
         private bool versionChecked = false;
-
         private IMAPINotifications notifications;
-        private PushResponse registerResponse;
+        private PushResponse registerResponse;        
 
         public Home()
         {
             this.InitializeComponent();   
 
-            // Developer Tools
-            this.CheckDeveloperTools();  
-
 #if DECOLAR
             // Remove Country Selection from BAR for DECOLAR
-            CommandBar bar = BottomAppBar as CommandBar;
-            bar.PrimaryCommands.RemoveAt(0);           
-
-    #if !DEBUG
-            this.BottomAppBar = null;
-    #endif
+            //CommandBar bar = BottomAppBar as CommandBar;
+            //bar.PrimaryCommands.RemoveAt(0);               
+            this.BottomAppBar = null;    
 #endif
          
             //Google Analytics
@@ -58,7 +51,6 @@ namespace Despegar.WP.UI
 
             //Notifications
             InitializeNotification();
-
         }
 
         protected async override void OnNavigatedTo(NavigationEventArgs e)
@@ -68,6 +60,8 @@ namespace Despegar.WP.UI
             ViewModel.OnNavigated(e.Parameter);
 
             this.DataContext = ViewModel;
+
+            this.VersionTxt.Text = "v" + GetAppVersion();
 
             if(e.NavigationMode == NavigationMode.New)
                 await SetupMenuItems(GlobalConfiguration.Site);
@@ -267,7 +261,7 @@ namespace Despegar.WP.UI
                 break;
             }
         }
-        #endregion
+        #endregion        
    
     }
 }

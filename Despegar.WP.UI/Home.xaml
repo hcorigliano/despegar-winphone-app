@@ -7,6 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:dev="using:Despegar.WP.UI.Developer.Controls"
     mc:Ignorable="d"  
+    xmlns:cont="using:Despegar.WP.UI.Controls"
     Style="{StaticResource BasePage}"
     NavigationCacheMode="Required"
     >
@@ -26,13 +27,14 @@
             <RowDefinition Height="{StaticResource Block1p}"/>
             <RowDefinition Height="{StaticResource Block2p}"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="14"/>
         </Grid.RowDefinitions>
 
         <!-- DEV -->
         <!--<dev:UserControlDesignGrid />-->
 
         <!-- Title Section -->
-        <Image Grid.Row="0" Style="{StaticResource TopLogo}" />
+        <cont:TopLogo Grid.Row="0"  />
         <TextBlock  Grid.Row="1" x:Uid="Page_Home" Style="{StaticResource PageHeader}" Text="inicio" Grid.RowSpan="2" />
 
         <ListView Grid.Row="2"  IsItemClickEnabled="True" ItemClick="ListView_ItemClick" ItemContainerStyle="{StaticResource HomeButtonItemContainer}" Margin="{StaticResource Top_Offset}">
@@ -109,5 +111,6 @@
             </ListViewItem>
         </ListView>
 
+        <TextBlock x:Name="VersionTxt" Text="v1.0.0.2"  Grid.Row="3" Style="{StaticResource SegoeRegular15}" FontSize="11" VerticalAlignment="Center" HorizontalAlignment="Right" />
     </Grid>
 </Page>

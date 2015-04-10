@@ -14,6 +14,7 @@
     xmlns:Interactivity="using:Microsoft.Xaml.Interactivity" 
     xmlns:Core="using:Microsoft.Xaml.Interactions.Core"
     xmlns:conv="using:Despegar.WP.UI.Common.Converter"
+    xmlns:cont="using:Despegar.WP.UI.Controls"
     mc:Ignorable="d"
     Style="{StaticResource BasePage}">
 
@@ -41,7 +42,7 @@
         </Grid.RowDefinitions>
         
         <!-- Title Panel -->
-        <Image Grid.Row="0" Style="{StaticResource TopLogo}" />
+        <cont:TopLogo Grid.Row="0"  />
         <TextBlock Grid.Row="1" x:Uid="Page_FlightSearch" Style="{StaticResource PageHeaderSmall}" Text="BUSQUEDA" FontFamily="Segoe WP Semibold" />
 
         <!--<dev:UserControlDesignGrid />-->

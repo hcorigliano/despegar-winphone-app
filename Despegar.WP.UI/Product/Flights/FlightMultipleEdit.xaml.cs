@@ -14,7 +14,6 @@ namespace Despegar.WP.UI.Product.Flights
         public FlightMultipleEdit()
         {
             this.InitializeComponent();
-            this.CheckDeveloperTools();                        
         }
 
         void HardwareButtons_BackPressed(object sender, BackPressedEventArgs e)
