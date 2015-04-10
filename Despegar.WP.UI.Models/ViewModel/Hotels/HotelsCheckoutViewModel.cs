@@ -37,6 +37,7 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
         private IMAPIHotels hotelService;
         private IMAPICross mapiCross;
         private IMAPICoupons couponsService;
+        private IGoogleAnalytics analyticsService;
         private ValidationCreditcards creditCardsValidations;
         #endregion
 
@@ -355,7 +356,7 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
 
         #endregion        
 
-        public HotelsCheckoutViewModel(INavigator navigator, IMAPIHotels hotelService, IMAPICross commonService, IMAPICoupons couponsService, IAPIv1 apiV1service, ICoreLogger logger, IBugTracker t)
+        public HotelsCheckoutViewModel(INavigator navigator, IMAPIHotels hotelService, IMAPICross commonService, IMAPICoupons couponsService, IAPIv1 apiV1service, ICoreLogger logger, IBugTracker t, IGoogleAnalytics analyticsService)
             : base(navigator,t)
         {
             this.logger = logger;
@@ -363,6 +364,7 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
             this.apiV1service = apiV1service;
             this.mapiCross = commonService;
             this.couponsService = couponsService;
+            this.analyticsService = analyticsService;
             this.PaymentAlertMessage = string.Empty;
         }
 
@@ -862,6 +864,8 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
         {
             BugTracker.LeaveBreadcrumb("Hotel checkout start");
             CrossParams = navigationParams as HotelsCrossParameters;
+
+            analyticsService.SendView("HotelsCheckout");
         }
 
 

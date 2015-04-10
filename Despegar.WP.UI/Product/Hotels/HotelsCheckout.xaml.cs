@@ -41,21 +41,10 @@ namespace Despegar.WP.UI.Product.Hotels
         public HotelsCheckout()
         {
             this.InitializeComponent();
-
-#if !DEBUG
-                GoogleAnalyticContainer ga = new GoogleAnalyticContainer();
-                ga.Tracker = GoogleAnalytics.EasyTracker.GetTracker();
-                ga.SendView("HotelsCheckout");
-#endif
         }
 
         protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
-#if !DEBUG
-                GoogleAnalyticContainer ga = new GoogleAnalyticContainer();
-                ga.Tracker = GoogleAnalytics.EasyTracker.GetTracker();
-                ga.SendView("HotelCheckout");
-#endif
             HardwareButtons.BackPressed += HardwareButtons_BackPressed;
 
             // Initialize Checkout

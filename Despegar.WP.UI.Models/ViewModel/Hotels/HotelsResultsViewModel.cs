@@ -15,6 +15,8 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
     public class HotelsResultsViewModel : ViewModelBase
     {
         private IMAPIHotels hotelService { get; set; }
+        private IGoogleAnalytics analyticsService;
+
 
         #region  *** Public Interface ***
         public const int ITEMS_FOR_EACH_PAGE = 30;
@@ -136,10 +138,11 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
 
         #endregion
 
-        public HotelsResultsViewModel(INavigator navigator, IMAPIHotels hotelService, IBugTracker t)
+        public HotelsResultsViewModel(INavigator navigator, IMAPIHotels hotelService, IBugTracker t,  IGoogleAnalytics analyticsService)
             : base(navigator, t)
         {
             this.hotelService = hotelService;
+            this.analyticsService = analyticsService;
         }
 
 
@@ -228,6 +231,8 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
         public override void OnNavigated(object navigationParams)
         {
             BugTracker.LeaveBreadcrumb("Hotels Results View");
+            analyticsService.SendView("HotelsDetails");
+
             GenericResultNavigationData pageParameters = navigationParams as GenericResultNavigationData;
             PropertyChanged += LockUnlockAppBar;
 

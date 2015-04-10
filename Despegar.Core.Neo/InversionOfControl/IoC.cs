@@ -29,7 +29,7 @@ namespace Despegar.Core.Neo.InversionOfControl
         /// <typeparam name="T"></typeparam>
         public static T Resolve<T>() 
         {
-            return container.Resolve<T>();
+             return container.Resolve<T>();
         }
     }
 }

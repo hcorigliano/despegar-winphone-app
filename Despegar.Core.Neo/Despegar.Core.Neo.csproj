@@ -73,6 +73,7 @@
     <Compile Include="Contract\API\IMAPICoupons.cs" />
     <Compile Include="Contract\API\IMAPIHotels.cs" />
     <Compile Include="Contract\API\IUPAService.cs" />
+    <Compile Include="Contract\Log\IGoogleAnalytics.cs" />
     <Compile Include="CoreContext.cs" />
     <Compile Include="API\MAPI\MAPICoupons.cs" />
     <Compile Include="API\MAPI\MAPIHotels.cs" />
@@ -259,6 +260,7 @@
     <Compile Include="Contract\Log\IBugTracker.cs" />
     <Compile Include="Log\CoreLogger.cs" />
     <Compile Include="Log\EmptyBugTracker.cs" />
+    <Compile Include="Log\EmptyGoogleAnalyticContainer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
