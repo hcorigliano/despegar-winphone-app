@@ -34,7 +34,12 @@ namespace Despegar.Core.Neo
         private Configuration configuration;
         
         #region ** Public Interface **
-        
+
+        private bool rcMode;
+        private bool betaMode;
+        public bool RCModeEnabled { get { return rcMode; } set { rcMode = value; betaMode = false; logger.Log("RC MODE: " + value.ToString()); } }
+        public bool BetaModeEnabled { get { return betaMode; } set { betaMode = value; rcMode = false; logger.Log("BETA MODE: " + value.ToString()); } }
+
         public CoreContext(IBugTracker bugTracker, ICoreLogger logger) 
         {
             this.bugtracker = bugTracker;
@@ -166,7 +171,6 @@ namespace Despegar.Core.Neo
             return null;
         }
 
-        #endregion
-        
+        #endregion        
     }
 }

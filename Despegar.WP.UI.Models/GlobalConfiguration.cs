@@ -60,7 +60,6 @@ namespace Despegar.WP.UI.Model
                 roamingSettings.Values["NotificationChannel"] = value;
             }
         }
-        public static bool RCEnvironmentEnabled { get; set; }
 
         // Debug Only        
         public static List<Breadcrumb> Bredcrumbs = new List<Breadcrumb>();

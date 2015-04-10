@@ -16,7 +16,7 @@ namespace Despegar.Core.Neo.Connector
     public abstract class ConnectorBase : IConnector
     {
         private const int MOCKED_RESPONSE_WAITING_TIME = 2000;
-        private ICoreContext context;
+        protected ICoreContext context;
         protected ICoreLogger logger;
         protected IBugTracker bugTracker;
         private HttpClient httpClient;

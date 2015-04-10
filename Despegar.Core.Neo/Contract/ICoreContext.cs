@@ -76,5 +76,15 @@ namespace Despegar.Core.Neo.Contract
         /// API Calls log
         /// </summary>
         List<APICall> APICallsLog { get; set; }
+
+        /// <summary>
+        /// Indicates whether the Core is working in RC mode (Release Candidate a.k.a MAPI RC)
+        /// </summary>
+        bool RCModeEnabled { get; set; }
+
+        /// <summary>
+        /// Indicates whether the Core is working in BETA mode (Release Candidate a.k.a MAPI BETA)
+        /// </summary>
+        bool BetaModeEnabled { get; set; }
     }
 }

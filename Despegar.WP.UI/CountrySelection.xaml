@@ -13,14 +13,8 @@
     Style="{StaticResource BasePage}">
     
     <Page.Resources>
-        <conv:StringConverter x:Key="StringConverter"></conv:StringConverter>
+        <conv:StringConverter x:Key="StringConverter" />
     </Page.Resources>
-    
-    <Page.BottomAppBar>
-        <CommandBar ClosedDisplayMode="Minimal">
-            <!--<AppBarButton Icon="Setting" x:Uid="Home_Settings" FontSize="14" Click="AppBarButton_Click" />-->
-        </CommandBar>
-    </Page.BottomAppBar>
     
     <Grid x:Name="LayoutRoot" Style="{StaticResource MainContainerGrid}">
         <Grid.ChildrenTransitions>
