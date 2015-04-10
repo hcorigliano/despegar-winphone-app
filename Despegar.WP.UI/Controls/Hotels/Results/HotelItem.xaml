@@ -60,7 +60,13 @@
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
 
-                    <Image Grid.Column="0" Source="/Assets/Icon/App/star-small-yellow.scale-100.png" Visibility="{Binding hotel.stars , Converter={StaticResource StarsVisibilityConverter} ,ConverterParameter=1 }" VerticalAlignment="Center"/>
+                <Image Grid.Column="0" Source="/Assets/Icon/App/starborder-small-yellow.scale-100.png" VerticalAlignment="Center"/>
+                <Image Grid.Column="1" Source="/Assets/Icon/App/starborder-small-yellow.scale-100.png" VerticalAlignment="Center"/>
+                <Image Grid.Column="2" Source="/Assets/Icon/App/starborder-small-yellow.scale-100.png" VerticalAlignment="Center"/>
+                <Image Grid.Column="3" Source="/Assets/Icon/App/starborder-small-yellow.scale-100.png" VerticalAlignment="Center"/>
+                <Image Grid.Column="4" Source="/Assets/Icon/App/starborder-small-yellow.scale-100.png" VerticalAlignment="Center"/>
+
+                <Image Grid.Column="0" Source="/Assets/Icon/App/star-small-yellow.scale-100.png" Visibility="{Binding hotel.stars , Converter={StaticResource StarsVisibilityConverter} ,ConverterParameter=1 }" VerticalAlignment="Center"/>
                     <Image Grid.Column="1" Source="/Assets/Icon/App/star-small-yellow.scale-100.png" Visibility="{Binding hotel.stars , Converter={StaticResource StarsVisibilityConverter} ,ConverterParameter=2 }" VerticalAlignment="Center"/>
                     <Image Grid.Column="2" Source="/Assets/Icon/App/star-small-yellow.scale-100.png" Visibility="{Binding hotel.stars , Converter={StaticResource StarsVisibilityConverter} ,ConverterParameter=3 }" VerticalAlignment="Center"/>
                     <Image Grid.Column="3" Source="/Assets/Icon/App/star-small-yellow.scale-100.png" Visibility="{Binding hotel.stars , Converter={StaticResource StarsVisibilityConverter} ,ConverterParameter=4 }" VerticalAlignment="Center"/>

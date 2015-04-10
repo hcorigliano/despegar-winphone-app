@@ -166,6 +166,15 @@ namespace Despegar.WP.UI.Product.Flights
                     dialog = new MessageDialog(manager.GetString("Voucher_ERROR_" + (string)e.Parameter), manager.GetString("Voucher_ERROR_TITLE"));
                     await dialog.ShowSafelyAsync();                    
                     break;
+                case "DUPLICATED_DOCUMENT_NUMBERS":
+                    dialog = new MessageDialog(manager.GetString("ERROR_DUPLICATED_DOCUMENT_NUMBERS"), manager.GetString("Voucher_ERROR_TITLE"));
+                    await dialog.ShowSafelyAsync();
+                    break;
+                case "INVALID_FISCAL_ID":
+                    dialog = new MessageDialog(manager.GetString("ERROR_INVALID_FISCAL_ID"), manager.GetString("Flights_Checkout_ERROR_FORM_ERROR_TITLE"));
+                    await dialog.ShowSafelyAsync();
+                    break;
+
                 case "API_ERROR":
                     int code = (int)e.Parameter;
                     var formErrors = new int[]
@@ -174,8 +183,8 @@ namespace Despegar.WP.UI.Product.Flights
                         1008,  // INVALID_PASSENGER_LAST_NAME_LENGTH
                         1009,  // INVALID_PASSENGER_FIRST_NAME_LENGTH
                         1011,  // INVALID_NATIONALITY
-                        1013,  // INVALID_BIRTHDAY       
-                        1099
+                        1013  // INVALID_BIRTHDAY       
+                        
                     };
 
                     if (formErrors.Any(x => x == code))
@@ -184,6 +193,13 @@ namespace Despegar.WP.UI.Product.Flights
                         await dialog.ShowSafelyAsync();
                         return;
                     }
+
+                    //if (code == 1099)
+                    //{
+                    //    dialog = new MessageDialog(manager.GetString("ERROR_INVALID_FISCAL_ID"), manager.GetString("Flights_Checkout_ERROR_FORM_ERROR_TITLE"));
+                    //    await dialog.ShowSafelyAsync();
+                    //    return;
+                    //}
 
                     if (code == 1010)
                     {
@@ -283,16 +299,7 @@ namespace Despegar.WP.UI.Product.Flights
         //    }
         //}
 
-        private async void AcceptConditions_Click(object sender, RoutedEventArgs e)
-        {
-            string uriToLaunch = String.Format("https://secure.despegar.com.{0}/book/flights/checkout/conditions/wp", GlobalConfiguration.Site.ToLowerInvariant());
-
-            if (GlobalConfiguration.Site.ToLowerInvariant() == "br")
-                uriToLaunch = "https://secure.decolar.com/book/flights/checkout/conditions/wp";
-
-            var uri = new Uri(uriToLaunch);
-            var success = await Windows.System.Launcher.LaunchUriAsync(uri);
-        }
+       
 
     }
 }

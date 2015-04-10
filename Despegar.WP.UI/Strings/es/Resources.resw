@@ -1315,4 +1315,10 @@ La reserva no ha sido generada y no se le cobrará ningún cargo por la transacc
   <data name="HOTEL_SEARCH_NO_DESTINATION_ERROR_MESSAGE" xml:space="preserve">
     <value>Escriba un destino u hotel para poder hacer la búsqueda</value>
   </data>
+  <data name="ERROR_INVALID_FISCAL_ID" xml:space="preserve">
+    <value>El codigo fiscal es invalido</value>
+  </data>
+  <data name="ERROR_DUPLICATED_DOCUMENT_NUMBERS" xml:space="preserve">
+    <value>El numero de documento esta duplicado</value>
+  </data>
 </root>

@@ -14,7 +14,7 @@ namespace Despegar.WP.UI.Product.Hotels
     /// </summary>
     public sealed partial class HotelThanks : Page
     {
-        private HotelsCheckoutViewModel ViewModel;
+        private HotelsThanksViewModel ViewModel;
 
         public HotelThanks()
         {
@@ -35,7 +35,7 @@ namespace Despegar.WP.UI.Product.Hotels
                 ga.SendView("HotelThanks");
 #endif
             HardwareButtons.BackPressed += HardwareButtons_BackPressed;
-            ViewModel = Despegar.Core.Neo.InversionOfControl.IoC.Resolve<HotelsCheckoutViewModel>();
+            ViewModel = Despegar.Core.Neo.InversionOfControl.IoC.Resolve<HotelsThanksViewModel>();
             ViewModel.OnNavigated(e.Parameter);
             this.DataContext = ViewModel;
         }
