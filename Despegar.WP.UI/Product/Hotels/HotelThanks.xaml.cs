@@ -29,11 +29,6 @@ namespace Despegar.WP.UI.Product.Hotels
         /// This parameter is typically used to configure the page.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-#if !DEBUG
-                GoogleAnalyticContainer ga = new GoogleAnalyticContainer();
-                ga.Tracker = GoogleAnalytics.EasyTracker.GetTracker();
-                ga.SendView("HotelThanks");
-#endif
             HardwareButtons.BackPressed += HardwareButtons_BackPressed;
             ViewModel = Despegar.Core.Neo.InversionOfControl.IoC.Resolve<HotelsThanksViewModel>();
             ViewModel.OnNavigated(e.Parameter);

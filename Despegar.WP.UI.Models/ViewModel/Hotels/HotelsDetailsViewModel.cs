@@ -28,6 +28,7 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
         private IMAPIHotels hotelService { get; set; }
         private IAPIv3 userReviewService { get; set; }
         private IAPIv1 userReviewServiceV1 { get; set; }
+        private IGoogleAnalytics analyticsService;
         private HotelsCrossParameters CrossParameters { get; set; }
 
         #region ** Public Interface **
@@ -175,19 +176,22 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
 
         #endregion
 
-        public HotelsDetailsViewModel(INavigator navigator, IMAPIHotels hotelService, IAPIv3 hotelReviews, IAPIv1 hReviewV1, IMAPICross crossService, IBugTracker t)
+        public HotelsDetailsViewModel(INavigator navigator, IMAPIHotels hotelService, IAPIv3 hotelReviews, IAPIv1 hReviewV1 ,IMAPICross crossService, IBugTracker t, IGoogleAnalytics analyticsService)
             : base(navigator, t)
         {
             this.hotelService = hotelService;
             this.userReviewService = hotelReviews;
             this.crossService = crossService;
             this.userReviewServiceV1 = hReviewV1;
+            this.analyticsService = analyticsService;
 
         }
 
         public override void OnNavigated(object navigationParams)
         {
             CrossParameters = navigationParams as HotelsCrossParameters;
+            analyticsService.SendView("HotelsDetails");
+
         }
 
         public async Task Init()

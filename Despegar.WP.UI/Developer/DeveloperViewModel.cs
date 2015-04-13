@@ -35,11 +35,25 @@ namespace Despegar.WP.UI.Developer
         #region ** Other Tools **
         public bool RCEnvironmentEnabled
         {
-            get { return GlobalConfiguration.RCEnvironmentEnabled; }
+            get { return GlobalConfiguration.CoreContext.RCModeEnabled; }
             set
             {
-                OnPropertyChanged();
-                GlobalConfiguration.RCEnvironmentEnabled = value;
+                GlobalConfiguration.CoreContext.RCModeEnabled = value;
+                OnPropertyChanged("RCEnvironmentEnabled");
+                OnPropertyChanged("BetaEnvironmentEnabled");
+
+             
+            }
+        }
+
+        public bool BetaEnvironmentEnabled
+        {
+            get { return GlobalConfiguration.CoreContext.BetaModeEnabled; }
+            set
+            {
+                GlobalConfiguration.CoreContext.BetaModeEnabled = value;
+                OnPropertyChanged("BetaEnvironmentEnabled");
+                OnPropertyChanged("RCEnvironmentEnabled");
             }
         }
 

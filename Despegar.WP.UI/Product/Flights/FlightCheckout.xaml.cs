@@ -28,11 +28,6 @@ namespace Despegar.WP.UI.Product.Flights
         public FlightCheckout()
         {
             this.InitializeComponent();
-            #if !DEBUG
-                GoogleAnalyticContainer ga = new GoogleAnalyticContainer();
-                ga.Tracker = GoogleAnalytics.EasyTracker.GetTracker();
-                ga.SendView("FlightCheckout");
-            #endif
         }
 
         protected async override void OnNavigatedTo(NavigationEventArgs e)

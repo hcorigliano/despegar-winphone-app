@@ -22,6 +22,7 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
         public IMAPIHotels hotelService { get; set; }
         private HotelSearchModel coreSearchModel;
         private Geolocator geolocator = null;
+        private IGoogleAnalytics analyticsService;
         private const int RESULTS_PAGE_SIZE = 30;
 
         public string DestinationType { get; set; }
@@ -100,8 +101,9 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
                 return new RelayCommand(() => SearchTodayHotels());
             }
         }
-        
-        public HotelsSearchViewModel(INavigator navigator,  IBugTracker t, IMAPIHotels hotelService ) : base(navigator,t)
+
+        public HotelsSearchViewModel(INavigator navigator, IBugTracker t, IMAPIHotels hotelService, IGoogleAnalytics analyticsService)
+            : base(navigator, t)
         {
             this.hotelService = hotelService;
             this.coreSearchModel = new HotelSearchModel();
@@ -110,7 +112,8 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
 
             this.coreSearchModel.EmissionAnticipationDay = GlobalConfiguration.GetEmissionAnticipationDayForHotels();
             this.coreSearchModel.LastAvailableHours = GlobalConfiguration.GetLastAvailableHoursForHotels();
-            this.DestinationType = string.Empty;            
+            this.DestinationType = string.Empty;
+            this.analyticsService = analyticsService;
             coreSearchModel.UpdateSearchDays();
         }
 
@@ -202,6 +205,7 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
 
         public override void OnNavigated(object navigationParams)
         {
+            analyticsService.SendView("HotelsCheckout");
         }
     }
 }

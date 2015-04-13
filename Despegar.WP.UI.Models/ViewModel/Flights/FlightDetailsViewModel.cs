@@ -9,15 +9,17 @@ namespace Despegar.WP.UI.Model
 {
     public class FlightDetailsViewModel : ViewModelBase
     {
-        public FlightsCrossParameter FlightsCrossParameters { get; set; } 
+        public FlightsCrossParameter FlightsCrossParameters { get; set; }
+        private IGoogleAnalytics analyticsService;
 
         /// <summary>
         /// Inbound + Outbound Initialization
         /// </summary>
         /// <param name="outBound"></param>
         /// <param name="route2"></param>
-        public FlightDetailsViewModel(INavigator navigator, IBugTracker t) : base(navigator,t)
-        {            
+        public FlightDetailsViewModel(INavigator navigator, IBugTracker t, IGoogleAnalytics analyticsService) : base(navigator,t)
+        {
+            this.analyticsService = analyticsService;
         }
 
         public bool IsTwoWaySearch
@@ -51,6 +53,8 @@ namespace Despegar.WP.UI.Model
         public override void OnNavigated(object navigationParams)
         {
             BugTracker.LeaveBreadcrumb("Flight Detail View");
+            analyticsService.SendView("FlightDetails");
+
             FlightsCrossParameter routes = navigationParams as FlightsCrossParameter;
 
             if (routes != null)

@@ -32,6 +32,8 @@ namespace Despegar.Core.Neo.InversionOfControl
             // Logging and Event/Bug Trackers
             builder.RegisterType<CoreLogger>().As<ICoreLogger>().SingleInstance();
             builder.RegisterType<EmptyBugTracker>().As<IBugTracker>().SingleInstance();
+            builder.RegisterType<EmptyGoogleAnalyticContainer>().As<IGoogleAnalytics>().SingleInstance();
+
             // Connectors
             builder.RegisterType<MapiConnector>().As<IMapiConnector>().SingleInstance();
             builder.RegisterType<Apiv1Connector>().As<IApiv1Connector>().SingleInstance();

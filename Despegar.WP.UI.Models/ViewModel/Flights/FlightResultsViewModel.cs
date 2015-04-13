@@ -134,6 +134,7 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
 #endregion
 
         private IMAPIFlights flightService;
+        private IGoogleAnalytics analyticsService;
 
         private FlightsItineraries itineraries;
         public FlightsItineraries Itineraries
@@ -203,9 +204,10 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
             }
         }
 
-        public FlightResultsViewModel(INavigator navigator, IMAPIFlights flightService, IBugTracker t) : base(navigator, t)
+        public FlightResultsViewModel(INavigator navigator, IMAPIFlights flightService, IBugTracker t, IGoogleAnalytics analyticsService) : base(navigator, t)
         {
             this.flightService = flightService;
+            this.analyticsService = analyticsService;
             Items = new List<BindableItem>();
             FlightCrossParameters = new FlightsCrossParameter();
         }
@@ -213,6 +215,8 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
         public override void OnNavigated(object navigationParams)
         {
             BugTracker.LeaveBreadcrumb("Flight Results View");
+            analyticsService.SendView("FlightResults");
+
             GenericResultNavigationData pageParameters = navigationParams as GenericResultNavigationData;
 
             // Obtain Search parameters

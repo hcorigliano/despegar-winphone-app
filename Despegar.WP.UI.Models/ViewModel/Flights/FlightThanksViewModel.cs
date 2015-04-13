@@ -10,10 +10,13 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
     public class FlightThanksViewModel : ViewModelBase
     {
         public FlightsCrossParameter flightCrossParameters { get; set; }
+        private IGoogleAnalytics analyticsService;
 
-        public FlightThanksViewModel(INavigator nav, IBugTracker t)
+
+        public FlightThanksViewModel(INavigator nav, IBugTracker t, IGoogleAnalytics analyticsService )
             : base(nav,t) 
         {
+            this.analyticsService = analyticsService;
         }
 
         public bool IsETicketed { get { return flightCrossParameters.BookingResponse.eticket_token != null; } }
@@ -33,6 +36,8 @@ namespace Despegar.WP.UI.Model.ViewModel.Flights
         {
              BugTracker.LeaveBreadcrumb("Flight Thanks View");
              BugTracker.LogEvent("Flight Purchase " + GlobalConfiguration.Site);
+             analyticsService.SendView("FlightThanks");
+
              this.flightCrossParameters = navigationParams as FlightsCrossParameter;
         }
 

@@ -68,11 +68,6 @@ namespace Despegar.WP.UI.Product.Hotels
 
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
-#if !DEBUG
-                GoogleAnalyticContainer ga = new GoogleAnalyticContainer();
-                ga.Tracker = GoogleAnalytics.EasyTracker.GetTracker();
-                ga.SendView("HotelResults");
-#endif
             HardwareButtons.BackPressed += HardwareButtons_BackPressed;
             BottomAppBar.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
             if (e.NavigationMode == NavigationMode.New)

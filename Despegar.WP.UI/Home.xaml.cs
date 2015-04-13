@@ -41,13 +41,6 @@ namespace Despegar.WP.UI
             //bar.PrimaryCommands.RemoveAt(0);               
             this.BottomAppBar = null;    
 #endif
-         
-            //Google Analytics
-#if !DEBUG
-            GoogleAnalyticContainer ga = new GoogleAnalyticContainer();
-            ga.Tracker = GoogleAnalytics.EasyTracker.GetTracker();
-            ga.SendView("Home");
-#endif
 
             //Notifications
             InitializeNotification();

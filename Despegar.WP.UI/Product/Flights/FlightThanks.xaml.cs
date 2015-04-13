@@ -21,11 +21,7 @@ namespace Despegar.WP.UI.Product.Flights
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             HardwareButtons.BackPressed += HardwareButtons_BackPressed;            
-#if !DEBUG
-                GoogleAnalyticContainer ga = new GoogleAnalyticContainer();
-                ga.Tracker = GoogleAnalytics.EasyTracker.GetTracker();
-                ga.SendView("FlightThanks");
-#endif
+
             ViewModel = Despegar.Core.Neo.InversionOfControl.IoC.Resolve<FlightThanksViewModel>();
             ViewModel.OnNavigated(e.Parameter);
             this.DataContext = ViewModel;
