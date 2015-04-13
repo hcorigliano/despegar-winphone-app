@@ -154,7 +154,15 @@ namespace Despegar.WP.UI.Product.Hotels
             }
 
             if (e.PropertyName == "GoToPivot")
-                MainPivot.SelectedIndex = ViewModel.GoToPivot;
+                MainPivot.SelectedIndex = GetSectionIndex(ViewModel.GoToPivot);
+        }
+
+        private int GetSectionIndex(string sectionID)
+        {
+            PivotItem errorPivot = this.FindName("Pivot_" + sectionID) as PivotItem;
+            if (errorPivot == null)
+                return MainPivot.SelectedIndex;
+            return MainPivot.Items.IndexOf(errorPivot);
         }
 
     }

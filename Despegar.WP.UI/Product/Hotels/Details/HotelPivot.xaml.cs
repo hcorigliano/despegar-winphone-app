@@ -27,12 +27,12 @@ namespace Despegar.WP.UI.Product.Hotels.Details
 
         private void GoToDetailsPivot(object sender, RoutedEventArgs e)
         {
-            ((HotelsDetailsViewModel)DataContext).GoToPivot = 4;
+            ((HotelsDetailsViewModel)DataContext).GoToPivot = "Details";
         }
 
         private void GoToCommentsPivot(object sender, RoutedEventArgs e)
         {
-            ((HotelsDetailsViewModel)DataContext).GoToPivot = 3;
+            ((HotelsDetailsViewModel)DataContext).GoToPivot = "Reviews";
         }
     }
 }

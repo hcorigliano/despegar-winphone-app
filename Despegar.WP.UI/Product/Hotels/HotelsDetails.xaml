@@ -65,11 +65,11 @@
                 </Grid>
             </PivotItem>
 
-            <PivotItem Style="{StaticResource PivotItemBase}" x:Uid="Hotel_Details_comments_Pivot" xmlns:src="using:Despegar.WP.UI.Product.Hotels.Details">
+            <PivotItem x:Name="Pivot_Reviews" Style="{StaticResource PivotItemBase}" x:Uid="Hotel_Details_comments_Pivot" xmlns:src="using:Despegar.WP.UI.Product.Hotels.Details">
                 <src:UserReviews DataContext="{Binding}"/>
             </PivotItem>
 
-            <PivotItem Style="{StaticResource PivotItemBase}" x:Uid="Hotel_Details_Description_Pivot">
+            <PivotItem x:Name="Pivot_Details" Style="{StaticResource PivotItemBase}" x:Uid="Hotel_Details_Description_Pivot">
              
                 <Grid>
                     <Hotels:HotelDescriptionControl DataContext="{Binding}" />

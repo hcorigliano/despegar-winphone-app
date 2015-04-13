@@ -389,6 +389,13 @@
                             </ScrollViewer>
                         </PivotItem>
 
+                        <PivotItem Header="quicklinks">
+                            <StackPanel>
+                                <Button Content="To Flights Results BUE-MIA"  Command="{Binding QuickLinkFlightCheckout}" Style="{StaticResource btnStlye}"/>
+                            </StackPanel>
+                            
+                        </PivotItem>
+                    
                     </Pivot>
             </StackPanel>
 

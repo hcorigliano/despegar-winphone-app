@@ -157,8 +157,8 @@ namespace Despegar.WP.UI.Model.ViewModel.Hotels
 
 
 
-        private int goToPivot { get; set; }
-        public int GoToPivot
+        private string goToPivot { get; set; }
+        public string GoToPivot
         {
             get
             {

@@ -121,6 +121,7 @@
     <Compile Include="Controls\TopLogo.xaml.cs">
       <DependentUpon>TopLogo.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Developer\QuickLinks.cs" />
     <Compile Include="Product\Flights\Checkout\BillingAddress.xaml.cs">
       <DependentUpon>BillingAddress.xaml</DependentUpon>
     </Compile>

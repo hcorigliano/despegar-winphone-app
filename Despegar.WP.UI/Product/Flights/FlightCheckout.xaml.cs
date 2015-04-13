@@ -240,6 +240,8 @@ namespace Despegar.WP.UI.Product.Flights
         private int GetSectionIndex(string sectionID)
         {
             PivotItem errorPivot = this.FindName("Pivot_" + sectionID) as PivotItem;
+            if (errorPivot == null)
+                return MainPivot.SelectedIndex;
             return MainPivot.Items.IndexOf(errorPivot);
         }
         #endregion
