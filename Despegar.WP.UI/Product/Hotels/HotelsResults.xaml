@@ -56,7 +56,7 @@
 
             <TextBlock x:Uid="Common_pessoa_por_noite"  Grid.Row="1" Text="Tarifa por persona por nocheX" Style="{StaticResource SegoeRegular12_9}" VerticalAlignment="Center"/>
 
-            <ListView Grid.Row="2" xmlns:src="using:Despegar.WP.UI.Controls.Hotels.Results" ItemsSource="{Binding CitiesAvailability.items}" Margin="{StaticResource Top_Offset}" Tapped="HotelSelected" >
+            <ListView Grid.Row="2" xmlns:src="using:Despegar.WP.UI.Controls.Hotels.Results"  ItemsSource="{Binding CitiesAvailability.items}" Margin="{StaticResource Top_Offset}" Tapped="HotelSelected" >
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Margin="{StaticResource Bottom_Block1p}">

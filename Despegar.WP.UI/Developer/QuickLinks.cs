@@ -39,6 +39,8 @@ namespace Despegar.WP.UI.Developer
                 "TotalAdults " + coreSearchModel.AdultsInFlights + " Child: " + coreSearchModel.ChildrenInFlights);
 
             Navigator.GoTo(ViewModelPages.FlightsResults, new GenericResultNavigationData() { SearchModel = coreSearchModel, FiltersApplied = false });
+
+
         }
 
 

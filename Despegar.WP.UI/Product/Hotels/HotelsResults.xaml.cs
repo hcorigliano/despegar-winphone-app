@@ -115,11 +115,20 @@ namespace Despegar.WP.UI.Product.Hotels
 
         private void HotelSelected(object sender, TappedRoutedEventArgs e)
         {
-            ListView listView = ((ListView)sender);
+            ListView listview = sender as ListView;
+            int index = 0;
+
+            if (listview == null)
+                return;
+
+            index = listview.SelectedIndex;
+
+            if (index == -1)
+                return;
             
             if (ViewModel != null)
             {
-                ViewModel.GoToDetails((HotelItem)listView.SelectedItem, listView.SelectedIndex);
+                ViewModel.GoToDetails((HotelItem)listview.SelectedItem, listview.SelectedIndex);
             }
         }
 
