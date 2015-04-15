@@ -63,7 +63,13 @@ namespace Despegar.WP.UI.Controls
             object resourceString = "";
             string resourceKey = control.ErrorPrefix + "_ERROR_" + control.ErrorCode;
             resourceString = (new ResourceLoader()).GetString(resourceKey);
+            if (!string.IsNullOrEmpty(control.ErrorCode) && resourceString == "")
+            {
+                resourceString = (new ResourceLoader()).GetString("Flights_Checkout_Generic_Error");
+            }
             control.TextLabel.Text = resourceString as string;
+
+            // validar si control.errorcode != null y resourcestring = "" es q buscvo un codigo de error y no enconbtro recurso
         }
 
         public ValidationError()

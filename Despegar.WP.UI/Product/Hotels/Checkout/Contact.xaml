@@ -44,8 +44,8 @@
 
                 <StackPanel Grid.ColumnSpan="5" Grid.Row="1">
                     <!--- TODO: Check Stacking invisible items -->
-                    <controls:ValidationError ErrorPrefix="Flights_Checkout_Contact_Area_Code" ErrorCode="{Binding Phone.country_code.CurrentError}" Visibility="{Binding Phone.country_code.required, Converter={StaticResource VisibilityConverter}, FallbackValue=Collapsed}"  />
-                    <controls:ValidationError ErrorPrefix="Flights_Checkout_Contact_Country_Code" ErrorCode="{Binding Phone.area_code.CurrentError}" Visibility="{Binding Phone.area_code.required,Converter={StaticResource VisibilityConverter}, FallbackValue=Collapsed}"  />
+                    <controls:ValidationError ErrorPrefix="Flights_Checkout_Contact_Country_Code" ErrorCode="{Binding Phone.country_code.CurrentError}" Visibility="{Binding Phone.country_code.required, Converter={StaticResource VisibilityConverter}, FallbackValue=Collapsed}"  />
+                    <controls:ValidationError ErrorPrefix="Flights_Checkout_Contact_Area_Code" ErrorCode="{Binding Phone.area_code.CurrentError}" Visibility="{Binding Phone.area_code.required,Converter={StaticResource VisibilityConverter}, FallbackValue=Collapsed}"  />
                     <controls:ValidationError ErrorPrefix="Flights_Checkout_Contact_Number" ErrorCode="{Binding Phone.number.CurrentError}" Visibility="{Binding Phone.number.required, Converter={StaticResource VisibilityConverter}, FallbackValue=Collapsed}"  />
                 </StackPanel>
             </Grid>
