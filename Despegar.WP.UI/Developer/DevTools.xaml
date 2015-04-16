@@ -393,7 +393,9 @@
 
                         <PivotItem Header="quicklinks">
                             <StackPanel>
-                                <Button Content="To Flights Results BUE-MIA"  Command="{Binding QuickLinkFlightCheckout}" Style="{StaticResource btnStlye}"/>
+                                <Button Content="To Flights Results BUE-MIA"  Command="{Binding QuickLinkFlightDetails}" Style="{StaticResource btnStlye}"/>
+                                <Button Content="To Flights Checkout BUE-MIA"  Command="{Binding QuickLinkFlightCheckout}" Style="{StaticResource btnStlye}"/>
+                                <!--<Button Content="To Hotels Checkout BUE"  Command="{Binding QuickLinkHotelCheckout}" Style="{StaticResource btnStlye}"/>-->
                             </StackPanel>
                         </PivotItem>
                     

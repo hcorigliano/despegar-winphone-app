@@ -249,5 +249,23 @@ namespace Despegar.WP.UI.Developer
             }
         }
 
+        public ICommand QuickLinkFlightDetails
+        {
+            get
+            {
+                QuickLinks ql = new QuickLinks();
+                return new RelayCommand(() => ql.GoToFlightsResults());
+            }
+        }
+
+        public ICommand QuickLinkHotelCheckout
+        {
+            get
+            {
+                QuickLinks ql = new QuickLinks();
+                return new RelayCommand(() => ql.GoToHotelsCheckout());
+            }
+        }
+
     }
 }
