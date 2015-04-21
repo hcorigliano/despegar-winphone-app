@@ -18,6 +18,7 @@ namespace Despegar.Core.Neo.Connector
         private static readonly string DOMAIN = "api.despegar.com/v1/";
         private string XUoW;
         private string x_client;
+        private string userAgent;
         private string site;
         private string currentAPIKey;
         private static readonly Dictionary<string, string> ApiKeysV1 = new Dictionary<string, string>()
@@ -54,11 +55,12 @@ namespace Despegar.Core.Neo.Connector
             logger.Log("Api V1 Connector created.");
         }
 
-        public void Configure(string x_client, string uow, string site)
+        public void Configure(string x_client, string uow, string userAgent, string site)
         {
             this.x_client = x_client;
             this.XUoW = uow;
             this.site = site;
+            this.userAgent = userAgent;
             this.currentAPIKey = ApiKeysV1[site];
         }
 
@@ -78,7 +80,8 @@ namespace Despegar.Core.Neo.Connector
         {
             httpMessage.Headers.Add("X-ApiKey", this.currentAPIKey);
             httpMessage.Headers.Add("X-UOW", XUoW);
-            httpMessage.Headers.Add("X-Client", x_client);           
+            httpMessage.Headers.Add("X-Client", x_client);
+            httpMessage.Headers.UserAgent.ParseAdd(userAgent);
         }
 
         protected override void PostProcessing(HttpResponseMessage httpResponse)

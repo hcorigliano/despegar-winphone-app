@@ -18,6 +18,7 @@ namespace Despegar.Core.Neo.Connector
         private static readonly string APIKEY_WINDOWS_PHONE = "24b56c96e09146298eca3093f6f990c9";
         private string XUoW;
         private string x_client;   // Example: "WindowsPhone8App";
+        private string userAgent;
         private string site;
         private string language;
 
@@ -27,10 +28,11 @@ namespace Despegar.Core.Neo.Connector
             logger.Log("Api V3 Connector created.");
         }
 
-        public void ConfigureClientAndUow(string x_client, string uow)
+        public void ConfigureClientAndUow(string x_client, string uow, string userAgent)
         {
             this.x_client = x_client;
             this.XUoW = uow;
+            this.userAgent = userAgent;
         }
 
         public void ConfigureSiteAndLanguage(string site, string language)
@@ -44,6 +46,7 @@ namespace Despegar.Core.Neo.Connector
             httpMessage.Headers.Add("X-ApiKey", APIKEY_WINDOWS_PHONE);
             httpMessage.Headers.Add("X-UOW", XUoW);
             httpMessage.Headers.Add("X-Client", x_client);
+            httpMessage.Headers.UserAgent.ParseAdd(userAgent);
         }
 
         protected override string GetBaseUrl()

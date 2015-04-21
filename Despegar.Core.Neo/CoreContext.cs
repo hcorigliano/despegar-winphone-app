@@ -29,6 +29,7 @@ namespace Despegar.Core.Neo
         private string site;
         private string x_client;
         private string uow;
+        private string userAgent;
         private IBugTracker bugtracker;
         private ICoreLogger logger;
         private Configuration configuration;
@@ -116,12 +117,13 @@ namespace Despegar.Core.Neo
         /// </summary>
         /// <param name="x_client"></param>
         /// <param name="uow"></param>
-        public void Configure(string x_client, string uow) 
+        public void Configure(string x_client, string uow , string userAgent) 
         {            
             this.x_client = x_client;
             this.uow = uow;
-            IoC.Resolve<IMapiConnector>().ConfigureClientAndUow(this.x_client, this.uow);
-            IoC.Resolve<IApiv3Connector>().ConfigureClientAndUow(this.x_client, this.uow);
+            this.userAgent = userAgent;
+            IoC.Resolve<IMapiConnector>().ConfigureClientAndUow(this.x_client, this.uow , this.userAgent);
+            IoC.Resolve<IApiv3Connector>().ConfigureClientAndUow(this.x_client, this.uow, this.userAgent);
             logger.Log("[Core]: Core Uow and X_Client configured.");
         }
 
@@ -142,7 +144,7 @@ namespace Despegar.Core.Neo
 
             this.site = siteCode;
             IoC.Resolve<IMapiConnector>().ConfigureSiteAndLanguage(site, lang);
-            IoC.Resolve<IApiv1Connector>().Configure(x_client, uow, site);
+            IoC.Resolve<IApiv1Connector>().Configure(x_client, uow, userAgent, site);
             IoC.Resolve<IApiv3Connector>().ConfigureSiteAndLanguage(site, lang);
 
             logger.Log("[Core]: Site Changed.");

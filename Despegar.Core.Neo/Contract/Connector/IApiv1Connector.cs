@@ -9,6 +9,6 @@ namespace Despegar.Core.Neo.Contract.Connector
 {
     internal interface IApiv1Connector : IConnector
     {
-        void Configure(string x_client, string uow, string site);
+        void Configure(string x_client, string uow,string userAgent, string site);
     }
 }

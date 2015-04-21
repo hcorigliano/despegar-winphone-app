@@ -45,7 +45,7 @@ namespace Despegar.Core.Neo.Contract
         /// <param name="uow"></param>
         /// <param name="site"></param>
         /// <param name="language"></param>
-        void Configure(string x_client, string uow);
+        void Configure(string x_client, string uow , string userAgent);
 
         /// <summary>
         /// Re-configures the Core for the new Site

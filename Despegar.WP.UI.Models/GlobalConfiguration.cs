@@ -91,11 +91,14 @@ namespace Despegar.WP.UI.Model
             mods.AddRange(modules);
             Despegar.Core.Neo.InversionOfControl.IoC.LoadModules(false, mods);
 
-            // Configure Core
+             //Configure Core
             CoreContext = Despegar.Core.Neo.InversionOfControl.IoC.Resolve<ICoreContext>();
-            CoreContext.Configure(xclient, uow);
-
+            
             await LoadUPA();
+
+            string userAgent = ClientInfo.GetUserAgent();
+
+            CoreContext.Configure(xclient, uow, userAgent);
 
 #if DECOLAR
             CoreContext.SetSite("BR");
@@ -123,6 +126,15 @@ namespace Despegar.WP.UI.Model
                 return null;
 
             return _s;
+        }
+
+        public static void SetUSerAgent()
+        {
+            ClientDeviceInfo ClientInfo = new ClientDeviceInfo();
+            string xclient = ClientInfo.GetClientInfo();
+            string uow = ClientInfo.GetUOW();
+            string userAgent = ClientInfo.GetUserAgent();
+            CoreContext.Configure(xclient, uow, userAgent); 
         }
 
         public static int GetEmissionAnticipationDayForFlights()
