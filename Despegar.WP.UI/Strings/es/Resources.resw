@@ -1324,4 +1324,10 @@ La reserva no ha sido generada y no se le cobrará ningún cargo por la transacc
   <data name="Flights_Checkout_Generic_Error" xml:space="preserve">
     <value>Campo inválido</value>
   </data>
+  <data name="Home_About.Label" xml:space="preserve">
+    <value>Acerca de</value>
+  </data>
+  <data name="Page_About" xml:space="preserve">
+    <value>ACERCA DE</value>
+  </data>
 </root>

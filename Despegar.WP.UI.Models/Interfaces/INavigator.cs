@@ -27,7 +27,8 @@ namespace Despegar.WP.UI.Model.Interfaces
         FlightsOrderBy,
         HotelsFilter,
         HotelsOrderBy,
-        HotelsThanks
+        HotelsThanks,
+        About
     }
 
     public interface INavigator

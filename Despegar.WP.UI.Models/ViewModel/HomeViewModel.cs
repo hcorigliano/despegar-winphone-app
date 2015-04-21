@@ -119,5 +119,15 @@ namespace Despegar.WP.UI.Model
                 return new RelayCommand(() => Navigator.GoTo(ViewModelPages.CountrySelecton, null));
             }
         }
+
+        public ICommand NavigateToAboutPage
+        {
+            get
+            {
+                return new RelayCommand(() => Navigator.GoTo(ViewModelPages.About, null));
+            }
+        }
+
+        
     }
 }

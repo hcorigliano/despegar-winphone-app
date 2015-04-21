@@ -1,0 +1,37 @@
+﻿<Page
+    x:Class="Despegar.WP.UI.About"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Despegar.WP.UI"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    xmlns:cont="using:Despegar.WP.UI.Controls"
+    Style="{StaticResource BasePage}">
+
+    <Grid Style="{StaticResource MainContainerGrid}">
+
+        <Grid.ChildrenTransitions>
+            <TransitionCollection>
+                <EntranceThemeTransition/>
+            </TransitionCollection>
+        </Grid.ChildrenTransitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="{StaticResource Block1p}"/>
+            <RowDefinition Height="{StaticResource Square}"/>
+            <RowDefinition Height="{StaticResource Block6p}"/>
+            <RowDefinition Height="{StaticResource Block1 }"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+
+        <!-- Title Panel -->
+        <cont:TopLogo Grid.Row="0"  />
+        <TextBlock Grid.Row="1" x:Uid="Page_About" Style="{StaticResource PageHeaderSmall}" Text="ACERCA DE" />
+        <Image  Grid.Row="2" HorizontalAlignment="Center"  VerticalAlignment="Top" Source="/Assets/Logo.png" />
+        <TextBlock Grid.Row="3" x:Name="Page_About_Version" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource SegoeSemilight24alphaBlue}" />
+        <TextBlock Grid.Row="4" x:Name="Page_About_Installation" HorizontalAlignment="Center" VerticalAlignment="Top" Style="{StaticResource SegoeSemilight17}" />
+
+    </Grid>
+</Page>

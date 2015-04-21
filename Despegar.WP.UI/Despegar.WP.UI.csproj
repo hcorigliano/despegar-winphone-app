@@ -91,6 +91,9 @@
       <Project>{4bd277e3-3251-4cf8-8ee5-9ef410362d4f}</Project>
       <Name>Despegar.WP.UI.Model</Name>
     </ProjectReference>
+    <Compile Include="About.xaml.cs">
+      <DependentUpon>About.xaml</DependentUpon>
+    </Compile>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
@@ -397,6 +400,10 @@
       <DependentUpon>HotelsSortBy.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Page Include="About.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\Alert.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -601,6 +608,7 @@
   <ItemGroup>
     <Content Include="analytics.xml" />
     <Content Include="Assets\Animations\loading.png" />
+    <Content Include="Assets\appbar.information.png" />
     <Content Include="Assets\Badge.scale-100.png" />
     <Content Include="Assets\Badge.scale-140.png" />
     <Content Include="Assets\Badge.scale-240.png" />
