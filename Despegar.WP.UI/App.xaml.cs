@@ -156,7 +156,7 @@ namespace Despegar.WP.UI
                     }
                 }
 
-                GlobalConfiguration.SetUSerAgent();
+                GlobalConfiguration.SetUSerAgent(); //Refresh user agent . Adds Country
 
             }
 
@@ -165,7 +165,7 @@ namespace Despegar.WP.UI
         }
 
         /// <summary>
-        ///  This Define different  builds for different deals . Only one must be active. 
+        ///  Define different builds for different deals . Only one must be active. 
         /// </summary>
         private void DefineBuild()
         {
