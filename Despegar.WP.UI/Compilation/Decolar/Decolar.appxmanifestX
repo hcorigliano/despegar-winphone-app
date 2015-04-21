@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/2010/manifest" xmlns:m2="http://schemas.microsoft.com/appx/2013/manifest" xmlns:m3="http://schemas.microsoft.com/appx/2014/manifest" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest">
-  <Identity Name="043C53DD.Decolar.com" Publisher="CN=80470F60-23BA-44D2-B832-C8B8BC4E43F9" Version="3.1.0.4" />
+  <Identity Name="043C53DD.Decolar.com" Publisher="CN=80470F60-23BA-44D2-B832-C8B8BC4E43F9" Version="3.1.0.5" />
   <mp:PhoneIdentity PhoneProductId="a5e6d5d2-c40e-46ea-be9e-8cceb4069a4e" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
     <DisplayName>Decolar.com</DisplayName>

@@ -5,6 +5,7 @@ using Despegar.Core.Neo.Contract.Log;
 using System;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -19,6 +20,7 @@ namespace Despegar.Core.Neo.Connector
         private static readonly ServiceKey[] cookieEnabledServices = new ServiceKey[] { ServiceKey.FlightItineraries, ServiceKey.FlightsBookingFields, ServiceKey.FlightsBookingCompletePost, ServiceKey.HotelsAvailability, ServiceKey.HotelsAvailabilityByGeo, ServiceKey.HotelsGetDetails, ServiceKey.HotelsBookingFields, ServiceKey.HotelsBookingCompletePost  };
         private string XUoW;
         private string x_client;   // Example: "WindowsPhone8App";
+        private string userAgent;
         private string site;
         private string language;
         private string mapiUPACookie;        
@@ -30,10 +32,11 @@ namespace Despegar.Core.Neo.Connector
             this.mapiUPACookie = String.Empty;
         }
 
-        public void ConfigureClientAndUow(string x_client, string uow)
+        public void ConfigureClientAndUow(string x_client, string uow, string userAgent)
         {
             this.x_client = x_client;
             this.XUoW = uow;
+            this.userAgent = userAgent;
         }
 
         public void ConfigureSiteAndLanguage(string site, string language)
@@ -107,7 +110,8 @@ namespace Despegar.Core.Neo.Connector
             // MAPI Headers
             httpMessage.Headers.Add("X-ApiKey", APIKEY_WINDOWS_PHONE);
             httpMessage.Headers.Add("X-UOW", XUoW);
-            httpMessage.Headers.Add("X-Client", x_client);           
+            httpMessage.Headers.Add("X-Client", x_client);
+            httpMessage.Headers.UserAgent.ParseAdd(userAgent);
 
             // This makes MAPI point to Hoteles v3
             if (httpMessage.RequestUri.AbsoluteUri.Contains("https://mobile.despegar.com/v3/mapi-hotels/"))

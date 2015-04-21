@@ -12,6 +12,6 @@ namespace Despegar.Core.Neo.Contract.Connector
     public interface IApiv3Connector : IConnector
     {
         void ConfigureSiteAndLanguage(string site, string lang);
-        void ConfigureClientAndUow(string x_client, string uow);
+        void ConfigureClientAndUow(string x_client, string uow, string userAgent);
     }
 }

@@ -29,7 +29,8 @@ namespace Despegar.WP.UI
         public HomeViewModel ViewModel { get; set; }
         private bool versionChecked = false;
         private IMAPINotifications notifications;
-        private PushResponse registerResponse;        
+        private PushResponse registerResponse;
+
 
         public Home()
         {
@@ -65,8 +66,11 @@ namespace Despegar.WP.UI
                 await ValidateUpdate();
 #endif
                 versionChecked = true;
+
             }
         }
+
+        
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
@@ -121,6 +125,8 @@ namespace Despegar.WP.UI
 
         private async Task ValidateUpdate()
         {
+            
+
 #if DECOLAR
             string productID = "e544d4bb-be44-4db8-9882-268f0b5631a3";
 #else

@@ -82,6 +82,8 @@ namespace Despegar.WP.UI
             }
 #endif
 
+            DefineBuild();
+
             Frame rootFrame = Window.Current.Content as Frame;
 
             // Do not repeat app initialization when the Window already has content,
@@ -123,7 +125,6 @@ namespace Despegar.WP.UI
                 {
                     // Read and Load Mocks from XML file
                     LoadMocks();
-
                     await GlobalConfiguration.InitCore(new List<CoreModule>() { new WindowsPhoneModule(false) });
                 }
                 catch (Exception)
@@ -131,36 +132,53 @@ namespace Despegar.WP.UI
                     NotifyAndClose();
                     return;
                 }
-               
+
                 // Check persist information
                 var roamingSettings = ApplicationData.Current.RoamingSettings;
-
 #if DECOLAR
                 // Decolar forced to BRASIL always
                  roamingSettings.Values["countryCode"] = "BR";
 #endif
                 // Load Country/Site
-                 if (roamingSettings.Values["countryCode"] == null)
-                 {
-                     if (!rootFrame.Navigate(typeof(CountrySelection), e.Arguments))
-                     {
-                         throw new Exception("Failed to create initial page");
-                     }
-                 }
-                 else
-                 {
-                     GlobalConfiguration.CoreContext.SetSite(roamingSettings.Values["countryCode"].ToString());
-                     if (!rootFrame.Navigate(typeof(Home), e.Arguments))
-                     {
-                         throw new Exception("Failed to create Home page");
-                     }
-                 }
-            }
+                if (roamingSettings.Values["countryCode"] == null)
+                {
+                    if (!rootFrame.Navigate(typeof(CountrySelection), e.Arguments))
+                    {
+                        throw new Exception("Failed to create initial page");
+                    }
+                }
+                else
+                {
+                    GlobalConfiguration.CoreContext.SetSite(roamingSettings.Values["countryCode"].ToString());
+                    if (!rootFrame.Navigate(typeof(Home), e.Arguments))
+                    {
+                        throw new Exception("Failed to create Home page");
+                    }
+                }
 
-            
+                GlobalConfiguration.SetUSerAgent(); //Refresh user agent . Adds Country
+
+            }
 
             // Ensure the current window is active
             Window.Current.Activate();                    
+        }
+
+        /// <summary>
+        ///  Define different builds for different deals . Only one must be active. 
+        /// </summary>
+        private void DefineBuild()
+        {
+            //ONLY FOR PRELOAD BUILD !!!!
+            //var localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
+            //if (!localSettings.Values.ContainsKey("InstallationSource"))
+            //    localSettings.Values["InstallationSource"] = "Telefonica";
+
+
+            //ONLY FOR WINDOWS STORE BUILD!!!!
+            var localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
+            if (!localSettings.Values.ContainsKey("InstallationSource"))
+                localSettings.Values["InstallationSource"] = "WindowsStore";
         }
 
         private void LoadMocks()
